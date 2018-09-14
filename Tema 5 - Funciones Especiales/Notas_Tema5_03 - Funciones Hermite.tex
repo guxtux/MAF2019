@@ -1,0 +1,97 @@
+\input{../preambulo_doc}
+\usepackage{mathrsfs}
+\usepackage{bigints}
+\spanishdecimal{.}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Funciones de Hermite \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Funciones de Hermite.}
+La ecuación de Hermite, tiene una aplicación en física, quizá la más importante que es la del oscilador armónico en mecánica cuántica, tiene la forma:
+\begin{equation}
+\ddot{H}(x) - 2 x \dot{H}(x) + 2n H(x) = 0
+\label{eq:ecuacion_001}
+\end{equation}
+La forma autoadjunta
+\[ \dfrac{d}{dx} \left( q(x) \dfrac{d H(x)}{dx} \right) + r(x) H(x) + \lambda p(x) H(x) = 0 \]
+es entonces
+\begin{equation}
+\dfrac{d}{dx} \left( \exp(-x^{2}) \dfrac{d H(x)}{dx} \right) + 2n \exp(-x^{2}) H(x) = 0
+\label{eq:ecuacion_002}
+\end{equation}
+La solución a esta ecuación forma una base ortogonal con factor de peso $p(x) = \exp(-x^{2})$, en el intervalo $(-\infty, \infty)$, ya que en dicho intervalo
+\[ [q W]_{-\infty}^{\infty} = [ \exp(-x^{2}) W ]_{-\infty}^{\infty} = 0 \]
+Por lo que la ortogonalidad queda expresada por
+\[ \int_{-\infty}^{\infty} \exp(-x^{2}) H_{n}(x) H_{m}(y) dx = 0, \hspace{1cm} \mbox{ si } n \neq m \]
+Con lo que vemos que la ortogonalidad de las autofunciones está asociada a la elección particular del dominio de la variable independiente.
+\\
+Aplicando el método de Frobenius:
+\begin{eqnarray}
+H(x) &=& \sum_{\alpha = 0}^{\infty} a_{\alpha} x^{\alpha + k} \nonumber \\
+\dot{H}(x) &=& \sum_{\alpha = 0}^{\infty} a_{\alpha}(\alpha + k) x^{\alpha + k-1} \nonumber \\
+\ddot{H}(x) &=& \sum_{\alpha = 0}^{\infty} a_{\alpha}(\alpha + k)(\alpha + k - 1) x^{\alpha + k-2} \nonumber
+\end{eqnarray}
+re-emplazando en la ecuación (\ref{eq:ecuacion_001}) y factorizando los términos
+\[ \sum_{\alpha = 0}^{\infty} a_{\alpha}(\alpha + k)(\alpha + k - 1) x^{\alpha + k-2} - \sum_{\alpha=0}^{\infty} a_{\alpha} [ 2 (\alpha + k) - 2n ] x^{\alpha +k} = 0 \]
+que puede escribirse como
+\[ \sum_{\alpha=-2}^{\infty} a_{\alpha + 2}( \alpha + k + 2)(\alpha + k + 1) x^{\alpha + k} - \sum_{\alpha=0}^{\infty} a_{\alpha} [2 (\alpha + k) - 2n ] x^{\alpha + k} = 0 \]
+escribiendo los dos primeros términos de la serie
+\[ \begin{split}
+ a_{0}(k)(k - 1) x^{k-2} &+ a_{1} (k + 1)(k)^{\alpha-1} \\
+&+ \sum_{\alpha=0}^{\infty} \left[ a_{\alpha + 2} (\alpha + k +2)(\alpha + k + 1) - a_{0} [2 (\alpha + k ) - 2n] \right] x^{\alpha + k} = 0 
+\end{split} \]
+donde reconocemos las ecuaciones indiciales
+\begin{eqnarray}
+a_{0} k (k-1) &=& 0 \nonumber \\
+a_{1} k (k+1) &=& 0 \nonumber \\
+a_{\alpha+2} (\alpha + k + 2) (\alpha + k + 1) - a_{\alpha} [2 (\alpha + k) - 2n] &=& 0, \hspace{1cm} \alpha=0,1,2,\ldots \nonumber
+\end{eqnarray}
+Revisamos que:
+\begin{enumerate}
+\item De la primera expresión: si $a_{0} \neq 0$, entonces $k=0$ ó $k=1$.
+\item De la segunda expresión: con $k=0$ se sigue que $a_{1} \neq 0$ y de $k=1$, se concluye que $a_{1} = 0$.
+\item De la tercera ecuación indicial con $k=0$, se obtiene
+\[ a_{\alpha+2} = \dfrac{2a_{\alpha}(\alpha - n)}{(\alpha + 2)(\alpha + 1)} \hspace{1cm} \alpha = 0, 1, 2, \ldots \]
+\end{enumerate}
+Explícitamente los primeros coeficientes son
+\begin{eqnarray}
+a_{2} &=& \dfrac{(-) 2n}{2!} a_{0} \nonumber \\
+a_{3} &=& \dfrac{(-) 2(n-1)}{3!} a_{1} \nonumber \\
+a_{4} &=& \dfrac{(-) 2 a_{2} (2 - n)}{4 \times 3} = \dfrac{2^{2} (-)^{2}(n)(n - 2)}{4!} a_{0} \nonumber \\
+\vdots \nonumber
+\end{eqnarray}
+Entonces tenemos
+\[ \begin{split}
+H(x) &= a_{0} \left[ 1 + \dfrac{(-) 2n}{2!} x^{2} + \dfrac{(-) 2^{2} n (n - 2)}{4!} x^{4} + \dfrac{(-)^{3}2^{3} n (n-2)(n-4) }{6!} x^{6} + \ldots \right] + \\
+&+ a_{1} \left[ x + \dfrac{(-) 2 (n-1)}{3!} x^{3} + \dfrac{(-)^{2}2^{2}(n-1)(n-3)}{5!} x^{5} + \right.\\
+&+ \left. \dfrac{(-)^{3}2^{3}(n-1)(n-3)(n-5)}{7!} x^{7} + \ldots \right]
+\end{split} \]
+Ambas series son divergentes en $x \to \pm \infty$. Si se incluyen estos dos extremos y se quiere lograr convergencia es necesario cortar las series y convertirlas en polinomios.
+\\
+La serie en $a_{0}$ requiere que $n$ = par positivo y la serie en $a_{1}$ requiere $n$ = impar positivo. Puesto que $n$ no puede ser simultáneamente par e impar en las series para $a_{0}$ y $a_{1}$, si $n$ = par, la segunda serie es divergente y si $n$ = impar la primera diverge.
+\\
+Las series convergentes serán las de nuestro interés, y conformarán los \emph{Polinomios de Hermite}.
+\\
+Puede demostrarse que con $n$ no entero, $H(x) \propto x^{2} \exp(x^{2})$ para $x \to \pm \infty$, lo que muestra la no convergencia para $n$ no entero.
+\\
+Consideremos $n$ = par. La serie para $a_{0}$, con $n=2m, \; m=0,1,2\ldots$ será
+\[ \begin{split}
+H(x) &= a_{0} \left[ 1 + \dfrac{(-) 2^{2} m}{2!} x^{2} + \dfrac{(-) 2^{4} m (m - 1)}{4!} x^{4} + \right. \\
+&+ \left. \dfrac{(-)^{3}2^{6} m (m-1)(m-2) }{6!} x^{6} + \ldots \right] \\
+H(x) &= a_{0} \left[ 1 + \dfrac{(-) 2^{2} m}{2!} x^{2} + \ldots + \dfrac{(-)^{3} 2^{6} m!}{(m-3)! 6!} x^{6} + \ldots + \dfrac{(-)^{p}(2x)^{2p} m!}{(m-p)!(2p)!} + \ldots \right]
+\end{split} \]
+Se definen los polinomios de Hermite de orden par, en la forma
+\begin{equation}
+H_{2m} (x) = (-)^{m} (2m)! \sum_{p=0}^{\infty} \dfrac{(-)^{p}(2x)^{2p}}{(m-p)!(2p)!}
+\label{eq:ecuacion_003}
+\end{equation}
+Revisemos que efectivaente la ecuación (\ref{eq:ecuacion_003}) es un polinomio, ya que para $p > m : 1 / (m-p)! \to 0$. Esto significa que la suma se extiende entre $0$ y $m$.
+\\
+De manera análoga, para $n$ = impar, con $n=2m+1, \hspace{0.5cm} m=0,1,2,\ldots$
+
+\end{document}

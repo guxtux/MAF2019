@@ -1,0 +1,242 @@
+\input{../preambulo_doc}
+\usepackage{standalone}
+\usepackage{geometry}
+\geometry{top=1.25cm, bottom=1.5cm, left=1.25cm, right=1.25cm}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Espacios de Hilbert y notación de Dirac \\ \large {Matemáticas Avanzadas de la Física}  \vspace{-1.5\baselineskip}}
+\date{}
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\section{Espacios de Hilbert.}
+\subsection{Espacio métrico.}
+\begin{defi}
+El par $(X, d)$ es un \textbf{espacio métrico} si $X$ es un conjunto y $d(x, y)$ es una función real valuada, llamada métrica definida para $x, y \in X$ que satisface las condiciones:
+\begin{enumerate}
+\item $d(x, y) \geq 0$ y $d(x, x) = 0, \hspace{0.5cm} \forall \: x, y \in X$
+\item  Si $d(x, y) = 0$, entonces $x = y$.
+\item $d(x, y) = d(y, x)$
+\item $d(x, y) \leq d(x, z) + d(z, y)$
+\end{enumerate}
+\end{defi}
+Una secuencia $\{x_{n}\}$ en un espacio métrico se llama \textbf{secuencia de Cauchy} si para cada $\varepsilon > 0$ existe un $N$ tal que $d(x_{n}, x_{m}) \leq \varepsilon$ para cualquier elección de $n, m \geq N$.
+\par
+Un espacio métrico $(X , d)$ es \textbf{completo} si cada secuencia de Cauchy en $(X , d)$ es convergente en $(X , d)$.
+\begin{defi}Sea $X$ un espacio lineal.
+    
+Un producto interno sobre $X$ es un mapeo que asocia a cada par de vectores $x$, y un escalar, denotado $ \braket{x}{y}$ que satisface las siguientes propiedades
+\begin{enumerate}[label=\roman*.]
+\item $\braket{x}{z+y} = \braket{x}{y} + \braket{x}{y} \hspace{1cm} x, y, z \in X$
+\item $\braket{x}{\lambda \: y} = \lambda \: \braket{x}{y} \hspace{1cm} \lambda \in K$
+\item $\braket{x}{y} = \overline{\braket{x}{y}}$
+\item $\braket{x}{y} \geq 0$ y $\braket{x}{y} = 0 \rightarrow x = \bm{0} $ 
+\end{enumerate}
+\end{defi}
+Un \textbf{espacio con producto interno} se define como un espacio lineal junto con su producto interno definido sobre $X$.
+\begin{defi}
+Dos vectores $x$ e $y$ son ortogonales cuando $\braket{x}{y} = 0$.
+\end{defi}
+\begin{defi}
+Una \textbf{norma} en $X$ es $\norm{\cdot} : X \rightarrow \mathbb{R}$ tal que  
+\begin{enumerate}[label=\roman*.]
+\item $\norm{x} \geq 0; \hspace{1cm} \norm{x} = 0$ si y sólo si $x = \bm{0}$
+\item $\norm{\lambda \: x} =  \abs{\lambda} \, \norm{x}$
+\item $\norm{x + y} \leq \norm{x} + \norm{y}$
+\end{enumerate}
+\end{defi}
+ Un espacio lineal normado es un par $(X, \norm{\cdot})$ donde $X$ es un espacio lineal y $\norm{\cdot}$ es una norma sobre $X$.
+ \par
+ Un espacio con producto interno tiene una estructura natural de espacio normado con la norma $\norm{x} = \sqrt{\braket{x}}$ y un espacio normado tiene la estructura natural de espacio métrico con $d(x, y) = \norm{x - y}$.
+
+Un \textbf{espacio de Hilbert} es un espacio con producto interno, con una norma definida por el producto interno y que además es completo.
+\par
+Ejemplos.
+
+\begin{enumerate}
+\item Sean $X = \mathbb{C}^{n}$ si $x = (x_{1}, x_{2}, \ldots, x_{n})$ e $y = (y_{1}, y_{2}, \ldots, y_{n})$, definamos
+\[ \braket{x}{y} = \sum_{k=1}^{n} \overline{x_{k}} \: y_{k} \]
+$X$ es un espacio de Hilbert.
+\item Sea $L^{2}(\mathbb{R})$ el conjunto de todas las funciones medibles de $\mathbb{R}$ en $\mathbb{C}$ tales que verifiquen la siguiente propiedad:
+
+Si $f(x) \in L2 L^{2}(\mathbb{R})$,entonces:
+\[ \int_{-\infty}^{\infty} \abs{f(x)}^{2} dx < \infty \]
+Así $L^{2}(\mathbb{R})$ es un espacio vectorial. Si lo dotamos del producto interno
+\[ \braket{f}{g} = \int_{-\infty}^{\infty} \overline{f(x)} \: g(x) |, dx \]
+y la norma asociada, entoces $L^{2}(\mathbb{R})$ es un espacio de Hilbert.
+\item Consideremos el conjunto de sucesiones de números complejos $(a_{n})_{n \in \mathbb{C}}$, tales que:
+\[ \sum_{n=1}^{\infty} \abs{a_{n}}^{2} < \infty \]
+con el producto escalar
+\[ \braket{A}{B} = \sum_{n=1}^{\infty} \overline{a_{n}} \: b_{n} \]
+donde $A = (a_{n})$ y $B = (b_{n})$, este conjunto es un espacio de Hilbert llamado $\ell_{2}$.
+\end{enumerate}
+\begin{defi} Conjunto ortonormal.
+
+Sea $S$ un conjunto de vectores en un espacio con producto interno $X$. Entonces $S$ es un sistema o conjunto ortonormal si:
+\begin{enumerate}[label=\roman*.]
+\item  $\norm{x} = 1, \hspace{0.5cm} \forall \, x \in S$
+\item $\braket{x}{y} = 0 \hspace{0.5cm} \forall \, x, y \in S$ con $x \neq y$
+\end{enumerate}
+\end{defi}
+\begin{teo} Desigualdades de Bessel.
+    
+Sea $A$ un conjunto ortonormal de vectores contenido en un espacio con producto interno $X$. Sean $x, y \in X$. Sea ${x_{1}, x_{2}, \ldots, x_{n}, \ldots}$ una sucesión de elementos de $A$ (finita o infinita). Entonces
+\begin{enumerate}[label=\roman*.]
+\item $\displaystyle{\sum_{n=1}^{\infty} \abs{\braket{x}{x_{n}}}^{2} \leq \norm{x}^{2}}$
+\item $\displaystyle{\sum_{n=1}^{\infty} \abs{\braket{x}{x_{n}} \, \braket{x_{n}}{y}} \leq \norm{x} \, \norm{y}}$
+\end{enumerate}
+\end{teo}
+\begin{defi} Conjunto completo.
+
+Un conjunto ortonormal $A \in X$ se llama \textbf{completo} si y sólo si no existe en $X$ otro conjunto ortonormal conteniendo estrictamente en $A$.
+
+A este \textit{conjunto ortonormal completo} se le llama \textbf{base ortonormal}.
+\end{defi}
+\begin{defi} Espacio de Hilbert separable.
+
+Un espacio de Hilbert es \textbf{separable} si y sólo si el cardinal de sus conjuntos ortonormales completos es finito o numerable.
+\end{defi}
+\begin{teo}
+Sea $X$ un espacio de Hilbert de dimensión finita o infinita. Sea ${x_{1}, x_{2}, \ldots}$ un conjunto ortonormal completo en $X$. Entonces
+\[ \norm{x}^{2} = \sum_{k=1}^{\infty} \abs{\braket{x_{k}}{x}} \]
+\end{teo}
+\begin{teo}
+ Sea $A$ un conjunto ortonormal completo en un espacio de Hilbert separable y de dimensión infinita $X$. Entonces:
+ \begin{enumerate}[label=\roman*.]
+\item $\overline{\bqty{A}} = X$
+\item Si $y \in X$ entonces $\displaystyle{y = \sum_{n=1}^{\infty} \, \braket{x_{n}}{y} \, x_{n}}$
+ \end{enumerate}
+\end{teo}
+Ejemplos de conjuntos ortonormales completos:
+\begin{enumerate}
+\item Sea $X = \mathbb{C}^{n}$
+\[ (1, 0, 0, \ldots, 0), \hspace{0.5cm} (0, 1, 0, \ldots, 0), \hspace{0.5cm} \ldots, (0, 0, 0, \ldots, 1) \]
+\item Sea $X = \ell_{2}$
+\begin{align*}
+e_{1} &=  (1, 0, 0, \ldots, 0, \ldots) \\
+e_{2} &=  (0, 1, 0, \ldots, 0, \ldots) \\
+e_{3} &=  (0, 0, 1, \ldots, 0, \ldots) \\
+&{} \vdots
+\end{align*}
+\item En $L^{2}(0, 2 \, \pi)$, el conjunto
+\[ x_{0}(t) = \dfrac{1}{\sqrt{2 \, \pi}}, \hspace{0.5cm} x_{1}(t) = \dfrac{\cos t}{\sqrt{\pi}}, \hspace{0.5cm} x_{2}(t) = \dfrac{\sin t}{\sqrt{\pi}}, \hspace{0.5cm} x_{3}(t) = \dfrac{\cos 2 \, t}{\sqrt{\pi}}, \ldots\]
+\end{enumerate}
+\begin{teo}
+Sea $X$ un espacio de Hilbert de dimensión finita $n$. Entonces $X$ y $\mathbb{C}^{n}$ son isométricos.
+\end{teo}
+\begin{teo}
+Sea $X$ un espacio de Hilbert separable y de dimensión infinita. Entonces $X$ y $\ell_{2}$ son isométricos.
+\end{teo}
+\subsection{Espacio dual.}
+\begin{defi} Funcional.
+
+Sea $f$ una aplicación lineal de un espacio normado $X$ en $\mathbb{C}$. Si $f$ es además continuo, lo llamaremos \textit{funcional lineal continuo}, o simplemente \textit{funcional}.
+\end{defi}
+\begin{defi} Espacio dual.
+
+Sea $f$ una aplicación lineal de $X \in \mathbb{C}$. Diremos que $f$ está acotada si existe una constante positiva $K$ tal que
+\[ \abs{f(x)} \leq K \, \norm{x}, \hspace{1cm} \forall \, x \in X \]
+El conjunto de todas las funcionales acotadas en $X$ forman un espacio vectorial llamado \textbf{espacio dual} de $X$, denotado por $X^{*}$.
+
+Además es normado y completo con la norma
+\[ \norm{f} = \inf \{ K \vert (\forall \, x \in X) \vert f(x) \vert = K \, \norm{x} \} \]
+\end{defi}
+\begin{teo} Teorema de representación de Riesz.
+
+Sea $f$ un funcional acotado en un espacio de Hilbert $X$. Entonces existe uno y sólo un vector $y \in X$ tal que
+\[ f(x) = \braket{y}{x}, \hspace{1cm} \forall \, x \in X \]
+\end{teo}
+\subsection{Operadores lineales en espacios de Hilbert.}
+\begin{defi} Operador lineal.
+
+Un operador lineal entre dos espacios normados $X$ e $Y$ es una aplicación lineal entre ambos.
+
+En particular puede ser una aplicación de un espacio de Hilbert consigo mismo.
+\end{defi}
+\begin{defi} Operador lineal adjunto.
+
+Sea $A$ un operador lineal continuo en un espacio de Hilbert $X$.
+Fijemos $x \in X$ y consideremos el siguiente producto escalar $\braket{x}{A \, y}$ para todo $y \in X$.
+
+La aplicación $f(y) = \braket{x}{A \, y}$ es un funcional lineal y continuo en $X$, el teorema de Riez nos asegura que existe, fijado $x$, un único $z \in X$ tal que
+\[ f(y) = \braket{z}{y} = \braket{x}{A \, y} \hspace{0.5cm} \forall y \in X \]
+
+Esto lo podemos hacer con cada uno de los $x \in X$, con lo que obtenemos una aplicación de $X$ en si mismo: $A^{\dagger}$, que llamaremos \textbf{operador adjunto} de $A$, y tal que $A^{\dagger} \, x = z$. De esta manera
+\[ \braket{x}{A \, y} = \braket{A^{\dagger} \, x}{y}, \hspace{1cm} \forall \, x, y \in X \]
+\end{defi}
+\subsection*{Propiedades de operadores adjuntos.}
+Sean $A$ y $B$ dos operadores acotados en un espacio de Hilbert $X$, y sea $\lambda$ un número complejo. Entonces
+\begin{align*}
+(A + B)^{\dagger} &= A^{\dagger} + B^{\dagger} \\
+(\lambda \: A)^{\dagger} &= \overline{\lambda} \: A^{\dagger} \\
+(A \: B)^{\dagger} &= B^{\dagger} \: A^{\dagger}
+\end{align*}
+\begin{defi} Operador autoadjunto.
+
+Sea $X$ un espacio de Hilbert y $T$ un operador lineal continuo, se dice que $T$ es un operador \textbf{autoadjunto} si $T = T^{\dagger}$.
+\end{defi}
+\textbf{Ejemplo:}
+
+Sea el espacio de Hilbert $L^{2} ([0, 1])$. Sea ahora la transformación $Q : L^{2} ([0, 1]) \rightarrow L^{2}([0, 1])$ definida de la siguiente manera
+\[ (Q \: f)(x) =  x \: f(x) \hspace{1cm} \forall \, f \in L^{2}([0, 1]) \]
+Esta transformación está bien definida ya que para toda $f(x) \in L^{2} ([0, 1])$ tenemos:
+\[ \int_{0}^{1} \abs{(Q \: f)(x)}^{2} \, dx = \int_{0}^{1} \abs{x \: f(x)}^{2} \leq \int_{0}^{1} \abs{f(x)}^{2} \, dx < \infty \]
+y por tanto $(Q \: f)(x) \in L^{2}([0, 1])$. Además es lineal.
+\par
+Para demostrar que $Q$ es acotado, es decir, es continuo
+\[ \norm{Q \: f}^{2} = \int_{0}^{1} \abs{x \: f(x)}^{2} \, dx   \leq \int_{0}^{1} \abs{f(x)}^{2} \, dx = \norm{f}^{2}, \hspace{1cm} \Rightarrow \norm{Q \: f} \leq \norm{f} \]
+lo cual nos dice que $Q$ es un operador acotado y además su norma es menor o igual a $1$.
+
+Notemos además que para todos $f, g \in L^{2} ([0, 1])$, se tiene:
+\[ \braket{g}{Q \: f} = \int_{0}^{1} \overline{g(x)} \: x \: f(x) \, dx = \int_{0}^{1} \overline{x \: g(x)} \: f(x) \, dx = \braket{Q \: g}{f} \]
+es decir, $Q$ es autoadjunto.
+\begin{defi} Se $A$ un operador lineal continuo.
+\begin{itemize}
+\item $A$ es normal si $A^{\dagger} \, A = A \, A^{\dagger}$
+\item $A$ es autoadjunto si $A^{\dagger} =  A$
+\item $A$ es isométrico si $\norm{A \: x} =  \norm{x}, \hspace{0.5cm} \forall x \in X$
+\end{itemize}
+\end{defi}
+\textbf{Proposición} : Sea $U$ un operador acotado en el espacio de Hilbert $X$.
+\begin{itemize}
+\item Si $U$ es invertible y $U^{-1} = U^{\dagger}$, entonces $U$ es unitario.
+\item $U$ es unitario si y sólo si $I = U^{\dagger} \: U = U \: U^{\dagger}$ 
+\end{itemize}
+
+\begin{defi} Proyectores.
+
+Sea $P$ un operador continuo en el espacio de Hilbert $X$. $P$ es un proyector si $P^{2} = P$ y $P^{\dagger} =  P$.
+
+El operador nulo y la identidad son proyectores.
+\end{defi}
+\textbf{Ejemplo} :
+
+Sea $M$ un subespacio cerrado de $X$ que no coincida con $X$. 
+
+Se sabe que $X =  M \oplus M^{\perp}$, siendo $M^{\perp} \neq \{ \bm{0} \}$. Para todo $x \in X$ existe una única descomposición $x = y + z$ con $y \in M$ y $z \in M^{\perp}$.
+
+Definamos $P \: x = y$. $P$ es un proyector.
+\begin{defi} Valor propio y vector propio.
+
+Sea $A$ un operador con dominio $\mathcal{D} \in X$, siendo $X$ un espacio de Hilbert. Diremos que $y \in \mathcal{D}, \: y \neq 0$, es un \textbf{eigenvector (valor propio)} de $A$ si existe un número complejo $\lambda$ tal que $A \: y = \lambda \: y$ ($\lambda$ si puede ser cero)
+
+Entonces $y$ es un \textbf{eigenvector (vector propio)} de $A$ con
+eigenvalor (valor propio) $\lambda$.
+\end{defi}
+\begin{itemize}[label=\checkmark]
+\item Diremos que $\lambda \in \mathbb{C}$ pertenece al \textbf{espectro discreto} de $A$ si es un valor propio de $A$.
+\item Diremos que $\lambda \in \mathbb{C}$ pertenece al \textbf{espectro residual} de $A$ si no es un valor propio de $A$ y además el rango del operador $A - \lambda \: I$ no es denso en $X$.
+\item $\lambda \in \mathbb{C}$ pertenece al \textbf{espectro continuo} de $A$ si no es un valor propio ni tampoco está en el residual de $A$, y la inversa de la aplicación $A - \lambda \: I$ no es continua. Si es continua $\lambda$ pertenece al \textbf{resolvente}.
+\end{itemize}
+\begin{lema}
+Sea $A$ un operador autoadjunto y acotado en un espacio de Hilbert. Entonces sus eigenvalores son reales.
+\end{lema}
+\begin{lema}
+Sea $A$ un operador autoadjunto y acotado en un espacio de Hilbert $X$. Sean $x$ e $y$ dos valores propios de $A$ con diferente valor. Entonces $x$ e $y$ son ortogonales.
+    Lema: Si U es unitario, sus eigenvalores (si existen) tienen
+    módulo uno.
+
+\end{lema}
+\end{document}

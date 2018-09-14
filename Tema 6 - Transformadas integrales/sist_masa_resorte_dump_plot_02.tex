@@ -1,0 +1,24 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+	xmin = 0,	
+	xmax = 1.7,
+	axis x line = middle,
+	%axis y line = center,
+	ymin = -0.6,
+	ymax = 3.2,
+	ylabel=x,
+	xlabel=t,
+	xtick={0.785,1.57},
+	xticklabels={$\frac{\pi}{4}$, $\frac{\pi}{2}$},
+	domain=0:1.7
+]
+\draw [->] (0,0) -- (1.7,0);
+\addplot [samples=500] plot ({\x},{exp(-3 * \x) *(3*cos(5*deg(\x)) + 2 * sin(5* deg(\x)))});
+\end{axis}
+
+\end{tikzpicture}
+\end{document}

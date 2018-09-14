@@ -1,0 +1,27 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{intersections,shapes,snakes}
+\begin{document}
+\begin{tikzpicture}
+	\draw [name path = eje_x, ->] (0,0.25) -- (10,0.25) node [pos=0.95, above] {$x$};
+	\draw [name path = eje_2x] (0,-3.25) -- (10,-3.25);
+	\begin{scope}[shift={(0,-1.5)},rotate=20]	
+		\draw (5,0) node[ellipse, ,rotate=15, thick, minimum height=2cm,minimum width=5cm,draw] {};
+		\draw [name path = eje_y, ->, thick] (2,0) -- (8,0) node [pos=0.95, above] {$y$};
+	\end{scope}
+	\begin{scope}[shift={(0,-5)},rotate=20]
+		\draw [name path = eje_2y, thick] (2,0) -- (8,0);
+	\end{scope}
+	\foreach \x in {2,3,4,5,6,7,8}
+		\draw [->,thick] (\x,2) -- (\x,1.5);
+	\draw node at(8,2.5) {Ondas incidentes};
+	\fill [draw= none, opacity=0.7, name intersections={of=eje_x and eje_y}]
+		(intersection-1) node (a) {} circle (2pt);
+	\fill [draw= none, opacity=0.7, name intersections={of=eje_2x and eje_2y}]
+		(intersection-1) node (b) {} circle (2pt);
+	\draw [dashed] node(linea){} (a) -- (b);
+	\draw (6,-3.05) node (punto){} circle (1pt);
+	\draw [dashed] node (lineapunto) {} (a) -- (punto);
+	\node (mitad1) at coordinate[pos=0.5] (a);
+\end{tikzpicture}
+\end{document}

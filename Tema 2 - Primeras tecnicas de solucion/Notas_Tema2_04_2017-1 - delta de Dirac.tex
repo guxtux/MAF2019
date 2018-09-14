@@ -1,0 +1,252 @@
+\input{../preambulo_doc}
+\usepackage{standalone}
+\usepackage{geometry}
+\geometry{top=1.25cm, bottom=1.5cm, left=1.25cm, right=1.25cm}
+\newtheorem{defi}{{\it Definición}}[section]
+\newtheorem{ejemplo}{{\it Ejemplo}}[section]
+\newtheorem{propiedad}{{\it Propiedad}}[section]
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Función delta de Dirac \\ \large {Matemáticas Avanzadas de la Física}  \vspace{-1.5\baselineskip}}
+\date{}
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Introducción.}
+En física a menudo nos encontramos con fenómenos donde se involucra el concepto de un pulso de duración \enquote{infinitamente corto}.
+\par
+Por ejemplo, en su curso de Mecánica Clásica se revisó el concepto de una magnitud física llamada \emph{impulso}, la cual se introduce cuando se cambia el estado de movimiento de un cuerpo al aplicarle un \enquote{golpe repentino}. El impulso se denota comúnmente con la letra $I$.
+\par
+Tomemos como ejemplo del fútbol, con un penalty, en este caso tenemos inicialmente al balón en resposo, la intención es meter la pelota en la portería contraria. Después de patear el balón, éste adquiere un momento que es igual al impulso asociado a la patada misma. Analíticamente esta afirmación se escribe como
+\[ m \: v = I = \int_{t_{0}}^{t_{0} + \tau} F(t) dt  \]
+donde $F(t)$ es la fuerza y $\tau$ la duración del impacto sobre la pelota (técnicamente de la acción de la fuerza sobre el balón).
+\par
+El término \enquote{repentino} implica que $\tau$ se considera infinitamente pequeño y por tanto, que el cambio en el momento ocurre instantáneamente. Sin embargo, dado que el cambio en el momento es un número finito, se sigue que la magnitud de la fueza $F(t)$ debió haber sido infinita durante el golpe al balón y cero en cualquier otro momento. Este
+tipo de descripciones no se puede formular apropiadamente con los conceptos matemáticos que conocemos, más aún, la descripción tampoco es rigurosa desde un punto de vista físico.
+\par
+En la realidad, la gráfica de la fuerza es una curva muy \enquote{picuda} (muy estrecha y muy alta) y satisface la propiedad que el área bajo la curva es igual a $I$. En la gran mayoría de los problemas físicos, la forma exacta de la gráfica no se conoce, sin embargo, en lo correspondiente a los efectos físicos observables asociados con tal función, usualmente esta falta de información no importa. Lo que tiene significado es la integral de la fuerza, esto es, el valor del impulso
+\[ I = \int_{t_{0}}^{t_{0} + \tau } F(t) dt\]
+\section{La delta de Dirac.}
+Informalmente la delta de Dirac es una \enquote{función} que representa un pico infinitamente agudo expresado simbólicamente por
+\begin{equation}
+\delta (x) = \begin{cases}
+0 & x \neq 0 \\
+\infty & x = 0
+\end{cases}
+\label{eq:ecuacion_delta_01}
+\end{equation}
+pero tal que la integral de $\delta (x)$ está normalizada a la unidad:
+\begin{equation}
+\int_{-\infty}^{\infty} \delta (x) \: dx = 1 
+\label{eq:ecuacion_delta_02}
+\end{equation}
+\subsection{Propiedad de filtro.}
+La delta de Dirac satisface la siguiente propiedad
+\begin{equation}
+\int_{-\infty}^{\infty} f(x) \: \delta (x) \: dx = f(0)
+\label{eq:ecuacion_delta_03}
+\end{equation}
+donde $f(x)$ es una función continua.
+\par
+Esta integral puede ser \enquote{evaluada} utilizando siguiente argumento: dado que $\delta (x) = 0$
+para $x \neq 0$, podemos cambiar los límites de integración en la ecuación (\ref{eq:ecuacion_delta_03}) a $- \epsilon$ y $\epsilon$, donde $\epsilon$ es un número positivo infinitesimal. Más aún, dado que $f(x)$ es continua en $x = 0$, sus valores dentro del intervalo $( - \epsilon, \epsilon)$ no diferirán mucho de $f(0)$ y podemos hacer la siguiente aproximación
+\[ \int_{-\infty}^{\infty} f(x) \: \delta (x) \: dx = \int_{-\epsilon}^{\epsilon} f(x) \: \delta (x) \: dx \approx f(0) \int_{-\infty}^{\infty} \delta (x) \: dx  \]
+Esta aproximación mejora cuando $\epsilon \to 0$. Pero
+\[ \int_{-\epsilon}^{\epsilon} \delta (x) \: dx = 1 \]
+para todos los valores de $\epsilon$, por que $\delta (x) = 0$ para $x \neq 0$ y $\delta (x)$ está normalizada. Así en el límite $\epsilon \to 0$, se tiene
+\[\int_{-\infty}^{\infty} f(x) \delta (x) \: dx = f(0)  \]
+Esta integral se le conoce también como \emph{propiedad de filtro} de la función delta, ya que $\delta (x)$ actúa como un filtro, seleccionando de todos los posibles valores de $f(x)$ su valor en el punto $x=0$.
+\subsection{Secuencias delta.}\label{secuencias_delta}
+La afirmación de que la función $\delta (x)$ está dada por la expresión (\ref{eq:ecuacion_delta_01}) \textit{no es una afirmación apropiada y no se puede utilizar para definir una función}, mucho menos para una función integrable. Una posible definición alterna, podría ser el definir la función $\delta (x)$ como la función que satisface la propiedad de filtro (\ref{eq:ecuacion_delta_03})
+\[ \int_{-\infty}^{\infty} f(x) \: \delta (x) \: dx = f(0)  \]
+para toda función continua $f(x)$. Sin embargo es posible demostrar que no existe ninguna función con esa propiedad. Por lo que 
+\begin{center}
+\textit{¡¡la función delta no es una función en el sentido matemático usual!!}
+\end{center}
+¿Qué se hace entonces?  ¿Dirac nos engañó con su propuesta? Lo que sucede es que existen secuencias de funciones de pico pronunciado, las cuales en el límite en que el pico es infinitamente delgado e infinitamente alto, satisfacen la propiedad de filtro.
+\begin{defi}
+Llamamos secuencias delta $\delta_{n} (x)$ a una secuencia de funciones de pico pronunciado, que satisfacen
+\[ \lim_{n \to \infty} \int_{-\infty}^{\infty} \delta_{n} (x) \: f(x) \: dx =  f(0) \]
+\end{defi}
+\begin{ejemplo}
+La secuencia de funciones
+\begin{equation}
+\delta (x) = \begin{cases}
+0 & x < - \dfrac{1}{2 \, n} \\
+n & - \dfrac{1}{2 \, n} < x < \dfrac{1}{2 \, n} \\
+0 & 0 >  \dfrac{1}{2 \, n}
+\end{cases}
+\label{eq:ecuacion_delta_04}
+\end{equation}
+es una secuencia delta.
+\end{ejemplo}
+\begin{figure}[H]
+\centering
+\includestandalone{./Figuras/plot_secuencia_delta}
+\caption{Secuncia delta para valores de $n=1,2,\ldots,10$. El área debajo de la curva para cada $\delta_{n}$ siempre es $1$.}
+\label{fig:secuncia_delta_01}
+\end{figure}
+Para verificar esta afirmación consideremos la integral
+%Apuntes FETI página 46
+\[ \int_{-\infty}^{\infty} \delta_{n} (x) \: f(x) dx \]
+para cualquier función arbitraria $f(x)$. De la expresión (\ref{eq:ecuacion_delta_04}) para la secuencia delta se tiene
+\[ \int_{-\infty}^{\infty} \delta_{n} (x) \: f(x) dx = \int_{-\frac{1}{2 \, n}}^{\frac{1}{2 \, n}} n \: f(x) \: dx = n \int_{-\frac{1}{2 \, n}}^{\frac{1}{2 \, n}} f(x) \:  dx \]
+Utilizando el teorema del valor medio para integrales, podemos deducir que
+\[ n \int_{-\frac{1}{2 \, n}}^{\frac{1}{2 \, n}} f(x) = n \: \dfrac{1}{n} f(\xi) = f(\xi), \hspace{1cm} - \dfrac{1}{2 \, n} \leq \xi \leq \dfrac{1}{2 \, n} \]
+En el límite cuando $n \to \infty$, $\xi \to 0$. De la continuidad de la función $f(x)$ se sigue que $f(\xi) \to f(0)$, obteniendo así el resultado
+\[ \lim_{n \to \infty} \int_{-\infty}^{\infty} \: \delta_{n}(x) \: f(x) \: dx = f(0) \]
+lo que nos dice que la secuencia (\ref{eq:ecuacion_delta_04}) es una secuencia delta.
+\par
+Nótese que la secuencia delta (\ref{eq:ecuacion_delta_04}) no es derivable en $0$. Para muchos propósitos es deseable
+construir secuencias delta de funciones que sean continuas y diferenciables. Por ejemplo, algunas seceuncias delta con estas características son:
+\begin{align*}
+\delta_{n} &= \dfrac{n}{\sqrt{\pi}} e^{-n^{2} x^{2}} \\
+\delta_{n} &= \dfrac{n}{\pi} \: \dfrac{1}{1 + x^{2} \, n^{2}} \\
+\delta_{n} &= \dfrac{\sin n \, x}{\pi \, x} = \dfrac{1}{2 \, \pi} \int_{-n}^{n} e^{i \, x \, t} dt
+\end{align*}
+Todas estas funciones están normalizadas a la unidad
+\begin{equation}
+\int_{- \infty}^{\infty} \delta_{n}(x) \: dx = 1
+\label{eq:ecuacion_delta_05}
+\end{equation}
+\subsection{Propiedades de la delta de Dirac.}
+Una vez que hemos definido la delta de Dirac, nos gustaria saber ahora como operar con y en ella. ¿Es posible decir algo sobre su derivada? La respuesta a esta pregunta es afirmativa y las secuencias delta hechas de funciones diferenciables nos permiten responder a la pregunta de manera precisa.
+\begin{propiedad}
+Propiedad de filtro de las derivadas.
+\\
+La delta de Dirac satisface la siguiente propiedad:
+\[ \int_{-\infty}^{\infty} \dfrac{d \: \delta(x)}{dx} \: f(x)  \: dx = - \dfrac{d \: f(0)}{dx} \]
+con $f(x)$ una función diferenciable.
+\end{propiedad}
+
+La delta de Dirac satisface varias propiedades y conocerlas es de mucha utilidad cuando resolvemos problemas específicos en física. 
+\par
+\begin{propiedad}
+Para el producto de la delta de Dirac con una función se tiene que
+\begin{align}
+x \: \delta(x) &= 0 \\
+f(x) \: \delta(x - a) &= f(a) \: \delta(x - a)
+\end{align}
+\end{propiedad}
+\begin{propiedad}
+La paridad de la delta de Dirac y su derivada es
+\begin{align}
+\delta (-x) &= \delta (x) \\
+\delta^{\prime)} (-x) &= - \delta^{\prime} (x)
+\end{align}
+\end{propiedad}
+\begin{propiedad}
+También satisface las relaciones
+\begin{align}
+\delta(ax) &= \dfrac{1}{\vert a \vert} \: \delta (x), \hspace{1cm} a \neq 0 \\
+\delta (x^{2} - a^{2}) &= \dfrac{1}{2 \, a} \left[ \delta (x + a) + \delta (x - a) \right] \hspace{1cm} a > 0
+\end{align}
+\end{propiedad}
+\begin{propiedad}
+Las propiedades de filtro
+\begin{align}
+\int_{-\infty}^{\infty} f(x) \: \delta (x - a) \: dx &= f(a) \\
+\int \delta (a - x) \: \delta (x - b) \: dx &= \delta (a - b)
+\end{align}
+\end{propiedad}
+\section{Introduciendo más variables.}
+Al introducir más variables:
+\begin{equation}
+\delta (\vv{\bm{r}} - \vv{\bm{r_{0}}}) = \delta (x - x_{0}) \: \delta (y - y_{0}) \: \delta (z - z_{0})
+\label{eq:ecuacion_A_03}
+\end{equation}
+de manera que al integrar sobre todo el espacio tenemos
+\[ \int \delta (\vv{\bm{r}} - \vv{\bm{r_{0}}}) \: dx \, dy \, dz = 1 \]
+\textbf{Ejenplo:}
+
+La función delta permite especificar la densidad de
+carga debida a un conjunto de $N$ cargas puntuales de valores $q_{i}$ situadas en posiciones $\vv{r_{i}}$  como:
+\begin{equation}
+\rho (\vv{r}) = \sum_{i=1}^{N} q_{i} \: \delta(\vv{r} - \vv{r_{i}})
+\label{eq:ecuacion_A_04}
+\end{equation}
+Las propiedades de la función delta permiten obtener el potencial $\varphi(\vv{r})$ evaluando la función dentro de la integral en los puntos $\vv{r_{i}}$, es decir
+\begin{equation}
+\varphi(\vv{r}) = \int \dfrac{\rho(\vv{r^{\prime}})}{\vert \vv{r} - \vv{r^{\prime}} \vert} \: d^{3}r^{\prime} = \sum_{i=1}^{N} q_{i} \int \dfrac{\delta ( \vv{r} - \vv{r_{i}})}{\vert \vv{r} - \vv{r^{\prime}} \vert} \: d^{3}r^{\prime} = \sum_{i=1}^{N} \dfrac{q_{i}}{\vert \vv{r} - \vv{r_{i}} \vert}
+\label{eq:ecuacion_A_05}
+\end{equation}
+Nótese que $\delta (x)$ tiene unidades de inverso de $x$ y $\delta (\vv{r})$ tiene unidades de densidad númerica.
+\par
+La función $\delta$ toma una forma particular en coordenadas cilíndricas y esféricas, dadas por la condición de normalización:
+\begin{enumerate}
+\item Para coordenadas cilíndricas
+\begin{equation}
+\int \delta (\vv{r} - \vv{r_{0}}) \: R \: dR \: d \varphi \: dz \Rightarrow \delta (\vv{r}) =  \dfrac{1}{R} \: \delta (R - R_{0}) \: \delta (\varphi - \varphi_{0}) \: \delta (z - z_{0})
+\end{equation}
+\item  Para coordenadas esféricas
+\begin{equation}
+\begin{aligned}
+\int & \delta (\vv{r} - \vv{r_{0}}) \: r^{2} \, dr \, \sin \theta \, d \theta \, d \varphi = 1 \\
+&\Rightarrow \delta (\vv{r}) = \dfrac{1}{r^{2}} \: \delta (r - r_{0}) \, \delta (\cos \theta - \cos \theta_{0}) \, \delta (\varphi - \varphi_{0})
+\end{aligned}
+\end{equation}
+\end{enumerate}
+\section*{Ejercicios a cuenta}
+\begin{enumerate}[label=\roman*.]
+\item Demuestra que 
+\[ \nabla \cdot \left( \dfrac{e_{r}}{r^{2}} \right) = 0 \hspace{1cm} \mbox{para } r > 0 \]
+Tip: Se puede resolver en coordenadas cartesianas, pero es más fácil usando coordenadas esféricas.
+\item Demuestra que 
+\[ \nabla \left( \dfrac{1}{r} \right) = \dfrac{- e_{r}}{r^{2}} \]
+\end{enumerate}
+\section{Distribuciones}
+Las ideas que nos permitieron desarrollar el concepto de la delta de Dirac previamente, se pueden sistematizar en lo que se conoce como \emph{la teoría de distribuciones o funciones generalizadas}.
+\par
+Las funciones generalizadas fueron introducidas en 1935 por el matemático ruso, Sergei Lvóvich Sóbolev (1908 - 1989). De manera independientemente a finales de la década de 1940, el matemático francés, Laurent Schwartz (1915 - 2002) formalizó la teoría de distribuciones, lo que le valió la Medalla Fields en 1950 (que no recibió durante la entrega ya que se le negó la visa para ingresar a los Estados Unidos.)
+\par
+Como el nombre lo sugiere, la teoría tiene como objetivo  \emph{extender la definición de una función}, de manera tal que conceptos como el de la delta de Dirac $\delta (x)$ cuenten con una base matemática firme. En particular la teoría permite extender el concepto de derivada a todas las funciones localmente integrables y a entes aún más generales. Existen varias formas de presentar la teoría de distribuciones, se dará una breve introducción utilizando las integrales de secuencias de funciones del tipo
+\begin{equation}
+\int f_{n}(x) \: g(x) dx \hspace{1cm} n = 1, 2, 3 , \ldots
+\label{eq:ecuacion_1_99}
+\end{equation}
+Para ello es necesario introducir tres conceptos:
+\begin{enumerate}
+\item El concepto de función de prueba.
+\item El concepto de función admisible.
+\item El concepto de convergencia débil.
+\end{enumerate}
+Hemos visto que una secuencia de funciones $f_{n}(x)$ tal como la secuencia delta de funciones, definida en \ref{secuencias_delta}, nos lleva al concepto matemático de \enquote{función} delta, si la secuencia de integrales converge para funciones apropiadas $g(x)$. Pero ¿Qué quiere decir que sean apropiadas? En la sección anterior vimos que si queremos definir conceptos tales como las derivadas de la función delta, entonces las funciones $g(x)$ deben ser diferenciables. Para definir las derivadas también hemos visto que al integrar por partes, para que las derivadas totales no contribuyan, es necesario que la función $g(x)$ tenga un comportamiento apropiado en infinito. Definimos entonces las funciones $g(x)$ como
+\begin{defi}
+Funciones de prueba.
+Decimos que las función $g(x)$ en la ec. (\ref{eq:ecuacion_1_99}), es de prueba, si es infinitamente diferenciable (clase $C^{\infty}$) y es idénticamente cero fuera de algún intervalo $(a, b)$ (en general este intervalo es diferente para funciones $g(x)$ diferentes).
+\end{defi}
+El nombre de funciones de prueba es adecuado, dado que por ejemplo, la propiedad de filtro de las secuencias delta, se prueba sobre estas funciones. Habiendo definido las funciones de prueba, podemos ahora definir las funciones admisibles (de las cuales seleccionaremos las funciones $f_{n}(x)$ y la convergencia débil.
+\begin{defi}
+Funciones admisibles.
+
+Decimos que las funciones $f_{n}(x)$ en la ec. (\ref{eq:ecuacion_1_99}) son admisibles, si son infinitamente diferenciables. Su comportamiento en infinito puede ser arbitrario.
+\end{defi}
+\begin{defi}
+Convergencia débil.
+
+Consideremos una secuencia de funciones admisibles $f_{n}(x) \mbox{ con } n = 1, 2, 3, \ldots $. Decimos que esta secuencia es débilmente convergente si el límite
+\begin{equation}
+\lim_{n \to \infty} \int_{-\infty}^{\infty} f_{n}(x) \:  g(x) \, dx
+\label{eq:ecuacion_1_100}
+\end{equation}
+existe para todas las funciones de prueba $g(x)$.
+\end{defi}
+Una secuencia débilmente convergente puede o no puede converger en alguno de los sentidos de convergencia usual, como convergencia puntual.
+\par
+Podemos presentar ahora una definición rigurosa de una distribución de la siguiente manera:
+\begin{defi}
+Distribuciones.
+
+Una distribución $\varphi (x)$ es un concepto matemático asociado con una secuencia débilmente convergente de funciones admisibles para la cual la integral simbólica
+\begin{equation}
+\int_{-\infty}^{\infty} \phi (x) \:  g(x) \, dx
+\label{eq:ecuacion_1_101}
+\end{equation}
+tiene un significado preciso, por medio de la prescripción
+\begin{equation}
+\int_{-\infty}^{\infty} \phi (x) \: g(x) \, dx = \lim_{n \to \infty} f_{n}(x) \: g(x) \, dx
+\label{eq:ecuacion_1_102}
+\end{equation}
+\end{defi}
+\end{document}

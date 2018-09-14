@@ -1,0 +1,70 @@
+\include{preambulo_doc}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Matemáticas Avanzadas de la Física \\ {\large Solución no homogénea}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Teorema de Green.}
+Si $u$ y $v$ son dos funciones escalares, consideremos las siguientes identidades:
+\begin{eqnarray}
+\nabla \cdot ( u \nabla v) &=& u \nabla \cdot \nabla v + (\nabla u) \cdot (\nabla v) \\
+\nabla \cdot ( v \nabla u) &=& v \nabla \cdot \nabla u + (\nabla v) \cdot (\nabla u)
+\end{eqnarray}
+Restando la segunda expresión de la primera, luego integramos sobre un volumen (suponemos que $u$, $v$ y sus derivadas son continuas), y usando el teorema de Gauss
+\begin{equation}
+\int_{S} \mathbf{V} \cdot d \bm{\sigma} = \int_{V} \mathbf{\nabla} \cdot \mathbf{V} d \tau
+\end{equation}
+Que dice que la integral de superficie de un vector sobre una superficie cerrada, es igual a la integral de volumen de la divergencia de ese vector, integrada sobre el volumen que encierra la superficie.
+\\
+Se obtiene entonces
+\begin{equation}
+\int_{V} (u \nabla \cdot \nabla v - v \nabla \cdot \nabla u) d \tau = \int_{S} (u \nabla v - v \nabla u) \cdot d \bm{\sigma}
+\end{equation}
+Que es el teorema de Green.
+\section{Operadores lineales.}
+Un operador lineal $\mathcal{L}$ se define como un operador con las siguientes dos propiedades:
+\begin{enumerate}
+\item $\mathcal{L}(a \psi) = a \mathcal{L} \psi$ con $a$ constante.
+\item $\mathcal{L} (\psi_{1} + \psi_{2}) =  \mathcal{L} \psi_{1} + \mathcal{L} \psi_{2}$
+\end{enumerate}
+\section{Función delta de Dirac.}
+La función delta de Dirac se define normalmente por sus propiedades:
+\begin{eqnarray}
+\delta(x) &=& 0, \hspace{1cm} x \neq 0 \\
+\int_{-\infty}^{\infty} \delta (x) dx  &=& 1 \\
+\int_{-\infty}^{\infty} f(x) \delta (x) dx &=& f(0) \label{eq:derivada1}
+\end{eqnarray}
+Donde hemos supuesto que $f(x)$ es continua en $x=0$.
+\\
+NO es una función en el sentido usual, por que ella tiene que ser la función nula en todos los puntos excepto en cero donde ella vale el infinito!!
+\\
+Se puede hacer una aproximación de la función delta:
+\begin{eqnarray}
+\delta_{n} (x) &=& \begin{cases}
+0, \hspace{0.5cm} x < - \dfrac{1}{2n} \\
+n, \hspace{0.5cm} - \dfrac{1}{2n} < x < \dfrac{1}{2n} \\
+0, \hspace{0.5cm} x > \dfrac{1}{2n}
+\end{cases} \label{eq:propiedad_integral} \\
+\delta_{n} (x) &=& \dfrac{n}{\sqrt{\pi}} \exp(-n^{2} x^{2}) \label{eq:derivada2} \\
+\delta_{n} (x) &=& \dfrac{n}{\pi} \dfrac{1}{1 + n^{2} x^{2}} \\
+\delta_{n} (x) &=& \dfrac{\sin nx}{\pi x} = \dfrac{1}{2 \pi} \int_{-n}^{n} e^{ixt} dt \label{eq:seriesF}
+\end{eqnarray}
+Las variaciones nos dan diferentes grados de utilidad:
+\begin{enumerate}
+\item La ecuación (\ref{eq:propiedad_integral}) es muy útil para encontrar de manera simple, propiedades de integración.
+\item Las ecuaciones (\ref{eq:derivada1}) y (\ref{eq:derivada2}) son convenientes para diferenciar, lo que nos llevaría a los polinomios de Hermite.
+\item La ecuación (\ref{eq:seriesF}) es bastante útil en el análisis de Fourier y sus aplicaciones en la mecánica cuántica.
+\end{enumerate}
+Considerando estas aproximaciones, podemos suponer que $f(x)$ es bien portada para valores grandes de $x$.
+\\
+Para la mayoría de fines en la física, las aproximaciones son bastante buenas, pero desde el punto de vista matemático, el punto es crítico, ya que el límite
+\[ \lim_{n \to \infty} \delta_{n} (x) \]
+\textbf{no existe}.
+\\
+Para cubrir esta dificultad, nos apoyamos con la teoría de distribuciones, reconocemos de la ecuación (\ref{eq:derivada1}) la propiedad fundamental, nos enfocamos en ésta más no en $\delta(x)$ en sí.
+\\
+El conjunto de las ecuaciones anteriores con $n=1,2,3,\ldots$
+\end{document}

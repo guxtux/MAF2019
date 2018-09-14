@@ -1,0 +1,82 @@
+\documentclass{standalone}
+\usepackage{tikz,tikz-3dplot}
+\tikzset{thin_line/.style={thin, solid, color=black}}
+\tikzset{dash_line/.style={thin, dashed, color=darkgray}}
+\tikzset{vect_line/.style={very thick, ->, >=latex,  solid, color=black}}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+ \draw[thick,->] (-1.5,0,0) -- (2,0,0) node[anchor=north east]{$y$};
+ \draw[thick,->] (-1.5,0,0) -- (-1.5,2.5,0) node[anchor=north east]{$z$};
+ \draw[thick,->] (-1.5,0,0) -- (-1.5,0,1.5) node[anchor=east]{$x$};
+
+ \coordinate (a)  at ( 2.00, 1.0);
+ \coordinate (am) at (-0.05, 0.1);
+ \coordinate (an) at ( 0.45, 0.8);
+
+ \coordinate (b)  at ( 2.30, 2.5);
+ \coordinate (bm) at ( 0.95, 0.9);
+
+ \coordinate (c)  at ( -0.5, 2.0);
+ \coordinate (cm) at (-0.05, 1.9);
+
+ \coordinate (d)  at (-1.10, 0.3);
+ \coordinate (dm) at (-1.15, 1.2);
+
+ %\draw (a) node {a1};
+ %\draw (b) node {b1};
+ %\draw (c) node {c1};
+ %\draw (d) node {d1};
+ \draw[thin_line] (a) -- (b);    
+ \draw[thin_line] (b) to[out=150, in=-15] (c);    
+ \draw[thin_line] (c) -- (d);    
+ \draw[thin_line] (d) to[out=-15, in=150] (a);    
+
+% \draw[fill=gray!30] (a) to[out= 25, in=200] 
+%                     (b) to[out=115, in=-30] 
+ %                    (c) to[out=185, in= 60] 
+ %                    (d) to[out=-25, in=110] (a);    
+
+% \draw[thin_line] (am) to[out= 25, in=200] (bm);    
+ %\draw[dash_line] (bm) to[out=115, in=-30] (cm);    
+ %\draw[dash_line] (cm) to[out=185, in= 60] (dm);    
+ %\draw[thin_line] (dm) to[out=-25, in=110] (am);    
+
+% \draw[thin_line] (am) -- (a);
+% \draw[thin_line] (bm) -- (b);
+ %\draw[dash_line] (cm) -- (c);
+% \draw[thin_line] (dm) -- (d);
+
+ %\draw[fill=gray!90] (a)  to[out= 25, in=200] 
+  %                   (b)  -- 
+   %                  (bm) to[out=200, in=25]
+    %                 (am) -- (a);
+
+% \draw[fill=gray!90] (am) --
+ %                    (a)  to[out=110, in=-25]
+  %                   (d)  --
+   %                  (dm) to[out=-25, in=110] (am);
+
+ \coordinate (O)   at ( 0.00, 1.25);
+ \coordinate (O1)  at ( -0.10, 2.3);
+ \coordinate (O2)  at (-0.10, 1.18);
+ \coordinate (P)   at ( 1.0, 1.6);
+ \coordinate (h1)  at (-0.80, 2.00);
+ \coordinate (h2)  at (-0.30, 1.60);
+
+ \draw (-0.2,1.25) node {$P$};
+ 
+
+ \draw[vect_line] (O) -- node[below] {$d \mathbf{r}$} (P) node[above] {$Q$};
+ \draw[vect_line] (O) -- (O1) node[above] {$\nabla \varphi$}; 
+ 
+ \draw (2.8,1.8) node {$\varphi (x,y,z) = C$};
+ %\draw[thin_line] (h1) node[above left] {\large $d{A}$} -- (h2);
+
+
+% \draw[thin_line] (O) to[out=-32, in=134] (O1);
+% \draw[thin_line] (O) to[out=205, in=40]  (O2);
+% \draw (O1) arc[radius=2.mm, start angle=-45, end %angle=54];
+% \draw (O2) arc[radius=4.mm, start angle=158, end %angle=110];
+
+\end{tikzpicture}
+\end{document}

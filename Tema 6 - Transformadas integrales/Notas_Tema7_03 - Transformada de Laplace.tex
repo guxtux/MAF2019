@@ -1,0 +1,449 @@
+\input{../preambulo_doc}
+\usepackage{standalone}
+\usepackage{mathrsfs}
+\usepackage{bigints}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing,patterns}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [draw, rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{bola} = [draw, circle , minimum size = 10, draw=black, text centered]
+\tikzstyle{elipse} = [draw, ellipse, minimum height = 10]
+\usepackage{pgfplots}
+\usepackage{float}
+\spanishdecimal{.}
+\newtheorem{defi}{{\textit{Definición}}}[section]
+\newtheorem{teo}{{\textit{Teorema}}}[section]
+\newtheorem{cor}{Corolario}
+\newcommand{\saltosin}{\nonumber \\}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Transformada de Laplace \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Transformadas de problemas con valores iniciales.}
+Ahora revisaremos la aplicación de la transformada de Laplace para resolver una ecuación diferencial lineal con coeficientes constantes, tal como 
+\begin{equation}
+a x^{\prime \prime} (t) + b x^{\prime} (t) + c x(t) = f(t)
+\label{eq:ecuacion_001}
+\end{equation}
+con condiciones iniciales dadas $x(0) = x_{0}$ y $x^{\prime}(0) = x^{\prime}_{0}$. Mediante la linealidad de la
+transformada de Laplace podemos transformar la ecuación (\ref{eq:ecuacion_001}) tomando de manera separada la transformada de Laplace de cada término de la ecuación. La ecuación transformada es
+\begin{equation}
+a \mathscr{L} \{ x^{\prime \prime} (t) \} + b \mathscr{L} \{ x^{\prime} (t) \} + c \mathscr{L} \{ x (t) \} = \mathscr{L} \{ f(t) \}
+\label{eq:ecuacion_002}
+\end{equation}
+esta ecuación involucra las transformadas de las derivadas $x^{\prime}$ y $x^{\prime \prime}$ de la función desconocida
+$x(t)$. La clave del método está en el siguiente teorema, el cual indica cómo expresar la transformada de la derivada de una función en términos de la transformada de la función misma.
+\begin{teo}
+\label{teo_001}
+Supóngase que la función $f(t)$ es continua y suave por tramos para $t \geq 0$, y que es de orden exponencial cuando $t \to + \infty$, de manera que existen constantes no negativas $M$, $c$ y $T$ tales que
+\begin{equation}
+\vert f(t) \vert \leq M e^{ct} \hspace{0.5cm} \mbox{para } t \geq T
+\label{eq:ecuacion_003}
+\end{equation}
+Entonces, la $\mathscr{L} \{ f^{\prime} (t) \}$ existe para $s > c$, y
+\begin{equation}
+\mathscr{L} \{ f^{\prime} (t) \} = s \mathscr{L} \{ f(t) \} - f(0) = s F(s) - f(0)
+\label{eq:ecuacion_004}
+\end{equation}
+\end{teo}
+La función $f$ se llama \textbf{suave por tramos} en el intervalo acotado $[a, b]$ si es continua por tramos en $[a, b]$ y derivable salvo en ciertos puntos finitos, siendo $f^{\prime}(t)$ continua por tramos en $[a, b]$. Pueden asignársele valores arbitrarios a $f(t)$ en los puntos aislados donde $f$ es no derivable. Se dice que $f$ es derivable por tramos para
+$t \geq 0$ si es suave en el segmento de cada subintervalo acotado de $[0, +\infty)$. La figura (\ref{fig:figura_001}) muestra cómo ''las esquinas'' de la gráfica de $f$ corresponden con discontinuidades en su derivada $f^{\prime}$.
+\begin{figure}
+\centering
+\includestandalone{discontinuidades}
+\label{fig:figura_001}
+\caption{Derivada continua por tramos.}
+\end{figure}
+La idea principal de la demostración del teorema (\ref{teo_001}) es mostrarlo mejor en el caso en que $f^{\prime}(t)$ es continua (no meramente continua por tramos) para $t \geq 0$. Entonces, comenzando con la definición de $\mathscr{L}         \{f^{\prime}(t) \}$ e integrando por partes, se obtiene
+\[ \mathscr{L} \{f^{\prime}(t) \} = \int_{0}^{\infty} e^{-st} f^{\prime}(t) dt = \left[ e^{-st} f(t) \right]_{t=0}^{\infty} + s \int_{0}^{\infty} e^{-st} f(t) dt \]
+Debido a la ecuación (\ref{eq:ecuacion_003}), el término integrado $\exp(-st) f(t)$ tiende a cero (cuando $s > c$) conforme $t \to +\infty$, y su valor en el límite inferior $t=0$ contribuye con $-f(0)$ en la evaluación de la expresión anterior. La integral que queda es simplemente $\mathscr{L} \{ f(t) \} $, la integral converge cuando $s > c$. Entonces, la $\mathscr{L} \{ f^{\prime}(t) \}$ existe cuando $s > c$, y su valor se muestra en la ecuación (\ref{eq:ecuacion_004}). El caso en el cual $f^{\prime}(t)$ cuenta con discontinuidades aisladas se verá más adelante.
+\subsection*{Solución de problemas con valores iniciales.}
+Para transformar la ecuación (\ref{eq:ecuacion_001}) se necesita también la transformada de la segunda derivada. Si se asume que $g(t) = f^{\prime}(t)$ satisface la hipótesis del teorema (\ref{teo_001}), entonces éste implica que
+\begin{eqnarray*}
+\mathscr{L} \{ f^{\prime \prime} (t) \} &=& \mathscr{L} \{ g^{\prime} (t) \} = s \mathscr{L}\{ g(t) \} - g(0) \nonumber \\
+&=& s \mathscr{L}\{ f^{\prime}(t) \} - f^{\prime}(0) \nonumber \\
+&=& s [ s \mathscr{L}\{ f(t) \} - f(0) ] - f^{\prime}(0) \nonumber
+\end{eqnarray*}
+y así
+\begin{equation}
+\mathscr{L} \{ f^{\prime \prime} (t) \} =  s^{2} F(s) - s f(0) - f^{\prime}(0)
+\label{eq:ecuacion_005}
+\end{equation}
+Una repetición de este cálculo da
+\begin{equation}
+\mathscr{L} \{ f^{\prime \prime \prime} (t) \} = s \mathscr{L} \{ f^{\prime \prime} (t) \} - f^{\prime \prime}(0) = s^{3} F(s) - s^{2} f(0) - s f^{\prime}(0) - f^{\prime \prime}(0)
+\label{eq:ecuacion_005}
+\end{equation}
+Después de un número finito de pasos como éste se obtiene la siguiente extensión del teorema (\ref{teo_001}).
+\begin{cor}[Transformada de derivadas de orden superior]
+Supóngase que las funciones $f$, $f^{\prime}$, $f^{\prime \prime}$, $\ldots$, $f^{n-1)}$ son continuas y suaves por tramos
+para $t \geq 0$, y que cada una de estas funciones satisface las condiciones dadas en (\ref{eq:ecuacion_003}) con los mismos valores de $M$ y de $c$. Entonces, la $\mathscr{L} \{ f^{(n)} (t) \}$ existe cuando $s > c$, y
+\begin{eqnarray*}
+\mathscr{L} \{ f^{(n)} (t) \} &=& s^{n} \mathscr{L} \{ f(t) \} - s^{n-1} f(0) - s^{n-2} f^{\prime}(0) - \ldots - f^{(n-1)}(0) \\
+&=& s^{n} F(s) - s^{n-1} f(0) -  \ldots - s f^{(n-2)}(0) - f^{(n-1)}(0)
+\label{eq:ecuacion_007}
+\end{eqnarray*}
+\end{cor}
+\subsection*{Ejemplo.}
+Resolver el siguiente problema con valores iniciales:
+\[ x^{\prime \prime} - x^{\prime} - 6 x = 2, \hspace{1cm} x(0)=2, x^{\prime}(0) = -1 \]
+Con los valores iniciales datos, las ecuaciones (\ref{eq:ecuacion_004}) y (\ref{eq:ecuacion_005}) nos conducen a que
+\[ \mathscr{L} \{ x^{\prime}(t) \} = s \mathscr{L} \{ x(t) \} - x(0) =  s X(s) - 2  \]
+y
+\[ \mathscr{L} \{ x^{\prime \prime}(t) \} = s^{2} \mathscr{L} \{ x(t) \} - s x(0) - x^{\prime} (0) =  s^{2} X(s) - 2s +1  \]
+donde (de acuerdo con nuestra convención respecto de la notación) $X(s)$ representa la transformada de Laplace de la función (desconocida) $x(t)$. De esta manera, la ecuación transformada es
+\[ [ s^{2} X(s) - 2s + 1 ] - [ s  X(s) - 2 ] - 6 [ X(s) ] = 0 \]
+la cual se simplifica rápidamente en
+\[ (s^{2} - s - 6) X(s) - 2s + 3 = 0 \]
+por tanto
+\[ X(s) = \dfrac{2s - 3}{s^{2} - s - 6} = \dfrac{2s -3}{(s-3) (s+2)} \]
+Por el método de fracciones parciales (del cálculo integral), existen constantes $A$ y $B$ tales que
+\[ \dfrac{2s -3}{(s-3) (s+2)} =  A (s +2 ) + B (s -3 ) \]
+Si sustituimos $s=3$, encontramos que $A=\frac{3}{5}$ , la sustitución de $s=-2$ muestra que $B=\frac{7}{5}$, así tenemos que
+\[ X(s) = \mathscr{L} \{ x(t) \} = \dfrac{\frac{3}{5}}{s-3} + \dfrac{\frac{7}{5}}{s+2} \]
+Como $\mathscr{L}^{-1} \left\lbrace \frac{1}{(s-a)} \right\lbrace =  \exp(at)$, se sigue que
+\[ x(t) = \dfrac{3}{5} \exp(3t) + \dfrac{7}{5} \exp(-2t) \]
+es la solución del problema original con valores iniciales. Nótese que se encontró primero la solución general de la ecuación diferencial. El método de la transformada de Laplace proporciona directamente la solución particular deseada considerando automáticamente  - por medio del teorema (\ref{teo_001}) y su corolario - las condiciones iniciales dadas.
+\\
+\textbf{Observación. } En el ejemplo anterior se encontraron los coeficientes de las fracciones parciales $A$ y $B$ mediante el ''truco'' de sustituir por separado las raíces $s = 3$ y $s = -2$ del denominador original $s^{2} - s - 6 = (s - 3) (s +2)$ en la ecuación
+\[ 2s - 3 =  A(s+2) + B(s-3) \]
+que resultan de resolver las fracciones. En lugar de cualquiera de estos caminos cortos, el ''método seguro'' es agrupar coeficientes de iguales potencias de $s$ del lado derecho de la ecuación
+\[ 2s - 3 = (A + B) s + (2A -3) \]
+Entonces, después de igualar coeficientes de términos del mismo grado, se obtienen las ecuaciones lineales
+\begin{eqnarray*}
+A + B &=& 2 \nonumber \\
+2A - 3B &=& -3 \nonumber
+\end{eqnarray*}
+las cuales se resuelven fácilmente obteniendo los mismos valores de $A = \frac{3}{5}$ y $B = \frac{7}{5}$.
+\subsection*{Ejemplo.}
+Resolver el problema con valores iniciales
+\[ x^{\prime \prime} + 4 x =  \sin 3t, \hspace{1.5cm} x(0) = x^{\prime}(0) = 0 \]
+Un problema de este tipo surge en el movimiento de un sistema masa-resorte con una fuerza externa, como se muestra en la figura (\ref{fig:figura_002}).
+\begin{figure}[H]
+\centering
+\includestandalone{sist_masa_resorte}
+\label{fig:figura_002}
+\caption{Sistema masa-resorte que satisface el problema con valores iniciales.}
+\end{figure}
+Debido a que ambas condiciones son cero, de la ecuación (\ref{eq:ecuacion_005}) se obtiene que $\mathscr{L} \{x^{\prime \prime} (t) \} = s^{2} X(s) $. La transformada de $\sin 3t$ se obtiene de tablas y de esta manera se encuentra la ecuación transformada
+\[ s^{2} X(s) + 4 X(s) = \dfrac{3}{s^{2} + 9} \]
+Por tanto
+\[ X(s) = \dfrac{3}{(s^{2} + 4)(s^{2} + 9)} \]
+El método de fracciones paricales resulta en
+\[ \dfrac{3}{(s^{2} + 4)(s^{2} + 9)} = \dfrac{As + B}{s^{2} + 4} + \dfrac{Cs +D}{s^{2} + 9} \]
+El ''método seguro'' para resolver las fracciones consistiría en multiplicar ambos lados de la ecuación por el denominador común, y luego agrupar los coeficientes de iguales potencias de $s$ del lado derecho. Igualando coeficientes de iguales potencias de los dos lados de la ecuación resultante se llega a cuatro ecuaciones lineales que pueden resolverse para obtener $A$, $B$, $C$ y $D$.
+\\
+Sin embargo, aquí puede anticiparse que $A = C = 0$ debido a que ni el numerador ni el denominador del lado izquierdo involucran alguna potencia impar de $s$, mientras que algún valor diferente de cero le corresponde a los términos de grado impar del lado derecho. De esta manera, $A$ y $C$ se reemplazan por cero antes de resolver las fracciones. El resultado es la identidad
+\[ 3 = B (s^{2} + 9) + D (s^{2} +  4) =  (B + D)s^{2} + (9 B + 4 D) \]
+Cuando se igualan coeficientes de iguales potencias de s se obtienen las ecuaciones lineales
+\begin{eqnarray*}
+B + D &=& 0 \nonumber \\
+9B + 4D &=& 3
+\end{eqnarray*}
+las cuales se resuelven fácilmente para $B = \frac{3}{5}$ y $D = - \frac{3}{5}$, así
+\[ X(s) = \mathscr{L} \{x(t) \} = \dfrac{3}{10} \; \dfrac{2}{s^{2} + 4} \; - \dfrac{1}{5} \; \dfrac{3}{s^{2} + 9} \]
+Dado que $\mathscr{L} \{\sin 2t \} = \frac{2}{s^{2} + 4}$ y $\mathscr{L} \{\sin 3t \} = \frac{3}{s^{2} + 9}$, se concluye que
+\[ x(t) = \dfrac{3}{10} \sin 2t - \dfrac{1}{5} \sin 3t \]
+La figura () muestra la gráfica de la función de posición de la masa de periodo $2 \pi$. Nótese que una vez más que el método de la transformada de Laplace proporciona la solución directamente sin necesidad de obtener primero la función complementaria y una solución particular de la ecuación diferencial no homogénea original. De esta manera, las ecuaciones no homogéneas se resuelven exactamente igual que las ecuaciones homogéneas.
+\begin{figure}[!h]
+\centering
+\includestandalone{sist_masa_resorte_plot}
+\label{fig:figura_003}
+\caption{Función de la posición $x(t)$ del sistema masa-resorte.}
+\end{figure}
+Los ejemplos anteriores ilustran el procedimiento de solución que se explica en la siguiente figura
+\begin{figure}[H]
+\centering
+\includestandalone[scale=0.75]{diagramatransformadas}
+\label{fig:figura_004}
+\caption{Uso de las transformadas de Laplace para resolver un problema de valores iniciales.}
+\end{figure}
+\section{Sistemas lineales.}
+La transformada de Laplace se utiliza con frecuencia en problemas para resolver sistemas lineales donde todos los coeficientes son constantes. Cuando se especifican las condiciones iniciales, la transformada de Laplace reduce este sistema lineal de ecuaciones diferenciales a un sistema lineal de ecuaciones algebraicas, donde las incógnitas son las transformadas de las funciones solución. Como se ilustra en el siguiente ejemplo, la técnica para un sistema es esencialmente la misma que para una ecuación diferencial con coeficientes constantes.
+\subsection*{Ejemplo.}
+Resolver el sistema
+\begin{eqnarray}
+\begin{aligned}
+2x^{\prime \prime} &=  - 6x + 2y \\
+y^{\prime \prime} &= 2x - 2y + 40 \sin 3t
+\end{aligned}
+\label{eq:ecuacion_008}
+\end{eqnarray}
+sujeto a las condiciones iniciales
+\begin{equation}
+x(0) = x^{\prime} (0) = y(0) = y^{\prime} (0) = 0
+\label{eq:ecuacion_009}
+\end{equation}
+De esta manera, la fuerza $f(t) = 40 \sin 3t$ se aplica a la segunda masa de la figura (\ref{fig:figura_005}), iniciando en el tiempo $t=0$ cuando el sistema está en reposo en su posición de equilibrio.
+\begin{figure}[H]
+\centering
+\includestandalone{sist_dos_masas}
+\label{fig:figura_005}
+\caption{Sistema masa-resorte que satisface el problema con valores iniciales.}
+\end{figure}
+Escribiendo $X(s) = \mathscr{L} \{ x(t) \}$ y $Y(s) = \mathscr{L} \{ y(t) \}$, entonces las condiciones iniciales dadas en (\ref{eq:ecuacion_009}) implican que
+\[ \mathscr{L} \{ x^{\prime \prime} (t) \} = s^{2} X(s) \hspace{1cm} \mbox{y} \hspace{1cm} \mathscr{L} \{ y^{\prime \prime}(t) \} = s^{2} Y(s) \]
+Debido a que $\mathscr{L} \{ \sin 3t \} = 3 / (s^{2} +9)$, las transformadas de las ecuaciones dadas en (\ref{eq:ecuacion_008}) son las ecuaciones
+\begin{eqnarray*}
+2 s^{2} X(s) &= - 6 X(s) + 2 Y(s) \nonumber \\
+s^{2} Y(s) &= 2 X(s) - 2 Y(s) + \dfrac{120}{s^{2} + 9} \nonumber
+\end{eqnarray*}
+De esta manera, el sistema trasnformado es
+\\
+\begin{center}
+\begin{tabular}{r r l}
+$(s^{2} + 3) X(s)$ & $-Y(s)$ & $=0$ \\
+$-2X(s)$ & $+(s^{2} + 2) Y(s)$ & $=\dfrac{120}{s^{2}+9}$ 
+\end{tabular}
+\end{center}
+El determinante de este par de ecuaciones lineales en $X(s)$ y $Y(s)$ es
+\[ \begin{vmatrix}
+s^{2} + 3 & -1 \\
+-2 & s^{2} + 2
+\end{vmatrix} 
+ = (s^{2} + 3)(s^{2} + 2) - 2 = (s^{2} + 1) (s^{2} + 4 )
+\]
+y resolviendo el sistema dado, se tiene
+\[ X(s) = \dfrac{120}{(s^{2} + 1)(s^{2} + 4)(s^{2} + 9)} = \dfrac{5}{s^{2} + 1} - \dfrac{8}{s^{2} + 4} + \dfrac{18}{s^{2} + 9} \]
+y 
+\[ Y(s) = \dfrac{120 (s^{2} + 3)}{(s^{2} + 1)(s^{2} + 4)(s^{2} + 9)} = \dfrac{10}{s^{2} + 1} + \dfrac{8}{s^{2} + 4} - \dfrac{18}{s^{2} + 9} \]
+La descomposición en fracciones parciales de las ecuaciones anterior se encuentra fácilmente, ya que los factores del denominador son lineales en $s^{2}$, por lo que puede escribirse
+\[ \dfrac{120}{(s^{2} + 1)(s^{2} + 4)(s^{2} + 9)} = \dfrac{A}{s^{2} + 1} + \dfrac{B}{s^{2} + 4} - \dfrac{C}{s^{2} + 9} \]
+concluyendo que
+\[ 120 =  A(s^{2}+4)(s^{2}+9) + B(s^{2}+1)(s^{2}+9) + C(s^{2}+1)(s^{2}+4) \]
+La sustitución de $s^{2}=-1$ (i.e. $s=i$ un cero del factor $s^{2}+1$), en la ecuación anterior, hace que $120= A \cdot 3 \cdot 8$, tal que $A=5$. De manera similar, la sustitución de $s^{2} = -4$, nos proporciona $B=-8$, y de la sustitución de $s^{2}= -9$ so obtiene que $C=3$.
+\\
+Las trasformadas inversas de Laplace de las expresiones anteriores, proporcionan la solución
+\begin{eqnarray*}
+x(t) &=& 5 \sin t - 4 \sin 2t + \sin 3t \nonumber \\
+y(t) &=& 10 \sin t + 4 \sin 2t - 6 \sin 3t \nonumber
+\end{eqnarray*}
+El desplazamiento de las masas, se muestra en la siguiente figura:
+\begin{figure}[H]
+\centering
+\includestandalone{sist_dos_masas_plot}
+\label{fig:figura_006}
+\caption{Funciones de la posición de $x(t)$ y $y(t)$.}
+\end{figure}
+\section*{La perspectiva de la transformada.}
+Considérese la ecuación general de segundo orden con coeficientes constantes como la ecuación de movimiento
+\[ m x^{\prime \prime} + c x^{\prime} + k x =  f(t) \]
+que corresponde a un sistema masa-resorte-amortiguador.
+\begin{figure}[H]
+\centering
+\includestandalone{sist_masa_resorte_dump}
+\label{fig:figura_007}
+\caption{Sistema masa-resorte-amortiguador con fuerza externa $f(t)$.}
+\end{figure}
+Entonces la ecuación transformada es
+\begin{equation}
+m [s^{2} X(s) - s x(0) - x^{\prime}(0) ] + c [ s X(s) - x(0) ] + k X(s) = F(s)
+\label{eq:ecuacion_013}
+\end{equation}
+Nótese que la ecuación (\ref{eq:ecuacion_013}) es una ecuación algebraica  - de hecho, una ecuación lineal - en la ''incógnita'' $X(s)$. Esta es la gran fuerza del método de la transformada de Laplace: \emph{Ecuaciones diferenciales se transforman en ecuaciones algebraicas fáciles de resolver}.
+\\
+Si se resuelve la ecuación (\ref{eq:ecuacion_013}) para $X(s)$, se obtiene
+\begin{equation}
+X(s) = \dfrac{F(s)}{Z(s)} + \dfrac{I(s)}{Z(s)}
+\label{eq:ecuacion_014}
+\end{equation}
+donde
+\[ Z(s) = ms^{2} + cs + k \hspace{1cm} \mbox{ e }  I(s) = m x(0) s + m x^{\prime} (0) + c x(0) \]
+Nótese que $Z(s)$ depende únicamente del sistema físico. Así, la ecuación (\ref{eq:ecuacion_014}) presenta $X(s)= \mathscr{L} \{ x(t)\}$ como la suma de un término dependiendo sólo de la fuerza externa y otro dependiendo sólo de las condiciones iniciales. En el caso de un sistema sin amortiguamiento, estos dos términos son las transformadas
+\[ \mathscr{L} \{ x_{sp} (t) \} = \dfrac{F(s)}{Z(s)} \hspace{1cm} \mbox{ y } \mathscr{L} \{ x_{st} (t) \} = \dfrac{I(s)}{Z(s)} \]
+de la solución periódica en estado permanente y de la solución transitoria, respectivamente. La única dificultad potencial en la búsqueda de estas soluciones se presenta al intentar obtener la transformada inversa de Laplace del lado derecho de la ecuación (\ref{eq:ecuacion_014}). 
+\begin{teo}
+Si $f(t)$ es una función continua por tramos para $t \geq 0$ y satisface la condición de orden exponencial $\vert f(t) \vert \leq M \exp(ct)$ para $t \geq T $, entonces
+\begin{equation}
+\mathscr{L} \left\lbrace \int_{0}^{t} f(t) d \tau \right\rbrace = \dfrac{1}{s} \mathscr{L} \{ f(t) \} = \dfrac{F(s)}{s}
+\label{eq:ecuacion_017}
+\end{equation}
+para $s > c$. En forma equivalente 
+\begin{equation}
+\mathscr{L}^{-1} \left\lbrace \dfrac{F(s)}{s}  \right\lbrace = \int_{0}^{t} f(\tau) d \tau
+\label{eq:ecuacion_018}
+\end{equation} 
+\end{teo}
+\textbf{Ejemplo: } Encuéntrese la transformada inversa de Laplace de
+\[ G(s) = \dfrac{1}{s^{2} (s - a)} \]
+En efecto, la ecuación (\ref{eq:ecuacion_018}) significa que se puede eliminar un factor de s del denominador,
+encontrar la transformada inversa del resultado que se simplifica, y finalmente
+integrar de $0$ a $t$ (para ''corregir'' el factor s faltante). Así
+\[ \mathscr{L}^{-1} \left\lbrace  \dfrac{1}{s (s-a)} \right\rbrace = \int_{0}^{t} \mathscr{L}^{-1} \left\lbrace \dfrac{1}{s-a} \right\rangle d \tau  = \int_{0}^{t} \exp(a \tau) d \tau  = \dfrac{1}{a} (\exp(at) - 1) \]
+Repetimos la técnica para obtener
+\[ \begin{split}
+\mathscr{L}^{-1} \left\lbrace  \dfrac{1}{s^{2} (s-a)} \right\rbrace &= \int_{0}^{t} \mathscr{L}^{-1} \left\lbrace \dfrac{1}{s(s-a)} \right\rbrace d \tau  = \int_{0}^{t} \dfrac{1}{a} (\exp(a \tau) - 1) d \tau  = \\  
+&= \left[ \dfrac{1}{a} \left( \dfrac{1}{a} (\exp(at) - \tau \right) \right]_{0}^{t} = \dfrac{1}{a^{2}} ( \exp(at) - at - 1)
+\end{split} \]
+Esta técnica es con frecuencia más conveniente que el método de fracciones parciales para encontrar una transformada inversa de una fracción de la forma $\frac{P(s)}{(s^{n}Q(s))}$.
+\begin{teo}
+Si $F(s) = \mathscr{L} \{ f(t) \}$ existe para $s > c$, entonces  $\mathscr{L} \{\exp(at) f(t) \}$ existe para $s > a + c$ y
+\[ \mathscr{L} \{ \exp(at) f(t) \} = F(s-a) \]
+De manera equivalente
+\[ \mathscr{L}^{-1} \{ F(s-a) \} = \exp(at) f(t) \]
+Así la traslación $s \to s \to a$ en la transformada corresponde a la multiplicación de la función original de $t$ por $\exp(at)$.
+\end{teo}
+Si se aplica el teorema de la traslación a las fórmulas de las transformadas de Laplace de $t^{n}$, $\cos kt$ y $\sen kt$ que ya se conocen  -multiplicando cada una de estas funciones por $\exp(at)$ y reemplazando $s$ por $s - a$ en las transformadas - se obtienen lo siguiente
+\begin{eqnarray}
+&{} f(t) \hspace{1cm} F(s)  \nonumber \\
+&{} \exp(at) t^{n} \hspace{1cm} \dfrac{n!}{(s-a)^{n+1}} \hspace{0.5cm} (s > a)  \label{eq:ecuacion_106 } \\
+&{} \exp(at) \cos kt \hspace{1cm} \dfrac{s-a}{(s-a)^{2}+ k^{2}} \hspace{0.5cm} (s > a)  \label{eq:ecuacion_107 }\\
+&{} \exp(at) \sin kt \hspace{1cm} \dfrac{k}{(s-a)^{2} + k^{2}} \hspace{0.5cm} (s > a)  \label{eq:ecuacion_108 }
+\end{eqnarray}
+\textbf{Ejemplo:}
+\\
+Considérese un sistema masa-resorte con $m = 1/2$, $k = 17$ y $c = 3$ en unidades mks. Como de costumbre, sea $x(t)$ la función que describe el desplazamiento de la masa $m$ a partir de su posición de equilibrio. Si la masa se pone en movimiento con $x(0)= 3$ y $x^{\prime}(0) = 1$, encuentra $x(t)$ para las oscilaciones libres amortiguadas resultantes.
+\begin{figure}[H]
+\centering
+\includestandalone{sist_masa_resorte_dump_02}
+\label{fig:figura_008}
+\caption{Sistema masa-resorte-amortiguador.}
+\end{figure}
+La ecuación diferencial es
+\[ \dfrac{1}{2} x^{\prime \prime} + 3 x^{\prime} + 17 x = 0 \]
+de esta manera, debe de resolverse el problema con valores iniciales
+\[ x^{\prime \prime} + 6 x^{\prime} + 34 x = 0, \hspace{1cm} x(0) = 3, x^{\prime}(0) = 1 \]
+Considérese la transformada de Laplace de cada término de la ecuación diferencial. Debido (obviamente) a que $\mathscr{L} \{ 0 \} = 0 $, se obtiene la ecuación
+\[ [s^{2} X(s) - 3 s - 1] + 6 [s X(s) - 3] +  34 X(s) = 0 \]
+la cual se resuelve para $X(s)$ como 
+\[ X(s) = \dfrac{3s + 19}{s^{2} + 6s + 34} =  3 \cdot \dfrac{s + 3}{(s+3)^{2} + 25} + 2 \cdot \dfrac{5}{(s+3)^{2} + 25} \]
+aplicando las fórmulas con $a=-3$ y $k=5$, se observa que
+\[ x(t) = \exp(-3t) (23 \cos 5t  + 2 \sin 5t) \]
+La figura (\ref{fig:figura_009}) muestra la gráfica de la oscilación amortiguada que decae rápidamente
+\begin{figure}[H]
+\centering
+\includestandalone{sist_masa_resorte_dump_plot_02}
+\label{fig:figura_009}
+\caption{Sistema masa-resorte-amortiguador.}
+\end{figure}
+\textbf{Ejemplo:}
+\\
+Considérese el sistema masa-resorte-amortiguador del ejemplo anterio, pero con condiciones iniciales $x(0) = x^{\prime}(0) = 0$ y con una fuerza externa aplicada $F(t) = 15 \sin 2t$. Encuéntrense el movimiento transitorio resultante y el movimiento periódico en estado permanente de la masa.
+\\
+El problema con valores iniciales que se necesita resolver es
+\[ x^{\prime \prime} + 6 x^{\prime} + 34 x =  30  \sin 2t, \hspace{1cm} x(0) = x^{\prime}(0) = 0 \]
+la ecuación transformada es
+\[ s^{2} X(s) + 6 s X(s) + 34 X(s) = \dfrac{60}{s^{2} + 4} \]
+por tanto
+\[ X(s) = \dfrac{60}{(s^{2} + 4)[(s+3)^{2} + 25]} = \dfrac{As + B}{s^{2} + 4} + \dfrac{Cs + D}{(s+3)^{2} + 25} \]
+Cuando se multiplican ambos lados de la ecuación por un denominador común, se tiene que
+\begin{equation}
+60 = (As + B) [(s+3)^{2} + 25] + (Cs + D)(s^{2} + 4)
+\label{eq:ecuacion_115}
+\end{equation}
+Para encontrar $A$ y $B$ se sustituye el cero $s = 2i$ del factor cuadrático $s^{2} + 4$ en la ecuación (\ref{eq:ecuacion_115}); el resultado es
+\[ 60 = (2iA + B)[(2i + 3)^{2} + 25] \]
+el cual se simplifica en
+\[ 60 = (-24 A + 30 B) + (60 A + 12 B)i \]
+Ahora se igualan las partes reales e imaginarias de cada lado de esta ecuación para obtener dos ecuaciones lineales
+\[  \begin{split}
+-24 A + 30 B &= 60 \\
+60 A + 12 B &= 0
+\end{split} \]
+las cuales se resuelven para obtener que $A=- \frac{10}{29}$ y $B = \frac{50}{29}$.
+\\
+Para encontrar $C$ y $D$ se sustituye el cero $s=-3 + 5i$ del factor cuadrático $(s+3)^{2}$ en la ecuación (\ref{eq:ecuacion_115}), y se obtiene
+\[ 60 = [C (-3 +  5i) + D][(-3 + 5i)^{2} + 4] \]
+que se simplifica en
+\[ 60 = (186 C -12 D) + (30 C - 30 D) i \]
+Igualando las partes reales e imaginarias, una vez más se llega a dos ecuaciones lineales
+\[  \begin{split}
+186 C - 12 D &= 60 \\
+30 C - 30 D &= 0
+\end{split} \]
+y se encuentra que su solución es $C = D = \frac{10}{29}$.
+\\
+Con estos valores de los coeficientes $A$, $B$, $C$, $D$, la descomposición en fracciones parciales de $X(s)$ es
+\[  \begin{split}
+X(s) &= \dfrac{1}{29} \left( \dfrac{-10 s + 50}{s^{2} + 4} + \dfrac{10 s + 10}{(s + 3)^{2} + 25} \right) = \\
+&= \dfrac{1}{29} \left( \dfrac{-10 s + 25 \cdot 2}{s^{2} + 4} + \dfrac{10 (s+3) - 4 \cdot 5}{(s+3)^{2} + 25} \right)
+\end{split} \]
+Después de calcular las trasnformadas inversas de Laplace se obtiene que la función de la posición es
+\[ x(t) = \dfrac{5}{29} ( - 2 \cos 2t  + 5  \sin 2t ) + \dfrac{2}{29} (5 \cos 5t - 2 \sin 5t) \]
+En la gráfica () se pueden ver las componentes periódica y transitoria, la suma de las dos, devuelve la posición $x(t)$ del sistema mecánico.
+\begin{figure}[H]
+\centering
+\includestandalone{sist_masa_resorte_dump_plot_03}
+\label{fig:figura_010}
+\caption{Oscilación periódica forzada $x_{sp}(t)$, movimiento transitorio amortiguado $x_{tr}(t)$ y solución $x(t) =x_{sp}(t) + x_{tr}(t)$.}
+\end{figure}
+Los términos con frecuencia angular $2$ constituyen la oscilación forzada periódica en estado permanente de la masa, mientras que los términos exponenciales amortiguados con frecuencia angular $5$ constituyen su movimiento transitorio, el cual desaparece rápidamente, como se ve en la gráfica (\ref{fig:figura_010}). Nótese que el movimiento transitorio es diferente de cero aun cuando las condiciones iniciales sean cero.
+\section{Teorema de convolución.}
+La transformada de Laplace de la (inicialmente desconocida) solución de una ecuación diferencial, se puede reconocer algunas veces como el producto de las transformadas de dos funciones conocidas. Por ejemplo, cuando se transforma el problema de valores iniciales
+\[ x^{\prime \prime} + x = \cos t \hspace{1cm} x(0) = x^{\prime}(0) = 0 \]
+se obtiene
+\[ X(s) = \dfrac{s}{(s^{2} + 1)^{2}} = \dfrac{s}{s^{2} + 1} \cdot \dfrac{1}{s^{2} + 1} = \mathscr{L} \{ \cos t \} \cdot \{ \mathscr{L} \sin t \} \]
+Esto sugiere fuertemente que debe haber una forma de combinar las dos funciones $\sin t$ y $\cos t$ para obtener una función $x(t)$ cuya transformada sea el producto de sus transformadas. Pero, como es obvio, $x(t)$ no es simplemente el producto de $\cos t$ por  $\sin t$ debido a que 
+\[ \mathscr \{ \cos t \sin t \} = \mathscr \{\frac{1}{2} \sin 2t \} = \dfrac{1}{s^{2} + 4} \neq \dfrac{s}{(s^{2} + 1)^{2}} \]
+Así,
+\[ \mathscr{L} \{ \cos t \sin t \} \neq \mathscr{L} \{ \cos t \} \cdot \mathscr{L} \{ \sin t \} \]
+El sigiente teorema muestra que la función
+\begin{equation}
+h(t) = \int_{0}^{t} f(\tau) g(t - \tau) d \tau
+\label{eq:ecuacion_Cap7_001}
+\end{equation}
+tiene la propiedad deseada de que
+\begin{equation}
+\mathscr{L} \{ h(t) \} = H(s) = F(s) \cdot G(s)
+\label{eq:ecuacion_Cap7_002}
+\end{equation}
+La nueva función de $t$ definida como la integral en (\ref{eq:ecuacion_Cap7_001}) depende sólo de $f$ y $g$, y se  conoce como \emph{la convolución de $f$ y $g$}. Se representa como $f * g$, donde la idea es que representa un nuevo tipo de producto de $f$  y $g$, de tal modo que su transformada es el producto de las transformadas de $f$  y de $g$.
+\begin{defi}{Convolución de dos funciones.}
+La \textbf{convolución} $f * g$ de funciones continuas por tramos $f$ y $g$ se define para $t \geqq 0$ como sigue:
+\begin{equation}
+(f * g)(t) = \int_{0}^{t} f(\tau) g(t - \tau) d \tau
+\label{eq:ecuacion_Cap7_003}
+\end{equation}
+\end{defi}
+Se puede escribir también como $f(t) * g(t)$ cuando sea conveniente. En términos de la convolución del producto, se tiene que
+\[ \mathscr{L} \{ f * g \} = \mathscr{L} \{ f \} \cdot \mathscr{L} \{ g \} \]
+Si se hace la sustitución $u = t -\tau$ en la integral dada en la ec. (\ref{eq:ecuacion_Cap7_003}), se observa que
+\begin{align*}
+f(t) * g(t) &= \int_{0}^{t} f(\tau) g(t - \tau) d \tau = \int_{t}^{0} f(t - u) g(u) (-d u) \saltosin
+&= \int_{0}^{t} g(u) f(t - u) d u = g(t) * f(t)
+\end{align*}
+De esta manera, se revisa que la convolución es \textit{conmutativa}: $f * g = g * f$.
+\subsection*{Ejemplo.}
+La convolución del $\cos t$ y el $\sin t$ es
+\[ (\cos t) * (\sin t) = \int_{0}^{t} \cos \tau	\; \sin (t - \tau) d \tau \]
+Usando la siguiente identidad trigonométrica
+\[ \cos A \; \sin B =  \frac{1}{2} [ (\sin(A + B) - \sin (A - B) ] \]
+tenemos que
+\begin{align*}
+(\cos t) * (\sin t) &=  \int_{0}^{t} \frac{1}{2} [\sin t - \sin (2 \tau - t)] d \tau \saltosin
+&= \dfrac{1}{2} \left[ \tau \; \sin t + \dfrac{1}{2} \cos (2 \tau - 1) \right]_{\tau=0}^{t}
+\end{align*}
+esto es entonces
+\[ (\cos t) * (\sin t) = \frac{1}{2} t \; \sin t \]
+\begin{teo}{Propiedad de convolución.}
+Supóngase que $f(t)$ y $g(t)$ son funciones continuas por tramos para $ t \geqq 0$ y que $\vert f(t) \vert$ y $\vert g(t) \vert$ están acotadas por $M e^{ct}$ conforme $t \to +\infty$. Entonces la TL de la convolución $f(t) * g(t)$ existe para $s > c$, más aún:
+\begin{equation}
+\mathscr{L} \{ f(t) * g(t) \} = \mathscr{L} \{ f(t) \} \cdot \mathscr{L} \{ g(t) \}
+\label{eq:ecuacion_Cap7_004}
+\end{equation}
+y además
+\begin{equation}
+\mathscr{L}^{-1} \{ F(s) \cdot G(s) \} = f(t) * g(t)
+\label{eq:ecuacion_Cap7_005}
+\end{equation}
+De esta manera, es posible encontrar la transformada inversa del producto $F(s) \cdot G(s)$ siempre que sea posible evaluar la integral
+\begin{equation}
+\mathscr{L} \{ F(s) \cdot G(s) \} = \int_{0}^{t} f(\tau) \; g(t - \tau) d \tau
+\label{eq:ecuacion_Cap7_005b}
+\end{equation}
+\end{teo}
+La utilidad de la convolución radica en el hecho de ser una alternativa al uso de las fracciones parciales para encontrar las transformadas inversas.
+\subsection*{Ejemplo.}
+Con $f(t) = \sin 2t$ y $g(t) = e^{t}$, la convolución es
+\begin{align*}
+\mathscr{L}^{-1} \left\lbrace \dfrac{2}{(s-1)(s^{2} + 4)} \right\rbrace &= (\sin 2t) * e^{t} = \int_{0}^{t} e^{t - \tau} \; \sin 2t dt \saltosin
+&= e^{t} \; int_{0}^{t} e^{-\tau} \; \sin 2t dt = e^{t} \left[ \dfrac{e^{-\tau}}{5} (- \sin 2 \tau - 2 \cos 2 \tau) \right]_{0}^{t} \saltosin
+&= \dfrac{2}{5} e^{t} - \dfrac{1}{5} \sin 2t - \dfrac{2}{5} \cos t
+\end{align*}
+
+\end{document}

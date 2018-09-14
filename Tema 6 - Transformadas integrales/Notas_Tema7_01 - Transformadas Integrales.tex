@@ -1,0 +1,455 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\input{../preambulo_doc}
+\usepackage{standalone}
+\usepackage{mathrsfs}
+\usepackage{bigints}
+\newtheorem{defi}{{\textit{Definición}}}[section]
+\newtheorem{teo}{{\textit{Teorema}}}[section]
+\newcommand{\saltosin}{\nonumber \\}
+\newcommand{\comillado}[1]{``#1''}
+\spanishdecimal{.}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Transformadas Integrales \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arab{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Transformadas Integrales.}
+Frecuentemente en física uno se encuentra con pares de funciones que se encuentran relacionadas por una expresión de la forma siguiente
+\begin{equation}
+g(\omega) = \int_{a}^{b} f(t) \; K(\omega,t) dt
+\label{eq:ecuacion7_01}
+\end{equation}
+La función $g(\omega)$ es llamada la transformada integral de $f(t)$ por el núcleo  $K(\omega,t)$. La operación se puede describir como un mapeo de una función $f(t)$ en el espacio-$t$ a otra función $g(\omega)$ en el espacio-$\omega$. Dos ejemplos de esta interpretación en física son las relaciones entre: el tiempo y la frecuencia en Electrodinámica Clásica y Mecánica Cuántica, y la relación entre el espacio de configuraciones y el espacio de momentos en Mecánica Cuántica.
+\\
+Cuando los límites de integración $a$ y $b$ son finitos, decimos que $g(\omega)$ es es la transformada finita de $f(t)$. Existen varios tipos de transformadas integrales que aparecen frecuentemente en física, cada una de ellas está asociada a un núcleo diferente. De entre ellas las diferentes posibilidades podemos mencionar los núcleos siguientes:
+\\
+\emph{Transformada de Fourier.}
+\begin{equation}
+g(\omega) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(t) e^{i \omega t} dt
+\label{eq:ecuacion_07_01}
+\end{equation}
+\emph{Transformada de Laplace.}
+\begin{equation}
+g(\alpha)= \int_{0}^{\infty} f(t) \; \exp(-\alpha t) dt
+\label{eq:ecuacion_7_02}
+\end{equation}
+\emph{Transformadas de Fourier seno y coseno.}
+\begin{equation}
+g(\alpha)= \int_{0}^{\infty} f(t) \; \substack{ \textstyle \sin \\ \textstyle \cos} \; \alpha t dt
+\label{eq:ecuacion_7_03}
+\end{equation}
+\emph{Transformada de Fourier compleja.}
+\begin{equation}
+g(\alpha)= \int_{-\infty}^{\infty} f(t) \; \exp(i \alpha t) dt
+\label{eq:ecuacion_7_04}
+\end{equation}
+\emph{Transformada de Hankel.}
+\begin{equation}
+g(\alpha)= \int_{0}^{\infty} f(t) \; t \; J_{n} (\alpha t) dt
+\label{eq:ecuacion_7_05}
+\end{equation}
+donde $J_{n}(\alpha t)$ es la función de Bessel de primera clase de orden $n$.
+\\
+\emph{Transformada de Mellin.}
+\begin{equation}
+g(\alpha)= \int_{0}^{\infty} f(t) \; t^{\alpha-1} dt
+\label{eq:ecuacion_7_06}
+\end{equation}
+Como se verá más adelante, aplicar una transformada integral a una EDP es para excluir temporalmente una variable independiente que se ha elegido y dejar de solución de una EDP en una variable menos. La solución de esta ecuación será una función de $\alpha$ y las variables restantes. Cuando se ha obtenido esta solución, tiene que ser \comillado{invertida} para recuperar la variable \comillado{perdida}: Así, si $t$ es la variable eliminada y $g(\alpha)$ es una de las transformaciones dadas anteriormente, obtenemos primero las ecuaciones auxiliares que dan $g$ en términos de $\alpha$ y las variables independientes restantes, resolvemos para $g$ y luego inviertimos para obtener $g(\alpha)$.
+\\
+El proceso de inversión significa, en efecto, la solución de una de las ecuaciones integrales (\ref{eq:ecuacion_7_02}) $\ldots$ (\ref{eq:ecuacion_7_06}), $g(\alpha)$ que se supone conocido y $f(t)$ que se encuentran, como se puede ver en la figura (\ref{fig:figura_01}). Tales soluciones son conocidas y pueden ser obtenidos formalmente del teorema de la integral de Fourier.
+\begin{figure}[H]
+\centering
+\includestandalone{esquema_transformadas}
+\caption{Esquema de las transformadas integrales.}
+\label{fig:figura_01}
+\end{figure}
+\subsection*{Linealidad.}
+Todas estas transformadas integrales son lineales, esto es, satisfacen las propiedades
+\begin{equation}
+\int_{a}^{b} [ c_{1} f_{1} (t) + c_{2} f_{2}(t)] \; K(\alpha,t) dt = \int_{a}^{b}  c_{1} f_{1} (t) \; K(\alpha,t) dt + \int_{a}^{b}  c_{2} f_{2} (t) \; K(\alpha,t) dt 
+\label{eq:ecuacion_7_07} 
+\end{equation}
+y además
+\begin{equation}
+\int_{a}^{b}  c \; f (t) \; K(\alpha,t) dt =  c \; \int_{a}^{b}  f (t) \; K(\alpha,t) dt
+\label{eq:ecuacion_7_08}
+\end{equation}
+donde $c_{1}$ y $c_{2}$ son constantes y $f_{1}(t)$ y $f_{2}(t)$ son funciones para las cuales la operación transformada está definda.
+\\
+Representando la transformada integral lineal por el operador $\mathcal{L}$, obtenemos
+\begin{equation}
+g(\alpha) = \mathcal{L} f(t)
+\label{eq:ecuacion_7_09}
+\end{equation}
+Uno espera que exista el operador inverso $\mathcal{L}^{-1}$, de manera tal que
+\begin{equation}
+f(t) = \mathcal{L}^{-1}  \; g (\alpha)
+\label{eq:ecuacion_7_10}
+\end{equation}
+En general, el mayor problema en uso de las transformadas integrales, es la determinación del operador inverso. Sin embargo, para los dos tipos de transformaciones: de Fourier y la de Laplace, obtener el inverso es relativamente sencillo.
+
+\section{La transformada de Fourier.}
+Podemos representar una función en series de Fourier, siempre y cuando la función cumpla con lo siguiente:
+\begin{enumerate}
+\item La función está acotada en el intervalo $[0, 2\pi]$ o $[-L,L]$ (intervalo finito).
+\item La función está definida en el intervalo $(- \infty, \infty)$, pero es una función periódica.
+\end{enumerate}
+Nos podemos plantear la siguiente pregunta: ¿Qué pasa si tenemos una función no periódica en el intervalo infinito $(-\infty,\infty)$?
+\\
+Respuesta: \emph{Existe una representación integral}.
+\\
+Sabemos que si $f(x)$ es una función continua a pedazos con discontinuidades finitas en el intervalo $[-L,L]$, podemos hacer una expansión en series de Fourier
+\begin{equation}
+f(x) = \dfrac{a_{0}}{2} + \sum_{k=1}^{\infty} \left[ a_{k} \cos \left( \dfrac{k \pi x}{L} \right) + b_{k} \sin \left( \dfrac{k \pi x}{L} \right) \right]
+\label{eq:8_11}
+\end{equation}
+donde
+\begin{equation}
+a_{k} = \dfrac{1}{L} \int_{-L}^{L} f(t) \cos \left( \dfrac{k \pi t}{L} \right) dt, \hspace{0.5cm} b_{k} = \dfrac{1}{L} \int_{-L}^{L} f(t) \sin \left( \dfrac{k \pi t}{L} \right) dt
+\label{eq:8_12}
+\end{equation}
+Con lo cual podemos re-escribir a $f(x)$ como una serie de Fourier
+\begin{align}
+\begin{aligned}
+f(x) &= \dfrac{1}{2L} \int_{-L}^{L} f(t) dt + \dfrac{1}{L} \sum_{k=1}^{\infty} \cos \left( \dfrac{k \pi x}{L} \right) \int_{-L}^{L} f(t) \cos \left( \dfrac{k \pi t}{L} \right) dt + \\
+&+ \dfrac{1}{L} \sum_{n=1}^{\infty}  \sin \left( \dfrac{k \pi x}{L} \right) \int_{-L}^{L} f(t) \sin \left( \dfrac{k \pi t}{L} \right) dt
+\label{eq:8_13}
+\end{aligned}
+\end{align}
+o de la forma
+\begin{equation}
+f(x) = \dfrac{1}{2L} \int_{-L}^{L} f(t) dt + \dfrac{1}{L} \sum_{n=1}^{\infty} \int_{-L}^{L} f(t) \cos \left( \dfrac{k \pi}{L} \right) (t - x) dt
+\label{eq:8_15}
+\end{equation}
+Hagamos que el parámetro $L$ tienda a infinito, cambiando el intervalo finito $[-L,L]$ en el intervalo infinito $(-\infty, \infty)$. Establecemos las siguientes relaciones:
+\[ \dfrac{k \pi}{L} = \omega, \hspace{1cm} \dfrac{\pi}{L} = \Delta \omega, \hspace{1cm} \mbox{con } L \to \infty \]
+Veamos la validez de esta afirmación. Consideremos la partición de los $\mathbb{R}^{+}$ dada por
+\begin{equation}
+\omega_{0} = 0 < \omega_{1} = \dfrac{\pi}{L} < \omega_{2} = \dfrac{2 \pi}{L} < \ldots < \omega_{k} = \dfrac{k \pi}{L}
+\label{eq:8_16}
+\end{equation}
+Entonces tenemos que
+\begin{equation}
+f(x) = \dfrac{1}{\pi} \sum_{n=1}^{\infty} \Delta \omega \; \int_{-\infty}^{\infty} f(t) \cos \omega (k - x) dt
+\label{eq:15_16}
+\end{equation}
+o 
+\begin{equation}
+f(x) = \dfrac{1}{\pi} \int_{0}^{\infty} d \omega \int_{-\infty}^{\infty} f(t) \cos \omega (k - x) dt
+\label{eq:15_17}
+\end{equation}
+re-emplazando la suma infinita por la intergral sobre $\omega$. El primer término (que corresponde a $a_{0}$) se anula, y suponemos que la integral $\int_{-\infty}^{\infty} f(t) dt$ existe.
+\subsection{Forma exponencial de la transformada de Fourier.}
+La integral de Fourier (ec. \ref{eq:15_17}) se puede escribir de forma exponencial, para obtener esta representación, revisemos que
+\begin{equation}
+f(x) =  \dfrac{1}{2 \pi} \int_{- \infty}^{\infty} d \omega \; \int_{-\infty}^{\infty} f(t) \; \cos \omega (k - x) dt
+\label{eq:15_18}
+\end{equation}
+mientras que
+\begin{equation}
+\dfrac{1}{2 \pi} \int_{-\infty}^{\infty} d \omega \; \int_{-\infty}^{\infty} f(t) \; \sin \omega (k - x) dt = 0
+\label{eq:15_19}
+\end{equation}
+veamos que $ \cos \omega (k - x)$ es una función par de $\omega$ y $\sin \omega (k - x)$ es una función impar de $\omega$. Sumando las ecuaciones (\ref{eq:15_18}) y (\ref{eq:15_19}), obtenemos el \emph{teorema integral de Fourier}
+\begin{equation}
+\boxed{
+f(x) = \dfrac{1}{2 \pi} \int_{-\infty}^{\infty} e^{-i \omega x} d \omega \int_{-\infty}^{\infty} f(t) e^{i \omega t} dt }
+\label{eq:15_20}
+\end{equation}
+Hasta ahora $\omega$ es una variable matemática auxiliar. En muchos problemas de la física, $\omega$ es una frecuencia angular. En este caso podemos interpretar la integral de Fourier como una representación de $f(x)$ en términos de una distribución de ondas sinusoidales infinitamente largas de frecuencia angular $\omega$ en la cual esta frecuencia es una variable continua.
+\subsection{Función delta de Dirac}
+Nótese que si reescribimos la función $f(x)$ en la forma
+\begin{align}
+f(x)= \int_{-\infty}^{\infty} f(t) \underbrace{ \left[ \dfrac{1}{2 \pi} \int_{-\infty}^{\infty} e^{i \omega(t - x)} d \omega \right] }_{\mbox{debe de ser una delta de Dirac}} dt 
+\label{eq:15_20a}
+\end{align}
+De una de las propiedades de la función delta de Dirac
+\[ f(0) = \int_{-\infty}^{\infty} f(x) \delta(x) d x \]
+cambiando la singularidad de $t=0$ a $t=x$
+\begin{equation}
+f(x) = \lim_{n \to \infty} \int_{-\infty}^{\infty} f(t) \delta_{n} (t - x) dt
+\label{eq:15_21a} 
+\end{equation}
+donde $\delta_{n}(t - x)$ es una secuencia que define la distribución $\delta(t - x)$. Revisemos que la ec. (\ref{eq:15_21a}) supone que $f(t)$ es continua en $t=x$. Tomamos $\delta_{n} (t - x)$  de la expresión
+\[ \delta_{n} = \dfrac{\sin n x}{\pi  x} \int_{-n}^{n} e^{i x t} dt \]
+para hacer
+\begin{equation}
+\delta_{n} (t - x) = \dfrac{\sin n (t - x)}{\pi (t - x)} = \dfrac{1}{2} \int_{-n}^{n} e^{i \omega (t - x)} d \omega
+\label{eq:15_21b}
+\end{equation}
+al sustituir en la ecuación (\ref{eq:15_21a}), tenemos
+\begin{equation}
+f(x) = \lim_{n \to \infty} \dfrac{1}{2 \pi} \int_{-\infty}^{\infty} f(t) \int_{-n}^{n} e^{i \omega (t - x)} d \omega d t
+\label{eq:15_21c}
+\end{equation}
+Intercambiando el orden de integración y tomando el límite cuando $n \to \infty$, obtenemos la ec. (\ref{eq:15_20}), el teorema integral de Fourier.
+\\
+Con el entendimiento de que pertenece en virtud de un signo integral, como en la ec. (\ref{eq:15_21a}), la definición
+\begin{equation}
+\boxed{\delta(t - x) = \dfrac{1}{2 \pi} \int_{-\infty}^{\infty} e^{i \omega (t - x)} d \omega}
+\label{eq:15_21d}
+\end{equation}
+nos proporciona una representación bastante útil de la función delta de Dirac.
+\subsection{Transformada de Fourier. Teorema de inversión.}
+\begin{defi}{Transformada de Fourier.}
+Denotamos la transformada de Fourier de la función $f(t)$ mediante $g(\omega)$ y se define por
+\begin{equation}
+g(\omega) = \dfrac{1}{2 \pi} \int_{-\infty}^{\infty} f(t) \; e^{i \omega t} dt
+\label{eq:15_22}
+\end{equation}
+\end{defi}
+Pero se ha demostrado que tiene una relación inversa de (\ref{eq:15_20})
+\begin{equation}
+f(x) = \dfrac{1}{\pi} \int_{-\infty}^{\infty} e^{-i \omega x} dt \int_{-\infty}^{\infty} f(t) \; e^{i \omega t} dt
+\label{eq:8_28}
+\end{equation}
+Este resultado nos permite establecer el siguiente teorema:
+\begin{teo}{Teorema de inversión.}
+\begin{equation}
+f(t) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} g(\omega) \; e^{-i \omega x} d \omega
+\label{eq:15_23}
+\end{equation}
+\end{teo}
+Consideremos que el factor $1/\sqrt{2 \pi}$ es opcional, pero no necesario, algunos autores prefieren usar el factor completo $1/2\pi$ en alguna de las ecuaciones (\ref{eq:15_22}) o (\ref{eq:15_23}). La transformada de Fourier y su inversa tienen una significancia particular en la física.
+\\
+Cuando nos desplazamos al espacio tridimensional con las dos tranformadas, obtenemos
+\begin{align}
+g(\mathbf{k}) = \dfrac{1}{(2 \pi)^{3/2}} \int f (\mathbf{r}) \; e^{i \mathbf{k \cdot r}} \; d^{3} r \label{eq:15_23a} \\
+f(\mathbf{r}) = \dfrac{1}{(2 \pi)^{3/2}} \int g (\mathbf{k}) \; e^{-i \mathbf{k \cdot r}} \; d^{3} k \label{eq:15_23b}
+\end{align}
+Las integrales se evalúan sobre todo el espacio. Para verificar esto, se sigue inmediatamente mediante la sustitución de la parte izquierda de una ecuación en el integrando de la otra ecuación y usando la función delta tridimensional. La ecuación (\ref{eq:15_23b}) puede ser interpretada como una expansión de una función $f(r)$ en un continuo de las funciones propias de onda plana, $g(k)$ se convierte en la amplitud de la onda, $exp(-i \mathbf{k \cdot r})$
+\subsection{Transformada coseno.}
+Si $f(x)$ es par o impar, las transformadas pueden expresarse de una forma diferente. Consideremos inicialmente una función par $f_{c}$ con $f_{c}(x) = f_{c}(-x)$. Escribiendo la exponencial de la ec. (\ref{eq:15_22}) en su forma trigonométrica
+\begin{align}
+\begin{aligned}
+g_{c}(\omega) &= \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f_{c} (t) \; (\cos \omega t + i \sin \omega t) dt \\
+&= \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} f_{c} (t) \; \cos \omega t dt 
+\label{eq:15_24}
+\end{aligned}
+\end{align}
+la dependencia de $\sin \omega t$ se anula en la integración del intervalo simétrico $(-\infty, \infty)$. De manera similar, como $\cos \omega t$ es par, las ecuaciones (\ref{eq:15_23}) se convierten en
+\begin{equation}
+f_{c} (x) = \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} g_{c} (\omega) \cos \omega x d \omega 
+\label{eq:15_25}
+\end{equation}
+Las ecuaciones (\ref{eq:15_24}) y (\ref{eq:15_25}) se conocen como las \emph{transformadas coseno}.
+\subsection{Tranformada seno.}
+Las correspondientes pares de la transformada seno de Fourier, se obtienen suponiendo que $f_{s}(x) = - f_{s}(-x)$ es impar, aplicando los mismos argumentos de simetría, las ecuación son
+\begin{align}
+g_{s} (\omega) &=  \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} f_{s} (t) \; \sin \omega t \; dt \label{eq:15_26} \\
+f_{s} (x) &= \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} g_{s} (\omega) \; \sin \omega x \; d \omega  \label{eq:15_27}
+\end{align}
+De la última ecuación podemos dar la interpretación física que $f(x)$ está describiendo una serie continua de ondas sinusoidales. La amplitud de $\sin \omega x$ está dada por $\sqrt{2 / \pi} g_{s} (\omega)$ en donde $g_{s}(x)$ es la transformada seno de Fourier de $f(x)$.
+\subsubsection{Ejemplo. Tren finito de ondas.}
+Una aplicación importante de la transformada de Fourier es la solución a un pulso finito de ondas senoidales.
+\begin{equation}
+f(t) = \begin{cases}
+\sin \omega_{0} t, & \vert t \vert < \dfrac{N \pi}{\omega_{0}} \\
+0, & \vert t \vert > \dfrac{N \pi}{\omega_{0}}
+\end{cases}
+\label{eq_15_28}
+\end{equation}
+Que corresponde a $N$ ciclos del tren de ondas inicial.
+\begin{figure}[H]
+\centering
+\includestandalone{Figura_01_Fourier}
+\caption{Tren finito de ondas.}
+\label{fig:tren_finito}
+\end{figure}
+Como $f(t)$ es impar, podemos usar la transformada seno de Fourier (ec. \ref{eq:15_26}), para obtener
+\begin{equation}
+g_{s}(\omega) = \sqrt{\dfrac{2}{\pi}} \int_{0}^{N \pi / \omega_{0}} \sin \omega_{0} t \; \sin \omega t dt
+\label{eq:15_29}
+\end{equation}
+Integrando, encontramos la amplitud de la función
+\begin{equation}
+g_{s} (\omega) = \sqrt{\dfrac{2}{\pi}} \left[ \dfrac{\sin[(\omega_{0} - \omega)(N \pi / \omega_{0})]}{2 (\omega_{0} - \omega)} - \dfrac{\sin[(\omega_{0} + \omega)(N \pi / \omega_{0})]}{2 (\omega_{0} + \omega)} \right]
+\label{eq:15_30}
+\end{equation}
+Es de considerable interés para ver cómo $g_{s} (\omega)$ depende de la frecuencia. Para valores grandes de $\omega_{0}$ y $\omega \simeq \omega_{0}$, sólo el primer término será de importancia debido a los denominadores. Se representa en la Fig. (\ref{fig:TF_tren_finito}). Esta es la curva de amplitud para el patrón de difracción de una sola rendija.
+\begin{figure}[H]
+\centering
+\includestandalone{Figura_02_Fourier}
+\caption{Transformada de Fourier de un tren finito de ondas.}
+\label{fig:TF_tren_finito}
+\end{figure}
+Los ceros se encuentran en
+\begin{equation}
+\dfrac{ \omega{0} - \omega}{\omega} = \dfrac{\Delta \omega}{\omega_{0}} = \pm \dfrac{1}{N}, \pm \dfrac{2}{N}, \hspace{1cm} \text{y así}
+\label{eq:15_31}
+\end{equation}
+Para valores grandes de $N$, $g_{s}(\omega)$ puede interpretarse como una distribución de Dirac. Considerando que las contribuciones fuera del máximo central son pequeñas para este caso, podemos tomar
+\begin{equation}
+\Delta \omega = \dfrac{\omega_{0}}{N}
+\label{eq:15_32}
+\end{equation}
+como una buena medida de la distribución de la frecuencia de nuestro pulso de onda. Directamente se nota que, si $N$ es grande (un pulso largo) la distribució de frecuencia será pequeña. Por otra parte, si nuestro pulso es corto, $N$ pequeño, la distribución de frecuencia será más ancha y los máximos secundarios son más importantes.
+\subsection*{Ejemplo. La función paso.}
+Considera para un valor fijo de $a$ la función \emph{paso} o función \emph{pulso rectangular} $p_{a}(t)$ de altura $1$ y duración $a$, definida por
+\begin{equation}
+p_{a}(t) = \begin{cases}
+1 & \text{ para } \vert t \vert \leq \frac{a}{2} \\
+0 & \text{ para cualquier otro valor} \end{cases}
+\label{eq:ecuacion_06_10_Beerends}
+\end{equation}
+Se puede ver de la figura (\ref{fig:figura_funcionpaso}) que $p_{a}(t)$ es integrable.
+\begin{figure}[H]
+\centering
+\includestandalone{funcion_paso}
+\caption{Función paso rectangular.}
+\label{fig:figura_funcionpaso}
+\end{figure}
+Para $\omega \neq 0$ se tiene
+\begin{align*}
+f(\omega) &= \int_{-\infty}^{\infty} p_{a}(t) \; e^{-i \omega t} dt = \int_{-a/2}^{a/2} e^{-i \omega t} dt = \left[ \dfrac{- e^{- i \omega t}}{i \omega} \right]_{-a/2}^{a/2} \saltosin
+&= \dfrac{e^{ia\omega/2} - e^{-i a \omega/2}}{i \omega} = \dfrac{2 \sin (a \omega/2}{\omega}
+\end{align*}
+mientras que para $\omega = 0$, se tiene
+\begin{equation*}
+f(0) = \int_{-\infty}^{\infty} p_{a}(t) dt = \int_{-a/2}^{a/2} dt =  a
+\end{equation*}
+Es bien sabido que el límite 
+\[ \lim_{x \to 0} \dfrac{\sin x}{x} = 1 \]
+entonces obtenemos 
+\[ \lim_{\omega \to 0} (f(p_{a})(\omega) = \lim_{\omega \to p} \dfrac{2 \sin (a \omega /2)}{\omega} = a \]
+A pesar de que $p_{a}(t)$ en sí, no es continua, vemos que
+\begin{equation}
+f(p_{a})(\omega) = \dfrac{2 \sin (a \omega/2)}{\omega}
+\label{eq:ecuacion_06_11_Beerends}
+\end{equation}
+es continua en $\mathbb{R}$.
+\begin{figure}[H]
+\centering
+\includestandalone{T_funcionpaso}
+\caption{Transformada de Fourier de la función paso rectangular.}
+\label{fig:figura_Tfuncionpaso}
+\end{figure}
+\section{La Transformada de Fourier de la derivada.}
+Para apoyarnos en la solución de una ED, necesitamos revisar cómo es la TF de la derivada. Usando la forma exponencial de la TF de $f(x)$:
+\begin{equation}
+g(\omega) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(x) \; e^{i \omega x} dx
+\label{eq:ecuacion_15_37}
+\end{equation}
+y para $d f(x) / dx$
+\begin{equation}
+g_{1}(\omega) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \dfrac{d f(x)}{d x} \; e^{i \omega x} dx
+\label{eq:ecuacion_15_38}
+\end{equation}
+Integrando la ecuación (\ref{eq:ecuacion_15_38}), se obtiene
+\begin{equation}
+g_{1}(\omega) = \dfrac{e^{i \omega x}}{\sqrt{2 \pi}} \; f(x) \Bigr\lvert_{-\infty}^{\infty} - \dfrac{i \omega}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(x) \; e^{i \omega x} dx
+\label{eq:ecuacion_15_39}
+\end{equation}
+Si $f(x)$ se anula mientras $x \to \pm \infty$, se tiene que
+\begin{equation}
+g_{1}(\omega) = - i \omega g(\omega)
+\label{eq:ecuacion_15_40}
+\end{equation}
+esto es, la transformada de la derivada es $(-i \omega)$ veces la transformada de la función original. Es posible generalizar que la derivada de orden $n$ sea
+\begin{equation}
+g_{n} (\omega) = (- i \omega)^{n} g(\omega)
+\label{eq:ecuacion_15_41}
+\end{equation}
+garantizando que la integración por parte se anula mientras $x \to \pm \infty$.
+\subsection*{Ejemplo. La ecuación de onda.}
+Aprovecharemos la ventaja de la transformada de la deriva para manejar ecuaciones diferenciales parciales. Consideremos una cuerda infinita que vibra, la amplitud $y$ de las vibraciones es pequeña, y satisface la ecuación de onda
+\begin{equation}
+\dfrac{\partial^{2} y}{\partial x^{2}} = \dfrac{1}{v^{2}} \dfrac{\partial^{2} y}{\partial t^{2}}
+\label{eq:ecuacion_15_42}
+\end{equation}
+con la condición inicial
+\begin{equation}
+y(x,0) = f(x)
+\label{eq:ecuacion_15_43}
+\end{equation}
+Aplicar la TF en $x$, significa multiplicar por $e^{i \omega x}$ y luego integrar sobre $x$, así que
+\begin{equation}
+\int_{-\infty}^{\infty} \dfrac{\partial^{2} y}{\partial x^{2}} \; e^{i \omega x} dx = \dfrac{1}{v^{2}} \int_{-\infty}^{\infty} \dfrac{\partial^{2} y}{\partial t^{2}} \; e^{i \omega x} dx
+\label{eq:ecuacion_15_44}
+\end{equation}
+o que es lo mismo
+\begin{equation}
+(-i \alpha)^{2} \; Y(\alpha, t) = \dfrac{1}{v^{2}} \; \dfrac{\partial^{2} Y(\alpha, t)}{\partial t^{2}}
+\label{eq:ecuacion_15_45}
+\end{equation}
+donde se ha utilizado
+\begin{equation}
+Y(\alpha, t) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} y(x, t) \; e^{i \alpha x} dx
+\label{eq:ecuacion_15_46}
+\end{equation}
+y la ec. (\ref{eq:ecuacion_15_41}) para la segunda derivada. Dado que no se tienen derivadas con respecto a $\alpha$, la ec. (\ref{eq:ecuacion_15_45}) es un EDO, de hecho la ecuación del oscilador armónico. La transformación de una EDP a una EDO es un logro significativo. Resolvemos la ec. (\ref{eq:ecuacion_15_45}) sujeta a las condiciones iniciales. En $t=0$, aplicando las ecuaciones (\ref{eq:ecuacion_15_43}) y (\ref{eq:ecuacion_15_46}), se simplifica a
+\begin{equation}
+Y(\alpha, 0) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(x) \; e^{i \alpha x} dx =  F(\alpha)
+\label{eq:ecuacion_15_47}
+\end{equation}
+La solución general de la ec. (\ref{eq:ecuacion_15_45}) es forma exponencial es
+\begin{equation}
+Y(\alpha, t) = F(\alpha) \; e^{\pm i v \alpha t}
+\label{eq:ecuacion_15_48}
+\end{equation}
+Usando la fórmula de inversión (ec. \ref{eq:15_23}), se tiene
+\begin{equation}
+y(x,t) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} Y(\alpha, t) \; e^{-i \alpha x} d \alpha
+\label{eq:ecuacion_15_49}
+\end{equation}
+y, por la ecuación (\ref{eq:ecuacion_15_48})
+\begin{equation}
+y(x,t) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} F(\alpha) \; e^{- i \alpha (x \mp v t)} d \alpha
+\label{eq:ecuacion_15_50}
+\end{equation}
+Ya que $f(x)$ es la TF inversa de $F(\alpha)$
+\begin{equation}
+y(x, t) = f (x \pm v t)
+\label{eq:ecuacion_15_51}
+\end{equation}
+que corresponde a ondas que avanzan en las direcciones $+x$ y $-x$ respectivamente.
+\subsection*{Ejemplo. Ecuación de calor.}
+Para ejemplificar la transformación de una EDP a una EDO, usemos la TF a la EDP de flujo de calor:
+\[ \dfrac{\partial \psi}{\partial t} = a^{2} \; \dfrac{\partial^{2} \psi}{\partial x^{2}} \]
+donde la solución $\psi(x,t)$ es la temperatura en el espacio como función del tiempo. Tomando la TF en ambos lados de la ecuación, nótese que $\omega$ es el conjugado complejo para $x$ ya que $t$ es el tiempo en la EDP de flujo de calor, donde
+\[ \Psi(\omega, t) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \psi(x, t) \; e^{i \omega x} dx \]
+Esto nos lleva a una EDO para la TF de $\Psi$ de $\psi$ en la variable temporal $t$
+\[ \dfrac{\partial \Psi(\omega, t)}{\partial t} = -a^{2} \omega^{2} \Psi(\omega, t) \] 
+Al integrar, obtenemos
+\[ \ln \Psi = -a^{2} \omega^{2} \; t + \ln C \hspace{1.5cm} \text{ o } \hspace{1.5cm} \Psi = C \; e^{-a^{2} \omega^{2} t}\]
+donde la constante de integración $C$ dependerá de $\omega$ y en general queda determinada por las condiciones iniciales. De hecho $C = \Psi(\omega, 0)$ es la distrubución espacial inicial de $\Psi$, que está dada por la transformación (en $x$) de la distribución inicial de $\psi$, llamada $\psi(x,0)$.
+\\
+Dejando la solución en la transformada inversa de Fourier, se obtiene
+\[ \psi(x, t) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} C(\omega) \; e^{-i \omega x} \; e^{-a^{2} \omega^{2} t} d \omega \]
+Por razones de simplicidad, tomamos a $C$ independiente de $\omega$ (suponiendo una distribución inicla de temperatura como una función delta), al integrar completando el cuadrado en $\omega$ y realizando los cambios de variable ($a^{2} \to a^{2}t$, $\omega \to x$, $t \to -\omega$. Nos encontramos con una solución particular de la EDP de flujo de calor
+\[ \psi(x,t) = \dfrac{C}{a \sqrt{2 t}} \; exp \left( - \dfrac{x^{2}}{4 a^{2} t} \right) \]
+\section{Teorema de convolución.}
+Consideremos dos funciones $f(x)$ y $g(x)$ cada una con su respectiva TF $F(t)$ y $G(t)$, se define la operación
+\begin{equation}
+f * g \equiv \dfrac{1}{\sqrt{2 \pi}} \int_{-\inf}^{\infty} g(y) \; f(x - y) dy
+\label{eq:ecuacion_15_52}
+\end{equation}
+como la \textbf{convolución} de las dos funciones $f$ y $g$ en el intervalo $(-\infty, \infty)$. 
+\\
+Al incluir las TF en la ec. (\ref{eq:ecuacion_15_52})
+\begin{align}
+\int_{-\infty}^{\infty} g(y) \; f(x - y) d y &= \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} F(t) \; e^{-it(x - y)} dt dy \saltosin
+&= \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} F(t) \left[ \int_{-\infty}^{\infty} g(y) \; e^{ity} dy \right] e^{-itx} dx \saltosin
+&= \int_{-\infty}^{\infty} F(t) \; G(t) \; e^{-itx} dt \label{eq:ecuacion_15_53}
+\end{align}
+intercambiando el orden de integración y tranformando $g(y)$. Este resultado se puede interpretar como sigue: la TF inversa de un producto de TF, es la convolución de las funciones originales $f * g$
+\\
+Para el caso especial $x = 0$, se tiene que
+\begin{equation}
+\int_{-\infty}^{\infty} F(t) \; G(t) dt = \int_{-\infty}^{\infty} f(-y) \; g(y) dy
+\label{eq:ecuacion_15_54}
+\end{equation}
+El signo negativo en $-y$ sugiere que se intentaron los cambios.
+\section{Relación de Parseval.}
+La relación de Parseval
+\begin{equation}
+\int_{-\infty}^{\infty} F(\omega) \; G^{*} (\omega) d \omega = \int_{-\infty}^{\infty} f(t) \; g^{*}(t) dt
+\label{eq:ecuacion_15_55}
+\end{equation}
+Algunos autores prefieren usar el nombre de Parseval a las series y propiamente se le llama a la relación (\ref{eq:ecuacion_15_55}) como el \textbf{teorema de Rayleigh}.
+\end{document}

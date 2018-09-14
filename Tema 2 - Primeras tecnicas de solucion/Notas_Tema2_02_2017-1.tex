@@ -1,0 +1,276 @@
+\input{../preambulo_doc}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{ Método de Frobenius \\ \large {Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Puntos singulares.}
+El concepto de punto singular o singularidad es de utilizado para clasificar una EDO y para revisar la posibilidad de obtener una solución en series.
+\\
+Toda EDO puede resolverse para $d^{2}y/dx^{2}$, usando la notación: $d^{2}y/dx^{2} = y^{\prime \prime}$, tenemos
+\begin{equation}
+y^{\prime \prime} = f (x, y, y^{\prime})
+\label{eq:ecuacion_09_74}
+\end{equation}
+Si escribimos la ED2H como
+\begin{equation}
+y^{\prime \prime} + P(x) y^{\prime}+ Q(x) y = 0
+\label{eq:ecuacion_09_75}
+\end{equation}
+podemos definir los puntos ordinarios y puntos singulares.
+\\
+Si las funciones $P(x)$ y $Q(x)$ permanecen finitas en $x = x_{0}$, el punto $x = x_{0}$ \emph{es un punto ordinario}. De otra forma, si tanto $P(x)$ y $Q(x)$ o ambas, divergen cuando $x \to x_{0}$, el punto $x_{0}$ es un \emph{punto singular}.
+\\
+Hay dos tipos de puntos singulares:
+\begin{itemize}
+\item Si tanto $P(x)$ o $Q(x)$ divergen cuando $x \to x_{0}$, pero $(x - x_{0}) \; P(x)$ y $(x - x_{0})^{2} \; Q(x)$ permanecen finitas cuando $x \to x_{0}$, entonces $x = x_{0}$ es llamado \textbf{punto singular regular}.
+\item Si $P(x)$ diverge más rápido que $1 / (x - x_{0})$ mientras que $(x - x_{0}) \; P(x)$ tiende a infinito cuando $x \to x_{0}$, o $Q(x)$ diverge más rápido que $1 / (x -x_{0})^{2}$ mientras que $(x -x_{0})^{2} \; Q(x)$ tiende a infinito cuando $x \to x_{0}$, el punto $x =x_{0}$ se llama \textbf{punto singular irregular}.
+\end{itemize}
+\section{Solución en series. El método de Frobenius.}
+En esta parte del tema se desarrolla un método para obtener una solución de la EDO lineal de segundo orden homogénea. El método, que es un desarrollo en serie, siempre funciona siempre y cuando el punto de expansión no es tan malo que un punto singular regular. En física, esta condición casi siempre satisface.
+\\
+Una EDO2H puede expresarse de la forma:
+\begin{equation}
+\dfrac{d^{2} y}{d x^{2}} + P(x) \dfrac{dy}{dx} + Q(x) = 0
+\label{eq:ecuacion_09_080}
+\end{equation}
+Esta ecuación es homogénea, lineal y sin productos entre la función $y$ y sus derivadas.
+\\
+Más adelante veremos que se puede obtener una segunda solución independiente, a la vez que se puede demostrar que no existe una tercera solución independiente.
+\\
+La solución más general para la ecuación (\ref{eq:ecuacion_09_080}) se expresa por
+\begin{equation}
+y(x) = c_{1} y_{1}(x) + c_{2} y_{2}
+\label{eq:ecuacion_09_081}
+\end{equation}
+En la realidad de la física, el problema nos puede conducir a una EDO2 no homogénea:
+\begin{equation}
+\dfrac{d^{2} y}{d x^{2}} + P(x) \dfrac{dy}{dx} + Q(x) = F(x)
+\label{eq:ecuacion_09_082}
+\end{equation}
+La función de la derecha,$F(x)$, representa una fuente (tal como una carga electrostática) o una fuerza de desplazamiento (como en el oscilador mecánico). Las soluciones específicas de esta ecuación no homogénea que pueden obtener usando las  técnicas de la función de Green, y con la técnica de transformada de Laplace que se verá más adelante en el curso-
+\\
+Al llamar a este solución $y_{p}$, podemos agregarla en cualquier solución de la ecuación homogénea correspondiente (Ec.  \ref{eq:ecuacion_09_082}). Por lo tanto la solución más general de la ecuación (\ref{eq:ecuacion_09_082}) es
+\begin{equation}
+y(x) = c_{1} y_{1}(x) + c_{2} y_{2} + y_{p} (x)
+\label{eq:ecuacion_09_083}
+\end{equation}
+Las constantes $c_{1}$ y $c_{2}$ normalmente se establecen por las condiciones de frontera.
+\\
+Para nuestro estudio, suponemos que $F(x)=0$ por lo que nuestra ecuación diferencial es homogéneo. Intentaremos desarrollar una solución de nuestra EDO2H, la Ec. (\ref{eq:ecuacion_09_080}), mediante la sustitución en una serie de potencias con coeficientes indeterminados. Se manejará como parámetro si la potencia menor del término de la serie es no nulo. Para ilustrar esto, veamos el método de dos ecuaciones diferenciales importantes, la primera es la ecuación del oscilador lineal
+\begin{equation}
+\dfrac{d^{2} y}{d x^{2}} + \omega^{2} y = 0
+\label{eq:ecuacion_09_084}
+\end{equation}
+de la que conocemos sus soluciones: $y= \sin \omega x, \cos \omega x$.
+\\
+Intentamos con
+\begin{eqnarray*}
+\begin{aligned}
+y(x) &= x^{k} (a_{0} + a_{1} x + a_{2} x^{2} + a_{3} x^{3} + \ldots ) \\
+&= \sum_{\lambda = 0}^{\infty} a_{\lambda} x^{k+\lambda}, \hspace{1cm} a_{0} \neq 0
+\end{aligned}
+\label{eq:ecuacion_09_085}
+\end{eqnarray*}
+donde el exponente $k$ y todos los coeficientes $a_{\lambda}$ son indeterminados. Nótese que no necesariamente $k$ es un entero. Diferenciando dos veces, tenemos
+\begin{eqnarray*}
+\dfrac{dy}{dx} &=& \sum_{\lambda=0}^{\infty} a_{\lambda} (k + \lambda) x^{k+\lambda-1} \nonumber \\
+\dfrac{d^{2} y}{d x^{2}} &=& \sum_{\lambda=0}^{\infty} a_{\lambda} (k + \lambda) (k + \lambda - 1) x^{k + \lambda - 2} \nonumber
+\end{eqnarray*}
+Al sustituir en la ecuación (\ref{eq:ecuacion_09_084}), obtenemos
+\begin{equation}
+\sum_{\lambda=0}^{\infty} a_{\lambda} (k + \lambda) (k + \lambda - 1) x^{k + \lambda - 2} + \omega^{2} \sum_{\lambda = 0}^{\infty} a_{\lambda} x^{k+\lambda} = 0
+\label{eq:ecuacion_09_086}
+\end{equation}
+Del análisis de la unicidad de las series de potencias, los coeficientes de cada potencia de $x$ en la parte izquierda de la ecuación (\ref{eq:ecuacion_09_086}) deben de anularse.
+\\
+La potencia menor de $x$ que aparece en la ecuación (\ref{eq:ecuacion_09_086}) es $x^{k-2}$ para $\lambda = 0$ en la primera suma. Para que el coeficiente se anule, se necesita que
+\[ a_{0} k (k-1) = 0 \]
+Se escoge $a_{0}$ como el coeficiente del término menor de la serie no nulo (Ec. \ref{eq:ecuacion_09_085}), por lo que de la definición, $a_{0} \neq 0$, por lo que tenemos
+\begin{equation}
+k (k -1) = 0
+\label{eq:ecuacion_09_087}
+\end{equation}
+Esta ecuación, que proviene del coeficiente de la menor potencia de $x$, se llama a la \emph{ecuación indicial} o \emph{ecuación de índices}. La ecuación indicial y sus raíces son muy importantes en este análisis.
+\\
+Si $k=1$, el coeficiente $a_{1} (k+1)k$ de $x^{k-1}$ se anula, por lo que $a_{1} = 0$, en este ejemplo se nota de inmediato que $k=0$ o $k=1$.
+\\
+Antes de considerar estas dos posibilidades para $k$, regresemos a la ecuación (\ref{eq:ecuacion_09_086}) y la condición de que los coeficientes netos restantes, digamos, el coeficiente de $x^{k + j} \; (j \geq 0)$, se anulan. Hemos establecido $ \lambda = j + 2$ en la primera suma y $\lambda = j$ en el segundo. (Son sumas independientes y $\lambda$ es un índice mudo.) Esto da lugar a
+\[ a_{j+2} (k + j + 2) (k + j + 1) + \omega^{2} a_{j} = 0 \]
+o
+\begin{equation}
+a_{j+2} = - a_{j} \dfrac{\omega^{2}}{(k + j + 2)(k + j + 1)}
+\label{eq:ecuacion_09_088}
+\end{equation}
+Este es una relación de recurrencia de dos términos: dado $a_{j}$ podemos calcular $a_{j+2}$ y luego $a_{j+4}$, $a_{j+6}$, y así sucesivamente hasta donde lo queramos. Tomemos en cuenta que para este ejemplo, si partimos con $a_{0}$ Ec. (\ref{eq:ecuacion_09_088}) conduce a los coeficientes pares $a_{2}$, $a_{4}$ y así sucesivamente, y no considera a $a_{1}$, $a_{3}$, $a_{5}$ y así sucesivamente. Dado que una $a_{1}$ es arbitrario si $k = 0$ y necesariamente cero si $k = 1$, hacemos que sea igual a cero  y luego por la Ec. (\ref{eq:ecuacion_09_088})
+\[ a_{3} = a_{5} = a_{7} = \ldots = 0 \]
+todos los coeficientes impares se anulan. Las potencias pares de $x$ se presentan cuando se utiliza la segunda raíz de la ecuación indicial.
+\\
+Regresando a la ecuación (\ref{eq:ecuacion_09_087}) de la ecuación indicial, intentamos con la solución $k=0$, la relación de recurrencia (Ec. \ref{eq:ecuacion_09_088})ahora es
+\begin{equation}
+a_{j+2} = - a_{j} \dfrac{\omega^{2}}{(j+2)(j+1)}
+\label{eq:ecuacion_09_089}
+\end{equation}
+que nos conduce a
+\begin{eqnarray*}
+a_{2} &=& - a_{0} \dfrac{\omega^{2}}{1 \cdot 2} = - \dfrac{\omega^{2}}{2!} a_{0} \nonumber \\
+a_{4} &=& - a_{2} \dfrac{\omega^{2}}{3 \cdot 4} = + \dfrac{\omega^{4}}{4!} a_{0} \nonumber \\
+a_{6} &=& - a_{4} \dfrac{\omega^{2}}{5 \cdot 6} = - \dfrac{\omega^{6}}{6!} a_{0} \nonumber \hspace{1cm} \mbox{ y así sucesivamente}
+\end{eqnarray*}
+Aplicando inducción matemática, tenemos
+\begin{equation}
+a_{2n} = (-1)^{n} \dfrac{\omega^{2n}}{(2n)!} a_{0}
+\label{eq:ecuacion_09_090}
+\end{equation}
+y la solución es
+\begin{equation}
+y(x)_{k=0} = a_{0} \left[ 1 - \dfrac{(\omega x)^{2}}{2!} + \dfrac{(\omega x)^{4}}{4!} - \dfrac{(\omega x)^{6}}{6!} + \ldots \right] = a_{0} \cos \omega x
+\label{eq:ecuacion_09_091}  
+\end{equation}
+Si elegimos la raíz $k=1$ de la ecuación indicial (Ec. \ref{eq:ecuacion_09_088}), la relación de recurrencia es
+\begin{equation}
+a_{j+2} = - a_{j} \dfrac{\omega^{2}}{(j+3)(j+2)}
+\label{eq:ecuacion_09_092}
+\end{equation}
+sustituyendo en $j=0,2,4$ sucesivamente, resulta
+\begin{eqnarray*}
+a_{2} &=& - a_{0} \dfrac{\omega^{2}}{2 \cdot 3} = - \dfrac{\omega^{2}}{3!} a_{0} \nonumber \\
+a_{4} &=& - a_{2} \dfrac{\omega^{2}}{4 \cdot 5} = + \dfrac{\omega^{4}}{5!} a_{0} \nonumber \\
+a_{6} &=& - a_{4} \dfrac{\omega^{2}}{6 \cdot 7} = - \dfrac{\omega^{6}}{7!} a_{0} \nonumber \hspace{1cm} \mbox{y así sucesivamente}
+\end{eqnarray*}
+Por inducción matemática
+\begin{equation}
+a_{2n} = (-1)^{n} \dfrac{\omega^{2n}}{(2n+1)!} a_{0}
+\label{eq:ecuacion_09_093}
+\end{equation}
+Para este valor $k=1$, se obtiene
+\begin{eqnarray}
+y(x)_{k=1} &=& a_{0} x \left[ 1 - \dfrac{(\omega x)^{2}}{3!} + \dfrac{(\omega x)^{4}}{5!} - \dfrac{(\omega x)^{6}}{7!} + \ldots \right] \nonumber \\
+&=& \dfrac{a_{0}}{\omega}  \left[ (\omega x) - \dfrac{(\omega x)^{3}}{3!} + \dfrac{(\omega x)^{5}}{5!} - \dfrac{(\omega x)^{7}}{7!} + \ldots \right] \nonumber \\
+&=& \dfrac{a_{0}}{\omega} \sin \omega x
+\label{eq:ecuacion_09_094}
+\end{eqnarray}
+Esta sustitución en series de potencias, es conocida como el \emph{método de Frobenius }, y nos ha dado dos soluciones en series de la ecuación del oscilador lineal. Sin embargo, hay que considerar dos puntos sobre dichas soluciones en series en los que se debe de hacer énfasis:
+\begin{enumerate}
+\item La solución en series siempre debe de sustituirse en la ecuación diferencial, para ver si funciona, como medida de precaución contra los errores algebraicos y de lógica. Si funciona, es una solución.
+\item Aceptar una solución en series depende de su convergencia (incluida la convergencia asintótica). Es muy posible que el método de Frobenius devuelva una solución en series que satisface la ecuación diferencial original cuando se sustituye en la ecuación, pero no converga en el intervalo de interés.
+\end{enumerate}
+\section*{Expansión cerca de $x_{0}$}
+La ecuación (\ref{eq:ecuacion_09_085}) es una expansión cerca del origen $x_{0} = 0$. Podemos re-emplazar la ec. (\ref{eq:ecuacion_09_085}) con
+\begin{equation}
+y(x) = \sum_{\lambda=0}^{\infty} a_{\lambda} (x -x_{0})^{k+\lambda}, \hspace{1cm} a_{0} \neq 0
+\label{eq:ecuacion_09_095}
+\end{equation}
+De hecho, para las ecuaciones de Legendre, Chebyshev, y las hipergeométricos la elección $x_{0} = 1$ tiene algunas ventajas. El punto $x_{0}$ no debe elegirse en una singularidad esencial, ya que el método de Frobenius probablemente fallará. La serie resultante ($x_{0}$ un punto ordinario o punto singular regular) será válida donde converge. Podemos esperar una divergencia de algún tipo cuando $\vert x - x_{0} \vert = \vert	z_{s} - x_{0} \vert$, donde $z_{0}$ es la singularidad más cercana a $x_{0}$ (en el plano complejo).
+\\
+\begin{tabular}{l c c}
+Ecuación & Expresión & Singularidad regular \\
+Legendre & $(1-x^{2}) y^{\prime \prime} - 2 x y^{\prime} +  l (l+1) = 0$ & $x=-1, 1, \infty$ \\
+Chebychev & $(1-x^{2}) - xy^{\prime} + n^{2} y = 0$ & $x= -1, 1, \infty$ \\
+Hipergeométrica & $x(x-1) y^{\prime \prime} + [(1 +a + b) c ] y^{\prime} + aby = 0$ & $x = 0, 1, \infty$
+\end{tabular}
+\section*{Simetría de las soluciones.}
+Tengamos en cuenta que se obtuvo una solución de simetría par $y_{1}(x) = y_{1} (-x)$, y una solución de simetría impar, $y_{2}(x) = - y_{2}(-x)$. Esto no es sólo una casualidad, sino una consecuencia directa de la forma de la EDO. Escribiendo en general una EDO como
+\begin{equation}
+\mathcal{L}(x) y(x) = 0
+\label{eq:ecuacion_09_096}
+\end{equation}
+en donde $\mathcal{L}$ es el operador diferencial, vemos que la ecuación del oscilador lineal (ec. \ref{eq:ecuacion_09_084}) es par bajo la paridad, es decir
+\begin{equation}
+\mathcal{L}(x) = \mathcal{L}(-x)
+\label{eq:ecuacion_09_097}
+\end{equation}
+Sin importar el tipo de operador diferencial tiene una paridad específica o simetría, ya sea par o impar, podemos intercambiar $-x$ y $-x$ en la ecuación (\ref{eq:ecuacion_09_096}) y se obtiene
+\begin{equation}
+\pm \mathcal{L} y(-x) = 0
+\label{eq:ecuacion_09_098}
+\end{equation}
+es $+$ si $\mathcal{L}(x)$ es par, es $-$ si $\mathcal{L}$ es impar. Queda claro que si $y(x)$ es una solución de la ecuación diferencial, $y(-x)$ es también una solución. Entonces cualqueir solución se resuelve en partes pares e impares
+\begin{equation}
+y(x) = \dfrac{1}{2} \left[ y(x) + y(-x) \right] + \dfrac{1}{2} \left[ y(x) - y (-x) \right]
+\label{eq:ecuacion_09_099}
+\end{equation}
+el primer corchete corresponde a la solución para, mientras que el segundo a la solución impar.
+\section*{Limitaciones en el alcance de las series. Caso de la ecuación de Bessel.}
+Abordar la ecuación del oscilador lineal fue relativamente muy sencillo: sustituimos la serie de potencias (ec. \ref{eq:ecuacion_09_085}) en la ecuación diferencial (ec. \ref{eq:ecuacion_09_084}), y obtuvimos dos soluciones independientes y no hubo mucho problema.
+\\
+Veamos lo que sucede si intentamos resolver la ecuación de Bessel
+\begin{equation}
+x^{2} y^{\prime \prime} +  x y^{\prime} + (x^{2} - n^{2}) y = 0
+\label{eq:ecuacion_09_100}
+\end{equation}
+dejando la notación $y^{\prime} = \frac{dy}{dx}$ y $y^{\prime \prime} = \frac{d^{2} y}{d x^{2}}$. Entonces, suponemos que la solución es de la forma
+\[ y(x) = \sum_{\lambda=0}^{\infty} a_{\lambda} \; x^{k + \lambda} \]
+diferenciamos y sustituimos en la ecuación (\ref{eq:ecuacion_09_100}), el resultado es
+\begin{eqnarray*}
+\begin{aligned}
+\sum_{\lambda=0}^{\infty} a_{\lambda} & (k + \lambda)(k + \lambda - 1) x^{k + \lambda} + \sum_{\lambda=0}^{\infty} a_{\lambda} (k + \lambda) x^{k + \lambda} + \nonumber \\
+& + \sum_{\lambda=0}^{\infty} a_{\lambda} x^{k + \lambda + 2} - \sum_{\lambda=0}^{\infty} a_{\lambda} n^{2} x^{k + \lambda}  = 0
+\end{aligned}
+\label{eq:ecuacion_09_101}
+\end{eqnarray*}
+Hacemos $\lambda=0$ para obtener el coeficiente de $x^{k}$ la potencia menos de $x$ que aparece del lado izquierdo
+\begin{equation}
+a_{0} [ k (k - 1) + k - n^{2} ] = 0
+\label{eq:ecuacion_09_102}
+\end{equation}
+y de nuevo $a_{0} = \neq 0$ por definición. La ecuación (\ref{eq:ecuacion_09_102}) nos conduce por tanto a la ecuación indicial
+\begin{equation}
+k^{2} - n^{2} = 0
+\label{eq:ecuacion_09_103}
+\end{equation}
+con soluciones $k = \pm n$.
+Veamos con interés el coeficiente para $x^{k+1}$. Obtenemos entonces
+\[ a_{1} [(k + 1) k + k + 1 - n^{2} ] = 0 \]
+o equivalentemente
+\begin{equation}
+a_{1} (k + 1 - n)(k + 1 + n) = 0
+\label{eq:ecuacion_09_104}
+\end{equation}
+Para $k = \pm n$ tanto $k + 1 -n$ o $k + 1 + n$ se anulan, y necesitamos que $a_{1} = 0$.
+\\
+Continuando con el coeficiente de $x^{k+j}$ para $k=n$, hacemos $\lambda=j$ en el primero, segundo y cuarto término de la ec. (\ref{eq:ecuacion_09_101}), y hacemos que $\lambda = j -2$ en el tercer término. Como se necesita que el coeficiente resultante de $x^{k+1}$ se anule, tenemos
+\[ a_{j} [(n + j)(n + j - 1) + (n + j) - n^{2}] + a_{j-2} = 0 \]
+cuando $j$ se re-emplaza por $j+2$, podemos re-escribir para $j \geq 0$ como
+\begin{equation}
+a_{j+2} = - a_{j} \dfrac{1}{(j+2)(2n + j +2)}
+\label{eq:ecuacion_09_105}
+\end{equation}
+que sería la deseada relación de recurrencia. Repitiendo la relación, tendremos
+\begin{eqnarray*}
+a_{2} &=& - a_{0} \dfrac{1}{2(2n + 2)} = - \dfrac{a_{0} n!}{2^{2} \; 1! \; (n+1)!} \nonumber \\
+a_{4} &=& - a_{2} \dfrac{1}{4(2n + 4)} =  \dfrac{a_{0} n!}{2^{4} \; 2! \; (n+2)!} \nonumber \\
+a_{6} &=& - a_{4} \dfrac{1}{6(2n + 6)} =  \dfrac{a_{0} n!}{2^{6} \; 3! \; (n+3)!} \hspace{1cm}\mbox{y así sucesivamente} \nonumber
+\end{eqnarray*}
+En general
+\begin{equation}
+a_{2p} = (-1)^{p} \; \dfrac{a_{0} n!}{2^{2p} \; p! \; (n+p)!}
+\label{eq:ecuacion_09_106}
+\end{equation}
+Acomodando los coeficientes en la solución en series, tenemos
+\begin{equation}
+y(x) = a_{0} x^{n} \left[ 1 - \dfrac{n! x^{2}}{2^{2} 1! (n+1)!} + \dfrac{n! x^{4}}{2^{4} 2! (n+2)!} - \ldots \right]
+\label{eq:ecuacion_09_107}
+\end{equation}
+En forma de suma:
+\begin{eqnarray*}
+\begin{aligned}
+y(x) &=& a_{0} \sum_{j=0}^{\infty} (-1)^{j} \dfrac{n! x^{n+2j}}{2^{2j} \; j! \; (n+j)!} \nonumber \\
+&=& a_{0} 2^{2} n! \sum_{j=0}^{\infty} (-1)^{j} \dfrac{1}{j! \; (n+j)!} \left( \dfrac{x}{2} \right)^{n+2j} 
+\end{aligned}	
+\label{eq:ecucion_09_108}  
+\end{eqnarray*}
+Que es la definición de la función de Bessel $J_{n}(x)$.
+\\
+Cuando $k=n$ y $n$ es no entero, podemos generar una segunda solución distinta, que se identifica como $J_{-n}(x)$. Pero cuando $-n$ es un entero negativo, ya tenemos problemas. La relación de recurrencia para los coeficientes $a_{j}$ está dada por la ecuación (\ref{eq:ecuacion_09_105}), pero cambiando $2n$ por $-2n$, entonces, cuando $j+2=2n$ o $j=2(n-1)$, el coeficiente $a_{j+2}$ ''truena'' y no se genera la solución por series. Esto lo podemos resolver (y se verá más adelante) por 
+\begin{equation}
+J_{-n} (x) = (-1)^{n} J_{n}(x)
+\label{eq:ecuacion_09_109}
+\end{equation}
+Esta segunda solución simplemente reproduce la primera. No se logró construir una segunda solución independiente para la ecuación de Bessel usando esta técnica, con $n$ entero.
+\subsection{Teorema de Fuchs.}
+La respuesta a la pregunta básica cuando se espera que el método de sustitución en series funcione, está dado por el teorema de Fuchs, que afirma que siempre podemos obtener por lo menos una solución en serie de potencias, siempre que se esté expandiendo alrededor de un punto que es un punto ordinario o en el peor de los casos, en un punto singular regular.
+\end{document}

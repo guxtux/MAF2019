@@ -1,0 +1,115 @@
+\input{../preambulo_doc}
+\usepackage{standalone}
+\usepackage{tikz,tikz-3dplot}
+\tikzset{thin_line/.style={thin, solid, color=black}}
+\tikzset{dash_line/.style={thin, dashed, color=darkgray}}
+\tikzset{vect_line/.style={very thick, ->, >=latex,  solid, color=black}}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Definiciones operadores vectoriales \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Gradiente $\nabla$.}
+Supongamos que $\varphi(x,y,z)$ es una función escalar, es decir, es una función cuyo valor depende de los valores de las coordenadas $(x,y,z,)$. Como es un escalar, debe tener el mismo valor en un determinado punto fijo en el espacio, independiente de la rotación del sistema coordenado
+\begin{equation}
+\varphi^{\prime} (x_{1}^{\prime},x_{2}^{\prime},x_{3}^{\prime}) = \varphi(x_{1},x_{2},x_{3})
+\label{eq:ecuacion_01_51}
+\end{equation}
+Diferenciando con respecto a $x_{i}^{\prime}$, obtenemos
+\begin{eqnarray}
+\begin{aligned}
+\dfrac{\partial \varphi^{\prime} (x_{1}^{\prime},x_{2}^{\prime},x_{3}^{\prime})}{\partial x_{i}^{\prime}} &= \dfrac{\varphi(x_{1},x_{2},x_{3})}{\partial x_{i}^{\prime}} \\
+&= \sum_{j} \dfrac{\partial \varphi}{\partial x_{i}} \; \dfrac{\partial x_{j}}{\partial x_{i}^{\prime}} = \sum_{j} a_{ij} \dfrac{\partial \varphi}{\partial x_{j}}
+\end{aligned}
+\label{eq:ecuacion_01_52}
+\end{eqnarray}
+Lo que nos muestra que hemos construido un vector con componentes $\partial \varphi / \partial x_{j}$. Este vector le denominamos el gradiente de $\varphi$.
+\\
+Una manera conveniente de representarlo es
+\begin{equation}
+\bm{\nabla} \varphi = \mathbf{i} \dfrac{\partial \varphi}{\partial x} + \mathbf{j} \dfrac{\partial \varphi}{\partial y} + \mathbf{k} \dfrac{\partial \varphi}{\partial z}
+\label{eq:ecuacion_01_53}
+\end{equation}
+o también
+\begin{equation}
+\bm{\nabla} = \mathbf{i} \dfrac{\partial}{\partial x} + \mathbf{j} \dfrac{\partial}{\partial y} + \mathbf{k} \dfrac{\partial}{\partial z}
+\label{eq:ecuacion_01_54}
+\end{equation}
+Donde $\bm{\nabla}$ es el gradiente del escalar $\varphi$, mientras que $\bm{\nabla}$ es en sí, un operador diferencial vectorial (que aplica sobre o en la diferenciación del escalar $\varphi$).
+\subsection*{Ejemplo. El gradiente de una función de $r$.}
+Calculemos el gradiente de
+\[ f(r) = f(\sqrt{x^{2} + y^{2} + z^{2}}) \]
+Entonces
+\[ \bm{\nabla} f(r) = \mathbf{i} \dfrac{\partial f(r)}{\partial x} + \mathbf{j} \dfrac{\partial f(r)}{\partial y} + \mathbf{k} \dfrac{\partial f(r)}{\partial z} \]
+Ahora $f(r)$ depende de $x$ debido a la dependencia de $r$ sobre $x$. Por tanto
+\[ \dfrac{\partial f(r)}{\partial x} = \dfrac{df(r)}{dr} \cdot \dfrac{\partial r}{\partial x} \]
+Dado que $r$ es una función de $x,y,z$
+\[ \dfrac{\partial r}{\partial x} = \dfrac{\partial (x^{2} + y^{2} + z^{2})^{1/2} }{\partial x} = \dfrac{x}{(x^{2} + y^{2} + z^{2})^{1/2}} = \dfrac{x}{r} \]
+Por tanto
+\[ \dfrac{\partial f(r)}{\partial x} = \dfrac{d f(r)}{d r} \cdot \dfrac{x}{r} \]
+Permutanto las coordenadas $(x \to y, y \to z, z \to x)$, tenemos que las derivadas de $y$ y $z$
+\[ \begin{split}  \bm{\nabla} f(r) &= ( \mathbf{i} x + \mathbf{j} y + \mathbf{k} z) \; \dfrac{1}{r} \dfrac{df}{dr} \\
+&= \dfrac{\mathbf{r}}{r} \; \dfrac{df}{dr} \\
+&= \mathbf{r}_{0} \; \dfrac{df}{dr} \end{split} \]
+Aquí $\mathbf{r}_{0}$ es un vector unitario $(\mathbf{r}/r$ en la dirección radial positiva. El gradiente de una función de $r$, es un vector en la dirección radial (positiva o negativa).
+\subsection*{Una interpretación geométrica.}
+Una aplicación inmediata del $\nabla \varphi$ es en el incremento de longitud
+\begin{equation}
+d \mathbf{r} = \mathbf{i} dx + \mathbf{j} dy + \mathbf{k} dz 
+\label{eq:ecuacion_01_55}  
+\end{equation}
+De donde obtenemos
+\begin{eqnarray}
+\begin{aligned}
+(\nabla \varphi) \cdot d \mathbf{r} &= \dfrac{\partial \varphi}{\partial x} dx + \dfrac{\partial \varphi}{\partial y} dy + \dfrac{\partial \varphi}{\partial z} dz \\
+&= d \varphi
+\end{aligned}
+\label{eq:ecuacion_01_56}
+\end{eqnarray}
+el cambio en la función escalar $\varphi$ corresponde a un cambio en la posición $d \mathbf{r}$. Ahora considera los puntos $P$ y $Q$, dos puntos sobre la superficie $\varphi(x,y,z)=C$ una constante. Esos puntos se eligen de tal manera que $Q$ representa la distancia $d \mathbf{r}$ hasta $P$. Por lo que el moverse de $P$ a $Q$, el cambio en $\varphi(x,y,z)=C$ está dado por
+\begin{eqnarray}
+\begin{aligned}
+d \varphi &= (\bm{\nabla} \varphi ) \cdot d \mathbf{r} \\
+&= 0	
+\end{aligned}
+\label{eq:ecuacion_01_57}
+\end{eqnarray}
+dado que estamos sobre la superficie $\varphi(x,y,z)=C$. Esto muestra que $\nabla \varphi$ es perpendicular a $d \mathbf{r}$. Como $d \mathbf{r}$ puede tener cualquier dirección en $P$ con tal de que se quede sobre la superficie $\varphi$, el punto $Q$ está restringido a quedarse sobre la superficie, pero puede tener cualquier dirección, $\nabla \varphi$ hemos visto que es normal a la superficie $\varphi = \mbox{ constante}$.
+\begin{figure}[H]
+\centering
+\includestandalone{Tema_01_Gradiente}
+\label{fig:figura_01}
+\caption{El incremento de longitud $d \mathbf{r}$ se requiere para que permanezca en la superficie $\varphi = C$.}
+\end{figure}
+Si ahora permitimos que $d \mathbf{r}$ salga de una superficie $\varphi = c_{1}$ a una superficie adyacente $\varphi = C_{2}$ (ver figura \ref{fig:figura_02})
+\begin{eqnarray}
+\begin{aligned}
+d \varphi &= C_{2} - C_{1} = \Delta C \\
+&= ( \nabla \varphi) \cdot d \mathbf{r}
+\label{eq:ecuacion_01_58}
+\end{aligned}
+\end{eqnarray}
+\begin{figure}[H]
+\centering
+\includestandalone{Tema_01_Gradiente_02}
+\label{fig:figura_02}
+\caption{Gradiente.}
+\end{figure}
+Para un $d \varphi$ dado, $\vert d \mathbf{r} \vert$ es un mínimo cuando se elige paralelo a $\nabla \varphi (\cos \theta =1)$; o para un $\vert d \mathbf{r} \vert$ dado, el cambio en la función escalar $\varphi$ es maximizado cuando se elige $d \mathbf{r}$ paralelo a $\nabla \varphi$. \emph{Esto reconoce a $\nabla \varphi$ como un vector que tiene la dirección de la máxima razón de cambio de $\varphi$}.
+\section*{Ejemplo.}
+Consideremos las superficies de capas esféricas concéntricas (ver figura \ref{fig:figura_03}). Tenemos que
+\[ \varphi (x,y,z,) = (x^{2} + y^{2} + z^{2})^{1/2} = r_{i} = C_{i} \]
+donde $r_{i}$ es igual al radio para $C_{i}$, nuestra constante. $\Delta C = \Delta \varphi = \Delta r_{i}$ la distancia entre las dos capas. Así que
+\[ \nabla \varphi (r) = \mathbf{r}_{0} \dfrac{d \varphi (r)}{d r} = \mathbf{r}_{0} \]
+\begin{figure}[H]
+\centering
+\includestandalone{Tema_01_Gradiente_03}
+\label{fig:figura_03}
+\caption{Gradiente para $\varphi(x,y,z) = (x^{2}+y^{2}+z^{2}$, con capas esféricas: $(x^{2}+y^{2}+z^{2} = r_{2} = C_{2},(x^{2}+y^{2}+z^{2} = r_{1} = C_{1}$}
+\end{figure}
+El gradiente está en la dirección radial y es normal a la superficie esférica $\varphi = C$
+
+\end{document}

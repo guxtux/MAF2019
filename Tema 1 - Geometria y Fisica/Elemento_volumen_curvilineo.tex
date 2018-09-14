@@ -1,0 +1,36 @@
+\documentclass{standalone}
+\usepackage{tikz,tikz-3dplot}
+\tikzset{thin_line/.style={thin, solid, color=black}}
+\tikzset{dash_line/.style={thin, dashed, color=darkgray}}
+\tikzset{vect_line/.style={very thick, ->, >=latex,  solid, color=black}}
+\begin{document}
+\begin{tikzpicture}[scale=2]
+	\draw[thick,->] (-1.5,0,0) -- (2,0,0) node[anchor=north east]{$y$};
+	\draw[thick,->] (-1.5,0,0) -- (-1.5,2.5,0) node[anchor=north east]{$z$};
+	\draw[thick,->] (-1.5,0,0) -- (-1.5,0,1.5) node[anchor=east]{$x$};
+	
+	\coordinate (a) at (-0.5,1);
+	\coordinate (b) at (0,0.7);
+	\coordinate (c) at (0.9,1.5);
+	\coordinate (d) at (0.05,2);
+	
+	\draw (a) -- (b);
+	\draw (b) -- (c);
+	\draw (a) -- (d);
+	\draw (d) to[out=-10, in=130] (c);
+	
+	\coordinate (aa) at (-0.2,1.1);
+	\coordinate (bb) at (0.3,0.65);
+	\coordinate (cc) at (1.2,1.45);
+	\coordinate (dd) at (0.3,2.1);
+	
+	\draw[dash_line] (a) -- (aa);
+	\draw (b) -- (bb);
+	\draw (bb) -- (cc);
+	\draw (c) -- (cc);
+	\draw (cc) to[out=110, in=-10] (dd);
+	\draw (d) -- (dd);
+	\draw [dash_line] (dd) -- (aa);
+	\draw [dash_line] (aa) to[out=130, in=-10] (bb);
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,192 @@
+\input{../preambulo_doc}
+\usepackage{mathrsfs}
+\usepackage{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{bigints}
+\newcommand{\saltosin}{\nonumber \\}
+\spanishdecimal{.}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Problemas con las Funciones de Bessel \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section*{Distribución de temperaturas en cilindros.}
+Considérese un largo cilindro macizo de radio $r = a$ cuya superficie lateral se matiene a temperatura cero. Inicialmente, la temperatura en el cilindro está dada por $f(r)$. Suponiendo que no hay variación con $z$ y que la temperatura para cada radio $r$ es la misma en toda esa superficie (independiente de $\theta$), se desea hallar una expresión para la distribución de temperaturas $u(r, t)$ en el cilindro.
+\\
+El modelo matemático del problema está constituido por la ecuación de calor
+\begin{equation}
+\dfrac{\partial u}{\partial t} = k \left( \dfrac{\partial^{2} u }{\partial r^{2}} + \dfrac{1}{r} \dfrac{\partial u}{\partial r} \right) \hspace{1cm} 0 < r < a, \hspace{0.5cm} t > 0
+\label{eq:ecuacion_039}
+\end{equation}
+junto con las condiciones
+\begin{equation}
+u(a,t) = 0, \hspace{2cm} u(r,0) =  f(r)
+\label{eq:ecuacion_040}
+\end{equation}
+Además, se exige que la función $u(r,t)$ debe ser acotada en todo el volumen del cilindro.
+\\
+Usando el método de separación de variables, proponemos una solución del tipo
+\begin{equation}
+u(r,t) = R(r) T(t)
+\label{eq:ecuacion_041}
+\end{equation}
+susituyendo en la ec. (\ref{eq:ecuacion_039}), se tiene que
+\begin{eqnarray*}
+R(t) \; T'(t) &=& k \left[ R^{\prime \prime}(r) T(t) + \dfrac{1}{r} R^{\prime}(r) T(t) \right] \saltosin
+\dfrac{R^{\prime \prime} + \frac{1}{r} R^{\prime}(r)}{R(r)} &=& \dfrac{1}{k} \; \dfrac{T^{\prime}}{T(t)} =  \lambda^{2}
+\end{eqnarray*}
+Adicionalmente, de la condición $u(a,t) = 0$, se deduce que
+\[ R(a) T(t) = 0 \Rightarrow R(a) = 0 \]
+De esta manera, se obtiene los siguientes dos problemas:
+\begin{eqnarray}
+R^{\prime \prime} + \dfrac{1}{r} R^{\prime} (r) + \lambda^{2} R(r) &=& 0, \hspace{1.5cm} R(a) = 0 \label{eq:ecuacion_042} \\
+T^{\prime}(t) + k \lambda^{2} T(t) &=& 0 \label{eq:ecuacion_043} 
+\end{eqnarray}
+La ec. (\ref{eq:ecuacion_042}) corresponde a una ecuación de Bessel con parámetro $\lambda$ del tipo
+\begin{equation}
+y^{\prime \prime} + \dfrac{1}{x} y^{\prime} + \left( \lambda^{2} - \dfrac{v^{2}}{x^{2}} \right) y = 0 
+\label{eq:ecuacion_011}
+\end{equation}
+que al hacer el cambio de variable $z = \lambda x$, se deduce que la solución general de esta ecuación está dada por
+\begin{equation}
+y = C_{1} J_{v} (\lambda x) + C_{2} N_{n} (\lambda x)
+\label{eq:ecuacion_012}
+\end{equation}
+Entonces para el problema del cilindro, se tiene que $v=0$, por lo tanto, la solución general es de la forma
+\[ R(r) = C_{1} J_{0}(\lambda r) + C_{2} N_{0} (\lambda r) \]
+La función $R(r)$ debe de estar acotada en $r=0$, por lo que se reduce que $C_{2} =0$, ya que $N_{0}(0) \to \infty$. Quedando entonces
+\[ R(r) =C_{1} J_{0} (\lambda r) \]
+Ahora
+\[ R(a) = 0 \Rightarrow C_{1} J_{0} (\lambda a) = 0 \]
+Para obtener una solución no trivial, se debe de tomar $C_{1} \neq 0$, entonces
+\begin{equation}
+J_{0}(\lambda a) = 0
+\label{eq:ecuacion_044}
+\end{equation}
+Si $\lambda_{i}$ con $i = 1,2, \ldots$, son las raíces positivas de la ec. (\ref{eq:ecuacion_044}), se tiene que, aparte del factor constante, las funciones
+\[ R_{i}(r) = J_{0} (\lambda_{i} r) \hspace{1cm} i = 1, 2, \ldots \]
+son soluciones de la ec. (\ref{eq:ecuacion_042}).
+Para los valores de $\lambda$ considerados, la ec. (\ref{eq:ecuacion_043}) tiene las soluciones particulares
+\[ T_{i}(t) = e^{-k \lambda_{i}^{2} t} \hspace{1.5cm} i = 1, 2, \ldots \]
+Así la sucesión de funciones
+\[ u_{i}(r,t) = J_{0} (\lambda_{i} r) e^{-k \lambda_{i}^{2} t} \hspace{1.5cm} i= 1, 2, \ldots \]
+satisfacen la ec. (\ref{eq:ecuacion_039}) y las condiciones de frontera consideradas, y de acuerdo al principio de superposición, la función
+\begin{equation}
+u(r,t) =  \sum_{i=1}^{\infty} C_{i} J_{0} (\lambda_{i} r)e^{-k \lambda_{i}^{2} t}
+\label{eq:ecuacion_045}
+\end{equation}
+también las satisface.
+\\
+Aplicando la condición $u(r,0) = f(r)$, se obtiene la expansión de Fourier-Bessel
+\[ f(r) = \sum_{i=1}^{\infty} C_{i} J_{0}(\lambda_{i} r) \]
+de donde
+\[ C_{i} = \dfrac{1}{a^{2} J_{1}^{2} (\lambda_{i} a)} \; \int_{0}^{a} r \; f(r) \; J_{0}(\lambda_{i} r) dr \hspace{1cm} i = 1,2, \ldots \]
+finalmente, la distribución de temperaturas en el cilindro viene dada por
+\begin{equation}
+u(r,t) = \dfrac{2}{a^{2}} \sum_{i = 1}^{\infty } \left[ \int_{0}^{a} r \; f(r) \; J_{0}(\lambda_{i} r) dr \right] \; \dfrac{J_{0}(\lambda_{i} r)} {J_{1}^{2} (\lambda_{i} a)} e^{-k \lambda_{i}^{2} t}
+\label{eq:ecuacion_046}
+\end{equation}
+donde la suma es tomada sobre todas las raíces positivas de la ec. (\ref{eq:ecuacion_044}).
+\\
+\textbf{Ejercicio a cuenta de examen.} Deducir una expresión para la distribución estacionaria de temperaturas $u(r, z)$ en el cilindro macizo limitado por las superficies $r = 1$, $z = 0$ y $z = 1$, si $u = 0$ en la superficie $r= 1$, $u = 1$ en la superficie $z = 1$ y la base $z = 0$ está aislada.
+\section*{Oscilaciones en una membrana circular.}
+Una onda que viaja en el espacio puede ser expresada como una función $\mathbf{u}( \overrightarrow{r}, t)$ donde cada componente deberá satisfacer la ecuación de onda
+\begin{equation}
+\nabla \mathbf{u} = \dfrac{1}{v^{2}} \dfrac{\partial^{2} \mathbf{u}}{\partial t^{2}}
+\label{eq:ecuacion_01_01}
+\end{equation}
+donde $\overrightarrow{r}$ representa el vector de movimiento en el espacio tridimensional en coordenadas euclidianas $(x, y, z)$ y $v$ es la velocidad de propagación de la onda en el medio.
+\\
+Una característica muy significativa de la ecuación (\ref{eq:ecuacion_01_01}) es que es una ecuación lineal y por lo tanto, si $\mathbf{u}_{1}(\overrightarrow{r}, t)$, ; $\mathbf{u}_{2}(\overrightarrow{r}, t)$, $\mathbf{u}_{1}( \ldots, \overrightarrow{n}, t)$, son soluciones individuales de dicha ecuación, cualquier combinación lineal de éstas también será una solución.
+\\
+Por lo tanto, una solución de la forma
+\begin{equation}
+\mathbf{u}(\overrightarrow{r},t) = \sum_{i=1}^{n} C_{i} \mathbf{u}_{i} (\overrightarrow{r},t)
+\label{eq:ecuacion_01_02}
+\end{equation}
+donde los coeficientes $C_{i}$ son constantes arbitrarias, deberá satisfacer la ecuación de onda (\ref{eq:ecuacion_01_01}).
+\\
+Esta propiedad de linealidad se denomina principio de superposición y sugiere que en sistemas lineales, la perturbación resultante debida a cualquier número de ondas en un punto cualquiera del espacio será la suma algebráica de sus ondas
+constituyentes por separado.
+\\
+Para cualquier sistema de coordenadas, los desplazamientos de una superficie en su dirección normal, están determinados
+por la ecuación de onda
+
+\begin{equation}
+\nabla U = \dfrac{1}{v^{2}} \; \dfrac{\partial^{2} U }{\partial t^{2}}
+\label{eq:ecuacion_01_15}
+\end{equation}
+donde $v$ representa la velocidad de propagación de la onda en la superficie. Para desarrollar la ecuación (\ref{eq:ecuacion_01_15}) se hicieron algunas suposiciones como que la membrana es delgada y uniforme con rigidez despreciable, que es perfectamente elástica sin amortiguamiento y que vibra con desplazamientos de amplitud pequeños. Además se supuso que la tensión sobre la superficie de la membrana está distribuida uniformemente.
+\\
+Para calcular los modos normales, se vuelve a escribir (\ref{eq:ecuacion_01_15}) suponiendo una solución de la forma
+\begin{equation}
+U = \Psi e^{i \omega t}
+\label{eq:ecuacion_01_16}
+\end{equation}
+donde $\Psi =  \Psi(x,y)$ es una función que depende sólo de la posición. Sustituyendo la solución (\ref{eq:ecuacion_01_16}) en (\ref{eq:ecuacion_01_15}) se obtiene
+\begin{equation}
+\nabla^{2} \Psi + k^{2} \Psi = 0
+\label{eq:ecuacion_01_17}
+\end{equation}
+con $k^{2} = \sqrt{\omega/v}$, que es la ecuación de onda independiente del tiempo o ecuación de Helmholtz.
+\\
+Las soluciones a esta ecuación representan un conjunto de líneas nodales, es decir, regiones donde el desplazamiento es constante. Éstas serán zonas en las que los desplazamientos de la membrana son nulos y que permanecen así en cualquier instante. Las soluciones a la ecuación (\ref{eq:ecuacion_01_17}) para una membrana de forma y condiciones específicas representará sus modos normales de vibración.
+\\
+\\
+Para una membrana circular, la ecuación de onda apropiada para las vibraciones transversales $U(r, \theta, t)$ en coordenadas polares es
+\begin{equation}
+\dfrac{\partial^{2} \mathbf{U}}{\partial r^{2}} + \dfrac{1}{r} \; \dfrac{\partial \mathbf{U}}{\partial r} + \dfrac{1}{r^{2}} \; \dfrac{\partial^{2} \mathbf{U}}{\partial \theta^{2}} = \dfrac{1}{v^{2}} \; \dfrac{\partial^{2} \mathbf{U}}{\partial t^{2}}
+\label{eq:ecuacion_01_24}  
+\end{equation}
+La ecuación (\ref{eq:ecuacion_01_24}) se convierte en la ecuación de Helmholtz en coordenadas polares,
+\begin{equation}
+\dfrac{r^{2}}{R} \left( \dfrac{d^{2} R}{d r^{2}} + \dfrac{1}{r} \; \dfrac{d R}{d r} \right) + k^{2} r^{2} = \dfrac{1}{\Theta} \; \dfrac{d^{2} \Theta}{d \theta^{2}}
+\label{eq:ecuacion_01_25}
+\end{equation}
+La solución a la parte angular tiene una forma armónica
+\begin{equation}
+\Theta (\theta) = \cos (m \theta + \gamma)
+\label{eq:ecuacion_01_26}
+\end{equation}
+donde $\gamma$ es el ángulo de fase inicial y los valores de la constante $m$ están restringidos a valores enteros $m = 0, 1,2, \ldots $. La ecuación (\ref{eq:ecuacion_01_25}) se convierte en la ecuación de Bessel
+\begin{equation}
+\dfrac{d^{2} R}{d r^{2}} + \dfrac{1}{r} \; \dfrac{d R}{d r}  + \left( k^{2} - \dfrac{m^{2}}{r^{2}} \right) R = 0
+\label{eq:ecuacion_01_27}
+\end{equation}
+Las soluciones de esta ecuación son las funciones de Bessel de primera clase $J_{m}(kr)$ y segunda clase $N_{m}(kr)$ de orden $m$ respectivamente,
+\begin{equation}
+R(r) = A J_{m} (kr) + B N_{m} (kr)
+\label{eq:ecuacion_01_28}
+\end{equation}
+Las funciones de Bessel de primera clase $J_{m}(kr)$ son funciones oscilantes cuyas amplitudes disminuyen conforme aumenta $kr$, y las funciones de Bessel de segunda clase $N_{m}(kr)$ crecen sin límite cuando $kr \to 0$.
+\\
+Si el radio $r$ de la membrana circular es $a$ y ésta se encuentra fija en todo su contorno, la condición de frontera requerida será
+\begin{equation}
+U(a, \theta, t) = 0
+\label{eq:ecuacion_01_29}
+\end{equation}
+
+Aunque  la ec. (\ref{eq:ecuacion_01_28}) es la solución general de (\ref{eq:ecuacion_01_27}), dado que la membrana se extiende a través del origen $(r = 0)$, la solución debe ser finita en el origen $(r = 0)$ y esto requiere que la constante $B = 0$ de tal manera que la solución será la parte real de
+\begin{equation}
+U_{m,n} (r, \theta, t) =  A_{mn} J_{m} (k_{mn} r) \cos (m \theta) e^{i \omega_{mn}t}
+\label{eq:ecuacion_01_30}
+\end{equation}
+donde $A_{mn}$ es la amplitud máxima del modo dado por los enteros $(m,n)$ y la constante $k_{mn}$ viene dada por
+\begin{equation}
+k_{mn} = \dfrac{j_{mn}}{a}
+\label{eq:ecuacion_01_31}
+\end{equation}
+donde $j_{mn}$ representa el $n$-ésimo cero de la función de Bessel $J_{m}$ de primera clase de orden $m$. Las frecuencias naturales de vibración estarán dadas por
+\begin{equation}
+f_{mn} = \dfrac{v}{2 \pi} \; \dfrac{j_{mn}}{a}
+\label{eq:ecuacion_01_32}
+\end{equation}
+El valor de $m$ restringe el número de líneas nodales radiales mientras que el valor de $n$, el número de circunferencias nodales.
+
+
+\end{document}

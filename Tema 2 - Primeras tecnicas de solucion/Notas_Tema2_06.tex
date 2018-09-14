@@ -1,0 +1,150 @@
+\include{preambulo_doc}
+\usepackage{mathrsfs}
+\spanishdecimal{.}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Función Gamma y Beta \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Definiciones.}
+La definición de la función Gamma es
+\[ \Gamma(x) = \int_{0}^{\infty} t^{x-1}e^{-t} dt \hspace{1cm x > 0} \]
+y una de sus propiedades es
+\[ \Gamma(x+1) = x \Gamma(x) \]
+La función Gamma es particularmente útil en problemas de probabilidad, en especial, en problemas que involucran el factorial de números muy grandes, se define la función Gamma incompleta
+\[ \gamma(x, \tau ) = \int_{0}^{\tau} t^{x-1}e^{-t} dt, \hspace{1cm} x>0, \tau >0  \]
+La función Beta $B(x,y)$ se define como
+\[ B(x,y) = \int_{0}^{1} t^{x-1} (1-t)^{y-1} dt, \hspace{1cm} x>0, y>0 \]
+Las funciones Beta y Gamma están relacionadas por
+\[ B(x,y) = \dfrac{\Gamma(x) \Gamma(y)}{\Gamma(x+y)} \]
+\section{Ejercicios de la función Gamma.}
+\begin{enumerate}
+\item Demostrar que
+\[ \Gamma(x) = \int_{0}^{1} \left[ \ln \left( \dfrac{1}{u} \right) \right]^{x-1} du \hspace{1cm} x>0 \]
+Empezamos con
+\[ \Gamma(x) = \int_{0}^{\infty} t^{x-1} e^{-t} dt \hspace{1cm} x>0 \]
+Hacemos el cambio de variable $u = e^{-t}$ por lo que
+\[ \dfrac{1}{u} = e^{t}, \hspace{1cm} ln \left(\dfrac{1}{u} \right) = t, \hspace{1cm} -\left(\dfrac{1}{u} \right) du = dt, \hspace{1cm} \left[ ln \left( \dfrac{1}{u} \right) \right]^{x-1} = t^{x-1} \]
+Los límites de integración quedan: cuando $t=0$ entonces $u=1$ y cuando $t = \infty$ entonces $u=0$, así
+\[ \int_{0}^{\infty} t^{x-1} e^{-t} dt = - \int_{1}^{0} \left[  \ln \left( \dfrac{1}{u} \right) \right]^{x-1} u \dfrac{1}{u} du = \int_{0}^{1} \left[ ln \left( \dfrac{1}{u} \right) \right]^{x-1} du  \]
+\item Demostrar que 
+ \[ \Gamma(x) = 2 \int_{0}^{\infty} m^{2x-1} e^{-m^{2}} dm, \hspace{1cm} x>0 \]
+\\
+Partimos de la definición $\int_{0}^{\infty} t^{x-1} e^{-t} dt, \hspace{1cm} x>0$.
+\\
+Hacemos $t=m^{2}$, entonces $dt= 2m dm$. Los límites de integración quedan en los mismos valores, por  lo que
+\[ \begin{split}
+\Gamma(x) &= \int_{0}^{\infty} t^{x-1} e^{-t} dt = \int_{0}^{\infty} m^{2x-1} e^{-m^{2}} 2m dm \\
+ &= 2 \int_{0}^{\infty} m^{2x-1} e^{-m^{2}} dm, \hspace{1cm} x>0
+\end{split}  \]
+\end{enumerate}
+Algunas propiedades:
+\begin{eqnarray}
+\Gamma (x) &=& \dfrac{\Gamma(x+1)}{x} \nonumber \\
+\Gamma (x) &=& (x-1) \Gamma (x-1) \nonumber \\
+\Gamma (-x) &=& \dfrac{\Gamma (1-x)}{-x} \hspace{0.5cm} x \neq 0,1,2, \ldots \nonumber 
+\end{eqnarray}
+\begin{enumerate}
+\item Evaluar $\Gamma(0.37)$
+\\
+Lo que podemos hacer en este caso es incrementar el argumento de $0.37$ a $1.37$, y aprovechar la identidad $\Gamma(x) = \Gamma(x+1)/x$ por lo que
+\[ \Gamma(0.37) = \dfrac{\Gamma(0.37 + 1)}{0.37} = \dfrac{\Gamma(1.37)}{0.37} =\dfrac{0.889314}{0.37} = 2.40355 \]
+\item Evaluar $\Gamma(\frac{9}{4})$.
+\\
+Ahora lo que hacemos es reducir el argumento de $\frac{9}{4}$ a $\frac{5}{4}$, usando la identidad $\Gamma(x) = (x-1) \Gamma(x-1)$
+\[ \Gamma \left( \dfrac{9}{4} \right) = \left( \dfrac{5}{4} \right) \Gamma \left( \dfrac{5}{4} \right) = \left( \dfrac{5}{4} \right) \Gamma(1.25) = \left( \dfrac{5}{4} \right) (0.906402) = 1.133 \]
+\item Evaluar $\Gamma(4.6)$
+\\
+Aplicamos hasta en tres ocasiones la identidad $\Gamma(x) = (x-1) \Gamma(x-1)$
+\[ \begin{split}
+\Gamma(4.6) &= (3.6) \Gamma(3.6) = (3.6) (2.6) \Gamma(2.6) = (3.6)(2.6)(1.6) \Gamma(1.6) \\
+&= 14.976 (0.893515) = 13.3813
+\end{split} \]
+\item Evaluar $\Gamma(-1.3)$
+Aplicamos un incremento al argumento en tres ocasiones, y usamos la identidad $\Gamma(x)= \Gamma(x+1) /x$
+\[ \begin{split}
+\Gamma(-1.3) &= \dfrac{\Gamma(-0.3)}{-1.3} = \dfrac{\Gamma(0.7)}{(-1.3)(-0.3)} = \dfrac{\Gamma(1.7)}{(-1.3)(-0.3)(0.7)} \\
+&= \dfrac{0.908639}{0.273} = 3.32835
+\end{split} \]
+\end{enumerate}
+\section{La función Beta.}
+Usnado la definición integral, podemos escribir el producto de dos factoriales como el producto de dos integrales, y si tomamos las integrales sobre intervalos finitos, se nos facilita el cambio de variables:
+\begin{equation}
+m! n! = \lim_{a^{2} \to \infty} \int_{0}^{a^{2}} e^{-u} u^{m} du \int_{0}^{a^{2}} e^{-v} v^{n} dv \hspace{1cm} \mathbb{R}(m) > -1, \mathbb{R}(n) > -1
+\label{eq:ecuacion_10_57a}
+\end{equation}
+Re-emplazando $u$ por $x^{2}$ y $v$ por $y^{2}$, tenemos
+\begin{equation}
+m! n! =  \lim_{a \to \infty} 4 \int_{0}^{a} e^{-x^{2}} x ^{2m+1} dx \int_{0}^{a} e^{-y^{2}} y^{2n+1} dy
+\label{eq:ecuacion_10_57b}
+\end{equation}
+Transformando a coordenadas polares
+\begin{eqnarray}
+\begin{aligned}
+m! n! &= \lim_{a \to \infty} 4 \int_{0}^{a} e^{-r^{2}} r^{2m+2n+3} dr \int_{0}^{\pi/2} \cos^{2m+1} \theta \sin^{2n+1} \theta d\theta \\
+&= (m+n+1)! 2 \int_{0}^{\pi/2} \cos^{2m+1} \theta \sin^{2n+1} \theta d \theta
+\label{eq:ecuacion_10_58}
+\end{aligned}
+\end{eqnarray}
+donde el elemento de área cartesiano $dxdy$ fue re-emplazado por $r dr d\theta$.
+\\
+A la integral definida junto con el factor $2$, se le llama \emph{función Beta}
+\begin{eqnarray}
+\begin{aligned}
+B(m+1,n+1) &\equiv \int_{0}^{\pi/2} \cos^{2m+1} \theta \sin^{2n+1} \theta d \theta \\
+&= \dfrac{m! n!}{(m+n+1)!} = B(n+1,m+1)
+\label{eq:ecuacion_10_59a}
+\end{aligned}
+\end{eqnarray}
+Expresada en términos de la función Gamma
+\begin{equation}
+B(p,q) = \dfrac{\Gamma(p) \Gamma(q)}{\Gamma(p+q)}
+\label{eq:ecuacion_10_59b}
+\end{equation}
+\subsection{Formas alternas: integrales definidas}
+La función Beta es útil para la evaluación de una amplia variedad de integrales definidas.\\
+Al sustituir $t= \cos^{2} \theta$, la ecuación (\ref{eq:ecuacion_10_59a}) queda como
+\begin{equation}
+B(m+1,n+1) = \dfrac{m! n!}{(m+n+1)} = \int_{0}^{1} t^{m} (1-t)^{n} dt
+\label{eq:ecuacion_10_60a}
+\end{equation}
+Re-emplazando $t$ por $x^{2}$, obtenemos
+\begin{equation}
+\dfrac{m! n!}{2(m+n+1)!} = \int_{0}^{1} x^{2m+1} (1-x^{2})^{n} dx
+\label{eq:ecuacion_10_60a}
+\end{equation}
+Al sustituir $t= u/(1+u)$ en la ecuación (\ref{eq:ecuacion_10_60a}), nos proporciona otra expresión útil
+\begin{equation}
+\dfrac{m! n!}{(m+n+1)!} = \int_{0}^{\infty} \dfrac{u^{m}}{(1+u)^{m+n+2}} du
+\label{eq:ecuacion_10_61}
+\end{equation}
+\subsection{La función Beta incompleta.}
+Veremos que como la función Gamma, la función Beta también tiene una definición ''incompleta''
+\begin{eqnarray}
+\begin{aligned}
+B_{x}(p,q) = \int_{0}^{x} t^{p-1} (1-p)^{q-1} dt \hspace{1.5cm} & 0 \leq x \leq 1 \\
+& p > 0 \\
+& q > 0 (\text{ si } x=1)
+\label{eq:ecuacion_10_67}
+\end{aligned}
+\end{eqnarray}
+Cuando $B_{x=1}(p,q)$ se recupera la forma regular (completa) de la función Beta.
+\section{La función Gamma incompleta.}
+De la definición de Euler para la función Gamma 
+\[  \Gamma(z) \equiv \int_{0}^{\infty} e^{-t} t^{z-1} dt \hspace{1.5cm} \mathbb{R}(z) > 0 \]
+se define la función Gamma incompleta por los límites variables de la integral
+\[ \gamma(a,x) = \int_{0}^{x} e^{-t} t^{a-1} dt, \hspace{1.5cm} \mathbb{R} (a) > 0 \]
+y
+\begin{equation}
+\Gamma(a,x) = \int_{x}^{\infty} e^{-t} t^{a-1} dt 
+\label{eq:ecuacion_10_68}
+\end{equation}
+Las dos funciones están relacionadas por
+\begin{equation}
+\gamma(a,x) + \Gamma(a,x) = \Gamma(a)
+\end{equation}
+\end{document}

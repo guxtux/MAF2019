@@ -1,0 +1,287 @@
+\input{../preambulo_doc}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Matemáticas Avanzadas de la Física \\ {\large Técnicas de solución}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Una segunda solución.}
+Antes de proponer dos variantes de solución independiente: un método con integrales y una serie de potencias con un término logarítmico. Antes veamos algo sobre la independencia de un conjunto de funciones.
+\subsection{Inpendencia lineal de las soluciones.}
+Dado  un conjunto de funciones $\varphi_{\lambda}$, el criterio de dependencia lineal es la existencia de una relación de la forma
+\begin{equation}
+\sum_{\lambda} k_{\lambda} \varphi_{\lambda} = 0 \label{dependencia_lineal}
+\end{equation}
+en la cual, no necesariamente todos los coeficientes de $k_{\lambda}$ son cero. Dicho de otra forma, si la única solución de la ecuación (\ref{dependencia_lineal}) es $k_{\lambda} = 0$, para toda $\lambda$, el conjunto de funciones $\varphi_{\lambda}$ se dice que es linealmente independiente.
+\\
+Suponemos que las funcioens $\varphi_{\lambda}$ son diferenciables, por tanto, podemos diferenciar la expresión \ref{dependencia_lineal}) repetidamente, donde obtenemos el conjunto de ecuaciones
+\begin{eqnarray}
+\sum_{\lambda} k_{\lambda} \varphi'_{\lambda} &=& 0 \\
+\sum_{\lambda} k_{\lambda} \varphi''_{\lambda} &=& 0 \hspace{2cm} \text{ y así, sucesivamente} 
+\end{eqnarray}
+Lo que nos proporciona un conjunto de ecuaciones lineales homogéneas, en donde $k_{\lambda}$ con cantidades desconocidas. Sabemos que existe una solución $k_{\lambda} \neq 0$ sólo si el determinante de los coeficientes de las $k_{\lambda}$ se anulan, esto implica que:
+\begin{equation}
+\begin{vmatrix}
+\varphi_{1} & \varphi_{2} & \ldots & \varphi_{n} \\
+\varphi'_{1} & \varphi'_{2} & \ldots & \varphi'_{n} \\
+\ldots & \ldots & \ldots & \ldots \\
+\varphi^{(n-1)}_{1} & \varphi^{(n-1)}_{2} & \ldots & \varphi^{(n-1)}_{n} \\
+\end{vmatrix} = 0
+\end{equation}
+A este determinante se le llama \emph{Wronskiano}.
+\begin{enumerate}
+\item Si el Wronkiano no es cero, entonces la ecuación (\ref{dependencia_lineal}) no tiene solución más que $k_{\lambda}=0$. El conjunto de funciones es por tanto, independiente.
+\item Si el Wronskiano se anula en ciertos valores aislados del argumento, esto no prueba necesariamente la dependencia lineal (a menos que el conjunto de funciones sea de dos funciones). De cualquier manera, si el Wronskiano es cero en un rango amplio de la variable, las funciones $\varphi_{\lambda}$ son linealmente independientes dentro de ese rango.
+\end{enumerate}
+\textbf{Ejemplo: Independencia lineal} 
+\\
+Las soluciones del oscilador lineal que hemos visto son $\varphi_{1} = \sin \omega x$ y $\varphi_{2} = \cos \omega x$. Por lo que el Wronskiano resulta ser
+\[ \begin{vmatrix}
+\sin x \omega x & \cos \omega x \\
+\omega \cos \omega x & - \omega \sin \omega x
+\end{vmatrix} = -\omega \neq 0 \]
+Estas dos soluciones $\varphi_{1}$ y $\varphi_{2}$ son por tanto linealmente independientes. Para estas dos funcioens, esto significa que una no es múltiplo de la otra, lo cual es cierto.
+\\
+Sabemos que
+\[ \sin \omega x = \pm (1 - \cos^{2} \omega x)^{1/2} \]
+pero ésta no es una relación lineal.
+\\
+\textbf{Ejemplo: Dependencia lineal:}
+\\
+Consideremos ahora las soluciones de la ecuación de difusión unidimensional, tales que $\varphi_{1} = e^{x}$ y $\varphi_{2} = e^{-x}$, agreguemos $\varphi_{3} = \cosh x$ como solución. El Wronskiano es:
+\[ \begin{vmatrix}
+e^{x}  & e^{-x} & \cosh x \\
+e^{x}  & -e^{-x} & \sinh x \\
+e^{x}  & e^{-x} & \cosh x
+\end{vmatrix} = 0 \]
+El determinante se anula para todos los valores de $x$, ya que la primera y tercera columan son iguales. Por tanto $e^{x}$, $e^{-x}$ y $\cosh	x$ son linealmente independientes. Tenemos pues una relación de la forma (\ref{dependencia_lineal}):
+\[ e^{x} + e^{-x} - 2 \cosh x = 0 \hspace{2cm} \text{con } k_{\lambda} \neq	0 \]
+\section{Segunda solución.}
+Regresando a la ecuación diferencial lineal, de segundo orden y homogénea de la forma
+\begin{equation}
+y'' + P(x) y' + Q(x) y = 0 \label{eq:ecuacion_inicial}
+\end{equation}
+sean $y_{1}$ y $y_{2}$ soluciones independientes. El Wronskiano es:
+\begin{equation}
+W = y_{1} y'_{2} - y'_{1} y_{2}
+\end{equation}
+diferenciando
+\begin{eqnarray}
+\begin{aligned}
+W' &= y'_{1} y'_{2} + y_{1} y''_{2} - y''_{1} y_{2} - y'_{1} y'_{2} \\
+&= y_{1} [ - P(x) y'_{2} - Q(x) y_{2}] - y_{2} [ - P(x) y'_{1} - Q(x) y_{1}] \\
+&= - P(x) (y_{1} y'_{2} - y'_{1} y_{2})
+\end{aligned}
+\end{eqnarray}
+Donde la expresión entre paréntesis es el Wronskiano mismo, por tanto
+\begin{equation}
+W' = - P(x) W \label{eq:derivada_W}
+\end{equation}
+Si $P(x)=0$, entonces
+\begin{equation}
+y'' + Q(x) y = 0
+\end{equation}
+y el Wronskiano
+\begin{equation}
+W = y_{1} y'_{2} - y'_{1} y_{2} = \text{ constante}
+\end{equation}
+Ya que nuestra ecuación diferencial es homogénea, podemos multiplicar las soluciones $y_{1}$ y $y_{2}$ por cualesquiera constantes, para arreglar que el valor del Wronskiano sea uno (o $-1$).
+\\
+El que $P(x)=0$ aparece más de lo esperado:
+\begin{itemize}
+\item El laplaciano $\nabla^{2}$ en coordenadas cartesianas no contiene la primera derivada.
+\item La dependencia radial de $\nabla^{2} (r \psi)$ en coordenadas esféricas polares carece de primera derivada.
+\end{itemize}
+Vamos a suponer que tenemos una solución para la ecuación (\ref{eq:ecuacion_inicial}) sustituyendo una serie (o adivinando). Desarrollamos una segunda solución independiente, re-escribimos la ecuación (\ref{eq:derivada_W}) como
+\[ \dfrac{d W}{W} = - P(x) d x_{1} \]
+integramos de $x_{1} = a$ a $x_{1} =  x$ de donde obtenemos
+\[ ln \dfrac{W(x)}{W(a)} = - \int_{a}^{x} P(x_{1}) dx_{1}  \]
+que es lo mismo
+\begin{equation}
+W(x) = W(a) \exp \left[ - \int_{a}^{x} P(x_{1}) d x_{1} \right] \label{Wronskiano_1}
+\end{equation}
+Pero
+\begin{eqnarray}
+\begin{aligned}
+W(x) &= y_{1} y'_{2} - y'_{1} y_{2} \\
+&= y^{2}_{1} \dfrac{d}{dx} \left( \dfrac{y_{2}}{y_{1}} \right) \label{eq:Wronskiano_2}
+\end{aligned}
+\end{eqnarray}
+Combinando las ecuaciones (\ref{Wronskiano_1}) y (\ref{eq:Wronskiano_2}), tenemos que
+\begin{equation}
+\dfrac{d}{dx} \left( \dfrac{y_{2}}{y_{1}} \right) =  W(a) \dfrac{\exp \left[ - \int_{a}^{x} P(x_{1}) d x_{1} \right]}{y^{2}_{1}} \label{eq:nueva_ed}
+\end{equation}
+Integramos la ecuación (\ref{eq:nueva_ed}) de $x_{2} = b$ a $x_{2} = x$, para obtener
+\begin{equation}
+y_{2} = y_{1} W(a) \int_{a}^{x} \dfrac{\exp \left[ - \int_{a}^{x_{2}} P(x_{1}) d x_{1} \right]}{[y_{1}(x_{2})]^{2}} dx_{2} \label{eq:solucion_ecdif}
+\end{equation}
+Donde $a$ y $b$ son constantes arbitrarias, los términos $y_{1}(x)y_{2}(b)/y_{1}(b)$ se ha omitido, ya que conduce a nada.
+\\
+Para $W(a)$, el Wronskiano evaluado en $x=a$, es una constante y las soluciones de la ecuación diferencial homogénea siempre contiene un factor de normalización desconocido, hacemos $W(a)=1$ y escribimos
+\begin{equation}
+y_{2}(x) =  y_{1}(x) \int^{x} \dfrac{\exp \left[ - \int^{x_{2}} P(x_{1}) d x_{1} \right]}{[y_{1}(x_{2})]^{2}} dx_{2} \label{eq:solucion_W1}
+\end{equation}
+en donde se han omitido los límites inferiores de integración. 
+\\
+Si tenemos el caso especial cuando $P(x)=0$, la ecuación (\ref{eq:solucion_ecdif}), toma la forma:
+\begin{equation}
+y_{2}(x) =  y_{1}(x) \int^{x} \dfrac{dx_{2}}{[y_{1}(x_{2})]^{2}} \label{eq:solucion_W2}
+\end{equation}
+Lo que significa que usando ya sea (\ref{eq:solucion_W1}) o (\ref{eq:solucion_W2}), podemos tomar una solución conocida y luego integrando, podemos generar una segunda solución independiente.
+\\
+\textbf{Ejemplo: Segunda solución del oscilador lineal}
+\\
+De la ecuación $d^{2} y / dx^{2} + y = 0$ con $P(x)=0$, hacemos una solución tipo $y_{1} = \sin x$, aplicando la solución (\ref{eq:solucion_W2}, resulta
+\begin{eqnarray*}
+y_{2}(x) &=& \sin x \int^{x} \dfrac{dx_{2}}{\sin^{2} x_{2}} \\
+&=& \sin x (-\cot x) = - \cos x
+\end{eqnarray*}
+La cual es obviamente independiente (no es un múltiplo) de $\sin x$.
+\section{Desarrollo en series de una segunda solución.}
+Para una mayor comprensión en la naturaleza de la segunda solución de la ecuación diferencial, veamos los siguientes pasos:
+\begin{enumerate}
+\item Expresar $P(x)$ y $Q(x)$ en la ecuación (\ref{eq:ecuacion_inicial}) como
+\begin{equation}
+P(x) = \sum_{i=-1}^{\infty} p_{i}x^{i} \hspace{2cm} Q(x) = \sum_{j=-2}^{\infty} q_{j} x^{j}
+\end{equation}
+Los límites inferiores de las sumas se eligen para crear una potencial singualiridad regular. Estas condiciones satisfacen el Teorema de Fuchs.
+\item Desarrollar los primeros términos de la solución en series de potencias.
+\item Usando la solución obtenida como $y_{1}$, obtenemos una segunda solución en tipo de series $y_{2}$, con la ecuación (\ref{eq:solucion_ecdif}) se integra término a término.
+\end{enumerate}
+Sigiendo el paso 1, tenemos
+\begin{equation}
+y'' + (p_{-} x^{-1} + p_{0} + p_{1} x + \ldots) y' + (q_{-2} x^{-2} + q_{-1} x^{-1} + \ldots) y = 0
+\end{equation}
+en el punto $x=0$ se tiene el peor punto singular regular. Si $p_{-1} = q_{-1} = q_{-2} =0$, se reduce a un punto ordinario. Sustituimos
+\[ y = \sum_{\lambda=0}^{\infty} a_{\lambda} x^{k + \lambda} \]
+Obtenemos (paso 2)
+\begin{eqnarray}
+\begin{aligned}
+\sum_{\lambda=0}^{\infty} (k + \lambda)(k + \lambda -1) a_{\lambda} x^{k + \lambda -2} &+ \sum_{i=-1}^{\infty} p_{i} x^{i} \sum_{\lambda=0}^{\infty} (k + \lambda) a_{\lambda} x^{k + \lambda -1} \\
+&+ \sum_{j=-2}^{\infty} q_{j} x^{j} \sum_{\lambda=0}^{\infty} a_{\lambda} x^{k + \lambda} = 0
+\end{aligned}
+\end{eqnarray}
+suponiendo que $p_{-1} \neq 0, q_{-2} \neq 0$, la ecuación indicial es
+\[ k(k-1) + p_{-1} k + q_{-2} = 0 \]
+lo que hace que el coeficiente neto de $x^{k-2}$ sea igual a cero, por lo que se reduce a
+\begin{equation}
+k^{2} + (p_{-1} - 1) k + q_{-2} = 0
+\end{equation}
+Escribimos las raíces de la ecuación indicial como $k = \alpha$ y $k= \alpha -n$ donde $n$ es cero o un entero positivo. Por lo que
+\begin{equation}
+(k - \alpha)(k - \alpha + n) = 0
+\end{equation}
+que es lo mismo
+\[ k^{2} + (n-2\alpha)k + \alpha(\alpha - n) = 0\]
+Igualando los coeficientes de $k$, tenemos
+\begin{equation}
+p_{-1} -1 = n - 2 \alpha
+\end{equation}
+La solución en series conocida corresponde al valor más grande de la raíz $k=\alpha$, que se escribe como
+\[ y_{1} =  x^{\alpha} \sum_{\lambda=0}^{\infty} a_{\lambda} x^{\lambda} \]
+Sustituimos la solución en serie en la ecuación (\ref{eq:solucion_ecdif}) -paso 3- y vemos que
+\begin{equation}
+y_{2}(x) = y_{1} (x) \int^{x} \dfrac{\exp \left[ - \int_{a}^{x_{2}} \sum_{i=-1}^{\infty} p_{i} x^{i}_{1} \right] }{x_{2}^{2\alpha} \left( \sum_{\lambda=0}^\infty a_{\lambda} x_{2}^{\lambda} \right)^{2} } dx_{2} \label{eq:solucion_casifinal}
+\end{equation}
+donde las soluciones $y_{1}$ y $y_{2}$ se han normalizado y por tanto, el Wronskiano $W(a)=1$. 
+\\
+Mirando en el factor exponencial
+\begin{equation}
+\int_{a}^{x_{2}} \sum_{i=-1}^{\infty} p_{i} x_{1}^{i} dx_{1} = p_{-1} ln x_{2} + \sum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} x_{2}^{k+1} + f(a)
+\end{equation}
+De aquí
+\begin{eqnarray}
+\begin{aligned}
+&{}\exp \left( - \int_{a}^{x_{2}} \sum_{i} p_{i} x_{1}^{i} dx_{1} \right) = \\
+&= \exp [ - f(a) ] x_{2}^{-p_{-1}} \exp \left( - \sum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} x_{2}^{k+1} \right) \\
+&= \exp [ - f(a) ] x_{2}^{-p_{-1}} \left[ 1 - \sum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} x_{2}^{k+1} + \dfrac{1}{2!} \left( \sum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} x_{2}^{k+1} \right)^{2} + \ldots \right]
+\end{aligned}
+\end{eqnarray}
+Esta expansión en serie de la exponencial es convergente, si la expansión original del coeficiente $P(x)$ converge.
+\\El denominador en la ecuación (\ref{eq:solucion_casifinal}) puede manejarse como
+\begin{eqnarray}
+\begin{aligned}
+\left[ x_{2}^{2 \alpha} \left( \sum_{\lambda=0}^{\infty} a_{\lambda} x_{2}^{\lambda} \right)^{2} \right]^{-1} &= x_{2}^{-2 \alpha} \left( \sum_{\lambda=0}^{\infty} a_{\lambda} x_{2}^{\lambda} \right)^{2} \\
+&= x_{2}^{-2 \alpha} \sum_{\lambda=0}^{\infty} b_{\lambda} x_{2}^{\lambda}
+\end{aligned}
+\end{eqnarray}
+Haciendo a un lado los factores constantes considerando que podemos tener $W(a)=1$, para obtener
+\begin{equation}
+y_{2}(x) =  y_{1}(x) = \int^{x} x_{2}^{-p_{-1}-2 \alpha} \left( \sum_{\lambda=0}^{\infty} c_{\lambda} x_{2}^{\lambda} \right) dx_{2} 
+\end{equation}
+de las raíces de la ecuación indicial
+\begin{equation}
+x_{2}^{-p_{-1} - 2 \alpha} = x_{2}^{-n-1}
+\end{equation}
+si suponemos que $n$ 4s entero, al sustituir obtenemos
+\begin{equation}
+y_{2}(x) = y_{1}(x) \int^{x} (c_{0} x_{2}^{-n-1} + c_{1} x_{2}^{-n} + c_{2} x_{2}^{n+1} + \ldots + c_{n} x^{-1} + \ldots ) dx_{2}
+\end{equation}
+La integración anterior nos devuelve un coeficiente de $y_{1}(x)$ formado de dos partes
+\begin{enumerate}
+\item Una serie de potencias que inicia en $x^{-n}$
+\item Un término logaritmo de la integración de $x^{-1}$ (cuando $\lambda=n$)
+\end{enumerate}
+\section{Teorema de Green.}
+Si $u$ y $v$ son dos funciones escalares, consideremos las siguientes identidades:
+\begin{eqnarray}
+\nabla \cdot ( u \nabla v) &=& u \nabla \cdot \nabla v + (\nabla u) \cdot (\nabla v) \\
+\nabla \cdot ( v \nabla u) &=& v \nabla \cdot \nabla u + (\nabla v) \cdot (\nabla u)
+\end{eqnarray}
+Restando la segunda expresión de la primera, luego integramos sobre un volumen (suponemos que $u$, $v$ y sus derivadas son continuas), y usando el teorema de Gauss
+\begin{equation}
+\int_{S} \mathbf{V} \cdot d \bm{\sigma} = \int_{V} \mathbf{\nabla} \cdot \mathbf{V} d \tau
+\end{equation}
+Que dice que la integral de superficie de un vector sobre una superficie cerrada, es igual a la integral de volumen de la divergencia de ese vector, integrada sobre el volumen que encierra la superficie.
+\\
+Se obtiene entonces
+\begin{equation}
+\int_{V} (u \nabla \cdot \nabla v - v \nabla \cdot \nabla u) d \tau = \int_{S} (u \nabla v - v \nabla u) \cdot d \bm{\sigma}
+\end{equation}
+Que es el teorema de Green.
+\section{Operadores lineales.}
+Un operador lineal $\mathcal{L}$ se define como un operador con las siguientes dos propiedades:
+\begin{enumerate}
+\item $\mathcal{L}(a \psi) = a \mathcal{L} \psi$ con $a$ constante.
+\item $\mathcal{L} (\psi_{1} + \psi_{2}) =  \mathcal{L} \psi_{1} + \mathcal{L} \psi_{2}$
+\end{enumerate}
+\section{Función delta de Dirac.}
+La función delta de Dirac se define normalmente por sus propiedades:
+\begin{eqnarray}
+\delta(x) &=& 0, \hspace{1cm} x \neq 0 \\
+\int_{-\infty}^{\infty} \delta (x) dx  &=& 1 \\
+\int_{-\infty}^{\infty} f(x) \delta (x) dx &=& f(0) \label{eq:derivada1}
+\end{eqnarray}
+Donde hemos supuesto que $f(x)$ es continua en $x=0$.
+\\
+NO es una función en el sentido usual, por que ella tiene que ser la función nula en todos los puntos excepto en cero donde ella vale el infinito!!
+\\
+Se puede hacer una aproximación de la función delta:
+\begin{eqnarray}
+\delta_{n} (x) &=& \begin{cases}
+0, \hspace{0.5cm} x < - \dfrac{1}{2n} \\
+n, \hspace{0.5cm} - \dfrac{1}{2n} < x < \dfrac{1}{2n} \\
+0, \hspace{0.5cm} x > \dfrac{1}{2n}
+\end{cases} \label{eq:propiedad_integral} \\
+\delta_{n} (x) &=& \dfrac{n}{\sqrt{\pi}} \exp(-n^{2} x^{2}) \label{eq:derivada2} \\
+\delta_{n} (x) &=& \dfrac{n}{\pi} \dfrac{1}{1 + n^{2} x^{2}} \\
+\delta_{n} (x) &=& \dfrac{\sin nx}{\pi x} = \dfrac{1}{2 \pi} \int_{-n}^{n} e^{ixt} dt \label{eq:seriesF}
+\end{eqnarray}
+Las variaciones nos dan diferentes grados de utilidad:
+\begin{enumerate}
+\item La ecuación (\ref{eq:propiedad_integral}) es muy útil para encontrar de manera simple, propiedades de integración.
+\item Las ecuaciones (\ref{eq:derivada1}) y (\ref{eq:derivada2}) son convenientes para diferenciar, lo que nos llevaría a los polinomios de Hermite.
+\item La ecuación (\ref{eq:seriesF}) es bastante útil en el análisis de Fourier y sus aplicaciones en la mecánica cuántica.
+\end{enumerate}
+Considerando estas aproximaciones, podemos suponer que $f(x)$ es bien portada para valores grandes de $x$.
+\\
+Para la mayoría de fines en la física, las aproximaciones son bastante buenas, pero desde el punto de vista matemático, el punto es crítico, ya que el límite
+\[ \lim_{n \to \infty} \delta_{n} (x) \]
+\textbf{no existe}.
+\\
+Para cubrir esta dificultad, nos apoyamos con la teoría de distribuciones, reconocemos de la ecuación (\ref{eq:derivada1}) la propiedad fundamental, nos enfocamos en ésta más no en $\delta(x)$ en sí.
+\\
+El conjunto de las ecuaciones anteriores con $n=1,2,3,\ldots$
+\end{document}

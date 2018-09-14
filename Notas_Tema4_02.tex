@@ -1,0 +1,79 @@
+\include{preambulo_doc}
+\usepackage{mathrsfs}
+\spanishdecimal{.}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Funciones hipergeométricas \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Funciones hipergeométricas.}
+En el estudio de ED2 dentro de la matemática se ha buscado generalizar, llegando a una fomra general de una ecuación diferencial de segundo que tiene aplicaciones de interés en la física, este tipo de ecuaciones se expresa en términos de una serie de potencias, a una de estas ecuaciones se le llama \emph{ecuación diferencial hipergeométrica}.
+\begin{equation}
+ x(1-x) y'' + [ \gamma - (\alpha + \beta + 1) x ] y' - \alpha \beta y = 0
+\label{eq:ecuacion_11_22}
+\end{equation}
+donde $\alpha$, $\beta$ y $\gamma$ son constantes\footnote{En algunos textos se utiliza $a$, $b$ y $c$ en lugar de $\alpha$, $\beta$, $\gamma$}
+\\
+La solución en series de esta ecuación diferencia es llama \textbf{función hipergeométrica}, que puede escribirse en términos de la función Gamma
+\begin{equation}
+F( \alpha, \beta; \gamma; x ) = \dfrac{\Gamma(\gamma)}{\Gamma(\alpha) \Gamma(\beta)} \sum_{n=0}^{\infty} \dfrac{\Gamma(\alpha + n) \Gamma(\beta + n)}{\Gamma(\gamma +n) \Gamma(n+1)} x^{n} 
+\label{eq:ecuacion_11_23}
+\end{equation}
+De esta representación en series, notamos que la función hipergeométrica es simétrica al intercambiar $\alpha$ y $\beta$. 
+\\
+Una serie infinita puede ''integrarse'' de tal modo que podemos expresar el resultado en términos de una integral, en este caso, si multiplicamos y dividimos la serie de la ecuación (\ref{eq:ecuacion_11_23}) por $\Gamma(\gamma - \beta)$ resulta
+\[ F( \alpha, \beta; \gamma; x ) = \dfrac{\Gamma(\gamma)}{\Gamma(\alpha) \Gamma(\beta) \Gamma(\gamma - \beta)}  \sum_{n=0}^{\infty} \dfrac{\Gamma(\alpha + n)}{ \Gamma(n+1)} \dfrac{\Gamma(\gamma - \beta) \Gamma(\beta + n)}{\Gamma(\gamma + n)} \]
+pero
+\[ B(\gamma - \beta, \beta -n) = \dfrac{\Gamma(\gamma - \beta) \Gamma(\beta + n)}{\Gamma(\gamma + n)} \]
+Usando $\Gamma(n+1) = n!$ así como al representación integral de la función Beta
+\[ \begin{split}
+ F( \alpha, \beta; \gamma; x ) &= \dfrac{\Gamma(\gamma)}{\Gamma(\alpha) \Gamma(\beta) \Gamma(\gamma - \beta)}  \sum_{n=0}^{\infty} \int_{0}^{1} dt (1-t)^{\gamma - \beta -1} t^{\beta +n +1} \Gamma(\alpha + n) \dfrac{x^{n}}{n!} \\
+&= \dfrac{\Gamma(\gamma)}{\Gamma(\beta) \Gamma(\gamma - \beta)} \int_{0}^{1} dt (1-t)^{\gamma - \beta -1} t^{\beta - 1} \sum_{n=0}^{\infty} \dfrac{\Gamma(\alpha + n)}{\Gamma(\alpha)} \dfrac{(tx)^{n}}{n!}
+\end{split}  \]
+Entonces podemos escribir
+\begin{equation}
+F( \alpha, \beta; \gamma; x ) = \dfrac{\Gamma(\gamma)}{\Gamma(\beta) \Gamma(\gamma - \beta)} \int_{0}^{1} dt (1-t)^{\gamma - \beta -1} t^{\beta - 1} (1-tx)^{-\alpha}
+\label{eq:ecuacion_11_24}
+\end{equation}
+Que es la representación integral de función hipergeométrica.
+\\
+La generalidad de la ecuación diferencial hipergeométrica radica en la habilidad para expresar varias funciones elementales y las llamadas funciones especiales de la física matemática en términos de la función hipergeométrica.
+\\
+Por ejemplo: consideremos la integral elíptica de segunda clase:
+\begin{equation}
+E(k) = E \left( \dfrac{\pi}{2} ,k \right) = \int_{0}^{\pi/2} \sqrt{1-k^{2} \sin^{2} t} dt
+\label{eq:ecuacion_11_15}
+\end{equation}
+que al utilizar la integral
+\[ \int_{0}^{\pi/2} \sin^{2n} t dt = \dfrac{(2n-1)!!}{(2n)!!} \dfrac{\pi}{2} \]
+se puede demostrar que
+\[ E(k) = \dfrac{\pi}{2} \left[ 1 - \sum_{n=1}^{\infty} \left[ \dfrac{(2n-1)!!}{(2n)!!} \right]^{2} \dfrac{k^{2n}}{2n-1} \right] \]
+Y podemos expresar la integral de segunda clase en términos de la función hipergeométrica
+\[ \begin{split}
+E(k) &= \dfrac{\pi}{2} \left[ 1 - \sum_{n=1}^{\infty} \dfrac{\Gamma(n+\frac{1}{2})\Gamma(n+\frac{1}{2}) \pi^{-1} }{\Gamma(n+1) \Gamma(n+1)} \dfrac{k^{2n}}{2(n - \frac{1}{2})} \right] \\
+&= \dfrac{\pi}{2} - \dfrac{1}{4} \sum_{n=1}^{\infty} \dfrac{\Gamma(n+\frac{1}{2}) \Gamma(n-\frac{1}{2})}{\Gamma(n+1) \Gamma(n+1)} (k^{2})^{n}
+\end{split} \]
+donde se ha utilizado $\Gamma(n+ \frac{1}{2} = (n-\frac{1}{2} \Gamma(n-\frac{1}{2})$. La suma inicia en $1$. Para que realmente se parezca a una serie hipergeométrica, se necesita incluir el término $n=0$, por lo que si sumamos un cero
+\[ \begin{split}
+E(k) &= \dfrac{\pi}{2} - \dfrac{1}{4} \sum_{n=0}^{\infty} \dfrac{\Gamma(n+\frac{1}{2}) \Gamma(n-\frac{1}{2})}{\Gamma(n+1) \Gamma(n+1)} (k^{2})^{n} + \dfrac{1}{4} \left[ \dfrac{\Gamma(\frac{1}{2}) \Gamma(-\frac{1}{2})}{\Gamma(1) \Gamma(1)} (k^{2})^{0}  \right] \\
+&= - \dfrac{1}{4} \sum_{n=0}^{\infty} \dfrac{\Gamma(n + \frac{1}{2}) \Gamma(n - \frac{1}{2})}{\Gamma(n+1) \Gamma(n+1)} (k^{2})^{n}
+\end{split} \]
+
+ya que $\Gamma(- \frac{1}{2} ) = -2 \Gamma( \frac{1}{2} ) = - 2 \sqrt{\pi}$
+Con excepción de una constante de multiplicación, la suma es la función hipergeométrica con $\alpha=\frac{1}{2}= \beta$ y $\gamma=1$. Agregando la constante 
+\[ \dfrac{\Gamma(1)}{\Gamma( \frac{1}{2} )\Gamma(- \frac{1}{2}) } = \dfrac{1}{(-2 \pi)} \]
+Obtenemos
+\begin{equation}
+E(k) = \dfrac{\pi}{4} F(\frac{1}{2}, -\frac{1}{2}; 1; k^{2})
+\label{eq:ecuacion_11_25}
+\end{equation}
+Queda por verificar que
+\begin{equation}
+K(k) = \dfrac{\pi}{4} F(\frac{1}{2}, -\frac{1}{2}; 1; k^{2})
+\label{ecuacion_11_26}
+\end{equation}
+\end{document}

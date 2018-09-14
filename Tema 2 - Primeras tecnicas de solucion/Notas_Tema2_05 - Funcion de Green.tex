@@ -1,0 +1,133 @@
+\input{../preambulo_doc}
+\usepackage{standalone}
+\newtheorem{defi}{{\it Definición}}[section]
+\newtheorem{ejemplo}{{\it Ejemplo}}[section]
+
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Función de Green - Ecuaciones no homogéneas \\ \large {Matemáticas Avanzadas de la Física}}
+\date{}
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Introducción.}
+La sustitución en series de potencias y el uso de la integral doble del Wronskiano, proporcionan la solución más general de una EDO homogénea, lineal y de segundo orden. 
+\par
+La solución específica, $y_{p}$, linealmente dependiente del término fuente $F (x)$ de la ecuación
+\begin{equation}
+\dfrac{d^{2} y}{d x^{2}} +  P(x) \: \dfrac{d y}{d x} + Q(x) \: y = F(x)
+\label{eq:ecuacion_09_82}
+\end{equation}
+puede obtenerse mediante el método de variación de parámetros.
+\par
+En esta tema abordamos un método diferente de solución: \emph{la función de Green}. Para una breve introducción al método de función de Green, tal como se aplica a la solución de una EDP no homogénea, es útil usar el análogo electrostático. En presencia de cargas el potencial electrostático $\psi$ cumple la ecuación de Poisson no homogénea (en unidades mks):
+\begin{equation}
+\nabla^{2} \: \psi = - \dfrac{\rho}{\varepsilon_{0}}
+\label{eq:ecuacion_09_143}
+\end{equation}
+así como la ecuación de Laplace
+\begin{equation}
+\nabla^{2} \: \psi = 0
+\label{eq:ecuacion_09_144}
+\end{equation}
+en ausencia de carga eléctrica ($\rho = 0$).
+\par
+Si las cargas son cargas puntuales $q_{i}$, sabemos que la solución es
+\begin{equation}
+\psi = \dfrac{1}{4 \, \pi \, \varepsilon_{0}} \sum_{i} \dfrac{q_{i}}{r_{i}}
+\label{eq:ecuacion_09_145}
+\end{equation}
+La fuerza entre dos cargas puntuales $q_{1}$ y $q_{2}$ se obtiene de la ley de Coulomb como una superposición de soluciones de una carga puntual 
+\begin{equation}
+\bm{F} = \dfrac{q_{1} \, q_{2} \hat{\bm{r}}}{4 \, \pi \, r^{2}}
+\label{eq:ecuacion_09_146}
+\end{equation}
+Reemplazando las cargas puntuales discretas por una carga distribuida de densidad $\rho$, la ec. (\ref{eq:ecuacion_09_145}) se convierte
+\begin{equation}
+\psi (r=0) = \dfrac{1}{4 \, \pi \, \varepsilon_{0}} \int \dfrac{\rho(\bm{r})}{r} \: d \tau
+\label{eq:ecuacion_09_147}
+\end{equation}
+o para el potencial en $\bm{r} = \bm{r}_{1}$ lejos del origen, y la carga en $\bm{r} = \bm{r}_{2}$
+\begin{equation}
+\psi (\bm{r_{1}}) = \dfrac{1}{4 \, \pi \, \varepsilon_{0}} \int \dfrac{\rho(\bm{r}_{2})}{\vert \bm{r}_{1} - \bm{r}_{2} \vert} \: d \tau_{2}
+\label{eq:ecuacion_09_148}
+\end{equation}
+Usamos $\psi$ como el potencial correspondiente a la distribución de carga dada y por tanto satisface la ecuación de Poisson (\ref{eq:ecuacion_09_143}), mientras que una función $G$, que etiquetamos como la función de Green, es requerida para satisfacer la ecuación de Poisson con una fuente puntual en el punto definido por $\bm{r}_{2}$:
+\begin{equation}
+\nabla^{2} G = - \delta (\bm{r}_{1} - \bm{r}_{2})
+\label{eq:ecuacion_09_149}
+\end{equation}
+Físicamente, $G$ es el potencial en $\bm{r}_{1}$ correspondiente a su unidad fuente en $\bm{r}_{2}$. Por el teorema de Green, tenemos que
+\begin{equation}
+\int (\psi \: \nabla^{2} G - G \: \nabla^{2} \psi) \, d \tau_{2} = \int (\psi \: \nabla G - G \: \nabla \psi) \cdot d \sigma
+\label{eq:ecuacion_09_150}
+\end{equation}
+Suponiendo que el integrando cae más rápido que $r^{-2}$ podemos simplificar el problema tomando el volumen tan grande que la integral de superficie se anula, dejando
+\begin{equation}
+\int \psi \: \nabla^{2} G \, d \tau_{2} = \int G \: \nabla^{2} \psi \, d \tau_{2}
+\label{eq:ecuacion_09_151}
+\end{equation}
+o sustituyendo en las ecs. (\ref{eq:ecuacion_09_143}) y (\ref{eq:ecuacion_09_149}), resulta
+\begin{equation}
+- \int \psi(\bm{r}_{2}) \: \delta (\bm{r}_{1} - \bm{r}_{2}) \, d \tau_{2} = - \int \dfrac{G(\bm{r}_{1}, \bm{r}_{2}) \: \rho(\bm{r}_{2})}{\varepsilon_{0}} \, d \tau_{2}
+\label{eq:ecuacion_09_152}
+\end{equation}
+Utilizando la propiedad de la delta de Dirac para la integración, obtenemos
+\begin{equation}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\psi(\bm{r}_{1}) = \dfrac{1}{\varepsilon_{0}} \int G(\bm{r}_{1}, \bm{r}_{2}) \: \rho (\bm{r}_{2}) \, d \tau_{2} }
+\label{eq:ecuacion_09_153}
+\end{equation}
+Nótese que se ha utilizado la ec. (\ref{eq:ecuacion_09_149}) para eliminar $\nabla^{2} G$, pero la función $G$, en sí es aún desconocida.
+\par
+De la ley de Gauss, sabemos que
+\begin{equation}
+\int \nabla^{2} \left( \dfrac{1}{r} \right) d \tau =
+\begin{cases}
+0 \\
+- 4 \pi
+\end{cases}
+\label{eq:ecuacion_09_154}
+\end{equation}
+Vale cero si el volumen no incluye el origen y vale $-4 \pi$ si el origen está incluido. Este resultado se puede escribir de la siguiente manera:
+\begin{equation}
+\nabla^{2} \left( \dfrac{1}{4 \, \pi \, r} \right) = - \delta (\bm{r}) \hspace{0.5cm} \mbox{ o } \hspace{0.5cm} \nabla^{2} \left( \dfrac{1}{4 \, \pi \, r_{12}} \right) = - \delta (\bm{r}_{1} - \bm{r}_{2})
+\label{eq:ecuacion_09_155}
+\end{equation}
+correspondiente a un desplazamiento de la carga electrostática desde el origen hasta la posición $\bm{r} = \bm{r}_{2}$. Aquí $r_{12} = \vert \bm{r}_{1} - \bm{r}_{2} \vert$, y la función delta de Dirac $\delta (\bm{r}_{1} - \bm{r}_{2})$ se anula a menos que $\bm{r}_{1} = \bm{r}_{2}$. 
+\par
+Por lo tanto, en una comparación de Ecs. (\ref{eq:ecuacion_09_149}) y (\ref{eq:ecuacion_09_155}) la función $G$ (\emph{función de Green}) viene dada por
+\begin{equation}
+G (\bm{r}_{1} , \bm{r}_{2}) = \dfrac{1}{4 \, \pi \, \vert \bm{r}_{1} - \bm{r}_{2} \vert}
+\label{eq:ecuacion_09_156}
+\end{equation}
+La solución a la ED de Poisson es
+\begin{equation}
+\psi (\bm{r}_{1}) = \dfrac{1}{4 \, \pi \, \varepsilon_{0}} \int \dfrac{\rho (\bm{r}_{2})}{\vert \bm{r}_{1} - \bm{r}_{2} \vert} \, d \tau_{2}
+\label{eq:ecuacion_09_157}
+\end{equation}
+Que corresponde a la solucion mostrada en la ec. (\ref{eq:ecuacion_09_148}). De hecho $\psi (\bm{r}_{1})$ es la solución particular de la ecuación de Poisson.
+\par
+Estos resultados se pueden generalizar para una ED2 no homogénea:
+\begin{equation}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\mathcal{L} y (\bm{r}_{1}) = - f (\bm{r}_{1})}
+\label{eq:ecuacion_09_158}
+\end{equation}
+donde $\mathcal{L}$ es un operador diferencial lineal.
+\par
+La función de Green se toma como solución de
+\begin{equation}
+\setlength{\fboxsep}{2\fboxsep}\boxed{\mathcal{L} \, G(\bm{r}_{1} , \bm{r}_{2}) = - \delta (\bm{r}_{1} - \bm{r}_{2})}
+\label{eq:ecuacion_09_159}
+\end{equation}
+análogo a la ec. (\ref{eq:ecuacion_09_149}).
+\par
+La función de Green depende de las condiciones de frontera que ya no pueden ser las mismas que el ejemplo de la electrostática, en una región de extensión infinita. Entonces la solución particular $y (\bm{r}_{1})$ se convierte
+\begin{equation}
+\setlength{\fboxsep}{2\fboxsep}\boxed{y (\bm{r}_{1}) = \int G (\bm{r}_{1} , \bm{r}_{2}) \: f(\bm{r}_{2}) \, d \tau_{2}}
+\label{eq:ecuacion_09_160}
+\end{equation}
+En resumen, la función de Green, a menudo escrita $G (r\bm{r}_{1} , \bm{r}_{2})$ a modo de recordatorio del nombre, es una solución de eq. (\ref{eq:ecuacion_09_149}) o de la ec. (\ref{eq:ecuacion_09_159}) más en general.
+\par
+Se presenta como una solución integral de la ecuación diferencial, como en las ecs. (\ref{eq:ecuacion_09_148}) y (\ref{eq:ecuacion_09_153}). Para el caso electrostático simple, pero importante, obtenemos la función de Green, $G (\bm{r}_{1} , \bm{r}_{2})$, según la ley de Gauss, comparando las ecuaciones. (\ref{eq:ecuacion_09_149}) y (\ref{eq:ecuacion_09_155}). Finalmente, a partir de la solución final (ecuación (\ref{eq:ecuacion_09_157}) es posible desarrollar una interpretación física de la función de Green: es una función de peso o función de propagación que amplifica o reduce el efecto del elemento de carga $\rho (\bm{r}) d \tau_{2}$ según su distancia desde el punto de $\bm{r}_{1}$. La función de Green, $G (\bm{r}_{1} , \bm{r}_{2})$ devuelve el efecto de una fuente puntual unitaria en $\bm{r}_{2}$ para producir un potencial en $\bm{r}_{1}$. Así es como se introdujo en la ec. (\ref{eq:ecuacion_09_149}); así es como aparece en la ec. (\ref{eq:ecuacion_09_157}).
+\end{document}

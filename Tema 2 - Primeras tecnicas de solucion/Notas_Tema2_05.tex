@@ -1,0 +1,282 @@
+\include{preambulo_doc}
+\usepackage{mathrsfs}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Completez de las funciones propias \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Completes de las funciones propias.}
+La tercera propiedad importante de un operador Hermitiano es que las funciones propias forman un conjunto completo. Esta completez significa que cualquier función bien portada (en partes pero continua) $F(x)$ se puede aproximar por una serie
+\begin{equation}
+F(x) = \sum_{n=0}^{\infty} a_{n} \varphi_{n}(x) \label{eq:ecuacion_61}
+\end{equation}
+con cualquier grado de precisión. El conjunto $\varphi_{n}$ se dice completo, si el límite del error medio cuadrado se anula:
+\begin{equation}
+lim_{m \to \infty} \int_{a}^{b} \left[ F(x) - \sum_{n=0}^{m} a_{n} \varphi_{n} \right]^{2} w(x) dx = 0
+\label{eq:ecuacion_62}
+\end{equation}
+Técnicamente, esta es una integra de Lebesgue. No necesariamente el error es nulo en $[a,b]$, pero sólo la integral del error al cuadrado debe ser cero.
+\\
+La convergencia a la media debe compararse con la convergencia uniforme. La convergencia uniforme implica la convergencia a la media, pero de manera inversa no se garantiza, la convergencia a la media es menos restrictiva.
+\\
+En la ecuación (\ref{eq:ecuacion_62}) no es válida para funciones continuas en piezas, ya que hay un número finito de discontinuidades.
+\\
+En términos del álgebra lineal, tenemos un espacio lineal, un espacio de funciones. Las funciones linelamente independientes, ortonormales $\varphi_{n}(x)$ forman una base de ese espacio (infinito-dimensional). La ecuación (\ref{eq:ecuacion_61}) es un punto que nos dice que las funciones $\varphi_{n}(x)$ cubre ese espacio lineal. Con un producto punto, el espacio lineal que tenemos, se convierte en un espacio de Hilbert.
+\\
+En la ecuación (\ref{eq:ecuacion_61}) la expasión de los coeficientes se determina por
+\begin{equation}
+a_{m} = \int_{a}^{b} F(x) \varphi_{m}(x) w(x) dx \label{eq:ecuacion_64}
+\end{equation}
+Que se obtiene al multiplicar la ecuación (\ref{eq:ecuacion_61}) por $\varphi_{m} w(x)$ y luego se integra. De la ortogonalidad de las funciones propias $\varphi_{n}(x)$, solo el $m$-término sobrevive, por lo que la ortogonalidad es importante. la ecuación (\ref{eq:ecuacion_64}) puede compararse con el producto interno de vectores.
+\\
+Para una función conocida $F(x)$,  la ecuación (\ref{eq:ecuacion_64}) devuelve $a_{m}$ como una integral definida que siempre se puede evaluar, ya sea numéricamente si es que no es de manera analítica.
+\\
+La relación entre funciones propias, conjunto de funciones ortogonales, conjunto de funciones linealmente independientes, unicidad de la representación, se muestra en la siguiente figura.
+\subsection{Desigualdad de Bessel}
+Si el conjunto de funciones $\varphi_{n} (x)$ no forma un conjunto completo, posiblemente sea por que no se han incluido el número infinito de elementos del conjunto completo,  esto nos guía a la \emph{desigualdad de Bessel}. Consideremos primero un caso finito. Sea $A$ 
+\begin{equation}
+\mathbf{A} = \mathbf{e}_{1} a_{1} + \mathbf{e}_{2} a_{2} + \ldots + \mathbf{e}_{n} a_{n} 
+\label{eq:ecuacion_65}
+\end{equation}
+en donde $\mathbf{e}_{i}$ es un vector unitario y $a_{i}$ es la correspondiente componente (proyección) de $\mathbf{A}$, esto es
+\begin{equation}
+a_{i} = \mathbf{A} \cdot \mathbf{e}_{i} \label{eq:ecuacion_66}
+\end{equation}
+Entonces
+\begin{equation}
+\left( \mathbf{A} - \sum_{i} \mathbf{e}_{i} a_{i} \right)^{2} \geq 0 \label{eq:ecuacion_67}
+\end{equation}
+Si sumamos todos los $n$ componentes, la suma se iguala a $\mathbf{A}$ por lo que la ecuación (\ref{eq:ecuacion_65}) se mantiene, pero si la suma, no incluye a todos los $n$ componentes, la desigualdad se mantiene. Expandiendo la ecuación (\ref{eq:ecuacion_67}) y recordando que los vectores unitarios satisfacen la relación de ortogonalidad
+\begin{equation}
+\mathbf{e}_{i} \cdot \mathbf{e}_{j} =  \delta_{ij} \label{eq:ecuacion_68}
+\end{equation}
+tenemos
+\begin{equation}
+A^{2} \geq \sum_{i} a_{i}^{2} \label{eq:ecuacion_69}
+\end{equation}
+Que es la desigualdad de Bessel.
+\\
+Para funciones debemos de considerar la integral
+\begin{equation}
+\int_{a}^{b} \left[ f(x) - \sum_{i} a_{i} \varphi_{i}(x) \right]^{2} w(x) dx \geq 0 \label{eq:ecuacion_70}
+\end{equation}
+que es el análogo de la ecuación (\ref{eq:ecuacion_67}), haciendo $n \to \infty$ y re-emplazando la suma por la integración. Nuevamente, con el factor de peso $w(x) >0 $, el integrando es no negativo. La integral se anula por la ecaución (\ref{eq:ecuacion_61}) si tenemos un conjunto completo. De otra forma, es positiva. Si expandemos el término al cuadrado obtenemos
+\begin{equation}
+\int_{a}^{b} [ f(x) ]^{2} w(x) dx - 2 \sum_{i} a_{i} \int_{a}^{b} f(x) \varphi w(x) dx  + \sum_{i} a_{i}^{2} \geq 0
+\label{eq:ecuacion_71}
+\end{equation}
+Usando la ecuación (\ref{eq:ecuacion_64}), tenemos
+\begin{equation}
+int_{a}^{b} [f(x)]^{2} w(x) dx \geq \sum_{i} a_{i}^{2} \label{eq:ecuacion_72}
+\end{equation}
+De aquóo que la suma de los cuadrados de la expansión de los coeficientes $a_{i}$ es menor o igual que la integral de peso de $[f(x)]^{2}$, la igualdad se mantiene si y sólo si, la expansión es exacta, esto ocurre si el conjunto de soluciones $\varphi_{n}(x)$ es un conjunto completo.
+\subsection{Desigualdad de Schwarz}
+La desigualdad de Schwarz se usa comúnmente y es similar a la desigualdad de Bessel. Consideremos la ecuación cuadrática
+\begin{equation}
+\sum_{i=1}^{n} (a_{i} x + b_{i})^{2} = \sum_{i=1}^{n} a_{i}^{2} \left( x + \frac{b_{i}}{a_{i}} \right)^{2} = 0
+\label{eq:ecuacion_73}
+\end{equation}
+Si $b_{i}/a_{i}$ es constante, $c$, la solución es $x= - c$. 
+\\
+Si $b_{i}/a_{i}$ no es constante, todos los términos no se anulan simultáneamente para un $x$ real, por lo que la solución debe de ser compleja.
+Expandiendo, tenemos que
+\begin{equation}
+x^{2} \sum_{i}^{n} a_{i}^{2} + 2x \sum_{i}^{n} a_{i} b_{i} + \sum_{i}^{n} b_{i}^{2} = 0
+\label{eq:ecuacion_74}
+\end{equation}
+y como $x$ es complejo (o = $-b_{i}/a_{i}$), la fórmula cuadrática para $x$ conduce a 
+\begin{equation}
+\left( \sum_{i=1}^{n} a_{i} b_{i} \right)^{2} \leq \left( \sum_{i=1}^{n} a_{i}^{2} \right) \left( \sum_{i=1}^{n} b_{i}^{2} \right)
+\label{eq:ecuacion_75}
+\end{equation}
+la igualdad se mantiene cuando $b_{i}/a_{i}$ es una constante.
+\\
+Nuevamente, en términos de vectores, tenemos
+\begin{equation}
+( \mathbf{a} \cdot \mathbf{b} )^{2} =  a^{2} b^{2} \cos^{2} \theta \leq a^{2} b^{2}
+\label{eq:ecuacion_76}
+\end{equation}
+La desigualdad de Schwarz para funciones tiene la expresión
+\begin{equation}
+\Bigg\vert \int_{a}^{b} f^{*} (x) g(x) dx \Bigg\vert^{2} \leq \int_{a}^{b} f^{*}(x) f(x) dx \int_{a}^{b} g^{*}(x) g(x) dx
+\label{eq:ecuacion_77}
+\end{equation}
+La desigualdad se mantiene si y sólo si $g(x) = \alpha f(x)$, con $\alpha$ una constante. Para probar esta forma de la función de la desigualdad de Schwarz, consideremos la función compleja $\psi(x) = f(x) + \lambda g(x)$ con $\lambda$ una constante compleja.
+\\
+Las funciones $f(x)$ y $g(x)$ son cualesquiera dos funciones (para las cuales, la integral existe). Multiplicadno por el conjugado complejo y luego integrando, tenemos
+\begin{equation}
+\int_{a}^{b} \psi^{*} \psi dx \equiv \int_{a}^{b} f^{*} f dx +  \lambda \int{a}^{b} f^{*} g dx + \lambda^{*} \int_{a}^{b} g^{*} g dx \geq 0
+\label{eq:ecuacion_78}
+\end{equation}
+El $\geq =$ aparece ya que $\psi^{*} \psi$ es no negativo, el signo igual $(=)$ se mantiene solo si $\psi(x)$ es idéntico a cero. Nótese que $\lambda$ y $\lambda^{*}$ son linealmente independientes, diferenciamos con respecto a uno de ellos, e igualamos la derivada a cero para minimizar $\int_{a}^{b} \psi^{*} \psi dx$
+\begin{equation*}
+\dfrac{\partial}{\partial \lambda^{*}} \int_{a}^{b} \psi^{*} \psi = \int_{a}^{b} g^{*} f dx  + \lambda \int_{a}^{b} g^{*} g dx = 0
+\end{equation*}
+que nos da
+\begin{equation}
+\lambda = - \dfrac{\int_{a}^{b} g^{*} f dx}{\int_{a}^{b} g^{*} g dx}
+\label{eq:ecuacion_79a}
+\end{equation}
+tomando el conjugado complejo 
+\begin{equation}
+\lambda^{*} = - \dfrac{\int_{a}^{b} f^{*} g dx}{\int_{a}^{b} g^{*} g dx}
+\label{eq:ecuacion_79b}
+\end{equation}
+sustituyendo esos valores de $\lambda$ y $\lambda^{*}$ en la ecuación (\ref{eq:ecuacion_78}), obtenemos la ecuación (\ref{eq:ecuacion_77}), la desigualdad de Schwarz.
+\\
+En mecánica cuántica las funciones $f(x)$ y $g(x)$ podrían representar un estado o una configuración de un sistema físico. Entonces la desigualdad e Shwarz garantiza que el producto punto $\int_{a}^{b} f^{*} g(x9 dx$ existe. En algunos textos, la desigualdad de Schwarz es un paso para llegar al principio de incertidumbre de Heinsenberg.
+\\
+La notación de las funciones de las ecuaciones (\ref{eq:ecuacion_77}) y (\ref{eq:ecuacion_78}) es a veces incómoda, por lo que es común usar una notación distinta:
+\[ < f \vert g > \equiv \int_{a}^{b} f^{*}(x) g(x) dx \]
+Usando esta notación, entendemos que el rango de integración $[a,b]$ y cualquier función de peso. La desigualdad de Schwarz ahora se representa
+\begin{equation}
+\vert <f \vert g > \vert^{2} \leq < f \vert f > < g \vert g >
+\label{eq:ecuacion_77a}
+\end{equation}
+Si $g(x)$ es una función propia normalizada, $\varphi_{i}(x)$, la ecuación (\ref{eq:ecuacion_77}) lleva a (con $w(x)=1$)
+\begin{equation}
+a_{i}^{*} a_{i} \leq \int_{a}^{b} f^{*}(x) f(x) dx 
+\label{eq:ecuacion_80}
+\end{equation}
+Un resultado que se sigue de la ecuación (\ref{eq:ecuacion_72}).
+\section{Función Gamma}
+Existen al menos tres formas convenientes de definir la función Gamma.
+\subsection{Límite infinito (Euler)}
+La primera definición, llamada de Euler es
+\begin{equation}
+\Gamma(z) \equiv \lim_{n \to \infty} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{z (z+1) (z+2) \cdots (z+n)} n^{z}, \hspace{1.5cm} z \neq	0, -1,-2,-3, \ldots
+\label{eq:ecuacion_10_1}
+\end{equation}
+Esta definición de $\Gamma(z)$ es útil para el desarrollo del producto infinito de Weierstrass de $\Gamma (z)$. Sin pérdida de generalidad, $z$ puede ser real o complejo. Re-emplazando $z$ con $z+1$, tenemos
+\begin{eqnarray}
+\begin{aligned}
+\Gamma (z+1) &= \lim_{n \to \infty} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{(z+1) (z+2)(z+3) \cdots (z+n+1)} n^{z+1} \\
+&= \lim_{n \to \infty} \dfrac{nz}{z+n+1} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{z (z+1) (z+2)(z+3) \cdots (z+n)} n^{z} \\
+&= z \Gamma (z)
+\label{eq:ecuacion_10_2}
+\end{aligned}
+\end{eqnarray}
+De la definición
+\begin{eqnarray}
+\begin{aligned}
+\Gamma (1) &= \lim_{n \to \infty} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{1 \cdot 2 \cdot 3 \cdots n(n+1)} n \\
+&= 1
+\label{eq:ecuacion_10_3}
+\end{aligned}
+\end{eqnarray}
+Usando de la ecuación (\ref{eq:ecuacion_10_2}), tenemos
+\begin{eqnarray}
+\begin{aligned}
+\Gamma (2) &= 1 \\
+\Gamma (3) &=  2 \Gamma(2) =  2 \\
+\Gamma (n) &= 1 \cdot 2 \cdot 3 \cdots (n-1) =  (n-1)!
+\label{eq:ecuacion_10_4}
+\end{aligned}
+\end{eqnarray}
+\subsection{Integral definida (Euler)}
+Una segunda definición es la llamada forma de Euler:
+\begin{equation}
+\Gamma (z) \equiv \int_{0}^{\infty} e^{-t} t^{z-1} dt, \hspace{1.5cm} \mathbb{R}(z) > 0
+\label{eq:ecuacion_10_5}
+\end{equation}
+La restricción en $z$ es necesaria para prevenir la divergencia de la integral. Cuando la función Gamma aparece en problemas de la física, a menudo tiene una variante
+\begin{eqnarray}
+\Gamma (z) &= 2 \int_{0}^{\infty} e^{-t^{2}} t^{2z-1} dt, \hspace{1.5cm} \mathbb{R}(z) > 0  \label{eq:ecuacion_10_6} \\
+\Gamma (z) &=  \int_{0}^{1} \left[ ln\left(\dfrac{1}{t} \right) \right]^{z-1} dt, \hspace{1.5cm} \mathbb{R}(z) > 0 \label{eq:ecuacion_10_7}
+\end{eqnarray}
+Cuando $z=1/2$, la ecuación (\ref{eq:ecuacion_10_6}) es la función de error gaussiana, que nos devuelve el siguiente resultado interesante:
+\begin{equation}
+\Gamma (1/2) = \sqrt{\pi}
+\label{eq:ecuacion_10_8}
+\end{equation}
+Para mostrar la equivalencia de esas dos definiciones, las ecuaciones (\ref{eq:ecuacion_10_1}) y (\ref{eq:ecuacion_10_5}) consideremos la función de dos variables
+\begin{equation}
+F(z,n) = \int_{0}^{n} \left( 1 - \dfrac{t}{n} \right)^{n} t^{z-1} dt, \hspace{1.5cm} \mathbb{R}(z) > 0
+\label{eq:ecuacion_10_9}
+\end{equation}
+con $n$ entero positivo. Ya que
+\begin{equation}
+\lim_{n \to \infty} \left( 1 - \dfrac{t}{n} \right)^{n} \equiv e^{-t}
+\label{eq:ecuacion_10_10}
+\end{equation}
+de la definición de función exponencial.
+\begin{equation}
+\lim_{n \to \infty} F(z,n) = F(z,\infty) = \int_{0}^{\infty} e^{-t} t^{z-1} dt \equiv \Gamma (z)
+\label{eq:ecuacione_10_11}
+\end{equation}
+por la ecuación (\ref{eq:ecuacion_10_5}).
+\\
+Regresado a $F(z,n)$, evaluamos sucesiamente la integral por partes, hacemos de manera conveniente $u = t/n$. Entonces
+\begin{equation}
+F(z,n) = n^{2} \int_{0}^{1} (1-u)^{n} u^{z-1} du
+\label{eq:ecuacione_10_12}
+\end{equation}
+Integrando por partes
+\begin{equation}
+\dfrac{F(z,n)}{n^{2}} =  (1-u)^{n} \dfrac{u^{z}}{z} \Bigg\vert_{0}^{1} + \dfrac{n}{z} \int_{0}^{1} (1-u)^{n-1} u^{z} du
+\label{eq:ecuacion_10_13}
+\end{equation}
+Repitiendo esto cada vez con el integrando se anula en ambos extremos, por lo que
+\begin{eqnarray}
+\begin{aligned}
+F(z,n) &= n^{z} \dfrac{n(n-1) \cdots 1}{z(z+1) \cdots (z+n+-1)} \int_{0}^{1} u^{z+n-1} du \\
+&= \dfrac{1 \cdot 2 \cdot 3 \cdots n}{z(z+1)(z+2) \cdots (z+n)} n^{z}
+\label{eq:ecuacion_10_14}
+\end{aligned}
+\end{eqnarray}
+Que es idéntico con la expresión del lado derecho de la ecuación (\ref{eq:ecuacion_10_1}). De aquí que
+\begin{equation}
+\lim_{n \to \infty} F(z,n) = F(z,\infty) \equiv \Gamma (z)
+\label{eq:ecuacion_10_15}
+\end{equation}
+\subsection{Producto infinito (Weierstrass)}
+La tercera forma es
+\begin{equation}
+\dfrac{1}{\Gamma (z)} \equiv z e^{\gamma z} \prod_{n=1}^{\infty} \left( 1 + \dfrac{z}{n} \right) e^{-z/n}
+\label{eq:ecuacion_10_16}
+\end{equation}
+donde $\gamma$ es la constante de Euler-Mascheroni
+\begin{equation}
+\gamma = 0.577216
+\label{eq:ecuacion_10_17}
+\end{equation}
+\subsection{Notación factorial}
+El valor de $-1$ en el exponente $z-1$ de la segunda definición (ecuación \ref{eq:ecuacion_10_5}) es una molestia continua, podemos re-escribir
+\begin{equation}
+\int_{0}^{\infty} e^{-t} t^{z} dt \equiv z!,  \hspace{1.5cm} \mathbb{R}(z) > 0
+\label{eq:ecuacion_10_25}
+\end{equation}
+que define la \emph{función factorial} $z!$. A veces se puede encontrar escrita como
+\begin{equation}
+\prod(z) = z!
+\end{equation}
+donde la notación $\Gamma$ se debe a Legendre. Ka función factorial de la ecuación (\ref{eq:ecuacion_10_25}) está relacionada con la función Gamma
+\[ \Gamma (z) = (z-1)! \]
+o
+\begin{equation}
+\Gamma (z+1) = z!
+\label{eq:ecuacion_10_27}
+\end{equation}
+Si $z=n$, un entero positivo (ecuación \ref{eq:ecuacion_10_4}), muestra que
+\begin{equation}
+z! = n! = 1 \cdot 2 \cdot 3 \cdots n
+\label{eq:ecuacion_10_28}
+\end{equation}
+\subsection{Notación doble factorial}
+En varios problemas de la física, en particular con los polinomios de Legendra, encontraremos productos de enteros impares positivos y de pares positivos, por conveniencia, definimos el doble factorial:
+\begin{eqnarray}
+\begin{aligned}
+1 \cdot 3 \cdot 5 \cdots (2n+1) &=& (2n+1) !! \\
+2 \cdot 4 \cdot 6 \cdots (2n) &=& (2n) !!
+\end{aligned}
+\end{eqnarray}
+Que están relacionado con la función factorial
+\begin{equation}
+(2n)!! =  2^{n} n! \text{ y } (2n+1)!! = \dfrac{(2n+1)!}{2^{n}n!}
+\end{equation}
+
+\end{document}

@@ -1,0 +1,183 @@
+\input{../preambulo_doc}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Matemáticas Avanzadas de la Física \\ {\large Segunda solución independiente}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Reduccion de orden.}
+Cuando existe sólo una solución en términos de serie de Frobenius es necesaria una técnica adicional. Aquí se presenta el método de reducción de orden, el cual permite utilizar la solución conocida de una ecuación diferencial lineal homogénea de segundo orden $y_{1}$ para encontrar una segunda solución linealmente independiente $y_{2}$. Considérese la ecuación de segundo orden
+\begin{equation}
+y'' + P(x) y' + Q(x) y = 0 
+\label{eq:ecuacion_023}
+\end{equation}
+en un intervalo abierto $I$, donde $P$ y $Q$ son continuas. Supóngase que se conoce una solución $y_{1}$ de la ecuación (\ref{eq:ecuacion_023}). Existe una segunda solución linealmente independiente $y_{2}$; el problema es encontrarla. De manera equivalente, se desea obtener el cociente
+\begin{equation}
+v(x) = \dfrac{y_{2} (x)}{y_{1} (x)}
+\label{eq:ecuacion_024}
+\end{equation}
+Una vez que se conozca $v(x)$, entonces $y_{2}$ estará definida por
+\begin{equation}
+y_{2} =  v(x) y_{1} (x)
+\label{eq:ecuacion_025}
+\end{equation}
+Se inicia sustituyendo la expresión dada en (\ref{eq:ecuacion_025}) en la ecuación (\ref{eq:ecuacion_023}) utilizando
+las derivadas
+\[y'_{2} = v y'_{1} + v' y_{1} \mbox{ y } y''_{2} = v y''_{1} +  2 v' y'_{1} + v'' y_{1} \]
+Con esto se obtiene
+\[ [v y''_{1} +  2 v' y'_{1} + v'' y_{1}] + P [v y'_{1} + v' y_{1}] + Q v y_{1} = 0  \]
+y reordenando se consigue
+\[ v [ y''_{1} + P y'_{1} + Q y_{1}] + v'' y_{1} + 2 v' y'_{1} + P v' y_{2} = 0 \]
+Pero la expresión en corchetes en esta última ecuación se anula porque $y_{1}$ es una solución de la ecuación (\ref{eq:ecuacion_023}). Esto deja la ecuación como
+\begin{equation}
+v'' y_{1} + (2 y'_{1} + P y_{1}) v' = 0
+\label{eq:ecuacion_026}
+\end{equation}
+La clave del éxito de este método es que la ecuación (\ref{eq:ecuacion_026}) es lineal en $v'$. Así, la sustitución en (\ref{eq:ecuacion_025}) ha reducido la ecuación lineal de segundo orden en (\ref{eq:ecuacion_023}) a la ecuación lineal de primer orden en (\ref{eq:ecuacion_026}) (en $v'$). Si se escribe $u -0 v'$ se considera que $y_{1}(x)$ nunca se anula en $I$, entonces la ecuación (\ref{eq:ecuacion_026}) resulta en
+\begin{equation}
+u' + \left( 2 \dfrac{y'_{1}}{y_{1}} + P(x) \right) u = 0
+\label{eq:ecuacion_027}
+\end{equation}
+Un factor integrante para la ecuación (\ref{eq:ecuacion_027}) es
+\[ \rho = \exp \left( \int	\left( 2 \dfrac{y'_{1}}{y_{1}} + P(x) \right) dx \right) = \exp \left( 2 ln \vert y_{1} \vert + \int P(x) dx \right)\]
+de este modo
+\[ \rho(x) = y_{1}^{2} \exp \left( \int P(x) dx \right)\]
+Ahora se integra la ecuación en (\ref{eq:ecuacion_027}) para obtener
+\[ u y_{1}^{2} \exp \left( \int P(x)  dx \right) = C \]
+así
+\[ v' = u = \dfrac{C}{y_{1}^{2}} \exp \left( - \int	P(x) dx \right) \]
+Orta integración resulta en
+\[ \dfrac{y_{2}}{y_{1}} = v = C \dfrac{\exp \left( - \int	P(x) dx \right)}{y_{1}^{2}} dx + K \]
+Seleccionando el caso particular donde $C=1$ y $K=0$, se obtiene la fórmial de reducción de orden
+\begin{equation}
+y_{2} = y_{2} \int	\dfrac{\exp \left( - \int	P(x) dx \right)}{y_{1}^{2}} dx
+\label{eq:ecuacion_028}
+\end{equation}
+Esta fórmula proporciona una segunda solución $y_{2}(x)$ de la ecuación (\ref{eq:ecuacion_023}) en cualquier intervalo donde $y_{1}(x)$ no se anule. Nótese que debido a que una función exponencial nunca se anula, $y_{2}(x)$ es un múltiplo no constante de $y_{1}(x)$, de tal manera que $y_{1}$ y $y_{2}$ son soluciones linealmente independientes.
+\section{Ejemplo.}
+Para una aplicación elemental de la fórmula de reducción de orden considérese la ecuación diferencial
+\[ x^{2} y''- 9 x y' + 25 y = 0 \]
+Se mencionó que la ecuación equidimensional $x^{2} y'' + p_{0} x y' + q_{0} y = 0$ tiene a la función de potencias $y(x) = x^{r}$ como una solución si y sólo si $r$ es una raíz de la ecuación cuadrática $r^{2} + (p_{0} - 1)r + q_{0} = 0$. 
+\\
+Aquí $p_{0} = -9$ y $q_{0} = 25$, por lo que la ecuación es $r^{2} - 10r + 25 5= (r - 5)^{2} = 0$ que tiene la raíz $r = 5$ (repetida). Esto proporciona sólo una solución de la función de potencias $y_{1}(x) = x^{5}$ para la ecuación diferencial.
+\\
+Antes de aplicar la fórmula de reducción de orden para encontrar una segunda solución, debe dividirse la ecuación $x^{2} y'' - 9 x y' + 25 y = 0$ entre el coeficiente $x^{2}$ para obtener la forma estándar
+\[ y'' - \dfrac{9}{x} y' + \dfrac{25}{x^{2}} y = 0 \]
+en la ecuación (\ref{eq:ecuacion_023}), con el coeficiente de mayor orden igual a $1$. De este modo se tiene $P(x) = \frac{-9}{x}$ y $Q(x) = \frac{25}{x^{2}}$, tal que la fórmula de reducción de orden en (\ref{eq:ecuacion_028}) obtiene la segunda solución linealmente independiente
+\[ \begin{split}
+y_{2}(x) &= x^{5} \int \dfrac{1}{(x^{5})^{2}} \exp \left( - \int - \dfrac{9}{x} \right) dx \\
+&= x^{5} \int x^{-10} \exp (9 ln x) dx  \\
+&= x^{5} \int x^{-10} x^{9} dx \\
+&=  x^{5} ln x
+\end{split} \]
+para $x > 0$. Así, la ecuación equidimensional particular tiene las dos soluciones independientes $y_{1}(x) = x^{5}$ y $y_{2}(x) = x^{5} ln x$ para $x > 0$.
+\section{Casos logartímicos.}
+Ahora se investigará la forma general de la segunda solución de la ecuación
+\begin{equation}
+y'' + \dfrac{p(x)}{x} y' + \dfrac{q(x)}{x^{2}} y = 0
+\label{eq:ecuacion_001}
+\end{equation}
+bajo la consideración de que sus exponentes $r_{1}$ y $r_{2} = r_{1} - N$ difieren por el entero $N \geq 0$. Se asume que ya se encontró la solución en términos de la serie de Frobenius
+\begin{equation}
+y_{1}(x) = x^{r_{1}} \sum_{n=0}^{\infty} a_{n} x^{n} \hspace{1cm} (a_{0} \neq 0)
+\label{eq:ecuacion_029}
+\end{equation}
+para $x > 0$ correspondiente al exponente más grande $r_{1}$. Se escribe $P(x)$ como $p(x)/x$ y $Q(x)$ como $q(x)/x^{2}$. Así, puede reescribirse la ecuación (\ref{eq:ecuacion_001}) en la forma $y'' + P y' + Q y = 0$ de la ecuación (\ref{eq:ecuacion_023}).
+\\
+Debido a que la ecuación de índices tiene raíces $r_{1}$ y $r_{2} = r_{1} - N$, puede factorizarse fácilmente:
+\[ \begin{split}
+r^{2} + (p_{0} - 1) r + q_{0} &= (r -r_{1})(r - r_{1} + N) \\
+&= r^{2} + (N- 2 r_{1} r + (r_{1}^{2} - r_{1} N) = 0
+\end{split} \]
+de tal manera que se observa
+\[ p_{0} -1 = N - 2 r_{1} \]
+esto es
+\begin{equation}
+-p_{0} - 2 r_{1} =  1 - N
+\label{eq:ecuacion_030}
+\end{equation}
+Como preparación para utilizar la fórmula de reducción de orden en (\ref{eq:ecuacion_028}) se escribe
+\[ P(x) = \dfrac{p_{0} + p_{1} x + p_{2} x^{2} + \ldots }{x} = \dfrac{p_{0}}{x} + p_{1} + p_{2} x + \ldots \]
+Entonces
+\[ \begin{split}
+\exp \left( - \int P(x) dx \right) &= \exp \left( - \int \left[ \dfrac{p_{0}}{x} + p_{1} + p_{2} x + \ldots \right] dx \right) \\
+&= \exp (- p_{0} \ln x - p_{1} x - \dfrac{1}{2} p_{2} x^{2} - \ldots ) \\
+&= x^{-p_{0}} \exp(- p_{1} x - \dfrac{1}{2} p_{2} x^{2} - \ldots)
+\end{split} \]
+de modo que
+\begin{equation}
+\exp \left( - \int P(x) dx \right) =  x^{-p_{0}} (1 + A_{1} x + A_{2} x^{2} + \ldots )
+\label{eq:ecuacion_031}
+\end{equation}
+En el último paso se empleó el hecho de que una composición de funciones analíticas es también analítica y por tanto tiene una representación en serie de potencias; el coeficiente inicial de esa serie en (\ref{eq:ecuacion_031}) es $1$, debido a que $e^{0} = 1$.
+\\
+Ahora se sustituyen (\ref{eq:ecuacion_029}) y (\ref{eq:ecuacion_031}) en (\ref{eq:ecuacion_028}); considerando $a_{0} = 1$ en (\ref{eq:ecuacion_029}), se obtiene:
+\[ y_{2} = y_{1} \int \dfrac{x^{-p_{0}} (1 + A_{1} x + A_{2} x^{2} + \ldots )}{x^{2r_{1}} (1 + a_{1} x + a_{2} x^{2} + \ldots )^{2}} dx \]
+Al desarrollar el denominador y simplificar
+\begin{eqnarray}
+y_{2} &= y_{1} \int \dfrac{x^{-p_{0}} (1 + A_{1} x + A_{2} x^{2} + \ldots )}{ 1 + B_{1} x + B_{2} x^{2} + \ldots } dx \nonumber \\
+&= y_{1} \int x^{-1-N} (1 + C_{1} x + C_{2} x^{2} + \ldots ) dx
+\label{eq:ecuacion_032}
+\end{eqnarray}
+Aquí se sustituyó (\ref{eq:ecuacion_030}) y, como lo indica el resultado, se realizó una división larga de las series; nótese en particular que el término constante de la serie del cociente es $1$]. Ahora considérense por separado los casos $N = 0$ y $N > 0$. Se quiere determinar la forma general de $y_{2}$ sin considerar los coeficientes específicos.
+\subsection*{CASO 1. EXPONENTES IGUALES ($r_{1} = r_{2})$}
+Con $N = 0$, la ecuación (\ref{eq:ecuacion_032}) resulta en
+\[  \begin{split}
+y_{2} &= y_{1} \int \left( \dfrac{1}{x} + C_{1} x + C_{2} x^{2} + \ldots \right) dx \\
+&= y_{1} \ln x + y_{1} (C_{1} x + \frac{1}{2} C_{2} + \ldots ) \\
+&= y_{1} \ln x + x^{r_{1}} (1 +  a_{1} x + \ldots)(C_{1} x + \frac{1}{2} C_{2} x^{2} + \ldots ) \\
+&= y_{1} \ln x + x^{r_{1}} (b_{0} x + b_{1} x^{2} + b_{2} x^{3} + \ldots )
+\end{split} \]
+En consecuencia, en el caso de exponentes iguales la forma general de $y_{2}$ es
+\begin{equation}
+y_{2}(x) = y_{1} (x) \ln x +  x^{1 + r_{1}} \sum_{n=0}^{\infty} b_{n} x^{n}
+\label{eq:ecuacion_033}
+\end{equation}
+Nota que el término logarítmico siempre aparece cuando $r_{1} = r_{2}$.
+\subsection*{CASO 2. DIFERENCIA POSITIVA ENTERA ($r_{1} = r_{2} + N$)}
+Con $N > 0$, la ecuación (\ref{eq:ecuacion_032}) resulta en
+\[  \begin{split}
+y_{2} &= y_{1} \int x^{-1-N} (1 + C_{1} x + C_{2} x^{2} + \ldots + C_{N} x^{N} + \ldots ) dx \\
+&= y_{1} \int \left( \dfrac{C_{N}}{x} + \dfrac{1}{x^{N+1}} + \dfrac{C_{1}}{x^{N}} + \ldots \right) \\
+&= C_{N} y_{1} \ln x + y_{1} \left( \dfrac{x^{-N}}{-N} + \dfrac{C_{1}x^{-N+1}}{-N+1} \ldots \right) \\
+&= C_{N} y_{1} \ln x + x^{r_{2} + N} \left( \sum_{n=0}^{\infty} \right) x^{-N} \left( - \dfrac{1}{N} + \dfrac{C_{1} x}{-N+1} + \ldots \right)
+\end{split} \]
+de tal manera que
+\begin{equation}
+y_{2}(x) = C_{N} y_{1}(x) \ln x + x^{r_{2}} \sum_{n=0}^{\infty} b_{n} x^{n}
+\label{eq:ecuacion_034}
+\end{equation}
+donde $b_{0} = - \frac{a_{0}}{N} \neq 0$. Esto proporciona la forma general de $y_{2}$ en el caso de exponentes con una diferencia de un entero positivo. Nótese que el coeficiente $C_{N}$ aparece en (\ref{eq:ecuacion_034}) pero no en (\ref{eq:ecuacion_033}). Si $C_{N} = 0$, entonces no hay término logarítmico; si es así, la ecuación (\ref{eq:ecuacion_001}) cuenta con una segunda solución en términos de serie de Frobenius.
+\\
+\textbf{Ejemplo:}
+\\
+Se presenta el caso en que $r_{1} = r_{2}$, deduciendo la segunda solución de la ecuación de Bessel de orden cero
+\begin{equation}
+x^{2} y'' + x y' + x^{2} y = 0
+\label{eq:ecuacion_037}
+\end{equation}
+para la cual $r_{1} = r_{2} = 0$. Se tiene como una primera solución
+\begin{equation}
+y_{1} (x) = J_{0}(x) = \sum_{n=0}^{\infty} \dfrac{(-1)^{n} x^{2n}}{2^{2n} (n!)^{2}}
+\label{eq:ecuacion_038}
+\end{equation}
+Entonces esperamos una segunda solución de la forma
+\begin{equation}
+y_{2} =  y_{1} \ln x + \sum_{n=1}^{\infty} b_{n} x^{n}
+\label{eq:ecuacion_039}
+\end{equation}
+Las primeras dos derivadas de $y_{2}$ son
+\[ y'_{2} = y'_{1} \ln x + \dfrac{y_{1}}{x} + \sum_{n=1}^{\infty} n b_{n} x^{n-1} \]
+y
+\[ y''_{2} = y''_{1} \ln x + \dfrac{2y'_{1}}{x} - \dfrac{y_{1}}{x^{2}} + \sum_{n=2}^{\infty} n (n-1) b_{n} x^{n-2} \]
+Se sustituyen estas expresiones en la ecuación (\ref{eq:ecuacion_037}) y se utiliza el hecho de que $J_{0}(x)$ también satisface esta ecuación para obtener
+\[  \begin{split}
+0 &= x^{2} y''_{2} +  c y'_{2} + x^{2} y_{2} \\
+&= (x^{2} pág. 556
+
+\]
+
+
+\end{document}

@@ -1,0 +1,221 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\input{../preambulo_doc}
+\usepackage{standalone}
+\usepackage{mathrsfs}
+\usepackage{bigints}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing,patterns}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [draw, rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{bola} = [draw, circle , minimum size = 10, draw=black, text centered]
+\tikzstyle{elipse} = [draw, ellipse, minimum height = 10]
+\usepackage{pgfplots}
+\usepackage{float}
+\spanishdecimal{.}
+\newtheorem{teo}{Teorema}
+\newtheorem{cor}{Corolario}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Transformada de Laplace \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Transformadas de Laplace.}
+%Referencia: Zill Cap 7
+Dada una función $f(t)$ definida para toda $t \geq 0$, la \emph{transformada de Laplace} de $f$ es la función $F$ definida como sigue:
+\begin{equation}
+F(s) = \mathscr{L} \{ f(t) \} = \int_{0}^{\infty} e^{-st} \; f(t) dt
+\label{eq:ecuacion_001}
+\end{equation}
+para todo valor de $s$ en los cuales la integral impropia converge.
+\\
+Recuerda que una \textbf{integral impropia} en un intervalo infinito está definida como el límite de la integral en el intervalo acotado; esto es,
+\begin{equation}
+\int_{a}^{\infty} g(t) dt = \lim_{b \to \infty} \int_{a}^{b} g(t) dt
+\label{eq:ecuacion_002}
+\end{equation}
+Si el límite en (\ref{eq:ecuacion_002}) existe, entonces se dice que la integral impropia  \textbf{converge}; de otra manera \textbf{diverge} o no existe. Nótese que el integrando de la integral impropia en (\ref{eq:ecuacion_001}) contiene el parámetro $s$, además de la variable de integración $t$. Por tanto, cuando la integral en (\ref{eq:ecuacion_001}) converge, lo hace no precisamente hacia un número, sino a la función $F$ de $s$. Como en los siguientes ejemplos, la integral impropia de la definición de $\mathscr{L} \{ f(t) \} $ normalmente converge para algunos valores de $s$ y diverge para otros.
+\subsection*{Ejemplo 1.}
+Con $f(t) \equiv 1$ para $t \geq 0$, la definición de la transformada de Laplace en (\ref{eq:ecuacion_001}) obtiene
+\[ \mathscr{L} \{ 1 \} = \int_{0}^{\infty} e^{-st} dt = \left[ - \dfrac{1}{s} e^{-st} \right]_{0}^{\infty} = \lim_{b \to \infty} = \left[ - \dfrac{1}{s} e^{-bs} + \dfrac{1}{s} \right] \]
+y por tanto
+\begin{equation}
+\mathscr{L} \{ 1 \} = \dfrac{1}{s} \mbox{ para } s > 0
+\label{eq:ecuacion_003}
+\end{equation}
+Como en (\ref{eq:ecuacion_003}), es una buena práctica especificar el dominio de la transformada de Laplace (tanto en problemas como en ejemplos).
+\subsection*{Ejemplo 2.}
+Con $f(t) = e^{at}$ para $t \geq 0$ se obtiene
+\[ \mathscr{L} \{ e^{at} \} = \int_{0}^{\infty} e^{-st} \; e^{at} dt = \int_{0}^{\infty} e^{-(s - a)t} dt =  \left[ - \dfrac{e^{-(s - a)t}}{s - a} \right]_{t=0}^{\infty}  \]
+Si $s -a > 0$, entonces $e^{-(s - a) t} \to 0$ conforme $t \to \infty$; así, se concluye que
+\begin{equation}
+\mathscr{L} \{ e^{at} \} = \dfrac{1}{s - a} \mbox{ para } s > a
+\label{eq:005}
+\end{equation}
+Nótese aquí que la integral impropia que proporciona la $\mathscr{L} \{ e^{at} \}$ diverge si $s leq a$. Se observa también que la fórmula dada en (\ref{eq:005}) se cumple si $a$ es un número complejo. Por tanto si $a = \alpha + i \beta$
+\[ e^{-(s - a)t} = e^{i \beta t} \; e^{-(s - \alpha) t} \; \to 0 \]
+conforme $t \to \infty$, siempre que $s > \alpha = Re[a]$, ya que $e^{i \beta t} = \cos \beta t + i \sin \beta t$.
+\\
+La transformada de Laplace de la forma $\mathscr{L} \{ a \}$ se expresa de manera más conveniente en términos de la \textbf{función gamma} $\Gamma(x)$, la cual está definida para $x > 0$ por la fórmula
+\begin{equation}
+\Gamma (x) = \int_{0}^{\infty} e^{-t} \; t^{x-1} dt
+\label{eq:006}
+\end{equation}
+\subsection*{Ejemplo 3.}
+Supongamos que $f(t) = t^{a}$, donde $a$ es real y $a > -1$. Entonces
+\[ \mathscr{L} \{ t^{a} \} = \int_{0}^{\infty} e^{-st} \; t^{a} dt \]
+Si sustituimos $u = st$, $t =  u/s$ y $dt = du/s$ en la integral, se obtiene
+\begin{equation}
+\mathscr{L} \{ t^{a} \} =  \dfrac{1}{s^{a+1}} \int_{0}^{\infty} e^{u} \; u^{a} du = \dfrac{\Gamma(a + 1)}{s^{a + 1}}
+\label{eq:010}
+\end{equation}
+para toda $s > 0$ (de tal manera que $u = st > 0$). Debido a que $\Gamma(n+1) = n!$ si $n$ es un entero no negativo, se observa que
+\begin{equation}
+\mathscr{L} \{ t^{n} \} = \dfrac{n!}{s^{n+1}} \hspace{1cm} \mbox{ para } s > 0
+\label{eq:011}
+\end{equation}
+por ejemplo
+\[ \mathscr{L} \{ t \} = \dfrac{1}{s^{2}}, \hspace{1cm} \mathscr{L} \{ t^{2} \} \dfrac{2}{s^{3}}, \hspace{1cm} \mathscr{L} \{ t^{3} \} \dfrac{6}{s^{4}} \]
+\section{Linealidad de las transformadas.}
+No es necesario realizar a fondo los cálculos de la transformada de Laplace directamente de la definición. Una vez que se conocen las transformadas de Laplace de varias funciones, éstas pueden combinarse para obtener las transformadas de otras funciones. La razón es que la transformación de Laplace es una operación lineal.
+\begin{teo}{Linealidad de la transformada de Laplace}
+Si $a$ y $b$ son constantes, entonces
+\begin{equation}
+\mathscr{L} \{ a f(t) +  b (g(t) \} = a \mathscr{L} \{ a f(t) \} + b \mathscr{L} \{ (g(t) \}
+\label{eq:012}
+\end{equation}
+para toda $s$ tal que las transformadas de Laplace tanto de $f$ como de $g$ existen.
+\end{teo}
+\subsection*{Ejemplo.}
+Como $\cosh kt = (e^{kt} + e^{-kt}) / 2$. Si $k > 0$, entonces tendremos que
+\[ \mathscr{L} \{ \cosh kt \} = \dfrac{1}{2} \mathscr{L} \{ e^{kt} \} + \dfrac{1}{2} \mathscr{L} \{ e^{-kt} \} = \dfrac{1}{2} \left( \dfrac{1}{s - k} + \dfrac{1}{s + k} \right) \]
+esto es
+\begin{equation}
+\mathscr{ \cosh kt} = \dfrac{s}{s^{2} - k^{2}} \hspace{1cm} \mbox{ para } s > k > 0
+\label{eq:014}
+\end{equation}
+De manera similar
+\begin{equation}
+\mathscr{ \sinh kt} = \dfrac{k}{s^{2} - k^{2}} \hspace{1cm} \mbox{ para } s > k > 0
+\label{eq:015}
+\end{equation}
+Como $\cosh kt = (e^{ikt} + e^{-ikt})/2$, y haciendo $a = ik$, resulta
+\[ \mathscr{L} \{ \cos kt \} = \left( \dfrac{1}{s - ik} + \dfrac{1}{s + ik} \right) =  \dfrac{1}{2} \; \dfrac{2s}{s^{2} - (ik)^{2}} \]
+entonces
+\begin{equation}
+\mathscr{L} \{ \cos kt \} = \dfrac{s}{s^{2} + k^{2}} \hspace{0.5cm} \mbox{ para } s > 0
+\label{eq:016}
+\end{equation}
+El dominio es para $s > Re[ik] = 0$. De manera similar
+\begin{equation}
+\mathscr{L} \{ \sin kt \} = \dfrac{k}{s^{2} + k^{2}} \hspace{0.5cm} \mbox{ para } s > 0
+\label{eq:017}
+\end{equation}
+\subsection*{Ejemplo.}
+Aplicando la linealidad, la fórmula (\ref{eq:016}) y aprovechado una identidad trigonométrica, se obtiene
+\[ \begin{split}
+\mathscr{L} \{ 3 e^{2t} + 2 \sin^{2} 3t \} &= \mathscr{L} \{ 3 e^{2t} + 1 - \cos 6t \} \\
+&= \dfrac{3}{s - 2} + \dfrac{1}{s} - \dfrac{s}{s^{2} + 36} \\
+&= \dfrac{3 s^{3} + 144s - 72}{s(s - 2)(s^{2} +  36)} \hspace{1cm} \mbox{ para } s > 0
+\end{split} \]
+\section{Transformadas inversas.}
+Como veremos más adelante, no existen dos diferentes funciones ambas continuas para toda $t \geq 0$ con la misma transformada de Laplace. Así, si $F(s)$ es la transformada de alguna función continua $f(t)$, entonces $f(t)$ está determinada de manera única. Esta observación permite construir la siguiente definición: si $F(s) = \mathscr{L}
+ \{ f(t) \}$, entonces se llama $f(t)$ a la \textbf{transformada inversa de Laplace} de $F(s)$, y se escribe
+\begin{equation}
+f(t) = \mathscr{L}^{-1} \{ F(s) \}
+\label{eq:018}
+\end{equation}
+Empleando las transformadas de Laplace que se obtuvieron en los ejemplos anteriores,se observa que
+\[ \mathscr{L} \left\lbrace \dfrac{1}{s^{3}} \right\rbrace = \dfrac{1}{2} t^{2}, \hspace{0.5cm} \mathscr{L} \left\lbrace \dfrac{1}{s + 2} \right\rbrace = e^{-2t}, \hspace{0.5cm} \mathscr{L} \left\lbrace \dfrac{2}{s^{2} + 9} \right\rbrace = \dfrac{2}{3} \sin 3t \]
+\section{Funciones continuas por tramos.}
+Como se destacó al inicio del tema, es necesario manejar ciertos tipos de funciones discontinuas. Se dice que la función $f(t)$ es \textbf{continua por tramos} en el intervalo acotado $a \leq t \leq b$ siempre que $[a, b]$ pueda subdividirse en varios subintervalos finitos colindantes, de tal manera que:
+\begin{enumerate}
+\item $f$ sea continua en el interior de cada uno de estos subintervalos; y
+\item $f(t)$ tenga un límite finito conforme $t$ se aproxime a cada extremo de cada subintervalo desde su interior.
+\end{enumerate}
+Se dice que $f$ es continua por tramos para $t \geq 0$ si es continua por tramos en todo subintervalo acotado de $[0, +\infty)$. Así, una función continua por tramos tiene sólo discontinuidades simples (si las hubiera) y únicamente en puntos aislados. En estos puntos el valor de la función experimenta un salto finito, como se indica en la figura (\ref{fig:figura_001}).
+\begin{figure}[H]
+\centering
+\includestandalone{Figura_001_Laplace}
+\caption{Gráfica de una función continua por tramos; los puntos rellenos indican los valores de la función en las discontinuidades.}
+\label{fig:figura_001}
+\end{figure}
+ El \textbf{salto en} $f(t)$ \textbf{en el punto} $c$ está definido como $f(c+) - f(c-)$, donde
+\[ f(c+) = \lim_{\epsilon \to 0^{+}} f (c + \epsilon) \mbox{ y } f(c-) = \lim_{\epsilon \to 0^{+}} f (c - \epsilon) \]
+Probablemente la función continua por tramos más simple (pero discontinua) es la función escalón unitario, cuya gráfica se muestra en la figura (\ref{fig:figura_002}).
+\begin{figure}[H]
+\centering
+\includestandalone{Figura_002_Laplace}
+\caption{Gráfica de la función escalón unitario.}
+\label{fig:figura_002}
+\end{figure}
+Esta función se define como sigue:
+\begin{equation}
+u(t) = \begin{cases}
+0 & \mbox{para } t < 0 \\
+1 & \mbox{para } t \geq 0
+\end{cases}
+\label{eq:019}
+\end{equation}
+Debido a que $u(t) = 1$ para $t \geq 0$, y a que la transformada de Laplace involucra sólo valores de la función para $t \geq 0$, se observa inmediatamente que
+\begin{equation}
+\mathscr{L} \{ u(t) \} = \dfrac{1}{s} \hspace{0.5cm} (s > 0)
+\label{eq:020}
+\end{equation}
+La gráfica de una función escalón unitario $u_{a}(t) = u(t - a)$ se muestra en la figura (\ref{fig:figura_003}). El salto de esta función ocurre en $t = a$ en vez de en $t = 0$; de manera equivalente,
+\begin{equation}
+u_{a}(t) = u (t - a) = \begin{cases}
+0 & \mbox{ para } t < a \\
+1 & \mbox{ para } t \geq a
+\end{cases}
+\end{equation}
+\begin{figure}[H]
+\centering
+\includestandalone{Figura_003_Laplace}
+\caption{Gráfica de la función escalón unitario.}
+\label{fig:figura_003}
+\end{figure}
+\section{Propiedades generales de la transformada.}
+Es un hecho común y corriente del cálculo que la integral
+\[\int_{a}^{b} g(t) dt \]
+existe si $g$ es continua por tramos en el intervalo acotado $[a, b]$. En consecuencia, si $f$ es continua por tramos para $t \geq 0$, se concluye que la integral
+\[ \int_{a}^{b} e^{-st} f(t) dt \]
+existe para toda $b < + \infty$. Sin embargo, para que $F(s)$  - el límite de esta última integral conforme $b \to + \infty$ exista, se necesita alguna condición que limite la velocidad de crecimiento de $f(t)$ conforme $t \to + \infty$. Se dice que la función $f$ es \textbf{de orden exponencial} conforme $t \to + \infty$ si existen constantes no negativas $M$, $c$ y $T$ tales que
+\begin{equation}
+\vert f(t) \vert \leq M \; e^{ct} \hspace{1cm} \mbox{para } t \geq T
+\label{eq:023}
+\end{equation}
+Así, una función es de orden exponencial siempre que su incremento (conforme $t \to + \infty$) no sea más rápido que un múltiplo constante de alguna función exponencial con un exponente lineal. Los valores particulares de $M$, $c$ y $T$ no son tan importantes; lo importante es que algunos de esos valores existan de tal manera que la condición en (\ref{eq:023}) se satisfaga.
+\\
+La condición en (\ref{eq:023}) simplemente dice que $f(t) / e^{ct}$ se encuentra entre $-M$ y $M$, y es por tanto acotada en su valor para $t$ suficientemente grande. En particular, esto se cumple (con $c = 0$) si $f(t)$ en sí misma está acotada. Por tanto, toda función acotada -tal como $\cos kt$ o $\sin kt$ - es de orden exponencial.
+\\
+Si $p(t)$ es un polinomio, entonces es común que $p(t) \; e^{-t} \to 0$ a medida que $t \to +\infty$, lo cual implica que (\ref{eq:023}) se cumple (para $T$ suficientemente grande) con $M = c = 1$. En consecuencia, toda función polinomial es de orden exponencial.
+\\
+Como ejemplo de una función elemental que es continua y por tanto acotada en todo intervalo (finito), pero que no es de orden exponencial, considérese la función $f(t) = e^{t^{2}} = \exp(t^{2})$. Cualquiera que sea el valor de $c$, se observa que
+\[ \lim_{t \to \infty} \dfrac{f(t)}{e^{ct}} = \lim_{t \to \infty} \dfrac{e^{t^{2}}}{e^{ct}} = \lim_{t \to \infty} e^{t^{2}-ct} = + \infty  \]
+debido a que $t^{2} - ct \to + \infty$ a medida que $t \to + \infty$. En consecuencia, la condición en (\ref{eq:023}) no se cumple para ningún valor (finito) de $M$, por lo que se concluye que la función $f(t) = e^{t^{2}}$ no es de orden exponencial.
+\\
+De manera similar, dado que $e^{-st}e^{t^{2}} \to + \infty$ conforme $t \to + \infty$, se observa que la integral impropia \[ \int_{0}^{\infty} e^{-st} \; e^{t^{2}}  \]
+que definiría la $\mathscr{L} \{ e^{t^{2}} \}$, no existe (para ningún valor de $s$) y, como resultado, la función $e^{t^{2}}$ no tiene transformada de Laplace. El siguiente teorema garantiza que las funciones por tramos de orden exponencial sí tienen transformada de Laplace.
+\begin{teo}{Existencia de la transformada de Laplace}
+Si la función $f$ es continua por tramos para $t \geq 0$, y de orden exponencial cuando $t \to +\infty$, entonces su transformada de Laplace $F(s) = \mathscr{L} \{ f(t) \}$ existe. De manera más precisa, si $f$ es continua por tramos y satisface la condición dada en (\ref{eq:023}), entonces $F(s)$ existe para toda $s > c$.
+\end{teo}
+\begin{cor} {$F(s)$ para cuando $s$ tiende a infinito.}
+\\
+Si $f(t)$ satisface la hipótesis del teorema anterior, entocnes
+\begin{equation}
+\lim_{s \to \infty} F(s) = 0
+\label{eq:025}
+\end{equation}
+La condición dada en (\ref{eq:025}) limita severamente las funciones que pueden ser transformadas de Laplace. Por ejemplo, la función $G(s) = s / (s + 1)$ no puede ser la transformada de Laplace de ninguna función ''razonable'', porque su límite cuando $s \to +\infty$ es $1$ en lugar de $0$. Por lo general, una función racional - un cociente de dos polinomios - puede ser (y lo es, como se verá más adelante) una transformada de Laplace sólo si el grado de su numerador es menor que el de su denominador.
+\end{cor}
+\begin{teo}
+Supóngase que las funciones $f(t)$ y $g(t)$ satisfacen la hipótesis del teorema 2, de tal manera que sus transformadas de Laplace $F(s)$ y $G(s)$ existan. $Si F(s) = G(s)$ para toda $s > c$ (para alguna $c$), entonces $f(t) = g(t)$ siempre que en $[0, + \infty)$ tanto $f$ como $g$ sean continuas.
+\end{teo}
+
+
+\end{document}
+

@@ -1,0 +1,107 @@
+\input{../preambulo_doc}
+\usepackage{mathrsfs}
+\usepackage{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{bigints}
+\newtheorem{problema}{{\it Problema}}
+\spanishdecimal{.}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Momento angular orbital \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+Clásicamente, el momento angular $L$ de una partícula con un momento lineal $p$ girando a una distancia $r$ en torno a un núcleo de atracción está definido como el producto cruz de los dos vectores $r$ y $p$:
+\[ \mathbf{L} = \mathbf{r} \times \mathbf{p}\]
+En un sistema de coordenadas cartesianas $(x, y, z)$, esta definición nos produce tres componentes ortogonales de $L: (L_{x}, L_{y}, L_{z})$, los cuales se obtienen de las proyecciones de los vectores $r = (x, y, z)$ y $p = (p_{x}, p_{y}, p_{z})$:
+\[ \mathbf{L} = (L_{x}, L_{y}, L_{z}) = (x, y, z) \times (p_{x}, p_{y}, p_{z}) \]
+usando un sistema de vectores unitarios de base ${\mathbf{i}, \mathbf{j},\mathbf{k}}$ a través de un determinante:
+\[ (L_{x}, L_{y}, L_{z}) = \begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+x & y & z \\
+p_{x} & p_{y} & p_{z}
+\end{vmatrix} \]
+de donde se puede leer directamente
+\[ L_{x} = y \; p_{z} - z \; p_{y}, \hspace{0.7cm} L_{y} = z \; p_{x} - x \; p_{z}, \hspace{0.7cm} L_{z} = x \; p_{y} - y \; p_{x} \]
+En estas fórmulas lo que tenemos son variables continuas, las cuales pueden tomar los valores que medimos experimentalmente en un laboratorio. Pero como se ha visto, en la Mecánica Ondulatoria lo que representa a las variables físicas son operadores y no variables reales. Si queremos incorporar al momento angular orbital bajo el concepto ondulatorio, tenemos que hacer algún cambio que involucre a los operadores que serán utilizados. Puesto que en la Mecánica Ondulatoria el operador para el momentum está dado por un operador diferencial, tenemos que modificar las relaciones anteriores para el momento angular escribiéndolas de la siguiente manera:
+\[ L_{x} = y \; P_{z} - z \; P_{y}, \hspace{0.7cm} L_{y} = z \; P_{x} - x \; P_{z}, \hspace{0.7cm} L_{z} = x \; P_{y} - y \; P_{x} \]
+de modo tal que estemos utilizando en dichas definiciones los siguiente operadores:
+\[ P_{x} = \dfrac{\hbar}{i} \; \dfrac{\partial}{\partial x}, \hspace{0.7cm} P_{y} = \dfrac{\hbar}{i} \; \dfrac{\partial}{\partial y}, \hspace{0.7cm} P_{z} = \dfrac{\hbar}{i} \; \dfrac{\partial}{\partial z} \]
+Así, los operadores del momento angular orbital que serán utilizados dentro de la Mecánica Ondulatoria serán los siguientes:
+\begin{eqnarray*}
+L_{x} &=& \dfrac{\hbar}{i} \left( y \dfrac{\partial}{\partial z} - z \dfrac{\partial}{\partial y} \right) \nonumber \\
+L_{y} &=& \dfrac{\hbar}{i} \left( z \dfrac{\partial}{\partial x} - x \dfrac{\partial}{\partial z} \right) \nonumber \\
+L_{z} &=& \dfrac{\hbar}{i} \left( x \dfrac{\partial}{\partial y} - y \dfrac{\partial}{\partial x} \right) \nonumber 
+\end{eqnarray*}
+Debe ser obvio de inmediato que, por su propia naturaleza, estos operadores no son conmutativos, y debemos recordar aquí que lo mismo sucedió en el tratamiendo del momento angular mediante la Mecánica Matricial en la cual los operadores por ser matrices tampoco eran conmutativos.
+\\
+Al tratar con anterioridad dentro del contexto de la Mecánica Matricial el asunto de ''el spin del electrón'', habíamos visto que si en un sistema de coordenadas rectangulares cartesianas tratamos de medir con precisión ilimitada las proyecciones del spin del electrón a lo largo los tres ejes, esto no será posible, y de hecho sólo será posible medir con precisión el spin en uno solo de dichos ejes, usualmente identificado como el eje-$z$, algo que no ocurre en la mecánica clásica en donde sí es posible descomponer un vector en sus tres proyecciones sobre los ejes ortogonales de un sistema cartesiano de coordenadas. Esto debe despertar nuestras sospechas de que, tratándose del momento angular orbital, en el mundo sub-microscópico ocurra algo similar y tampoco sea posible medir las tres componentes del momento angular orbital sobre un sistema tridimensional de coordenadas rectangulares, manifestando los efectos en acción del omnipresente principio de incertidumbre. Y esto resulta ser así, en efecto, lo cual podemos corroborar con las relaciones que acabamos de obtener arriba.
+\\
+\\
+\textit{Problema. Demostrar que no se pueden conocer simultáneamente las tres componentes del momento angular orbital.}
+\\
+Para llevar a cabo la demostración, supóngase que sí se pueden conocer las tres componentes del momento angular orbital. En tal caso, el vector momento angular orbital se puede representar del modo siguiente con sus proyecciones sobre los tres ejes coordenados:
+%va una figura
+\\
+siendo $l_{x}, l_{}y, l_{z}$  las observables (cantidades medibles, los eigenvalores) que corresponden a los operadores $L_{x}, L_{y} , L_{z}$. Gírese ahora el sistema de coordenadas de modo tal que la magnitud $l$ del momento angular orbital coincida con el eje-$z$ sin tener proyecciones sobre el eje-$x$ y el eje-$z$:
+%va otra figura
+\\
+En el sistema de coordenadas rotado, la función de onda $\psi$ que representa al estado del sistema será una función \emph{eigen} de los operadores $L_{x}, L_{y}, L_{z}$, de modo tal que podemos escribir de inmediato el siguiente sistema de ecuaciones:
+\[ L_{x^{\prime}} \psi = 0, \hspace{0.7cm} L_{y^{\prime}} \psi = 0, \hspace{0.7cm} L_{z^{\prime}} \psi = A \psi \]
+en donde hemos llamado $A$ al \emph{eigenvalor} del momento angular orbital que corresponde al único valor esperado medible dentro del sistema de coordenadas rotado. Si substituímos las expresiones explícitas mecánico-cuánticas para $L_{x}$ y $L_{y}$, obtendremos lo siguiente:
+\begin{eqnarray*}
+\dfrac{\hbar}{i} \left( y^{\prime} \dfrac{\partial \psi}{\partial z^{\prime}} - z^{prime} \dfrac{\partial \psi}{\partial y^{\prime}} \right) &=& 0 \nonumber \\
+\dfrac{\hbar}{i} \left( z^{\prime} \dfrac{\partial \psi}{\partial x^{\prime}} - x^{prime} \dfrac{\partial \psi}{\partial z^{\prime}} \right) &=& 0 \nonumber 
+\end{eqnarray*}
+Eliminando $\partial \psi / \partial z^{\prime}$ e igualando estas dos ecuaciones, obtenemos el siguiente resultado:
+\[ \dfrac{\hbar}{i} z^{\prime} \left( y^{\prime} \dfrac{\partial \psi}{\partial x^{\prime}} - x^{\prime} \dfrac{\partial \psi}{\partial y^{\prime}} \right) = 0 \]
+o lo que es lo mismo:
+\[ \left( y^{\prime} \dfrac{\partial \psi}{\partial x^{\prime}} - x^{\prime} \dfrac{\partial \psi}{\partial y^{\prime}} \right) = 0 \]
+Con esto, deducimos entonces que:
+\begin{eqnarray*}
+L_{z^{\prime}} \psi &=& \dfrac{\hbar}{i} \left( y^{\prime} \dfrac{\partial \psi}{\partial x^{\prime}} - x^{\prime} \dfrac{\partial \psi}{\partial y^{\prime}} \right) \nonumber \\
+L_{z^{\prime}} \psi &=& 0
+\end{eqnarray*}
+Pero esto contradice la hipótesis según la cual estamos midiendo y dándole un valor real al momento angular orbital a lo largo del eje-$z$, a menos de que hagamos $A = 0$ en cuyo caso no hay momento angular orbital alguno a medir. De este modo, la suposición de que es posible conocer las tres componentes del momento angular orbital resulta ilógica, a menos de que el momento angular orbital sera igual a cero.
+\textit{Problema. Demuéstrese, usando notación operacional, que:}
+\[  [L_{z}, x] = i \; \hbar \; y \]
+Operacionalmente hablando, tenemos lo siguiente para $L_{z}$:
+\[ L_{z} = x \; P_{y} - y \; P_{x} \]
+Premultiplicando y postmultiplicando por la observable $x$ obtenemos las siguientes dos expresiones:
+\begin{eqnarray*}
+L_{z}x &=& x \; P_{y} \; x - y P_{x} \; x \nonumber \\
+x \; L_{z}  &=& x^{2} \;Py - x \;y \; P_{x} \nonumber
+\end{eqnarray*} 
+Restando miembro a miembro la segunda igualdad de la primera:
+\begin{eqnarray}
+L_{z} \; x - x \; L_{z} &= x \; P_{y} \; x - y \; P_{x} \; x - x^{2} \; P_{y}  + x \; y \; P_{x} \nonumber \\
+[L_{z}, x] &= x\; P_{y} \; x - x^{2} \; P_{y} + x \;y \; P_{x} - y \; P_{x} \;x \nonumber \\
+&= x(P_{y} \; x - x \; P_{y}) + x \; y \; P_{x} - y \; P_{x} \; x \nonumber \\
+&= - x(x \; P_{y} - P_{y} \; x) + x \; y \; P_{x} - y \; P_{x} \; x \nonumber \\
+&= - x {\color{red}{[x, P_{y}]}} + x \; y \; P_{x} - y \; P_{x} \;x \nonumber
+\end{eqnarray}
+Pero $\color{red}{[x, P_{y}]} = 0$ por tratarse de dos observables compatibles. Entonces:
+\[ [L_{z},x] = x \; y \; P_{x} - y \; P_{x} \; x \]
+Puesto que las observables $\color{blue}{x}$ y $\color{blue}{y}$ (operadores posición) son observables \emph{compatibles}, como tales son operadores que conmutan, y tenemos entonces que $\color{blue}{x y = y x}$, con lo cual:
+\begin{eqnarray*}
+[L_{z}, x] &= y \; x \; P_{x} - y \; P_{x} \; x \nonumber \\
+[L_{z}, x] &= y(x \; P_{x}  - P_{x} \; x) \nonumber \\
+[L_{z}, x] &= y[x, P_{x}]
+\end{eqnarray*}
+Pero $[x, P_{x}] = i \; \hbar$. Entonces:
+\[ [L_{z}, x] = i \; \hbar \; y \]
+Del mismo modo podemos demostrar que:
+\[ [L_{z}, y] = i \; \hbar \; x, \hspace{0.5cm} [L_{x}, y] = i \; \hbar \; z, \hspace{0.5cm} [L_{x}, z] = i \; \hbar \; y, \hspace{0.5cm} [L_{y}, x] = i \; \hbar \; z, \hspace{0.5cm} [L_{y}, z] = i \; \hbar \; x \]
+Lo que tenemos aquí en realidad son relaciones de Born, que nos revelan la naturaleza de estos operadores de momento angular con las coordenadas con las cuales constituyen observables incompatibles.
+\\
+\\
+
+
+
+
+
+\end{document}

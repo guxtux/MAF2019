@@ -1,0 +1,453 @@
+\input{../preambulo_doc}
+\usepackage{standalone}
+\usepackage{tikz}   
+\usepackage{tikz-3dplot}
+\usepackage{mathrsfs}
+\usepackage{bigints}
+\spanishdecimal{.}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Funciones de Legendre \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+%referencia: Riley: Mathematical methods for physics and engineering
+\section{Funciones de Legendre}
+La ecuación diferencial de Legendre tiene la forma
+\begin{equation}
+(1-x^{2})y'' - 2xy' + \ell (\ell + 1) y = 0
+\label{eq:ecuacion_001}
+\end{equation}
+y tiene tres puntos singulares en $x = -1, 1, \infty$. Se presenta en diversos problemas de la física, en particular en problemas con simetría axial que involucra el operador $\nabla^{2}$, en donde se expresa en coordenadas esféricas.
+\\
+Normalmente la variable $x$ en la ecuación de Legendre es el coseno del ángulo en coordenadas polares, por lo que $-1 \leq x \leq 1$. El párametro $\ell$ es un número real, y la solución a la ecuación (\ref{eq:ecuacion_001}) se le denomina \emph{función de Legendre}.
+\\
+Es posible demostrar que $x=0$ es un punto ordinario, por lo que podemos esperar dos soluciones lineamente independientes de la forma
+\[ y = \sum_{n=0}^{\infty} a_{n} x^{n} \]
+Sustituimos para encontrar
+\[ \sum_{n=0}^{\infty} \left[ n (n-1) a_{n} x^{n-2} - n (n-1) a_{n} x^{n} - 2n a_{n} x^{n} + \ell (\ell + 1) a_{n} x^{n} \right] = 0 \]
+donde juntamos los términos
+\[ \sum_{n=0}^{\infty} \left[ (n+2)(n+1) a_{n+2} - [ n(n+1) - \ell (\ell + 1) ] a_{n} \right] x^{n} = 0 \]
+La relación de recurrencia es por tanto
+\begin{equation}
+a_{n+2} = \dfrac{[n(n+1)- \ell ( \ell + 1)]}{(n+1)(n+2)} a_{n}
+\label{eq:ecuacion_002}
+\end{equation}
+para $n=0,1,2,\ldots$
+\\
+Si elegimos $a_{0} = 1$ y $a_{1} = 0$ entonces obtenemos la solución
+\begin{equation}
+y_{1}(x) = 1 - \ell (\ell + 1) \dfrac{x^{2}}{2!} + (\ell - 2)\; \ell \; (\ell + 1)\;(\ell + 3) \dfrac{x^{4}}{4!} - \ldots
+\label{eq:ecuacion_003}
+\end{equation}
+Mientras que si escogemos $a_{0} = $ y $ a_{1} = 1 $, encontramos la segunda solución
+\begin{equation}
+y_{2}(x) = x - (\ell - 1)(\ell + 2) \dfrac{x^{3}}{3!} + (\ell - 3) (\ell - 1)(\ell + 2)(\ell + 4) \dfrac{x^{5}}{5!} - \ldots
+\label{eq:ecuacion_004}
+\end{equation}
+Aplicando la prueba de convergencia de razón, se encuentra que ambas series convergen para $\vert x \vert < 1$, y su radio de convergencia es unitario, que representa la distancia al punto singular más cercano de la ecuación. Dado que la ecuación (\ref{eq:ecuacion_003}) contiene sólo potencias pares de $x$ y la ecuación (\ref{eq:ecuacion_004}) contiene sólo potencias impares, esas dos soluciones no pueden ser proporcionales una de la otra, por lo tanto, son linealmente independientes. De aquí, la solución general para la ecuación (\ref{eq:ecuacion_001}) y con $\vert x \vert < 1$ es
+\[ y(x) = c_{1} y_{1} + c_{2} y_{2} \]
+\subsection{Funciones de Legendre para enteros $\ell$.}
+En varios problemas de la física, el parámetro $\ell$ en la ecuación de Legendre - ec. (\ref{eq:ecuacion_001})- es un entero, es decir $\ell = 0,1,2,\ldots$. En ese caso, la relación de recurrencia - ec. (\ref{eq:ecuacion_002})- queda dada por
+\[ a_{\ell + 2} = \dfrac{[ \ell (\ell + 1) - \ell (\ell + 1) ]}{(\ell + 1)(\ell + 2)} a_{\ell} = 0 \]
+Esto es, la serie termina y obtenemos una solución con un polinomio de orden $\ell$. En particular, si $\ell$ es par, entonces $y_{1}(x)$ en la ecuación (\ref{eq:ecuacion_003}) se reduce a un polinomio, mientras que si $\ell$ es impar, lo mismo le ocurre a $y_{2}$ en la ecuación (\ref{eq:ecuacion_004}).
+\\
+Esas soluciones (adecuadamente normalizadas) son llamadas \emph{Polinomios de Legendre de orden $\ell$}, se escriben $P_{\ell}(x)$ y son válidas para todo valor $x$ finito. De manera convencional, se normalliza $P_{\ell}(x)$ de tal manera que $P_{\ell}(1) =  1$, y como consecuencia $P_{\ell}(-1) = (-1)^{\ell}$. Los primeros polinomios se construyen fácilmente y están dados por:
+\begin{center}
+\begin{tabular}{l l}
+$P_{0}(x) = 1 $ & $P_{1}(x) = 1 $ \\
+$P_{2}(x) = \frac{1}{2} (3 x^{2} - 1)$ & $P_{3}(x) = \frac{1}{2} (5 x^{2} - 3 x)$ \\ 
+$P_{4}(x) = \frac{1}{8} (35 x^{4} - 30 x^{2} + 3)$ & $P_{5}(x) = \frac{1}{8} (63 x^{5} - 70 x^{3} + 15 x)$
+\end{tabular}
+\end{center}
+A pesar de que si $\ell$ es un entero par o impar, respectivamente para $y_{1}(x)$ - ec. (\ref{eq:ecuacion_003}) - o $y_{2}(x)$ - ec. (\ref{eq:ecuacion_004}), se termina dando un múltiplo del correspondiente polinomio de Legendre $P_{\ell}(x)$, la otra serie en cada caso no termina y por tanto converge sólo para $\vert x \vert < 1$.
+\\
+De acuerdo si $\ell$ es par o impar, se definen las \emph{funciones de Legendre de segunda clase} como $Q_{\ell}(x) =  \alpha_{\ell} y_{2}(x)$ o $Q_{\ell}(x) =  \beta_{\ell} y_{1}(x)$, respectivamente, donde las constantes $\alpha_{\ell}$ y $\beta_{\ell}$ toman los valores
+\begin{eqnarray}
+\alpha_{\ell} &=& \dfrac{(-1)^{\ell/2} \; 2^{\ell} \; [(\ell / 2)!]^{2}}{\ell!} \hspace{3.5cm} \mbox{ para $\ell$ par} \label{eq:ecuacion_005}\\
+\beta_{\ell} &=& \dfrac{(-1)^{(\ell + 1)/2} \; 2^{\ell - 1} \; \lbrace \left[ (\ell - 1) /2 \right] ! \rbrace^{2}}{\ell!} \hspace{1cm} \mbox{ para $\ell$ impar} \label{eq:ecuacion_006}
+\end{eqnarray}
+La normalización de los factores se elige de tal manera que $Q_{\ell}(x)$ obedece la misma relación de recuerrencia de $P_{\ell}(x)$.
+\\
+La solución general para la ecuación de Legendre para enteros $\ell$ es por tanto
+\begin{equation}
+y(x) = c_{1} P_{\ell}(x) + c_{2} Q_{\ell} (x) 
+\label{eq:ecuacion_007}
+\end{equation}
+Donde $P_{\ell}(x)$ es un polinomio de orden $\ell$, que converge para cualquier $x$, y $Q_{\ell}(x)$ es una serie infinita que converge sólo si $\vert x \vert < 1$.
+\\
+Usando el método del Wronkisano, podemos obtener una forma cerrada para $Q_{\ell}(x)$:
+\\
+Una segunda solución para la ecuación de Legendre -ec. \ref{eq:ecuacion_001}), con $\ell = 0$ es
+\begin{eqnarray}
+y_{2}(x) &=& P_{0}(x) \int^{x} \dfrac{1}{[P_{0}(u)]^{2}} \exp \left( \int^{u} \dfrac{2v}{1-v^{2}} dv \right) du \nonumber \\
+&=& \int^{x} \exp [ - \ln (1 - u^{2}) ] du \nonumber \\
+&=& \int^{x} \dfrac{du}{(1-u^{2})} = \frac{1}{2} \ln \left( \dfrac{1+x}{1-x} \right) \label{eq:ecuacion_008}
+\end{eqnarray}
+En la segunda línea hemos utilizado el hecho de que $P_{0}(x)=1$.
+\\
+Lo que queda es ajustar la normalización de esta solución para que se corresponda con la ecuación (\ref{eq:ecuacion_005}). Expandiendo el logaritmo en la ec. (\ref{eq:ecuacion_008}) como una serie de Maclaurin, obtenemos
+\[ y_{2}(x) = x + \dfrac{x^{3}}{3} + \dfrac{x^{5}}{5} + \cdots \]
+Comparando esto con la expresión para $Q_{0}(x)$, usando la ec. (\ref{eq:ecuacion_004}) con $\ell = 0$ y normalizando -ec. (\ref{eq:ecuacion_005})-, encontramos que $y_{2}$ está correctamente normalizada, así
+\[ Q_{0} (x) = \dfrac{1}{2} \ln \left( \dfrac{1+x}{1-x} \right) \]
+Usando el mismo método para $\ell = 1$, tenemos que
+\[ Q_{1} (x) =  \frac{1}{2} x \ln \left( \dfrac{1+x}{1-x} \right) - 1 \]
+Se pueden encontrar formas cerradas para $Q_{\ell}(x)$ de mayor orden, usando la relacion de recurrencia.
+\subsection{Propiedades de los Polinomios de Legendre.}
+Como se mencionó anteriormente, cuando encontramos problemas físicos en donde la variable $x$ en la ecuación de Legendre es el coseno del ángulo polar $\theta$ en coordenadas esféricas, y entonces requiere la solución $y(x)$ que sea regular en $x = \pm 1$, que corresponde a $\theta = 0$ o $\theta = \pi$. Para que esto ocurra, requerimos que la ecuación tenga una solución polinomial, así el valor de $\ell$ debe ser un entero.
+\\
+Por otra parte, también requerimos que el coeficiente $c_{2}$ de la función $Q_{\ell}(x)$ en la ecuación (\ref{eq:ecuacion_007}) sea nulo, ya que $Q_{\ell}(x)$ es singular en $x = \pm 1$, como resultado de que la solución general es un múltiplo del polinomio de Legendre $P_{\ell}(x)$.
+\subsection*{Fórmula de Rodrigues.}
+Como una ayuda para definir nuevas propiedades de los polinomios de Legendre, desarrollamos la representación de Rodrigues de éstas funciones. La \emph{fórmula de Rodrigues} para el $P_{\ell} (x)$ es
+\begin{equation}
+P_{\ell} (x) = \dfrac{1}{2^{\ell} \; \ell !} \dfrac{d^{\ell}}{d x^{\ell}} (x^{2} - 1)^{\ell}
+\label{eq:ecuacion_009}
+\end{equation}
+\subsection*{Ortogonalidad.}
+De temas anteriores vemos que la ecuación de Legendre es de la forma Sturm-Liouville con $p = 1 - x^{2}$, $q = 0$, $\lambda = \ell (\ell + 1)$ y $\omega = 1$, y que su intervalo natural es $[-1, 1 ]$. Ya que los polinomios de Legendre $P_{\ell} (x)$ son regulares en los puntos extremos $x = \pm 1$, deben ser mutuamente ortogonales en este intervalo, es decir,
+\begin{equation}
+\int_{-1}^{1} P_{\ell}(x) P_{k}(x) dx = 0 \hspace{1cm} \mbox{ si $\ell \neq k$}
+\label{eq:ecuacion_012}
+\end{equation}
+Como ya se comentó previamente, la ortogonalidad mutua (y completes) de  $P_{\ell} (x)$ significa que cualquier función razonable $f(x)$ (es decir, una que satisfaga las condiciones de Dirichlet) puede expresarse en el intervalo de $\vert x \vert <1$ como una suma infinita de polinomios de Legendre,
+\begin{equation}
+f(x) = \sum_{\ell = 0}^{\infty} a_{\ell} P_{\ell} (x)
+\label{eq:ecuacion_013}
+\end{equation}
+donde los coeficientes $a_{\ell}$ están dado por
+\begin{equation}
+a_{\ell} = \dfrac{2 \ell + 1}{2} \int_{-1}^{1} f(x) P_{\ell} (x) dx
+\label{eq:ecuacion_014}
+\end{equation}
+\subsection*{Función generatriz.}
+Una manera útil para manipular y estudiar secuencias de funciones o cantidades etiquetados por una variable entera (en el caso de los polinomios de Legendre $P_{\ell} (x)$ están etiquetados por $\ell$), es mediante una función generatriz. 
+\\
+La función generatriz tiene quizás su mayor utilidad en el ámbito de la teoría de la probabilidad, sin embargo, también es de gran conveniencia en nuestro estudio.
+\\
+La función generatriz para decirlo, es una serie de funciones $f_{n} (x)$ para $n = 0, 1, 2,\ldots$ es una función $G (x, h)$ que contiene tanto a $x$, como una variable ficticia $h$, de tal manera que
+\[ G(x,h) = \sum_{n=0}^{\infty} f_{n} (x) h^{n} \]
+es decir, $f_{n}(x)$ es el coeficiente de $h^{n}$ en la expansión de $G$ en potencias de $h$. La  utilidad de esta manera de trabajar la función, está en el hecho de que a veces es posible encontrar una forma cerrada para $G(x,h)$.
+\\
+En el caso de los polinomios de Legendre, usemos las funciones $P_{n}(x)$ definidas por
+\begin{equation}
+G(x,h) = (1 - 2xh + h^{2})^{-1/2} =  \sum_{n=0}^{\infty} P_{n}(x) h^{n}
+\label{eq:ecuacion_015}
+\end{equation}
+Como veremos las funciones así definidas son idénticas a los polinomios de Legendre y la función $(1 - 2xh + h^{2})^{-1/2}$ es de hecho la función generatriz para ellos. En el proceso también vamos a deducir varias relaciones útiles entre los diferentes polinomios y sus derivadas.
+\\
+Hacemos la anotación de que $d P_{n}(x) / dx$ es $P^{\prime} n$, derivamos la ecuación (\ref{eq:ecuacion_015}) con respecto a $x$ y obtenemos
+\begin{equation}
+h (1 - 2xh + h^{2})^{-3/2} = \sum P^{\prime}_{n} \; h^{n}
+\label{eq:ecuacion_016}
+\end{equation}
+También derivamos la ecuación (\ref{eq:ecuacion_015}) con respecto a $h$ por lo que
+\begin{equation}
+(x-h) (1- 2xh + h^{2})^{-3/2} = \sum n \; P_{n} \; h^{n-1}
+\label{eq:ecuacion_017}
+\end{equation}
+La ecuación (\ref{eq:ecuacion_016}) puede re-escribirse usando la ecuación (\ref{eq:ecuacion_015}) como
+\[ h \sum P_{n} \; h^{n} =  (1 - 2xh + h^{2}) \sum P^{\prime}_{n} h^{n} \]
+igualando los coeficientes de $h^{n+1}$, obtenemos la relación de recurrencia
+\begin{equation}
+P_{n} = P^{\prime}_{n+1} - 2x \; P^{\prime}_{n} + P^{\prime}_{n-1}
+\label{eq:ecuacion_018}
+\end{equation}
+Las ecuaciones (\ref{eq:ecuacion_016}) y (\ref{eq:ecuacion_017}) pueden combinarse como
+\[ (x-h) \sum P^{\prime}_{n} \; h^{n} = h \sum n \; P_{n} \; h^{n-1} \]
+donde el coeficiente de $h^{n}$ nos proporciona otra relación de recurrencia
+\begin{equation}
+x P^{\prime}_{n} - P^{\prime}_{n-1} =  n \; P_{n}
+\label{eq:ecuacion_019}
+\end{equation}
+eliminando $P^{\prime}_{n-1}$ entre las ecuaciones (\ref{eq:ecuacion_018}) y (\ref{eq:ecuacion_019}), el resulta que se obtiene es
+\begin{equation}
+(n+1)P_{n} = P^{\prime}_{n+1} - x \; P^{\prime}_{n}
+\label{eq:ecuacion_020}
+\end{equation}
+Si tomamos el resultado de la ecuación (\ref{eq:ecuacion_020}) re-emplazando $n$ por $n-1$ y sumamos $x$ veces, obtenemos
+\begin{equation}
+(1 - x^{2}) P^{\prime}_{n} = n \; (P_{n-1} - x P_{n})
+\label{eq:ecuacion_021}
+\end{equation}
+Finalmente, derivamos ambos lados con respecto a $x$ y usamos el resultado de la ecuación (\ref{eq:ecuacion_019}) para tener
+\[ \begin{split}
+(1-x^{2}) P^{\prime \prime}_{n} - 2x P^{\prime}_{n} &=  n [ (P^{\prime}_{n-1} - x P^{\prime}_{n}) - P_{n} ] \\
+&= n (-n P_{n} - P_{n}) \\
+&= -n (n+1) P_{n}
+\end{split} \]
+por lo que los $P_{n}$ definidos en la ecuación (\ref{eq:ecuacion_015}), satisfacen la ecuación de Legendre.
+\\
+El ejemplo anterior muestra que las funciones $P_{n} (x)$ definida por la ecuación (\ref{eq:ecuacion_015}) satisfacen la ecuación de Legendre con $\ell = n$ (un entero) y también de (\ref{eq:ecuacion_015}), estas funciones son regulares en $x = \pm 1$. Por lo tanto $P_{n}$ debe ser un múltiplo del n-ésimo polinomio de Legendre. Por lo tanto, sólo queda verificar la normalización. Esto se hace fácilmente en $x = 1$, cuando G se convierte en
+\[ G(1,h) = [(1 - h)^{2}]^{-1/2} =  1 + h + h^{2} + \cdots \]
+y podemos ver que todo $P_{n}$ así definido, se tiene $P_{n} (1) = 1$ como se requiere, por tanto son idénticos a los polinomios de Legendre.
+\\
+Un uso particular de la función generatriz (\ref{eq:ecuacion_015}) es la representación del inverso de la distancia  entre dos puntos en el espacio tridimensional en términos de polinomios de Legendre. Si dos puntos $\mathbf{r}$ y $\mathbf{r}^{\prime}$ se encuentran a distancias $r$ y $r^{\prime}$, respectivamente, desde el origen, con $r^{\prime} < r$, se tiene
+\begin{eqnarray}
+\dfrac{1}{\vert \mathbf{r} - \mathbf{r}^{\prime} \vert} &=& \dfrac{1}{(r^{2} + r^{\prime \: 2} - 2 r r^{\prime} \cos \theta)^{1/2}} \nonumber \\
+&=& \dfrac{1}{r [ 1 -2 (r^{\prime}/r) \cos \theta + (r^{\prime}/r)^{2}]^{1/2}} \nonumber \\
+&=& \dfrac{1}{r} \sum_{\ell = 0}^{\infty} \left( \dfrac{r^{\prime}}{r} \right)^{\ell} P_{\ell} (\cos \theta)
+\label{eq:ecuacion_022}
+\end{eqnarray}
+donde $\theta$ es el ángulo entre los dos vectores de posición $r$ y $r^{\prime}$. Si $r^{\prime} > r$, entonces $r$ y $r^{\prime}$ deben de intercambiarse en la ecuación (\ref{eq:ecuacion_022}) o de lo contrario, la serie no converge.
+\\
+Este resultado puede ser utilizado por ejemplo, para escribir el potencial electrostático en un punto $\mathbf{r}$ debido a una carga $q$ en el punto $\mathbf{r}^{\prime}$. Entonces, en el caso $r^{\prime} < r$, se tiene que
+\[ V(\mathbf{r}) =  \dfrac{4}{4 \pi \epsilon_{0} r} \sum_{\ell=0}^{\infty} \left( \dfrac{r^{\prime}}{r} \right)^{\ell} P_{\ell} (\cos \theta) \]
+Vemos el caso especial cuando la carga está en el origen, y $r^{\prime} =0$, entonces el término $\ell =0$ en la serie es no nulo, y al expresión se reduce a la forma ya conocida 
+\[ V(\mathbf{r}) = \frac{q}{4 \pi \epsilon_{0} r} \]
+\subsection*{Relaciones de recurrencia.}
+En nuestro análisis previo de la función generatriz, derivamos varias relaciones de recurrencia útiles que satisfacen los polinomios de Legendre $P_{n} (x)$. En particular, a partir de la ecuación (\ref{eq:ecuacion_018}), tenemos la cuarta relación de recurrencia
+\[ P^{\prime}_{n+1} + P^{\prime}_{n-1} =  P_{n} + 2 \; x \; P^{\prime}_{n} \]
+De las ecuaciones (\ref{eq:ecuacion_019}) a (\ref{eq:ecuacion_021}) tenemos las siguientes relaciones de recuerrencia con tres términos:
+\begin{eqnarray}
+P^{\prime}_{n+1} &=& (n+1) \; P_{n} + x \; P^{\prime}_{n} \\
+P^{\prime}_{n-1} &=& -n \; P_{n} + x \; P^{\prime}_{n} \\
+(1 - x^{2}) P^{\prime}_{n+1} &=& n \; (P_{n-1} - x \; P_{n}) \\
+(2n+1) P_{n} &=& P^{\prime}_{n+1} - P^{\prime}_{n-1}
+\end{eqnarray}
+\subsection{Ejemplos.}
+\textbf{Ejemplo 1.} Queremos encontrar la expansión de Legendre de una función $f(x)$ definida por
+\[ f(x) = \begin{cases}
+V_{0} & \mbox{ si } 0 < x \leq 1 \\
+- V_{0} & \mbox{ si } -1 \leq x < 0
+\end{cases} \]
+Utilizamos la ecuación (\ref{eq:ecuacion_014}) para determinar los coeficientes:
+\[ \begin{split}
+a_{\ell} &= \dfrac{2 \ell + 1}{2} \int_{-1}^{1} f(x) P_{\ell} (x) dx \\
+&= \dfrac{2 \ell + 1}{2} \int_{-1}^{0} \underbrace{f(x)}_{=-V_0}  P_{\ell} (x) dx + \dfrac{2 \ell + 1}{2} \int_{0}^{1} \underbrace{f(x)}_{=+V_0}  P_{\ell} (x) dx \\
+&= \dfrac{2 \ell + 1}{2} V_{0} \left[ - \int_{-1}^{0} P_{\ell} (x) dx + \int_{0}^{1} P_{\ell} (x) dx \right]
+\end{split}\]
+En la primera integral de la última línea, hacemos el cambio de variable $x = -y$, por lo que
+\[ \int_{-1}^{0} P_{\ell} (x) dx = \int_{+1}^{0} P_{\ell} (-y) (-dy) = \int_{0}^{1} P_{\ell} (-y) dy = (-1)^{\ell} P_{\ell} (x) dx \]
+donde ocupamos una de la propiedade paridad de los polinomios de Legendre
+\[ P{\ell} (-u) = (-1)^{\ell} P_{\ell} (u) \]
+Sustituimos en la expresión para los coeficientes
+\[  \begin{split}
+a_{\ell} &= \dfrac{2 \ell + 1}{2} V_{0} [1 - (-1)^{\ell} \int_{0}^{1} P_{\ell} (x) dx \\
+&= \dfrac{2 \ell + 1}{2} V_{0} \begin{cases}
+0 & \mbox{ si } \ell \mbox{ es par} \\
+2 \int_{0}^{1} P_{2 k + 1} (x) dx & \mbox{ si } \ell = 2 k + 1 
+\end{cases}
+\end{split} \]
+donde para $\ell$ impar se definió como $\ell =  2k+1$ con $k=0,1,2\ldots$.
+\\
+Queda por evaluar la integral del polinomio de Legendre de orden impar en el intervalo $(0,1)$. Para ello, utilizamos la fórmula de Rodrigues
+\[ \begin{split}
+\int_{0}^{1} P_{2k+1} (x) dx &= \dfrac{1}{2^{2k+1} \; (2k +1)!} \int_{0}^{1} \dfrac{d^{2k+1}}{d x^{2k+1}} \left[ (x^{2} -1)^{2k+1} \right] dx \\
+&= \dfrac{1}{2^{2k+1} \; (2k +1)!} \; \dfrac{d^{2k}}{d x^{2k}} \left[ (x^{2} - 1)^{2k+1} \right] \Bigr\lvert_{0}^{1} \\
+&= \dfrac{1}{2^{2k+1} \; (2k +1)!} \; \left\lbrace \dfrac{d^{2k}}{d x^{2k}} \left[ (x^{2} - 1)^{2k+1} \right] \Bigr\lvert_{x=1} - \dfrac{d^{2k}}{d x^{2k}} \left[ (x^{2} - 1)^{2k+1} \right] \Bigr\lvert_{x=0} \right\rbrace
+\end{split} \]
+El primer término resulta ser cero, porque no hay un número suficiente de diferenciaciones para deshacerse de todos los factores de $(x^{2} - 1)$. Para el segundo término, observamos que $(x^{2} - 1)^{2k + 1}$ es un polinomio en $x$ cuyos derivadas de varios órdenes, serán potencias de $x$. Estas potencias devolverán cero en $x = 0$, excepto para el término constante (de potencia cero). Por lo tanto, vamos a utilizar la expansión binomial para $(x^{2} - 1)^{2k + 1}$, que es igual a $-(1 - x^{2})^{2k + 1}$:
+\[ \begin{split}
+\dfrac{d^{2k}}{d x^{2k}} \left[ (x^{2} - 1)^{2k+1} \right] \Bigr\lvert_{x=0} &= - \dfrac{d^{2k}}{d x^{2k}} \left[ \sum_{j=0}^{2k+1} \dfrac{(2k+1)!}{j! \; (2k + 1 - j)!} (-x^{2})^{j} \right] \Biggr\lvert_{x=0} \\
+&= - \sum_{j=0}^{2k+1} \dfrac{(2k+1)!}{j! \; (2k + 1 - j)!} (-1)^{j} \dfrac{d^{2k}}{d x^{2k}} \left( x^{2j} \right) \Biggr\vert_{x=0}
+\end{split} \]
+de donde se obtiene un término constante cuando $k = j$, todos los demás términos de la suma se anulan ya sea por tener  demasiadas diferenciaciones (cuando $j <k$, terminamos derivando constantes), o por tener muy pocas diferenciaciones (cuando $j> k$, una potencia de $x$ permanece y se evalúa como cero en $x = 0$). Por tanto
+\[ \begin{split}
+\dfrac{d^{2k}}{d x^{2k}} \left[ (x^{2} - 1)^{2k+1} \right] \Bigr\lvert_{x=0} &= - \dfrac{(2k+1)!}{k! \; (2k + 1)!} (-1)^{k} \dfrac{d^{2k}}{d x^{2k}} \left( x^{2k} \right) \Biggr\vert_{x=0} \\
+&= \dfrac{(2k+1)!}{k! \; (2k + 1)!} (-1)^{k+1} \; (2k)!
+\end{split} \]
+Entonces el coeficiente $a_{2k+1}$ se escribe como
+\[ a_{2k+1} = 2 \dfrac{2(2k+1)+1}{2} \; V_{0} \int_{0}^{1} P_{2k+1} (x) dx = \dfrac{(-1)^{k}(4k+3)(2k!)}{2^{2k+1} \; k! \; (k+1)!} V_{0} \]
+con $a_{\ell} = 0$ para $\ell$ par. La expansión en series se escribe como
+\[ 
+f(x) = \begin{cases}
+V_{0} & \mbox{ si } 0 < x \leq 1 \\
+-V_{0} & \mbox{ si } -1 \leq x < 0
+\end{cases}
+= V_{0} \sum_{k=0}^{\infty} \dfrac{(-1)^{k}(4k+3)(2k!)}{2^{2k+1} \; k! \; (k+1)!} P_{2k+1} (x)
+\] 
+Expresando los primeros términos :
+\[ f(x) = V_{0} \left[ \dfrac{3}{2} P_{1}(x) - \dfrac{7}{8} P_{3}(x) + \dfrac{11}{16} P_{5}(x) - \cdots \right]  \]
+\\
+\textbf{Ejemplo 2.}
+\\
+Para encontrar la solución más general con simetría azimutal de la ecuación de Laplace en coordenadas esféricas, multiplicamos la solución radial y la solución angular (polinomio de Legendre) para cada $k$ y sumamos sobre todos los valores posibles de $k$:
+\begin{equation}
+\Phi (r, \theta) = \sum_{k=0}^{\infty} \left( A_{k} \; r^{k} + \dfrac{B_{k}}{r^{k+1}} \right) \; P_{k} (\cos \theta)
+\label{eq:ecuacion_029a}
+\end{equation}
+donde $A_{k}$ y $B_{k}$ son constantes y se ha sustituido $\cos \theta$ por $x$.
+\\
+Dos hemisferios sólidos conductores de calor de radio $a$, separados por un hueco muy pequeño aislante, forman una esfera. Las dos mitades de la esfera están en contacto - por fuera - con dos baños de calor (infinitos) a temperaturas $T_{0}$ y $-T_{0}$. Queremos encontrar la distribución de temperatura $T (r, \theta, \varphi)$ en el interior de la esfera.
+\\
+Elegimos un sistema de coordenadas esféricas en donde el origen coincide con el centro de la esfera y el eje polar es perpendicular al plano ecuatorial. El hemisferio con temperatura $T_{0}$ suponemos que es el hemisferio norte.
+\begin{figure}[H]
+\centering
+\includestandalone{esfera_2}
+\caption{Dos semiesferas separadas infinitesimalmente a temperaturas contrarias.}
+\label{fig:figura2}
+\end{figure}
+Dado que el problema tiene simetría azimutal, $T$ es independiente de $\varphi$, y podemos escribir inmediatamente la solución general de la ecuación (\ref{eq:ecuacion_029a}). Sin embargo, dado que el origen se encuentra en la región de interés, es necesario excluir a todos los potencias negativas de $r$. Esto se logra dejando que todos los coeficientes de $B$ se anulen. Por lo tanto, tenemos
+\begin{equation}
+T(r, \theta) = \sum_{n=0}^{\infty} A_{n} \; r^{n} P_{n} (\cos \theta)
+\label{eq:ecuacion_050a}
+\end{equation}
+Quedando pendiente calcular las constantes $A_{n}$, pero notemos que
+\[  T(a, \theta) = 
+\begin{cases}
+T_{0} & \mbox{ si } 0 \leq \theta < \frac{\pi}{2} \\
+-T_{0} & \mbox{ si } \frac{\pi}{2} < \theta \leq \pi 
+\end{cases} \]
+en términos de $u= \cos \theta$, podemos escribir
+\[  T(a, u) = 
+\begin{cases}
+T_{0} & \mbox{ si } -1 \leq u < 0 \\
+-T_{0} & \mbox{ si } 0 < u \leq 1 
+\end{cases} \]
+sustituyendo en la ecuación (\ref{eq:ecuacion_050a}), obtenemos
+\begin{equation} 
+T(a, u) = 
+\begin{cases}
+T_{0} & \mbox{ si } -1 \leq u < 0 \\
+-T_{0} & \mbox{ si } 0 < u \leq 1 
+\end{cases} =
+\sum_{n=0}^{\infty} \underbrace{A_{n} a^{n}}_{\equiv c_{n}} P_{n}(u)
+\label{eq:ecuacion_051a}
+\end{equation}
+donde podemos ocupar el resultado (usando $u$ en lugar de $x$) del ejemplo anterior, y vemos que es equivalente a la expansión en series, tal que los coeficientes pares están ausentes, así
+\[ c_{2k+1} \equiv A_{2k+1} a^{2k+1} = \dfrac{(-1)^{k}(4k+3)(2k)!}{2^{2k+1} \; k! \; (k+1)!} T_{0} \]
+Encontrando $A_{2k+1}$ de esta ecuación y agregándolo en la ecuación (\ref{eq:ecuacion_050a}) se obtiene
+\begin{equation}
+T(r_\theta) = T_{0} \sum_{k=0}^{\infty} \dfrac{(-1)^{k}(4k+3)(2k)!}{2^{2k+1} \; k! \; (k+1)!} \left( \dfrac{r}{a} \right)^{2k+1} P_{2k+1} (\cos \theta)
+\label{eq:ecuacion_052a}
+\end{equation}
+donde se ha sustituido $\cos \theta$ por $u$.
+\section{Funciones asociadas de Legendre.}
+La ecuación asociada de Legendre tiene la forma
+\begin{equation}
+(1 - x^{2}) y'' - 2 x y' + \left[ \ell (\ell + 1) - \dfrac{m^{2}}{1 - x^{2}} \right] y = 0
+\label{eq:ecuacion_028}
+\end{equation}
+que tiene tres puntos singulares en $x = -1, 1, \infty$, se reduce a la ecuación de Legendre (\ref{eq:ecuacion_001}) cuando $m=0$. Se presenta en problemas de la física que involucran el operador $\nabla^{2}$, cuando se expresa en coordenadas polares. En esos casos, $- \ell \leq m \leq \ell$ y $m$ está restringida a valores enteros. Como en el caso de la ecuación de Legendre, la variable $x$ es el coseno del ángulo polar en coordenadas esféricas, por tanto $-1 \leq x \leq 1$. Cualquier solución de la ecuación \ref{eq:ecuacion_028}) es llamada la \emph{función asociada de Legendre}.
+\\
+El punto $x=0$ es un punto ordinario, y del cual se pueden obtener soluciones en series de la forma
+\[ y = 0\sum_{n=0} a_{n} x^{n} \]
+de la misma manera que se hizo para la ecuación de Legendre. En este caso, debemos de notar que si $u(x)$ es solución de la ecuación de Legendre, entonces
+\begin{equation}
+y(x) = (1 -x^{2})^{\vert m \vert / 2} \dfrac{d^{\vert m \vert} u}{d x^{\vert m \vert}}
+\label{eq:ecuacion_029}
+\end{equation}
+es solución a la ecuación asociada.
+\\
+De las dos soluciones en serie linealmente independientes de la ecuación de Legendre dada en \ref{eq:ecuacion_003}) y (\ref{eq:ecuacion_004}), que ahora denotamos por $u_{1} (x)$ y $u_{2}(x)$, podemos obtener dos soluciones en serie linealmente independientes, $y_{1} (x)$ y $y_{2} (x)$, a la ecuación asociada mediante el uso de (\ref{eq:ecuacion_029}). A partir de la discusión general de la convergencia de la serie de potencias, vemos que ambas $y_{1} (x)$ y $y_{2} (x)$ también convergen para $\vert x |\vert < 1$. Por lo tanto la solución general de la ecuación(\ref{eq:ecuacion_028}) en este rango está dado por
+\[ y(x) = c_{1} y_{1} (x) + c_{2} y_{2} (x) \]
+\subsection*{Funciones asociadas de Legendre para enteros $\ell$.}
+Si $\ell$ y $m$ son ambos enteros, como en el caso de varios problemas de la física, entonces la solución general de la ecuación (\ref{eq:ecuacion_028}) se expresa por
+\begin{equation}
+y(x) = c_{1} P_{\ell}^{m} (x) + c_{2} Q_{\ell}^{m} (x)
+\label{eq:ecuacion_031}
+\end{equation}
+donde $P_{\ell}^{m} (x)$ y $Q_{\ell}^{m} (x)$ son las funciones asociadas de Legendre de primera y segunda clase, respectivamente. Para valores no negativos de $m$, esas funciones están relacionadas a las funciones de Legendre para enteros $\ell$ mediante
+\begin{equation}
+P_{\ell}^{m} (x) = (1 - x^{2})^{m/2} \dfrac{d^{m} P_{\ell}}{d x^{m}}, \hspace{1cm} Q_{\ell}^{m} (x) = (1 - x^{2})^{m/2} \dfrac{d^{m} Q_{\ell}}{d x^{m}}
+\label{eq:ecuacion_032}
+\end{equation}
+Vemos inmediatamente que, en caso necesario, las funciones asociadas de Legendre se reducen a las funciones ordinarias de Legendre cuando $m = 0$. Dado que $m^{2}$ aparece en la ecuación asociada de Legendre (\ref{eq:ecuacion_028}), las funciones asociadas de Legendre para los valores negativos $m$ debe ser proporcional a la función correspondiente para valores no negativos $m$. La constante de proporcionalidad es una cuestión de convención. Para el $P_{\ell}^{m} (x) $, es habitual considerar la definición (\ref{eq:ecuacion_032}) como válida también para los valores negativos $m$. Aunque la diferenciación de un número negativo no está definida, cuando $P_{\ell}(x)$ se expresa en términos de la fórmula de Rodrigues (\ref{eq:ecuacion_009}), este problema no se presenta para? $\ell \leq m \leq \ell$. En este caso,
+\begin{equation}
+P_{\ell}^{-m} (x) = (-1)^{m} \; \dfrac{(\ell - m)!}{(\ell + m)!} P_{\ell}^{m} (x)
+\label{eq:ecuacion_033}
+\end{equation}
+Ya que $P_{\ell}(x)$ es un polinomio de orden $\ell$, tenemos que $P_{\ell}^{m}(x)=0$ para $\vert m \vert > \ell$. De esta definición, queda claro que $P_{\ell}^{m} (x)$ es también un polinomio de orden $\ell$ si $m$ es par, ya que contiene el factor $(1-x^{2})$ a una potencial fraccionaria si $m$ es impar. En cualquier caso $P_{\ell}^{m}(x)$ es regular en $x = \pm 1$.
+\\
+Las primeras funciones asociadas de Legendre de primera clase, se construyen fácilmente y están dadas por (se omiten los casos $m=0$):
+\begin{eqnarray}
+P_{1}^{1} (x) &=& (1-x^{2})^{1/2} \nonumber \\
+P_{2}^{1} (x) &=& 3x (1-x^{2})^{1/2} \nonumber \\
+P_{2}^{2} (x) &=& 3(1-x^{2}) \nonumber \\
+P_{3}^{1} (x) &=& \frac{3}{2}(5x^{2}-1)(1-x^{2})^{1/2} \nonumber \\
+P_{3}^{2} (x) &=& 15x (1-x^{2}) \nonumber \\
+P_{3}^{3} (x) &=& 15 (1-x^{2})^{3/2} \nonumber
+\end{eqnarray}
+Debemos de mencionar que las funciones asociados de Legendre de segunda clase $Q_{\ell}^{m} (x)$ como las $Q_{\ell}(x)$ son singulares en $x= \pm 1$.
+\subsection*{Propiedades de las funciones asociadas de Legendre $P_{\ell}^{m}$.}
+Cuando encontramos en problemas físicos, la variable $x$ de la ecuación asociada de Legendre (como en la ecuación ordinaria Legendre) es generalmente el coseno del ángulo polar $\theta$ en coordenadas polares esféricas, y entonces queremos que la solución $y (x)$ sea regular en $x = \pm 1$ (correspondiente a $\theta = 0$ o $\theta = \pi$). Para que esto ocurra, se requiere que $\ell$ sea un número entero y que el coeficiente $c_{2}$ de la función $Q_{\ell}^{m} (x)$ en la ecuación (\ref{eq:ecuacion_031}) sea cero, dado que $Q_{\ell}^{m}(x)$ es singular en $x = \pm 1$, con el resultado de que la solución general son múltiplos de las funciones asociadas de Legendre de primera clase $P_{\ell}^{m}(x)$.
+\subsection*{Ortogonalidad mutua.}
+Ya se mencionó anteriormente que la ecuación asociada de Legendre es del tipo Sturm-Liouville de la forma
+\[ (py)' + qy + \lambda w y = 0 \]
+con
+\begin{eqnarray}
+p &=& 1 - x^{2} \nonumber \\
+q &=& - \dfrac{m^{2}}{(1 - x^{2})} \nonumber \\
+\lambda &=& \ell (\ell + 1) \nonumber \\
+w &=& 1 \nonumber
+\end{eqnarray}
+siendo su intervalo natural en $[-1,1]$.
+\\
+Dado que las funciones asociadas de Legendre $P_{\ell}^{m} (x)$ son regulares en los extremos $x = \pm 1$, entonces deben de ser mutuamente ortogonales en este intervalo para un valor fijo de $m$, es decir:
+\begin{equation}
+\int_{-1}^{1} P_{\ell}^{m} (x) P_{k}^{m} (x) dx  = 0, \hspace{1cm} \mbox{ si } \ell \neq	 k
+\label{eq:ecuacion_036}
+\end{equation}
+Nótese que el valor de $m$ debe de ser el mismo en ambas funciones asociadas de Legendre para que la expresión sea válida. La condición de normalización cuando $\ell = k$ se obtiene de la fórmula de Rodrigues:
+\begin{equation}
+I_{\ell m} = \int_{-1}^{1} P_{\ell}^{m} (x) P_{\ell}^{m} (x) dx = \dfrac{2}{2 \ell + 1}\: \dfrac{(\ell +m)!}{( \ell - m)!}
+\label{eq:ecuacion_037}
+\end{equation}
+Las condiciones de ortogonalidad y normalización, ecuaciones (\ref{eq:ecuacion_036}) y (\ref{eq:ecuacion_037}), respectivamente, significan que la funciones asociadas de Legendre $P_{\ell}^{m}(x)$, con $m$ fija, puede utilizarse de  manera similar a los polinomios de Legendre para expandir cualquier función $f(x)$ razonable en el intervalo $\vert x \vert < 1$ en una serie de la forma
+\begin{equation}
+f(x) = \sum_{k=0}^{\infty} a_{m+k} P_{m+k}^{m} (x)
+\label{eq:ecuacion_038}
+\end{equation}
+donde los coeficientes están dado por
+\[ a_{\ell} = \dfrac{2 \ell + 1}{2} \: \dfrac{(\ell - m)!}{(\ell + m)!} \int_{-1}^{1} f(x) P_{\ell}^{m} (x) dx \]
+\subsection*{Función generatriz.}
+La función generatriz para las funciones asociadas de Legendre, se obtienen de la combinación de su definición con la función generatriz de los polinomio de Legendre:
+\begin{equation}
+G(x,h) = \dfrac{(2m)(1 - x^{2})^{m/2}}{2^{m} m! (1 - 2 hx + h^{2})^{m+1/2}} = \sum_{n=0}^{\infty} P_{n+m}^{m} (x) h^{n}
+\label{eq:ecuacion_040}
+\end{equation}
+Como era de esperar, las funciones asociadas de Legendre satisfacen ciertas relaciones de recurrencia. De hecho, la presencia de los dos índices $n$ y $m$ significa que se puede derivar una gama mucho más amplia de relaciones de recurrencia. Presentaremos sólo cuatro de las relaciones más útiles:
+\begin{eqnarray}
+P_{n}^{m+1} &=& \dfrac{2mx}{(1-x^{2})^{1/2}} P_{n}^{m} + [m(m - 1) - n (n + 1)]P_{n}^{m-1} \\
+(2n + 1)x P_{n}^{m} &=& (n + m) P_{n-1}^{m} + (n - m + 1) P_{n+1}^{m} \\
+(2n + 1)(1 -  x^{2})^{1/2} P_{n}^{m} &=& P_{n+1}^{m+1} - P_{n-1}^{m+1} \\
+2 (1 - x^{2})^{1/2} (P_{n}^{m})^{\prime} &=& P_{n}^{m+1} - (n + m)(n - m + 1) P_{n}^{m-1}
+\end{eqnarray}
+Las relaciones de recurrencia son válidas tanto para valores negativos como positivos de $m$.
+\section{Armónicos esféricos.}
+Las funciones asociadas de Legendre discutidas anteriormente se presentan más comúnmente la solución de la ecuación de Laplace $\nabla^{2} =0$ en coordenadas polares esféricas. En particular, se encuentra que para las soluciones que son finitas en el eje polar, la parte angular de la solución viene dada por
+\[ \Theta (\theta) \Phi (\phi) = P_{\ell}^{m} (\cos \theta) (C \cos m \phi + D \sin m \phi) \]
+donde $\ell$ y $m$ son enteros con $- \ell \leq m \leq \ell$. Esta forma general es muy común para funciones particulares de $\theta$ y $\phi$, se les llama \emph{armónicos esféricos}, se definen por
+\begin{equation}
+Y_{\ell}^{m} (\theta, \phi) = (1-)^{m} \left[ \dfrac{2 \ell + 1}{4 \pi} \: \dfrac{(\ell + m)!}{(\ell - m)!} \right]^{1/2} P_{\ell}^{m} (\cos \theta) \exp(i m \phi)
+\label{eq:ecuacion_045}
+\end{equation}
+Usando la ecuación (\ref{eq:ecuacion_033}), encontramos que:
+\[ Y_{\ell}^{-m} (\theta, \phi) =  (-1)^{m} \left[ Y_{\ell}^{m} (\theta,\phi) \right]^{*} \]
+donde el asterisco indica el complejo conjugado. Los priemros armónicos esféricos $Y_{\ell}^{m}(\theta,\phi) = Y_{\ell}^{m}$ son:
+\begin{eqnarray}
+Y_{0}^{0} &=& \sqrt{\dfrac{1}{4 \pi}} \nonumber \\
+Y_{1}^{0} &=& \sqrt{\dfrac{3}{4 \pi}} \cos \theta \nonumber \\
+Y_{1}^{\pm 1} &=& \mp \sqrt{\dfrac{3}{8 \pi}} \sin \theta \exp(\pm i \phi) \nonumber \\
+Y_{2}^{0} &=& \sqrt{\dfrac{5}{16 \pi}} ( 3 \cos^{2} \theta - 1) \nonumber \\
+Y_{2}^{\pm 1} &=& \mp \sqrt{\dfrac{15}{8 \pi}} \sin \theta \cos \theta \exp(\pm i \phi) \nonumber \\
+Y_{2}^{\pm 2} &=& \sqrt{\dfrac{15}{32 \pi}} \sin^{2} \theta \exp(\pm 2 i \phi) \nonumber
+\end{eqnarray}
+Ya que contienen su $\theta$-dependiente de parte de la solución $P_{\ell}^{m}$ a la ecuación asociada de Legendre, el $Y_{\ell}^{m}$ son mutuamente ortogonales cuando se integra de $-1$ a $+1$ sobre $d(cos \theta)$. Su ortogonalidad mutua respecto de $\phi (0 \leq \phi \leq 2 \pi)$ es aún más evidente. El factor numérico en la ecuación (\ref{eq:ecuacion_045}) es elegido para hacer el $Y_{\ell}^{m}$ un conjunto ortonormal, es decir
+\begin{equation}
+\int_{-1}^{1} \int_{0}^{2 \pi} [ Y_{\ell}^{m} (\theta, \phi) ]^{*} Y_{\ell'}^{m'} (\theta, \phi) d \phi d(\cos \theta) = \delta_{\ell \ell'} \delta_{m m'}
+\label{eq:ecuacion_046}
+\end{equation}
+Adicionalmente, los armónicos esféricos forman un conjunto completo para cualquier función razonable de $\theta$ y $\phi$(como las que podemos encontrar en un problema físico), la función puede expandirse como una suma de tales funciones
+\begin{equation}
+f(\theta, \phi) = \sum_{\ell=0}^{\infty} \sum_{-\ell}^{\ell} a_{\ell m} Y_{\ell}^{m} (\theta, \phi)
+\label{eq:ecuacion_047}
+\end{equation}
+las constantes $a_{\ell m}$ están dadas por
+\begin{equation}
+a_{\ell m} = \int_{-1}^{1} \int_{0}^{2 \pi} [ Y_{\ell}^{m} (\theta, \phi) ]^{*} f (\theta, \phi) d \theta d (\cos \theta)
+\label{eq:ecuacion_048}
+\end{equation}
+Esto es una analogía exacta con una serie de Fourier y es un ejemplo particular de la propiedad general de soluciones de Sturm-Liouville. Aparte de la condición ortonormalidad (\ref{eq:ecuacion_046}), la relación más importante que cumplen los $Y_{\ell}^{m}$ es el teorema de adición de armónicos esféricos:
+\begin{equation}
+P_{\ell} (\cos \gamma) = \dfrac{4 \pi}{2 \ell + 1} \sum_{m = -\ell}^{\ell} Y_{\ell}^{m} (\theta, \phi) [ Y_{\ell}^{m} (\theta^{\prime}, \phi^{\prime}) ]^{*}
+\end{equation}
+donde $(\theta, \phi)$ y $(\theta^{\prime}, \phi^{\prime})$ denotan dos direcciones diferentes a nuestro sistema de coordenadas esféricas polares y que están separadas por un ángulo $\gamma$. En general, la trigonometría esférica (o vectorial) demuestra que estos ángulos obedecen la identidad
+\begin{equation}
+\cos \gamma = \cos \theta \cos \theta^{\prime} + \sin \theta \sin \theta^{\prime} \cos (\phi - \phi^{\prime})
+\label{eq:ecuacion_050}
+\end{equation}
+\end{document}

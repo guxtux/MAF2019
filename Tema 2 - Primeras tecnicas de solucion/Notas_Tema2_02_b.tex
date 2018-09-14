@@ -1,0 +1,420 @@
+\input{../preambulo_doc}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Matemáticas Avanzadas de la Física \\ {\large Solución no homogénea}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Puntos singulares regulares.}
+Se estudiará ahora la solución de la ecuación lineal homogénea de segundo orden
+\begin{equation}
+A(x) y'' +  B(x)y' + C(x)y = 0
+\label{eq:ecuacion_001}
+\end{equation}
+cerca de un punto singular. Recuérdese que si las funciones $A$, $B$ y $C$ son polinomios que no tienen factores comunes, entonces los puntos singulares en la ecuación (\ref{eq:ecuacion_001}) son simplemente los puntos donde $A(x)= 0$. Por ejemplo, $x=0$ es el único punto singular de la ecuación de Bessel de orden $n$,
+\[ x^{2}y'' +  xy' + (x^{2} - n^{2})y = 0 \]
+mientras que la ecuación de Legendre de orden $n$,
+\[(1 - x^{2})y'' -  2xy' + n(n + 1)y = 0 \]
+tiene los dos puntos singulares $x = -1$ y $x = 1$. De aquí, resulta que algunas características de las soluciones de estas ecuaciones, tan importantes en las aplicaciones, son determinadas en gran parte por su comportamiento cerca de sus puntos singulares.
+\\
+De manera general podemos limitar el caso en el que $x =0$ es un punto singular de la ecuación (\ref{eq:ecuacion_001}). Una ecuación diferencial con un punto singular en $x = a$ puede transformarse fácilmente sustituyendo $t = x - a$ en una correspondiente que tenga un punto singular en $0$. Por ejemplo, si se sustituye $t = x - 1$ en la ecuación de Legendre de orden $n$, debido a que
+\begin{eqnarray*}
+y' &=& \dfrac{dy}{dx} = \dfrac{dy}{dt}\dfrac{dt}{dx}= \dfrac{dy}{dt} \nonumber \\ 
+y'' &=& \dfrac{d^{2} y}{d x^{2}} = \left[ \dfrac{d}{dt} \left( \dfrac{dy}{dx} \right) \right] \dfrac{dt}{dx} = \dfrac{d^{2}y}{d t^{2}} \nonumber
+\end{eqnarray*}
+además $1-x^{2} = 1 - (t+1)^{2} = -t -t^{2}$, se obtiene la ecuación
+\[ -t (t+2) \dfrac{d^{2}y}{dt^{2}} - t(t+1) \dfrac{dy}{dt} + n(n+1) y = 0 \]
+Esta nueva ecuación tiene el punto singular $t = 0$ que corresponde a $x = 1$ en la ecuación original; tiene también un punto singular $t = -2$ que corresponde a $x = -1$.
+\subsection{Tipos de puntos singulares.}
+Una ecuación diferencial con un punto singular en $0$ comúnmente no tendrá soluciones en serie de potencias de la forma $y(x) = \sum c_{n} x^{n}$, de tal manera que el método de cálculo en series falla en este caso. Para investigar la forma que podría tomar la solución de una ecuación de este tipo, se considera que los coeficientes de la ecuación (\ref{eq:ecuacion_001}) tienen funciones analíticas, por lo que se reescribe la ecuación en la forma estándar
+\begin{equation}
+y'' + P(x) y' + Q(x) y = 0
+\label{eq:ecuacion_002}
+\end{equation}
+donde $P = B/A$ y $Q = C/A$. Recuérdese que $x = 0$ es un punto ordinario (en oposición a un punto singular) de la ecuación (\ref{eq:ecuacion_002}) si las funciones $P(x)$ y $Q(x)$ son analíticas en $x = 0$; esto es, si $P(x)$ y $Q(x)$ tienen desarrollos en serie de potencias de $x$ convergentes en algún intervalo abierto que contenga $x = 0$.
+\\
+Puede ahora probarse que cada una de las funciones $P(x)$ y $Q(x)$ o es analítica o se aproxima a $\pm \infty$ conforme $x  \to 0$. En consecuencia, $x = 0$ es un punto singular de la ecuación (\ref{eq:ecuacion_002}) siempre que $P(x)$ o
+$Q(x)$ (o ambas) se aproximen a $\pm \infty$ conforme $x \to 0$. Por ejemplo, si se reescribe la ecuación de Bessel de orden $n$ en la forma
+\[ y'' + \dfrac{1}{x} y' + \left( 1 - \dfrac{n^{2}}{x^{2}} \right) y  = 0\]
+se observa que $P(x) = 1/x$ y $Q(x) = 1 - (n/x)^{2}$ tienden a infinito conforme $x \to 0$.
+\\
+Veremos que la aplicación del método de series de potencias puede generalizarse para aplicarse cerca del punto singular $x = 0$ en la ecuación (\ref{eq:ecuacion_002}), siempre que $P(x)$ tienda a infinito más lentamente que $1/x$, y $Q(x)$ no más rápido que $1/x^{2}$ conforme $x \to 0$. Ésta es una forma de decir que $P(x)$ y $Q(x)$ tienen únicamente singularidades ''débiles'' en $x = 0$.
+\\
+Para establecer esto con mayor precisión, se reescribela ecuación (\ref{eq:ecuacion_002}) en la forma
+\begin{equation}
+y'' + \dfrac{p(x)}{x} y' + \dfrac{q(x)}{x^{2}} y = 0
+\label{eq:ecuacion_003}
+\end{equation}
+donde
+\begin{equation}
+p(x) = x P(x) \mbox{ y } q(x) = x^{2} Q(x)
+\label{eq:ecuacion_004}
+\end{equation}
+\textbf{Definición: Puntos singular regular.}
+\\
+El punto singular $x = 0$ de la ecuación (\ref{eq:ecuacion_003}) es un \textbf{punto singular regular} si las funciones $p(x)$ y $q(x)$ son ambas analíticas en $x = 0$. De otra manera es un \textbf{punto singular irregular}.
+\\
+En particular, el punto singular $x = 0$ es un punto singular regular si $p(x)$ y $q(x)$ son ambas polinomios. Por ejemplo, se observa que $x = 0$ es un punto singular regular de la ecuación de Bessel de orden $n$ al escribir esa ecuación en la forma
+\[ y'' + \dfrac{1}{x} y' + \dfrac{x^{2} - n^{2}}{x^{2}}y =  \]
+nótese que $p(x) \equiv 1$ y $q(x)= x^{2} - n^{2}$ son ambas polinomios en $x$.
+\\
+En contraste, considérese la ecuación
+\[ 2 x^{3} y'' + (1+x) y' + 3xy = 0 \]
+la cual tiene el punto singular $x = 0$. Si esta ecuación se escribe en la forma de (\ref{eq:ecuacion_003}), se obtiene
+\[ y'' + \dfrac{(1+x)/(2x^{2})}{x} y' + \dfrac{3/2}{x^{2}} y = 0 \]
+Debido a que
+\[ p(x) = \dfrac{1 + x}{2x^{2}} =  \dfrac{1}{2x^{2}} + \dfrac{1}{2x} \to \infty \]
+conforme $x \to 0$ (aunque $q(x) \equiv 3/2$ es un polinomio), se observa que $x = 0$ es un punto singular irregular. No se discutirá la solución de ecuaciones diferenciales cercanas a puntos singulares irregulares; éste es un tema considerablemente más avanzado que la solución de ecuaciones diferenciales cercanas a puntos singulares regulares.
+\\
+\textbf{Ejemplo.}
+\\
+Considera la siguiente ecuación diferencial
+\[ x^{2}(1+x)y'' + x(4-x^{2}) y' + (2+3x)y = 0 \]
+En la forma canónica $y'' + Py' y Qy = 0$, resulta
+\[  y'' + \dfrac{4-x^{2}}{x(1+x)} y' + \dfrac{2+3x}{x^{2}(1+x)} y = 0 \]
+Debido a que
+\[ P(x) = \dfrac{4-x^{2}}{x(1+x)} \mbox{ y } Q(x) = \dfrac{2+3x}{x^{2}(1+x)} \]
+ambos coeficientes tienden a $\infty$ conforme $x \to 0$, donde se observa que $x = 0$ es un punto singular. Para determinar la naturaleza de este punto singular, debe escribirse la ecuación diferencial en la forma de la ecuación (\ref{eq:ecuacion_003}):
+\[ y'' + \dfrac{(4-x^{2})/(1+x)}{x} y' + \dfrac{(2+3x)/(1+x)}{x^{2}} y = 0 \]
+De este modo
+\[ p(x) = \dfrac{4-x^{2}}{1+x} \mbox{ y } q(x) = \dfrac{2+3x}{1+x} \]
+Debido a que el cociente de los polinomios es analítico en cualquier punto siempre que el denominador sea diferente de cero, se observa que $p(x)$ y $q(x)$ son ambas analíticas en $x = 0$. En consecuencia, $x = 0$ es un punto singular regular de la ecuación diferencial dada.
+\\
+Puede suceder que cuando se empieza con una ecuación diferencial en la forma general dada en la ecuación (\ref{eq:ecuacion_001}), y se reescribe en la forma en (\ref{eq:ecuacion_003}), las funciones $p(x)$ y $q(x)$, tal como se dan en (\ref{eq:ecuacion_004}), son formas indeterminadas en $x = 0$. En este caso, La situación es determinada por los límites
+\begin{equation}
+p_{0} = p(0) = \lim_{x \to 0} p(x) = \lim_{x \to 0} x P(x)
+\label{eq:ecuacion_005}
+\end{equation}
+y por
+\begin{equation}
+q_{0} = q(0) = \lim_{x \to 0} q(x) = \lim_{x \to 0} x^{2} Q(x)
+\label{eq:ecuacion_006}
+\end{equation}
+Si $p_{0} = 0 = q_{0}$, entonces $x = 0$ puede ser un punto ordinario de la ecuación diferencial $x^{2}y'' + xp(x) y'+ q(x)y = 0$ en (\ref{eq:ecuacion_003}). De otro modo,
+\begin{itemize}
+\item Si los límites en (\ref{eq:ecuacion_005}) y (\ref{eq:ecuacion_006}) existen y son finitos, entonces $x = 0$ es un punto singular regular.
+\item Si alguno de los límites no existe o es infinito, entonces $x = 0$ es un punto singular irregular.
+\end{itemize}
+\textbf{Ejemplo}
+\\
+Considera el punto $x=0$ para la EDO 
+\[ x^{4} y'' + (x^{2} \sin x) y' + (1 - \cos x) y = 0 \]
+la pasamos primero en la forma dada por (\ref{eq:ecuacion_003})
+\[ y'' + \dfrac{(\sin x)/x}{x} y' + \dfrac{(1-\cos x)/x^{2}}{x^{2}} y = 0 \]
+usando la regla de l'Hopital se obtienen los valores
+\[ p_{0} = \lim_{x \to o} \dfrac{\sin x}{x} = \lim_{x \to 0} \dfrac{\cos x}{1} = 1 \]
+y 
+\[ q_{0} = \lim_{x \to o} \dfrac{1 - \cos x}{x^{2}} = \lim_{x \to 0} \dfrac{\sin x}{2x} = \dfrac{1}{2} \]
+para los límites en las ecuaciones (\ref{eq:ecuacion_005}) y (\ref{eq:ecuacion_006}). Puesto que ambos no son cero, se observa que $x = 0$ no es un punto ordinario. Pero sus límites son finitos, de tal manera que el punto singular $x = 0$ es regular. De forma alternativa, puede escribirse
+\[ p(x) = \dfrac{\sin x}{x} = \dfrac{1}{x} \left( x - \dfrac{x^{3}}{3!} + \dfrac{x^{5}}{5!} - \ldots \right) = 1 - \dfrac{x^{2}}{3!} - \dfrac{x^{4}}{5!} - \ldots \]
+y
+\[ q(x) = \dfrac{1 - \cos x}{x^{2}} = \dfrac{1}{x^{2}} \left[ 1 - \left( 1 -  \dfrac{x^{2}}{2!} + \dfrac{x^{4}}{4!} - \dfrac{x^{6}}{6!} +  \ldots \right) \right] = \dfrac{1}{2!} - \dfrac{x^{2}}{4!} + \dfrac{x^{4}}{6!} - \ldots \]
+Esta series de potencias (convergentes) muestran explícitamente que $p(x)$ y $q(x)$ son analíticas, y además que $p_{0} =  p(0) = 1$ y $q_{0} = q(0) = 1/2$, por lo que se verifica directamente que $x = 0$ es un punto singular regular.
+\section{Método de Frobenius.}
+Ahora se intentará realmente encontrar las soluciones de una ecuación diferencial lineal de segundo orden cerca de un punto singular regular $x = 0$. La ecuación más simple de este tipo es la ecuación equidimensional de coeficientes constantes
+\begin{equation}
+x^{2} y'' + p_{0} xy' + q_{0} y = 0
+\label{eq:ecuacion_007}
+\end{equation}
+a la cual se reduce la ecuación (\ref{eq:ecuacion_003}) cuando $p(x) \equiv p_{0}$ y $q(x) \equiv q_{0}$ son constantes. En este caso, puede verificarse por sustitución directa que la simple función de potencias $y(x) = x^{r}$ es una solución de la ecuación (\ref{eq:ecuacion_007}) si y sólo si $r$ es una raíz de la ecuación cuadrática
+\begin{equation}
+r(r-1) + p_{0} r + q_{0} = 0
+\label{eq:ecuacion_008}
+\end{equation}
+En el caso general en que $p(x)$ y $q(x)$ son series de potencias en lugar de constantes, una conjetura razonable es que la ecuación diferencial podría tener una solución de la forma
+\begin{equation}
+y(x) = x^{r} \sum_{n=0}^{\infty} c_{n} x^{n} =  \sum_{n=0}^{\infty} c_{n} x^{n+r} =  c_{0} x^{r} + c_{1} x^{r+1} +c_{2} x^{r+2} + \ldots
+\label{eq:ecuacion_009}
+\end{equation}
+(el producto de $x^{r}$ y una serie de potencias). Esto resulta en una suposición fructífera; de acuerdo con el teorema 1 (que se establecerá más adelante), toda ecuación de la forma dada en (\ref{eq:ecuacion_001}) con $x = 0$ como un punto singular regular tiene al menos una solución de este tipo. Este hecho es la base del método de Frobenius, nombrado así
+en honor del matemático alemán Georg Frobenius (1848-1917), quien descubrió el método en 1870.
+\\
+Una serie infinita de la forma dada en (\ref{eq:ecuacion_009}) se llama serie de Frobenius. Nótese que ésta por lo general no es una serie de potencias. Por ejemplo, si $r = - 1/2$ , la serie dada en (\ref{eq:ecuacion_009}) toma la forma
+\[ y =  c_{0} x^{-1/2} + c_{1} x^{1/2} + c_{2} x^{3/2} + c_{3} x^{5/2} + \ldots \]
+y no es unan serie en potencias enteras de $x$.
+\\
+Para investigar la posible existencia de una solución en serie de Frobenius se inicia con la ecuación
+\begin{equation}
+x^{2} y'' + x p(x) y' + q(x) y = 0
+\label{eq:ecuacion_010}
+\end{equation}
+que se obtiene multiplicando la ecuación (\ref{eq:ecuacion_003}) por $x^{2}$. Si $x = 0$ es un punto singular regular, entonces $p(x)$ y $q(x)$ son analíticas en $x = 0$, de tal manera que
+\begin{eqnarray}
+\begin{aligned}
+p(x) &= p_{0} + p_{1} x + p_{2} x^{2} + p_{3} x^{3} + \ldots , \\
+q(x) &= q_{0} + q_{1} x + q_{2} x^{2} + q_{3} x^{3} + \ldots
+\end{aligned}
+\label{eq:ecuacion_011}
+\end{eqnarray}
+Suponemos que la ecuación (\ref{eq:ecuacion_010}) tiene una solución en serie de Frobenius
+\begin{equation}
+y = \sum_{n=0}^{\infty} c_{n} x^{n+r}
+\label{eq:ecuacion_012}
+\end{equation}
+Se puede considerar (y siempre se hace) que $c_{0} \neq 0$, debido a que la serie debe tener un primer término diferente de cero. Al derivar término a término la ecuación (\ref{eq:ecuacion_012}) se tiene
+\begin{equation}
+y' = \sum_{n=0}^{\infty} c_{n} (n+r) x^{n+r-1} 
+\label{eq:ecuacion_013}
+\end{equation}
+y
+\begin{equation}
+y'' = \sum_{n=0}^{\infty} c_{n} (n+r)(n+r-1) x^{n+r-2} 
+\label{eq:ecuacion_014}
+\end{equation}
+La sustitución de las series en las ecuaciones (\ref{eq:ecuacion_011}) a la (\ref{eq:ecuacion_014}) en la ecuacion (\ref{eq:ecuacion_010}) resulta
+\begin{eqnarray}
+\begin{aligned}
+\left[ r(r - 1) c_{0} x^{r} + (r + 1) r c_{1} x^{r+1} + \ldots \right]  \\
++ [p_{0} x + p_{1} x^{2} + \ldots] [ r c_{0} x^{r-1} + (r+1) c_{1} x^{r} + \ldots] \\
++ [q_{0} + q_{1} x + \ldots] [ c_{0} x^{r} + c_{1} x^{r+1} + \ldots] = 0 
+\end{aligned}
+\label{eq:ecuacion_015}
+\end{eqnarray}
+Después de la multiplicación de los términos iniciales de los dos productos en el lado izquierdo, y agrupando coeficientes de $x^{r}$, se observa que el término de menor grado en la ecuación (\ref{eq:ecuacion_015}) es $c_{0}[r(r - 1)+ p_{0}r + q_{0}]x^{r}$. Si la ecuación (\ref{eq:ecuacion_015}) debe satisfacerse idénticamente, entonces los coeficientes de este término (así como los coeficientes de grados mayores) deben anularse. Pero considerando que $c_{0} \neq 0$, se concluye que $r$ debe satisfacer la ecuación cuadrática
+\begin{equation}
+r(r+1) + p_{0}r + q_{0} = 0
+\label{eq:ecuacion_016}
+\end{equation}
+que es precisamente de la misma forma que la obtenida con la ecuación equidimensional dada en (\ref{eq:ecuacion_007}). La ecuación (\ref{eq:ecuacion_016}) se llama ecuación de índices de la ecuación diferencial en (\ref{eq:ecuacion_010}), y sus dos raíces (posiblemente iguales) son los exponentes de la ecuación diferencial (en el punto singular regular $x = 0$).
+\\
+La deducción de la ecuación (\ref{eq:ecuacion_016}) muestra que si la serie de Frobenius $y = x^{r} \sum c_{n} x^{n}$ fuese una solución de la ecuación diferencial en (\ref{eq:ecuacion_010}), entonces el exponente $r$ debe ser una de las raíces $r_{1}$ y $r_{2}$ de la ecuación de índices dada en (\ref{eq:ecuacion_016}). Si $r_{1} \neq r_{2}$, se concluye que hay dos posibles soluciones en términos de series de Frobenius, mientras que si $r_{1} = r_{2}$ existe, sólo hay una solución posible de este tipo; la segunda solución no puede ser una serie de Frobenius.
+\\
+Los exponentes $r_{1}$ y $r_{2}$ en las posibles soluciones en términos de series de Frobenius se determinan (utilizando la ecuación de índices) por los valores $p_{0} = p(0)$ y $q_{0} = q(0)$ que ya se han discutido. En la práctica, particularmente cuando los coeficientes de la ecuación diferencial en la forma original dada en (\ref{eq:ecuacion_001}) son polinomios, con frecuencia la forma más simple de encontrar $p_{0}$ y $q_{0}$ es escribir la ecuación en la forma
+\begin{equation}
+y'' + \dfrac{p_{0} + p_{1} x + p_{2} x^{2} + \ldots}{x} y' + \dfrac{q_{0} + q_{1} x + q_{2} x^{2} + \ldots}{x^{2}} y = 0
+\label{eq:ecuacion_017}
+\end{equation}
+Entonces, la inspección de las series que aparecen en los dos numeradores revela las constantes $p_{0}$ y $q_{0}$.
+\\
+\textbf{Ejemplo:}
+\\
+Encuéntrense los exponentes de las soluciones posibles en series de Frobenius de la ecuación
+\[ 2 x^{2} (1+x) y'' + 3x(1+x)^{3} y' - (1-x^{2}) y = 0 \]
+Al dividir cada término entre $2x^{2}(1+x)$, podemos re-escribir la ED de la forma
+\[ y'' + \dfrac{\frac{3}{2}(1 + 2x + x^{2}}{x} y' + \dfrac{-\frac{1}{2} (1-x)}{x^{2}} y = 0 \]
+de este modo tenemos que $p_{0} = \frac{3}{2}$ y $q_{0} = - \frac{1}{2}$. Por lo que la ecuación indicial es
+\[ r(r-1) + \frac{3}{2} r - \frac{1}{2} = r^{2} + \frac{1}{2} r - \frac{1}{2} = (r+1)(r-\frac{1}{2}) = 0 \]
+con raíces $r_{1}=\frac{1}{2}$ y $r_{2} = -1$. Las dos soluciones posibles en series de Frobenius son de las formas
+\begin{eqnarray*}
+y_{1} &= x^{1/2} \sum_{n=0}^{\infty} a_{n} x^{n} \nonumber \\
+y_{2} &= x^{-1} \sum_{n=0}^{\infty} b_{n} x^{n} \nonumber \\
+\end{eqnarray*}
+\subsection{Soluciones en series de Frobenius.}
+Una vez que se conocen los exponentes $r_{1}$ y $r_{2}$, los coeficientes de una solución en series de Frobenius se determinan sustituyendo las series en las ecuaciones (\ref{eq:ecuacion_012}) a la (\ref{eq:ecuacion_014}) en la ecuación diferencial, siguiendo en esencia el mismo método utilizado para determinar los coeficientes en las soluciones en series de potencias.
+\\
+Si los exponentes $r_{1}$ y $r_{2}$ son complejos conjugados, entonces siempre existirán dos soluciones en términos de series de Frobenius linealmente independientes. Aquí se restringe la atención para el caso en el cual $r_{1}$ y $r_{2}$ son reales. También se buscarán soluciones únicamente para $x>0$. Una vez que se encuentra una solución de este tipo, sólo se necesita reemplazar $x^{r_{1}}$ por $\vert x \vert^{r_{1}}$.
+\newtheorem{teorema}{Teorema}
+\begin{teorema}
+\label{teo:Teorema_01}
+Soluciones en series de Frobenius.
+\\
+Supongamos que $x=0$ es un punto singular regular de la ecuación
+\begin{equation}
+x^{2} y'' + xp(x) y' + q(x) y = 0
+\end{equation}
+donde las series de potencias
+\[ p(x) = \sum_{n=0}^{\infty} p_{n} x^{n} \mbox{ y } q(x) = \sum_{n=0}^{\infty} q_{n} x^{n} \]
+Sean $r_{1}$ y $r_{2}$ las raíces (reales), con $r_{1} \geq r_{2}$, de la ecuación de índices $r(r-1) + p_{0}r + q_{0} = 0$. Entonces:
+\begin{enumerate}[(a)]
+\item Para $x>0$ existe una solución de la ecuación (\ref{eq:ecuacion_010}) de la forma
+\begin{equation}
+y_{1} = x^{r_{1}} \sum_{n=0}^{\infty} a_{n} x^{n} \hspace{1cm} (a_{0} \neq 0)
+\label{eq:ecuacion_018}
+\end{equation}
+correspondiente a la raíz más grande $r_{1}$.
+\item Si $r_{1} - r_{2}$ no es ni cero ni un entero positivo, entonces existe una segunda solución linealmente independiente para $x > 0$ de la forma
+\begin{equation}
+y_{2}(x) = x^{r_{2}} \sum_{n=0}^{\infty} b_{n} x^{n} \hspace{1cm} (b_{0} \neq 0)
+\label{eq:ecuacion_019}
+\end{equation}
+correspondiente a la raíz más pequeña $r_{2}$.
+\end{enumerate}
+\end{teorema}
+\textbf{Ejemplo:}
+\\
+Encuéntrense las soluciones en términos de series de Frobenius de
+\begin{equation}
+2 x^{2} y'' + 3 x y' - (x^{2} + 1) y = 0
+\label{eq:ecuacion_020}
+\end{equation}
+Dividimos primero cada término entre $2x^{2}$ para escribir la ecuación en la forma dada en (\ref{eq:ecuacion_017}):
+\begin{equation}
+y'' + \dfrac{\frac{3}{2} (1 + 2x + x^{2})}{x} y' + \dfrac{-\frac{1}{2}(1-x)}{x^{2}} y = 0
+\label{eq:ecuacion_021}
+\end{equation}
+Se nota que $x=0$ es un punto singular regular, además $p_{0} = \frac{3}{2}$ y $q_{0} = -\frac{1}{2}$. Dado que $p(x) \equiv \frac{3}{2}$ y $q(x) = - \frac{1}{2} - \frac{1}{2} x^{2}$ son polinomios, la serie de Frobenius obtenida, será convergente para toda $x>0$. La ecuación de índices es
+\[ r (r-1) + \frac{3}{2} r - \frac{1}{2} = \left( r - \frac{1}{2} \right)(r+1) = 0 \]
+de modo que los exponentes son $r_{1} = \frac{1}{2}$ y $r_{2}=-1$.
+\\
+Como su diferencia no corresponde a un entero, entonces el teorema (\ref{teo:Teorema_01}) garantiza la existencia de dos soluciones en términos de series de Frobenius linealmente independientes. En lugar de sustituir por separado
+\[ y_{1} = x^{1/2} \sum_{n=0}^{\infty} a_{n} x^{n} \mbox{ y } y_{2} = x^{-1} \sum_{n=0}^{\infty} b_{n} x^{n} \]
+en la ecuación (\ref{eq:ecuacion_020}), es más eficiente iniciar sustituyendo $y = x^{r} \sum c_{n} x^{n}$.
+\\
+Se obtendrá entonces una fórmula de recurrencia que depende de $r$. Con el valor $r_{1} = \frac{1}{2}$ se obtiene una fórmula de recurrencia para la serie de $y_{1}$, mientras que con $r_{2} = -1$ se logra una fórmula de recurrencia para la serie de $y_{2}$.
+\\
+Cuando se sustituyen
+\begin{eqnarray*}
+y &=& \sum_{n=0}^{\infty} c_{n} x^{n+r} \nonumber \\
+y' &=& \sum_{n=0}^{\infty} (n+r) c_{n} x^{n+r-1} \nonumber \\
+y'' &=& \sum_{n=0}^{\infty}(n+r)(n+r-1) c_{n} x^{n+r-2} \nonumber
+\end{eqnarray*}
+en la ecuación (\ref{eq:ecuacion_020}), en lugar de la ecuación (\ref{eq:ecuacion_021}) se obtiene
+\begin{equation}
+\begin{aligned}
+2 \sum_{n=0}^{\infty}(n+r)(n+r-1) c_{n} x^{n+r} &+ 3 \sum_{n=0}^{\infty}(n+r) c_{n} x^{n+r} + \\
+&- \sum_{n=0}^{\infty} c_{n} x^{n+r+2} - \sum_{n=0}^{\infty} c_{n} x^{n+r} = 0
+\end{aligned}
+\label{eq:ecuacion_022}
+\end{equation}
+En esta etapa hay varios caminos a seguir. Una buena práctica estándar es correr los índices de tal manera que cada exponente sea igual al más pequeño índice que esté presente. En este ejemplo, se corren los índices de la tercera suma en $-2$ para reducir su exponente de $n + r + 2$ a $n + r$. Esto resulta en
+\begin{equation}
+\begin{aligned}
+2 \sum_{n=0}^{\infty}(n+r)(n+r-1) c_{n} x^{n+r} &+ 3 \sum_{n=0}^{\infty}(n+r) c_{n} x^{n+r} + \\
+&- \sum_{n=2}^{\infty} c_{n-2} x^{n+r} - \sum_{n=0}^{\infty} c_{n} x^{n+r} = 0
+\end{aligned}
+\label{eq:ecuacion_023}
+\end{equation}
+El rango común de la suma es $n \geq 2$, por lo que deben tratarse $n = 0$ y $n = 1$ por separado. Siguiendo la práctica estándar, los términos correspondientes a $n = 0$ siempre proporcionarán la ecuación para el índice
+\[ [2r (r-1) + 3r - 1] c_{0} = 2 (r^{2} + \frac{1}{2} r - \frac{1}{2} ) c_{0} = 0\]
+Los términos correspondientes a $n=1$ resultan en
+\[ [2r (r-1) + 3(r - 1) -1 ] c_{1} = (2 r^{2} + 5 r + 2 ) c_{1} = 0\]
+Debido a que el coeficiente $2r^{2} + 5r + 2$ de $c_{1}$ es diferente de cero si $r = \frac{1}{2}$ o $r=-1$, se concluye que
+\begin{equation}
+c_{1} = 0
+\label{eq:ecuacion_024}
+\end{equation}
+en cualquier caso.
+\\
+El coeficiente de $x^{n+r}$ en la ecuación (\ref{eq:ecuacion_023}) es
+\[ 2(n+r)(n+r-1) c_{n} + 3(n+r) c_{n} - c_{n} - c_{n-2} - c_{n} = 0 \]
+Despejando $c_{n}$ y simplificando, se obtiene la fórmula de recurrencia
+\begin{equation}
+c_{n} = \dfrac{c_{n-2}}{2(n+r)^{2} + (n+r) - 1} \hspace{1cm} \mbox{ para } n \geq 2
+\label{eq:ecuacion_025}
+\end{equation}
+\begin{enumerate}[C{a}so 1.]
+\item $r_{1}= \frac{1}{2}$. Se escribe ahora $a_{n}$ en lugar de $c_{n}$ y se sustituye $r = \frac{1}{2}$  en la ecuación (\ref{eq:ecuacion_025}). Con esto se obtiene la fórmula de recurrencia
+\begin{equation}
+a_{n} =  \dfrac{a_{n-2}}{2 n^{2} + 3n} \hspace{1cm} \mbox{ para } n \geq 2
+\label{eq:ecuacion_026}
+\end{equation}
+Con esta fórmula se pueden determinar los coeficientes en la primera solución de Frobenius $y_{1}$. En la ecuación (\ref{eq:ecuacion_024}) se observa que $a_{n} = 0$ siempre que $n$ sea impar.
+\\
+Con $n = 2, 4, 6$ en la ecuación (\ref{eq:ecuacion_026}) se obtiene
+\[ a_{2} = \dfrac{a_{0}}{14}, \hspace{1cm} a_{4} = \dfrac{a_{2}}{44} = \dfrac{a_{0}}{616}, \hspace{1cm} a_{6} = \dfrac{a_{4}}{90} = \dfrac{a_{0}}{55440} \]
+Así, la primera solución de Frobenius es
+\[ y_{1}(x) = a_{0} x^{1/2} \left( 1 + \dfrac{x^{2}}{14} + \dfrac{x^{4}}{616} + \dfrac{x^{6}}{55440} + \ldots \right)  \]
+\item $r_{2} = -1$. Ahora se escribe $b_{n}$ en lugar de $c_{n}$ y se sustituye $r = -1$ en la ecuación (\ref{eq:ecuacion_025}). Con esto se obtiene la fórmula de recurrencia
+\begin{equation}
+b_{n} = \dfrac{b_{n-2}}{2 b^{2} - 3n} \hspace{1cm} \mbox{ para } n \geq 2
+\label{eq:ecuacion_027}
+\end{equation}
+Nuevamente la ecuación )\ref{eq:ecuacion_024}) implica que $b_{n}=0$ para $n$ impar. Con $n = 2,4,6$ en (\ref{eq:ecuacion_027}) se obtiene
+\[ b_{2} = \dfrac{b_{0}}{2}, \hspace{1cm} b_{4} = \dfrac{b_{2}}{20} = \dfrac{b_{0}}{40}, \hspace{1cm} b_{6} = \dfrac{b_{4}}{54} = \dfrac{b_{0}}{2160} \]
+Por lo que la segunda solución de Frobenius es
+\[ y_{2}(x) = b_{0} x^{-1} \left( 1 + \dfrac{x^{2}}{2} + \dfrac{x^{4}}{40} + \dfrac{x^{6}}{2160} + \ldots \right) \]
+\end{enumerate}
+\textbf{Ejemplo:}
+\\
+Encuéntrese una solución de Frobenius de la ecuación de Bessel de orden cero,
+\begin{equation}
+x^{2} y'' + x y' + x^{2} y = 0
+\label{eq:ecuacion_028}
+\end{equation}
+En la forma de (\ref{eq:ecuacion_017}) la ecuación (\ref{eq:ecuacion_028}) se transforma en
+\[ y'' + \dfrac{1}{x} y ' + \dfrac{x^{2}}{x^{2}} y = 0 \]
+Por tanto, $x = 0$ es un punto singular regular con $p(x) \equiv 1$ y $q(x) = x^{2}$, de tal manera que las series serán convergentes para toda $x > 0$. Debido a que $p_{0} = 1$ y $q_{0} = 0$, la ecuación de índices es
+\[ r(r - 1) + r = r^{2} 0 \]
+De este modo, se obtiene sólo un exponente $r = 0$ y por tanto existe solamente una solución en términos de la serie de Frobenius
+\[ y(x) = x^{0} \sum_{n=0}^{\infty} c_{n} x^{n} \]
+de la ecuación (\ref{eq:ecuacion_028}), ésta es de hecho una serie de potencias.
+\\
+Así, al sustituir $y= \sum c_{n} x^{n}$ en (\ref{eq:ecuacion_028}), el resultado es
+\[ \sum_{n=0}^{\infty} n (n-1) c_{n} x^{n} + \sum_{n=0}^{\infty} n c_{n} x^{n} + \sum_{n=0}^{\infty} c_{n} x^{n+2} = 0 \]
+Combinando las dos primeras sumas y corriendo el índice de la tercera en $-2$, se obtiene
+\[ \sum_{n=0}^{\infty} n^{2} c_{n} x^{n} + \sum_{n=2}^{\infty} c_{n-2} x^{n} = 0 \]
+El término correspondiente a $x^{0}$ resulta en que $0 = 0$; es decir, no proporciona información. El término correspondiente a $x^{1}$ resulta en que $c_{1} = 0$, y el término para $x^{n}$ obtiene la fórmula de recurrencia
+\begin{equation}
+c_{n} = - \dfrac{c_{n-2}}{n^{2}} \hspace{1cm} \mbox{ para } n \geq 2
+\label{eq:ecuacion_029}
+\end{equation}
+Debido a que $c_{1} = 0$, se observa que $c_{n} = 0$ siempre que $n$ sea impar. Sustituyendo $n = 2, 4, 6$ en la ecuación (\ref{eq:ecuacion_029}), se obtiene
+\[ c_{2} = - \dfrac{c_{0}}{2^{2}}, \hspace{1cm} c_{4} = - \dfrac{c_{2}}{4^{2}} = \dfrac{c_{0}}{2^{2} \cdot 4^{2}}, \hspace{1cm} c_{6} = - \dfrac{c_{4}}{6^{2}} = \dfrac{c_{0}}{2^{2} \cdot 4^{2} \cdot 6^{2}} \]
+La elección de $c_{0} = 1$ proporciona una de las más importantes funciones especiales en matemáticas, la \textbf{función de Bessel de orden cero de primera clase}, que se representa por $J_{0}(x)$. De este modo,
+\begin{equation}
+J_{0}(x) = \sum_{n=0}^{\infty} \dfrac{(-1)^{n} x^{2n}}{2^{2n}(n!)^{2}} = 1 - \dfrac{x^{2}}{4} + \dfrac{x^{4}}{64} - \dfrac{x^{6}}{2304 + \ldots}
+\label{eq:ecuacion_030}
+\end{equation}
+En este ejemplo no se ha podido encontrar una segunda solución linealmente independiente de la ecuación de Bessel de orden cero.
+\subsection{Cuando $r_{1}-r_{2}$ es un entero.}
+Recordemos que si $r_{1} - r_{2}$ es un entero positivo, entonces el teorema (\ref{teo:Teorema_01}) garantiza solamente la existencia de la solución en términos de serie de Frobenius correspondiente al exponente mayor $r_{1}$. El siguiente ejemplo ilustra el caso afortunado en el cual el método de series obtiene, no obstante, una segunda solución en términos de serie de Frobenius.
+\\
+\textbf{Ejemplo:}
+\\
+Encuéntrense las soluciones en términos de series de Frobenius de
+\begin{equation}
+x y'' + 2 y' + xy = 0
+\label{eq:ecuacion_031}
+\end{equation}
+La ecuación en la forma estándar se convierte en
+\[ y'' + \dfrac{2}{x} y' + \dfrac{x^{2}}{x^{2}} y = 0 \]
+de esta manera se observa que $x = 0$ es un punto singular regular con $p_{0} = 2$ y $q_{0} = 0$.
+\\
+La ecuación de índices
+\[ r(r - 1) + 2r = r(r + 1) = 0 \]
+tiene raíces $r_{1} = 0$ y $r_{2} = -1$, las cuales difieren en un entero. En este caso, cuando $r_{1} - r_{2}$ es un entero, es mejor partir del procedimiento estándar e iniciar el trabajo con el exponente más pequeño. Como se verá, la fórmula de recurrencia nos dirá entonces si existe o no una segunda solución en términos de series de Frobenius.
+\\
+Si existe, los cálculos proporcionarán simultáneamente ambas soluciones de Frobenius. Si no existe la segunda solución se inicia de nuevo con el exponente más grande $r = r_{1}$ para obtener la solución de Frobenius que garantiza el teorema (\ref{teo:Teorema_01})
+\\
+Por tanto, se inicia con la sustitución de
+\[ y = x^{-1} \sum_{n=0}^{\infty} c_{n} x^{n} = \sum_{n=0}^{\infty} c_{n} x^{n-1}  \]
+en la ecuación (\ref{eq:ecuacion_031}). Con esto se encuentra
+\[ \sum_{n=0}^{\infty}(n-1)(n-2) c_{n} x^{n-2} +  2 \sum_{n=0}^{\infty} (n-1) c_{n} x^{n-2} + \sum_{n=0}^{\infty} c_{n} x^{n} = 0 \]
+Combinando las dos primeras sumas y corriendo el índice de la tercera en $-2$ se obtiene
+\begin{equation}
+\sum_{n=0}^{\infty} n(n-1) c_{n} x^{n-2} + \sum_{n=0}^{\infty} c_{n-2} x^{n-2} = 0
+\label{eq:ecuacion_032}
+\end{equation}
+Los casos para $n = 0$ y $n = 1$ se reducen a
+\[ 0 \cdot c_{0} = 0 \mbox{ y } 0 \cdot c_{1} = 0 \]
+De esta forma se tienen \emph{dos} constantes arbitrarias $c_{0}$ y $c_{1}$, por lo que puede esperarse encontrar una solución general incorporando dos soluciones de Frobenius linealmente independientes.
+\\
+Si para $n = 1$ se hubiera obtenido una ecuación tal como $0 \cdot c_{1} = 3$, la cual puede satisfacerse sin elegir $c_{1}$, esto significaría que no podría existir la segunda solución en series de Frobenius. Sabiendo ahora que todo marcha bien, de (\ref{eq:ecuacion_032}) se puede obtener la fórmula de recurrencia
+\begin{equation}
+c_{n} = - \dfrac{c_{n-2}}{n(n-1)} \hspace{1cm} \mbox{para } n \geq 2
+\label{eq:ecuacion_033}
+\end{equation}
+Los primeros valores de $n$ obtienen
+\begin{eqnarray} \nonumber
+\begin{aligned}
+c_{2} &= - \dfrac{1}{2 \cdot 1} c_{0} \\
+c_{3} &= - \dfrac{1}{3 \cdot 2} c_{1} \\
+c_{4} &= - \dfrac{1}{4 \cdot 3} c_{2} = \dfrac{c_{0}}{4!} 
+\end{aligned}
+\hspace{1.5cm}
+\begin{aligned}
+c_{5} &= - \dfrac{1}{5 \cdot 4} c_{3} = \dfrac{c_{1}}{5!} \\
+c_{6} &= - \dfrac{1}{6 \cdot 5} c_{4} = - \dfrac{c_{0}}{6!} \\
+c_{7} &= - \dfrac{1}{7 \cdot 6} c_{6} = - \dfrac{c_{1}}{7!} 
+\end{aligned}
+\end{eqnarray}
+evidentemente el patrón es
+\[ c_{2n} = - \dfrac{(-1)^{n} c_{0}}{(2n)!} \hspace{1cm} c_{2n+1} = \dfrac{(-1)^{n} c_{1}}{(2n+1)!} \]
+para $n \geq 1$. Por tanto, una solución general de la ecuación (\ref{eq:ecuacion_031}) es
+\[ \begin{split}
+ y(x) &= x^{-1} \sum_{n=0}^{\infty} c_{n} x^{n} \\
+&= \dfrac{c_{0}}{x} \left( 1 - \dfrac{x^{2}}{2!} + \dfrac{x^{4}}{4!} - \ldots \right) + \dfrac{c_{1}}{x} \left( 1 - \dfrac{x^{3}}{3!} + \dfrac{x^{5}}{5!} - \ldots \right) \\
+&= \dfrac{c_{0}}{x} \sum_{n=0}^{\infty} \dfrac{(-1)^{n} x^{2n}}{(2n)!} +  \dfrac{c_{1}}{x} \sum_{n=0}^{\infty} \dfrac{(-1)^{n} x^{2n+1}}{(2n+1)!}
+\end{split} \] 
+Así
+\[ y(x) = \dfrac{1}{x}(c_{0} \cos x +  c_{1} \sin x)  \]
+De este modo se ha encontrado una solución general expresada como una combinación lineal de dos soluciones en términos de series de Frobenius
+\begin{equation}
+y_{1} = \dfrac{\cos x }{x} \mbox{ y } y_{2} = \dfrac{\sin x}{x} 
+\label{eq:ecuacion_034}
+\end{equation}
+
+
+\end{document}

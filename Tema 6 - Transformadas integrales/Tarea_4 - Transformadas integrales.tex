@@ -1,0 +1,109 @@
+\input{../preambulo_doc}
+\usepackage{standalone}
+\usepackage{tikz}   
+\usepackage{tikz-3dplot}
+\usetikzlibrary{decorations.pathmorphing,patterns}
+\usepackage{enumerate}
+\usepackage{pifont}
+\renewcommand{\labelitemi}{\ding{43}}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{{Tarea Examen Transformadas Integrales} \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}})}
+\maketitle
+\fontsize{14}{14}\selectfont
+%Fecha de entrega: \textbf{Martes 31 de mayo del 2106.} 
+\begin{enumerate}
+\item La función $\exp(i\mathbf{k} \cdot \mathbf{r})$ describe una onda plana de momento $\mathbf{p} = \hbar \mathbf{k}$ normalizada a una densidad unitaria, se supone la dependencia del tiempo de $\exp(-i \omega t)$. Demuestra que esas funciones de onda plana satisfacen la relación de ortogonalidad
+\[ \int ( \exp(i \mathbf{k} \cdot \mathbf{r} ))^{*}  \exp(i \mathbf{k}' \cdot \mathbf{r}) \; dx dy dx =  (2 \pi)^{3} \delta(\mathbf{k} - \mathbf{k}')  \]
+\item Un oscilador lineal cuántico en su estado base tiene una función de onda
+\[ \psi(x) = a^{-1/2} \pi^{-1/4} \exp(-x^{2}/2a^{2}) \]
+Demuestra que la correspondiente función de momento es
+\[ g(p) = a^{1/2} \pi^{-1/4} \hbar^{-1/2} \exp(-a^{2}p^{2}/2\hbar^{2}) \]
+\item La ecuación unidimensional de onda de Schrödinger es
+\[ - \dfrac{\hbar^{2}}{2m} \; \dfrac{d^{2} \psi(x)}{d x^{2}} +  V(x) \psi(x) = E \psi (x) \]
+Para el caso especial de que $V(x)$ es una función analítica de $x$, demuestra que la correspondiente ecuación de onda para el momento es
+\[ V \left( i \hbar \dfrac{d}{dp} \right) g(p) + \dfrac{p^{2}}{2m} g(p) =  E g(p)  \]
+Recupera esta ecuación de onda para el momento usando la transformada de Fourier y su inversa. No utilices la sustitución directa $x \to i \hbar (d/dp)$.
+\item Una masa $m$ está sujeta al extremo de un resorte sin comprimir, el resorte tiene constante $k$. Al tiempo $t=0$ el extremo libre del resorte presenta una aceleración constante $a$, lejos de la masa. 
+\begin{figure}[H]
+\centering
+\includestandalone{Figura_01_Tarea4}
+\caption{Sistema masa-resorte.}
+\label{fig:figura1}
+\end{figure}
+Usando la transformada de Laplace
+\begin{enumerate}[label=\alph*)]
+\item Encuentra la posición $x$ de la masa $m$ como función del tiempo.
+\item Determina la expresión que toma $x(t)$ para tiempos pequeños $t$.
+\end{enumerate}
+\item El decaimiento radiactivo de un núcleo sigue la ley
+\[ \dfrac{d N}{d t} = - \lambda N \]
+donde $N$ es la concentración para un núcleo dado y $\lambda$ es la constante de decaimiento. Esta ecuación indica que la tasa de decaimiento es proporcional al número de estos núcleos radiactivos presentes, que decaen de manera independiente. En una serie radiactiva de $n$ núcleos diferentes, iniciando con $N_{1}$,
+\begin{eqnarray*}
+\dfrac{d N_{1}}{dt} &=& - \lambda_{1} N_{1}, \nonumber \\
+\dfrac{d N_{2}}{dt} &=& - \lambda_{1} N_{1} - \lambda_{2} N_{2}, \hspace{0.3cm} \mbox{y así} \nonumber \\
+\dfrac{d N_{n}}{dt} &=& - \lambda_{n-1} N_{n-1}, \hspace{0.3cm} \mbox{estable} \nonumber
+\end{eqnarray*} 
+\begin{enumerate}[label=\alph*)]
+\item Encuentra $N_{1}$, $N_{2}$ y $N_{3}$, $n=3$, con $N_{1}(0)=N_{0}$, $N_{2}(0)=N_{3}(0) =0$.
+\item Encuentra una expresión aproximada para $N_{2}$ y $N_{3}$, para valores pequeños de $t$ cuando $\lambda_{1} \simeq \lambda_{2}$
+\item Encuentra una expresión aproximada para $N_{2}$ y $N_{3}$ válidas para valores grandes de $t$, cuando
+\begin{enumerate}[label=\roman*)]
+\item $\lambda_{1} \gg \lambda_{2}$
+\item $\lambda_{1} \ll \lambda_{2}$
+\end{enumerate}
+\end{enumerate}
+\item El potecial electróstatico de una carga puntual $q$ en el origen dentro de un sistema de coordenadas cilíndrico es
+\[ \dfrac{q}{4 \pi \varepsilon_{0}} \int_{0}^{\infty} \exp(-kz) \; J_{0}(k \rho) dk = \dfrac{q}{4 \pi \varepsilon_{0}}  \;\dfrac{1}{(\rho^{2} + z^{2})^{1/2}}, \hspace{1cm} Re(z) \geq 0\]
+De esta relación, demostrar que las transformadas de Fouriere coseno y seno de $J_{0}(k \rho)$ son
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{\dfrac{\pi}{2}} F_{c} \left[ J_{0} (k \rho) \right] = \displaystyle  \int_{0}^{\infty} J_{0} (k \rho) \; \cos k \zeta dk
+ = \begin{cases}
+(\rho^{2} - \zeta^{2})^{-1/2}, & \rho > \zeta \\
+0, & \rho < \zeta
+\end{cases}$ 
+\item $\sqrt{\dfrac{\pi}{2}} F_{s} \left[ J_{0} (k \rho) \right] = \displaystyle  \int_{0}^{\infty} J_{0} (k \rho) \; \sin k \zeta dk
+ = \begin{cases}
+0, & \rho > \zeta \\
+(\zeta^{2} - \rho^{2})^{-1/2}, & \rho < \zeta
+\end{cases}$ 
+ \end{enumerate}
+\item Resuelve la ecuación de un oscilador armónico amortiguado 
+\[ m X^{\prime \prime} (t) + b X^{\prime}(t) + k X(t) = 0 \]
+con $X(0) = X_{0}$, $X^{\prime}(0) = 0$ y
+\begin{enumerate}[label=\alph*)]
+\item $b^{2} = 4 \mbox{ km}$, caso con amortiguamiento crítico.
+\item $b^{2} > 4 \mbox{ km}$, caso sobreamortiguado.
+\end{enumerate}
+\item Resuelve la misma ecuación de un oscilador armónico amortiguado del ejercicio anterior, con $X(0) = X_{0}$, $X^{\prime}(0) = v_{0}$ y
+\begin{enumerate}[label=\alph*)]
+\item $b^{2} < 4 \mbox{ km}$, caso subamortiguado.
+\item $b^{2} = 4 \mbox{ km}$, caso con amortiguamiento crítico.
+\item $b^{2} > 4 \mbox{ km}$, caso sobreamortiguado.
+\end{enumerate}
+\item Encuentra la transformada de Laplace para una función periódica ''diente de sierra'' con período $T$, dada por
+\[ V(t) = V_{0} \dfrac{t}{T}, \hspace{0.5cm} \mbox{ para } 0 \leq t \leq T \]
+\item Una función $N(t)$ se llama \emph{función nula}, si
+\[ \int_{0}^{t} N(u) du = 0 \]
+para todo $t > 0$. Demuestra que $\mathcal{L} [N(t)] = 0$.
+\item Encuentra la transformada seno de Fourier de las siguientes funciones:
+\begin{enumerate}[label=\roman*)]
+\item $f(x) = x \exp(-a x), a>0$
+\item $f(x) = \dfrac{1}{x} \exp(-a x), a>0$
+\item $f(x) = \dfrac{1}{x}$
+\item $f(x) = \dfrac{x}{a^{2} + x^{2}}$
+\end{enumerate}
+\item Usando la transformada de Fourier (seno o coseno) resuelve las siguientes ecuaciones integrales:
+\begin{enumerate}[label=\roman*)]
+\item $\displaystyle \int_{0}^{\infty} f(x) \cos kx dx = \sqrt{\dfrac{\pi}{2k}}$
+\item $\displaystyle \int_{0}^{\infty} f(x) \sin kx dx = \dfrac{a}{a^{2} +k^{2}}$
+\item $\displaystyle \int_{0}^{\infty} f(x) \sin kx dx = \dfrac{\pi}{2} J_{0} (ak)$
+\item $\displaystyle \int_{0}^{\infty} f(x) \cos kx dx = \dfrac{\sin ak}{k}$
+\end{enumerate}
+Sugerencia: usa el teorema de inversión de la transformada de Fourier, en caso de que escojas otra vía, menciona cuál es el procedimiento que se sigue, no es válido hacer inferencias ni emplear funciones de prueba al azar.
+\end{enumerate}
+\end{document}

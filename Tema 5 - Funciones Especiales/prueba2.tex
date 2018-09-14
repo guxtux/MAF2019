@@ -1,0 +1,179 @@
+\input{../preambulo_doc}
+\usepackage{mathrsfs}
+\usepackage{bigints}
+\spanishdecimal{.}
+\newcommand{\saltosin}{\nonumber \\}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Funciones de Hermite \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Funciones de Hermite.}
+Los polinomios de Hermite son otras funciones especiales que debemos aprender en este curso. Es muy importante estudiar las características y las propiedades de los polinomios de Hermite, ya que ellos aparecen en uno de lo problemas más importantes (para muchos, el más importante) de la mecánica cuántica: \emph{el oscilador armónico}. El oscilador armónico en mecánica cuántica tiene la misma importancia que en mecánica clásica, ya que cualquier perturbación de un sistema a partir de su estado de equilibrio dará origen a oscilaciones pequeñas, las cuales pueden ser descompuestas en modos
+normales, esto es, en oscilaciones independientes. Más aáun, toda la física de partículas elementales, conocida táecnicamente como la teoría cuántica de campos, se basa en expresar los diferentes campos, como una colección de osciladores armónicos cuánticos. \textbf{Moraleja: } entienda lo mejor posible el problema del oscilador armónico.
+\\
+Comenzaremos este tema planteando el problema del oscilador armónico en 1D de la mecánica cuántica y obteniendo la ecuación diferencial de Hermite. Después nuestro trabajo cosistirá en resolver la ecuación de Hermite y estudiar las propiedades básicas de sus soluciones.
+\\
+\section*{El oscilador armónico.}
+Tomamos como punto de partid la ecuación de Schrödinger en 1D para el oscilador armónico. En este caso la función potencial es cuadrática en las posiciones
+\begin{equation}
+V(x) =  \dfrac{1}{2} m \omega^{2} x^{2} 
+\label{eq:ecuacion_06_01}
+\end{equation}
+por lo que la ED de Schrödinger estacionaria que necesitamos resolver es
+\begin{equation}
+- \dfrac{\hbar^{2}}{2m} \dfrac{d^{2}}{d x^{2}} \Psi(x) + \dfrac{1}{2} m \omega^{2} x^{2} \Psi(x) =  E \Psi(x)
+\label{eq:ecuacion_06_02}
+\end{equation}
+con el objetivo de no cargar con las constantes del problema en el desarrollo, hacemos el siguiente cambio de variable
+\begin{equation}
+y = \sqrt{\dfrac{m \omega}{\hbar}} x \Rightarrow \dfrac{d}{dx} = \dfrac{d y}{d x} \; \dfrac{d}{y} = \sqrt{\dfrac{m \omega}{\hbar}} \; \dfrac{d}{dy}
+\label{eq:ecuacion_06_03}
+\end{equation}
+En términos de esta variable, la ED de Schrödinger (\ref{eq:ecuacion_06_02}), se re-escribe como
+\begin{equation}
+- \dfrac{\hbar^{2}}{2m} \; \dfrac{m \omega}{k} \; \dfrac{d^{2}}{d y^{2}} \Psi(y) + \dfrac{1}{2} m \omega^{2} \; \dfrac{k}{m \omega} y^{2} \Psi(x) =  E \Psi(y)
+\label{eq:ecuacion_06_05}
+\end{equation}
+con lo cual
+\[ - \dfrac{\omega \hbar}{2} \; \dfrac{d^{2}}{d y^{2}} \Psi(y) + \dfrac{1}{2} \omega \hbar y^{2} \Psi(y) =  E \Psi(y) \Rightarrow \dfrac{d^{2} \Psi (y)}{d y^{2}} - y^{2} \Psi(y) = - \dfrac{2 E}{\omega \hbar} \Psi (y) \]
+al definir
+\[ \epsilon = \dfrac{2E}{\omega \hbar} \]
+se obtiene la ecuación
+\begin{equation}
+\dfrac{d^{2} \Psi (y)}{d y^{2}} + (\epsilon - y^{2}) \Psi (y) = 0
+\label{eq:ecuacion_06_06}
+\end{equation}
+Note que en esta ecuación todas las cantidades son adimensionales y que el dominio de definición de la variable $y$ son los $\mathbb{R}$. La estrategia para resolver esta ecuación se divide en dos pasos. El primer paso consiste en estudiar el comportamiento de las soluciones para valores de $y \to \pm \infty$, al comportamiento de las soluciones en éste régimen se le llama \emph{comportamiento asintótico}. El segundo paso será estudiar el comportamiento de las soluciones cerca del origen, es decir, cuando $y \to 0$.
+\subsection*{Paso 1.}
+Para cualquier valor propio $\epsilon$, cuando $y^{2} \to \infty$, el término $\epsilon$ en la ec. (\ref{eq:ecuacion_06_06}) es despreciable, por tanto, la función propia $\Psi (y)$ debe de satisfacer asintóticamente la ecuación
+\begin{equation}
+\dfrac{d^{2} \Psi_{a} (y)}{d y^{2}} - y^{2} \Psi_{a} (y) = 0, \hspace{1.5cm} \text{válida en } y \to \pm \infty
+\label{eq:ecuacion_06_07} 
+\end{equation}
+donde el subíndice $``a"$ denota asintóticamente. Si multiplicamos la ecuación por $2 \frac{d \Psi_{a}}{d y}$, se obtiene
+\begin{eqnarray*}
+2 \dfrac{d \Psi_{a}}{d y} \; \dfrac{d^{2} \Psi_{1} (y}{d y^{2}} &-& 2 y^{2} \; \dfrac{d \Psi_{a} (y)}{dy} \Psi_{a} (y) = 0  \saltosin
+&\Rightarrow & \dfrac{d}{d y} \left(\dfrac{d \Psi_{a}}{d y} \right)^{2} - y^{2} \dfrac{d}{d y} (\Psi^{2}_{a}) = 0 \saltosin
+&\Rightarrow & \dfrac{d}{d y} \left[ \left( \dfrac{d \Psi_{a}}{d y} \right)^{2} - y^{2} \Psi_{a}^{2} \right] + \Psi^{2}_{a} \; \dfrac{d y^{2}}{d y} = 0 \saltosin
+&\Rightarrow & \dfrac{d}{d y} \left[ \left( \dfrac{d \Psi_{a}}{d y} \right)^{2} - y^{2} \Psi_{a}^{2} \right] = - 2 y \Psi^{2}_{a}
+\end{eqnarray*}
+Esta ecuación se simplifica mucho si despreciamos el término de la derecha de la ecuación. Procedemos a despreciar el término y veremos que más adelante se justifica que la solución es correcta, así pues
+\begin{eqnarray*}
+\dfrac{d}{d y} \left[ \left( \dfrac{d \Psi_{a}}{d y} \right)^{2} - y^{2} \Psi^{2}_{a} \right] &=& 0 \saltosin
+& \Rightarrow & \left( \dfrac{d \Psi}{d y} \right)^{2} - y^{2} \Psi^{2}_{a} =  C \saltosin
+& \Rightarrow & \dfrac{d \Psi_{a}}{dy} = \pm \sqrt{C + y^{2} \; \Psi^{2}_{a}}
+\end{eqnarray*}
+donde $C$ es una constante de integración. Dado que en la mecánica cuántica las funciones que nos interesan son de cuadrado integrable, es decir, del tipo
+\begin{equation}
+\int_{- \infty}^{\infty} \vert \Psi \vert^{2} dx < \infty
+\label{eq:ecuacion_03_16}
+\end{equation}
+y para que se cumpla esta ecuación, debe de suceder que
+\begin{eqnarray*}
+\lim_{y^{2} \to \infty} \Psi_{a} (y) &=& 0 \hspace{1cm} \text{ y } \saltosin
+\lim_{y^{2} \to \infty} \dfrac{\Psi_{a} (y)}{d y} &=& 0 \saltosin
+&\Rightarrow & C = 0
+\end{eqnarray*}
+Con esta valor de la constante, la ecuación se simplifica aún más
+\begin{eqnarray*}
+\dfrac{d \Psi_{a}}{d y} &=& y \Psi_{a} \saltosin
+\Rightarrow \int \dfrac{d \Psi_{a}}{d y} &=& \int y \Psi_{a} \saltosin
+\Rightarrow \ln \Psi_{a} &=& \pm \dfrac{y^{2}}{2} + C_{0} \saltosin
+\Rightarrow \Psi_{a} &=& C e^{\pm y^{2}}
+\end{eqnarray*}
+Por lo que la solución más general posible de la ecuación (\ref{eq:ecuacion_06_07}) es
+\begin{equation}
+\Psi_{a} (y) = C_{1} e^{-y^{2}/2} + C_{2} e^{y^{2}/2}
+\label{eq:ecuacion_06_08}
+\end{equation}
+Como queremos que el 
+\[ \lim_{y^{2} \to \infty} \Psi_{a} (y) = 0 \]
+la única solución aceptable es
+\begin{eqnarray}
+e^{-y^{2}/2} & \Rightarrow & C_{2} = 0 \saltosin
+\therefore \Psi_{a} (y) & \simeq & e^{-y^{2}/2}
+\label{eq:ecuacion_06_09}
+\end{eqnarray}
+Ahora se justificará el que hayamos despreciado el término $-2 y \; \Psi^{2}_{a}$, fue una decisión correcta. La ecuación que teníamos es
+\[ \dfrac{d}{dy} \left[ \left( \dfrac{d \Psi_{a}}{d y} \right)^{2} - y^{2} \Psi^{2}_{a} \right] = - 2 y \; \Psi^{2}_{a} \]
+y dada la solución asintótica obtenid, el término que despreciamos es
+\[ -2 y \; \Psi^{2}_{a} \simeq - 2 y \; e^{-y^{2}} \]
+mientras que
+\begin{eqnarray*}
+\dfrac{d}{dy} (- y^{2} \Psi^{2}_{a} ) \simeq \dfrac{d}{dy} (- y^{2} \; e^{-y^{2}}) &=& -y^{2} (-2y) \; e^{-y^{2}} - 2 y\; e^{-y^{2}} = \saltosin
+&=& 2 y^{3} \; e^{-y^{2}} - 2 y \; e^{-y^{2}}  \saltosin
+& \simeq & _{y \to \infty} 2 y^{3} \; e^{-y^{2}}
+\end{eqnarray*}
+Así que en el límite $y^{2} \to \infty$, el término $2 y \; e^{-y^{2}}$ es despreciable con respecto al término $y^{3} \; e^{-y^{2}}$, lo que justifica que hayamos despreciado ese término.
+\\
+Pero lo que nos interesa es resolver la ecuación (\ref{eq:ecuacion_06_06})
+\begin{equation}
+\dfrac{d^{2} \Psi}{d y^{2}} + (\epsilon - y^{2}) \Psi = 0 \hspace{0.5cm} \forall y, \hspace{0.5cm} \text{y no sólo en el límite: } y^{2} \to \infty
+\label{eq:ecuacion_06_10}
+\end{equation}
+Para resolver la ecuación en todo el dominio de definición de $y$, escribimos la función propia $\Psi (y)$ como un producto de dos funciones, donde una de ellas es su solución asintótica
+\begin{equation}
+\Psi (y) \equiv h(y) \Psi_{a} (y) = h(y) \; e^{-y^{2}/2}
+\label{eq:ecuacion_06_11}
+\end{equation}
+Con esta propuesta, la segunda derivada de $\Psi$ respecto a la variable $y$ es ahora
+\begin{eqnarray*}
+\dfrac{d^{2} \Psi}{d y^{2}} &=& \dfrac{d^{2}}{d y^{2}} \left( h(y) \;  e^{-y^{2}/2} \right) = \dfrac{d}{d y} \left( \dfrac{d h(y)}{dy} \; e^{-y^{2}/2} - y \;  h(y) \; e^{-y^{2}/2} \right) \saltosin
+&=& \dfrac{d^{2} h(y)}{d y^{2}} \; e^{-y^{2}/2} - y \; \dfrac{d h(y)}{d y} \;  e^{-y^{2}/2} - y \; \dfrac{d h(y)}{d y} \; e^{-y^{2}/2} + y^{2} \; h(y) \; e^{-y^{2}/2} \saltosin
+&=& \left( \dfrac{d^{2} h(y)}{d y^{2}} - 2 y \; \dfrac{d h(y)}{d y} + (y^{2} -1) h(y) \right) \;  e^{-y^{2}/2}  
+\end{eqnarray*}
+y la ecuación (\ref{eq:ecuacion_06_06}) se re-escribe como
+\begin{equation}
+\left( \dfrac{d^{2} h(y)}{d y^{2}} - 2 y \; \dfrac{d h(y)}{d y} + (y^{2} -1) h(y) \right) \; e^{y^{2}/2} + (\epsilon - y^{2}) h(y) \; e^{-y^{2}/2} = 0 \saltosin
+\Rightarrow \dfrac{d^{2} h(y)}{d y^{2}} - 2 y \; \dfrac{d h(y)}{d y} + (\epsilon -1) h(y) = 0
+\label{eq:ecuacion_06_12}
+\end{equation}
+que es la ecuación diferencial de Hermite.
+\\
+Parece que no hemos ganado mucho, pero si lo hemos hecho. Ya conocemos el comportamiento de $\Psi (y)$ en $y^{2} \to \infty$. Entonces podemos preocuparnos ahora por el comportamiento de $h(y)$ en $y \to 0$ y la ecuación que gobierna este comportamiento es la ecuación de Hermite. La ecuación de Hermite tiene solo una singularidad en $\infty$. Por tanto, si queremos resolver la ecuación cerca del origen, podemos emplear sin ningún problema el método de Frobenius.
+\\
+Propongamos entonces que $h(y)$ puede escribirse como una serie de potencias alrededor del origen
+\begin{equation}
+h(y) = \sum_{m=0}^{\infty} a_{m} y^{m}
+\label{eq:ecuacion_06_13}
+\end{equation}
+donde la primera y segunda derivada con respecto a $y$ son
+\begin{eqnarray*}
+\dfrac{d}{d y} h(y) &=& \sum_{m=0}^{\infty} a_{m} \; m \; y^{m-1} \saltosin
+\dfrac{d^{2}}{d y^{2}} h(y) &=& \sum_{m=0}^{\infty} a_{m} \; m(m-1) \; y^{m-2}
+\end{eqnarray*}
+sutituyendo en la ED de Hermite (\ref{eq:ecuacion_06_12})
+\begin{eqnarray*}
+\sum_{m=0}^{\infty} a_{m} \; m(m-1) \; y^{m-2} &-&  2y \; \sum_{m=0}^{\infty} a_{m} \; m \; y^{m-1} + (\epsilon -1) \sum_{m=0}^{\infty} a_{m} \; y^{m} = 0 \saltosin
+&\Rightarrow & \sum_{m=0}^{\infty} a_{m} \; m(m-1) \; y^{m-2} - \sum_{m=0}^{\infty} a_{m} (2m - \epsilon + 1) \; y^{m} = 0
+\end{eqnarray*}
+Haciendo el cambio de índice $m - 2 = n$ en el primer sumando, podemos re-escribirlo como
+\begin{eqnarray*}
+\sum_{m=0}^{\infty} a_{m} \; m(m-1) \; y^{m-2} &=& \sum_{n=-2}^{\infty} a_{n+2} \; (n + 2)(n + 2 - 1) \; y^{n} = \saltosin
+&=& \sum_{n=-2}^{\infty} a_{n + 2} \; (n + 2)(n + 1) \; y^{n} = \saltosin 
+&=& \sum_{n = 0}^{\infty} a_{n + 2} \; (n + 2)(n + 1) \; y^{n} = \saltosin
+&=& \sum_{m = 0}^{\infty} a_{m + 2} \; (m + 2)(m + 1) \; y^{m}
+\end{eqnarray*}
+por tanto, la ecuación de Hermite se escribe como
+\begin{equation}
+\sum_{m = 0}^{\infty} \left[ a_{m + 2} (m + 2)(m + 1) - a_{m} (2 m - \epsilon + 1) \right] \; y^{m} = 0
+\label{eq:ecuacion_06_14} 
+\end{equation}
+Dado que las potencias de $y$ son linealmente independientes, para que esta ecuación se satisfaga debe suceder que los coeficiente se anulan idénticamente, con lo cual obtenemos la regla de recurrencia
+\begin{equation}
+a_{m + 2} = \dfrac{2m - \epsilon + 1}{(m + 1)(m + 2)} a_{m}
+\label{eq:ecuacion_06_15}
+\end{equation}
+De la inspección de esta relación de recurrencia concluimos que: dado $a_{0}$ podemos encontrar $a_{2}, a_{4}, \ldots $, esto es, podemos generar la serie de potencias pares de $h(y)$ y dado el coeficiente $a_{1}$ podemos encontrar $a_{3}, a_{5}, \ldots $, esto es, podemos generar la serie de potencias impares de $h(y)$. Desde luego que esto no es una sorpresa, ya que éstas son las dos soluciones linealmente independientes que se obtienen para la ecuación diferencial de Hermite.
+\\
+Comentario: Físicamente, que la serie par e impar no se mezclen es una consecuencia de la invariancia del Hamiltoniano ante reflexiones. Explícitamente dado $a_{0}$.
+
+
+
+
+\end{document}

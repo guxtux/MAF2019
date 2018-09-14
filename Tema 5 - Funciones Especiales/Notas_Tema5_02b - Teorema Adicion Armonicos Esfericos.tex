@@ -1,0 +1,83 @@
+\input{../preambulo_doc}
+\usepackage{mathrsfs}
+\usepackage{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{bigints}
+\newtheorem{problema}{{\it Problema}}
+\newcommand{\saltosin}{\nonumber \\}
+\spanishdecimal{.}
+%\usepackage{enumerate}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Teorema de adición de los armónicos esféricos \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+El teorema de adición de los armónicos esféricos permite expresar cualquier polinomio de Legendre $P_{\ell}$ como una suma de productos de armónicos esféricos, razón por la cual se le conoce como un teorema de adición. Si usamos la siguiente definición basada en el coseno de un ángulo $\gamma$:
+\[ \cos (\gamma)= \cos(\theta_{1})\cos(\theta_{2}) + \sin(\theta_{1})\sin(\theta_{2}) \cos(\theta_{1} - \theta_{2}) \]
+entonces se tiene que
+\[ P_{\ell} [ \cos (\gamma) ] = \dfrac{4 \pi}{2 \ell + 1} \sum_{m = \ell}^{+\ell} \overline{Y}_{\ell m} (\theta_{1}, \varphi_{1}) Y_{\ell m}(\theta_{2}, \varphi_{2}) \]
+dejando a $m$ como super índice, sabemos que esta forma representa lo mismo:
+\[ P_{\ell} [ \cos (\gamma) ] = \dfrac{4 \pi}{2 \ell + 1} \sum_{m = \ell}^{+\ell} \overline{Y}_{\ell}^{m} (\theta_{1}, \varphi_{1}) Y_{\ell}^{m}(\theta_{2}, \varphi_{2}) \]
+\textbf{Problema. } Verificar que el teorema de adición de los armónicos esféricos cuando el número cuántico $\ell=1$.
+\\
+Cuando $\ell = 1$, los valores que puede tomar $m$ son $-1, 0, 1$.
+\\
+Para $m = -1$, se tiene que
+\begin{eqnarray*}
+Y_{1}^{-1} (\theta, \varphi) &= \sqrt{\dfrac{3}{8 \pi}} \; \sin (\theta) \; e^{-i \varphi} \saltosin
+\overline{Y}_{1}^{-1} (\theta, \varphi) &= \sqrt{\dfrac{3}{8 \pi}} \; \sin (\theta) \; e^{i \varphi}
+\end{eqnarray*}
+Para $m = 0$, se tiene que
+\begin{eqnarray*}
+Y_{1}^{0} (\theta, \varphi) &= \sqrt{\dfrac{3}{4 \pi}} \; \cos (\theta) = \overline{Y}_{1}^{0} (\theta, \varphi)
+\end{eqnarray*}
+Para $m = 1$, se tiene que
+\begin{eqnarray*}
+Y_{1}^{1} (\theta, \varphi) &= - \sqrt{\dfrac{3}{8 \pi}} \; \sin (\theta) \; e^{i \varphi} \saltosin
+\overline{Y}_{1}^{1} (\theta, \varphi) &= - \sqrt{\dfrac{3}{8 \pi}} \; \sin (\theta) \; e^{-i \varphi}
+\end{eqnarray*}
+Haciendo ahora la suma de términos:
+\begin{eqnarray*}
+\sum_{m = \ell}^{+\ell} \overline{Y}_{\ell}^{m} (\theta_{1}, \varphi_{1}) Y_{\ell}^{m}(\theta_{2}, \varphi_{2}) &=& \sum_{m = -1}^{+1} \overline{Y}_{\ell}^{m} (\theta_{1}, \varphi_{1}) Y_{\ell}^{m}(\theta_{2}, \varphi_{2}) \saltosin
+&=& \overline{Y}_{1}^{-1} (\theta_{1}, \varphi_{1}) Y_{1}^{-1}(\theta_{2}, \varphi_{2}) + \overline{Y}_{1}^{0} (\theta_{1}, \varphi_{1}) Y_{1}^{0}(\theta_{2}, \varphi_{2}) + \saltosin
+&+& \overline{Y}_{1}^{1} (\theta_{1}, \varphi_{1}) Y_{1}{1}(\theta_{2}, \varphi_{2}) \saltosin
+&=& \sqrt{\dfrac{3}{8 \pi}} \; \sin (\theta_{1}) \; e^{-i \varphi_{1}} \cdot \sqrt{\dfrac{3}{8 \pi}} \; \sin (\theta_{2}) \; e^{-i \varphi_{2}} + \saltosin
+&+& \left( - \sqrt{\dfrac{3}{8 \pi}} \; \sin (\theta_{1}) \; e^{-i \varphi_{1}} \right) \cdot \left( - \sqrt{\dfrac{3}{8 \pi}} \; \sin (\theta_{2}) \; e^{-i \varphi_{2}} \right) \saltosin
+&=& \dfrac{3}{8 \pi} \sin (\theta_{1}) \sin (\theta_{2}) e^{i(\varphi_{1} - \varphi_{2})} + \saltosin
+&+& \dfrac{3}{4 \pi} \cos(\theta_{1}) \cos(\theta_{2}) + \saltosin
+&+& \dfrac{3}{8 \pi} \sin(\theta_{1}) \sin(\theta_{2}) e^{i(\varphi_{1} - \varphi_{2})}
+\end{eqnarray*}
+simplificando los términos y usando la relación trigonométrica que define el coseno del ángulo $\gamma$, resulta
+\begin{eqnarray*}
+\sum_{m = \ell}^{+\ell} \overline{Y}_{\ell}^{m} (\theta_{1}, \varphi_{1}) Y_{\ell}^{m}(\theta_{2}, \varphi_{2}) &=& \dfrac{3}{4 \pi} \cos(\theta_{1}) \cos(\theta_{2}) \saltosin
+&+& \dfrac{3}{8 \pi} \sin(\theta_{1}) \sin (\theta_{2}) \left[ e^{i(\varphi_{1} - \varphi_{2})} + e^{i(\varphi_{1} - \varphi_{2})} \right] \saltosin
+&=& \dfrac{3}{4 \pi} \cos(\theta_{1}) \cos(\theta_{2}) \saltosin
+&+& \dfrac{3}{4 \pi} \sin(\theta_{1}) \sin (\theta_{2}) \cos(\varphi_{1} - \varphi_{2}) \saltosin
+&=& \dfrac{3}{4 \pi} \left[ \cos(\theta_{1}) \cos (\theta_{2}) + \sin (\theta_{1}) \sin (\theta_{2}) \cos(\varphi_{1} - \varphi_{2}) \right] \saltosin
+&=& \dfrac{3}{4 \pi} \cos (\gamma)
+\end{eqnarray*}
+Por tanto
+\begin{eqnarray*}
+\dfrac{4 \pi}{2 \ell + 1} \sum_{m = -1}^{+1} \overline{Y}_{\ell}^{m} (\theta_{1}, \varphi_{1}) Y_{\ell}^{m}(\theta_{2}, \varphi_{2}) &=& \dfrac{4 \pi}{3} \cdot \dfrac{3}{4 \pi} \cos (\gamma) \saltosin
+&=& \cos(\gamma) \saltosin
+&=& P_{1} \; \cos(\gamma)
+\end{eqnarray*}
+\section*{Demostración del teorema de adición de los armónicos esféricos.}
+Supongamos que tenemos dos vectores:
+\[ \overrightarrow{\mathbf{r}} =(r, \theta, \varphi), \hspace{1.5cm} \overrightarrow{\mathbf{r}}^{\prime} =(r, \theta, \varphi)  \]
+que se muestran en la siguiente figura:
+%aqui va la figura
+El ángulo entre los dos vectores es $\gamma$. Nótese que los vectores unitarios están dados por
+\[ \widehat{\mathbf{r}} = \widehat{\mathbf{i}} \sin \theta \cos \varphi + \widehat{\mathbf{j}} \sin \theta \sin \varphi + \widehat{\mathbf{k}} \cos \theta \]
+y de manera similar para $\widehat{\mathbf{r}}^{\prime}$, lo que se sigue de
+\begin{equation}
+cos \gamma = \widehat{\mathbf{r}} \cdot \widehat{\mathbf{r}}^{\prime} = \cos \theta \cos \theta^{\prime} + \sin \theta \sin \theta^{\prime} \cos (\varphi -  \varphi^{\prime})
+\label{eq:ecuacion_021}
+\end{equation}
+El teorema de adición de los armónicos esféricos es
+\[ P_{\ell} (\cos \gamma) = \dfrac{4 \pi}{2 \ell + 1} \sum_{m= -\ell}^{\ell} Y_{\ell}^{m} (\theta, \varphi) \overline{Y}_{\ell}^{m} (\theta^{\prime}, \varphi^{\prime}) \]
+
+\end{document}

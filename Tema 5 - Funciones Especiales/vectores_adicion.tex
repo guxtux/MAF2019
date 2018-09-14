@@ -1,0 +1,77 @@
+\documentclass{standalone}
+\usepackage{tikz,tikz-3dplot}
+\begin{document}
+\tdplotsetmaincoords{60}{110}
+
+\pgfmathsetmacro{\rvec}{.8}
+\pgfmathsetmacro{\thetavec}{45}
+\pgfmathsetmacro{\phivec}{40}
+
+%segundo vector
+\pgfmathsetmacro{\rvecc}{0.9}
+\pgfmathsetmacro{\thetavecc}{60}
+\pgfmathsetmacro{\phivecc}{65}
+
+%
+
+% customized coordinate system
+\begin{tikzpicture}[scale= 5, tdplot_main_coords]
+
+% axes
+	\draw[thick,->] (0,0,0) -- ( 1,0,0) node[anchor=south]{$x$};
+  	\draw[thick,->] (0,0,0) -- ( 0,1,0) node[anchor=west]{$y$};
+  	\draw[thick,->] (0,0,0) -- ( 0,0,1) node[anchor=north east]{$z$};  
+  
+  	\coordinate (O) at (0,0,0);
+	%\pgfmathsetmacro{\ax}{3}
+	%\pgfmathsetmacro{\ay}{6}
+	%\pgfmathsetmacro{\az}{3}  
+  	
+  	\tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+  	\tdplotsetcoord{Q}{\rvecc}{\thetavecc}{\phivecc}
+  	
+  	\draw[ultra thick, ->] (O) -- (P) node[anchor=west] {$\mathbf{x}$};
+  	\draw[ultra thick, ->] (O) -- (Q) node[anchor=west] {$\mathbf{x^{\prime}}$};
+%  	\draw[ultra thick, ->] (0,0,0) -- (6,4,3) node[anchor=west] {$\mathbf{x^{\prime}}$};
+  
+  	\draw[dashed] (O) -- (Pxy);
+  	\draw[dashed] (P) -- (Pxy);
+  	
+  	\draw[dashed] (O) -- (Qxy);
+  	\draw[dashed] (Q) -- (Qxy);
+  	
+  	\tdplotdrawarc[->]{(O)}{0.2}{0}{\phivec}{anchor=north}{$\theta$}
+  	\tdplotdrawarc[->]{(O)}{0.4}{0}{\phivecc}{anchor=north}{$\theta^{\prime}$}
+
+%  	\draw[dashed] (\rvec,0,0) arc (0:90:\rvec);
+
+  	
+  	\tdplotsetthetaplanecoords{\phivec}
+  	
+   	\tdplotdrawarc[->, tdplot_rotated_coords]{(O)}{0.25}{0} {\thetavec}{anchor=south west}{$\varphi$}
+  	\tdplotdrawarc[->, tdplot_rotated_coords]{(O)}{0.5}{0} {\thetavecc}{anchor=south west}{$\varphi^{\prime}$}
+  	
+% 	\draw (\rvecc, \thetavecc, \phivecc) arc (0:45:\rvecc);
+   	
+%	\tdplotdefinepoints(0,0,0)(P)(Q)
+%	\tdplotdrawpolytopearc[thick]{1}{anchor=west}{$\gamma$}
+	  	
+%   	\draw[dashed,tdplot_rotated_coords] (\rvec,0,0) arc (0:90:\rvec);
+%   	\draw[dashed,color=blue,tdplot_rotated_coords] (\rvecc,0,0) arc (0:90:\rvecc);
+
+  	
+%  	\draw[dashed] (6,4,3) -- (6,0,3);
+  	
+%  	\draw[dashed] (0,0,0) -- (3,0,3);
+%  	\draw[dashed] (0,0,0) -- (6,0,3);
+  	
+%  	\tdplotdrawarc{(O)}{1.25}{0}{60}{anchor=north}{$\phi$};
+
+%	\tdplotgetpolarcoords{\ax}{\ay}{\az}
+%	\tdplotsetthetaplanecoords{\tdplotresphi}
+%	\tdplotdrawarc[tdplot_rotated_coords]{(O)}{1}{0}%
+%		{\tdplotresphi}{anchor=west}{$\phi = \tdplotrestheta$}
+	
+
+\end{tikzpicture}
+\end{document}

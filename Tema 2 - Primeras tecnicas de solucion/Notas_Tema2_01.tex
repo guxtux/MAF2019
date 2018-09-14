@@ -1,0 +1,614 @@
+\input{../preambulo_doc}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Matemáticas Avanzadas de la Física \\ {\large Separación de variables}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+%Referencia Arfken - Capítulo 9
+\section{Introducción}
+En la física para conocer la fuerza en una ecuación de movimiento de una partícula por ejemplo por lo general nos conduce a una ecuación diferencial. Por lo tanto, en casi toda la física básica y en un mayor parte de la física teórica avanzada se expresa en términos de ecuaciones diferenciales. A veces, estas son ecuaciones diferenciales ordinarias en una variable (EDO), más a menudo las ecuaciones son expresiones de ecuaciones diferenciales parciales (EDP) en dos o más variables.
+\par
+Recordemos del cálculo que la operación de tomar una derivada total o parcial es un \emph{operador lineal} $(\mathcal{L})$
+\[ \dfrac{d(a \: \varphi(x) + b \: \psi (x))}{dx} = a \: \dfrac{d \varphi}{dx} +  b \: \dfrac{d \psi}{dx} \]
+para EDO que involucran derivadas en una variable $x$ solamente y no de orden cuadrático, $(d \psi / dx)^{2}$ o de potencias mayores. De manera análoga para una derivada parcial
+\[ \dfrac{\partial ( a \: \varphi(x, y) + b \: \psi(x,y))}{\partial x} = a \: \dfrac{\partial \varphi(x, y)}{\partial x} + b \: \dfrac{\partial \psi(x, y)}{\partial x}  \]
+En general
+\[ \mathcal{L} (a \: \varphi +  b \: \psi ) = a \: \mathcal{L}(\varphi) +  b \: \mathcal{L} (\psi)  \]
+Esto es, tanto para EDO como para EDP, se encuentra el operador lineal
+\begin{equation}
+\mathcal{L} \: \psi = F
+\end{equation}
+donde $F$ es una función conocida (fuente) de una (por EDO) o más variables (para EDP), $\mathcal{L}$ es una combinación lineal de las derivadas, y $\psi$ es la función desconocida o solución. Cualquier combinación lineal de las soluciones es de nuevo una solución si $F = 0$; este es el \emph{principio de superposición} para EDP homogéneas.
+\\
+Ejemplos de EDP.
+\begin{enumerate}
+\item La ecuación de Laplace, $\nabla^{2} \psi = 0$. 
+\\
+Esta ecuación es muy común e importante, se encuentra en problemas de
+\begin{enumerate}
+\item Fenómenos electromagnéticos, incluyendo la electrostática, dieléctricos, corrientes continuas y magnetostática.
+\item En la hidrodinámica (flujo irrotacional de líquido perfecto y en las ondas de superficie)
+\item En el flujo de calor.
+\item En problemas de gravitación.
+\end{enumerate}
+\item La ecuación de Poisson $\nabla^{2} \psi = - \rho / \epsilon_{0}$.
+\\
+En contraste con la ecuación de Laplace homogénea, la ecuación de Poisson es no homogénea con un término fuente $- \rho / \epsilon_{0}$.
+\item La ecuación de onda (Helmholtz) y ecuaciones de difusión independientes del tiempo, $\nabla^{2} \psi \pm k^{2} \psi= 0$.
+\\
+Estas ecuaciones se presentan en diversos fenómenos como:
+\begin{enumerate}
+\item Ondas elásticas en sólidos, incluyendo cuerdas vibrantes, barras, membranas.
+\item En sonido o acústica.
+\item En ondas electromagnéticas.
+\item En reactores nucleares.
+\end{enumerate}
+\item La ecuación de difusión dependiente del tiempo
+\[ \nabla^{2} \psi = \dfrac{1}{a^{2}} \dfrac{\partial \psi}{\partial t} \]
+y la forma correspondiente de cuatro dimensiones que implican el d'Alembertiano, un análogo de cuatro dimensiones del Laplaciano en el espacio de Minkowski,
+\[ \partial^{\mu} \partial_{\mu} = \partial^{2} = \dfrac{1}{c^{2}} \dfrac{\partial^{2}}{\partial t^{2}} - \nabla^{2} \]
+\item La ecuación de onda dependiente del tiempo, $\partial^{2} \psi = 0$.
+\item La ecuación del potencial escalar, $\partial^{2} \psi = \rho / \epsilon_{0}$. Al igual que la ecuación de Poisson, esta ecuación es no homogénea con un término fuente $\rho / \epsilon_{0}$.
+\item La ecuación de Klein-Gordon $\partial^{2} \psi = - \mu^{2} \psi$ y las respectivas ecuaciones vectoriales, en las cuales la función escalar $\psi$ se remplaza por una función vectorial.
+\item La ecuación de onda de Schrödinger
+\[ - \dfrac{\hbar^{2}}{2m} \nabla^{2} \psi +  V \psi =  i \hbar \dfrac{\partial \psi}{\partial t} \]
+y
+\[ - \dfrac{\hbar^{2}}{2m} \nabla^{2} \psi +  V \psi =  E \psi \]
+ésta última, la ecuación independiente del tiempo.
+\end{enumerate}
+\subsection{Tipos de EDP y sus características.}
+Las ecuaciones diferenciales parciales de segundo orden (EDP2) se pueden clasificar en tres tipos:
+\begin{enumerate}
+\item Elípticas: consideran los términos $\nabla^{2}$ o $c^{-2} \: \partial^{2} / \partial t^{2} + \nabla^{2}$.
+\item Parabólicas: consideran $a \: \partial / \partial t + \nabla^{2}$.
+\item Hiperbólicas: consideran $c^{-2} \: \partial^{2} / \partial t^{2} - \nabla^{2}$.
+\end{enumerate}
+Estos operadores canónicos se obtienen a partir de un cambio de variable $\xi = \xi(x,y), \eta = \eta (x,y)$ en un operador lineal (se presenta el caso de dos variables para simplificar)
+\begin{equation}
+\mathcal{L} = a \: \dfrac{\partial^{2}}{\partial x^{2}} + 2 \: b \: \dfrac{\partial^{2}}{\partial x \partial y} + c \: \dfrac{\partial^{2}}{\partial y^{2}} + d \: \dfrac{\partial}{\partial x} +  e \: \dfrac{\partial}{\partial y} +  f
+\end{equation}
+el cual se reduce a las formas canónicas anteriores, si el discriminante \[ D = a \: c - b^{2} > 0, = 0, \mbox{ ó } < 0 \]
+\\
+Si $\xi(x, y)$ está definida por la EDP de primer orden pero no lineal
+\begin{equation}
+a \: \left(\dfrac{\partial \xi}{\partial x} \right)^{2} + 2 \: b \: \left(\dfrac{\partial \xi}{\partial x} \right) \left(\dfrac{\partial \xi}{\partial y} \right) + c \: \left(\dfrac{\partial \xi}{\partial y} \right)^{2} = 0
+\end{equation}
+Entonces el coeficiente de $\partial^{2} / \partial \xi^{2}$ en $\mathcal{L}$ es cero.
+\\
+Si $\eta$ es una solución independiente de la misma ecuación, el coeficiente de $\partial^{2} / \partial \eta^{2}$ es también cero.
+\\
+El operador que queda $\partial^{2} / \partial \xi \: \partial \eta$ en $\mathcal{L}$, es característico del caso hiperbólico con $D<0,(a=0=c \mbox{ que lleva a } D = - b^{2} < 0)$, de aquí se factoriza a una forma cuadrática $a \: \lambda^{2} + 2\: b \: \lambda + c$ y por tanto, tiene dos soluciones independientes $\xi(x, y), \: \eta(x, y)$.
+\\
+En el caso elíptico con $D > 0$ las dos soluciones $\xi, \: \eta$ son conjugados complejos.
+\\
+En el caso parabólico con $D=0$, solamente el término $\partial^{2} / \partial \xi^{2}$ se mantiene en $\mathcal{L}$, mientras que los términos en los otras dos derivadas de segundo orden, se anulan.
+\subsection{Condiciones de frontera.}
+Por lo general, cuando sabemos que un sistema físico en algún momento está sometido a una ley que rige tal sistema, entonces seremos capaces de predecir la evolución de ese sistema. Tales valores iniciales son las condiciones de contorno (de frontera) más comunes que se asocian a las EDO y las EDP. 
+\par
+La búsqueda de soluciones que responden a determinados puntos, curvas o superficies corresponde a problemas con condiciones de frontera. Las soluciones normalmente deben de satisfacer determinadas condiciones de frontera impuestas (por ejemplo, asintóticas). Estas condiciones de frontera pueden clasificar en tres formas:
+\begin{enumerate}
+\item \textbf{Condiciones de frontera de Cauchy}. El valor de una función y la derivada se especifican en la frontera. En la electrostática esto significaría, el potencial $\varphi$, y la componente normal del campo eléctrico $E_{n}$.
+\item \textbf{Condiciones de frontera de Direchlet}. El valor de una función se especifica en la frontera.
+\item \textbf{Condiciones de frontera de Neumann}. La derivada normal (gradiente) de una función se especifica en la frontera. En el caso de la electrostática, serían $E_{n}$ y $\sigma$, la densidad de carga superficial.
+\end{enumerate}
+\begin{center}
+{ \fontsize{12}{12} \selectfont
+\begin{tabular}{ l l l l} \hline
+Condiciones de frontera & Elíptica & Hiperbólica & Parabólica \\ \hline
+ & Laplace, Poisson & Ecuación de onda & Ecuación de difusión \\
+ & en $(x,y)$  &  en $(x,t)$ &  en $(x,t)$ \\ 
+\textbf{Cauchy} & & & \\ \hline
+Superficie abierta & Resultados sin & \textbf{solución única}  & Demasiado \\ 
+ & interpretación física & \textbf{estable} & restrictiva \\ 
+Superficie cerrada & Demasiado & Demasiado & Demasiado \\
+ & restrictiva & restrictiva & restrictiva \\
+\textbf{Dirichlet} & & & \\ \hline
+Superficie abierta & Insuficiente & Insuficiente  & \textbf{solución única} \\ 
+ & & & \textbf{estable} en una dirección \\ 
+Superficie cerrada & \textbf{solución única} & Más de una & Demasiado \\
+ & \textbf{estable} & solución & restrictiva \\
+ \textbf{Neumann} & & & \\ \hline
+Superficie abierta & Insuficiente & Insuficiente  & \textbf{solución única} \\ 
+ & & & \textbf{estable} en un dirección \\ 
+Superficie cerrada & \textbf{solución única} & Más de una & Demasiado \\
+ & \textbf{estable} & solución & restrictiva \\
+\end{tabular}
+}
+\end{center}
+\section{Separación de variables.}
+% 
+Las ecuaciones de la física matemática que hemos mencionado son todas ecuaciones diferenciales parciales.
+\par
+Una primera técnica para su solución separa la ecuación diferencial parcial de $n$ variables en $n$ ecuaciones diferenciales ordinarias. Cada separación introduce una constante arbitraria de separación. Si tenemos $n$ variables, tenemos que introducir $n-1$ constantes, determinadas por las condiciones impuestas en el problema que se está resolviendo.
+\section{Separación de variables en sistemas coordenados}
+\subsection{Sistema coordenado cartesiano $(x,y,z)$}
+Consideremos la ecuación de Helmholtz en coordenadas cartesianas
+\begin{equation}
+\dfrac{\partial^{2} \psi}{\partial x^{2}} + \dfrac{\partial^{2} \psi}{\partial y^{2}} + \dfrac{\partial^{2} \psi}{\partial z^{2}} + k^{2} \psi = 0
+\label{eq:Helmholtz}
+\end{equation}
+Suponemos que por el método de separación de variables, tiene una solución tipo:
+\begin{equation}
+\psi = X(x) \: Y(y) \: Z(z)
+\end{equation}
+Al sustituirla en (\ref{eq:Helmholtz}), dividiendo por $\psi = X \: Y \: Z$, tenemos que:
+\begin{align}
+\begin{aligned}
+\dfrac{1}{X} \dfrac{d^{2} X}{d x^{2}} + \dfrac{1}{Y} \dfrac{d^{2} Y}{d y^{2}} + \dfrac{1}{Z} \dfrac{d^{2} Z}{d z^{2}} + k^{2} = 0 \\
+\dfrac{1}{X} \dfrac{d^{2} X}{d x^{2}}  = - k^{2} - \dfrac{1}{Y} \dfrac{d^{2} Y}{d y^{2}} - \dfrac{1}{Z} \dfrac{d^{2} Z}{d z^{2}}
+\end{aligned}
+\label{eq:EDPseparada}
+\end{align}
+Dado que $X(x)$ es una función sólo de $x$, es claro que $\frac{1}{X} \frac{d^{2}X}{d x^{2}}$ es independiente de $y$ así como de $z$.
+\\
+Por otro lado, de la ecuación (\ref{eq:EDPseparada}), vemos que 
+\begin{equation}
+\dfrac{1}{X} \dfrac{d^{2}X}{d x^{2}} = - k^{2} - \dfrac{1}{Y} \dfrac{d^{2}Y}{dy^{2}} - \dfrac{1}{Z} \dfrac{d^{2}Z}{dz^{2}}
+\end{equation}
+que es una función sólo de $y$ así como de $z$. De estos dos puntos, podemos concluir que:
+\begin{equation}
+\dfrac{1}{X} \dfrac{d^{2}X}{d x^{2}} = - k^{2}_{1} \label{eq:EDP_solox}
+\end{equation}
+es una cantidad constante. De manera similar tenemos que
+\begin{eqnarray}
+\dfrac{1}{Y} \dfrac{d^{2}Y}{d y^{2}} = - k^{2}_{2} \label{eq:EDP_soloy} \\
+\dfrac{1}{Z} \dfrac{d^{2}Z}{d z^{2}} = - k^{2}_{3} \label{eq:EDP_soloz}
+\end{eqnarray}
+Sustituyendo las ecuaciones (\ref{eq:EDP_solox}), (\ref{eq:EDP_soloy}), (\ref{eq:EDP_soloz}) en la ecuación (\ref{eq:EDPseparada}), encontramos la relación
+\begin{equation}
+k^{2} = k^{2}_{1} + k^{2}_{2} + k^{2}_{3} \label{eq:sumadek}
+\end{equation}
+Las ecuaciones diferenciales (\ref{eq:EDP_solox}), (\ref{eq:EDP_soloy}), (\ref{eq:EDP_soloz}), son ecuaciones más fáciles de resolver:
+\begin{eqnarray}
+\begin{aligned}
+X &= A_{1} \exp(i k_{1} x) + B_{1} \exp(-i k_{1} x), \\
+Y &= A_{2} \exp(i k_{2} y) + B_{2} \exp(-i k_{2} y), \\
+Z &= A_{3} \exp(i k_{3} z) + B_{3} \exp(-i k_{3} z)
+\end{aligned}  
+\end{eqnarray}
+Multiplicando estos resultados, podemos encontrar soluciones para $u(\overrightarrow{r})$ de la forma
+\begin{equation}
+u(\overrightarrow{r}) = A \exp(i \overrightarrow{k} \cdot \overrightarrow{r})
+\end{equation}
+con $\overrightarrow{k}$ un vector en tres dimensiones que satisface la ecuación (\ref{eq:sumadek}):
+\begin{equation}
+\overrightarrow{k}^{2} = k^{2} \label{eq:kvector}
+\end{equation}
+Nótese que las diferentes posibilidades de $\exp(\pm ik_{1} x \pm i k_{2} y \pm i k_{3} z)$ que se obtienen al invertir el signo de las componentes de $\overrightarrow{k}$, no afecta el resultado de (\ref{eq:kvector}).
+\subsubsection{Ejemplo}
+Supongamos que tenemos una cuerda de guitarra estirada y que se suelta para sonar. La ecuación de la cuerda, es la ecuación de onda sin fuente en una dimensión, digamos $x$. La ecuación de onda es:
+\begin{equation}
+\dfrac{\partial^{2}u }{\partial x^{2}} - \dfrac{1}{v^{2}} \dfrac{\partial^{2}u}{\partial t^{2}} = 0 
+\label{eq:eq_onda}
+\end{equation}
+Proponemos la solución $u = X(x)T(t)$ y la substituimos en la ecuación de onda:
+\begin{equation}
+\dfrac{ T \partial^{2} X }{\partial x^{2}} - \dfrac{1}{v^{2}} X \dfrac{\partial^{2}T}{\partial t^{2}} = 0
+\end{equation}
+Si dividimos entre $TX$ toda la ecuación, nos queda una parte que solo depende de $x$ y otra que solo depende de $t$. Como $x$ y $t$ son variables independientes, se sigue que
+\begin{equation}
+\dfrac{1}{X} \dfrac{ \partial^{2} X }{\partial x^{2}} = \dfrac{1}{v^{2}T}  \dfrac{\partial^{2}T}{\partial t^{2}} = -c
+\end{equation}
+donde $c$ es una constante arbitraria.
+\\
+La ecuación de onda se separa en dos ecuaciones diferenciales como la ecuación del oscilador armónico
+\begin{eqnarray}
+\dfrac{d^{2} X}{dx^{2}} + cX &=& 0 \\
+\dfrac{d^{2} T}{dt^{2}} + c v^{2} T &=& 0
+\end{eqnarray}
+Cuyas soluciones son:
+\begin{eqnarray}
+X(x) &= c_{1} \sin(\sqrt{c}(x+x_{0})) \\
+T(t) &= c_{2} \sin(\sqrt{cv^{2}}(t+t_{0}))
+\end{eqnarray}
+La solución de la ecuación de onda es entonces:
+\begin{equation}
+u(x,t) = c_{1} \sin(\sqrt{c}(x+x_{0})) \sin(\sqrt{cv^{2}}(t+t_{0}))
+\end{equation}
+Vamos a suponer que al tiempo $t = 0$, el guitarrista pulsa la cuerda una elongación pequeña $l$. Si la cuerda tiene una longitud $L$, se tiene que $\sin(0) = \sin(x =
+L) = 0$.
+\\
+Esto quiere decir que al tiempo $t = 0$, la cuerda tiene una elongación tipo
+$\sin(x)$, con los extremos fijos y puestos en $x = 0$ y $x = L$. Es decir,
+\[ u(x, 0) = c_{1} \sin(\sqrt{c} (x + x_{0}))\sin(\sqrt{cv^{2}}t_{0}) = l \sin(x\pi/L) \]
+\\
+Esto implica que $c_{1} = l$, $x_{0} = 0$, $\sqrt{c} = \pi/L$ y $\sqrt{cv^{2}}t_{0} = \pi/2$, es decir $c = 1$, $t_{0} = L/(2v)$.
+\\
+La solución será entonces
+\begin{equation}
+u(x,t) = l \sin \left( \pi \dfrac{x}{L} \right) \sin \left( \dfrac{v \pi}{L} \left( t + \dfrac{L}{2v} \right) \right)
+\end{equation}
+\textbf{Comentario:} Un método equivalente para resolver la ecuación de onda es proponiendo la solución por el método de separación de variables del tipo $u(x,t) = X(x) \exp(-ikt)$. Subtituyendo esta propuesta en la ecuación (\ref{eq:eq_onda}), se obtiene
+\begin{equation}
+\dfrac{d^{2} X }{d x^{2}} + \dfrac{k^{2}}{v^{2}}X = 0
+\end{equation}
+que es la ecuación del oscilador armónico de nuevo. La solución es la misma que en el ejemplo, haciendo $c = k^{2}/v^{2}$. Sin embargo, utilizando esta propuesta es posible escribir la solución general (sin condiciones iniciales) en forma de una suma. Para cada $k$ se tiene una solución de la ecuación de onda. Por eso, la solución general se puede escribir como
+\begin{equation}
+u(x,t) = \sum_{k} u_{k} \sin \left( \dfrac{k}{v} ( x + x_{k}) \right) \exp(-ikt)
+\end{equation}
+\section{Coordenadas cilíndricas $(\rho, \varphi, z)$}
+La ecuación de Helmholtz en coordenadas cilíndricas tiene la forma
+\begin{equation}
+\dfrac{1}{\rho} \dfrac{\partial}{\partial \rho} \left( \rho \dfrac{\partial \psi}{\partial \rho}  \right) + \dfrac{1}{\rho^{2}} \dfrac{\partial^{2} \psi}{\partial \varphi^{2}} + \dfrac{\partial^{2} \psi}{\partial z^{2}} + k^{2} \psi = 0  \label{eq:Helmholtz_cilindricas}
+\end{equation}
+Suponemos una solución de tipo
+\begin{equation}
+\psi(\rho, \varphi,z) = P(\rho) \Phi (\varphi) Z(z) \label{eq:sol_prop_cilindricas}
+\end{equation}
+Sustituyendo en la ecuación (\ref{eq:Helmholtz_cilindricas}), dividiendo por $P \Phi Z$, dejando el término de la derivada de $z$ a la derecha de la igualdad, resulta
+\begin{equation}
+\dfrac{1}{\rho P} \dfrac{d}{d \rho} \left( \rho \dfrac{dP}{d \rho} \right) + \dfrac{1}{\rho^{2} \Phi} \dfrac{d^{2} \Phi}{d \varphi^{2}} + k^{2} =  - \dfrac{1}{Z} \dfrac{d^{2} Z}{dz^{2}} \label{eq:Helmholtz_separada}
+\end{equation}
+Se elige como constante de separación  $-l^{2}$, por tanto, tenemos el sistema:
+\begin{eqnarray}
+\dfrac{d^{2} Z}{d z^{2}} &=& l^{2} Z \\
+\dfrac{1}{\rho P} \dfrac{d}{d \rho} \left( \rho \dfrac{d P}{d \rho} \right) + \dfrac{1}{\rho^{2} \Phi} \dfrac{d^{2} \Phi}{d \varphi^{2}} + k^{2} &=& - l^{2}
+\end{eqnarray}
+Haciendo $k^{2} + l^{2} = n^{2}$, multiplicando por $\rho^{2}$, reordenamos los términos para obtener:
+\begin{equation}
+\dfrac{\rho}{P} \dfrac{d}{d \rho} \left( \rho \dfrac{d P}{d \rho} \right) + n^{2} \rho^{2} = - \dfrac{1}{\Phi} \dfrac{d^{2} \Phi}{d \varphi^{2}}
+\end{equation}
+Si definimos que la expresión del lado derecho sea igual a $m^{2}$, entonces
+\begin{equation}
+\dfrac{d^{2} \Phi}{d \varphi^{2}} = - m^{2} \Phi
+\end{equation}
+Para el término con dependencia en $\rho$, se tiene
+\begin{equation}
+\rho \dfrac{d}{d \rho} \left( \rho \dfrac{d P}{d \rho} \right) + (n^{2} \rho^{2} - m^{2} ) P = 0 \label{eq:ecuacion_Bessel}
+\end{equation}
+Que es la ecuación diferencial de Bessel.
+\\
+Reconociendo las soluciones específicas para $P, \Phi, Z$ por los subíndices, la solución general de la ecuación de Helmholtz, es una combinación lineal del producto de las soluciones:
+\begin{equation}
+\Psi(\rho, \varphi, z) =  \sum_{m,n} a_{mn} P_{mn}(\rho) \Phi_{m}(\varphi) Z_{n}(z)
+\end{equation}
+\section{Coordenadas esféricas $(r, \theta, \varphi)$}
+Retomando la ecuación de Helmholtz con $k^{2}$ constante, en coordenadas esféricas resulta
+\begin{equation}
+\dfrac{1}{r^{2} \sin \theta} \left[ \sin \theta \dfrac{\partial}{\partial r} \left( r^{2} \dfrac{\partial \psi}{\partial r} \right) + \dfrac{\partial}{\partial \theta} \left( \sin \theta \dfrac{\partial \psi}{\partial \theta} \right) + \dfrac{1}{\sin \theta} \dfrac{\partial^{2} \psi}{\partial \varphi^{2}} \right] = -k^{2} \psi \label{eq:Helmholtz_esfericas}
+\end{equation}
+Consideramos la propuesta de solución del tipo
+\begin{equation}
+\psi (r, \theta, \varphi) =  R(r) \Theta(\theta) \Phi(\varphi)
+\end{equation}
+Se sustituye en la ecuación (\ref{eq:Helmholtz_esfericas}), para luego dividir por $R \Theta \Phi$, donde se obtiene
+\begin{equation}
+\dfrac{1}{R r^{2}} \dfrac{d}{d r} \left( r^{2} \dfrac{d R}{d r} \right) + \dfrac{1}{\Theta r^{2} \sin \theta} \dfrac{d}{d \theta} \left( \sin \theta \dfrac{d \Theta}{d \theta} \right) + \dfrac{1}{\Phi r^{2} \sin^{2} \theta} \dfrac{d^{2} \Phi}{d \varphi^{2}} = - k^{2}
+\end{equation}
+Al multiplicar por $r^{2} \sin^{2} \theta$, podemos separar el término $\Phi$ que depende de $\varphi$
+\begin{equation}
+\dfrac{1}{\Phi} \dfrac{d^{2} \Phi}{d \varphi^{2}} =  r^{2} \sin^{2} \theta \left[ - k^{2} - \dfrac{1}{r^{2} R} \dfrac{d}{d r} \left( r^{2} \dfrac{d R}{d r} \right) - \dfrac{1}{r^{2} \sin \theta \Theta} \dfrac{d}{d \theta}\left( \sin \theta \dfrac{d \Theta}{d \theta} \right) \right] \label{eq:Helmholtz_separada_esfericas}
+\end{equation}
+La ecuación (\ref{eq:Helmholtz_separada_esfericas}) relaciona una función de $\varphi$ como una función tanto de $r$ como de $\varphi$. Como $r$, $\theta$ y $\varphi$ son variables independientes, podemos igualar la ecuación (\ref{eq:Helmholtz_separada_esfericas}) mediante una constante \footnote{En algunos problemas de la física, la variable $\varphi$ se utiliza como ángulo azimutal, lo que sugiere una solución periódica de tipo exponencial.}.
+Entonces tenemos que
+\begin{eqnarray}
+\dfrac{1}{\Phi} \dfrac{d^{2} \Phi(\varphi)}{d \varphi^{2}} &=& - m^{2} \\
+\dfrac{1}{r^{2} R} \dfrac{d}{d r} \left( r^{2} \dfrac{d R}{d r} \right) + \dfrac{1}{r^{2} \sin \theta \Theta} \dfrac{d}{d \theta} \left( \sin \theta \dfrac{d \Theta}{d \theta} \right) - \dfrac{m^{2}}{r^{2} \sin^{2} \theta} &=& - k^{2} \label{eq:Ecu_2_separada}
+\end{eqnarray} 
+Multiplicando la ecuación (\ref{eq:Ecu_2_separada}) por $r^{2}$ y reordenando los términos, resulta
+\begin{equation}
+\dfrac{1}{R} \dfrac{d}{d r} \left( r^{2} \dfrac{d R}{d r} \right) + r^{2} k^{2} = - \dfrac{1}{\sin \theta \Theta} \dfrac{d}{d \theta} \left( \sin \theta \dfrac{d \Theta}{d \theta} \right) + \dfrac{m^{2}}{\sin^{2} \theta}
+\end{equation}
+Donde de nuevo tenemos variables separadas. Podemos igualar cada lado por una constante $Q$, de tal manera que se obtiene
+\begin{eqnarray}
+\dfrac{1}{\sin \theta} \dfrac{d}{d \theta} \left( \sin \theta \dfrac{d \Theta}{d \theta} \right) - \dfrac{m^{2}}{\sin^{2} \theta} \Theta + Q \Theta &=& 0 \label{Polinomio_Legendre} \\
+\dfrac{1}{r^{2}} \dfrac{d}{d r} \left( r^{2} \dfrac{d R}{d r} \right) + k^{2} R - \dfrac{Q R}{r^{2}} &=& 0 \label{eq:funciones_Bessel_esfericas}
+\end{eqnarray}
+Las soluciones a estas ecuaciones se verán más adelante; la ecuación (\ref{Polinomio_Legendre}) corresponde a la ecuación de los polinomios asociados de Legendre, donde la constante $Q$ es $l(l+1)$, donde $l$ es un entero.
+\\
+Si $k^{2}$ es constante positiva, la ecuación (\ref{eq:funciones_Bessel_esfericas}), es la que representa las funciones de Bessel esféricas.
+\\
+La solución general se puede escribir como
+\begin{equation}
+\psi_{Qm} (r, \theta, \varphi) = \sum_{Q,m} R_{Q} (r) \Theta_{Qm} (\theta) \Phi_{m} (\varphi)
+\end{equation}
+\textbf{Nota: } La restricción de que $k^{2}$ sea una constante no es tan estricta, el proceso de separación será posible para una $k^{2}$ tan general como
+\begin{equation}
+k^{2} =  f(r) + \dfrac{1}{r^{2}} g(\theta) + \dfrac{1}{r^{2} \sin^{2} \theta} h(\varphi) + k'^{2}
+\end{equation}
+Casos especiales:
+\begin{itemize}
+\item En el problema del átomo de hidrógeno, al usar $k^{2} = f(r)$, la solución al átomo de hidrógeno se expresa en términos de los polinomios asociados de Laguerre.
+\item Cuando $k^{2} = k^{2}(r)$ se recuperan bastantes escenarios de la física: gravitación, electrostática, física atómica, física nuclear.
+\item Cuando $k^{2} = k^{2}(r)$ la dependencia angular queda aislada, por lo que las ecuaciones se resuelven de manera exacta.
+\end{itemize}
+\section{Problemas de tipo Sturm-Louville y Series de Fourier.}
+Consideremos la ecuación de Laplace en coordenadas cartesianas
+\begin{equation}
+\dfrac{\partial^{2} v}{\partial x^{2}} + \dfrac{\partial^{2} v}{\partial y^{2}} = 0 \label{eq:Laplace_2D}
+\end{equation}
+De acuerdo al método que hemos propuesto, sea una solución $v = X(x) Y(y)$, que sustituimos en la ecuación  (\ref{eq:Laplace_2D}), para luego dividir por $v$, por tanto
+\begin{eqnarray}
+\dfrac{X''}{X} + \dfrac{Y''}{Y} = 0 \\
+\Rightarrow \dfrac{X''(x)}{X(x)} = - \dfrac{Y''(y)}{Y(y)}
+\end{eqnarray}
+El término del lado izquierdo de la igualdad, sólo depende $x$, el término del lado derecho es independiente de $x$, por tanto, la ecuación de Laplace (en coordenadas cartesianas) se dice que es \emph{separable}.
+\\
+Si tomamos la derivada parcial con respecto de $x$ en ambos lados de la ecuación separada, encontramos que
+\begin{equation}
+\dfrac{d}{dx} \left[ \dfrac{X''}{X} \right] = 0
+\end{equation}
+Ya que $X''/X$ depende sólo de $x$, la derivada parcial es una derivada total. Entonces tenemos que
+\begin{equation}
+\dfrac{X''}{X} = - \lambda
+\end{equation}
+donde $\lambda$ es una constante. Adicionalmente
+\begin{equation}
+\dfrac{Y''}{Y} = \lambda
+\end{equation}
+Por tanto $u= X(x) Y(y)$ es solución de la ecuación de Laplace, si y sólo si $X$ y $Y$ satisfacen las dos ecuaciones diferenciales ordinarias:
+\begin{eqnarray}
+\begin{aligned}
+X'' + \lambda X = 0 \\
+Y'' - \lambda Y = 0 \label{eq:sistema_separado}
+\end{aligned}
+\end{eqnarray}
+De esta manera llegamos al siguiente problema: Hallar los valores del paráametro $\lambda$, para los que existen las soluciones no triviales del problema.
+\\
+Todos los valores del parámetro $\lambda$, se llaman valores propios y las soluciones no triviales del problema, se llaman funciones propias.
+\\
+Este tipo de problemas se les llama de tipo Sturm-Liouville.
+\\
+\\
+Para cada valor de $\lambda$ cada una de las ecuaciones de segundo orden, tiene dos soluciones linealmente independientes, sus productos forman una familia de cuatro soluciones, vienen dadas por:
+\begin{eqnarray}
+\text{Para } \lambda > 0 &,& \hspace{1cm} \exp(\pm\sqrt{\lambda} y) \cos \sqrt{\lambda} x, \exp(\pm \sqrt{\lambda} y) \sin \sqrt{\lambda} x \\
+\text{Para } \lambda = 0 &,& \hspace{1cm} 1,x,y,xy \\
+\text{Para } \lambda < 0 &,& \hspace{1cm} \exp(\pm\sqrt{\lambda} x) \cos \sqrt{- \lambda} y, \exp(\pm \sqrt{\lambda} x) \sin \sqrt{-\lambda} y 
+\end{eqnarray}
+Para la mayoría de dominios $D$, resulta complicado encontrar una combinación lineal de esas familias de soluciones que satisfagan las condiciones de frontera derecha.
+\\
+Si nos fijamos en el cuadrado $D: 0<x<1, 0<y<1$, tenemos que la ecuación de Laplace en $D$ y asignamos $v$ en la frontera. Esto mediante
+\begin{eqnarray*}
+v(x,0) &=& f_{1}(x) \\
+v(1,y) &=& f_{2}(y) \\
+v(x,1) &=& f_{3}(x) \\
+v(0,y) &=& f_{4}(x) 
+\end{eqnarray*}
+donde $f_{1},f_{2},f_{3},f_{4}$ son funciones dadas.
+\\
+Como tenemos un problema lineal, la solución puede ser la suma de la solución de
+\begin{eqnarray}
+\begin{aligned}
+\dfrac{\partial^{2} u}{\partial x^{2}} + \dfrac{\partial^{2} u}{\partial y^{2}} &= 0 \\
+u(x,0) &= f_{1} (x) \\
+u(1,y) &= 0 \\
+u(x,1) &= 0 \\
+u(0,y) &= 0 
+\end{aligned}
+\end{eqnarray}
+y los otros tres problemas con condiciones de frontera, en cada cual se tiene que $u=0$, excepto en un extremo. Por lo que es suficiente para resolver problemas de este tipo.
+\\
+Como queremos que $u=0$ para $x=0$ y $x=1$, consideramos las soluciones de la primera ecuación de (\ref{eq:sistema_separado}), que satisface esas condiciones. Por lo que debemos de tener
+\begin{eqnarray}
+\begin{aligned}
+X'' + \lambda X &= 0 \\
+X(0) = X(1) &= 0
+\end{aligned}
+\end{eqnarray}
+Este probelma homogéneo tiene una solución trivial $X \equiv 0$, pero no es lo que buscamos. Nos interesan casos donde no sea la solución trivial, es decir, donde no se mantiene la unicidad de la solución.
+\\
+Si $\lambda < 0$, la condición $X(0) =0 $ nos dice que $X(x)$ debe de ser múltiplo de $\sinh \sqrt{-\lambda}x$.
+\\
+Como $\sinh \sqrt{-\lambda}$ nunca es cero, la condición $X(1)=0$ nos dice que debe ser múltiplo de cero.
+\\
+Para $\lambda=0$, $X$ debe ser un múltiplo de $x$, y la condición $X(1)=0$ nos dice $X \equiv 0$. \\
+Para $\lambda>0$, $X$ es múltiplo de $\sin \sqrt{\lambda}x$. Entonces $X$ necesita no ser cero si y sólo si
+\begin{equation}
+\sin \sqrt{\lambda} = 0
+\end{equation}
+Que ocurre si
+\begin{equation}
+\lambda = n^{2} \pi^{2}, \hspace{1cm} n=1,2,\ldots
+\end{equation}
+Hemos encontrado un conjunto infinito discreto de valores de $\lambda$ para los cuales, el problema tiene solución \textbf{no trivial}. Estos valores se llaman \textbf{valores propios (eigenvalores)} del  problema, y las funciones
+\begin{equation}
+X_{n} (x) = \sin n \pi, \hspace{1cm}, n=1,2 \ldots
+\end{equation}
+son las correspondientes \textbf{funciones propias (eigenfunciones)}.
+\\
+Habiendo encontrado una secuencia de valores para $\lambda$, podemos ahora conocer las correspondientes funciones para $Y(y)$, del sistema (\ref{eq:sistema_separado})y de la condición homogénea $u=0$ en $y=1$, tenemos que las soluciones de 
+\begin{eqnarray}
+\begin{aligned}
+Y'' - n^{2} \pi^{2} Y &= 0 \\
+Y(1) &= 0
+\end{aligned}
+\end{eqnarray}
+De donde podemos revisar que las soluciones son múltiplos de $\sinh n \pi (1-y)$. Por lo que podemos construir las soluciones particulares que satisfacen las condiciones homogéneas descritas. Esto mismo es cierto para cualquier combinación lineal de las soluciones, por lo que es posible representar la solución de $u$ como una serie infinita en términos de las funciones $u_{n}$
+\begin{equation}
+u(x,y) =  \sum_{n=1}^{\infty} c_{n} \sin n \pi x \sinh n \pi (1-y)
+\end{equation}
+Donde es necesario determinar los coeficientes $c_{n}$ en los cuales se cumpla que $u(x,0) = f_{1}(x)$, donde $f_{1}$ es una función dada. Debemos aún así de asegurarnos de que la convergencia de la serie es buena, para asegurarse que cumplen la ecuación diferencial y las condiciones de frontera.
+\\
+Si hacemos $y=0$ en cada uno de los términos de la serie, para obtener la condición
+\begin{equation}
+f_{1}(x) = \sum^{\infty}_{1} c_{n} \sinh n \pi \sin n \pi x
+\end{equation}
+Y si hacemos que
+\begin{equation}
+b_{n} = c_{n} \sinh n \pi
+\end{equation}
+Ahora nuestro problema es determinar los $b_{1}, b_{2}, \ldots$  de tal manera que para una función dada $f_{1}(x)$
+\begin{equation}
+f_{1}(x) = \sum_{1}^{\infty} b_{n} \sin n \pi  x
+\end{equation}
+La expansión de una función arbitraria en una serie de funciones propias se llama una \emph{serie de Fourier}. El caso particular de que las funciones propias son todos los senos, se llama una \emph{serie de senos de Fourier}.
+\\
+\textbf{Ejemplo:}
+\\
+Consideremos el problema de condiciones iniciales y de frontera para la ecuación de onda:
+\begin{eqnarray*}
+\dfrac{\partial^2 u}{\partial t^{2}} - c^{2} \dfrac{\partial^{2} u}{\partial x^{2}} &=& 0 \hspace{1.5 cm} \text{para } 0 < x < l, t > 0 \\
+u(x,0) &=& f(x) \hspace{1.5cm} \text{para } 0 \leq x \leq l \\
+\dfrac{\partial u}{\partial t} (x,0) &=& 0 \hspace{1.5cm} \text{para } 0 \leq x \leq l \\
+u(0,t) &=& 0 \\
+u(l,t) &=& 0
+\end{eqnarray*}
+Buscamos las soluciones de la ecuación diferencial de la forma $u=X(x) T(x)$, para luego sustituir $u$ en la ecuación de onda, dividimos por $u$, arreglamos términos para obtener
+\begin{equation}
+\dfrac{T''(t)}{T(t)} =  c^{2} \dfrac{X''(x)}{X(x)}
+\end{equation}
+Donde vemos que la ecuación es separable. Usando el razonamiento anteriormente explicado, podemos igualar ambos lados de la expresión mediante el uso de una misma constante $\lambda$. Con las condiciones iniciales y las de frontera, tenemos que
+\begin{eqnarray*}
+c^{2} X'' + \lambda X &=& 0 \\
+X(0) = X(l) &=& 0 \\
+\\
+T'' + \lambda T &=& 0\\
+T'(0) &=& 0
+\end{eqnarray*}
+Encontramos que los valores propios son
+\begin{equation}
+\lambda = \dfrac{n^{2} \pi^{2} c^{2}}{l^{2}}
+\end{equation}
+y las funciones propias son
+\begin{equation}
+X_{n} = \sin \left(\dfrac{n \pi x}{l} \right)
+\end{equation}
+Usando esos valores de $\lambda$, tenemos que
+\begin{equation}
+T_{n} = \cos \left( \dfrac{n \pi  c}{l} \right) t
+\end{equation}
+por lo que buscamos una solución de la forma
+\begin{equation}
+u(x,t) = \sum_{1}^{\infty} b_{n} \sin \left( \dfrac{n \pi x}{l} \right) \cos \left( \dfrac{n \pi c}{l} \right) t
+\end{equation}
+Haciendo que $t=0$, ahora queremos determinar las constantes $b_{1}, b_{2}, \ldots$ tales que
+\begin{equation}
+f(x) = \sum_{1}^{\infty} b_{n} \sin \left( \dfrac{n \pi x}{l} \right)
+\end{equation}
+Esto es, buscamos nuevamente la serie de senos de Fourier para $f(x)$.
+\section{Método de Frobenius}
+Este método se ha convertido en una herramienta muy poderosa para la determinación de soluciones para un amplio espectro de ecuaciones diferenciales de segundo orden con una inmediata repercusión en aplicaciones de la física en innumerables problemas.
+\\
+El método propone la búsqueda de soluciones desarrollables en series de potencias para ecuaciones diferenciales lineales de segundo orden. Este procedimiento requiere el encontrar relaciones de recurrencia entre los coeficientes de las series
+buscadas, asumiendo un primer término no nulo.
+\\
+Veamos cómo es el método de Frobenius, para ello consideremos lo siguiente: todas las ecuaciones diferenciales que estudiamos hasta ahora pueden escribirse de la siguiente manera
+\begin{eqnarray}
+\begin{aligned}
+y'' &= f(x,y,y') \\
+\text{donde } \\
+y' &= \dfrac{d y(x)}{dx} \\
+y'' &= \dfrac{d^{2} y(x) }{d x^{2}}
+\end{aligned}
+\end{eqnarray}
+Si en este ecuación, $y$ y $y'$  pueden tomar cualquier valor finito en $x = x_{0}$  y  $y''$  es finito, vamos a decir que el punto $x = x_{0}$ es un \textbf{punto ordinario.}
+\\
+Si en este ecuación, $y''$  tiende al infinito para una elección de valores finitos de $y$ y $y_{1}$, el punto $x = x_{0}$
+se llama \textbf{punto singular}.
+\\
+Otra manera de presentar la definición de punto singular es escribiendo nuestra ecuación diferencial de la manera usual:
+\begin{equation}
+y'' + P(x) y' + Q(x) y =0 \label{eq:EDO2}
+\end{equation}
+Si las funciones $P(x)$ y $Q(x)$ son finitas en $x = x_{0}$, el punto $x = x_{0}$ es un \emph{punto ordinario}. Al 
+contrario, si $P(x)$ y/o $Q(x)$ tienen una singularidad en $x = x_{0}$, el punto $x = x_{0}$ es un \emph{punto singular}.
+\\
+Usando la ecuación (\ref{eq:EDO2}) podemos distinguir entre dos tipos de puntos singulares:
+\begin{enumerate}
+\item Si $P(x)$ y/o $Q(x)$ tienen una singularidad en $x = x_{0}$, pero tenemos que
+\begin{eqnarray}
+\lim_{x \to x_{0}} (x - x_{0}) P(x) \hspace{1.5cm} \text{es finito} \\
+\lim_{x \to x_{0}} (x - x_{0})^{2} Q(x) \hspace{1.5cm} \text{es finito}
+\end{eqnarray} 
+entonces, el punto $x_{0}$ se llama \textbf{punto singular no esencial o punto singular regular}.
+\item Si $P(x)$ diverge más rápidamente que $1/(x-x_{0})$, de tal manera que 
+\begin{equation}
+\lim_{x \to x_{0}} (x - x_{0}) P(x) \rightarrow \infty
+\end{equation}
+o si $Q(x)$ diverge más rápidamente que $1/(x-x_{0})^{2}$, de tal manera que
+\begin{equation}
+\lim_{x \to x_{0}} (x - x_{0})^{2} Q(x) \rightarrow \infty
+\end{equation}
+\end{enumerate}
+entonces el punto $x_{0}$ se llama \textbf{singularidad esencial o singularidad irregular}.
+\\
+Estas definiciones son válidas para cualquier valor finito $x_{0}$. El análisis de los puntos al infinito $(x \to \infty)$ se hace usando el cambio de variable $x = 1/z$, así, el estudiar $x \to \infty$ es equivalente a estudiar la ecuación para $z \to 0$. Pero primero tenemos que expresar la ecuación en términos de la variable $z$. Haciendo el cambio de variable en las derivadas:
+\begin{eqnarray}
+\begin{aligned}
+\dfrac{dy(x)}{dx} &= \dfrac{d y(z^{-1}}{d z} \dfrac{dz}{dx} = - \dfrac{1}{x^{2}} \dfrac{dy(z^{-1})}{dz} = -z^{2} \dfrac{dy(z^{-1})}{dz} \\
+\dfrac{d^{2} y(x)}{d x^{2}} &= \dfrac{d}{dz} \left[ \dfrac{dy(x)}{dx} \right] \dfrac{dz}{dx} = (-z^{2}) \left[ -2z \dfrac{dy(z^{-1})}{dz} - z^{2} \dfrac{d^{2} y(z^{-1})}{dz^{2}} \right] = \\
+ &= 2z^{3} \dfrac{dy(z^{-1})}{dz} + z^{4} \dfrac{d^{2}y(z^{-1})}{dz^{2}}
+\end{aligned}
+\end{eqnarray}
+Usando estos resultados, podemos transformar la ecuación (\ref{eq:EDO2}) en
+\begin{equation}
+z^{4} \dfrac{d^{2} y}{d z^{2}} + [ 2 z^{3} - z^{2} P(z^{-1})] \dfrac{d y}{d z} + Q(z^{-1}) y = 0 \label{eq:EDO2_en_Z}
+\end{equation}
+El comportamiento en $x=\infty, (z=0)$ entonces dependerá del comportamiento de los nuevos coeficientes
+\[ \dfrac{2z - P(z^{-1})}{z^{2}} \hspace{1cm} \text{ y } \hspace{1cm} \dfrac{Q(z^{-1})}{z^{4}}\]
+mientras $z \to 0$.
+\\
+Si esas dos expresiones se mantienen finitas, el punto $x=\infty$ es un punto ordinario. Si las expresiones divergen no más rápido que $1/z$ y $1/z^{2}$, respectivamente, el punto $x=\infty$ es un punto regular singular, de otra manera, el unto es irregular singular (una singularidad esencial).
+\\
+\textbf{Ejemplo:}
+\\
+Sea la ecuación de Bessel
+\begin{equation}
+x^{2} y'' + xy' + (x^{2} - n^{2})y = 0
+\end{equation}
+Comparando contra la ecuación (\ref{eq:EDO2}), tenemos que
+\[ P(x) =  \dfrac{1}{x} \hspace{2cm} Q(x) = 1 - \dfrac{n^{2}}{x^{2}}\]
+lo que muestra que le punto $x=0$ es una singularidad regular. Por inspección vemos que no hay otros puntos singulares en el rango finito. Mientras $x \to \infty (z \to 0)$ de la ecuación (\ref{eq:EDO2_en_Z}) tenemos los coeficientes
+\[ \dfrac{2z - z}{z^{2}} \hspace{2cm} \dfrac{1 - n^{2} z^{2}}{z^{4}}\]
+ya que la última expresión diverge como $z^{4}$, el punto $x= \infty$ es una singularidad irregular o esencial. 
+\subsection{Solución en serie.}
+Veamos el método para obtener una solución de una ecuación diferencial de 2o. grado, homogénea y lineal. Este método funcionará siempre que el punto de expansión no tiene un peor comportamiento que un punto singular regular.
+\\
+Como siempre podemos escribir tal ecuación de la siguiente manera:
+\begin{equation}
+y'' + P(x) y' + Q(x) y = 0
+\end{equation}
+Vamos a tratar de obtener una solución de esta ecuación diferencial substituyendo en la ecuación una serie de Taylor con coeficientes no-determinados. Para ilustrar el método, vamos a aplicarlo a dos ecuaciones diferenciales que aparecen en varios problemas físicos. Primero, consideramos la ecuación del oscilador lineal
+\begin{equation}
+y'' + \omega^{2} y =0 \label{eq:oscilador}
+\end{equation}
+con las soluciones conocidas $y(x) = \sin \omega x, \cos \omega x$.
+\\
+Intentamos con
+\begin{eqnarray}
+\begin{aligned}
+y(x) &= x^{k} (a_{0} + a_{1} x + a_{2} x^{2} + a_{3} x^{3} + \ldots ) \\
+&= \sum_{\lambda=0}^{\infty} a_{\lambda} x^{k+\lambda} \hspace{1.5cm} a_{0} \neq 0
+\end{aligned}
+\end{eqnarray}
+donde el exponente $k$ y todos los coeficientes $a_{\lambda}$ son indeterminados. Nótese que $k$ no necesariamente es un entero. Al diferenciar en dos ocaciones, tenemos que
+\begin{eqnarray*}
+\dfrac{d y}{d x} &=& \sum_{\lambda = 0}^{\infty} a_{\lambda} (k + \lambda) x^{k + \lambda -1} \\
+\dfrac{d^{2} y}{d x^{2}} &=& \sum_{\lambda = 0}^{\infty} a_{\lambda} (k + \lambda) (k + \lambda -1) x^{k + \lambda -2}
+\end{eqnarray*}
+Al sustituir en la ecuación (\ref{eq:oscilador}), tenemos que
+\begin{equation}
+\sum_{\lambda=0}^{\infty} a_{\lambda} (k + \lambda) (k + \lambda - 1) x^{k + \lambda -2} + \omega^{2} \sum_{\lambda=0}^{\infty} a_{\lambda} x^{k+\lambda} = 0 \label{eq:oscilador_desarrollado}
+\end{equation}
+De la unicidad de las series de potencias, los coeficientes de cada potencia de $x$ del lado izquierdo, deben de ser cero.
+\\
+La potencia menor de $x$ que aparece en la ecuación e $x^{k-2}$, con $\lambda=0$ en la primera suma. El requisito para que el coeficiente se anule, nos lleva a
+\begin{equation}
+a_{0} k (k-1) = 0
+\end{equation}
+Se ha elegido $a_{0}$ como el coeficiente menor de los términos que no se anular de la serie, ya que por definición $a_{0} \neq 0$, por tanto
+\begin{equation}
+k (k-1) = 0 \label{eq:ecuacion_indicial}
+\end{equation}
+A esta ecuación se le llama ecuación indicial; la ecuación indicial y sus raíces son importante para el análisis, en nuestro ejemplo $k=0$ o $k=1$.
+\\
+Antes de considerar esas dos posibilidades para $k$, volvemos a la ecuación (\ref{eq:oscilador_desarrollado}) y nos hacemos que los coeficientes que se mantienen, los coeficientes de $x^{k+j} \hspace{0.3cm} \text{con } (j \geq 0)$ se anulen.
+\\
+Hacemos $\lambda = j+2$ en la primera suma y $\lambda =j$ en la segunda, lo que nos devuelve
+\begin{equation*}
+a_{j+2} (k + j + 2) (k + j +1) + \omega^{2} a_{j} = 0
+\end{equation*}
+Que es lo mismo
+\begin{equation}
+a_{j+2} =  - a_{j} \dfrac{\omega^{2}}{(k + j +2)( k + j + 1)}
+\end{equation}
+Siendo una relación de recurrencia entre los coeficientes: dado $a_{j}$, podemos calcular $a_{j+2}$ y luego $a_{j+4}$, $a_{j+6}$, etc. Vemos que en este ejemplo comenzamos con $a_{0}$. Lo que nos devuelve los coeficientes pares, ignorando los  impares $a_{1}, a_{3}, a_{5}, \ldots$, ya que $a_{1}$ es arbitrario, lo igualamos a cero, por tanto
+\begin{equation*}
+a_{3} = a_{5} = a_{7} = \ldots = 0
+\end{equation*}
+Todos los coeficientes impares se anulan
+\end{document}
