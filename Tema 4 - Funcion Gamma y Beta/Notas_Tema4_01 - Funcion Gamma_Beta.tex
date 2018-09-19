@@ -10,141 +10,181 @@
 \renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
+%Referencia Arfken Capítulo 8. Función Gamma.
+La función gamma aparece ocasionalmente en problemas físicos tales como la normalización de las funciones de onda de Coulomb y el cálculo de probabilidades en mecánica estadística.
+\par
+En general, sin embargo, tiene una aplicación e interpretación física menos directa que, por ejemplo, las funciones de Legendre y Bessel. Más bien, su importancia radica en su utilidad para desarrollar otras funciones que tienen una aplicación física directa.
 \section{Función Gamma}
 Existen al menos tres formas convenientes de definir la función Gamma.
 \subsection{Límite infinito (Euler)}
-La primera definición, llamada de Euler es
+La primera definición, llamada de \emph{Euler} es
 \begin{equation}
 \Gamma(z) \equiv \lim_{n \to \infty} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{z (z+1) (z+2) \cdots (z+n)} n^{z}, \hspace{1.5cm} z \neq	0, -1,-2,-3, \ldots
-\label{eq:ecuacion_10_1}
+\label{eq:ecuacion_10_01}
 \end{equation}
-Esta definición de $\Gamma(z)$ es útil para el desarrollo del producto infinito de Weierstrass de $\Gamma (z)$. Sin pérdida de generalidad, $z$ puede ser real o complejo. Re-emplazando $z$ con $z+1$, tenemos
-\begin{eqnarray}
+Esta definición de $\Gamma(z)$ es útil para el desarrollo del producto infinito de Weierstrass de $\Gamma (z)$. Sin pérdida de generalidad, $z$ puede ser real o complejo. Re-emplazando $z$ con $z + 1$, tenemos
+\begin{align}
 \begin{aligned}
-\Gamma (z+1) &= \lim_{n \to \infty} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{(z+1) (z+2)(z+3) \cdots (z+n+1)} n^{z+1} \\
-&= \lim_{n \to \infty} \dfrac{nz}{z+n+1} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{z (z+1) (z+2)(z+3) \cdots (z+n)} n^{z} \\
-&= z \Gamma (z)
-\label{eq:ecuacion_10_2}
+\Gamma (z + 1) &= \lim_{n \to \infty} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{(z + 1)(z + 2)(z + 3) \cdots (z + n + 1)} n^{z + 1} \\
+&= \lim_{n \to \infty} \dfrac{n \, z}{z + n + 1} \: \dfrac{1 \cdot 2 \cdot 3 \cdots n}{z (z + 1)(z + 2)(z + 3) \cdots (z + n)} n^{z} \\
+&= z \: \Gamma (z)
+\label{eq:ecuacion_10_02}
 \end{aligned}
-\end{eqnarray}
+\end{align}
+Esta es la relación funcional básica para la función gamma. Debe notarse que es una ecuación de diferencias. Se ha demostrado que la función gamma es una de una clase general de funciones que no satisfacen ninguna ecuación diferencial con coeficientes racionales.
+\par
+Específicamente, la función gamma es una de las pocas funciones de la física matemática que no satisface ni la ecuación diferencial hipergeométrica ni la ecuación hipergeométrica confluente.
+\par
 De la definición
-\begin{eqnarray}
-\begin{aligned}
-\Gamma (1) &= \lim_{n \to \infty} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{1 \cdot 2 \cdot 3 \cdots n(n+1)} n \\
-&= 1
-\label{eq:ecuacion_10_3}
-\end{aligned}
-\end{eqnarray}
-Usando de la ecuación (\ref{eq:ecuacion_10_2}), tenemos
-\begin{eqnarray}
+\begin{align}
+\Gamma (1) = \lim_{n \to \infty} \dfrac{1 \cdot 2 \cdot 3 \cdots n}{1 \cdot 2 \cdot 3 \cdots n \, (n + 1)} \: n = 1
+\label{eq:ecuacion_10_03}
+\end{align}
+Usando de la ecuación (\ref{eq:ecuacion_10_02}), tenemos
+\begin{align}
 \begin{aligned}
 \Gamma (2) &= 1 \\
-\Gamma (3) &=  2 \Gamma(2) =  2 \\
+\Gamma (3) &=  2 \: \Gamma(2) =  2 \\
 \Gamma (n) &= 1 \cdot 2 \cdot 3 \cdots (n-1) =  (n-1)!
-\label{eq:ecuacion_10_4}
+\label{eq:ecuacion_10_04}
 \end{aligned}
-\end{eqnarray}
+\end{align}
 \subsection{Integral definida (Euler)}
-Una segunda definición es la llamada forma de Euler:
+Una segunda definición es la llamada integral de Euler:
 \begin{equation}
-\Gamma (z) \equiv \int_{0}^{\infty} e^{-t} t^{z-1} dt, \hspace{1.5cm} Re(z) > 0
-\label{eq:ecuacion_10_5}
+\Gamma (z) \equiv \int_{0}^{\infty} e^{-t} \: t^{z - 1} \, \dd t, \hspace{1.5cm} \Re(z) > 0
+\label{eq:ecuacion_10_05}
 \end{equation}
 La restricción en $z$ es necesaria para prevenir la divergencia de la integral. Cuando la función Gamma aparece en problemas de la física, a menudo tiene una variante
-\begin{eqnarray}
-\Gamma (z) &= 2 \int_{0}^{\infty} e^{-t^{2}} t^{2z-1} dt, \hspace{1.5cm} Re(z) > 0  \label{eq:ecuacion_10_6} \\
-\Gamma (z) &=  \int_{0}^{1} \left[ ln\left(\dfrac{1}{t} \right) \right]^{z-1} dt, \hspace{1.5cm} \mathbb{R}(z) > 0 \label{eq:ecuacion_10_7}
-\end{eqnarray}
-Cuando $z=1/2$, la ecuación (\ref{eq:ecuacion_10_6}) es la función de error gaussiana, que nos devuelve el siguiente resultado interesante:
+\begin{align}
+\Gamma (z) &= 2 \: \int_{0}^{\infty} \exp(-t^{2}) \: t^{2 \, z - 1} \dd t, \hspace{1.5cm} \Re(z) > 0  \label{eq:ecuacion_10_06} \\
+\Gamma (z) &=  \int_{0}^{1} \left[ \ln\left(\dfrac{1}{t} \right) \right]^{z - 1} \dd t, \hspace{1.5cm} \Re (z) > 0 \label{eq:ecuacion_10_07}
+\end{align}
+Cuando $z=1/2$, la ecuación (\ref{eq:ecuacion_10_06}) es la función de error gaussiana, que nos devuelve el siguiente resultado interesante:
 \begin{equation}
 \Gamma (1/2) = \sqrt{\pi}
-\label{eq:ecuacion_10_8}
+\label{eq:ecuacion_10_08}
 \end{equation}
-Para mostrar la equivalencia de esas dos definiciones, las ecuaciones (\ref{eq:ecuacion_10_1}) y (\ref{eq:ecuacion_10_5}) consideremos la función de dos variables
+Para mostrar la equivalencia de esas dos definiciones, las ecuaciones (\ref{eq:ecuacion_10_01}) y (\ref{eq:ecuacion_10_05}) consideremos la función de dos variables
 \begin{equation}
-F(z,n) = \int_{0}^{n} \left( 1 - \dfrac{t}{n} \right)^{n} t^{z-1} dt, \hspace{1.5cm} Re(z) > 0
-\label{eq:ecuacion_10_9}
+F(z, n) = \int_{0}^{n} \left( 1 - \dfrac{t}{n} \right)^{n} \: t^{z - 1} \dd t, \hspace{1.5cm} \Re(z) > 0
+\label{eq:ecuacion_10_09}
 \end{equation}
 con $n$ entero positivo. Ya que
 \begin{equation}
 \lim_{n \to \infty} \left( 1 - \dfrac{t}{n} \right)^{n} \equiv e^{-t}
 \label{eq:ecuacion_10_10}
 \end{equation}
-de la definición de función exponencial.
+de la definición de función exponencial
 \begin{equation}
-\lim_{n \to \infty} F(z,n) = F(z,\infty) = \int_{0}^{\infty} e^{-t} t^{z-1} dt \equiv \Gamma (z)
+\lim_{n \to \infty} F(z, n) = F(z, \infty) = \int_{0}^{\infty} \exp(-t) \: t^{z - 1} \dd t \equiv \Gamma (z)
 \label{eq:ecuacione_10_11}
 \end{equation}
-por la ecuación (\ref{eq:ecuacion_10_5}).
+por la ecuación (\ref{eq:ecuacion_10_05}).
 \\
-Regresado a $F(z,n)$, evaluamos sucesiamente la integral por partes, hacemos de manera conveniente $u = t/n$. Entonces
+Regresando a $F(z,n)$, evaluamos sucesivamente la integral por partes, hacemos de manera conveniente $u = t/n$. Entonces
 \begin{equation}
-F(z,n) = n^{2} \int_{0}^{1} (1-u)^{n} u^{z-1} du
+F(z,n) = n^{2} \: \int_{0}^{1} (1-u)^{n} \: u^{z-1} \dd u
 \label{eq:ecuacione_10_12}
 \end{equation}
 Integrando por partes
 \begin{equation}
-\dfrac{F(z,n)}{n^{2}} =  (1-u)^{n} \dfrac{u^{z}}{z} \Bigg\vert_{0}^{1} + \dfrac{n}{z} \int_{0}^{1} (1-u)^{n-1} u^{z} du
+\dfrac{F(z, n)}{n^{2}} =  (1-u)^{n} \: \dfrac{u^{z}}{z} \Bigg\vert_{0}^{1} + \dfrac{n}{z} \: \int_{0}^{1} (1-u)^{n-1} \: u^{z} \dd u
 \label{eq:ecuacion_10_13}
 \end{equation}
 Repitiendo esto cada vez con el integrando se anula en ambos extremos, por lo que
-\begin{eqnarray}
+\begin{align}
 \begin{aligned}
-F(z,n) &= n^{z} \dfrac{n(n-1) \cdots 1}{z(z+1) \cdots (z+n+-1)} \int_{0}^{1} u^{z+n-1} du \\
-&= \dfrac{1 \cdot 2 \cdot 3 \cdots n}{z(z+1)(z+2) \cdots (z+n)} n^{z}
+F(z,n) &= n^{z} \: \dfrac{n(n-1) \cdots 1}{z \, (z+1) \cdots (z+n-1)} \int_{0}^{1} u^{z+n-1} \, \dd u \\
+&= \dfrac{1 \cdot 2 \cdot 3 \cdots n}{z \, (z+1)(z+2) \cdots (z+n)} \: n^{z}
 \label{eq:ecuacion_10_14}
 \end{aligned}
-\end{eqnarray}
-Que es idéntico con la expresión del lado derecho de la ecuación (\ref{eq:ecuacion_10_1}). De aquí que
+\end{align}
+Que es idéntico con la expresión del lado derecho de la ecuación (\ref{eq:ecuacion_10_01}). De aquí que
 \begin{equation}
-\lim_{n \to \infty} F(z,n) = F(z,\infty) \equiv \Gamma (z)
+\lim_{n \to \infty} F(z, n) = F(z, \infty) \equiv \Gamma (z)
 \label{eq:ecuacion_10_15}
 \end{equation}
 \subsection{Producto infinito (Weierstrass)}
-La tercera forma es
+La tercera forma conocida como forma de Weierstrass es
 \begin{equation}
-\dfrac{1}{\Gamma (z)} \equiv z e^{\gamma z} \prod_{n=1}^{\infty} \left( 1 + \dfrac{z}{n} \right) e^{-z/n}
+\dfrac{1}{\Gamma (z)} \equiv z \:  e^{\gamma \, z} \: \prod_{n=1}^{\infty} \left( 1 + \dfrac{z}{n} \right) \: e^{-z/n}
 \label{eq:ecuacion_10_16}
 \end{equation}
-donde $\gamma$ es la constante de Euler-Mascheroni
+donde $\gamma$ es la constante de \emph{Euler-Mascheroni}
 \begin{equation}
-\gamma = 0.577216
+\gamma = 0.5772156619
 \label{eq:ecuacion_10_17}
 \end{equation}
-\subsection{Notación factorial}
-El valor de $-1$ en el exponente $z-1$ de la segunda definición (ecuación \ref{eq:ecuacion_10_5}) es una molestia continua, podemos re-escribir
+De esta definición de producto infinito de $\Gamma (z)$, se obtiene una identidad importante:
 \begin{equation}
-\int_{0}^{\infty} e^{-t} t^{z} dt \equiv z!,  \hspace{1.5cm} \mathbb{R}(z) > 0
+\Gamma (z) \: \Gamma (1 - z) = \dfrac{\pi}{\sin z \, \pi}
+\label{eq:ecuacion_10_23}
+\end{equation}
+Así también la \textbf{fórmula de duplicación de Legendre}:
+\begin{equation}
+\Gamma (1 + z) \: \Gamma (z + \frac{1}{2}) = 2^{-2 \, z} \: \sqrt{\pi} \: \Gamma (2 \, z + 1)
+\label{eq:ecuacion_10_24b}
+\end{equation}
+La definición de Weierstrass muestra directamente que $\Gamma (z)$ tiene polos sencillos en $z = 0, -1, -2, -3, \ldots$ y que $[\Gamma (z)]^{-1}$ no tiene polos en el plano complejo, lo que significa que $\Gamma (z)$ no tiene ceros.
+\subsection{Notación factorial}
+El valor de $-1$ en el exponente $z-1$ de la segunda definición (ecuación \ref{eq:ecuacion_10_05}) es una molestia continua, podemos re-escribir
+\begin{equation}
+\int_{0}^{\infty} e^{-t} \: t^{z} \: \dd t \equiv z!,  \hspace{1.5cm} \Re (z) > 0
 \label{eq:ecuacion_10_25}
 \end{equation}
-que define la \emph{función factorial} $z!$. A veces se puede encontrar escrita como
+que define la \emph{función factorial} $z!$. A veces se puede encontrar escrita con la notación de Gauss: $\prod (z)$ como
 \begin{equation}
-\prod(z) = z!
+\prod(z) = z! = \Gamma (z + 1)
+\label{eq:ecuacion_10_26}
 \end{equation}
 donde la notación $\Gamma$ se debe a Legendre. La función factorial de la ecuación (\ref{eq:ecuacion_10_25}) está relacionada con la función Gamma
-\[ \Gamma (z) = (z-1)! \]
-o
 \begin{equation}
-\Gamma (z+1) = z!
+\Gamma (z) = (z-1)! \hspace{1cm} \mbox{ o } \hspace{1cm} \Gamma (z + 1) = z!
 \label{eq:ecuacion_10_27}
 \end{equation}
-Si $z=n$, un entero positivo (ecuación \ref{eq:ecuacion_10_4}), muestra que
+Si $z=n$, un entero positivo (ecuación \ref{eq:ecuacion_10_04}), se demuestra que
 \begin{equation}
 z! = n! = 1 \cdot 2 \cdot 3 \cdots n
 \label{eq:ecuacion_10_28}
 \end{equation}
-\subsection{Notación doble factorial}
-En varios problemas de la física, en particular con los polinomios de Legendra, encontraremos productos de enteros impares positivos y de pares positivos, por conveniencia, definimos el doble factorial:
-\begin{eqnarray}
-\begin{aligned}
-1 \cdot 3 \cdot 5 \cdots (2n+1) &=& (2n+1) !! \\
-2 \cdot 4 \cdot 6 \cdots (2n) &=& (2n) !!
-\end{aligned}
-\end{eqnarray}
-Que están relacionado con la función factorial
+que el la forma conocida del factorial. Sin embargo, hay que tomar en cuenta que como $z!$ ahora está definido por la eq. (\ref{eq:ecuacion_10_25}) (o de forma equivalente por la ecuación (\ref{eq:ecuacion_10_27})) la función factorial ya no está limitada a valores positivos del argumento de las integrales (figura \ref{fig:figura_10_01}).
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/FuncionFactorial_01.png}
+    \caption{La función factorial. Extensión a los argumentos negativos.}
+    \label{fig:figura_10_01}
+\end{figure}
+La relación de diferencias (ec. (\ref{eq:ecuacion_10_02})) se convierte
 \begin{equation}
-(2n)!! =  2^{n} n! \text{ y } (2n+1)!! = \dfrac{(2n+1)!}{2^{n}n!}
+(z - 1)! = \dfrac{z!}{z}
+\label{eq:ecuacion_10_29}
 \end{equation}
+Esto muestra de inmediato que
+\begin{equation}
+0!= 1
+\label{eq:ecuacion_10_30}
+\end{equation}
+y además
+\begin{equation}
+n! = \pm \infty \hspace{2cm} \mbox{para $n$, un \textbf{entero negativo.}}
+\label{eq:ecuacion_10_31}
+\end{equation}
+\subsection{Notación doble factorial}
+En varios problemas de la física, en particular con los polinomios de Legendre, encontraremos productos de enteros impares positivos y de pares positivos, por conveniencia, definimos el doble factorial:
+\begin{align}
+\begin{aligned}
+1 \cdot 3 \cdot 5 \cdots (2 \, n+1) &= (2 \, n+1) !! \\
+2 \cdot 4 \cdot 6 \cdots (2 \, n) &= (2 \, n) !!
+\end{aligned}
+\label{eq:ecuacion_10_33b}
+\end{align}
+Que están relacionados con la función factorial
+\begin{equation}
+(2 \, n)!! =  2^{n} \: n! \hspace{1cm} \mbox{ y } \hspace{1cm} (2 \, n+1)!! = \dfrac{(2 \, n+1)!}{2^{n} \, n!}
+\label{eq:ecuacion_10_33c}
+\end{equation}
+También definimos $(-1)!! = 1$, un caso especial que no se obtiene de la ec. (\ref{eq:ecuacion_10_33c})
 \subsection{Algunas cosas sobre la función Gamma.}
 Es posible calcular el valor de la función Gamma para todos los números naturales y semienteros positivos. Para $z \in \mathbb{N}$ tenemos
 \begin{eqnarray}

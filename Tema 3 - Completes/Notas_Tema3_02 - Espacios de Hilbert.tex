@@ -293,4 +293,84 @@ Sea $A$ un operador y sea $x \in \mathcal{D}(A) \cup \mathcal{D}(A^{2})$. Llamar
 \textbf{Principio de Heinserberg:} Sea $f \in S$. Entonces:
 \[ (\Delta_{f} \: Q)(\Delta_{f} \: P) \geq \dfrac{\hbar}{2} \]
 \section{Notación de Dirac.}
+En mecánica cuántica, la interpretación probabilística de la
+función de onda $\psi (\bm{r}, t)$ dice que $\abs{\psi (\bm{r}, t)}^{2} \dd[3]{r}$ representa la
+probabilidad de encontrar al tiempo $t$ la partícula en el volumen $\dd[3]{r}$ alrededor del punto $\bm{r}$.
+\par
+La probabilidad de encontrar a la partícula en algún lugar del espacio es $1$, de este modo
+\[ \int \dd[3]{r} \: \abs{\psi (\bm{r}, t)}^{2} = 1 \]
+Un espacio de Hilbert \enquote{natural} para trabajar es $L^{2} (\mathcal{R})$. Sin embargo es muy grande. 
+
+Llamaremos $F \subset L^{2} (\mathcal{R})$ al subespacio que es el conjunto de funciones suficientemente regulares que son cuadrado integrable.
+\subsection*{\enquote{Bases} que no pertenecen a $\mathcal{F}$.}
+\textbf{Ondas Planas.}
+
+Las funciones
+\[ v_{p}(x) = \dfrac{1}{\sqrt{2 \, \pi \, \hbar}} \: e^{i \, p \, x / \hbar} \]
+no son de cuadrado integrable, por lo tanto no pertenecen a $\mathcal{F}$ y no pueden ser un conjunto ortogonal completo o base estrictamente, sin embargo cumple propiedades similares a las de las bases:
+\begin{align*}
+\psi (x) &= \int_{-\infty}^{\infty} d \: p \: \overline{\psi (p)} \: v_{p} (x) \\[1em]
+\overline{\psi (p)} &= \braket{v_{p}}{\psi}
+\end{align*}
+El \enquote{producto interno} entre dos elementos de la base está dado por
+\[ \braket{v_{p}}{v_{p^{\prime}}} = \dfrac{1}{2 \, \pi} \int \dfrac{\dd x}{\hbar} \: \exp(i \, \frac{x}{\hbar}(p^{\prime} - p)) = \delta (p - p^{\prime}) \]
+\subsection*{Funciones delta.}
+De la misma manera que en el caso de ondas planas
+introducimos el conjunto $\{\xi_{x_{0}} (x) \}$ etiquetadas por el índice continuo $x_{0}$ y definidas por
+\[ \xi_{x_{0}} (x) = \delta (x - x_{0})\]
+Este conjunto representa una familia de funciones $\delta$ centradas en los puntos $x_{0}$. Estas funciones no son de cuadrado integrable sin embargo podemos ver que
+\begin{align*}
+\psi (x) &= \int \dd x_{0} \: \psi(x_{0}) \: \xi_{x_{0}} (x) \\[1em]
+\psi (x_{0}) &= \braket{\xi_{x_{0}}}{\psi} = \int \dd x \: \overline{\xi_{x_{0}}(x)} \: \psi(x)
+\end{align*}
+Y la relación de ortonormalidad, es decir el producto interno entre dos elementos de la \enquote{base}:
+\[ \braket{\xi_{x_{0}}}{\xi_{x_{0}^{\prime}}(x)} = \int \dd x \: \delta (x - x_{0}) \: \delta (x - x_{0}^{\prime}) = \delta (x - x_{0}^{\prime}) \]
+Puesto que la física no depende de la base que utilicemos, y como ya vimos que los espacios de Hilbert son isométricos entre ellos, podemos elegir trabajar en un espacio \enquote{abstracto} y cuando busquemos una propiedad en particular de nuestro sistema aterrizar al espacio de Hilbert que nos sea más cómodo. 
+\par
+Así, en correspondencia uno a uno con $\mathcal{F}$ introducimos el subespacio de \enquote{kets} $\mathcal{E}$.
+\[ \psi (x) \in \mathcal{F} \Longleftrightarrow \ket{\psi} \in \mathcal{E} \]
+El \textbf{producto interno} entre dos kets se escribe
+\[ \braket{\ket{\phi}}{\ket{\psi}} = \braket{\phi}{\psi} \]
+
+El \textbf{espacio dual} de $\mathcal{E}$ es el espacio vectorial de funcionales lineales que actúan sobre los kets, a cada vector de este espacio se le conoce como \enquote{bra}, la etiqueta de los bra está dada por el
+teorema de representación de Riez
+\[ \tau (\ket{\psi}) = \braket{\tau}{\psi} \]
+La notación de Dirac ofrece una manera simple de representar los \textbf{proyectores}. Sea $\ket{\psi}$ un ket normalizado. Ahora el operador
+\[ P_{\psi} =  \ket{\psi} \bra{\psi} \]
+es un proyector. El significado geométrico es que proyecta todos los kets al subespacio generado por $\ket{\psi}$.
+\par
+El proyector para un subespacio de dimensión $n$ se construye tomando $n$ kets normalizados ortogonales entre sí $\{ \phi_{1}, \phi_{2}, \ldots, \phi_{n} \}$. De esta manera
+\[ P_{n} = \sum_{j=1}^{n} \ket{\phi_{j}} \bra{\phi_{j}}\]
+\subsection*{Más sobre bases.}
+Un conjunto de kets, discreto $\{ \ket{u_{i}} \}$ o continuo $\{ \ket{w_{\alpha}} \}$, satisface la relación de ortonormalización
+\[ \braket{u_{i}}{u_{j}} = \delta_{ij} \hspace{1cm} \braket{w_{\alpha}}{w_{\alpha^{\prime}}} = \delta(\alpha - \alpha^{\prime}) \]
+Un vector cualquiera se escribe en la base $\{ \ket{u_{i}} \}$ como 
+\[ \ket{\psi} =  \sum_{j} c_{j} \, \ket{u_{j}} = \sum_{i} \braket{u_{j} \, \ket{\psi}}{u_{j}} = \left( \sum_{j} \ket{u_{j}} \bra{u_{j}} \right) \ket{\psi} \]
+El operador entre paréntesis debe ser la identidad para que se cumpla la igualdad.
+\par
+Haciendo lo mismo con la base continua $\{ \ket{w_{\alpha}} \}$:
+\begin{align*}
+\ket{\psi} &= \int \dd \alpha \: c (\alpha) \ket{w_{\alpha}} = \int \dd \alpha \: \braket{w_{\alpha}}{\psi} \ket{w_{\alpha}} \\
+&= \int \dd \alpha \: \ket{w_{\alpha}} \braket{w_{\alpha}}{\psi} = \left( \int \dd \alpha \ket{w_{\alpha}} \bra{w_{\alpha}} \right) \ket{\psi} 
+\end{align*}
+Resumiendo, las bases deben cumplir la relación de cerradura que es
+\[ \sum_{j} \ket{u_{j}} \bra{u_{j}} = I, \hspace{1cm} \int \dd \alpha \ket{w_{\alpha}} \bra{w_{\alpha}} = I \]
+\subsection*{Representación en las bases $\{ \ket{x}\}$ y $\{ \ket{p}\}$}
+Tomemos los vectores delta de Dirac y de ondas planas previos.
+\begin{align*}
+\xi_{x_{0}} (x) & \Longleftrightarrow \ket{x_{0}} \\
+v_{p_{0}} (x) & \Longleftrightarrow \ket{p_{0}}
+\end{align*}
+Utilizando ahora la relación de cerradura, escribiremos
+\[ \ket{\psi} = \int \dd x \: \ket{x_{0}} \braket{x_{0}}{\psi} = \int \dd x \: \ket{p_{0}} \braket{p_{0}}{\psi} \]
+Los coeficientes $\braket{x_0}{\psi}$ y $\braket{p_{0}}{\psi}$ son calculados directamente:
+\begin{align*}
+\braket{x_0}{\psi} &= \int \dd x \: \overline{\xi_{x_{0}}} \, \psi (x) =  \psi (x_{0}) \\
+\braket{p_0}{\psi} &= \int \dd x \: \overline{v_{p_{0}}} \, \psi (x) =  \overline{\psi} (p_{0})
+\end{align*}
+donde $\overline{\psi} (p)$ es la transformada de Fourier de $\psi (r)$.
+\par
+El valor $\psi (x_{0})$ de la función de onda en el punto $x_{0}$ es el coeficiente que acompaña al vector $\ket{x_{0}}$ de la descomposición de $\ket{\psi}$ en la base $\{ \ket{x} \}$.
+\par
+La función de onda en el espacio de momentos $\overline{\psi} (p)$ puede interpretarse de manera análoga.
 \end{document}
