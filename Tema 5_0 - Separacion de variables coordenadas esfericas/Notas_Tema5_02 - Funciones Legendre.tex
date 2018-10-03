@@ -19,16 +19,43 @@ podemos escribir
 \[ \dfrac{1}{r} \, \pdv[2]{r} (r \, \phi) + \dfrac{1}{r^{2} \, \sin \theta} \, \pdv{\theta} \left( \sin \theta \, \pdv{\phi}{\theta} \right) + \dfrac{1}{r^{2} \, \sin^{2} \theta} \pdv[2]{\phi}{\varphi} = 0 \]
 Introduzcamos ahora la separación de varibales en la forma
 \[ \phi (r, \theta, \varphi) =  \dfrac{U(r)}{r} \, Y(\theta, \varphi) \]
-La parte radial ha sido escrita U(r)/r con el fin de simplificar el primer término de la ecuación diferencial. Posteriormente separaremos $Y(\theta, \varphi)$ en un producto de funciones en $\theta$ y $\varphi$. Se sigue entonces:
-\[ \dfrac{r^{2}}{U} \, \dv[2]{U}{r} + \dfrac{1}{Y} \left[ \dfrac{1}{\sin \theta} \right] \]
+La parte radial ha s    ido escrita U(r)/r con el fin de simplificar el primer término de la ecuación diferencial. Posteriormente separaremos $Y(\theta, \varphi)$ en un producto de funciones en $\theta$ y $\varphi$. Se sigue entonces:
+\[ \dfrac{r^{2}}{U} \, \dv[2]{U}{r} + \dfrac{1}{Y} \left[ \dfrac{1}{\sin \theta} \, \pdv{}{\theta} \left( \sin \theta \, \pdv{Y}{\theta} \right) + \dfrac{1}{\sin^{2} \theta} \, \pdv[2]{Y}{\varphi} \right] = 0 \]
+La ecuación ha sido separada en una parte radial y otra angular.
+\par
+El cuadrado del operador
+\[ \vb{L} = \dfrac{1}{i} \vb{r} \times \nabla \]
+es el negativo del corchete en la última ecuación, entonces se puede escribir:
+\[ \dfrac{r^{2}}{U} \, \dv[2]{U}{r} - \dfrac{L^{2} \, Y}{Y} = 0 \]
+De acuerdo con la técnica de separación de variables, cada sumando ha de ser igual a una constante. Por razones que serán claras más adelante, la separación de variable se escribe en la forma $\ell (\ell + 1)$, por lo que
+\[ r^{2} \, \dv[2]{U}{r} - \ell (\ell + 1) \, U = 0, \hspace{2cm} L^{2} \, Y = \ell(\ell + 1) \, Y  \]
+La ecuación radial es homogénea en $r$, es decir, es una ecuación del tipo de Euler, cuya solución es
+\[ U(r) = A \, r^{\ell +1} + \dfrac{B}{r^{\ell}} \hspace{1.5cm} \ell \geq 0 \]
+La ecuación $L^{2} \, Y = \ell (\ell + 1) \, Y$ tiene la forma explícita
+\[ \dfrac{1}{\sen \theta} \, \pdv{}{\theta} \left( \sin \theta \, \pdv{Y}{\theta} \right) + \dfrac{1}{\sin^{2} \theta} \, \pdv[2]{Y}{\varphi} + \ell (\ell +1) \, Y = 0 \]
+Separando ahora las variables $\theta$ y $\varphi$ en la forma $Y(\theta, \varphi) = P(\theta) \, G(\varphi)$, luego de re-emplazar y multiplicar por $\sin^{2} \theta / P \, G$:
+\[ \dfrac{\sin \theta}{P} \, \dv{}{\theta} \left( \sin \theta \, \dv{P}{\theta} \right) + \ell (\ell + 1) \, \sin^{2} \theta = - \dfrac{1}{G} \, \dv[2]{G}{\varphi}  \]
+En consecuencia, escogiendo la constante de separación de modo que permita soluciones armónicas en $\varphi$, que a su vez garanticen la continuidad en $\varphi$ de la solución, se tiene que
+\[ \dfrac{1}{G} \, \dv[2]{G}{\varphi} = -m^{2} \]
+cuya solución es:
+\begin{align*}
+G &= C \, \exp(i \, m \, \varphi) + D \, \exp(-i \, m \, \varphi), \hspace{1cm} m = 1, 2, \ldots, y \\
+G &= a \, \varphi + b \hspace{6cm} m = 0
+\end{align*}
+La ecuación en $\theta$ será entonces:
+\[ \sin \theta \, \dv{}{\theta} \left( \sin \theta \, \dv{P}{\theta} \right) + P \, \ell (\ell + 1) \, \sin^{2} \theta - m^{2} \, P = 0 \]
+con la sustitución $x = \cos \theta$ obtenemos la \emph{ecuación asociada de Legendre}:
+\[ \dv{}{x} \left[ (1 -x^{2}) \, \dv{P(x)}{x} \right] - \dfrac{m^{2} \, P(x)}{1- x^{2}} + \ell (\ell + 1) \, P(x) = 0 \]
+con $m=0$ se obtiene la \emph{ecuación ordinaria de Legendre}:
+\[ \dv{}{x} \left[ (1 -x^{2}) \, \dv{P(x)}{x} \right] + \ell (\ell + 1) \, P(x) = 0 \]
 % %referencia: Riley: Mathematical methods for physics and engineering
-% \section{Funciones de Legendre}
-% La ecuación diferencial de Legendre tiene la forma
-% \begin{equation}
-% (1 - x^{2}) \, y^{\prime \prime} - 2 \, x |, y^{\prime} + \ell (\ell + 1) y = 0
-% \label{eq:ecuacion_001}
-% \end{equation}
-% y tiene tres puntos singulares en $x = -1, 1, \infty$. Se presenta en diversos problemas de la física, en particular en problemas con simetría axial que involucra el operador $\laplacian$, en donde se expresa en coordenadas esféricas.
+\section{Funciones de Legendre}
+La ecuación diferencial de Legendre tiene la forma
+\begin{equation}
+(1 - x^{2}) \, y^{\prime \prime} - 2 \, x |, y^{\prime} + \ell (\ell + 1) y = 0
+\label{eq:ecuacion_001}
+\end{equation}
+y tiene tres puntos singulares en $x = -1, 1, \infty$. Se presenta en diversos problemas de la física, en particular en problemas con simetría axial que involucra el operador $\laplacian$, en donde se expresa en coordenadas esféricas.
 % \par
 % Normalmente la variable $x$ en la ecuación de Legendre es el coseno del ángulo en coordenadas polares, por lo que $-1 \leq x \leq 1$. El párametro $\ell$ es un número real, y la solución a la ecuación (\ref{eq:ecuacion_001}) se le denomina \emph{función de Legendre}.
 % \par
