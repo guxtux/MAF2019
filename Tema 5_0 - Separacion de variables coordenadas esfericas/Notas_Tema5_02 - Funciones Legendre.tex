@@ -48,14 +48,150 @@ con la sustitución $x = \cos \theta$ obtenemos la \emph{ecuación asociada de L
 \[ \dv{}{x} \left[ (1 -x^{2}) \, \dv{P(x)}{x} \right] - \dfrac{m^{2} \, P(x)}{1- x^{2}} + \ell (\ell + 1) \, P(x) = 0 \]
 con $m=0$ se obtiene la \emph{ecuación ordinaria de Legendre}:
 \[ \dv{}{x} \left[ (1 -x^{2}) \, \dv{P(x)}{x} \right] + \ell (\ell + 1) \, P(x) = 0 \]
+Podemos presentar la ecuación anterior como
+\[ (1 - x^{2}) \, \dv[2]{y}{x} - 2 \, x \, \, dv{y}{x} + C \, x = 0 \]
+donde $C$ es el parámetro de la separación de variables.
+\par
+Propongamos la serie de Frobenius:
+\[ y = \sum_{\lambda=0}^{\infty} a_{\lambda} \, x^{\lambda + k} , \hspace{1cm} a_{0} \neq 0 \]
+por lo que al derivar la serie anterior, tenemos que
+\[ \dot{y} = \sum_{\lambda=0}^{\infty} (\lambda + k ) \, a_{\lambda} \, x^{\lambda + k - 1} \]
+nuevamente derivamos la serie, para obtener
+\[ \ddot{y} = \sum_{\lambda=0}^{\infty} (\lambda + k )(\lambda + k - 1) \, a_{\lambda} \, x^{\lambda + k - 2} \]
+Al sustituir en la ecuación diferencial inicial, resulta que
+\[ \sum_{\lambda=0}^{\infty} (\lambda + k )(\lambda + k - 1) \, a_{\lambda} \, x^{\lambda + k - 2} + \sum_{\lambda=0}^{\infty} a_{\lambda} \, [-(\lambda + k)(\lambda + k + 1) + C] \, x^{\lambda + k} = 0 \]
+al bajar el límite inferior de la primera suma y elevando el índice $\lambda$ dentro de la suma, resulta
+\[ \sum_{\lambda=-2}^{\infty} a_{\lambda + 2} \, (\lambda + k + 2)(\lambda + k + 1) \, x^{\lambda + k} + \sum_{\lambda=0}^{\infty} a_{\lambda} \, [-(\lambda + k)(\lambda + k + 1) + C] \, x^{\lambda + k} = 0 \]
+\section{Polinomios asociados de Legendre.}
+Se obtienen de la ED de Legendre con $m \neq 0$. Son útiles para describir situaciones en donde no hay simetría azimutal.
+\par
+En vez de resolver mediante el método de Frobenius, ahora se obtendrá la ecuación asociada a partir de la ecuación:
+\[ (1 - x^{2}) \, \ddot{y} - 2 \, x \, \dot{y} + n(n +1) \, y = 0 \]
+donde $y = P_{n} (x)$.
+\par
+Derivando $m$ veces y utilizando la fórmula de Leibinz para la derivación de un producto, tenemos que
+\[ \dv[m]{}{x} (f \, g) = \sum_{s=0}^{\infty} \dfrac{m!}{(m - s)! \, s!} \, \dv[m-s]{f}{x} \, \dv[s]{g}{x} \]
+con $f = \ddot{y}$, $g = 1 - x^{2}$ (repitiendo para $f = \dot{y}, g = x)$ se obtiene:
+\[ (1 - x^{2}) \, \dv[m+2]{y}{x} - 2 \, x \, (m + 1) \, \dv[m+1]{y}{x} + [n(n+1) - m(m + 1)] \, \dv[m]{y}{x} = 0 \]
+si hacemos
+\[ u = (1 - x^{2})^{m/2} \, \dv[m]{y}{x} \]
+se puede escribir ahora
+\[ (1 - x^{2}) \, \ddot{u} - 2 \, x \, \dot{u} + \left[ n(n + 1) - \dfrac{m^{2}}{1 - x^{2}} \right] \, u = 0 \]
+que es la ecuación asociada de Legendre, cuya solución $u$ es
+\[ u = P_{n}^{m} (x) \]
+Por tanto:
+\[ \boxed{P_{n}^{m}(x) = (1 - x^{2})^{m/2} \dv[m]{P_{n}(x)}{x} } \]
+donde las $P_{n}^{m}(x)$ son la \emph{funciones asociadas de Legendre}. Nótese que $P_{n}^{0}(x) = P_{n}(x)$.
+\par
+Utilizando la fórmula de Rodrigues, se obtiene el siguiente resultado
+\[ \boxed{P_{n}^{m} (x) = \dfrac{1}{2^{n} \, n!} \, (1 - x^{2})^{m/2} \, \dv[n+m]{}{x} (x^{2} - 1)^{n}}\]
+Escrito de esta forma, $P_{n}^{m}$ admite valores negativos de $m$, sólo que si tomamos en cuenta que el orden de la derivación debe ser menor o igual al orden del polinomio, debe ser cierto que $n + m \leq 2 \, n$, por tanto $m \leq n$.
+\par
+Además $n + m \geq 0$ pues el orden de la derivación debe de ser positivo. Como $m$ puede ser positivo o negativo (y ha de ser entero, pues la derivación de orden $n + m$ ha de ser entera), tendremos que
+\begin{itemize}
+\item Si $m > 0$, entonces $m \leq n$.
+\item Si $m < 0$, entonces $- \abs{m} \leq n$, de donde $\abs{m} \geq -n$.
+\end{itemize}
+Por tanto, los valores de $m$ son del tipo $-n \leq m \leq n$, con $m$ y $n$ enteros, y $n$ es positivo. Esta restricción a valores enteros de $m$ y $n$ aparece en mecánica cuántica como la cuantización del momento angular.
+\par
+En consecuencia se tiene que
+\[ P_{n}^{m} (x) = 0 \hspace{2cm} \mbox{para } m > n\]
+La ecuación asociada de Legendre es autoadjunta; el conjunto $ \left\{ P_{n}^{m} (x) \right\}$ es ortogonal en $n$ dentro del intervalo $(-1, 1)$, siendo $1$ el factor de peso:
+\[ \boxed{\int_{-1}^{1} P_{n}^{m}(x) \, P_{n^{\prime}}^{m} (x) \, \dd x = \dfrac{2}{2 \,n + 1 } \, \dfrac{(n + m)!}{(n - m)!}  \, \delta_{n \, n^{\prime}} }\]
+\subsection{Relaciones de recurrencia.}
+En términos de los \emph{operadores escalera}, que son los corchetes a la derecha en las ecuaciones que siguen, se tiene que
+\begin{align*}
+\sqrt{1 - x^{2}} \, P_{n}^{m+1} = \left[ m \, x + (1 - x^{2})\, \dv{}{x} \right] \, P_{n}^{m} \\[1em]
+(n + m)(n - m + 1) \, \sqrt{1 - x^{2}} \, P_{n}^{m-1} = \left[ m \, x - (1 - x^{2}) \dv{}{x} \right] \, P_{n}^{m} \\[1em]
+(n + m) \, P_{n-1}^{m} = \left[ n \, x + (1 - x^{2}) \dv{}{x} \right] \, P_{n}^{m} \\[1em]
+(n -m + 1) \, P_{n+1}^{m} = \left[ (n+1) \, x - (1-x^{2}) \, \dv{}{x} \right] \, P_{n}^{m}
+\end{align*}
+\subsection{Armónicos esféricos.}
+Las soluciones $\exp(\pm i \, m \, \varphi)$ forman una base ortogonal respecto al índice $m$ en $(0, 2 \pi)$, mientras que $P_{n}^{m} (x)$ son ortogonales en $(-1, 1)$, respecto al índice $n$.
+\par
+Es posible definir una nueva base ortogonal en $theta$ y $\varphi$ respecto a los índices $n$ y $m$, para ser más precisos, se tiene unas base bi-ortogonal. Las nuevas funciones, \emph{ortonormales} sobre una superficie esférica y conocidas como \emph{armónicos esféricos} se definen como:
+\[ \boxed{Y_{nm} (\theta, \varphi) = \sqrt{\dfrac{2n+1}{4\pi} \, \dfrac{(n-m)!}{(n+m)!}} \, P_{n}^{m} (\cos \theta) \, \exp{i \, m \, \varphi} } \]
+El radical ha sido escogido de tal manera que $\left\{ Y_{nm}(\theta, \varphi) \right\}$ sea una base ortonormal:
+\[ \int_{\varphi=0}^{2 \pi} \int_{\varphi=0}^{\pi} Y_{nm}^{*} (\theta, \varphi) \, Y_{n^{\prime}m^{\prime}} (\theta, \varphi) \, \sin \theta \dd \theta \, \dd \varphi = \delta_{n n^{\prime}} \, \delta_{m m^{\prime}}  \]
+y como el ángulo sólido es $\dd \Omega = \sin \theta \, \dd \theta \, \dd \varphi$, se puede escribir
+\[ \boxed{\int_{4\pi} Y_{nm}^{*} (\theta, \varphi) \, Y_{n^{\prime} m^{\prime}} (\theta, \varphi) \dd \Omega = \delta_{n n^{\prime}} \, \delta_{m m^{\prime}} } \]
+Los armónicos esféricos son funciones propias del operador $L^{2}$, con valores propios $n(n+1)$, así:
+\[ L^{2} \, Y_{nm} (\theta, \varphi) =  n(n+1) \, Y_{nm}(\theta, \varphi) \]
+Puesto que $\left\{ Y_{nm}(\theta, \varphi) \right\}$ es una base completa, una función $f( \theta, \varphi)$ puede expandirse en armónicos esféricos:
+\[ f(\theta, \varphi) = \sum_{n=0}^{\infty} \sum_{m=-n}^{n} A_{nm} \, Y_{nm} (\theta, \varphi) \]
+Por lo que la base $\left\{ Y_{nm}(\theta, \varphi) \right\}$ permite expandir funciones definidas sobre la superficie de una esfera.
+\subsection*{Función generadora.}
+La función generadora de los polinomios de Legendre es:
+\[ \dfrac{1}{\sqrt{1 - 2 \, z \, u + z^{2}}} = \sum_{n \geq 0} z^{n} \, P_{n} (u), \hspace{2cm} z < 1 \]
+\subsection{Teorema de adición de los armónicos esféricos.}
+Este teorema nos dice que si se tiene un vector en los ángulos $(\theta, \varphi)$ y otro en los ángulos $(\theta^{\prime}, \varphi^{\prime})$, y además, es $\alpha$ el ángulo entre estos dos vectores, entonces se cumple:
+\[ P_{n} (\cos \alpha) = \sum_{m=-n}^{m=n} \dfrac{4 \pi}{2 n + 1} \, Y_{nm}^{*} \, (\theta^{\prime}, \varphi^{\prime}) \, Y_{nm} (\theta, \varphi) \]
+El ángulo $\alpha$ puede ser bastante complicado, por ejemplo, supongamos que tenemos los vectores
+\begin{align*}
+\va{r}_{1} =  r_{1} (\cos \varphi_{1} \sin \theta_{1}, \sin \varphi_{1} \sin \theta_{1}, \cos \theta_{1}) \\
+\va{r}_{2} =  r_{2} (\cos \varphi_{2} \sin \theta_{2}, \sin \varphi_{2} \sin \theta_{2}, \cos \theta_{2})
+\end{align*}
+Entonces el ángulo que forman, está dado por
+\[ \vu{r}_{1} \vdot \vu{r}_{2} = \cos \alpha = \sin \theta_{1} \, \sin \theta_{2} \, \cos (\varphi_{1} - \varphi_{2}) + \cos \theta_{1} \, \cos \theta_{2} \]
+\subsection*{Implicaciones del teorema de adición.}
+Si $\theta = \theta_{1} = \theta_{2}$ y $\varphi = \varphi_{1} = \varphi_{2}$, entonces tenemos que
+\[ \sum_{m=-n}^{m=n} \abs{Y_{nm}(\theta, \varphi)}^{2} = \dfrac{2 \, n + 1}{4 \pi} \]
+que se le llama regla de suma de los armónicos esféricos.
+\par
+Introduciendo la expresión del teorema de adición en la relación de completes, se encuentra que
+\[ \delta (\varphi - \varphi^{\prime}) \, \delta (\cos \theta - \cos \theta^{\prime}) = \sum_{n\geq 0} \dfrac{4 \, \pi}{2 \, n + 1} P_{n} (\cos \alpha) \]
+Considerando que la delta de Dirac en coordenadas esféricas es:
+\[ \delta (\va{r} - \va{r}^{\prime}) = \dfrac{1}{r^{2}} \, \delta (\varphi - \varphi^{\prime}) \, \delta (\cos \theta - \cos \theta^{\prime}) \]
+se llega al resultado
+\[ \delta (\va{r} - \va{r}^{\prime}) = \dfrac{4 \, \pi}{2 \, n + 1} \sum_{n \geq 0} \dfrac{\delta (\va{r} - \va{r}^{\prime})}{r^{2}} \, P_{n} (\vu{r} \vdot \vu{r}^{\prime}) \]
+Otra aplicación se encuentra al considerar la función
+\[ \dfrac{1}{\abs{\va{r}_{1} - \va{r}_{2}}} = \dfrac{1}{\sqrt{r_{1}^{2} - 2 \, r_{1} \, r_{2} \, \cos \alpha + r_{2}^{2}}} \]
+con $\alpha$ el ángulo entre $\va{r}_{1}$ y $\va{r}_{2}$ que satisface $\vu{r}_{1} \vdot \vu{r}_{2}$. Ahora, si $r_{1} \neq r_{2}$, se define $r_{<} = \min \{r_{1}, r_{2} \}$ y $r_{>} = \max \{r_{1}, r_{2} \}$, es claro que
+\[ \left( \dfrac{r_{<}}{r_{>}} \right) < 1 \]
+Entonces, usando estas definiciones y la función generatriz con
+\[ z = \dfrac{r_{<}}{r_{>}}, \hspace{2cm} u = \cos \alpha \]
+se tiene que
+\[ \dfrac{1}{\abs{\va{r}_{1} - \va{r}_{2}}} =  \dfrac{1}{r_{>} \, \sqrt{1 - 2 \, \left( \dfrac{r_{<}}{r_{>}} \right) \, \cos \alpha + \left( \dfrac{r_{<}}{r_{>}} \right)^{2}}} = \dfrac{1}{r_{>}} \sum_{n \geq 0} \left( \dfrac{r_{<}}{r_{>}} \right)^{n} \, P_{n} (\cos \alpha) \]
+Al usar el teorema de adición de los armónicos esféricos, se tiene que
+\[ \dfrac{1}{\abs{\va{r}_{1} - \va{r}_{2}}} = \sum_{n \geq 0} \sum_{m=-n}^{m=n} \dfrac{4 \, \pi}{2 \, n + 1} \, \left( \dfrac{r_{<}^{m}}{r_{>}^{n+1}} \right) \, Y_{nm}^{*} (\theta_{2}, \varphi_{2}) \, Y_{nm} (\theta_{1}, \varphi_{1}) \]
+que es la función de Green de la ecuación de Poisson en términos de armónicos esféricos.
+\subsection*{Paridad.}
+La transformación de paridad está definida por
+\[ (x, y, z) \to (-x, -y, -z) \]
+Ahora, en coordenadas esféricas, se tiene que
+\begin{align*}
+-x &= - r \, \sin \theta \, \cos \varphi =  r \, \sin (\pi - \theta) \, \cos (\pi + \varphi) \\
+-y &= - r \, \sin \theta \, \sin \varphi =  r \, \sin (\pi - \theta) \, \sin (\pi + \varphi) \\
+-z &= - r \, \cos \theta = \cos (\pi - \theta)
+\end{align*}
+Por lo que la transformaci{on de paridad en coordenadas esféricas toma la forma
+\[ (r, \theta, \varphi) \to (r, \pi - \theta, \pi + \varphi) \]
+Veamos ahora cómo transforman los polinomios asociados de Legendre bajo paridad. Primero notemos que bajo paridad se tiene que
+\[ u = \cos \theta \to \cos (\pi - \theta) = -u \]
+También se tiene que
+\[ P_{n} (\cos (\pi - \theta))  = P_{n}(-\cos \theta) = (-)^{n} \, P_{n} (\cos \theta)  \]
+y también
+\begin{align*}
+P_{n}^{m} (\cos (\pi - \theta)) &= (-)^{n} (1 - (-u)^{2})^{m/2} \, \dv[m]{}{(-u)} P_{n}(-u) \\
+&= (-)^{n+m} \, (-)^{m} \, (1 - u^{2})^{m/2} \, \dv[m]{}{u} P_{n}(u) \\
+&= (-)^{n+m} \, P_{n}^{m} (\cos \theta)
+\end{align*}
+Otra identidad de utilidad es
+\begin{align*}
+\exp(i(\pi + \varphi)m) &= \exp(i \, \pi \, m) \, \exp(i \, \varphi \, m) = \\
+&=  (\cos \pi + i \, \sin \pi)^{m} \, \exp(i \, \varphi  \, m) = \\
+&=  (-)^{m} \, \exp(i \, \varphi)
+\end{align*}
+Por lo tanto, ocupando la definición de armónicos esféricos, se tiene que
+\[ Y_{nm}(r, \pi - \theta, \pi + \varphi) = (-)^{n} \, Y_{nm} (r, \theta, \varphi)  \]
 % %referencia: Riley: Mathematical methods for physics and engineering
-\section{Funciones de Legendre}
-La ecuación diferencial de Legendre tiene la forma
-\begin{equation}
-(1 - x^{2}) \, y^{\prime \prime} - 2 \, x |, y^{\prime} + \ell (\ell + 1) y = 0
-\label{eq:ecuacion_001}
-\end{equation}
-y tiene tres puntos singulares en $x = -1, 1, \infty$. Se presenta en diversos problemas de la física, en particular en problemas con simetría axial que involucra el operador $\laplacian$, en donde se expresa en coordenadas esféricas.
+% \section{Funciones de Legendre}
+% La ecuación diferencial de Legendre tiene la forma
+% \begin{equation}
+% (1 - x^{2}) \, y^{\prime \prime} - 2 \, x |, y^{\prime} + \ell (\ell + 1) y = 0
+% \label{eq:ecuacion_001}
+% \end{equation}
+% y tiene tres puntos singulares en $x = -1, 1, \infty$. Se presenta en diversos problemas de la física, en particular en problemas con simetría axial que involucra el operador $\laplacian$, en donde se expresa en coordenadas esféricas.
 % \par
 % Normalmente la variable $x$ en la ecuación de Legendre es el coseno del ángulo en coordenadas polares, por lo que $-1 \leq x \leq 1$. El párametro $\ell$ es un número real, y la solución a la ecuación (\ref{eq:ecuacion_001}) se le denomina \emph{función de Legendre}.
 % \par
