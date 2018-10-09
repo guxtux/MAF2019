@@ -1,10 +1,4 @@
 \input{../preambulo_doc}
-\usepackage{mathrsfs}
-\usepackage{standalone}
-\usepackage{tikz}
-\usetikzlibrary{shapes}
-\usepackage{bigints}
-\spanishdecimal{.}
 %\usepackage{enumerate}
 %\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
 \title{Funciones de Bessel \\ {\large Matemáticas Avanzadas de la Física}}
@@ -14,614 +8,811 @@
 \renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
-Las funciones de Bessel aparecen en una amplia variedad de problemas físicos: desde la separación con la ecuación de Helmholtz o la ecuación de onda en coordenadas cilíndricas, nos llevan a la ecuación de Bessel. La ecuación de Helmholtz en coordenadas esféricas nos dirigirá a una forma especial de la ecuación de Bessel.
-\section{Función generatriz, Integral de orden $J_{n}(x)$}
-Consideremos una función de dos variables:
-\begin{equation}
-g(x,t) = e^{(x/2)(t-1/t)}
-\label{eq:ecuacion_11_1}
-\end{equation}
-Expandiendo esta función en una serie de Laurent, se obtiene
-\begin{equation}
-e^{(x/2)(t-1/t)} = \sum_{n=-\infty}^{\infty} J_{n} (x) t^{n}
-\label{eq:ecuacion_11_2}
-\end{equation}
-El coeficiente de $t^{n}$, $J_{n}(x)$ se define como una función de Bessel de primera clase de orden $n$. Expandiendo las exponenciales, tenemos un producto de series de Maclaurin en $xt/2$ y $-x/2t$ respectivamente
-\begin{equation}
-e^{xt/2} \cdot e^{-x/2t} = \sum_{r=0}^{\infty} \left( \dfrac{x}{2} \right)^{r} \dfrac{t^{t}}{r!} \sum_{s=0}^{\infty} (-1)^{s} \left( \dfrac{x}{2} \right)^{s} \dfrac{t^{-s}}{s!}
-\label{eq:ecuacion_11_3}
-\end{equation}
-Para un valor de $s$ dado, tenemos $t^{n}$ $(n \geq 0 )$ donde $r=n+s$
-\begin{equation}
-\left( \dfrac{x}{2} \right)^{n+s} \dfrac{t^{n+s}}{(n+s)!} (-1)^{s} \left( \dfrac{x}{2} \right)^{s} \dfrac{t^{-s}}{s!}
-\label{eq:ecuacion_11_4}
-\end{equation}
-El coeficiente de $t^{n}$ es entonces
-\begin{equation}
-J_{n}(x) = \sum_{s=0}^{\infty} \dfrac{(-1)^{s}}{s! \; (n+s)!} \left( \dfrac{x}{2} \right)^{n+2s} = \dfrac{x^{n}}{2^{n} \; n!} - \dfrac{x^{n+2}}{2^{n+2} \; (n+1)! + \ldots}
-\label{eq:ecuacion_11_5}
-\end{equation}
-Esta serie muestra el comportamiento de la función de Bessel $J_{n}(x)$ para valores de $x$ pequeños, y permite una evaluación numérica para $J_{n}(x)$.
-\\
-Las funciones de Bessel oscilan pero no son periódicas (excepto en el límite cuando $x \to \infty$. La amplitud de $J_{n}(x)$ no es constante, ya que decrece asintóticamente como $x^{-1/2}$.
-\\
-La ecuación (\ref{eq:ecuacion_11_5}) se ocupa si $n<0$, resultando
-\begin{equation}
-J_{-n} (x) = \sum_{s=0}^{\infty} \dfrac{(-1)^{s}}{s! \; (s-n)!)} \left( \dfrac{x}{2} \right)^{2s-n}
-\label{eq:ecuacion_11_6}
-\end{equation}
-que se obtiene re-emplazando $n$ por $-n$ en la ecuación (\ref{eq:ecuacion_11_5}). Dado que $n$ es un entero, $(s-n)! \to \infty$ para $s=0, \ldots,(n-1)$. Por lo que se considera que inicia con $n=s$.
-\\
-Sustituyendo $s$ por $s+n$, se obtiene
-\begin{equation}
-J_{-n}(x) = \sum_{s=0}^{\infty} \dfrac{(-1)^{s+n}}{s! \; (n+s)!} \left( \dfrac{x}{2} \right)^{n+2s}
-\label{eq:ecuacion_11_7}
-\end{equation}
-de donde se revisa que $J_{n}(x)$ y $J_{-n}(x)$ no son independientes, ya que están relacionadas por
-\begin{equation}
-J_{-n}(x) = (-1)^{n} J_{n}(x) \hspace{1.5cm} \text{con $n$ entero}
-\label{eq:ecuacion_11_8}
-\end{equation}
-Las expresiones en series (ecuaciones \ref{eq:ecuacion_11_5} y \ref{eq:ecuacion_11_6}) pueden usarse al re-emplazar $n$ por $v$ para definir $J_{v}(x)$ y $J_{-v}(x)$ para $v$ un valor no entero.
-\section{Relaciones de recurrencia.}
-Las relaciones de recurrencia para $J_{n}(x)$ y sus derivadas se pueden obtener al operar las series, la ecuación (\ref{eq:ecuacion_11_5}) requiere un poco de clarividencia (o bastante ensayo y error).
-\\
-Diferenciando parcialmente la ecuación (\ref{eq:ecuacion_11_1}) con respecto a $t$, se encuentra
-\begin{eqnarray}
+Las funciones de Bessel tienen aplicaciones en diversos problemas de mecánica cuántica, electrodinámica y otras disciplinas.
+\section{Funciones de Bessel.}
+La ecuación de Bessel surge de la separación de varibales de las ecuaciones de Laplace y Helmholtz en coordenadas cilíndricas; la ecuación de Laplace en coordenadas cilíndricas da lugar a las siguientes ecuaciones diferenciales:
+\begin{align}
 \begin{aligned}
-\dfrac{\partial}{\partial t} g(x,t) &= \dfrac{1}{2} x \left( 1 + \dfrac{1}{t^{2}} \right) e^{(x/2)(t-1/t)} \\
-&= \sum_{n=-\infty}^{\infty} n \; J_{n}(x) \; t^{n-1}
+\dv[2]{G(\varphi)}{\varphi} &= - \nu^{2} \, G(\varphi) \\
+\dv[2]{Z(z)}{z} &= k^{2} \, Z(z) \\
+\dfrac{1}{\rho} \dv{}{\rho} \left( \rho \, \dv{R(\rho)}{\rho} \right) + \left( k^{2} - \dfrac{\nu^{2}}{\rho^{2}} \right) \, R(\rho) &= 0
 \end{aligned}
-\label{eq:ecuacion_11_9}
-\end{eqnarray}
-Sustituyendo la ecuación (\ref{eq:ecuacion_11_2}) para la exponencial y ajustando los coeficientes de las potencias de $t$, tenemos
+\label{eq:ecuacion_08_02} 
+\end{align}
+La última de ellas es la ecuación de Bessel. Como un primer paso en su solución conviene definir la nueva variable adimensional $ x = k \rho$, que conduce a la siguiente ecuación donde, para generalizar, $\nu$ no es necesariamente entero:
 \begin{equation}
-J_{n-1}(x) + J_{n+1}(x) = \dfrac{2n}{x} J_{n} (x)
-\label{eq:ecuacion_11_10}
+x^{2} \, \ddot{y} (x) +  x \, \dot{y} (x) +  (x^{2} - \nu^{2}) \, y(x) = 0
+\label{eq:ecuacion_08_03}
 \end{equation}
-Que es una relación de recurrencia de tres términos. Dados por ejemplo $J_{0}$ y $J_{1}$, se puede calcular $J_{2}$ y cualquier otra valor de orden $J_{n}$.
-\\
-Ahora diferenciamos parcialmente la ecuación (\ref{eq:ecuacion_11_1}) con respecto a $x$, para obtener:
+Proponiendo una solución por serie de Frobenius, tenemos que
+\[ y(x) = \sum_{\lambda=0}^{\infty} a_{\lambda} \, x^{\lambda + s} \]
+por lo que al diferenciar la solución hasta en dos ocasiones
+\begin{align*}
+\dot{y}(x) &= \sum_{\lambda=0}^{\infty} a_{\lambda} \, (\lambda + s) \, x^{\lambda + s - 1} \\
+\ddot{y}(x) &= \sum_{\lambda=0}^{\infty} a_{\lambda} \, (\lambda + s) \, (\lambda + s - 1) \, x^{\lambda + s - 2}
+\end{align*}
+Al re-emplazar en la ec. (\ref{eq:ecuacion_08_03}) y factorizando los términos
+\[ \sum_{\lambda=0}^{\infty} a_{\lambda} \left[ (\lambda + s)^{2} - \nu^{2} \right] \, x^{\lambda + s} + \sum_{\lambda=0}^{\infty} a_{\lambda} \, x^{\lambda + s + 2} = 0 \]
+Si tomamos en cuenta que para una función $f_{\lambda} (x)$ dependiente del índice $\lambda$, es siempre cierto que
+\[ \sum_{\lambda=0}^{\infty} f_{\lambda} (x) = \sum_{\lambda=-2}^{\infty} f_{\lambda+2} (x) \]
+por lo que podemos escribir
+\[ \sum_{\lambda=-2}^{\infty} a_{\lambda+2} \left[ (\lambda + s + 2)^{2} - \nu^{2} \right] \, x^{\lambda + s + 2} + \sum_{\lambda=0}^{\infty} a_{\lambda} \, x^{\lambda + s + 2} = 0 \]
+La suma de la izquierda contiene dos términos: $\lambda=-2$ y $\lambda=-1$ que no están en la suma de la derecha, pudiéndose escribir entonces:
+\begin{align*}
+a_{0} \, [s^{2} - \nu^{2}] \, x^{-2+s} &+ a_{1} \, [(s+1)^{2} - \nu^{2}] \, x^{-1+s} + \\
+&+ \sum_{\lambda=0}^{\infty} \left\{ a_{\lambda+2} [(\lambda + s + 2)^{2} - \nu^{2}] + a_{\lambda} \right\} \, x^{\lambda + s} = 0
+\end{align*}
+En consecuencia, como las potencias son independientes:
+\begin{align*}
+a_{0} \, [s^{2} - \nu^{2}] &= 0 \\
+a_{1} \, [(s + 1)^{2} - \nu^{2}] &= 0 \\
+a_{\lambda+2} \, [(\lambda + s + 2)^{2} - \nu^{2}] + a_{\lambda} &= 0 \hspace{1cm} \lambda=0, 1, 2, \ldots
+\end{align*}
+De acuerdo a lo que se ha visto del método de Frobenius: $a_{0} \neq 0$, por lo que de la primera ecuación de índices
 \begin{equation}
-\dfrac{\partial}{\partial x} g(x,t) = \dfrac{1}{2} \left( 1 - \dfrac{1}{t} \right) e^{(x/2)(t-1/t)} = \sum_{n=-\infty}^{\infty} J^{\prime}_{n} (x) \; t^{n}
-\label{eq:ecuacion_11_11}
+s = \pm \nu \hspace{2cm} \mbox{con } \nu \geq 0
+\label{eq:ecuacion_08_04}
 \end{equation}
-Nuevamente, sustituyendo en la ecuación (\ref{eq:ecuacion_11_2}) y ajustando los coeficientes de las potencias de $t$, obtenemos el resultado
+al re-emplezar en la segunda ecuación de índices
+\[ a_{1} \, [1 \pm 2 \, \nu] = 0 \]
+de donde se sigue $a_{1} = 0$ pues $1 \pm 2 \, \nu$ es diferente de cero para valores arbitrarios de $\nu$. Se anula sólo en el caso muy particular en que $\nu = 1/2$, con el signo inferior.
+\par
+Reemplazando $s = + \nu$ en la tercera ecuación de índices:
+\[ a_{\lambda+2} = - \dfrac{a_{\lambda}}{(\lambda + \nu + 2)^{2} - \nu^{2}} = - \dfrac{a_{\lambda}}{(\lambda + 2)(\lambda + 2 \, \nu + 2)} \]
+como $a_{1} = 0$, resultará que todos los coeficientes con índice impar se anulan. Para los coeficiente pares, que se obtienen haciendo $\lambda = 0, 2, 4, \ldots$ tendremos:
+\begin{align*}
+a_{2} &= \dfrac{-a_{0}}{2 \, (2 \, \nu + 2)} = \dfrac{-a_{0}}{2 \times 2 \, (\nu + 1)} \\
+a_{4} &= \dfrac{-a_{2}}{4 \, (2 \, \nu + 4)} = \dfrac{(-)^{2} \, a_{0}}{2 \times 2^{4} \, (\nu + 2)(\nu + 1)} \\
+a_{6} &= \dfrac{-a_{4}}{6 \, (2 \, \nu + 6)} = \dfrac{(-)^{3} \, a_{0}}{2 \times 3 \times 2^{6} \, (\nu + 3)(\nu + 2)(\nu + 1)} \\
+&= \dfrac{(-)^{3} \, a_{0} \, \Gamma (\nu + 1)}{3! \, 2^{6} \, (\nu + 3)(\nu + 2)(\nu + 1) \, \Gamma (\nu + 1)} \\
+&= \dfrac{(-)^{3} \, a_{0} \, \Gamma (\nu + 1)}{3! \, 2^{6} \, \Gamma (\nu + 3 + 1)}
+\end{align*}
+De este modo, es directo probar que
 \begin{equation}
-J_{n-1}(x) - J_{n+1}(x) = 2 J'_{n}(x)
-\label{eq:ecuacion_11_12}
+a_{2p} = \dfrac{(-)^{p} \, a_{0} \, \Gamma (\nu + 1)}{2^{2p} \, p! \, \Gamma (\nu + p + 1)}
+\label{eq:ecuacion_08_05}
 \end{equation}
-Como un caso especial de esta relación de recurrencia general
+En donde la función Gamma que se indica, está definida por
+\[ \Gamma (\nu) = \int_{0}^{\infty} x^{\nu-1} \, e^{-x} \dd x, \hspace{1.5cm} \nu > 0 \]
+y cuya propiedad más importante es: $\Gamma (\nu + 1) = \nu \, \Gamma (\nu)$. En el caso particular en que $\nu$ es un entero $n: \Gamma (n + 1) = n \, \Gamma (n) = n!$. Además: $\Gamma (1/2) = \pi$.
+\par
+Así, reemplazando en la serie de Frobenius:
+\begin{align*}
+y(x) &= \sum_{\lambda=0}^{\infty} a_{\lambda} \, x^{\lambda+\nu} = \sum_{p=0}^{\infty} a_{2p} \, x^{\nu+2p} \\
+&= a_{0} \, \Gamma (\nu + 1) \, \sum_{p=0}^{\infty} \dfrac{(-)^{p} \, x^{\nu+2p}}{2^{2p} \, p! \, \Gamma (\nu + p)} \\
+&= a_{0} \, \Gamma (\nu + 1) \, 2^{\nu} \, \sum_{p=0}^{\infty} \dfrac{(-)^{p}}{p! \, \Gamma (\nu + p + 1)} \left( \dfrac{x}{2} \right)^{\nu+2p} \\
+&= a_{0} \, \Gamma (\nu + 1) \, 2^{\nu} \, J_{\nu} (x)
+\end{align*}
+En lo anterior hemos definido la \emph{función de Bessel} de orden $\nu$ real positivo y argumento $x$, que es solución de la ec. (\ref{eq:ecuacion_08_03})
 \begin{equation}
-J'_{0}(x) = - J_{1}(x)
-\label{eq:ecuacion_11_13}
+\boxed{J_{v} (x) = \sum_{p=0}^{\infty} \dfrac{(-)^{p}}{p! \, \Gamma (\nu + p + 1)} \left( \dfrac{x}{2} \right)^{\nu+2p}}
+\label{eq:ecuacion_08_06}
 \end{equation}
-Sumando las ecuaciones (\ref{eq:ecuacion_11_10}) y (\ref{eq:ecuacion_11_12}), para luego dividir entre 2, resulta
+De la expansión (\ref{eq:ecuacion_08_05}) se sigue que la serie es convergente. Es fácil concluir en efecto que:
+\[ \dfrac{a_{2p+2}}{a_{2} \, p} = \dfrac{-1}{4 \, (p+1)(\nu + p + 1)} \to 0,\hspace{1.5cm} \mbox{si } p \to \infty \]
+Ahora bien, volvamos a la ec. (\ref{eq:ecuacion_08_04}). La segunda posibilidad es $s = -\nu$. Reemplazando en la ec. (\ref{eq:ecuacion_08_05}) $\nu$ por $-\nu$ se sigue:
+\[ a_{2p} = \dfrac{(-)^{p} \, a_{0} \, \Gamma (-\nu + 1)}{2^{2p} \, p! \, \Gamma (-\nu + p + 1)} \]
+al reemplazar en la serie de Frobenius podemos definir la función de Bessel de orden $-\nu$ en la forma:
 \begin{equation}
-J_{n+1}(x) = \dfrac{n}{x} J_{n}(x) + J'_{n}(x)
-\label{eq:ecuacion_11_14}
+\boxed{J_{-v} (x) = \sum_{p=0}^{\infty} \dfrac{(-)^{p}}{p! \, \Gamma (-\nu + p + 1)} \left( \dfrac{x}{2} \right)^{-\nu+2p}}
+\label{eq:ecuacion_08_07}
 \end{equation}
-Multiplicando por $x^{n}$ y re-arreglando los términos
+serie que es convergente para todos los valores de $x$, si $-\nu + 2p \geq 0$.
+\par
+De la forma de los exponentes en las ecuaciones (\ref{eq:ecuacion_08_06}) y (\ref{eq:ecuacion_08_07}) es fácil ver que, si $\nu$ no es entero, las series $J_{\nu}(x)$ y $J_{-\nu}(x)$ son diferentes y conforman las dos soluciones linealmente independientes de la ecuacion de Bessel. La solución general, para $\nu \neq$ entero, será entonces:
+\[ y_{\nu}(x) = A \, J_{v} + B \, J_{-\nu} (x) \]
+Veamos ahora qué ocurre si $\nu$ es un entero $n$. Utilizando $\Gamma (\ell + 1) = \ell !$ con $\ell$ entero, la ecuación (\ref{eq:ecuacion_08_07}) se escribe:
+\[ J_{-n} (x) = \sum_{p=0}^{\infty} \dfrac{(-)^{p}}{p! \, (-n + p)!} \left( \dfrac{x}{2} \right)^{-n+2p} \]
+pero $(-n + p)!$ se hace $\infty$ para $p = 0, 1, \ldots, n-1$, de modo que para esos valores de $p$ los términos correspondientes de la serie se anulan, pues (-entero)! $\to \infty$. La parte de la serie que no se anula empieza con $p = n$ y se expresa como:
+\[ J_{-n} (x) = \sum_{p=n}^{\infty} \dfrac{(-)^{p}}{p! \, (-n + p)!} \left( \dfrac{x}{2} \right)^{-n+2p} \]
+y como 
+\[ \sum_{p=n}^{\infty} f(p) = \sum_{p=0}^{\infty} f(p + n) \]
+para cualquier función $f(p)$, tendremos entonces
+\begin{align*}
+J_{-n} (x) &= \sum_{p=0}^{\infty} \dfrac{(-)^{p+n}}{(p + n)! \, p!} \left( \dfrac{x}{2} \right)^{n+2p} \\
+J_{-n} (x) &= (-)^{n} \, J_{n}(x)
+\end{align*}
+En consecuencia $J_{n}(x)$ y $J{-n}(x)$ difieren al máximo en un signo. Se vuelve necesario entonces buscar la segunda solución para $\nu \neq$ entero.
+\section{La función de Neumann.}
+Con el propósito de obtener una segunda solución a la ecuación de Bessel, escribimos la ecuación de la siguiente forma
+\[ \ddot{J}_{\nu} + \dfrac{1}{x} \, \dot{J}_{\nu} + \left( 1 - \dfrac{nu^{2}}{x^{2}} \right) \, J_{\nu} = 0, \hspace{2cm} \dot{J}_{\nu} =  \dv{J_{\nu}}{x} \]
+derivando respecto a $\nu$, obtenemos:
 \begin{equation}
-\dfrac{d}{dx} \left[ x^{n} J_{n} (x) \right] = x^{n} J_{n-1}(x)
-\label{eq:ecuacion_11_15}
+\pdv{\ddot{J}_{\nu}}{\nu} + \dfrac{1}{x} \, \pdv{\dot{J}_{\nu}}{\nu} + \left( 1 - \dfrac{\nu^{2}}{x^{2}} \right) \, \pdv{J_{\nu}}{\nu} - \dfrac{2  \, \nu}{x^{2}} \, J_{\nu} = 0
+\label{eq:ecuacion_08_08} 
 \end{equation}
-Restando la ecuación (\ref{eq:ecuacion_11_12}) de (\ref{eq:ecuacion_11_10}) y dividiendo entre dos
+y también, cambiando $\nu$ por $-\nu$:
 \begin{equation}
-J_{n+1}(x) = \dfrac{n}{x} J_{n}(x) - J'_{n}(x)
-\label{eq:ecuacion_11_16}
+\pdv{\ddot{J}_{-\nu}}{\nu} + \dfrac{1}{x} \, \pdv{\dot{J}_{-\nu}}{\nu} + \left( 1 - \dfrac{\nu^{2}}{x^{2}} \right) \, \pdv{J_{-\nu}}{\nu} - \dfrac{2 \, \nu}{x^{2}} \, J_{-\nu} = 0
+\label{eq:ecuacion_08_09} 
 \end{equation}
-multiplicando por $x^{-n}$ y re-ordenando los términos, se tiene
+De (\ref{eq:ecuacion_08_08}) $-(-)^{\nu}$ (\ref{eq:ecuacion_08_09}):
+\begin{align*}
+&\dv[2]{}{x} \left( \pdv{J_{\nu}}{\nu} - (-1)^{\nu} \, \pdv{J_{-\nu}}{\nu} \right) + \dfrac{1}{x} \dv{}{x} \left( \pdv{J_{\nu}}{\nu} - (-)^{\nu} \,\pdv{J_{-\nu}}{\nu} \right) + \\
+&+ \left( 1 - \dfrac{\nu^{2}}{x^{2}} \right) \left( \pdv{J_{\nu}}{\nu} - (-)^{\nu}  \, \pdv{J_{\nu}}{\nu} \right) - \dfrac{2 \, \nu}{x^{2}} \, (J_{\nu} - (-)^{\nu} \, J_{-\nu}) = 0
+\end{align*}
+Si $\nu = n$, y como $J_{-n} = (-)^{n} \, J_{n}$, el último término se anula; precisamente para ello hicimos este tipo de resta entre (\ref{eq:ecuacion_08_08}) y (\ref{eq:ecuacion_08_09}). Así pues, la función de Neumann $N_{n}(x)$, definida por:
 \begin{equation}
-\dfrac{d}{dx} \left[ x^{-n} J_{n} (x) \right] = -x^{-n} J_{n+1}(x)
-\label{eq:ecuacion_11_17}
+N_{n} (x) = \dfrac{1}{\pi} \left[ \pdv{J_{\nu}}{\nu} - (-)^{\nu} \, \pdv{J_{-\nu}}{\nu} \right]_{\nu = n}
+\label{eq:ecuacion_08_10}
 \end{equation}
-\section{Ecuación diferencial de Bessel.}
-Consideremos un conjunto de funciones $Z_{v}(x)$ tal que satisface las relaciones de recurrencia (ecuaciones \ref{eq:ecuacion_11_10} y \ref{eq:ecuacion_11_12}), pero donde $v$ no es necesariamente un entero y $Z_{v}$ no necesariamente está dada por las series (ecuación \ref{eq:ecuacion_11_15}). La ecuación (\ref{eq:ecuacion_11_14}) puede re-escribirse ($n \to v$) como
+satisface la ecuación de Bessel
+\[ \dv[2]{N_{n}}{x} + \dfrac{1}{x} \, \dv{N_{n}}{x} + \left( 1 - \dfrac{\nu^{2}}{x^{2}} \right) \, N_{n} = 0\]
+La función $N_{n}(x)$, definida por la ec. (\ref{eq:ecuacion_08_10}), es la segunda solución a la ecuación de Bessel para $\nu =$ entero.
+\par
+La definición (\ref{eq:ecuacion_08_10}) es válida exclusivamente para $\nu = n =$ entero. Nos proponemos ahora extender esta definición para escribir $N_{\nu} (x)$ con $\nu > 0$.
+\par
+Observemos ante todo que la ec. (\ref{eq:ecuacion_08_10}) puede escribirse en la forma:
+\[ N_{n} (x) =  \left\{  \dfrac{\dv{{\nu}} [\cos \nu \, \pi \, J_{\nu} (x) - J_{-\nu} (x)]}{\dv{}{\nu} \sin \nu \, \pi} \right\}_{\nu=n} \]
+donde $\sin n \, \pi = 0$, $\cos n \, pi = (-1)^{n}$. Al aplicar la regla de L'Hôpital y al evaluar en $\nu = n$, el anterior cociente es la función
 \begin{equation}
-x Z'_{v} (x) = x Z_{v-1}(x) - v Z_{v} (x)
-\label{eq:ecuacion_11_18}
+N_{n} (x) = \dfrac{\cos \nu \, \pi \, J_{\nu} (x) - J_{-\nu} (x)}{\sin \nu \, \pi}
+\label{eq:ecuacion_08_11}
 \end{equation}
-Ahora, diferenciando respecto a $x$, tenemos
-\begin{equation}
-x Z''_{v}(x) +  (v+1) Z'_{v} - x Z'_{v-1} - Z_{v-1} = 0
-\label{eq:ecuacion_11_19}
-\end{equation}
-Multiplicando por $x$ y restando la ecuación (\ref{eq:ecuacion_11_18}) multiplicada por $v$, obtenemos
-\begin{equation}
-x^{2} Z''_{v} + x Z'_{v} - v^{2} Z_{v} + (v-1) x Z_{v-1} - x^{2} Z'_{v-1} = 0
-\label{eq:ecuacion_11_20}
-\end{equation}
-Podemos re-escribir la ecuación (\ref{eq:ecuacion_11_16}) y re-emplazar $n$ por $v-1$
-\begin{equation}
-x Z'_{v-1} = (v-1) Z_{v-1} - x Z_{v}
-\label{eq:ecuacion_11_21}
-\end{equation}
-Usando este último resultado para eliminar $Z_{v-1}$ y $Z'_{v-1}$ de la ecuación (\ref{eq:ecuacion_11_20}), se obtiene finalmente
-\begin{equation}
-x^{2} Z''_{v} + x Z'_{v} + (x^{2} - v^{2}) Z_{v} = 0
-\label{eq:ecuacion_11_22}
-\end{equation}
-Que es la ecuación de Bessel. Aquí, cualesquiera funciones $Z_{v}(x)$ que satisfacen las relaciones de recurrencia (ecuaciones \ref{eq:ecuacion_11_10}, \ref{eq:ecuacion_11_12}, \ref{eq:ecuacion_11_14}, \ref{eq:ecuacion_11_16} o \ref{eq:ecuacion_11_15} y \ref{eq:ecuacion_11_17}) satisfacen la ecuación de Bessel, esto es, las $Z_{v}$ son las funciones de Bessel.
-\\
-En particular, hemos demostrado que las funciones $J_{n}(x)$ definidas por la función generatriz, satisface la ecuación de Bessel.
-\\
-Si el argumento es $k \rho$ en vez de $x$, la ecuación (\ref{eq:ecuacion_11_22}) se convierte en
-\begin{equation}
-\rho^{2} \dfrac{d^{2}}{d \rho^{2}} Z_{v} (k \rho) + \rho \dfrac{d}{d \rho} Z_{v} (k \rho) + (k^{2} \rho^{2} - v^{2}) Z_{v} (k \rho) = 0
-\label{eq:ecuacion_11_22a}
-\end{equation}
-\section{Representación integral.}
-Una particular manera útil y poderosa para el manejo de las funciones de Bessel, es la representación integral. Retomando la función generatriz (Ecuación \ref{eq:ecuacion_11_2}), y al sustituir $t=e^{i\theta}$
-\begin{eqnarray}
-\begin{aligned}
-e^{ix \sin \theta} &= J_{0}(x) + 2 (J_{2}(x) \cos 2 \theta + J_{4}(x) \cos 4 \theta + \ldots) + \\
-&+ 2i (J_{1}(x) \sin \theta + J_{3}(x) \sin 3 \theta + \ldots)
-\end{aligned}
-\label{eq:ecuacion_11_23}
-\end{eqnarray}
-en donde se han utilizado las relaciones
-\begin{eqnarray}
-\begin{aligned}
-J_{1}(x) e^{i \theta} + J_{-1}(x) e^{-i \theta} &= J_{1} (x) (e^{i \theta} - e^{-i \theta}) \\
-&= 2 i \; J_{1}(x) \sin \theta \\
-J_{2}(x) e^{2i \theta} + J_{-2}(x) e^{-2 i \theta} &= 2 J_{2} (x)\cos 2 \theta
-\end{aligned}
-\label{eq:ecuacion_11_24}
-\end{eqnarray}
-y así.
-\\
-En notación de suma
-\begin{eqnarray}
-\begin{aligned}
-\cos (x \sin \theta) &= J_{0}(x) + 2 \sum_{n=1}^{\infty} J_{2n}(x) \cos (2n \theta) \\
-\sin (x \sin \theta) &=  2 \sum_{n=1}^{\infty} J_{2n-1} (x) \sin [(2n - 1) \theta]
-\end{aligned}
-\label{eq:ecuacion_11_25}
-\end{eqnarray}
-igualando las partes real e imaginaria, respectivamente. Nótese que el ángulo $\theta$ (en radianes) no tiene dimensiones. Dado que $\sin \theta$ no tiene dimensiones y la función $\cos (x \sin \theta)$ es correcta desde el punto de vista dimensional.
-\\
-Usando las propiedades de ortogonalidad del coseno y seno
-\begin{eqnarray}
-\int_{0}^{\pi} \cos n \theta \cos m \theta d \theta &=& \dfrac{\pi}{2} \delta_{nm} \label{eq:ecuacion_11_26a} \\
-\int_{0}^{\pi} \sin n \theta \sin m \theta d \theta &=& \dfrac{\pi}{2} \delta_{nm} \label{eq:ecuacion_11_26b}
-\end{eqnarray}
-en donde $n$ y $m$ son enteros positivos (se excluye el cero), se obtiene
-\begin{eqnarray}
-\dfrac{1}{\pi} \int_{0}^{\pi} \cos (x \sin \theta) \cos n \theta d \theta &=& \begin{cases}
-J_{n}(x) & n \text{ par} \\
-0 & n \text{ impar} \end{cases} \label{eq:ecuacion_11_27} \\
-\dfrac{1}{\pi} \int_{0}^{\pi} \sin (x \sin \theta) \sin n \theta d \theta &=& \begin{cases}
-0 & n \text{ par} \\
-J_{n}(x) & n \text{ impar} \end{cases}  \label{eq:ecuacion_11_28}
-\end{eqnarray}
-Si sumamos las dos ecuaciones
-\begin{eqnarray}
-\begin{aligned}
-J_{n}(x) &= \dfrac{1}{\pi} \int_{0}^{\pi} [ \cos (x \sin \theta) \cos n \theta + \sin (x \sin \theta) \sin n \theta] d\theta \\
-&= \dfrac{1}{\pi} \int_{0}^{\pi} \cos (n \theta - x \sin \theta) d \theta, \hspace{1cm} n=0,1,2,3,\ldots
-\end{aligned}
-\label{eq:ecuacion_11_29}
-\end{eqnarray}
-Un caso especial es (integrando la ec. (\ref{eq:ecuacion_11_25}) sobre $(0, \pi)$ se obtiene):
-\begin{equation}
-J_{0} (x) = \dfrac{1}{\pi} \int_{0}^{\pi} \cos (x \sin \theta) d \theta
-\label{eq:ecuacion_11_30}
-\end{equation}
-Nótese que $\cos( x \sin \theta)$ se repite en los cuatro cuadrantes ($\theta_{1} = \theta, \theta_{2} = \pi - \theta, \theta_{3} = \pi + \theta, \theta_{4} = - \theta$), podemos re-escribir la ecuación (\ref{eq:ecuacion_11_30}) como
-\begin{equation}
-J_{0}(x) = \dfrac{1}{2 \pi} \int_{0}^{2 \pi} \cos (x \sin \theta) d \theta
-\label{eq:ecuacion_11_30a}
-\end{equation}
-De otro manera, $\sin(x \sin \theta)$ cambia de signo en el tercer y cuarto cuadrante, así que
-\begin{equation}
-\dfrac{1}{2 \pi} \int_{0}^{2 \pi} \sin (x \sin \theta) d \theta = 0
-\label{eq:ecuacion_11_30b}
-\end{equation}
-Sumando la ecuación (\ref{eq:ecuacion_11_30a}) con $i$ veces la ecuación (\ref{eq:ecuacion_11_30b}), se obtiene la representación exponencial compleja
-\begin{eqnarray}
-\begin{aligned}
-J_{0}(x) &= \dfrac{1}{2 \pi} \int_{0}^{2 \pi} e^{ix \sin \theta} d \theta \\
-&= \dfrac{1}{2 \pi} \int_{0}^{2 \pi} e^{ix \cos \theta} d \theta
-\end{aligned}
-\label{eq:ecuacion_11_30c}
-\end{eqnarray}
-\newpage
-\section{Ortogonalidad de las funciones de Bessel}
-Si la ecuación de Bessel 
-\begin{equation}
-\rho^{2} \dfrac{d^{2}}{d \rho^{2}} Z_{v} (k \rho) + \rho \dfrac{d}{d \rho} Z_{v} (k \rho) + (k^{2} \rho^{2} - v^{2}) Z_{v} (k \rho) = 0
-\label{eq:ecuacion_11_22a}
-\end{equation}
-se divide entre $x$, vemos que se convierte en autoadjunta, y por lo visto en la teoría de Sturm-Liouville, se espera que las soluciones sean ortogonales, si logramos ajustar las condiciones de frontera de manera adecuada.
-\\
-Teniendo cuidado con las condiciones de frontera, para un intervalo finito $[0,a]$, introducimos los parámetros $a$y $\alpha_{vm}$ en el argumento de $J_{v}$ para obtener $J_{v}(\alpha_{vm} \rho /a)$. Donde $a$ es el límite superior de la coordenada radial cilíndrica $\rho$.
-\\
-De la ecuación (\ref{eq:ecuacion_11_22a})
-\begin{equation}
-\rho \dfrac{d^{2}}{d \rho^{2}} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) + \dfrac{d}{d \rho} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) + \left( \dfrac{\alpha_{vm}^{2} \rho}{a^{2}} - \dfrac{v^{2}}{\rho} \right) J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) = 0
-\label{eq:ecuacion_11_45}
-\end{equation}
-Cambiando el parámetro $\alpha_{vm}$ por $\alpha_{vn}$, encontramos que $J_{v}(\alpha_{vn} \rho /a)$ satisface
-\begin{equation}
-\rho \dfrac{d^{2}}{d \rho^{2}} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) + \dfrac{d}{d \rho} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) + \left( \dfrac{\alpha_{vn}^{2} \rho}{a^{2}} - \dfrac{v^{2}}{\rho} \right) J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) = 0
-\label{eq:ecuacion_11_45a}
-\end{equation}
-Como vimos anteriormente, multiplicamos la ecuación (\ref{eq:ecuacion_11_45}) por $J_{v}(\alpha_{vn} \rho /a)$ y la ecuación (\ref{eq:ecuacion_11_45a}) por $J_{v}(\alpha_{vm} \rho /a)$, para luego restarlarla y obtener
-\begin{eqnarray}
-\begin{aligned}
-J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) &  \dfrac{d}{d \rho} \left[ \rho \dfrac{d}{d \rho} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \right] - J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \dfrac{d}{d \rho} \left[ \rho \dfrac{d}{d \rho} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \right] \\
-&= \dfrac{\alpha^{2}_{vn} - \alpha^{2}_{vm}}{a^{2}} \rho J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right)
-\end{aligned}
-\label{eq:ecuacion_11_46}
-\end{eqnarray}
-Integrando de $\rho = 0$ a $\rho = a$, se obtiene
-\begin{eqnarray}
-\begin{aligned}
-\int_{0}^{a} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) &  \dfrac{d}{d \rho} \left[ \rho \dfrac{d}{d \rho} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \right] d \rho \\
-& - \int_{0}^{a} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \dfrac{d}{d \rho} \left[ \rho \dfrac{d}{d \rho} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \right] d \rho \\
-&= \dfrac{\alpha^{2}_{vn} - \alpha^{2}_{vm}}{a^{2}} \int_{0}^{a} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \rho d \rho
-\end{aligned}
-\label{eq:ecuacion_11_47}
-\end{eqnarray}
-De la integración por partes, vemos que el lado izquierdo de la ecuación (\ref{eq:ecuacion_11_47}) es
-\begin{equation}
-\bigg\vert \rho J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \dfrac{d}{d \rho} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \bigg\vert_{0}^{a} - \bigg\vert \rho J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \dfrac{d}{d \rho} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \bigg\vert_{0}^{a} 
-\label{eq:ecuacion_11_48}
-\end{equation}
-Para $v \geq 0$ el factor $\rho$ garantiza un cero en el límite inferior $\rho = 0$. De hecho el límite inferior en el índice $v$ puede reducirse a $v>-1$. En $\rho = a$, cada una de las expresiones se anulan si elegimos los parámetros $\alpha_{vn}$ y $\alpha_{vm}$ como ceros de las raíces de $J_{v}$, esto es, $J_{v}(\alpha_{vm})=0$. Los subíndices ahora toman significado: $\alpha_{vm}$ es el $m$-ésimo cero de $J_{v}$.
-\\
-Al elegir estos parámetros, el lado izquierdo de la igualdad se anula (las condiciones de frontera de Sturm-Loiuville se satisfacen) y para $m \neq n$
-\begin{equation}
-\int_{0}^{a} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \rho d \rho = 0
-\label{eq:ecuacion_11_49}
-\end{equation}
-Lo que nos proporciona la ortogonalidad en el intervalo $[0,a]$.
-\section{Normalización.}
-La normalización de la integral se desarrolla mediante el ajuste de $\alpha_{vn} = \alpha_{vm} + \varepsilon$ en la ecuación (\ref{eq:ecuacion_11_48}), y considerando el límite $\varepsilon \to 0$. Apoyándose de la relación de recuerrencia
-\begin{equation}
-J_{n+1}(x) = \dfrac{n}{x} J_{n}(x) - J'_{n}(x)
-\label{eq:ecuacion_11_16}
-\end{equation}
-podemos escribir el resultado como
-\begin{equation}
-\int_{0}^{a} \left[ J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \right] \rho d \rho = \dfrac{a^{2}}{2} [ J_{v+1} (\alpha_{vm} )]^{2}
-\label{eq:ecuacion_11_50}
-\end{equation}
-\section{Series de Bessel.}
-Si suponemos que el conjunto de funciones de Bessel $J_{v} (\alpha_{vm} \rho /a)$ (con $v$ fijo, $m =1,2,3,\ldots$) es un conjunto completo, y que cualquier otra función arbitraria $f(\rho)$ es bien portada, podemos expandir el resultado en una serie de Bessel (Bessel-Fourier o Fourier-Bessel)
-\begin{equation}
-f(\rho) = \sum_{m=1}^{\infty} c_{vm} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \hspace{1cm} 0 \leq \rho \leq a, \hspace{0.5cm} v > -1
-\label{eq:ecuacion_11_51}
-\end{equation}
-Los coeficientes $c_{vm}$ se determinan usando la ecuación (\ref{eq:ecuacion_11_50})
-\begin{equation}
-c_{vm} = \dfrac{2}{a^{2}[J_{v+1} (\alpha_{vm})]^{2}} \int_{0}^{a} f(\rho) J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \rho d \rho 
-\label{eq:ecuacion_11_52}
-\end{equation}
-\section{Funciones de Neumann. Funciones de Bessel de segunda clase $N_{v}(x)$.}
-De la teoría de las ecuaciones diferenciales, sabemos que la ecuación de Bessel tiene dos soluciones independientes. De hecho para el orden $v$ no entero, se cuenta con dos soluciones $J_{v}(x)$ y $J_{-v}(x)$ usando series infinitas. El problema radica cuando $v$ es entero, de donde ya hemos obtenido una solución.
-\\
-Una segunda solución puede obtenerse por los métodos que hemos visto en el tema anterior, lo que nos entrega una segunda solución para la ecuación de Bessel, pero que no son de la forma usual.
-\\
-\textbf{Definición:}
-Tomando una combinación particular de $J_{v}$ y $J_{v}$
-\begin{equation}
-N_{v} (x) = \dfrac{\cos v \pi J_{v}(x) - J_{-v} (x)}{\sin v \pi}
-\label{eq:ecuacion_11_60}
-\end{equation}
-Esta es la función de Neumman. Para un valor de $v$ no entero, $N_{v}(x)$ satisface la ecuación de Bessel, por que es una combinación lineal de las soluciones conocidas $J_{v}(x)$ y $J_{-v}(x)$.
-\\
-Para un valor de $v$ entero, $v=n$, usando la ecuación
-\begin{equation}
-J_{-n}(x) = (-1)^{n} J_{n}(x) \hspace{1.5cm} \text{con $n$ entero}
-\label{eq:ecuacion_11_8}
-\end{equation}
-la ecuación (\ref{eq:ecuacion_11_60}) se vuelve indeterminada. La definición de $N_{v}(x)$ se elige deliberadamente para esta propiedad. Evaluando $N_{n}(x)$ con la regla de L'Hopital para expresiones indeterminadas, tenemos
-\begin{eqnarray}
-\begin{aligned}
-N_{n}(x) &= \dfrac{(d/d v)[\cos v \pi J_{v}(x) - J_{-v}(x)]}{(d/dv) \sin v \pi)} \bigg\vert_{v=n} \\
-&= \dfrac{-\pi \sin n \pi J_{n}(x) + [\cos n \pi \partial J_{v} / \partial v - \partial J_{-v} / \partial v]}{\pi \cos n \pi} \bigg\vert_{v=n} \\
-&= \dfrac{1}{\pi} \left[ \dfrac{\partial J_{v}(x)}{\partial v} - (-1)^{n} \dfrac{\partial J_{-v}(x)}{\partial v} \right] \bigg\vert_{v=n}
-\end{aligned}
-\label{eq:ecuacion_11_61}
-\end{eqnarray}
-Como en el caso de las funciones de Bessel de primera clase, $N_{v}(x)$ tiene una representación integral. Para $N_{0}(x)$, se expresa como
-\begin{eqnarray}
-\begin{aligned}
-N_{0}(x) &= - \dfrac{2}{\pi} \int_{0}^{\infty} \cos (x \cosh t ) dt \\
-&= - \dfrac{2}{\pi} \int_{1}^{0} \dfrac{\cos (xt)}{(t^{2}-1)^{1/2}} dt, \hspace{1cm}  x>0
-\end{aligned}
-\label{eq:ecuacion_11_65a}
-\end{eqnarray}
-Para verificar que las funciones de Neumman o funciones de Bessel de segunda clase, satisface la ecuación de Bessel para $n$ entero, hagamos lo siguiente. Diferenciando la ecucación de Bessel $J_{\pm v}(x)$ con respecto a $v$
-\begin{equation}
-x^{2} \dfrac{d^{2}}{dx^{2}} \left( \dfrac{\partial J_{\pm v}}{\partial v} \right) + x \dfrac{d}{dx} \left( \dfrac{\partial J_{\pm v}}{\partial v} \right) + (x^{2} - v^{2}) \dfrac{\partial J_{\pm v}}{\partial v} = 2 v J_{\pm v}
-\label{eq:ecuacion_11_66}
-\end{equation}
-Multiplicando la ecuación con $J_{-v}$ por $(-1)^{v}$, restando de la ecuación con $J_{v}$, y tomando el límite cuando $v \to n$, se obtiene
-\begin{equation}
-x^{2} \dfrac{d^{2}}{dx^{2}} N_{n} +  x \dfrac{d}{dx} N_{n} + (x^{2} - n^{2}) N_{n} = \dfrac{2n}{\pi}[ J_{n} - (-1)^{n} J_{-n}]
-\label{eq:ecuacion_11_67}
-\end{equation}
-Cuando $n=v$ entero, el lado derecho de la ecuación se anula y por tanto $N_{n}(x)$ es una solución a la ecuación de Bessel.
-\\
-La forma general de la solución para cualquier $v$ puede escribirse como
-\begin{equation}
-y(x) = A J_{v}(x) + B N_{v}(x)
-\end{equation}
+Obsérvese que el límite con cuando $\nu \to n$ de $N_{\nu} (x)$ es $0/0$.
+\par
+La ecuación (\ref{eq:ecuacion_08_11}) es la definición de la función de Neumann para $\nu$ real. Si $\nu \neq$ entero, $J_{\nu} (x)$ y $J_{-\nu} (x)$ son linealmente independientes, de modo que $N_{\nu}(x)$ es solución linealmente dependiente, y si $\nu =$ entero entonces $N_{n}(x)$ dada por la ec. (\ref{eq:ecuacion_08_10}) es la segunda solución. Una forma en series de (\ref{eq:ecuacion_08_10}) es:
+\begin{align*}
+N_{n}(x) &= \dfrac{2}{\pi} \left[ \ln \left(\dfrac{x}{2} \right) + \gamma - \dfrac{1}{2} \sum_{p=1}^{n} \dfrac{1}{p} \right] \, J_{n} (x) + \\
+&- \dfrac{1}{\pi} \sum_{r=0}^{\infty} (-)^{r} \, \dfrac{1}{r! \, (n + r)!} \, \left( \dfrac{x}{2} \right)^{n+2r} \, \sum_{p=1}^{r} \left( \dfrac{1}{p} + \dfrac{1}{p + n} \right) + \\
+&- \dfrac{1}{\pi} \sum_{r=0}^{n-1} \dfrac{(n - r - 1)!}{r!} \, \left( \dfrac{x}{2} \right)^{-n+2r}
+\end{align*}
+donde $\gamma$ es la constante de Euler-Mascheroni, definida por:
+\[ \gamma = \lim_{n \to \infty} \left( \sum_{m=1}^{n} \dfrac{1}{m} - \ln n \right) = 0.57721566 \]
+La solución general de la ecuación de Bessel, es entonces
+\[ y_{\nu} (x) = A \, J_{\nu} (x) + B \, N_{\nu} (x) \hspace{1.5cm} \mbox{para $\nu$ real} \]
+\section{Propiedades de las funciones de Bessel.}
+\subsection{Raíces.}
+Llámanse raíces de las funciones de Bessel los valores de $x$, designados por $\chi_{\nu n}$ para los cuales $J_{\nu} (\chi_{\nu n}) = 0$. 
+\par
+Cada función de Bessel de orden $\nu$ presenta un número infinito de ceros, que numeramos con $n = 1, 2, 3, \ldots$. Por tanto los ceros deberán clasificarse con dos índices: El primero señala el orden de la función y el segundo el $n-$ ésimo cero. El valor $\chi = 0$ lo consideramos como una raíz trivial.
+\par
+Para $n > -1$ la ecuación $J_{\nu} (x) = 0$ no tiene raíces complejas, ni puramente imaginarias. Además, si $\nu$ es un número real, la ecuación $J_{\nu} (x) = 0$ no tiene raíces comunes ni con $J_{\nu+1} (x) = 0$ ni con $J_{\nu-1} (x) = 0$ (excepto cero). También las funciones de Neumann presentan ceros.
+\subsection{Relaciones de recurrencia.}
+Son expresiones que relacionan entre sí funciones y derivadas de funciones de Bessel de diferente orden.
+\par
+Por ejemplo, por aplicación directa de la ecuación (\ref{eq:ecuacion_08_06}), se tiene que:
+\begin{align*}
+J_{\nu-1} (x) - J_{\nu+1} (x)&= 2 \, \dv{J_{\nu}(x)}{x} \\
+J_{\nu-1} (x) &= \dfrac{\nu}{x} \, J_{\nu} + \dv{J_{\nu}(x)}{x} \\
+J_{\nu-1} &= \left( \dfrac{\nu}{x} + \dv{}{x} \right) \, J_{\nu} \\
+J_{\nu+1} &= \left( \dfrac{\nu}{x} - \dv{}{x} \right) \, J_{\nu}
+\end{align*}
+Estas cuatro ecuaciones son válidas también para $N_{\nu} (x)$. Las dos últimas ecuaciones se deducen de las dos primeras, y aseguran que las funciones de Bessel $J_{\nu \pm 1} (x)$ pueden obtenerse de $J_{\nu}$, mediante la aplicación de los \emph{operadores escalera}:
+\[ G_{-} = \left( \dfrac{\nu}{x} + \dv{}{x} \right) \hspace{2cm} G_{+} = \left( \dfrac{\nu}{x} - \dv{}{x} \right) \]
+tal que
+\[ J_{\nu-1} = G_{-} \, J_{\nu} \hspace{2cm} J_{\nu+1} = G_{+} \, J_{\nu}  \]
+\subsection{Forma asintótica para $x \gg 1$.}
+Para $x \gg 1$ es cierto que
+\begin{align*}
+J_{\nu} (x) &\to \sqrt{\dfrac{2}{\pi \, x}} \, \cos \left( x - (\nu + 1/2) \, \dfrac{\pi}{2} \right) \\
+N_{\nu} (x) &\to \sqrt{\dfrac{2}{\pi \, x}} \, \sin \left( x - (\nu + 1/2) \, \dfrac{\pi}{2} \right)
+\end{align*}
+La separación entre dos ceros consecutivos de la función de Bessel de orden $\nu$ para $x \gg 1$ se obtiene de:
+\begin{align*}
+J_{\nu}(\chi_{\nu n}) = 0 = \cos (\chi_{\nu n} - (\nu + 1/2) \dfrac{\pi}{2})
+\end{align*}
+de donde:
+\begin{align*}
+\chi_{\nu n} - (\nu +  1/2) \dfrac{\pi}{2} = (2 \, n + 1) \dfrac{\pi}{2}
+\end{align*}
+con $n$ entero, de modo que: $\chi_{\nu, n+1} - \chi_{nu,n} = \pi$.
+\par
+Las formas asintóticas muestran la similaridad entre las funciones de Bessel y las trigonométricas. En el caso trigonométrico es conveniente introducir las combinaciones lineales $\cos x \pm i \, \sin x$ que dan lugar a las exponenciales complejas $e^{\pm i x}$, útiles en la descripción de ondas planas. 
+\par
+En analogía  definimos las \emph{funciones de Hankel} como:
+\begin{align*}
+H_{\nu}^{1} &= J_{\nu} (x) + i \, N_{\nu} (x) \\
+H_{\nu}^{2} &= J_{\nu} (x) - i \, N_{\nu} (x)  
+\end{align*}
+% Las funciones de Bessel aparecen en una amplia variedad de problemas físicos: desde la separación con la ecuación de Helmholtz o la ecuación de onda en coordenadas cilíndricas, nos llevan a la ecuación de Bessel. La ecuación de Helmholtz en coordenadas esféricas nos dirigirá a una forma especial de la ecuación de Bessel.
+% \section{Función generatriz, Integral de orden $J_{n}(x)$}
+% Consideremos una función de dos variables:
+% \begin{equation}
+% g(x,t) = e^{(x/2)(t-1/t)}
+% \label{eq:ecuacion_11_1}
+% \end{equation}
+% Expandiendo esta función en una serie de Laurent, se obtiene
+% \begin{equation}
+% e^{(x/2)(t-1/t)} = \sum_{n=-\infty}^{\infty} J_{n} (x) t^{n}
+% \label{eq:ecuacion_11_2}
+% \end{equation}
+% El coeficiente de $t^{n}$, $J_{n}(x)$ se define como una función de Bessel de primera clase de orden $n$. Expandiendo las exponenciales, tenemos un producto de series de Maclaurin en $xt/2$ y $-x/2t$ respectivamente
+% \begin{equation}
+% e^{xt/2} \cdot e^{-x/2t} = \sum_{r=0}^{\infty} \left( \dfrac{x}{2} \right)^{r} \dfrac{t^{t}}{r!} \sum_{s=0}^{\infty} (-1)^{s} \left( \dfrac{x}{2} \right)^{s} \dfrac{t^{-s}}{s!}
+% \label{eq:ecuacion_11_3}
+% \end{equation}
+% Para un valor de $s$ dado, tenemos $t^{n}$ $(n \geq 0 )$ donde $r=n+s$
+% \begin{equation}
+% \left( \dfrac{x}{2} \right)^{n+s} \dfrac{t^{n+s}}{(n+s)!} (-1)^{s} \left( \dfrac{x}{2} \right)^{s} \dfrac{t^{-s}}{s!}
+% \label{eq:ecuacion_11_4}
+% \end{equation}
+% El coeficiente de $t^{n}$ es entonces
+% \begin{equation}
+% J_{n}(x) = \sum_{s=0}^{\infty} \dfrac{(-1)^{s}}{s! \; (n+s)!} \left( \dfrac{x}{2} \right)^{n+2s} = \dfrac{x^{n}}{2^{n} \; n!} - \dfrac{x^{n+2}}{2^{n+2} \; (n+1)! + \ldots}
+% \label{eq:ecuacion_11_5}
+% \end{equation}
+% Esta serie muestra el comportamiento de la función de Bessel $J_{n}(x)$ para valores de $x$ pequeños, y permite una evaluación numérica para $J_{n}(x)$.
+% \\
+% Las funciones de Bessel oscilan pero no son periódicas (excepto en el límite cuando $x \to \infty$. La amplitud de $J_{n}(x)$ no es constante, ya que decrece asintóticamente como $x^{-1/2}$.
+% \\
+% La ecuación (\ref{eq:ecuacion_11_5}) se ocupa si $n<0$, resultando
+% \begin{equation}
+% J_{-n} (x) = \sum_{s=0}^{\infty} \dfrac{(-1)^{s}}{s! \; (s-n)!)} \left( \dfrac{x}{2} \right)^{2s-n}
+% \label{eq:ecuacion_11_6}
+% \end{equation}
+% que se obtiene re-emplazando $n$ por $-n$ en la ecuación (\ref{eq:ecuacion_11_5}). Dado que $n$ es un entero, $(s-n)! \to \infty$ para $s=0, \ldots,(n-1)$. Por lo que se considera que inicia con $n=s$.
+% \\
+% Sustituyendo $s$ por $s+n$, se obtiene
+% \begin{equation}
+% J_{-n}(x) = \sum_{s=0}^{\infty} \dfrac{(-1)^{s+n}}{s! \; (n+s)!} \left( \dfrac{x}{2} \right)^{n+2s}
+% \label{eq:ecuacion_11_7}
+% \end{equation}
+% de donde se revisa que $J_{n}(x)$ y $J_{-n}(x)$ no son independientes, ya que están relacionadas por
+% \begin{equation}
+% J_{-n}(x) = (-1)^{n} J_{n}(x) \hspace{1.5cm} \text{con $n$ entero}
+% \label{eq:ecuacion_11_8}
+% \end{equation}
+% Las expresiones en series (ecuaciones \ref{eq:ecuacion_11_5} y \ref{eq:ecuacion_11_6}) pueden usarse al re-emplazar $n$ por $v$ para definir $J_{v}(x)$ y $J_{-v}(x)$ para $v$ un valor no entero.
+% \section{Relaciones de recurrencia.}
+% Las relaciones de recurrencia para $J_{n}(x)$ y sus derivadas se pueden obtener al operar las series, la ecuación (\ref{eq:ecuacion_11_5}) requiere un poco de clarividencia (o bastante ensayo y error).
+% \\
+% Diferenciando parcialmente la ecuación (\ref{eq:ecuacion_11_1}) con respecto a $t$, se encuentra
+% \begin{eqnarray}
+% \begin{aligned}
+% \dfrac{\partial}{\partial t} g(x,t) &= \dfrac{1}{2} x \left( 1 + \dfrac{1}{t^{2}} \right) e^{(x/2)(t-1/t)} \\
+% &= \sum_{n=-\infty}^{\infty} n \; J_{n}(x) \; t^{n-1}
+% \end{aligned}
+% \label{eq:ecuacion_11_9}
+% \end{eqnarray}
+% Sustituyendo la ecuación (\ref{eq:ecuacion_11_2}) para la exponencial y ajustando los coeficientes de las potencias de $t$, tenemos
+% \begin{equation}
+% J_{n-1}(x) + J_{n+1}(x) = \dfrac{2n}{x} J_{n} (x)
+% \label{eq:ecuacion_11_10}
+% \end{equation}
+% Que es una relación de recurrencia de tres términos. Dados por ejemplo $J_{0}$ y $J_{1}$, se puede calcular $J_{2}$ y cualquier otra valor de orden $J_{n}$.
+% \\
+% Ahora diferenciamos parcialmente la ecuación (\ref{eq:ecuacion_11_1}) con respecto a $x$, para obtener:
+% \begin{equation}
+% \dfrac{\partial}{\partial x} g(x,t) = \dfrac{1}{2} \left( 1 - \dfrac{1}{t} \right) e^{(x/2)(t-1/t)} = \sum_{n=-\infty}^{\infty} J^{\prime}_{n} (x) \; t^{n}
+% \label{eq:ecuacion_11_11}
+% \end{equation}
+% Nuevamente, sustituyendo en la ecuación (\ref{eq:ecuacion_11_2}) y ajustando los coeficientes de las potencias de $t$, obtenemos el resultado
+% \begin{equation}
+% J_{n-1}(x) - J_{n+1}(x) = 2 J'_{n}(x)
+% \label{eq:ecuacion_11_12}
+% \end{equation}
+% Como un caso especial de esta relación de recurrencia general
+% \begin{equation}
+% J'_{0}(x) = - J_{1}(x)
+% \label{eq:ecuacion_11_13}
+% \end{equation}
+% Sumando las ecuaciones (\ref{eq:ecuacion_11_10}) y (\ref{eq:ecuacion_11_12}), para luego dividir entre 2, resulta
+% \begin{equation}
+% J_{n+1}(x) = \dfrac{n}{x} J_{n}(x) + J'_{n}(x)
+% \label{eq:ecuacion_11_14}
+% \end{equation}
+% Multiplicando por $x^{n}$ y re-arreglando los términos
+% \begin{equation}
+% \dfrac{d}{dx} \left[ x^{n} J_{n} (x) \right] = x^{n} J_{n-1}(x)
+% \label{eq:ecuacion_11_15}
+% \end{equation}
+% Restando la ecuación (\ref{eq:ecuacion_11_12}) de (\ref{eq:ecuacion_11_10}) y dividiendo entre dos
+% \begin{equation}
+% J_{n+1}(x) = \dfrac{n}{x} J_{n}(x) - J'_{n}(x)
+% \label{eq:ecuacion_11_16}
+% \end{equation}
+% multiplicando por $x^{-n}$ y re-ordenando los términos, se tiene
+% \begin{equation}
+% \dfrac{d}{dx} \left[ x^{-n} J_{n} (x) \right] = -x^{-n} J_{n+1}(x)
+% \label{eq:ecuacion_11_17}
+% \end{equation}
+% \section{Ecuación diferencial de Bessel.}
+% Consideremos un conjunto de funciones $Z_{v}(x)$ tal que satisface las relaciones de recurrencia (ecuaciones \ref{eq:ecuacion_11_10} y \ref{eq:ecuacion_11_12}), pero donde $v$ no es necesariamente un entero y $Z_{v}$ no necesariamente está dada por las series (ecuación \ref{eq:ecuacion_11_15}). La ecuación (\ref{eq:ecuacion_11_14}) puede re-escribirse ($n \to v$) como
+% \begin{equation}
+% x Z'_{v} (x) = x Z_{v-1}(x) - v Z_{v} (x)
+% \label{eq:ecuacion_11_18}
+% \end{equation}
+% Ahora, diferenciando respecto a $x$, tenemos
+% \begin{equation}
+% x Z''_{v}(x) +  (v+1) Z'_{v} - x Z'_{v-1} - Z_{v-1} = 0
+% \label{eq:ecuacion_11_19}
+% \end{equation}
+% Multiplicando por $x$ y restando la ecuación (\ref{eq:ecuacion_11_18}) multiplicada por $v$, obtenemos
+% \begin{equation}
+% x^{2} Z''_{v} + x Z'_{v} - v^{2} Z_{v} + (v-1) x Z_{v-1} - x^{2} Z'_{v-1} = 0
+% \label{eq:ecuacion_11_20}
+% \end{equation}
+% Podemos re-escribir la ecuación (\ref{eq:ecuacion_11_16}) y re-emplazar $n$ por $v-1$
+% \begin{equation}
+% x Z'_{v-1} = (v-1) Z_{v-1} - x Z_{v}
+% \label{eq:ecuacion_11_21}
+% \end{equation}
+% Usando este último resultado para eliminar $Z_{v-1}$ y $Z'_{v-1}$ de la ecuación (\ref{eq:ecuacion_11_20}), se obtiene finalmente
+% \begin{equation}
+% x^{2} Z''_{v} + x Z'_{v} + (x^{2} - v^{2}) Z_{v} = 0
+% \label{eq:ecuacion_11_22}
+% \end{equation}
+% Que es la ecuación de Bessel. Aquí, cualesquiera funciones $Z_{v}(x)$ que satisfacen las relaciones de recurrencia (ecuaciones \ref{eq:ecuacion_11_10}, \ref{eq:ecuacion_11_12}, \ref{eq:ecuacion_11_14}, \ref{eq:ecuacion_11_16} o \ref{eq:ecuacion_11_15} y \ref{eq:ecuacion_11_17}) satisfacen la ecuación de Bessel, esto es, las $Z_{v}$ son las funciones de Bessel.
+% \\
+% En particular, hemos demostrado que las funciones $J_{n}(x)$ definidas por la función generatriz, satisface la ecuación de Bessel.
+% \\
+% Si el argumento es $k \rho$ en vez de $x$, la ecuación (\ref{eq:ecuacion_11_22}) se convierte en
+% \begin{equation}
+% \rho^{2} \dfrac{d^{2}}{d \rho^{2}} Z_{v} (k \rho) + \rho \dfrac{d}{d \rho} Z_{v} (k \rho) + (k^{2} \rho^{2} - v^{2}) Z_{v} (k \rho) = 0
+% \label{eq:ecuacion_11_22a}
+% \end{equation}
+% \section{Representación integral.}
+% Una particular manera útil y poderosa para el manejo de las funciones de Bessel, es la representación integral. Retomando la función generatriz (Ecuación \ref{eq:ecuacion_11_2}), y al sustituir $t=e^{i\theta}$
+% \begin{eqnarray}
+% \begin{aligned}
+% e^{ix \sin \theta} &= J_{0}(x) + 2 (J_{2}(x) \cos 2 \theta + J_{4}(x) \cos 4 \theta + \ldots) + \\
+% &+ 2i (J_{1}(x) \sin \theta + J_{3}(x) \sin 3 \theta + \ldots)
+% \end{aligned}
+% \label{eq:ecuacion_11_23}
+% \end{eqnarray}
+% en donde se han utilizado las relaciones
+% \begin{eqnarray}
+% \begin{aligned}
+% J_{1}(x) e^{i \theta} + J_{-1}(x) e^{-i \theta} &= J_{1} (x) (e^{i \theta} - e^{-i \theta}) \\
+% &= 2 i \; J_{1}(x) \sin \theta \\
+% J_{2}(x) e^{2i \theta} + J_{-2}(x) e^{-2 i \theta} &= 2 J_{2} (x)\cos 2 \theta
+% \end{aligned}
+% \label{eq:ecuacion_11_24}
+% \end{eqnarray}
+% y así.
+% \\
+% En notación de suma
+% \begin{eqnarray}
+% \begin{aligned}
+% \cos (x \sin \theta) &= J_{0}(x) + 2 \sum_{n=1}^{\infty} J_{2n}(x) \cos (2n \theta) \\
+% \sin (x \sin \theta) &=  2 \sum_{n=1}^{\infty} J_{2n-1} (x) \sin [(2n - 1) \theta]
+% \end{aligned}
+% \label{eq:ecuacion_11_25}
+% \end{eqnarray}
+% igualando las partes real e imaginaria, respectivamente. Nótese que el ángulo $\theta$ (en radianes) no tiene dimensiones. Dado que $\sin \theta$ no tiene dimensiones y la función $\cos (x \sin \theta)$ es correcta desde el punto de vista dimensional.
+% \\
+% Usando las propiedades de ortogonalidad del coseno y seno
+% \begin{eqnarray}
+% \int_{0}^{\pi} \cos n \theta \cos m \theta d \theta &=& \dfrac{\pi}{2} \delta_{nm} \label{eq:ecuacion_11_26a} \\
+% \int_{0}^{\pi} \sin n \theta \sin m \theta d \theta &=& \dfrac{\pi}{2} \delta_{nm} \label{eq:ecuacion_11_26b}
+% \end{eqnarray}
+% en donde $n$ y $m$ son enteros positivos (se excluye el cero), se obtiene
+% \begin{eqnarray}
+% \dfrac{1}{\pi} \int_{0}^{\pi} \cos (x \sin \theta) \cos n \theta d \theta &=& \begin{cases}
+% J_{n}(x) & n \text{ par} \\
+% 0 & n \text{ impar} \end{cases} \label{eq:ecuacion_11_27} \\
+% \dfrac{1}{\pi} \int_{0}^{\pi} \sin (x \sin \theta) \sin n \theta d \theta &=& \begin{cases}
+% 0 & n \text{ par} \\
+% J_{n}(x) & n \text{ impar} \end{cases}  \label{eq:ecuacion_11_28}
+% \end{eqnarray}
+% Si sumamos las dos ecuaciones
+% \begin{eqnarray}
+% \begin{aligned}
+% J_{n}(x) &= \dfrac{1}{\pi} \int_{0}^{\pi} [ \cos (x \sin \theta) \cos n \theta + \sin (x \sin \theta) \sin n \theta] d\theta \\
+% &= \dfrac{1}{\pi} \int_{0}^{\pi} \cos (n \theta - x \sin \theta) d \theta, \hspace{1cm} n=0,1,2,3,\ldots
+% \end{aligned}
+% \label{eq:ecuacion_11_29}
+% \end{eqnarray}
+% Un caso especial es (integrando la ec. (\ref{eq:ecuacion_11_25}) sobre $(0, \pi)$ se obtiene):
+% \begin{equation}
+% J_{0} (x) = \dfrac{1}{\pi} \int_{0}^{\pi} \cos (x \sin \theta) d \theta
+% \label{eq:ecuacion_11_30}
+% \end{equation}
+% Nótese que $\cos( x \sin \theta)$ se repite en los cuatro cuadrantes ($\theta_{1} = \theta, \theta_{2} = \pi - \theta, \theta_{3} = \pi + \theta, \theta_{4} = - \theta$), podemos re-escribir la ecuación (\ref{eq:ecuacion_11_30}) como
+% \begin{equation}
+% J_{0}(x) = \dfrac{1}{2 \pi} \int_{0}^{2 \pi} \cos (x \sin \theta) d \theta
+% \label{eq:ecuacion_11_30a}
+% \end{equation}
+% De otro manera, $\sin(x \sin \theta)$ cambia de signo en el tercer y cuarto cuadrante, así que
+% \begin{equation}
+% \dfrac{1}{2 \pi} \int_{0}^{2 \pi} \sin (x \sin \theta) d \theta = 0
+% \label{eq:ecuacion_11_30b}
+% \end{equation}
+% Sumando la ecuación (\ref{eq:ecuacion_11_30a}) con $i$ veces la ecuación (\ref{eq:ecuacion_11_30b}), se obtiene la representación exponencial compleja
+% \begin{eqnarray}
+% \begin{aligned}
+% J_{0}(x) &= \dfrac{1}{2 \pi} \int_{0}^{2 \pi} e^{ix \sin \theta} d \theta \\
+% &= \dfrac{1}{2 \pi} \int_{0}^{2 \pi} e^{ix \cos \theta} d \theta
+% \end{aligned}
+% \label{eq:ecuacion_11_30c}
+% \end{eqnarray}
+% \newpage
+% \section{Ortogonalidad de las funciones de Bessel}
+% Si la ecuación de Bessel 
+% \begin{equation}
+% \rho^{2} \dfrac{d^{2}}{d \rho^{2}} Z_{v} (k \rho) + \rho \dfrac{d}{d \rho} Z_{v} (k \rho) + (k^{2} \rho^{2} - v^{2}) Z_{v} (k \rho) = 0
+% \label{eq:ecuacion_11_22a}
+% \end{equation}
+% se divide entre $x$, vemos que se convierte en autoadjunta, y por lo visto en la teoría de Sturm-Liouville, se espera que las soluciones sean ortogonales, si logramos ajustar las condiciones de frontera de manera adecuada.
+% \\
+% Teniendo cuidado con las condiciones de frontera, para un intervalo finito $[0,a]$, introducimos los parámetros $a$y $\alpha_{vm}$ en el argumento de $J_{v}$ para obtener $J_{v}(\alpha_{vm} \rho /a)$. Donde $a$ es el límite superior de la coordenada radial cilíndrica $\rho$.
+% \\
+% De la ecuación (\ref{eq:ecuacion_11_22a})
+% \begin{equation}
+% \rho \dfrac{d^{2}}{d \rho^{2}} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) + \dfrac{d}{d \rho} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) + \left( \dfrac{\alpha_{vm}^{2} \rho}{a^{2}} - \dfrac{v^{2}}{\rho} \right) J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) = 0
+% \label{eq:ecuacion_11_45}
+% \end{equation}
+% Cambiando el parámetro $\alpha_{vm}$ por $\alpha_{vn}$, encontramos que $J_{v}(\alpha_{vn} \rho /a)$ satisface
+% \begin{equation}
+% \rho \dfrac{d^{2}}{d \rho^{2}} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) + \dfrac{d}{d \rho} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) + \left( \dfrac{\alpha_{vn}^{2} \rho}{a^{2}} - \dfrac{v^{2}}{\rho} \right) J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) = 0
+% \label{eq:ecuacion_11_45a}
+% \end{equation}
+% Como vimos anteriormente, multiplicamos la ecuación (\ref{eq:ecuacion_11_45}) por $J_{v}(\alpha_{vn} \rho /a)$ y la ecuación (\ref{eq:ecuacion_11_45a}) por $J_{v}(\alpha_{vm} \rho /a)$, para luego restarlarla y obtener
+% \begin{eqnarray}
+% \begin{aligned}
+% J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) &  \dfrac{d}{d \rho} \left[ \rho \dfrac{d}{d \rho} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \right] - J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \dfrac{d}{d \rho} \left[ \rho \dfrac{d}{d \rho} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \right] \\
+% &= \dfrac{\alpha^{2}_{vn} - \alpha^{2}_{vm}}{a^{2}} \rho J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right)
+% \end{aligned}
+% \label{eq:ecuacion_11_46}
+% \end{eqnarray}
+% Integrando de $\rho = 0$ a $\rho = a$, se obtiene
+% \begin{eqnarray}
+% \begin{aligned}
+% \int_{0}^{a} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) &  \dfrac{d}{d \rho} \left[ \rho \dfrac{d}{d \rho} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \right] d \rho \\
+% & - \int_{0}^{a} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \dfrac{d}{d \rho} \left[ \rho \dfrac{d}{d \rho} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \right] d \rho \\
+% &= \dfrac{\alpha^{2}_{vn} - \alpha^{2}_{vm}}{a^{2}} \int_{0}^{a} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \rho d \rho
+% \end{aligned}
+% \label{eq:ecuacion_11_47}
+% \end{eqnarray}
+% De la integración por partes, vemos que el lado izquierdo de la ecuación (\ref{eq:ecuacion_11_47}) es
+% \begin{equation}
+% \bigg\vert \rho J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \dfrac{d}{d \rho} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \bigg\vert_{0}^{a} - \bigg\vert \rho J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \dfrac{d}{d \rho} J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \bigg\vert_{0}^{a} 
+% \label{eq:ecuacion_11_48}
+% \end{equation}
+% Para $v \geq 0$ el factor $\rho$ garantiza un cero en el límite inferior $\rho = 0$. De hecho el límite inferior en el índice $v$ puede reducirse a $v>-1$. En $\rho = a$, cada una de las expresiones se anulan si elegimos los parámetros $\alpha_{vn}$ y $\alpha_{vm}$ como ceros de las raíces de $J_{v}$, esto es, $J_{v}(\alpha_{vm})=0$. Los subíndices ahora toman significado: $\alpha_{vm}$ es el $m$-ésimo cero de $J_{v}$.
+% \\
+% Al elegir estos parámetros, el lado izquierdo de la igualdad se anula (las condiciones de frontera de Sturm-Loiuville se satisfacen) y para $m \neq n$
+% \begin{equation}
+% \int_{0}^{a} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) J_{v} \left( \alpha_{vn} \dfrac{\rho}{a} \right) \rho d \rho = 0
+% \label{eq:ecuacion_11_49}
+% \end{equation}
+% Lo que nos proporciona la ortogonalidad en el intervalo $[0,a]$.
+% \section{Normalización.}
+% La normalización de la integral se desarrolla mediante el ajuste de $\alpha_{vn} = \alpha_{vm} + \varepsilon$ en la ecuación (\ref{eq:ecuacion_11_48}), y considerando el límite $\varepsilon \to 0$. Apoyándose de la relación de recuerrencia
+% \begin{equation}
+% J_{n+1}(x) = \dfrac{n}{x} J_{n}(x) - J'_{n}(x)
+% \label{eq:ecuacion_11_16}
+% \end{equation}
+% podemos escribir el resultado como
+% \begin{equation}
+% \int_{0}^{a} \left[ J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \right] \rho d \rho = \dfrac{a^{2}}{2} [ J_{v+1} (\alpha_{vm} )]^{2}
+% \label{eq:ecuacion_11_50}
+% \end{equation}
+% \section{Series de Bessel.}
+% Si suponemos que el conjunto de funciones de Bessel $J_{v} (\alpha_{vm} \rho /a)$ (con $v$ fijo, $m =1,2,3,\ldots$) es un conjunto completo, y que cualquier otra función arbitraria $f(\rho)$ es bien portada, podemos expandir el resultado en una serie de Bessel (Bessel-Fourier o Fourier-Bessel)
+% \begin{equation}
+% f(\rho) = \sum_{m=1}^{\infty} c_{vm} J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \hspace{1cm} 0 \leq \rho \leq a, \hspace{0.5cm} v > -1
+% \label{eq:ecuacion_11_51}
+% \end{equation}
+% Los coeficientes $c_{vm}$ se determinan usando la ecuación (\ref{eq:ecuacion_11_50})
+% \begin{equation}
+% c_{vm} = \dfrac{2}{a^{2}[J_{v+1} (\alpha_{vm})]^{2}} \int_{0}^{a} f(\rho) J_{v} \left( \alpha_{vm} \dfrac{\rho}{a} \right) \rho d \rho 
+% \label{eq:ecuacion_11_52}
+% \end{equation}
+% \section{Funciones de Neumann. Funciones de Bessel de segunda clase $N_{v}(x)$.}
+% De la teoría de las ecuaciones diferenciales, sabemos que la ecuación de Bessel tiene dos soluciones independientes. De hecho para el orden $v$ no entero, se cuenta con dos soluciones $J_{v}(x)$ y $J_{-v}(x)$ usando series infinitas. El problema radica cuando $v$ es entero, de donde ya hemos obtenido una solución.
+% \\
+% Una segunda solución puede obtenerse por los métodos que hemos visto en el tema anterior, lo que nos entrega una segunda solución para la ecuación de Bessel, pero que no son de la forma usual.
+% \\
+% \textbf{Definición:}
+% Tomando una combinación particular de $J_{v}$ y $J_{v}$
+% \begin{equation}
+% N_{v} (x) = \dfrac{\cos v \pi J_{v}(x) - J_{-v} (x)}{\sin v \pi}
+% \label{eq:ecuacion_11_60}
+% \end{equation}
+% Esta es la función de Neumman. Para un valor de $v$ no entero, $N_{v}(x)$ satisface la ecuación de Bessel, por que es una combinación lineal de las soluciones conocidas $J_{v}(x)$ y $J_{-v}(x)$.
+% \\
+% Para un valor de $v$ entero, $v=n$, usando la ecuación
+% \begin{equation}
+% J_{-n}(x) = (-1)^{n} J_{n}(x) \hspace{1.5cm} \text{con $n$ entero}
+% \label{eq:ecuacion_11_8}
+% \end{equation}
+% la ecuación (\ref{eq:ecuacion_11_60}) se vuelve indeterminada. La definición de $N_{v}(x)$ se elige deliberadamente para esta propiedad. Evaluando $N_{n}(x)$ con la regla de L'Hopital para expresiones indeterminadas, tenemos
+% \begin{eqnarray}
+% \begin{aligned}
+% N_{n}(x) &= \dfrac{(d/d v)[\cos v \pi J_{v}(x) - J_{-v}(x)]}{(d/dv) \sin v \pi)} \bigg\vert_{v=n} \\
+% &= \dfrac{-\pi \sin n \pi J_{n}(x) + [\cos n \pi \partial J_{v} / \partial v - \partial J_{-v} / \partial v]}{\pi \cos n \pi} \bigg\vert_{v=n} \\
+% &= \dfrac{1}{\pi} \left[ \dfrac{\partial J_{v}(x)}{\partial v} - (-1)^{n} \dfrac{\partial J_{-v}(x)}{\partial v} \right] \bigg\vert_{v=n}
+% \end{aligned}
+% \label{eq:ecuacion_11_61}
+% \end{eqnarray}
+% Como en el caso de las funciones de Bessel de primera clase, $N_{v}(x)$ tiene una representación integral. Para $N_{0}(x)$, se expresa como
+% \begin{eqnarray}
+% \begin{aligned}
+% N_{0}(x) &= - \dfrac{2}{\pi} \int_{0}^{\infty} \cos (x \cosh t ) dt \\
+% &= - \dfrac{2}{\pi} \int_{1}^{0} \dfrac{\cos (xt)}{(t^{2}-1)^{1/2}} dt, \hspace{1cm}  x>0
+% \end{aligned}
+% \label{eq:ecuacion_11_65a}
+% \end{eqnarray}
+% Para verificar que las funciones de Neumman o funciones de Bessel de segunda clase, satisface la ecuación de Bessel para $n$ entero, hagamos lo siguiente. Diferenciando la ecucación de Bessel $J_{\pm v}(x)$ con respecto a $v$
+% \begin{equation}
+% x^{2} \dfrac{d^{2}}{dx^{2}} \left( \dfrac{\partial J_{\pm v}}{\partial v} \right) + x \dfrac{d}{dx} \left( \dfrac{\partial J_{\pm v}}{\partial v} \right) + (x^{2} - v^{2}) \dfrac{\partial J_{\pm v}}{\partial v} = 2 v J_{\pm v}
+% \label{eq:ecuacion_11_66}
+% \end{equation}
+% Multiplicando la ecuación con $J_{-v}$ por $(-1)^{v}$, restando de la ecuación con $J_{v}$, y tomando el límite cuando $v \to n$, se obtiene
+% \begin{equation}
+% x^{2} \dfrac{d^{2}}{dx^{2}} N_{n} +  x \dfrac{d}{dx} N_{n} + (x^{2} - n^{2}) N_{n} = \dfrac{2n}{\pi}[ J_{n} - (-1)^{n} J_{-n}]
+% \label{eq:ecuacion_11_67}
+% \end{equation}
+% Cuando $n=v$ entero, el lado derecho de la ecuación se anula y por tanto $N_{n}(x)$ es una solución a la ecuación de Bessel.
+% \\
+% La forma general de la solución para cualquier $v$ puede escribirse como
+% \begin{equation}
+% y(x) = A J_{v}(x) + B N_{v}(x)
+% \end{equation}
 
-%\section{Ejemplo.}
-%Partiendo del reposo a una distancia $L$ desde el origen $O$, una partícula $P$ de masa variante $m$ es atraída hacia el origen por una fuerza dirigida siempre hacia el origen y que tiene magnitud proporcional al producto $my$, donde $y$ es la distancia de $P$ a partir de la origen. La masa $m$ de $P$ disminuye con el tiempo $t$ de acuerdo con la expresión
-%\begin{equation}
-%m = \dfrac{1}{a + bt}
-%\end{equation}
-%donde $a$ y $b$ son constantes. El problema es calcular el tiempo que necesita la partícula $P$ en llegar al origen $O$.
-%\\
-%\emph{Solución: }
-%\\
-%De Newton-2
-%\begin{equation}
-%\dfrac{d\overrightarrow{M}}{dt} = \overrightarrow{F}
-%\end{equation}
-%donde $\overrightarrow{M}$ es el vector momento y $\overrightarrow{F}$ es la fuerza actuante. El problema nos conduce a
-%\begin{equation}
-%\dfrac{d}{dt} \left( m \dfrac{dy}{dt} \right) = - k^{2} m y
-%\end{equation}
-%que es
-%\begin{equation}
-%m\dfrac{d^{2} y}{dt^{2}}+ \dfrac{dm}{dt}\dfrac{dy}{dt} + k^{2} m y = 0
-%\end{equation}
-%donde $k^{2}$ es la constante de proporcionalidad involucrada en la magnitud de $\overrightarrow{F}$.
-%\\
-%Si proponemos el cambio de variable
-%\begin{equation}
-%a + bt = bx
-%\end{equation}
-\section{Funciones de Hankel.}
-Se definen las funciones de Hankel $H_{v}^{(1)}$ y $H_{v}^{(2)}$ como
-\begin{equation}
-H_{v}^{(1)}(x) = J_{v}(x) + i N_{v}(x)
-\label{eq:ecuacion_11_85}
-\end{equation}
-y
-\begin{equation}
-H_{v}^{(2)}(x) = J_{v}(x) - i N_{v}(x)
-\label{eq:ecuacion_11_86}
-\end{equation}
-Que es análogo a tomar
-\begin{equation}
-e^{\pm i \theta} =  \cos \theta \pm i \sin \theta
-\label{eq:ecuacion_11_87}
-\end{equation}
-Para argumentos reales, $H_{v}^{(1)}$ y $H_{v}^{(2)}$  son conjugados complejos.
-\\
-Ya que las funciones de Hankel son combinaciones lineales (con coeficientes constantes) de $J_{v}$ y $N_{v}$, satisfacen las mismas relaciones de recurrencia
-\begin{equation}
-H_{v-1} (x) + H_{v+1} (x) = \dfrac{2v}{x} H_{v} (x)
-\label{eq:ecuacion_11_92}
-\end{equation} 
-y 
-\begin{equation}
-H_{v-1} (x) - H_{v+1} (x) = 2 H'_{v} (x)
-\label{eq:ecuacion_11_92}
-\end{equation} 
-tanto para $H_{v}^{(1)}$ y $H_{v}^{(2)}$.
-\newpage
-\section{Ejemplos de la función de Bessel.}
-\subsection{Ecuación de Laplace.}
-Veamos el caso de la ecuación de Laplace en regiones cilíndricas (independientes de $\theta$). Consideremos la región cilíndrica ($0 < r < 1$) y ($0 < z < a$) sujeto a las condiciones de frontera:
-\begin{eqnarray*}
-\Psi(1,z) &=& 0 \nonumber \\
-\Psi(\rho, a) &=& 0 \nonumber \\
-\Psi(\rho, 0) &=& f(r)
-\end{eqnarray*}
-\begin{figure}[H]
-\centering
-\includestandalone{plot_cilindro_Laplace}
-\label{fig:cilindro_Laplace}
-\caption{Cilindro para la ecuación de Laplace}
-\end{figure}
-La ecuación de Laplace para el ejercicio resulta
-\begin{equation}
-\dfrac{\partial^{2} \Psi}{\partial \rho^{2}} + \dfrac{1}{\rho} \; \dfrac{\partial \Psi}{\partial \rho} + \dfrac{\partial^{2} \Psi}{\partial z^{2}} = 0
-\label{eq:ecuacion_05_86}
-\end{equation}
-Usando la técnica de separación de variables tenemos
-\begin{equation}
-\Psi (\rho, z) = R(\rho) Z(z)
-\label{eq:ecuacion_05_87}
-\end{equation}
-De tal manera que la ecuación de Laplace, se separa en dos ecuaciones diferenciales ordinarias ($k=n=0$), por tanto
-\begin{eqnarray}
-R^{\prime \prime} + \dfrac{1}{\rho} R^{\prime} + \alpha^{2} R &=& 0 \hspace{1cm} \mbox{Ecuación de Bessel de orden 0} \label{eq:ecuacion_05_88}  \\
-Z^{\prime \prime} - \alpha^{2} Z &=& 0 \hspace{1cm} \mbox{con $\alpha$ = constante} \label{eq:ecuacion_05_89}
-\end{eqnarray}
-Las condiciones de frontera se reescriben como
-\begin{equation}
-\begin{aligned}
-R(1) &=& 0 \\
-Z(\alpha) &=& 0 
-\end{aligned}
-\label{eq:ecuacion_05_90}
-\end{equation}
-La solución a la ecuación de Bessel de orden cero es
-\begin{equation}
-R(\rho) = A J_{0} (\alpha \rho) + B N_{0} (\alpha \rho) \hspace{1cm} \mbox{con A y B constantes.}
-\label{eq:ecuacion_05_91}
-\end{equation}
-La solución a la ecuación de Bessel de orden cero es
-\begin{equation}
-R(\rho) =  A J_{0} (\alpha \rho) + B N_{0} (\alpha \rho) \hspace{1cm} \mbox{con A y B constantes}
-\label{eq:ecuacion_05_91}
-\end{equation}
-Como queremos que $R(\rho=0)$ sea finita $\rightarrow B = 0$, con lo que la solución toma la forma
-\begin{equation}
-R(\rho) = A J_{0}(\alpha \rho)
-\label{eq:ecuacion_05_92}
-\end{equation}
-y de la condición $R(1) =0$, tenemos que $J_{0}(\alpha)=0$, que implica que los valores de $\alpha$ sean los ceros positivos de $J_{0}$, esto es
-\begin{equation}
-R_{k}(\rho) = J_{0} (\alpha \rho) \hspace{1cm} \mbox{ con $n=1,2,\ldots$}
-\label{eq:ecuacion_05_93}
-\end{equation}
-Cuando $\alpha = \alpha_{n}$, la solución general de la ecuación (\ref{eq:ecuacion_05_89}) es
-\begin{equation}
-Z(z) = A \; \sinh( \alpha_{n} z) +  B \; \cosh(\alpha_{n} z) 
-\label{eq:ecuacion_05_94}
-\end{equation}
-Como $Z(a) = 0$
-\begin{equation}
-A \sinh (\alpha_{n} a) + B \cosh (\alpha_{n} a) = 0 \Rightarrow \hspace{0.5cm} B = - A \tanh (\alpha_{n} a)
-\label{eq:ecuacion_05_95}	
-\end{equation}
-y la función $Z(z)$ es
-\begin{equation}
-Z = \dfrac{A}{\cosh	(\alpha_{n} a} ( \sinh(\alpha_{n} z) \cosh (\alpha_{n} a)  - \cosh (\alpha_{n} z) \sinh(\alpha_{n} a)) =  C \; \sinh \alpha_{n} (z - a)
-\label{eq:ecuacion_05_96}
-\end{equation}
-De lo cual concluimos que la función $\Psi$ es de la forma
-\begin{equation}
-\Psi_{n} (\rho, z) = C_{n} \sinh(\alpha_{n} (a -z)) \; J_{0}(\alpha_{n} \rho), \hspace{1cm} k = 1, 2, \ldots
-\label{eq:ecuacion_05_97}
-\end{equation}
-y satisface las condiciones de frontera $\Psi(1,z) = \Psi(\rho, a) = 0$. Quedando pendiente imponer la condición de frontera $\Psi(\rho, 0) = f(\rho)$
-\\
-La solución más general es pues
-\begin{equation}
-\Psi(\rho, z) =  \sum_{n=1}^{\infty} C_{n} \sinh(\alpha_{n} (a -z)) J_{0}(\alpha_{n} \rho)
-\label{eq:ecuacion_05_98}
-\end{equation}
-y satisface la condición de frontera
-\begin{equation}
-f(r) = \Psi(\rho, z=0) =  \sum_{n=1}^{\infty} C_{n} \sinh(\alpha_{n} (a)) J_{0}(\alpha_{n} \rho)
-\label{eq:ecuacion_05_99}
-\end{equation}
-Para calcular el valor de las constantes $C_{n}$, multiplicamos la ecuación por $J_{0}(\alpha_{m} \rho)$ y utilizamos la relación de ortogonalidad (\ref{eq:ecuacion_11_50})
-\[ \begin{split}
-\int_{0}^{1} J_{0}(\alpha_{m} \rho) f(\rho) \rho d \rho &= \sum_{n=1}^{\infty} C{n} \sinh (\alpha_{n} a) \int_{0}^{1} J_{0} (\alpha_{m} \rho) J_{0} (\alpha_{n} \rho) \rho d \rho \\
-&= \sum_{n=1}^{\infty} C{n} \sinh (\alpha_{n} a) \dfrac{1}{2} \; J_{1}^{2} (\alpha_{m}) \delta_{mn} \\
-&= \dfrac{C_{m}}{2} \; \sinh (\alpha_{m} a) J_{1}^{2} (\alpha_{m})
-\end{split} \]
-Con lo cual, las constantes resultan ser
-\begin{equation}
-C_{n} = \dfrac{2}{\sinh ( \alpha_{n} a) J_{1}^{2} (\alpha_{n})} \int_{0}^{1} J_{0} (\alpha_{n} \rho) f(\rho) \rho d \rho
-\label{eq:ecuacion_05_100}
-\end{equation}
-y la expresión final del potencial es
-\begin{equation}
-\Psi(\rho, z) = \sum_{n=1}^{\infty} \dfrac{2}{\sinh (\alpha_{n} a) J_{1}^{2}(\alpha_{n}} \left[ \int_{0}^{1} J_{0} (\alpha_{n} \rho^{\prime}) f(\rho^{\prime}) \rho^{\prime} d \rho^{\prime} \right] \; \sinh (\alpha_{n} (a -z)) J_{0} (\alpha_{n} \rho)
-\label{eq:ecuacion_05_101}
-\end{equation}
-\subsection{Ejemplo: Difracción de Fraunhofer, apertura circular.}
-En la teoría de la difracción a través de una apertura circular, encontramos la integral
-\begin{equation}
-\Phi \sim \int_{0}^{a} \int_{0}^{2 \pi} e^{ibr \cos \theta} d \theta r dr
-\label{eq:ecuacion_11_31}
-\end{equation}
-donde $Phi$ es la amplitud de la onda difractada. Aquí el ángulo $\theta$ es el ángulo azimutal en el plano de la apertura circular de radio $a$, y $\alpha$ es el ángulo definido por un punto en la pantalla bajo la apertura circular relativo a la normal del punto central.
-\\
-El parámetro $b$ está dado por
-\begin{equation}
-b = \dfrac{2 \pi}{\lambda} \sin \alpha
-\label{eq:ecuacion_11_32}
-\end{equation}
-donde $\lambda$ es la longitud de onda de la onda incidente. Los otros símbolos se definen a partir de la figura (\ref{fig:difraccion_fraunhofer})
-\begin{figure}[H]
-\centering
-\includestandalone{plot_difraccion}
-\caption{Difracción de Fraunhofer para una abertura cilíndrica.}
-\label{fig:difraccion_fraunhofer}
-\end{figure}
-De la ecuación (\ref{eq:ecuacion_11_30c}) tenemos que
-\begin{equation}
-\Phi \sim 2 \pi \int_{0}^{a} J_{0} (br) r dr 
-\label{eq:ecuacion_11_33}
-\end{equation}
-La ecuación (\ref{eq:ecuacion_11_15}) nos permite integrar la expresión (\ref{eq:ecuacion_11_33}) inmediatamente para obtener
-\begin{equation}
-\Phi \sim \dfrac{2 \pi a b}{b^{2}} J_{1} (ab) \sim \dfrac{\lambda a}{\sin \alpha} J_{1} \left( \dfrac{2 \pi a}{\lambda} \sin \alpha \right)
-\label{eq:ecuacion_11_34}
-\end{equation}
-La intensidad de la luz en el patrón de difracción es proporcional a $\Phi^{2}$ y
-\begin{equation}
-\Phi^{2} \sim \left[ \dfrac{J_{1} [(2 \pi a / \lambda) \sin \alpha]}{\sin \alpha} \right]^{2}
-\label{eq:ecuacion_11_35}
-\end{equation}
-Evaluando los ceros de la función de Bessel y sus derivadas, vemos que la expresión (\ref{eq:ecuacion_11_35}) tiene un cero en
-\begin{equation}
-\dfrac{2 \pi a}{\lambda} \sin \alpha =  3.8317
-\label{eq:ecuacion_11_36}
-\end{equation}
-que es lo mismo
-\begin{equation}
-\sin \alpha = \dfrac{3.8317 \lambda}{2 \pi a}
-\label{eq:ecuacion_11_37}
-\end{equation}
-Para la luz verde $\lambda=5.5 \times 10^{-5}$ cm. Si $a=0.5$ cm, entonces
-\begin{eqnarray}
-\begin{aligned}
-\alpha \simeq \sin \alpha &= 6.7 \times 10^{-5} \text{ (radianes)} \\
-&\simeq 14 \text{ segundos de arco}
-\end{aligned}
-\label{eq:ecuacion_11_38}
-\end{eqnarray}
-que nos dice que la dispersión de un haz de luz es muy pequeña.
-\subsection{Ejemplo: Cavidad resonante cilíndrica.}
-En el interior de una cavidad resonante electromagnética, las ondas oscilan con una dependencia en el tiempo del tipo $e^{-i \omega t}$. Las ecuaciones de Maxwell nos conducen a
-\[ \nabla \times \nabla \times E = \alpha^{2} E \]
-para la parte espacial del campo eléctrico con $\alpha^{2} = \omega^{2} \varepsilon_{0} \mu_{0}$. Con $\nabla \cdot E=0$ (en el vacío, sin cargas)
-\[ \nabla^{2} E + \alpha^{2} E = 0 \]
-Separando las variables en coordenadas cilíndricas circualres, encontramos que la componente $z$ ($E_{z}$, en la parte espacial solamente) satisface la ecuación escalar de Helmholtz
-\begin{equation}
-\nabla^{2} E_{z} + \alpha^{2} E_{z} = 0
-\label{eq:ecuacion_11_39}
-\end{equation}
-donde $\alpha^{2} =  \omega^{2} \varepsilon_{0} \mu_{0} = \omega^{2}/c^{2}$. Adicionalmente
-\begin{equation}
-(E_{z})_{mnk} = \sum_{m.n} J_{m} (\gamma_{mn} \rho) e^{\pm im\varphi} [ a_{mn} \sin kz + b_{mn} \cos kz ]
-\label{eq:ecuacion_11_40}
-\end{equation}
-\begin{enumerate}
-\item El parámetro $k$ es la constante de separación introducida en la división de $Z$ para la dependencia de $E_{z}(\rho, \varphi,z)$.
-\item De manera análoga $m$ aparece en la separación de dependencia de $\varphi$.
-\item $\gamma$ se presenta como $\alpha^{2} - k^{2}$ y está cuantizada como requisito para que $\gamma a$ sea una raíz de la función de Besser $J_{m}$-
-\item Por tanto, $n$ en $\gamma_{mn}$ es la $n$-ésima raíz de $J_{m}$.
-\end{enumerate}
-Para las superficies en $z=0$ y $z=l$, se hace que $a_{mn}=0$ y
-\begin{equation}
-k = \dfrac{p \pi}{l}, \hspace{1cm} p=0,1,2,\ldots
-\label{eq:ecuacion_11_41}
-\end{equation}
-Las ecuaciones de Maxwell entonces garantizan que los campos tangenciales $E_{\rho}$ y $E_{\varphi}$ se anulen en $z=0$ y $l$. Este es el modo de oscilación transversal del campo magnético. Tenemos entonces
-\begin{eqnarray}
-\begin{aligned}
-\gamma^{2} &= \dfrac{\omega^{2}}{c^{2}} - k^{2} \\
-&= \dfrac{\omega^{2}}{c^{2}} - \dfrac{p^{2} \pi^{2}}{l^{2}}
-\end{aligned}
-\label{eq:ecuacion_11_42}
-\end{eqnarray}
-Aquí la condición de frontera usual es $E_{z}(\rho =a)=0$. Entonces tenemos el conjunto. Por lo tanto tenemos
-\begin{equation}
-\gamma_{mn} = \dfrac{\alpha_{mn}}{a}
-\label{eq:ecuacion_11_43}
-\end{equation}
-donde $\alpha_{mn}$ es el $n$-cero de $J_{m}$.
-\\
-El resultado de dos condiciones de frontera y la constante de separación $m^{2}$ es que la frecuencia angular de la oscilación depende de tres parámetros discretos
-\begin{equation}
-\omega_{mnp} = c \sqrt{\dfrac{\alpha^{2}_{mn}}{a^{2}} + \dfrac{p^{2} \pi^{2}}{l^{2}}} 
-\begin{cases}
-m = 0,1,2, \ldots \\
-n = 1,2,3, \ldots \\
-p = 0,1,2, \ldots
-\end{cases}
-\label{eq:ecuacion_11_44}
-\end{equation}
-Que son las frecuencias de resonancia permitidas para el modo TM.
-\section{Ejercicio a cuenta.}
-La sección diferencial de área en un experimento de dispersión nuclear está dada por $d \sigma / d \Omega = \vert f(\theta) \vert^{2}$.Una aproximación nos conduce a
-\[ f(\theta) = \dfrac{-ik}{2 \pi} \int_{0}^{2\pi} \int_{0}^{R} \exp[ik \rho \sin \theta \sin \varphi] \rho d \rho d \varphi \]
-Donde $\theta$ es el ángulo en el cual la partícula es dispersada. $R$ es el radio del núcleo. Demostrar que
-\[ \dfrac{d \sigma}{d \Omega} = (\pi R^{2}) \dfrac{1}{\pi} \left[ \dfrac{J_{1} (k R \sin \theta)}{\sin \theta} \right]^{2} \]
+% %\section{Ejemplo.}
+% %Partiendo del reposo a una distancia $L$ desde el origen $O$, una partícula $P$ de masa variante $m$ es atraída hacia el origen por una fuerza dirigida siempre hacia el origen y que tiene magnitud proporcional al producto $my$, donde $y$ es la distancia de $P$ a partir de la origen. La masa $m$ de $P$ disminuye con el tiempo $t$ de acuerdo con la expresión
+% %\begin{equation}
+% %m = \dfrac{1}{a + bt}
+% %\end{equation}
+% %donde $a$ y $b$ son constantes. El problema es calcular el tiempo que necesita la partícula $P$ en llegar al origen $O$.
+% %\\
+% %\emph{Solución: }
+% %\\
+% %De Newton-2
+% %\begin{equation}
+% %\dfrac{d\overrightarrow{M}}{dt} = \overrightarrow{F}
+% %\end{equation}
+% %donde $\overrightarrow{M}$ es el vector momento y $\overrightarrow{F}$ es la fuerza actuante. El problema nos conduce a
+% %\begin{equation}
+% %\dfrac{d}{dt} \left( m \dfrac{dy}{dt} \right) = - k^{2} m y
+% %\end{equation}
+% %que es
+% %\begin{equation}
+% %m\dfrac{d^{2} y}{dt^{2}}+ \dfrac{dm}{dt}\dfrac{dy}{dt} + k^{2} m y = 0
+% %\end{equation}
+% %donde $k^{2}$ es la constante de proporcionalidad involucrada en la magnitud de $\overrightarrow{F}$.
+% %\\
+% %Si proponemos el cambio de variable
+% %\begin{equation}
+% %a + bt = bx
+% %\end{equation}
+% \section{Funciones de Hankel.}
+% Se definen las funciones de Hankel $H_{v}^{(1)}$ y $H_{v}^{(2)}$ como
+% \begin{equation}
+% H_{v}^{(1)}(x) = J_{v}(x) + i N_{v}(x)
+% \label{eq:ecuacion_11_85}
+% \end{equation}
+% y
+% \begin{equation}
+% H_{v}^{(2)}(x) = J_{v}(x) - i N_{v}(x)
+% \label{eq:ecuacion_11_86}
+% \end{equation}
+% Que es análogo a tomar
+% \begin{equation}
+% e^{\pm i \theta} =  \cos \theta \pm i \sin \theta
+% \label{eq:ecuacion_11_87}
+% \end{equation}
+% Para argumentos reales, $H_{v}^{(1)}$ y $H_{v}^{(2)}$  son conjugados complejos.
+% \\
+% Ya que las funciones de Hankel son combinaciones lineales (con coeficientes constantes) de $J_{v}$ y $N_{v}$, satisfacen las mismas relaciones de recurrencia
+% \begin{equation}
+% H_{v-1} (x) + H_{v+1} (x) = \dfrac{2v}{x} H_{v} (x)
+% \label{eq:ecuacion_11_92}
+% \end{equation} 
+% y 
+% \begin{equation}
+% H_{v-1} (x) - H_{v+1} (x) = 2 H'_{v} (x)
+% \label{eq:ecuacion_11_92}
+% \end{equation} 
+% tanto para $H_{v}^{(1)}$ y $H_{v}^{(2)}$.
+% \newpage
+% \section{Ejemplos de la función de Bessel.}
+% \subsection{Ecuación de Laplace.}
+% Veamos el caso de la ecuación de Laplace en regiones cilíndricas (independientes de $\theta$). Consideremos la región cilíndrica ($0 < r < 1$) y ($0 < z < a$) sujeto a las condiciones de frontera:
+% \begin{eqnarray*}
+% \Psi(1,z) &=& 0 \nonumber \\
+% \Psi(\rho, a) &=& 0 \nonumber \\
+% \Psi(\rho, 0) &=& f(r)
+% \end{eqnarray*}
+% \begin{figure}[H]
+% \centering
+% \includestandalone{plot_cilindro_Laplace}
+% \label{fig:cilindro_Laplace}
+% \caption{Cilindro para la ecuación de Laplace}
+% \end{figure}
+% La ecuación de Laplace para el ejercicio resulta
+% \begin{equation}
+% \dfrac{\partial^{2} \Psi}{\partial \rho^{2}} + \dfrac{1}{\rho} \; \dfrac{\partial \Psi}{\partial \rho} + \dfrac{\partial^{2} \Psi}{\partial z^{2}} = 0
+% \label{eq:ecuacion_05_86}
+% \end{equation}
+% Usando la técnica de separación de variables tenemos
+% \begin{equation}
+% \Psi (\rho, z) = R(\rho) Z(z)
+% \label{eq:ecuacion_05_87}
+% \end{equation}
+% De tal manera que la ecuación de Laplace, se separa en dos ecuaciones diferenciales ordinarias ($k=n=0$), por tanto
+% \begin{eqnarray}
+% R^{\prime \prime} + \dfrac{1}{\rho} R^{\prime} + \alpha^{2} R &=& 0 \hspace{1cm} \mbox{Ecuación de Bessel de orden 0} \label{eq:ecuacion_05_88}  \\
+% Z^{\prime \prime} - \alpha^{2} Z &=& 0 \hspace{1cm} \mbox{con $\alpha$ = constante} \label{eq:ecuacion_05_89}
+% \end{eqnarray}
+% Las condiciones de frontera se reescriben como
+% \begin{equation}
+% \begin{aligned}
+% R(1) &=& 0 \\
+% Z(\alpha) &=& 0 
+% \end{aligned}
+% \label{eq:ecuacion_05_90}
+% \end{equation}
+% La solución a la ecuación de Bessel de orden cero es
+% \begin{equation}
+% R(\rho) = A J_{0} (\alpha \rho) + B N_{0} (\alpha \rho) \hspace{1cm} \mbox{con A y B constantes.}
+% \label{eq:ecuacion_05_91}
+% \end{equation}
+% La solución a la ecuación de Bessel de orden cero es
+% \begin{equation}
+% R(\rho) =  A J_{0} (\alpha \rho) + B N_{0} (\alpha \rho) \hspace{1cm} \mbox{con A y B constantes}
+% \label{eq:ecuacion_05_91}
+% \end{equation}
+% Como queremos que $R(\rho=0)$ sea finita $\rightarrow B = 0$, con lo que la solución toma la forma
+% \begin{equation}
+% R(\rho) = A J_{0}(\alpha \rho)
+% \label{eq:ecuacion_05_92}
+% \end{equation}
+% y de la condición $R(1) =0$, tenemos que $J_{0}(\alpha)=0$, que implica que los valores de $\alpha$ sean los ceros positivos de $J_{0}$, esto es
+% \begin{equation}
+% R_{k}(\rho) = J_{0} (\alpha \rho) \hspace{1cm} \mbox{ con $n=1,2,\ldots$}
+% \label{eq:ecuacion_05_93}
+% \end{equation}
+% Cuando $\alpha = \alpha_{n}$, la solución general de la ecuación (\ref{eq:ecuacion_05_89}) es
+% \begin{equation}
+% Z(z) = A \; \sinh( \alpha_{n} z) +  B \; \cosh(\alpha_{n} z) 
+% \label{eq:ecuacion_05_94}
+% \end{equation}
+% Como $Z(a) = 0$
+% \begin{equation}
+% A \sinh (\alpha_{n} a) + B \cosh (\alpha_{n} a) = 0 \Rightarrow \hspace{0.5cm} B = - A \tanh (\alpha_{n} a)
+% \label{eq:ecuacion_05_95}	
+% \end{equation}
+% y la función $Z(z)$ es
+% \begin{equation}
+% Z = \dfrac{A}{\cosh	(\alpha_{n} a} ( \sinh(\alpha_{n} z) \cosh (\alpha_{n} a)  - \cosh (\alpha_{n} z) \sinh(\alpha_{n} a)) =  C \; \sinh \alpha_{n} (z - a)
+% \label{eq:ecuacion_05_96}
+% \end{equation}
+% De lo cual concluimos que la función $\Psi$ es de la forma
+% \begin{equation}
+% \Psi_{n} (\rho, z) = C_{n} \sinh(\alpha_{n} (a -z)) \; J_{0}(\alpha_{n} \rho), \hspace{1cm} k = 1, 2, \ldots
+% \label{eq:ecuacion_05_97}
+% \end{equation}
+% y satisface las condiciones de frontera $\Psi(1,z) = \Psi(\rho, a) = 0$. Quedando pendiente imponer la condición de frontera $\Psi(\rho, 0) = f(\rho)$
+% \\
+% La solución más general es pues
+% \begin{equation}
+% \Psi(\rho, z) =  \sum_{n=1}^{\infty} C_{n} \sinh(\alpha_{n} (a -z)) J_{0}(\alpha_{n} \rho)
+% \label{eq:ecuacion_05_98}
+% \end{equation}
+% y satisface la condición de frontera
+% \begin{equation}
+% f(r) = \Psi(\rho, z=0) =  \sum_{n=1}^{\infty} C_{n} \sinh(\alpha_{n} (a)) J_{0}(\alpha_{n} \rho)
+% \label{eq:ecuacion_05_99}
+% \end{equation}
+% Para calcular el valor de las constantes $C_{n}$, multiplicamos la ecuación por $J_{0}(\alpha_{m} \rho)$ y utilizamos la relación de ortogonalidad (\ref{eq:ecuacion_11_50})
+% \[ \begin{split}
+% \int_{0}^{1} J_{0}(\alpha_{m} \rho) f(\rho) \rho d \rho &= \sum_{n=1}^{\infty} C{n} \sinh (\alpha_{n} a) \int_{0}^{1} J_{0} (\alpha_{m} \rho) J_{0} (\alpha_{n} \rho) \rho d \rho \\
+% &= \sum_{n=1}^{\infty} C{n} \sinh (\alpha_{n} a) \dfrac{1}{2} \; J_{1}^{2} (\alpha_{m}) \delta_{mn} \\
+% &= \dfrac{C_{m}}{2} \; \sinh (\alpha_{m} a) J_{1}^{2} (\alpha_{m})
+% \end{split} \]
+% Con lo cual, las constantes resultan ser
+% \begin{equation}
+% C_{n} = \dfrac{2}{\sinh ( \alpha_{n} a) J_{1}^{2} (\alpha_{n})} \int_{0}^{1} J_{0} (\alpha_{n} \rho) f(\rho) \rho d \rho
+% \label{eq:ecuacion_05_100}
+% \end{equation}
+% y la expresión final del potencial es
+% \begin{equation}
+% \Psi(\rho, z) = \sum_{n=1}^{\infty} \dfrac{2}{\sinh (\alpha_{n} a) J_{1}^{2}(\alpha_{n}} \left[ \int_{0}^{1} J_{0} (\alpha_{n} \rho^{\prime}) f(\rho^{\prime}) \rho^{\prime} d \rho^{\prime} \right] \; \sinh (\alpha_{n} (a -z)) J_{0} (\alpha_{n} \rho)
+% \label{eq:ecuacion_05_101}
+% \end{equation}
+% \subsection{Ejemplo: Difracción de Fraunhofer, apertura circular.}
+% En la teoría de la difracción a través de una apertura circular, encontramos la integral
+% \begin{equation}
+% \Phi \sim \int_{0}^{a} \int_{0}^{2 \pi} e^{ibr \cos \theta} d \theta r dr
+% \label{eq:ecuacion_11_31}
+% \end{equation}
+% donde $Phi$ es la amplitud de la onda difractada. Aquí el ángulo $\theta$ es el ángulo azimutal en el plano de la apertura circular de radio $a$, y $\alpha$ es el ángulo definido por un punto en la pantalla bajo la apertura circular relativo a la normal del punto central.
+% \\
+% El parámetro $b$ está dado por
+% \begin{equation}
+% b = \dfrac{2 \pi}{\lambda} \sin \alpha
+% \label{eq:ecuacion_11_32}
+% \end{equation}
+% donde $\lambda$ es la longitud de onda de la onda incidente. Los otros símbolos se definen a partir de la figura (\ref{fig:difraccion_fraunhofer})
+% \begin{figure}[H]
+% \centering
+% \includestandalone{plot_difraccion}
+% \caption{Difracción de Fraunhofer para una abertura cilíndrica.}
+% \label{fig:difraccion_fraunhofer}
+% \end{figure}
+% De la ecuación (\ref{eq:ecuacion_11_30c}) tenemos que
+% \begin{equation}
+% \Phi \sim 2 \pi \int_{0}^{a} J_{0} (br) r dr 
+% \label{eq:ecuacion_11_33}
+% \end{equation}
+% La ecuación (\ref{eq:ecuacion_11_15}) nos permite integrar la expresión (\ref{eq:ecuacion_11_33}) inmediatamente para obtener
+% \begin{equation}
+% \Phi \sim \dfrac{2 \pi a b}{b^{2}} J_{1} (ab) \sim \dfrac{\lambda a}{\sin \alpha} J_{1} \left( \dfrac{2 \pi a}{\lambda} \sin \alpha \right)
+% \label{eq:ecuacion_11_34}
+% \end{equation}
+% La intensidad de la luz en el patrón de difracción es proporcional a $\Phi^{2}$ y
+% \begin{equation}
+% \Phi^{2} \sim \left[ \dfrac{J_{1} [(2 \pi a / \lambda) \sin \alpha]}{\sin \alpha} \right]^{2}
+% \label{eq:ecuacion_11_35}
+% \end{equation}
+% Evaluando los ceros de la función de Bessel y sus derivadas, vemos que la expresión (\ref{eq:ecuacion_11_35}) tiene un cero en
+% \begin{equation}
+% \dfrac{2 \pi a}{\lambda} \sin \alpha =  3.8317
+% \label{eq:ecuacion_11_36}
+% \end{equation}
+% que es lo mismo
+% \begin{equation}
+% \sin \alpha = \dfrac{3.8317 \lambda}{2 \pi a}
+% \label{eq:ecuacion_11_37}
+% \end{equation}
+% Para la luz verde $\lambda=5.5 \times 10^{-5}$ cm. Si $a=0.5$ cm, entonces
+% \begin{eqnarray}
+% \begin{aligned}
+% \alpha \simeq \sin \alpha &= 6.7 \times 10^{-5} \text{ (radianes)} \\
+% &\simeq 14 \text{ segundos de arco}
+% \end{aligned}
+% \label{eq:ecuacion_11_38}
+% \end{eqnarray}
+% que nos dice que la dispersión de un haz de luz es muy pequeña.
+% \subsection{Ejemplo: Cavidad resonante cilíndrica.}
+% En el interior de una cavidad resonante electromagnética, las ondas oscilan con una dependencia en el tiempo del tipo $e^{-i \omega t}$. Las ecuaciones de Maxwell nos conducen a
+% \[ \nabla \times \nabla \times E = \alpha^{2} E \]
+% para la parte espacial del campo eléctrico con $\alpha^{2} = \omega^{2} \varepsilon_{0} \mu_{0}$. Con $\nabla \cdot E=0$ (en el vacío, sin cargas)
+% \[ \nabla^{2} E + \alpha^{2} E = 0 \]
+% Separando las variables en coordenadas cilíndricas circualres, encontramos que la componente $z$ ($E_{z}$, en la parte espacial solamente) satisface la ecuación escalar de Helmholtz
+% \begin{equation}
+% \nabla^{2} E_{z} + \alpha^{2} E_{z} = 0
+% \label{eq:ecuacion_11_39}
+% \end{equation}
+% donde $\alpha^{2} =  \omega^{2} \varepsilon_{0} \mu_{0} = \omega^{2}/c^{2}$. Adicionalmente
+% \begin{equation}
+% (E_{z})_{mnk} = \sum_{m.n} J_{m} (\gamma_{mn} \rho) e^{\pm im\varphi} [ a_{mn} \sin kz + b_{mn} \cos kz ]
+% \label{eq:ecuacion_11_40}
+% \end{equation}
+% \begin{enumerate}
+% \item El parámetro $k$ es la constante de separación introducida en la división de $Z$ para la dependencia de $E_{z}(\rho, \varphi,z)$.
+% \item De manera análoga $m$ aparece en la separación de dependencia de $\varphi$.
+% \item $\gamma$ se presenta como $\alpha^{2} - k^{2}$ y está cuantizada como requisito para que $\gamma a$ sea una raíz de la función de Besser $J_{m}$-
+% \item Por tanto, $n$ en $\gamma_{mn}$ es la $n$-ésima raíz de $J_{m}$.
+% \end{enumerate}
+% Para las superficies en $z=0$ y $z=l$, se hace que $a_{mn}=0$ y
+% \begin{equation}
+% k = \dfrac{p \pi}{l}, \hspace{1cm} p=0,1,2,\ldots
+% \label{eq:ecuacion_11_41}
+% \end{equation}
+% Las ecuaciones de Maxwell entonces garantizan que los campos tangenciales $E_{\rho}$ y $E_{\varphi}$ se anulen en $z=0$ y $l$. Este es el modo de oscilación transversal del campo magnético. Tenemos entonces
+% \begin{eqnarray}
+% \begin{aligned}
+% \gamma^{2} &= \dfrac{\omega^{2}}{c^{2}} - k^{2} \\
+% &= \dfrac{\omega^{2}}{c^{2}} - \dfrac{p^{2} \pi^{2}}{l^{2}}
+% \end{aligned}
+% \label{eq:ecuacion_11_42}
+% \end{eqnarray}
+% Aquí la condición de frontera usual es $E_{z}(\rho =a)=0$. Entonces tenemos el conjunto. Por lo tanto tenemos
+% \begin{equation}
+% \gamma_{mn} = \dfrac{\alpha_{mn}}{a}
+% \label{eq:ecuacion_11_43}
+% \end{equation}
+% donde $\alpha_{mn}$ es el $n$-cero de $J_{m}$.
+% \\
+% El resultado de dos condiciones de frontera y la constante de separación $m^{2}$ es que la frecuencia angular de la oscilación depende de tres parámetros discretos
+% \begin{equation}
+% \omega_{mnp} = c \sqrt{\dfrac{\alpha^{2}_{mn}}{a^{2}} + \dfrac{p^{2} \pi^{2}}{l^{2}}} 
+% \begin{cases}
+% m = 0,1,2, \ldots \\
+% n = 1,2,3, \ldots \\
+% p = 0,1,2, \ldots
+% \end{cases}
+% \label{eq:ecuacion_11_44}
+% \end{equation}
+% Que son las frecuencias de resonancia permitidas para el modo TM.
+% \section{Ejercicio a cuenta.}
+% La sección diferencial de área en un experimento de dispersión nuclear está dada por $d \sigma / d \Omega = \vert f(\theta) \vert^{2}$.Una aproximación nos conduce a
+% \[ f(\theta) = \dfrac{-ik}{2 \pi} \int_{0}^{2\pi} \int_{0}^{R} \exp[ik \rho \sin \theta \sin \varphi] \rho d \rho d \varphi \]
+% Donde $\theta$ es el ángulo en el cual la partícula es dispersada. $R$ es el radio del núcleo. Demostrar que
+% \[ \dfrac{d \sigma}{d \Omega} = (\pi R^{2}) \dfrac{1}{\pi} \left[ \dfrac{J_{1} (k R \sin \theta)}{\sin \theta} \right]^{2} \]
 \end{document}
