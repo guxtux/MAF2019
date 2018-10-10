@@ -8,6 +8,7 @@
 \renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
+%Referencia Sepulveda - Lecciones de Física Matemática. Cap. 8 Funciones de Bessel
 Las funciones de Bessel tienen aplicaciones en diversos problemas de mecánica cuántica, electrodinámica y otras disciplinas.
 \section{Funciones de Bessel.}
 La ecuación de Bessel surge de la separación de varibales de las ecuaciones de Laplace y Helmholtz en coordenadas cilíndricas; la ecuación de Laplace en coordenadas cilíndricas da lugar a las siguientes ecuaciones diferenciales:
@@ -286,6 +287,71 @@ a^{\nu} \, \cos (\nu \, \pi /2)/ \nu \, [b + \sqrt{b^{2} - a^{2}}]^{\nu} & a < b
 \cos [\nu \, \sin^{-1} (b/a)] \, \nu & a > b, \nu > 0  
 \end{cases}
 \end{align*}
+\subsection{Sumas.}
+Si $\alpha$ es una raíz de $J_{0}$:
+\begin{align*}
+1 &= 2 \, \sum_{\alpha} \dfrac{J_{0} (\alpha \, x)}{\alpha \, J_{1} (\alpha)} \\
+x^{2} &= 2 \, \sum_{\alpha} \dfrac{(\alpha^{2}- 4) \, J_{0} (\alpha \, x)}{\alpha^{3} \, J_{1} (\alpha)} \\
+J_{0} (k \, x) &= 2 \, J_{0} (k) \sum_{\alpha} \dfrac{\alpha \, J_{0} (\alpha \, x)}{(\alpha^{2} - k^{2}) \, J_{1}(\alpha)} \\
+1 -x^{2} &= 8 \, \sum_{\alpha} \dfrac{J_{0}(\alpha \, x)}{\alpha^{3} \, J_{1} (\alpha)}
+\end{align*}
+Si $\alpha$ es raíz de $J_{1}$:
+\begin{align*}
+x^{2} &= \dfrac{1}{2} + 4 \, \sum_{\alpha} \dfrac{J_{0} (\alpha \, x)}{\alpha^{4} \, J_{0} (\alpha)} \\
+(1 - x^{2})^{2} &= \dfrac{1}{3} - 64 \, \sum_{\alpha} \dfrac{J_{0} (\alpha \, x)}{\alpha^{4} \, J_{0} (\alpha)}
+\end{align*}
+Si $\alpha$ es raíz de $J_{n}$:
+\begin{align*}
+x^{n} = 2 \, \sum_{\alpha} \dfrac{J_{n} (\alpha \, x)}{\alpha \, J_{n+1} (\alpha)}
+\end{align*}
+\subsection{Wronskianos.}
+Para las ED del tipo
+\[ ddot{y} + P(x) \, \dot{y} + Q(x) \, y = 0 \]
+es cierto que el Wronskiano se calcula como
+\[ W(x) = W(a) \, \exp(- \int_{a}^{x} \, P \, \dd x) \]
+Para la ecuación de Bessel
+\[  \ddot{y} + \dfrac{1}{x} \, \dot{y} + (k^{2} - \dfrac{n^{2}}{x^{2}}) \, y = 0 \]
+se sigue que
+\[ W(x) = \dfrac{a \, W(a)}{x} \]
+Elegir de manera apropiada de $a$ permite la evaluación directa de $W(a)$; si se escoge $a=0$ se obtiene
+\[ [a \, W(a)]_{a \to 0} =  - \dfrac{2 \, \nu}{\Gamma(\nu + 1)(\Gamma (-\nu +1))} \]
+teniendo en cuenta que
+\[ \Gamma (\nu + 1) \, \Gamma (-\nu + 1) = \dfrac{\nu \, \pi}{\sin \nu \,\pi } \]
+se concluye que
+\[ W (J_{\nu} (x), J_{-\nu} (x)) = - \dfrac{2 \, \sin \nu \, \pi}{\pi \, x} \]
+Análogamente se sigue que
+\begin{align*}
+W (J_{\nu} (x), N_{\nu} (x)) = \dfrac{2}{\pi \, x} \\[1em]
+W (J_{\nu} (x), H_{\nu}^{(1)} (x)) =  \dfrac{2 \, i}{\pi \, x} \\[1em]
+W (N_{\nu} (x), H_{\nu}^{(1)} (x)) = - \dfrac{2}{\pi \, x} \\[1em]
+W (H_{\nu}^{(1)} (x), H_{\nu}^{(2)} (x)) = - \dfrac{4 \, i}{\pi \, x}
+\end{align*}
+\section{Ortogonalidad y normalización.}
+La ortogonalidad de una función propia depende del dominio de la variable independiente y/o de las condiciones de frontera sobre las funciones propias.
+\par
+Lo que sigue es un ejemplo de la elección, tanto del dominio como de las condiciones de frontera.
+\par
+De la ecuación (\ref{eq:ecuacion_08_02}) se sigue:
+\[ \dv[2]{}{\rho} J_{\nu} (k \, \rho) + \dfrac{1}{\rho} \, \dv{}{\rho} J_{\nu} (k \, \rho) + \left( k^{2} - \dfrac{\nu^{2}}{\rho^{2}} \right) \, J_{\nu} (k \, \rho) = 0\]
+entonces podemos hacer que
+\[ q(\rho) = p(\rho) = \rho, \hspace{1.5cm} r(\rho) = -\dfrac{nu^{2}}{\rho} \hspace{1.5cm} \Lambda = k^{2} \]
+entonces escribimos
+\begin{equation}
+[ \rho \, W(J_{\nu}(k^{\prime} \, \rho), J_{\nu} (k \, \rho))]_{\rho=a}^{\rho=b} = (k^{\prime \, 2} - k^{2}) \, \int_{a}^{b} \rho \, J_{\nu}(k^{\prime} \, \rho) \, J_{\nu} (k \, \rho) \, \dd \rho
+\label{eq:ecuacion_08_08}
+\end{equation}
+El corchete $[q \, W]_{a}^{b}$ toma la forma
+\[ \rho \, W(J_{\nu}(k^{\prime} \, \rho), J_{\nu} (k \, \rho))]_{\rho=a}^{\rho=b} \]
+Si este corchete se anula para $k \neq k^{\prime}$ entonces la base $\left\{ J_{\nu} (k \, \rho) \right\}$ es ortogonal de peso $\rho$ en el intervalo $(a,b)$. Este anulamiento puede ocurrir para dos intervalos $(a,b): (0, b)$ y $(0, \infty)$, con $b$ finito, dando lugar a bases discretas o continuas.
+\section{Solución de la ecuación de Laplace.}
+De acuerdo a las ecuaciones (\ref{eq:ecuacion_08_02}), la solución a la ecuación de Laplace en coordenadas cilíndricas tiene la forma:
+\[ \phi (\rho, \varphi, z) = (A \, J_{\nu} (k \, \rho) + B \, N_{\nu} (k \, \rho))(C \, e^{i \nu \varphi} + D \, e^{-i \nu \varphi}) \, (E \, \sinh k \, z + F \,  \cosh k \, z)  \]
+Las constantes de integración $A, B, C, D, E, F$ y los parámetros de separación de variables $\nu$, $k$ se evalúan teniendo en cuenta:
+\begin{enumerate}[label=\textbf{\Alph*})]
+\item El dominio de $\varphi$. Si $\varphi$ abarca el ángulo completo $2 \pi$ ha de cumplirse una condición de continuidad, que asegure la igualdad de valores de $\phi$ en $\varphi$ y $\varphi + 2 \pi$, es decir, debe ser cierto que $\phi (\varphi) = \phi (\varphi + 2 \pi)$; para que esto ocurra $\nu$ debe ser un entero $n$ arbitrario, y la solución general debe involucrar una suma sobre $n$. Si $\nu$ no abarca el ángulo completo entonces $\nu$ no es necesariamente entero, a menos que las condiciones de frontera lo exijan.
+\item El comportamiento de $N_{\nu}$. Es cierto que la función de Newmann diverge si $\rho \to 0$, por lo cual $B$ deberá hacerse cero en los casos en los que en el eje no haya alambres o puntos cuyo potencial sea divergente en $\rho \to 0$. Estas consideraciones sobre infinitos no son necesarias en el caso cartesiano, pues las funciones trigonométricas no divergen en ningún punto.
+\item Las condiciones de frontera de Dirichlet, Neumann o mixtas.
+\end{enumerate}
 % Las funciones de Bessel aparecen e]n una amplia variedad de problemas físicos: desde la separación con la ecuación de Helmholtz o la ecuación de onda en coordenadas cilíndricas, nos llevan a la ecuación de Bessel. La ecuación de Helmholtz en coordenadas esféricas nos dirigirá a una forma especial de la ecuación de Bessel.
 % \section{Función generatriz, Integral de orden $J_{n}(x)$}
 % Consideremos una función de dos variables:
