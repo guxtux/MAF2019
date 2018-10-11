@@ -1,0 +1,178 @@
+\input{../preambulo_doc}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{{Propiedades de las funciones de Bessel} \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+%\maketitle
+\fontsize{14}{14}\selectfont
+\section{Propiedades de las funciones de Bessel.}
+\subsection{Raíces.}
+Llámanse raíces de las funciones de Bessel los valores de $x$, designados por $\chi_{\nu n}$ para los cuales $J_{\nu} (\chi_{\nu n}) = 0$. 
+\par
+Cada función de Bessel de orden $\nu$ presenta un número infinito de ceros, que numeramos con $n = 1, 2, 3, \ldots$. Por tanto los ceros deberán clasificarse con dos índices: El primero señala el orden de la función y el segundo el $n-$ ésimo cero. El valor $\chi = 0$ lo consideramos como una raíz trivial.
+\par
+Para $n > -1$ la ecuación $J_{\nu} (x) = 0$ no tiene raíces complejas, ni puramente imaginarias. Además, si $\nu$ es un número real, la ecuación $J_{\nu} (x) = 0$ no tiene raíces comunes ni con $J_{\nu+1} (x) = 0$ ni con $J_{\nu-1} (x) = 0$ (excepto cero). También las funciones de Neumann presentan ceros.
+\subsection{Relaciones de recurrencia.}
+Son expresiones que relacionan entre sí funciones y derivadas de funciones de Bessel de diferente orden.
+\par
+Por ejemplo, por aplicación directa de la ecuación
+\begin{equation}
+\boxed{J_{v} (x) = \sum_{p=0}^{\infty} \dfrac{(-)^{p}}{p! \, \Gamma (\nu + p + 1)} \left( \dfrac{x}{2} \right)^{\nu+2p}}
+\label{eq:ecuacion_08_06}
+\end{equation}
+se tiene que:
+\begin{align*}
+J_{\nu-1} (x) - J_{\nu+1} (x)&= 2 \, \dv{J_{\nu}(x)}{x} \\
+J_{\nu-1} (x) &= \dfrac{\nu}{x} \, J_{\nu} + \dv{J_{\nu}(x)}{x} \\
+J_{\nu-1} &= \left( \dfrac{\nu}{x} + \dv{}{x} \right) \, J_{\nu} \\
+J_{\nu+1} &= \left( \dfrac{\nu}{x} - \dv{}{x} \right) \, J_{\nu}
+\end{align*}
+Estas cuatro ecuaciones son válidas también para $N_{\nu} (x)$. Las dos últimas ecuaciones se deducen de las dos primeras, y aseguran que las funciones de Bessel $J_{\nu \pm 1} (x)$ pueden obtenerse de $J_{\nu}$, mediante la aplicación de los \emph{operadores escalera}:
+\[ G_{-} = \left( \dfrac{\nu}{x} + \dv{}{x} \right) \hspace{2cm} G_{+} = \left( \dfrac{\nu}{x} - \dv{}{x} \right) \]
+tal que
+\[ J_{\nu-1} = G_{-} \, J_{\nu} \hspace{2cm} J_{\nu+1} = G_{+} \, J_{\nu}  \]
+\subsection{Forma asintótica para $x \gg 1$.}
+Para $x \gg 1$ es cierto que
+\begin{align*}
+J_{\nu} (x) &\to \sqrt{\dfrac{2}{\pi \, x}} \, \cos \left( x - (\nu + 1/2) \, \dfrac{\pi}{2} \right) \\
+N_{\nu} (x) &\to \sqrt{\dfrac{2}{\pi \, x}} \, \sin \left( x - (\nu + 1/2) \, \dfrac{\pi}{2} \right)
+\end{align*}
+La separación entre dos ceros consecutivos de la función de Bessel de orden $\nu$ para $x \gg 1$ se obtiene de:
+\begin{align*}
+J_{\nu}(\chi_{\nu n}) = 0 = \cos (\chi_{\nu n} - (\nu + 1/2) \dfrac{\pi}{2})
+\end{align*}
+de donde:
+\begin{align*}
+\chi_{\nu n} - (\nu +  1/2) \dfrac{\pi}{2} = (2 \, n + 1) \dfrac{\pi}{2}
+\end{align*}
+con $n$ entero, de modo que: $\chi_{\nu, n+1} - \chi_{nu,n} = \pi$.
+\par
+Las formas asintóticas muestran la similaridad entre las funciones de Bessel y las trigonométricas. En el caso trigonométrico es conveniente introducir las combinaciones lineales $\cos x \pm i \, \sin x$ que dan lugar a las exponenciales complejas $e^{\pm i x}$, útiles en la descripción de ondas planas. 
+\par
+En analogía  definimos las \emph{funciones de Hankel} como:
+\begin{align*}
+H_{\nu}^{1} &= J_{\nu} (x) + i \, N_{\nu} (x) \\
+H_{\nu}^{2} &= J_{\nu} (x) - i \, N_{\nu} (x)  
+\end{align*}
+cuyas formas asintóticas son:
+\begin{align*}
+H_{\nu}^{1}(x) & \xrightarrow{\text{$x \gg 1$}} \sqrt{\dfrac{2}{\pi \, x}} \, \exp{i (x - \frac{\nu \pi}{2}) - \frac{\pi}{4}} \\
+H_{\nu}^{2}(x) & \xrightarrow{\text{$x \gg 1$}} \sqrt{\dfrac{2}{\pi \, x}} \, \exp{-i (x - \frac{\nu \pi}{2}) - \frac{\pi}{4}} 
+\end{align*}
+Las dos últimas expresiones corresponden a la amplitud de una onda cilíndrica a gran distancia de la fuente. Es claro así que una onda plana $e^{\pm i \, k \, x}$ tiene su análogo cilídrico en $H_{\nu}^{(1)} (k \rho)$ y $H_{\nu}^{(2)} (k \rho)$, que a grandes distancias producen una onda de amplitud proporcional a $e^{i k \rho} / \sqrt{k \rho}$.
+\par
+Para las funciones de Hankel es cierto que:
+\begin{align*}
+H_{\nu-1} + H_{\nu+1} &= \dfrac{2 \, \nu}{x} \, H_{\nu} \\
+H_{\nu-1} - H_{\nu+1} &= 2 \, \dv{H_{\nu}}{x} \\
+H_{\nu}^{(1)} &= e^{i \nu \pi} \, H_{-\nu}^{(1)} \\
+H_{\nu}^{(2)} &= e^{-i \nu \pi} \, H_{-\nu}^{(2)} 
+\end{align*}
+\subsection{Forma asintótica para $x \to 0$.}
+\begin{align*}
+J_{\nu} (x) \to \dfrac{1}{\Gamma (\nu + 1)} \, \left( \dfrac{x}{2} \right)^{\nu}
+\end{align*}
+\begin{align*}
+N_{\nu} (x) \to 
+\begin{cases}
+- \dfrac{1}{\pi} \, \Gamma (\nu) \, \left( \dfrac{2}{x} \right)^{\nu} & \mbox{si } \nu \neq 0  \\
+\dfrac{2}{\pi} \, \ln x & \mbox{si } \nu = 0 
+\end{cases}
+\end{align*}
+\subsection{Forma asintótica para $\nu \to \infty$.}
+\begin{align*}
+J_{\nu} (x) \to \dfrac{1}{\sqrt{2 \pi \nu}} \, \left( \dfrac{e^{x}}{2 \nu} \right)^{\nu}
+\end{align*}
+\begin{align*}
+N_{\nu} (x) \to - \sqrt{\dfrac{2}{\pi \, \nu}} \, \left( \dfrac{e^{x}}{2 \nu} \right)^{- \nu}
+\end{align*}
+\subsection{Identidades: para $\nu = n$ (entero).}
+\begin{align*}
+J_{-n} (x) &= (-)^{n} \, J_{n}(x) \\
+N_{-n} (x) &= (-)^{n} \, N_{n}(x) \\
+J_{n} (x) &= (-)^{n} \, J_{n}(-x) \\
+\dv{}{x} [x^{n} \, J_{n}(x)] &=  x^{n} \, J_{n-1}(x) \\
+\dv{}{x} [x^{-n} \, J_{n}(x)] &=  -x^{-n} \, J_{n+1}(x)
+\end{align*}
+\subsection{Función generatriz.}
+Sea la función
+\[ e^{x(t-1/t)/2} = \sum_{-\infty}^{\infty} t^{n} \, J_{n} (x) \]
+esta es la función generatriz de las funciones de Bessel de orden entero.
+\subsection{Integrales.}
+\begin{align*}
+\int \dfrac{J_{n+1} (\alpha \, x)}{x^{n}} &= - \dfrac{J_{n}(x)}{\alpha \, x^{n}} \\[1em]
+\int x^{n} \, J_{n-1} (\alpha \, x) \, \dd x &= \dfrac{x^{n} \, J_{n}(\alpha \, x)}{\alpha} \\[1em]
+\int_{0}^{\infty} J_{1}(x) \, \dd x &= 1 \\[1em]
+\int_{0}^{\infty} J_{n} (b \, x) \, \dd x &= \dfrac{1}{b}, \hspace{1cm} n = 0, 1, 2, \ldots, \hspace{1cm} b > 0 \\[1em]
+\int_{0}^{\infty} \dfrac{J_{n} (b \, x)}{x} \, \dd x &= \dfrac{1}{n} \hspace{1cm} n = 0, 1, 2, \ldots \\[1em]
+\int J_{0} \, J_{1} \, \dd x &= - \dfrac{J_{0}^{2}}{2}
+\end{align*}
+Si $\alpha$ es raíz de $J_{0}$, entonces
+\begin{align*}
+\int_{0}^{1} J_{1} (\alpha \, x) \, \dd x &= \dfrac{1}{\alpha} \\[1em]
+\int_{0}^{\alpha} J_{1} (x) \, \dd x &= 1
+\end{align*}
+\subsection{Integrales discontinuas de Weber.}
+\begin{align*}
+\int_{0}^{\infty} J_{\nu} (a \, x) \, \sin b \, x \, \dd x &=
+\begin{cases}
+a^{\nu} \, \cos (\nu \, \pi /2)/\sqrt{b^{2} - a^{2}} \, [b + \sqrt{b^{2} - a^{2}}]^{\nu} & a < b,  \nu > -2 \\
+\sin [\nu \, \sin^{-1} (b/a)] \, \sqrt{a^{2} - b^{2}} & a > b, \nu > -2 
+\end{cases} \\[1em]
+\int_{0}^{\infty} J_{\nu} (a \, x) \, \cos b \, x \, \dd x &=
+\begin{cases}
+-a^{\nu} \, \sin (\nu \, \pi /2)/\sqrt{b^{2} - a^{2}} \, [b + \sqrt{b^{2} - a^{2}}]^{\nu} & a < b,  \nu > -1 \\
+\cos [\nu \, \sin^{-1} (b/a)] \, \sqrt{a^{2} - b^{2}} & a > b, \nu > -1 
+\end{cases} \\[1em]
+\int_{0}^{\infty} J_{\nu} (a \, x) \, \dfrac{\sin b \, x}{x} \, \dd x &=
+\begin{cases}
+a^{\nu} \, \sin (\nu \, \pi /2)/ \nu \, [b + \sqrt{b^{2} - a^{2}}]^{\nu} & a < b,  \nu > -1 \\
+\sin [\nu \, \sin^{-1} (b/a)] \, \nu & a > b, \nu > -1  
+\end{cases} \\[1em]
+\int_{0}^{\infty} J_{\nu} (a \, x) \, \dfrac{\cos b \, x}{x} \, \dd x &=
+\begin{cases}
+a^{\nu} \, \cos (\nu \, \pi /2)/ \nu \, [b + \sqrt{b^{2} - a^{2}}]^{\nu} & a < b,  \nu > 0 \\
+\cos [\nu \, \sin^{-1} (b/a)] \, \nu & a > b, \nu > 0  
+\end{cases}
+\end{align*}
+\subsection{Sumas.}
+Si $\alpha$ es una raíz de $J_{0}$:
+\begin{align*}
+1 &= 2 \, \sum_{\alpha} \dfrac{J_{0} (\alpha \, x)}{\alpha \, J_{1} (\alpha)} \\
+x^{2} &= 2 \, \sum_{\alpha} \dfrac{(\alpha^{2}- 4) \, J_{0} (\alpha \, x)}{\alpha^{3} \, J_{1} (\alpha)} \\
+J_{0} (k \, x) &= 2 \, J_{0} (k) \sum_{\alpha} \dfrac{\alpha \, J_{0} (\alpha \, x)}{(\alpha^{2} - k^{2}) \, J_{1}(\alpha)} \\
+1 -x^{2} &= 8 \, \sum_{\alpha} \dfrac{J_{0}(\alpha \, x)}{\alpha^{3} \, J_{1} (\alpha)}
+\end{align*}
+Si $\alpha$ es raíz de $J_{1}$:
+\begin{align*}
+x^{2} &= \dfrac{1}{2} + 4 \, \sum_{\alpha} \dfrac{J_{0} (\alpha \, x)}{\alpha^{4} \, J_{0} (\alpha)} \\
+(1 - x^{2})^{2} &= \dfrac{1}{3} - 64 \, \sum_{\alpha} \dfrac{J_{0} (\alpha \, x)}{\alpha^{4} \, J_{0} (\alpha)}
+\end{align*}
+Si $\alpha$ es raíz de $J_{n}$:
+\begin{align*}
+x^{n} = 2 \, \sum_{\alpha} \dfrac{J_{n} (\alpha \, x)}{\alpha \, J_{n+1} (\alpha)}
+\end{align*}
+\subsection{Wronskianos.}
+Para las ED del tipo
+\[ ddot{y} + P(x) \, \dot{y} + Q(x) \, y = 0 \]
+es cierto que el Wronskiano se calcula como
+\[ W(x) = W(a) \, \exp(- \int_{a}^{x} \, P \, \dd x) \]
+Para la ecuación de Bessel
+\[  \ddot{y} + \dfrac{1}{x} \, \dot{y} + (k^{2} - \dfrac{n^{2}}{x^{2}}) \, y = 0 \]
+se sigue que
+\[ W(x) = \dfrac{a \, W(a)}{x} \]
+Elegir de manera apropiada de $a$ permite la evaluación directa de $W(a)$; si se escoge $a=0$ se obtiene
+\[ [a \, W(a)]_{a \to 0} =  - \dfrac{2 \, \nu}{\Gamma(\nu + 1)(\Gamma (-\nu +1))} \]
+teniendo en cuenta que
+\[ \Gamma (\nu + 1) \, \Gamma (-\nu + 1) = \dfrac{\nu \, \pi}{\sin \nu \,\pi } \]
+se concluye que
+\[ W (J_{\nu} (x), J_{-\nu} (x)) = - \dfrac{2 \, \sin \nu \, \pi}{\pi \, x} \]
+Análogamente se sigue que
+\begin{align*}
+W (J_{\nu} (x), N_{\nu} (x)) = \dfrac{2}{\pi \, x} \\[1em]
+W (J_{\nu} (x), H_{\nu}^{(1)} (x)) =  \dfrac{2 \, i}{\pi \, x} \\[1em]
+W (N_{\nu} (x), H_{\nu}^{(1)} (x)) = - \dfrac{2}{\pi \, x} \\[1em]
+W (H_{\nu}^{(1)} (x), H_{\nu}^{(2)} (x)) = - \dfrac{4 \, i}{\pi \, x}
+\end{align*}
+
+\end{document}

@@ -116,7 +116,7 @@ J_{-n} (x) &= (-)^{n} \, J_{n}(x)
 En consecuencia $J_{n}(x)$ y $J{-n}(x)$ difieren al máximo en un signo. Se vuelve necesario entonces buscar la segunda solución para $\nu \neq$ entero.
 \section{La función de Neumann.}
 Con el propósito de obtener una segunda solución a la ecuación de Bessel, escribimos la ecuación de la siguiente forma
-\[ \ddot{J}_{\nu} + \dfrac{1}{x} \, \dot{J}_{\nu} + \left( 1 - \dfrac{nu^{2}}{x^{2}} \right) \, J_{\nu} = 0, \hspace{2cm} \dot{J}_{\nu} =  \dv{J_{\nu}}{x} \]
+\[ \ddot{J}_{\nu} + \dfrac{1}{x} \, \dot{J}_{\nu}  + \left( 1 - \dfrac{\nu^{2}}{x^{2}} \right) \, J_{\nu} = 0, \hspace{2cm} \dot{J}_{\nu} =  \dv{J_{\nu}}{x} \]
 derivando respecto a $\nu$, obtenemos:
 \begin{equation}
 \pdv{\ddot{J}_{\nu}}{\nu} + \dfrac{1}{x} \, \pdv{\dot{J}_{\nu}}{\nu} + \left( 1 - \dfrac{\nu^{2}}{x^{2}} \right) \, \pdv{J_{\nu}}{\nu} - \dfrac{2  \, \nu}{x^{2}} \, J_{\nu} = 0
@@ -338,7 +338,7 @@ entonces podemos hacer que
 entonces escribimos
 \begin{equation}
 [ \rho \, W(J_{\nu}(k^{\prime} \, \rho), J_{\nu} (k \, \rho))]_{\rho=a}^{\rho=b} = (k^{\prime \, 2} - k^{2}) \, \int_{a}^{b} \rho \, J_{\nu}(k^{\prime} \, \rho) \, J_{\nu} (k \, \rho) \, \dd \rho
-\label{eq:ecuacion_08_08}
+\label{eq:ecuacion_08_12}
 \end{equation}
 El corchete $[q \, W]_{a}^{b}$ toma la forma
 \[ \rho \, W(J_{\nu}(k^{\prime} \, \rho), J_{\nu} (k \, \rho))]_{\rho=a}^{\rho=b} \]
@@ -352,6 +352,35 @@ Las constantes de integración $A, B, C, D, E, F$ y los parámetros de separaci�
 \item El comportamiento de $N_{\nu}$. Es cierto que la función de Newmann diverge si $\rho \to 0$, por lo cual $B$ deberá hacerse cero en los casos en los que en el eje no haya alambres o puntos cuyo potencial sea divergente en $\rho \to 0$. Estas consideraciones sobre infinitos no son necesarias en el caso cartesiano, pues las funciones trigonométricas no divergen en ningún punto.
 \item Las condiciones de frontera de Dirichlet, Neumann o mixtas.
 \end{enumerate}
+\section{Funciones de Bessel esféricas.}
+Estas funciones surgen a partir de la separación de variables de la ecuación de Helmholtz en coordenadas esféricas, en su parte radial, se tiene la siguiente ecuación diferencial:
+\begin{equation}
+r^{2} \, \dv[2]{R(r)}{r} + 2 \, r \, \dv{R(r)}{r} + (k^{2} \, r^{2} - \ell (\ell + 1)) \, R(r) = 0
+\label{eq:ecuacion_08_17}
+\end{equation}
+Esta ecuación puede transformarse en la ecuación de Bessel ordinaria (a la que también puede llamarse ecuación de Bessel \emph{cilíndrica}) mediante la transformación $R(r) = u(r) /\sqrt{r}$, que conduce a:
+\[ r^{2} \, \dv[2]{u(r)}{r} + r \, \dv{u(r)}{r} + \left[ k^{2} \, r^{2} -  \left( \ell + \dfrac{1}{2} \right)^{2} \right] \, u = 0\]
+Puesto que la solución a esta ecuación es
+\[ u(r) = A \, J_{\ell+\frac{1}{2}} (k \, r) + B \, N_{\ell+\frac{1}{2}} (k \, r) \]
+se sigue que $R(r)$ en la ec. (\ref{eq:ecuacion_08_17}) es de la forma
+\[ R(r) = A \, \dfrac{J_{\ell+\frac{1}{2}} (k \, r)}{\sqrt{r}} + B \, \dfrac{N_{\ell+\frac{1}{2}} (k \, r)}{\sqrt{r}}  \]
+Se definen las funciones de Bessel, Neumman y Hankel esféricas en la forma:
+\begin{align*}
+j_{\ell} (x) &= \sqrt{\dfrac{\pi}{2 \, x}} \, J_{\ell+\frac{1}{2}} (x) \\
+\eta_{\ell} (x) &= \sqrt{\dfrac{\pi}{2 \, x}} \, N_{\ell+\frac{1}{2}} (x) \\
+h_{\ell}^{(1)} (x) &= j_{\ell} (x) + i \, \eta_{\ell} (x) \\
+h_{\ell}^{(2)} (x) &= j_{\ell} (x) - i \, \eta_{\ell} (x)
+\end{align*}
+Por tanto, la solución a la ecuación de Bessel esférica puede expresarse en cualquiera de las dos formas equivalentes:
+\begin{align}
+\begin{aligned}
+R(r) &= A \, j_{\ell} (k \, r) +  B \, \eta_{\ell} (k , r) \\
+&= A^{\prime} \, h_{\ell}^{(1)} (k , r) + B^{\prime} \, h_{\ell}^{2} (k \,r)
+\end{aligned}
+\label{eq:ecuacion_08_18}
+\end{align}
+por tanto, la solución general a la ecuación de Helmholtz en coordenadas esféricas tiene la forma
+\[ \psi (r) = \sum_{\ell}^{\infty} \sum_{m=-\ell}^{\ell} \left[ A_{\ell m} \, j_{\ell} (k , r) + B_{\ell m} \, \eta_{\ell} (k , r) \right] \, Y_{\ell m} (\theta, \phi)  \]
 % Las funciones de Bessel aparecen e]n una amplia variedad de problemas físicos: desde la separación con la ecuación de Helmholtz o la ecuación de onda en coordenadas cilíndricas, nos llevan a la ecuación de Bessel. La ecuación de Helmholtz en coordenadas esféricas nos dirigirá a una forma especial de la ecuación de Bessel.
 % \section{Función generatriz, Integral de orden $J_{n}(x)$}
 % Consideremos una función de dos variables:
