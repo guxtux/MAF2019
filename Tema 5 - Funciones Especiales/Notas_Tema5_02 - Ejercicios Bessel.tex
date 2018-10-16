@@ -1,0 +1,109 @@
+\input{../preambulo_doc}
+%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\title{Problemas con las Funciones de Bessel \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Ecuación de Laplace en el interior de un cilindro.}
+Consideremos la ecuación de Laplace válida en el interior de un cilindro de radio $R$ y altura $L$, sujeto a las condiciones de frontera:
+\begin{figure}[H]
+    \centering
+    \includestandalone{Figuras/P1_Cilindro_01}
+\end{figure}
+\begin{align*}
+\phi &= 0 \mbox{ en } z = 0 \\
+\phi &= V (\rho, \varphi) \mbox{ en  } z = L \\
+\phi &= 0 \mbox{ en } \rho = R
+\end{align*}
+En el interior del cilindro no hay infinitos (que en el caso electrostático podrían ser debidos a un alambre colocado en el eje), tal que $B = 0$.
+\par
+Además, el ángulo completo $2 \, \pi$ es permitido, por lo cual la solución general deberá contener una suma sobre $n$. Para que no haya redundancia iniciamos la suma en $n = 0$.
+\par
+Tendremos entonces:
+\[ \phi = (\rho, \varphi, z) =  \sum_{n=0}^{\infty} J_{n} (k \, \rho) (C_{n} \, e^{i n \varphi} +  D_{n} \, e^{-i n \varphi})(E_{n} \, \sinh k \, z + F_{n} \, \cosh k \, z) \]
+Aplicando la condición $\phi=0$ en $z=0$, se sigue que $F_{n}=0$, por lo que
+\[ \phi = (\rho, \varphi, z) =  \sum_{n=0}^{\infty} J_{n} (k \, \rho) (C_{n}^{\prime} \, e^{i n \varphi} +  D_{n}^{\prime} \, e^{-i n \varphi}) \,  \sinh k \, z \]
+De la condición $\phi=0$ en $\rho = R$, se tiene que $J_{n} (k \, R) = 0$, lo que significa que $k \, R$ es raíz de $J_{n}$, por tanto
+\[ k \, R = \chi_{n \ell}, \hspace{1.5cm} \ell = 1, 2, 3, \ldots \]
+La solución contendrá ahora adicionalmente una suma sobre $\ell$, pues para cada $\ell$ hay una solución. Obsérvese que los coeficientes $C$ y $D$ dependen entonces de dos índices:
+\[ \phi = (\rho, \varphi, z) =  \sum_{n=0}^{\infty} \, \sum_{\ell=1}^{\infty} J_{n} \left( \dfrac{\chi_{n \ell}}{R} \right)\left( C_{n \ell} \, e^{i n \varphi} +  D_{n \ell} \, e^{-i n \varphi} \right) \, \sinh \left( \dfrac{\chi_{n \ell} \, z}{R} \right) \]
+La condición en $z = L$ conduce adicionalmente
+\[ V (\rho, \varphi) =  \sum_{n=0}^{\infty} \, \sum_{\ell=1}^{\infty} J_{n} \left( \dfrac{\chi_{n \ell}}{R} \right)\left( C_{n \ell} \, e^{i n \varphi} +  D_{n \ell} \, e^{-i n \varphi} \right) \, \sinh \left( \dfrac{\chi_{n \ell} \, L}{R} \right) \]
+Multiplicando esta expresión por 
+\[ \rho \, e^{-i n^{\prime} \varphi} \, J_{n^{\prime}} \left( \dfrac{\chi_{n^{\prime} \ell^\prime} \, \rho}{R} \right) \]
+integrando sobre $\varphi$ y $\rho$ en los dominios $(0, 2 \, \pi)$ y $(0, R)$ se obtiene el coeficiente $C_{n \ell}$. Nótese que $n$ es positivo. Multiplicando por 
+\[ \rho \, e^{i n^{\prime} \varphi} \, J_{n^{\prime}} \left( \dfrac{\chi_{n^{\prime} \ell^\prime} \, \rho}{R} \right) \]
+e integrando sobre $\varphi$ y $\rho$ se obtiene el coeficiente $D_{n \ell}$.
+\par
+La solución que hemos propuesto ha contemplado sólo los casos $\nu \neq 0$ y $k \neq 0$. 
+\par
+\textbf{Ejercicio a cuenta: } Deberían incluirse, además, en la solución general las siguientes posibilidades:
+\begin{enumerate}
+\item $\nu = 0, k \neq 0$
+\item $\nu \neq 0, k = 0$
+\item $\nu = 0, k = 0$
+\end{enumerate}
+\section{Disco circular a una temperatura en el borde.}
+Considere un disco circular de radio $R$ sometido en el borde a una temperatura cero. En $t = 0$ la temperatura es $T (\rho, 0) = f (\rho)$. La situación es de simetría angular tal que la temperatura es función sólo de $\rho$ y $t$.
+\par
+La ecuación de conducción del calor, en las variables $\rho$ y $t$ es:
+\[ \dfrac{1}{\rho} \, \pdv{\rho} \left( \rho \pdv{T}{\rho} \right) = \alpha \, \pdv{T}{t}  \]
+Separando variables en la forma $T(\rho, t) = A(\rho) \, B(t)$, tendremos
+\[ \dfrac{1}{A \, \rho} \, \dv{\rho} \left( \rho \dv{A}{\rho} \right) = \dfrac{\alpha}{B} \, \dv{B}{t} \]
+Se elige
+\[ \left( \dfrac{\alpha}{B} \right) \, \left( \dv{B}{t} \right) = -k^{2} \]
+lo que da un perfil de temperatura que decrece con el tiempo, en acuerdo con la experiencia
+\[ B(t) \, \alpha \, e^{-k^{2} t /\alpha} \]
+tal que
+\[ \rho^{2} \, \ddot{A} + \rho , \dot{A} + k^{2} \, \rho \, A = 0 \]
+que es la ecuación de Bessel de orden cero, así la solución es:
+\[ A(\rho) =  C \, J_{0} (k \, \rho) + D \, N_{0} (k \, \rho) \]
+Como el problema debe de ser finito sobre la placa, se sigue que $B = 0$, entonces:
+\[ T (\rho, t) =  C \, J_{0} (k \, \rho) \, e^{-k^{2} t / \alpha} \]
+La CDF $T(R, t) = 0$ conduce a $k \, R = \chi_{0 \ell}$ de donde
+\[ T (\rho, t) = \sum_{\ell=1}^{\infty} J_{0} \left( \dfrac{\chi_{0 \ell} \, \rho}{R} \right) \, \exp  \left( - \dfrac{\chi_{0 \ell}^{2} \, t}{R^{2} \, \alpha} \right) \] 
+La segunda condición $T(\rho, t) = f(\rho)$, conduce acuerdo
+\[ f(\rho) = \sum_{\ell=1}^{\infty} C_{\ell} \, J_{0} \left( \dfrac{\chi_{0 \ell} \, \rho}{R} \right) \]
+Multiplicando por 
+\[ \rho, J_{0} \left( \dfrac{\chi_{0 \ell^{\prime}} \, \rho}{R} \right) 
+\dd \rho \]
+integrando entre $0$ y $R$, y haciendo uso de la relación de ortogonalidad para las funciones de Bessel en un intervalo finito $(0,b)$, expresa en términos de sus raíces, y con $\nu > -1$, que es:
+\[ \int_{0}^{b} \rho \, J_{\nu} \left( \dfrac{\chi_{\nu \ell} \rho}{b}  \right) \, J_{\nu} \left( \dfrac{\chi_{\nu \ell^{\prime}} \rho}{b} \right) \dd \rho = b^{2} \left[ J_{\nu + 1} (\chi_{\nu \ell}) \right]^{2} \, \delta_{\ell \ell^{\prime}} /2 \]
+se obtiene entonces:
+\[ C_{\ell} =  \dfrac{2}{R^{2}} \, \int_{0}^{R} \rho \, f(\rho) \, J_{0} \left( \dfrac{\chi_{0 \ell} \, \rho}{R} \right) \dd \rho \]
+\textbf{Ejercicio a cuenta: } Una placa semicircular de radio $R$ está sometida en su circunferencia a una temperatura $T_{0}$ y en su porción recta a una temperatura $T_{1}$. Calcular $T(\rho, \varphi)$ en este régimen estacionario.
+\section{Oscilaciones en una membrana circular.}
+Consideremos una membrana inicialmente en reposo y desplazada respecto a su posición de equilibrio. En todo momento la membrana tiene su borde fijo a un aro circular de radio $R$.
+\par
+En coordenadas polares, la ecuación de movimiento de la membrana es:
+\[ \dfrac{1}{\rho} \, \pdv{r} \left( \rho \, \pdv{\psi}{\rho} \right) + \dfrac{1}{\rho^{2}} \, \pdv[2]{\psi}{\varphi} - \dfrac{1}{v^{2}} \, \pdv[2]{\psi}{t} = 0 \]
+Realizando la separación de variables $\psi (\rho, \varphi, t) = A(\rho) \, B(\varphi) \, C(t)$, exigiendo que:
+\begin{enumerate}
+\item La solución en $\varphi$ sea armónica (para satisfacer la condición de continudad con $\nu = n =$ entero)
+\item La solución en $t$ sea armónica (para lograr oscilaciones) y que no aparezcan infinitos.
+\end{enumerate}
+Se obtiene:
+\[ \psi = (\rho, \varphi, t) = \sum_{n=0}^{\infty} J_{n} (k \, \rho) \, \left( D_{n} \, e^{i n \varphi} + E_{n} \, e^{-i n \varphi} \right) \, (F_{n} \, \cos k \, v \, t + G_{n} \sin k \, v \, t) \]
+Con $\psi (R, \varphi, t) = 0$ (la membrana está fija en los bordes), se tiene que $k \, R =  \chi_{n \ell}$ y con
+\[ \pdv{\psi}{t}\eval_{t=0} \Longrightarrow G = 0\]
+que representa la velocidad inicial, entonces
+\[ \psi (\rho, \varphi, t) = \sum_{n=0}^{\infty} \, \sum_{\ell=1}^{\infty} J_{n} \left( \dfrac{\chi_{n \ell}}{R} \right) \left( D_{n \ell} \, e^{i n \varphi} + E_{n \ell} \, e^{-i n \varphi} \right) \, \cos \left( \dfrac{\chi_{n \ell}}{R} v \, t \right) \]
+El argumento $\chi_{n \ell} v \, t /R $ de la función coseno permite obtener las \emph{frecuencias naturales} de la membrana: $\omega_{n \ell} = \chi_{n \ell} v / R$; cada término en la doble serie es un \emph{modo natural de oscilación} $\psi_{n \ell}$, tal que
+\[ \psi (\rho, \varphi, t) = \sum_{n=0}^{\infty} \, \sum_{\ell=1}^{\infty} \psi_{n \ell} (\rho, \varphi, t) \]
+Cada frecuencia tiene dos modos asociados $(e^{+i n \varphi}, e^{-i n \varphi}$  o $\sin n \, \varphi, \cos n \, \varphi)$, tal que existe degeneración doble; la excepción es el caso $n = 0$ que posee simetría azimutal y es no degenerado. Algunos de los modos $(n, \ell)$, donde los dos tonos representan desplazamientos opuestos de la membrana, son:
+\begin{figure}[H]
+    \centering
+    \includestandalone{Figuras/P3_Membrana}
+    \caption{Modos de oscilación de una membrana circular.}    
+\end{figure}
+Finalmente, si la forma inicial de la membrana es
+\[ \psi (\rho, \varphi, 0)\eval_{t=0} = f (\rho, \varphi) \]
+se tiene que
+\[ f (\rho, \varphi) = \sum_{n=0}^{\infty} \, \sum_{\ell=1}^{\infty} J_{n} \, \left( \dfrac{\chi_{n \ell} \, \rho}{R} \right) \, \left( D_{n \ell} \, e^{i n \varphi} + E_{n} \, e^{-i n \varphi} \right) \]
+Multiplicando por 
+\[ \rho \, e^{-i n^{\prime} \varphi} \, J_{n^{\prime}} \left( \dfrac{\chi_{n^{\prime} \ell^{\prime}} \, \rho}{R} \right) \]
+e integrando sobre $\rho$ y $\varphi$, se obtiene el coeficiente $D_{n \ell}$; análogamente con el argumento positivo de la función exponencial, se obtiene el coeficiente $E_{n \ell}$.
+\par
+\textbf{Ejercicio a cuenta: } Evaluar los coficientes $E_{n \ell}$ y $D_{n \ell}$ en el caso de que la función $f(\rho, \varphi)$ sea sólo $f(\varphi)$. Analiza y disctue los primeros modos de oscilación.
+\end{document}
