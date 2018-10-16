@@ -1,97 +1,122 @@
 \input{../preambulo_doc}
-\usepackage{mathrsfs}
-\usepackage{bigints}
-\spanishdecimal{.}
-%\usepackage{enumerate}
 %\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
 \title{Funciones de Hermite \\ {\large Matemáticas Avanzadas de la Física}}
 \date{ }
 \begin{document}
-%\renewcommand\theenumii{\arabic{theenumii.enumii}}
-\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
+%Referencia:: Sepúlveda - Lecciones de Física Matemática Cap. 8.5 Polinomios de Hermite.
 \section{Funciones de Hermite.}
 La ecuación de Hermite, tiene una aplicación en física, quizá la más importante que es la del oscilador armónico en mecánica cuántica, tiene la forma:
 \begin{equation}
-\ddot{H}(x) - 2 x \dot{H}(x) + 2n H(x) = 0
-\label{eq:ecuacion_001}
+\ddot{H}(x) - 2 \, x \,  \dot{H}(x) + 2\, n\ , H(x) = 0
+\label{eq:ecuacion_08_58}
 \end{equation}
 La forma autoadjunta
-\[ \dfrac{d}{dx} \left( q(x) \dfrac{d H(x)}{dx} \right) + r(x) H(x) + \lambda p(x) H(x) = 0 \]
+\[ \dv{x} \left[ q(x) \, \dv{H(x)}{x} \right] + r(x) \, H(x) + \lambda \, p(x) \, H(x) = 0 \]
 es entonces
 \begin{equation}
-\dfrac{d}{dx} \left( \exp(-x^{2}) \dfrac{d H(x)}{dx} \right) + 2n \exp(-x^{2}) H(x) = 0
-\label{eq:ecuacion_002}
+\dv{x} \left[ \exp(-x^{2}) \dv{H(x)}{x} \right] + 2 \, n \, \exp(-x^{2}) \, H(x) = 0
+\label{eq:ecuacion_08_59}
 \end{equation}
 La solución a esta ecuación forma una base ortogonal con factor de peso $p(x) = \exp(-x^{2})$, en el intervalo $(-\infty, \infty)$, ya que en dicho intervalo
-\[ [q W]_{-\infty}^{\infty} = [ \exp(-x^{2}) W ]_{-\infty}^{\infty} = 0 \]
+\[ [q \, W]_{-\infty}^{\infty} = [ \exp(-x^{2}) \, W ]_{-\infty}^{\infty} = 0 \]
 Por lo que la ortogonalidad queda expresada por
-\[ \int_{-\infty}^{\infty} \exp(-x^{2}) H_{n}(x) H_{m}(y) dx = 0, \hspace{1cm} \mbox{ si } n \neq m \]
-Con lo que vemos que la ortogonalidad de las autofunciones está asociada a la elección particular del dominio de la variable independiente.
-\\
+\[ \int_{-\infty}^{\infty} \exp(-x^{2}) \, H_{n}(x) \, H_{m}(y) \, \dd x = 0, \hspace{1cm} \mbox{ si } n \neq m \]
+Con lo que vemos que la ortogonalidad de las funciones propias está asociada a la elección particular del dominio de la variable independiente.
+\par
 Aplicando el método de Frobenius:
-\begin{eqnarray}
-H(x) &=& \sum_{\alpha = 0}^{\infty} a_{\alpha} x^{\alpha + k} \nonumber \\
-\dot{H}(x) &=& \sum_{\alpha = 0}^{\infty} a_{\alpha}(\alpha + k) x^{\alpha + k-1} \nonumber \\
-\ddot{H}(x) &=& \sum_{\alpha = 0}^{\infty} a_{\alpha}(\alpha + k)(\alpha + k - 1) x^{\alpha + k-2} \nonumber
-\end{eqnarray}
-re-emplazando en la ecuación (\ref{eq:ecuacion_001}) y factorizando los términos
-\[ \sum_{\alpha = 0}^{\infty} a_{\alpha}(\alpha + k)(\alpha + k - 1) x^{\alpha + k-2} - \sum_{\alpha=0}^{\infty} a_{\alpha} [ 2 (\alpha + k) - 2n ] x^{\alpha +k} = 0 \]
+\begin{align*}
+H(x) &= \sum_{\alpha = 0}^{\infty} a_{\alpha} \, x^{\alpha+k} \\
+\dot{H}(x) &= \sum_{\alpha = 0}^{\infty} a_{\alpha} \, (\alpha + k) \, x^{\alpha+k-1} \\
+\ddot{H}(x) &= \sum_{\alpha = 0}^{\infty} a_{\alpha} \, (\alpha + k) \, (\alpha + k - 1) \, x^{\alpha+ k-2}
+\end{align*}
+re-emplazando en la ecuación (\ref{eq:ecuacion_08_58}) y factorizando los términos
+\[ \sum_{\alpha = 0}^{\infty} a_{\alpha} \, (\alpha + k) \, (\alpha + k - 1) \, x^{\alpha+k-2} - \sum_{\alpha=0}^{\infty} a_{\alpha} \, [ 2 \, (\alpha + k) - 2 \, n] \, x^{\alpha+k} = 0 \]
 que puede escribirse como
-\[ \sum_{\alpha=-2}^{\infty} a_{\alpha + 2}( \alpha + k + 2)(\alpha + k + 1) x^{\alpha + k} - \sum_{\alpha=0}^{\infty} a_{\alpha} [2 (\alpha + k) - 2n ] x^{\alpha + k} = 0 \]
+\[ \sum_{\alpha=-2}^{\infty} a_{\alpha + 2} \, ( \alpha + k + 2) \, (\alpha + k + 1)\, x^{\alpha+k} - \sum_{\alpha=0}^{\infty} a_{\alpha} \, [2 \, (\alpha + k) - 2 \, n] \, x^{\alpha+k} = 0 \]
 escribiendo los dos primeros términos de la serie
-\[ \begin{split}
- a_{0}(k)(k - 1) x^{k-2} &+ a_{1} (k + 1)(k)^{\alpha-1} \\
-&+ \sum_{\alpha=0}^{\infty} \left[ a_{\alpha + 2} (\alpha + k +2)(\alpha + k + 1) - a_{0} [2 (\alpha + k ) - 2n] \right] x^{\alpha + k} = 0 
-\end{split} \]
-donde reconocemos las ecuaciones indiciales
-\begin{eqnarray}
-a_{0} k (k-1) &=& 0 \nonumber \\
-a_{1} k (k+1) &=& 0 \nonumber \\
-a_{\alpha+2} (\alpha + k + 2) (\alpha + k + 1) - a_{\alpha} [2 (\alpha + k) - 2n] &=& 0, \hspace{1cm} \alpha=0,1,2,\ldots \nonumber
-\end{eqnarray}
+\begin{align*}
+ a_{0}(k) \, (k - 1)\, x^{k-2} &+ a_{1} \, (k + 1)(k)^{\alpha-1} + \\
+&+ \sum_{\alpha=0}^{\infty} \left[ a_{\alpha + 2} \, (\alpha + k +2) \, (\alpha + k + 1) - a_{0} \, [2 (\alpha + k ) - 2 \, n] \right] \, x^{\alpha+k} = 0 
+\end{align*}
+donde reconocemos las ecuaciones de índices:
+\begin{align*}
+a_{0}\, k \, (k-1) &= 0 \\
+a_{1} \, k\, (k+1) &= 0 \\
+a_{\alpha+2}\, (\alpha + k + 2) \, (\alpha + k + 1) - a_{\alpha} \, [2 \, (\alpha + k) - 2 \, n] &= 0, \hspace{1cm} \alpha=0, 1, 2, \ldots
+\end{align*}
 Revisamos que:
 \begin{enumerate}
 \item De la primera expresión: si $a_{0} \neq 0$, entonces $k=0$ ó $k=1$.
 \item De la segunda expresión: con $k=0$ se sigue que $a_{1} \neq 0$ y de $k=1$, se concluye que $a_{1} = 0$.
-\item De la tercera ecuación indicial con $k=0$, se obtiene
+\item De la tercera ecuación de índices con $k=0$, se obtiene
 \[ a_{\alpha+2} = \dfrac{2a_{\alpha}(\alpha - n)}{(\alpha + 2)(\alpha + 1)} \hspace{1cm} \alpha = 0, 1, 2, \ldots \]
 \end{enumerate}
 Explícitamente los primeros coeficientes son
-\begin{eqnarray}
-a_{2} &=& \dfrac{(-) 2n}{2!} a_{0} \nonumber \\
-a_{3} &=& \dfrac{(-) 2(n-1)}{3!} a_{1} \nonumber \\
-a_{4} &=& \dfrac{(-) 2 a_{2} (2 - n)}{4 \times 3} = \dfrac{2^{2} (-)^{2}(n)(n - 2)}{4!} a_{0} \nonumber \\
-\vdots \nonumber
-\end{eqnarray}
+\begin{align*}
+a_{2} &= \dfrac{(-) \, 2 \, n}{2!} \, a_{0} \\
+a_{3} &= \dfrac{(-) \, 2 \, (n-1)}{3!} \, a_{1} \\
+a_{4} &= \dfrac{(-) \, 2 \, a_{2} \, (2 - n)}{4 \times 3} = \dfrac{2^{2} \, (-)^{2} \, (n) \, (n - 2)}{4!} a_{0} \\
+\vdots
+\end{align*}
 Entonces tenemos
-\[ \begin{split}
-H(x) &= a_{0} \left[ 1 + \dfrac{(-) 2n}{2!} x^{2} + \dfrac{(-) 2^{2} n (n - 2)}{4!} x^{4} + \dfrac{(-)^{3}2^{3} n (n-2)(n-4) }{6!} x^{6} + \ldots \right] + \\
-&+ a_{1} \left[ x + \dfrac{(-) 2 (n-1)}{3!} x^{3} + \dfrac{(-)^{2}2^{2}(n-1)(n-3)}{5!} x^{5} + \right.\\
-&+ \left. \dfrac{(-)^{3}2^{3}(n-1)(n-3)(n-5)}{7!} x^{7} + \ldots \right]
-\end{split} \]
+\begin{align*}
+H(x) &= a_{0} \, \left[ 1 + \dfrac{(-) 2 \, n}{2!}\, x^{2} + \dfrac{(-) \, 2^{2} \, n \, (n - 2)}{4!}\, x^{4} + \dfrac{(-)^{3} \, 2^{3} \, n \, (n-2)(n-4) }{6!}\, x^{6} + \ldots \right] + \\
+&+ a_{1} \, \left[ x + \dfrac{(-) \, 2 \, (n-1)}{3!} \, x^{3} + \dfrac{(-)^{2} \, 2^{2} \, (n-1)(n-3)}{5!}\, x^{5} + \right.\\
+&+ \left. \dfrac{(-)^{3} \, 2^{3} \, (n-1)(n-3)(n-5)}{7!} \, x^{7} + \ldots \right]
+\end{align*}
 Ambas series son divergentes en $x \to \pm \infty$. Si se incluyen estos dos extremos y se quiere lograr convergencia es necesario cortar las series y convertirlas en polinomios.
-\\
+\par
 La serie en $a_{0}$ requiere que $n$ = par positivo y la serie en $a_{1}$ requiere $n$ = impar positivo. Puesto que $n$ no puede ser simultáneamente par e impar en las series para $a_{0}$ y $a_{1}$, si $n$ = par, la segunda serie es divergente y si $n$ = impar la primera diverge.
-\\
+\par
 Las series convergentes serán las de nuestro interés, y conformarán los \emph{Polinomios de Hermite}.
 \\
-Puede demostrarse que con $n$ no entero, $H(x) \propto x^{2} \exp(x^{2})$ para $x \to \pm \infty$, lo que muestra la no convergencia para $n$ no entero.
-\\
-Consideremos $n$ = par. La serie para $a_{0}$, con $n=2m, \; m=0,1,2\ldots$ será
-\[ \begin{split}
-H(x) &= a_{0} \left[ 1 + \dfrac{(-) 2^{2} m}{2!} x^{2} + \dfrac{(-) 2^{4} m (m - 1)}{4!} x^{4} + \right. \\
-&+ \left. \dfrac{(-)^{3}2^{6} m (m-1)(m-2) }{6!} x^{6} + \ldots \right] \\
-H(x) &= a_{0} \left[ 1 + \dfrac{(-) 2^{2} m}{2!} x^{2} + \ldots + \dfrac{(-)^{3} 2^{6} m!}{(m-3)! 6!} x^{6} + \ldots + \dfrac{(-)^{p}(2x)^{2p} m!}{(m-p)!(2p)!} + \ldots \right]
-\end{split} \]
+Puede demostrarse que con $n \neq$ entero, $H(x) \propto x^{2} \, \exp(x^{2})$ para $x \to \pm \infty$, lo que muestra la no convergencia para $n$ no entero.
+\par
+Consideremos $n$ = par. La serie para $a_{0}$, con $n=2\, m, \; m = 0, 1, 2, \ldots$ será
+\begin{align*}
+H(x) &= a_{0} \, \left[ 1 + \dfrac{(-) \, 2^{2} \, m}{2!} \, x^{2} + \dfrac{(-)^{2} \, 2^{4} \, m \, (m - 1)}{4!} \, x^{4} + \right. \\
+&+ \left. \dfrac{(-)^{3} \, 2^{6} \, m \, (m-1)(m-2)}{6!} \, x^{6} + \ldots \right] \\[1em]
+H(x) &= a_{0}\, \left[ 1 + \dfrac{(-)\, 2^{2}\, m}{2!} \, x^{2} + \ldots + \dfrac{(-)^{3} \, 2^{6}\, m!}{(m-3)! \, 6!} \, x^{6} + \ldots + \dfrac{(-)^{p} \, (2 \, x)^{2\, p}\, m!}{(m-p)! \, (2\, p)!} + \ldots \right] \\
+&= m!\, a_{0} \, \sum_{p=0}^{\infty} \dfrac{(-)^{p}\, (2\, x)^{2\, p}}{(m-p)! \, (2\, p)!}
+\end{align*}
 Se definen los polinomios de Hermite de orden par, en la forma
 \begin{equation}
-H_{2m} (x) = (-)^{m} (2m)! \sum_{p=0}^{\infty} \dfrac{(-)^{p}(2x)^{2p}}{(m-p)!(2p)!}
-\label{eq:ecuacion_003}
+H_{2\, m} (x) = (-)^{m} \, (2\, m)! \sum_{p=0}^{\infty} \dfrac{(-)^{p} \, (2\, x)^{2\, p}}{(m-p)!\, (2p)!}
+\label{eq:ecuacion_08_60}
 \end{equation}
-Revisemos que efectivaente la ecuación (\ref{eq:ecuacion_003}) es un polinomio, ya que para $p > m : 1 / (m-p)! \to 0$. Esto significa que la suma se extiende entre $0$ y $m$.
-\\
-De manera análoga, para $n$ = impar, con $n=2m+1, \hspace{0.5cm} m=0,1,2,\ldots$
-
+Revisemos que efectivaente la ecuación (\ref{eq:ecuacion_08_60}) es un polinomio, ya que para $p > m : 1 / (m-p)! \to 0$. Esto significa que la suma se extiende entre $0$ y $m$.
+\par
+De manera análoga, para $n=$ impar, con $n = 2 \, m + 1, \hspace{0.5cm} m=0, 1, 2, \ldots$
+\begin{align*}
+H(x) & = a_{1} \, \left[ x + \dfrac{(-) \, 2^{2} \, m}{3!} \, x^{2} + \dfrac{(-)^{2} \, 2^{4} \, m \, (m - 1)}{5!} \, x^{5} + \right. \\
+& + \left. \dfrac{(-)^{3} \, 2^{6} \, m \, (m-1)(m-2)}{7!} \, x^{7} + \ldots \right] \\[1em]
+H(x) & = a_{1}\, \left[ x + \dfrac{(-)\, 2^{2}\, m}{3!} \, x^{3} + \ldots + \dfrac{(-)^{3} \, 2^{6}\, m!}{(m-3)! \, 7!} \, x^{7} + \ldots + \right. \\
+&+  \left. \dfrac{(-)^{p} \, 2^{2 \, p} \, m!}{(m-p)! \, (2\, p + 1)!} \, x^{2p+1} + \ldots \right] \\
+& = a_{1} \, m! \sum_{p=0}^{\infty} \dfrac{(-)^{p}\, (2\, x)^{2\, p+1}}{(m-p)! \, (2\, p + 1)!}  
+\end{align*}
+Definimos los polinomios de Hermite de orden impar como:
+\begin{equation}
+H_{2m+1} (x) = (-)^{m} \, (2 \, m + 1)! \, \sum_{p=0}^{\infty} \dfrac{(-)^{p} \, (2 \, x)^{2p+1}}{(m-p)! \, (2 \, p + 1)!}
+\label{eq:ecuacion_08_61}
+\end{equation}
+donde la suma da términos diferentes de cero sólo entre $0$ y $m$. En forma compacta se tiene la expresión:
+\begin{equation}
+\boxed{H_{n}(x) = n! \, \sum_{p=0}^{N} \dfrac{(-)^{p}}{(n - 2 \, p)! \, p!} \, (2 \, x)^{n-2p}}
+\label{eq:ecuacion_08_62}
+\end{equation}
+con $N=n/2$ si $n$ es par, o $N=n-1/2$ si $n$ es impar.
+\par
+La primera ecuación de índices provee para el exponente $k$ en la serie de Frobenius un segundo valor: $k = 1$. Es directo comprobar que nada nuevo se añade al desarrollo anterior.
+\par
+Los primeros polinomios de Hermite son:
+\begin{align*}
+H_{0}(x) &= 1 \\
+H_{1}(x) &= 2 \, x \\
+H_{2}(x) &= 4 \, x^{2} - 2 \\
+H_{3}(x) &= 8 \, x^{3} - 12 \, x \\
+H_{4}(x) &= 16 \, x^{4} - 48 \, x^{2} + 12 \\
+H_{5}(x) &= 32 \, x^{5} - 160 \, x^{3} + 120 \, x
+\end{align*}
 \end{document}
