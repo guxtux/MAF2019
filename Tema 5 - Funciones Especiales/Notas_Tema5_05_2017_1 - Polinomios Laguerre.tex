@@ -15,413 +15,433 @@
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
-\section{El átomo de hidrógeno.}
-El átomo de hidrógeno consta de un protón pesado, esencialmente inmóvil (de tal manera que podemos ponerlo en el origen) de carga $e$, junto con un electrón mucho más ligero (de carga $-e$) que se desplaza en círculo alrededor del protón, y se mantiene en órbita por la atracción mutua de cargas opuestas (ver Figura \ref{fig:figura_01}).
-\begin{figure}[H]
-\centering
-\includestandalone{atomohidrogeno}
-\caption{El átomo de hidrógeno.}
-\label{fig:figura_01}
-\end{figure}
-A partir de la ley de Coulomb, la energía potencial (en unidades SI) es
-\begin{equation}
-V(r) = - \dfrac{e^{2}}{4 \pi \epsilon_{0}} \; \dfrac{1}{r}
-\label{eq:ecuacion_04_52}
-\end{equation}
-y la ecuación radial es
-\begin{equation}
-- \dfrac{\hbar^{2}}{2m} \; \dfrac{d^{2} u }{d r^{2}} + \left[ - \dfrac{e^{2}}{4 \pi \epsilon_{0}} \; \dfrac{1}{r} + \dfrac{\hbar^{2}}{2m} \; \dfrac{\ell(\ell +1)}{r^{2}} \right] u =  E u
-\label{eq:ecuacion_04_53}
-\end{equation}
-Nuestro problema es resolver esta ecuación para $u(r)$ y determinar las energías permitidas $E$ de los electrones. El potencial de Coulomb (Ecuación \ref{eq:ecuacion_04_52}) admite estados de medios continuos (con $E> 0$), la descripción de electrones la dispersión de protones, así como estados ligados discretas, lo que representa el átomo de hidrógeno, pero nos limitaremos nuestra atención a este último.
-\section{La función radial de onda.}
-Nuestra primera tarea es poner en orden la notación. Dejando
-\begin{equation}
-\kappa \equiv \dfrac{\sqrt{-2 m E}}{\hbar}
-\label{eq:ecuacion_04_54}
-\end{equation}
-(Para estados base, $E < 0$, por lo que $\kappa$ es real). Al dividir la ec. (\ref{eq:ecuacion_04_53}) por $E$, tenemos
-\[ \dfrac{1}{\kappa^{2}} \dfrac{d^{2} u}{d r^{2}} = \left[1 - \dfrac{m e^{2}}{2 \pi \; \epsilon_{0} \hbar^{2} \kappa} \; \dfrac{1}{(\kappa r)} + \dfrac{\ell (\ell + 1)}{(\kappa r)^{2}} \right] u \]
-donde podemos hacer
-\begin{equation}
-\rho \equiv \kappa r \hspace{1cm} \rho_{0} \equiv \dfrac{m e^{2}}{2 \pi \; \epsilon_{0} \hbar^{2} \kappa}
-\label{eq:ecuacion_04_55}
-\end{equation}
-por lo que
-\begin{equation}
-\dfrac{d^{2} u}{d \rho^{2}} = \left[ 1 - \dfrac{\rho_{0}}{\rho} + \dfrac{\ell (\ell + 1)}{\rho^{2}} \right] u
-\label{eq:ecuacion_04_56}
-\end{equation}
-Revisemos la forma asintótica de las soluciones: mientras $\rho \to \infty$, el término constante en los paréntesis es el que domina, por lo que aproximadamente
-\[ \dfrac{d^{2} u}{d \rho^{2}} = u \]
-La solución general es del tipo
-\begin{equation}
-u(\rho) = A e^{-\rho} + B e^{\rho}
-\label{eq:ecuacion_04_57}
-\end{equation}
-pero $exp(\rho)$ se anula cuando $\rho \to \infty$, así $B=0$, evidentemente
-\begin{equation}
-u(\rho) \sim A e^{-\rho}
-\label{eq:ecuacion_04_58}
-\end{equation}
-para valores grande de $\rho$. Mientras que por otro lado, mientras que $\rho \to 0$ el término centrífugo domina, por lo que la aproximación es
-\[ \dfrac{d^{2} u}{d \rho} = \dfrac{\ell (\ell + 1)}{\rho^{2}} u \]
-que tiene por solución general
-\[ u(\rho) = C \rho^{\ell +1} + D \rho^{-\ell} \]
-pero el término $\rho^{-\ell}$ se anula cuando $\rho \to 0$, así $D = 0$, por lo que
-\begin{equation}
-u(\rho) \sim C \rho^{\ell + 1}
-\label{eq:ecuacion_04_59}
-\end{equation}
-para valores pequeños de $\rho$.
-\\
-El siguiente paso es revisar el compartamiento asintótico, al introducir una nueva función $v(\rho)$:
-\begin{equation}
-u(\rho) = \rho^{\ell + 1} e^{-\rho} \; v(\rho)
-\label{eq:ecuacion_04_60} 
-\end{equation}
-en espera que $v(\rho)$ sea tan sencilla como $u(\rho)$, pero la primera vista nos dice que en apariencia, no es así:
-\[ \dfrac{d u}{d \rho} = \rho^{\ell} e^{-\rho} \left[ (\ell + 1 - \rho) v + \rho \dfrac{d v}{d \rho} \right]  \]
-y
-\[ \dfrac{d^{2} u}{d \rho^{2}} = \rho^{\ell} e^{-\rho} \left( \left[ -2 \ell - 2 + \rho + \dfrac{ \ell (\ell + 1)}{\rho} \right] v + 2 (\ell + 1 - \rho) \dfrac{d v}{d \rho} + \rho \dfrac{d^{2} v}{d \rho^{2}} \right)  \]
-en términos de $v(\rho)$, la ecuación radial (ec. \ref{eq:ecuacion_04_56}) se escribe
-\begin{equation}
-\rho \dfrac{d^{2} v}{d \rho^{2}} + 2 (\ell + 1 - \rho) \dfrac{d v}{d \rho} + [\rho_{0} - 2 (\ell + 1)] v = 0
-\label{eq:ecuacion_04_61}
-\end{equation}
-Finalmente, suponemos que la solución $v(\rho)$ puede expresarse como una serie de potencias en $\rho$:
-\begin{equation}
-v(\rho) = \sum_{j=0}^{\infty} a_{j} \rho^{j} 
-\label{eq:ecuacion_04_62}
-\end{equation}
-Nuestro problema ahora es determinar los coeficientes $(a_{0}, a_{1}, a_{2}, \ldots)$. Diferenciando término a término
-\[ \dfrac{d v}{d \rho} = \sum_{j=0}^{\infty} j \; a_{j} \; \rho^{j - 1} = \sum_{j=0}^{\infty} (j+1) a_{j+1} \; \rho^{j} \]
-En la segunda suma, se ha renombrado el índice mudo $j \to j+1$. Diferenciando nuevamente
-\[ \dfrac{d^{2} v}{d \rho} = \sum_{j=0}^{\infty} j (j+1) \; a_{j+1} \rho^{j-1} \]
-sustituyendo en la ecuación \ref{eq:ecuacion_04_61}, tenemos
-\[ \begin{split}
-\sum_{j=0}^{\infty} j (j &+ 1)\; a_{j+1} \rho^{j} + 2 (\ell + 1) \sum_{j=0}^{\infty} (j + 1) \; a_{j+1} \rho^{j} + \\
-&- 2 \sum_{j=0}^{\infty} j \; a_{j} \rho^{j} + [ \rho_{0} - 2(\ell + 1)] \sum_{j=0}^{\infty} a_{j} \rho^{j} = 0
-\end{split} \]
-igualando los coeficientes de las potencias similares, nos lleva a
-\[ j(j+1)a_{j+1} + 2(\ell + 1)(j + 1) a_{j+1} - 2 j \; a_{j} + [\rho_{0} - 2(\ell + 1)] a_{j} = 0 \]
-o equivalentemente
-\begin{equation}
-a_{j+1} = \left[ \dfrac{2(j + \ell + 1) - \rho_{0}}{(j+1)(j + 2 \ell + 2)} \right] a_{j}
-\label{eq:ecuacion_04_63}
-\end{equation}
-Esta fórmula de recurrencia determina los coeficientes, y por lo tanto la función $v(\rho)$: Comenzamos con $a_{0}= A$ (esto se convierte en una constante en general, que se fija por la normalización), y la ecuación (\ref{eq:ecuacion_04_63}) nos devuelve $a_{1}$, usando este valor, , se obtiene un $a_{2}$, y así.
-\\
-Ahora vamos a ver a que se parecen los coeficientes grandes $j$ (esto corresponde a un valor grande de $\rho$, donde dominan las potencias superiores). En este régimen la fórmula de recurrencia dice que
-\[ a_{j+1} \cong \dfrac{2 j}{j (j + 1)} a_{j} =  \dfrac{2}{j + 1} a_{j} \]
-así
-\begin{equation}
-a_{j} \cong \dfrac{2^{j}}{j!} A
-\label{eq:ecuacion_04_64}
-\end{equation}
-Suponemos que éste es el valor exacto, así
-\[ v(\rho) = A \sum_{j=0}^{\infty} \dfrac{2^{j}}{j!} =  A e^{2 \rho} \]
-por tanto
-\begin{equation}
-u(\rho) = A \; \rho^{\ell + 1} \; e^{\rho}
-\label{eq:ecuacion_04_65}
-\end{equation}
-que ``vuela" para valores grandes de $\rho$. El exponencial positivo es precisamente el comportamiento asintótico que no queríamos en la ecuación (\ref{eq:ecuacion_04_57}). (No es ningún accidente que ha vuelto a aparecer, después de todo
-sí representa la forma asintótica de algunas soluciones a la ecuación radial que simplemente no resultan ser los que estamos interesados, porque no son normalizables.
-\\
-Sólo hay una manera de salir de este dilema: \emph{La serie debe terminar}. Tiene que haber algún entero máximo, $j_{\text{max}}$, de tal manera que
-\begin{equation}
-a_{j_{\text{max}+1}} = 0
-\label{eq:ecuacion_04_66}
-\end{equation}
-(Y más allá del cual todos los coeficientes desaparecen automáticamente). Evidentemente (ec. \ref{eq:ecuacion_04_63})
-\[ 2 (j_{\text{max}} + \ell + 1) - \rho_{0} = 0 \]
-Definimos
-\begin{equation}
-n \equiv j_{\text{max}} + \ell + 1
-\label{eq:ecuacion_04_67}
-\end{equation}
-(que llamaremos \textbf{número cuántico principal}), tenemos
-\begin{equation}
-\rho_{0} = 2 n
-\label{eq:ecuacion_04_68}
-\end{equation}
-Pero $\rho_{0}$ determina $E$ (ecs. \ref{eq:ecuacion_04_54} y \ref{eq:ecuacion_04_55}):
-\begin{equation}
-E = - \dfrac{\hbar^{2} \kappa^{2}}{2 m } = - \dfrac{m e^{2}}{8 \pi^{2} \; \epsilon_{0}^{2} \; \hbar^{2} \; \rho_{0}^{2}}
-\label{eq:ecuacion_04_69}
-\end{equation}
-y las energías permitidas son
-\begin{equation}
-\boxed{E_{n} = - \left[ \dfrac{m}{2 \hbar^{2}} \left( \dfrac{e^{2}}{4 \pi \epsilon_{0}} \right)^{2} \right] \dfrac{1}{n^{2}} = \dfrac{E_{1}}{n^{2}}, \hspace{1cm} n = 1, 2, 3, \ldots}
-\label{eq:ecuacion_04_70}
-\end{equation}
-Esta es la famosa fórmula de Bohr, para cualquier medida, es el resultado más importante de toda la mecánica cuántica. Bohr lo obtuvo en 1913 por una mezcla casual de una innaplicable física clásica y una teoría cuántica prematura (la ecuación de Schrödinger no llegó hasta 1924).
-\\
-Combinando las ecuaciones (\ref{eq:ecuacion_04_55}) y (\ref{eq:ecuacion_04_68}), encontramos que
-\begin{equation}
-\kappa = \left( \dfrac{m e^{2}}{4 \pi \; e_{0} \hbar^{2}} \right) \dfrac{1}{n} = \dfrac{1}{a n}
-\label{eq:ecuacion_04_71}
-\end{equation}
-donde
-\begin{equation}
-\boxed{a \equiv \dfrac{4 \pi \epsilon_{0} \hbar^{2}}{m e^{2}} = 0.529 \times 10^{-10}  m}
-\label{eq:ecuacion_04_72}
-\end{equation}
-al que se le denomina \emph{radio de Bohr}. Se sigue (de la ec. \ref{eq:ecuacion_04_55}) que
-\begin{equation}
-\rho = \dfrac{r}{a n}
-\label{eq:ecuacion_04_73}
-\end{equation}
-Evidentemente las funciones de onda espaciales para el hidrógeno se etiquetan con tres números cuánticos ($n$, $\ell$ y $m$):
-\begin{equation}
-\psi_{n \ell m} (r, \theta, \phi) =  R_{n \ell} (r) Y_{\ell}^{m} (\theta, \phi)
-\label{eq:ecuacion_04_74}
-\end{equation}
-retomando la ecuación (\ref{eq:ecuacion_04_60})
-\begin{equation}
-R_{n \ell}(r) = \dfrac{1}{r} \rho^{\ell + 1} \; e^{-\rho} \; v(\rho)
-\label{eq:ecuacion_04_75}
-\end{equation}
-y $v(r\rho)$ es un polinomio de grado $j_{\text{max}} = n - \ell - 1)$ en $\rho$, donde los coeficientes están determinados (hasta un factor de normalización global) por la fórmula de recursión
-\begin{equation}
-a_{j+1} = \dfrac{2 (j + \ell + 1 - n}{(j + 1)(j + 2 \ell + 2)} a_{j}
-\label{eq:ecuacion_04_76}
-\end{equation}
-El \textbf{estado base} (es decir, el estado de menor energía) es el caso cuando $n = 1$, usando los valores de las constantes físicas, se obtiene
-\begin{equation}
-E_{1} = - \left[ \dfrac{m}{2 \hbar^{2}} \left( \dfrac{e^{2}}{4 \pi \epsilon_{0}} \right)^{2} \right] =  -13.6 \text{ eV}
-\label{eq:ecuacion_04_77}
-\end{equation}
-Evidentemente, la \textbf{energía de enlace} del hidrógeno (la cantidad de energía que tendría que impartir el electrón con el fin de ionizar el átomo) es de $13.6$ eV. La ec. (\ref{eq:ecuacion_04_67}) obliga que $\ell = 0$, de donde también $m = 0$, por lo que
-\begin{equation}
-\psi_{100} (r, \theta, \phi) = R_{10}(r) Y_{0}^{0} (\theta, \psi)
-\label{eq:ecuacion_04_78}
-\end{equation}
-La fórmula de recursión se trunca después del primer término (ec. \ref{eq:ecuacion_04_76} con $j=0$ devuelve $a_{1} = 0$), así $v(\rho)$ es una constante ($a_{0}$) y
-\begin{equation}
-R_{10} = \dfrac{a_{0}}{a} \; e^{-r/a}
-\label{eq:ecuacion_04_79}
-\end{equation}
-Normalizando
-\[ \int_{0}^{\infty} \vert R_{10} \vert^{2} r^{2} dr = \dfrac{\vert a_{0} \vert^{2}}{a^{2}} \; \int_{0}^{\infty} e^{-2r/a} \; r^{2} dr =  \vert a_{0} \vert^{2} \; \dfrac{a}{4} =  1 \]
-por lo que $a_{0} = 2 / \sqrt{a}$. Mientras que $Y_{0}^{0} = 1 / \sqrt{4 \pi}$, así
-\begin{equation}
-\boxed{\psi_{100} (r, \theta, \phi) = \dfrac{1}{\sqrt{\pi a^{3}}} e^{-r/a}}
-\label{eq:ecuacion_04_80}
-\end{equation}
-Si $n = 2$ la energía es
-\begin{equation}
-E_{2} = \dfrac{-13.6 \text{ eV}}{4} =  - 3.4 \text{ eV}
-\label{eq:ecuacion_04_81}
-\end{equation}
-este es el primer estado excitado, o más bien, \textit{estados}, ya que podemos tener ya sea $\ell = 0$ (en cuyo caso $m = 0$) o $\ell = 1$ (con $m = -1$, $0$, $+ 1$), por lo que son en realidad cuatro estados diferentes que comparten esta energía. Si $\ell = 0$, la relación de recurrencia (ec. \ref{eq:ecuacion_04_76}) da
-\[ a_{1} = - a_{0} \hspace{0.5cm} \text{(usando } j = 0 \text{)}, \hspace{1.5cm} \text{y } a_{2} = 0 \hspace{0.5cm} \text{(usando } j = 1 \text{)} \]
-así $v(\rho) = a_{0}(1 - \rho)$, y por tanto
-\begin{equation}
-R_{20}(r) = \dfrac{a_{0}}{2 a} \left(1 - \dfrac{r}{2 a} \right) e^{-r/2a}
-\label{eq:ecuacion_04_82}
-\end{equation}
-Si $\ell = 1$ la fórmula de recurrencia termina la serie luego de un solo término, así $v(\rho)$ es una constante, por lo que se encuentra que
-\begin{equation}
-R_{21}(r) = \dfrac{a_{0}}{4 a^{2}} \; r e^{-r/2a}
-\label{eq:ecuacion_04_83}
-\end{equation}
-En cada caso la constante $a_{0}$, está determinado por la normalización.
-\\
-Para un valor arbitrario de $n$, los posibles valores de $\ell$, son
-\begin{equation}
-\ell = 0, 1, 2, \ldots, n - 1
-\label{eq:ecuacion_04_84}
-\end{equation}
-Para cada $\ell$, existen $2 \ell + 1$ valores posibles de $m$, por lo que el nivel total de energía degenerada $E_{n}$ es
-\begin{equation}
-d(n) = \sum_{\ell = 0}^{n - 1} (2 \ell + 1) = n^{2}
-\label{eq:ecuacion_04_85}
-\end{equation}
-la función polinomial $v(\rho)$ es una función conocida de la matemática, se puede escribir como
-\begin{equation}
-v(\rho) = L_{n - \ell -1}^{2 \ell + 1}(2 \rho)
-\label{eq:ecuacion_04_86}
-\end{equation}
-donde
-\begin{equation}
-L_{q - p}^{p} (x) = (-1)^{p} \left( \dfrac{d}{dx} \right)^{p} L_{q}(x)
-\label{eq:ecuacion_04_87}
-\end{equation}
-son los \textbf{polinomios asociados de Laguerre} y
-\begin{equation}
-L_{q}(x) = e^{x} \left( \dfrac{d}{dx} \right)^{q} \; (e^{-x} \; x^{q} )
-\label{eq:ecuacion_04_88}
-\end{equation}
-es el \textbf{polinomio de Laguerre de orden $n$}.
-En la tabla (\ref{table:tabla_01}) se muestran los primeros polinomios de Laguerre $L_{q}(x)$, mientras que en la tabla (\ref{table:tabla_02}) se muestran algunos polinomios asociados de Laguerre $L_{q-p}^{p}(x)$.
-\begin{table}[H]
-\centering
-\begin{tabular}{l}
-$L_{0} = 1$ \\
-$L_{1} = - x + 1$ \\
-$L_{2} = x^{2} - 4 x + 2$ \\
-$L_{3} = - x^{3} + 9 x^{2} - 18 x + 6$ \\
-\vdots 
-\end{tabular}
-\caption{Primeros polinomios de Laguerre.}
-\label{table:tabla_01}
-\end{table}
-\begin{table}[H]
-\centering
-\begin{tabular}{l l}
-$L_{0}^{0} = 1$ & $L_{0}^{2} = 2$  \\
-$L_{1}^{0} = - x + 1$ & $L_{1}^{2} = -6x + 18$ \\
-$L_{2}{0} = x^{2} - 4 x + 2$ & $L_{2}^{2} = 12 x^{2} - 96 x + 144$ \\
-$L_{0}^{1} = 1$ & $L_{0}^{3} = 6$ \\
-$L_{1}^{1} = -2x + 4$ & $L_{1}^{3} = -24 x + 96$ \
-\vdots 
-\end{tabular}
-\caption{Primeros polinomios asociados de Laguerre.}
-\label{table:tabla_02}
-\end{table}
-Las funciones de onda normalizadas para el hidrógeno son:
-\begin{equation}
-\boxed{\psi_{n \ell m} = \sqrt{\left(\dfrac{2}{na} \right)^{3} \dfrac{(n - \ell - 1)}{2n[(n + \ell)!]^{3}}} e^{-r/na} \; \left( \dfrac{2r}{na} \right)^{\ell} \; L_{n - \ell -1}^{2 \ell + 1} \left( \dfrac{2 r}{n a} \right) Y_{\ell}^{m} (\theta, \phi)}
-\label{eq:ecuacion_04_89}
-\end{equation}
-No se miran muy agradables, pero no se quejan, este es uno de los muy pocos sistemas realistas que se puede resolver del todo, de forma exacta. Como verá más adelante, son mutuamente ortogonales:
-\begin{equation}
-\int \psi_{n \ell m}^{*} \psi_{n^{\prime} \ell^{\prime} m^{\prime}} r^{2} \sin \theta dr d \theta d \phi =  \delta_{n n^{\prime}} \delta_{\ell \ell^{\prime}} \delta_{m m^{\prime}}
-\label{eq:ecuacion_04_90}
-\end{equation}
-\section{Espectro del hidrógeno.}
-En principio, si ponemos un átomo de hidrógeno en un estado estacionario $\Psi_{n \ell m}$, debe quedarse allí para siempre. Sin embargo, si \emph{perturbamos} ligeramente (por colisión con otro átomo, por ejemplo, o haciéndole incidir  luz en él), entonces el átomo puede experimentar una transición a otro estado estacionario mediante la absorción de la energía y pasarse a un estado de mayor energía o cediendo energía (normalmente en forma de radiación electromagnética) y moverse  hacia abajo. En la práctica este tipo de perturbaciones están siempre presentes; transiciones (o, como a veces se denominan ``saltos cuánticos'') se producen constantemente, y el resultado es que un contenedor de hidrógeno emite luz (fotones), cuya energía corresponde a la diferencia de energía entre los estados inicial y final:
-\begin{equation}
-E_{\gamma} = E_{i} - E_{f} = -13.6 \text{ eV} \left( \dfrac{1}{n_{i}^{2}} - \dfrac{1}{n_{f}^{2}} \right)
-\label{eq:ecuacion_04_91}
-\end{equation}
-de acuerdo con la fórmula de Planck, la energía de un fotón es proporcional a su frecuencia
-\begin{equation}
-E_{\gamma} = h \nu
-\label{eq:ecuacion_04_92}
-\end{equation}
-Mientras que la longitud de onda está dada por $\lambda = c / \nu)$, por tanto
-\begin{equation}
-\dfrac{1}{\lambda} = R \left( \dfrac{1}{n_{f}^{2}} - \dfrac{1}{n_{i}^{2}} \right)
-\label{eq:ecuacion_04_93}
-\end{equation}
-donde
-\begin{equation}
-R = \dfrac{m}{4 \pi c \hbar} \left( \dfrac{e^{2}}{4 \pi \epsilon_{0}} \right)^{2} = 1.097 \times 10^{7} \text{m}^{-1}
-\label{eq:ecuacion_04_94}
-\end{equation}
-a $R$ se le conoce como la \textbf{constante de Rydberg}, y la ec. (\ref{eq:ecuacion_04_93}) es la \textbf{fórmula Rydberg} para el espectro de hidrógeno. Fue descubierto empíricamente en el siglo XIX, y el mayor triunfo de la teoría de Bohr fue su capacidad para dar cuenta de este resultado y calcular $R$ en función de las constantes fundamentales de la naturaleza. Las transiciones al estado base ($n_{f}= 1$) se encuentran en el ultravioleta; son conocidas por los espectroscopistas como la \textbf{serie de Lyman}. Las transiciones al primer estado excitado ($n_{f}= 2$) se encuentran en la zona de región visible; conforman la \textbf{serie de Balmer}. Las transiciones a $n_{f} = 3$ (la \textbf{serie de Paschen}) están en el infrarrojo, y así sucesivamente (véase la figura \ref{fig:figura_02}). (A temperatura ambiente, la mayoría de los átomos de hidrógeno están en el estado base, para obtener el espectro de emisión, se deben elevar primero los diferentes estados excitados, por lo general esto se realiza haciendo pasar una chispa eléctrica a través del gas.)
-\begin{figure}[H]
-\centering
-\includestandalone{espectrohidrogeno}
-\caption{Niveles de energía y transiciones en el espectro de hidrógeno.}
-\label{fig:figura_02}
-\end{figure}
-\newpage
+% \section{El átomo de hidrógeno.}
+% El átomo de hidrógeno consta de un protón pesado, esencialmente inmóvil (de tal manera que podemos ponerlo en el origen) de carga $e$, junto con un electrón mucho más ligero (de carga $-e$) que se desplaza en círculo alrededor del protón, y se mantiene en órbita por la atracción mutua de cargas opuestas (ver Figura \ref{fig:figura_01}).
+% \begin{figure}[H]
+% \centering
+% \includestandalone{atomohidrogeno}
+% \caption{El átomo de hidrógeno.}
+% \label{fig:figura_01}
+% \end{figure}
+% A partir de la ley de Coulomb, la energía potencial (en unidades SI) es
+% \begin{equation}
+% V(r) = - \dfrac{e^{2}}{4 \pi \epsilon_{0}} \; \dfrac{1}{r}
+% \label{eq:ecuacion_04_52}
+% \end{equation}
+% y la ecuación radial es
+% \begin{equation}
+% - \dfrac{\hbar^{2}}{2m} \; \dfrac{d^{2} u }{d r^{2}} + \left[ - \dfrac{e^{2}}{4 \pi \epsilon_{0}} \; \dfrac{1}{r} + \dfrac{\hbar^{2}}{2m} \; \dfrac{\ell(\ell +1)}{r^{2}} \right] u =  E u
+% \label{eq:ecuacion_04_53}
+% \end{equation}
+% Nuestro problema es resolver esta ecuación para $u(r)$ y determinar las energías permitidas $E$ de los electrones. El potencial de Coulomb (Ecuación \ref{eq:ecuacion_04_52}) admite estados de medios continuos (con $E> 0$), la descripción de electrones la dispersión de protones, así como estados ligados discretas, lo que representa el átomo de hidrógeno, pero nos limitaremos nuestra atención a este último.
+% \section{La función radial de onda.}
+% Nuestra primera tarea es poner en orden la notación. Dejando
+% \begin{equation}
+% \kappa \equiv \dfrac{\sqrt{-2 m E}}{\hbar}
+% \label{eq:ecuacion_04_54}
+% \end{equation}
+% (Para estados base, $E < 0$, por lo que $\kappa$ es real). Al dividir la ec. (\ref{eq:ecuacion_04_53}) por $E$, tenemos
+% \[ \dfrac{1}{\kappa^{2}} \dfrac{d^{2} u}{d r^{2}} = \left[1 - \dfrac{m e^{2}}{2 \pi \; \epsilon_{0} \hbar^{2} \kappa} \; \dfrac{1}{(\kappa r)} + \dfrac{\ell (\ell + 1)}{(\kappa r)^{2}} \right] u \]
+% donde podemos hacer
+% \begin{equation}
+% \rho \equiv \kappa r \hspace{1cm} \rho_{0} \equiv \dfrac{m e^{2}}{2 \pi \; \epsilon_{0} \hbar^{2} \kappa}
+% \label{eq:ecuacion_04_55}
+% \end{equation}
+% por lo que
+% \begin{equation}
+% \dfrac{d^{2} u}{d \rho^{2}} = \left[ 1 - \dfrac{\rho_{0}}{\rho} + \dfrac{\ell (\ell + 1)}{\rho^{2}} \right] u
+% \label{eq:ecuacion_04_56}
+% \end{equation}
+% Revisemos la forma asintótica de las soluciones: mientras $\rho \to \infty$, el término constante en los paréntesis es el que domina, por lo que aproximadamente
+% \[ \dfrac{d^{2} u}{d \rho^{2}} = u \]
+% La solución general es del tipo
+% \begin{equation}
+% u(\rho) = A e^{-\rho} + B e^{\rho}
+% \label{eq:ecuacion_04_57}
+% \end{equation}
+% pero $exp(\rho)$ se anula cuando $\rho \to \infty$, así $B=0$, evidentemente
+% \begin{equation}
+% u(\rho) \sim A e^{-\rho}
+% \label{eq:ecuacion_04_58}
+% \end{equation}
+% para valores grande de $\rho$. Mientras que por otro lado, mientras que $\rho \to 0$ el término centrífugo domina, por lo que la aproximación es
+% \[ \dfrac{d^{2} u}{d \rho} = \dfrac{\ell (\ell + 1)}{\rho^{2}} u \]
+% que tiene por solución general
+% \[ u(\rho) = C \rho^{\ell +1} + D \rho^{-\ell} \]
+% pero el término $\rho^{-\ell}$ se anula cuando $\rho \to 0$, así $D = 0$, por lo que
+% \begin{equation}
+% u(\rho) \sim C \rho^{\ell + 1}
+% \label{eq:ecuacion_04_59}
+% \end{equation}
+% para valores pequeños de $\rho$.
+% \\
+% El siguiente paso es revisar el compartamiento asintótico, al introducir una nueva función $v(\rho)$:
+% \begin{equation}
+% u(\rho) = \rho^{\ell + 1} e^{-\rho} \; v(\rho)
+% \label{eq:ecuacion_04_60} 
+% \end{equation}
+% en espera que $v(\rho)$ sea tan sencilla como $u(\rho)$, pero la primera vista nos dice que en apariencia, no es así:
+% \[ \dfrac{d u}{d \rho} = \rho^{\ell} e^{-\rho} \left[ (\ell + 1 - \rho) v + \rho \dfrac{d v}{d \rho} \right]  \]
+% y
+% \[ \dfrac{d^{2} u}{d \rho^{2}} = \rho^{\ell} e^{-\rho} \left( \left[ -2 \ell - 2 + \rho + \dfrac{ \ell (\ell + 1)}{\rho} \right] v + 2 (\ell + 1 - \rho) \dfrac{d v}{d \rho} + \rho \dfrac{d^{2} v}{d \rho^{2}} \right)  \]
+% en términos de $v(\rho)$, la ecuación radial (ec. \ref{eq:ecuacion_04_56}) se escribe
+% \begin{equation}
+% \rho \dfrac{d^{2} v}{d \rho^{2}} + 2 (\ell + 1 - \rho) \dfrac{d v}{d \rho} + [\rho_{0} - 2 (\ell + 1)] v = 0
+% \label{eq:ecuacion_04_61}
+% \end{equation}
+% Finalmente, suponemos que la solución $v(\rho)$ puede expresarse como una serie de potencias en $\rho$:
+% \begin{equation}
+% v(\rho) = \sum_{j=0}^{\infty} a_{j} \rho^{j} 
+% \label{eq:ecuacion_04_62}
+% \end{equation}
+% Nuestro problema ahora es determinar los coeficientes $(a_{0}, a_{1}, a_{2}, \ldots)$. Diferenciando término a término
+% \[ \dfrac{d v}{d \rho} = \sum_{j=0}^{\infty} j \; a_{j} \; \rho^{j - 1} = \sum_{j=0}^{\infty} (j+1) a_{j+1} \; \rho^{j} \]
+% En la segunda suma, se ha renombrado el índice mudo $j \to j+1$. Diferenciando nuevamente
+% \[ \dfrac{d^{2} v}{d \rho} = \sum_{j=0}^{\infty} j (j+1) \; a_{j+1} \rho^{j-1} \]
+% sustituyendo en la ecuación \ref{eq:ecuacion_04_61}, tenemos
+% \[ \begin{split}
+% \sum_{j=0}^{\infty} j (j &+ 1)\; a_{j+1} \rho^{j} + 2 (\ell + 1) \sum_{j=0}^{\infty} (j + 1) \; a_{j+1} \rho^{j} + \\
+% &- 2 \sum_{j=0}^{\infty} j \; a_{j} \rho^{j} + [ \rho_{0} - 2(\ell + 1)] \sum_{j=0}^{\infty} a_{j} \rho^{j} = 0
+% \end{split} \]
+% igualando los coeficientes de las potencias similares, nos lleva a
+% \[ j(j+1)a_{j+1} + 2(\ell + 1)(j + 1) a_{j+1} - 2 j \; a_{j} + [\rho_{0} - 2(\ell + 1)] a_{j} = 0 \]
+% o equivalentemente
+% \begin{equation}
+% a_{j+1} = \left[ \dfrac{2(j + \ell + 1) - \rho_{0}}{(j+1)(j + 2 \ell + 2)} \right] a_{j}
+% \label{eq:ecuacion_04_63}
+% \end{equation}
+% Esta fórmula de recurrencia determina los coeficientes, y por lo tanto la función $v(\rho)$: Comenzamos con $a_{0}= A$ (esto se convierte en una constante en general, que se fija por la normalización), y la ecuación (\ref{eq:ecuacion_04_63}) nos devuelve $a_{1}$, usando este valor, , se obtiene un $a_{2}$, y así.
+% \\
+% Ahora vamos a ver a que se parecen los coeficientes grandes $j$ (esto corresponde a un valor grande de $\rho$, donde dominan las potencias superiores). En este régimen la fórmula de recurrencia dice que
+% \[ a_{j+1} \cong \dfrac{2 j}{j (j + 1)} a_{j} =  \dfrac{2}{j + 1} a_{j} \]
+% así
+% \begin{equation}
+% a_{j} \cong \dfrac{2^{j}}{j!} A
+% \label{eq:ecuacion_04_64}
+% \end{equation}
+% Suponemos que éste es el valor exacto, así
+% \[ v(\rho) = A \sum_{j=0}^{\infty} \dfrac{2^{j}}{j!} =  A e^{2 \rho} \]
+% por tanto
+% \begin{equation}
+% u(\rho) = A \; \rho^{\ell + 1} \; e^{\rho}
+% \label{eq:ecuacion_04_65}
+% \end{equation}
+% que ``vuela" para valores grandes de $\rho$. El exponencial positivo es precisamente el comportamiento asintótico que no queríamos en la ecuación (\ref{eq:ecuacion_04_57}). (No es ningún accidente que ha vuelto a aparecer, después de todo
+% sí representa la forma asintótica de algunas soluciones a la ecuación radial que simplemente no resultan ser los que estamos interesados, porque no son normalizables.
+% \\
+% Sólo hay una manera de salir de este dilema: \emph{La serie debe terminar}. Tiene que haber algún entero máximo, $j_{\text{max}}$, de tal manera que
+% \begin{equation}
+% a_{j_{\text{max}+1}} = 0
+% \label{eq:ecuacion_04_66}
+% \end{equation}
+% (Y más allá del cual todos los coeficientes desaparecen automáticamente). Evidentemente (ec. \ref{eq:ecuacion_04_63})
+% \[ 2 (j_{\text{max}} + \ell + 1) - \rho_{0} = 0 \]
+% Definimos
+% \begin{equation}
+% n \equiv j_{\text{max}} + \ell + 1
+% \label{eq:ecuacion_04_67}
+% \end{equation}
+% (que llamaremos \textbf{número cuántico principal}), tenemos
+% \begin{equation}
+% \rho_{0} = 2 n
+% \label{eq:ecuacion_04_68}
+% \end{equation}
+% Pero $\rho_{0}$ determina $E$ (ecs. \ref{eq:ecuacion_04_54} y \ref{eq:ecuacion_04_55}):
+% \begin{equation}
+% E = - \dfrac{\hbar^{2} \kappa^{2}}{2 m } = - \dfrac{m e^{2}}{8 \pi^{2} \; \epsilon_{0}^{2} \; \hbar^{2} \; \rho_{0}^{2}}
+% \label{eq:ecuacion_04_69}
+% \end{equation}
+% y las energías permitidas son
+% \begin{equation}
+% \boxed{E_{n} = - \left[ \dfrac{m}{2 \hbar^{2}} \left( \dfrac{e^{2}}{4 \pi \epsilon_{0}} \right)^{2} \right] \dfrac{1}{n^{2}} = \dfrac{E_{1}}{n^{2}}, \hspace{1cm} n = 1, 2, 3, \ldots}
+% \label{eq:ecuacion_04_70}
+% \end{equation}
+% Esta es la famosa fórmula de Bohr, para cualquier medida, es el resultado más importante de toda la mecánica cuántica. Bohr lo obtuvo en 1913 por una mezcla casual de una innaplicable física clásica y una teoría cuántica prematura (la ecuación de Schrödinger no llegó hasta 1924).
+% \\
+% Combinando las ecuaciones (\ref{eq:ecuacion_04_55}) y (\ref{eq:ecuacion_04_68}), encontramos que
+% \begin{equation}
+% \kappa = \left( \dfrac{m e^{2}}{4 \pi \; e_{0} \hbar^{2}} \right) \dfrac{1}{n} = \dfrac{1}{a n}
+% \label{eq:ecuacion_04_71}
+% \end{equation}
+% donde
+% \begin{equation}
+% \boxed{a \equiv \dfrac{4 \pi \epsilon_{0} \hbar^{2}}{m e^{2}} = 0.529 \times 10^{-10}  m}
+% \label{eq:ecuacion_04_72}
+% \end{equation}
+% al que se le denomina \emph{radio de Bohr}. Se sigue (de la ec. \ref{eq:ecuacion_04_55}) que
+% \begin{equation}
+% \rho = \dfrac{r}{a n}
+% \label{eq:ecuacion_04_73}
+% \end{equation}
+% Evidentemente las funciones de onda espaciales para el hidrógeno se etiquetan con tres números cuánticos ($n$, $\ell$ y $m$):
+% \begin{equation}
+% \psi_{n \ell m} (r, \theta, \phi) =  R_{n \ell} (r) Y_{\ell}^{m} (\theta, \phi)
+% \label{eq:ecuacion_04_74}
+% \end{equation}
+% retomando la ecuación (\ref{eq:ecuacion_04_60})
+% \begin{equation}
+% R_{n \ell}(r) = \dfrac{1}{r} \rho^{\ell + 1} \; e^{-\rho} \; v(\rho)
+% \label{eq:ecuacion_04_75}
+% \end{equation}
+% y $v(r\rho)$ es un polinomio de grado $j_{\text{max}} = n - \ell - 1)$ en $\rho$, donde los coeficientes están determinados (hasta un factor de normalización global) por la fórmula de recursión
+% \begin{equation}
+% a_{j+1} = \dfrac{2 (j + \ell + 1 - n}{(j + 1)(j + 2 \ell + 2)} a_{j}
+% \label{eq:ecuacion_04_76}
+% \end{equation}
+% El \textbf{estado base} (es decir, el estado de menor energía) es el caso cuando $n = 1$, usando los valores de las constantes físicas, se obtiene
+% \begin{equation}
+% E_{1} = - \left[ \dfrac{m}{2 \hbar^{2}} \left( \dfrac{e^{2}}{4 \pi \epsilon_{0}} \right)^{2} \right] =  -13.6 \text{ eV}
+% \label{eq:ecuacion_04_77}
+% \end{equation}
+% Evidentemente, la \textbf{energía de enlace} del hidrógeno (la cantidad de energía que tendría que impartir el electrón con el fin de ionizar el átomo) es de $13.6$ eV. La ec. (\ref{eq:ecuacion_04_67}) obliga que $\ell = 0$, de donde también $m = 0$, por lo que
+% \begin{equation}
+% \psi_{100} (r, \theta, \phi) = R_{10}(r) Y_{0}^{0} (\theta, \psi)
+% \label{eq:ecuacion_04_78}
+% \end{equation}
+% La fórmula de recursión se trunca después del primer término (ec. \ref{eq:ecuacion_04_76} con $j=0$ devuelve $a_{1} = 0$), así $v(\rho)$ es una constante ($a_{0}$) y
+% \begin{equation}
+% R_{10} = \dfrac{a_{0}}{a} \; e^{-r/a}
+% \label{eq:ecuacion_04_79}
+% \end{equation}
+% Normalizando
+% \[ \int_{0}^{\infty} \vert R_{10} \vert^{2} r^{2} dr = \dfrac{\vert a_{0} \vert^{2}}{a^{2}} \; \int_{0}^{\infty} e^{-2r/a} \; r^{2} dr =  \vert a_{0} \vert^{2} \; \dfrac{a}{4} =  1 \]
+% por lo que $a_{0} = 2 / \sqrt{a}$. Mientras que $Y_{0}^{0} = 1 / \sqrt{4 \pi}$, así
+% \begin{equation}
+% \boxed{\psi_{100} (r, \theta, \phi) = \dfrac{1}{\sqrt{\pi a^{3}}} e^{-r/a}}
+% \label{eq:ecuacion_04_80}
+% \end{equation}
+% Si $n = 2$ la energía es
+% \begin{equation}
+% E_{2} = \dfrac{-13.6 \text{ eV}}{4} =  - 3.4 \text{ eV}
+% \label{eq:ecuacion_04_81}
+% \end{equation}
+% este es el primer estado excitado, o más bien, \textit{estados}, ya que podemos tener ya sea $\ell = 0$ (en cuyo caso $m = 0$) o $\ell = 1$ (con $m = -1$, $0$, $+ 1$), por lo que son en realidad cuatro estados diferentes que comparten esta energía. Si $\ell = 0$, la relación de recurrencia (ec. \ref{eq:ecuacion_04_76}) da
+% \[ a_{1} = - a_{0} \hspace{0.5cm} \text{(usando } j = 0 \text{)}, \hspace{1.5cm} \text{y } a_{2} = 0 \hspace{0.5cm} \text{(usando } j = 1 \text{)} \]
+% así $v(\rho) = a_{0}(1 - \rho)$, y por tanto
+% \begin{equation}
+% R_{20}(r) = \dfrac{a_{0}}{2 a} \left(1 - \dfrac{r}{2 a} \right) e^{-r/2a}
+% \label{eq:ecuacion_04_82}
+% \end{equation}
+% Si $\ell = 1$ la fórmula de recurrencia termina la serie luego de un solo término, así $v(\rho)$ es una constante, por lo que se encuentra que
+% \begin{equation}
+% R_{21}(r) = \dfrac{a_{0}}{4 a^{2}} \; r e^{-r/2a}
+% \label{eq:ecuacion_04_83}
+% \end{equation}
+% En cada caso la constante $a_{0}$, está determinado por la normalización.
+% \\
+% Para un valor arbitrario de $n$, los posibles valores de $\ell$, son
+% \begin{equation}
+% \ell = 0, 1, 2, \ldots, n - 1
+% \label{eq:ecuacion_04_84}
+% \end{equation}
+% Para cada $\ell$, existen $2 \ell + 1$ valores posibles de $m$, por lo que el nivel total de energía degenerada $E_{n}$ es
+% \begin{equation}
+% d(n) = \sum_{\ell = 0}^{n - 1} (2 \ell + 1) = n^{2}
+% \label{eq:ecuacion_04_85}
+% \end{equation}
+% la función polinomial $v(\rho)$ es una función conocida de la matemática, se puede escribir como
+% \begin{equation}
+% v(\rho) = L_{n - \ell -1}^{2 \ell + 1}(2 \rho)
+% \label{eq:ecuacion_04_86}
+% \end{equation}
+% donde
+% \begin{equation}
+% L_{q - p}^{p} (x) = (-1)^{p} \left( \dfrac{d}{dx} \right)^{p} L_{q}(x)
+% \label{eq:ecuacion_04_87}
+% \end{equation}
+% son los \textbf{polinomios asociados de Laguerre} y
+% \begin{equation}
+% L_{q}(x) = e^{x} \left( \dfrac{d}{dx} \right)^{q} \; (e^{-x} \; x^{q} )
+% \label{eq:ecuacion_04_88}
+% \end{equation}
+% es el \textbf{polinomio de Laguerre de orden $n$}.
+% En la tabla (\ref{table:tabla_01}) se muestran los primeros polinomios de Laguerre $L_{q}(x)$, mientras que en la tabla (\ref{table:tabla_02}) se muestran algunos polinomios asociados de Laguerre $L_{q-p}^{p}(x)$.
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{l}
+% $L_{0} = 1$ \\
+% $L_{1} = - x + 1$ \\
+% $L_{2} = x^{2} - 4 x + 2$ \\
+% $L_{3} = - x^{3} + 9 x^{2} - 18 x + 6$ \\
+% \vdots 
+% \end{tabular}
+% \caption{Primeros polinomios de Laguerre.}
+% \label{table:tabla_01}
+% \end{table}
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{l l}
+% $L_{0}^{0} = 1$ & $L_{0}^{2} = 2$  \\
+% $L_{1}^{0} = - x + 1$ & $L_{1}^{2} = -6x + 18$ \\
+% $L_{2}{0} = x^{2} - 4 x + 2$ & $L_{2}^{2} = 12 x^{2} - 96 x + 144$ \\
+% $L_{0}^{1} = 1$ & $L_{0}^{3} = 6$ \\
+% $L_{1}^{1} = -2x + 4$ & $L_{1}^{3} = -24 x + 96$ \
+% \vdots 
+% \end{tabular}
+% \caption{Primeros polinomios asociados de Laguerre.}
+% \label{table:tabla_02}
+% \end{table}
+% Las funciones de onda normalizadas para el hidrógeno son:
+% \begin{equation}
+% \boxed{\psi_{n \ell m} = \sqrt{\left(\dfrac{2}{na} \right)^{3} \dfrac{(n - \ell - 1)}{2n[(n + \ell)!]^{3}}} e^{-r/na} \; \left( \dfrac{2r}{na} \right)^{\ell} \; L_{n - \ell -1}^{2 \ell + 1} \left( \dfrac{2 r}{n a} \right) Y_{\ell}^{m} (\theta, \phi)}
+% \label{eq:ecuacion_04_89}
+% \end{equation}
+% No se miran muy agradables, pero no se quejan, este es uno de los muy pocos sistemas realistas que se puede resolver del todo, de forma exacta. Como verá más adelante, son mutuamente ortogonales:
+% \begin{equation}
+% \int \psi_{n \ell m}^{*} \psi_{n^{\prime} \ell^{\prime} m^{\prime}} r^{2} \sin \theta dr d \theta d \phi =  \delta_{n n^{\prime}} \delta_{\ell \ell^{\prime}} \delta_{m m^{\prime}}
+% \label{eq:ecuacion_04_90}
+% \end{equation}
+% \section{Espectro del hidrógeno.}
+% En principio, si ponemos un átomo de hidrógeno en un estado estacionario $\Psi_{n \ell m}$, debe quedarse allí para siempre. Sin embargo, si \emph{perturbamos} ligeramente (por colisión con otro átomo, por ejemplo, o haciéndole incidir  luz en él), entonces el átomo puede experimentar una transición a otro estado estacionario mediante la absorción de la energía y pasarse a un estado de mayor energía o cediendo energía (normalmente en forma de radiación electromagnética) y moverse  hacia abajo. En la práctica este tipo de perturbaciones están siempre presentes; transiciones (o, como a veces se denominan ``saltos cuánticos'') se producen constantemente, y el resultado es que un contenedor de hidrógeno emite luz (fotones), cuya energía corresponde a la diferencia de energía entre los estados inicial y final:
+% \begin{equation}
+% E_{\gamma} = E_{i} - E_{f} = -13.6 \text{ eV} \left( \dfrac{1}{n_{i}^{2}} - \dfrac{1}{n_{f}^{2}} \right)
+% \label{eq:ecuacion_04_91}
+% \end{equation}
+% de acuerdo con la fórmula de Planck, la energía de un fotón es proporcional a su frecuencia
+% \begin{equation}
+% E_{\gamma} = h \nu
+% \label{eq:ecuacion_04_92}
+% \end{equation}
+% Mientras que la longitud de onda está dada por $\lambda = c / \nu)$, por tanto
+% \begin{equation}
+% \dfrac{1}{\lambda} = R \left( \dfrac{1}{n_{f}^{2}} - \dfrac{1}{n_{i}^{2}} \right)
+% \label{eq:ecuacion_04_93}
+% \end{equation}
+% donde
+% \begin{equation}
+% R = \dfrac{m}{4 \pi c \hbar} \left( \dfrac{e^{2}}{4 \pi \epsilon_{0}} \right)^{2} = 1.097 \times 10^{7} \text{m}^{-1}
+% \label{eq:ecuacion_04_94}
+% \end{equation}
+% a $R$ se le conoce como la \textbf{constante de Rydberg}, y la ec. (\ref{eq:ecuacion_04_93}) es la \textbf{fórmula Rydberg} para el espectro de hidrógeno. Fue descubierto empíricamente en el siglo XIX, y el mayor triunfo de la teoría de Bohr fue su capacidad para dar cuenta de este resultado y calcular $R$ en función de las constantes fundamentales de la naturaleza. Las transiciones al estado base ($n_{f}= 1$) se encuentran en el ultravioleta; son conocidas por los espectroscopistas como la \textbf{serie de Lyman}. Las transiciones al primer estado excitado ($n_{f}= 2$) se encuentran en la zona de región visible; conforman la \textbf{serie de Balmer}. Las transiciones a $n_{f} = 3$ (la \textbf{serie de Paschen}) están en el infrarrojo, y así sucesivamente (véase la figura \ref{fig:figura_02}). (A temperatura ambiente, la mayoría de los átomos de hidrógeno están en el estado base, para obtener el espectro de emisión, se deben elevar primero los diferentes estados excitados, por lo general esto se realiza haciendo pasar una chispa eléctrica a través del gas.)
+% \begin{figure}[H]
+% \centering
+% \includestandalone{espectrohidrogeno}
+% \caption{Niveles de energía y transiciones en el espectro de hidrógeno.}
+% \label{fig:figura_02}
+% \end{figure}
+% \newpage
+%Refernci
 \section{Polinomios de Laguerre.}
 La ecuación diferencial de Laguerre tiene la forma:
 \begin{equation}
-x \dprima{y} + (1 - x) \prima{y} +  n y = 0
+x \, \ddot{y} + (1 - x) \, \dot{y} + n \, y = 0
 \label{eq:ecuacion_08_74}
 \end{equation}
 donde
 \[ a_{2} = x \hspace{1cm} a_{1} = 1 - x \hspace{1cm} a_{0} = 0 \hspace{1cm} \lambda = n \]
 Entonces por ser una ecuación de tipo Sturm-Liouville, se tiene que
-\[ p = \dfrac{1}{a_{2}} \exp \left( \int \frac{a_{1}}{a_{2}} dx \right) = e^{-x} \hspace{1cm} q = a_{2} \; p = x \; e^{-x} \hspace{1cm} r =a_{0} \; p = 0 \]
+\[ p = \dfrac{1}{a_{2}} \exp \left( \int \frac{a_{1}}{a_{2}} \, \dd x \right) = e^{-x} \hspace{1cm} q = a_{2} \, p = x \, e^{-x} \hspace{1cm} r = a_{0} \, p = 0 \]
 En consecuencia la forma autoadjunta es:
-\[ \dfrac{d}{dx} \left( x \; e^{-x} \; \prima{y} \right) + n \; e^{-x} \;  y = 0  \]
+\[ \dv{x} \left( x \, e^{-x} \, \dot{y} \right) + n \, e^{-x} \,  y = 0  \]
 Al considerar el método de Frobenius, se verá que $n$ debe de ser un entero positivo, para que la solución sea convergente en $x \to \infty$. Considerando la teoría de Sturm-Liouville, se obtiene con $y(x) = L_{n}(x)$:
 \begin{equation}
-(n - m) \int_{a}^{b} e^{-x} \; L_{n}(x) \; L_{m}(x) dx = \left[ x \; e^{-x} (\dot{L}_{n} L_{m} - \dot{L}_{m} L_{n}) \right]_{a}^{b}
+(n - m) \int_{a}^{b} e^{-x} \; L_{n}(x) \; L_{m}(x) \, \dd x = \left[ x \; e^{-x} (\dot{L}_{n} \, L_{m} - \dot{L}_{m} \, L_{n}) \right]_{a}^{b}
 \label{eq:ecuacion_08_75}
 \end{equation}
 Las funciones $L_{n}$ son ortogonales si $a=0$, $b \to \infty$.
-\\
-Aplicando el método de Frobenius:
+\par
+Aplicando el método de Frobenius, con una prpouesta de solución:
 \[ y(x) = \sum_{\alpha = 0}^{\infty} a_{\alpha} \; x^{\alpha + k}, \hspace{1.5cm} a_{0} \neq 0 \]
-se sigue por sustitución:
-\begin{eqnarray*}
-\sum_{\alpha = 0}^{\infty} a_{\alpha} (\alpha + k)^{2} \; x^{\alpha + k - 1} + \sum_{\alpha = 0}^{\infty} a_{\alpha} (- \alpha - k + n) \; x^{\alpha + k} &=& 0 \Rightarrow \saltosin
-\sum_{\alpha = -1}^{\infty} a_{\alpha + 1} (\alpha + k + 1)^{2} \; x^{\alpha + k} + \sum_{\alpha = 0}^{\infty} a_{\alpha} (- \alpha - k + n) \; x^{\alpha + k} &=& 0
-\end{eqnarray*}
-se sigue entonces que
-\begin{eqnarray}
-a_{0} k^{2} &=& 0 \saltosin
-a_{\alpha + 1} (\alpha + k + 1)^{2} + a_{\alpha} (-\alpha - k + n) &=& 0 \nonumber
-\end{eqnarray}
-Por tanto: $k = 0$ y la de la segunda ecuación indicial
-\[ a_{\alpha + 1} = \dfrac{a_{\alpha} (\alpha + k - n)}{(\alpha + k + 1)^{2}} = \dfrac{a_{\alpha} (\alpha - n)}{(\alpha + 1)^{2}} \]
+se sigue por sustitución en la ec. (\ref{eq:ecuacion_08_74}),:
+\begin{align*}
+\sum_{\alpha = 0}^{\infty} a_{\alpha} \, (\alpha + k)^{2} \; x^{\alpha + k - 1} + \sum_{\alpha = 0}^{\infty} a_{\alpha} (- \alpha - k + n) \; x^{\alpha + k} = 0
+\end{align*}
+Moviendo el índice $-1$ de la primera suma
+\begin{align*}
+\sum_{\alpha = -1}^{\infty} a_{\alpha + 1} \, (\alpha + k + 1)^{2} \; x^{\alpha + k} + \sum_{\alpha = 0}^{\infty} a_{\alpha} \, (- \alpha - k + n) \; x^{\alpha + k} = 0
+\end{align*}
+se sigue,  que
+\begin{align*}
+a_{0} \, k^{2} &= 0 \saltosin
+a_{\alpha + 1} (\alpha + k + 1)^{2} + a_{\alpha} (-\alpha - k + n) &= 0 
+\end{align*}
+Por tanto: $k = 0$ y la de la segunda ecuación de índices
+\[ a_{\alpha + 1} = \dfrac{a_{\alpha} \, (\alpha + k - n)}{(\alpha + k + 1)^{2}} = \dfrac{a_{\alpha} \, (\alpha - n)}{(\alpha + 1)^{2}} \]
 explícitamente
-\begin{eqnarray*}
-a_{1} &=& (-1) \dfrac{n}{1} a_{0} \saltosin
-a_{2} &=& (-1) \dfrac{a_{1} (n - 1)}{2^{2}} = (-1)^{2} \dfrac{n (n - 1)(n - 2)}{2^{2}} a_{0} \saltosin
-a_{3} &=& (-1) \dfrac{a_{2} (n - 2)}{3!} = (-1)^{3} \dfrac{n (n - 1)(n - 2)}{2^{2} \times 3^{2}} a_{0} \saltosin
-a_{4} &=& (-1) \dfrac{a_{3} (n - 3)}{4^{2}} = (-1)^{4} \dfrac{n (n - 1)(n - 2)(n - 3)}{2^{2} \times 3^{2} \times 4^{4}} a_{0} \saltosin
+\begin{align*}
+a_{1} &= (-) \, \dfrac{n}{1} \, a_{0} \\
+a_{2} &= (-) \, \dfrac{a_{1} \, (n - 1)}{2^{2}} = (-)^{2} \, \dfrac{n (n - 1)}{2^{2}} \, a_{0} \\
+a_{3} &= (-) \, \dfrac{a_{2} \, (n - 2)}{3!} = (-)^{3} \, \dfrac{n (n - 1)(n - 2)}{2^{2} \times 3^{2}} \, a_{0} \\
+a_{4} &= (-) \dfrac{a_{3} \, (n - 3)}{4^{2}} = (-)^{4} \dfrac{n \, (n - 1)(n - 2)(n - 3)}{2^{2} \times 3^{2} \times 4^{4}} \, a_{0} \\
 \vdots
-\end{eqnarray*}
+\end{align*}
 generalizando la expresión
-\[ a_{p} = \dfrac{(-1)^{p} n!}{(p!)^{2} (n - p)!} \; a_{0} \]
+\[ a_{p} = \dfrac{(-1)^{p} \, n!}{(p!)^{2} \, (n - p)!} \, a_{0} \]
 La serie de Frobenius toma entonces la forma:
-\[ y = a_{0} \; n! \; \sum_{p=0}^{\infty} \dfrac{(-1)^{p} \; x^{p}}{(p!)^{2} (n - p)! } \]
+\[ y = a_{0} \, n! \, \sum_{p=0}^{\infty} \dfrac{(-1)^{p} \, x^{p}}{(p!)^{2} \, (n - p)! } \]
 La convergencia de la serie puede estudiarse mediante la evaluación del siguiente cociente:
-\[ \dfrac{a_{p + 1} \; x^{p + 1}}{a_{p} \; x^{p}}, \hspace{1.5cm} \mbox{que resulta ser} \hspace{1.5cm} \dfrac{x(n - p)}{(p + 1)^{2}} \]
+\[ \dfrac{a_{p + 1} \; x^{p + 1}}{a_{p} \; x^{p}}, \hspace{1.5cm} \mbox{que resulta ser} \hspace{1.5cm} \dfrac{x \, (n - p)}{(p + 1)^{2}} \]
 y es no convergente, si $n \neq \mbox{ entero}$, cuando $x \to \infty$. En consecuencia debemos de imponer la restricción de que $n$ sea \emph{entero positivo}, lo que convierte la serie infinita en un polinomio.
-\\
+\par
 Definimos los \emph{polinomios de Laguerre} $L_{n}(x)$ con $n$ entero como
-\[ L_{n}(x) = A \; \sum_{p = 0}^{\infty} \dfrac{(-1)^{p} \; x^{p}}{(p!)^{2} (n - p)!} \]
+\[ L_{n}(x) = A \; \sum_{p = 0}^{\infty} \dfrac{(-)^{p} \; x^{p}}{(p!)^{2} \, (n - p)!} \]
 y de tal modo que $L_{n}(0) = 1$. Esto implica que $A = n!$, así pues, con $n \geq 0$ entero:
 \begin{equation}
-\boxed{
-L_{n}(x) = n! \; \sum_{p = 0}^{\infty} \dfrac{(-1)^{p} \; n!}{(p!)^{2} (n - p)!} \; x^{p}
-}
+\setlength{\fboxsep}{3\fboxsep}\boxed{ L_{n}(x) = n! \; \sum_{p = 0}^{\infty} \dfrac{(-1)^{p} \; n!}{(p!)^{2} (n - p)!} \; x^{p}}
 \label{eq:ecuacion_08_76}
 \end{equation}
+Los primeros polinomios son:
+\begin{align*}
+L_{0} (x) &= 1 \\
+L_{1} (x) &= 1 - x \\
+L_{2} (x) &= 1 - 2 \, x + \dfrac{x^{2}}{2} \\
+L_{3} (x) &= 1 - 3 \, x + \dfrac{3}{2} x^{2} + \dfrac{x^{3}}{6} \\
+\end{align*}
 Equivalentemente los polinomios de Laguerre pueden evaluarse a partir de la fórmula de Rodrigues
-\[ \boxed{ L_{n}(x) = \dfrac{e^{x}}{n!} \; \dfrac{d^{n}}{d x^{n}} (x^{n} \; e^{-x}) } \]
-Dos relaciones de recurrencia importante son:
-\begin{eqnarray*}
-(n + 1) L_{n + 1}(x) &=& (2n + 1 - x) L_{n}(x) - n L_{n-1}(x) \saltosin
-x \dot{L}_{n}(x) &=& n L_{n}(x) - n L_{n - 1}(x)
-\end{eqnarray*}
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{ L_{n}(x) = \dfrac{e^{x}}{n!} \; \dv[n]{x} \, (x^{n} \; e^{-x}) }
+\end{align*}
+Dos relaciones de recurrencia importantes son:
+\begin{align*}
+(n + 1) \, L_{n + 1}(x) &= (2 \, n + 1 - x) \, L_{n}(x) - n \, L_{n-1}(x) \\
+x \, \dot{L}_{n}(x) &= n \, L_{n}(x) - n \, L_{n - 1}(x)
+\end{align*}
 En términos de operadores de escalera, podemos escribir
-\begin{eqnarray*}
-L_{n - 1} &=& \left( 1 - \dfrac{x}{n} \; \dfrac{d}{d x} \right) L_{n} \saltosin
-L_{n + 1} &=& \left( n + 1 - x + x \; \dfrac{d}{d x} \right) L_{n}
-\end{eqnarray*}
+\begin{align*}
+L_{n - 1} &= \left( 1 - \dfrac{x}{n} \; \dv{x} \right) \, L_{n} \\
+L_{n + 1} &= \left( n + 1 - x + x \; \dv{x} \right) \, L_{n}
+\end{align*}
 Utilizando la función generatriz
 \[ \dfrac{e^{-x t/(1 - t)}}{1 - t} = \sum_{n=0}^{\infty} t^{n} \; L_{n}(x) \]
-donde $vert t \vert < 1$, podemos evaluar el factor de normalización para la condición de ortogonalidad. Multiplicamos la expresión anterior por sí misma (haciendo el cambio de variable $t$ por $s$ y por $e^{-x}$, para luego integrar en $(0, \infty)$:
-\begin{eqnarray}
+donde $\abs{t} < 1$, podemos evaluar el factor de normalización para la condición de ortogonalidad. Multiplicamos la expresión anterior por sí misma (haciendo el cambio de variable $t$ por $s$ y por $e^{-x}$, para luego integrar en $(0, \infty)$:
+\begin{align}
 \begin{aligned}
-\dfrac{1}{(1 - t)(1 - s)} &\int_{0}^{\infty} \exp \left( -x \left[ \dfrac{1+t}{1-t} + \dfrac{s}{1-s} \right] \right) dx =  \\
-&= \sum_{n, m = 0}^{\infty} t^{n} \; s^{m} \times \int_{0}^{\infty} e^{-x} \; L_{n}(x) L_{m}(x) dx
+\dfrac{1}{(1 - t)(1 - s)} &\int_{0}^{\infty} \exp \left( -x \left[ \dfrac{1+t}{1-t} + \dfrac{s}{1-s} \right] \right) \dd x =  \\
+&= \sum_{n, m = 0}^{\infty} t^{n} \; s^{m} \times \int_{0}^{\infty} e^{-x} \; L_{n}(x) \, L_{m}(x) \, \dd x
 \end{aligned}
-\end{eqnarray}
+\label{eq:ecuacion_08_77}
+\end{align}
 y como
-\[ \int_{0}^{\infty} e^{-x} \; L_{n}(x) L_{m}(x) dx = \delta_{nm} \; \int_{0}^{\infty} e^{-x} \; L_{n}^{2} (x) dx \]
+\[ \int_{0}^{\infty} e^{-x} \; L_{n}(x) L_{m}(x) \, \dd x = \delta_{nm} \; \int_{0}^{\infty} e^{-x} \; L_{n}^{2} (x) \, \dd x \]
 y además
-\begin{eqnarray*}
-\int_{0}^{\infty} &\exp \left( -x \left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right] \right) dx = \saltosin
-&\dfrac{1}{\left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right]} \exp \left( -x \left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right] \right) \Bigr|_{0}^{\infty} \saltosin
+\begin{align*}
+\int_{0}^{\infty} &\exp \left( -x \left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right] \right) \, \dd x = \\
+&\dfrac{1}{\left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right]} \, \exp \left( -x \left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right] \right) \eval_{0}^{\infty} \\
 &= \dfrac{1}{\left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right]}
-\end{eqnarray*}
+\end{align*}
 se sigue que:
-\begin{eqnarray*}
-\dfrac{1}{(1-t)(1 - s) \left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right]} &= \sum_{n=0}^{\infty} (s t)^{n} \int_{0}^{\infty} e^{-x} \; L_{n}^{2} (x)  dx \saltosin
-&= \dfrac{1}{1 - st} = (1 - st)^{-1} = \sum_{n=0}^{\infty} (s t)^{n}
-\end{eqnarray*}
+\begin{align*}
+\dfrac{1}{(1-t)(1 - s) \left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right]} &= \sum_{n=0}^{\infty} (s \, t)^{n} \int_{0}^{\infty} e^{-x} \; L_{n}^{2} (x) \, \dd x \\
+&= \dfrac{1}{1 - s \, t} = (1 - s \, t)^{-1} = \sum_{n=0}^{\infty} (s \, t)^{n}
+\end{align*}
 en el último paso, se ha utilizado la expansión binomial:
-\[  (a + b)^{-k} = \sum \dfrac{(1-)^{n} (k + n - 1)!}{n! (k -1)!} a^{k - n} \; b^{n} \hspace{1cm} k >0, b < a \]
+\[  (a + b)^{-k} = \sum \dfrac{(1-)^{n} \, (k + n - 1)!}{n! \, (k -1)!} \, a^{k - n} \; b^{n} \hspace{1cm} k >0, b < a \]
 entonces
-\[ \int_{0}^{\infty} e^{-x} \; L_{n}^{2}(x) dx = 1 \]
+\[ \int_{0}^{\infty} e^{-x} \; L_{n}^{2}(x) \, \dd x = 1 \]
 La condición de ortogonalidad resulta ser simultáneamente condición de ortonormalidad:
 \begin{equation}
-\boxed{\int_{0}^{\infty} e^{-x} \; L_{n}(x) L_{m}(x) d x = \delta_{nm} }
+\setlength{\fboxsep}{3\fboxsep}\boxed{\int_{0}^{\infty} e^{-x} \; L_{n}(x) L_{m}(x) d x = \delta_{nm} }
 \label{eq:ecuacion_08_78}
 \end{equation}
-
+\section{Ecuación asociada de Laguerre.}
+Siguiendo un procedimiento análogo al implementado sobre la ecuación de Legendre para generar la ecuación asociada de Legendre, se tiene que:
+\[ x \, \ddot{y} + (k + 1 - x) \, \dot{y} +  n \, y = 0 \]
+Las soluciones a la ecuación se escribirán como $L_{n}^{k} (x)$ y son tales que:
+\begin{align*}
+L_{n}^{k} (x) &= (-)^{k} \, \dv[k]{x} \, L_{n+k} (x) \\
+&= \dfrac{e^{x} \, x^{-k}}{n!} \, \dv[n]{x} \, (e^{-x} \, x^{n+k}) \hspace{1cm} \mbox{Fórmula de Rodrigues} \\
+&= \sum_{m=0}^{n} \dfrac{(-)^{m} \, (n + k)! \, x^{m}}{(n -m )! \, (k + m)! \, m!} \hspace{1.5cm} k > -1
+\end{align*}
 
 
 
