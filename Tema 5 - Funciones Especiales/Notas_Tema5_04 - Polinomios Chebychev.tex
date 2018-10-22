@@ -17,240 +17,404 @@
 \renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
-\section{Polinomios de Chebychev.}
+\section{Ecuación de Gegenbauer.}
+Esta ecuación tiene la siguiente forma
+\[ (1 - x^{2}) \, \ddot{y} - (2 \, \lambda + 1) \, x \,\dot{y} + \ell (\ell + 2 \, \lambda) \, y = 0 \]
+La forma de Sturm-Lioville puede obtenerse, tomando en cuenta que
+\begin{align*}
+p &= (1 -x^{2})^{\lambda - 1/2} \\
+q &= (1- x^{2})^{\lambda + 1/2}
+\end{align*}
+se tiene entonces
+\[ \dv{x} \left[ (1 - x^{2})^{\lambda+1/2} \, \dot{y} \right] + \ell (\ell + 2 \, \lambda) (1 - x^{2})^{\lambda-1/2} \, y = 0 \]
+Las soluciones a esta ecuación forma una base ortogonal si $[ q \, W]_{x=a}^{x=b} = 0$, es decir, si
+\[ [(1 - x^{2})^{\lambda+1/2} \, W]_{x=a}^{x=b} = 0\]
+lo cual se cumple si $a = -1, b = 1$. A estas soluciones les llamaremos $T_{\ell}^{\lambda} (x)$, son ortogonales, con una función de peso $(1 - x^{2})^{\lambda-1/2}$, con $\ell$ entero:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{\int_{-1}^{1} (1 - x^{2})^{\lambda-1/2} \, T_{\ell}^{\lambda} (x) \, T_{m}^{\lambda} (x) \, \dd x
+ = \dfrac{2^{1-2 \lambda} \, \Gamma (\ell + 2 \, \lambda)}{(\ell + \lambda) [ \Gamma (\lambda + 1)^{2}])} \, \delta_{\ell m}}
+\end{align*}
+Así, lo polinomios $T_{\ell}^{\lambda} (x)$ son una generalización de los polinomios de Legendre $P_{\ell}(x)$ que se presentan cuando $\lambda = 1/2$.
+\par
+Es posible demostrar que
+\begin{equation}
+T_{\ell}^{\lambda} (x) = \sum_{r=0}^{n/2} \dfrac{\Gamma (n - r + \lambda)}{\Gamma (\lambda) \, r! \, (n - 2 \, r)!} \, (2 \, x)^{n-2r}
+\label{eq:ecuacion_08_86}
+\end{equation}
+Si en la ecuación de Gegenbauer, hacemos que $\lambda = 0$, se obtiene la ecuación de \textbf{Chebyshev I}:
+\begin{equation}
+(1 - x^{2}) \, \ddot{y} - x \, \dot{y} + \ell \, y = 0\sum_{r=0}^{N} \dfrac{(-)^{r} \, \Gamma (\ell - r)}{r! \, (\ell - 2 \, r)!} \, (2 \, x)^{\ell - 2r}
+\label{eq:ecuacion_08_87}
+\end{equation}
+ \section{Polinomios de Chebychev.}
 La relevancia de los polinomios de Chebychev radica en el análisis numérico.
-\\
-Considerando la función generatriz para los polinomios de Gegenbauer
-\begin{equation}
-\dfrac{1}{(1 - 2xt + t^{2})^{\alpha}} = \sum_{n=0}^{\infty} C_{n}^{(\alpha)} \; (x) \; t^{n}, \hspace{1cm} \vert x \vert < 1, \hspace{0.5cm} \vert t \vert < 1
-\label{eq:ecuacion_13_092}
-\end{equation}
-en el caso de que $\alpha = \frac{1}{2}$, se obtienen los polinomios de Legendre. Cuando $\alpha=1$ y luego $\alpha=0$ se generan dos conjuntos de polinomios llamados: Polinomios de Chebychev.
-\subsection{Polinomios de tipo II.}
-Con $\alpha=1$ y
-\[ C_{n}^{(1)} (x) = U_{n} \]
-la ecuación (\ref{eq:ecuacion_13_92}) conduce a
-\begin{equation}
-\dfrac{1}{(1 - 2xt + t^{2})} = \sum_{n=0}^{\infty} U_{n} \; (x) \; t^{n} \hspace{1cm} \vert x \vert < 1, \hspace{0.5cm} \vert t \vert < 1
-\label{eq:ecuacion_13_093}
-\end{equation} 
-Esas funciones $U_{n}(x)$ generadas por el término $(1-2xt+t^{2})^{-1}$ se conocen como polinomios de tipo  II. Son útiles en el estudio de la teoría de momento angular con el desarrollo de armónicos esféricos en cuatro dimensiones.
-\subsection{Polinomios de Tipo I.}
-Con $\alpha=0$ tenemos complicaciones, de hecho la función generatriz se reduce a la constante $1$. Para evitar este problema, diferenciamos la ecuación (\ref{eq:ecuacion_13_092}) respecto a $t$, lo que nos devuelve
-\begin{equation}
-\dfrac{-\alpha(-2x + 2t)}{(1 - 2xt + t^{2})^{\alpha+1}} = \sum_{n=1}^{\infty} n \; C_{n}^{(\alpha)} \; (x) \; t^{n-1}
-\label{eq:ecuacion_13_094}
-\end{equation}
-o equivalentemente
-\begin{equation}
-\dfrac{x - t}{(1 - 2xt + t^{2})^{\alpha + 1)}} = \sum_{n=1}^{\infty} \dfrac{n}{2} \left[ \dfrac{C_{n}^{(\alpha)} (x)}{\alpha} \right] \; t^{n-1}
-\label{eq:ecuacion_13_095}
-\end{equation}
-Definimos $C_{n}^{(0)} (x)$ por
-\begin{equation}
-C_{n}^{(0)} (x) = \lim_{\alpha \to 0} \dfrac{C_{n}^{(\alpha)}}{\alpha}
-\label{eq:ecuacion_13_096}
-\end{equation}
-Hemos diferenciado con respecto a $t$ para dejar a $\alpha$ en el denominador y con esto, crear una indeterminación. Ahora multiplicamos la ecuación (\ref{eq:ecuacion_13_095}) por $2t$ le sumamos $1 = (1 - 2xt + t^{2}) / (1 - 2xt + t^{2})$ para obtener
-\begin{equation}
-\dfrac{1 - t^{2}}{1 - 2xt + t^{2}} =  1 + 2 \sum_{n=1}^{\infty} \dfrac{n}{2} C_{n}^{(0)} \; (x) \; t^{n}
-\label{eq:ecuacion_13_097}
-\end{equation}
-Definimos $T_{n}(x)$ por
-\begin{equation}
-T_{n}(x) = \begin{cases}
-1, & n=0 \\
-\dfrac{n}{2} C_{n}^{(0)} (x), & n>0
-\end{cases}
-\label{eq:ecuacion_13_098} 
-\end{equation}
-Hay que señalar que el valor de $C_{n}^{(0)}$ es el límite indicado en la ecuación (\ref{eq:ecuacion_13_096}) y no una sustitución literal de $\alpha=0$ en la función generatriz. Con esta indicación, tenemos pues
-\begin{equation}
-\dfrac{1 - t^{2}}{1 - 2xt + t^{2}} = T_{0} (x) +  2 \sum_{n=1}^{\infty} T_{n} (x) t^{n}, \hspace{1cm} \vert x \vert \leq 1, \hspace{0.5cm} \vert t \vert < 1
-\label{eq:ecuacion_13_099}
-\end{equation}
-A los $T_{n}(x)$ se les denomina polinomios de Chebychev de tipo I. Tomen en cuenta de que el nombre puede cambiar en algunas referencias.
-\\
-Si diferenciamos la función generatriz (ec. \ref{eq:ecuacion_13_099}) con respecto a $t$ y multiplicamos el denominador por $1 - 2xt + t^{2}$, se obtiene
-\[ \begin{split}
-- t - (t - x) \left[ T_{0}(x) +  2 \sum_{n=1}^{\infty} T_{n} (x) t^{n} \right] &= (1 - 2xt + t^{2}) \sum_{n=1}^{\infty} n \; T_{n}(x) \; t^{n-1} \\
-&= \sum_{n=1}^{\infty} [ n \; T_{n} \; t^{n-1} - 2 \; x \; n \; T_{n} \; t^{n} + n \; T_{n} \; t^{n+1} ]
-\end{split} \]
-de donde recuperamos la relación de recurrencia
-\begin{equation}
-T_{n+1} (x) - 2 x T_{n} (x) + T_{n-1} (x) = 0
-\label{eq:ecuacion_13_100}
-\end{equation}
-que se sigue desplazando el índice de suma con el fin de conseguir la misma potencia, $t^{n}$ en cada término y comparando los coeficientes de $t^{n}$. Con el mismo proceso en la ecuación (\ref{eq:ecuacion_13_093}), encontramos
-\[ - \dfrac{2 (t - x)}{1 - 2xt + t^{2}} = (1 - 2xt + t^{2}) \sum_{n=1}^{\infty} n \; U_{n} (x) \; t^{n-1} \]
-de la que se genera la siguiente relación de recurrencia
-\begin{equation}
-U_{n+1}(x) - 2 x U_{n} + U_{n-1} (x) = 0
-\label{eq:ecuacion_13_101}
-\end{equation}
-a la que se llega comparando los coeficientes de potencias de $t$ similares. En la tabla (\ref{tab:tabla_01}) se muestra la relación entre los coeficientes y algunos polinomios
-\begin{center}
-\begin{tabular}{ p{4cm} | C{2cm} | C{2cm} | C{2cm} | C{2cm} }
-\toprule
- & $P_{n}$ & $A_{n}$ & $B_{n}$ & $C_{n}$ \\ \hline
-Legendre & $P_{n}(x)$ & $\frac{2n+1}{n+1}$ & $0$ & $\frac{1}{n+1}$ \\
-Chebychev I & $T_{n}$ & $2$ & $0$ & $1$ \\
-Chebychev II & $U_{n}$ & $2$ & $0$ & $1$ \\
-Asoc. Laguerre & $L_{n}^{(k)} $ & $-\frac{1}{n+1}$ & $-\frac{2n+k+1}{n+1}$ & $\frac{n+k}{n+1}$ \\
-Hermite & $H_{n}(x)$ & $2$ & $0$ & $2n$ \\
-\bottomrule
+\par
+La solución de la ec. de Chebychev (\ref{eq:ecuacion_08_87}), a partir de la ec. (\ref{eq:ecuacion_08_86}) es:
+\begin{align*}
+T_{\ell}^{0} = T_{\ell} &= \sum_{r=0}^{N} \dfrac{(-)^{r} \, \Gamma (\ell - r)}{r! \, (\ell - 2 \, r)!} \, (2 \, x)^{\ell - 2r} \\
+&= \sum_{r=0}^{N} \dfrac{(-)^{r} \, (\ell - r - 1)!}{r! \, (\ell - 2 \, r)!} \, (2 \, x)^{\ell - 2r}
+\end{align*}
+donde $N=\ell/2$ si $\ell=$ par, y $N=(\ell-1)/2$ si $N=$ impar.
+\par
+Una forma equivalente de definir los polinomios de Chebyshev $T_{\ell} (x)$ y $U_{\ell} (x)$ de primera y segunda clase, es la siguiente:
+\begin{align*}
+T_{\ell} (x) &= \cos (\ell \, \arccos x) \\
+U_{\ell} (x) &= \sin (\ell \, \arcsin x) \\
+\end{align*}
+Que las funciones $T_{\ell} (x)$ y $U_{\ell} (x)$ son soluciones independientes, se sigue de observar que:
+\begin{enumerate}[label=\alph*)]
+\item Son funciones \emph{seno} y \emph{coseno}.
+\item $T_{\ell}(1) = 1$ mientras que $U_{\ell}(1) = 0$, por lo que $U_{\ell}(x)$ \textbf{no puede ser múltiplo constante} de $T_{\ell}(x)$.
+\end{enumerate}
+La solución $U_{\ell}(x)$ también puede escribirse de la fomma:
+\[ U_{\ell} (x) = \sqrt{1 - x^{2}} \, \sum_{r=0}^{N} (-)^{r} \, \dfrac{(\ell - r - 1)!}{r! \, (\ell -2 \, r - 1)!} \, (2 \, x)^{\ell-2r-1} \]
+\par
+Las primeras funciones de Chebyshev tienen la siguiente expresión:
+\begin{table}[H]
+\centering
+\begin{tabular}{>{\raggedright\arraybackslash}p{5cm} >{\raggedright\arraybackslash}p{5cm}}
+$T_{0}=1$ & $U_{0}(x)=0$  \\
+$T_{1}(x) = x$ & $U_{1}(x) = \sqrt{1 - x^{2}}$ \\
+$T_{2}(x) = 2 \, x^{2} - 1$ & $U_{2}(x) = 2 \, x \, \sqrt{1 - x^{2}}$ \\
+$T_{3}(x) = 4 \, x^{3} - 3 \, x$ & $U_{3}(x) = (4 \, x^{2} - 1) \, \sqrt{1 - x^{2}}$ \\ 
 \end{tabular}
-\captionof{table}{Relación de recursiva $P_{n+1}(x) = (A_{n} x + B_{n}) P_{n}(x) - C_{n} P_{n-1}(x)$.}
-\label{tab:tabla_01}
-\end{center}
-Usando las funciones generatrices para los primeros valores de $n$ y las relaciones de recurrencia para polinomios de orden mayor, obtenemos las siguientes expresiones tablas (\ref{tab:Poli_tipoI}) y (\ref{tab:Poli_tipoII}):
-\\
-\begin{center}
-\begin{minipage}{5cm}
-\captionof{table}{Polinomios de Chebychev Tipo I.}
-\begin{tabular}{ l }
-\toprule
-$T_{0} = 1$ \\
-$T_{1} = x$ \\
-$T_{2} = 2x^{2} -1$ \\
-$T_{3} = 4x^{3} - 3x$ \\
-$T_{4} = 8x^{4} - 8x^{2} + 1$ \\
-\bottomrule
-\end{tabular}
-\label{tab:Poli_tipoI}
-\end{minipage}
-\hspace{2cm}
-\begin{minipage}{5cm}
-\captionof{table}{Polinomios de Chebychev Tipo II.}
-\begin{tabular}{ l }
-\toprule
-$U_{0} = 1$ \\
-$U_{1} = 2x$ \\
-$U_{2} = 4x^{2} - 1$ \\
-$U_{3} = 8x^{3} - 4x$ \\
-$U_{4} = 16x^{4} - 12x^{2} + 1$ \\
-\bottomrule
-\end{tabular}
-\label{tab:Poli_tipoII}
-\end{minipage}
-\end{center}
-Nuevamente de las funciones generatrices, podemos obtener algunos valores especiales para los polinomios:
-\begin{eqnarray}
+\end{table}
+Las funciones generatrices de los polinomios de Chebyshev son:
+\begin{align}
 \begin{aligned}
-T_{n}(1) &= 1 \\
-T_{n}(-1) &= (-1)^{n} \\
-T_{1n}(0) &= (-1)^{n} \\
-T_{2n+1}(0) &= 0 \\
-U_{n}(1) &= n + 1 \\
-U_{n}(-1) &= (-1)^{n} (n+1) \\
-U_{2n}(0) &= (-1)^{n} \\
-U_{2n+1}(0) &= 0
+\dfrac{1 - t^{2}}{1 - 2 \, x \, t + t^{2}} &= \sum_{\ell=0}^{\infty} \varepsilon_{\ell} \, T_{\ell} (x) \, t^{\ell} \\[0.5em]
+\dfrac{\sqrt{1 - t^{2}}}{1 - 2 \, x \, t + t^{2}} &= \sum_{\ell=0}^{\infty} U_{\ell} (x) \, t^{\ell}
 \end{aligned}
-\end{eqnarray}
-Las relaciones de paridad para $T_{n}$ y $U_{n}$ se obtiene de sus respectivas funciones generatrices, con las sustituciones $t \to -t$ , $x \to -x$, con lo que quedan como invariantes, y son
-\begin{equation}
-T_{n}(x) = (-1)^{n} \; T_{n}(-x) \hspace{1.5cm} U_{n}(x) = (-1)^{n} \; U_{n}(-x)
-\label{eq:ecuacion_13_104}
-\end{equation}
-Las fórmulas de Rodrigues para $T_{n}$ y $U_{n}$ son
-\begin{equation}
-T_{n}(x) = \dfrac{(-1)^{n} \pi^{1/2}(1 - x^{2})^{1/2}}{2^{n} (n - \frac{1}{2})!} \; \dfrac{d^{n}}{d x^{n}}\left[ (1 - x^{2})^{n - 1/2} \right]
-\label{eq:ecuacion_13_105}
-\end{equation}
-y
-\begin{equation}
-U_{n}(x) = \dfrac{(-1)^{n} (n + 1)  \pi^{1/2}}{2^{n + 1} (n + \frac{1}{2})! \; (1 - x^{2})^{1/2}} \; \dfrac{d^{n}}{d x^{n}}\left[ (1 - x^{2})^{n + 1/2} \right]
-\label{eq:ecuacion_13_105}
-\end{equation}
-\subsection{Relaciones de recurrencia.}
-Al diferenciar las funciones generatrices de $T_{n}$ y $U_{n}$ con respecto a $x$, se obtiene una variedad de relaciones de recurrencia que involucra las derivadas, por ejemplo, de la ecuación (\ref{eq:ecuacion_13_99}), tenemos
-\[ (1 - 2xt +  t^{2}) \; 2 \; \sum_{n=1}^{\infty} T_{n}^{\prime} (x) \; t^{n} =  2 t \left[ T_{0}(x) + 2 \sum_{n=1}^{\infty} T_{n}(x) \; t^{n} \right] \]
-de la que se genera la recurrencia
-\begin{equation}
-2 T_{n-1} (x) = T_{n}^{\prime} (x) - 2 x \; T_{n-1}^{\prime} (x) +  T_{n-2}^{\prime}(x)
-\label{eq:ecuacion_13_107}
-\end{equation}
-que es la derivada de la ecuación (\ref{eq:ecuacion_13_100}) para $n \to n-1$.
-\\
-Otras relaciones de recurrencia útiles son
-\begin{equation}
-(1 - x^{2}) T_{n}^{\prime} (x) = -n \; x \; T_{n}(x) + n \; T_{n-1}(x)
-\label{eq:ecuacion_13_108}
-\end{equation}
-y 
-\begin{equation}
-(1 - x^{2}) U_{n}^{\prime} (x) = -n \; x \; U_{n}(x) + (n + 1) \; U_{n-1}(x)
-\label{eq:ecuacion_13_109}
-\end{equation}
-Manejando este conjunto de relaciones de recurrencia, podemos eliminar el índice $n-1$ y ocupar $T_{n}^{\prime \prime} (x)$ así como $T_{n}(x)$, por lo que los polinomios de Chebychev de tipo I satisfacen la EDO2H
-\begin{equation}
-(1 - x^{2}) T_{n}^{\prime \prime} (x) - x T_{n}^{\prime} (x) + n^{2} T_{n} (x) = 0
-\label{eq:ecuacion_13_110}
-\end{equation}
-Los polinomios de Chebychev de tipo II, satisfacen
-\begin{equation}
-(1 - x^{2}) U_{n}^{\prime \prime} (x) - 3 x U_{n}^{\prime} (x) + n(n +2) U_{n} (x) = 0
-\label{eq:ecuacion_13_111}
-\end{equation}
-La ecuación \emph{ultraesférica}
-\begin{equation}
-(1 - x^{2}) \dfrac{d^{2}}{d x^{2}} C_{n}^{(\alpha)} (x) - (2 \alpha + 1) x \dfrac{d}{dx} C_{n}^{(\alpha)} (x) + n(n + 2\alpha) C_{n}^{(\alpha)} (x) = 0
-\label{eq:ecuacion_13_112}
-\end{equation}
-es una generalización de esas ecuaciones diferenciales, que se reduce a la ecuación (\ref{eq:ecuacion_13_110}) cuando $\alpha=0$ y la ecuación (\ref{eq:ecuacion_13_111}) cuando $\alpha = 1$, en el caso de que $\alpha = \frac{1}{2}$ se recupera la ecuación de Legendre.
-\subsection{Forma trigonométrica.}
-En el desarrollo de las propiedades de las soluciones de Chebychev, es conveniente hacer un cambio de variable, de $x$ a $\cos \theta$.
-\\
-Con $x = \cos \theta$ y $d /dx = (-1 / \sin \theta) (d / d \theta)$, se comprueba que
-\[ (1 -x^{2}) \dfrac{d^{2} T_{n}}{d x^{2}} = \dfrac{d^{2} T_{n}}{d \theta^{2}} - \cot \theta \dfrac{d T_{n}}{d \theta}, \hspace{1.5cm} x T_{n}^{prime} = - \cot \theta \dfrac{d T_{n}}{d \theta} \]
-agregando esos términos a la ecuación (\ref{eq:ecuacion_13_110}), resulta
-\begin{equation}
-\dfrac{d^{2} T_{n}}{d \theta^{2}} + n^{2} T_{n} = 0
-\label{eq:ecuacion_13_113}
-\end{equation}
-que es la ecuación de un oscilador armónico simple, con soluciones $\cos n \theta$ y $\sin n \theta$. Con las condiciones de frontera en $x=0,1$, se tiene
-\begin{equation}
-T_{n} = \cos n \theta = \cos n (\arccos x)
-\label{eq:ecuacion_13_114a}
-\end{equation}
-Una segunda solución independiente de las ecuaciones (\ref{eq:ecuacion_13_110}) y (\ref{eq:ecuacion_13_113}) es
-\begin{equation}
-V_{n} = \sin n \theta = \sin n (\arccos x)
-\label{eq:ecuacion_13_114b}
-\end{equation}
-Las correspondientes soluciones para la ecuación de Chebychev de tipo II, (\ref{eq:ecuacion_13_111}) son
-\begin{eqnarray}
-U_{n} &= \dfrac{\sin (n + 1) \theta}{\sin \theta} \label{eq:ecuacion_13_115a} \\
-W_{n} &= \dfrac{\cos (n + 1) \theta}{\sin \theta} \label{eq:ecuacion_13_115b}
-\end{eqnarray}
-Los dos conjuntos de soluciones de tipo I y Tipo II, están relacionadas por
-\begin{eqnarray}
-V_{n} &=  (1 - x^{2})^{1/2} \; U_{n-1} (x) \label{eq:ecuacion_13_116a} \\
-W_{n} &=  (1 - x^{2})^{1/2} \; T_{n-1} (x) \label{eq:ecuacion_13_116b} 
-\end{eqnarray}
-De las funciones generatrices se ha visto que $T_{n}$ y $U_{n}$ son polinomios, claramente $V_{n}$ y $W_{n}$ \textbf{no} son polinomios. 
-\subsection{Ortogonalidad.}
-Si la ecuación (\ref{eq:ecuacion_13_110}) se deja en una forma autoadjunta, obtenemos el factor de peso $w (x) = (1 - x^{2})^{-1/2}$, para la ecuación (\ref{eq:ecuacion_13_111}), la correspondiente función de peso es $(1 - x^{2})^{+1/2}$. Resultando las integrales de ortogonalidad
-\begin{eqnarray}
-\int_{-1}^{1} T_{m} (x) T_{n} (x) (1 - x^{2})^{-1/2} dx = 
+\label{eq:ecuacion_08_88}
+\end{align}
+donde los valores de $\varepsilon_{0} = 1, \varepsilon_{2} = \varepsilon_{3} = \ldots = 2$.
+\par
+Las condiciones de ortogonalidad, son de la forma:
+\[ \int_{-1}^{1} \dfrac{T_{\ell} (x) \, T_{m} (x)}{\sqrt{1 - x^{2}}} \, \dd x = 
 \begin{cases}
-0, & m \neq n \\
-\dfrac{\pi}{2}, & m = n \neq 0 \\
-\pi, & m = n = 0
-\end{cases}
-\label{eq:ecuacion_13_120} \\
-\int_{-1}^{1} V_{m} (x) V_{n} (x) (1 - x^{2})^{-1/2} dx = 
+0 & \ell \neq m \\
+\pi/2 & \ell = m \neq 0 \\
+\pi & \ell = m = 0
+\end{cases} \]
+Para los polinomios de Chebyshev de segunda clase:
+\[ \int_{-1}^{1} \dfrac{U_{\ell} (x) \, U_{m} (x)}{\sqrt{1 - x^{2}}} \, \dd x = 
 \begin{cases}
-0, & m \neq n \\
-\dfrac{\pi}{2}, & m = n \neq 0 \\
-0, & m = n = 0
-\end{cases}
-\label{eq:ecuacion_13_121}
-\end{eqnarray}
-y
+0     & \ell \neq m     \\
+\pi/2 & \ell = m \neq 0 \\
+0   & \ell = m = 0    
+\end{cases} \]
+Algunos valores especiales:
+\begin{table}[H]
+\centering
+\begin{tabular}{>{\raggedright\arraybackslash}p{5cm} >{\raggedright\arraybackslash}p{5cm}}
+$T_{\ell}=1$ & $U_{\ell}(1)=0$ \\
+$T(-1) = (-)^{\ell}$ & $U_{\ell}(-1) = 0$ \\
+$T_{2 \ell}(0) = (-)^{\ell}$ & $U_{2 \ell}(0) = 0$ \\
+$T_{2 \ell+1}(0) = 0$ & $U_{2 \ell+1}(0) = (-)^{\ell}$ \\ 
+\end{tabular}
+\end{table}
+A continuación se muestran algunas relaciones de recurrencia para $T_{\ell}(x)$, son válidas también para $U_{\ell}(x)$:
+\begin{align*}
+T_{\ell+1}(x) &= 2 \, x \, T_{\ell} (x) - T_{\ell-1} \\
+(1 - x^{2}) \, \dot{T}_{\ell}(x) &= -\ell \, x \, T_{\ell}(x) + \ell \, T_{\ell-1} (x) \\
+T_{\ell-1} &= \left[ x + \dfrac{1 - x^{2}}{\ell} \, \dv{x} \right] \, T_{\ell} \\
+T_{\ell+} &= \left[ x - \dfrac{1 - x^{2}}{\ell} \, \dv{x} \right] \, T_{\ell} \\
+\end{align*}
+\subsection{Polinomios de Chebyshev de tipo II.}
+La ecuación de Chebyshev de tipo II, satisface la siguiente expresión:
 \begin{equation}
-\int_{-1}^{1} W_{m} (x) W_{n} (x) (1 - x^{2})^{-1/2} dx = \dfrac{\pi}{2} \delta_{mn}
-\label{eq:ecuacion_13_123}
+(1 - x^{2}) \, \ddot{V}_{\ell} - 3 \, x \, \dot{V}_{\ell} + \ell (\ell + 2) \, V_{\ell} = 0
+\label{eq:ecuacion_08_89}
 \end{equation}
+y es una ecuación de la familia de Chebyshev, en tanto que:
+\begin{equation}
+V_{\ell} (x) = \dfrac{U_{\ell+1}(x)}{\sqrt{1 - x^{2}}}
+\label{eq:ecuacion_08_90}
+\end{equation}
+\section{Polinomios de Jacobi.}
+Los polinomios y la ecuación de Legendre pueden ser generalizados aún más, mediante las funciones
+\[y(x) = P_{\ell}^{\alpha, \beta} (x) \]
+que satisfacen la \textbf{ecuación de Jacobi.}
+\[ (1 - x^{2}) \, \ddot{y} + \left\{ \beta - \alpha - (\alpha + \beta + 2) \, x \right\} \, \dot{y} + \ell (\ell + \alpha + \beta + 1) \, y = 0 \]
+Nótese que si $\alpha = \beta = 0$, se obtiene
+\[ y = P_{\ell}^{0,0} (x) = P_{\ell}(x) \]
+Las funciones de Gegenbauer, Chebyshev, Laguerre y Hermite se expresan mediante los polinomios de Jacobi de la forma:
+\begin{align*}
+T_{\ell}^{\lambda} &= \dfrac{\Gamma (\lambda + 1/2) \, \Gamma (\lambda + 2 \, \lambda)}{\Gamma (2 \, \lambda) \, \Gamma (\ell + \lambda) + 1/2)} \, P_{\ell}^{\lambda-1/2, \lambda+1/2} (x) \\[1em]
+T_{\ell}(x) &= \dfrac{n}{2} \, \lim_{\lambda \to 0} \left[ \dfrac{T_{\ell}^{\lambda}(x)}{\lambda} \right], \hspace{1cm} n \geq 1 \\[1em]
+U_{\ell} &= \sqrt{1 - x^{2}} \, T_{\ell-1}^{1} (x) \\[1em]
+L_{n}^{\alpha} (x) &= \lim_{\beta \to \infty} \left[ P_{n}^{\alpha, \beta} (1 - 2 \, x / \beta) \right] \\[1em]
+H_{n}(x) &= n! \, \lim_{\lambda \to \infty} \left[ \lambda^{-n/2} \, T_{n}^{\lambda} \left( \dfrac{x}{\sqrt{\lambda}} \right) \right]
+\end{align*}
+Se tiene entonces que de la ecuación de Jacobi, surgen las de Gegenbauer, Laguerre y Hermite; mientras que de la ecuación de Gegenbauer, surgen las de Chebyshev y Legendre ordinaria.
+\par
+La fórmula de Rodrigues es
+\[ P_{\ell}^{\alpha \beta} (x) = \dfrac{(-)^{n}}{2^{n} \, n!} \, (1 - x)^{-\alpha} \, (1 + x)^{- \beta} \, \dv[n]{x} \left[ (1 -x)^{\alpha+n} \, (1+ x)^{\beta+n}  \right] \]
+que equivale a la expansión en series:
+\begin{align*}
+P_{\ell}^{\alpha \beta} (x) = \sum_{r=0}^{\ell} &\dfrac{\Gamma (\ell + \alpha + 1)}{\Gamma (\alpha + r + 1) \, \Gamma (\alpha + \beta - r + 1) \, (\ell -r)! \, r!} \times \\
+&{} \times \left( \dfrac{x - 1}{2} \right)^{r} \, \left( \dfrac{x+1}{2} \right)^{\ell-r}
+\end{align*}
+La condición de ortogonalidad es:
+\begin{align*}
+\int_{-1}^{1} &(1 - x)^{\alpha} (1 + x)^{\beta} \, P_{\ell}^{\alpha, \beta} (x) \, P_{m}^{\alpha, \beta} (x) \, \dd x \\
+&= \dfrac{2^{\alpha+\beta+1} \Gamma (\ell + \alpha + 1) \, \Gamma (\ell + \beta + 1)}{(2 \, \ell + \alpha +\beta + 1) \, \ell! \, \Gamma (\ell + \alpha + \beta + 1)} \, \delta_{\ell  m}
+\end{align*}
+Relaciones de recurrencia:
+\begin{align*}
+\dot{P}_{\ell}^{\alpha, \beta} (x) &= \dfrac{1}{2} (1 + \alpha + \beta + \ell) \, P_{\ell-1}^{\alpha+1, \beta+1}(x) \\[1em]
+(x + 1) \, \dot{P}_{\ell}^{\alpha, \beta} (x) &= \ell \, P_{\ell}^{\alpha, \beta} (x) + (\beta + \ell) P_{\ell-1}^{\alpha+1, \beta} (x) \\[1em]
+(x - 1) \, \dot{P}_{\ell}^{\alpha, \beta} (x) &= \ell \, P_{\ell}^{\alpha, \beta} (x) - (\alpha + \ell) P_{\ell-1}^{\alpha, \beta+1} (x) \\[1em]
+\dot{P}_{\ell}^{\alpha, \beta} (x) &= \dfrac{1}{2} \, P_{\ell-1}^{\alpha+1, \beta}(x) + (\alpha + \ell) \, P_{\ell-1}^{\alpha, \beta+1}
+\end{align*}
+\section{La ecuación hipergeométrica.}
+Se definen los símbolos de Pochhammer $(\alpha)_{n}$ como:
+\[ (\alpha)_{n} = \alpha \, (\alpha + 1) \ldots (\alpha + n -1) = \dfrac{\Gamma (\alpha + n)}{\Gamma (\alpha)}, \hspace{1.5cm} (\alpha)_{0} = 1 \]
+donde $n$ es un entero positivo.
+\par
+Se define la \textbf{función hipergeométrica general} de la forma:
+\begin{equation}
+{}_{m}F_{n} (\alpha_{1}, \alpha_{2}, \ldots, \alpha_{m}; \beta_{1}, \beta_{2}, \ldots, \beta_{n},; x) = \sum_{r=0}^{\infty} \dfrac{(\alpha_{1})_{r}, (\alpha_{2})_{r}, \ldots, (\alpha_{m})_{r}}{(\beta_{1})_{r}, (\beta_{2})_{r}, \ldots, (\beta_{n})_{r}} \, x^{r}
+\label{eq:ecuacion_08_91}
+\end{equation}
+Muchas funciones especiales puedes expresarse en términos de estas nuevas funciones, como por ejemplo:
+\begin{align*}
+P_{\ell} (x) &= {}_{2}F_{1} \left( -\ell , \ell + 1; 1; \dfrac{1 - x}{2} \right) \\[1em]
+P_{m}^{\ell} &= \dfrac{(\ell + m)!}{(\ell - m)!} \, \dfrac{(1 - x^{2})^{m/2}}{2^{m} \, m!} \, {}_{2}F_{1} \left( m - \ell, m + \ell + 1; m + 1; \dfrac{1 - x}{2} \right)
+\end{align*}
+% \\
+% Considerando la función generatriz para los polinomios de Gegenbauer
+% \begin{equation}
+% \dfrac{1}{(1 - 2xt + t^{2})^{\alpha}} = \sum_{n=0}^{\infty} C_{n}^{(\alpha)} \; (x) \; t^{n}, \hspace{1cm} \vert x \vert < 1, \hspace{0.5cm} \vert t \vert < 1
+% \label{eq:ecuacion_13_092}
+% \end{equation}
+% en el caso de que $\alpha = \frac{1}{2}$, se obtienen los polinomios de Legendre. Cuando $\alpha=1$ y luego $\alpha=0$ se generan dos conjuntos de polinomios llamados: Polinomios de Chebychev.
+% \subsection{Polinomios de tipo II.}
+% Con $\alpha=1$ y
+% \[ C_{n}^{(1)} (x) = U_{n} \]
+% la ecuación (\ref{eq:ecuacion_13_92}) conduce a
+% \begin{equation}
+% \dfrac{1}{(1 - 2xt + t^{2})} = \sum_{n=0}^{\infty} U_{n} \; (x) \; t^{n} \hspace{1cm} \vert x \vert < 1, \hspace{0.5cm} \vert t \vert < 1
+% \label{eq:ecuacion_13_093}
+% \end{equation} 
+% Esas funciones $U_{n}(x)$ generadas por el término $(1-2xt+t^{2})^{-1}$ se conocen como polinomios de tipo  II. Son útiles en el estudio de la teoría de momento angular con el desarrollo de armónicos esféricos en cuatro dimensiones.
+% \subsection{Polinomios de Tipo I.}
+% Con $\alpha=0$ tenemos complicaciones, de hecho la función generatriz se reduce a la constante $1$. Para evitar este problema, diferenciamos la ecuación (\ref{eq:ecuacion_13_092}) respecto a $t$, lo que nos devuelve
+% \begin{equation}
+% \dfrac{-\alpha(-2x + 2t)}{(1 - 2xt + t^{2})^{\alpha+1}} = \sum_{n=1}^{\infty} n \; C_{n}^{(\alpha)} \; (x) \; t^{n-1}
+% \label{eq:ecuacion_13_094}
+% \end{equation}
+% o equivalentemente
+% \begin{equation}
+% \dfrac{x - t}{(1 - 2xt + t^{2})^{\alpha + 1)}} = \sum_{n=1}^{\infty} \dfrac{n}{2} \left[ \dfrac{C_{n}^{(\alpha)} (x)}{\alpha} \right] \; t^{n-1}
+% \label{eq:ecuacion_13_095}
+% \end{equation}
+% Definimos $C_{n}^{(0)} (x)$ por
+% \begin{equation}
+% C_{n}^{(0)} (x) = \lim_{\alpha \to 0} \dfrac{C_{n}^{(\alpha)}}{\alpha}
+% \label{eq:ecuacion_13_096}
+% \end{equation}
+% Hemos diferenciado con respecto a $t$ para dejar a $\alpha$ en el denominador y con esto, crear una indeterminación. Ahora multiplicamos la ecuación (\ref{eq:ecuacion_13_095}) por $2t$ le sumamos $1 = (1 - 2xt + t^{2}) / (1 - 2xt + t^{2})$ para obtener
+% \begin{equation}
+% \dfrac{1 - t^{2}}{1 - 2xt + t^{2}} =  1 + 2 \sum_{n=1}^{\infty} \dfrac{n}{2} C_{n}^{(0)} \; (x) \; t^{n}
+% \label{eq:ecuacion_13_097}
+% \end{equation}
+% Definimos $T_{n}(x)$ por
+% \begin{equation}
+% T_{n}(x) = \begin{cases}
+% 1, & n=0 \\
+% \dfrac{n}{2} C_{n}^{(0)} (x), & n>0
+% \end{cases}
+% \label{eq:ecuacion_13_098} 
+% \end{equation}
+% Hay que señalar que el valor de $C_{n}^{(0)}$ es el límite indicado en la ecuación (\ref{eq:ecuacion_13_096}) y no una sustitución literal de $\alpha=0$ en la función generatriz. Con esta indicación, tenemos pues
+% \begin{equation}
+% \dfrac{1 - t^{2}}{1 - 2xt + t^{2}} = T_{0} (x) +  2 \sum_{n=1}^{\infty} T_{n} (x) t^{n}, \hspace{1cm} \vert x \vert \leq 1, \hspace{0.5cm} \vert t \vert < 1
+% \label{eq:ecuacion_13_099}
+% \end{equation}
+% A los $T_{n}(x)$ se les denomina polinomios de Chebychev de tipo I. Tomen en cuenta de que el nombre puede cambiar en algunas referencias.
+% \\
+% Si diferenciamos la función generatriz (ec. \ref{eq:ecuacion_13_099}) con respecto a $t$ y multiplicamos el denominador por $1 - 2xt + t^{2}$, se obtiene
+% \[ \begin{split}
+% - t - (t - x) \left[ T_{0}(x) +  2 \sum_{n=1}^{\infty} T_{n} (x) t^{n} \right] &= (1 - 2xt + t^{2}) \sum_{n=1}^{\infty} n \; T_{n}(x) \; t^{n-1} \\
+% &= \sum_{n=1}^{\infty} [ n \; T_{n} \; t^{n-1} - 2 \; x \; n \; T_{n} \; t^{n} + n \; T_{n} \; t^{n+1} ]
+% \end{split} \]
+% de donde recuperamos la relación de recurrencia
+% \begin{equation}
+% T_{n+1} (x) - 2 x T_{n} (x) + T_{n-1} (x) = 0
+% \label{eq:ecuacion_13_100}
+% \end{equation}
+% que se sigue desplazando el índice de suma con el fin de conseguir la misma potencia, $t^{n}$ en cada término y comparando los coeficientes de $t^{n}$. Con el mismo proceso en la ecuación (\ref{eq:ecuacion_13_093}), encontramos
+% \[ - \dfrac{2 (t - x)}{1 - 2xt + t^{2}} = (1 - 2xt + t^{2}) \sum_{n=1}^{\infty} n \; U_{n} (x) \; t^{n-1} \]
+% de la que se genera la siguiente relación de recurrencia
+% \begin{equation}
+% U_{n+1}(x) - 2 x U_{n} + U_{n-1} (x) = 0
+% \label{eq:ecuacion_13_101}
+% \end{equation}
+% a la que se llega comparando los coeficientes de potencias de $t$ similares. En la tabla (\ref{tab:tabla_01}) se muestra la relación entre los coeficientes y algunos polinomios
+% \begin{center}
+% \begin{tabular}{ p{4cm} | C{2cm} | C{2cm} | C{2cm} | C{2cm} }
+% \toprule
+%  & $P_{n}$ & $A_{n}$ & $B_{n}$ & $C_{n}$ \\ \hline
+% Legendre & $P_{n}(x)$ & $\frac{2n+1}{n+1}$ & $0$ & $\frac{1}{n+1}$ \\
+% Chebychev I & $T_{n}$ & $2$ & $0$ & $1$ \\
+% Chebychev II & $U_{n}$ & $2$ & $0$ & $1$ \\
+% Asoc. Laguerre & $L_{n}^{(k)} $ & $-\frac{1}{n+1}$ & $-\frac{2n+k+1}{n+1}$ & $\frac{n+k}{n+1}$ \\
+% Hermite & $H_{n}(x)$ & $2$ & $0$ & $2n$ \\
+% \bottomrule
+% \end{tabular}
+% \captionof{table}{Relación de recursiva $P_{n+1}(x) = (A_{n} x + B_{n}) P_{n}(x) - C_{n} P_{n-1}(x)$.}
+% \label{tab:tabla_01}
+% \end{center}
+% Usando las funciones generatrices para los primeros valores de $n$ y las relaciones de recurrencia para polinomios de orden mayor, obtenemos las siguientes expresiones tablas (\ref{tab:Poli_tipoI}) y (\ref{tab:Poli_tipoII}):
+% \\
+% \begin{center}
+% \begin{minipage}{5cm}
+% \captionof{table}{Polinomios de Chebychev Tipo I.}
+% \begin{tabular}{ l }
+% \toprule
+% $T_{0} = 1$ \\
+% $T_{1} = x$ \\
+% $T_{2} = 2x^{2} -1$ \\
+% $T_{3} = 4x^{3} - 3x$ \\
+% $T_{4} = 8x^{4} - 8x^{2} + 1$ \\
+% \bottomrule
+% \end{tabular}
+% \label{tab:Poli_tipoI}
+% \end{minipage}
+% \hspace{2cm}
+% \begin{minipage}{5cm}
+% \captionof{table}{Polinomios de Chebychev Tipo II.}
+% \begin{tabular}{ l }
+% \toprule
+% $U_{0} = 1$ \\
+% $U_{1} = 2x$ \\
+% $U_{2} = 4x^{2} - 1$ \\
+% $U_{3} = 8x^{3} - 4x$ \\
+% $U_{4} = 16x^{4} - 12x^{2} + 1$ \\
+% \bottomrule
+% \end{tabular}
+% \label{tab:Poli_tipoII}
+% \end{minipage}
+% \end{center}
+% Nuevamente de las funciones generatrices, podemos obtener algunos valores especiales para los polinomios:
+% \begin{eqnarray}
+% \begin{aligned}
+% T_{n}(1) &= 1 \\
+% T_{n}(-1) &= (-1)^{n} \\
+% T_{1n}(0) &= (-1)^{n} \\
+% T_{2n+1}(0) &= 0 \\
+% U_{n}(1) &= n + 1 \\
+% U_{n}(-1) &= (-1)^{n} (n+1) \\
+% U_{2n}(0) &= (-1)^{n} \\
+% U_{2n+1}(0) &= 0
+% \end{aligned}
+% \end{eqnarray}
+% Las relaciones de paridad para $T_{n}$ y $U_{n}$ se obtiene de sus respectivas funciones generatrices, con las sustituciones $t \to -t$ , $x \to -x$, con lo que quedan como invariantes, y son
+% \begin{equation}
+% T_{n}(x) = (-1)^{n} \; T_{n}(-x) \hspace{1.5cm} U_{n}(x) = (-1)^{n} \; U_{n}(-x)
+% \label{eq:ecuacion_13_104}
+% \end{equation}
+% Las fórmulas de Rodrigues para $T_{n}$ y $U_{n}$ son
+% \begin{equation}
+% T_{n}(x) = \dfrac{(-1)^{n} \pi^{1/2}(1 - x^{2})^{1/2}}{2^{n} (n - \frac{1}{2})!} \; \dfrac{d^{n}}{d x^{n}}\left[ (1 - x^{2})^{n - 1/2} \right]
+% \label{eq:ecuacion_13_105}
+% \end{equation}
+% y
+% \begin{equation}
+% U_{n}(x) = \dfrac{(-1)^{n} (n + 1)  \pi^{1/2}}{2^{n + 1} (n + \frac{1}{2})! \; (1 - x^{2})^{1/2}} \; \dfrac{d^{n}}{d x^{n}}\left[ (1 - x^{2})^{n + 1/2} \right]
+% \label{eq:ecuacion_13_105}
+% \end{equation}
+% \subsection{Relaciones de recurrencia.}
+% Al diferenciar las funciones generatrices de $T_{n}$ y $U_{n}$ con respecto a $x$, se obtiene una variedad de relaciones de recurrencia que involucra las derivadas, por ejemplo, de la ecuación (\ref{eq:ecuacion_13_99}), tenemos
+% \[ (1 - 2xt +  t^{2}) \; 2 \; \sum_{n=1}^{\infty} T_{n}^{\prime} (x) \; t^{n} =  2 t \left[ T_{0}(x) + 2 \sum_{n=1}^{\infty} T_{n}(x) \; t^{n} \right] \]
+% de la que se genera la recurrencia
+% \begin{equation}
+% 2 T_{n-1} (x) = T_{n}^{\prime} (x) - 2 x \; T_{n-1}^{\prime} (x) +  T_{n-2}^{\prime}(x)
+% \label{eq:ecuacion_13_107}
+% \end{equation}
+% que es la derivada de la ecuación (\ref{eq:ecuacion_13_100}) para $n \to n-1$.
+% \\
+% Otras relaciones de recurrencia útiles son
+% \begin{equation}
+% (1 - x^{2}) T_{n}^{\prime} (x) = -n \; x \; T_{n}(x) + n \; T_{n-1}(x)
+% \label{eq:ecuacion_13_108}
+% \end{equation}
+% y 
+% \begin{equation}
+% (1 - x^{2}) U_{n}^{\prime} (x) = -n \; x \; U_{n}(x) + (n + 1) \; U_{n-1}(x)
+% \label{eq:ecuacion_13_109}
+% \end{equation}
+% Manejando este conjunto de relaciones de recurrencia, podemos eliminar el índice $n-1$ y ocupar $T_{n}^{\prime \prime} (x)$ así como $T_{n}(x)$, por lo que los polinomios de Chebychev de tipo I satisfacen la EDO2H
+% \begin{equation}
+% (1 - x^{2}) T_{n}^{\prime \prime} (x) - x T_{n}^{\prime} (x) + n^{2} T_{n} (x) = 0
+% \label{eq:ecuacion_13_110}
+% \end{equation}
+% Los polinomios de Chebychev de tipo II, satisfacen
+% \begin{equation}
+% (1 - x^{2}) U_{n}^{\prime \prime} (x) - 3 x U_{n}^{\prime} (x) + n(n +2) U_{n} (x) = 0
+% \label{eq:ecuacion_13_111}
+% \end{equation}
+% La ecuación \emph{ultraesférica}
+% \begin{equation}
+% (1 - x^{2}) \dfrac{d^{2}}{d x^{2}} C_{n}^{(\alpha)} (x) - (2 \alpha + 1) x \dfrac{d}{dx} C_{n}^{(\alpha)} (x) + n(n + 2\alpha) C_{n}^{(\alpha)} (x) = 0
+% \label{eq:ecuacion_13_112}
+% \end{equation}
+% es una generalización de esas ecuaciones diferenciales, que se reduce a la ecuación (\ref{eq:ecuacion_13_110}) cuando $\alpha=0$ y la ecuación (\ref{eq:ecuacion_13_111}) cuando $\alpha = 1$, en el caso de que $\alpha = \frac{1}{2}$ se recupera la ecuación de Legendre.
+% \subsection{Forma trigonométrica.}
+% En el desarrollo de las propiedades de las soluciones de Chebychev, es conveniente hacer un cambio de variable, de $x$ a $\cos \theta$.
+% \\
+% Con $x = \cos \theta$ y $d /dx = (-1 / \sin \theta) (d / d \theta)$, se comprueba que
+% \[ (1 -x^{2}) \dfrac{d^{2} T_{n}}{d x^{2}} = \dfrac{d^{2} T_{n}}{d \theta^{2}} - \cot \theta \dfrac{d T_{n}}{d \theta}, \hspace{1.5cm} x T_{n}^{prime} = - \cot \theta \dfrac{d T_{n}}{d \theta} \]
+% agregando esos términos a la ecuación (\ref{eq:ecuacion_13_110}), resulta
+% \begin{equation}
+% \dfrac{d^{2} T_{n}}{d \theta^{2}} + n^{2} T_{n} = 0
+% \label{eq:ecuacion_13_113}
+% \end{equation}
+% que es la ecuación de un oscilador armónico simple, con soluciones $\cos n \theta$ y $\sin n \theta$. Con las condiciones de frontera en $x=0,1$, se tiene
+% \begin{equation}
+% T_{n} = \cos n \theta = \cos n (\arccos x)
+% \label{eq:ecuacion_13_114a}
+% \end{equation}
+% Una segunda solución independiente de las ecuaciones (\ref{eq:ecuacion_13_110}) y (\ref{eq:ecuacion_13_113}) es
+% \begin{equation}
+% V_{n} = \sin n \theta = \sin n (\arccos x)
+% \label{eq:ecuacion_13_114b}
+% \end{equation}
+% Las correspondientes soluciones para la ecuación de Chebychev de tipo II, (\ref{eq:ecuacion_13_111}) son
+% \begin{eqnarray}
+% U_{n} &= \dfrac{\sin (n + 1) \theta}{\sin \theta} \label{eq:ecuacion_13_115a} \\
+% W_{n} &= \dfrac{\cos (n + 1) \theta}{\sin \theta} \label{eq:ecuacion_13_115b}
+% \end{eqnarray}
+% Los dos conjuntos de soluciones de tipo I y Tipo II, están relacionadas por
+% \begin{eqnarray}
+% V_{n} &=  (1 - x^{2})^{1/2} \; U_{n-1} (x) \label{eq:ecuacion_13_116a} \\
+% W_{n} &=  (1 - x^{2})^{1/2} \; T_{n-1} (x) \label{eq:ecuacion_13_116b} 
+% \end{eqnarray}
+% De las funciones generatrices se ha visto que $T_{n}$ y $U_{n}$ son polinomios, claramente $V_{n}$ y $W_{n}$ \textbf{no} son polinomios. 
+% \subsection{Ortogonalidad.}
+% Si la ecuación (\ref{eq:ecuacion_13_110}) se deja en una forma autoadjunta, obtenemos el factor de peso $w (x) = (1 - x^{2})^{-1/2}$, para la ecuación (\ref{eq:ecuacion_13_111}), la correspondiente función de peso es $(1 - x^{2})^{+1/2}$. Resultando las integrales de ortogonalidad
+% \begin{eqnarray}
+% \int_{-1}^{1} T_{m} (x) T_{n} (x) (1 - x^{2})^{-1/2} dx = 
+% \begin{cases}
+% 0, & m \neq n \\
+% \dfrac{\pi}{2}, & m = n \neq 0 \\
+% \pi, & m = n = 0
+% \end{cases}
+% \label{eq:ecuacion_13_120} \\
+% \int_{-1}^{1} V_{m} (x) V_{n} (x) (1 - x^{2})^{-1/2} dx = 
+% \begin{cases}
+% 0, & m \neq n \\
+% \dfrac{\pi}{2}, & m = n \neq 0 \\
+% 0, & m = n = 0
+% \end{cases}
+% \label{eq:ecuacion_13_121}
+% \end{eqnarray}
+% y
+% \begin{equation}
+% \int_{-1}^{1} W_{m} (x) W_{n} (x) (1 - x^{2})^{-1/2} dx = \dfrac{\pi}{2} \delta_{mn}
+% \label{eq:ecuacion_13_123}
+% \end{equation}
+
 
 \end{document}
