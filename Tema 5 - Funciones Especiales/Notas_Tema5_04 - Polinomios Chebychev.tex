@@ -180,8 +180,161 @@ Se define la \textbf{función hipergeométrica general} de la forma:
 Muchas funciones especiales puedes expresarse en términos de estas nuevas funciones, como por ejemplo:
 \begin{align*}
 P_{\ell} (x) &= {}_{2}F_{1} \left( -\ell , \ell + 1; 1; \dfrac{1 - x}{2} \right) \\[1em]
-P_{m}^{\ell} &= \dfrac{(\ell + m)!}{(\ell - m)!} \, \dfrac{(1 - x^{2})^{m/2}}{2^{m} \, m!} \, {}_{2}F_{1} \left( m - \ell, m + \ell + 1; m + 1; \dfrac{1 - x}{2} \right)
+P_{m}^{\ell} &= \dfrac{(\ell + m)!}{(\ell - m)!} \, \dfrac{(1 - x^{2})^{m/2}}{2^{m} \, m!} \, {}_{2}F_{1} \left( m - \ell, m + \ell + 1; m + 1; \dfrac{1 - x}{2} \right) \\[1em]
+J_{n} (x) &= \dfrac{e^{-i x}}{n!} \, \left( \dfrac{x}{2} \right)^{n} \, {}_1 F_{1} \left( n + \dfrac{1}{2}; 2 \, n; 2 \, n + 1; 2 \, i \, x \right) \\[1em]
+H_{2 n} (x) &= (-)^{n} \, \dfrac{(2 \, n)!}{n!} \, {}_1 F_{1} \left( -n; \dfrac{1}{2}; x^{2} \right) \\[1em]
+H_{2 n+1} (x) &= x \, (-)^{n} \, \dfrac{2 (2 \, n + 1)!}{n!} \, {}_1 F_{1} \left( -n; \dfrac{3}{2}; x^{2}\right) \\[1em]
+L_{n} (x) &= {}_{1} F_{1} (-n; 1; x)\\[1em]
+L_{n}^{k} (x) &= \dfrac{\Gamma (n +  k + 1)}{n! \, \Gamma (k + 1)} \, {}_{1} F_{1} (-n; k + 1; x) \\[1em]
+T_{\ell} (x) &= {}_{2} F_{1} \left( -\ell, \ell; \dfrac{1}{2}; \dfrac{1 - x}{2} \right)
 \end{align*}
+\section{La ecuación hipergeométrica (de Gauss).}
+La ecuación hipergeométrica o ecuación de Gauss, tiene la forma
+\[ x \, (1 - x) \, \ddot{y} + [c - (a + b + 1) \, x] \, \dot{y} - a \, b \, y = 0 \]
+Expresada en la forma de Sturm-Liouville, resulta ser
+\[ \dv{x} \left[ (1 - x^{2})^{a+b-c+1} \, x^{c} \, \dot{y} \right] - a \, b \, x^{c-1} \, (1 - x)^{a+b-c} \, y = 0 \]
+donde
+\begin{align*}
+p &= x^{c-1} \, (1 - x)^{a+b-c} \\
+q &= x^{c} \, (1 - x)^{a+b-c+1}
+\end{align*}
+de tal manera que la solución forma una base ortogonal.
+\par
+Esta ecuación tiene tres puntos singulares: $x = 0, 1, \infty$. La primera solución, conocida como \emph{serie hipergeométrica}, tiene la forma de la ec. (\ref{eq:ecuacion_08_91}) con $m=2, n=1, (\alpha_{1})_{r}, (\alpha_{2})_{r} = (b)_{r}, (\beta_{1})_{r} = (c)_{r}$:
+\begin{align*}
+y (x) &= {}_{2} F_{1} (a, b, c ; x) = 1 + \dfrac{a \, b \, x}{c} + \dfrac{a (a + 1) \, b (b + 1)}{2! \, c \, (c + 1)} \, x^{2} + \\
+&+ \dfrac{a (a + 1)(a + 2) \, b (b + 1) (b + 2)}{3! \, c \, (c + 1)(c + 2)} \, x^{3} + \ldots + \dfrac{(a)_{r} \, (b)_{r}}{r! \, (c)_{r}} \, x^{r} + \ldots \\
+&= \sum_{r=0}^{\infty} \dfrac{(a)_{r} \, (b)_{r}}{r! \, (c)_{r}} \, x^{r} \hspace{2cm} c \neq 0, -1, -2, -3, \ldots
+\end{align*}
+Si $c$ es no entero, se tiene una segunda solución independiente:
+\[ y(x) = {}_{2} F_{1} (a + 1 - c, b + 1 - c, 2 - c; x) \, x^{1-c}, \hspace{1.5cm} c \neq 2, 3, 4, \ldots \]
+Si $c$ es entero, las dos soluciones coinciden o (si además $a$ o $b$ es entero) una de ellas diverge. En tal caso, la segunda solución incluye un término logarítmico.
+\par
+El caso especial $a = b = 1$ genera la serie geométrica $\displaystyle{\sum_{n=0}^{\infty} x^{n}}$. Por esta razón, la solución general se llama \emph{hipergeométrica}; fue Gauss quien realizó un estudio sistemático de esta función.
+\par
+Si $a$ o $b$ es cero o entero negativo, la serie infinita se convierte en un polinomio.
+\par
+La serie converge para $-1 < x \leq 1$ si $c > a + b$ y converge en $x = -1$ si $c > a + b - 1$.
+\par
+Para $c = -n$ con $n = 0, 1, 2, \ldots$ la serie es indeterminada si $a \neq -m$ y $b \neq -m$ con $m < n, m$ entero positivo. Excluyendo estos valores de $a, b, c$, la serie converge para $-1 < x < 1$ si cumple las siguientes reglas:
+\begin{enumerate}[label=\alph*)]
+\item Si $a + b - c > 1$, la serie converge en $x = 1$.
+\item Si $a + b - c < 0$, la serie converge absolutamente en $x = 1$.
+\item Si Si $a + b - c \geq 1$, la serie diverge en $x = 1$.
+\end{enumerate}
+Las funciones hipergeométricas son útiles para expresar otras funciones:
+\begin{align*}
+\dfrac{\ln (1 + x)}{x} &= {}_{2} F_{1}(1, 1; 2; -x) \\
+(1 + x)^{n} &= {}_{2} F_{1}(-n, b; b; -x) \\
+- \dfrac{\ln (1 + x)}{x} &= {}_{2} F_{1}(1, 1; 2; x) \\
+\dfrac{1}{2 \, x} \, \ln \left( \dfrac{1 + x}{1 - x} \right)&= {}_{2} F_{1}\left( \dfrac{1}{2}, 1; \dfrac{3}{2}; x^{2} \right)
+\end{align*}
+así como las integrales elípticas:
+\begin{align*}
+\int_{0}^{\pi/2} (1 - k^{2} \, \sin^{2} \theta)^{-1/2} \, \dd \theta = \dfrac{\pi}{2} \, {}_{2} F_{1} \left( \dfrac{1}{2}, \dfrac{1}{2}; 1; k^{2}  \right) \\[1em]
+\int_{0}^{\pi/2} (1 - k^{2} \, \sin^{2} \theta)^{1/2} \, \dd \theta = \dfrac{\pi}{2} \, {}_{2} F_{1} \left( \dfrac{1}{2}, -\dfrac{1}{2}; 1; k^{2}  \right)
+\end{align*}
+\section{La ecuación hipergeométrica confluente.}
+La ecuación hipergeométrica confluente (o ecuación de Kummer) es:
+\[  x^{2} \, \ddot{y} + (\beta - x) \, \dot{y} - \alpha \, y = 0 \]
+tiene por soluciones:
+\[ {}_{1} F_{1} (\alpha; \beta; x) \]
+Si $\beta$ es no enter, la segunda solución independiente está dada por
+\[ x^{1-\beta} \, {}_{1} F_{1} (\alpha - \beta + 1; 2 - \beta; x) \]
+\subsection{Ejemplo: El péndulo simple.}
+Un péndulo simple consiste de un cuerpo de masa $m$ atado a una cuerda sin masa de longitud $L$. El otro extremo de la cuerda está fijo en un punto de tal manera que el sistema puede moverse bajo la acción de la gravedad como se muestra en la siguiente figura:
+\begin{figure}[H]
+    \centering
+    \includestandalone{Figuras/pendulo_01}
+    \caption{Péndulo simple.}
+\end{figure}
+Las fuerzas que actúan sobre la masa $m$, son la tensión $T$ de la cuerda y el peso $mg$; usando la segunda ley de Newton, tenemos que
+\begin{align}
+T - m \, g \, \cos \theta &= \dfrac{m \, v^{2}}{L}  \label{eq:ecuacion_pendulo_01} \\
+-m \, g \, \sin \theta &= m \dv[2]{t} (L \, \theta) \label{eq:ecuacion_pendulo_02}
+\end{align}
+Considerando la ecuación tangencial (\ref{eq:ecuacion_pendulo_02}) y luego de acomodar términos, tenemos que
+\begin{equation} \dv[2]{\theta}{t} + \dfrac{g}{L} \, \sin \theta = 0
+\label{eq:ecuacion_pendulo_03}
+\end{equation}
+La aproximación usual para oscilaciones de pequeña amplitud es tomar el término principal en la expansión de la serie del seno, en cuyo caso el movimiento descrito es el de un oscilador armónico simple.
+\par
+Para obtener una solución exacta de la ec. (\ref{eq:ecuacion_pendulo_03}), se multiplica por $\displaystyle{\dv{\theta}{t}}$, para obtener
+\begin{equation}
+\dv{t} \left[ \dfrac{1}{2} \, \left( \dv{\theta}{t} \right)^{2} - \dfrac{g}{L} \, \cos \theta \right] = 0
+\label{eq:ecuacion_pendulo_04}
+\end{equation}
+La ecuación anterior nos dice que la cantidad entre los corchetes es una constante\footnote{De hecho, si multiplicamos por $m \, L^{2}$, vemos que el primer término es la energía cinética y el segundo es la energía potencial gravitatoria. La ecuación comprueba entonces el teorema de conservación de energía.} Para obtener el valor de la constante, suponemos que liberamos el péndulo del reposo, por lo que el ángulo $\theta$, tiene un valor $\theta_{0}$, esto nos conduce a
+\[ \dv{\theta}{t} = \sqrt{\dfrac{2 \, g}{L} \, (\cos \theta - \cos \theta_{0})}
+\]
+Podemos utilizar la siguiente identidad trigonométrica $cos 2 \, x = 1 - 2 \, \sin^{2} x$, para entonces ordenar los términos de la ecuación, con lo cual
+\[ 2 \sqrt{\dfrac{g}{L}} \int \, \dd t = \int \dfrac{\dd \theta}{[k^{2} - \sin^{2} (\theta/2)]^{1/2}}
+\]
+En la integral, $k = \sin (\theta_{0}/2)$. Como el ángulo $\theta \leq \theta_{0}$, podemos hacer el cambio de variable $\sin \phi = k^{-1} \, \sin (\theta/2)$, para entonces obtener
+\[ \sqrt{\dfrac{g}{L}} \int \, \dd t = \int \dfrac{\dd \phi}{\sqrt{1- k^{2} - \sin^{2} \phi}} \]
+La integral de la derecha es una \emph{interal elíptica de primera clase}, descrita por
+\[ F(k , \phi) = \int_{0}^{\phi} \dfrac{\dd \phi^{\prime}}{\sqrt{1 - k^{2} \, \sin^{2} \phi^{\prime} }} \]
+El tiempo necesario para que el ángulo cambie de $0$ a $\theta_{0}$ es un cuarto del período $T$. En este tiempo, el ángulo $\phi$ cambia de $0$ a $\pi/2$. Con esos límites, se tiene que la integral es
+\begin{equation}
+F(k) = \int_{0}^{\pi/2} \dfrac{\dd \phi}{\sqrt{1 - k^{2} \, \sin^{2} \phi} }
+\label{eq:ecuacion_pendulo_05}
+\end{equation}
+y se le conoce como la integral elíptica \emph{completa} de primera clase.
+\par
+Utilizando el resultado que expresa una serie
+\begin{equation}
+(1 - z)^{s} = \sum_{k=0}^{\infty} \dfrac{(-s)_{k}}{k!} \, z^{k}
+\label{eq:ecuacion_pendulo_06}
+\end{equation}
+Para evaluar la integral $F(k)$, usamos el resultado de la ec. (\ref{eq:ecuacion_pendulo_06}) para expandir el integrando
+\[ [ 1 - k^{2} \, \sin^{2} \phi ]^{-1/2} = \sum_{n=0}^{\infty} \dfrac{(\frac{1}{2})_{n}}{n!} \, k^{2 n} \, \sin^{2 n} \phi \]
+Al sustituir esta expansión en la ec. (\ref{eq:ecuacion_pendulo_05}) es posible evaluar una integral del tipo
+\[ \int \sin^{p} \, x \, \dd x = \int \sin^{2 n} \, \phi \, \dd \phi \]
+Integrando por partes
+\begin{align*}
+\int \sin^{p} \, x \, \dd x &= - \sin^{p-1} \, x \, \cos x + (p - 1) \, \int \sin^{p-1} \, x \, \cos^{2} \, x \, \dd x \\
+&= -\sin^{p-1} \, x \, \cos x + (p - 1) \, \int \sin^{p-2} \, x \, \dd x - (p - 1) \, \int \sin^{p} x \, \dd x 
+\end{align*}
+Resolviendo para $\displaystyle{\int \sin^{p} x \, \dd x}$, llegamos a la fórmula
+\[ \int \sin^{p} x \, \dd x = - \dfrac{\sin^{p-1} \, x \, \cos x}{p} + \dfrac{p - 1}{p} \int \sin^{p-2} x \, \dd x \]
+Ocupando la fórmula nuevamente en la integral de la deracha, se tiene que
+\begin{align*}
+\int \sin^{p} x \, \dd x &= - \dfrac{\sin^{p-1} \, x \, \cos x}{p} + \dfrac{p - 1}{p} \, \dfrac{\sin^{p-3} \, x \, \cos x}{(p - 2)} + \\
+&+ \dfrac{(p - 1)(p - 3)}{p \, (p - 2)} \int \sin^{p-4} \, x \, \dd x
+\end{align*}
+Repitiendo el uso de la fórmula siempre se tendrá como resultado una suma de términos, cada uno de los cuales involucra un producto del $\cos x$ con alguna de potencia del $\sin x$, más una integral con una potencia de $\sin x$. Si tomamos el rango de integración de $0$ a $\pi / 2$, entonces el $\cos x$ se anula en un límite y $\sin x$ se anula en el otro. Solo el término con la integral permanece. El resultado es entonces
+\begin{align*}
+&\int_{0}^{\pi/2} \sin^{p} \, x \, \dd x = \\
+&= \begin{dcases}
+\dfrac{(p-1)(p-3) \ldots (p - (p-1))}{p(p-2) \ldots (p -(p-2))} \int_{0}^{\pi/2} \, \dd x,  & p = 0, 2, 4, \ldots \\
+\dfrac{(p-1)(p-3) \ldots (p - (p-2))}{p(p-2) \ldots (p -(p-3))} \int_{0}^{\pi/2} \sin x \, \dd x, & p = 1, 3, 5, \ldots
+\end{dcases}
+\end{align*}
+Las integrales de la derecha se pueden evaluar directamente para obtener $\pi/2$ y $1$, respectivamente. La notación más compacta de Pochhammer para los productos queda expresada como
+\begin{align*}
+\int_{0}^{\pi/2} \sin^{p} x \, \dd x = \begin{cases}
+\dfrac{\pi}{2} \, \dfrac{\left( \frac{1}{2} \right)_{p/2}}{(p/2)!}, & p = 0, 2, 4, \ldots \\[1em]
+\dfrac{((p-1)/2)!}{(3/2)_{(p-1)/2}}. & p = 1, 3, 5, \ldots
+\end{cases}
+\end{align*}
+Si el resultado para valores pares de $p$ se incluyen en la expansión del integrando en la ecuación (\ref{eq:ecuacion_pendulo_05}), la integral elíptica completa es
+\begin{align*}
+F(k) &= \dfrac{\pi}{2} \sum_{n=0}^{\infty} \dfrac{\left(\frac{1}{2} \right)_{n} \, \left(\frac{1}{2} \right)_{n}}{n! , (1)_{n}} \, k^{2n} \\
+&= \dfrac{\pi}{2} \, F (\frac{1}{2}, \frac{1}{2}; 1; k^{2})
+\end{align*}
+Así, el período de oscilación de un péndulo simple está dado por
+\begin{align*}
+T = 2 \, \pi \, \sqrt{\dfrac{L}{g}} \, F \left(\frac{1}{2}, \frac{1}{2}; 1; \sin^{2} \left( \dfrac{\theta_{0}}{2} \right) \right)
+\end{align*}
+Claramente, el período depende de la amplitud de la oscilación. Sin embargo, si la amplitud es pequeña, podemos usar solo el término principal en las series hipergeométricas. Entonces, el período se reduce a la aproximación habitual de ángulo pequeño
+\[ T = 2 \, \pi (L / g)^{1/2} \hspace{2cm} \theta_{0} \ll 1 \]
+La integral elíptica de segunda clase está definida por
+\[ E (k, \phi) = \int_{0}^{\phi} \sqrt{1 - k^{2} \, \sin^{2} \phi^{\prime}} \, \dd \phi^{\prime} \]
+La integral elíptica completa de segunda clase se relaciona con la función hipergeométrica por
+\begin{equation}
+E(k) = \int_{0}^{\pi/2} \sqrt{1 - k^{2} \, \sin^{2} \phi} \, \dd \phi =  \dfrac{\pi}{2} \, F \left( -\frac{1}{2}, \frac{1}{2}; 1; k^{2} \right)
+\end{equation}
+
 % \\
 % Considerando la función generatriz para los polinomios de Gegenbauer
 % \begin{equation}
