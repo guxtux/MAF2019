@@ -1,0 +1,64 @@
+\input{../preambulo_doc}
+\title{Ejemplos Físicos \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Funciones de Legendre.}
+Los problemas físicos más comunes que involucran la ecuación de Laplace son los de la electrostática en un espacio vacío y la transferencia de calor en estado estable. En cada caso, una superficie se mantiene a un potencial o temperatura (no necesariamente uniforme) y el potencial o la temperatura se busca en regiones alejadas de la superficie. En el presente contexto, estas superficies son típicamente (porciones de) esferas.
+\subsection{Ejemplo 1. Semiesferas a diferentes temperaturas.}
+Dos hemisferios sólidos conductores de calor de radio $a$, separados por un pequeño espacio aislante, forman una esfera. Las dos mitades de la esfera están en contacto, en el exterior, con dos baños de calor (infinitos) a temperaturas $T_{0}$ y $-T_{0} $, ver la figura (\ref{fig:figura_esfera_01}).
+\begin{figure}[H]
+    \centering
+    \includestandalone[scale=0.8]{Figuras/Ejemplo_Esfera_01}.
+    \caption{Dos hemisferios a distintas temperaturas.}
+    \label{fig:figura_esfera_01}
+\end{figure}
+Queremos encontrar la distribución de temperatura $T(r, \theta, \varphi)$ dentro de la esfera.
+\par
+Elegimos un sistema de coordenadas esféricas en el que el origen coincide con el centro de la esfera y el eje polar es perpendicular al plano ecuatorial. Se supone que el hemisferio con temperatura $T_{0}$ constituye el hemisferio norte.
+\par
+Dado que el problema tiene simetría azimutal, $T$ es independiente de $\varphi$, y podemos escribir inmediatamente la solución general con simetría azimutal de la ecuación Laplace en coordenadas esféricas: que multiplica la solución radial con la solución angular, para cada valor de $k$ y luego suma sobre todos los posibles valores de $k$:
+\begin{equation}
+\Phi = (r, \theta) = \sum_{k=0}^{\infty} \left( A_{k} \, r^{k} + \dfrac{B_{k}}{r^{k+1}} \right) \, P_{k} (\cos \theta)
+\label{eq:ecuacion_26_29}
+\end{equation}
+Sin embargo, dado que el origen está en la región de interés, debemos excluir todos los potencias negativas de $r$. Esto se logra haciendo que todos los coeficientes $B$ sean iguales a cero. Así, tenemos
+\begin{equation}
+T(r, \theta) = \sum_{n=0}^{\infty} A_{n} \, r^{n} \, P_{n} (\cos \theta)
+\label{eq:ecuacion_26_50}
+\end{equation}
+Quedando por calcular los coeficientes $A_{n}$.
+\par
+Para resolver esta parte, revisemos que
+\begin{align*}
+T (a, \theta) = \begin{cases}
+T_{0} & \mbox{ si } 0 \leq \theta < \pi / 2 \\
+-T_{0} & \mbox{ si } \dfrac{\pi}{2} < \theta \leq \pi
+\end{cases}
+\end{align*}
+En términos de $u = \cos \theta$, queda expresado por
+\begin{align*}
+T (a, u) = \begin{cases}
+-T_{0} & \mbox{ si } -1 \leq u < 0 \\
+T_{0} & \mbox{ si } 0 < u \leq 1
+\end{cases}
+\end{align*}
+Sustituyendo este resultado en la ecuación (\ref{eq:ecuacion_26_50}), se obtiene
+\begin{align*}
+T (a, \theta) = \begin{cases}
+- T_{0}  & \mbox{ si } -1 \leq u < 0 \\
+T_{0} & \mbox{ si } 0 < u \leq 1 
+\end{cases}
+\hspace{0.5cm} = \sum_{n=0}^{\infty} A_{n} \, a^{n} \, P_{n}(u)
+\label{eq:ecuacion_26_51}
+\end{align*}
+Haciendo una expansión de $c_{n} = A_{n} \, a^{n}$ se encuentra que los coeficientes pares están ausentes y por tanto
+\[ c_{2k+1} \equiv A_{2k+1} \, a^{2k+1} = \dfrac{(-)^{k} (4 \, k + 3)(2 \, k)!}{2^{2k+1} \, k! \, (k+1)!} \, T_{0} \]
+Despejando $A_{2k+1}$ de la ecuación anterior, para utilizarlo dentro de la ec. (\ref{eq:ecuacion_26_50}) nos lleva a:
+\begin{equation}
+T(r, \theta) = T_{0} \, \sum_{k=0}^{\infty} \dfrac{(-)^{k} (4 \, k + 3)(2 \, k)!}{2^{2k+1} \, k! \, (k+1)!} \, \left( \dfrac{r}{a} \right)^{2k+1} \, P_{2k+1} (\cos \theta)
+\label{eq:ecuacion_26_52}
+\end{equation}
+donde se ha sustituido $\cos \theta$ por $u$.
+\end{document}
