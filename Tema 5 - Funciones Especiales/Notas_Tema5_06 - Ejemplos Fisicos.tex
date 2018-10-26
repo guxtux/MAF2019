@@ -4,9 +4,120 @@
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
+\section{Expansion en Polinomios de Legendre.}
+La ortogonalidad de los polinomios de Legendre nos es de utilidad para expandir una función definida en el intervalo $(-1,1)$. Sea $f(x)$ esa función, entonces escribimos:
+\begin{equation}
+f(x) = \sum_{n=0}^{\infty} c_{n} \, P_{n} (x)
+\label{eq:ecuacion_26_46}
+\end{equation}
+quedando por definir los coeficientes $c_{n}$.
+\par
+Los coeficientes $c_{n}$ se obtienen al multiplicar en ambos lados de la igualdad por $P_{m}$, para luego integrar de $-1$ a $1$. En la expresión del lado izquierdo tenemos
+\[ \int_{-1}^{1} f(x) \, P_{m}(x) \, \dd x  \]
+y del lado derecho
+\[ \int_{-1}^{1} \left( \sum_{n=0}^{\infty} c_{n} P_{n} (x) \right) \, P_{m} (x) \, \dd x = \sum_{n=0}^{\infty} \int_{-1}^{1} P_{n}(x) \, P_{m}(x) \, \dd x \]
+pero el valor de la integral es tal que
+\[ \int_{-1}^{1} P_{n}(x) \, P_{m}(x) \, \dd x = \dfrac{2}{(2 \, n +1)} \, \delta_{nm} \]
+por tanto
+\[ \int_{-1}^{1} \left( \sum_{n=0}^{\infty} c_{n} P_{n} (x) \right) \, P_{m} (x) \, \dd x = c_{m} \, \dfrac{2}{(2 \, n +1)} \]
+igualando las expresiones, se tiene que
+\begin{align}
+\begin{aligned}
+c_{m} &= \dfrac{2 \, m + 1}{2} \, \int_{-1}^{1} f(x) \, P_{m} (x) \, \dd x \hspace{0.5cm} \mbox{ o } \\
+c_{n} &= \dfrac{2 \, n + 1}{2} \, \int_{-1}^{1} f(x) \, P_{n} (x)\, \dd x
+\end{aligned}
+\label{eq:ecuacion_26_47}
+\end{align}
+Las ecs. (\ref{eq:ecuacion_26_46}) y (\ref{eq:ecuacion_26_47}) nos proporcionan una manera para expandir una función arbitraria en el intervalo $(-1, 1)$ en términos de polinomios de Legendre.
+\par
+Si $f(x)$ es un polinomio de grado $k$, entonces se puede escribir como una suma finita de polinomios de Legendre de grado $k$ y menor.
+\par
+De hecho, para $f(x) = x^{k}$, se tiene
+\[ c_{n} = \dfrac{2 \, n + 1}{2} \int_{-1}^{1} x^{k} \, P_{n} (x) \, \dd x = 0, \hspace{1.5cm} \mbox{para } n > k \]
+Por lo tanto, los coeficientes en la suma (\ref{eq:ecuacion_26_46}) más allá de $k$ son todos cero.
+\subsection{Ejemplo. Expansión de $f(x)$.}
+Queremos encontrar la expansión de Legendra de la función $f(x)$ definida por
+\begin{align*}
+f(x) = \begin{cases}
+V_{0} & \mbox{ si } 0 < x \leq 1 \\
+-V_{0} & \mbox { si } -1 \leq x < 1
+\end{cases}
+\end{align*}
+Para encontrar los coeficientes de la expansión, usamos la ec. (\ref{eq:ecuacion_26_47}):
+\begin{align}
+\begin{aligned}
+c_{n} &= \dfrac{2 \, n + 1}{2} \int_{-1}^{1} f(x) \, P_{n} (x) \, \dd x \\
+&= \dfrac{2 \, n + 1}{2} \int_{-1}^{0} \underbrace{f(x)}_{=-V_{0}} \, P_{n} (x) \, \dd x + \dfrac{2 \, n + 1}{2} \int_{0}^{1} \underbrace{f(x)}_{=+V_{0}} \, P_{n} (x) \, \dd x \\
+&= \dfrac{2 \, n + 1}{2} \, V_{0} \, \left[ - \int_{-1}^{0} P_{n} (x) \, \dd x + \int_{0}^{1} P_{n} (x) \, \dd x  \right]
+\end{aligned}
+\label{eq:ecuacion_26_48}
+\end{align}
+Para la primera integral, hacemos el cambio de variable $x = -y$, y usando la fórmula de paridad
+\begin{equation}
+P_{k}(-u) = (-)^{k} \, P_{k}(u)
+\label{eq:ecuacion_26_35}
+\end{equation}
+tenemos que
+\begin{align*}
+\int_{-1}^{0} P_{n}(x) \, \dd x = \int_{+1}^{0} P_{n} (-y) \, (- \dd y) = \int_{0}^{1} P_{n} (-y) \, \dd y = (-)^{n} \, \int_{0}^{1} P_{n} (x) \, \dd x  
+\end{align*}
+en la última igualdad, se ha cambiado la variable muda de integración de $y$ a $x$.
+\par
+Ocupando este resultado en la ec. (\ref{eq:ecuacion_26_48}), se obtiene:
+\begin{align*}
+c_{n} &= \dfrac{2 \, n + 1}{2} \, V_{0} \left[ 1 - (-)^{n} \right] \, \int_{0}^{1} P_{n} \, \dd x \\
+&= \dfrac{2 \, n + 1}{2} \, V_{0} \begin{dcases}
+0 & \mbox{ si } n \mbox{ es par} \\
+2 \, \int_{0}^{1} P_{2k+1} (x) \, \dd x& \mbox{ si } n = 2 \, k + 1
+\end{dcases}
+\end{align*}
+donde se ha escrito el valor impar de $n = 2 \, k + 1$ para $k = 0, 1, \ldots$
+\par
+Quedando pendiente evaluar la integral en el intervalo $(0,1)$ con los polinomios de Legendre de orden impar, para ello, usaremos la fórmula de Rodrigues:
+\begin{align*}
+\int_{0}^{1} &P_{2k+1} (x) \, \dd x
+ = \dfrac{1}{2^{2k+1} \, (2k+1)!} \int_{0}^{1} \dv[2k+1]{x} \left[ (x^{2} - 1)^{2k+1} \right] \, \dd x \\[0.5em]
+&= \dfrac{1}{2^{2k+1} \, (2k+1)!} \, \dv[2k+1]{x} \left[ (x^{2} - 1)^{2k+1} \right] \eval_{0}^{1} \\[0.5em]
+&= \dfrac{1}{2^{2k+1} (2k+1)!} \left\{ \dv[2k+1]{x} \left[ (x^{2} - 1)^{2k+1} \right] \eval_{x=1} + \right. \\[0.5em]
+&- \left. \dv[2k+1]{x} \left[ (x^{2} - 1)^{2k+1} \right] \eval_{x=0} \right\}
+\end{align*}
+El primer término da cero porque no hay un número suficiente de diferenciaciones para deshacerse de todos los factores de $(x^{2} - 1)$. Para el segundo término, notamos que $(x^{2} - 1)^{2k+1}$ es un polinomio en $x$ cuyas derivadas de varios órdenes consisten en potencias de $x$. Estas potencias darán cero en $x = 0$, excepto por el término constante (de potencia cero). Entonces, usemos la expansión binomial para $(x^{2} - 1)^{2k+1}$ que es igual a $-(1 - x^{2})^{2k+1}$:
+\begin{align*}
+\dv[2k]{x} \left[ (x^{2} - 1)^{2k+1} \right] \eval_{x=0} &= - \dv[2k]{x} \left[ \sum_{j=0}^{2k+1} \dfrac{(2 \, k + 1)!}{j! \, (2 \, k + 1 - j)!} \, (-x^{2})^{j} \right] \eval_{x=0} \\[0.5em]
+&= - \sum_{j=0}^{2k+1} \dfrac{(2 \, k + 1)!}{j! \, (2 \, k + 1 - j)!} \, (-)^{j} \, \dv[2k]{x} \left( x^{2j} \right) \eval_{x=0}
+\end{align*}
+cuyo término constante se obtiene cuando $k = j$, todos los demás términos de la suma se anulan, debido a que hay demasiadas diferenciaciones (cuando $j < k$, terminamos diferenciando constantes) o muy pocas diferenciaciones (cuando $j > k$, una potencia de $x$ se mantendrá, y cuando se evalúa $x = 0$ se anula). Por lo tanto,
+\begin{align*}
+\dv[2k]{x} \left[ (x^{2} - 1)^{2k+1} \right] \eval_{x=0} &= - \dfrac{(2 \, k + 1)!}{k! \, (k + 1)!} \, (-)^{k} \, \dv[2k]{x} \left( x^{2k} \right) \eval_{x=0} \\
+&= \dfrac{(2 \, k + 1)!}{k! \, (k + 1)!} \, (-)^{k+1} \, (2 \, k )!
+\end{align*}
+entonces la integral
+\begin{align}
+\begin{aligned}
+\int_{0}^{1} P_{2k+1} (x) \, \dd x &= - \dfrac{1}{2^{2k+1} \, (2 \, k + 1)!} \, \left[ \dfrac{(2 \, k + 1)!}{k! \, (k + 1)!} (-)^{k+1} \, (2 \, k)! \right] = \\
+&= \dfrac{(-)^{k} \, (2 \, k )!}{2^{2k+1} \, k! \, (k+1)!}
+\end{aligned}
+\label{eq:ecuacion_26_49}
+\end{align}
+Con esto, ya podemos escribir los coeficientes $c_{2k+1}$ como
+\begin{align*}
+c_{2k+1} &=  2 \, \dfrac{2 (2 \, k + 1) + 1}{2} \, V_{0} \, \int_{0}^{1} P_{2k+1} (x) \, \dd x = \\
+&= \dfrac{(-)^{k} \, (4 \, k + 3)(2 \, k)!}{2^{2k+1} \,k! \, (k + 1)!} \, V_{0}
+\end{align*}
+con $c_{n}=0$ para valores pares de $n$.
+\par
+La expansión por series queda entonces como:
+\begin{align*}
+f(x) &= \begin{cases}
+V_{0} & \mbox{ si } 0 < x \leq 1 \\
+-V_{0} & \mbox { si } -1 \leq x < 0
+\end{cases} = \\
+&= V_{0} \, \sum_{k=0}^{\infty} \dfrac{(-)^{k} \, (4 \, k + 3)(2 \, k)!}{2^{2k+1} \,k! \, (k + 1)!} \, P_{2k+1} (x) = \\
+&= V_{0} \left[ \dfrac{3}{2} P_{1} (x) - \dfrac{7}{8} P_{3} (x) + \dfrac{11}{16} P_{5} (x) - \ldots \right]
+\end{align*}
 \section{Funciones de Legendre.}
 Los problemas físicos más comunes que involucran la ecuación de Laplace son los de la electrostática en un espacio vacío y la transferencia de calor en estado estable. En cada caso, una superficie se mantiene a un potencial o temperatura (no necesariamente uniforme) y el potencial o la temperatura se busca en regiones alejadas de la superficie. En el presente contexto, estas superficies son típicamente (porciones de) esferas.
-\subsection{Ejemplo 1. Semiesferas a diferentes temperaturas.}
+\subsection{Ejemplo 1. Semiesferas a diferentes temperaturas.}\label{sec:sub_seccion_01}
 Dos hemisferios sólidos conductores de calor de radio $a$, separados por un pequeño espacio aislante, forman una esfera. Las dos mitades de la esfera están en contacto, en el exterior, con dos baños de calor (infinitos) a temperaturas $T_{0}$ y $-T_{0} $, ver la figura (\ref{fig:figura_esfera_01}).
 \begin{figure}[H]
     \centering
@@ -61,4 +172,37 @@ T(r, \theta) = T_{0} \, \sum_{k=0}^{\infty} \dfrac{(-)^{k} (4 \, k + 3)(2 \, k)!
 \label{eq:ecuacion_26_52}
 \end{equation}
 donde se ha sustituido $\cos \theta$ por $u$.
+\subsection{Ejercicio 2. Semiesferas a distintos potenciales.}
+Considere dos hemisferios de radio conductores de electricidad separados por un pequeño espacio de aislamiento en el ecuador. El hemisferio superior se mantiene al potencial $V_{0}$ y el inferior a $-V_{0}$ como se muestra en la figura (\ref{fig:figura_esfera_02}).
+\begin{figure}[H]
+    \centering
+    \includestandalone{Figuras/Ejemplo_Esfera_03}
+    \caption{Dos semiesferas con distintos potenciales eléctricos.}
+    \label{fig:figura_esfera_02}
+\end{figure}
+Queremos encontrar el potencial en puntos fuera de la esfera completa. Como el potencial debe desvanecerse en el infinito, esperamos que el primer término en la ec. (\ref{eq:ecuacion_26_29}) esté ausente, es decir, $A_{k} = 0$. Para encontrar $B_{k}$, sustituimos $a$ por $r$ en la ec. (\ref{eq:ecuacion_26_29}), y dejamos $\cos \theta \equiv u$. Entonces:
+\begin{align*}
+\Phi (a, u) = \sum_{k=0}^{\infty} \dfrac{B_{k}}{a^{k+1}} \, P_{k} (u)
+\end{align*}
+en donde
+\[ c_{k} \equiv \dfrac{B_{k}}{a^{k+1}} \]
+y además
+\begin{align*}
+\Phi (a, u) = \begin{cases}
+-V_{0} & \mbox{ si } -1 < u < 0 \\
++V_{0} & \mbox{ si } 0 < u < 1
+\end{cases}
+\end{align*}
+El cálculo de los coeficientes se realiza de la misma manera que en el \nameref{sec:sub_seccion_01}.
+\par
+Por lo que $c_{k} = 0$ para valores pares de $k$ y
+\[ c_{2m+1} = \dfrac{B_{2m+1}}{a^{2m+2}} = (-)^{m} \, \dfrac{(4 \, m + 3)(2 \, m)!}{2^{2m+1} \, (m + 1)! \, m!} \, V_{0} \]
+o equivalentemente
+\[ B_{2m+1} = \dfrac{(-)^{m} \, (4 \, m + 3)(2 \, m)!}{2^{2m+1} \, (m + 1)! \, m!} \, a^{2m+2} \, V_{0} \]
+Una vez hallados los coeficientes, escribimos el potencial:
+\begin{equation}
+\setlength{\fboxsep}{3\fboxsep}\boxed{\Phi (r, \theta) = V_{0} \, \sum_{m=0}^{\infty} (-)^{m} \, \dfrac{(4 \, m + 3)(2 \, m)!}{2^{2m+1} \, (m + 1)! \, m!} \, \left( \dfrac{a}{r} \right)^{2m+2} \, P_{2m+1} (\cos \theta)}
+\label{eq:ecuacion_26_53}
+\end{equation}
+
 \end{document}
