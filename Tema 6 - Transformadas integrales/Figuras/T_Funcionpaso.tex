@@ -1,0 +1,45 @@
+\documentclass{standalone}
+\usepackage[spanish]{babel}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathmorphing,patterns}
+\begin{document}
+\begin{tikzpicture}
+	\begin{axis}[
+		title={Espectro de la funci{\'o}n paso},
+		ymin=-0.5,
+		ymax=1.5,
+		xmax=7,
+		xmin=-7,
+		ytick = \empty,
+		axis lines = middle,
+		domain = -pi*2:+pi*2, samples=200,
+		no markers,
+		xtick={-4, -2, 0,  2,  4},
+		xticklabels={$-4\pi$, $-2\pi$, $0$, $2\pi$, $4\pi$},
+		xlabel near ticks,
+		xlabel= $\omega$,
+		ylabel = $a$,
+		every axis x label/.style={
+    	at={(ticklabel* cs:1)},
+    	anchor=west,
+		},
+		every axis y label/.style={
+    	at={(ticklabel* cs:1)},
+    	anchor=south,
+		}
+	]
+ 	%\draw[<->] (-1.75,0) -- (1.75,0) node [below, pos=1] {$\omega$};
+	%\draw [->] (0,-0.1)--(0,1.6) node [left, pos=0.9] {$a$};
+	%\draw (0.75, 0.65) node {$(g p_{a})(\omega)$};  
+    %\draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+	%\draw[color=blue]   plot (\x,{sin(\x r)}) ; 
+	%\draw[domain=-20:20,samples=200,blue] plot(\x,{sqrt{2/pi}* (sin \x}* pi);
+	%\draw[red, thick] plot[domain = -pi/2:+pi/2, samples = 2000] (\x,{0.25*sin(5*(\x) r)/(\x))});
+	
+	\addplot {(0.25*sin(deg(5*x))/x};
+	%\draw (0,-0.25) node {$\omega = \omega_{0}$};
+	%\draw (0.3,1) node {$ \frac{1}{\sqrt{2 \pi}} \; \frac{N \pi}{\omega_{0}}$};
+	\node[] at (axis cs: 2.5, 0.75) {$(g p_{a})(\omega)$};
+	\end{axis}
+\end{tikzpicture}
+\end{document}
