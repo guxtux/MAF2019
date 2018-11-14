@@ -477,11 +477,63 @@ Para el caso especial $x = 0$, se tiene que
 \label{eq:ecuacion_15_54}
 \end{equation}
 El signo negativo en $-y$ sugiere que se intentaron los cambios.
-% \section{Relación de Parseval.}
-% La relación de Parseval es
-% \begin{equation}
-% \int_{-\infty}^{\infty} F(\omega) \; G^{*} (\omega) d \omega = \int_{-\infty}^{\infty} f(t) \; g^{*}(t) dt
-% \label{eq:ecuacion_15_55}
-% \end{equation}
-% Algunos autores prefieren usar el nombre de Parseval a las series y propiamente se le llama a la relación (\ref{eq:ecuacion_15_55}) como el \textbf{teorema de Rayleigh}.
+\section{Relación de Parseval.}
+Resultados análogos a las ecs. (\ref{eq:ecuacion_15_53}) y (\ref{eq:ecuacion_15_54}) se obtienen de las transformadas seno y coseno de Fourier.
+\par
+La ec. (\ref{eq:ecuacion_15_54}) y las respectivas convoluciones seno y coseno se les llama \emph{relaciones de Parseval}, en analogía al teorema de Parseval para las series de Fourier.
+\par
+La relación de Parseval es
+\begin{equation}
+\int_{-\infty}^{\infty} F(\omega) \; G^{*} (\omega) \, \dd \omega = \int_{-\infty}^{\infty} f(t) \; g^{*}(t) \, \dd t
+\label{eq:ecuacion_15_55}
+\end{equation}
+Esta relación se obtiene utilizando la representación de la delta de Dirac ec. (\ref{eq:ecuacion_15_21d}), se tiene:
+\begin{equation}
+\int_{-\infty}^{\infty} f(t) \, g^{*}(t) \, \dd t = \int_{-\infty}^{\infty} \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} F(\omega) \, e^{-i \omega t} \, \dd \omega \cdot \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} G^{*}(x) \, e^{i x t} \, \dd{x} \dd{t}
+\label{eq:ecuacion_15_56}
+\end{equation}
+hay que mantener especial atención en la transforma del conjugado complejo de $G^{*}(x)$ a $g^{*}(t)$. Integrando primero con respecto a $t$ y usando la ec. (\ref{eq:ecuacion_15_21d}), se obtiene
+\begin{align}
+\int_{-\infty}^{\infty} f(t) \, g^{*}(t) \, \dd t &= \int_{-\infty}^{\infty} F(\omega) \, \int_{-\infty}^{\infty} G^{*} (x) \, \delta (x - \omega) \, \dd{x} \dd{\omega} \nonumber \\
+&= \int_{-\infty}^{\infty} F(\omega) \, G^{*} (\omega) \,\dd \omega
+\label{eq:ecuacion_15_57}
+\end{align}
+que es la relación de Parseval.
+\par
+Si $f(t) = g(t)$, entonces las integrales en la relación de Parseval son la normalización de las integrales. La ec. (\ref{eq:ecuacion_15_57}) garantiza que si una función $f(t)$ es normalizada a la unidad, entonces su transformada $F(\omega)$ también es normalizada a la unidad, esto es muy importante en la mecánica cuántica.
+\section{Representación del momento.}
+En dinámica avanzada y en mecánica cuántica, el momento lineal y la posición espacial se producen en igualdad de condiciones. En esta sección revisaremos la distribución espacial habitual y derivaremos la distribución de momento correspondiente. Para el caso unidimensional, nuestra función de onda $\psi(x)$ tiene las siguientes propiedades:
+\begin{enumerate}
+\item Sea $\psi^{*}(x) \, \psi(x)$ la densidad de probabilidad de encontrar una partícula entre $x$ y $x + \dd{x}$,
+\item La probabilidad unitaria es
+\begin{equation}
+\int_{-\infty}^{\infty} \psi^{*}(x) \, \psi(x) \, \dd x = 1
+\label{eq:ecuacion_15_58}
+\end{equation}
+\item De manera adicional
+\begin{equation}
+\expval{x} = \int_{-\infty}^{\infty} \psi^{*} (x) \, \psi (x) \, \dd x
+\label{eq:ecuacion_15_59}   
+\end{equation}
+que representa el \textbf{promedio} de la posición de la partícula en el eje-$x$, se le conoce como \emph{valor esperado (expectation value)}.
+\end{enumerate}
+Queremos una función $g(p)$ que nos proporcione la misma información sobre el momento:
+\begin{enumerate}
+\item Sea $g^{*}(p) \, g(p)$ la densidad de probabilidad de que la partícula tenga un momento entre $p$ y $p + \dd{p}$,
+\item La probabilidad unitaria es
+\begin{equation}
+\int_{-\infty}^{\infty} g^{*}(p) \, g(p) \, \dd p = 1
+\label{eq:ecuacion_15_60}
+\end{equation}
+\item Y que el valor esperado para el momento sea
+\begin{equation}
+\expval{p} = \int_{-\infty}^{\infty} g^{*} (p) \, p \, g(p) \, \dd p
+\label{eq:ecuacion_15_61}   
+\end{equation}
+\end{enumerate}
+Como veremos, esta función viene dada por la transformada de Fourier de nuestra función espacial $\psi(x)$. Específicamente:
+\begin{align}
+g (p) &= \dfrac{1}{\sqrt{2 \, \pi \, \hbar}} \int_{-\infty}^{\infty} \psi (x) \, e^{-i p x / \hbar} \, \dd x \\
+g^{*} (p) &= \dfrac{1}{\sqrt{2 \, \pi \, \hbar}} \int_{-\infty}^{\infty} \psi^{*} (x) \, e^{i p x / \hbar} \, \dd x
+\end{align}
 \end{document}
