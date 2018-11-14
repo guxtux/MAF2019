@@ -533,7 +533,88 @@ Queremos una función $g(p)$ que nos proporcione la misma información sobre el 
 \end{enumerate}
 Como veremos, esta función viene dada por la transformada de Fourier de nuestra función espacial $\psi(x)$. Específicamente:
 \begin{align}
-g (p) &= \dfrac{1}{\sqrt{2 \, \pi \, \hbar}} \int_{-\infty}^{\infty} \psi (x) \, e^{-i p x / \hbar} \, \dd x \\
-g^{*} (p) &= \dfrac{1}{\sqrt{2 \, \pi \, \hbar}} \int_{-\infty}^{\infty} \psi^{*} (x) \, e^{i p x / \hbar} \, \dd x
+g (p) &= \dfrac{1}{\sqrt{2 \, \pi \, \hbar}} \int_{-\infty}^{\infty} \psi (x) \, e^{-i p x / \hbar} \, \dd x \label{eq:ecuacion_15_62} \\
+g^{*} (p) &= \dfrac{1}{\sqrt{2 \, \pi \, \hbar}} \int_{-\infty}^{\infty} \psi^{*} (x) \, e^{i p x / \hbar} \, \dd x \label{eq:ecuacion_15_63}
 \end{align}
+La correspondiente función de momento en 3D es
+\begin{align*}
+g (\vb{p}) = \dfrac{1}{(2 \, \pi \, \hbar)^{3/2}} \iiint \limits_{-\infty}^{\infty} \psi (\vb{r}) \, \exp(-i \vb{r} \cdot \vb{p} / \hbar) \, \dd[3]{x}
+\end{align*}
+Para verificar las ecs. (\ref{eq:ecuacion_15_62}) y (\ref{eq:ecuacion_15_63}), veremos primero las propiedades $2$ y $3$.
+\par
+Propiedad $2$: La normalización se satisface en automático de la relación de Parseval: si la función espacial $\psi (x)$ se normaliza a la unidad, la función de momento $g(p)$ también se normaliza a la unidad.
+\par
+Para revisar la propiedad $3$, debemos de mostrar que
+\begin{equation}
+\expval{p} = \int_{-\infty}^{\infty} g^{*} (p) \, p \, g(p) \, \dd p = \int_{-\infty}^{\infty} \psi^{*} (x) \, \dfrac{\hbar}{i} \, \dv{x} \psi (x) \, \dd x
+\label{eq:ecuacion_15_64}
+\end{equation}
+donde $(\hbar/i)(\dv{x})$ es el operador de momento angular en el espacio. Sustituimos las funciones de momento por las TF espaciales, y la primera integral es
+\begin{equation}
+\dfrac{1}{2 \,\pi \, \hbar} \iiint \limits_{-\infty}^{\infty} p \, \exp(-i p (x - x^{\prime})/ \hbar) \, \psi^{*}(x^{\prime}) \, \psi (x) \dd{p} \dd{x^{\prime}} \dd{x}
+\label{eq:ecuacion_15_65}
+\end{equation}
+Ahora podemos utilizar la identidad de onda plana
+\begin{equation}
+p \, \exp(-i p (x - x^{\prime})/ \hbar) = \dv{x} \left[ - \dfrac{\hbar}{i} \, \exp(-i p (x - x^{\prime})/ \hbar) \right]
+\label{eq:ecuacion_15_66}
+\end{equation}
+donde $p$ es una constante, no un operador. Al sustituir en la ec. (\ref{eq:ecuacion_15_65}) para luego integrar por partes, mantiendo $x^{\prime}$ y $p$ constantes, obtenemos el siguiente resultado
+\begin{equation}
+\expval{p} = \iint \limits_{-\infty}^{\infty} \left[ \dfrac{1}{2 \,\pi \, \hbar} \int_{-\infty}^{\infty} \exp(-i p (x - x^{\prime})/ \hbar) \, \dd p \right] \cdot \psi (x^{\prime}) \, \dfrac{\hbar}{i} \, \dv{x} \psi (x) \dd{x^{\prime}} \dd{x}
+\label{eq:ecuacion_15_67}
+\end{equation}
+Hemos supuesto que $\psi (x)$ se anula cuando $x \to \pm \infty$, por lo que se elimina la parte que se integra. Usando la función delta de Dirac de la ec. (\ref{eq:ecuacion_15_21c}), la ec. (\ref{eq:ecuacion_15_67}) se reduce a la ec. (\ref{eq:ecuacion_15_64}) para verificar la representación del momento.
+\subsection*{Ejemplo. El átomo de hidrógeno.}
+El estado base del átomo de hidrógeno puede describirse por la función de onda espacial
+\begin{equation}
+\psi (\vb{r}) = \left( \dfrac{1}{\pi \, a_{0}^{3}} \right)^{1/3} \, e^{-r/a_{0}}
+\label{eq:ecuacion_15_68}
+\end{equation}
+donde $a_{0}$ es el radio de Bohr: $4 \, \pi \varepsilon_{0} \, \hbar^{2} / m \, e^{2}$, ahora se tiene una función de onda en 3D.
+\par
+La correspondiente transformada de la ec. (\ref{eq:ecuacion_15_62}) es
+\begin{equation}
+g (\vb{p}) = \dfrac{1}{(2 \, \pi \, \hbar)^{3/2}} \int \psi (\vb{r}) \, \exp(-i \vb{p} \cdot \vb{r} / \hbar) \, \dd[3]{r}
+\label{eq:ecuacion_15_69}
+\end{equation}
+Sustituyendo la ec. (\ref{eq:ecuacion_15_68}) en la ec. (\ref{eq:ecuacion_15_69}), además de usar el siguiente resultado
+\begin{equation}
+\int \exp(-a r + i \vb{b} \cdot \vb{r}) \, \dd[3]{r} = \dfrac{8 \, \pi \, a}{(a^{2} + b^{2})^{2}}
+\label{eq:ecuacion_15_70}
+\end{equation}
+obtenemos la función de onda del momento hidrogenoide
+\begin{equation}
+g (\vb{p}) = \dfrac{2^{3/2}}{\pi} \, \dfrac{a_{0}^{3} \, \hbar^{5/2}}{(a_{0}^{2} \, p^{2} + \hbar^{2})^{2}}
+\label{eq:ecuacion_15_71}
+\end{equation}
+Estas funciones de momento se han encontrado útiles en problemas como la dispersión de Compton a partir de electrones atómicos, la distribución de longitud de onda de la radiación dispersada, dependiendo de la distribución de momento de los electrones objetivo.
+\par
+La relación entre la representación espacial ordinaria y la representación del momento se puede aclarar considerando las relaciones básicas de conmutación de la mecánica cuántica. Pasamos de un hamiltoniano clásico a la ecuación de onda de Schrodinger al exigir que el momento $p$ y la posición $x$ \textbf{no conmuten}. En su lugar, requerimos que
+\begin{equation}
+\qty[p, x] \equiv p \, x - x \, p = - i \, \hbar
+\label{eq:ecuacion_15_72}
+\end{equation}
+Para el caso multidimensional, la ec (\ref{eq:ecuacion_15_72}) sería la siguiente
+\begin{equation}
+\qty[p_{i}, x_{j}] = - i \, \hbar \, \delta_{i j}
+\label{eq:ecuacion_15_73}
+\end{equation}
+La representación espacial de Schrödinger se obtiene utilizando
+\[ x \to x : \hspace{1cm} p_{i} \to - i \, \hbar \, \pdv{x_{i}} \]
+re-emplazando el momento por la derivada parcial espacial. Vemos que
+\begin{equation}
+\qty[p, x] \, \psi (x) = - i \, \hbar \, \psi(x)
+\label{eq:ecuacion_15_74}
+\end{equation}
+Sin embargo, la ec. (\ref{eq:ecuacion_15_72}) de igual forma se satisface usando
+\[p \to p : \hspace{1cm} x_{j} \to - i \, \hbar \, \pdv{p_{j}} \]
+Que es a representación del momento. Entonces
+\begin{equation}
+\qty[p, x] \, g (p) = - i \, \hbar \, g (p)
+\label{eq:ecuacion_15_75}
+\end{equation}
+Por lo tanto, la representación $(x)$ no es única; $(p)$ es una posibilidad alterna.
+\par
+En general, la representación de Schrödinger $(x)$ que conduce a la ecuación de onda de Schrödinger es más conveniente porque la energía potencial $V$ generalmente se da en función de la posición $V (x, y, z)$. La representación de momento $(p)$ generalmente conduce a una ecuación integral.
 \end{document}
