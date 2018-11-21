@@ -606,76 +606,78 @@ En este caso se encuentra que
 \[ C(t) = \dfrac{F_{0}}{2 \, \omega_{0}^{2}} \, \sqrt{\omega_{0}^{2} \, t^{2} + 1} \]
 \textbf{Problema a cuenta: } Con el mismo sistema masa resorte amortiguador, considera los valores de $m = 1$, $k = 9.04$, y $F(t) =  6 \, \exp(-t/50) \, \cos 3 \, t$, resuelve el problema para obtener el desplazamiento $x(t)$. ¿Cuál es el valor máximo de la amplitud? Discute tus resultados. (Nota: será necesario que cuentes con una gráfica de la solución, ya que de esa manera podrás argumentar tu respuesta)
 % %Sección 7.4 Zill - Derivadas, integrales y productos de transformadas
-% \section{Teorema de convolución.}
-% La transformada de Laplace de la (inicialmente desconocida) solución de una ecuación diferencial, se puede reconocer algunas veces como el producto de las transformadas de dos funciones conocidas. Por ejemplo, cuando se transforma el problema de valores iniciales
-% \[ x^{\prime \prime} + x = \cos t \hspace{1cm} x(0) = x^{\prime}(0) = 0 \]
-% se obtiene
-% \[ X(s) = \dfrac{s}{(s^{2} + 1)^{2}} = \dfrac{s}{s^{2} + 1} \cdot \dfrac{1}{s^{2} + 1} = \mathscr{L} \{ \cos t \} \cdot \{ \mathscr{L} \sin t \} \]
-% Esto sugiere fuertemente que debe haber una forma de combinar las dos funciones $\sin t$ y $\cos t$ para obtener una función $x(t)$ cuya transformada sea el producto de sus transformadas. Pero, como es obvio, $x(t)$ no es simplemente el producto de $\cos t$ por  $\sin t$ debido a que 
-% \[ \mathscr \{ \cos t \sin t \} = \mathscr \{\frac{1}{2} \sin 2t \} = \dfrac{1}{s^{2} + 4} \neq \dfrac{s}{(s^{2} + 1)^{2}} \]
-% Así,
-% \[ \mathscr{L} \{ \cos t \sin t \} \neq \mathscr{L} \{ \cos t \} \cdot \mathscr{L} \{ \sin t \} \]
-% El sigiente teorema muestra que la función
-% \begin{equation}
-% h(t) = \int_{0}^{t} f(\tau) g(t - \tau) d \tau
-% \label{eq:ecuacion_Cap7_001}
-% \end{equation}
-% tiene la propiedad deseada de que
-% \begin{equation}
-% \mathscr{L} \{ h(t) \} = H(s) = F(s) \cdot G(s)
-% \label{eq:ecuacion_Cap7_002}
-% \end{equation}
-% La nueva función de $t$ definida como la integral en (\ref{eq:ecuacion_Cap7_001}) depende sólo de $f$ y $g$, y se  conoce como \emph{la convolución de $f$ y $g$}. Se representa como $f * g$, donde la idea es que representa un nuevo tipo de producto de $f$  y $g$, de tal modo que su transformada es el producto de las transformadas de $f$  y de $g$.
-% \begin{defi}{Convolución de dos funciones.}
-% La \textbf{convolución} $f * g$ de funciones continuas por tramos $f$ y $g$ se define para $t \geqq 0$ como sigue:
-% \begin{equation}
-% (f * g)(t) = \int_{0}^{t} f(\tau) g(t - \tau) d \tau
-% \label{eq:ecuacion_Cap7_003}
-% \end{equation}
-% \end{defi}
-% Se puede escribir también como $f(t) * g(t)$ cuando sea conveniente. En términos de la convolución del producto, se tiene que
-% \[ \mathscr{L} \{ f * g \} = \mathscr{L} \{ f \} \cdot \mathscr{L} \{ g \} \]
-% Si se hace la sustitución $u = t -\tau$ en la integral dada en la ec. (\ref{eq:ecuacion_Cap7_003}), se observa que
-% \begin{align*}
-% f(t) * g(t) &= \int_{0}^{t} f(\tau) g(t - \tau) d \tau = \int_{t}^{0} f(t - u) g(u) (-d u) \saltosin
-% &= \int_{0}^{t} g(u) f(t - u) d u = g(t) * f(t)
-% \end{align*}
-% De esta manera, se revisa que la convolución es \textit{conmutativa}: $f * g = g * f$.
-% \subsection*{Ejemplo.}
-% La convolución del $\cos t$ y el $\sin t$ es
-% \[ (\cos t) * (\sin t) = \int_{0}^{t} \cos \tau	\; \sin (t - \tau) d \tau \]
-% Usando la siguiente identidad trigonométrica
-% \[ \cos A \; \sin B =  \frac{1}{2} [ (\sin(A + B) - \sin (A - B) ] \]
-% tenemos que
-% \begin{align*}
-% (\cos t) * (\sin t) &=  \int_{0}^{t} \frac{1}{2} [\sin t - \sin (2 \tau - t)] d \tau \saltosin
-% &= \dfrac{1}{2} \left[ \tau \; \sin t + \dfrac{1}{2} \cos (2 \tau - 1) \right]_{\tau=0}^{t}
-% \end{align*}
-% esto es entonces
-% \[ (\cos t) * (\sin t) = \frac{1}{2} t \; \sin t \]
-% \begin{teo}{Propiedad de convolución.}
-% Supóngase que $f(t)$ y $g(t)$ son funciones continuas por tramos para $ t \geqq 0$ y que $\vert f(t) \vert$ y $\vert g(t) \vert$ están acotadas por $M e^{ct}$ conforme $t \to +\infty$. Entonces la TL de la convolución $f(t) * g(t)$ existe para $s > c$, más aún:
-% \begin{equation}
-% \mathscr{L} \{ f(t) * g(t) \} = \mathscr{L} \{ f(t) \} \cdot \mathscr{L} \{ g(t) \}
-% \label{eq:ecuacion_Cap7_004}
-% \end{equation}
-% y además
-% \begin{equation}
-% \mathscr{L}^{-1} \{ F(s) \cdot G(s) \} = f(t) * g(t)
-% \label{eq:ecuacion_Cap7_005}
-% \end{equation}
-% De esta manera, es posible encontrar la transformada inversa del producto $F(s) \cdot G(s)$ siempre que sea posible evaluar la integral
-% \begin{equation}
-% \mathscr{L} \{ F(s) \cdot G(s) \} = \int_{0}^{t} f(\tau) \; g(t - \tau) d \tau
-% \label{eq:ecuacion_Cap7_005b}
-% \end{equation}
-% \end{teo}
-% La utilidad de la convolución radica en el hecho de ser una alternativa al uso de las fracciones parciales para encontrar las transformadas inversas.
-% \subsection*{Ejemplo.}
-% Con $f(t) = \sin 2t$ y $g(t) = e^{t}$, la convolución es
-% \begin{align*}
-% \mathscr{L}^{-1} \left\lbrace \dfrac{2}{(s-1)(s^{2} + 4)} \right\rbrace &= (\sin 2t) * e^{t} = \int_{0}^{t} e^{t - \tau} \; \sin 2t dt \saltosin
-% &= e^{t} \; int_{0}^{t} e^{-\tau} \; \sin 2t dt = e^{t} \left[ \dfrac{e^{-\tau}}{5} (- \sin 2 \tau - 2 \cos 2 \tau) \right]_{0}^{t} \saltosin
-% &= \dfrac{2}{5} e^{t} - \dfrac{1}{5} \sin 2t - \dfrac{2}{5} \cos t
-% \end{align*}
+\section{Teorema de convolución.}
+La transformada de Laplace de la (inicialmente desconocida) solución de una ecuación diferencial, se puede reconocer algunas veces como el producto de las transformadas de dos funciones conocidas. Por ejemplo, cuando se transforma el problema de valores iniciales
+\[ x^{\prime \prime} + x = \cos t \hspace{1cm} x(0) = x^{\prime}(0) = 0 \]
+se obtiene
+\[ X(s) = \dfrac{s}{(s^{2} + 1)^{2}} = \dfrac{s}{s^{2} + 1} \cdot \dfrac{1}{s^{2} + 1} = \mathscr{L} \left\{ \cos t \right\} \cdot \left\{ \mathscr{L} \sin t \right\} \]
+Esto sugiere fuertemente que debe haber una forma de combinar las dos funciones $\sin t$ y $\cos t$ para obtener una función $x(t)$ cuya transformada sea el producto de sus transformadas. Pero, como es obvio, $x(t)$ no es simplemente el producto de $\cos t$ por $\sin t$ debido a que 
+\begin{align*}
+\mathscr{L} \left\{ \cos t \, \sin t \right\} = \mathscr{L} \left\{ \dfrac{1}{2} \sin 2 \, t \right\} = \dfrac{1}{s^{2} + 4} \neq \dfrac{s}{(s^{2} + 1)^{2}}
+\end{align*}
+Así,
+\[ \mathscr{L} \left\{ \cos t \, \sin t \right\} \neq \mathscr{L} \left\{ \cos t \right\} \cdot \mathscr{L} \left\{ \sin t \right\} \]
+El sigiente teorema muestra que la función
+\begin{equation}
+h(t) = \int_{0}^{t} f(\tau) \, g(t - \tau) \, \dd \tau
+\label{eq:ecuacion_07_04_01}
+\end{equation}
+tiene la propiedad deseada de que
+\begin{equation}
+\mathscr{L} \{ h(t) \} = H(s) = F(s) \cdot G(s)
+\label{eq:ecuacion_07_04_02}
+\end{equation}
+La nueva función de $t$ definida como la integral en (\ref{eq:ecuacion_07_04_01}) depende sólo de $f$ y $g$, y se  conoce como \emph{la convolución de $f$ y $g$}. Se representa como $f * g$, donde la idea es que representa un nuevo tipo de producto de $f$  y $g$, de tal modo que su transformada es el producto de las transformadas de $f$  y de $g$.
+\begin{defi}{Convolución de dos funciones.}
+La \textbf{convolución} $f * g$ de funciones continuas por tramos $f$ y $g$ se define para $t \geqq 0$ como sigue:
+\begin{equation}
+(f * g)(t) = \int_{0}^{t} f(\tau) \, g(t - \tau) \, \dd \tau
+\label{eq:ecuacion_07_04_03}
+\end{equation}
+\end{defi}
+Se puede escribir también como $f(t) * g(t)$ cuando sea conveniente. En términos de la convolución del producto, se tiene que
+\[ \mathscr{L} \left\{ f * g \right\} = \mathscr{L} \left\{ f \right\} \cdot \mathscr{L} \left\{ g \right\} \]
+Si se hace la sustitución $u = t - \tau$ en la integral dada en la ec. (\ref{eq:ecuacion_07_04_03}), se observa que
+\begin{align*}
+f(t) * g(t) &= \int_{0}^{t} f(\tau) \, g(t - \tau) \, \dd \tau = \int_{t}^{0} f(t - u) \, g(u) \, (-\dd u) \\
+&= \int_{0}^{t} g(u) \, f(t - u) \, \dd u = g(t) * f(t)
+\end{align*}
+De esta manera, se revisa que la convolución es \textit{conmutativa}: $f * g = g * f$.
+\subsection*{Ejemplo.}
+La convolución del $\cos t$ y el $\sin t$ es
+\[ (\cos t) * (\sin t) = \int_{0}^{t} \cos \tau	\; \sin (t - \tau) \, \dd \tau \]
+Usando la siguiente identidad trigonométrica
+\[ \cos A \; \sin B =  \dfrac{1}{2} [ (\sin(A + B) - \sin (A - B) ] \]
+tenemos que
+\begin{align*}
+(\cos t) * (\sin t) &=  \int_{0}^{t} \frac{1}{2} [\sin t - \sin (2 \tau - t)] \, \dd \tau \\
+&= \dfrac{1}{2} \left[ \tau \; \sin t + \dfrac{1}{2} \cos (2 \tau - 1) \right]_{\tau=0}^{t}
+\end{align*}
+esto es entonces
+\[ (\cos t) * (\sin t) = \frac{1}{2} t \; \sin t \]
+\begin{teo}{Propiedad de convolución.}
+Supóngase que $f(t)$ y $g(t)$ son funciones continuas por tramos para $ t \geqq 0$ y que $\vert f(t) \vert$ y $\vert g(t) \vert$ están acotadas por $M \, e^{ct}$ conforme $t \to +\infty$. Entonces la TL de la convolución $f(t) * g(t)$ existe para $s > c$, más aún:
+\begin{equation}
+\mathscr{L} \{ f(t) * g(t) \} = \mathscr{L} \{ f(t) \} \cdot \mathscr{L} \{ g(t) \}
+\label{eq:ecuacion_07_04_04}
+\end{equation}
+y además
+\begin{equation}
+\mathscr{L}^{-1} \{ F(s) \cdot G(s) \} = f(t) * g(t)
+\label{eq:ecuacion_07_04_05}
+\end{equation}
+De esta manera, es posible encontrar la transformada inversa del producto $F(s) \cdot G(s)$ siempre que sea posible evaluar la integral
+\begin{equation}
+\mathscr{L} \{ F(s) \cdot G(s) \} = \int_{0}^{t} f(\tau) \; g(t - \tau) \, \dd \tau
+\label{eq:ecuacion_07_04_05b}
+\end{equation}
+\end{teo}
+ La utilidad de la convolución radica en el hecho de ser una alternativa al uso de las fracciones parciales para encontrar las transformadas inversas.
+\subsection*{Ejemplo.}
+Con $f(t) = \sin 2 \, t$ y $g(t) = e^{t}$, la convolución es
+\begin{align*}
+\mathscr{L}^{-1} \left\{ \dfrac{2}{(s-1)(s^{2} + 4)} \right\} &= (\sin 2t) * e^{t} = \int_{0}^{t} e^{t - \tau} \; \sin 2 \, t \, \dd t \\
+&= e^{t} \; \int_{0}^{t} e^{-\tau} \; \sin 2 \, t \, \dd t = e^{t} \left[ \dfrac{e^{-\tau}}{5} (- \sin 2 \, \tau - 2 \, \cos 2 \, \tau) \right]_{0}^{t} \\
+&= \dfrac{2}{5} \, e^{t} - \dfrac{1}{5} \, \sin 2 \, t - \dfrac{2}{5} \, \cos t
+\end{align*}
 \end{document}
