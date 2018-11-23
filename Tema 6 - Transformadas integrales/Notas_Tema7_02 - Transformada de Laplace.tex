@@ -677,7 +677,94 @@ De esta manera, es posible encontrar la transformada inversa del producto $F(s) 
 Con $f(t) = \sin 2 \, t$ y $g(t) = e^{t}$, la convolución es
 \begin{align*}
 \mathscr{L}^{-1} \left\{ \dfrac{2}{(s-1)(s^{2} + 4)} \right\} &= (\sin 2t) * e^{t} = \int_{0}^{t} e^{t - \tau} \; \sin 2 \, t \, \dd t \\
-&= e^{t} \; \int_{0}^{t} e^{-\tau} \; \sin 2 \, t \, \dd t = e^{t} \left[ \dfrac{e^{-\tau}}{5} (- \sin 2 \, \tau - 2 \, \cos 2 \, \tau) \right]_{0}^{t} \\
+&= e^{t} \; \int_{0}^{t} e^{-\tau} \; \sin 2 \, t \, \dd t = \\
+&= e^{t} \left[ \dfrac{e^{-\tau}}{5} (- \sin 2 \, \tau - 2 \, \cos 2 \, \tau) \right]_{0}^{t} \\
 &= \dfrac{2}{5} \, e^{t} - \dfrac{1}{5} \, \sin 2 \, t - \dfrac{2}{5} \, \cos t
 \end{align*}
+\section{Derivación de transformadas.}
+\begin{teo}{Derivación de transformadas.}
+
+Si $f(t)$ es continua por tramos para $t \geqq 0$ y $\abs{f(t)} \leqq M \, \exp(c \, t)$ conforme $t \to +\infty$, entonces
+\begin{equation}
+\mathscr{L} \left\{ -t \, f(t) \right\} = F^{\prime}(s), \hspace{1.5cm} \mbox{ para } s > c
+\label{eq:ecuacion_07_04_06}
+\end{equation}
+En forma equivalente
+\begin{equation}
+f(t) = \mathscr{L}^{-1} \left\{ F(s) \right\} = - \dfrac{1}{t} \, \mathscr{L}^{-1} \left\{ F^{\prime}(s) \right\}
+\label{eq:ecuacion_07_04_07}
+\end{equation}
+Aplicaciones sucesivas de la ec. (\ref{eq:ecuacion_07_04_06}) nos proporciona
+\begin{equation}
+\mathscr{L} \left\{ t^{n} \, f(t) \right\} = (-1)^{n} \, F^{n}(s), \hspace{1.5cm} n = 1, 2, \ldots
+\label{eq:ecuacion_07_04_08}
+\end{equation}
+\end{teo}
+\subsection*{Ejemplo.}
+Encuentra $\mathscr{L} \left\{ t^{2} \, \sin k \, t \right\}$
+\par
+De la ec. (\ref{eq:ecuacion_07_04_08}), tenemos que
+\begin{align}
+\begin{aligned}
+\mathscr{L} \left\{ t^{2} \, \sin k \, t \right\} &= (-1)^{2} \, \dv[2]{s} \left( \dfrac{k}{s^{2} + k^{2}} \right) \\[0.5em]
+&= \dv{s} \left[ \dfrac{-2 \, k \, s}{(s^{2} + k^{2})^{2}} \right] \\[0.5em]
+&= \dfrac{6 \, k \, s^{2} - 2 \, k^{3}}{(s^{2} + k^{2})^{3}}  
+\end{aligned}
+\label{eq:ecuacion_07_04_09}
+\end{align}
+La forma de la propiedad de la derivación en la ec. (\ref{eq:ecuacion_07_04_07}) es normalmente útil para encontrar la transformada inversa cuando la derivada de la transformada es más fácil de manejar que la transformada en sí misma.
+\subsection*{Ejemplo.}
+Calcula $\mathscr{L}^{-1} \left\{ \tan^{-1} (1/s) \right\}$
+\par
+La derivada de $\tan^{-1}(1/s)$ es una función racional simple, por lo que usando la ec. (\ref{eq:ecuacion_07_04_07}), se tiene que:
+\begin{align*}
+\mathscr{L}^{-1} \left\{ \tan^{-1} (1/s) \right\} &= -\dfrac{1}{t} \, \mathscr{L}^{-1} \left\{ \dv{s} \tan^{-1} \left( \dfrac{1}{s} \right) \right\} \\[0.5em]
+&= -\dfrac{1}{t} \, \mathscr{L}^{-1} \left\{ \dfrac{-1/s^{2}}{1 + (1/s)^{2}} \right\} \\[0.5em]
+&= -\dfrac{1}{t} \, \mathscr{L}^{-1} \left\{ \dfrac{-1}{s^{2} + 1} \right\} \\[0.5em]
+&= -\dfrac{1}{t} \,(- \sin t)
+\end{align*}
+por tanto
+\begin{align*}
+\mathscr{L}^{-1} \left\{ \tan^{-1} \dfrac{1}{s} \right\} = \dfrac{sin t}{t}
+\end{align*}
+La ec. (\ref{eq:ecuacion_07_04_08}) puede utilizarse para transformar la ED lineal con polinomios en lugar de coeficietes constantes. El resultado será una ED que involucre la transformada; el éxito de este procedimiento dependerá de si la nueva ecuación es más fácil de resolver que la ecuación original.
+\subsection*{Ejemplo.}
+Sea $x(t)$ la solución a la ecuación de Bessel de orden cero
+\begin{align*}
+t \, x^{\prime \prime} + x^{\prime} + t \, x = 0
+\end{align*}
+de tal manera que $x(0) = 1$ y $x^{\prime}(0) = 0$. La solución a la ecuación de Bessel es $J_{0}(t)$.
+\par
+Al aplicar la TL, tenemos que
+\begin{align*}
+\mathscr{L} \left\{ x^{\prime} (t) \right\} &= s \, X(s) - 1 \\
+\mathscr{L} \left\{ x^{\prime \prime} (t) \right\} &= s^{2} \, X(s) - s
+\end{align*}
+y como $x$ y $x^{\prime \prime}$ se multiplican cada una por $t$, el uso de la ec. (\ref{eq:ecuacion_07_04_06}), nos devuelve la ecuación transformada
+\begin{align*}
+- \dv{s} \left[ s^{2} \, X(s) - s \right] + \left[s \, X(s) - 1 \right] - \dv{s} [X(s)] = 0
+\end{align*}
+El resultado de la derivación y simplificación es la siguiente ED
+\begin{align*}
+(s^{2} + 1) \, X^{\prime} (s) + s \, X(s) = 0
+\end{align*}
+siendo esta ecuación de variables separables
+\begin{align*}
+\dfrac{X^{\prime}}{X(s)} = - \dfrac{s}{s^{2} + 1}
+\end{align*}
+que tiene por solución general:
+\begin{align*}
+X(s) = \dfrac{C}{\sqrt{s^{2}+ 1}}
+\end{align*}
+El valor de $C = 1$ (el ejercicio a cuenta pide que demuestres este resultado), entonces, como $X(s) = \mathscr{L} \left\{ J_{0}(t) \right\}$, concluimos que
+\begin{equation}
+\mathscr{L} \left\{ J_{0}(t) \right\} = \dfrac{1}{\sqrt{s^{2}+ 1}}
+\label{ec:ecuacion_07_04_10}
+\end{equation}
+\subsection*{Problema a cuenta.}
+Como se mencionó:
+\begin{align*}
+\mathscr{L} \left\{ J_{0}(t) \right\} = \dfrac{C}{\sqrt{s^{2}+ 1}} =  \dfrac{C}{s} \left( 1 + \dfrac{1}{s^{2}} \right)^{-1/2}
+\end{align*}
+Desarrolla lo anterior con el apoyo de la serie binomial y calcula la transformada inversa término a término, de tal manera que cuando evalúes $J_{0}(0)$, tendrás la demostración de que $C = 1$.
 \end{document}
