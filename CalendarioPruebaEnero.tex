@@ -1,0 +1,57 @@
+\documentclass[a4paper]{article}    %% a4 doesn't work here
+\usepackage{termcal}
+
+\makeatletter
+\renewcommand\ca@doaday[1]{% %%<--- spurious space
+   \hspace*{-1em}\hbox{\vrule depth \calboxdepth height 0pt width 0pt\vtop{%  note \hspace* in the begining
+                                           %% Adjust as needed.
+   #1%                                 %options specified by |\calday|
+   \csname\curdate options\endcsname%  % options specified by date
+   \ifclassday\csname C\theclassnum options\endcsname\fi%   by classnumber
+   \hbox to \hsize{\calprintdate\hfill\ifclassday\calprintclass\fi}%
+   \vspace{2pt}
+      \begingroup
+        \let\\=\ca@normbs
+        \raggedright
+        \sloppy
+        \the\weeklytext\par
+        \csname\curdate text\endcsname
+        \ifclassday\csname C\theclassnum text\endcsname
+                   \stepcounter{classnum}\fi
+      \endgroup
+   }}%
+    \global\newmonthfalse
+    \advancedate%
+}%
+\makeatother
+
+\newcommand{\TRClass}{%
+\skipday % Tuesday
+\skipday % Tuesday
+%\skipday % Wednesday (no class)
+\calday[Miercoles]{\classday}
+\calday[Thursday]{\classday} % Thursday
+\skipday % Friday
+\skipday\skipday % weekend (no class)
+}
+
+\newcommand{\Holiday}[2]{%
+\options{#1}{\noclassday}%
+\caltext{#1}{#2}%
+}%
+
+\begin{document}
+\paragraph*{Lab Tentative Schedule for Electric Circuit Analysis:}
+\begin{center}
+\begin{calendar}{8/18/2014}{2} % Semester starts on 1/11/2010 and last for 16
+                    % weeks, including finals week
+\setlength{\calboxdepth}{0.3in}
+\TRClass
+% schedule
+\caltexton{1}{Lab briefing}%
+\caltextnext{2.2 Charge, Current, Voltage, and Power\\
+2.3 Voltage and Current Sources\\
+2.4 Ohm's Law}
+\end{calendar}
+\end{center}
+\end{document}
