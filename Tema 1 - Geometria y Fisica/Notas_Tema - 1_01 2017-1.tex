@@ -225,43 +225,41 @@ El operador divergencia puede obtenerse del teorema de Gauss:
 \nabla \vdot \vb{V}(q_{1}, q_{2}, q_{3}) = \lim_{\int \dd \tau \to 0} \dfrac{\int \vb{V} \vdot \dd \bm{\sigma}}{\int \dd \tau}
 \label{eq:ecuacion_02_19}
 \end{equation}
-con un volumen diferencial $h_{1} \: h_{2} \: h_{3} \: \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}$.
-% %\begin{figure}
-% %\begin{tikzpicture}
-% %	\draw [->] (0,0) -- (7,0) node [right] {$x$};
-% %	\draw [->] (0,0) --  (0,5) node [right] {$y$};
-% %\end{tikzpicture}
-% %\end{figure}
-% \\
+con un volumen diferencial $h_{1} \: h_{2} \: h_{3} \: \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}$, como se ve en la siguiente figura:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/ElementoVolumen_01.png}
+    \caption{Elemento de volumen curvilíneo.}
+\end{figure}
 Nótese que las direcciones positivas se han elegido tal que $(\vu{q}_{1}, \vu{q}_{2}, \vu{q}_{3})$ o $(\vu{e}_{1},\vu{e}_{2}, \vu{e}_{3})$ forman un conjunto con orientación derecha: $\vu{q}_{1} \cp \vu{q}_{2} = \vu{q}_{3}$.
 \par
 La diferencia de área de las integrales para las dos caras $q_{1} = \text{constante}$ está dada por:
 \begin{align}
 \begin{aligned}
-\left[ V_{1} \: h_{2} \: h_{3} + \pdv{}{q_{1}} (V_{1} \: h_{2} \: h_{3}) \: \dd{q_{1}} \right] \: \dd{q_{2}} \dd{q_{3}} -& V_{1} \: h_{2} \: h_{3} \: \dd{q_{2}} \dd{q_{3}} \\
-=& \pdv{}{q} (V_{1} \: h_{2} \: h_{3}) \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}
+\left[ V_{1} \: h_{2} \: h_{3} + \pdv{q_{1}} (V_{1} \: h_{2} \: h_{3}) \: \dd{q_{1}} \right] \: \dd{q_{2}} \dd{q_{3}} -& V_{1} \: h_{2} \: h_{3} \: \dd{q_{2}} \dd{q_{3}} \\
+=& \pdv{q} (V_{1} \: h_{2} \: h_{3}) \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}
 \end{aligned}
 \label{eq:ecuacion_02_20}
 \end{align}
 Aquí  $v_{i} = \vb{V} \vdot \vu{q}_{i}$ es la proyección de $\vb{V}$ en la dirección  $\vu{q}_{i}$. Agregando los resultados que se obtienen de manera similar para las otras dos superficies, tenemos que:
 \begin{align}
 \begin{aligned}
-\int \vb{V}(q_{1}, q_{2}, q_{3}) \vdot \bm{\sigma}  \\
-&= \left[ \pdv{}{q_{1}} (V_{1} \: h_{2} \: h_{3}) + \pdv{}{q_{2}} (V_{2} \: h_{3} \: h_{1}) +
-\pdv{}{q_{3}} (V_{3} \: h_{1} \: h_{2}) \right] \: \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}
+\int \vb{V}(q_{1}, & q_{2}, q_{3}) \vdot \vu*{\sigma} =  \\
+&= \left[ \pdv{q_{1}} (V_{1} \: h_{2} \: h_{3}) + \pdv{q_{2}} (V_{2} \: h_{3} \: h_{1}) +
+\pdv{q_{3}} (V_{3} \: h_{1} \: h_{2}) \right] \: \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}
 \end{aligned}
 \end{align}
 Usando la ecuación (\ref{eq:ecuacion_02_19}), dividiendo por el diferencial de volumen, se tiene que
 \begin{equation}
-\vb{\nabla} \vdot \vb{V}(q_{1}, q_{2}, q_{3}) = \dfrac{1}{h_{1} \: h_{2} \: h_{3}} \; \left[ \pdv{}{q_{1}} (V_{1} \: h_{2} \: h_{3}) + \pdv{}{q_{2}} (V_{2} \: h_{3} \: h_{1}) + \pdv{}{q_{3}} (V_{3} \: h_{1} \: h_{2})   \right]
+\vb{\nabla} \vdot \vb{V}(q_{1}, q_{2}, q_{3}) = \dfrac{1}{h_{1} \: h_{2} \: h_{3}} \; \left[ \pdv{q_{1}} (V_{1} \: h_{2} \: h_{3}) + \pdv{q_{2}} (V_{2} \: h_{3} \: h_{1}) + \pdv{q_{3}} (V_{3} \: h_{1} \: h_{2})   \right]
 \label{eq:ecuacion_02_21}
 \end{equation}
 De las ecuaciones (\ref{eq:ecuacion_02_18}) y (\ref{eq:ecuacion_02_21}), obtenemos el operador Laplaciano, usando $\vb{V} = \nabla \psi(q_{1} \: q_{2}\:  q_{3})$. Lo que nos devuelve
 \begin{align}
 \begin{aligned}
 \nabla \vdot \nabla \psi (q_{1}, q_{2}, q_{3}) &= \\
-&= \dfrac{1}{h_{1} \: h_{2} \: h_{3}} \left[ \pdv{}{q_{1}} \left( \dfrac{h_{2} \: h_{3}}{h_{1}} \pdv{\psi}{q_{1}} \right) + \right. \\
-&+ \left.  \pdv{}{q_{2}} \left( \dfrac{h_{3} \: h_{1}}{h_{2}} \pdv{ \psi}{q_{2}} \right) + \pdv{}{q_{3}} \left( \dfrac{h_{1} \: h_{2}}{h_{3}} \pdv{\psi}{q_{3}} \right) \right]  
+&= \dfrac{1}{h_{1} \: h_{2} \: h_{3}} \left[ \pdv{q_{1}} \left( \dfrac{h_{2} \: h_{3}}{h_{1}} \pdv{\psi}{q_{1}} \right) + \right. \\
+&+ \left.  \pdv{q_{2}} \left( \dfrac{h_{3} \: h_{1}}{h_{2}} \pdv{ \psi}{q_{2}} \right) + \pdv{q_{3}} \left( \dfrac{h_{1} \: h_{2}}{h_{3}} \pdv{\psi}{q_{3}} \right) \right]  
 \end{aligned}
 \label{eq:ecuacion_02_22}
 \end{align}
@@ -277,208 +275,175 @@ el teorema de Stokes nos devuelve
 \label{eq:ecuacion_02_24}
 \end{equation}
 con la integral de línea que rodea la superficie $q_{1}=\text{constante}$. Siguiendo el bucle $(1, 2, 3, 4)$ de la figura
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/ElementoCurvilineo_02.png}
+    \caption{Elemento de superficie curvilíneo con $q_{1}=$ constante. }
+\end{figure}
 \begin{align}
 \begin{aligned}
-\oint \vb{V} (q_{1}, q_{2}, q_{3}) \vdot \dd{\vb*{r}} &= V_{2} \: h_{2} \dd{q_{2}} + \left[ V_{3} \: h_{3} + \pdv{}{q_{2}} (V_{3} \: h_{3}) \dd{q_{2}} \right] \: \dd{q_{3}} \\
-&- \left[ V_{2} \: h_{2} + \pdv{}{q_{3}} (V_{2} \: h_{2}) \: \dd{q_{3}} \right] \: \dd{q_{2}} - V_{3} \: h_{3} \: \dd{q_{3}} \\
-&= \left[ \pdv{}{q_{2}} (h_{3} \: V_{3}) - \pdv{}{q_{3}} (h_{2} \: V_{2}) \right] \: \dd{q_{2}} \dd{q_{3}}
+\oint \vb{V} (q_{1}, q_{2}, q_{3}) \vdot \dd{\vb*{r}} &= V_{2} \: h_{2} \dd{q_{2}} + \left[ V_{3} \: h_{3} + \pdv{q_{2}} (V_{3} \: h_{3}) \dd{q_{2}} \right] \: \dd{q_{3}} \\
+&- \left[ V_{2} \: h_{2} + \pdv{q_{3}} (V_{2} \: h_{2}) \: \dd{q_{3}} \right] \: \dd{q_{2}} - V_{3} \: h_{3} \: \dd{q_{3}} \\
+&= \left[ \pdv{q_{2}} (h_{3} \: V_{3}) - \pdv{q_{3}} (h_{2} \: V_{2}) \right] \: \dd{q_{2}} \dd{q_{3}}
 \end{aligned}
 \label{eq:ecuacion_02_25}
 \end{align}
 Se da un signo positivo cuando vamos en la dirección positiva de las partes 1 y 2, y un signo negativo en las partes 3 y 4, ya que vamos en dirección negativa. Los términos de orden mayor en la expansión de la serie de Maclaurin o de Taylor se omiten, ya que tienden a cero cuando el límite del elemento de superficie se hace muy pequeño ($\dd{q_{2}} \rightarrow 0, \dd{q_{3}} \rightarrow 0$.)
 De la ecuación (\ref{eq:ecuacion_02_24}) tenemos
 \begin{equation}
-\nabla \cp \vb{V} \eval_{1} = \dfrac{1}{h_{2} \:h_{3}} \; \left[ \pdv{}{q_{2}} (h_{3} \: V_{3}) - \pdv{}{q_{3}} h_{2} \: V_{2} \right]
+\nabla \cp \vb{V} \eval_{1} = \dfrac{1}{h_{2} \:h_{3}} \; \left[ \pdv{q_{2}} (h_{3} \: V_{3}) - \pdv{q_{3}} h_{2} \: V_{2} \right]
 \label{eq:ecuacion_02_26}
 \end{equation}
 Las dos componentes que restan de $\nabla \cp \vb{V}$, se obtienen al realizar una permutación ciclíca de los índices. La mejor manera para escribir el rotacional, es una forma de determinante
 \begin{equation}
 \nabla \cp V = \dfrac{1}{h_{1} \: h_{2} \: h_{3}} \begin{vmatrix}
 \vu{q}_{1} \: h_{1} & \vu{q}_{2} \: h_{2} & \vu{q}_{3} \: h_{3} \\[1em]
-\displaystyle \pdv{}{q_{1}} & \displaystyle \pdv{}{q_{2}} & \displaystyle \pdv{}{q_{3}} \\[1em]
+\displaystyle \pdv{q_{1}} & \displaystyle \pdv{q_{2}} & \displaystyle \pdv{q_{3}} \\[1em]
 h_{1} \: V_{1} & h_{2} \: V_{2} & h_{3} \: V_{3}
 \end{vmatrix}
 \end{equation}
 Recordemos que debido a la presencia de los operadores diferenciales, este determinante debe de expandrise de arriba hacia abajo. La ecuación en sí, no es idéntica a la forma del producto cruz de dos vectores, ya que $\nabla$ no es un vector común, es un operador vectorial.
-% \section{Coordenadas cartesianas rectangulares.}
-% En previsión de las nuevas expresiones para el cálculo de vectores que aparecerán más adelante, vamos a enfatizar que álgebra vectorial es la misma en coordenadas curvilíneas ortogonales como en el sistema de coordenadas cartesianas. En concreto, para el producto escalar:
-% \[ \begin{split}
-% \mathbf{A} \cdot \mathbf{B} &=  \sum_{ik} A_{i} \mathbf{\widehat{q}}_{i} \cdot \mathbf{\widehat{q}}_{k} B_{k} = \sum_{ik} A_{i} B_{k} \delta_{ik} \\
-% &= \sum_{i} A_{i}B_{i} = A_{1}B_{1} + A_{2} B_{2} + A_{3} B_{3}
-% \end{split} \]
-% donde los subíndices indican las componentes curvilíneas. Para el producto punto
-% \[ \mathbf{A} \times \mathbf{B} = \left| \begin{matrix}
-% \mathbf{\widehat{q}}_{1} & \mathbf{\widehat{q}}_{2} & \mathbf{\widehat{q}}_{3} \\
-% A_{1} & A_{2} & A_{3} \\
-% B_{1} & B_{2} & B_{3}
-% \end{matrix} \right| \]
-% Previamente, nos enfocamos al manejo en coordenadas rectangulares localmente adaptadas a simetrías especiales. Veamos ahora brevemente en el caso más general, donde las coordenadas no son necesariamente ortogonales. Los elementos de superficie y de volumen son parte de integrales múltiples, que son comunes en aplicaciones físicas, como por ejemplo determinar el centro de masa y los momentos de inercia.
-% \\
-% Normalmente elegimos el sistema de coordenadas de acuerdo con la simetría del problema particular. Mediante el teorema de Gauus se transforma una integral de volumen a una integral de superficie, con el teorema de Stokes, se transforma una integral de superficie a una integral de línea. Para coordenadas ortogonales, los elementos de superficie y de volumen son productos de la elementos de la línea $h_{i}dq_{i}$. Para el caso general, usamos el significado geométrico de $\partial \mathbf{r} / \partial q_{i}$ como vectores tangentes. Comenzamos con los elementos cartesianos de superficie $dxdy$, que se convierten en un rectángulo infinitesimal en las nuevas coordenadas $q_{1}, q_{2}$ formado por el incremento de dos vectores
-% \[ \begin{split}
-% d \mathbf{r}_{1} &= \mathbf{r}(q_{1} + dq_{1},q_{2}) - \mathbf{r}(q_{1}, q_{2}) = \dfrac{\partial \mathbf{r}}{\partial q_{1}} dq_{1} \\
-% d \mathbf{r}_{2} &= \mathbf{r}(q_{1}, q_{2}+ dq_{2}) - \mathbf{r}(q_{1}, q_{2}) = \dfrac{\partial \mathbf{r}}{\partial q_{2}} dq_{2}
-% \end{split} \]
-% cuya área es la componente $z$ de su producto cruz o
-% \[ \renewcommand\arraystretch{2} \begin{split}
-% dx dy = d\mathbf{r}_{1} \times d \mathbf{r}_{2}\big\vert_{z} &= \left[ \dfrac{\partial x}{\partial q_{1}} \dfrac{\partial y}{\partial q_{2}} - \dfrac{\partial x}{\partial q_{2}} \dfrac{\partial y}{\partial q_{1}} \right] dq_{1} dq_{2} \\
-% &= \left| \begin{matrix}
-% \dfrac{\partial x}{\partial q_{1}} & \dfrac{\partial x}{\partial q_{2}} \\
-% \dfrac{\partial y}{\partial q_{1}} & \dfrac{\partial y}{\partial q_{2}}
-% \end{matrix} \right| dq_{1} dq_{2}
-% \end{split} \]
-% El coeficiente de transformación en forma de determinante, es el \emph{Jacobiano}.
-% \\
-% De manera similar, el elemento de volumen $dxdydz$ corresponde al triple producto escalar de los tres vectores de desplazamiento infinitesimales $d\mathbf{r}_{i} =  d q_{i} \partial \mathbf{r} / \partial q_{i}$ a lo largo de las $q_{i}$ direcciones $\mathbf{\widehat{q}}_{i}$, por lo que toma la forma:
-% \[ \renewcommand\arraystretch{2} dx dy dz = \left| \begin{matrix}
-% \dfrac{\partial x}{\partial q_{1}} & \dfrac{\partial x}{\partial q_{2}} & \dfrac{\partial x}{\partial q_{3}} \\
-% \dfrac{\partial y}{\partial q_{1}} & \dfrac{\partial y}{\partial q_{2}} & \dfrac{\partial y}{\partial q_{3}} \\
-% \dfrac{\partial z}{\partial q_{1}} & \dfrac{\partial z}{\partial q_{2}} & \dfrac{\partial z}{\partial q_{3}}
-% \end{matrix} \right| dq_{1} dq_{2} dq_{3} \]
-% \textbf{Ejemplo}: La transformación de un elemento de volumen en coordenadas cartesianas en dos dimensiones a coordenadas polares $\rho, \varphi$ con $x= \rho \cos \varphi$, $y= \rho \sin \varphi$, resulta
-% \[\renewcommand\arraystretch{2} dx dy = \left| \begin{matrix}
-% \dfrac{\partial x }{\partial \rho} & \dfrac{\partial x}{\partial \varphi} \\
-% \dfrac{\partial y }{\partial \rho} & \dfrac{\partial y}{\partial \varphi} 
-% \end{matrix} \right| d \rho d \varphi  =
-% \left| \renewcommand\arraystretch{1.5} \begin{matrix}
-% \cos \varphi & - \rho \sin \varphi \\
-% \sin \varphi & \rho \cos \varphi 
-% \end{matrix}  \right| d \rho d \varphi =  \rho d \rho d \varphi \]
-%  \textbf{Ejemplo (para casa)} De manera similar, en coordenadas esféricas, partiendo de $x = r \sin \theta \cos \varphi, y= r \sin \theta \sin \varphi, z = r \cos \theta $, el Jacobiano es
-%  \[ J = r^{2} (\cos^{2} \theta \sin \theta + \sin^{3} \theta) = r^{2} \sin \theta \]
-% Por lo que el elemento de volumen es: $dx dy dz = r^{2} dr \sin \theta d \theta d \varphi$. La integral de volumen se puede escribir como
-% \[ \int f(x,y,z) dxdydz = \int f(x(r,\theta, \varphi), y(r,\theta, \varphi), z(r,\theta, \varphi)) r^{2} dr \sin \theta d \theta d \varphi  \]
-% En resumen, hemos desarrollado un formalismo general para el análisis de vectores en coordenadas curvilíneas ortogonales en $\mathbb{R}^{3}$. Para la mayoría de aplicaciones, podemos elegir coordenadas ortogonales para las cuales, los elementos de superficie y de volumen en integrales múltiples son productos de los elementos de línea. Para el caso no ortogonal en general, se aplica el determinante Jacobiano.
-% \section{Sistema coordenado cartesiano}
-% Los factores de escala son:
-% \begin{eqnarray}
-% \begin{aligned}
-% h_{1} &=& h_{x} = 1 \\
-% h_{2} &=& h_{y} = 1 \\
-% h_{3} &=& h_{z} = 1 \\
-% \end{aligned}
-% \end{eqnarray}
-% Las siguientes expresiones corresponden para el gradiente, divergencia, laplaciano y rotacional:
-% \begin{eqnarray}
-% \nabla \psi &=& \mathbf{i} \dfrac{\partial \psi}{\partial x} + \mathbf{j} \dfrac{\partial \psi}{\partial y} + \mathbf{k} \dfrac{\partial \psi}{\partial z} \\
-% \nabla \cdot \mathbf{V} &=& \dfrac{\partial \psi}{\partial x} + \dfrac{\partial \psi}{\partial y} + \dfrac{\partial \psi}{\partial z} \\
-% \nabla \cdot \nabla \psi &=& \dfrac{\partial^{2} \psi}{\partial x^{2}} + \dfrac{\partial^{2} \psi}{\partial y^{2}} +  \dfrac{\partial^{2} \psi}{\partial z^{2}} \\
-% \nabla \times \mathbf{V} &=& \begin{vmatrix}
-% \mathbf{i} & \mathbf{j} & \mathbf{k} \\
-% \dfrac{\partial}{\partial x} & \dfrac{\partial}{\partial y} & \dfrac{\partial}{\partial z} \\
-% V_{x} & V_{y} & V_{z}
-% \end{vmatrix}
-% \end{eqnarray}
-% \section{Sistema coordenado cilíndrico ($\rho,\varphi,z$)}
-% En el sistema coordenado cilíndrico las tres coordenadas curvilíneas del sistema generalizado $(q_{1},q_{2},q_{3})$, se renombran por $(\rho, \varphi, z)$. Las superficies coordenadas:
-% \begin{enumerate}
-% \item Los cilindros circulares tienen al eje $z$ como eje común, tal que:
-% \[ \rho =  (x^{2} + y^{2})^{1/2} = \text{constante} \]
-% \item Los semiplanos a través del eje $z$
-% \[ \varphi = \tan^{-1} \left(\dfrac{y}{x} \right) = \text{constante} \]
-% \item Los planos paralelos al plano $x-y$, como en el sistema cartesiano:
-% \[ z = \text{constante} \]
-% \end{enumerate}
-% \begin{figure}[!h]
-% \centering
-% \tdplotsetmaincoords{70}{120}
-% \begin{tikzpicture}[tdplot_main_coords][scale=0.75]
-% \tikzstyle{every node}=[font=\small]
-% \draw[thick,-latex] (0,0,0) -- (6,0,0) node[anchor=north east]{$x$};
-% \draw[thick,-latex] (0,0,0) -- (0,6,0) node[anchor=north west]{$y$};
-% \draw[thick,-latex] (0,0,0) -- (0,0,6) node[anchor=south]{$z$};
-% \draw [thick](0,0,0) circle (3);
-% \draw [thick](0,0,4) circle (3);
-% \draw [thick](1.9,-2.35,0) -- (1.9,-2.35,4) node[midway, left]{$\rho=\rho_1$ superficie};
-% \draw [thick](-1.9,2.35,0) -- (-1.9,2.35,4);
-% \filldraw[fill=orange, nearly transparent] (-4,-4,4) -- (4,-4,4) --  (4,5,4) -- (-4,5,4) -- (-4,-4,4);
-% \filldraw[fill=blue, nearly transparent] (0,0,4) -- (5.2,6,4) --  (5.2,6,0) -- (0,0,0) -- (0,0,4);
-% \filldraw [color=blue](2,2.25,4) circle (0.075cm) ;
-% \draw (-4,5,4) node[anchor=south]{$z=z_1$ plano};
-% \draw (5.2,6,0) node[anchor=south west]{$\varphi=\varphi_1$ plano};
-% \node at (1.8,1,4)  { $\rho_{1}(\rho_{1},\varphi_{1},z_{1})$};
-% \draw[ultra thick,-latex](2,2.25,4) -- (3,3.45,4) node[anchor=north] {$\bm{\rho}_{0}$};
-% \draw[ultra thick,-latex](2,2.25,4) -- (1,2.5,4) node[anchor=north west] {$\bm{\varphi}_{0}$};
-% \draw[ultra thick,-latex](2,2.25,4) -- (2,2.25,4.75) node[anchor=north west] {$\mathbf{k}$};
-% \draw [thick,->](4,0,0) arc (0:45:4 and 4.5);
-% \draw (3.6,2,0) node[anchor=north] {$\varphi_1$};
-% \draw[ultra thick,-latex](0,0,0) -- (2,2.35,0);
-% \draw (1,1,0) node[anchor=north] {$\rho_1$};
-% \draw [ultra thick] (2,2.25,4)--(1.95,2.25,0);
-% \draw[ultra thick](0.1,0,4) -- (-0.1,0,4) node[anchor=south west] {$z_1$};
-% \end{tikzpicture}
-% \end{figure}
-% Los límites de $\rho, \varphi$ y $z$, son:
-% \[ 0 \leq \rho < \infty, \hspace{1cm} 0 \leq \varphi \leq 2 \pi, \hspace{1cm} -\infty < z < \infty \]
-% Podemos recuperar las relaciones de transformación:
-% \begin{eqnarray}
-% \begin{aligned}
-% x &= \rho \cos \varphi \\
-% y &= \rho \sin \varphi \\
-% z &= z
-% \end{aligned}
-% \end{eqnarray}
-% Considerando los elementos de longitud $ds_{1}$, revisamos que los factores de escala son:
-% \begin{eqnarray}
-% \begin{aligned}
-% h_{1} &=& h_{\rho} = 1 \\
-% h_{2} &=& h_{\varphi} = \rho \\
-% h_{3} &=& h_{z} = 1
-% \end{aligned}
-% \end{eqnarray}
-% Los vectores unitarios $(\mathbf{e}_{1},\mathbf{e}_{2},\mathbf{e}_{3})$ se renombran $(\bm{\rho}_{0},\bm{\varphi}_{0},\mathbf{z})$:
-% \begin{enumerate}
-% \item El vector unitario $\bm{\rho}_{0}$ es normal a la superficie cilíndrica que apunta en la dirección del incremento del radio $\rho$.
-% \item El vector unitario $\bm{\varphi}_{0}$ es tangencial a la superficie cilíndrica y además, perpendicular al semiplano $\varphi=\text{constante}$, y el vector apunta en la dirección del incremento del ángulo azimutal $\varphi$.
-% \item El vector $\mathbf{z}$, es el vector unitario que conocemos del sistema cartesiano.
-% \end{enumerate}
-% Estos vectores son mutuamente ortogonales
-% \[ \bm{\widehat{\rho}} \cdot \bm{\widehat{\varphi}} = \bm{\widehat{\varphi}} \cdot \mathbf{\widehat{z}} = \mathbf{\widehat{z}} \cdot \bm{\widehat{\rho}} = 0  \]
-% un vector general $\mathbf{V}$ se expresa como
-% \[ \mathbf{V} =  \bm{\rho} V_{\rho} + \bm{\varphi} V_{\varphi} + \mathbf{z} V_{z} \]
-% Un elemento diferencial de desplazamiento $d\mathbf{r}$ se puede escribir como
-% \begin{eqnarray}
-% \begin{aligned}
-% d \mathbf{r} &= \bm{\rho}_{0} ds_{\rho} + \bm{\varphi}_{0} ds_{\varphi} + \mathbf{k} dz \\
-% &= \bm{\rho}_{0} d \rho + \bm{\varphi}_{0} \rho d \varphi + \mathbf{k} dz
-% \end{aligned}
-% \end{eqnarray}
-% Los operadores diferenciales, resultan ser:
-% \begin{eqnarray}
-% \nabla \psi (\rho, \varphi, z) &=& \bm{\rho} \dfrac{\partial \psi}{\partial \rho} + \bm{\varphi} \dfrac{1}{\rho} \dfrac{\partial \varphi}{\partial \varphi} + \mathbf{z} \dfrac{\partial \psi}{\partial z} \\
-% \bm{\nabla} \cdot \mathbf{V} &=& \dfrac{1}{\rho} \dfrac{\partial}{\partial \rho} (\rho V_{\rho}) + \dfrac{1}{\rho} \dfrac{\partial V_{\varphi}}{\partial \varphi} + \dfrac{\partial V_{z}}{\partial z} \\
-% \nabla^{2} \psi &=& \dfrac{1}{\rho} \dfrac{\partial}{\partial \rho} \left( \rho \dfrac{\partial \psi}{\partial \rho} \right) + \dfrac{1}{\rho^{2}} \dfrac{\partial^{2} \psi}{\partial \varphi^{2}} + \dfrac{\partial^{2} \psi}{\partial z^{2}} \\
-% \mathbf{\nabla} \times \mathbf{V} &=& \dfrac{1}{\rho} 
-% \renewcommand\arraystretch{1.5} \begin{vmatrix}
-% \bm{\rho} & \rho \bm{\varphi} & \mathbf{z} \\
-% \dfrac{\partial}{\partial \rho} & \dfrac{\partial}{\partial \varphi} & \dfrac{\partial}{\partial z} \\
-% V_{\rho} & \rho V_{\varphi} & V_{z}
-% \end{vmatrix}
-% \end{eqnarray}
-% \\
-% \textbf{Ejemplo: } Las ecuaciones de Navier Stokes de la hidrodinámica incluyen un término no lineal:
-% \[ \bm{\nabla} \times [ \mathbf{v} \times ( \bm{\nabla} \times \mathbf{v})] \]
-% donde $\mathbf{v}$ es la velocidad del fluido. Para flujos a través de un tubo cilíndrico en la dirección $z$
-% \[ \mathbf{v} =  \mathbf{\widehat{z}} v (\rho) \]
-% Calculamos primeramente el rotacional
-% \[ \bm{\nabla} \times \mathbf{v} = \dfrac{1}{\rho} \left| 
-% \renewcommand\arraystretch{1.5} \begin{matrix}
-% \bm{\widehat{\rho}} & \rho \bm{\widehat{\varphi}} & \mathbf{\widehat{z}} \\
-% \dfrac{\partial}{\partial \rho} & \dfrac{\partial}{\partial \varphi} & \dfrac{\partial}{\partial z} \\
-% 0 & 0 & v(\rho)\end{matrix} \right| = - \bm{\widehat{\varphi}} \dfrac{\partial v}{\partial \rho} \]
-% ahora calculamos el doble producto escalar (vector con vector)
-% \[ \mathbf{v} \times (\bm{\nabla} \times \mathbf{v}) = \left| 
-% \renewcommand\arraystretch{1.5} \begin{matrix}
-% \bm{\widehat{\rho}} & \bm{\widehat{\varphi}} & \mathbf{\widehat{z}} \\
-% 0 & 0 & v \\
-% 0 & - \dfrac{\partial v}{\partial \rho} & 0\end{matrix} \right| = - \bm{\widehat{\rho}} v(\rho) \dfrac{\partial v}{\partial \rho} \] 
-% finalmente, el triple producto escalar resulta ser
-% \[ \bm{\nabla} \times ( \mathbf{v} \times (\bm{\nabla} \times \mathbf{v})) = \dfrac{1}{\rho} \left| 
-% \renewcommand\arraystretch{1.5} \begin{matrix}
-% \bm{\widehat{\rho}} & \rho \bm{\widehat{\varphi}} & \mathbf{\widehat{z}} \\
-% \dfrac{\partial}{\partial \rho} & \dfrac{\partial}{\partial \varphi} & \dfrac{\partial}{\partial z} \\
-% v \dfrac{\partial v}{\partial \rho} & 0 & 0\end{matrix} \right| = 0 \]
-% Para este caso en particular, los términos no lineales se anulan. 
+\section{Sistema coordenado cartesiano}
+Los factores de escala son:
+\begin{align*}
+\begin{aligned}
+h_{1} &=& h_{x} = 1 \\
+h_{2} &=& h_{y} = 1 \\
+h_{3} &=& h_{z} = 1 \\
+\end{aligned}
+\end{align*}
+Las siguientes expresiones corresponden para el gradiente, divergencia, laplaciano y rotacional:
+\begin{align*}
+\nabla \psi &= \vu{i} \pdv{\psi}{x} + \vu{j} \pdv{\psi}{y} + \vu{k} \pdv{\psi}{z} \\[1em]
+\nabla \vdot \vb{V} &= \pdv{\psi}{x} + \pdv{\psi}{y} + \pdv{\psi}{z} \\[1em]
+\nabla \vdot \nabla \psi &= \pdv[2]{\psi}{x} + \pdv[2]{\psi}{y} +  \pdv[2]{\psi}{z} \\[1em]
+\nabla \cp \vb{V} &= \begin{vmatrix}
+\vu{i} & \vu{j} & \vu{k} \\
+\displaystyle \pdv{x} & \displaystyle \pdv{y} & \displaystyle \pdv{z} \\
+V_{x} & V_{y} & V_{z}
+\end{vmatrix}
+\end{align*}
+\section{Sistema coordenado cilíndrico ($\rho,\varphi,z$)}
+En el sistema coordenado cilíndrico las tres coordenadas curvilíneas del sistema generalizado $(q_{1}, q_{2}, q_{3})$, se renombran por $(\rho, \varphi, z)$. Las superficies coordenadas:
+\begin{enumerate}
+\item Los cilindros circulares tienen al eje $z$ como eje común, tal que:
+\[ \rho =  (x^{2} + y^{2})^{1/2} = \text{constante} \]
+\item Los semiplanos a través del eje $z$
+\[ \varphi = \tan^{-1} \left(\dfrac{y}{x} \right) = \text{constante} \]
+\item Los planos paralelos al plano $x-y$, como en el sistema cartesiano:
+\[ z = \text{constante} \]
+\end{enumerate}
+\begin{figure}[!h]
+\centering
+\tdplotsetmaincoords{70}{120}
+\begin{tikzpicture}[tdplot_main_coords][scale=0.75]
+\tikzstyle{every node}=[font=\small]
+\draw[thick,-latex] (0,0,0) -- (6,0,0) node[anchor=north east]{$x$};
+\draw[thick,-latex] (0,0,0) -- (0,6,0) node[anchor=north west]{$y$};
+\draw[thick,-latex] (0,0,0) -- (0,0,6) node[anchor=south]{$z$};
+\draw [thick](0,0,0) circle (3);
+\draw [thick](0,0,4) circle (3);
+\draw [thick](1.9,-2.35,0) -- (1.9,-2.35,4) node[midway, left]{$\rho=\rho_1$ superficie};
+\draw [thick](-1.9,2.35,0) -- (-1.9,2.35,4);
+\filldraw[fill=orange, nearly transparent] (-4,-4,4) -- (4,-4,4) --  (4,5,4) -- (-4,5,4) -- (-4,-4,4);
+\filldraw[fill=blue, nearly transparent] (0,0,4) -- (5.2,6,4) --  (5.2,6,0) -- (0,0,0) -- (0,0,4);
+\filldraw [color=blue](2,2.25,4) circle (0.075cm) ;
+\draw (-4,5,4) node[anchor=south]{$z=z_1$ plano};
+\draw (5.2,6,0) node[anchor=south west]{$\varphi=\varphi_1$ plano};
+\node at (1.8,1,4)  { $\rho_{1}(\rho_{1},\varphi_{1},z_{1})$};
+\draw[ultra thick,-latex](2,2.25,4) -- (3,3.45,4) node[anchor=north] {$\bm{\rho}_{0}$};
+\draw[ultra thick,-latex](2,2.25,4) -- (1,2.5,4) node[anchor=north west] {$\bm{\varphi}_{0}$};
+\draw[ultra thick,-latex](2,2.25,4) -- (2,2.25,4.75) node[anchor=north west] {$\mathbf{k}$};
+\draw [thick,->](4,0,0) arc (0:45:4 and 4.5);
+\draw (3.6,2,0) node[anchor=north] {$\varphi_1$};
+\draw[ultra thick,-latex](0,0,0) -- (2,2.35,0);
+\draw (1,1,0) node[anchor=north] {$\rho_1$};
+\draw [ultra thick] (2,2.25,4)--(1.95,2.25,0);
+\draw[ultra thick](0.1,0,4) -- (-0.1,0,4) node[anchor=south west] {$z_1$};
+\end{tikzpicture}
+\caption{Coordenadas cilíndricas circulares.}
+\end{figure}
+Los límites de $\rho, \varphi$ y $z$, son:
+\[ 0 \leq \rho < \infty, \hspace{1cm} 0 \leq \varphi \leq 2 \pi, \hspace{1cm} -\infty < z < \infty \]
+Podemos recuperar las relaciones de transformación:
+\begin{align*}
+\begin{aligned}
+x &= \rho \cos \varphi \\
+y &= \rho \sin \varphi \\
+z &= z
+\end{aligned}
+\end{align*}
+Considerando los elementos de longitud $\dd{s_{1}}$, revisamos que los factores de escala son:
+\begin{align*}
+\begin{aligned}
+h_{1} &=& h_{\rho} = 1 \\
+h_{2} &=& h_{\varphi} = \rho \\
+h_{3} &=& h_{z} = 1
+\end{aligned}
+\end{align*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/CoordenadasCilindricas_Vector_Unitario.png}
+    \caption{Vectores unitarios para el sistema coordenado cilíndrico circular.}
+\end{figure}
+Los vectores unitarios $(\vu{e}_{1},\vu{e}_{2},\vu{e}_{3})$ se renombran $(\vu*{\rho}_{0},\vu*{\varphi}_{0},\vu{z})$:
+\begin{enumerate}
+\item El vector unitario $\vu*{\rho}_{0}$ es normal a la superficie cilíndrica que apunta en la dirección del incremento del radio $\rho$.
+\item El vector unitario $\vu*{\varphi}_{0}$ es tangencial a la superficie cilíndrica y además, perpendicular al semiplano $\varphi=\text{constante}$, y el vector apunta en la dirección del incremento del ángulo azimutal $\varphi$.
+\item El vector $\vu{z}$, es el vector unitario que conocemos del sistema cartesiano.
+\end{enumerate}
+Estos vectores son mutuamente ortogonales
+\[ \vu*{\rho} \vdot \vu*{\varphi} = \vu*{\varphi} \vdot \vu{z} = \vu{z} \vdot \vu*{\rho} = 0 \]
+Un vector general $\vb{V}$ se expresa como
+\[ \vb{V} =  \vu*{\rho} \: V_{\rho} + \vu*{\varphi} \: V_{\varphi} + \vb{z} \: V_{z} \]
+Un elemento diferencial de desplazamiento $\dd{\vb{r}}$ se puede escribir como
+\begin{align*}
+\begin{aligned}
+\dd{\vb{r}} &= \vu*{\rho}_{0} \dd{s_{\rho}} + \vu*{\varphi}_{0} \dd{s_{\varphi}} + \vu{z} \dd{z} \\
+&= \vu*{\rho}_{0} \dd{\rho} + \vu*{\varphi}_{0} \: \rho \dd{\varphi} + \vu{z} \dd{z}
+\end{aligned}
+\end{align*}
+Los operadores diferenciales, resultan ser:
+\begin{align*}
+\nabla \psi (\rho, \varphi, z) &= \vu*{\rho} \: \pdv{\psi}{\rho} + \vu*{\varphi} \: \dfrac{1}{\rho} \: \pdv{\varphi}{\varphi} + \vu{z} \: \pdv{\psi}{} \\[1em]
+\vb{\nabla} \vdot \vb{V} &= \dfrac{1}{\rho} \pdv{\rho} (\rho \: V_{\rho}) + \dfrac{1}{\rho} \: \pdv{V_{\varphi}}{\varphi} + \pdv{V_{z}}{z} \\[1em]
+\nabla^{2} \psi &= \dfrac{1}{\rho} \pdv{\rho} \left( \rho \: \pdv{\psi}{\rho} \right) + \dfrac{1}{\rho^{2}} \pdv[2]{\psi}{\varphi} + \pdv[2]{\psi}{z} \\[1em]
+\vb{\nabla} \cp \vb{V} &= \dfrac{1}{\rho} 
+\renewcommand\arraystretch{1.5} \begin{vmatrix}
+\vu*{\rho} & \rho \: \vu*{\varphi} & \vu{z} \\
+\displaystyle \pdv{\rho} & \displaystyle \pdv{\varphi} & \displaystyle \pdv{z} \\
+V_{\rho} & \rho \: V_{\varphi} & V_{z}
+\end{vmatrix}
+\end{align*}
+\textbf{Ejemplo: } Las ecuaciones de Navier Stokes de la hidrodinámica incluyen un término no lineal:
+\[ \vb{\nabla} \cp [ \vb{v} \cp ( \vb{\nabla} \cp \vb{v})] \]
+donde $\vb{v}$ es la velocidad del fluido. Para flujos a través de un tubo cilíndrico en la dirección $z$ se tiene que
+\[ \vb{v} =  \vu{z} \: v (\rho) \]
+Calculamos primeramente el rotacional
+\begin{align*}
+\vb{\nabla} \cp \vb{v} = \dfrac{1}{\rho} \left| 
+\renewcommand\arraystretch{1.5} \begin{matrix}
+\vu*{\rho} & \rho \: \vu*{\varphi} & \vu{z} \\
+\displaystyle \pdv{\rho} & \displaystyle \pdv{\varphi} & \displaystyle \pdv{z} \\
+0 & 0 & v(\rho)\end{matrix} \right| = - \vu*{\varphi} \: \pdv{v}{\rho}
+\end{align*}
+ahora calculamos el doble producto escalar (vector con vector)
+\begin{align*}
+\vb{v} \times (\bm{\nabla} \times \mathbf{v}) = \left| 
+\renewcommand\arraystretch{1.5} \begin{matrix}
+\vu*{\rho} & \vu*{\varphi} & \vu{z} \\
+0 & 0 & v \\
+0 & - \displaystyle \pdv{v}{\rho} & 0 \end{matrix} \right| = - \vu*{\rho} \: v(\rho) \: \pdv{v}{\rho}
+\end{align*} 
+finalmente, el triple producto escalar resulta ser
+\begin{align*}
+\vb{\nabla} \cp ( \vb{v} \cp (\vb{\nabla} \cp \vb{v})) = \dfrac{1}{\rho} \left| 
+\renewcommand\arraystretch{1.5} \begin{matrix}
+\vu*{\rho} & \rho \: \vu*{\varphi} & \vu{z} \\
+\displaystyle \pdv{\rho} & \displaystyle \pdv{\varphi} & \displaystyle \pdv{z} \\
+v \: \displaystyle \pdv{v}{\rho} & 0 & 0 \end{matrix} \right| = 0
+\end{align*}
+Para este caso en particular, los términos no lineales se anulan. 
 % \section{Coordenadas esféricas polares $(r,\theta, \varphi)$}
 % Renombrando las coordenadas $(q_{1},q_{2},q_{3})$ como $(r, \theta, \varphi)$, vemos que el sistema coordenado esférico es consistente con:
 % \begin{enumerate}
