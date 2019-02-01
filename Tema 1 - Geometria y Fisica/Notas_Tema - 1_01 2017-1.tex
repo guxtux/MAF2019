@@ -444,16 +444,16 @@ finalmente, el triple producto escalar resulta ser
 v \: \displaystyle \pdv{v}{\rho} & 0 & 0 \end{matrix} \right| = 0
 \end{align*}
 Para este caso en particular, los términos no lineales se anulan. 
-% \section{Coordenadas esféricas polares $(r,\theta, \varphi)$}
-% Renombrando las coordenadas $(q_{1},q_{2},q_{3})$ como $(r, \theta, \varphi)$, vemos que el sistema coordenado esférico es consistente con:
-% \begin{enumerate}
-% \item Tenemos esferas concéntricas en el origen:
-% \[ r = (x^{2} + y^{2} + z^{2})^{1/2} =  \text{constante} \]
-% \item Hay conos circulares concéntricos en el eje $z$-polar, con vértices en el origen:
-% \[ \theta = \arccos \dfrac{z}{(x^{2} +y^{2} + z^{2})^{1/2}} = \text{constante}\]
-% \item Tenemos que los semiplanos pasan a través del eje $z$-polar:
-% \[ \varphi = \arctan\left(\dfrac{y}{x} \right) =  \text{constante}\]
-% \end{enumerate}
+\section{Coordenadas polares esféricas $(r,\theta, \varphi)$}
+Renombrando las coordenadas $(q_{1}, q_{2}, q_{3})$ como $(r, \theta, \varphi)$, vemos que el sistema coordenado esférico es consistente con:
+\begin{enumerate}
+\item Tenemos esferas concéntricas en el origen:
+\[ r = (x^{2} + y^{2} + z^{2})^{1/2} =  \text{constante} \]
+\item Hay conos circulares concéntricos en el eje $z$-polar, con vértices en el origen:
+\[ \theta = \arccos \dfrac{z}{(x^{2} + y^{2} + z^{2})^{1/2}} = \text{constante}\]
+\item Tenemos que los semiplanos pasan a través del eje $z$-polar:
+\[ \varphi = \arctan\left(\dfrac{y}{x} \right) =  \text{constante}\]
+\end{enumerate}
 % %\begin{center}
 % %\begin{figure}
 % %\begin{tikzpicture}
@@ -465,98 +465,95 @@ Para este caso en particular, los términos no lineales se anulan.
 % %\end{tikzpicture}
 % %\end{figure}
 % %\end{center}
-% Dado que la elección del ángulo polar $\theta$, el ángulo azimutal $\varphi$, el eje $z$ merece un manejo especial. Las ecuaciones de transformación son:
-% \begin{eqnarray}
-% \begin{aligned}
-% x &= r \sin \theta \cos \varphi \\
-% y &= r \sin \theta \sin \varphi \\
-% z &= r \cos \theta
-% \end{aligned}
-% \end{eqnarray}
-% Midiendo $\theta$ en el cuadrante positivo del eje $z$ y $\varphi$ en el plano $x-y$ sobre el eje positivo $x$. Los rangos donde varían las coordenadas son $0 \leq r < \infty$, $0 \leq \theta \leq \pi$, y $ 0 \leq \varphi \leq 2 \pi$. Diferenciando las expresiones inversas, tenemos que 
-% \begin{eqnarray}
-% \begin{aligned}
-% h_{1} &= h_{r} = 1 \\
-% h_{2} &= h_{\theta} = r \\
-% h_{3} &= h_{\varphi} = r \sin \theta 
-% \end{aligned}
-% \end{eqnarray}
-% Lo que nos da un elemento de línea
-% \[ d \mathbf{r} = \mathbf{\widehat{r}} dr + \bm{\widehat{\theta}} r d\theta + \bm{\widehat{\varphi}} r \sin \theta d \varphi \]
-% por tanto
-% \[ ds^{2} = d \mathbf{r} \cdot d \mathbf{r} =  dr^{2} + r^{2} d \theta^{2} + r^{2} \sin^{2} \theta d \varphi^{2} \]
-% En este sistema coordenado esférico, el elemento de área (para $r=\text{constante}$) es:
-% \[ dA = d\sigma_{\theta \varphi} = r^{2} \sin \theta d\theta d\varphi \]
-% Integrando sobre la coordenada azimutal $\varphi$, se tiene que el elemento de área, genera un anillo de ancho $d\theta$
-% \[ dA_{\theta} = 2 \pi r^{2} \sin \theta d \theta \]
-% Esta expresión se presenta frecuentemente en problemas con coordenadas esféricas polares con simetría azimutal, tales como la dispersión de un haz no polarizado de partículas nucleares.
-% \\
-% Por definición de estereoradianes, un elemento de ángulo sólido $d\Omega$ está dado por:
-% \[ d \Omega = \dfrac{dA}{r^{2}} = \sin \theta d \theta d \varphi \]
-% Integrando sobre toda la superficie esférica, se obtiene
-% \[ \int d \Omega = 4 \pi \]
-% El elemento de volumen es:
-% \begin{eqnarray}
-% \begin{aligned}
-% d \tau &= r^{2} dr \sin \theta d \theta d\varphi \\
-% &= r^{2} d r d \Omega
-% \end{aligned}
-% \end{eqnarray}
-% Los vectores unitarios del sistema polar esféricos se muestran en la siguiente figura:
-% %\begin{figure}[!h]
-% %\centering
-% %\tdplotsetmaincoords{60}{110}
-% %%
-% %\pgfmathsetmacro{\rvec}{.8}
-% %\pgfmathsetmacro{\thetavec}{30}
-% %\pgfmathsetmacro{\phivec}{60}
-% %%
-% %\begin{tikzpicture}[scale=5,tdplot_main_coords]
-% %    \coordinate (O) at (0,0,0);
-% %    \draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
-% %    \draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
-% %	\draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
-% %    \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
-% %    \draw[-stealth,color=red] (O) -- (P) node[above right] {$P$};
-% %    \draw[dashed, color=red] (O) -- (Pxy);
-% %    \draw[dashed, color=red] (P) -- (Pxy);
-% %    %\draw[dashed, color=red] (0,0,0.7) -- (O);
-% %    \tdplotdrawarc{(O)}{0.4}{0}{\phivec}{anchor=north}{$\phi$}
-% %    \tdplotsetthetaplanecoords{\phivec}
-% %    \tdplotdrawarc[tdplot_rotated_coords]{(0,0,0)}{0.5}{0}%
-% %        {\thetavec}{anchor=south west}{$\theta$}
-% %
-% %
-% %\end{tikzpicture}
-% %\end{figure}
-% Se insiste en que los vectores unitarios $\mathbf{\widehat{r}}, \bm{\widehat{\theta}}, \bm{\widehat{\varphi}}$ cambian de dirección conforme cambian los ángulos $\theta$ y $\varphi$. En términos de los vectores unitarios cartesianos $(\mathbf{i},\mathbf{j},\mathbf{k})$ cuya dirección es fija, tenemos que
-% \begin{eqnarray}
-% \begin{aligned}
-% \mathbf{\widehat{r}} &= \mathbf{\widehat{x}}\sin \theta \cos \varphi + \mathbf{\widehat{y}} \sin \theta \sin \varphi + \mathbf{\widehat{z}} \cos \theta \\
-% \bm{\widehat{\theta}} &= \mathbf{\widehat{x}}\cos \theta \cos \varphi + \mathbf{\widehat{y}} \cos \theta \sin \varphi - \mathbf{\widehat{z}} \sin \theta = \dfrac{\partial \mathbf{\widehat{r}}}{\partial \theta} \\
-% \bm{\widehat{\varphi}} &= - \mathbf{\widehat{x}} \sin \varphi + \mathbf{\widehat{y}} \cos \varphi = \dfrac{1}{\sin \theta} \dfrac{\partial \mathbf{\widehat{r}}}{\partial \varphi}
-% \end{aligned}
-% \end{eqnarray}
-% Dadas la transformación inversa y un vector dado, se puede expresar de diferentes maneras, por ejemplo el vector de posición $\mathbf{r}$ puede escribirse como
-% \[ \begin{split}
-% \mathbf{r} &= \mathbf{\widehat{r}} r = \mathbf{\widehat{r}} \left( x^{2} + y^{2} + z^{2} \right)^{1/2} \\
-% &= \mathbf{\widehat{x}} x + \mathbf{\widehat{y}} y + \mathbf{\widehat{z}} z  \\
-% &= \mathbf{\widehat{x}} r \sin \theta \cos \varphi + \mathbf{\widehat{y}} r \sin \theta \sin \varphi + \mathbf{\widehat{z}} r \cos \theta    
-% \end{split}\]
-% De  acuerdo al problema a resolver, debemos de elegir la expresión más útil.
-% \\
-% Renombrando los vectores unitarios del sistema de coordenadas curvilineas $(\mathbf{q}_{1}, \mathbf{q}_{2}, \mathbf{q}_{3}) $ como $(\mathbf{\widehat{r}}, \bm{\widehat{\theta}}, \bm{\widehat{\varphi}})$, los operadores diferenciales son:
-% \begin{eqnarray}
-% \nabla \psi &=& \mathbf{\widehat{r}} \dfrac{\partial \psi}{\partial r} + \bm{\widehat{\theta}} \dfrac{1}{r} \dfrac{\partial \psi}{\partial \theta} + \bm{\widehat{\varphi}} \dfrac{1}{r \sin \theta} \dfrac{\partial \psi}{\partial \varphi} \\
-% \mathbf{\nabla \cdot V} &=& \dfrac{1}{r^{2} \sin \theta} \left[ \sin \theta \dfrac{\partial}{\partial r}(r^{2} V_{r}) + r \dfrac{\partial}{\partial \theta} (\sin \theta V_{\theta}) + r \dfrac{\partial V_{\varphi}}{\partial \varphi} \right] \\
-% \mathbf{\nabla \cdot \nabla \psi} &=& \dfrac{1}{r^{2} \sin \theta} \left[  \sin \theta \dfrac{\partial}{\partial r} \left(  r^{2} \dfrac{\partial \psi}{\partial r} \right) + \dfrac{\partial}{\partial \theta} \left( \sin \theta \dfrac{\partial \psi}{\partial \theta} \right) + \dfrac{1}{\sin \theta} \dfrac{\partial^{2} \psi}{\partial \varphi^{2}}   \right] \\
-% \mathbf{\nabla \times V} &=& \dfrac{1}{r^{2} \sin \theta}
-% \renewcommand\arraystretch{1.5} \begin{vmatrix}
-% \mathbf{\widehat{r}} & r \bm{\widehat{\theta}} & r \sin \theta \bm{\widehat{\varphi}} \\
-% \dfrac{\partial}{\partial r} & \dfrac{\partial}{\partial \theta} & \dfrac{\partial}{\partial \varphi} \\
-% V_{r} & r V_{\theta} & r \sin \theta V_{\varphi}
-% \end{vmatrix}
-% \end{eqnarray}
+Dado que la elección del ángulo polar $\theta$, el ángulo azimutal $\varphi$, el eje $z$ merece un manejo especial. Las ecuaciones de transformación son:
+\begin{align*}
+\begin{aligned}
+x &= r \sin \theta \cos \varphi \\
+y &= r \sin \theta \sin \varphi \\
+z &= r \cos \theta
+\end{aligned}
+\end{align*}
+Midiendo $\theta$ en el cuadrante positivo del eje $z$ y $\varphi$ en el plano $x-y$ sobre el eje positivo $x$. Los rangos donde varían las coordenadas son $0 \leq r < \infty$, $0 \leq \theta \leq \pi$, y $ 0 \leq \varphi \leq 2 \pi$. Diferenciando las expresiones inversas, tenemos que 
+\begin{align*}
+\begin{aligned}
+h_{1} &= h_{r} = 1 \\
+h_{2} &= h_{\theta} = r \\
+h_{3} &= h_{\varphi} = r \sin \theta 
+\end{aligned}
+\end{align*}
+Lo que nos da un elemento de línea
+\begin{align*}
+\begin{aligned}
+\dd{\vb{r}} = \vu{r} \dd{r} + \vu*{\theta} \: r \: \dd{\theta} + \vu*{\varphi} \: r \: \sin \theta \dd{\varphi}
+\end{aligned}
+\end{align*}
+por tanto
+\begin{align*}
+\dd{s^{2}} = \dd{\vb{r}} \vdot \dd{\vb{r}} =  \dd{r^{2}} + r^{2} \dd{\theta^{2}} + r^{2} \: \sin^{2} \theta \: \dd{\varphi^{2}}
+\end{align*}
+En este sistema coordenado esférico, el elemento de área (para $r=\text{constante}$) es:
+\begin{align*}
+\dd{A} = \dd{\sigma_{\theta \varphi}} = r^{2} \: \sin \theta \dd{\theta} \dd{\varphi}
+\end{align*}
+que se muestra en la siguiente figura:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{Imagenes/Elemento_Area_Esferico.png}
+    \caption{Elementos de área para un sistema coordenado esférico.}
+\end{figure}
+Integrando sobre la coordenada azimutal $\varphi$, se tiene que el elemento de área, genera un anillo de ancho $\dd{\theta}$
+\[ \dd{A_{\theta}} = 2 \: \pi \: r^{2} \: \sin \theta \dd{\theta} \]
+Esta expresión se presenta frecuentemente en problemas con coordenadas esféricas polares con simetría azimutal, tales como la dispersión de un haz no polarizado de partículas nucleares.
+\par
+Por definición de estereoradianes, un elemento de ángulo sólido $\dd{\Omega}$ está dado por:
+\[ \dd{\Omega} = \dfrac{\dd{A}}{r^{2}} = \sin \theta \dd{\theta} \dd{\varphi} \]
+Integrando sobre toda la superficie esférica, se obtiene
+\[ \int \dd{\Omega} = 4 \: \pi \]
+El elemento de volumen es:
+\begin{align*}
+\begin{aligned}
+\dd{\tau} &= r^{2} \dd{r} \sin \theta \dd{\theta} \dd{\varphi} \\
+&= r^{2} \: \dd{r} \dd{\Omega}
+\end{aligned}
+\end{align*}
+Los vectores unitarios del sistema polar esféricos se muestran en la siguiente figura:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Imagenes/CoordenadasEsfericasVectoresUnitarios.png}
+    \caption{Vectores unitarios en coordenadas esféricas.}
+\end{figure}
+Se insiste en que los vectores unitarios $\vu{r}, \vu*{\theta}, \vu{\varphi}$ cambian de dirección conforme cambian los ángulos $\theta$ y $\varphi$. En términos de los vectores unitarios cartesianos $(\vu{i},\vu{j},\vu{k})$ cuya dirección es fija, tenemos que
+\begin{align}
+\begin{aligned}
+\vu{r} &= \vu{x} \: \sin \theta \cos \varphi + \vu{y} \: \sin \theta \: \sin \varphi + \vu{z} \: \cos \theta \\
+\vu*{\theta} &= \vu{x} \: \cos \theta \: \cos \varphi + \vu{y} \: \cos \theta \: \sin \varphi - \vu{z} \: \sin \theta = \pdv{\vu{r}}{\theta} \\
+\vu*{\varphi} &= - \vu{x} \: \sin \varphi + \vu{y} \: \cos \varphi = \dfrac{1}{\sin \theta} \pdv{\vu{r}}{\varphi}
+\end{aligned}
+\end{align}
+por lo que se tiene que
+\begin{align*}
+0 = \pdv{\vu{r}^{2}}{\theta} =  2 \: \vu{r} \vdot \pdv{\vu{r}}{\theta}, \hspace{2cm} 0 = \pdv{\vu{r}^{2}}{\varphi} =  2 \: \vu{r} \vdot \pdv{\vu{r}}{\varphi}
+\end{align*}
+Dadas la transformación inversa y un vector dado, se puede expresar de diferentes maneras, por ejemplo el vector de posición $\vu{r}$ puede escribirse como
+\begin{align*}
+\vb{r} &= \vu{r} \: r = \vu{r} \: (x^{2} + y^{2} + z^{2})^{1/2} \\
+&= \vu{x} \: x + \vu{y} \: y + \vu{z} \: z  \\
+&= \vu{x} \: r \: \sin \theta \: \cos \varphi + \vu{y} \: r \:  \sin \theta \: \sin \varphi + \vu{z} \: r \:  \cos \theta    
+\end{align*}
+De  acuerdo al problema a resolver, debemos de elegir la expresión más útil.
+\par
+Renombrando los vectores unitarios del sistema de coordenadas curvilineas $(\vu{q}_{1}, \vu{q}_{2}, \vu{q}_{3}) $ como $(\vu{r}, \vu*{\theta}, \vu*{\varphi})$, los operadores diferenciales para este sistema coordenado son:
+\begin{align}
+\nabla \psi &= \vu{r} \pdv{\psi}{r} + \vu*{\theta} \: \dfrac{1}{r} \: \pdv{\psi}{\theta} + \vu*{\varphi} \: \dfrac{1}{r \sin \theta} \: \pdv{\psi}{\varphi} \\[1em]
+\vb{\nabla} \vdot \vb{V} &= \dfrac{1}{r^{2} \: \sin \theta} \left[ \sin \theta \: \pdv{r}(r^{2} \: V_{r}) + r \: \pdv{\theta} (\sin \theta \: V_{\theta}) + r \: \pdv{V_{\varphi}}{\varphi} \right] \\[1em]
+\nabla \vdot \nabla \psi &= \dfrac{1}{r^{2} \: \sin \theta} \left[ \sin \theta \: \pdv{r} \left( r^{2} \: \pdv{\psi}{r} \right) + \pdv{\theta} \left( \sin \theta \: \pdv{\psi}{\theta} \right) + \dfrac{1}{\sin \theta} \: \pdv[2]{\psi}{\varphi} \right] \\[1em]
+\vb{\nabla} \times \vb{V} &= \dfrac{1}{r^{2} \: \sin \theta}
+\renewcommand\arraystretch{1.5} \begin{vmatrix}
+\vu{r} & r \: \vu{\theta} & r \: \sin \theta \vu*{\varphi} \\
+\displaystyle \pdv{r} & \displaystyle \pdv{\theta} & \displaystyle \pdv{\varphi} \\
+V_{r} & r \: V_{\theta} & r \: \sin \theta \: V_{\varphi}
+\end{vmatrix}
+\end{align}
 % \section{Construcción de sistemas coordenados.}
 % Para construir un sistema de coordenadas en un espacio euclidiano basta contar con una familia de curvas planas, definida en forma tal que a cada valor de un parámetro le corresponda una curva. La teoría vista nos permite construir una familia de curvas ortogonales a la familia original. De este modo se obtiene un sistema de coordenadas curvilíneas ortogonales en el plano. Por rotación o adición del eje $z$ pueden generarse sistemas coordenados en 3D. Así, las coordenadas cilíndricas y esféricas pueden ser obtenidas de las coordenadas polares incluyendo el eje $z$ o rotando alrededor del eje $y$.
 % \subsection*{Coordenadas parabólicas cilíndricas.}
