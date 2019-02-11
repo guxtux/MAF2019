@@ -1,0 +1,257 @@
+\input{../preambulo_doc}
+\title{Tema 2 - Ecuaciones Diferenciales Parciales \\ {\large Matemáticas Avanzadas de la Física}}
+\date{ }
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+%Referencia Sepúlveda - Lecciones de Física Matemática 3.2
+\section{Introducción}
+Una gran cantidad de situaciones físicas puede ser descrita utilizando ecuaciones diferenciales que incluyen funciones de dos o más variables. Las conocemos como ecuaciones diferenciales parciales pues incluyen derivadas respecto a cada una de las variables.
+\par
+Se denomina \emph{ecuación diferencial parcial de segundo orden} en las variables independientes $x$ y $y$, a una relación entre la función incógnita $u(x, y)$ y sus derivadas parciales hasta el segundo orden:
+\[ F (x, y, u_{x}, u_{y}, u_{xx}, u_{xy}, u_{yy}) = 0 \]
+y análogamente para un número mayor de variables independientes.
+\par
+Una ecuación diferencial parcial es lineal respecto a la derivada de segundo orden si tiene la forma:
+\[ A \: u_{xx} + B \: u_{xy} + C \: u_{yy} + F_{1} (x, y, u, u_{x}, u_{y} ) = 0 \]
+donde $A$, $B$, $C$ son en general, funciones de $x$ y $y$.
+\par
+La ecuación diferencialserá lineal, si lo es respecto a la función $u$ y a sus primeras y segundas derivadas:
+\[ A \: u_{xx} + B \: u_{xy} + C \: u_{yy} + D \: u_{x} + E \: u_{y} + F \: u = G \]
+donde $A$, $B$, $C$, $D$, $E$, $F$, $G$ son en general, funciones de $x$ y $y$. La ecuación es homogénea si $G = 0$.
+\section{Clasificación de las EDP}
+Las ecuaciones diferenciales parciales (EDP) pueden ser reducidas a formas más simples con un doble propósito:
+\begin{enumerate}
+\item El primero es clasificar a las EDP con respecto con las condiciones de frontera (CDF).
+\item  El segundo es utilizar la técnica de separación de variables, para resolver la ecuación.
+\end{enumerate}
+Antes de entrar al problema de la reducción de las EDP consideremos el correspondiente problema algebraico: \emph{reducción de las cónicas a su forma canónica}.
+\subsection{Las cónicas.}
+La expresión:
+\[ A \: x^{2} + B \: x \: y + C \: y^{2} + D \: x + E \: y + F = 0 \]
+describe una cónica, como puede comprobarse si se realiza una rotación de coordenadas que elimine el término cruzado $x \: y$. Tal procedimiento alinea los ejes coordenados con los ejes de simetría de las cónicas.
+\par
+Bajo la rotación:
+\begin{align*}
+x &= x^{\prime} \: \cos \theta - y^{\prime} \: \sin \theta \\
+y &= y^{\prime} \: \cos \theta + x^{\prime} \: \sin \theta
+\end{align*}
+la ecuación de las cónicas toma la forma
+\[ A^{\prime} \: x^{\prime \: 2} + B^{\prime} \: x^{\prime} \:  y^{\prime} + C^{\prime} \: y^{\prime \: 2} + D^{\prime} \: x^{\prime} + E^{\prime} \: y^{\prime} + F = 0 \]
+donde:
+\begin{align*}
+A^{\prime} &= A \: \cos^{2} \theta + C \: \sin^{2} \theta + B \: \sin \theta  \: \cos \theta \\
+B^{\prime} &= (C - A) \: \sin^{2} \theta + B \: \cos^{2} \theta \\
+C^{\prime} &= A \: \sin^{2} \theta + C \: \cos^{2} \theta - B \: \sin \theta \: \cos \theta \\
+D^{\prime} &= D \: \cos \theta + E \: \sin \theta \\
+E^{\prime} &= -D \: \sin \theta + E \: \cos \theta
+\end{align*}
+El término $x^{\prime} \: y^{\prime}$ puede eliminarse si se hace $B^{\prime} = 0$, esto ocurre si:
+\[ \tan 2 \ \theta = \dfrac{B}{(A - C)} \]
+De este modo la ecuación diagonalizada es:
+\begin{equation}
+A^{\prime} \: x^{\prime \: 2} + C \: y^{\prime \: 2} + D^{\prime} \: x^{\prime} + E^{\prime} \: y^{\prime} + F^{\prime} = 0
+\label{eq:ecuacion_03_019}
+\end{equation}
+Si $A^{\prime} \neq 0$ y $C^{\prime} \neq 0$ esta ecuación es, equivalentemente:
+\[ A^{\prime} \left( x^{\prime} + \dfrac{D^{\prime}}{2 \: A^{\prime}} \right)^{2} + C^{\prime} \left( y^{\prime} + \dfrac{E^{\prime}}{2 \: C^{\prime}} \right)^{2} + F^{\prime} = 0 \]
+donde:
+\[ F^{\prime} = F - \dfrac{D^{\prime \: 2}}{4 \: A^{\prime}} - \dfrac{E^{\prime \: 2}}{4 \: C^{\prime}} \]
+Obtenemos así elipses e hipérbolas, cuyas formas canónicas son:
+\begin{align*}
+A^{\prime} \left( x^{\prime} - x_{0}^{\prime} \right)^{2} + C^{\prime} \left( y^{\prime} - y_{0}^{\prime} \right)^{2} + F^{\prime} = 0
+\end{align*}
+Las elipses corresponden cuando $A^{\prime} \: C^{\prime} > 0$, y las hipérbolas cuando $A^{\prime} \: C^{\prime} < 0$. Con el caso de las parábolas, correspondiente cuando $A^{\prime} \: C^{\prime} = 0$, se estudia partiendo de la ecuación diagonalizada y sin factorizar (\ref{eq:ecuacion_03_019}).
+\subsection{Ecuaciones diferenciales.}
+Consideremos las ecuaciones diferenciales en dos variables, con coeficientes constantes, del tipo:
+\begin{equation}
+A \: u_{xx} + B \: u_{xy} + C \: u_{yy} + D \: u_{x} + E \: u_{y} + F \: u = G(x, y)
+\label{eq:ecuacion_03_020}
+\end{equation}
+donde: $u = u(x, y)$.
+\par
+Bajo la rotación de coordenadas:
+\begin{align*}
+x^{\prime} &= x \: \cos \theta + y \: \sin \theta \\
+y^{\prime} &= -x \: \sin \theta + y \: \cos \theta
+\end{align*}
+Se obtiene:
+\begin{align*}
+\pdv{u}{x} &= \pdv{u}{x^{\prime}} \: \pdv{x^{\prime}}{x} + \pdv{u}{y^{\prime}} \: \pdv{y^{\prime}}{x} = u_{x}^{\prime} \: \cos \theta - u_{y}^{\prime} \: \sin \theta = u_{x} \\[1em]
+\pdv[2]{u}{x} &= u_{xx}^{\prime} \: \cos^{2} \theta - 2 \: u_{xy}^{\prime} \: \sin \theta \: \cos \theta + u_{yy}^{\prime} \: \sin^{2} \theta = u_{xx} \\[1em]
+\pdv{u}{y} &= u_{x}^{\prime} \: \sin \theta + u_{y}^{\prime} \: \cos \theta = u_{y} \\[1em]
+\pdv[2]{u}{y} &= u_{xx}^{\prime} \: \sin^{2} \theta + 2\: u_{xy}^{\prime} \: \sin \theta \: \cos \theta + u_{yy}^{\prime} \: cos^{2} \theta = u_{yy} \\[1em]
+\pdv{u}{x}{y} &= u_{xx}^{\prime} \: \sin \theta \: \cos \theta + u_{xy}^{\prime} \: (\cos^{2} \theta - \sin^{2} \theta) - u_{yy}^{\prime} \: \sin \theta \: \cos \theta = u_{xy}
+\end{align*}
+re-emplazando y factorizando términos en la ecuación (\ref{eq:ecuacion_03_020}), se obtiene:
+\begin{align*}
+[ A \: \cos^{2} \theta &+ B \: \sin \theta \: \cos \theta + C \: \sin^{2} \theta ] \: u_{xx}^{\prime} + \\
+&+ [(C - A) \: \sin^{2} \theta + B \: \cos^{2} \theta ] \: u_{xy}^{\prime} + \\
+&+ [A \: \sin^{2} \theta - B \: \sin \theta \: \cos \theta + C \: \cos^{2} \theta ] \: u_{yy}^{\prime} + \\
+&+ [ D \: \cos \theta + E \: \sin \theta ] \: u_{x}^{\prime} + \\
+&+ [ -D \: \sin \theta + E \: \cos \theta ] \: u_{y}^{\prime} + \\
+&+ F \: u^{\prime} =  \\
+&= G^{\prime}
+\end{align*}
+o de manera equivalente
+\begin{align*}
+A^{\prime} \: u_{xx}^{\prime} + B^{\prime} \: u_{xy}^{\prime} + C^{\prime} \: u_{yy} + D^{\prime} \: u_{x}^{\prime} + E^{\prime} \: u_{y}^{\prime} + F \: u^{\prime} = G^{\prime}
+\end{align*}
+En el nuevo sistema de coordenadas el término mixto $u_{xy}^{\prime}$ desaparece si $B^{\prime} = 0$, es decir si
+\begin{equation}
+\tan 2 \: \theta = \dfrac{B}{(A - C)}
+\label{eq:ecuacion_03_021}
+\end{equation}
+así la ecuación diferencial resulta ser:
+\begin{equation}
+A^{\prime} \: u_{xx}^{\prime} + C^{\prime} \: u_{yy}^{\prime} + D^{\prime} \: u_{x}^{\prime} + E^{\prime} \: u_{y}^{\prime} + F \: u^{\prime} = G^{\prime}
+\label{eq:ecuacion_03_022}
+\end{equation}
+En los coeficientes $A^{\prime}$, $C^{\prime}$, $D^{\prime}$, $E^{\prime}$ el ángulo $\theta$ está dado por la ecuación (\ref{eq:ecuacion_03_021}).
+\par
+La ecuación diferencial (\ref{eq:ecuacion_03_022}), puede factorizarse de la siguiente manera:
+\begin{align*}
+A^{\prime} \left[ u_{xx}^{\prime} + \dfrac{D^{\prime}}{A^{\prime}} \: u_{x}^{\prime} \right] + C^{\prime} \left[ u_{yy}^{\prime} + \dfrac{E^{\prime}}{C^{\prime}} \: u_{y}^{\prime}  \right] + F \: u^{\prime} = G^{\prime}
+\end{align*}
+Con $A^{\prime} \neq 0$ y $C^{\prime} \neq 0$.
+\par
+La ecuación se puede escribir también de la siguiente forma:
+\begin{equation}
+A^{\prime} \left[ D_{x^\prime} + \dfrac{D^{\prime}}{2 \: A^{\prime}} \right]^{2} \: u^{\prime} + C^{\prime} \left[ D_{y^\prime} + \dfrac{E^{\prime}}{2 \: C^{\prime}} \right] \: u^{\prime} + F^{\prime} \: u^{\prime} - G^{\prime} = 0
+\label{eq:ecuacion_03_023}
+\end{equation}
+donde
+\begin{align*}
+D_{x^{\prime}} &\equiv \pdv{x^{\prime}} \\
+D_{y^{\prime}} &\equiv \pdv{y^{\prime}} \\
+F^{\prime} &= F - \dfrac{D^{\prime \: 2}}{4 \: A^{\prime}} - \dfrac{E^{\prime \: 2}}{4 \: C^{\prime}} 
+\end{align*}
+La ecuación (\ref{eq:ecuacion_03_023}) se asemeja a las cónicas, ya que su forma genérica es
+\begin{align*}
+A^{\prime} (x - x_{0})^{2} + C^{\prime} (y - y_{0})^{2} + F = 0 
+\end{align*}
+Así pues, diremos que la ecuación (\ref{eq:ecuacion_03_022}) es de tipo:
+\begin{enumerate}
+\item Elíptico si $A^{\prime} \: C^{\prime} > 0$,
+\item Hiperbólico si $A^{\prime} \: C^{\prime} < 0$, 
+\item Parabólico si $A^{\prime} \: C^{\prime} = 0$ (en el último caso el análisis se hace partiendo de la ecuación (\ref{eq:ecuacion_03_022}) para evitar los infinitos que aparecen en la ecuación (\ref{eq:ecuacion_03_023})). 
+\end{enumerate}
+Si $C^{\prime} = 0$ el tipo parabólico. la ecuación toma la forma:
+\begin{align*}
+A^{\prime} \left[ D_{x^\prime} + \dfrac{D^{\prime}}{2 \: A^{\prime}} \right]^{2} \: u^{\prime} + E^{\prime} \: u_{y} + F^{\: \prime \prime} \: u^{\prime} - G^{\prime} = 0
+\end{align*}
+Ahora bien, conviene expresar las condiciones $A^{\prime} \: C^{\prime} > 0$,$A^{\prime} \: C^{\prime} < 0$ y $A^{\prime} \: C^{\prime} = 0$ de tal forma que aparezcan directamente los coeficientes $A, B, C, \ldots . . .$ de la ecuación original (\ref{eq:ecuacion_03_020}). Teniendo en cuenta que:
+\begin{align*}
+A^{\prime} &= A \: \cos^{2} \theta + B \: \sin \theta \: \cos \theta + C \: \sin^{2} \theta \\
+&= \dfrac{1}{2} [ A (1 + \cos 2 \: \theta) + B \sin 2 \: \theta +  C (1 - \cos 2 \: \theta)] \\[1em]
+C^{\prime} &= A \: \sin^{2} \theta - B \: \sin \theta \: \cos \theta + C \: \cos^{2} \theta \\
+&= \dfrac{1}{2} [ A (1 - \cos 2 \: \theta) - B \sin 2 \: \theta +  C (1 - \cos 2 \: \theta)]
+\end{align*}
+y que de
+\[ \tan 2 \: \theta = \dfrac{B}{(A - C)} \]
+se sigue entonces que:
+\begin{align}
+\begin{aligned}
+\sin 2 \: \theta = \dfrac{B}{\sqrt{(A - C)^{2} + B^{2}}} \\
+\cos 2 \: \theta = \dfrac{A - C}{\sqrt{(A - C)^{2} + B^{2}}}
+\end{aligned}
+\label{eq:ecuacion_03_024}
+\end{align}
+se puede escribir:
+\begin{align*}
+A^{\prime} &= \dfrac{1}{2} {\left[ (A+ C) +  \sqrt{(A - C)^{2} + B^{2}} \right]} \\
+C^{\prime} &= \dfrac{1}{2} {\left[ (A+ C) -  \sqrt{(A - C)^{2} + B^{2}} \right]}
+\end{align*}
+de donde
+\[ A^{\prime} \: C^{\prime} = \dfrac{4 \: A \: C - B^{2}}{4} \]
+se sigue entonces:
+\begin{enumerate}[label=\alph*)]
+\item $A^{\prime} \: C^{\prime} > 0$ si $-B^{2} + 4 \: A \: C > 0$
+\item $A^{\prime} \: C^{\prime} < 0$ si $-B^{2} + 4 \: A \: C < 0$
+\item $A^{\prime} \: C^{\prime} = 0$ si $-B^{2} + 4 \: A \: C = 0$
+\end{enumerate}
+En consecuencia: una EDP en dos variables es de tipo:
+\begin{enumerate}[label=\roman*)]
+\item Elíptico si $-B^{2} + 4 \: A \: C < 0$
+\item Hiperbólico si $-B^{2} + 4 \: A \: C > 0$
+\item Parabólico si $-B^{2} + 4 \: A \: C = 0$
+\end{enumerate}
+La ecuación (\ref{eq:ecuacion_03_022}) puede hacerse de manera particular a expresiones bidimensionales de ecuaciones de la física muy conocidas:
+\begin{center}
+\begin{tabular}{| p{7.3cm} | p{4cm} | }
+\hline
+\makecell{Condiciones} & \makecell{Ecuación} \\ \hline
+\makecell{$A^{\prime} \: C^{\prime}$ = 1 \\ $D^{\prime} \: E^{\prime} = F = 0$} & \makecell{Poisson} \\ \hline
+\makecell{Las anteriores y \\ $G^{\prime} = 0$} & \makecell{Laplace} \\ \hline
+\makecell{$A^{\prime} = 1, E = -K$ \\ $C^{\prime} = D^{\prime} =  F = G^{\prime} = 0$ \\ y si además: \\ $y$ representa el tiempo} & \makecell{Difusión} \\ \hline
+\makecell{$A^{\prime} = 1, C^{\prime} = -\dfrac{1}{v^{2}}$ \\ $D^{\prime} =  E^{\prime} = F = 0$ \\ y si además \\
+$y$ representa el tiempo} & \makecell{Ec. de onda \\ con fuentes} \\ \hline
+\end{tabular}
+\end{center}
+Las ecuaciones de Laplace y Poisson en 2D son de tipo elípticas, la ecuación de ondas es de tipo hiperbólica y la de difusión es de tipo parabólica.
+\par
+%Arfken
+\section{Condiciones de frontera.}
+Por lo general, cuando sabemos que un sistema físico en algún momento está sometido a una ley que rige tal sistema, entonces seremos capaces de predecir la evolución de ese sistema. Tales valores iniciales son las condiciones de contorno (de frontera) más comunes que se asocian a las EDO y las EDP. La búsqueda de soluciones que responden a determinados puntos, curvas o superficies corresponde a problemas con condiciones de frontera. Las soluciones normalmente deben de satisfacer determinados condiciones de frontera impuestas (por ejemplo, asintóticas). Estas condiciones de frontera pueden clasificar en tres formas:
+\begin{enumerate}
+\item \textbf{Condiciones de frontera de Direchlet}. El valor de una función se especifica en la frontera.
+\item \textbf{Condiciones de frontera de Neumann}. La derivada normal (gradiente) de una función se especifica en la frontera. En el caso de la electrostática, serían $E_{n}$ y $\sigma$, la densidad de carga superficial.
+\item \textbf{Condiciones de frontera de Cauchy}. El valor de una función y la derivada se especifican en la frontera. En la electrostática esto significaría, el potencial $\varphi$, y la componente normal del campo eléctrico $E_{n}$.
+\end{enumerate}
+%Sepulveda - EDP Cap. 3
+Se puede hacer una segunda clasificación de las CDF, en función de su alcance: \emph{generales} y \emph{específicas}.
+\subsection*{CDF Generales.}
+Una condición de frontera general corresponde a situaciones donde un campo se extiende de un medio a otro. En estos casos no es posible especificar los valores de los campos y/o sus derivadas sobre las superficies de separación (interfases), sino alguna relación entre sus valores a ambos lados.
+\par
+Para un campo electrostático, por ejemplo, el potencial es continuo a través de la interfase $(\phi_{1} \eval_{S} = \phi_{2} \eval_{S})$ y, si no hay carga superficial en la interfase, la componente normal del vector de desplazamiento es continua a través de la interfase $(\vb{D}_{1} \vdot \vu{n} \eval_{S} = \vb{D}_{2} \vdot \vu{n} \eval_{S})$.
+\par
+En el caso del campo de temperatura, ésta es continua en la frontera de separación de dos medios ($T_{1} \eval_{S} = T_{2} \eval_{S})$.
+\subsection*{CDF Específica.}
+Una CDF específica establece los valores de los campos y/o sus derivadas espaciales y/o temporales en las fronteras espaciales (sean ellas superficies o líneas o puntos) y en puntos iniciales en el tiempo. A este tipo pertenecen las condiciones de Dirichlet, Neumann y Cauchy.
+\par
+Las condiciones de frontera específicas pueden subdividirse en homogéneas e inhomogéneas.
+\begin{enumerate}
+\item  Una CDF homogénea es del tipo:
+\[ \phi \eval_{S} = 0 \hspace{1cm} \mbox{o} \hspace{1cm} \pdv{\phi}{n} \eval_{S} \hspace{1.5cm} \hspace{1cm} \mbox{o} \hspace{1cm} \alpha \: \phi \eval_{S} + \beta \: \pdv{\phi}{n} \eval_{S} = 0 \]
+La solución de problemas de tipo Sturm-Liouville, exige este tipo de condiciones.
+\item Las CDF inhomogéneas son del tipo:
+\[ \phi \eval{S} = f(\vb{r}) \hspace{1cm} \mbox{o} \hspace{1cm}\pdv{\phi}{n} \eval{S} = g(\vb{r})\hspace{1cm} \mbox{o} \hspace{1cm} \psi(\vb{r}, t) \eval_{t=0} = h(\vb{r}) \]
+entre otras.
+\end{enumerate}
+\subsection*{Recapitulación.}
+La clasificación canónica anterior apunta hacia la conexión entre EDP y condiciones de frontera (CDF). Generalizando, podemos decir:
+\begin{enumerate}[label=\alph*)]
+\item Las ecuaciones elípticas satisfacen las CDF de tipo Dirichlet o Newmann o mixtas.
+\item Las ecuaciones hiperbólicas satisfacen las CDF de tipo Cauchy.
+\item Las ecuaciones parabólicas satisfacen las CDF de tipo de la ecuación de calor.
+\end{enumerate}
+La clasificación de las EDP es válida aún si los coeficientes $A, B, C,\ldots$ son funciones de $x$ y $y$. Esto implica que la clasificación es válida localmente; así, \emph{la misma ecuación puede ser de diferentes tipos en diferentes puntos}; la clasificación es además invariante en cada punto bajo transformación de coordenadas.
+\par
+Ejemplos:
+\begin{itemize}
+\item $u_{xx} + u_{yy} + 3 \: u_{xy} = 0$ es hiperbólica.
+\item $u_{xx} + u_{yy} + u_{xy} = 0$ es elíptica.
+\item $u_{xx} + u_{yy} + 2 \: u_{xy} = 0$ es parabólica.
+\item $u_{xx} - u_{yy} = 0$ es hiperbólica, con $B^{2} - 4 \: A \: C = 4$
+\item $u_{xx} + u_{yy} + u = x \: y$ es elíptica, con $B^{2} - 4 \: A \: C = -4$
+\item  $u_{xx} + u{x} - u_{y} + u = 0$ es parabólica, con $B^{2}- 4 \: A \: C = 0$
+\item $u_{xx} + x \: u_{yy} = 0$ es elíptica para $x > 0$ e hiperbólica para $x < 0$
+\end{itemize}
+\newpage
+\begin{landscape}
+\begin{center}
+\captionof{table}{Tabla que relaciona el tipo de EDP y las CDF.}
+\begin{tabular}{ | c | c | c | c | c |} \hline
+\multirow{3}{3.5cm}[-7pt]{\makecell{Condiciones \\ de frontera}} & \multirow{3}{3.5cm}[-7pt]{\makecell{Tipo de \\ superficie}} & \multicolumn{3}{c |}{Tipo de EDP} \\ \cline{3-5}
+ & & \makecell{Elíptica} & \makecell{Hiperbólica} & \makecell{Parabólica} \\ \cline{3-5}
+ & & \makecell{Laplace, Poisson \\ en $(x,y)$} & \makecell{Ecuación de onda \\ en $(x,t)$} & \makecell{Ecuación de difusión \\ en $(x,t)$} \\ \hline
+\multirow{2}*{\textbf{Cauchy}} & \makecell{Superficie \\ abierta} & \makecell{Resultados sin \\ interpretación física} & \makecell{\underline{\textbf{Solución única}} \\ \underline{\textbf{estable}}} & \makecell{Demasiado \\ restrictiva} \\ \cline{2-5}
+ & \makecell{Superficie \\ cerrada} & \makecell{Demasiado \\ restrictiva} & \makecell{Demasiado \\ restrictiva} & \makecell{Demasiado \\ restrictiva} \\ \hline
+ \multirow{2}*{\textbf{Dirichlet}} & \makecell{Superficie \\ abierta} & \makecell{Insuficiente} & \makecell{Insuficiente}  &\makecell{\underline{\textbf{Solución única}} \\ \underline{\textbf{estable} en una dirección}} \\ \cline{2-5} 
+& \makecell{Superficie \\ cerrada} & \makecell{\underline{Solución única} \\ \underline{estable}} & \makecell{Más de \\ una solución} & \makecell{Demasiado \\ restrictiva} \\ \hline
+ \multirow{2}*{\textbf{Neumann}} & \makecell{Superficie \\ abierta} & \makecell{Insuficiente} & \makecell{Insuficiente}  &\makecell{\underline{\textbf{Solución única}} \\ \underline{\textbf{estable} en una dirección}} \\ \cline{2-5}
+& \makecell{Superficie \\ cerrada} & \makecell{\underline{\textbf{Solución única}} \\ \underline{\textbf{estable}}} & \makecell{Más de \\ una solución} & \makecell{Demasiado \\ restrictiva} \\ \hline
+\end{tabular}
+\end{center}
+\end{landscape}
+\end{document}
