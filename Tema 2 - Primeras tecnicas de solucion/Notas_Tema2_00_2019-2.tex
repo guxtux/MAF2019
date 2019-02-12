@@ -181,7 +181,7 @@ La ecuación (\ref{eq:ecuacion_03_022}) puede hacerse de manera particular a exp
 \begin{tabular}{| p{7.3cm} | p{4cm} | }
 \hline
 \makecell{Condiciones} & \makecell{Ecuación} \\ \hline
-\makecell{$A^{\prime} \: C^{\prime}$ = 1 \\ $D^{\prime} \: E^{\prime} = F = 0$} & \makecell{Poisson} \\ \hline
+\makecell{$A^{\prime} = C^{\prime}$ = 1 \\ $D^{\prime} = E^{\prime} = F = 0$} & \makecell{Poisson} \\ \hline
 \makecell{Las anteriores y \\ $G^{\prime} = 0$} & \makecell{Laplace} \\ \hline
 \makecell{$A^{\prime} = 1, E = -K$ \\ $C^{\prime} = D^{\prime} =  F = G^{\prime} = 0$ \\ y si además: \\ $y$ representa el tiempo} & \makecell{Difusión} \\ \hline
 \makecell{$A^{\prime} = 1, C^{\prime} = -\dfrac{1}{v^{2}}$ \\ $D^{\prime} =  E^{\prime} = F = 0$ \\ y si además \\
@@ -254,4 +254,130 @@ Ejemplos:
 \end{tabular}
 \end{center}
 \end{landscape}
+\section{Separación de variables.}
+La propuesta de separar variables en una EDP comienza por asumir que existe una solución, que es el producto de funciones de cada una de las variables:
+\[ u(x, y) = A(x) \: B(y) \]
+Este método no es de validez general y sólo cabe ensayarlo en ecuaciones lineales y homogéneas. Es aplicable a ecuaciones de diversos tipos, inicialmente veremos su desarrollo en un sistema de coordenadas cartesianas:
+\par
+Sea la EDP2H:
+\[ u_{xx} - u_{y} = 0 \]
+Proponemos la solución $u$ dada por:
+\[ u = A(x) \: B(y) \]
+por lo que entonces:
+\[ \dfrac{1}{A} \: \dv[2]{A}{x} = \dfrac{1}{B} \: \dv[2]{B}{y} \]
+Si hacemos variar $x$ mientras $y$ permanece fijo, el término de la derecha es una constante, por tanto también el de la izquierda; así, una primera solución para valores reales y positivos de $\alpha$ es:
+\begin{align}
+\begin{aligned}
+\dfrac{1}{A} \: \dv[2]{A}{x} = \alpha^{2} \\[1em]
+\dfrac{1}{B} \: \dv{B}{y} = \alpha^{2}
+\end{aligned}
+\label{eq:ecuacion_03_025}
+\end{align}
+de modo que
+\[ A \propto  \exp(\pm \alpha \: x), \hspace{1cm} B \propto \exp(\alpha^{2} \: y) \]
+Por tanto la solución es:
+\begin{equation}
+u = \left( c_{1} \: \exp(\alpha \: x) + c_{2} \: \exp(-\alpha \: x) \right) \: \exp(\alpha^{2} \: y)
+\label{eq:ecuacion_03_026}
+ \end{equation}
+La constante $\alpha$ se conoce como constante de separación. Como $\alpha$ es real (positivo o negativo), la parte en $x$ de la solución es real y el exponencial en $y$ es creciente.
+\par
+En vez de de la ec. (\ref{eq:ecuacion_03_025}) podemos escribir (con $\beta$ real)
+\[ \dfrac{1}{A} \: \dv[2]{A}{x} = - \beta^{2} \\[1em]
+\dfrac{1}{B} \: \dv{B}{y} = -\beta^{2}\]
+por lo cual es posible una segunda solución donde la parte en $x$ es compleja mientras aquella en $y$ es exponencial decreciente. Con $\beta > 0$ la solución es:
+\begin{equation}
+u = \left[ d_{1} \: \exp(i \: \beta \: x) + d_{2} \: \exp(-i \: \beta \: x) \right] \: \exp(-\beta^{2} \: y)
+\label{eq:ecuacion_03_027}
+\end{equation}
+\textbf{Nota: } Las soluciones dadas por las ecs. (\ref{eq:ecuacion_03_026}) y (\ref{eq:ecuacion_03_027}) provienen, de un modo equivalente, de tomar en la ec. (\ref{eq:ecuacion_03_025}): $\alpha = a + i \: b$ con $a$ y $b$ reales. Si $b = 0$ se obtiene la ec. (\ref{eq:ecuacion_03_027}) y si $a = 0$ se obtiene la ec. (\ref{eq:ecuacion_03_026}).
+\par
+Una tercera solución corresponde cuando $\alpha = 0$ en la ec. (\ref{eq:ecuacion_03_025}), de donde $u = a \: x + b.$
+De acuerdo a la teoría general de ecuaciones diferenciales, la solución general ha de expresarse como combinación lineal de las anteriores soluciones. Así pues, con $\alpha > 0$ y $\beta > 0$:
+\begin{align*}
+u = &\left( c_{1} \: \exp(\alpha \: x) + c_{2} \: \exp(-\alpha \: x) \right) \: \exp(\alpha^{2} \: y) + \\
+&+ \left[ d_{1} \: \exp(i \: \beta \: x) + d_{2} \: \exp(-i \: \beta \: x) \right] \: \exp(-\beta^{2} \: y) + \\
+&+ a \: x + b
+\end{align*}
+En principio la solución en la ec. (\ref{eq:ecuacion_03_026}) es válida para todos los valores reales de $\alpha$. Por
+tanto la solución general es una combinación lineal (en este caso una integral, pues $\alpha$ es real) de la forma:
+\begin{equation}
+u(x) = \int_{0}^{\infty} \left[ c(\alpha) \: \exp(\alpha \: x) + d(\alpha) \: \exp(- \alpha \: x) \right] \exp(\alpha^{2} \: y) \dd{\alpha}
+\label{eq:ecuacion_03_028}
+\end{equation}
+o de manera equivalente (nótese los límites de la integral):
+\begin{align*} 
+u(x) = \int_{-\infty}^{\infty} c(\alpha) \: \exp(\alpha \: x + \alpha^{2} \: y) \dd{x}
+\end{align*}
+De igual manera, la ecuación (\ref{eq:ecuacion_03_027}) es válida para todos los valores reales de $\beta$, por lo cual:
+\begin{equation}
+u(x) = \int_{0}^{\infty} \left[ a(\beta) \, \exp(i \, \beta \, x) + b(\beta) \, \exp(- i \, \beta \, x) \right] \, \exp(\beta^{2} \, y) \dd{\beta}
+\label{eq:ecuacion_03_029}
+\end{equation}
+La solución general a la EDP $u_{xx} - u_{y} = 0$, tiene la forma:
+\begin{align}
+\begin{aligned}
+u(x, y) &=  \int_{0}^{\infty} \left[ c(\alpha) \: \exp(\alpha \: x) + d(\alpha) \: \exp(- \alpha \: x) \right] \: \exp(\alpha^{2} \: y) \dd{\alpha} + \\
+&+ \int_{0}^{\infty} \left[ a(\beta) \, \exp(i \, \beta \, x) + b(\beta) \: \exp(- i \: \beta \: x) \right] \: \exp(\beta^{2} \: y) \dd{\beta} + \\
+&+ a \, x + b
+\end{aligned}
+\label{eq:ecuacion_03_030}
+\end{align}
+Es frecuente que $\alpha$ (o $\beta$) tomen valores proporcionales a un entero, en tal caso las integrales en la ec. (\ref{eq:ecuacion_03_030}) se convierten en una suma. Las ecuaciones (\ref{eq:ecuacion_03_026}) y (\ref{eq:ecuacion_03_027}) son utilizables sumando sobre el índice entero $n$.
+\subsection{Teoría general cartesiana.}
+La forma más general de una EDP2LH en coordenadas cartesianas, tiene la forma:
+\[ A(x,y) \: u_{xx} + B(x,y) \: u_{xy} + C(x,y) \: u_{yy} + D(x,y) \: u_{x} + E(x,y) \: u_{y} + F(x,y) \:u = 0 \]
+La propuesta de separación de variables dice que: $u(x, y) = X(x) \:Y (y)$. Reemplazando y dividiendo por $X \:Y$ se sigue, después de agrupar:
+\begin{align*}
+\left( \dfrac{A \, \ddot{X}}{X} + \dfrac{D \, \dot{X}}{X} \right) + \left( \dfrac{B \, \dot{X} \, \dot{Y}}{X \, Y} \right) + \left( \dfrac{C \, \ddot{Y}}{Y} + \dfrac{E \, \dot{Y}}{Y} \right) + F = 0
+\end{align*}
+Esta ecuación es separable, es decir cada uno de los paréntesis es función sólo de $x$ o de $y$ si:
+\begin{enumerate}
+\item  El primer paréntesis es función sólo de $x$, lo que se logra si $A = A(x)$ y $D = (x)$.
+\item  Si $B = 0$, es decir, si no hay términos cruzados $u_{xy}$. Esto puede lograrse diagonalizando la ecuación diferencial.
+\item Si el tercer paréntesis es función sólo de $y$, es decir si $C = C(y)$ y $E = E(y)$.
+\item Si $F =F(x)$ o $F =F(y)$ o $F =$ constante.
+\end{enumerate}
+Así pues, en el caso en que $F = F (x)$, (incluyendo valor constante) tendremos:
+\begin{align*}
+\dfrac{A(x) \, \ddot{X}}{X} + \dfrac{D(x) \, \dot{X}}{X} + F(x) &= \pm \alpha^{2} \\[1em]
+\dfrac{C(y) \, \ddot{Y}}{Y} + \dfrac{E(y) \, \dot{Y}}{Y} &= \mp \alpha^{2}, \hspace{1cm} \mbox{y} \hspace{1cm} B = 0
+\end{align*}
+o si $F = F(y)$ o es una constante
+\begin{align*}
+\dfrac{A(x) \, \ddot{X}}{X} + \dfrac{D(x) \, \dot{X}}{X} &= \pm \alpha^{2} \\[1em]
+\dfrac{C(y) \, \ddot{Y}}{Y} + \dfrac{E(y) \, \dot{Y}}{Y}  + F(y) &= \mp \alpha^{2}, \hspace{1cm} \mbox{y} \hspace{1cm} B = 0
+\end{align*}
+Asumimos que $\alpha$ es real y positivo y con dos signos posibles $\pm \alpha$. Los signos alternados $\pm$ significan que si en la ecuación en $x$ se toma el $+$, en $y$ se tomará el $-$, y recíprocamente. Anticipamos que, mediante una diagonalización, siempre se logra que $B$ desaparezca.
+\par
+La solución que hemos propuesto es en principio válida para todo valor de $\alpha^{2}$ es real (por ello hemos introducido los signos $\pm$, aunque pudimos haber considerado un $\alpha$ real o imaginario puro, y entonces hubiera bastado con $\alpha^{2}$). La solución con $\alpha = 0$ debe ser tomada en cuenta como solución independiente.
+\par
+Es claro que la separación de variables \emph{sólo puede realizarse si la ecuación diferencial es homogénea}; aunque puede aplicarse a ecuaciones inhomogéneas que sean reducibles a homogéneas.
+\par
+Así pues, toda ecuación diferencial en dos variables, homogenizable, puede ser escrita, mediante una previa diagonalización, en una forma que no contenga al término $u_{xy}$, y es separable si tiene la forma:
+\begin{align*}
+A(x) \, u_{xx} + C(y) \, u_{yy} + D(x) \, u_{x} + E(y) \, u_{y} + F \, u = 0
+\end{align*}
+donde $F$ es una función sólo de $x$ o sólo de $y$.
+\par
+Si $F = F (x)$ las ecuaciones diferenciales ordinarias originadas por la separación de variables son
+\begin{align*}
+A(x) \, \ddot{X} +D(x) \, \dot{X} + F(x) \, X \mp \alpha^{2} \, X &= 0 \\
+C(y) \, \ddot{Y} + E(y) \, \dot{Y} \pm \alpha^{2} \, Y &= 0
+\end{align*}
+Dado que $X$ y $Y$ dependen también del parámetro $\alpha$, la solución para $u$ deberá de escribirse en la forma:
+\begin{align*}
+u(x, y) = X(x, \alpha) \: Y (y, \alpha)
+\end{align*}
+La solución que hemos propuesto es válida para todo $\alpha$ real: de acuerdo a la teoría de ecuaciones diferenciales, la solución general será la combinación lineal de las soluciones para cada $\alpha$, y deberá involucrar una integral sobre $\alpha$; así pues, la solución general es:
+\begin{equation}
+u(x, y) = \int_{0}^{\infty} X(x, \alpha) \: Y(y, \alpha) \dd{\alpha}
+\label{eq:ecuacion_03_031}
+\end{equation}
+Los límites de integración que hemos escogido aquí son convencionales y pueden extenderse de ($-\infty)$ a $+\infty)$. En los casos en los que las condiciones de frontera exijan que $\alpha$ sea proporcional a un entero, la ecuación (\ref{eq:ecuacion_03_031}) ha de escribirse:
+\begin{equation}
+u(x, y) = \sum_{n} X(x, \alpha) \: Y(y, \alpha)
+\label{eq:ecuacion_03_032}
+\end{equation}
+Utilizando la técnica de separación de variables en problemas de la física, resulta equivalente utilizar alguna de las  soluciones anteriores, con una restricción simple: cuando el problema físico no ponga exigencias sobre $\alpha$, la solución deberá en el primer caso considerar una integral sobre $\alpha$, o si el problema exige que $\alpha$ sea proporcional a un entero $n$, deberá hacerse una suma sobre $n$. Esto ya está dicho en la forma integral de la solución, la que, además se transforma en una suma si $\alpha$ es proporcional a un entero.
 \end{document}
