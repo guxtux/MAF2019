@@ -1,1 +1,1 @@
-find -type f -name '*eps-converted*' -delete
+find . -type f -name '*eps-converted*' -delete
