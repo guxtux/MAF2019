@@ -1,0 +1,90 @@
+\input{../preambulo_doc}
+\author{}
+\title{Función de Green - Ecuaciones no homogéneas \\ \large {Tema 2 - Matemáticas Avanzadas de la Física}}
+\date{}
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+Las ecuaciones diferenciales aparecen frecuentemente en varias áreas de la física y de las matemática. En este subtema, se analizará en detalle el método de las \emph{Funciones de Green} como soluciones para estas ecuaciones. También se incluirán varios ejemplos de problemas físicos en los que las soluciones de Funciones de Green son útiles.
+\section{Introducción.}
+En el estudio de la física, interpretar un fenómeno mediante un modelo matemático, hace necesario el uso de ED, que aparecen con bastante frecuencia y pueden ser muy variadas en su tipo. Por ejemplo, existe la ecuación del movimiento armónico simple (una EDO2H):
+\begin{equation}
+\dv[2]{\psi}{x} + k^{2} \: \psi = 0
+\label{eq:ecuacion_01}
+\end{equation}
+También tenemos la ecuación de Poisson (ED2NH)
+\begin{equation}
+\laplacian{\psi} = - \dfrac{\rho}{\varepsilon_{0}}
+\label{eq:ecuacion_02}
+\end{equation}
+Afortunadamente, existen muchas formas, tanto analíticas como numéricas, de resolver estas ecuaciones y otras.
+\par
+El método de las Funciones de Green (llamado así por el matemático y físico inglés George Green) es particularmente útil para la ED2NH. Se revisará el proceso general de formación de una función de Green y las propiedades de las funciones de Green. Mostraremos un ejemplo donde se usará la función de Green para calcular el potencial electrostático de una densidad de carga específica. Posteriormente se mostrará un ejemplo para ilustrar la utilidad de las funciones de Green en la dispersión cuántica.
+\section{Funciones de Green como soluciones.}
+Supongamos que tenemos una ED de la forma
+\begin{equation}
+W \: m(\va{r}) =  f(\va{r})
+\label{eq:ecuacion_03}
+\end{equation}
+donde\begin{enumerate}
+\item $m(\va{r})$ es la función a determinar.
+\item $f(\va{r})$ es un término que contiene a $m$ y las derivadas de $m$.
+\item $W$ es un operador lineal.
+\end{enumerate}
+Debemos de considerar que esta ecuación está sujeta a ciertas CDF.
+\par
+Consideremos la idea de que podemos encontrar una función $G(\va{r}, \va{r}_{0})$ que resuelve esta particular ED con una función delta de Dirac como una fuente (o término no homogéneo) en lugar de $f(\va{r})$:
+\begin{equation}
+W \: G(\va{r}, \va{r}_{0}) = \delta (\va{r} - \va{r}_{0})
+\label{eq:ecuacion_04}
+\end{equation}
+Como ejemplo, sea $W = \laplacian$.
+\par
+Usando el teorema de Green en $G(\va{r}, \va{r}_{0})$ y $m(\va{r})$
+\begin{equation}
+\int_{V} \left( m \: \laplacian{G} - G \: \laplacian{m} \right) \dd{\tau} = \int_{S} \left( m \: \nabla G - G \: \nabla m \right) \vdot \dd{\va{A}}
+\label{eq:ecuacion_05}
+\end{equation}
+De las ecuaciones anteriores, se tiene que
+\begin{align}
+&\int_{V} \left[ m(\va{r}) \: \delta(\va{r} - \va{r}_{0}) - G (\va{r} - \va{r}_{0}) \: f(\va{r}) \right] \dd{\tau} = \label{eq:ecuacion_06} \\
+&= \int_{S} \left( m(\va{r}) \: \nabla G(\va{r}, \va{r}_{0}) - G(\va{r}, \va{r}_{0}) \: \nabla m(\va{r}) \right) \vdot \dd{\va{A}} \label{eq:ecuacion_07}
+\end{align}
+Si intercambiamos $\va{r}$ y $\va{r}_{0}$, entonces
+\begin{align}
+&\int_{V} \left[ m(\va{r}_{0}) \: \delta(\va{r}_{0} - \va{r}) - G (\va{r}_{0} - \va{r}) \: f(\va{r}_{0}) \right] \dd{\tau} = \label{eq:ecuacion_08} \\
+&= \int_{S} \left( m(\va{r}) \: \nabla G(\va{r}, \va{r}_{0}) - G(\va{r}, \va{r}_{0}) \: \nabla m(\va{r}) \right) \vdot \dd{\va{A}} \label{eq:ecuacion_09}
+\end{align}
+Resolviendo la integral de la función delta de Dirac, para luego sumar, tenemos que
+\begin{align}
+m(\va{r}) &= \int_{V} G(\va{r}, \va{r}_{0}) \: f(\va{r}_{0}) \dd{\tau} + \label{eq:ecuacion_10} \\
+&+ \int_{S} \left( m(\va{r}_{0}) \: \nabla G(\va{r}, \va{r}_{0}) - G(\va{r}, \va{r}_{0}) \nabla m(\va{r}_{0}) \right) \label{eq:ecuacion_11}
+\end{align}
+Llamaremos \textbf{Función de Green} a $G(\va{r})$, para esta particular ED.
+\par
+Si podemos encontrar una función de Green  $G(\va{r})$ que satisfaga la ecuación anterior, entonces podemos encontrar nuestra función deseada. El problema entonces es manipular esta fórmula para tener algo útil, tales manipulaciones son específicas de la ecuación particular a resolver y la geometría del problema.
+\par
+El desarrollo anterior no es la única forma de resolver la función de Green; resultó ser el más conveniente, ya que el operador diferencial lineal era el laplaciano.
+\par
+Las funciones de Green son siempre la solución de una inhomogeneidad similar a la delta $\delta$. Sin embargo, vale la pena mencionar que dado que la función delta es una distribución y no una función, no se requiere que las funciones de Green sean funciones.
+\par
+Es importante señalar que las funciones de Green son únicas para cada geometría. Sin embargo, se puede agregar un factor $G_{0} (\va{r})$ a la función de Green $G(\va{r})$ donde $G_{0} (\va{r})$ satisface la ecuación diferencial homogénea en cuestión
+\begin{equation}
+W \: G_{0} (\va{r}) = 0
+\label{eq:ecuacion_12}
+\end{equation}
+Donde $W$ es una operador diferencial lineal.
+\par
+También dependen en gran medida de las CDF especificadas; la función de Green para una frontera  no se puede definir en otra. 
+\par
+Una de las propiedades más útiles de las funciones de Green es que siempre son simétricas:
+\begin{equation}
+G(a, b) =  G(b, a) \hspace{1cm} a \neq b
+\label{eq:ecuacione_13}
+\end{equation}
+Al calcular la función de Green anteriormente, dependíamos de cambiar $\va{r}$ por $\va{r}_{0}$; si las variables de esta función de Green no fueran simétricas, no hubieramos podido hacer esto. Como tal, vale la pena probar la simetría de las variables en cualquier función de Green.
+\par
+Supongamos que tenemos dos funciones de Green $G(\va{r}, \va{r}_{1})$ y $G(\va{r}, \va{r}_{2})$, queremos que esas funciones satisfacen las siguienes ecuaciones
+\end{document}
