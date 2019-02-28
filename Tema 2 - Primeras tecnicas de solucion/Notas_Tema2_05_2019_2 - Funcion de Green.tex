@@ -22,7 +22,7 @@ También tenemos la ecuación de Poisson (ED2NH)
 Afortunadamente, existen muchas formas, tanto analíticas como numéricas, de resolver estas ecuaciones y otras.
 \par
 El método de las Funciones de Green (llamado así por el matemático y físico inglés George Green) es particularmente útil para la ED2NH. Se revisará el proceso general de formación de una función de Green y las propiedades de las funciones de Green. Mostraremos un ejemplo donde se usará la función de Green para calcular el potencial electrostático de una densidad de carga específica. Posteriormente se mostrará un ejemplo para ilustrar la utilidad de las funciones de Green en la dispersión cuántica.
-\section{Funciones de Green como soluciones.}
+\section{Funciones de Green como soluciones.}\label{sec:FuncionesdeGreen}
 Supongamos que tenemos una ED de la forma
 \begin{equation}
 W \: m(\va{r}) =  f(\va{r})
@@ -86,5 +86,332 @@ G(a, b) =  G(b, a) \hspace{1cm} a \neq b
 \end{equation}
 Al calcular la función de Green anteriormente, dependíamos de cambiar $\va{r}$ por $\va{r}_{0}$; si las variables de esta función de Green no fueran simétricas, no hubieramos podido hacer esto. Como tal, vale la pena probar la simetría de las variables en cualquier función de Green.
 \par
-Supongamos que tenemos dos funciones de Green $G(\va{r}, \va{r}_{1})$ y $G(\va{r}, \va{r}_{2})$, queremos que esas funciones satisfacen las siguienes ecuaciones
+Supongamos que tenemos dos funciones de Green $G(\va{r}, \va{r}_{1})$ y $G(\va{r}, \va{r}_{2})$, queremos que esas funciones satisfacen las siguienes ecuaciones:
+\begin{align}
+\nabla \vdot [ p(\va*{r}) \: \nabla G(\va{r}, \va{r}_{1}) ] + q(\va{r}) \: G(\va{r}, \va{r}_{1}) &= - \delta(\va{r}, \va{r}_{1}) \label{eq:ecuacion_14} \\
+\nabla \vdot [ p(\va*{r}) \: \nabla G(\va{r}, \va{r}_{2}) ] + q(\va{r}) \: G(\va{r}, \va{r}_{2}) &= - \delta(\va{r}, \va{r}_{2}) \label{eq:ecuacion_15}
+\end{align}
+Donde $p(\va*{r})$ y $q(\va*{r})$ son funciones arbitrarias de $\va*{r}$.
+Especificaremos aún más las funciones de Green mediante las CDF  de Dirichlet, en  donde $G(\va{r}, \va{r}_{1})$ y $G(\va{r}, \va{r}_{2})$ obtendrán los mismos valores sobre la superficie $S$ de cierto volumen. Si no se cumple esta condición, las funciones de Green se anularán en $S$.
+\par
+Al multiplicar la ecuación de $G(\va{r}, \va{r}_{1})$ por $G(\va{r}, \va{r}_{2})$ viceversa encontramos:
+\begin{align}
+G(\va{r}, \va{r}_{1})  \: \nabla \vdot [ p(\va*{r}) \: \nabla G(\va{r}, \va{r}_{1})] + \label{eq:ecuacion_16} \\
+G(\va{r}, \va{r}_{2})  \: q(\va{r}) \: G(\va{r}, \va{r}_{1}) = -  G(\va{r}, \va{r}_{2}) \: \delta(\va*{r} - \va*{r}_{1})  \label{eq:ecuacion_17} \\
+\nonumber \\
+G(\va{r}, \va{r}_{1})  \: \nabla \vdot [ p(\va*{r}) \: \nabla G(\va{r}, \va{r}_{2})] + \label{eq:ecuacion_18} \\
+G(\va{r}, \va{r}_{1})  \: q(\va{r}) \: G(\va{r}, \va{r}_{2}) = -  G(\va{r}, \va{r}_{1}) \: \delta(\va*{r} - \va*{r}_{2})  \label{eq:ecuacion_19}
+\end{align}
+restando la segunda ecuación de la primera:
+\begin{align}
+&G(\va{r}, \va{r}_{2})  \: \nabla \vdot [ p(\va*{r}) \: \nabla G(\va{r}, \va{r}_{1})] - G(\va{r}, \va{r}_{1})  \: \nabla \vdot [ p(\va*{r}) \: \nabla G(\va{r}, \va{r}_{2})] = \label{eq:ecuacion_20} \\ 
+&= - G(\va{r}, \va{r}_{2}) \: \delta(\va*{r} - \va*{r}_{1}) + G(\va{r}, \va{r}_{1}) \: \delta(\va*{r} - \va*{r}_{2}) \label{eq:ecuacion_21}
+\end{align}
+%Nota: se simplificó la expresion 20 para dejar una sola ecuacion
+%por eso se salta a la ecuacion_23
+Usando la siguiente regla para un producto
+\begin{equation}
+\nabla \vdot (f \: \va{A}) =  f (\nabla \vdot \va{A}) +  \va{A} \vdot \nabla f
+\label{eq:ecuacion_23}
+\end{equation}
+podemos intercambiar algunos términos de la ecuación
+\begin{align}
+&\nabla \vdot [G(\va{r}, \va{r}_{2}) \: p(\va{r}) \: \nabla G(\va{r}, \va{r}_{1})] - \nabla \vdot [G(\va{r}, \va{r}_{1}) \: p(\va{r}) \: \nabla G(\va{r}, \va{r}_{2})] = \label{eq:ecuacion_24} \\ 
+&= - G(\va{r}, \va{r}_{2}) \: \delta(\va*{r} - \va*{r}_{1}) + G(\va{r}, \va{r}_{1}) \: \delta(\va*{r} - \va*{r}_{2}) \label{eq:ecuacion_26}
+\end{align}
+Realizando la integral de volumen en ambos lados de la igualdad y utilizando el teorema de la divergencia, se simplifica el lado izquierdo de la ecuación:
+\begin{align}
+\int_{S} [G(\va{r}, \va{r}_{2}) \: p(\va{r}) \: \nabla G(\va{r}, \va{r}_{1}) &- G(\va{r}, \va{r}_{1}) \: p(\va{r}) \: \nabla G(\va{r}, \va{r}_{2}) ] \vdot \dd{\va{A}} = \label{eq:ecuacion_27} \\
+&- G(\va{r}_{1}, \va{r}_{2}) + G(\va{r}_{2}, \va{r}_{1}) \label{eq:ecuacion_29}
+\end{align}
+Pero por las CDF mencionadas al inicio, la parte izquierda de la expresión se anula, por tanto
+\begin{equation}
+G(\va{r}_{1}, \va{r}_{2}) = G(\va{r}_{2}, \va{r}_{1})
+\label{eq:ecuacion_30}
+\end{equation}
+Por lo que se ha demostrado la simetría de la función de Green.
+\section{Aplicación: Potencial electrostático.}
+Partimos de la ecuación de Poisson
+\begin{equation}
+\laplacian{\phi} = - \dfrac{\rho}{\varepsilon_{0}}
+\label{eq:ecuacion_31}
+\end{equation}
+Supongamos que tenemos un conjunto de cargas puntuales $q_{k}$. De la electrostática sabemos que el potencial para una configuración de este tipo es:
+\begin{equation}
+\phi = \dfrac{1}{4 \, \pi \, \varepsilon_{0}} \sum_{k} \dfrac{q_{k}}{r_{k}}
+\label{eq:ecuacion_32}
+\end{equation}
+Si en lugar de un número discreto de cargas puntuales tuviéramos una distribución continua de la carga (es decir, $\rho$ una densidad de carga), entonces tenemos:
+\begin{equation}
+\phi(\va*{r}) = \dfrac{1}{4 \, \pi \, \varepsilon_{0}} \int \dfrac{\rho(\va{r}^{\, \prime})}{\abs{\va{r} - \va{r}^{\, \prime}}} \dd{V}^{\prime}
+\label{eq:ecuacion_33}
+\end{equation}
+donde $\va{r}$ es el vector que apunta del origen al punto del campo, $\va{r}^{\, \prime}$ es el vector que apunta del origen al punto de la fuente, y $\dd{V}^{\prime}$ es el elemento de volumen.
+\par
+Observando la ecuación de Poisson y directamente el resultado encontrado arriba, estamos en una posición para tratar de encontrar la función de Green $G(\va*{r}, \va*{r}^{\, \prime})$. 
+\par 
+Usando el formalismo de la sección (\ref{sec:FuncionesdeGreen}) :
+\begin{equation}
+\laplacian G(\va*{r}, \va*{r}^{\, \prime}) = - \delta (\va*{r} - \va*{r}^{\, \prime})
+\label{eq:ecuacion_34}
+\end{equation}
+Resolvermos para $G(\va*{r}, \va*{r}^{\, \prime})$. Usando la identidad de Green
+\begin{align}
+&\int_{V} (\phi (\va*{r}^{\, \prime}) \: \laplacian G (\va*{r}, \va*{r}^{\, \prime}) - G(\va*{r}, \va*{r}^{\, \prime}) \laplacian \phi (\va*{r}^{\, \prime})) \dd{V}^{\prime} = \label{eq:ecuacion_35} \\[1em]
+&\int_{S} (\phi (\va*{r}^{\, \prime}) \: \nabla G (\va*{r}, \va*{r}^{\, \prime}) - G(\va*{r}, \va*{r}^{\, \prime}) \nabla \phi (\va*{r}^{\, \prime})) \vdot \dd{\va{A}} \label{eq:ecuacion_36}
+\end{align}
+donde $\dd{A}$ es el elemento de superficie que bordea el volumen $V$.
+\par
+Consideraremos ahora el caso donde el término de superficie es cero. Esto simplificará el problema:
+\begin{align}
+&\int_{V} (\phi (\va*{r}^{\, \prime}) \: \laplacian G (\va*{r}, \va*{r}^{\, \prime}) - G(\va*{r}, \va*{r}^{\, \prime}) \laplacian \phi (\va*{r}^{\, \prime})) \dd{V}^{\prime} = 0 \label{eq:ecuacion_37} \\[1em]
+&\int_{V} \phi (\va*{r}^{\, \prime}) \: \laplacian G (\va*{r}, \va*{r}^{\, \prime}) \dd{V}^{\prime} = \int_{V} G(\va*{r}, \va*{r}^{\, \prime}) \laplacian \phi (\va*{r}^{\, \prime}) \dd{V}^{\prime} \label{eq:ecuacion_38}
+\end{align}
+Utilizando los valores de $\laplacian G (\va*{r}, \va*{r}^{\, \prime})$ y de $\laplacian \phi (\va*{r})$:
+\begin{equation}
+- \int \phi (\va*{r}) \: \delta (\va*{r} - \va*{r}^{\, \prime}) \dd{V}^{\prime} = - \int \dfrac{G (\va*{r}, \va*{r}^{\, \prime}) \: \rho (\va*{r})}{\varepsilon_{0}} \dd{V}^{\prime}
+\label{eq:ecuacion_39}
+\end{equation}
+Encontramos que
+\begin{equation}
+\phi (\va*{r}) = \dfrac{1}{\varepsilon_{0}} \int G (\va*{r}, \va*{r}^{\, \prime}) \: \rho (\va*{r}) \dd{V}^{\prime}
+\label{eq:ecuacion_40}
+\end{equation}
+Ya estamos en posición para determinar la función de Green. Del estudio de la ecuación de Poisson y de la ley de Coulomb, se tiene que
+\begin{equation}
+\laplacian \dfrac{1}{r} = - 4 \, \pi \, \delta(r)
+\label{eq:ecuacion_41}
+\end{equation}
+y mirando el resultado en la ecuación original para $\laplacian{G}$, concluimos que
+\begin{equation}
+G (\va*{r}, \va*{r}^{\, \prime}) = \dfrac{1}{4 \, \pi \, \abs{\va*{r} - \va*{r}^{\, \prime}}}
+\label{eq:ecuacion_42}
+\end{equation}
+Entonces para $\phi$:
+\begin{equation}
+\phi (\va*{r}) = \dfrac{1}{4 \: \pi \, \varepsilon_{0}} \int \dfrac{\rho (\va{r}^{\, \prime})}{\abs{\va*{r} - \va*{r}^{\, \prime}}} \dd{V}^{\prime}
+\label{eq:ecuacion_43}
+\end{equation}
+A pesar de que sabíamos la respuesta desde el principio, es bueno ver que el formalismo de la función de Green da los resultados correctos. 
+\par
+Por supuesto, hay otros ejemplos en los que no conocemos la respuesta en retrospectiva y debemos confiar en las funciones de Green para resolver el problema.
+\section{Aplicación: Dispersión cuántica.}
+Supongamos que tenemos un haz de partículas incidiendo en un objetivo (representado por un potencial $V(\va*{r})$ ). Las partículas que golpean el objetivo se dispersan como ondas esféricas; representamos esas ondas con la función de onda $\psi(\va*{r})$. 
+\par
+Obviamente obedece a la ecuación de Schrödinger
+\begin{equation}
+- \dfrac{\hbar^{2}}{2m} \laplacian \psi (\va*{r}) + V (\va*{r}) \, \psi (\va*{r}) =  E \, \psi (\va*{r})
+\label{eq:ecuacion_44} 
+\end{equation}
+Será más útil manejar la expresión en términos de la ecuación de Helmholtz, para ello, definimos $\displaystyle k^{2} = \dfrac{2 \, m \, E}{\hbar^{2}}$ y escribimos
+\begin{equation}
+\laplacian \psi (\va*{r}) + k^{2} \, \psi (\va*{r}) = - \left[ - \dfrac{2 \, m \, V (\va*{r})}{\hbar} \, \psi (\va*{r})\right]
+\label{eq:ecuacion_45}
+\end{equation}
+En última instancia, querremos una solución que contenga la onda incidente $\exp(i \, \va*{k}_{0} \, \va*{r})$, la onda en dispersión $\displaystyle \dfrac{\exp(i \, k \, r)}{r}$ y la amplitud de la onda en dispersión $f_{k} (theta, \phi)$.
+\par
+Así $\psi (\va*{r})$ tendrá la forma asintótica:
+\begin{equation}
+\psi (\va*{r}) \simeq \exp(i \, \va*{k}_{0} \, \va*{r}) + f_{k} (\theta, \phi) \: \dfrac{\exp(i \, k \, r)}{r}
+\label{eq:ecuacion_46}
+\end{equation}
+Donde $k_{0}$ es el vector que apunta en la dirección de la onda incidente, y $k$ es el vector que apunta en la dirección de la onda en dispersión.
+\par
+Por la forma general de la función de Green, tenemos que
+\begin{equation}
+\psi(r_{1}) = - \int_{V} \dfrac{2 \, m}{\hbar^{2}} \, V(\va*{r}_{2}) \: \psi (\va*{r}_{2}) \: G (\va*{r}_{1}, \va*{r}_{2}) \dd[3]{r_{2}}
+\label{eq:ecuacion_47}
+\end{equation}
+Debido a que esto pretende describir una onda saliente que se aproxima al infinito, establecemos el término de superficie igual a cero. 
+\par
+Añadimos un término para hacer que $\psi (\va*{r})$ sea asintótica:
+\begin{equation}
+\psi(r_{1}) = \exp(i \, \va*{k}_{0} \, \va*{r}_{1}) - \int_{V} \dfrac{2 \, m}{\hbar^{2}} \, V(\va*{r}_{2}) \: \psi (\va*{r}_{2}) \: G (\va*{r}_{1}, \va*{r}_{2}) \dd[3]{r_{2}}
+\label{eq:ecuacion_48}
+\end{equation}
+Como estamos trabajando con el operador de Helmholtz, la función de Green tomo la forma:
+\begin{equation}
+G (\va*{r}_{1}, \va*{r}_{2}) = \dfrac{\exp(i \, k \, \abs{\va*{r}_{1} - \va*{r}_{2}})}{4 \, \pi \, \abs{\va*{r}_{1} - \va*{r}_{2}}}
+\label{eq:ecuacion_49}
+\end{equation}
+De ahí obtenemos la ecuación exacta:
+\begin{equation}
+\psi(r_{1}) = \exp(i \, \va*{k}_{0} \, \va*{r}_{1}) - \int_{V} \dfrac{2 \, m}{\hbar^{2}} \, V(\va*{r}_{2}) \: \psi (\va*{r}_{2}) \: \dfrac{\exp(i \, k \, \abs{\va*{r}_{1} - \va*{r}_{2}})}{4 \, \pi \, \abs{\va*{r}_{1} - \va*{r}_{2}}} \dd[3]{r_{2}}
+\label{eq:ecuacion_50}
+\end{equation}
+Al hacer aproximaciones en la función $\psi$, podemos obtener información extremadamente útil de esta ecuación. Por ejemplo: si asumimos que la onda incidente no cambia considerablemente por el potencial:
+\begin{equation}
+\psi(\va*{r}_{2}) = \exp(i \, \va*{k}_{0} \, \va*{r}_{2})
+\label{eq:ecuacion_51}
+\end{equation}
+Agregando esto en la integral, se obtiene lo siguiente:
+\begin{equation}
+\psi(r_{1}) = \exp(i \, \va*{k}_{0} \, \va*{r}_{1}) - \int_{V} \dfrac{2 \, m}{\hbar^{2}} \, V(\va*{r}_{2}) \: \exp(i \, \va*{k}_{0} \, \va*{r}_{2}) \: \dfrac{\exp(i \, k \, \abs{\va*{r}_{1} - \va*{r}_{2}})}{4 \, \pi \, \abs{\va*{r}_{1} - \va*{r}_{2}}} \dd[3]{r_{2}}
+\label{eq:ecuacion_52}
+\end{equation}
+La ecuación anterior se conoce como la \emph{aproximación de Born}; que es muy útil para problemas de dispersión donde el potencial es débil en comparación con el potencial dado.
+\par
+Existen numerosos métodos disponibles para resolver ecuaciones diferenciales. A primera vista, puede parecer que el método de las funciones de Green es bastante limitado, ya que sólo se puede usar en ecuaciones de una forma particular y por el hecho de que no todos los operadores lineales admiten una función de Green. Sin embargo, este tipo de ecuaciones aparecen con frecuencia en la física, por lo que las funciones de Green resultan ser invaluables en la comprensión de los sistemas físicos.
+\newpage
+\section{Las funciones de Green.}
+En este apartado se presenta una guía para abordar la solución de EDO no homogéneas, desde la perspectiva de la teoría de Sturm-Liouville, es decir, desde la perspectiva en la que las ED son concebidas como un problema de valores propios en un espacio vectorial de dimensión infinita.
+\par
+En la teoría de Sturm-Liouville se estudian ecuaciones EDOH del tipo:
+\begin{equation}
+A(x) \: \dv[2]{y}{x} + B(x) \: \dv{y}{x} + C(x) \: y(x) +  \lambda \: D(x) \: y = 0
+\label{eq:ecuacion_53}
+\end{equation}
+en donde $\lambda$ juega el papel de un parámetro que hay que determinar. Si ahora dividimos la ec. (\ref{eq:ecuacion_53}) por la función $A(x)$ se obtiene:
+\begin{equation}
+\dv[2]{y}{x} + b(x) \: \dv{y}{x} + c(x) \: y(x) +  \lambda \: d(x) \: y = 0
+\label{eq:ecuacion_54}
+\end{equation}
+Con este procedimiento se debe tener cuidado de que la función $A(x)$ no se anule. Por otra parte, la ecuación (\ref{eq:ecuacion_54}) admite un factor integrante de la forma:
+\begin{equation}
+p(x) = \exp \left[ \int^{x} b(x^{\prime}) \dd{x^{\prime}} \right]
+\label{eq:ecuacion_55}
+\end{equation}
+Por lo que podemos reescribir la ec. (\ref{eq:ecuacion_54}) de la forma
+\begin{equation}
+\dv{x} \left[ p(x) \: \dv{y}{x} \right] + q(x) \: y + \lambda \: \omega(x) \: y = 0
+\label{eq:ecuacion_56}
+\end{equation}
+en la que se han definido a las funciones $q(x) = p(x) \: c(x)$ y $\omega (x) = p(x) \: d(x)$. Si adicionalmente se imponen las condiciones: a) $p(x)$, $q(x)$ y $\omega (x)$, sean funciones reales y b) $\omega(x)$ y $p(x)$ sean positivas, entonces se dice que la ec. (\ref{eq:ecuacion_56}) es una ecuación de tipo Sturm-Liouville.
+\par
+Finalmente con unas cuantas manipulaciones algebraicas es posible escribir la ec. (\ref{eq:ecuacion_56}) como el problema de valores propios 
+\begin{align*}
+L \: y = \lambda \:y
+\end{align*}
+ donde $L$ se conoce como el operador diferencial de Sturm-Liouville y que se expresa como:
+ \begin{align*}
+L = - \dfrac{1}{\omega (x)} \left[ \dv{x} \left( p(x) \: \dv{x} \right) + q(x) \right]
+ \end{align*}
+ el cual se comporta como un operador Hermitiano con respecto a la función de peso si en se satisfacen las CDF:
+ \begin{align*}
+\left[ p(x) \left( y_{n}^{*} \: \dv{y_{m}}{x} - \dv{y_{n}^{*}}{x} \: y_{m} \right) \right]\eval_{a}^{b} = 0
+ \end{align*}
+ donde $y_{n}$ y $y_{m}$ son dos diferentes funciones propias del operador de Sturm-Liouville y los asteriscos denotan a los complejos conjugados de éstas.
+\par
+A continuación y después de esta breve introducción, se procede a describir la forma en que este elegante formalismo matemático se extiende al caso de las EDO2 no homogéneas.
+
+\section{Funciones de Green.}
+Como se indicó en la introducción, las soluciones de la ecuación de Sturm-Liouville satisfacen ciertas CDF, éstas se convierten en un conjunto de funciones ortogonales $Y_{n} (x)$, con valores propios asociados $\lambda_{n}$.
+\par
+Ahora supongamos que queremos resolver la siguiente ED2 no homogénea en el intervalo $a \leq x \leq b$
+\begin{equation}
+\dv{x} \left[ p(x) \: \dv{Y}{x} \right] + q(x) \: Y + k \: \omega(x) \: Y = f(x)
+\label{eq:ecuacion_57}
+\end{equation}
+donde $f(x)$ es una función dada. Las CDF que deben de ser satisfechas por la solución $f(x)$, son las mismas que  satisfacen las funciones propias $f_{n} (x)$ del problema de Sturm-Liouville:
+\begin{align*}
+\dv{x} \left[ p(x) \: \dv{Y_{n}}{x} \right] + q(x) \: Y_{n} + k \: \omega(x) \: Y_{n} = f(x)
+\end{align*}
+Nótese que $k \neq \lambda_{n}$. De hecho, $k$ puede valer cero.
+\par
+Ahora, siempre es más conveniente trabajar con funciones propias normalizadas. Si $f_{n} (x)$ no está normalizada todavía, se puede definir:
+\begin{align*}
+\phi_{n} (x) = \dfrac{1}{\sqrt{\ip{Y_{n}}{Y_{n}}}} \: Y_{n} (x)
+\end{align*}
+tal que
+\begin{align*}
+\ip{\phi_{n}}{\phi_{m}} = \int_{a}^{b} \phi_{n} (x) \: \phi_{m} (x) \: \omega (x) \dd{x} = \delta_{nm} 
+\end{align*}
+Debido a que  $\left\{ \phi_{n} \right\}(n = 1, 2, \ldots)$ es un conjunto ortonormal completo de funciones propias, la solución $Y(x)$ de la ec. (\ref{eq:ecuacion_57}) se puede  expresar como una serie de las $\phi_{n}$:
+\begin{align*}
+Y(x) = \sum_{n=1}^{\infty} C_{n} \: \phi_{n}
+\end{align*}
+al sustituir la solución anterior en la ec. (\ref{eq:ecuacion_57}), se tiene
+\begin{align*}
+\sum_{n=1}^{\infty} C_{n} \left\{ \dv{x}  \left[ p(x) \dv{x} \right] + q(x) \right\} \: \phi_{n} (x) + k \: \omega (x) \: \sum_{n=1}^{\infty} C_{n} \: \phi_{n} (x) = f(x)
+\end{align*}
+donde
+\begin{align*}
+\left\{ \dv{x}  \left[ p(x) \dv{x} \right] + q(x) \right\} \: \phi_{n} (x) = - \lambda_{n} \: \omega (x) \: \phi_{n} (x)
+\end{align*}
+así
+\begin{align*}
+\sum_{n=1}^{\infty} C_{n} \: (-\lambda_{n} + k) \: \omega (x) \: \phi_{n} (x) = f(x)
+\end{align*}
+multiplicando ambos lados de la ecuación anterior por $\phi_{m}(x)$, para luego integrar, obtenemos:
+\begin{align*}
+\sum_{n=1}^{\infty} C_{n} \: (-\lambda_{n} + k) \int_{a}^{b} \phi_{m} (x) \: \omega (x) \: \phi_{n} (x) \dd{x} = \int_{a}^{b} \phi_{m} \: f(x) \dd{x}
+\end{align*}
+Tomando en cuenta la condición de ortogonalidad, resulta que
+\begin{align*}
+C_{m} \: (-\lambda_{m} + k) = \int_{a}^{b} \phi_{m} \: f(x) \dd{x}
+\end{align*}
+de donde
+\begin{align*}
+C_{m} = \dfrac{1}{-\lambda_{m} + k} \int_{a}^{b} \phi_{m} (x) \: f(x) \dd{x}
+\end{align*}
+Por lo tanto, la solución general $Y(x)$, está dada por:
+\begin{align*}
+Y(x) = \sum_{n=1}^{\infty} C_{n} \: \phi_{n} (x) = \sum_{n=1}^{\infty} \left[ \dfrac{1}{-\lambda_{n} + k} \int_{a}^{b} \phi_{n} (x^{\prime}) \: f(x^{\prime}) \dd{x^{\prime}} \right] \: \phi_{n} (x)
+\end{align*}
+Como $f(x)$ es una función conocida, probablemente la serie anterior pueda calcularse, sin embargo, queremos expresarla en forma diferente e introducir una función conceptualmente importante y conocida como la función de Green.
+\par
+Debido a que la suma y la integral pueden ser intercambiadas, podemos expresar la última expresión como
+\begin{align*}
+Y(x) = \int_{a}^{b} f(x) \: \sum_{n=1}^{\infty} \dfrac{\phi_{n}(x^{\prime}) \: \phi_{n}(x)}{k - \lambda_{n}} \dd{x^{\prime}}
+\end{align*}
+definimos la función de Green como
+\begin{equation}
+G(x^{\prime}, x) =  \sum_{n=1}^{\infty} \dfrac{\phi_{n}(x^{\prime}) \: \phi_{n}(x)}{k - \lambda_{n}}
+\label{eq:ecuacion_58}
+\end{equation}
+entonces la solución para $Y(x)$, se escribe como
+\begin{align*}
+Y(x) = \int_{a}^{b} f(x) \: G(x^{\prime}, x) \dd{x^{\prime}}
+\end{align*}
+\section{La función de Green y la delta de Dirac}
+Para apreciar el significado de la función de Green, primero se mostrará que $G(x^{\prime}, x)$ es la solución de la ecuación (\ref{eq:ecuacion_57}), excepto cuando la función $f(x)$ se remplaza por la delta de Dirac $\delta (x^{\prime} - x)$ . Esto es, se mostrará que
+\begin{equation}
+\dv{x} \left[ p(x) \: \dv{x} G(x^{\prime}, x) \right] + q(x) \: G(x^{\prime}, x) + k \: \omega (x) \: G(x^{\prime}, x) = \delta (x^{\prime} - x)
+\label{eq:ecuacion_59}
+\end{equation}
+Donde la delta de Dirac, queda definida por
+\begin{align*}
+F(x) = \int_{a}^{b} F(x^{\prime}) \: \delta (x^{\prime} - x) \dd{x^{\prime}}
+\end{align*}
+Utilizando la función $G(x^{\prime}, x)$ de la ec. (\ref{eq:ecuacion_58}), se tiene que
+\begin{align*}
+&\dv{x} \left[ p(x) \: \dv{x} G(x^{\prime}, x) \right] + q(x) \: G(x^{\prime}, x) + k \: \omega (x) \: G(x^{\prime}, x) = \\
+&=  \left\{  \dv{x} \left[ p(x) \: \dv{x} \right] + q(x)   \right\} \: \sum_{n=1}^{\infty} \dfrac{\phi_{n}(x^{\prime}) \: \phi_{n}(x)}{k - \lambda_{n}} +  k \: \omega (x) \: \sum_{n=1}^{\infty} \dfrac{\phi_{n}(x^{\prime}) \: \phi_{n}(x)}{k - \lambda_{n}} = \\
+&= \sum_{n=1}^{\infty} \dfrac{- \lambda_{n} \: \omega (x) \: \phi_{n}(x^{\prime}) \: \phi_{n}(x)}{k - \lambda_{n}} +  k \: \omega (x) \: \sum_{n=1}^{\infty} \dfrac{\phi_{n}(x^{\prime}) \: \phi_{n}(x)}{k - \lambda_{n}} = \\
+&= w(x) \sum_{n=1}^{\infty} \phi_{n}(x^{\prime}) \: \phi_{n}(x)
+\end{align*}
+De donde se puede mostrar que las funciones propias son la expansión de la delta de Dirac, la cual tendría la forma:
+\begin{align*}
+\delta (x^{\prime} - x) = \sum_{n=1}^{\infty} a_{n} \: \phi_{n}(x)
+\end{align*}
+El producto interno efectuado con una función propia en ambos lados de la ecuación anterior muestra que
+\begin{align*}
+a_{n} = \ip{\delta (x^{\prime} - x)}{\phi_{n}(x)}
+\end{align*}
+por lo tanto
+\begin{align*}
+\delta (x^{\prime} - x) &= \sum_{n=1}^{\infty} a_{n} \: \phi_{n}(x) = \\
+&= \sum_{n=1}^{\infty} \ip{\delta (x^{\prime} - x)}{\phi_{n}(x)} \: \phi_{n} (x) = \\
+&= \sum_{n=1}^{\infty} \left[ \int_{a}^{b} \delta (x^{\prime} - x) \: \phi_{n} (x) \: \omega (x) \dd{x} \right] \: \phi_{n} (x) = \\
+&= \omega (x) \sum_{n=1}^{\infty} \phi_{n}(x^{\prime}) \: \phi_{n}(x)
+\end{align*}
+Pero como $\delta (x^{\prime} - x) \neq 0$ en $x = x^{\prime}$
+\begin{equation}
+\delta (x^{\prime} - x) = \delta (x - x^{\prime}) = \omega (x) \sum_{n=1}^{\infty} \phi_{n}(x^{\prime}) \: \phi_{n}(x)
+\label{eq:ecuacion_60}
+\end{equation}
+Por lo que la ecuación (\ref{eq:ecuacion_59}) queda establecida.
+\par
+Ahora, la función de Green puede ser interpretada de múltiples formas. Una interpretación es: que la ecuación diferencial lineal tal como la ec. (\ref{eq:ecuacion_57}) puede ser utilizada para describir un sistema lineal físico. La función $f(x)$ en el lado derecho de la ecuación representa la fuerza o la función de empuje aplicada a un sistema. En otras palabras, $f(x)$ es la entrada del sistema. La solución $Y(x)$ de la ecuación representa la respuesta del sistema.
+\par
+La función de Green $G(x^{\prime}, x)$ describe la respuesta del sistema físico a una única función delta, la cual representa el impulso de un punto fuente en $x^{\prime}$ con una unidad de longitud.
+\par
+Podemos modelar cualquier $f(x)$ entrante como la suma de un conjunto de puntos entrantes. Esto se expresa como
+\begin{align*}
+f(x) = \int_{a}^{b} f(x^{\prime}) \: \delta (x^{\prime} - x) \dd{x^{\prime}}
+\end{align*}
+El valor de $f(x^{\prime})$ es simplemente la longitud de la función delta en $x^{\prime}$. Como $G(x^{\prime}, x)$ es la respuesta de una unidad de la delta, si la longitud de la es $f(x^{\prime})$ veces más grande, la respuesta también será mas grande por tal cantidad. Esto es, la respuesta será $G(x^{\prime}, x) \: f(x^{\prime})$. Como el sistema es lineal, podemos encontrar la respuesta del sistema para la entrada $f(x)$ sumando las respuestas de los puntos de entrada. Esto es,
+\begin{align*}
+Y(x) = \int_{a}^{b} f(x^{\prime}) \: G(x^{\prime}, x) \dd{x^{\prime}}
+\end{align*}
 \end{document}
