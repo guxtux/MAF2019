@@ -405,197 +405,226 @@ Si $i=j$ la integral no se puede anular ($w(x) > 0$ para puntos aislados), a men
 Lo que es una prueba matemática de que el valor propio es real, ya que $\lambda_{i}$ representa a cualquiera de los valores propios, se cumple esta propiedad.
 \par
 En mecánica cuántica los valores propios corresponden a cantidades medibles, tales como la energía o el momento angular. Con la teoría revisada en términos de operadores Hermitianos, esta prueba de que los valores propios nos garantiza que la teoría predice valores reales para esas cantidades físicas medibles.
-% \subsection{Funciones propias ortogonales.}
-% Si tomamos $i \neq	j$ y si $\lambda_{i} \neq \lambda_{j}$ la integral del producto de dos funciones propias diferentes debe de anularse:
-% \begin{equation}
-% \int_{a}^{b} u_{i}u*_{j} w dx = 0
-% \label{eq:ecuacion_35}
-% \end{equation}
-% Esta condición es llamada \emph{ortogonalidad}. Se dice que las funciones propias $u_{i}(x)$ y $u_{j}(x)$ son ortogonales con respecto a una función de peso $w(x)$ en el intervalo $[a,b]$.
-% \\
-% Si tenemos el caso $i \neq j$ pero se mantiene que $\lambda_{i} = \lambda_{j}$, se tiene el llamado caso \emph{degenerado}. Esto significa que la independencia linea de las funciones propias que corresponden al mismo valor propio, no son automáticamente ortogonales, por lo que deberíamos usar un método que nos permita recuperar el conjunto ortogonal.  Aunque tengamos funciones propias en el caso degenerado y sean no ortogonales, siempre se pueden ortogonalizar.
-% \\
-% \textbf{Ejemplo: Series de Fourier.}
-% \\
-% Consideremos la ecuación 
-% \[ \dfrac{d^{2}}{d x^{2}} y(x) + n^{2} y(x) = 0 \]
-% Que en mecánica cuántica puede describir una partícula en una caja, o puede representar la cuerda de un violín con funciones propias (degeneradas) $\cos nx, \sin nx$.
-% \\
-% Con $n$ real, las integrales ortogonales son
-% \begin{enumerate}[label=\alph*)]
-% \item $\begin{aligned}[t] \int_{x_{0}}^{x_{0} +  2 \pi} \sin mx \sin nx dx = C_{n} \delta_{nm} \end{aligned} $ 
-% \item $\begin{aligned}[t] \int_{x_{0}}^{x_{0} +  2 \pi} \cos mx \cos nx dx = D_{n} \delta_{nm} \end{aligned} $ 
-% \item $\begin{aligned}[t] \int_{x_{0}}^{x_{0} +  2 \pi} \sin mx \cos nx dx = 0 \end{aligned} $
-% \end{enumerate}
-% Para un intervalo de $2 \pi$ el análisis previo, garantiza la delta de Kronecker en los incisos a) y b), pero no para el iniciso c), ya que c) involucra funciones propias degeneradas. Pero vemos que en c) siempre se anula para todas las integrales $m$ y $n$.
-% \\
-% De la teoría de Sturm-Liouville no nos dice nada sobre los valores de $C_{n}$ y $D_{n}$. Al calcularlos:
-% \begin{eqnarray*}
-% C_{n} &= \begin{cases}
-% \pi  & n \neq 0 \\
-% 0  & n = 0 \end{cases}  \nonumber \\
-% D_{n} &= \begin{cases}
-% \pi & n \neq 0 \\
-% 2 \pi & n = 0 \end{cases}
-% \end{eqnarray*}
-% La ortogonalidad de los integrandos forma la base para las series de Fourier.
-% \\
-% \textbf{Ejemplo: Expansión de funciones propias ortogonales: una onda cuadrada.}
-% \\
-% La propiedad de \emph{completez} significa que cierta clase de funciones (funciones continuas por secciones o pedazos), puede representarse por una serie de funciones propias ortogonales, con cualquier grado de precisión. Consideremos la onda cuadrada:
-% \begin{equation}
-% f(x) = \begin{cases}
-% \dfrac{h}{2} & 0 < x < \pi \\
-% - \dfrac{h}{2} & -\pi < x < o
-% \end{cases}
-% \label{eq_ecuacion_36}
-% \end{equation}
-% Esta función puede desarrollarse en funciones propias de varios tipos: Legendre, Hermite, Chebyshev, etc. La elección de la función propia se hace en base a la conveniencia del problema. Si elegimos para el desarrollo de la solución, las funciones propias $\cos nx$ y $\sin nx$.
-% \\
-% La serie de funciones propias se escribe conveniente (y convencionalmente) como
-% \[ f(x) = \dfrac{a_{0}}{2} + \sigma_{n=1}^{\infty} (a_{n} \cos nx +  b_{n} \sin nx) \]
-% De la ortogonalidad de los integrados, los coeficientes están dados por
-% \begin{eqnarray*}
-% a_{n} = \dfrac{1}{\pi} \int_{-\pi}^{\pi} f(t) \cos nt dt \\
-% b_{n} = \dfrac{1}{\pi} \int_{-\pi}^{\pi} f(t) \sin nt dt, \hspace{1cm} n = 0,1,2,\ldots
-% \end{eqnarray*}
-% La sustitición directa de $\pm h/2$ para $f(t)$, devuelve que
-% \[ a_{n} = 0 \]
-% lo que ya se esperaba dada la antisimetría y además
-% \[ b_{n} = \dfrac{h}{n \pi} (1 - \cos n \pi) = \begin{cases}
-% 0 & n \text{ par} \\
-% \dfrac{2h}{n \pi} & n \text{ impar} \end{cases} \]
-% Por lo que la expansión de las funciones propias (de Fourier) de una onda cuadrada es
-% \begin{equation}
-% f(x) = \dfrac{2h}{\pi} \sum_{n=0}^{\infty} \dfrac{\sin(2n+1)x}{(2n+1)}
-% \end{equation}
-% \subsection{Degeneración.}
-% Si $N$ funciones propias linealmente independientes corresponden al mismo valor propio, se dice que el valor propio es $N$-veces degenerado.
-% \\
-% Un ejemplo directo lo tomamos de las funciones propias y valores propios en la ecuación del oscilador lineal: para cada valor propio $n$, hay dos posibles soluciones: $\sin x$ y $\cos x$ (y cualquier posibles combinación lineal). En este caso, las funciones son degeneradas o el valor propio es degenerado.
-% \\
-% Otro ejemplo es el sistema electrón en un átomo (no relativista y omitiendo el spin). De la ecuación de Schrödinger para el hidrógeno
-% \[ - \dfrac{\hbar^{2}}{2m} \nabla^{2} \psi - \dfrac{Z e^{2}}{r} \psi =  E \psi \]
-% la energía total del electrón es el valor propio.
-% \\
-% Si nombramos $E_{nLM}$ usando los números cuánticos $n$, $L$ y $M$ como subíndices. Para cada diferente conjunto de números cuánticos $(n,L.M)$ existe una función propia linealmente independiente $\psi_{nLM}(r,\theta, \varphi)$.
-% \\
-% Para el hidrógeno, la energía $E_{nLM}$ es independiente de $L$ y $M$. Con $0 \leq L \leq n-1$ y $-L \leq M \leq L$, el valor propio es $n^{2}$-veces degenerado (que al incluir el espín del electrón, lo elevaría a $2n^{2}$)
-% \\
-% En átomos con más de un electrón, el campo electrostático no es mayor a un potencial de tipo $r^{-1}$. La energía depende de $L$ como de $n$, pero no de $M$. En este caso, la energía $E_{nLM}$ es aún $(2L+1)$-veces degenerada. Esta particularidad se puede remover al aplicar un campo magnético externo, dando origen al efeto Zeeman.
+\subsection{Funciones propias ortogonales.}
+Si tomamos $i \neq	j$ y si $\lambda_{i} \neq \lambda_{j}$ la integral del producto de dos funciones propias diferentes debe de anularse:
+\begin{equation}
+\int_{a}^{b} u_{i} \, u_{j}^{*} \, w \dd{x} = 0
+\label{eq:ecuacion_10_36}
+\end{equation}
+Esta condición es llamada \emph{ortogonalidad}. Se dice que las funciones propias $u_{i}(x)$ y $u_{j}(x)$ son ortogonales con respecto a una función de peso $w(x)$ en el intervalo $[a,b]$.
+\par
+Si tenemos el caso $i \neq j$ pero se mantiene que $\lambda_{i} = \lambda_{j}$, se tiene el llamado caso \emph{degenerado}. Esto significa que la independencia lineal de las funciones propias que corresponden al mismo valor propio, no son automáticamente ortogonales, por lo que deberíamos usar un método que nos permita recuperar el conjunto ortogonal.  Aunque tengamos funciones propias en el caso degenerado y sean no ortogonales, siempre se pueden ortogonalizar.
+\par
+\textbf{Ejemplo: Series de Fourier.}
+
+Consideremos la ecuación 
+\begin{align*}
+\dv[2]{x} y(x) + n^{2} \, y(x) = 0
+\end{align*}
+Que en mecánica cuántica puede describir una partícula en una caja, o puede representar la cuerda de un violín con funciones propias (degeneradas) $\cos n \, x, \sin n \, x$.
+\par
+Con $n$ real, las integrales ortogonales son
+\begin{enumerate}[label=\alph*)]
+\item $\begin{aligned}[t] \int_{x_{0}}^{x_{0} + 2 \pi} \sin m \, x \sin n \, x \dd{x} = C_{n} \, \delta_{nm} \end{aligned} $ 
+\item $\begin{aligned}[t] \int_{x_{0}}^{x_{0} + 2 \pi} \cos m \, x \cos n \, x \dd{x} = D_{n} \, \delta_{nm} \end{aligned} $ 
+\item $\begin{aligned}[t] \int_{x_{0}}^{x_{0} + 2 \pi} \sin m \, x \cos n \, x \dd{x} = 0 \end{aligned} $
+\end{enumerate}
+Para un intervalo de $2 \, \pi$ el análisis previo garantiza la delta de Kronecker en los incisos a) y b), pero no para el iniciso c), ya que c) involucra funciones propias degeneradas. Pero vemos que en c) siempre se anula para todas las integrales $m$ y $n$.
+\par
+De la teoría de Sturm-Liouville no nos dice nada sobre los valores de $C_{n}$ y $D_{n}$. Al calcularlos:
+\begin{align*}
+C_{n} = \begin{cases}
+\pi  & n \neq 0 \\
+0  & n = 0 \end{cases}
+\hspace{2cm}
+D_{n} = \begin{cases}
+\pi & n \neq 0 \\
+2 \, \pi & n = 0 \end{cases}
+\end{align*}
+La ortogonalidad de los integrandos forma la base para las series de Fourier.
+\par
+\textbf{Ejemplo: Expansión de funciones propias ortogonales: una onda cuadrada.}
+\par
+La propiedad de \emph{completez} significa que cierta clase de funciones (funciones continuas por secciones o pedazos), puede representarse por una serie de funciones propias ortogonales, con cualquier grado de precisión. Consideremos la onda cuadrada:
+\begin{equation}
+f(x) = \begin{cases}
+\dfrac{h}{2} & 0 < x < \pi \\
+- \dfrac{h}{2} & -\pi < x < o
+\end{cases}
+\label{eq_ecuacion_10_37}
+\end{equation}
+Esta función puede desarrollarse en funciones propias de varios tipos: Legendre, Hermite, Chebyshev, etc. La elección de la función propia se hace en base a la conveniencia del problema. Si elegimos para el desarrollo de la solución, las funciones propias $\cos n \, x$ y $\sin n \, x$.
+\par
+La serie de funciones propias se escribe conveniente (y convencionalmente) como
+\begin{align*}
+f(x) = \dfrac{a_{0}}{2} + \sum_{m=1}^{\infty} (a_{m} \, \cos m \, x +  b_{m} \, \sin m \, x)
+\end{align*}
+Al multiplicar $f(t)$ por $\cos n \, t$ o $\sin n \, t$ para luego integrar, sólo los n-ésimos términos sobreviven, de la ortogonalidad de los integrales, los coeficientes están dados por
+\begin{align*}
+a_{n} &= \dfrac{1}{\pi} \int_{-\pi}^{\pi} f(t) \cos n \, t \dd{t} \\[1em]
+b_{n} &= \dfrac{1}{\pi} \int_{-\pi}^{\pi} f(t) \sin n \, t \dd{t}, \hspace{1cm} n = 0,1,2,\ldots
+\end{align*}
+La sustitición directa de $\pm h/2$ para $f(t)$, devuelve que
+\begin{align*}
+ a_{n} = 0
+\end{align*}
+lo que ya se esperaba dada la antisimetría $f(-x) = - f(x)$ y además
+\begin{align*}
+b_{n} = \dfrac{h}{n \, \pi} (1 - \cos n \, \pi) = \begin{cases}
+0 & n \mbox{ par} \\
+\dfrac{2 \, h}{n \, \pi} & n \mbox{ impar} \end{cases}
+\end{align*}
+Por lo que la expansión de las funciones propias (de Fourier) de una onda cuadrada es
+\begin{equation}
+f(x) = \dfrac{2 \, h}{\pi} \sum_{n=0}^{\infty} \dfrac{\sin(2 \, n + 1) \, x}{(2 \, n + 1)}
+\label{eq:ecuacion_10_38}
+\end{equation}
+\subsection{Degeneración.}
+Si $N$ funciones propias linealmente independientes corresponden al mismo valor propio, se dice que el valor propio es $N$-veces degenerado.
+\par
+Un ejemplo directo lo tomamos de las funciones propias y valores propios en la ecuación del oscilador armónico: para cada valor propio $n^{2}$, hay dos posibles soluciones: $\sin n \, x$ y $\cos n \, x$ (y cualquier posibles combinación lineal). En este caso, las funciones son degeneradas o el valor propio es degenerado.
+\par
+Otro ejemplo es el sistema de un electrón en un átomo (no relativista y omitiendo el spin). De la ecuación de Schrödinger para el hidrógeno
+\begin{align*}
+- \dfrac{\hbar^{2}}{2 \, m} \laplacian{\psi} - \dfrac{Z \, e^{2}}{r} \psi =  E \, \psi
+\end{align*}
+la energía total del electrón es el valor propio.
+\par
+Si nombramos $E_{nLM}$ usando los números cuánticos $n$, $L$ y $M$ como subíndices. Para cada diferente conjunto de números cuánticos $(n, L, M)$ existe una función propia linealmente independiente $\psi_{nLM}(r,\theta, \varphi)$.
+\par
+Para el hidrógeno, la energía $E_{nLM}$ es independiente de $L$ y $M$, reflejando la simetría esférica del potencial de Coulomb. Con $0 \leq L \leq n-1$ y $-L \leq M \leq L$, el valor propio es $n^{2}$-veces degenerado (que al incluir el espín del electrón, lo elevaría a $2 \, n^{2}$)
+\par
+En átomos con más de un electrón, el campo electrostático no es mayor a un potencial de tipo $r^{-1}$. La energía depende de $L$ como de $n$, pero no de $M$. En este caso, la energía $E_{nLM}$ es aún $(2 \, L + 1)$-veces degenerada. Esta particularidad (debida a la invariancia rotacional del potencial) se puede remover aplicando un campo magnético externo, rompiendo la simetría esférica, dando origen al efeto Zeeman.
+\par
+Como regla, las funciones propias forman un \emph{Espacio de Hilbert}, que es un espacio vectorial completo de funciones con una métrica definida por el producto punto.
+\par
+A menudo, una simetría subyacente, como la invariancia rotacional, está causando las degeneraciones. Los estados que pertenecen al mismo valor propio de energía formarán entonces un multiplete o una representación del grupo de simetría.
 \newpage
 \section{Ortogonalización de Gram-Schmidt.}
-Este método toma un conjunto de funciones linealmente dependientes no ortogonales y genera un conjunto ortogonal en un intervalo arbitrario con respecto a una función de peso arbitraria.
+Este método toma un conjunto de funciones (o vectores) no ortogonales linealmente dependientes y genera un conjunto ortogonal de funciones (o vectores) en un intervalo arbitrario con respecto a una función de peso arbitraria.
+\par
+Las funciones involucradas pueden ser reales o complejas, por conveniencia, asumiremos que las funciones son reales, la generalización para funciones complejas, no ofrece mayor dificultad.
 \par
 Veamos el caso de la normalización de funciones, que implica lo siguiente:
-\[ \int_{a}^{b} \varphi_{i}^{2} \, w \, \dd x  =  N_{i}^{2} \]
-revisemos que no se le ha puesto atención al valor de $N_{i}$. Ya que la ecuación básica (ec. (\ref{eq:ecuacion_10_08}) es lineal y homogénea, podemos multiplicar la solución por cualquier constante, de tal manera que sigue siendo solución. Por lo que podemos pedir que tal solución $\varphi_{i}(x)$ se multiplique por $N_{i}^{-1}$ y ahora la nueva $\varphi_{i}$ (normalizada) satisface
+\begin{align*}
+\int_{a}^{b} \varphi_{i}^{2} \, w \, \dd{x}  =  N_{i}^{2}
+\end{align*}
+revisemos que no se le ha puesto atención al valor de $N_{i}$. Ya que la ecuación básica (ec. (\ref{eq:ecuacion_10_08}) es lineal y homogénea, podemos multiplicar la solución por cualquier constante, de tal manera que sigue siendo solución. Por lo que podemos pedir que tal solución $\varphi_{i}(x)$ se multiplique por $N_{i}^{-1}$ y ahora la nueva $\varphi_{i}$ (normalizada) $\varphi_{i}$ satisface
 \begin{equation}
-\int_{a}^{b} \varphi_{i}^{2} (x) \, w(x) \, \dd x = 1
+\int_{a}^{b} \varphi_{i}^{2} (x) \, w(x) \, \dd{x} = 1
 \label{eq:ecuacion_10_39}
 \end{equation}
 o en términos de una delta
 \begin{equation}
-\int_{a}^{b} \varphi_{i}(x) , \varphi_{j} (x) , w(x) \, \dd x = \delta_{ij}
+\int_{a}^{b} \varphi_{i}(x) , \varphi_{j} (x) \, w(x) \, \dd{x} = \delta_{ij}
 \label{eq:ecuacion_10_40}
 \end{equation}
-La ecuación (\ref{eq:ecuacion_10_39}) nos dice que hemos normalizado a la unidad; incluyendo la propiedad de ortogonalidad, tenemos la ecuación (\ref{eq:ecuacion_10_40}), las funciones que las satisfacen, se dice que son \textbf{ortonormales} (ortogonales y normalizadas), cabe señalar que existen otras formas de normalización.
+La ecuación (\ref{eq:ecuacion_10_39}) nos dice que hemos normalizado a la unidad; incluyendo la propiedad de ortogonalidad, tenemos la ecuación (\ref{eq:ecuacion_10_40}), las funciones que las satisfacen, se dice que son \textbf{ortonormales} (ortogonales y normalizadas), cabe señalar que existen otras formas de normalización, cada una de las funciones especiales de la Física Matemática se puede normalizar de distintas formas.
 \par
 Consideremos tres conjuntos de funciones:
 \begin{enumerate}
-\item Un conjunto original, linealmente independiente $u_{n}(x)$ con $n=0,1,2,\ldots$
+\item Un conjunto original, linealmente independiente $u_{n}(x)$ con $n=0,1,2,\ldots$ \\
+Las funciones podrían ser funciones propias degeneradas, pero no es necesario que se cumpla este punto.
 \item Un conjunto ortogonal $\psi_{n}(x)$ que se va a construir.
-\item Un conjunto de funciones $\varphi_{n}(x)$ que será nnormalizadas $\psi_{n}(x)$
+\item Un conjunto de funciones $\varphi_{n}(x)$ que será normalizadas $\psi_{n}(x)$
 \end{enumerate}
 Tendremos las siguientes propiedades
 \begin{center}
 {\fontsize{12}{12}\selectfont
-\begin{tabular}{l l l}
-    
+\renewcommand{\arraystretch}{1.5}%
+\begin{tabular}{p{4.5cm} p{4.5cm} p{4.5cm}}
 \hline
-$u_{n}(x)$ & $\psi_{n}(x)$ & $\varphi_{n}(x)$ \\ \hline
-linealmente independiente &    linealmente independiente & linealmente independiente \\
-no ortogonal & ortogonal & ortogonal \\
-no  normalizada & no normalizada & normalizada \\
- & & (ortonormal)
+\makecell{$u_{n}(x)$} & \makecell{$\psi_{n}(x)$} & \makecell{$\varphi_{n}(x)$} \\ \hline
+\makecell{linealmente \\ independiente} &    \makecell{linealmente \\ independiente} & \makecell{linealmente \\ independiente} \\ \hline
+\makecell{no ortogonal} & \makecell{ortogonal} & \makecell{ortogonal} \\ \hline
+\makecell{no normalizada} & \makecell{no normalizada} & \makecell{normalizada \\ (ortonormal)} 
 \end{tabular}
 }
 \end{center}
 
-La técnica de Gram-Schmidt consiste en tomar la $n-\psi$-función $(\psi_{n}$) que sea $u_{n}(x)$ más un combinación lineal no conocida de la función $\varphi$ previa. El que haya una nueva $u_{n}(x)$ nos dará la garantía de que se mantenga la independencia lineal.
-
+La técnica de Gram-Schmidt consiste en tomar la n-ésima función $\psi$ ($\psi_{n}$) para ser $u_{n}(x)$ más un combinación lineal no conocida de la función $\varphi$ previa. El que haya una nueva $u_{n}(x)$ nos dará la garantía de que se mantenga la independencia lineal.
+\par
 El que $\psi_{n}(x)$ sea ortogonal para cada $\varphi$ previa, apenas nos da elementos para determinar los coeficientes desconocidos. Así cuando ya se determine $\psi_{n}$, se normaliza a la unidad, dejando $\varphi_{n}(x)$. Este procedimiento se repite para las $\psi_{n+1}(x)$.
 
-Empezamos con $n=0$, sea
+Empezamos con $n = 0$, sea
 \begin{equation}
 \psi_{0} = u_{0}(x)
 \label{eq:ecuacion_10_41}
 \end{equation}
 no nos preocupemos al no tener una $\varphi$ previa. Entonces normalizamos
 \begin{equation}
-\varphi_{0}(x) = \dfrac{\psi_{0}(x)}{\left[ \int \psi_{0}^{2} \, w \, \dd x \right]^{1/2}}
+\varphi_{0}(x) = \dfrac{\psi_{0}(x)}{\left[ \displaystyle \int \psi_{0}^{2} \, w \, \dd{x} \right]^{1/2}}
 \label{eq:ecuacion_10_42}
 \end{equation}
-Para $n=1$, tenemos
+Para $n = 1$, tenemos
 \begin{equation}
 \psi_{1}(x) = u_{1}(x) + a_{1,0} \, \varphi_{0}(x)
 \label{eq:ecuacion_10_43}
 \end{equation}
-Que requiere que $\psi_{1}(x)$ sea ortogonal a $\varphi_{0}(x)$, con esto se conduce a
+Que requiere que $\psi_{1}(x)$ sea ortogonal a $\varphi_{0}(x)$ (en este punto, la normalización de $\psi_{1}(x)$ es irrelevante). La ortogonalidad nos conduce a
 \begin{equation}
-\int \psi_{1} \, \varphi_{0} \, w \, \dd x = \int u_{1} \, \varphi_{0} \, w \, \dd x + a_{1,0} \int \varphi_{0}^{2} \, w \,  \dd x = 0
+\int \psi_{1} \, \varphi_{0} \, w \, \dd{x} = \int u_{1} \, \varphi_{0} \, w \, \dd{x} + a_{1,0} \int \varphi_{0}^{2} \, w \,  \dd{x} = 0
 \label{eq:ecuacion_10_44}
 \end{equation}
 Ya que $\varphi_{0}$ se normaliza a la unidad (ec. \ref{eq:ecuacion_10_42}), tenemos
 \begin{equation}
-a_{1,0} = - \int	u_{1} \, \varphi_{0} \, w \, \dd x
+a_{1,0} = - \int u_{1} \, \varphi_{0} \, w \, \dd{x}
 \label{eq:ecuacion_10_45}
 \end{equation}
 fijando el valor de $a_{1, 0}$. Normalizando, definimos
 \begin{equation}
-\varphi_{1} (x) = \dfrac{\psi_{1}(x)}{\left( \int \psi_{1}^{2} \, w \, \dd x \right)^{1/2}}
+\varphi_{1} (x) = \dfrac{\psi_{1}(x)}{\left( \displaystyle \int \psi_{1}^{2} \, w \, \dd{x} \right)^{1/2}}
 \label{eq:ecuacion_10_46}
 \end{equation}
 Generalizando, resulta
 \begin{equation}
-\varphi_{i}(x) = \dfrac{\psi_{i}(x)}{\left( \int \psi_{i}^{2}(x) \, w(x) \, \dd x \right)^{1/2}}
+\varphi_{i}(x) = \dfrac{\psi_{i}(x)}{\left( \displaystyle \int \psi_{i}^{2}(x) \, w(x) \, \dd{x} \right)^{1/2}}
 \label{eq:ecuacion_10_47}
 \end{equation}
 donde
 \begin{equation}
-\psi_{i}(x) = u_{i} + a_{1,0} \, \varphi_{0} + a_{i,1} \, \varphi_{1} + \ldots + a_{i,i-1} \, \varphi_{i-1}
+\psi_{i}(x) = u_{i} + a_{1, 0} \, \varphi_{0} + a_{i, 1} \, \varphi_{1} + \ldots + a_{i, i-1} \, \varphi_{i-1}
 \label{eq:ecuacion_10_48}
 \end{equation}
 Los coeficientes $a_{i, j}$ están dados por
 \begin{equation}
-a_{i, j} = - \int u_{i} \, \varphi_{j} \, w \, \dd x
+a_{i, j} = - \int u_{i} \, \varphi_{j} \, w \, \dd{x}
 \label{eq:ecuacion_10_49}
 \end{equation}
 La ecuación (\ref{eq:ecuacion_10_49}) es para una normalización unitaria. Para otros tipos de normalización, se tiene que
-\[ \int_{a}^{b} \left[ \varphi_{j} (x) \right]^{2} \, w(x) \, \dd x =  N_{j}^{2} \]
-La ecuación (\ref{eq:ecuacion_10_47}) se re-emplaza por
+\begin{align*}
+\int_{a}^{b} \left[ \varphi_{j} (x) \right]^{2} \, w(x) \, \dd{x} =  N_{j}^{2}
+\end{align*}
+Entonces la ecuación (\ref{eq:ecuacion_10_47}) se re-emplaza por
 \begin{equation}
-\varphi_{i}(x) =  N_{i} \: \dfrac{\psi_{i}(x)}{\left( \int \psi_{i}^{2} \, w \, \dd x \right)^{1/2}}
+\varphi_{i}(x) =  N_{i} \: \dfrac{\psi_{i}(x)}{\left( \displaystyle \int \psi_{i}^{2} \, w \, \dd{x} \right)^{1/2}}
 \label{eq:ecuacion_10_47a}
 \end{equation}
 y los términos $a_{i,j}$ resultan
 \begin{equation}
-a_{i, j} = - \dfrac{\int u_{i} \, \varphi_{j} \, w \, \dd x}{N_{j}^{2}}
+a_{i, j} = - \dfrac{ \displaystyle \int u_{i} \, \varphi_{j} \, w \, \dd{x}}{N_{j}^{2}}
 \label{eq:ecuacion_10_49a}
 \end{equation}
 Las ecuaciones (\ref{eq:ecuacion_10_48}) y (\ref{eq:ecuacion_10_49}) pueden escribirse en términos de operadores de proyección $P_{j}$. Si consideramos que $\varphi_{n}(x)$ forman un espacio vectorial lineal, la integral en la ecuación \ref{eq:ecuacion_10_49}) puede interpretarse como la proyección de $u_{i}$ en la \enquote{coordenada} $\varphi_{j}$ o la componente $j$-ésima de $u_{i}$. Con
-\[ P_{j} \, u_{i}(x) = \left[ \int u_{i}(t) \, \varphi_{j}(t) \, w(t) \right] \varphi_{j}(x) \]
+\begin{align*}
+P_{j} \, u_{i}(x) = \left[ \int u_{i}(t) \, \varphi_{j}(t) \, w(t) \dd{t} \right]\, \varphi_{j}(x)
+\end{align*}
 la ecuación (\ref{eq:ecuacion_10_48}) resulta ahora
 \begin{equation}
-\psi_{i}(x) = \left\{ 1 - \sum_{j=1}^{i-1} P_{j} \right\} u_{i}(x)
+\psi_{i}(x) = \left\{ 1 - \sum_{j=1}^{i-1} P_{j} \right\} \, u_{i}(x)
 \label{eq:ecuacion_10_48a}
 \end{equation}
-Restando los $j-$-ésimos compoenentes: $j=1$ a $i-1$, resulta que $\psi_{i}(x)$ es ortogonal para todo $\varphi_{j}(x)$.
+Restando los $j-$-ésimos componentes: $j=1$ a $i-1$, resulta que $\psi_{i}(x)$ es ortogonal para todo $\varphi_{j}(x)$.
 \par
  Cabe señalar que el procedimiento de Gram-Schmidt es una manera de construir un conjunto ortogonal o ortonormal, pero las funciones $\varphi_{i}(x)$ no son únicas. Existe un infinito de posibles conjuntos ortonormales para un intervalo dado y una función de peso dada.
-\begin{ejemplo} \textbf{Ejemplo: Ortogonalización de Gram-Schmidt para los polinomios de Legendre.}
-Queremos generar un conjunto ortonormal a partir de las funciones $u_{n}(x)=x^{n}$, $n=0,1,2,\ldots$. El intervalo es $-1 \leq x \leq 1$ y la función de peso es $w(x)=1$.
+\begin{ejemplo} \textbf{Ortogonalización de Gram-Schmidt para los polinomios de Legendre.}
 
+Queremos generar un conjunto ortonormal a partir de las funciones 
+\begin{align*}
+u_{n}(x) = x^{n}, \hspace{1.5cm} n = 0, 1, 2, \ldots
+\end{align*}
+El intervalo es $-1 \leq x \leq 1$ y la función de peso es $w(x)=1$.
+\par
 De acuerdo a la técnica descrita de ortogonaliación de Gram-Schmidt
 \begin{equation}
 u_{0} = 1 \hspace{1.5cm} \varphi_{0} =  \dfrac{1}{\sqrt{2}}
@@ -603,12 +632,12 @@ u_{0} = 1 \hspace{1.5cm} \varphi_{0} =  \dfrac{1}{\sqrt{2}}
 \end{equation}
 Entonces
 \begin{equation}
-\psi_{1}(x) = x + a_{1,0} \dfrac{1}{\sqrt{2}}
+\psi_{1}(x) = x + a_{1,0} \, \dfrac{1}{\sqrt{2}}
 \label{eq:ecuacion_10_51}
 \end{equation}
 donde
 \begin{equation}
-a_{1, 0} = - \int_{-1}^{1} \dfrac{x}{\sqrt{2}} \, \dd x = 0
+a_{1, 0} = - \int_{-1}^{1} \dfrac{x}{\sqrt{2}} \, \dd{x} = 0
 \label{eq:ecuacion_10_52}
 \end{equation}
 por simetría. Normalizando $\psi_{1}$, obtenemos
@@ -618,16 +647,14 @@ por simetría. Normalizando $\psi_{1}$, obtenemos
 \end{equation}
 Continuando el método de Gram-Schmidt, se define ahora
 \begin{equation}
-\psi_{2} (x) = x^{2} +  a_{2, 0} \dfrac{1}{\sqrt{2}} +  a_{2, 1} \sqrt{\dfrac{3}{2}} \, x
+\psi_{2} (x) = x^{2} +  a_{2, 0} \, \dfrac{1}{\sqrt{2}} +  a_{2, 1} \, \sqrt{\dfrac{3}{2}} \, x
 \label{eq:ecuacion_10_54}
 \end{equation}
 donde
 \begin{align}
-a_{2, 0} &= - \int_{-1}^{1} \dfrac{x^{2}}{\sqrt{2}} \, \dd x = - \dfrac{\sqrt{2}}{3} \label{eq:ecuacion_10_55} \\[1em] 
-a_{2, 1} &= - \int_{-1}^{1} \sqrt{\dfrac{3}{2}} \, x^{3} \dd x = 0 \label{eq:ecuacion_10_56}
+a_{2, 0} &= - \int_{-1}^{1} \dfrac{x^{2}}{\sqrt{2}} \, \dd{x} = - \dfrac{\sqrt{2}}{3} \label{eq:ecuacion_10_55} \\[1em] 
+a_{2, 1} &= - \int_{-1}^{1} \sqrt{\dfrac{3}{2}} \, x^{3} \dd{x} = 0 \label{eq:ecuacion_10_56}
 \end{align}
-
-\end{ejemplo}
 de nueva cuenta por simetría. Por tanto
 \begin{equation}
 \psi_{2}(x) = x^{2} - \dfrac{1}{3}
@@ -635,69 +662,80 @@ de nueva cuenta por simetría. Por tanto
 \end{equation}
 normalizando a la unidad, tenemos
 \begin{equation}
-\varphi_{2} (x) = \sqrt{\dfrac{5}{2}} \, \dfrac{1}{2} \, (3 x^{2} - 1)
+\varphi_{2} (x) = \sqrt{\dfrac{5}{2}} \, \dfrac{1}{2} \, (3 \, x^{2} - 1)
 \label{eq:ecuacion_10_58}
 \end{equation}
 La siguiente función $\varphi_{3}(x)$ es
 \begin{equation}
-\varphi_{3} (x) = \sqrt{\dfrac{7}{2}} \, \dfrac{1}{2} \, (5 x^{3} - 3x)
+\varphi_{3} (x) = \sqrt{\dfrac{7}{2}} \, \dfrac{1}{2} \, (5 \, x^{3} - 3 \, x)
 \label{eq:ecuacion_10_59}
 \end{equation}
 Se puede demostrar que
 \begin{equation}
-\varphi_{n}(x) = \sqrt{\dfrac{2n+1}{2}} \, P_{n}(x)
-\label{eq:ecuacion_59}
+\varphi_{n}(x) = \sqrt{\dfrac{2 \, n + 1}{2}} \, P_{n}(x)
+\label{eq:ecuacion_10_60}
 \end{equation}
 donde $P_{n}$ es el polinomio de orden $n$ de Legendre.
+\end{ejemplo}
 \subsection{Polinomios ortogonales.}
 El ejemplo anterior se ha elegido estrictamente para ilustrar el procedimiento de Gram-Schmidt. Aunque tiene la ventaja de introducir los polinomios de Legendre, las funciones iniciales $u_{n} = x^{n}$ no son funciones propias degeneradas y no son soluciones de la ecuación de Legendre. Son simplemente un conjunto de funciones que hemos reorganizado aquí para crear un conjunto ortonormal para el intervalo dado y la función de peso dada. El hecho de que hayamos obtenido los polinomios de Legendre no es una magia negra, sino una consecuencia directa de la elección de la función de peso y del intervalo.
 \par
+El uso de $u_{n} = x^{n}$ pero eligiendo otros intervalos y funciones de peso, nos conduce a otros conjuntos de polinomios ortogonales, como se muestra en la tabla (\ref{tabla:tabla_03}):
+\begin{landscape}
 \begin{table}[H]
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{p{3cm} c c l}
+\centering
+{\renewcommand{\arraystretch}{1.5}%
+%\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{5cm} c c p{10cm}}
 \hline
-Polinomios & Intervalo & $w(x)$ & Normalización estándar \\ \hline
-Legendre & $ -1 \leqq x \leq 1$ & $1$ & $ \int_{-1}^{1} \left[ P_{n}(x) \right]^{2} dx = \dfrac{2}{2n+1} $ \\
-Modificados de Legendre & $ 0 \leq x \leq 1$ & $1$ & $ \int_{-1}^{1} \left[ P_{n}^{*}(x) \right]^{2} dx = \dfrac{2}{2n+1} $ \\
-Chebyshev I & $-1 \leq x \leq 1$ & $(1-x^{2})^{-1/2}$ & $ \int_{-1}^{1} \left( T_{n}(x) \right)^{2}(1-x^{2})^{-1/2} dx = \begin{cases} 
-\frac{\pi}{2} & n \neq 0 \\
+\makecell{Polinomios} & Intervalo & $w(x)$ & \makecell{Normalización estándar} \\ \hline
+Legendre & $ -1 \leq x \leq 1$ & $1$ & $\displaystyle \int_{-1}^{1} \left[ P_{n}(x) \right]^{2} \dd{x} = \dfrac{2}{2 \, n + 1} $ \\
+Modificados de Legendre & $ 0 \leq x \leq 1$ & $1$ & $\displaystyle \int_{-1}^{1} \left[ P_{n}^{*}(x) \right]^{2} \dd{x} = \dfrac{2}{2 \, n + 1} $ \\
+Chebyshev I & $-1 \leq x \leq 1$ & $(1 - x^{2})^{-1/2}$ & $\displaystyle \int_{-1}^{1} \dfrac{\left[ T_{n}(x) \right]^{2}}{(1 - x^{2})^{-1/2}} \dd{x} = \begin{cases} 
+\displaystyle \frac{\pi}{2} & n \neq 0 \\
 \pi & n = 0 \end{cases} $ \\
-Chebyshev II & $-1 \leq x \leq 1$ & $(1-x^{2})^{1/2}$ & $\int_{-1}^{1} [U_{n} (x)]^{2} \, (1-x^{2})^{1/2} \, \dd x = \frac{\pi}{2}$ \\
-Laguerre & $0 \leq x < \infty $ & $e^{-x}$ & $ \int_{0}^{\infty} \left( L_{n} (x) \right)^{2} e^{-x} dx =  1 $ \\
-Hermite & $- \infty < x < \infty $ & $e^{-x^{2}}$ & $ \int_{-\infty}^{\infty} \left[ H_{n} (x) \right]^{2} e^{-x^{2}} dx = 2^{n} \pi^{1/2} n! $
+Modificados de Chebyshev I & $0 \leq x \leq 1$ & $[x (1 - x)]^{-1/2}$ & $\displaystyle \int_{-1}^{1} \dfrac{\left[ T_{n}^{*} (x) \right]^{2}}{[x (1 - x)]^{-1/2}} \dd{x} = \begin{cases} 
+\displaystyle \frac{\pi}{2} & n > 0 \\
+\pi & n = 0 \end{cases} $ \\
+Chebyshev II & $-1 \leq x \leq 1$ & $(1 - x^{2})^{1/2}$ & $\displaystyle\int_{-1}^{1} [U_{n} (x)]^{2} \, (1 - x^{2})^{1/2} \, \dd x = \frac{\pi}{2}$ \\
+Laguerre & $0 \leq x < \infty $ & $e^{-x}$ & $\displaystyle \int_{0}^{\infty} \left[ L_{n} (x) \right]^{2} \, e^{-x} \dd{x} =  1 $ \\
+Asociados de Laguerre & $0 \leq x < \infty $ & $x^{k} \, e^{-x}$ & $\displaystyle \int_{0}^{\infty} \left[ L_{n}^{k} (x) \right]^{2} \, x^{k} \, e^{-x} \dd{x} = \dfrac{(n + k)!}{n!} $ \\
+Hermite & $- \infty < x < \infty $ & $e^{-x^{2}}$ & $\displaystyle \int_{-\infty}^{\infty} \left[ H_{n} (x) \right]^{2} e^{-x^{2}} \dd{x} = 2^{n} \, \pi^{1/2} \, n! $
 \end{tabular}}
 \caption{Polinomios ortogonales generados por la ortogonalización de Gram-Schmidt de $u_{n}(x)= x^{n}$, con $n=0,1,2,\ldots$}
+\label{tabla:tabla_03}
 \end{table}
+\end{landscape}
 Una revisión de este proceso de ortogonalización revelará dos características arbitrarias:
 \begin{enumerate}
 \item Primero, como se enfatizó antes, no es necesario normalizar las funciones a la unidad. En el ejemplo que acabamos de dar, podríamos haber requerido
 \begin{equation}
-\int_{-1}^{1} \varphi_{n} (x) \: \varphi_{m} (x) \, \dd x = \dfrac{2}{2\, n +1} \, \delta_{nm}
+\int_{-1}^{1} \varphi_{n} (x) \: \varphi_{m} (x) \, \dd{x} = \dfrac{2}{2 \, n +1} \, \delta_{nm}
 \label{eq:ecuacion_10_61}
 \end{equation}
 y el conjunto resultante habría el de los polinomios de Legendre.
 \item Segundo, el signo de $\varphi_{n} (x)$ siempre es indeterminado. En el ejemplo, elegimos el signo al requerir que el coeficiente de mayor potencia de $x$ en el polinomio sea positivo. Para los polinomios de Laguerre, por otro lado, requeriríamos que el coeficiente de mayor potencia sea $(-1)^{n}/n!$
 \end{enumerate}
-\section{Completes de las funciones propias.}
-La tercera propiedad importante de un operador Hermitiano es que las funciones propias forman un conjunto completo. Esta completes significa que cualquier función bien portada (al menos en partes pero continua) $F(x)$ se puede aproximar por una serie
+\section{Completez de las funciones propias.}
+La tercera propiedad importante de un operador Hermitiano es que las funciones propias forman un conjunto completo. Esta completez significa que cualquier función bien portada (al menos en partes pero continua) $F(x)$ se puede aproximar por una serie
 \begin{equation}
 F(x) = \sum_{n=0}^{\infty} a_{n} \: \varphi_{n}(x) 
 \label{eq:ecuacion_10_62}
 \end{equation}
-con cualquier grado de precisión. Con mayor precisión, el conjunto $\varphi_{n} (x)$ se dice completo, si el límite del error medio cuadrado se anula:
+con cualquier grado de precisión. Con mayor formalismo, el conjunto $\varphi_{n} (x)$ se dice completo, si el límite del error medio cuadrado se anula:
 \begin{equation}
-\lim_{m \to \infty} \int_{a}^{b} \left[ F(x) - \sum_{n=0}^{m} a_{n} \: \varphi_{n} \right]^{2} \, w(x) \, \dd x = 0
+\lim_{m \to \infty} \int_{a}^{b} \left[ F(x) - \sum_{n=0}^{m} a_{n} \: \varphi_{n} \right]^{2} \, w(x) \, \dd{x} = 0
 \label{eq:ecuacion_10_63}
 \end{equation}
 Técnicamente, esta es una integral de Lebesgue. No necesariamente el error es nulo en $[a,b]$, pero sólo la integral del error al cuadrado debe ser cero.
 \par
-La convergencia a la media (ec. \ref{eq:ecuacion_10_63} debe compararse con la convergencia uniforme. La convergencia uniforme implica la convergencia a la media, pero de manera inversa no se garantiza, la convergencia a la media es menos restrictiva.
+La convergencia en la media (ec. \ref{eq:ecuacion_10_63}) debe compararse con la convergencia uniforme. La convergencia uniforme implica la convergencia en la media, pero de manera inversa no se garantiza, la convergencia en la media es menos restrictiva.
 \par
 En la ecuación (\ref{eq:ecuacion_10_63}) no es válida para funciones continuas en piezas, ya que hay un número finito de discontinuidades.
 \par
  En la ecuación (\ref{eq:ecuacion_10_62}) la expasión de los coeficientes $a_{m}$ se determina por
 \begin{equation}
-a_{m} = \int_{a}^{b} F(x) \, \varphi_{m}^{*} (x) \, w(x) \, \dd x
+a_{m} = \int_{a}^{b} F(x) \, \varphi_{m}^{*} (x) \, w(x) \, \dd{x}
 \label{eq:ecuacion_10_64}
 \end{equation}
 Que se obtiene al multiplicar la ecuación (\ref{eq:ecuacion_10_62}) por $\varphi_{m}^{*} \, w(x)$ y luego se integra. De la ortogonalidad de las funciones propias $\varphi_{n}(x)$, solo el $m$-término sobrevive, por lo que la ortogonalidad es importante. La ecuación (\ref{eq:ecuacion_10_64}) puede compararse con el producto interno de vectores. En ocasiones los coeficientes $a_{m}$ son llamados \textbf{coeficientes generalizados de Fourier}.
@@ -714,15 +752,16 @@ Multiplicando la relación de cerradura por $\ket{F}$. obtenemos la expansión d
 \begin{align*}
 \boxed{\ket{F} = \sum_{i} \ket{\varphi_{i}} \braket{\varphi_{i}}{F}}
 \end{align*}
-con el coeficinete generalizado de Fourier $a_{i} = \braket{\varphi_{i}}{F}$. De manera equivalente en una representación coordenada
+con el coeficiente generalizado de Fourier $a_{i} = \braket{\varphi_{i}}{F}$. De manera equivalente en una representación coordenada
 \begin{align*}
 \boxed{\sum_{i} \varphi_{i}^{*} (y) \: \varphi_{i} (x) = \delta (x - y)}
 \end{align*}
 implica que
 \begin{align*}
-F(x) = \int F(y) \: \delta (x - y) \, \dd y = \sum_{i} \varphi_{i} (x) \: \int \varphi_{i}^{*} (y) \: F(y) \, \dd y
+F(x) = \int F(y) \: \delta (x - y) \, \dd{y} = \sum_{i} \varphi_{i} (x) \: \int \varphi_{i}^{*} (y) \: F(y) \, \dd{y}
 \end{align*}
-Sin pruebas, afirmamos que el espectro de un operador lineal $A$ que mapea un espacio de Hilbert $H$ en sí mismo puede dividirse en un espectro discreto (o puntual) con vectores propios de longitud finita, un espectro continuo para que la ecuación de valores propios $A \, v = \lambda \, v$ con $v$ en $H$ no tiene una inversa limitada única $(A - \lambda)^{-1}$ en un dominio denso de $H$ y un espectro residual donde $(A - \lambda)^{-1}$. \subsection{Desigualdad de Bessel}
+Sin pruebas, afirmamos que el espectro de un operador lineal $A$ que mapea un espacio de Hilbert $H$ en sí mismo puede dividirse en un espectro discreto (o puntual) con vectores propios de longitud finita, un espectro continuo para que la ecuación de valores propios $A \, v = \lambda \, v$ con $v$ en $H$ no tiene una inversa limitada única $(A - \lambda)^{-1}$ en un dominio denso de $H$ y un espectro residual donde $(A - \lambda)^{-1}$.
+\subsection{Desigualdad de Bessel}
 Si el conjunto de funciones $\varphi_{n} (x)$ no forma un conjunto completo, posiblemente sea por que no se han incluido el número infinito de elementos del conjunto completo, esto nos conduce a la \emph{desigualdad de Bessel}. Consideremos primero un caso finito. Sea $\vb{A}$ un vector de $n$ componentes
 \begin{equation}
 \vb{A} = \vb{e}_{1} \, a_{1} + \vb{e}_{2} \, a_{2} + \ldots + \vb{e}_{n} \, a_{n} 
@@ -738,9 +777,9 @@ Entonces
 \left( \vb{A} - \sum_{i} \vb{e}_{i} \, a_{i} \right)^{2} \geq 0
 \label{eq:ecuacion_10_68}
  \end{equation}
-Si sumamos todos los $n$ componentes, la suma se iguala a $\vb{A}$ por lo que la ecuación (\ref{eq:ecuacion_10_66}) se mantiene, pero si la suma, no incluye a todos los $n$ componentes, la desigualdad se mantiene.
+Si sumamos todos los $n$ componentes, la suma se iguala a $\vb{A}$ por lo que la ecuación (\ref{eq:ecuacion_10_66}) se mantiene, pero si la suma, no incluye a todos los $n$ componentes, la desigualdad se mantiene. Pero si la suma no incluye todos los $n$ componentes, se presenta la desigualdad.
 \par
-Expandiendo la ecuación (\ref{eq:ecuacion_10_68}) y recordando que los vectores unitarios satisfacen la relación de ortogonalidad
+Expandiendo la ecuación (\ref{eq:ecuacion_10_68}) y eligiendo los vectores unitarios para que satisfagan la relación de ortogonalidad
 \begin{equation}
 \vb{e}_{i} \cdot \vb{e}_{j} =  \delta_{ij}
 \label{eq:ecuacion_10_69}
@@ -754,29 +793,31 @@ Que es \underline{la desigualdad de Bessel}.
 \par
 Para funciones reales debemos de considerar la integral
 \begin{equation}
-\int_{a}^{b} \left[ f(x) - \sum_{i} a_{i} \: \varphi_{i}(x) \right]^{2} \, w(x) \, \dd x \geq 0
+\int_{a}^{b} \left[ f(x) - \sum_{i} a_{i} \: \varphi_{i}(x) \right]^{2} \, w(x) \, \dd{x} \geq 0
 \label{eq:ecuacion_10_71}
 \end{equation}
-que es el análogo continuo de la ecuación (\ref{eq:ecuacion_10_68}), haciendo $n \to \infty$ y re-emplazando la suma por la integración. Nuevamente, con el factor de peso $w(x) >0 $, el integrando es no negativo. La integral se anula por la ecuación (\ref{eq:ecuacion_10_62}) si tenemos un conjunto completo. De otra forma, es positiva.
+que es el análogo continuo de la ecuación (\ref{eq:ecuacion_10_68}), haciendo $n \to \infty$ y reemplazando la suma por la integración. Nuevamente, con el factor de peso $w(x) > 0 $, el integrando es no negativo. La integral se anula por la ecuación (\ref{eq:ecuacion_10_62}) si tenemos un conjunto completo. De otra forma, es positiva.
 
 Si expandemos el término al cuadrado obtenemos
 \begin{equation}
-\int_{a}^{b} [ f(x) ]^{2} \, w(x) \, \dd x - 2 \sum_{i} a_{i} \, \int_{a}^{b} f(x) \, \varphi (x) \, w(x) \, \dd x  + \sum_{i} a_{i}^{2} \geq 0
+\int_{a}^{b} [ f(x) ]^{2} \, w(x) \, \dd{x} - 2 \sum_{i} a_{i} \, \int_{a}^{b} f(x) \, \varphi (x) \, w(x) \, \dd{x} + \sum_{i} a_{i}^{2} \geq 0
 \label{eq:ecuacion_10_72}
 \end{equation}
 Usando la ecuación (\ref{eq:ecuacion_10_64}), tenemos
 \begin{equation}
-\int_{a}^{b} [f(x)]^{2} \, w(x) \, \dd x \geq \sum_{i} a_{i}^{2}
+\int_{a}^{b} [f(x)]^{2} \, w(x) \, \dd{x} \geq \sum_{i} a_{i}^{2}
 \label{eq:ecuacion_10_73}
 \end{equation}
 De aquí que la suma de los cuadrados de la expansión de los coeficientes $a_{i}$ es menor o igual que la integral de peso de $[f(x)]^{2}$, la igualdad se mantiene si y sólo si, la expansión es exacta, esto ocurre si el conjunto de soluciones $\varphi_{n}(x)$ es un conjunto completo.
-\subsection{Desigualdad de Schwarz}
+\par
+La desigualdad de Bessel tiene distintos usos, incluida la prueba de convergenia para las series de Fourier.
+\subsection{Desigualdad de Schwarz.}
  La desigualdad de Schwarz se usa comúnmente y es similar a la desigualdad de Bessel. Consideremos la ecuación cuadrática con la incógnita $x$
  \begin{equation}
 \sum_{i=1}^{n} (a_{i} \, x + b_{i})^{2} = \sum_{i=1}^{n} a_{i}^{2} \left( x + \frac{b_{i}}{a_{i}} \right)^{2} = 0
 \label{eq:ecuacion_10_74}
 \end{equation}
-Con $a_{i}$, $b_{i}$ reales. Si $b_{i}/a_{i}$ es constante, $c$ independiente del índice $i$, la solución es $x= - c$. 
+Con $a_{i}$, $b_{i}$ reales. Si $b_{i}/a_{i}$ es la constante $c$, independiente del índice $i$, la solución es $x= - c$. 
 \par
 Si $b_{i}/a_{i}$ no es constante en $i$, todos los términos no se anulan simultáneamente para un $x$ real, por lo que la solución debe de ser compleja. Expandiendo, tenemos que
 \begin{equation}
@@ -788,45 +829,46 @@ como $x$ es complejo (o = $-b_{i}/a_{i}$), la fórmula cuadrática para $x$ cond
 \left( \sum_{i=1}^{n} a_{i} \, b_{i} \right)^{2} \leq \left( \sum_{i=1}^{n} a_{i}^{2} \right) \, \left( \sum_{i=1}^{n} b_{i}^{2} \right)
 \label{eq:ecuacion_10_76}
 \end{equation}
-la igualdad se mantiene cuando $b_{i}/a_{i}$ es una constante.
+la igualdad se mantiene cuando $b_{i}/a_{i}$ es una constante independiente de $i$.
 \par
 Nuevamente, en términos de vectores, tenemos
 \begin{equation}
-( \vb{a} \cdot \vb{b} )^{2} =  a^{2} \, b^{2} \cos^{2} \theta \leq a^{2} \, b^{2}
+( \vb{a} \cdot \vb{b} )^{2} =  a^{2} \, b^{2} \, \cos^{2} \theta \leq a^{2} \, b^{2}
 \label{eq:ecuacion_10_77}
 \end{equation}
-donde $\theta$ es el ángulo entre $\vb{a}$ y $vb{b}$.
+donde $\theta$ es el ángulo entre $\vb{a}$ y $\vb{b}$.
 \par
 La desigualdad de Schwarz para funciones complejas tiene la expresión
 \begin{equation}
-\Bigg\vert \int_{a}^{b} f^{*} (x) \, g(x) , \dd x \Bigg\vert^{2} \leq \int_{a}^{b} f^{*}(x) \, f(x) \, \dd x \int_{a}^{b} g^{*}(x) \, g(x) \, \dd x
+\boxed{
+\Bigg\vert \int_{a}^{b} f^{*} (x) \, g(x) , \dd{x} \Bigg\vert^{2} \leq \int_{a}^{b} f^{*}(x) \, f(x) \, \dd{x} \int_{a}^{b} g^{*}(x) \, g(x) \, \dd{x}}
 \label{eq:ecuacion_10_78}
 \end{equation}
-La desigualdad se mantiene si y sólo si $g(x) = \alpha \, f(x)$, siendo $\alpha$ una constante. Para probar esta forma de la función de la desigualdad de Schwarz, consideremos la función compleja $\psi(x) = f(x) + \lambda \, g(x)$ con $\lambda$ una constante compleja, donde las funciones $f(x)$ y $g(x)$ son cualesquiera dos funciones de cuadrado integrable (para las cuales, laa integrales del lado derecho existen). Multiplicando por el conjugado complejo y luego integrando, tenemos
+La desigualdad se mantiene si y sólo si $g(x) = \alpha \, f(x)$, siendo $\alpha$ una constante. Para probar esta forma de la función de la desigualdad de Schwarz, consideremos la función compleja $\psi(x) = f(x) + \lambda \, g(x)$ con $\lambda$ una constante compleja, donde las funciones $f(x)$ y $g(x)$ son cualesquiera dos funciones de cuadrado integrable (para las cuales, las integrales del lado derecho existen). Multiplicando por el conjugado complejo y luego integrando, tenemos
 \begin{align}
 \begin{aligned}
-\int_{a}^{b} \psi^{*} \, \psi \, \dd x &\equiv \int_{a}^{b} f^{*} \, f \, \dd x + \lambda \int_{a}^{b} f^{*} \, g \, \dd x + \lambda^{*} \int_{a}^{b} g^{*} \, f \, \dd x + \\
-&+ \lambda \, \lambda^{*} \int_{a}^{b} g^{*} \, g \, \dd x  \geq 0
+\int_{a}^{b} \psi^{*} \, \psi \, \dd{x} &\equiv \int_{a}^{b} f^{*} \, f \, \dd{x} + \lambda \int_{a}^{b} f^{*} \, g \, \dd{x} + \lambda^{*} \int_{a}^{b} g^{*} \, f \, \dd{x} + \\
+&+ \lambda \, \lambda^{*} \int_{a}^{b} g^{*} \, g \, \dd{x}  \geq 0
 \end{aligned}
 \label{eq:ecuacion_10_79}
 \end{align}
-El $\geq 0$ aparece ya que $\psi^{*} \, \psi$ es no negativo, el signo igual $(=)$ se mantiene sólo si $\psi (x)$ es idéntico a cero. Nótese que $\lambda$ y $\lambda^{*}$ son linealmente independientes, diferenciamos con respecto a uno de ellos, e igualamos la derivada a cero para minimizar $\int_{a}^{b} \psi^{*} \, \psi dx$
-\begin{equation*}
-\dfrac{\partial}{\partial \lambda^{*}} \int_{a}^{b} \psi^{*} \, \psi = \int_{a}^{b} g^{*} \,f dx  + \lambda \int_{a}^{b} g^{*} g dx = 0
-\end{equation*}
+El $\geq 0$ aparece ya que $\psi^{*} \, \psi$ es no negativo, el signo igual $(=)$ se mantiene sólo si $\psi (x)$ es idéntico a cero. Nótese que $\lambda$ y $\lambda^{*}$ son linealmente independientes, diferenciamos con respecto a uno de ellos, e igualamos la derivada a cero para minimizar $\displaystyle \int_{a}^{b} \psi^{*} \, \psi \dd{x}$:
+\begin{align*}
+\pdv{\lambda^{*}} \int_{a}^{b} \psi^{*} \, \psi \dd{x} = \int_{a}^{b} g^{*} \, f \dd{x}  + \lambda \int_{a}^{b} g^{*} g \dd{x} = 0
+\end{align*}
 que nos da
 \begin{equation}
-\lambda = - \dfrac{\int_{a}^{b} g^{*} \, f \, \dd x}{\int_{a}^{b} g^{*} \, g \, \dd x}
+\lambda = - \dfrac{\displaystyle \int_{a}^{b} g^{*} \, f \, \dd{x}}{\displaystyle \int_{a}^{b} g^{*} \, g \, \dd{x}}
 \label{eq:ecuacion_10_80a}
 \end{equation}
 tomando el conjugado complejo 
 \begin{equation}
-\lambda^{*} = - \dfrac{\int_{a}^{b} f^{*} \, g \, \dd x}{\int_{a}^{b} g^{*} \, g \, \dd x}
+\lambda^{*} = - \dfrac{\displaystyle \int_{a}^{b} f^{*} \, g \, \dd{x}}{\displaystyle \int_{a}^{b} g^{*} \, g \, \dd{x}}
 \label{eq:ecuacion_80b}
 \end{equation}
 sustituyendo esos valores de $\lambda$ y $\lambda^{*}$ en la ecuación (\ref{eq:ecuacion_10_79}), obtenemos la ecuación (\ref{eq:ecuacion_10_78}), \underline{la desigualdad de Schwarz}.
 \par
-En mecánica cuántica las funciones $f(x)$ y $g(x)$ podrían representar un estado o una configuración de un sistema físico, es decir, una combinación lineal de funciones de onda. Entonces la desigualdad e Shwarz garantiza que el producto punto $\int_{a}^{b} f^{*} \, g(x) \, \dd x$ existe. En algunos textos, la desigualdad de Schwarz es un paso para llegar al principio de incertidumbre de Heinsenberg.
+En mecánica cuántica las funciones $f(x)$ y $g(x)$ podrían representar un estado o una configuración de un sistema físico, es decir, una combinación lineal de funciones de onda. Entonces la desigualdad e Shwarz garantiza que el producto punto $\displaystyle \int_{a}^{b} f^{*} \, g(x) \, \dd{x}$ existe. En algunos textos, la desigualdad de Schwarz es un paso para llegar al principio de incertidumbre de Heinsenberg.
 \par
 La notación de las funciones de las ecuaciones (\ref{eq:ecuacion_10_78}) y (\ref{eq:ecuacion_10_79}) es a veces incómoda; en mecánica cuántica es común utilizar la notación de Dirac. Con esta notación, se simplifica tanto el rango de integración $(a, b)$, como la función de peso $w(x) \geq 0$. La desigualdad de Schwarz ahora se representa
 \begin{equation}
@@ -835,7 +877,7 @@ La notación de las funciones de las ecuaciones (\ref{eq:ecuacion_10_78}) y (\re
 \end{equation}
 Si $g(x)$ es una función propia normalizada, $\varphi_{i}(x)$, la ecuación (\ref{eq:ecuacion_10_78}) lleva a (donde $w(x)=1$)
 \begin{equation}
-a_{i}^{*} \, a_{i} \leq \int_{a}^{b} f^{*}(x) \, f(x) \, \dd x 
+a_{i}^{*} \, a_{i} \leq \int_{a}^{b} f^{*}(x) \, f(x) \, \dd{x} 
 \label{eq:ecuacion_10_81}
 \end{equation}
 Un resultado que se sigue de la ecuación (\ref{eq:ecuacion_10_73}).
