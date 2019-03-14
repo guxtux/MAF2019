@@ -1,0 +1,211 @@
+\input{../preambulo_doc}
+\usepackage[flushleft]{threeparttable}
+\author{}
+\title{Ortogonalización Gram-Schmidt \\ {\large Tema 3 - Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\date{ }
+\begin{document}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\maketitle
+\fontsize{14}{14}\selectfont
+Este procedimiento permite construir una base ortogonal partiendo de un conjunto no ortogonal de funciones linealmente independientes, definido en cierto intervalo. La base nueva es ortogonal respecto a un factor de peso elegido libremente.
+\subsection*{Espacio Euclidiano.}
+Consideremos los vectores $\vb{H}_{1}, \vb{H}_{2}, \vb{H}_{3}$ en el espacio $3D$, los vectores no son ortogonales ni colineales, es decir $\vb{H}_{i} \cdot \vb{H}_{j} \neq 0$ con $i, j = 1, 2, 3$.
+\par
+Formemos una nueva base $\vb{K}_{1}, \vb{K}_{2}, \vb{K}_{3}$ de vectores ortogonales $\vb{K}_{i} \cdot \vb{K}_{j} = 0$ con $i \neq j$. Escogemos $\vb{K}_{1}$ conicidente con $\vb{H}_{1}$, tal que $\vb{K}_{1} = \vb{H}_{1}$ y además:
+\begin{align*}
+\vb{K}_{2} &= \vb{H}_{2} + a \, \vb{K}_{1} \\
+\vb{K}_{3} &= \vb{H}_{3} + b \, \vb{K}_{1} + c \, \vb{K}_{2}
+\end{align*}
+De esta manera, $\vb{K}_{2}$ está en el plano de $\vb{H}_{1}$ y $\vb{H}_{2}$ y el vector $\vb{K}_{3}$ es perpendicular al plano de $\vb{K}_{1}$ y $\vb{K}_{2}$.
+\par
+Aquí va la figura del plano con los vectores.
+\par
+De la primera ecuación se sigue que:
+\begin{align*}
+\vb{K}_{2} \cdot \vb{K}_{1} &= 0  \\
+(\vb{H}_{2} + a \, \vb{K}_{1}) \cdot \vb{K}_{1} &= 0 \\
+\vb{H}_{2} \cdot \vb{K}_{1} + a \, \vb{K}_{1} \cdot \vb{K}_{1} &= 0 \\
+\\
+\Rightarrow a &= - \dfrac{\vb{H}_{2} \cdot \vb{K}_{1}}{\vb{K}_{1} \cdot \vb{K}_{1}}
+\end{align*}
+De la segunda ecuación, tenemos que:
+\begin{align*}
+\vb{K}_{3} \cdot \vb{K}_{1} &= 0  \\
+(\vb{H}_{3} + b \, \vb{K}_{1}) + c \, \vb{K}_{2}) \cdot \vb{K}_{1} &= 0 \\
+\vb{H}_{3} \cdot \vb{K}_{1} + b \, \vb{K}_{1} \cdot \vb{K}_{1} + c \, \cancelto{0}{\vb{K}_{2} \cdot \vb{K}_{1}} &= 0 \\
+\\
+\Rightarrow b &= - \dfrac{\vb{H}_{3} \cdot \vb{K}_{1}}{\vb{K}_{1} \cdot \vb{K}_{1}}
+\end{align*}
+De la tercera ecuación:
+\begin{align*}
+\vb{K}_{3} \cdot \vb{K}_{2} &= 0  \\
+(\vb{H}_{3} + b \, \vb{K}_{1}) + c \, \vb{K}_{2}) \cdot \vb{K}_{2} &= 0 \\
+\vb{H}_{3} \cdot \vb{K}_{2} + b \, \cancelto{0}{\vb{K}_{1} \cdot \vb{K}_{2}} + c \, \vb{K}_{2} \cdot \vb{K}_{2} &= 0 \\
+\\
+\Rightarrow c &= - \dfrac{\vb{H}_{3} \cdot \vb{K}_{2}}{\vb{K}_{2} \cdot \vb{K}_{2}}
+\end{align*}
+La nueva base ortogonal es:
+\begin{align*}
+\vb{K}_{1} &= \vb{H}_{1} \\[1em]
+\vb{K}_{2} &= \vb{H}_{2} - \dfrac{\vb{K}_{1} (\vb{H}_{2} \cdot \vb{K}_{2})}{\abs{\vb{K}_{1}}^{2}} \\[1em]
+\vb{K}_{3} &= \vb{H}_{3} - \dfrac{\vb{K}_{1} (\vb{H}_{3} \cdot \vb{K}_{1})}{\abs{\vb{K}_{1}}^{2}} - \dfrac{\vb{K}_{2} (\vb{H}_{3} \cdot \vb{K}_{2})}{\abs{\vb{K}_{2}}^{2}} 
+\end{align*}
+En forma general, dada la base no ortogonal (oblicua) $\left\{ \vb{H}_{1}, \ldots \vb{H}_{p} \right\}$ es un espacio de $p$ dimensiones, se pretende construir la base ortogonal $\left\{ \vb{K}_{1}, \ldots \vb{K}_{p} \right\}$, como extensión del procedimiento anterior, podemos escribir:
+\begin{align*}
+\vb{K}_{1} &= \vb{H}_{1} \\
+\vb{K}_{2} &= \vb{H}_{2} + A_{21} \, \vb{K}_{1} \\
+\vb{K}_{3} &= \vb{H}_{3} + A_{31} \, \vb{K}_{1} + A_{32} \, \vb{K}_{2}
+\end{align*}
+El vector $\vb{K}_{n}$ se expresa como
+\begin{align*}
+\vb{K}_{n} = \vb{H}_{n} + \sum_{m=1}^{n-1} A_{nm} \, \vb{K}_{m}
+\end{align*}
+Los coeficientes $A_{nm}$ pueden evaluarse formando el producto escalar $\vb{K}_{n} \cdot \vb{K}_{l}$ con $l < n$
+\begin{align*}
+\vb{K}_{n} \cdot \vb{K}_{l} = 0 = \vb{H}_{n} \cdot \vb{K}_{l} + \sum_{m=1}^{n-1} A_{nm} \, \vb{K}_{m} \cdot \vb{K}_{l}
+\end{align*}
+como $\vb{K}_{Mn} \cdot \vb{K}_{l}$ son ortogonales, $\vb{K}_{m} \cdot \vb{K}_{l} \neq 0$ si $m = l$, por tanto
+\begin{align*}
+\vb{K}_{m} \cdot \vb{K}_{l} = \vb{K}_{m} \cdot \vb{K}_{m} \, \delta_{lm}
+\end{align*}
+tenemos entonces que
+\begin{align*}
+0 &= \vb{H}_{n} \cdot \vb{K}_{l} + \sum_{m=1}^{n-1} A_{nm} \, \abs{\vb{K}_{m}}^{2} \,\delta_{lm} \\
+&= \vb{H}_{n} \cdot \vb{K}_{l} + A_{nl} \, \abs{\vb{K}_{m}}^{2}
+\end{align*}
+finalmente podemos calcular los coeficientes $A_{nl}$:
+\begin{align*}
+A_{nl} = - \dfrac{\vb{H}_{n} \cdot \vb{K}_{l}}{\abs{\vb{K}_{m}}^{2}}
+\end{align*}
+si intercambiamos índices
+\begin{align*}
+A_{nm} = - \dfrac{\vb{H}_{n} \cdot \vb{K}_{m}}{\abs{\vb{K}_{m}}^{2}}
+\end{align*}
+Si reemplazamos este valor en la expresión para $\vb{K}_{n}$, resulta
+\begin{align*}
+\vb{K}_{n} = \vb{H}_{n} - \sum_{m=1}^{n-1} \vb{K}_{m} \, \dfrac{\vb{H}_{n} \cdot \vb{K}_{m}}{\abs{\vb{K}_{m}}^{2}}
+\end{align*}
+\subsection*{Espacio de funciones.}
+En el caso de una base $\left\{f_{n} (x) \right\}$ enumerable, no ortogonal, escribimos la base nueva ortogonal $\left\{ \varphi_{n} (x) \right\}$ como
+\begin{align}
+\varphi_{n} (x) = f_{n} + \sum_{m=1}^{n-1} A_{nm} \, \varphi_{m} (x)
+\label{eq:ecuacion_05_26}
+\end{align}
+y si la nueva base ortogonal es de peso unitario:
+\begin{align*}
+(\varphi_{n}, \varphi_{m}) = \int_{a}^{b} \varphi_{n}^{*} \, \varphi_{m} \dd{x} = (\varphi_{n}, \varphi_{m}) \, \delta_{nm}
+\end{align*}
+tendremos para $l < n$
+\begin{align*}
+(\varphi_{n}, \varphi_{m}) = 0 &= (\varphi_{l}, f_{n}) + \sum_{m=1}^{n-1} A_{nm} \, (\varphi_{l}, \varphi_{m}) \\
+&= (\varphi_{l}, f_{n}) + \sum_{m=1}^{n-1} A_{nm} \, (\varphi_{l}, \varphi_{m}) \, \delta_{lm} \\
+&= (\varphi_{l}, f_{n}) + A_{nl} \, (\varphi_{l}, \varphi_{l}) 
+\end{align*}
+de donde deducimos a los coeficientes $A_{nm}$:
+\begin{align*}
+A_{nm} = - \dfrac{(\varphi_{m}, f_{n})}{(\varphi_{m}, \varphi_{m})}
+\end{align*}
+Así entonces
+\begin{align*}
+\varphi_{n} = f_{n} (x) - \sum_{m=1}^{n-1} \varphi_{m} \, \dfrac{(\varphi_{m}, f_{n})}{(\varphi_{m}, \varphi_{m})}
+\end{align*}
+También podemos escribir
+\begin{align}
+\varphi_{n} = f_{n} (x) - \sum_{m=1}^{n-1} B_{nm} \, f_{m} (x)
+\label{eq:ecuacion_05_27}
+\end{align}
+y evaluar los coeficientes $B_{nm}$.
+\par
+Con el mismo conjunto $\left\{ f_{n}(x) \right\}$ y eligiendo diferentes intervalos $(a, b)$, y con una función de peso $w(x)$, es posible obtener diferentes bases ortogonales $\left\{ \varphi_{n} (x) \right\}$.
+\par
+\textbf{Ejemplo: }
+
+Sea el conjunto de funciones
+\begin{align*}
+\left\{ f_{n} (x) \right\} = \left\{ 1, x, x^{2}, x^{3}, \ldots \right\} = \left\{x^{n-1} \right\}
+\end{align*}
+con $n = 1, 2, \ldots$ en el intervalo $-1 \leq x \leq 1$, a esta base se le denomina \emph{base de Taylor}, ya que aparece en la expansión
+\begin{align*}
+f(x) = \sum_{n=0}^{\infty} \left( \dv[n]{x} f(x) \right) \eval_{0}
+\end{align*}
+Se puede demostrar que la base $\left\{x^{n-1} \right\}$ no es ortogonal y es linealmente independiente, ya que su wronskiano es diferente de cero.
+\par
+Para construir el conjunto ortogonal $\left\{ \varphi_{n} (x) \right\}$, con una función de peso $w(x) = 1$, usamos la ecuación
+\begin{align*}
+\varphi_{n} = f_{n} (x) - \sum_{m=1}^{n-1} B_{nm} \, f_{m} (x)
+\end{align*}
+Entonces veamos el procedimiento por pasos:
+\begin{enumerate}[label=\alph*)]
+\item $\varphi_{1} = f_{1} = 1$
+\item $\varphi_{2} = f_{2} + a \, f_{1} = x + a$
+\\
+se sigue entonces que
+\begin{align*}
+(\varphi_{2}, \varphi_{1}) = 0 &= (x + a, 1) = \int_{-1}^{1} (x + a) \dd{x} = 2 \, a
+\end{align*}
+de donde resulta que $a = 0$, por lo tanto
+\begin{align*}
+\varphi_{2} = x
+\end{align*}
+\item $\varphi_{3} = f_{3} + b \, f_{1} + c \, f_{2} = x^{2} + b + c \, x$
+\\
+por tanto
+\begin{align*}
+(\varphi_{3}, \varphi_{1}) = 0 &= (x^{2} + b + c \, x, 1) = \int_{-1}^{1} (x^{2} + b + c \, x) \dd{x} = 2 \, b + \dfrac{2}{3} \\[1em]
+(\varphi_{3}, \varphi_{2}) = 0 &= (x^{2} + b + c \, x, x) = \int_{-1}^{1} (x^{2} + b + c \, x) \, x \dd{x} = \dfrac{2 \, c}{3}
+\end{align*}
+de donde $b = -\dfrac{1}{3}$ y $c = 0$, así resulta
+\begin{align*}
+\varphi_{3} = x^{2} - \dfrac{1}{3}
+\end{align*}
+\item $\varphi_{4} = f_{4} + d \, f_{1} + e \, f_{2} + g \, f_{3} = x^{2} + b + c \, x$
+\\
+sabemos que 
+\begin{align*}
+(\varphi_{4}, \varphi_{1}) = (\varphi_{4}, \varphi_{2}) = (\varphi_{4}, \varphi_{3}) = 0
+\end{align*}
+se tiene que
+\begin{align*}
+d = g = 0, \hspace{1.5cm} e = - \dfrac{3}{5}
+\end{align*}
+por tanto
+\begin{align*}
+\varphi_{4} = x^{3} - \dfrac{3}{5} x
+\end{align*}
+\end{enumerate}
+Es directo probar que si utilizamos la ecuación (\ref{eq:ecuacion_05_26}), resulta
+\begin{align*}
+A_{21} = A_{32} = A_{41} = A_{43} &= 0 \\
+A_{31} &= - \dfrac{1}{3} \\
+A_{42} &= - \dfrac{3}{5}
+\end{align*}
+lo que nos devuelve el mismo resultado que obtuvimos.
+\\
+En síntesis:
+\begin{align*}
+\varphi_{1} &= 1 \\
+\varphi_{2} &= x \\
+\varphi_{3} &= \dfrac{1}{3} (3 \, x^{2} - 1) \\
+\varphi_{4} &= \dfrac{1}{5} (5 \, x^{3} - 3 \, x) \\
+\vdots
+\end{align*}
+Esta base es ortogonal pero no está normalizada. Es común elegir la normalización haciendo que cada elemento sea unitario cuando $x=1$, obviamente, este conjunto no es ortonormal en el sentido de la ecuación
+\begin{align*}
+(\varphi_{n}, \varphi_{m}) = \int_{a}^{b} \varphi_{n}^{*} (x) \, \varphi_{m} (x) \dd{x} = A_{n} \, \delta_{mn}
+\end{align*}
+La nueva base se conoce como \emph{base de Legendre} y sus elementos son los polinomios:
+\begin{align*}
+P_{0} &= 1 \\
+P_{1} &= x \\
+P_{2} &= \dfrac{1}{2} \, (3 \, x^{2} + 1) \\
+P_{3} &= \dfrac{1}{2} \, (5 \, x^{2} - 3 \, x) \\
+\vdots
+\end{align*}
+Tómese en cuenta de que el procedimiento de ortogonalización permite construir \emph{polinomios ortogonales}, pero no \emph{series infinitas ortogonales}, como la de Bessel, por ejemplo.
+\par
+\textbf{Problema a cuenta: } ¿En qué intervalo es ortogonal el conjunto?
+\begin{align*}
+\left\{ x^{-n} \right\} \hspace{1cm} n = 1, 2, 3, \ldots
+\end{align*}
+\end{document}
