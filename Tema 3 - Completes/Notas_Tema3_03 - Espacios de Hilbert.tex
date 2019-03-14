@@ -13,7 +13,7 @@
 \fontsize{14}{14}\selectfont
 %Referencia: Zettili - Quantum Mechanics. Concepts and Applications. 2d. Edition.
 %Chapter 2. Mathematical tools of quantum mechanics.
-Tratamos en este subtema con la \emph{maquinaria matemática} necesaria para estudiar la mecánica cuántica. Aunque esta revisión tiene un alcance matemático, no se intenta que sea matemáticamente completo o riguroso. Nos limitamos a los temas prácticos que son relevantes para el formalismo de la mecánica cuántica.
+Trataremos en este subtema con la \emph{maquinaria matemática} necesaria para estudiar la mecánica cuántica. Aunque esta revisión tiene un alcance matemático, no se intenta que sea matemáticamente completo o riguroso. Nos limitamos a los temas prácticos que son relevantes para el formalismo de la mecánica cuántica.
 \par
 La ecuación de Schrödinger es una de las piedras angulares de la teoría de la mecánica cuántica; Tiene la estructura de una ecuación lineal. El formalismo de la mecánica cuántica trata con operadores que son lineales y funciones de onda que pertenecen a un \textbf{espacio abstracto de Hilbert}. Las propiedades matemáticas y la estructura de los espacios de Hilbert son esenciales para una comprensión adecuada del formalismo de la mecánica cuántica.
 \par
@@ -163,13 +163,39 @@ En el caso de los espacios de funciones, un \enquote{vector} está dado por una 
 \end{equation}
 Si esta integral diverge, el producto escalar \emph{no existe}. Como un resultado, si queremos que el espacio de funciones tenga un producto escalar, debemos de seleccionar solo aquellas funciones para las cuales el producto $(\psi, \phi)$ existe.
 \par
-En particular, una función $\psi (x)$ se dice que es \emph{cuadrado integrable}, si el producto escalar de $\psi$ consigo misma
+%Referencia: Sepúlveda - Cap. 5, 5.2.2 Espacios de funciones.
+La condición de que las funciones $\psi$ y $\phi$ sean ortogonales en el intervalo $(a, b)$, es:
+\begin{align*}
+(\psi, \phi) = \int_{a}^{b} \psi^{*} (x) \, \phi (x) \dd{x} = 0
+\end{align*}
+Por definición, la base discreta $\left\{ \varphi_{n} \right\}$, con $n \in \mathbb{N},$ es ortogonal en el intervalo $(a, b)$ si
 \begin{equation}
-(\psi, \psi) = \int \abs{\psi (x)}^{2} \dd{x}
+(\varphi_{n}, \varphi_{m}) = \int \varphi_{n}^{*} (x) \, \varphi_{m} (x) \dd{x} = A_{nm} \, \delta_{nm}
+\label{eq:ecuacion_05_02}
+\end{equation}
+La base es ortonormal si  $A_{n} = 1$.
+\par
+En particular, una función $\varphi_{n} (x)$ se dice que es \emph{cuadrado integrable}, si el producto escalar de $\varphi_{n}$ consigo misma $(n = m)$
+\begin{equation}
+(\varphi_{n}, \varphi_{m}) = \int \abs{\varphi_{n} (x)}^{2} \dd{x} =  A_{n}
 \label{eq:ecuacion_02_22}
 \end{equation}
-es \emph{finita.}
+es \emph{finito.}
 \par
+La base $\left\{ \varphi_{n} (x) \right\}$ es un conjunto completo de funciones propias de un operador lineal.
+\par
+La condición de ortogonalidad puede extenderse para incluir un factor de peso: por lo que la base $\left\{ \varphi_{n} (x) \right\}$ es ortogonal de peso $w(x) \in \mathbb{R}$, en el intervalo $a \leq x \leq b$ si
+\begin{align*}
+(w \, \varphi_{n}, \varphi_{m}) &= \int_{a}^{b} w(x) \,  \varphi_{n}^{*} (x) \, \varphi_{m} (x) \dd{x} = \\
+&=\delta_{nm} \, \int_{a}^{b} w(x) \, \abs{\varphi_{n}}^{2} \dd{x} = \\
+&= \delta_{nm} \, (w \, \varphi_{n}, \varphi_{n}) = \\
+&= A_{n} \, \delta_{nm}
+\end{align*}
+y es ortonormal de peso $w(x)$, si además:
+\begin{align*}
+A_{n} = \int_{a}^{b} w(x) \, \abs{\varphi_{n}}^{2} \dd{x} = 1
+\end{align*}
+\vfill{}
 Es fácil verificar que el espacio de funciones de cuadrado integrables posee las propiedades de un espacio de Hilbert. Por ejemplo, cualquier combinación lineal de funciones de cuadrado integrables es también una función integrable cuadrada y la ec. (\ref{eq:ecuacion_02_21}) satisface todas las propiedades del producto escalar de un espacio de Hilbert.
 \par
 Toma en cuenta que la dimensión del espacio de Hilbert de las funciones de cuadrado integrables es infinita, ya que cada función de onda puede expandirse en términos de un número infinito de funciones linealmente independientes. La dimensión de un espacio viene dada por el número máximo de vectores de base linealmente independientes requeridos para abarcar ese espacio.
@@ -180,6 +206,61 @@ Un buen ejemplo de una función de cuadrado integrable es la \emph{función de o
 \label{eq:ecuacion_02_23}
 \end{equation}
 Por lo tanto, las funciones de onda de la mecánica cuántica son de tipo cuadrado integrables. Las funciones de onda que satisfacen la ec. (\ref{eq:ecuacion_02_23}) se dice que están normalizadas o son cuadrado integrables. Como la mecánica de ondas se ocupa de funciones de tipo cuadrado integrables, cualquier función de onda que no sea cuadrado integrable, no tiene ningún significado físico en mecánica cuántica.
+\vfill{}
+Considérese que:
+\begin{itemize}
+\item Si $\left\{ \varphi_{n} (x) \right\}$ es una base ortogonal de peso $w(x)$, entonces $\left\{ \sqrt{w(x)} \: \varphi_{n} (x) \right\}$ es una base ortogonal de peso $w(x) = 1$.
+\item Se elige siempre una función de peso tal que $w(x) \in \mathbb{R}$, de esta manera se garantiza que el producto interno $(w \, \varphi_{n}, \varphi_{m})$ sea real.
+\item Si $\left\{ \varphi_{n} (x) \right\}$ es una base ortogonal de peso $w(x)$:
+\begin{align*}
+\int_{a}^{b} w(x) \,  \varphi_{n}^{*} (x) \, \varphi_{m} (x) \dd{x} = A_{n} \, \delta_{nm}
+\end{align*}
+entonces: $\left\{ \varphi_{n} (x) \: \sqrt{w(x) / A_{n}} \right\}$ es un base ortonormal de peso $1$.
+\end{itemize}
+
+Si consideramos $\left\{ \varphi_{n} (x) \right\}$ como un conjunto completo de \enquote{vectores unitarios}, cualquier función $f(x)$ de cuadrado integrable, continua o con un número finito de discontinuidades, puede expresarse como una combinación lineal de $\varphi_{n}$:
+\begin{equation}
+f(x) = \sum_{n} C_{n} \, \varphi_{n} (x)
+\label{eq:ecuacion_05_03}
+\end{equation}
+En el sentido del álgebra lineal $f(x)$ es un \emph{vector}, pues es una combi¡nación lineal de los vectores base $\left\{ \varphi_{n} (x) \right\}$. Los coeficientes constantes $C_{n}$ son las \emph{componentes} del vector $f(x)$.
+\par
+Los coeficientes $C_{n}$ pueden obtenerse si conocemos $f(x)$, al multiplicar la ec. (\ref{eq:ecuacion_05_03}) por $w(x) \: \varphi_{m}^{*} (x)$, para luego integrar, tomando en cuenta la ortogonalidad de la base:
+\begin{align*}
+\int_{a}^{b} w(x) \, f(x) \, \varphi_{m}^{*} (x) \dd{x} &= \sum_{n} C_{n} \: \int_{a}^{b} w(x) \, \varphi_{m}^{*} (x) \, \varphi_{n} (x) \dd{x} = \\
+&= \sum_{n} C_{n} \, \delta_{mn} = C_{m}
+\end{align*}
+entonces
+\begin{align*}
+C_{n} = \int_{a}^{b} w(x^{\prime}) \, f(x^{\prime}) \, \varphi_{n}^{*} (x^{\prime}) \dd{x^{\prime}}
+\end{align*}
+Al sustituir en la ec. (\ref{eq:ecuacion_05_03}), se tiene
+\begin{align*}
+f(x) &= \sum_{n=1}^{\infty} \varphi_{n} (x) \: \int_{a}^{b} w(x^{\prime}) \, f(x^{\prime}) \, \varphi_{n}^{*} (x^{\prime}) \dd{x^{\prime}} = \\
+&= \int_{a}^{b} f(x^{\prime}) \left( \sum_{n} w(x) \, \varphi_{n}^{*} (x^{\prime}) \, \varphi_{n} (x) \right) \dd{x^{\prime}}
+\end{align*}
+y como
+\begin{align*}
+f(x) = \int_{a}^{b} f(x^{\prime}) \, \delta(x - x^{\prime}) \dd{x^{\prime}}
+\end{align*}
+se sigue que
+\begin{align*}
+\int_{a}^{b} f(x^{\prime}) \, \delta(x - x^{\prime}) \dd{x^{\prime}} = \int_{a}^{b} f(x^{\prime}) \left( \sum_{n} w(x) \, \varphi_{n}^{*} (x^{\prime}) \, \varphi_{n} (x) \right) \dd{x^{\prime}}
+\end{align*}
+por tanto
+\begin{equation}
+\sum_{n} w(x^{\prime}) \, \varphi_{n}^{*} (x^{\prime}) \, \varphi_{n} (x) = \delta(x - x^{\prime})
+\label{eq:ecuacion_05_04}
+\end{equation}
+La ecuación (\ref{eq:ecuacion_05_04}) es conocida como la condición de \emph{completez} del conjunto $\left\{ \varphi_{n} (x) \right\}$, que es a la vez, una representación de la delta de Dirac.
+\par
+\textbf{Ejercicio a cuenta: } Escribe las condiciones de ortonormalidad y completez para las siguientes bases de peso unitario:
+\begin{enumerate}[label=\roman*)]
+\item $\left\{ \varphi_{n} (x) \right\} = \left\{ \sqrt{\dfrac{2}{L}} \, \sin (\dfrac{n \pi x}{L}) \right\} \hspace{2.5cm} 0 \leq x \leq L$
+\item $\left\{ \varphi_{n} (x) \right\} = \left\{ \sqrt{\dfrac{2}{L}} \, \cos (\dfrac{n \pi x}{L}), \dfrac{1}{\sqrt{L}} \right\} \hspace{1.5cm} 0 \leq x \leq L$
+\item $\left\{ \varphi_{n} (\phi) \right\} = \left\{ \dfrac{1}{\sqrt{2 \, \beta}} \exp(i n \pi \phi / \beta) \right\} \hspace{2cm} c \leq \phi \leq c + 2 \, \beta$
+\end{enumerate}
+\newpage
 \section{Notación de Dirac.}
 El estado físico de un sistema está representado en la mecánica cuántica por elementos de un espacio de Hilbert; estos elementos se denominan vectores de estado. 
 \par
@@ -303,5 +384,129 @@ El producto escalar puede interpretarse de dos maneras:
 \item En analogía con el producto escalar de vectores ordinarios en el espacio euclidiano, donde $\va*{A} \cdot \va*{B}$ representa la proyección de $\va*{B}$ sobre $\va*{A}$, el producto $\braket{\phi}{\psi}$ también representa la proyección de $\ket{\psi}$ sobre $\ket{\phi}$.
 \item En el caso de estados normalizados y de acuerdo con la interpretación probabilística de Bohr, la cantidad $\braket{\phi}{\psi}$, representa la amplitud de probabilidad que el estado del sistema $\ket{\psi}$ después de que se realice una medición en el sistema, se encontrará que se encuentra en otro estado $\ket{\phi}$.
 \end{enumerate}
+\textbf{Ejercicios a cuenta: }
+\begin{enumerate}[label=\roman*)]
+\item Considera los dos estados
+\begin{align*}
+\ket{\psi_{1}} &= \ket{\phi_{1}} + 4 \, i \, \ket{\phi_{2}} + 5 \, \ket{\phi_{3}} \\
+\ket{\psi_{2}} &= b \, \ket{\phi_{1}} + 4 \, \ket{\phi_{2}} - 3 \, i \, \ket{\phi_{3}}
+\end{align*}
+donde $\ket{\phi_{1}}$, $\ket{\phi_{2}}$, $\ket{\phi_{3}}$, son ortonormales, y $b$ es una constante. Calcula el valor de $b$, para el cual, $\ket{\psi_{1}}$ y $\ket{\psi_{2}}$ son ortogonales.
+\item Si $\ket{\phi_{1}}$, $\ket{\phi_{2}}$, $\ket{\phi_{3}}$, son ortonormales, demuestra que los estados
+\begin{align*}
+\ket{\psi} &= i \, \ket{\phi_{1}} + 3 \, i \, \ket{\phi_{2}} - \ket{\phi_{3}} \\
+\ket{\chi} &= \ket{\phi_{1}} - i \, \ket{\phi_{2}} + 5 \, i \, \ket{\phi_{3}}
+\end{align*}
+Satisfacen:
+\begin{enumerate}[label=\alph*)]
+\item la desigualdad del triángulo.
+\item la desigualdad de Schwarz.
+\end{enumerate}
+\end{enumerate}
 \section{Operadores.}
+\subsection{Definiciones generales.}
+\textbf{Operador: } Un operador $\hat{A}$ es una \emph{regla matemática} que cuando se aplica a un ket $\ket{\psi}$, lo transforma en otro ket $\ket{\psi^{\prime}}$ del mismo espacio, y cuando el operador actúa sobre un bra $\bra{\phi}$, lo transforma en otro bra $\bra{\phi^{\prime}}$:
+\begin{equation}
+\hat{A} \, \ket{\psi} = \ket{\psi^{\prime}} \hspace{1.5cm} \bra{\phi} \, \hat{A} = \bra{\phi^{\prime}}
+\label{eq:ecuacion_02_51}
+\end{equation}
+Una definición similar se aplica para las funciones de onda:
+\begin{equation}
+\hat{A} \, \psi(\va*{r}) =  \psi^{\prime} (\va*{r}) \hspace{1.5cm} \phi(\va*{r}) \, \hat{A} =  \phi^{\prime} (\va*{r})
+\label{eq:ecuacion_02_52}
+\end{equation}
+Ejemplos de operadores:
+\begin{itemize}
+\item Operador unitario: deja cualquier ket sin cambios:
+\begin{align*}
+\hat{I} \, \ket{\psi} = \ket{\psi}
+\end{align*}
+\item El operador gradiente
+\begin{align*}
+\gradient \psi(\va*{r}) = \sum_{i} \pdv{\psi(\va*{r})}{\vu{e}_{i}}
+\end{align*}
+\item El operador de momento lineal
+\begin{align*}
+\va*{P} \, \psi(\va*{r}) =  - i \, \hbar \, \gradient \psi(\va*{r})
+\end{align*}
+\item El operador Laplaciano
+\begin{align*}
+\laplacian \psi(\va*{r}) = \sum_{i} \pdv[2]{\psi(\va*{r})}{x_{i}}
+\end{align*}
+\item El operador de paridad
+\begin{align*}
+\mathcal{P} \, \psi(\va*{r}) = \psi(- \va*{r}) 
+\end{align*}
+\end{itemize}
+
+\textbf{Producto entre operadores.}
+
+El producto de dos operadores es en general, no conmutativo
+\begin{equation}
+\hat{A} \, \hat{B} \neq \hat{B} \, \hat{A}
+\label{eq:ecuacion_02_53}
+\end{equation}
+El producto entre dos operadores es en general, asociativo
+\begin{equation}
+\hat{A} \, \hat{B} \, \hat{C} =  \hat{A} \, (\hat{B} \, \hat{C}) = (\hat{A} \, \hat{B}) \, \hat{C} 
+\label{eq:ecuacion_02_54}
+\end{equation}
+También se puede escribir:
+\begin{align*}
+\hat{A}^{n} \, \hat{A}^{m} = \hat{A}^{n + m}
+\end{align*}
+Cuando el producto $\hat{A} \, \hat{B}$ opera sobre un ket $\ket{\psi}$, el orden en el que se aplica, es importante: el operador $\hat{B}$ primero actúa en $\ket{\psi}$, luego entonces el operador $\hat{A}$ actúa en el nuevo ket $(B \, \ket{\psi}$
+\begin{equation}
+\hat{A} \, \hat{B} \, \ket{\psi} = \hat{A} \, (\hat{B} \, \ket{\psi})
+\label{eq:ecuacion_02_55}
+\end{equation}
+De manera similar, cuando el producto de $\hat{A} \, \hat{B} \, \hat{C} \, \hat{D}$ opera sobre un ket $\ket{\psi}$, primero actúa $\hat{D}$, luego $\hat{C}$, luego $\hat{B}$ y al final $\hat{A}$.
+\par
+Cuando un operador $\hat{A}$ está en medio de un bra $\bra{\phi}$ y un ket $\ket{\psi}$, devuelve en general un número complejo: $\bra{\phi} \, A \, \ket{\psi} =$ número complejo, el resultado puede ser un número real puro o un imaginario puro.
+\par
+En la evaluación de $\bra{\phi} \, A \, \ket{\psi}$, no importa si primero $\hat{A}$ opera sobre el ket, y luego opera sobre el braket, o si primero $\hat{A}$ aplica primero sobre el bra, y luego sobre el braket, es decir
+\begin{align*}
+(\bra{\phi} \, A) \, \ket{\psi} = \bra{\phi} \, (A \, \ket{\psi})
+\end{align*}
+\textbf{Operadores lineales.}
+
+Un operador $\hat{A}$ se dice que es lineal, si obedece la ley distributiva, y como en todos los operadores, conmuta con las constantes.
+\par
+Esto es, si, para cualesquiera vectores $\ket{\psi_{1}}$ y $\ket{\psi_{2}}$ y cualesquiera números complejos $a_{1}$ y $a_{2}$, se tiene
+\begin{align}
+\hat{A} \, (a_{1} \, \ket{\psi_{1}} + a_{2} \, \ket{\psi_{2}}) &= a_{1} \, \hat{A} \, \ket{\psi_{1}} + a_{2} , \hat{A} \, \ket{\psi_{2}} \label{eq:ecuacion_02_56} \\[1.75em]
+( \bra{\psi_{1}} \, a_{1} +  \bra{\psi_{2}} \, a_{2}) \, \hat{A} &= a_{1} \, \bra{\psi_{1}} \, \hat{A} + a_{2} \, \bra{\psi_{2}} \, \hat{A} \label{eq:ecuacion_02_57}
+\end{align}
+\newpage
+\textbf{Observaciones:}
+\begin{itemize}
+\item El \emph{valor esperado o promedio} $\langle{\hat{A}}\rangle$ de un operador $\hat{A}$ con respecto a un estado $\ket{\psi}$, está definido por:
+\begin{equation}
+\langle{\hat{A}}\rangle = \dfrac{\bra{\psi} \, \hat{A} \, \ket{\psi}}{\braket{\psi}{\psi}}
+\label{eq:ecuacion_02_58}
+\end{equation}
+\item La cantidad $\dyad{\phi}{\psi}$ (el producto de un ket con un bra), es un operador lineal en la notación de Dirac. Esto es, cuando $\dyad{\phi}{\psi}$ es aplicado a un ket $\ket{\psi^{\prime}}$, se obtiene otro ket:
+\begin{equation}
+\ket{\phi} \, \braket{\psi}{\psi^{\prime}} =  \braket{\psi}{\psi^{\prime}} \, \ket{\phi}
+\label{eq:ecuacion_02_59}
+\end{equation}
+donde $\braket{\psi}{\psi^{\prime}}$ es un número complejo.
+\item Los productos del tipo $\ket{\psi} \, \hat{A}$ y $\hat{A} \, \bra{\psi}$, es decir, cuando un operador está a la derecha de un ket o a la izquierda de un bra, los productos están prohibidos. No son operadores, ni kets, ni bras, no tienen sentido matemático ni físico.
+\end{itemize}
+\subsection{Operadores hermitianos.}
+El operador hermitiano o conjugado $\alpha^{\dagger}$, de un número complejo $\alpha$ es el conjugado complejo de este número: $\alpha^{\dagger} = \alpha^{*}$.
+\par
+El adjunto hermitiano, o simplemente el adjunto $\hat{A}^{\dagger}$, de un operador $\hat{A}$, está definido por la relación:
+\begin{equation}
+\bra{\psi} \, \hat{A}^{\dagger} \, \ket{\psi} = \bra{\psi} \, \hat{A} \, \ket{\psi}^{*}
+\label{eq:ecuacion_02_60}
+\end{equation}
+\textbf{Propiedades de la regla del hermitiano conjugado.}
+
+Para obtener el adjunto hermitiano de cualquier expresión, debemos invertir cíclicamente el orden de los factores y hacer tres reemplazos:
+\begin{itemize}
+\item Reemplazar las constantes por sus conjugados complejos: $\alpha^{\dagger} = \alpha^{*}$
+\item Reemplazar los kets (bras) por los correspondientes bras (kets): $(\ket{\psi})^{\dagger} = \bra{\psi}$ y $(\bra{\psi})^{\dagger} = \ket{\psi}$
+\end{itemize}
+
 \end{document}
