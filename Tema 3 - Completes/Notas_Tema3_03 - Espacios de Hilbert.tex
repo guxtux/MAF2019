@@ -632,7 +632,7 @@ Usando la relación de conmutadores (\ref{eq:ecuacion_02_79}), se pueden estable
 \end{equation}
 \item Lienalidad:
 \begin{equation}
-[\hat{A} + \hat{B} + \hat{C} + \hat{D} + \ldots] = [\hat{A} + \hat{B}] + [\hat{A} + \hat{C}] + [\hat{A} + \hat{D}] + \ldots
+[\hat{A} + \hat{B} + \hat{C} + \hat{D} + \ldots] = [\hat{A} , \hat{B}] + [\hat{A} , \hat{C}] + [\hat{A} , \hat{D}] + \ldots
 \label{eq:ecuacion_02_85} 
 \end{equation}
 \item Conjugado hermitiano de un conmutador:
@@ -641,13 +641,15 @@ Usando la relación de conmutadores (\ref{eq:ecuacion_02_79}), se pueden estable
 \label{eq:ecuacion_02_86}
 \end{equation}
 \item Distribución:
-\begin{equation}
-[\hat{A},  \hat{B} \, \hat{C}] = [\hat{A} + \hat{B}] \,  \hat{C} + \hat{B} \, [\hat{A} + \hat{C}]
-\label{eq:ecuacion_02_87}
-\end{equation}
+\begin{align}
+[\hat{A},  \hat{B} \, \hat{C}] &= [\hat{A} , \hat{B}] \,  \hat{C} + \hat{B} \, [\hat{A} , \hat{C}]
+\label{eq:ecuacion_02_87} \\[1em]
+[\hat{A} \, \hat{B} , \hat{C}] &= \hat{A} \,[ \hat{B} ,  \hat{C}] + [\hat{A} , \hat{C}] \, \hat{B}
+\label{eq:ecuacion_02_88}
+\end{align}
 \item Identidad de Jacobi:
 \begin{equation}
-[\hat{A},  [\hat{B} \, \hat{C}]] = [\hat{B}, [\hat{C} \, \hat{A}]] + [\hat{C},  [\hat{A} \, \hat{B}]] = 0
+[\hat{A},  [\hat{B} , \hat{C}]] = [\hat{B}, [\hat{C} , \hat{A}]] + [\hat{C},  [\hat{A} , \hat{B}]] = 0
 \label{eq:ecuacion_02_89}
 \end{equation}
 \item Repitiendo la aplicación de (\ref{eq:ecuacion_02_87}), podemos ver que
@@ -753,7 +755,7 @@ donde hemos utilizado el hecho de que $[\Delta \hat{A},\Delta \hat{B}]= [\hat{A}
 \end{align*}
 por lo que
 \begin{equation}
-\abs{ \langle \Delta \hat{A} \, \Delta \hat{B} \rangle}^{2} = \dfrac{1}{4} \abs{\langle [ \Delta \hat{A}, \Delta \hat{B} ] \rangle}^{2} + \dfrac{1}{4} \abs{ \langle \left\{ \Delta \hat{A}, \Delta \hat{B}] \right\} \rangle}^{2}
+\abs{ \langle \Delta \hat{A} \, \Delta \hat{B} \rangle}^{2} = \dfrac{1}{4} \abs{\langle [ \hat{A}, \hat{B} ] \rangle}^{2} + \dfrac{1}{4} \abs{ \langle \left\{ \Delta \hat{A}, \Delta \hat{B}] \right\} \rangle}^{2}
 \label{eq:ecuacion_02_103}
 \end{equation}
 Ya que el último término es un número positivo real, podemos inferir la siguiente relación
@@ -763,13 +765,77 @@ Ya que el último término es un número positivo real, podemos inferir la sigui
 \end{equation}
 Comparando las ecuaciones (\ref{eq:ecuacion_02_101}) y (\ref{eq:ecuacion_02_104}), concluimos que
 \begin{equation}
-\langle (\Delta \hat{A})^{2} \rangle \, \langle (\Delta \hat{B})^{2} \rangle \geq \dfrac{1}{4} \abs{\langle [ \Delta \hat{A}, \Delta \hat{B} ] \rangle}^{2}
+\langle (\Delta \hat{A})^{2} \rangle \, \langle (\Delta \hat{B})^{2} \rangle \geq \dfrac{1}{4} \abs{\langle [ \hat{A}, \hat{B} ] \rangle}^{2}
 \label{eq:ecuacion_02_105}
 \end{equation}
 que al tomar la raíz cuadrada, se puede reducir a
 \begin{equation}
-\hat{A} \, \hat{B}) \geq \dfrac{1}{2} \abs{\langle [ \Delta \hat{A}, \Delta \hat{B} ] \rangle}
+\Delta \hat{A} \, \Delta \hat{B} \geq \dfrac{1}{2} \abs{\langle [ \hat{A}, \hat{B} ] \rangle}
 \label{eq:ecuacion_02_106}
 \end{equation}
 Esta relación es importante en el formalismo de la mecánica cuántica. Su uso con los operadores de posición y momento, nos conducen a la relación de incertidumbre de Heisenberg.
+\subsection{Operadores de funciones.}
+Sea $F(\hat{A})$ una función de un operador $\hat{A}$. Si $\hat{A}$ es un operador lineal, podemos expandir con un desarrollo en series de Taylor a $F(\hat{A})$:
+\begin{equation}
+F(\hat{A}) = \sum_{n=0}^{\infty} a_{n} \, \hat{A}^{n}
+\label{eq:ecuacion_02_108}
+\end{equation}
+donde los $a_{n}$ son los coeficientes de la expansión. Como ejemplo de operadores de una función, considera $\exp(a \, \hat{A})$, donde $a$ es un escalar, el cual puede ser complejo o real. La expansión se puede desarrollar como sigue:
+\begin{equation}
+\exp(a \, \hat{A}) = \sum_{n=0}^{\infty} \dfrac{a^{n}}{n!} \, \hat{A} = \hat{I} + a \, \hat{A} + \dfrac{a^{2}}{2!} \, \hat{A}^{2} + \dfrac{a^{1}}{3!} \, \hat{A}^{3} + \ldots
+\label{eq:ecuacion_02_109}
+\end{equation}
+\subsection*{Conmutadores que involucran funciones de operadores.}
+Si $\hat{A}$ conmuta con otro operador $\hat{B}$, entonces el operador $\hat{B}$ conmuta con cualquier otro operador de funciones que dependa de $\hat{A}$:
+\begin{equation}
+[\hat{A}, \hat{B}] = 0 \hspace{1cm} \Longrightarrow \hspace{1cm} [\hat{B}, F(\hat{A})] = 0
+\label{eq:ecuacion_02_110}
+\end{equation}
+En particular, $F(\hat{A})$ conmuta con $\hat{A}$ y con cualquier otra función $G(\hat{A})$ que dependa de $\hat{A}$, es decir:
+\begin{equation}
+[\hat{A}, F(\hat{A})] = 0 \hspace{0.5cm} [\hat{A}^{n}, F(\hat{A})]= 0 \hspace{0.5cm} [F(\hat{A}), G(\hat{A})] = 0
+\label{eq:ecuacion_02_111}
+\end{equation}
+\subsection*{Adjunto hermitiano de un operador de funciones.}
+El adjunto de $F(\hat{A})$ está dado por
+\begin{equation}
+[F(\hat{A})]^{\dagger} = F^{*}(\hat{A}^{\dagger})
+\label{eq:ecuacion_02_112}
+\end{equation}
+Nótese que si $\hat{A}$ es hermitiano, $F(\hat{A})$ no necesariamente es hermitiano; $F(\hat{A})$ será hermitiano sólo si $F$ es una función real y $\hat{A}$ es hermitiano. Un ejemplo es:
+\begin{align}
+\begin{aligned}
+\left( \exp(\hat{A}) \right)^{\dagger} &= \exp(\hat{A}^{\dagger}) \\[1em]
+\left( \exp(i \, \hat{A}) \right)^{\dagger} &= \exp(-i \, \hat{A}^{\dagger}) \\[1em]
+\left( \exp(i \, \alpha \, \hat{A}) \right)^{\dagger} &= \exp(-i \, \alpha^{*} \, \hat{A}^{\dagger})
+\end{aligned}
+\label{eq:ecuacion_02_113}
+\end{align}
+donde $\alpha$ es un número complejo.
+\par
+Si $\hat{A}$ es hermitiano, un operador de funciones el cual puede expandirse como
+\begin{align*}
+F(\hat{A}) = \sum_{n=0}^{\infty} a_{n} \, \hat{A}^{n}
+\end{align*}
+será hermitiana sólo si la expansión de los coeficientes $a_{n}$ son números reales. Pero en general, $F(\hat{A})$ es no hermitiano, aún así $\hat{A}$ sea hermitiano, ya que
+\begin{equation}
+F^{*}(\hat{A}^{\dagger}) = \sum_{n=0}^{\infty} a_{n}^{*} \, (\hat{A}^{\dagger})^{n}
+\label{eq:ecuacion_02_114}
+\end{equation}
+\subsection*{Relaciones que involcuran operadores de funciones.}
+Nótese que
+\begin{equation}
+[\hat{A}, \hat{B}] \neq 0 \hspace{1cm} \Longrightarrow \hspace{1cm} [\hat{B} , F(\hat{A}) ] \neq 0
+\label{eq:ecuacion_02_115}
+\end{equation}
+en particular
+\begin{align*}
+\exp(\hat{A}) \, \exp(\hat{B}) \neq \exp(\hat{A} + \hat{B})
+\end{align*}
+Usando la ec. (\ref{eq:ecuacion_02_109}) podemos determinar que
+\begin{align}
+\exp(\hat{A}) \, \exp(\hat{B}) &= \exp(\hat{A} + \hat{B}) \, \exp([\hat{A}, \hat{B}]/2) \label{eq:ecuacion_02_116} \\[1em]
+\exp(\hat{A}) \, \hat{B} \, \exp(\hat{-A}) &= \hat{B} + [\hat{A}, \hat{B}] + \dfrac{1}{2!} [\hat{A}, [\hat{A}, \hat{B}]] + \dfrac{1}{3!} [\hat{A}, [ \hat{A}, [\hat{A}, \hat{B}]]] + \ldots \label{eq:ecuacion_02_117}
+\end{align}
+
 \end{document}
