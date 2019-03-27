@@ -355,11 +355,94 @@ para $n = 2$
 \end{align*}
 Para un oscilador armónico, el período no depende de $E$.
 \subsection*{Longitud de una lemniscata.}
-
-\begin{figure}[!h]
+Usando la función Gamma, calcula la longitud de la lemniscata
+\begin{align*}
+\rho^{2} = a^{2} \, \cos 2 \theta
+\end{align*}
+La curva se parece a un ocho invertido, teniendo al eje x como eje de simetría, pasa en dos ocasiones por el origen, como se puede ver en la figura (\ref{fig:figura_01})
+\begin{figure}[!ht]
     \centering
     \includegraphics[scale=0.75]{Imagenes/plot_leminscata_01.eps}
     \caption{Gráfica de la lemniscata.}
     \label{fig:figura_01}
 \end{figure}
+Para esta curva, por simetría tiene la misma longitud en cada uno de los cuatro cuadrantes, por lo que podemos calcular la longitud en el primer cuadrante y luego multiplicarla por cuatro.
+\par
+Los puntos donde la curva cruza el eje x en el origen son aquellos para los cuales el argumento del coseno es un múltiplo entero, impar de $\pi / 2$. Para el tramo en el primer cuadrante, tomamos $0 \leq \theta \leq \pi/4$.
+\par
+La longitud de la curva en coordenadas polares es
+\begin{align*}
+s = \int_{\alpha}^{\beta} \left[ \rho^{2} + \left( \dv{\rho}{\theta} \right)^{2} \right]^{1/2} \dd{\theta}
+\end{align*}
+Como $\rho^{2} = a^{2} \, \cos 2 \theta$, tenemos que
+\begin{align*}
+\left( \dv{\rho}{\theta} \right)^{2} = \dfrac{a^{4} \, \sin^{2} 2 \theta}{a^{2} \, \cos 2 \theta}
+\end{align*}
+Entonces:
+\begin{align*}
+\dfrac{1}{4} \, s = \int_{0}^{\pi/4} \left( a^{2} \, \cos 2 \theta + \dfrac{a^{4} \, \sin^{2} 2 \theta}{\cos 2 \theta} \right)^{1/2} \dd{\theta} = \int_{0}^{\pi/4} a \, \cos^{-1/2} 2 \theta \dd{\theta}
+\end{align*}
+Haciendo un cambio de variable, es posible llevar esta integral a uno forma de la función Beta con integral:
+\begin{align*}
+B(x, y) = \int_{0}^{\pi/2} 2 \, \sin^{2x-1} \theta \, \cos^{2y-1} \theta \dd{\theta}
+\end{align*}
+Hemos utilizado el hecho de que la función Beta define una función de $x$ y $y$ como argumentos reales, dado que ambos son positivos.
+\par
+Sea $2 \theta = t$. Por lo que el intervalo de integración ahora va de $0$ a $\pi/2$, por tanto
+\begin{align*}
+\dfrac{1}{4} \, s &= \int_{0}^{\pi/4} a \, \cos^{-1/2} 2 \theta \dd{\theta} = \dfrac{a}{2} \int_{0}^{\pi/2} \cos^{-1/2} t \, \sin^{0} t \dd{t} \\[1em]
+&= \dfrac{a}{2} \, \dfrac{1}{2} B\left(\dfrac{1}{4}, \dfrac{1}{2} \right) = \dfrac{a}{4} B\left(\dfrac{1}{4}, \dfrac{1}{2} \right)
+\end{align*}
+La longitud completa de la lemniscata se obtiene al multiplicar por cuatro el resultado anterior:
+\begin{align*}
+s &= a \, B\left(\dfrac{1}{4}, \dfrac{1}{2} \right) = \\
+&= \dfrac{a \, \Gamma \left( \dfrac{1}{4} \right) \, \Gamma \left( \dfrac{1}{2} \right) }{\Gamma \left( \dfrac{3}{4} \right)} \\
+&= \dfrac{4 \, a \, \Gamma \left( \dfrac{5}{4} \right) \sqrt{\pi}}{\dfrac{4}{3} \, \Gamma \left( \dfrac{7}{4} \right)} \\
+&\cong 5.2 \,a
+\end{align*}
+\subsection*{Calcular el período de oscilación de un péndulo.}
+Calcula el período de oscilación de un péndulo simple que oscila en un arco de $\ang{180}$, como se aprecia en la figura (\ref{fig:figura_02}):
+\begin{figure}[!ht]
+    \centering
+    \includegraphics{Figuras/pendulo_simple}
+    \caption{Esquema del péndulo simple que oscila en un arco.}
+    \label{fig:figura_02}
+\end{figure}
+Usando el eje coordenado, vemos que el ángulo polar $\theta$ varía de $-\pi/2$ a $\pi/2$, mientras que la coordenada radial $r = Op$ permanece constante.
+\par
+Sea $g$ la aceleración debida a la gravedad y $W$ el peso del péndulo $p$. La energía potencial de $p$ en $\theta = 0$ es cero. Por lo que el valor de la energía potencial en cualquier instante, es el producto de $W$ por la altura $h$:
+\begin{align*}
+P = W (r - r \, \cos \theta)
+\end{align*}
+Mientras que la energía cinética viene dada por
+\begin{align*}
+K = \dfrac{m \, v^{2}}{2} = \dfrac{1}{2} \dfrac{W}{g} \left( r \dv{\theta}{t} \right)^{2}
+\end{align*}
+Como el péndulo está oscilando, la energía total es constante: $P + K = C$. Lo que nos permite expresar una ED del movimiento:
+\begin{align*}
+W \, r (1 - \cos \theta) + \dfrac{1}{2} \dfrac{W}{g} \left( r \dv{\theta}{t} \right)^{2} = C
+\end{align*}
+Para calcular $C$ tomamos el tiempo $t = 0$ cuando $\theta = \pi/2$, vemos que el péndulo está en reposo, por lo que $\dv*{\theta}{t} = 0$, cuando $t = 0$ y $\theta = \pi/2$.
+\par
+De esta manera $C = W \, r$ y la ecuación de movimiento resulta
+\begin{align*}
+\dfrac{r}{2 \, g} \left( \dv{\theta}{t} \right)^{2} - \cos \theta = 0
+\end{align*}
+Como $p$ está oscilando de un lado a otro, $\dv*{\theta}{t}$ es en ocasiones positiva y en otras negativa; podemos estimar el período $T$, calculando el tiempo que tarda de ir de $\theta=0$ a $\theta=\pi/2$, para luego multiplicar el resultado por $4$. De esta manera podemos usar la raíz positiva para resolver la ecuación de $\dv*{\theta}{t}$.
+\par
+Entonces tenemos
+\begin{align*}
+\sqrt{\dfrac{r}{2 \, g}} \, \dv{\theta}{t} &= \cos^{1/2} \theta
+\dd{t} \\[1em]
+\dd{t} &= \sqrt{\dfrac{r}{2 \, g}} \, \dv{\theta}{t} \cos^{-1/2} \theta \dd{\theta} \\[1em]
+T &= 4 \, \sqrt{\dfrac{r}{2 \, g}} \, \int_{0}^{\pi/2} \cos^{-1/2} \theta \dd{\theta} \\[1em]
+&= 2 \, \sqrt{\dfrac{r}{2 \, g}} \, \int_{0}^{\pi/2} 2 \, \sin^{0} \theta \, \cos^{-1/2} \theta \dd{\theta} \\[1em]
+&= \sqrt{\dfrac{2 \, r}{g}} \, B \left( \dfrac{1}{2}, \dfrac{1}{4} \right) \\
+&= \sqrt{\dfrac{2 \, r}{g}} \, \dfrac{\Gamma \left(\dfrac{1}{2} \right) \, \Gamma \left(\dfrac{1}{4} \right)}{\Gamma \left(\dfrac{3}{4} \right)} \\[1em]
+&= \sqrt{\dfrac{2 \, r}{g}} \, \dfrac{\Gamma \left(\dfrac{1}{2} \right) \, 4 \, \Gamma \left(\dfrac{5}{4} \right)}{\dfrac{4}{3} \, \Gamma \left(\dfrac{7}{4} \right)} \\[1em]
+\end{align*}
+Usando los valores para la función gamma, se concluye que
+\begin{align*}
+T \cong 7.416 \sqrt{\dfrac{r}{g}}
+\end{align*}
 \end{document}
