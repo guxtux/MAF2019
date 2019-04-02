@@ -1,11 +1,259 @@
 \input{../preambulo_doc}
 \title{Funciones de Bessel \\ {\large Tema 5 - Matemáticas Avanzadas de la Física}\vspace{-1.5\baselineskip}}
 \date{ }
+\author{}
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
 %Sadri Hassani - Mathematical methods for students of physics. Chap. 27 Laplace equation: cylindrical coordinates
-Las funciones de Bessel tienen aplicaciones en diversos problemas de mecánica cuántica, electrodinámica y otras disciplinas.
+Antes de desarrollar un problema con una geometría cilíndrica, consideremos una pregunta que tiene implicaciones más generales. Vimos en el Tema 2 que la separación de variables condujo a un sistema de EDO en las que aparecían ciertas constantes de separación, y que elegir el signo de esa constante nos lleva a una forma funcional diferente de la solución general.
+\par
+Por ejemplo, para una ecuación como
+\begin{align*}
+\dv[2]{x}{t} - k \, x = 0
+\end{align*}
+se pueden tener soluciones exponenciales si $k > 0$ y soluciones trigonométricas si $k < 0$ Uno no puede asignar a priori un signo específico a $k$. Por lo tanto, la forma general de la solución es indeterminada. Sin embargo, \emph{una vez que se imponen las CDF}, las soluciones únicas surgirán independientemente de la forma funcional inicial de las soluciones.
+\par
+El siguiente argumento ilustra este punto en la ED angular resultante de la separación de variables para la ecuación de Laplace en coordenadas cilíndricas.
 \section{Funciones de Bessel.}
+La separación de variables en coordenadas cilíndricas para la ecuación de Laplace
+\begin{align*}
+\laplacian{\Phi} = 0
+\end{align*}
+mediante la solución propuesta $\Phi (\rho, \varphi, z) = R(\rho) S(\varphi) Z(z)$, nos lleva a un sistema de tres EDO:
+\begin{align}
+\begin{aligned}
+\dv{\rho} \left( \rho \dv{R}{\rho} \right) + \left( \lambda \, \rho + \dfrac{\mu}{\rho} \right) \, R &= 0 \\
+\dv[2]{S}{\varphi} - \mu \, S &= 0 \\
+\dv[2]{Z}{z} - \lambda \, Z &= 0
+\end{aligned}
+\label{eq:ecuacion_27_01}
+\end{align}
+Si nos fijamos en la segunda ecuación cuya solución más general podemos escribir como
+\begin{align}
+S (\varphi) = \begin{cases}
+A \, \exp(\sqrt{\mu} \, \varphi) + B \, \exp(-\sqrt{\mu} \, \varphi) & \mbox{ si } \mu \neq 0 \\
+C \,\varphi + D & \mbox { si } \mu = 0
+\end{cases}
+\label{eq:ecuacion_27_02}
+\end{align}
+No importa que tipo de CDF se impongan al potencial $\Phi$, ya que debe de devolver el mismo valor en $\varphi$ y en $\varphi + 2 \pi$, mientras que se mantengan las otras dos variables fijas\footnote{Este argumento es válido solo para los casos físicos definidos para todo el rango de $\varphi$. Si la región de interés restringe a $\varphi$ en un subconjunto del intervalo $[0, 2 \pi]$, el argumento ya no funciona.}. Esto debido a que $(\rho, \varphi, z)$ y $(\rho, \varphi + 2 \pi, z)$ representan físicamente al mismo punto en el espacio. Se sigue entonces que
+\begin{align*}
+R(\rho) S(\varphi) Z(z) = R(\rho) S(\varphi + 2 \pi) Z(z) \Longrightarrow S(\varphi + 2 \pi) = S (\varphi)
+\end{align*}
+ya que la identidad se mantiene para todos los valores de $\rho$ y $z$. Si la última relación es verdadera para el caso de $\mu = 0$, entonces tenemos que $C = 0$ y $S(\varphi) = D$. Para $\mu neq 0$, la ec. (\ref{eq:ecuacion_27_02}) es
+\begin{align*}
+A \, \exp(\sqrt{\mu}(\varphi + 2 \pi)) + B \, \exp(- \sqrt{\mu}(\varphi + 2 \pi)) = A \, \exp(\sqrt{\mu} \, \varphi) 
+\end{align*}
+o también
+\begin{align*}
+A \, \exp(\sqrt{\mu} \, \varphi) \, (\exp(\sqrt{\mu} \, 2 \pi) - 1) + B \, \exp(- \sqrt{\mu} \, \varphi) \, (\exp(- \sqrt{\mu} \, 2 \pi) - 1) = 0
+\end{align*}
+que debe de cumplirse para todo $\varphi$; la única manera en la que esto puede ocurrir (cuidando de que $A$ y $B$ no sean nulos) es mediante
+\begin{align*}
+\exp(\sqrt{\mu} \, 2 \pi) - 1 = 0 \hspace{1cm} y \hspace{1cm} \exp(- \sqrt{\mu} \, 2 \pi) - 1 = 0
+\end{align*}
+En ambos casos se tiene que $\exp(\sqrt{\mu} 2 \pi) = 1$
+\par
+Si nos limitamos a valores reales de $\mu$, obtendremos soluciones triviales. Para prevenir esto, tenemos que hacer
+\begin{align*}
+\sqrt{\mu} = i \, m \hspace{1cm} m = 0, \pm 1, \pm 2, \ldots
+\end{align*}
+o
+\begin{align*}
+\mu = -m^{2}  \hspace{1cm} m = 0, \pm 1, \pm 2, \ldots
+\end{align*}
+Con esta elección de $\mu$, la ED para $S(\varphi)$ es
+\begin{align*}
+S^{\prime \prime} + m^{2} \, S = 0
+\end{align*}
+que tiene como solución general: una suma de funciones trigonométricas.
+\begin{teo}
+Para todos los problemas físicos para los cuales el ángulo azimutal varíe entre $0$ y $2 \pi$, uno está forzado a restringir el valor de $\mu$ al negativo de la raíz cuadrada de un entero. La solución para la parte angular es entonces
+\begin{equation}
+S (\varphi) = A_{m} \, \cos m \varphi + B_{m} \, \sin m \varphi, \hspace{1cm} m = 0, 1, 2, \ldots
+\label{eq:ecuacion_27_03}
+\end{equation}
+donde $A_{m}$ y $B_{m}$ son constantes que pueden ser distintas para diferentes valores de $m$.
+\end{teo}
+Los valores negativos de $m$ no darán lugar a nuevas soluciones, por lo que no se incluyen en el rango de $m$. El caso de $\mu = 0$ no se necesita tratar por separado, ya que la solución aceptable para este caso es $S = D = \mbox{ constante}$, la cual es la que se obtiene en la ec. (\ref{eq:ecuacion_27_03}) cuando $m = 0$.
+\par
+La ED para $Z(z)$ es independiente de $m$ y tiene una solución exponencial si $\lambda > 0$ y una solución trigonométrica si $\lambda < 0$. Asumiendo ésta forma y escribiendo $\lambda \equiv l^{2}$, se tiene
+\begin{equation}
+Z(z) = A \, e^{l \, z} + B \, e^{- li \, z}
+\label{eq:ecuacion_27_04}
+\end{equation}
+La más familiar de las ED es la ecuación radial, en términos de $l = \sqrt{\lambda}$, se puede escribir como
+\begin{equation}
+\dv[2]{R}{\rho} + \dfrac{1}{\rho} \, \dv{R}{\rho} + \left( l^{2} - \dfrac{m^{2}}{\rho^{2}} \right) \, R = 0
+\label{eq:ecuacion_27_05}
+\end{equation}
+Además, si definimos la variable $v = l\, \rho$, podemos transformar la ec. (\ref{eq:ecuacion_27_05}) en la forma:
+\begin{equation}
+\dv[2]{R}{\rho} + \dfrac{1}{v} \, \dv{R}{v} + \left( 1 - \dfrac{m^{2}}{v^{2}} \right) \, R = 0
+\label{eq:ecuacion_27_06}
+\end{equation}
+Tanto la ec. (\ref{eq:ecuacion_27_05}) o (\ref{eq:ecuacion_27_06}), es una de las ED de la física matemática más famosas: \textbf{la ecuación diferencial de Bessel}.
+\section{Soluciones para la ED de Bessel.}
+El método de Frobenius es una manera efectiva para encontrar las soluciones de las EDO. Al reescribir la ec. (\ref{eq:ecuacion_27_06}) multiplicando por $v^{2}$ para convertir todos sus coeficientes en polinomios como lo sugiere la ecuación (\ref{eq:ecuacion_26_07}).
+\begin{equation}
+p_{2} \, \dv[2]{y}{x} + p_{1}(x) \, \dv{y}{x} + p_{0} \, y
+ = 0
+\label{eq:ecuacion_26_07}
+\end{equation}
+Esto nos lleva a
+\begin{equation}
+v^{2} \, \dv[2]{R}{v} + v \dv{R}{v} + (v^{2} - m^{2}) \, R = 0
+\label{eq:ecuacion_27_07}
+\end{equation}
+Como $v^{2}$ se anula cuando $v = 0$, podemos proponer una solución de la forma
+\begin{align*}
+R(v) &= v^{s} \sum_{k=0}^{\infty} c_{k} \, v^{k} = \\
+&= \sum_{k=0}^{\infty} c_{k} \, v^{k+s}
+\end{align*}
+de la cual obtenemos al diferenciar en dos ocasiones:
+\begin{align*}
+v \, \dv{R}{v} &= \sum_{k=0}^{\infty} c_{k} (k + s) \, v^{k+s} \\
+v^{2} \, \dv[2]{R}{v} &= \sum_{k=0}^{\infty} c_{k} (k + s)(k + s - 1) \, v^{k+s} 
+\end{align*}
+sustituyendo estos, como
+\begin{align*}
+(v^{2} - m^{2}) \sum_{k=0}^{\infty} c_{k} \, v^{k+s}
+\end{align*}
+en la ED, nos conduce a
+\begin{align*}
+\sum_{k=0}^{\infty} c_{k} [\underbrace{k + s + (k + s)(k + s - 1)}_{=(k+s)^{2}} - m^{2} ] \, v^{k+s} + \sum_{k=0}^{\infty} c_{k} \, v^{k+s+2} = 0
+\end{align*}
+Para encontrar la relación de recurrencia, necesitamos que el valor de la potencia de $v$ sea el mismo en las sumas, por lo que re-escribimos la primera suma como
+\begin{align*}
+c_{0}(s^{2} &- m^{2}) v^{s} + c_{1} [(s + 1)^{2}- m^{2}] v^{s+1} + \sum_{k=0}^{\infty} c_{k} [(k + s)^{2} - m^{2}] v^{k+s} \\
+&= c_{0}(s^{2} - m^{2}) v^{s} + c_{1} [(s + 1)^{2}- m^{2}] v^{s+1} \\
+&+ \sum_{n=0}^{\infty} c_{n+2} [(n + 2 + s)^{2} - m^{2}] v^{n+2+s}
+\end{align*}
+donde en la segunda línea, usamos $n = k -2$. Como el índice $n$ es mudo, lo podemos regresar de nuevo al índice $k$. Entonces, seguimos con que
+\begin{align*}
+c_{0}(s^{2} &- m^{2}) v^{s} + c_{1} [(s + 1)^{2}- m^{2}] v^{s+1} + \\
+&+ \sum_{k=0}^{\infty} \left\{ c_{k+2} [(k + 2 + s)^{2} - m^{2}] + c_{k} \right\} \, v^{k+2+s} = 0
+\end{align*}
+Suponemos que $c_{0} \neq 0$ y que todos los demás coeficinetes de las potencias de $v$ se anulan, obtenemos
+\begin{align*}
+s^{2} &= m^{2} \\
+c_{1} [(s + 1)^{2}- m^{2}] &= 0\\
+c_{k+2} [(k + 2 + s)^{2} - m^{2}] + c_{k} &= 0
+\end{align*}
+La primera ecuación nos dice que $m = \pm s$. Por lo que al usarlo en la segunda ecuación, resulta en
+\begin{align*}
+c_{1} (2 \, s + 1) = 0 \hspace{0.5cm} \Rightarrow \hspace{0.5cm} c_{1} = 0 \hspace{1cm} \mbox{ o } \hspace{0.5cm} s = - \dfrac{1}{2}
+\end{align*}
+La elección $s = -1/2$ nos devuelve que $m = \mp 1/2$ la cual no es aceptable\footnote{En realidad, los problemas que surgen de otras áreas de la física más allá de la electrostática y la transferencia de calor en estado estacionario permiten valores de $m$ no enteros. Sin embargo, no trataremos tales problemas aquí.}, por lo que decidimos que $m$ sea un entero positivo. Por lo tanto concluimos que $s = \pm m$ y $c_{1} = 0$. 
+\par
+Se sigue que la regla de recurrencia para todos los coeficientes impares son cero. La serie de Frobenius entonces será
+\begin{equation}
+R(v) = v^{\pm m} \sum_{k=0}^{\infty} c_{2k} \, v^{2k}, \hspace{1.5cm} \dfrac{c_{2k+2}}{c_{2k}} = - \dfrac{1}{(2k + 2 + s)^{2} - m^{2}}
+\label{eq:ecuacion_27_08}
+\end{equation}
+La prueba del cociente para la convergencia de la serie nos lleva a
+\begin{align*}
+\lim_{k \to \infty} \abs{\dfrac{c_{2k+2} \, v^{2k+2}}{c_{2k} \, v^{2k}}} = \lim_{k \to \infty} \abs{\dfrac{1}{(2k + 2 + s)^{2} -m^{2}}} \, v^{2} = 0
+\end{align*}
+Lo que nos indica que la serie de la ec. (\ref{eq:ecuacion_27_08}) es convergente para todos los valores de $v$.
+\par
+Ahora usaremos la relación de recurrencia para obtener los coeficientes de la expansión. Reescribimos la relación de recuerrencia como
+\begin{align*}
+c_{k+2} = - \dfrac{1}{(k + 2 + s)^{2} - s^{2}} \, c_{k} = \dfrac{1}{(k + 2)(2 s + k + 2)} \, c_{k}
+\end{align*}
+donde hemos sustituido $s^{2}$ por $m^{2}$. Lo que nos devuelve
+\begin{align*}
+c_{2} &= - \dfrac{1}{2 (2 s + 2)} c_{0} \\
+c_{4} &= - \dfrac{1}{4 (2 s + 4)} c_{2} = (-1)^{2} \dfrac{1}{4 (2 s + 4)} \, \dfrac{1}{2 (2 s + 2)} \, c_{0} \\
+c_{6} &= - \dfrac{1}{6 (2 s + 6)} c_{4} = (-1)^{3} \dfrac{1}{6 (2 s + 6)} \, \dfrac{1}{4 (2 s + 4)} \, \dfrac{1}{2 (2 s + 2)} \, c_{0}
+\end{align*}
+y de manera general
+\begin{align*}
+c_{2k} = (-1)^{k} \dfrac{1}{\underbrace{2 k \cdot (2 k - 2) \ldots 2}_{=2^{k} \, k!} \underbrace{(2 s + 2 k)[2 s + (2 k - 2)] \ldots (2 s + 2)}_{=2^{k} (s + k)(s + k + 1) \ldots (s + 1)}} \, c_{0}
+\end{align*}
+Multiplicando el numerador y el denominador por $s!$, llegamos a
+\begin{equation}
+c_{2k} = (-1)^{k} \dfrac{s!}{2^{2k} \, k! \, (s+k)!} \, c_{0}
+\label{eq:ecuacion_27_09}
+\end{equation}
+Sustituyendo la ec. (\ref{eq:ecuacion_27_09}) en la (\ref{eq:ecuacion_27_08}), nos conduce abs
+\begin{align*}
+R(v) &= c_{0} \, s! \, v^{s} \sum_{k=0}^{\infty} \dfrac{(-1)^{k}}{2^{2k} \, k! \, (s + k)!} \, v^{2k} \\
+&= c_{0} \, s! \, 2^{s} \, \left( \dfrac{v}{2} \right)^{s} \sum_{k=0}^{\infty} \dfrac{(-1)^{k}}{k! \, (s + k)!} \, \left( \dfrac{v}{2} \right)^{2 k} 
+\end{align*}
+donde sustituimos $s$ por $\pm m$ en el exponente de $v$ fuera de la suma. También absorbimos las potencias de $2$ en el denominador de la suma en las potencias de $v$, y fuera de la suma, multiplicamos y dividimos por $2^{s}$. Es habitual elegir que la constante arbitraria $c_{0}$ sea igual a $1/(s! \, 2^{s})$. Esto nos lleva a 
+\begin{tcolorbox}
+Las \textbf{funciones de Bessel} de orden $s$, que se escribe como $J_{s}$ y está dada por la serie
+\begin{equation}
+J_{s}(x) = \left( \dfrac{x}{2} \right)^{s} \sum_{k=0}^{\infty} \dfrac{(-1)^{k}}{k!\, (s + k)!} \, \left( \dfrac{x}{2} \right)^{2k}
+\label{eq:ecuacion_27_10}
+\end{equation}
+la cual es convergente para todos los valores de $x$.
+\end{tcolorbox}
+Aunque la Ecuación (\ref{eq:ecuacion_27_10}) se obtuvo asumiendo que $m$, y por lo tanto $s$, era un número entero, al levantar esta restricción se obtendría una serie que es convergente en todas partes, y uno puede definir funciones de Bessel cuyas órdenes son números reales o incluso complejos. La única dificultad es interpretar correctamente $(s + n)!$ para $s$ no enteros. Pero esto es precisamente para lo que se inventó la función gamma. Por lo tanto, dejaremos que la ecuación (\ref{eq:ecuacion_27_10}) represente las funciones de Bessel de todos los órdenes.
 
+\section{Segunda solución a la ED de Bessel.}
+Se puede obtener una segunda solución de la ED de Bessel, usando la ec. (\ref{eq:ecuacion_24_06}), donde $p(x) = 1/x$.
+\begin{equation}
+f_{2}(x) =  f_{1}(x) \left\{ C + K \int_{\alpha}^{x} \dfrac{1}{f_{1}^{2} (s)} \, \exp( - \int_{c}^{s} p(t) \dd{t}) \dd{s} \right\}
+\label{eq:ecuacion_24_06}
+\end{equation}
+Usando $J_{m}(x)$ como entrada, podemos generar la segunda solución; con $C = 0$ en la ec. (\ref{eq:ecuacion_24_06}), obtenemos
+\begin{align*}
+Z_{m}(x) = K \, J_{m}(x) \, \int_{\alpha}^{x} \dfrac{1}{J_{m}^{2}(x)} \exp(- \int_{c}^{u} \dfrac{\dd{t}}{t}) \dd{u} = A_{m} \, J_{m}(x) \int_{\alpha}^{x} \dfrac{\dd{u}}{u \, J_{m}^{2}(u)}
+\end{align*}
+donde $A_{m} \equiv K , c$ y $\alpha$ son constantes arbitrarias que se establecen por convención.
+\par
+Nótese que, contrario a $J_{m}(x)$, la solución $Z_{m}(x)$ no se comporta bien en $x = 0$, debido a la presencia de $u$ en el denominador del integrando.
+\par
+Aunque el procedimiento anterior genera una segunda solución para la ED  de Bessel, no es el procedimiento habitual. Resulta que para los no enteros $s$, la función de Bessel $J_{-s} (x)$ es independiente de $J_{s} (x)$ y se puede usar como una segunda solución. Sin embargo, una segunda solución más común es la combinación lineal
+\begin{equation}
+Y_{s} (x) = \dfrac{J_{s}(x) , \cos s \pi - J_{-s}(x)}{\sin s\pi}
+\label{eq:ecuacion_27_11}
+\end{equation}
+que es llamada la función de Bessel de segunda clase, o \textbf{Funciones de Neumann}.
+\par
+Para enteros $s$ la función es indeterminada debido a que
+\begin{align}
+\begin{aligned}
+J_{-m}(x) &= \left(\dfrac{x}{2} \right)^{-m} \sum_{n=0}^{\infty} \dfrac{(-1)^{m+n}}{(m+n)! \, \Gamma(n+1)} \, \left( \dfrac{x}{2} \right)^{2m +2n} = \\
+&= (-1)^{m} \left( \dfrac{x}{2} \right)^{m} \sum_{n=0}^{\infty} \dfrac{(-1)^{n}}{\Gamma(m+n+1) \, n!} \, \left( \dfrac{x}{2} \right)^{2n} = \\
+&= (-1)^{m} \, J_{m}(x)    
+\end{aligned}
+\label{ecuacion_11_32}
+\end{align}
+y por la identidad $\cos n \pi = (-1)^{n}$. Por lo tanto, usamos la regla de l'Hôpital y definimos
+\begin{align*}
+Y_{n}(x) &\equiv \lim_{s \to n} Y_{s} (x) = \lim_{s \to n} \dfrac{\displaystyle \pdv{s} \left[ J_{s}(x) \,\cos s \pi - J_{-s}(x) \right]}{\pi \, \cos n \pi} \\[1em]
+&= \dfrac{1}{\pi} \lim_{s \to n} \left[ \pdv{J_{s}}{s} - (-1)^{n} \pdv{J_{-s}}{s} \right]
+\end{align*}
+De la ec. (\ref{eq:ecuacion_27_10}) se obtiene que
+\begin{align*}
+\pdv{J_{s}}{s} = J_{s} (x) \, \ln \left( \dfrac{x}{2} \right) - \left( \dfrac{x}{2} \right)^{s} \sum_{k=0}^{\infty} (-1)^{k} \, \dfrac{\Psi(s + k + 1)}{k! \, \Gamma(s + k + 1)} \, \left( \dfrac{x}{2} \right)^{2k}
+\end{align*}
+donde
+\begin{align*}
+\Psi (x) \equiv \dv{x} \ln[(x - 1)!] = \dv{x} \ln \Gamma (x) = \dfrac{\dv*{\Gamma(x)}{x}}{\Gamma (x)}
+\end{align*}
+De manera similar
+\begin{align*}
+\pdv{J_{-s}}{s} = -J_{-s} (x) \, \ln \left( \dfrac{x}{2} \right) + \left( \dfrac{x}{2} \right)^{-s} \sum_{k=0}^{\infty} (-1)^{k} \, \dfrac{\Psi(-s + k + 1)}{k! \, \Gamma(-s + k + 1)} \, \left( \dfrac{x}{2} \right)^{2k}
+\end{align*}
+Al sustituir estas expresiones en la definición de $Y_{n}(x)$ y usando la identidad $J_{-n} = (-1)^{n} J_{n}(x)$, se obtiene
+\begin{align}
+\begin{aligned}
+Y_{n} (x) &= \dfrac{2}{\pi} \, J_{n} (x) \, \ln \left(\dfrac{x}{2} \right) - \dfrac{1}{\pi} \left( \dfrac{x}{2} \right)^{n} \sum_{k=0}^{\infty} (-1)^{k} \dfrac{\Psi (n + k + 1)}{k! \, \Gamma (n + k + 1)} \left(\dfrac{x}{2} \right)^{2k} + \\
+&- \dfrac{1}{\pi} (-1)^{n} \left( \dfrac{x}{2} \right)^{-n} \sum_{k=0}^{\infty} (-1)^{k} \dfrac{\Psi (k - n + 1)}{k! \, \Gamma (k - n + 1)} \left(\dfrac{x}{2} \right)^{2k}
+\end{aligned}
+\label{eq:ecuacion_27_12}
+\end{align}
+Debe de quedar claro con la ec. (\ref{eq:ecuacion_27_12}) que la función de Neumann $Y_{s} (x)$ está mal definida en $x = 0$, como se espera de la segunda solución para la ED de Bessel, como la función $Z_{m} (x)$ discutida anteriormente.
+\par
+Como $Y_{s} (x)$ es linealmente independiente de $J_{s} (x)$ para cualquier $s$, entero o no entero, es conveniente considerar $\left\{ Js (x), Ys (x) \right\}$ como base de las soluciones para la ED de Bessel. En particular, la solución de la ecuación radial en coordenadas cilíndricas, es decir, la primera ecuación en (\ref{eq:ecuacion_27_01}), se convierte en
+\begin{equation}
+R(\rho) = A \, J_{m}(v) + B \, Y_{m}(v) = A \, J_{m} (l \, \rho) + B \, Y_{m} (l \, \rho)
+\label{eq:ecuacion_27_13}
+\end{equation}
+\section{Propiedades de las funciones de Bessel.}
 \end{document}
