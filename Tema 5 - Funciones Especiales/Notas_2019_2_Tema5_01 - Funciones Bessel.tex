@@ -221,7 +221,7 @@ J_{-m}(x) &= \left(\dfrac{x}{2} \right)^{-m} \sum_{n=0}^{\infty} \dfrac{(-1)^{m+
 &= (-1)^{m} \left( \dfrac{x}{2} \right)^{m} \sum_{n=0}^{\infty} \dfrac{(-1)^{n}}{\Gamma(m+n+1) \, n!} \, \left( \dfrac{x}{2} \right)^{2n} = \\
 &= (-1)^{m} \, J_{m}(x)    
 \end{aligned}
-\label{ecuacion_11_32}
+\label{eq:ecuacion_11_32}
 \end{align}
 y por la identidad $\cos n \pi = (-1)^{n}$. Por lo tanto, usamos la regla de l'Hôpital y definimos
 \begin{align*}
@@ -256,4 +256,324 @@ R(\rho) = A \, J_{m}(v) + B \, Y_{m}(v) = A \, J_{m} (l \, \rho) + B \, Y_{m} (l
 \label{eq:ecuacion_27_13}
 \end{equation}
 \section{Propiedades de las funciones de Bessel.}
+\subsection{Funciones de Bessel de orden entero negativo.}
+La ec. (\ref{eq:ecuacion_11_32}) nos proporciona una relación de la función de Bessel de orden entero y la función de Bessel de orden entero negativo:
+\begin{equation}
+J_{-m} (x) = (-1)^{m} \, J_{m} (x)
+\label{eq:ecuacion_27_14}
+\end{equation}
+\subsection{Relaciones de recurrencia.}
+Una primera relación de recurrencia que no involucra la derivada de la función de Bessel es:
+\begin{equation}
+J_{m-1} (x) + J_{m+1} (x) = \dfrac{2 \, m}{x} \, J_{m} (x)
+\label{eq:ecuacion_27_15}
+\end{equation}
+La siguiente relación considera la derivada de la función de Bessel:
+\begin{equation}
+J_{m-1} (x) - J_{m+1} (x) = 2 \, J_{m}^{\prime} (x)
+\label{eq:ecuacion_27_16}
+\end{equation}
+Combinando las dos ecuaciones anteriores, se obtiene
+\begin{align}
+\begin{aligned}
+J_{m-1}(x) &= \dfrac{m}{x} \, J_{m} (x) + J_{m}^{\prime} (x) \\
+J_{m+1}(x) &= \dfrac{m}{x} \, J_{m} (x) - J_{m}^{\prime} (x)
+\end{aligned}
+\label{eq:ecuacion_27_17}
+\end{align}
+Podemos utilizar estas ecuaciones para obtener nuevas y útiles relaciones de recurrencia. Por ejemplo, al diferenciar $x^{m} \, J_{m} (x)$, se obtiene
+\begin{align*}
+[x^{m} \, J_{m} (x)]^{\prime} &= m \, x^{m-1} \, J_{m} (x) + x^{m} \, J_{m}^{\prime} (x) \\[1em]
+&= x^{m} \underbrace{ \left[ \dfrac{m}{x} \, J_{m} (x) + J_{m}^{\prime} (x)\right]}_{=J_{m-1}(x) \mbox{ por } (\ref{eq:ecuacion_27_17})}  \\[1em]
+&= x^{m} \, J_{m-1} (x)
+\end{align*}
+Integrando esta ecuación, nos lleva a
+\begin{equation}
+\int x^{m} \, J_{m-1} (x) \dd{x} = x^{m} \, J_{m} (x)
+\label{eq:ecuacion_27_18}
+\end{equation}
+De manera similar, se obtiene que
+\begin{equation}
+\int x^{-m} \, J_{m+1} (x) \dd{x} = -x^{-m} \, J_{m} (x)
+\label{eq:ecuacion_27_19}
+\end{equation}
+\subsection{Ortogonalidad.}
+Las funciones de Bessel satisfacen una relación de ortogonalidad, la cantidad que determina esta ortogonalidad de las diferentes funciones de Bessel no es el orden sino un parámetro en su argumento.
+\par
+Considere dos soluciones de la ED de Bessel que corresponden al mismo parámetro azimutal, pero con un parámetro radial diferente. Más específicamente, hagamos
+\begin{align*}
+f(\rho) &= J_{m} (k \rho) \\
+g(\rho) &= J_{m} (l \rho)
+\end{align*}
+Entonces se tiene que
+\begin{align*}
+\dv[2]{f}{\rho} + \dfrac{1}{\rho} \, \dv{f}{\rho} + \left( k^{2} - \dfrac{m^{2}}{\rho^{2}} \right) \, f &= 0 \\[1em]
+\dv[2]{g}{\rho} + \dfrac{1}{\rho} \, \dv{g}{\rho} + \left( l^{2} - \dfrac{m^{2}}{\rho^{2}} \right) \, g &= 0
+\end{align*}
+Al multiplicar la primera ecuación por $\rho \, g$ y la seguna por $\rho \, f$, para luego restarlar, se llega a
+\begin{align*}
+\dv{\rho} [\rho (f \, g^{\prime} - g \, f^{\prime} ) ] = (k^{2} - l^{2}) \rho \, f \, g
+\end{align*}
+donde el primado indica que la diferenciación es con respecto a la variable $\rho$. Al integrar la última ecuación con respecto a $\rho$ de un valor inicial (digamos $a$) a un valor final (digamos $b$), se obtiene
+\begin{align*}
+[\rho (f \, g^{\prime} - g \, f^{\prime} ) ]\eval_{a}^{b} = (k^{2} - l^{2}) \int_{a}^{b} \rho \, f(\rho) \, g(\rho) \dd{\rho}
+\end{align*}
+En todas las aplicaciones físicas, tanto $a$ como $b$ se escogen de tal manera para hacer que el lado derecho de la igualdad se anule. Entonces, al sustituir $f$ y $g$ en términos de las funciones de Bessel, tenemos
+\begin{align*}
+(k^{2} - l^{2}) \int_{a}^{b} \rho \, J_{m} (k \, \rho) \, J_{m}(l \, \rho) \dd{\rho} = 0
+\end{align*}
+Se sigue que si $k \neq l$, entonces la integral se anula, es decir
+\begin{equation}
+\int_{a}^{b} \rho \, J_{m} (k \, \rho) \, J_{m}(l \, \rho) \dd{\rho} = 0 \hspace{1.5cm} \mbox{ si } k \neq l
+\label{eq:ecuacion_27_20}
+\end{equation}
+Esta es la relación de ortogonalidad para las funciones de Bessel.
+\par
+Para completar la relación de ortogonalidad, también debemos abordar el caso cuando $k = l$. Esto implica la evaluación de la integral $\displaystyle \int \rho J_{m}^{2} ( k \, \rho) \dd{\rho}$, la cual con el cambio de variable $x \equiv k \, \rho$ se reduce a
+\begin{align*}
+\dfrac{\displaystyle \int x \, J_{m}^{2} (x) \dd{x}}{k^{2}}
+\end{align*}
+Integrando por partes, se tiene
+\begin{align*}
+I \equiv \int  \underbrace{J_{m}^{2} (x)}_{u} \, \underbrace{x \dd{x}}_{\dd{v}} =  \dfrac{1}{2} x^{2} \, J_{m}^{2} (x)
+ - \int J_{m}(x) \, J_{m}^{\prime} (x) \, x^{2} \dd{x}
+\end{align*}
+En la última integral, sustituimos por $x^{2} \, J_{m} (x)$ de la ecuación de Bessel (\ref{eq:ecuacion_27_06}), usangdo $x$ en lugar de $v$:
+\begin{align*}
+x^{2} \, J_{m} (x) =  m^{2} \, J_{m}(x) - x \, J_{m}^{\prime} (x) - x^{2} \, J_{m}^{\prime \prime} (x)
+\end{align*}
+Por lo tanto
+\begin{align*}
+I &= \dfrac{1}{2} \, x^{2} \, J_{m}^{2} (x) - \int J_{m}^{\prime}(x) \, [m^{2} J_{m}(x) \overbrace{- x \, J_{m}^{\prime} (x) - x^{2} \, J_{m}^{\prime \prime} (x)]}^{=-(\frac{1}{2} x^{2} [J_{m}^{\prime} (x)]^{2})^{\prime}} \, \dd{x} \\[1em]
+&= \dfrac{1}{2} \, x^{2} \, J_{m}^{2} (x) - m^{2} \int \overbrace{J_{m} (x) \, J_{m}^{\prime} (x)}^{=\frac{1}{2} [J_{m}^{2}(x)]^{\prime}} \dd{x} + \dfrac{1}{2} \int \dv{x} (x^{2} [J_{m}^{\prime} (x)]^{2}) \dd{x} \\[1em]
+&= \dfrac{1}{2} \, x^{2} \, J_{m}^{2} (x) - \dfrac{1}{2} m^{2} \, J_{m}^{2} (x) + \dfrac{1}{2} \, x^{2} \, [J_{m}^{\prime}(x)]^{2}
+\end{align*}
+Regresando a la variable $\rho$, obtenemos una integral indefinida
+\begin{equation}
+\int \rho \, J_{m}^{2} ( k \, \rho) \dd{\rho} = \dfrac{I}{k^{2}} = \dfrac{1}{2} \left(\rho^{2} - \dfrac{m^{2}}{k^{2}} \right) \, J_{m}^{2} (k \, \rho) + \dfrac{1}{2} \rho^{2} [J_{m}^{\prime}(k \, \rho)]^{2}
+\label{eq:ecuacion_27_21}
+\end{equation}
+En la mayoría de las aplicaciones, el límite inferior de integración es cero y el límite superior es un número positivo $a$. El lado derecho de la igualdad de la ec. (\ref{eq:ecuacion_27_21}) se anula en el límite inferior debido a la siguiente razón: El primer término se desvanece en $\rho = 0$ porque $J_{m} (0) = 0$ para todo $m > 0$, como se desprende de la expansión de la serie (\ref{eq:ecuacion_27_10}). Para $m = 0$ (y $\rho = 0$), los paréntesis en el primer término de la ec. (\ref{eq:ecuacion_27_21}) se anulan. Entonces, el primer término es cero para todo $m \geq 0$ en el límite inferior de integración. El segundo término se anula debido a la presencia de $\rho^{2}$. Así, obtenemos
+\begin{equation}
+\int_{0}^{a} \rho \, J_{m}^{2} ( k \, \rho) \dd{\rho} = \dfrac{1}{2} \left( a^{2} - \dfrac{m^{2}}{k^{2}} \right) \, J_{m}^{2} (k \, a) + \dfrac{1}{2} a^{2} [J_{m}^{\prime} (k \, a)]^{2}
+\label{eq:ecuacion_27_22}
+\end{equation}
+para todo $m \geq 0$ y, por la ec. (\ref{eq:ecuacion_27_14}), también para todos los enteros negativos. Como se mencionó anteriormente, limitaremos nuestra discusión a las funciones de Bessel de orden entero. Es costumbre simplificar el lado derecho de la igualdad de la ec. (\ref{eq:ecuacion_27_22}) al elegir $k$ de tal manera que $J_{m} (k \, a) = 0$, es decir, que $k \, a$ sea una raíz de la función de Bessel de orden $m$. En general, hay infinitas raíces. Entonces, digamos que $x_{mn}$ corresponde a la $n$-ésima raíz de $J_m (x)$. Entonces,
+\begin{align*}
+k \, a = x_{mn} \hspace{1cm} \Longrightarrow \hspace{1cm} k = \dfrac{x_{mn}}{a}, \hspace{1cm} n = 1, 2, 3, \ldots
+\end{align*}
+Si utilizamos la ec. (\ref{eq:ecuacion_27_17}) obtenemos
+\begin{equation}
+\int_{0}^{a} \rho \, J_{m}^{2} \left(\dfrac{x_{mn} \, \rho}{a}   \right) \dd{\rho} = \dfrac{1}{2} a^{2} [J_{m+1} (x_{mn})]^{2}
+\label{eq:ecuacion_27_23}
+\end{equation}
+Las ecuaciones (\ref{eq:ecuacion_27_20}) y (\ref{eq:ecuacion_27_23}) se pueden combinar en una ecuación sencilla usando una delta de Kronecker:
+\begin{tcolorbox}
+Las funciones de Bessel de orden entero satisfacen la relación de ortogonalidad.
+\begin{equation}
+\int_{0}^{a} J_{m} \left(\dfrac{x_{mn} \, \rho}{a} \right) \, J_{m} \left(\dfrac{x_{mk} \, \rho}{a} \right) \, \rho \dd{\rho} = \dfrac{1}{2} a^{2} \, J_{m+1}^{2} (x_{mn}) \, \delta_{kn}
+\label{eq:ecuacion_27_24}
+\end{equation}
+donde $a > 0$ y $x_{mn}$ es la $n$-ésima raíz de $J_{m}(x)$.
+\end{tcolorbox}
+\subsection{Función generatriz.}
+Las funciones de Bessel de orden entero tienen una función generatriz, es decir, existe una función $g(x, t)$, tal que
+\begin{equation}
+g (x, t) = \sum_{n=-\infty}^{\infty} t^{n} \, J_{n} (x)
+\label{eq:ecuacion_27_25}
+\end{equation}
+Para determinar a la función $g$, comenzamos con la siguiente relación de recurrencia
+\begin{align*}
+J_{m-1}(x) + J_{m+1} (x) = \dfrac{2 \, m}{x} \, J_{m} (x)
+\end{align*}
+multiplicándola por $t^{m}$, para luego sumar sobre todo $m$, tenemos
+\begin{equation}
+\sum_{m=-\infty}^{\infty} t^{m} \, J_{m-1} (x) + \sum_{m=-\infty}^{\infty} t^{m} \, J_{m+1} (x) = \dfrac{2}{x} \, \sum_{m=-\infty}^{\infty} m \, t^{m} \, J_{m} (x)
+\label{eq:ecuacion_27_26}
+\end{equation}
+La primera suma se puede escribir como
+\begin{align*}
+\sum_{m=-\infty}^{\infty} t^{m} \, J_{m-1} (x) = t \, \sum_{-\infty}^{\infty} t^{m-1} \, J_{m-1} (x) =  t \, \sum_{-\infty}^{\infty} t^{n} \, J_{n} (x) = t \, g(x, t)
+\end{align*}
+donde se ha sustituido el índice mudo $n = m -1$ por $m$. De manera similar
+\begin{align*}
+\sum_{m=-\infty}^{\infty} t^{m} \, J_{m+1} (x) = \dfrac{1}{t} \, \sum_{-\infty}^{\infty} t^{m+1} \, J_{m+1} (x) = \dfrac{1}{t} \,  g(x, t)
+\end{align*}
+y
+\begin{align*}
+\dfrac{2}{m} \, \sum_{m=-\infty}^{\infty} m \, t^{m} \, J_{m} (x) = \dfrac{2 \, t}{x} \, \sum_{m=-\infty}^{\infty} m \, t^{m-1} \, J_{m} (x) = \dfrac{2 \, t}{x} \, \pdv{g}{t}
+\end{align*}
+Se sigue de la ec. (\ref{eq:ecuacion_27_26}) que
+\begin{align*}
+\left( t + \dfrac{1}{t} \right) \, g(x, t) = \dfrac{2 \, t}{x} \, \pdv{g}{t}
+\end{align*}
+o también
+\begin{align*}
+\dfrac{x}{2} \left( 1 + \dfrac{1}{t^{2}} \right) \dd{t} = \dfrac{\dd{g}}{g}
+\end{align*}
+donde se supone que $x$ es una constante porque hemos estado diferenciando con respecto a $t$. Integrando ambos lados resulta
+\begin{align*}
+\underbrace{\int \dfrac{x}{2} \left( 1 + \dfrac{1}{t^{2}} \right) \dd{t}}_{=\frac{x}{2} (t - \frac{1}{t})} = \ln g + \ln \phi(x)
+\end{align*}
+donde el último término es la \enquote{constante} de integración. Entonces
+\begin{align*}
+g (x, t) = \phi (x) \, \exp \left[ \dfrac{x}{2} \left( t - \dfrac{1}{t} \right) \right]
+\end{align*}
+Para encontrar $\phi(x)$, veamos que
+\begin{align*}
+g(x, t) &= \phi (x) \, \exp(x \, t / 2) \, \exp(-x \, t / 2) = \\[1em]
+&= \phi (x) \, \sum_{n=0}^{\infty} \dfrac{(x \, t / 2)^{n}}{n!} \, \sum_{m=0}^{\infty} \dfrac{(-x \, t / 2)^{m}}{m!} \\[1em]
+&= \phi (x) \, \sum_{n, m=0}^{\infty} \dfrac{(-1)^{m}}{n! \, m!} \, \left( \dfrac{x}{2} \right)^{n+m} \, t^{n-m}
+\end{align*}
+En la última suma doble, se reúnen todos los términos cuya potencia de $t$ es cero y llamemos a esta suma $S_{0}$. Esto se obtiene haciendo $n = m$. Entonces,
+\begin{align*}
+S_{0} = \phi (x) \, \sum_{n=0}^{\infty} \dfrac{(-1)^{n}}{n! \, n!} \, \left( \dfrac{x}{2} \right)^{2n} = \phi (x) \, J_{0} (x)
+\end{align*}
+donde hemos usado la ec. (\ref{eq:ecuacion_27_10}) con $s = 0$. Pero la ec. (\ref{eq:ecuacion_27_05}) nos dice que al juntar los términos cuya potencia de $t$ es cero, es simplemente $J_{0} (x)$. Por lo tanto, $S_{0} = J_{0} (x)$, y $\phi (x) = 1$. Esto nos conduce a la forma final de la función de generación de Bessel:
+\begin{equation}
+g (x, t) = \exp \left[ \dfrac{x}{2} \left( t - \dfrac{1}{t} \right) \right] = \sum_{n=-\infty}^{\infty} t^{n} \, J_{n} (x)
+\label{eq:ecuacion_27_27}
+\end{equation}
+\textbf{Problema a cuenta: } A partir de la función generatriz, demuestra el \textbf{teorema de adición} de las funciones de Bessel:
+\begin{equation}
+J_{n} (x + y) = \sum_{m=-\infty}^{\infty} J_{n-m} (x) \, J_{m} (y) = \sum_{m=-\infty}^{\infty} J_{m} (x) \, J_{n-m} (y)
+\label{eq:ecuacion_27_28}
+\end{equation}
+Tip: Considera que
+\begin{align*}
+g (x + y, t) =  g(x, t) \, g(y, t)
+\end{align*}
+que tendrías que expandir y realizar las debidas operaciones para llegar al resultado indicado en la ec. (\ref{eq:ecuacion_27_28}).
+\par
+La función generatriz de Bessel también nos puede conducir a algunas identidades muy importantes. En la ec. (\ref{eq:ecuacion_27_27}), hacemos $t = e^{i \theta}$ y usamos el resultado
+\begin{equation}
+\sin \theta = \dfrac{1}{2 \, i} (e^{i \theta} - e^{-i \theta})
+\label{eq:ecuacion_18_14}
+\end{equation}
+para obtener
+\begin{equation}
+e^{i  \, x \, \sin \theta} = \sum_{n=-\infty}^{\infty} e^{i n \theta} \, J_{n} (x)
+\label{eq:ecuacion_27_29}
+\end{equation}
+Esta es una expansión de la serie de Fourier en $\theta$, cuyos coeficientes son las funciones de Bessel. Para encontrar estos coeficientes, multiplicamos ambos lados por $e^{-i m \theta}$ para luego integrar de $-\pi$ a $\pi$. El lado izquierdo de la igualdad nos devuelve
+\begin{align*}
+\int_{-\pi}^{\pi} e^{i \, x \, \sin \theta} \, e^{i \, m \,  \theta} \dd{\theta} = \int_{-\pi}^{\pi} e^{i (x \, \sin \theta -  m \,  \theta} \dd{\theta}
+\end{align*}
+Para el lado derecho de la igualdad, tenemos
+\begin{align*}
+\sum_{n=-\infty}^{\infty} \left[ \int_{-\pi}^{\pi} e^{i(n - m) \theta} \dd{\theta} \right] \, J_{n} (x) = 2 \, \pi \, J_{m}(x)
+\end{align*}
+En donde hemos utilizado el siguiente resultado (que se puede verificar fácilmente):
+\begin{align*}
+\int_{-\pi}^{\pi} e^{i(n - m) \theta} \dd{\theta} &= \begin{cases}
+0 & \mbox{ si } n \neq m \\
+2 \, \pi & \mbox{ si } n = m
+\end{cases} \\
+&= 2 \pi \, \delta_{mn}
+\end{align*}
+Al igualar ambos lados de la expresión, obtenemos
+\begin{equation}
+J_{m} (x) = \dfrac{1}{2 \, \pi} \int_{-\pi}^{\pi} e^{i (x \, \sin \theta -  m \, \theta}) \dd{\theta}
+\label{eq:ecuacion_27_30}
+\end{equation}
+Que podemos reducir (ejericio a cuenta) a
+\begin{equation}
+J_{m} (x) = \dfrac{1}{\pi} \int_{-\pi}^{\pi} \cos (x \, \sin \theta -  m \, \theta) \dd{\theta}
+\label{eq:ecuacion_27_31}
+\end{equation}
+que es llamada la \textbf{integral de Bessel.}
+\section{Expansión mediante funciones de Bessel.}
+La ortogonalidad de las funciones de Bessel puede ser útil para ampliar otras funciones en términos de ellas. La idea básica es similar a la expansión en las series de Fourier. Si una función $f(\rho)$ está definida en el intervalo $(0, a)$, entonces podemos escribir
+\begin{equation}
+f(\rho) = \sum_{n=1}^{\infty} c_{n} \, J_{m} \left( \dfrac{x_{mn}\, \rho}{a} \right)
+\label{eq:ecuacion_27_34}
+\end{equation}
+Los coeficinetes $c_{n}$ pueden calcularse al multiplicar ambos lados por la expresión $\rho \, J_{m}(x_{mk} \, \rho/a)$, para luego integrar de $0$ a $a$, se puede verificar que esto nos lleva abordar
+\begin{equation}
+c_{n} = \dfrac{2}{a^{2} \, J_{m+1}^{2} (x_{mn})} \, \int_{0}^{a} f (\rho) \, J_{m} \left( \dfrac{x_{mn} \, \rho}{a} \right) \, \rho \dd{\rho}
+\label{eq:ecuacion_27_35}
+\end{equation}
+Con estas ecuaciones, podemos expandir una función en términos de las funciones de Bessel de un orden en particular.
+\par
+Si elevamos al cuadrado la ec. (\ref{eq:ecuacion_27_34}) y la multiplicamos por $\rho$, para luego integrar de $0$ a $a$, se tiene que
+\begin{align*}
+\int_{0}^{a} f^{2} (\rho) \, \rho \dd{\rho} = \sum_{n=1}^{\infty} \sum_{k=1}^{\infty} c_{n} \, c_{k} \, \underbrace{\int_{0}^{a} J_{m} \left( \dfrac{x_{mn} \, \rho}{a} \right) \, J_{m} \left( \dfrac{x_{mk} \, \rho}{a} \right) \, \rho \dd{\rho}}_{=\frac{1}{2} a^{2} J_{m+1}^{2} (x_{mn}) \delta_{kn} \mbox{ por } (\ref{eq:ecuacion_27_24})}
+\end{align*}
+que nos conduce a la llamada \textbf{relación de Parseval}.
+\begin{equation}
+\int_{0}^{a} f^{2} (\rho) \, \rho \dd{\rho} = \dfrac{1}{2} a^{2} \sum_{n=1}^{\infty} c_{n}^{2} \, J_{m+1}^{2} (x_{mn})
+\label{eq:ecuacion_27_38}
+\end{equation}
+para un valor de $m$. Este valor de $m$ se puede escoger para que las integrales sean lo más sencillas posible.
+\section{Ejemplos de la física.}
+Podemos considerar que las funciones de Bessel son las funciones \enquote{naturales} de la geometría cilíndrica.
+\par
+Como en el caso de las coordenadas cartesianas y esféricas, a menos que la simetría del problema simplifique la situación, la separación de la ecuación de Laplace da como resultado dos parámetros que conducen a una suma doble. Así, esperamos una suma doble en la solución más general de la ecuación de Laplace en geometrías cilíndricas. Una de estas sumas es sobre $m$ que, como muestra la ecuación (\ref{eq:ecuacion_27_03}), aparece en el argumento de las funciones seno y coseno. También designa el orden de la función Bessel (o Neumann).
+\par
+\subsection{Potencial en un cilindro conductor.}
+Para comprender el origen de la segunda suma, considera un cilindro conductor, de radio $a$ y altura $h$ (ver la figura xxx). Supongamos que el potencial en la tapa superior varía como $V (\rho, \varphi)$ mientras que la superficie lateral y la tapa inferior están conectadas a tierra.
+\par
+Calculemos el potencial electrostático $\Phi$ en todos los puntos dentro del cilindro.
+\par
+La solución general es el producto de las soluciones (\ref{eq:ecuacion_27_03}), (\ref{eq:ecuacion_27_04}) y (\ref{eq:ecuacion_27_13}):
+\begin{align*}
+\Phi (\rho, \varphi, z) = R(\rho) \, S(\varphi) \, Z(z)
+\end{align*}
+Como $\Phi (\rho, \varphi, 0) = 0$ para cualquier valor arbitrario de $\rho$ y $\varphi$, tenemos que $Z(0) = 0$, dando una constante $Z(z) = \sinh (l \, z)$.
+\par
+Ya que $\Phi (0, \varphi, z)$ es finito, es finito, no se permite ninguna función de Neumann en la expansión y, dentro de una constante, tenemos $R(\rho) = J_{m}(l \, \rho)$. Además, como $\Phi (a, \varphi, z) = 0$ para cualquier valor arbitrario $\varphi$ y $z$, debemos de tener
+\begin{align*}
+R(a) = J_{m} (l \, a) = 0 \hspace{0.5cm} \Longrightarrow \hspace{0.5cm} l \, a = x_{mn} \hspace{0.5cm} \Longrightarrow \hspace{0.5cm} l = \dfrac{x_{mn}}{a} \hspace{1cm} n = 1, 2, \ldots
+\end{align*}
+donde, $x_{mn}$ son las $n$-ésimas raíces de $J_{m}$.
+\par
+Ahora podemos multiplicar $R$, $S$ y $Z$ y luego sumar todos los valores posibles de $m$ y $n$, teniendo en cuenta que los valores negativos de $m$ dan términos que dependen linealmente de los valores positivos correspondientes. El resultado es la llamada \textbf{serie de Fourier-Bessel}:
+\begin{equation}
+\Phi (\rho, \varphi, z) = \sum_{m=0}^{\infty} \, \sum_{n=1}^{\infty} J_{m} \left( \dfrac{x_{mn}}{a}  \, \rho \right) \, \sinh \left( \dfrac{x_{mn}}{a}  \, z \right) \, (A_{mn} \cos m \, \varphi + B_{mn} \sin m \, \varphi )
+\label{eq:ecuacion_27_39}
+\end{equation}
+donde las constantes $A_{mn}$ y $B_{mn}$ deben ser determinadas por las CDF restantes que establecen que $\Phi (\rho, \varphi, z) = V(\rho, \varphi)$ o
+\begin{equation}
+V (\rho, \varphi) = \sum_{m=0}^{\infty} \, \sum_{n=1}^{\infty} J_{m} \left( \dfrac{x_{mn}}{a}  \, \rho \right) \, \sinh \left( \dfrac{x_{mn}}{a}  \, h \right) \, (A_{mn} \cos m \, \varphi + B_{mn} \sin m \, \varphi )
+\label{eq:ecuacion_27_40}
+\end{equation}
+Multiplicando ambos lados por
+\begin{align*}
+\rho \, J_{m} \left( \dfrac{x_{mk} \, a}{\rho} \right) \, \cos j \varphi
+\end{align*}
+para luego integrar de $0$ a $2 \, \pi$, y de $0$ a $a$ en $\rho$, se obtiene $A_{jk}$. Cambiando el coseno al seno, y siguiendo el mismo procedimiento, obtenemos $B_{jk}$. Regresamos del índice $m$ al $n$, por lo tanto
+\begin{align}
+\begin{aligned}
+A_{mn} &= \dfrac{\displaystyle 2 \int_{0}^{2 \pi} \dd{\varphi} \int_{0}^{a} \rho \, V (\rho, \varphi) \, J_{m} \, \left( \dfrac{x_{mn}}{a}  \, \rho \right) \, \cos m \varphi \dd{\rho}}{\pi \, a^{2} \, J_{m+1}^{2} (x_{mn}) \, \sinh \left( \dfrac{x_{mn} \, h}{a} \right) } \\[1em]
+B_{mn} &= \dfrac{\displaystyle 2 \int_{0}^{2 \pi} \dd{\varphi} \int_{0}^{a} \rho \, V (\rho, \varphi) \, J_{m} \, \left( \dfrac{x_{mn}}{a}  \, \rho \right) \, \sin m \varphi \dd{\rho}}{\pi \, a^{2} \, J_{m+1}^{2} (x_{mn}) \, \sinh \left( \dfrac{x_{mn} \, h}{a} \right) }
+\end{aligned}
+\label{eq:ecuacion_27_41}
+\end{align}
+en donde se ha utilizado la ec. (\ref{eq:ecuacion_27_24}).
+\par
+El caso importante de simetría azimutal requiere una consideración especial. En tal caso, el potencial de la superficie superior $V (\rho, \varphi)$ debe ser independiente de $\varphi$. Además, como $S (\varphi)$ es constante, su derivada debe anularse. Por lo tanto, la segunda ecuación en (\ref{eq:ecuacion_27_01}) devuelve $\mu = -m^{2} = 0$. Este valor cero de $m$ reduce la suma doble de la ec. (\ref{eq:ecuacion_27_39}) a una sola suma, y obtenemos
+\begin{equation}
+\Phi (\rho, z) = \sum_{n=1}^{\infty} A_{n} \, J_{0} \left( \dfrac{x_{0n}}{a}  \, \rho \right) \, \sinh \left( \dfrac{x_{0n}}{a}  \, z \right)
+\label{eq:ecuacion_27_42}
+\end{equation}
+Los coeficientes $A_{n}$ pueden obtenerse haciendo $m = 0$ en la primera ecuación de (\ref{eq:ecuacion_27_41}):
+\begin{equation}
+A_{n} = \dfrac{4}{a^{2} \, J_{1}^{2} (x_{0n}) \, \sinh \left( \dfrac{x_{0n} \, h}{a} \right)} \, \int_{0}^{a} \rho \, V (\rho) \, J_{0} \, \left( \dfrac{x_{0n}}{a}  \, \rho \right) \dd{\rho}
+\label{eq:ecuacion_27_43}
+\end{equation}
+donde $V(\rho)$ es el potencial independiente de $\varphi$ en la tapa superior del cilindro.
+\subsection{Cilindro conductor con tapa a un potencial fijo $V_{0}$.}
+Supongamos que la tapa superior de un cilindro conductor se mantiene a un potencial constante $V_{0}$ mientras que la superficie lateral y la tapa inferior están conectadas a tierra.
+\par
+Queremos calcular el potencial electrostático $\Phi$ en todos los puntos dentro del cilindro.
+\par
+Como el potencial de la tapa superior es independiente de $\varphi$, prevalece la simetría azimutal y la ec. (\ref{eq:ecuacion_27_43}) nos devuelve
+\begin{align*}
+A_{n} &= \dfrac{4 \, V_{0}}{a^{2} \, J_{1}^{2} (x_{0n}) \, \sinh \left( \dfrac{x_{0n} \, h}{a} \right)} \, \int_{0}^{a} \rho \,  J_{0} \, \left( \dfrac{x_{0n}}{a}  \, \rho \right) \dd{\rho} \\[1em]
+&= \dfrac{4 \, V_{0}}{x_{0n} \, J_{1} (x_{0n}) \, \sinh \left( \dfrac{x_{0n} \, h}{a} \right)}
+\end{align*}
+donde hemos usado la ec. (\ref{eq:ecuacion_27_18}). El detalle del cálculo de la integral es \textbf{un problema a cuenta}. Se tiene entonces que
+\begin{align*}
+\Phi (\rho, z) = 4 \, V_{0} \, \sum_{n=1}^{\infty} \dfrac{J_{0} \left( \dfrac{x_{0n} \, \rho}{a} \right) \, \sinh \left( \dfrac{x_{0n} \, z}{a} \right)}{{x_{0n} \, J_{1} (x_{0n}) \, \sinh \left( \dfrac{x_{0n} \, h}{a} \right)}}
+\end{align*}
 \end{document}
