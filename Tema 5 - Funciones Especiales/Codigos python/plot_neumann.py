@@ -10,12 +10,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.special as sp
 
-x = np.linspace(0, 15)
+x = np.linspace(0, 10)
 
 for v in range(0, 4):
-    plt.plot(x, sp.jv(v, x))
+    plt.plot(x, sp.yn(v, x))
 
 plt.axhline(y=0, lw=0.9)
-plt.xlim([0,14])
-plt.title('Funciones de Bessel $J_{n}(x)$')
+plt.xlim([0, 10])
+plt.ylim([-4, 1])
+plt.title(r'Funciones de Neumann $N_{\nu}(x)$')
 plt.show()

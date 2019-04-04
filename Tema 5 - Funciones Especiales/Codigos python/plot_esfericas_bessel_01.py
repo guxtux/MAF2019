@@ -10,12 +10,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.special as sp
 
-x = np.linspace(0, 15)
+x = np.linspace(0, 14)
 
 for v in range(0, 4):
-    plt.plot(x, sp.jv(v, x))
+    plt.plot(x, sp.spherical_jn(v, x, 0))
+        
+
 
 plt.axhline(y=0, lw=0.9)
-plt.xlim([0,14])
-plt.title('Funciones de Bessel $J_{n}(x)$')
+plt.xlim([0, 14])
+#plt.ylim([-4, 2])
+plt.title(r'Funciones esféricas de Bessel $j_{n}(x)$')
 plt.show()

@@ -10,12 +10,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.special as sp
 
-x = np.linspace(0, 15)
+x = np.linspace(0, 10)
 
-for v in range(0, 4):
-    plt.plot(x, sp.jv(v, x))
+for v in range(0, 2):
+    plt.plot(x, sp.iv(v, x), label='$I_{' + str(v)+ '}$')
 
+plt.legend(loc='best')
 plt.axhline(y=0, lw=0.9)
-plt.xlim([0,14])
-plt.title('Funciones de Bessel $J_{n}(x)$')
+plt.xlim([4, 10])
+#plt.ylim([-4, 1])
+plt.title(r'Funciones modificadas de Bessel $I_{\nu}(x)$')
 plt.show()
