@@ -22,12 +22,12 @@ MODES = (
     (0, 1),
     (0, 2),
     (0, 3),
-    (1, 1),
-    (1, 2),
-    (1, 3),
-    (2, 1),
-    (2, 2),
-    (2, 3)
+    (1, 1)
+#    (1, 2),
+#    (1, 3),
+#    (2, 1),
+#    (2, 2),
+#    (2, 3)
 )
 
 FRAMES = len(MODES) * TIME_PER_MODE * FPS
@@ -84,10 +84,10 @@ def update(i):
     ax.set_ylim(-0.75, 0.75)
     omega = SPEED_OF_SOUND * lambda_mn(m, n, RADIUS)
     ax.set_title(
-        f'Circular membrane, m = {m}, n = {n}, ω={omega:.2f}',
+        f'Membrana circular, m = {m}, n = {n}, ω={omega:.2f}',
         size=36, weight='bold', family='Fira Sans',
     )
 
 
 ani = FuncAnimation(fig, update, frames=FRAMES, interval=1000/FPS, repeat=False)
-ani.save(f'membrane.mov', writer='ffmpeg')
+ani.save(f'membrana_03.mp4', writer='ffmpeg')
