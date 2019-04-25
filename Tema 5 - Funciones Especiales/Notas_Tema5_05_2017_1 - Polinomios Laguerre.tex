@@ -15,6 +15,7 @@
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
+%Referencia: Griffits.
 % \section{El átomo de hidrógeno.}
 % El átomo de hidrógeno consta de un protón pesado, esencialmente inmóvil (de tal manera que podemos ponerlo en el origen) de carga $e$, junto con un electrón mucho más ligero (de carga $-e$) que se desplaza en círculo alrededor del protón, y se mantiene en órbita por la atracción mutua de cargas opuestas (ver Figura \ref{fig:figura_01}).
 % \begin{figure}[H]
@@ -320,7 +321,7 @@
 % \label{fig:figura_02}
 % \end{figure}
 % \newpage
-%Refernci
+%Referencia: Sepúlveda. 8.6 Polinomios de Laguerre
 \section{Polinomios de Laguerre.}
 La ecuación diferencial de Laguerre tiene la forma:
 \begin{equation}
@@ -330,17 +331,17 @@ x \, \ddot{y} + (1 - x) \, \dot{y} + n \, y = 0
 donde
 \[ a_{2} = x \hspace{1cm} a_{1} = 1 - x \hspace{1cm} a_{0} = 0 \hspace{1cm} \lambda = n \]
 Entonces por ser una ecuación de tipo Sturm-Liouville, se tiene que
-\[ p = \dfrac{1}{a_{2}} \exp \left( \int \frac{a_{1}}{a_{2}} \, \dd x \right) = e^{-x} \hspace{1cm} q = a_{2} \, p = x \, e^{-x} \hspace{1cm} r = a_{0} \, p = 0 \]
+\[ p = \dfrac{1}{a_{2}} \exp \left( \int \frac{a_{1}}{a_{2}} \, \dd{x} \right) = e^{-x} \hspace{1cm} q = a_{2} \, p = x \, e^{-x} \hspace{1cm} r = a_{0} \, p = 0 \]
 En consecuencia la forma autoadjunta es:
 \[ \dv{x} \left( x \, e^{-x} \, \dot{y} \right) + n \, e^{-x} \,  y = 0  \]
 Al considerar el método de Frobenius, se verá que $n$ debe de ser un entero positivo, para que la solución sea convergente en $x \to \infty$. Considerando la teoría de Sturm-Liouville, se obtiene con $y(x) = L_{n}(x)$:
 \begin{equation}
-(n - m) \int_{a}^{b} e^{-x} \; L_{n}(x) \; L_{m}(x) \, \dd x = \left[ x \; e^{-x} (\dot{L}_{n} \, L_{m} - \dot{L}_{m} \, L_{n}) \right]_{a}^{b}
+(n - m) \int_{a}^{b} e^{-x} \; L_{n}(x) \; L_{m}(x) \, \dd{x} = \left[ x \; e^{-x} (\dot{L}_{n} \, L_{m} - \dot{L}_{m} \, L_{n}) \right]\eval_{a}^{b}
 \label{eq:ecuacion_08_75}
 \end{equation}
 Las funciones $L_{n}$ son ortogonales si $a=0$, $b \to \infty$.
 \par
-Aplicando el método de Frobenius, con una prpouesta de solución:
+Aplicando el método de Frobenius, con una propuesta de solución:
 \[ y(x) = \sum_{\alpha = 0}^{\infty} a_{\alpha} \; x^{\alpha + k}, \hspace{1.5cm} a_{0} \neq 0 \]
 se sigue por sustitución en la ec. (\ref{eq:ecuacion_08_74}),:
 \begin{align*}
@@ -350,12 +351,12 @@ Moviendo el índice $-1$ de la primera suma
 \begin{align*}
 \sum_{\alpha = -1}^{\infty} a_{\alpha + 1} \, (\alpha + k + 1)^{2} \; x^{\alpha + k} + \sum_{\alpha = 0}^{\infty} a_{\alpha} \, (- \alpha - k + n) \; x^{\alpha + k} = 0
 \end{align*}
-se sigue,  que
+se sigue, que
 \begin{align*}
-a_{0} \, k^{2} &= 0 \saltosin
+a_{0} \, k^{2} &= 0 \\
 a_{\alpha + 1} (\alpha + k + 1)^{2} + a_{\alpha} (-\alpha - k + n) &= 0 
 \end{align*}
-Por tanto: $k = 0$ y la de la segunda ecuación de índices
+Por tanto: $k = 0$ y de la segunda ecuación de índices
 \[ a_{\alpha + 1} = \dfrac{a_{\alpha} \, (\alpha + k - n)}{(\alpha + k + 1)^{2}} = \dfrac{a_{\alpha} \, (\alpha - n)}{(\alpha + 1)^{2}} \]
 explícitamente
 \begin{align*}
@@ -366,15 +367,23 @@ a_{4} &= (-) \dfrac{a_{3} \, (n - 3)}{4^{2}} = (-)^{4} \dfrac{n \, (n - 1)(n - 2
 \vdots
 \end{align*}
 generalizando la expresión
-\[ a_{p} = \dfrac{(-1)^{p} \, n!}{(p!)^{2} \, (n - p)!} \, a_{0} \]
-La serie de Frobenius toma entonces la forma:
-\[ y = a_{0} \, n! \, \sum_{p=0}^{\infty} \dfrac{(-1)^{p} \, x^{p}}{(p!)^{2} \, (n - p)! } \]
+\begin{align*}
+a_{p} = \dfrac{(-1)^{p} \, n!}{(p!)^{2} \, (n - p)!} \, a_{0}
+\end{align*}
+La serie de Frobenius entonces toma la forma:
+\begin{align*}
+y = a_{0} \, n! \, \sum_{p=0}^{\infty} \dfrac{(-1)^{p} \, x^{p}}{(p!)^{2} \, (n - p)! }
+\end{align*}
 La convergencia de la serie puede estudiarse mediante la evaluación del siguiente cociente:
-\[ \dfrac{a_{p + 1} \; x^{p + 1}}{a_{p} \; x^{p}}, \hspace{1.5cm} \mbox{que resulta ser} \hspace{1.5cm} \dfrac{x \, (n - p)}{(p + 1)^{2}} \]
-y es no convergente, si $n \neq \mbox{ entero}$, cuando $x \to \infty$. En consecuencia debemos de imponer la restricción de que $n$ sea \emph{entero positivo}, lo que convierte la serie infinita en un polinomio.
+\begin{align*}
+\dfrac{a_{p + 1} \; x^{p + 1}}{a_{p} \; x^{p}}, \hspace{1.5cm} \text{que resulta ser} \hspace{1.5cm} \dfrac{x \, (n - p)}{(p + 1)^{2}}
+\end{align*}
+y es no convergente, si $n \neq \text{ entero}$, cuando $x \to \infty$. En consecuencia debemos de imponer la restricción de que $n$ sea \emph{entero positivo}, lo que convierte la serie infinita en un polinomio.
 \par
-Definimos los \emph{polinomios de Laguerre} $L_{n}(x)$ con $n$ entero como
-\[ L_{n}(x) = A \; \sum_{p = 0}^{\infty} \dfrac{(-)^{p} \; x^{p}}{(p!)^{2} \, (n - p)!} \]
+Definimos los \textbf{polinomios de Laguerre} $\mathbf{L_{n}(x)}$ con $n$ entero como
+\begin{align*}
+L_{n}(x) = A \; \sum_{p = 0}^{\infty} \dfrac{(-)^{p} \; x^{p}}{(p!)^{2} \, (n - p)!}
+\end{align*}
 y de tal modo que $L_{n}(0) = 1$. Esto implica que $A = n!$, así pues, con $n \geq 0$ entero:
 \begin{equation}
 \setlength{\fboxsep}{3\fboxsep}\boxed{ L_{n}(x) = n! \; \sum_{p = 0}^{\infty} \dfrac{(-1)^{p} \; n!}{(p!)^{2} (n - p)!} \; x^{p}}
@@ -406,13 +415,15 @@ Utilizando la función generatriz
 donde $\abs{t} < 1$, podemos evaluar el factor de normalización para la condición de ortogonalidad. Multiplicamos la expresión anterior por sí misma (haciendo el cambio de variable $t$ por $s$ y por $e^{-x}$, para luego integrar en $(0, \infty)$:
 \begin{align}
 \begin{aligned}
-\dfrac{1}{(1 - t)(1 - s)} &\int_{0}^{\infty} \exp \left( -x \left[ \dfrac{1+t}{1-t} + \dfrac{s}{1-s} \right] \right) \dd x =  \\
-&= \sum_{n, m = 0}^{\infty} t^{n} \; s^{m} \times \int_{0}^{\infty} e^{-x} \; L_{n}(x) \, L_{m}(x) \, \dd x
+\dfrac{1}{(1 - t)(1 - s)} &\int_{0}^{\infty} \exp \left( -x \left[ \dfrac{1+t}{1-t} + \dfrac{s}{1-s} \right] \right) \dd{x} =  \\
+&= \sum_{n, m = 0}^{\infty} t^{n} \; s^{m} \times \int_{0}^{\infty} e^{-x} \; L_{n}(x) \, L_{m}(x) \, \dd{x}
 \end{aligned}
 \label{eq:ecuacion_08_77}
 \end{align}
 y como
-\[ \int_{0}^{\infty} e^{-x} \; L_{n}(x) L_{m}(x) \, \dd x = \delta_{nm} \; \int_{0}^{\infty} e^{-x} \; L_{n}^{2} (x) \, \dd x \]
+\begin{align*}
+\int_{0}^{\infty} e^{-x} \; L_{n}(x) L_{m}(x) \, \dd x = \delta_{nm} \; \int_{0}^{\infty} e^{-x} \; L_{n}^{2} (x) \, \dd{x}
+\end{align*}
 y además
 \begin{align*}
 \int_{0}^{\infty} &\exp \left( -x \left[ \dfrac{1 + t}{1 - t} + \dfrac{s}{1 - s} \right] \right) \, \dd x = \\
@@ -425,17 +436,27 @@ se sigue que:
 &= \dfrac{1}{1 - s \, t} = (1 - s \, t)^{-1} = \sum_{n=0}^{\infty} (s \, t)^{n}
 \end{align*}
 en el último paso, se ha utilizado la expansión binomial:
-\[  (a + b)^{-k} = \sum \dfrac{(1-)^{n} \, (k + n - 1)!}{n! \, (k -1)!} \, a^{k - n} \; b^{n} \hspace{1cm} k >0, b < a \]
+\begin{align*}
+(a + b)^{-k} = \sum \dfrac{(1-)^{n} \, (k + n - 1)!}{n! \, (k -1)!} \, a^{k - n} \; b^{n} \hspace{1cm} k >0, \hspace{0.5cm} b < a
+\end{align*}
 entonces
-\[ \int_{0}^{\infty} e^{-x} \; L_{n}^{2}(x) \, \dd x = 1 \]
+\begin{align*}
+\int_{0}^{\infty} e^{-x} \; L_{n}^{2}(x) \, \dd{x} = 1
+\end{align*}
 La condición de ortogonalidad resulta ser simultáneamente condición de ortonormalidad:
 \begin{equation}
 \setlength{\fboxsep}{3\fboxsep}\boxed{\int_{0}^{\infty} e^{-x} \; L_{n}(x) L_{m}(x) d x = \delta_{nm} }
 \label{eq:ecuacion_08_78}
 \end{equation}
+\textbf{Problema a cuenta: } Obtener la condición de completes de la base $\left\{ L_{n}(x) \right\}$. Con esta condición podremos expandir cualquier función $f(x)$ definida en $(0, \infty)$ en la base de Laguerre.
+\begin{align*}
+f(x) = \sum_{n=0}^{\infty} c_{n} \, L_{n} (x)
+\end{align*}
 \section{Ecuación asociada de Laguerre.}
 Siguiendo un procedimiento análogo al implementado sobre la ecuación de Legendre para generar la ecuación asociada de Legendre, se tiene que:
-\[ x \, \ddot{y} + (k + 1 - x) \, \dot{y} +  n \, y = 0 \]
+\begin{align*}
+x \, \ddot{y} + (k + 1 - x) \, \dot{y} +  n \, y = 0
+\end{align*}
 Las soluciones a la ecuación se escribirán como $L_{n}^{k} (x)$ y son tales que:
 \begin{align*}
 L_{n}^{k} (x) &= (-)^{k} \, \dv[k]{x} \, L_{n+k} (x) \\
@@ -443,14 +464,18 @@ L_{n}^{k} (x) &= (-)^{k} \, \dv[k]{x} \, L_{n+k} (x) \\
 &= \sum_{m=0}^{n} \dfrac{(-)^{m} \, (n + k)! \, x^{m}}{(n -m )! \, (k + m)! \, m!} \hspace{1.5cm} k > -1
 \end{align*}
 La función generatriz es:
-\[ \dfrac{e^{-xt/(1-t)}}{(1 - t)^{k+1}} = \sum_{n=0}^{\infty} t^{n} \, L_{n}^{k} (x) \]
+\begin{align*}
+\dfrac{e^{-xt/(1-t)}}{(1 - t)^{k+1}} = \sum_{n=0}^{\infty} t^{n} \, L_{n}^{k} (x)
+\end{align*}
 y la condición de ortogonalidad es la siguiente:
 \begin{equation}
 \int_{0}^{\infty} x^{k} \, e^{-x} \, L_{n}^{k} (x) \, L_{m}^{k} )(x) \, \dd x = \dfrac{(n + k)!}{n!} \, \delta_{nm}
 \label{eq:ecuacion_08_79}
  \end{equation}
 Es cierto también que:
-\[ \int_{0}^{\infty} x^{k+1} \, e^{-x} \, [L_{n}^{k} (x)]^{2} \, \dd x = \dfrac{(n+k)!}{n!} \, (2 \, n +k + 1) \]
+\begin{align*}
+\int_{0}^{\infty} x^{k+1} \, e^{-x} \, [L_{n}^{k} (x)]^{2} \, \dd{x} = \dfrac{(n+k)!}{n!} \, (2 \, n +k + 1)
+\end{align*}
 Algunas relaciones de recurrencia son:
 \begin{align*}
 (n + 1) \, L_{n+1}^{k} (x) &= (2 \, n + k + 1 - x) \, L_{n}^{k} (x) - (n + k) \, L_{n-1}^{k} (x) \\[0.5em]
@@ -459,17 +484,23 @@ L_{n}^{k} (x) &= L_{n-1}^{k}(x) + L_{n}^{k-1}(x)
 \end{align*}
 \section{La familia de la ecuación de Laguerre.}
 Una familia bastante sencilla se puede obtener si hacemos
-\[ L_{p} (x) = e^{a x} \, \psi_{p} \]
+\begin{align*}
+L_{p} (x) = e^{a \, x} \, \psi_{p} (x)
+\end{align*}
 donde $p$ es un entero positivo. Se puede demostrar directamente que:
-\[ x \, \ddot{\psi}_{p} (x) + \dot{\psi} (x) \, [1 + (2 \, a -1) \, x] + \psi_{p} (x) [a \, x \, (a - 1) + a + p] = 0  \]
-Para la ecuación asociada de Laguerre, al proponer
-\[ L_{p}^{k} (x) = x^{b} \, e^{a x} \, \psi_{p}^{k} (x) \]
+\begin{align*}
+x \, \ddot{\psi}_{p} (x) + \dot{\psi} (x) \, [1 + (2 \, a -1) \, x] + \psi_{p} (x) [a \, x \, (a - 1) + a + p] = 0
+\end{align*}
+Para la ecuación asociada de Laguerre, si proponemos
+\begin{align*}
+L_{p}^{k} (x) = x^{b} \, e^{a \, x} \, \psi_{p}^{k} (x)
+\end{align*}
 se obtiene la familia
 \begin{align*}
-x \, \ddot{\psi}_{p}^{k} (x) &+ \dot{\psi}_{p}^{k} \, [(2 \, a -1) \, x  + 2 \, b + k + 1] + \\
+x \, \ddot{\psi}_{p}^{k} (x) &+ \dot{\psi}_{p}^{k} \, [(2 \, a - 1) \, x  + 2 \, b + k + 1] + \\
 &+ \psi_{p}^{k} (x) [ a \, (a - 1) \, x + b (b + k) / x + 2 \, a \, b + a \, k + p] = 0
 \end{align*}
-En particular si $2 \, a = 1, 2 \, b + k + 1 = 0$, se tiene que
+En particular si $2 \, a = 1$, y $ 2 \, b + k + 1 = 0$, se tiene que
 \begin{equation}
 \psi_{p}^{k} (x) = x^{(k+1)/2} \, e^{-x/2} \, L_{p}^{k} (x)
 \label{eq:ecuacion_08_80}
@@ -481,21 +512,30 @@ y además
 \end{equation}
 Esta es la ecuación que proviene de la teoría de Schrödinger para el átomo de hidrógeno, como lo veremos en la siguiente sección.
 \section{El átomo de hidrógeno.}
-Una aplicación importante de la ecuación asociada de Laguerre es el estudio mecánico cuántico del átomo de Hidrógeno, el que consiste en un núcleo (protón) de
-carga positiva alrededor del cual hay una nube de probabilidad electrónica descrita por la función $\psi$.
+Una aplicación importante de la ecuación asociada de Laguerre es el estudio mecánico cuántico del átomo de hidrógeno, el que consiste en un núcleo (protón) de carga positiva alrededor del cual hay una nube de probabilidad electrónica descrita por la función $\psi$.
 \par
 El electrón tiene una energía potencial $V = -K /r$, donde $K = q^{2} / 4 \pi \varepsilon_{0}$ en unidades MKSC; $m$ es la masa del electrón.
 \par
 En tres dimensiones la ecuación de Schrödinger se escribe, en el caso estacionario, como:
-\[ - \dfrac{\hbar^{2}}{2 \, m} \laplacian \, \psi + V \, \psi = E \, \psi \]
+\begin{align*}
+- \dfrac{\hbar^{2}}{2 \, m} \laplacian \, \psi + V \, \psi = E \, \psi
+\end{align*}
 En coordenadas esféricas, y tomando en cuenta el siguiente resultado:
-\[ \laplacian \, \psi = \dfrac{1}{r} \, \pdv[2]{r} (r \, \psi) - \dfrac{L^{2} \, \psi}{r^{2}} \]
+\begin{align*}
+\laplacian \, \psi = \dfrac{1}{r} \, \pdv[2]{r} (r \, \psi) - \dfrac{L^{2} \, \psi}{r^{2}}
+\end{align*}
 podemos escribir la ecuación como
-\[ - \dfrac{\hbar^{2}}{2 \, m} \left[ \dfrac{1}{r} \, \pdv[2]{r} (r \, \psi) - \dfrac{L^{2} \, \psi}{r^{2}} \right] - \dfrac{K}{r} \, \psi = E \, \psi \]
+\begin{align*}
+- \dfrac{\hbar^{2}}{2 \, m} \left[ \dfrac{1}{r} \, \pdv[2]{r} (r \, \psi) - \dfrac{L^{2} \, \psi}{r^{2}} \right] - \dfrac{K}{r} \, \psi = E \, \psi
+\end{align*}
 La separación de variables:
-\[ \psi (r, \theta, \varphi) = R(r) \, Y_{\ell m} (\theta, \varphi) \]
+\begin{align*}
+\psi (r, \theta, \varphi) = R(r) \, Y_{\ell m} (\theta, \varphi)
+\end{align*}
 conduce a las siguientes dos ecuaciones, donde $\ell (\ell +1)$ es la constante de separación:
-\[  L^{2} \, Y_{\ell m} = \ell (\ell + 1) \, Y_{\ell m} (\theta, \varphi) \]
+\begin{align*}
+L^{2} \, Y_{\ell m} = \ell (\ell + 1) \, Y_{\ell m} (\theta, \varphi)
+\end{align*}
 que asegura que los armónicos esféricos, son funciones propias del operador $L^{2}$ con valores propios $\ell (\ell +1)$.
 \par
 La otra ecuación, para la parte radial (conocida como \emph{ecuación de onda de Coulomb}), es:
@@ -520,28 +560,44 @@ De las ecuaciones (\ref{eq:ecuacion_08_81}) y \ref{eq:ecuacion_08_84}), se tiene
 \begin{enumerate}[label=\roman*.)]
 \item $R(x) \propto \psi_{n}^{k} (x)$
 \item $\ell (\ell + 1) = (k^{2} - 1)/4$, de donde
-\[ k^{2} = 4 \, \ell^{2} + 4 \, \ell + 1 = 4 (\ell + 1)^{2} \]
+\begin{align*}
+k^{2} = 4 \, \ell^{2} + 4 \, \ell + 1 = 4 (\ell + 1)^{2}
+\end{align*}
 y por lo tanto: $k = 2 \, \ell + 1$, con $k > 0$.
 \item $b \,\alpha^{2} = - 1/4$, de donde
 \begin{equation}
 \alpha^{2} =  - \dfrac{1}{4 \, b} = - \dfrac{\hbar^{2}}{8 \, m \, E}
 \label{eq:ecuacion_08_85}
 \end{equation}
-\item $\alpha \, \lambda = (2 \, p + k + 1)/2$, y reemplazando 
-\[ k =  2 \, \ell + 1 : \alpha \, \lambda = p + \ell +1 \]
+\item $\alpha \, \lambda = (2 \, p + k + 1)/2$, y reemplazando
+\begin{align*}
+k =  2 \, \ell + 1 : \alpha \, \lambda = p + \ell + 1
+\end{align*}
 reemplazando $\lambda$ y $\alpha$ de las ecs. (\ref{eq:ecuacion_08_83}) y (\ref{eq:ecuacion_08_85}), resulta:
-\[- i \, \sqrt{\dfrac{m \, K^{2}}{2 \, E \, \hbar^{2}}} = p + \ell + 1 \]
+\begin{align*}
+- i \, \sqrt{\dfrac{m \, K^{2}}{2 \, E \, \hbar^{2}}} = p + \ell + 1
+\end{align*}
 \end{enumerate}
 donde $p$ y $\ell$ son reales, tales que $E$ debe ser negativo: $E = - \abs{E}$, de donde se concluye que:
-\[ \sqrt{\dfrac{m \, K^{2}}{2 \, \abs{E} \, \hbar^{2}}} = p + \ell + 1 \]
+\begin{align*}
+\sqrt{\dfrac{m \, K^{2}}{2 \, \abs{E} \, \hbar^{2}}} = p + \ell + 1
+\end{align*}
 Por otra parte $p$ debe de ser un entero para que haya convergencia en la solución, también $\ell$ es entero. Se sigue que el radical debe de ser un entero $n = p + \ell + 1$:
-\[ \sqrt{\dfrac{m \, K^{2}}{2 \, \hbar^{2} \, \abs{E}}} = n \]
+\begin{align*}
+\sqrt{\dfrac{m \, K^{2}}{2 \, \hbar^{2} \, \abs{E}}} = n
+\end{align*}
 Así pues:
-\[ E = - \abs{E} = - \dfrac{K^{2} \, m}{2 \, \hbar^{2} \, n^{2}} \]
+\begin{align*}
+E = - \abs{E} = - \dfrac{K^{2} \, m}{2 \, \hbar^{2} \, n^{2}}
+\end{align*}
 En consencuencia, la energía del electrón del átomo de hidrógeno está \emph{cuantizada}, es decir, no toma valores arbitrarios, sino sólo los valores asociados $n = 1, 2, 3, \ldots$. Finalmente la función de onda $\psi (r, \theta, \varphi)$ es:
-\[ \psi (r, \theta, \varphi) =  \dfrac{R(r)}{r} \, Y_{\ell m} (\theta, \varphi) = C \, \dfrac{\psi_{p}^{k} (x)}{r} \, Y_{\ell m} (\theta, \varphi) \]
+\begin{align*}
+\psi (r, \theta, \varphi) =  \dfrac{R(r)}{r} \, Y_{\ell m} (\theta, \varphi) = C \, \dfrac{\psi_{p}^{k} (x)}{r} \, Y_{\ell m} (\theta, \varphi)
+\end{align*}
 y de acuerdo a la ec. (\ref{eq:ecuacion_08_80})
-\[ \psi (r, \theta, \varphi) = C \, e^{-x/2} \, x^{\frac{k+1}{2} - 1} \, L_{p}^{k} (x) \, Y_{\ell m} (\theta, \varphi) \]
+\begin{align*}
+\psi (r, \theta, \varphi) = C \, e^{-x/2} \, x^{\frac{k+1}{2} - 1} \, L_{p}^{k} (x) \, Y_{\ell m} (\theta, \varphi)
+\end{align*}
 donde
 \begin{align*}
 k &= 2 \, \ell + 1 \\
@@ -550,7 +606,9 @@ p &= n - \ell - 1 \\
 \alpha &= \dfrac{\hbar^{2} \, n}{2 \, m \, K} 
 \end{align*}
 y finalmente la función de onda del electrón del átomo de hidrógeno, se escribe de la siguiente manera:
-\[ \setlength{\fboxsep}{3\fboxsep}\boxed{\psi_{n \ell m} (r, \theta, \varphi) = C^{\prime} \, e^{-r/2 \alpha} \, r^{\ell} \, L_{n -\ell-1}^{2 \ell+1} (r / \alpha) \, Y_{\ell m} (\theta, \varphi)} \]
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{\psi_{n \ell m} (r, \theta, \varphi) = C^{\prime} \, e^{-r/2 \alpha} \, r^{\ell} \, L_{n -\ell-1}^{2 \ell+1} \left( \dfrac{r}{\alpha} \right) \, Y_{\ell m} (\theta, \varphi)}
+\end{align*}
 En la mecánica cuántica $(n, \ell, m)$ son los números cuánticos de energía, momento angular y proyección $z$ del momento angular (número cuántico azimutal). Como sabemos, dado un valor de $\ell$, hay $2 \, \ell + 1$ valores de $m$ que van desde $-m$ hasta $m$ en pasos enteros. Además, el subíndice del polinomio $P_{n-\ell-1}^{2 \ell+1}$ debe cumplir $n - \ell - 1 \geq 0$ por lo cual, dado $n$ tendremos $\ell \leq n - 1$. En consecuencia, las funciones de onda $\psi_{n \ell m}$ del átomo de hidrógeno son clasificables del siguiente modo:
 \begin{center}
 \begin{tabular}{l l l}
@@ -584,7 +642,7 @@ Cada uno de estos tripletes $(n, \ell, m)$ define lo que se conoce como un \emph
 \par
 %Referencia: Eisberg - Física moderna. Cap. 10 Átomos con un electrón
 % 10.3 Separación y solución de la ec. de movimiento relativo.
-Es conveniente observar que, si bien la forma de las funciones propias depende de los valores de los tres números cuánticos $n$, $\ell$, $m$, los \emph{valores propios dependen sólo del número cuántico $n$}. Ya que para un valor dado de $n$ hay, en general, diferentes valores posibles para $ell$ y $m$, se presentarán situaciones en las que dos o más funciones propias totalmente distintas estén degeneradas puesto que corresponden al mismo valor propio.
+Es conveniente observar que, si bien la forma de las funciones propias depende de los valores de los tres números cuánticos $n$, $\ell$, $m$, los \emph{valores propios dependen sólo del número cuántico $n$}. Ya que para un valor dado de $n$ hay, en general, diferentes valores posibles para $\ell$ y $m$, se presentarán situaciones en las que dos o más funciones propias totalmente distintas estén degeneradas puesto que corresponden al mismo valor propio.
 \par
 Se presenta la degeneración respecto a $m$ siempre que el potencial dependa exclusivamente de $r$, mientras que la degeneración respecto a $\ell$  es una consecuencia de la forma como el potencial de Coulomb $V = -Z \, e^{2} /r$ depende de $r$.
 \par
