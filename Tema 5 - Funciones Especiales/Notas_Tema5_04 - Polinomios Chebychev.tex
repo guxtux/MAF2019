@@ -203,7 +203,7 @@ Se define la \textbf{función hipergeométrica general} de la forma:
 Muchas funciones especiales puedes expresarse en términos de estas nuevas funciones, como por ejemplo:
 \begin{align*}
 P_{\ell} (x) &= {}_{2}F_{1} \left( -\ell , \ell + 1; 1; \dfrac{1 - x}{2} \right) \\[1em]
-P_{m}^{\ell} &= \dfrac{(\ell + m)!}{(\ell - m)!} \, \dfrac{(1 - x^{2})^{m/2}}{2^{m} \, m!} \, {}_{2}F_{1} \left( m - \ell, m + \ell + 1; m + 1; \dfrac{1 - x}{2} \right) \\[1em]
+P_{\ell}^{m} &= \dfrac{(\ell + m)!}{(\ell - m)!} \, \dfrac{(1 - x^{2})^{m/2}}{2^{m} \, m!} \, {}_{2}F_{1} \left( m - \ell, m + \ell + 1; m + 1; \dfrac{1 - x}{2} \right) \\[1em]
 J_{n} (x) &= \dfrac{e^{-i x}}{n!} \, \left( \dfrac{x}{2} \right)^{n} \, {}_1 F_{1} \left( n + \dfrac{1}{2}; 2 \, n; 2 \, n + 1; 2 \, i \, x \right) \\[1em]
 H_{2 n} (x) &= (-)^{n} \, \dfrac{(2 \, n)!}{n!} \, {}_1 F_{1} \left( -n; \dfrac{1}{2}; x^{2} \right) \\[1em]
 H_{2 n+1} (x) &= x \, (-)^{n} \, \dfrac{2 (2 \, n + 1)!}{n!} \, {}_1 F_{1} \left( -n; \dfrac{3}{2}; x^{2}\right) \\[1em]
@@ -261,23 +261,33 @@ Las funciones hipergeométricas son útiles para expresar otras funciones:
 \dfrac{\arcsin x}{x} &= {}_{2} F_{1} \left( \dfrac{1}{2}, \dfrac{1}{2}; \dfrac{3}{2}, x^{2} \right) \\[1em]
 \dfrac{\arctan x}{x} &= {}_{2} F_{1} \left( \dfrac{1}{2}, 1; \dfrac{3}{2}, -x^{2} \right)
 \end{align*}
-así como las integrales elípticas:
+así como las integrales elípticas $K$ y $E$:
 \begin{align*}
-\int_{0}^{\pi/2} (1 - k^{2} \, \sin^{2} \theta)^{-1/2} \, \dd \theta = \dfrac{\pi}{2} \, {}_{2} F_{1} \left( \dfrac{1}{2}, \dfrac{1}{2}; 1; k^{2}  \right) \\[1em]
-\int_{0}^{\pi/2} (1 - k^{2} \, \sin^{2} \theta)^{1/2} \, \dd \theta = \dfrac{\pi}{2} \, {}_{2} F_{1} \left( \dfrac{1}{2}, -\dfrac{1}{2}; 1; k^{2}  \right)
+K(k^{2}) &=\int_{0}^{\pi/2} (1 - k^{2} \, \sin^{2} \theta)^{-1/2} \, \dd \theta = \dfrac{\pi}{2} \, {}_{2} F_{1} \left( \dfrac{1}{2}, \dfrac{1}{2}; 1; k^{2}  \right) \\[1em]
+E(k^{2})  &= \int_{0}^{\pi/2} (1 - k^{2} \, \sin^{2} \theta)^{1/2} \, \dd \theta = \dfrac{\pi}{2} \, {}_{2} F_{1} \left( \dfrac{1}{2}, -\dfrac{1}{2}; 1; k^{2}  \right)
+\end{align*}
+La ecuación hipergeométrica tiene una segunda solución linealmente independiente, de la forma
+\begin{align*}
+y(x) = x^{1-c} \, {}_{2} F_{1} (a+1-c, b+1-c; 2-c; x) \hspace{1.5cm} c \neq 2, 3, 4, \ldots
 \end{align*}
 \section{La ecuación hipergeométrica confluente.}
 La ecuación hipergeométrica confluente (o ecuación de Kummer) es:
 \begin{align*}
 x^{2} \, \ddot{y} + (\beta - x) \, \dot{y} - \alpha \, y = 0
 \end{align*}
-tiene por soluciones:
+la ecuación tiene una singularidad regular en $x=0$ y una irregular en $x=\infty$. La solución de la ecuación hipergeométrica confluente es
 \begin{align*}
-{}_{1} F_{1} (\alpha; \beta; x)
+y(x) &= {}_{1} F_{1} (\alpha; \beta; x) = M(\alpha, \beta, x) \\
+&= 1 + \dfrac{\alpha}{\beta} \dfrac{x}{1!} + \dfrac{\alpha (\alpha + 1)}{\beta (\beta + 1)} \dfrac{x^{2}}{2!} + \ldots \hspace{1.5cm} c \neq 0, -1, -2, \ldots 
+\end{align*}
+La solución es convergente para todo $x$ finito (o complejo $z$). En términos de los símbolos de Pochhammer, se tiene que
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+M(\alpha, \beta, x) = \sum_{n=0}^{\infty} \dfrac{(\alpha)_{n}}{(\beta)_{n}} \, \dfrac{x^{n}}{n!}}
 \end{align*}
 Si $\beta$ es no entero, la segunda solución independiente está dada por
 \begin{align*}
-x^{1-\beta} \, {}_{1} F_{1} (\alpha - \beta + 1; 2 - \beta; x)
+y_{2} (x) = x^{1-\beta} \, {}_{1} F_{1} (\alpha - \beta + 1; 2 - \beta; x)
 \end{align*}
 %Referencia. Seaborn. Hypergeometric functions and their applications. 2.5 The simple pendulum
 \subsection{Ejemplo: El péndulo simple.}
