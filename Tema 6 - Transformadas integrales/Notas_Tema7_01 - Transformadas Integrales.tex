@@ -1,62 +1,82 @@
 %\RequirePackage[l2tabu, orthodox]{nag}
 \input{../preambulo_doc}
-%\usepackage{standalone}
-%\usepackage{mathrsfs}
-%\usepackage{bigints}
-%\newtheorem{defi}{{\textit{Definición}}}[section]
-%\newtheorem{teo}{{\textit{Teorema}}}[section]
 \newcommand{\saltosin}{\nonumber \\}
-%\newcommand{\comillado}[1]{``#1''}
-%\spanishdecimal{.}
-%\usepackage{enumerate}
-%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\author{}
 \title{Transformadas Integrales \\ {\large Matemáticas Avanzadas de la Física}}
 \date{ }
 \begin{document}
-%\renewcommand\theenumii{\arabic{theenumii.enumii}}
-%\renewcommand\labelenumii{\theenumi.{\arab{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
-%Referencia Arfken - Mathematical methods for physicists. Cap. 15 Integral Transforms -djvu
-\section{Transformadas Integrales.}
-Frecuentemente en física uno se encuentra con pares de funciones que se encuentran relacionadas por una expresión como la siguiente
-\begin{equation}
-g (\alpha) = \int_{a}^{b} f(t) \, K(\alpha, t) \, \dd t
-\label{eq:ecuacion_15_01}
-\end{equation}
-La función $g (\alpha)$ es llamada la transformada integral de $f(t)$ por el núcleo (o kernel)  $K (\alpha,t)$. La operación se puede describir como un mapeo de una función $f(t)$ en el espacio-$t$ a otra función $g (\alpha)$ en el espacio-$\alpha$. Dos ejemplos de esta interpretación en física son las relaciones entre: el tiempo y la frecuencia en Electrodinámica Clásica y Mecánica Cuántica, y la relación entre el espacio de configuraciones y el espacio de momentos en Mecánica Cuántica.
+%Referencia. Debnath - Integral transforms and their applications. Sec. 1.1
+\section{Breve introducción.}
+Las transformadas integrales se han utilizado con éxito durante casi dos siglos para resolver muchos problemas en matemática aplicada, física matemática y ciencias de la ingeniería. Históricamente, el origen de las transformaciones integrales, incluidas las transformadas de Laplace y de Fourier, se remonta a la célebre obra de Laplace (1749-1827) sobre la teoría de la probabilidad en la década de 1780 y al tratado monumental de Joseph Fourier (1768-1830) en \emph{La Théorie Analytique de la Chaleur} publicada en 1822. De hecho, el libro clásico de Laplace \emph{La Théorie Analytique des Probabilities} incluye algunos resultados básicos de la transformada de Laplace, que es una de las transformadas integrales más antiguas y más utilizadas en la literatura matemática. 
 \par
-Cuando los límites de integración $a$ y $b$ son finitos, decimos que $g(\alpha)$ es es la transformada finita de $f(t)$. Existen varios tipos de transformadas integrales que aparecen frecuentemente en física, cada una de ellas está asociada a un núcleo diferente. De entre ellas las diferentes posibilidades podemos mencionar los núcleos siguientes:
+Esto se ha utilizado efectivamente para encontrar la solución de ecuaciones diferenciales lineales y ecuaciones integrales. Por otro lado, el tratado de Fourier proporcionó la teoría matemática moderna de la conducción de calor, las series de Fourier y las integrales de Fourier con aplicaciones. En su tratado, Fourier declaró un resultado notable que se conoce universalmente como el \emph{Teorema Integral de Fourier}. Proporcionó una serie de ejemplos antes de afirmar que una función arbitraria definida en un intervalo finito puede expandirse en términos de series trigonométricas que ahora se conocen universalmente como la \emph{serie de Fourier}. En un intento por extender sus nuevas ideas a funciones definidas en un intervalo infinito, Fourier descubrió una transformada integral y su fórmula de inversión que ahora se conocen como la \emph{transformada de Fourier} y la \emph{transformada de Fourier inversa}. Sin embargo, esta célebre idea de Fourier era conocida por Laplace y Cauchy (1789–1857), ya que algunos de sus trabajos anteriores implicaban esta transformada. Por otro lado, Poisson (1781–1840) también utilizó de manera independiente el método de transformada en su investigación sobre la propagación de ondas de agua.
+\par
+Sin embargo, fue Leibniz (1646–1716) quien introdujo por primera vez la idea de un método simbólico en el cálculo. Posteriormente, tanto Lagrange (1736–1813) como Laplace hicieron contribuciones considerables a los métodos simbólicos que se conocieron como cálculo operacional. Aunque tanto la transformada de Laplace como la de Fourier se descubrieron en el siglo XIX, fue el ingeniero eléctrico británico Oliver Heaviside (1850–1925) quien hizo la transformada de Laplace muy popular al usarla para resolver ecuaciones diferenciales ordinarias de circuitos y sistemas eléctricos, y luego desarrollar el cálculo operacional moderno. Puede ser relevante señalar que la transformada de Laplace es esencialmente un caso especial de la transformada de Fourier para una clase de funciones definidas en el eje real positivo, pero es más simple que la transformada de Fourier por las siguientes razones.
+\begin{enumerate}
+\item La cuestión de la convergencia de la transformada de Laplace es mucho menos delicada debido al kernel de la exponencial decreciente $\exp (-s \, t)$, donde $\Re{s} > 0$ y $t > 0$.
+\item La transformada de Laplace es una función analítica de variable compleja y sus propiedades pueden ser fácilmente estudiadas con el conocimiento de la teoría de la variable compleja.
+\item La fórmula integral de Fourier proporcionó las definiciones de la transformada de Laplace y la transformada inversa de Laplace en términos de una integral de contorno complejo que se puede evaluar con la ayuda de la teoría del residuo de Cauchy y la deformación del contorno en el plano complejo.
+\end{enumerate}
+\section{Conceptos básicos y definiciones.}
+La transformada integral de una función $f(x)$ definida en el intervalo $a \leq x \leq b$, se escribe como $\mathscr{I} \left\{ f(x) \right\} = F(x)$ y se define por
+\begin{equation}
+\mathscr{I} \left\{ f(x) \right\} = F(k) = \int_{a}^{b} K(x, k) \, f(x) \dd{x}
+\label{eq:ecuacion_01_02_01}
+\end{equation}
+donde $K(x, k)$ es una función dada de dos variables $x$ y $k$, que se le llama \emph{kernel} de la transformada. El operador $\mathscr{I}$ es llamada \emph{operador de transformada integral} o simplemente \emph{transformada integral}.
+\par
+La función transformada $F(k)$ se refiera a menudo como la \emph{imagen} de la función dad $f(x)$, y $k$ es llamada la \emph{variable transformada}.
+\par
+De manera similar, la transformada integral de una función de varias variables se define por
+\begin{equation}
+\mathscr{I} \left\{ f(x) \right\} = F(\mathbf{k}) = \int_{S} K(\mathbf{x}, \mathbf{k}) \, f(\mathbf{x}) \dd{x}
+\label{eq:ecuacion_01_02_02}
+\end{equation}
+donde $\mathbf{x} = (x_{1}, x_{2}, \ldots, x_{n}), \mathbf{k} = (k_{1}, k_{2}, \ldots, k_{n})$ y $S \in R^{n}$
+%Referencia Arfken - Mathematical methods for physicists. Cap. 15 Integral Transforms -djvu
+% \section{Transformadas Integrales.}
+% Frecuentemente en física uno se encuentra con pares de funciones que se encuentran relacionadas por una expresión como la siguiente
+% \begin{equation}
+% g (\alpha) = \int_{a}^{b} f(t) \, K(\alpha, t) \, \dd t
+% \label{eq:ecuacion_15_01}
+% \end{equation}
+% La función $g (\alpha)$ es llamada la transformada integral de $f(t)$ por el núcleo (o kernel)  $K (\alpha,t)$.
+\par
+La operación de transformación se puede describir como un mapeo de una función $f(t)$ en el espacio-$t$ a otra función $F (\alpha)$ en el espacio-$\alpha$. Dos ejemplos de esta interpretación en física son las relaciones entre: el tiempo y la frecuencia en Electrodinámica Clásica y Mecánica Cuántica, y la relación entre el espacio de configuraciones y el espacio de momentos en Mecánica Cuántica.
+\par
+Cuando los límites de integración $a$ y $b$ son finitos, decimos que $F(\alpha)$ es es la transformada finita de $f(x)$. Existen varios tipos de transformadas integrales que aparecen frecuentemente en física, cada una de ellas está asociada a un núcleo diferente. De entre ellas las diferentes posibilidades podemos mencionar los núcleos siguientes:
 \begin{enumerate}
 \item \emph{Transformada de Fourier.}
 \begin{equation}
-g (\omega) = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} f(t) \, e^{i \omega t} \, \dd t
+g (\omega) = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} f(t) \, e^{i \omega t} \, \dd{t}
 \label{eq:ecuacion_07_01}
 \end{equation}
 \item \emph{Transformada de Laplace.}
 \begin{equation}
-g (\alpha)= \int_{0}^{\infty} f(t) \; \exp(-\alpha t) \, \dd t
+g (\alpha)= \int_{0}^{\infty} f(t) \; \exp(-\alpha t) \, \dd{t}
 \label{eq:ecuacion_7_02}
 \end{equation}
 \item \emph{Transformadas de Fourier seno y coseno.}
 \begin{equation}
-g (\alpha)= \int_{0}^{\infty} f(t) \; \substack{ \textstyle \sin \\[0.5em] \textstyle \cos} \; \alpha \, t \,  \dd t
+g (\alpha)= \int_{0}^{\infty} f(t) \; \substack{ \textstyle \sin \\[0.5em] \textstyle \cos} \; \alpha \, t \,  \dd{t}
 \label{eq:ecuacion_7_03}
 \end{equation}
 \item \emph{Transformada de Fourier compleja.}
 \begin{equation}
-g (\alpha)= \int_{-\infty}^{\infty} f(t) \; \exp(i \alpha t) \, \dd t
+g (\alpha)= \int_{-\infty}^{\infty} f(t) \; \exp(i \alpha t) \, \dd{t}
 \label{eq:ecuacion_7_04}
 \end{equation}
 \item \emph{Transformada de Hankel.}
 \begin{equation}
-g (\alpha)= \int_{0}^{\infty} f(t) \; t \; J_{n} (\alpha \, t) \, \dd t
+g (\alpha)= \int_{0}^{\infty} f(t) \; t \; J_{n} (\alpha \, t) \, \dd{t}
 \label{eq:ecuacion_7_05}
 \end{equation}
 donde $J_{n}(\alpha t)$ es la función de Bessel de primera clase de orden $n$.
 \item \emph{Transformada de Mellin.}
 \begin{equation}
-g (\alpha)= \int_{0}^{\infty} f(t) \; t^{\alpha-1} \, \dd t
+g (\alpha)= \int_{0}^{\infty} f(t) \; t^{\alpha-1} \, \dd{t}
 \label{eq:ecuacion_7_06}
 \end{equation}
 \end{enumerate}
@@ -73,14 +93,14 @@ El proceso de inversión significa, en efecto, la solución de una de las ecuaci
 Todas estas transformadas integrales son lineales, por lo que satisfacen las siguientes propiedades:
 \begin{align}
 \begin{aligned}
-\int_{a}^{b} [ c_{1} \, f_{1} (t) + c_{2} \, f_{2}(t)] \; K(\alpha, t) \, \dd t &= c_{1} \, \int_{a}^{b} f_{1} (t) \; K(\alpha, t) \, \dd t + \\
-&+ c_{2} \, \int_{a}^{b} f_{2} (t) \; K(\alpha, t) \, \dd t
+\int_{a}^{b} [ c_{1} \, f_{1} (t) + c_{2} \, f_{2}(t)] \; K(\alpha, t) \, \dd{t} &= c_{1} \, \int_{a}^{b} f_{1} (t) \; K(\alpha, t) \, \dd{t} + \\
+&+ c_{2} \, \int_{a}^{b} f_{2} (t) \; K(\alpha, t) \, \dd{t}
 \end{aligned}
 \label{eq:ecuacion_15_08} 
 \end{align}
 y además
 \begin{equation}
-\int_{a}^{b}  c \; f (t) \; K(\alpha, t) \, \dd t =  c \; \int_{a}^{b} f (t) \; K(\alpha, t) \, \dd t
+\int_{a}^{b}  c \; f (t) \; K(\alpha, t) \, \dd t =  c \; \int_{a}^{b} f (t) \; K(\alpha, t) \, \dd{t}
 \label{eq:ecuacion_15_09}
 \end{equation}
 donde $c_{1}$ y $c_{2}$ son constantes y $f_{1}(t)$ y $f_{2}(t)$ son funciones para las cuales la operación transformada está definda.
@@ -113,21 +133,21 @@ f(x) = \dfrac{a_{0}}{2} + \sum_{n=1}^{\infty} \left[ a_{n} \cos \left( \dfrac{n 
 \end{equation}
 donde los coeficientes $a_{n}$ y $b_{n}$ son:
 \begin{align}
-a_{n} &= \dfrac{1}{L} \int_{-L}^{L} f(t) \, \cos \left( \dfrac{n \, \pi \, t}{L} \right) \, \dd t \label{eq:15_12} \\[0.5em]
-b_{n} &= \dfrac{1}{L} \int_{-L}^{L} f(t) \, \sin \left( \dfrac{n \pi \, t}{L} \right) \, \dd t
+a_{n} &= \dfrac{1}{L} \int_{-L}^{L} f(t) \, \cos \left( \dfrac{n \, \pi \, t}{L} \right) \, \dd{t} \label{eq:15_12} \\[0.5em]
+b_{n} &= \dfrac{1}{L} \int_{-L}^{L} f(t) \, \sin \left( \dfrac{n \pi \, t}{L} \right) \, \dd{t}
 \label{eq:ecuacion_15_13}
 \end{align}
 Con lo cual podemos re-escribir a $f(x)$ como una serie de Fourier
 \begin{align}
 \begin{aligned}
-f(x) &= \dfrac{1}{2 \, L} \int_{-L}^{L} f(t) \, \dd t + \dfrac{1}{L} \sum_{k=1}^{\infty} \cos \left( \dfrac{n \, \pi \, x}{L} \right) \, \int_{-L}^{L} f(t) \, \cos \left( \dfrac{n \, \pi \, t}{L} \right) \, \dd t + \\
-&+ \dfrac{1}{L} \sum_{n=1}^{\infty}  \sin \left( \dfrac{n \, \pi \, x}{L} \right) \int_{-L}^{L} f(t) \, \sin \left( \dfrac{n \, \pi \, t}{L} \right) \, \dd t
+f(x) &= \dfrac{1}{2 \, L} \int_{-L}^{L} f(t) \, \dd{t} + \dfrac{1}{L} \sum_{k=1}^{\infty} \cos \left( \dfrac{n \, \pi \, x}{L} \right) \, \int_{-L}^{L} f(t) \, \cos \left( \dfrac{n \, \pi \, t}{L} \right) \, \dd{t} + \\
+&+ \dfrac{1}{L} \sum_{n=1}^{\infty}  \sin \left( \dfrac{n \, \pi \, x}{L} \right) \int_{-L}^{L} f(t) \, \sin \left( \dfrac{n \, \pi \, t}{L} \right) \, \dd{t}
 \label{eq:ecuacion_15_14}
 \end{aligned}
 \end{align}
 o de la forma
 \begin{equation}
-f(x) = \dfrac{1}{2 \, L} \int_{-L}^{L} f(t) \, \dd t + \dfrac{1}{L} \sum_{n=1}^{\infty} \, \int_{-L}^{L} f(t) \, \cos \left( \dfrac{n \, \pi}{L} \right) (t - x) \, \dd t
+f(x) = \dfrac{1}{2 \, L} \int_{-L}^{L} f(t) \, \dd{t} + \dfrac{1}{L} \sum_{n=1}^{\infty} \, \int_{-L}^{L} f(t) \, \cos \left( \dfrac{n \, \pi}{L} \right) (t - x) \, \dd{t}
 \label{eq:ecuacion_15_15}
 \end{equation}
 Hagamos que el parámetro $L$ tienda a infinito, cambiando el intervalo finito $[-L, L]$ al intervalo infinito $(-\infty, \infty)$. Establecemos las siguientes relaciones:
@@ -139,44 +159,44 @@ Veamos la validez de esta afirmación. Consideremos la partición de los $\mathb
 \end{equation}
 Entonces tenemos que
 \begin{equation}
-f(x) \rightarrow \dfrac{1}{\pi} \sum_{n=1}^{\infty} \Delta \omega \; \int_{-\infty}^{\infty} f(t) \, \cos \omega (t - x) \, \dd t
+f(x) \rightarrow \dfrac{1}{\pi} \sum_{n=1}^{\infty} \Delta \omega \; \int_{-\infty}^{\infty} f(t) \, \cos \omega (t - x) \, \dd{t}
 \label{eq:ecuacion_15_16}
 \end{equation}
 re-emplazando la suma infinita por la intergral sobre $\omega$:
 \begin{equation}
-f(x) = \dfrac{1}{\pi} \int_{0}^{\infty} \, \dd \omega \; \int_{-\infty}^{\infty} f(t) \, \cos \omega (t - x) \, \dd t
+f(x) = \dfrac{1}{\pi} \int_{0}^{\infty} \, \dd \omega \; \int_{-\infty}^{\infty} f(t) \, \cos \omega (t - x) \, \dd{t}
 \label{eq:ecuacion_15_17}
 \end{equation}
- El primer término (que corresponde a $a_{0}$) se anula, y suponemos que la integral $\displaystyle{\int_{-\infty}^{\infty} f(t) \, \dd t}$ existe.
+ El primer término (que corresponde a $a_{0}$) se anula, y suponemos que la integral $\displaystyle{\int_{-\infty}^{\infty} f(t) \, \dd{t}}$ existe.
 \par
 Debemos de enfatizar que el resultado obtenido en la ec. (\ref{eq:ecuacion_15_17}) sólo es formal, no pretende ser un resultado riguroso; se tomará como la \emph{integral de Fourier}, considerando que la función $f(x)$ cumple con las siguientes condiciones:
 \begin{enumerate}
 \item Es continua (continua por partes)
 \item Es diferenciable (diferenciable por partes)
-\item La integral $\displaystyle{\int_{-\infty}^{\infty} \abs{f(x)} \, \dd x}$ es finita. 
+\item La integral $\displaystyle{\int_{-\infty}^{\infty} \abs{f(x)} \, \dd{x}}$ es finita. 
 \end{enumerate}
 \subsection{Forma exponencial de la integral de Fourier.}
 La integral de Fourier (ec. \ref{eq:ecuacion_15_17}) se puede escribir de forma exponencial, para obtener esta representación, revisemos que
 \begin{equation}
-f(x) =  \dfrac{1}{2 \, \pi} \int_{- \infty}^{\infty} \,\dd \omega \; \int_{-\infty}^{\infty} f(t) \; \cos \omega (t - x) \, \dd t
+f(x) =  \dfrac{1}{2 \, \pi} \int_{- \infty}^{\infty} \,\dd{\omega} \; \int_{-\infty}^{\infty} f(t) \; \cos \omega (t - x) \, \dd{t}
 \label{eq:ecuacion_15_18}
 \end{equation}
 mientras que
 \begin{equation}
-\dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} \, \dd \omega \; \int_{-\infty}^{\infty} f(t) \; \sin \omega (t - x) \, \dd t = 0
+\dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} \, \dd \omega \; \int_{-\infty}^{\infty} f(t) \; \sin \omega (t - x) \, \dd{t} = 0
 \label{eq:ecuacion_15_19}
 \end{equation}
 veamos que $ \cos \omega (t - x)$ es una función par de $\omega$ y $\sin \omega (t - x)$ es una función impar de $\omega$. Sumando las ecuaciones (\ref{eq:ecuacion_15_18}) y (\ref{eq:ecuacion_15_19}) (con un factor $i$), obtenemos el \emph{teorema integral de Fourier}
 \begin{equation}
 \setlength{\fboxsep}{3\fboxsep}\boxed{
-f(x) = \dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} e^{-i \omega x} \, \dd \omega \; \int_{-\infty}^{\infty} f(t) \, e^{i \omega t} \, \dd t }
+f(x) = \dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} e^{-i \omega x} \, \dd{\omega} \; \int_{-\infty}^{\infty} f(t) \, e^{i \omega t} \, \dd{t} }
 \label{eq:ecuacion_15_20}
 \end{equation}
 Hasta ahora $\omega$ es una variable matemática auxiliar. En muchos problemas de la física, $\omega$ es una frecuencia angular. En este caso podemos interpretar la integral de Fourier como una representación de $f(x)$ en términos de una distribución de ondas sinusoidales infinitamente largas de frecuencia angular $\omega$, en la cual esta frecuencia es una \textbf{variable continua}.
 \subsection{Obtención mediante la función delta de Dirac.}
 Nótese que si cambiamos el orden de integración de la ec. (\ref{eq:ecuacion_15_20}), la función $f(x)$ se escribe de la forma
 \begin{align}
-\setlength{\fboxsep}{3\fboxsep}\boxed{f(x)= \int_{-\infty}^{\infty} f(t) \underbrace{ \left[ \dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} e^{i \omega(t - x)} \, \dd \omega \right] }_{\mbox{debe de ser una delta de Dirac}} \, \dd t} 
+\setlength{\fboxsep}{3\fboxsep}\boxed{f(x)= \int_{-\infty}^{\infty} f(t) \underbrace{ \left[ \dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} e^{i \omega(t - x)} \, \dd \omega \right] }_{\mbox{debe de ser una delta de Dirac}} \, \dd{t}} 
 \label{eq:ecuacion_15_20a}
 \end{align}
 En apariencia, la cantidad entre corchetes parece ser una función delta de Dirac $\delta (t - x)$. Podríamos tomar la ec. (\ref{eq:ecuacion_15_20a}) como una representación de la delta de Dirac, lo que nos daría una pista para obtener el teorema integral de Fourier.
@@ -185,26 +205,26 @@ De una de las propiedades de la función delta de Dirac
 \[ f(0) = \int_{-\infty}^{\infty} f(x) \, \delta(x) \, \dd x \]
 cambiando la singularidad de $t = 0$ a $t = x$
 \begin{equation}
-f(x) = \lim_{n \to \infty} \int_{-\infty}^{\infty} f(t) \, \delta_{n} (t - x) \, \dd t
+f(x) = \lim_{n \to \infty} \int_{-\infty}^{\infty} f(t) \, \delta_{n} (t - x) \, \dd{t}
 \label{eq:ecuacion_15_21a} 
 \end{equation}
 donde $\delta_{n}(t - x)$ es una secuencia que define la distribución $\delta(t - x)$. Revisemos que la ec. (\ref{eq:ecuacion_15_21a}) supone que $f(t)$ es continua en $t = x$. Tomamos $\delta_{n} (t - x)$  de la expresión
-\[ \delta_{n} = \dfrac{\sin n \, x}{\pi \, x} \int_{-n}^{n} e^{i x t} \, \dd t \]
+\[ \delta_{n} = \dfrac{\sin n \, x}{\pi \, x} \int_{-n}^{n} e^{i x t} \, \dd{t} \]
 para hacer
 \begin{equation}
-\delta_{n} (t - x) = \dfrac{\sin n (t - x)}{\pi (t - x)} = \dfrac{1}{2 \, \pi} \int_{-n}^{n} e^{i \omega (t - x)} \, \dd \omega
+\delta_{n} (t - x) = \dfrac{\sin n (t - x)}{\pi (t - x)} = \dfrac{1}{2 \, \pi} \int_{-n}^{n} e^{i \omega (t - x)} \, \dd{\omega}
 \label{eq:ecuacion_15_21b}
 \end{equation}
 al sustituir en la ecuación (\ref{eq:ecuacion_15_21a}), tenemos
 \begin{equation}
-f(x) = \lim_{n \to \infty} \dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} f(t) \, \int_{-n}^{n} e^{i \omega (t - x)} \, \dd \omega \, \dd t
+f(x) = \lim_{n \to \infty} \dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} f(t) \, \int_{-n}^{n} e^{i \omega (t - x)} \, \dd{\omega} \dd{t}
 \label{eq:ecuacion_15_21c}
 \end{equation}
 Intercambiando el orden de integración y tomando el límite cuando $n \to \infty$, obtenemos la ec. (\ref{eq:ecuacion_15_20}), el teorema integral de Fourier.
 \par
 Con el entendimiento de que pertenece bajo el signo integral, como en la ec. (\ref{eq:ecuacion_15_21a}), la definición
 \begin{equation}
-\setlength{\fboxsep}{3\fboxsep}\boxed{\delta(t - x) = \dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} e^{i \omega (t - x)} \, dd \omega}
+\setlength{\fboxsep}{3\fboxsep}\boxed{\delta(t - x) = \dfrac{1}{2 \, \pi} \int_{-\infty}^{\infty} e^{i \omega (t - x)} \, \dd{\omega}}
 \label{eq:ecuacion_15_21d}
 \end{equation}
 nos proporciona una representación bastante útil de la función delta de Dirac.
@@ -213,7 +233,7 @@ nos proporciona una representación bastante útil de la función delta de Dirac
 
 Denotamos la transformada de Fourier de la función $f(t)$ mediante $g(\omega)$ y se define por
 \begin{equation}
-g (\omega) \equiv \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} f(t) \; e^{i \omega t} \, \dd t
+g (\omega) \equiv \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} f(t) \; e^{i \omega t} \, \dd{t}
 \label{eq:ecuacion_15_22}
 \end{equation}
 \end{defi}
@@ -226,7 +246,7 @@ Pero se ha demostrado que la ec. (\ref{eq:ecuacion_15_20}) tiene una relación i
 % Este resultado nos permite establecer el siguiente teorema:
 % \begin{teo}{Teorema de inversión.}
 \begin{equation}
-f(t) = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} g(\omega) \; e^{-i \omega t} \, \dd \omega
+f(t) = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} g(\omega) \; e^{-i \omega t} \, \dd{\omega}
 \label{eq:ecuacion_15_23}
 \end{equation}
 %\end{teo}
@@ -249,22 +269,22 @@ Las integrales se evalúan sobre todo el espacio. Para verificar esto, se sigue 
 Si $f(x)$ es par o impar, las transformadas pueden expresarse de una forma diferente. Consideremos inicialmente una función par $f_{c}$ con $f_{c}(x) = f_{c}(-x)$. Escribiendo la exponencial de la ec. (\ref{eq:ecuacion_15_22}) en su forma trigonométrica, se tiene que
 \begin{align}
 \begin{aligned}
-g_{c}(\omega) &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} f_{c} (t) \; (\cos \omega t + i \sin \omega t) \, \dd t \\
-&= \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} f_{c} (t) \; \cos \omega t \, \dd t 
+g_{c}(\omega) &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} f_{c} (t) \; (\cos \omega t + i \sin \omega t) \, \dd{t} \\
+&= \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} f_{c} (t) \; \cos \omega t \, \dd{t} 
 \label{eq:ecuacion_15_24}
 \end{aligned}
 \end{align}
 la dependencia de $\sin \omega t$ se anula en la integración del intervalo simétrico $(-\infty, \infty)$. De manera similar, como $\cos \omega t$ es par, las ecuaciones (\ref{eq:ecuacion_15_23}) se convierten en
 \begin{equation}
-f_{c} (x) = \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} g_{c} (\omega) \cos \omega x \, \dd \omega 
+f_{c} (x) = \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} g_{c} (\omega) \cos \omega x \, \dd{\omega} 
 \label{eq:ecuacion_15_25}
 \end{equation}
 Las ecuaciones (\ref{eq:ecuacion_15_24}) y (\ref{eq:ecuacion_15_25}) se conocen como las \emph{transformadas coseno de Fourier}.
 \subsection{Tranformada seno de Fourier.}
 Las correspondientes pares de la transformada seno de Fourier, se obtienen suponiendo que $f_{s}(x) = - f_{s}(-x)$ es impar, aplicando los mismos argumentos de simetría, las ecuaciones son
 \begin{align}
-g_{s} (\omega) &=  \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} f_{s} (t) \; \sin \omega t \, dd t \label{eq:ecuacion_15_26} \\
-f_{s} (x) &= \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} g_{s} (\omega) \; \sin \omega x \, \dd \omega  \label{eq:ecuacion_15_27}
+g_{s} (\omega) &=  \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} f_{s} (t) \; \sin \omega t \, dd{t} \label{eq:ecuacion_15_26} \\
+f_{s} (x) &= \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} g_{s} (\omega) \; \sin \omega x \, \dd{\omega}  \label{eq:ecuacion_15_27}
 \end{align}
 De la última ecuación podemos dar la siguiente interpretación física: $f(x)$ está describiendo una serie continua de ondas sinusoidales. La amplitud de $\sin \omega x$ está dada por $\sqrt{2 / \pi} \, g_{s} (\omega)$ en donde $g_{s}(x)$ es la transformada seno de Fourier de $f(x)$.
 \par
@@ -353,6 +373,17 @@ es continua en $\mathbb{R}$.
 \caption{Transformada de Fourier de la función paso rectangular.}
 \label{fig:figura_Tfuncionpaso}
 \end{figure}
+\textbf{Problema a cuenta: } Calcula la transformada de Fourier de un pulso triangular, como se muestra en la siguiente figura:
+\begin{figure}[H]
+    \centering
+    \includestandalone{Figuras/Tarea-01-Pulso_Triangular}
+\end{figure}
+\begin{align*}
+f(x) = \begin{cases}
+h(1 - a \, \abs{x}) & \abs{x} < \dfrac{1}{a} \\
+0 & \abs{x} > \dfrac{1}{a}
+\end{cases}
+\end{align*}
 \section{La Transformada de Fourier de la derivada.}
 Para apoyarnos en la solución de una ED utilizando la transformada de Fourier y su inversa, necesitamos revisar cómo es la TF de una derivada. 
 \par
