@@ -1,31 +1,31 @@
-%\RequirePackage[l2tabu, orthodox]{nag}
+ %\RequirePackage[l2tabu, orthodox]{nag}
 \input{../preambulo_doc}
-%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
-\title{Transformada de Laplace \\ {\large Matemáticas Avanzadas de la Física}}
+\author{}
+\title{Transformada de Laplace \\ {\large Matemáticas Avanzadas de la Física}\vspace{-1.5\baselineskip}}
 \date{ }
 \begin{document}
-%\renewcommand\theenumii{\arabic{theenumii.enumii}}
-\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
 \section{Transformadas de Laplace.}
 %Referencia: Zill Cap 7
 Dada una función $f(t)$ definida para toda $t \geq 0$, la \emph{transformada de Laplace} de $f$ es la función $F$ definida como sigue:
 \begin{equation}
-F(s) = \mathscr{L} \{ f(t) \} = \int_{0}^{\infty} e^{-st} \; f(t) \, \dd t
+F(s) = \mathscr{L} \{ f(t) \} = \int_{0}^{\infty} e^{-st} \; f(t) \, \dd{t}
 \label{eq:ecuacion_001}
 \end{equation}
 para todo valor de $s$ en los cuales la integral impropia converge.
 \par
 Recuerda que una \textbf{integral impropia} en un intervalo infinito está definida como el límite de la integral en el intervalo acotado; esto es,
 \begin{equation}
-\int_{a}^{\infty} g(t) \, \dd t = \lim_{b \to \infty} \int_{a}^{b} g(t) \, \dd t
+\int_{a}^{\infty} g(t) \, \dd{t} = \lim_{b \to \infty} \int_{a}^{b} g(t) \, \dd{t}
 \label{eq:ecuacion_002}
 \end{equation}
 Si el límite en (\ref{eq:ecuacion_002}) existe, entonces se dice que la integral impropia \textbf{converge}; de otra manera \textbf{diverge} o no existe. Nótese que el integrando de la integral impropia en (\ref{eq:ecuacion_001}) contiene el parámetro $s$, además de la variable de integración $t$. Por tanto, cuando la integral en (\ref{eq:ecuacion_001}) converge, lo hace no precisamente hacia un número, sino a la función $F$ de $s$. Como en los siguientes ejemplos, la integral impropia de la definición de $\mathscr{L} \{ f(t) \} $ normalmente converge para algunos valores de $s$ y diverge para otros.
 \subsection*{Ejemplo 1.}
 Con $f(t) \equiv 1$ para $t \geq 0$, la definición de la transformada de Laplace en (\ref{eq:ecuacion_001}) obtiene
-\[ \mathscr{L} \{ 1 \} = \int_{0}^{\infty} e^{-st} \, \dd t = \left[ - \dfrac{1}{s} \, e^{-st} \right]_{0}^{\infty} = \lim_{b \to \infty} = \left[ - \dfrac{1}{s} \, e^{-bs} + \dfrac{1}{s} \right] \]
+\begin{align*}
+\mathscr{L} \{ 1 \} = \int_{0}^{\infty} e^{-st} \, \dd{t} = \left[ - \dfrac{1}{s} \, e^{-st} \right]_{0}^{\infty} = \lim_{b \to \infty} = \left[ - \dfrac{1}{s} \, e^{-bs} + \dfrac{1}{s} \right]
+\end{align*}
 y por tanto
 \begin{equation}
 \mathscr{L} \{ 1 \} = \dfrac{1}{s} \hspace{1cm} \mbox{ para } s > 0
@@ -34,14 +34,18 @@ y por tanto
 Como en (\ref{eq:ecuacion_003}), es una buena práctica especificar el dominio de la transformada de Laplace (tanto en problemas como en ejemplos).
 \subsection*{Ejemplo 2.}
 Con $f(t) = e^{at}$ para $t \geq 0$ se obtiene
-\[ \mathscr{L} \{ e^{at} \} = \int_{0}^{\infty} e^{-st} \; e^{at} \, \dd t = \int_{0}^{\infty} e^{-(s - a)t} \, \dd t =  \left[ - \dfrac{e^{-(s - a)t}}{s - a} \right]_{t=0}^{\infty}  \]
+\begin{align*}
+\mathscr{L} \{ e^{at} \} = \int_{0}^{\infty} e^{-st} \; e^{at} \, \dd{t} = \int_{0}^{\infty} e^{-(s - a)t} \, \dd{t} = - \dfrac{e^{-(s - a)t}}{s - a} \eval_{t=0}^{\infty} 
+\end{align*}
 Si $s -a > 0$, entonces $e^{-(s - a) t} \to 0$ conforme $t \to \infty$; así, se concluye que
 \begin{equation}
 \mathscr{L} \{ e^{at} \} = \dfrac{1}{s - a} \hspace{1cm} \mbox{ para } s > a
 \label{eq:005}
 \end{equation}
 Nótese aquí que la integral impropia que proporciona la $\mathscr{L} \{ e^{at} \}$ diverge si $s \leq a$. Se observa también que la fórmula dada en (\ref{eq:005}) se cumple si $a$ es un número complejo. Por tanto si $a = \alpha + i \beta$
- \[ e^{-(s - a)t} = e^{i \beta t} \; e^{-(s - \alpha) t} \; \to 0 \]
+\begin{align*}
+e^{-(s - a)t} = e^{i \beta t} \; e^{-(s - \alpha) t} \; \to 0
+\end{align*}
 conforme $t \to \infty$, siempre que $s > \alpha = \Re{a}$, ya que $e^{i \beta t} = \cos \beta \, t + i \sin \beta \, t$.
 \par
 La transformada de Laplace de la forma $\mathscr{L} \{ a \}$ se expresa de manera más conveniente en términos de la \textbf{función gamma} $\Gamma(x)$, la cual está definida para $x > 0$ por la fórmula
@@ -51,8 +55,10 @@ La transformada de Laplace de la forma $\mathscr{L} \{ a \}$ se expresa de maner
 \end{equation}
 \subsection*{Ejemplo 3.}
 Supongamos que $f(t) = t^{a}$, donde $a$ es real y $a > -1$. Entonces
-\[ \mathscr{L} \{ t^{a} \} = \int_{0}^{\infty} e^{-st} \; t^{a} \dd t \]
-Si sustituimos $u = s \, t$, $t =  u/s$ y $dt = du/s$ en la integral, se obtiene
+\begin{align*}
+\mathscr{L} \{ t^{a} \} = \int_{0}^{\infty} e^{-st} \; t^{a} \dd{t}
+\end{align*}
+Si sustituimos $u = s \, t$, $t =  u/s$ y $\dd{t} = \dd{u}/s$ en la integral, se obtiene
 \begin{equation}
 \mathscr{L} \{ t^{a} \} =  \dfrac{1}{s^{a+1}} \int_{0}^{\infty} e^{u} \; u^{a} \, \dd u = \dfrac{\Gamma(a + 1)}{s^{a + 1}}
 \label{eq:010}
@@ -63,7 +69,9 @@ para toda $s > 0$ (de tal manera que $u = s \, t > 0$). Debido a que $\Gamma(n+1
 \label{eq:011}
 \end{equation}
 por ejemplo
-\[ \mathscr{L} \{ t \} = \dfrac{1}{s^{2}} \hspace{1cm} \mathscr{L} \{ t^{2} \} = \dfrac{2}{s^{3}} \hspace{1cm} \mathscr{L} \{ t^{3} \} = \dfrac{6}{s^{4}} \]
+\begin{align*}
+\mathscr{L} \{ t \} = \dfrac{1}{s^{2}} \hspace{1cm} \mathscr{L} \{ t^{2} \} = \dfrac{2}{s^{3}} \hspace{1cm} \mathscr{L} \{ t^{3} \} = \dfrac{6}{s^{4}}
+\end{align*}
 \section{Linealidad de las transformadas.}
 No es necesario realizar a fondo los cálculos de la transformada de Laplace directamente de la definición. Una vez que se conocen las transformadas de Laplace de varias funciones, éstas pueden combinarse para obtener las transformadas de otras funciones. La razón es que la transformación de Laplace es una operación lineal.
 \begin{teo}{Linealidad de la transformada de Laplace.}
@@ -77,7 +85,9 @@ para toda $s$ tal que las transformadas de Laplace tanto de $f$ como de $g$ exis
 \end{teo}
 \subsection*{Ejemplo.}
 Como $\cosh kt = (e^{kt} + e^{-kt}) / 2$. Si $k > 0$, entonces tendremos que
-\[ \mathscr{L} \{ \cosh k \, t \} = \dfrac{1}{2} \mathscr{L} \{ e^{kt} \} + \dfrac{1}{2} \mathscr{L} \{ e^{-kt} \} = \dfrac{1}{2} \left( \dfrac{1}{s - k} + \dfrac{1}{s + k} \right) \]
+\begin{align*}
+\mathscr{L} \{ \cosh k \, t \} = \dfrac{1}{2} \mathscr{L} \{ e^{kt} \} + \dfrac{1}{2} \mathscr{L} \{ e^{-kt} \} = \dfrac{1}{2} \left( \dfrac{1}{s - k} + \dfrac{1}{s + k} \right)
+\end{align*}
 esto es
 \begin{equation}
 \mathscr{ \cosh k \, t} = \dfrac{s}{s^{2} - k^{2}} \hspace{1cm} \mbox{ para } s > k > 0
@@ -89,7 +99,9 @@ De manera similar
 \label{eq:015}
 \end{equation}
 Como $\cosh kt = (e^{ikt} + e^{-ikt})/2$, y haciendo $a = i \, k$, resulta
-\[ \mathscr{L} \{ \cos k , t \} = \left( \dfrac{1}{s - i \, k} + \dfrac{1}{s + i \, k} \right) =  \dfrac{1}{2} \; \dfrac{2s}{s^{2} - (i \, k)^{2}} \]
+\begin{align*}
+\mathscr{L} \{ \cos k , t \} = \left( \dfrac{1}{s - i \, k} + \dfrac{1}{s + i \, k} \right) =  \dfrac{1}{2} \; \dfrac{2s}{s^{2} - (i \, k)^{2}}
+\end{align*}
 entonces
 \begin{equation}
 \mathscr{L} \{ \cos k , t \} = \dfrac{s}{s^{2} + k^{2}} \hspace{0.5cm} \mbox{ para } s > 0
@@ -115,28 +127,32 @@ f(t) = \mathscr{L}^{-1} \{ F(s) \}
 \label{eq:018}
 \end{equation}
 Empleando las transformadas de Laplace que se obtuvieron en los ejemplos anteriores,se observa que
-\[ \mathscr{L} \left\lbrace \dfrac{1}{s^{3}} \right\rbrace = \dfrac{1}{2} t^{2}, \hspace{0.5cm} \mathscr{L} \left\lbrace \dfrac{1}{s + 2} \right\rbrace = e^{-2t}, \hspace{0.5cm} \mathscr{L} \left\lbrace \dfrac{2}{s^{2} + 9} \right\rbrace = \dfrac{2}{3} \, \sin 3 \, t \]
+\begin{align*}
+\mathscr{L} \left\lbrace \dfrac{1}{s^{3}} \right\rbrace = \dfrac{1}{2} t^{2}, \hspace{0.5cm} \mathscr{L} \left\lbrace \dfrac{1}{s + 2} \right\rbrace = e^{-2t}, \hspace{0.5cm} \mathscr{L} \left\lbrace \dfrac{2}{s^{2} + 9} \right\rbrace = \dfrac{2}{3} \, \sin 3 \, t
+\end{align*}
 \section{Funciones continuas por tramos.}
 Como se destacó al inicio del tema, es necesario manejar ciertos tipos de funciones discontinuas. Se dice que la función $f(t)$ es \textbf{continua por tramos} en el intervalo acotado $a \leq t \leq b$ siempre que $[a, b]$ pueda subdividirse en varios subintervalos finitos colindantes, de tal manera que:
 \begin{enumerate}
 \item $f$ sea continua en el interior de cada uno de estos subintervalos; y
 \item $f(t)$ tenga un límite finito conforme $t$ se aproxime a cada extremo de cada subintervalo desde su interior.
 \end{enumerate}
-Se dice que $f$ es continua por tramos para $t \geq 0$ si es continua por tramos en todo subintervalo acotado de $[0, +\infty)$. Así, una función continua por tramos tiene sólo discontinuidades simples (si las hubiera) y únicamente en puntos aislados. En estos puntos el valor de la función experimenta un salto finito, como se indica en la figura (\ref{fig:figura_001}).
-\begin{figure}[H]
+Se dice que $f$ es continua por tramos para $t \geq 0$ si es continua por tramos en todo subintervalo acotado de $[0, +\infty)$. Así, una función continua por tramos tiene sólo discontinuidades simples (si las hubiera) y únicamente en puntos aislados. En estos puntos el valor de la función experimenta un salto finito, como se indica en la figura (\ref{fig:figura_07_01_03}).
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/Figura_001_Laplace}
     \caption{Gráfica de una función continua por tramos; los puntos rellenos indican los valores de la función en las discontinuidades.}
-    \label{fig:figura_001}
+    \label{fig:figura_07_01_03}
 \end{figure}
  El \textbf{salto en} $f(t)$ \textbf{en el punto} $c$ está definido como $f(c+) - f(c-)$, donde
-\[ f(c+) = \lim_{\epsilon \to 0^{+}} f (c + \epsilon) \hspace{0.5cm} \mbox{ y } \hspace{0.5cm} f(c-) = \lim_{\epsilon \to 0^{+}} f (c - \epsilon) \]
-Probablemente la función continua por tramos más simple (pero discontinua) es la función escalón unitario, cuya gráfica se muestra en la figura (\ref{fig:figura_002}).
-\begin{figure}[H]
+ \begin{align*}
+f(c+) = \lim_{\epsilon \to 0^{+}} f (c + \epsilon) \hspace{0.5cm} \mbox{ y } \hspace{0.5cm} f(c-) = \lim_{\epsilon \to 0^{+}} f (c - \epsilon)
+\end{align*}
+Probablemente la función continua por tramos más simple (pero discontinua) es la función escalón unitario, cuya gráfica se muestra en la figura (\ref{fig:figura_07_01_04}).
+\begin{figure}[!ht]
 \centering
 \includestandalone{Figuras/Figura_002_Laplace}
 \caption{Gráfica de la función escalón unitario.}
-\label{fig:figura_002}
+\label{fig:figura_07_01_04}
 \end{figure}
 Esta función se define como sigue:
 \begin{equation}
@@ -151,24 +167,28 @@ Debido a que $u(t) = 1$ para $t \geq 0$, y a que la transformada de Laplace invo
 \mathscr{L} \{ u(t) \} = \dfrac{1}{s} \hspace{0.5cm} (s > 0)
 \label{eq:020}
 \end{equation}
-La gráfica de una función escalón unitario $u_{a}(t) = u(t - a)$ se muestra en la figura (\ref{fig:figura_003}). El salto de esta función ocurre en $t = a$ en vez de en $t = 0$; de manera equivalente,
+La gráfica de una función escalón unitario $u_{a}(t) = u(t - a)$ se muestra en la figura (\ref{fig:figura_07_01_05}). El salto de esta función ocurre en $t = a$ en vez de en $t = 0$; de manera equivalente,
 \begin{equation}
 u_{a}(t) = u (t - a) = \begin{cases}
 0 & \mbox{ para } t < a \\
 1 & \mbox{ para } t \geq a
 \end{cases}
 \end{equation}
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/Figura_003_Laplace}
     \caption{Gráfica de la función escalón unitario.}
-    \label{fig:figura_003}
+    \label{fig:figura_07_01_05}
 \end{figure}
 \section{Propiedades generales de la transformada.}
 Es un hecho común y corriente del cálculo que la integral
-\[\int_{a}^{b} g(t) \, \dd t \]
+\begin{align*}
+\int_{a}^{b} g(t) \, \dd{t}
+\end{align*}
 existe si $g$ es continua por tramos en el intervalo acotado $[a, b]$. En consecuencia, si $f$ es continua por tramos para $t \geq 0$, se concluye que la integral
-\[ \int_{a}^{b} e^{-st} \, f(t) \, \dd t \]
+\begin{align*}
+\int_{a}^{b} e^{-st} \, f(t) \, \dd{t}
+\end{align*}
 existe para toda $b < + \infty$. Sin embargo, para que $F(s)$  - el límite de esta última integral conforme $b \to + \infty$ exista, se necesita alguna condición que limite la velocidad de crecimiento de $f(t)$ conforme $t \to + \infty$. Se dice que la función $f$ es \textbf{de orden exponencial} conforme $t \to + \infty$ si existen constantes no negativas $M$, $c$ y $T$ tales que
 \begin{equation}
 \abs{f(t)} \leq M \; e^{ct} \hspace{1cm} \mbox{para } t \geq T
@@ -181,11 +201,15 @@ La condición en (\ref{eq:023}) simplemente dice que $f(t) / e^{ct}$ se encuentr
 Si $p(t)$ es un polinomio, entonces es común que $p(t) \; e^{-t} \to 0$ a medida que $t \to +\infty$, lo cual implica que (\ref{eq:023}) se cumple (para $T$ suficientemente grande) con $M = c = 1$. En consecuencia, toda función polinomial es de orden exponencial.
 \par
 Como ejemplo de una función elemental que es continua y por tanto acotada en todo intervalo (finito), pero que no es de orden exponencial, considérese la función $f(t) = e^{t^{2}} = \exp(t^{2})$. Cualquiera que sea el valor de $c$, se observa que
-\[ \lim_{t \to \infty} \dfrac{f(t)}{e^{ct}} = \lim_{t \to \infty} \dfrac{e^{t^{2}}}{e^{ct}} = \lim_{t \to \infty} e^{t^{2}-ct} = + \infty  \]
+\begin{align*}
+\lim_{t \to \infty} \dfrac{f(t)}{e^{ct}} = \lim_{t \to \infty} \dfrac{e^{t^{2}}}{e^{ct}} = \lim_{t \to \infty} e^{t^{2}-ct} = + \infty
+\end{align*}
 debido a que $t^{2} - ct \to + \infty$ a medida que $t \to + \infty$. En consecuencia, la condición en (\ref{eq:023}) no se cumple para ningún valor (finito) de $M$, por lo que se concluye que la función $f(t) = e^{t^{2}}$ no es de orden exponencial.
 \par
-De manera similar, dado que $e^{-st} \, e^{t^{2}} \to + \infty$ conforme $t \to + \infty$, se observa que la integral impropia 
-\[ \int_{0}^{\infty} e^{-st} \; e^{t^{2}} \, \dd t \]
+De manera similar, dado que $e^{-st} \, e^{t^{2}} \to + \infty$ conforme $t \to + \infty$, se observa que la integral impropia
+\begin{align*}
+\int_{0}^{\infty} e^{-st} \; e^{t^{2}} \, \dd{t}
+\end{align*}
 que definiría la $\mathscr{L} \{ e^{t^{2}} \}$, no existe (para ningún valor de $s$) y, como resultado, la función $e^{t^{2}}$ no tiene transformada de Laplace. El siguiente teorema garantiza que las funciones por tramos de orden exponencial sí tienen transformada de Laplace.
 \begin{teo}{Existencia de la transformada de Laplace.}
 
@@ -200,7 +224,7 @@ Si $f(t)$ satisface la hipótesis del teorema anterior, entonces
 \end{equation}
 La condición dada en (\ref{eq:025}) limita severamente las funciones que pueden ser transformadas de Laplace. Por ejemplo, la función $G(s) = s / (s + 1)$ no puede ser la transformada de Laplace de ninguna función \enquote{razonable}, porque su límite cuando $s \to +\infty$ es $1$ en lugar de $0$. Por lo general, una función racional - un cociente de dos polinomios - puede ser (y lo es, como se verá más adelante) una transformada de Laplace sólo si el grado de su numerador es menor que el de su denominador.
 \end{cor}
-\begin{teo}{Unicidad de la transformada inversa de Laplace.}Supóngase que las funciones $f(t)$ y $g(t)$ satisfacen la hipótesis del teorema 2, de tal manera que sus transformadas de Laplace $F(s)$ y $G(s)$ existan. $Si F(s) = G(s)$ para toda $s > c$ (para alguna $c$), entonces $f(t) = g(t)$ siempre que en $[0, + \infty)$ tanto $f$ como $g$ sean continuas.
+\begin{teo}{Unicidad de la transformada inversa de Laplace.}Supóngase que las funciones $f(t)$ y $g(t)$ satisfacen la hipótesis del teorema 2, de tal manera que sus transformadas de Laplace $F(s)$ y $G(s)$ existan. Si $F(s) = G(s)$ para toda $s > c$ (para alguna $c$), entonces $f(t) = g(t)$ siempre que en $[0, + \infty)$ tanto $f$ como $g$ sean continuas.
 \end{teo}
 Así, dos funciones continuas por tramos de orden exponencial con la misma transformada de Laplace pueden diferir únicamente en sus puntos aislados de discontinuidad. Esto no tiene importancia en la mayoría de las aplicaciones prácticas, por lo que las transformadas inversas de Laplace pueden considerarse esencialmente únicas. En particular, dos soluciones de una ecuación diferencial deben ser continuas y por lo tanto deben representar la misma solución si ambas tienen la misma transformada de Laplace.
 \section{Transformadas de problemas con valores iniciales.}
@@ -231,14 +255,16 @@ Entonces, la $\mathscr{L} \{ f^{\prime} (t) \} $ existe para $s > c$, y
 \end{equation}
 \end{teo}
 La función $f$ se llama \textbf{suave por tramos} en el intervalo acotado $[a, b]$ si es continua por tramos en $[a, b]$ y derivable salvo en ciertos puntos finitos, siendo $f^{\prime}(t)$ continua por tramos en $[a, b]$. Pueden asignársele valores arbitrarios a $f(t)$ en los puntos aislados donde $f$ es no derivable. Se dice que $f$ es derivable por tramos para $t \geq 0$ si es suave en el segmento de cada subintervalo acotado de $[0, +\infty)$. La figura (\ref{fig:figura_07_02_01}) muestra cómo \enquote{las esquinas} de la gráfica de $f$ corresponden con discontinuidades en su derivada $f^{\prime}$.
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/discontinuidades}
     \caption{Derivada continua por tramos.}
     \label{fig:figura_07_02_01}
 \end{figure}
 La idea principal de la demostración del teorema (\ref{teo:teo_001}) es mostrarlo mejor en el caso en que $f^{\prime}(t)$ es continua (no meramente continua por tramos) para $t \geq 0$. Entonces, comenzando con la definición de $\mathscr{L} \{ f^{\prime}(t) \} $ e integrando por partes, se obtiene
-\[ \mathscr{L} \{f^{\prime}(t) \} = \int_{0}^{\infty} e^{-st} \, f^{\prime}(t) \, \dd t = \left[ e^{-st} \, f(t) \right]_{t=0}^{\infty} + s \, \int_{0}^{\infty} e^{-st} \, f(t) \, \dd t \]
+\begin{align*}
+\mathscr{L} \{f^{\prime}(t) \} = \int_{0}^{\infty} e^{-st} \, f^{\prime}(t) \, \dd t = \left[ e^{-st} \, f(t) \right]_{t=0}^{\infty} + s \, \int_{0}^{\infty} e^{-st} \, f(t) \, \dd{t}
+\end{align*}
 Debido a la ecuación (\ref{eq:ecuacion_07_02_03}), el término integrado $\exp(-st) \, f(t)$ tiende a cero (cuando $s > c$) conforme $t \to +\infty$, y su valor en el límite inferior $t=0$ contribuye con $-f(0)$ en la evaluación de la expresión anterior. La integral que queda es simplemente $\mathscr{L} \{ f(t) \} $, la integral converge cuando $s > c$. Entonces, la $\mathscr{L} \{ f^{\prime}(t) \}$ existe cuando $s > c$, y su valor se muestra en la ecuación (\ref{eq:ecuacion_07_02_04}). El caso en el cual $f^{\prime}(t)$ cuenta con discontinuidades aisladas se verá más adelante.
 \subsection*{Solución de problemas con valores iniciales.}
 Para transformar la ecuación (\ref{eq:ecuacion_07_02_01}) se necesita también la transformada de la segunda derivada. Si se asume que $g(t) = f^{\prime}(t)$ satisface la hipótesis del teorema (\ref{teo:teo_001}), entonces éste implica que
@@ -269,31 +295,57 @@ Supóngase que las funciones $f$, $f^{\prime}$, $f^{\prime \prime}$, $\ldots$, $
 \end{cor}
 \subsection*{Ejemplo.}
 Resolver el siguiente problema con valores iniciales:
-\[ x^{\prime \prime} - x^{\prime} - 6 \, x = 2, \hspace{1cm} x(0)=2, x^{\prime}(0) = -1 \]
+\begin{align*}
+x^{\prime \prime} - x^{\prime} - 6 \, x = 2, \hspace{1cm} x(0)=2, x^{\prime}(0) = -1
+\end{align*}
 Con los valores iniciales dados, las ecuaciones (\ref{eq:ecuacion_07_02_04}) y (\ref{eq:ecuacion_07_02_05}) nos conducen a que
-\[ \mathscr{L} \{ x^{\prime}(t) \} = s \, \mathscr{L} \{ x(t) \} - x(0) =  s \, X(s) - 2  \]
+\begin{align*}
+\mathscr{L} \{ x^{\prime}(t) \} = s \, \mathscr{L} \{ x(t) \} - x(0) =  s \, X(s) - 2
+\end{align*}
 y
-\[ \mathscr{L} \{ x^{\prime \prime}(t) \} = s^{2} \, \mathscr{L} \{ x(t) \} - s \, x(0) - x^{\prime} (0) =  s^{2} \, X(s) - 2 \, s +1  \]
+\begin{align*}
+\mathscr{L} \{ x^{\prime \prime}(t) \} = s^{2} \, \mathscr{L} \{ x(t) \} - s \, x(0) - x^{\prime} (0) =  s^{2} \, X(s) - 2 \, s +1
+\end{align*}
 donde (de acuerdo con nuestra convención respecto de la notación) $X(s)$ representa la transformada de Laplace de la función (desconocida) $x(t)$. De esta manera, la ecuación transformada es
-\[ [ s^{2} \, X(s) - 2 \, s + 1 ] - [ s \, X(s) - 2 ] - 6 [ X(s) ] = 0 \]
+\begin{align*}
+[ s^{2} \, X(s) - 2 \, s + 1 ] - [ s \, X(s) - 2 ] - 6 [ X(s) ] = 0
+\end{align*}
 la cual se simplifica rápidamente en
-\[ (s^{2} - s - 6) \, X(s) - 2 \, s + 3 = 0 \]
+\begin{align*}
+(s^{2} - s - 6) \, X(s) - 2 \, s + 3 = 0
+\end{align*}
 por tanto
-\[ X(s) = \dfrac{2 \, s - 3}{s^{2} - s - 6} = \dfrac{2 \, s - 3}{(s-3)(s+2)} \]
+\begin{align*}
+X(s) = \dfrac{2 \, s - 3}{s^{2} - s - 6} = \dfrac{2 \, s - 3}{(s-3)(s+2)}
+\end{align*}
 Por el método de fracciones parciales (del cálculo integral), existen constantes $A$ y $B$ tales que
-\[ \dfrac{2 \, s - 3}{(s-3)(s+2)} =  A \, (s + 2) + B \, (s -3) \]
+\begin{align*}
+\dfrac{2 \, s - 3}{(s-3)(s+2)} =  \dfrac{A}{(s - 3)} + \dfrac{B}{(s+2)}
+\end{align*}
+y al multuplicar ambos lados de esta ecuación por $(s-3)(s+2)$, se llega a la identidad
+\begin{align*}
+2 \, s - 3 = A (s + 2) +  B (s - 3)
+\end{align*}
 Si sustituimos $s = 3$, encontramos que $A = \frac{3}{5}$, la sustitución de $s = -2$ muestra que $B = \frac{7}{5}$, así tenemos que
-\[ X(s) = \mathscr{L} \{ x(t) \} = \dfrac{\frac{3}{5}}{s-3} + \dfrac{\frac{7}{5}}{s+2} \]
+\begin{align*}
+X(s) = \mathscr{L} \{ x(t) \} = \dfrac{\frac{3}{5}}{s - 3} + \dfrac{\frac{7}{5}}{s + 2}
+\end{align*}
 Como $\mathscr{L}^{-1} \left\{ \dfrac{1}{(s-a)} \right\} = e^{a t}$, se sigue que
-\[ x(t) = \dfrac{3}{5} \, e^{3t} + \dfrac{7}{5} \, e^{-2t} \]
+\begin{align*}
+x(t) = \dfrac{3}{5} \, e^{3t} + \dfrac{7}{5} \, e^{-2t}
+\end{align*}
 es la solución del problema original con valores iniciales. 
 \par
 Nótese que se encontró primero la solución general de la ecuación diferencial. El método de la transformada de Laplace proporciona directamente la solución particular deseada considerando automáticamente  - por medio del teorema (\ref{teo:teo_001}) y su corolario - las condiciones iniciales dadas.
 \par
 \textbf{Observación. } En el ejemplo anterior se encontraron los coeficientes de las fracciones parciales $A$ y $B$ mediante el \enquote{truco} de sustituir por separado las raíces $s = 3$ y $s = -2$ del denominador original $s^{2} - s - 6 = (s - 3)(s + 2)$ en la ecuación
-\[ 2 \, s - 3 =  A \, (s+2) + B \, (s-3) \]
+\begin{align*}
+2 \, s - 3 =  A \, (s + 2) + B \, (s - 3)
+\end{align*}
 que resultan de resolver las fracciones. En lugar de cualquiera de estos caminos cortos, el \enquote{método seguro} es agrupar coeficientes de iguales potencias de $s$ del lado derecho de la ecuación
-\[ 2 \, s - 3 = (A + B) \, s + (2 \, A - 3) \]
+\begin{align*}
+2 \, s - 3 = (A + B) \, s + (2 \, A - 3)
+\end{align*}
 Entonces, después de igualar coeficientes de términos del mismo grado, se obtienen las ecuaciones lineales
 \begin{align*}
 A + B &= 2 \\
@@ -303,45 +355,57 @@ las cuales se resuelven fácilmente obteniendo los mismos valores de $A = \dfrac
 \subsection*{Ejemplo.}
 Resolver el problema con valores iniciales
 \[ x^{\prime \prime} + 4 \, x =  \sin 3 \, t, \hspace{1.5cm} x(0) = x^{\prime}(0) = 0 \]
-Un problema de este tipo surge en el movimiento de un sistema masa-resorte con una fuerza externa, como se muestra en la figura (\ref{fig:figura_002}).
-\begin{figure}[H]
+Un problema de este tipo surge en el movimiento de un sistema masa-resorte con una fuerza externa, como se muestra en la figura (\ref{fig:figura_07_02_02}).
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/sist_masa_resorte}
     \caption{Sistema masa-resorte que satisface el problema con valores iniciales.}
-    \label{fig:figura_002}
+    \label{fig:figura_07_02_02}
 \end{figure}
 Debido a que ambas condiciones son cero, de la ecuación (\ref{eq:ecuacion_07_02_05}) se obtiene que $\mathscr{L} \{x^{\prime \prime} (t) \} = s^{2} \, X(s) $. La transformada de $\sin 3 \, t$ se obtiene de tablas y de esta manera se encuentra la ecuación transformada
-\[ s^{2} \, X(s) + 4 \, X(s) = \dfrac{3}{s^{2} + 9} \]
+\begin{align*}
+s^{2} \, X(s) + 4 \, X(s) = \dfrac{3}{s^{2} + 9}
+\end{align*}
 Por tanto
-\[ X(s) = \dfrac{3}{(s^{2} + 4)(s^{2} + 9)} \]
+\begin{align*}
+X(s) = \dfrac{3}{(s^{2} + 4)(s^{2} + 9)}
+\end{align*}
 El método de fracciones parciales resulta en
-\[ \dfrac{3}{(s^{2} + 4)(s^{2} + 9)} = \dfrac{A \, s + B}{s^{2} + 4} + \dfrac{C \, s +D}{s^{2} + 9} \]
+\begin{align*}
+\dfrac{3}{(s^{2} + 4)(s^{2} + 9)} = \dfrac{A \, s + B}{s^{2} + 4} + \dfrac{C \, s +D}{s^{2} + 9}
+\end{align*}
 El \enquote{método seguro} para resolver las fracciones consistiría en multiplicar ambos lados de la ecuación por el denominador común, y luego agrupar los coeficientes de iguales potencias de $s$ del lado derecho. Igualando coeficientes de iguales potencias de los dos lados de la ecuación resultante se llega a cuatro ecuaciones lineales que pueden resolverse para obtener $A$, $B$, $C$ y $D$.
 \par
 Sin embargo, aquí puede anticiparse que $A = C = 0$ debido a que ni el numerador ni el denominador del lado izquierdo involucran alguna potencia impar de $s$, mientras que algún valor diferente de cero le corresponde a los términos de grado impar del lado derecho. De esta manera, $A$ y $C$ se reemplazan por cero antes de resolver las fracciones. El resultado es la identidad
-\[ 3 = B \, (s^{2} + 9) + D \, (s^{2} + 4) =  (B + D) \, s^{2} + (9 \, B + 4 \, D) \]
+\begin{align*}
+3 = B \, (s^{2} + 9) + D \, (s^{2} + 4) =  (B + D) \, s^{2} + (9 \, B + 4 \, D)
+\end{align*}
 Cuando se igualan coeficientes de iguales potencias de $s$ se obtienen las ecuaciones lineales
 \begin{align*}
 B + D &= 0 \\
 9 \, B + 4 \, D &= 3
 \end{align*}
 las cuales se resuelven fácilmente para $B = \dfrac{3}{5}$ y $D = - \dfrac{3}{5}$, así
-\[ X(s) = \mathscr{L} \{x(t) \} = \dfrac{3}{10} \; \dfrac{2}{s^{2} + 4} \; - \dfrac{1}{5} \; \dfrac{3}{s^{2} + 9} \]
+\begin{align*}
+X(s) = \mathscr{L} \{x(t) \} = \dfrac{3}{10} \; \dfrac{2}{s^{2} + 4} \; - \dfrac{1}{5} \; \dfrac{3}{s^{2} + 9}
+\end{align*}
 Dado que $\mathscr{L} \{\sin 2 \, t \} = \dfrac{2}{s^{2} + 4}$ y $\mathscr{L} \{\sin 3 \, t \} = \dfrac{3}{s^{2} + 9}$, se concluye que
-\[ x(t) = \dfrac{3}{10} \sin 2 \, t - \dfrac{1}{5} \sin 3 \, t \]
-La figura () muestra la gráfica de la función de posición de la masa de periodo $2 \, \pi$. Nótese que una vez más que el método de la transformada de Laplace proporciona la solución directamente sin necesidad de obtener primero la función complementaria y una solución particular de la ecuación diferencial no homogénea original. De esta manera, las ecuaciones no homogéneas se resuelven exactamente igual que las ecuaciones homogéneas.
-\begin{figure}[!h]
+\begin{align*}
+x(t) = \dfrac{3}{10} \sin 2 \, t - \dfrac{1}{5} \sin 3 \, t
+\end{align*}
+La figura (\ref{fig:figura_07_02_03}) muestra la gráfica de la función de posición de la masa de periodo $2 \, \pi$. Nótese que una vez más que el método de la transformada de Laplace proporciona la solución directamente sin necesidad de obtener primero la función complementaria y una solución particular de la ecuación diferencial no homogénea original. De esta manera, las ecuaciones no homogéneas se resuelven exactamente igual que las ecuaciones homogéneas.
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/sist_masa_resorte_plot}
     \caption{Función de la posición $x(t)$ del sistema masa-resorte.}
-    \label{fig:figura_003}
+    \label{fig:figura_07_02_03}
 \end{figure}
 Los ejemplos anteriores ilustran el procedimiento de solución que se explica en la siguiente figura
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
     \includestandalone[scale=0.7]{Figuras/diagramatransformadas}
     \caption{Uso de las transformadas de Laplace para resolver un problema de valores iniciales.}
-    \label{fig:figura_004}
+    \label{fig:figura_07_02_04}
 \end{figure}
 \section{Sistemas lineales.}
 La transformada de Laplace se utiliza con frecuencia en problemas para resolver sistemas lineales donde todos los coeficientes son constantes. Cuando se especifican las condiciones iniciales, la transformada de Laplace reduce este sistema lineal de ecuaciones diferenciales a un sistema lineal de ecuaciones algebraicas, donde las incógnitas son las transformadas de las funciones solución. Como se ilustra en el siguiente ejemplo, la técnica para un sistema es esencialmente la misma que para una ecuación diferencial con coeficientes constantes.
@@ -359,15 +423,17 @@ sujeto a las condiciones iniciales
 x(0) = x^{\prime} (0) = y(0) = y^{\prime} (0) = 0
 \label{eq:ecuacion_07_02_09}
 \end{equation}
-De esta manera, la fuerza $f(t) = 40 \, \sin 3 \, t$ se aplica a la segunda masa de la figura (\ref{fig:figura_005}), iniciando en el tiempo $t=0$ cuando el sistema está en reposo en su posición de equilibrio.
-\begin{figure}[H]
+De esta manera, la fuerza $f(t) = 40 \, \sin 3 \, t$ se aplica a la segunda masa de la figura (\ref{fig:figura_07_02_05}), iniciando en el tiempo $t=0$ cuando el sistema está en reposo en su posición de equilibrio.
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/sist_dos_masas}
     \caption{Sistema masa-resorte que satisface el problema con valores iniciales.}
-    \label{fig:figura_005}
+    \label{fig:figura_07_02_05}
 \end{figure}
 Escribiendo $X(s) = \mathscr{L} \{ x(t) \} $ y $Y(s) = \mathscr{L} \{ y(t) \} $, entonces las condiciones iniciales dadas en (\ref{eq:ecuacion_07_02_09}) implican que
-\[ \mathscr{L} \{ x^{\prime \prime} (t) \} = s^{2} \, X(s) \hspace{1cm} \mbox{y} \hspace{1cm} \mathscr{L} \{ y^{\prime \prime}(t) \} = s^{2} \, Y(s) \]
+\begin{align*}
+\mathscr{L} \{ x^{\prime \prime} (t) \} = s^{2} \, X(s) \hspace{1cm} \mbox{y} \hspace{1cm} \mathscr{L} \{ y^{\prime \prime}(t) \} = s^{2} \, Y(s)
+\end{align*}
 Debido a que $\mathscr{L} \{ \sin 3 \, t \} = 3 / (s^{2} + 9)$, las transformadas de las ecuaciones dadas en (\ref{eq:ecuacion_07_02_08}) son las ecuaciones
 \begin{align*}
 2 \, s^{2} X(s) &= - 6 \, X(s) + 2 \, Y(s) \\
@@ -402,9 +468,13 @@ Y(s) = \dfrac{120 (s^{2} + 3)}{(s^{2} + 1)(s^{2} + 4)(s^{2} + 9)} = \dfrac{10}{s
 \end{equation}
 \end{subequations}
 La descomposición en fracciones parciales de las ecuaciones (\ref{eq:ecuacion_07_02_11a}) y (\ref{eq:ecuacion_07_02_11b}) se encuentra fácilmente, ya que los factores del denominador son lineales en $s^{2}$, por lo que puede escribirse
-\[ \dfrac{120}{(s^{2} + 1)(s^{2} + 4)(s^{2} + 9)} = \dfrac{A}{s^{2} + 1} + \dfrac{B}{s^{2} + 4} + \dfrac{C}{s^{2} + 9} \]
+\begin{align*}
+\dfrac{120}{(s^{2} + 1)(s^{2} + 4)(s^{2} + 9)} = \dfrac{A}{s^{2} + 1} + \dfrac{B}{s^{2} + 4} + \dfrac{C}{s^{2} + 9}
+\end{align*}
 concluyendo que
-\[ 120 =  A \, (s^{2} + 4)(s^{2} + 9) + B \, (s^{2} + 1)(s^{2} + 9) + C \, (s^{2} + 1)(s^{2} + 4) \]
+\begin{align*}
+120 =  A \, (s^{2} + 4)(s^{2} + 9) + B \, (s^{2} + 1)(s^{2} + 9) + C \, (s^{2} + 1)(s^{2} + 4)
+\end{align*}
 La sustitución de $s^{2} = -1$ (i.e. $s = i$ un cero del factor $s^{2}+1$), en la ecuación anterior, hace que $120 = A \cdot 3 \cdot 8$, tal que $A = 5$. De manera similar, la sustitución de $s^{2} = -4$, nos proporciona $B = -8$, y de la sustitución de $s^{2} = -9$ so obtiene que $C = 3$.
 \par
 Las trasformadas inversas de Laplace de las expresiones anteriores, proporcionan la solución
@@ -412,21 +482,23 @@ Las trasformadas inversas de Laplace de las expresiones anteriores, proporcionan
 x(t) &= 5 \, \sin t - 4 \, \sin 2 \, t + \sin 3 \, t \\
 y(t) &= 10 \, \sin t + 4 \, \sin 2 \, t - 6 \, \sin 3 \, t \end{align*}
 El desplazamiento de las masas, se muestra en la siguiente figura:
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/sist_dos_masas_plot}
     \caption{Funciones de la posición de $x(t)$ y $y(t)$.}
-    \label{fig:figura_006}
+    \label{fig:figura_07_02_06}
 \end{figure}
 \section{La perspectiva de la transformada.}
 Considérese la ecuación general de segundo orden con coeficientes constantes como la ecuación de movimiento
-\[ m \, x^{\prime \prime} + c \, x^{\prime} + k \, x =  f(t) \]
-que corresponde a un sistema masa-resorte-amortiguador, como el que se presenta en la figura (\ref{fig:figura_007}).
-\begin{figure}[H]
+\begin{align*}
+m \, x^{\prime \prime} + c \, x^{\prime} + k \, x =  f(t)
+\end{align*}
+que corresponde a un sistema masa-resorte-amortiguador, como el que se presenta en la figura (\ref{fig:figura_07_02_07}).
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/sist_masa_resorte_dump}
     \caption{Sistema masa-resorte-amortiguador con fuerza externa $f(t)$.}
-    \label{fig:figura_007}
+    \label{fig:figura_07_02_07}
 \end{figure}
 Entonces la ecuación transformada es
 \begin{equation}
@@ -441,7 +513,10 @@ X(s) = \dfrac{F(s)}{Z(s)} + \dfrac{I(s)}{Z(s)}
 \label{eq:ecuacion_07_02_14}
 \end{equation}
 donde
-\[ Z(s) = m \, s^{2} + c \, s + k \hspace{1cm} \mbox{ e }  I(s) = m \, x(0) \, s + m \, x^{\prime} (0) + c \, x(0) \]
+\begin{align*}
+Z(s) &= m \, s^{2} + c \, s + k \hspace{1cm} \\
+I(s) &= m \, x(0) \, s + m \, x^{\prime} (0) + c \, x(0)
+\end{align*}
 Nótese que $Z(s)$ depende únicamente del sistema físico. Así, la ecuación (\ref{eq:ecuacion_07_02_14}) presenta $X(s)= \mathscr{L} \{ x(t)\} $ como la suma de un término dependiendo sólo de la fuerza externa y otro dependiendo sólo de las condiciones iniciales. En el caso de un sistema sin amortiguamiento, estos dos términos son las transformadas
 \[ \mathscr{L} \{ x_{sp} (t) \} = \dfrac{F(s)}{Z(s)} \hspace{1cm} \mbox{ y } \mathscr{L} \{ x_{st} (t) \} = \dfrac{I(s)}{Z(s)} \]
 de la solución periódica en estado permanente y de la solución transitoria, respectivamente. La única dificultad potencial en la búsqueda de estas soluciones se presenta al intentar obtener la transformada inversa de Laplace del lado derecho de la ecuación (\ref{eq:ecuacion_07_02_14}). 
@@ -449,30 +524,37 @@ de la solución periódica en estado permanente y de la solución transitoria, r
 
 Si $f(t)$ es una función continua por tramos para $t \geq 0$ y satisface la condición de orden exponencial $\abs{f(t)} \leq M \, \exp(c \, t)$ para $t \geq T $, entonces
 \begin{equation}
-\mathscr{L} \left\{ \int_{0}^{t} f(t) \, \dd \tau \right\} = \dfrac{1}{s} \, \mathscr{L} \{ f(t) \} = \dfrac{F(s)}{s}
+\mathscr{L} \left\{ \int_{0}^{t} f(t) \, \dd{\tau} \right\} = \dfrac{1}{s} \, \mathscr{L} \{ f(t) \} = \dfrac{F(s)}{s}
 \label{eq:ecuacion_07_02_17}
 \end{equation}
 para $s > c$. En forma equivalente 
 \begin{equation}
-\mathscr{L}^{-1} \left\{ \dfrac{F(s)}{s} \right\} = \int_{0}^{t} f(\tau) \, \dd \tau
+\mathscr{L}^{-1} \left\{ \dfrac{F(s)}{s} \right\} = \int_{0}^{t} f(\tau) \, \dd{\tau}
 \label{eq:ecuacion_07_02_18}
 \end{equation} 
 \end{teo}
 \textbf{Ejemplo: } Encuéntrese la transformada inversa de Laplace de
-\[ G(s) = \dfrac{1}{s^{2} \, (s - a)} \]
+\begin{align*}
+G(s) = \dfrac{1}{s^{2} \, (s - a)}
+\end{align*}
 En efecto, la ecuación (\ref{eq:ecuacion_07_02_18}) significa que se puede eliminar un factor de $s$ del denominador, encontrar la transformada inversa del resultado que se simplifica, y finalmente integrar de $0$ a $t$ (para \enquote{corregir} el factor $s$ faltante). Así
-\[ \mathscr{L}^{-1} \left\{  \dfrac{1}{s (s-a)} \right\} = \int_{0}^{t} \mathscr{L}^{-1} \left\{ \dfrac{1}{s-a} \right\}  \, \dd \tau  = \int_{0}^{t} \exp(a \, \tau) \, \dd \tau  = \dfrac{1}{a} \, (\exp(a \, t) - 1) \]
+\begin{align*}
+\mathscr{L}^{-1} \left\{  \dfrac{1}{s (s - a)} \right\} &= \int_{0}^{t} \mathscr{L}^{-1} \left\{ \dfrac{1}{s - a} \right\}  \, \dd{\tau} \\
+&= \int_{0}^{t} \exp(a \, \tau) \, \dd{\tau} \\
+&= \dfrac{1}{a} \, (\exp(a \, t) - 1)
+\end{align*}
 Repetimos la técnica para obtener
 \begin{align*}
-\mathscr{L}^{-1} \left\{  \dfrac{1}{s^{2} \, (s-a)} \right\} &= \int_{0}^{t} \mathscr{L}^{-1} \left\{ \dfrac{1}{s \, (s-a)} \right\} \, \dd \tau  \\[0.5em]
-&= \int_{0}^{t} \dfrac{1}{a} (\exp(a \, \tau) - 1) \, \dd \tau  = \\[0.5em]
-&= \left[ \dfrac{1}{a} \left( \dfrac{1}{a} \, \exp(a \, t) - \tau \right) \right]_{0}^{t} \\[0.5em]
+\mathscr{L}^{-1} \left\{  \dfrac{1}{s^{2} \, (s - a)} \right\} &= \int_{0}^{t} \mathscr{L}^{-1} \left\{ \dfrac{1}{s \, (s - a)} \right\} \, \dd{\tau}  \\[0.5em]
+&= \int_{0}^{t} \dfrac{1}{a} (\exp(a \, \tau) - 1) \, \dd{\tau}  = \\[0.5em]
+&= \dfrac{1}{a} \left( \dfrac{1}{a} \, \exp(a \, t) - \tau \right) \eval_{0}^{t} \\[0.5em]
 &= \dfrac{1}{a^{2}} \, (\exp(a \, t) - a \, t - 1)
 \end{align*}
 Esta técnica es con frecuencia más conveniente que el método de fracciones parciales para encontrar una transformada inversa de una fracción de la forma $\displaystyle \frac{P(s)}{[s^{n} \, Q(s)]}$.
-\begin{teo}
+\begin{teo}{Traslación sobre el eje $s$.}
+
 Si $F(s) = \mathscr{L} \{ f(t) \}$ existe para $s > c$, entonces  
-\[ \mathscr{L} \{\exp(at) f(t) \} \]
+\[ \mathscr{L} \{\exp(at) \, f(t) \} \]
 existe para $s > a + c$ y
 \[ \mathscr{L} \{ \exp(at) \, f(t) \} = F(s - a) \]
 De manera equivalente
@@ -488,49 +570,69 @@ f(t) & \quad \quad \quad \quad \quad F(s) \nonumber \\
 \end{align}
 \textbf{Ejemplo:}
 \par
-Considérese un sistema masa-resorte con $m = 1/2$, $k = 17$ y $c = 3$ en unidades mks, como se ve en la figura (\ref{fig:figura_008}). Como de costumbre, sea $x(t)$ la función que describe el desplazamiento de la masa $m$ a partir de su posición de equilibrio. Si la masa se pone en movimiento con $x(0)= 3$ y $x^{\prime}(0) = 1$, encuentra $x(t)$ para las oscilaciones libres amortiguadas resultantes.
+Considérese un sistema masa-resorte con $m = 1/2$, $k = 17$ y $c = 3$ en unidades mks, como se ve en la figura (\ref{fig:figura_07_03_01}). Como de costumbre, sea $x(t)$ la función que describe el desplazamiento de la masa $m$ a partir de su posición de equilibrio. Si la masa se pone en movimiento con $x(0)= 3$ y $x^{\prime}(0) = 1$, encuentra $x(t)$ para las oscilaciones libres amortiguadas resultantes.
 \begin{figure}[H]
     \centering
     \includestandalone{Figuras/sist_masa_resorte_dump_02}
     \caption{Sistema masa-resorte-amortiguador.}
-    \label{fig:figura_008}
+    \label{fig:figura_07_03_01}
 \end{figure}
 La ecuación diferencial es
-\[ \dfrac{1}{2} \, x^{\prime \prime} + 3 \, x^{\prime} + 17 \, x = 0 \]
+\begin{align*}
+\dfrac{1}{2} \, x^{\prime \prime} + 3 \, x^{\prime} + 17 \, x = 0
+\end{align*}
 de esta manera, debe de resolverse el problema con valores iniciales
-\[ x^{\prime \prime} + 6 \, x^{\prime} + 34 \, x = 0, \hspace{1cm} x(0) = 3, x^{\prime}(0) = 1 \]
+\begin{align*}
+x^{\prime \prime} + 6 \, x^{\prime} + 34 \, x = 0, \hspace{1cm} x(0) = 3, x^{\prime}(0) = 1
+\end{align*}
 Considérese la transformada de Laplace de cada término de la ecuación diferencial. Debido (obviamente) a que $\mathscr{L} \{ 0 \} = 0 $, se obtiene la ecuación
-\[ [s^{2} \, X(s) - 3 \, s - 1] + 6 [s \, X(s) - 3] +  34 \, X(s) = 0 \]
-la cual se resuelve para $X(s)$ como 
-\[ X(s) = \dfrac{3 \, s + 19}{s^{2} + 6 \, s + 34} =  3 \cdot \dfrac{s + 3}{(s+3)^{2} + 25} + 2 \cdot \dfrac{5}{(s+3)^{2} + 25} \]
-aplicando las fórmulas con $a=-3$ y $k=5$, se observa que
-\[ x(t) = \exp(-3 \, t) (23 \, \cos 5 \, t  + 2 \, \sin 5 \, t) \]
-La figura (\ref{fig:figura_009}) muestra la gráfica de la oscilación amortiguada que decae rápidamente
+\begin{align*}
+s^{2} \, X(s) - 3 \, s - 1] + 6 [s \, X(s) - 3] +  34 \, X(s) = 0
+\end{align*}
+la cual se resuelve para $X(s)$ como
+\begin{align*}
+X(s) = \dfrac{3 \, s + 19}{s^{2} + 6 \, s + 34} =  3 \cdot \dfrac{s + 3}{(s+3)^{2} + 25} + 2 \cdot \dfrac{5}{(s+3)^{2} + 25}
+\end{align*}
+aplicando las fórmulas con $a = -3$ y $k = 5$, se observa que
+\begin{align*}
+x(t) = \exp(-3 \, t) (23 \, \cos 5 \, t  + 2 \, \sin 5 \, t)
+\end{align*}
+La figura (\ref{fig:figura_07_03_02}) muestra la gráfica de la oscilación amortiguada que decae rápidamente
 \begin{figure}[H]
     \centering
     \includestandalone{Figuras/sist_masa_resorte_dump_plot_02}
     \caption{Desplazamiento resultante del sistema masa-resorte-amortiguador.}
-    \label{fig:figura_009}
+    \label{fig:figura_07_03_02}
 \end{figure}
 \textbf{Ejemplo:}
 \par
 Considérese el sistema masa-resorte-amortiguador del ejemplo anterior, pero con condiciones iniciales $x(0) = x^{\prime}(0) = 0$ y con una fuerza externa aplicada $F(t) = 15 \sin 2 \, t$. Encuéntrense el movimiento transitorio resultante y el movimiento periódico en estado permanente de la masa.
 \par
 El problema con valores iniciales que se necesita resolver es
-\[ x^{\prime \prime} + 6 \, x^{\prime} + 34 \, x =  30  \sin 2 \, t, \hspace{1cm} x(0) = x^{\prime}(0) = 0 \]
+\begin{align*}
+x^{\prime \prime} + 6 \, x^{\prime} + 34 \, x =  30  \sin 2 \, t, \hspace{1cm} x(0) = x^{\prime}(0) = 0
+\end{align*}
 la ecuación transformada es
-\[ s^{2} \, X(s) + 6 \, s \, X(s) + 34 \, X(s) = \dfrac{60}{s^{2} + 4} \]
+\begin{align*}
+s^{2} \, X(s) + 6 \, s \, X(s) + 34 \, X(s) = \dfrac{60}{s^{2} + 4}
+\end{align*}
 por tanto
-\[ X(s) = \dfrac{60}{(s^{2} + 4)[(s+3)^{2} + 25]} = \dfrac{A \, s + B}{s^{2} + 4} + \dfrac{C \, s + D}{(s+3)^{2} + 25} \]
+\begin{align*}
+X(s) = \dfrac{60}{(s^{2} + 4)[(s+3)^{2} + 25]} = \dfrac{A \, s + B}{s^{2} + 4} + \dfrac{C \, s + D}{(s+3)^{2} + 25}
+\end{align*}
 Cuando se multiplican ambos lados de la ecuación por un denominador común, se tiene que
 \begin{equation}
 60 = (A , s + B) [(s+3)^{2} + 25] + (C \, s + D)(s^{2} + 4)
 \label{eq:ecuacion_07_03_15}
 \end{equation}
 Para encontrar $A$ y $B$ se sustituye el cero $s = 2 \, i$ del factor cuadrático $s^{2} + 4$ en la ecuación (\ref{eq:ecuacion_07_03_15}); el resultado es
-\[ 60 = (2 \, i \, A + B)[(2 \, i + 3)^{2} + 25] \]
+\begin{align*}
+60 = (2 \, i \, A + B)[(2 \, i + 3)^{2} + 25]
+\end{align*}
 el cual se simplifica en
-\[ 60 = (-24 \, A + 30 \, B) + (60 \, A + 12 \, B) \, i \]
+\begin{align*}
+60 = (-24 \, A + 30 \, B) + (60 \, A + 12 \, B) \, i
+\end{align*}
 Ahora se igualan las partes reales e imaginarias de cada lado de esta ecuación para obtener dos ecuaciones lineales
 \begin{align*}
 -24 \, A + 30 \, B &= 60 \\
@@ -539,9 +641,13 @@ Ahora se igualan las partes reales e imaginarias de cada lado de esta ecuación 
 las cuales se resuelven para obtener que $A = - \frac{10}{29}$ y $B = \frac{50}{29}$.
 \par
 Para encontrar $C$ y $D$ se sustituye el cero $s=-3 + 5 \, i$ del factor cuadrático $(s+3)^{2}$ en la ecuación (\ref{eq:ecuacion_07_03_15}), y se obtiene
-\[ 60 = [C (-3 +  5 \, i) + D][(-3 + 5 \, i)^{2} + 4] \]
+\begin{align*}
+60 = [C (-3 +  5 \, i) + D][(-3 + 5 \, i)^{2} + 4]
+\end{align*}
 que se simplifica en
-\[ 60 = (186 \, C -12 \, D) + (30 \, C - 30 \, D) \, i \]
+\begin{align*}
+60 = (186 \, C -12 \, D) + (30 \, C - 30 \, D) \, i
+\end{align*}
 Igualando las partes reales e imaginarias, una vez más se llega a dos ecuaciones lineales
 \begin{align*}
 186 \, C - 12 \, D &= 60 \\
@@ -555,15 +661,17 @@ X(s) &= \dfrac{1}{29} \left( \dfrac{-10 \, s + 50}{s^{2} + 4} + \dfrac{10 \, s +
 &= \dfrac{1}{29} \left( \dfrac{-10 \, s + 25 \cdot 2}{s^{2} + 4} + \dfrac{10 (s+3) - 4 \cdot 5}{(s+3)^{2} + 25} \right)
 \end{align*}
 Después de calcular las transformadas inversas de Laplace se obtiene que la función de la posición es
-\[ x(t) = \dfrac{5}{29} ( - 2 \, \cos 2 \, t  + 5 \, \sin 2 \, t ) + \dfrac{2}{29} (5 \, \cos 5 \, t - 2 \, \sin 5 \, t) \]
-En la gráfica (\ref{fig:figura_010}) se pueden ver las componentes periódica y transitoria, la suma de las dos, devuelve la posición $x(t)$ del sistema mecánico.
-\begin{figure}[H]
+\begin{align*}
+x(t) = \dfrac{5}{29} ( - 2 \, \cos 2 \, t  + 5 \, \sin 2 \, t ) + \dfrac{2}{29} (5 \, \cos 5 \, t - 2 \, \sin 5 \, t)
+\end{align*}
+En la gráfica (\ref{fig:figura_07_03_03}) se pueden ver las componentes periódica y transitoria, la suma de las dos, devuelve la posición $x(t)$ del sistema mecánico.
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/sist_masa_resorte_dump_plot_03}
     \caption{Oscilación periódica forzada $x_{sp}(t)$, movimiento transitorio amortiguado $x_{tr}(t)$ y solución $x(t) =x_{sp}(t) + x_{tr}(t)$.}
-    \label{fig:figura_010}
+    \label{fig:figura_07_03_03}
 \end{figure}
-Los términos con frecuencia angular $2$ constituyen la oscilación forzada periódica en estado permanente de la masa, mientras que los términos exponenciales amortiguados con frecuencia angular $5$ constituyen su movimiento transitorio, el cual desaparece rápidamente, como se ve en la gráfica (\ref{fig:figura_010}). Nótese que el movimiento transitorio es diferente de cero aun cuando las condiciones iniciales sean cero.
+Los términos con frecuencia angular $2$ constituyen la oscilación forzada periódica en estado permanente de la masa, mientras que los términos exponenciales amortiguados con frecuencia angular $5$ constituyen su movimiento transitorio, el cual desaparece rápidamente, como se ve en la gráfica (\ref{fig:figura_07_03_03}). Nótese que el movimiento transitorio es diferente de cero aun cuando las condiciones iniciales sean cero.
 \section{Resonancia y factores cuádraticos repetidos.}
 Las siguientes dos transformadas inversas de Laplace son útiles para invertir fracciones parciales al caso de factores cuadráticos repetidos:
 \begin{align}
@@ -574,43 +682,65 @@ Debido a la presencia de los términos $t \, \sin k , t$ y $t \, \cos k \, t$ en
 \par
 \textbf{Ejemplo.}
 Resuelve el siguiente problema con valores inciales:
-\[ x^{\prime \prime} + \omega_{0}^{2} \, x = F_{0} \, \sin \omega \, t, \hspace{1cm} x(0) = x^{\prime}(0) = 0 \]
+\begin{align*}
+x^{\prime \prime} + \omega_{0}^{2} \, x = F_{0} \, \sin \omega \, t, \hspace{1cm} x(0) = x^{\prime}(0) = 0
+\end{align*}
 que determinan las oscilaciones forzadas no amortiguadas de una masa sujeta a un resorte.
 \par
 Cuando se transforma la ED, se obtiene la ecuación
-\[ s^{2} \, X(s) + \omega^{2} \, X(s) = \dfrac{F_{0} \, \omega}{s^{2} + \omega^{2}} \]
+\begin{align*}
+s^{2} \, X(s) + \omega^{2} \, X(s) = \dfrac{F_{0} \, \omega}{s^{2} + \omega^{2}}
+\end{align*}
 por lo que
-\[  X(s) = \dfrac{F_{0} \, \omega}{(s^{2} + \omega^{2})(s^{2} + \omega_{0}^{2})} \]
+\begin{align*}
+ X(s) = \dfrac{F_{0} \, \omega}{(s^{2} + \omega^{2})(s^{2} + \omega_{0}^{2})}
+\end{align*}
 Si $\omega \neq \omega_{0}$, se encuentra que
-\[ X(s) = \dfrac{F_{0} \, \omega}{\omega^{2} - \omega_{0}^{2}} \, \left( \dfrac{1}{s^{2}+ \omega_{0}^{2}} - \dfrac{1}{s^{2} + \omega^{2}} \right) \]
+\begin{align*}
+X(s) = \dfrac{F_{0} \, \omega}{\omega^{2} - \omega_{0}^{2}} \, \left( \dfrac{1}{s^{2}+ \omega_{0}^{2}} - \dfrac{1}{s^{2} + \omega^{2}} \right)
+\end{align*}
 de esta manera se concluye que
-\[ x(t) = \dfrac{F_{0} \, \omega}{\omega^{2} - \omega_{0}^{2}} \left( \dfrac{1}{\omega_{0}} \sin \omega \, t - \dfrac{1}{\omega} \, \sin \omega \, t \right) \]
+\begin{align*}
+x(t) = \dfrac{F_{0} \, \omega}{\omega^{2} - \omega_{0}^{2}} \left( \dfrac{1}{\omega_{0}} \sin \omega \, t - \dfrac{1}{\omega} \, \sin \omega \, t \right)
+\end{align*}
 Pero si $\omega = \omega_{0}$, se tiene que
-\[ X(s) = \dfrac{F_{0} \, \omega_{0}}{(s^{2} + \omega^{2})^{2}} \]
+\begin{align*}
+X(s) = \dfrac{F_{0} \, \omega_{0}}{(s^{2} + \omega^{2})^{2}}
+\end{align*}
 la ec. (\ref{eq:ecuacion_07_03_17}) proporciona la solución de resonancia
 \begin{equation}
 x(t) = \dfrac{F_{0}}{2 \, \omega_{0}^{2}} \, (\sin \omega_{0} \, t - \omega_{0} \, t \, \cos \omega_{0} \, t )
 \label{eq:ecuacion_07_03_18}
 \end{equation}
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
     \includestandalone{Figuras/sist_masa_resorte_resonancia_plot_01}
     \caption{La solución de resonancia junto con sus curvas envolventes.}
-    \label{fig_figura_011}
+    \label{fig_figura_07_03_04}
 \end{figure}
-\textbf{Nota:} La curva solución definida por la ec. (\ref{eq:ecuacion_07_03_18}) oscila una y otra vez, como vemos en la figura (\ref{fig_figura_011}) entre dos \enquote{rectas envolventes}: $x = \pm C(t)$, que se obtienen al escribir la ec. (\ref{eq:ecuacion_07_03_18}) en la forma
-\[ x(t) =  A(t) \, \cos \omega_{0} \, t +  B(t) \, \sin \omega_{0 \, t} \]
+\textbf{Nota:} La curva solución definida por la ec. (\ref{eq:ecuacion_07_03_18}) oscila una y otra vez, como vemos en la figura (\ref{fig_figura_07_03_04}) entre dos \enquote{rectas envolventes}: $x = \pm C(t)$, que se obtienen al escribir la ec. (\ref{eq:ecuacion_07_03_18}) en la forma
+\begin{align*}
+x(t) =  A(t) \, \cos \omega_{0} \, t +  B(t) \, \sin \omega_{0 \, t}
+\end{align*}
 definiendo entonces la usual \enquote{amplitud}
-\[ C = \sqrt{A^{2} +  B^{2}} \]
+\begin{align*}
+C = \sqrt{A^{2} +  B^{2}}
+\end{align*}
 En este caso se encuentra que
-\[ C(t) = \dfrac{F_{0}}{2 \, \omega_{0}^{2}} \, \sqrt{\omega_{0}^{2} \, t^{2} + 1} \]
+\begin{align*}
+C(t) = \dfrac{F_{0}}{2 \, \omega_{0}^{2}} \, \sqrt{\omega_{0}^{2} \, t^{2} + 1}
+\end{align*}
 \textbf{Problema a cuenta: } Con el mismo sistema masa resorte amortiguador, considera los valores de $m = 1$, $k = 9.04$, y $F(t) =  6 \, \exp(-t/50) \, \cos 3 \, t$, resuelve el problema para obtener el desplazamiento $x(t)$. ¿Cuál es el valor máximo de la amplitud? Discute tus resultados. (Nota: será necesario que cuentes con una gráfica de la solución, ya que de esa manera podrás argumentar tu respuesta)
 % %Sección 7.4 Zill - Derivadas, integrales y productos de transformadas
 \section{Teorema de convolución.}
 La transformada de Laplace de la (inicialmente desconocida) solución de una ecuación diferencial, se puede reconocer algunas veces como el producto de las transformadas de dos funciones conocidas. Por ejemplo, cuando se transforma el problema de valores iniciales
-\[ x^{\prime \prime} + x = \cos t \hspace{1cm} x(0) = x^{\prime}(0) = 0 \]
+\begin{align*}
+x^{\prime \prime} + x = \cos t \hspace{1cm} x(0) = x^{\prime}(0) = 0
+\end{align*}
 se obtiene
-\[ X(s) = \dfrac{s}{(s^{2} + 1)^{2}} = \dfrac{s}{s^{2} + 1} \cdot \dfrac{1}{s^{2} + 1} = \mathscr{L} \left\{ \cos t \right\} \cdot \left\{ \mathscr{L} \sin t \right\} \]
+\begin{align*}
+X(s) = \dfrac{s}{(s^{2} + 1)^{2}} = \dfrac{s}{s^{2} + 1} \cdot \dfrac{1}{s^{2} + 1} = \mathscr{L} \left\{ \cos t \right\} \cdot \left\{ \mathscr{L} \sin t \right\}
+\end{align*}
 Esto sugiere fuertemente que debe haber una forma de combinar las dos funciones $\sin t$ y $\cos t$ para obtener una función $x(t)$ cuya transformada sea el producto de sus transformadas. Pero, como es obvio, $x(t)$ no es simplemente el producto de $\cos t$ por $\sin t$ debido a que 
 \begin{align*}
 \mathscr{L} \left\{ \cos t \, \sin t \right\} = \mathscr{L} \left\{ \dfrac{1}{2} \sin 2 \, t \right\} = \dfrac{1}{s^{2} + 4} \neq \dfrac{s}{(s^{2} + 1)^{2}}
@@ -619,7 +749,7 @@ Así,
 \[ \mathscr{L} \left\{ \cos t \, \sin t \right\} \neq \mathscr{L} \left\{ \cos t \right\} \cdot \mathscr{L} \left\{ \sin t \right\} \]
 El sigiente teorema muestra que la función
 \begin{equation}
-h(t) = \int_{0}^{t} f(\tau) \, g(t - \tau) \, \dd \tau
+h(t) = \int_{0}^{t} f(\tau) \, g(t - \tau) \, \dd{\tau}
 \label{eq:ecuacion_07_04_01}
 \end{equation}
 tiene la propiedad deseada de que
@@ -631,32 +761,41 @@ La nueva función de $t$ definida como la integral en (\ref{eq:ecuacion_07_04_01
 \begin{defi}{Convolución de dos funciones.}
 La \textbf{convolución} $f * g$ de funciones continuas por tramos $f$ y $g$ se define para $t \geqq 0$ como sigue:
 \begin{equation}
-(f * g)(t) = \int_{0}^{t} f(\tau) \, g(t - \tau) \, \dd \tau
+(f * g)(t) = \int_{0}^{t} f(\tau) \, g(t - \tau) \, \dd{\tau}
 \label{eq:ecuacion_07_04_03}
 \end{equation}
 \end{defi}
 Se puede escribir también como $f(t) * g(t)$ cuando sea conveniente. En términos de la convolución del producto, se tiene que
-\[ \mathscr{L} \left\{ f * g \right\} = \mathscr{L} \left\{ f \right\} \cdot \mathscr{L} \left\{ g \right\} \]
+\begin{align*}
+\mathscr{L} \left\{ f * g \right\} = \mathscr{L} \left\{ f \right\} \cdot \mathscr{L} \left\{ g \right\}
+\end{align*}
 Si se hace la sustitución $u = t - \tau$ en la integral dada en la ec. (\ref{eq:ecuacion_07_04_03}), se observa que
 \begin{align*}
-f(t) * g(t) &= \int_{0}^{t} f(\tau) \, g(t - \tau) \, \dd \tau = \int_{t}^{0} f(t - u) \, g(u) \, (-\dd u) \\
-&= \int_{0}^{t} g(u) \, f(t - u) \, \dd u = g(t) * f(t)
+f(t) * g(t) &= \int_{0}^{t} f(\tau) \, g(t - \tau) \, \dd{\tau} = \int_{t}^{0} f(t - u) \, g(u) \, (-\dd{u}) \\
+&= \int_{0}^{t} g(u) \, f(t - u) \, \dd{u} = g(t) * f(t)
 \end{align*}
 De esta manera, se revisa que la convolución es \textit{conmutativa}: $f * g = g * f$.
 \subsection*{Ejemplo.}
 La convolución del $\cos t$ y el $\sin t$ es
-\[ (\cos t) * (\sin t) = \int_{0}^{t} \cos \tau	\; \sin (t - \tau) \, \dd \tau \]
+\begin{align*}
+(\cos t) * (\sin t) = \int_{0}^{t} \cos \tau	\; \sin (t - \tau) \, \dd{\tau}
+\end{align*}
 Usando la siguiente identidad trigonométrica
-\[ \cos A \; \sin B =  \dfrac{1}{2} [ (\sin(A + B) - \sin (A - B) ] \]
+\begin{align*}
+\cos A \; \sin B =  \dfrac{1}{2} [ (\sin(A + B) - \sin (A - B) ]
+\end{align*}
 tenemos que
 \begin{align*}
-(\cos t) * (\sin t) &=  \int_{0}^{t} \frac{1}{2} [\sin t - \sin (2 \tau - t)] \, \dd \tau \\
-&= \dfrac{1}{2} \left[ \tau \; \sin t + \dfrac{1}{2} \cos (2 \tau - 1) \right]_{\tau=0}^{t}
+(\cos t) * (\sin t) &=  \int_{0}^{t} \frac{1}{2} [\sin t - \sin (2 \tau - t)] \, \dd{\tau} \\
+&= \dfrac{1}{2} \left[ \tau \; \sin t + \dfrac{1}{2} \cos (2 \tau - 1) \right] \, \eval_{\tau = 0}^{t}
 \end{align*}
 esto es entonces
-\[ (\cos t) * (\sin t) = \frac{1}{2} t \; \sin t \]
+\begin{align*}
+(\cos t) * (\sin t) = \frac{1}{2} t \; \sin t
+\end{align*}
 \begin{teo}{Propiedad de convolución.}
-Supóngase que $f(t)$ y $g(t)$ son funciones continuas por tramos para $ t \geqq 0$ y que $\vert f(t) \vert$ y $\vert g(t) \vert$ están acotadas por $M \, e^{ct}$ conforme $t \to +\infty$. Entonces la TL de la convolución $f(t) * g(t)$ existe para $s > c$, más aún:
+
+Supóngase que $f(t)$ y $g(t)$ son funciones continuas por tramos para $ t \geqq 0$ y que $\abs{f(t)}$ y $\abs{g(t)}$ están acotadas por $M \, e^{ct}$ conforme $t \to +\infty$. Entonces la transformada de Laplace de la convolución $f(t) * g(t)$ existe para $s > c$, más aún:
 \begin{equation}
 \mathscr{L} \{ f(t) * g(t) \} = \mathscr{L} \{ f(t) \} \cdot \mathscr{L} \{ g(t) \}
 \label{eq:ecuacion_07_04_04}
@@ -668,7 +807,7 @@ y además
 \end{equation}
 De esta manera, es posible encontrar la transformada inversa del producto $F(s) \cdot G(s)$ siempre que sea posible evaluar la integral
 \begin{equation}
-\mathscr{L} \{ F(s) \cdot G(s) \} = \int_{0}^{t} f(\tau) \; g(t - \tau) \, \dd \tau
+\mathscr{L} \{ F(s) \cdot G(s) \} = \int_{0}^{t} f(\tau) \; g(t - \tau) \, \dd{\tau}
 \label{eq:ecuacion_07_04_05b}
 \end{equation}
 \end{teo}
@@ -676,9 +815,9 @@ De esta manera, es posible encontrar la transformada inversa del producto $F(s) 
 \subsection*{Ejemplo.}
 Con $f(t) = \sin 2 \, t$ y $g(t) = e^{t}$, la convolución es
 \begin{align*}
-\mathscr{L}^{-1} \left\{ \dfrac{2}{(s-1)(s^{2} + 4)} \right\} &= (\sin 2t) * e^{t} = \int_{0}^{t} e^{t - \tau} \; \sin 2 \, t \, \dd t \\
-&= e^{t} \; \int_{0}^{t} e^{-\tau} \; \sin 2 \, t \, \dd t = \\
-&= e^{t} \left[ \dfrac{e^{-\tau}}{5} (- \sin 2 \, \tau - 2 \, \cos 2 \, \tau) \right]_{0}^{t} \\
+\mathscr{L}^{-1} \left\{ \dfrac{2}{(s-1)(s^{2} + 4)} \right\} &= (\sin 2t) * e^{t} = \int_{0}^{t} e^{t - \tau} \; \sin 2 \, t \, \dd{t} \\
+&= e^{t} \; \int_{0}^{t} e^{-\tau} \; \sin 2 \, t \, \dd{t} = \\
+&= e^{t} \left[ \dfrac{e^{-\tau}}{5} (- \sin 2 \, \tau - 2 \, \cos 2 \, \tau) \right] \, \eval_{0}^{t} \\
 &= \dfrac{2}{5} \, e^{t} - \dfrac{1}{5} \, \sin 2 \, t - \dfrac{2}{5} \, \cos t
 \end{align*}
 \section{Derivación de transformadas.}
@@ -725,7 +864,7 @@ La derivada de $\tan^{-1}(1/s)$ es una función racional simple, por lo que usan
 \end{align*}
 por tanto
 \begin{align*}
-\mathscr{L}^{-1} \left\{ \tan^{-1} \dfrac{1}{s} \right\} = \dfrac{sin t}{t}
+\mathscr{L}^{-1} \left\{ \tan^{-1} \dfrac{1}{s} \right\} = \dfrac{\sin t}{t}
 \end{align*}
 La ec. (\ref{eq:ecuacion_07_04_08}) puede utilizarse para transformar la ED lineal con polinomios en lugar de coeficietes constantes. El resultado será una ED que involucre la transformada; el éxito de este procedimiento dependerá de si la nueva ecuación es más fácil de resolver que la ecuación original.
 \subsection*{Ejemplo.}
@@ -735,7 +874,7 @@ t \, x^{\prime \prime} + x^{\prime} + t \, x = 0
 \end{align*}
 de tal manera que $x(0) = 1$ y $x^{\prime}(0) = 0$. La solución a la ecuación de Bessel es $J_{0}(t)$.
 \par
-Al aplicar la TL, tenemos que
+Al aplicar la transformada de Laplace, tenemos que
 \begin{align*}
 \mathscr{L} \left\{ x^{\prime} (t) \right\} &= s \, X(s) - 1 \\
 \mathscr{L} \left\{ x^{\prime \prime} (t) \right\} &= s^{2} \, X(s) - s
@@ -766,5 +905,5 @@ Como se mencionó:
 \begin{align*}
 \mathscr{L} \left\{ J_{0}(t) \right\} = \dfrac{C}{\sqrt{s^{2}+ 1}} =  \dfrac{C}{s} \left( 1 + \dfrac{1}{s^{2}} \right)^{-1/2}
 \end{align*}
-Desarrolla lo anterior con el apoyo de la serie binomial y calcula la transformada inversa término a término, de tal manera que cuando evalúes $J_{0}(0)$, tendrás la demostración de que $C = 1$.
+Desarrolla lo anterior con el apoyo de la serie binomial y calcula la transformada inversa término a término, de tal manera que cuando evalúes $J_{0}(0)$, comprobarás que $C = 1$.
 \end{document}
