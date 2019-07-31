@@ -1,7 +1,8 @@
  \input{../preambulo_doc}
 %\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
-\title{Matemáticas Avanzadas de la Física \\ {\large Operadores diferenciales vectoriales}}
+\title{Sistemas Coordenados \\ {\large OMatemáticas Avanzadas de la Física}\vspace{-1.5\baselineskip}}
 \date{ }
+\author{}
 \begin{document}
 %\renewcommand\theenumii{\arabic{theenumii.enumii}}
 \renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
@@ -10,10 +11,15 @@
 \section{Introducción.}
 Buena parte de la formación que hemos recibido tanto en la matemática como en la física, se ha hecho mediante un sistema de referencia cartesiano, donde ya conoces al conjunto de vectores cartesianos $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$, que sabemos que son constantes en dirección y en magnitud. 
 \par
-En ciertos problemas se puede introducir una distancia radial $\mathbf{r}$, que se puede manejar incluso como una función de $x$, $y$, $z$. Desafortunadamente, no todos los problemas físicos se ajustan a una solución en coordenadas cartesianas. Por ejemplo, si tenemos un problema fuerza central, $\mathbf{F} = \widehat{r} \: F(r)$, como en el caso de la fuerza de la gravedad o en electrostática, el uso de coordenadas cartesianas resulta ser el inadecuado. Tal problema exige el uso de un sistema de coordenadas en el que se toma la distancia radial como una de las coordenadas, es decir, usamos un sistema de coordenadas esféricas.
+En ciertos problemas se puede introducir una distancia radial $\mathbf{r}$, que se puede manejar incluso como una función de $x$, $y$, $z$. Desafortunadamente, no todos los problemas físicos se ajustan a una solución en coordenadas cartesianas. Por ejemplo, si tenemos un problema fuerza central, $\mathbf{F} = \va{r} \: F(r)$, como en el caso de la fuerza gravitacional o electrostática, el uso de coordenadas cartesianas resulta ser inadecuado. Tal problema exige el uso de un sistema de coordenadas en el que se toma la distancia radial como una de las coordenadas, es decir, usamos un sistema de coordenadas esféricas.
+\par
+El punto es que el sistema coordenado debe de seleccionarse de modo que se adapte al problema, para aprovechar cualquier oportunidad o simetría presente en el mismo. Luego, con buena disposición, resultará más fácil la solución que cuando se obliga a adaptar una estructura cartesiana. Cuando se menciona \enquote{de más fácil solución}, significa que se tendrá una ecuación diferencial parcial (EDP) que puede separarse en ecuaciones diferenciales ordinarias (EDO), frecuentemente en la \enquote{forma estándar} en el nuevo sistema coordenado. La \emph{técnica de separación de variables}, se verá en el Tema 2 del curso.
 \par
 Nos va a interesar aquellos sistemas de coordenadas en donde la ecuación
-\[ \nabla^{2} \psi + k^{2} \: \psi =0 \]
+\begin{align}
+\nabla^{2} \psi + k^{2} \: \psi = 0
+\label{eq:ecuacion_02_01}
+\end{align}
 es una ecuación separable.  En particular ésta ecuación tiene como particular el hecho de que si:
 \begin{itemize}
 \item $k^{2} = 0$, se obtiene la ecuación de Laplace.
@@ -21,67 +27,58 @@ es una ecuación separable.  En particular ésta ecuación tiene como particular
 \item $k^{2} = (-) \mbox{ constante}$, se obtiene la ecuación de difusión (en su parte espacial).
 \item $k^{2} = \mbox{ constante } \times \mbox{ energía cinética}$, se obtiene la ecuación de onda de Schrödinger.
 \end{itemize}
+Se ha demostrado que existen once sistemas coordenados en donde la ec. (\ref{eq:ecuacion_02_01}) puede separarse. 
 \par
-El punto es que el sistema de coordenadas debe ser elegido para ajustar el problema, para aprovechar cualquier restricción o simetría presente en ella. Entonces es probable que la solución sea más fácil de obtener que si lo hubiéramos planteado dentro de un sistema cartesiano.
+Naturalmente, hay un costo que se debe pagar por el uso de un sistema diferente al de coordenadas cartesianas. Todavía no hemos escrito las expresiones para el gradiente, la divergencia, o el rotacional en los sistemas de coordenadas no cartesianas. Primero debemos desarrollar un sistema de coordenadas curvilíneas, un sistema general que pueda especializarse para cualquiera de los sistemas coordenados particulares de interés. Comenzaremos con esta parte en el primer tema del curso. 
+\subsection{Coordenadas curvilíneas.}
+En coordenadas cartesianas nos ocupamos de tres familias de planos mutuamente perpendiculares: $x = \mbox{ constante}$, $y = \mbox{ constante}$, y $z = \mbox{ constante}$. Imaginemos que superponemos en este sistema otras tres familias de superficies $q_{i} (x, y, z), i = 1,2,3$. Las superficies de cualquier familia $q_{i}$ no necesitan ser paralelas con respecto a las otras  y que no necesariamente representan un plano.
 \par
-Naturalmente, hay un costo que se debe pagar por el uso de un sistema diferente al de coordenadas cartesianas. Todavía no hemos escrito las expresiones de gradiente, divergencia, o rotacional en los sistemas de coordenadas no cartesianas. Comenzaremos con esta parte en el primer tema del curso.
-\subsection{Coordenadas ortogonales}
-En coordenadas cartesianas nos ocupamos de tres familias mutuamente perpendiculares de plano: $x = \mbox{ constante}$, $y = \mbox{ constante}$, y $z = \mbox{ constante}$. Imaginemos que superponemos en este sistema otras tres familias de superficies $q_{i} (x, y, z), i = 1,2,3$. Las superficies de cualquier familia $q_{i}$ no necesitan ser paralelas con respecto a las otras  y que no necesariamente representan un plano.
-\par
-Las tres nuevas familias de superficies no necesitan ser mutuamente perpendiculares, pero por simplicidad que imponen esta condición, dado que las coordenadas ortogonales son comunes en las aplicaciones físicas.
+Las tres nuevas familias de superficies no necesitan ser mutuamente perpendiculares, pero por simplicidad imponemos ésta condición, dado que las coordenadas ortogonales son comunes en las aplicaciones físicas.
 \par
 Esta ortogonalidad tiene muchas ventajas: las coordenadas ortogonales casi son como las coordenadas cartesianas, donde las secciones de áreas infinitesimales y los volúmenes son producto de los diferenciales de las coordenadas.
 \\
 Podemos describir cualquier punto $(x, y, z)$ como la intersección de tres planos en coordenadas cartesianas o como la intersección de las tres superficies que forman nuestras nuevas coordenadas curvilíneas. Al describir las superficies coordenadas curvilíneas por $q_{1} = \mbox{ constante}$, $q_{2} = \mbox{ constante}$, $q_{3} = \mbox{ constante}$, podemos identificar nuestro punto por $(q_{1}, q_{2}, q_{3})$, así como por $(x, y, z)$:
-\begin{eqnarray}
+\begin{align}
 \begin{aligned}
 \mbox{Coordenadas  generales curvilíneas} & \hspace{1.cm} \mbox{Coordenadas circulares cilíndricas} \\
 q_{1}, q_{2}, q_{3} & \hspace{1.5cm} \rho, \varphi, z \\ 
-x = x(q_{1},q_{2}, q_{3}) & \hspace{1.5cm} - \infty < x = \rho \: \cos \varphi < \infty \\ 
-y = y(q_{1},q_{2}, q_{3}) & \hspace{1.5cm} - \infty < y = \rho \: \sin \varphi < \infty \\
-z = z(q_{1},q_{2}, q_{3}) & \hspace{1.5cm} - \infty < z = z < \infty
-\label{eq:ecuacion_02_01}
+x = x(q_{1},q_{2}, q_{3}) & \hspace{1.5cm} x = \rho \: \cos \varphi \\ 
+y = y(q_{1},q_{2}, q_{3}) & \hspace{1.5cm} y = \rho \: \sin \varphi \\
+z = z(q_{1},q_{2}, q_{3}) & \hspace{1.5cm} z = z
+\label{eq:ecuacion_02_02}
 \end{aligned}
-\end{eqnarray}
-podemos definir $x,y,z$ en términos de $q_{1}, q_{2}, q_{3}$ y sus relaciones inversas:
-\begin{eqnarray}
+\end{align}
+podemos definir $x, y, z$ en términos de $q_{1}, q_{2}, q_{3}$ y sus relaciones inversas:
+\begin{align}
 \begin{aligned}
-q_{1} = q_{1}(x,y,z) & \hspace{1.5cm} 0 \leq \rho = (x^{2} + y^{2})^{1/2} < \infty \\
-q_{2} = q_{2}(x,y,z) & \hspace{1.5cm} 0 \leq \varphi = \arctan(y/x) < 2 \pi \\
-q_{3} = q_{3}(x,y,z) & \hspace{1.5cm} - \infty < z = z < \infty
+q_{1} = q_{1}(x,y,z) & \hspace{1.5cm} \rho = (x^{2} + y^{2})^{1/2} \\
+q_{2} = q_{2}(x,y,z) & \hspace{1.5cm} \varphi = \arctan(y/x) \\
+q_{3} = q_{3}(x,y,z) & \hspace{1.5cm} z = z
 \end{aligned}
 \label{eq:ecuacion_02_02}
-\end{eqnarray}
-
-Con cada familia de superficies $q_{i} = \mbox {constante}$, podemos asociar un vector unitario $\mathbf{\widehat{q}_{i}}$ normal a la superficie $q_{i} = \mbox{ constante}$ y en la dirección en donde $q_{i}$ aumenta. En general, estos vectores unitarios dependerán de la posición en el espacio. Entonces,  un vector $\mathbf{V}$ se puede escribir
-\begin{equation}
-\mathbf{V} = \mathbf{\widehat{q}}_{1} \: V_{1} +\mathbf{\widehat{q}}_{2} \: V_{2} + \mathbf{\widehat{q}}_{3} \: V_{3}
-\label{eq:ecuacion_02_03}
-\end{equation}
-
+\end{align}
+Con cada familia de superficie $q_{i} = \mbox {constante}$, podemos asociar un vector unitario $\vu{e}_{i}$ normal a la superficie $q_{i} = \mbox{ constante}$ y en la dirección en donde $q_{i}$ aumenta. En general, estos vectores unitarios dependerán de la posición en el espacio. Entonces,  un vector $\vb{V}$ se puede escribir
+\begin{align}
+\vb{V} = \vu{e}_{1} \: V_{1} +\vu{e}_{2} \: V_{2} + \vu{e}_{3} \: V_{3}
+\end{align}
 pero la coordenada o el vector de posición es diferente en general
-
-\begin{align*} \mathbf{r} \neq \mathbf{\widehat{q}}_{1} \: q_{1} + \mathbf{\widehat{q}}_{2} \: q_{2} + \mathbf{\widehat{q}}_{3} \: q_{3}
+\begin{align*}
+\vb{r} \neq \vu{q}_{1} \: q_{1} + \vu{q}_{2} \: q_{2} + \vu{q}_{3} \: q_{3}
 \end{align*}
-
-como casos especiales tenemos $\mathbf{r} = r \: \mathbf{\widehat{r}}$ para las coordenadas polares y $\mathbf{r} = \rho \: \mathbf{\widehat{\rho}} + z \: \widehat{z}$ para coordenadas cilíndricas. Los $\mathbf{\widehat{q}}_{i}$ se normalizan, tal que $\mathbf{\widehat{q}}_{i}^{2} = 1$ y forman un sistema coordenado derecho con volumen $\mathbf{\widehat{q}}_{1} \cdot (\mathbf{\widehat{q}}_{2} \times \mathbf{\widehat{q}}_{3} ) > 0$.
-
-
-La diferenciación de $x$ en coordenadas generalizadas (ec. \ref{eq:ecuacion_02_01}), nos lleva a un diferencial
-
-\begin{equation}
-dx  = \dfrac{\partial x}{\partial q_{1}} \: d q_{1} + \dfrac{\partial x}{\partial q_{2}} \: d q_{2} + \dfrac{\partial x}{\partial q_{3}} \: d q_{3}
+como casos especiales tenemos $\vb{r} = r \: \vu{r}$ para las coordenadas polares y $\vb{r} = \rho \: \vu{\rho} + z \: \vu{z}$ para coordenadas cilíndricas. Los $\vu{q}_{i}$ se normalizan, tal que $\vu{q}_{i}^{2} = 1$ y forman un sistema coordenado derecho con volumen $\vu{q}_{1} \cdot (\vu{q}_{2} \cp \vu{q}_{3} ) > 0$.
+\par
+La diferenciación de $x$ en coordenadas generalizadas (ec. \ref{eq:ecuacion_02_02}), nos lleva a un diferencial
+\begin{align}
+\dd{x} = \pdv{x}{q_{1}} \dd{q_{1}} + \pdv{x}{q_{2}} \dd{q_{2}} + \pdv{x}{q_{3}} \dd{q_{3}}
 \label{eq:ecuacion_02_04}
-\end{equation}
-
+\end{align}
 de manera similar, obtenemos la diferenciación para $y$ y para $z$.
-
+\par
 En notación vectorial, tenemos
-
-\begin{align*} d \mathbf{r} = \sum_{i} \dfrac{\partial \mathbf{r}}{\partial q_{i}} d q_{i}
+\begin{align*}
+\dd{\vb{r}} = \sum_{i} \pdv{\vb{r}}{q_{i}} \dd{q_{i}}
 \end{align*}
-
-Sabemos del teorema de Pitágoras que en coordenadas cartesianas, el cuadro de la distancia entre dos puntos está dada por
+Sabemos del teorema de Pitágoras que en coordenadas cartesianas el cuadrado de la distancia entre dos puntos está dada por
 
 \[ ds^{2} = dx^{2} + dy^{2} + dz^{2} \]
 
