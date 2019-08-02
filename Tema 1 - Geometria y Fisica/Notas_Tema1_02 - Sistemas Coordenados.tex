@@ -1,6 +1,6 @@
  \input{../preambulo_doc}
 %\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
-\title{Sistemas Coordenados \\ {\large OMatemáticas Avanzadas de la Física}\vspace{-1.5\baselineskip}}
+\title{Sistemas Coordenados \\ {\large Matemáticas Avanzadas de la Física}\vspace{-1.5\baselineskip}}
 \date{ }
 \author{}
 \begin{document}
@@ -18,7 +18,7 @@ El punto es que el sistema coordenado debe de seleccionarse de modo que se adapt
 Nos va a interesar aquellos sistemas de coordenadas en donde la ecuación
 \begin{align}
 \nabla^{2} \psi + k^{2} \: \psi = 0
-\label{eq:ecuacion_02_01}
+%\label{eq:ecuacion_02_01}
 \end{align}
 es una ecuación separable.  En particular ésta ecuación tiene como particular el hecho de que si:
 \begin{itemize}
@@ -27,7 +27,7 @@ es una ecuación separable.  En particular ésta ecuación tiene como particular
 \item $k^{2} = (-) \mbox{ constante}$, se obtiene la ecuación de difusión (en su parte espacial).
 \item $k^{2} = \mbox{ constante } \times \mbox{ energía cinética}$, se obtiene la ecuación de onda de Schrödinger.
 \end{itemize}
-Se ha demostrado que existen once sistemas coordenados en donde la ec. (\ref{eq:ecuacion_02_01}) puede separarse. 
+Se ha demostrado que existen once sistemas coordenados en donde la ec. de Helmholtz puede separarse. 
 \par
 Naturalmente, hay un costo que se debe pagar por el uso de un sistema diferente al de coordenadas cartesianas. Todavía no hemos escrito las expresiones para el gradiente, la divergencia, o el rotacional en los sistemas de coordenadas no cartesianas. Primero debemos desarrollar un sistema de coordenadas curvilíneas, un sistema general que pueda especializarse para cualquiera de los sistemas coordenados particulares de interés. Comenzaremos con esta parte en el primer tema del curso. 
 \subsection{Coordenadas curvilíneas.}
@@ -45,7 +45,7 @@ q_{1}, q_{2}, q_{3} & \hspace{1.5cm} \rho, \varphi, z \\
 x = x(q_{1},q_{2}, q_{3}) & \hspace{1.5cm} x = \rho \: \cos \varphi \\ 
 y = y(q_{1},q_{2}, q_{3}) & \hspace{1.5cm} y = \rho \: \sin \varphi \\
 z = z(q_{1},q_{2}, q_{3}) & \hspace{1.5cm} z = z
-\label{eq:ecuacion_02_02}
+\label{eq:ecuacion_02_01}
 \end{aligned}
 \end{align}
 podemos definir $x, y, z$ en términos de $q_{1}, q_{2}, q_{3}$ y sus relaciones inversas:
@@ -60,6 +60,7 @@ q_{3} = q_{3}(x,y,z) & \hspace{1.5cm} z = z
 Con cada familia de superficie $q_{i} = \mbox {constante}$, podemos asociar un vector unitario $\vu{e}_{i}$ normal a la superficie $q_{i} = \mbox{ constante}$ y en la dirección en donde $q_{i}$ aumenta. En general, estos vectores unitarios dependerán de la posición en el espacio. Entonces,  un vector $\vb{V}$ se puede escribir
 \begin{align}
 \vb{V} = \vu{e}_{1} \: V_{1} +\vu{e}_{2} \: V_{2} + \vu{e}_{3} \: V_{3}
+\label{eq:ecuacion_02_03}
 \end{align}
 pero la coordenada o el vector de posición es diferente en general
 \begin{align*}
@@ -79,148 +80,218 @@ En notación vectorial, tenemos
 \dd{\vb{r}} = \sum_{i} \pdv{\vb{r}}{q_{i}} \dd{q_{i}}
 \end{align*}
 Sabemos del teorema de Pitágoras que en coordenadas cartesianas el cuadrado de la distancia entre dos puntos está dada por
-
-\[ ds^{2} = dx^{2} + dy^{2} + dz^{2} \]
-
-Al sustituir $d\mathbf{r}$ se muestra que en nuestro espacio de coordenadas curvilíneo el elemento al cuadrado de la distancia puede ser escrito como una forma cuadrática en los diferenciales:
+\begin{align*}
+\dd{s^{2}} = \dd{x^{2}} + \dd{y^{2}} + \dd{z^{2}}
+\end{align*}
+Al sustituir $dd\vb{r}$ se muestra que en nuestro espacio de coordenadas curvilíneo, el cuadrado del elemento de distancia puede ser escrito como una forma cuadrática en los diferenciales:
 \begin{align}
-ds^{2} &= d\mathbf{r} \cdot d \mathbf{r} =  d\mathbf{r}^{2} =  \sum_{ij} \dfrac{\partial \mathbf{r}}{\partial q_{i}} \cdot \dfrac{\partial \mathbf{r}}{\partial q_{j}} \: dq_{i} \: dq_{j} \nonumber \\
-&= g_{11} \: dq_{1}^{2} + g_{12} \: dq_{1} \: dq_{2} + g_{13} \: dq_{1} \: dq_{3} + \nonumber \\
-&+ g_{21} \: dq_{2} \: dq_{1} + g_{22} \: dq_{2}^{2} + g_{23} \: dq_{2} \: dq_{3} + \nonumber \\
-&+ g_{31} \: dq_{3} \: dq_{1} + g_{32} \: dq_{3} \: dq_{2} + g_{33} \: dq_{3}^{2} \nonumber \\
-&= \sum_{ij} g_{ij} \: dq_{i} \: dq_{j}
+\dd{s^{2}} &= \dd{\vb{r}} \cdot \dd{\vb{r}} =  \dd{\vb{r}^{2}} =  \sum_{ij} \pdv{\vb{r}}{q_{i}} \cdot \pdv{\vb{r}}{q_{j}} \: \dd{q_{i}} \dd{q_{j}} \nonumber \\
+&= g_{11} \dd{q_{1}^{2}} + g_{12} \dd{q_{1}} \dd{q_{2}} + g_{13} \dd{q_{1}} \dd{q_{3}} + \nonumber \\
+&+ g_{21} \dd{q_{2}} \dd{q_{1}} + g_{22} \dd{q_{2}^{2}} + g_{23} \dd{q_{2}} \dd{q_{3}} + \nonumber \\
+&+ g_{31} \dd{q_{3}} \dd{q_{1}} + g_{32} \dd{q_{3}} \dd{q_{2}} + g_{33} \dd{q_{3}^{2}} \nonumber \\
+&= \sum_{ij} g_{ij} \dd{q_{i}} \dd{q_{j}}
 \label{eq:ecuacion_02_05}
 \end{align}
-donde los términos mixtos no nulos $dq_{i} \: dq_{j}$ con $i \neq j$ son señal de que estas coordenadas no son ortogonales, es decir, las direcciones tangenciales $\mathbf{\widehat{q}}_{i}$ no son mutuamente ortogonales. Aquellos espacios para los cuales la ecuación anterior (ec. \ref{eq:ecuacion_02_05}) es una expresión legítima, se denominan \emph{métrica} o \emph{espacios de Riemann}.
-\\
+donde los términos mixtos no nulos $\dd{q_{i}} \dd{q_{j}}$ con $i \neq j$ son señal de que éstas coordenadas no son ortogonales, es decir, las direcciones tangenciales $\vu{q}_{i}$ no son mutuamente ortogonales. Aquellos espacios para los cuales la ecuación anterior (ec. \ref{eq:ecuacion_02_05}) es una expresión legítima, se denominan \emph{métrica} o \emph{espacios de Riemann}.
+\par
 Escribiendo de manera más específica la ecuación anterior, vemos que
-
-\begin{equation}
-g_{ij}(q_{1}, q_{2}, q_{3}) = \dfrac{\partial x}{\partial q_{i}} \: \dfrac{\partial x}{\partial q_{j}} + \dfrac{\partial y}{\partial q_{i}} \: \dfrac{\partial y}{\partial q_{j}} + \dfrac{\partial z}{\partial q_{i}} \: \dfrac{\partial z}{\partial q_{j}} = \dfrac{\partial \mathbf{r}}{\partial q_{i}} \cdot \dfrac{\partial \mathbf{r}}{\partial q_{j}}
+\begin{align}
+g_{ij}(q_{1}, q_{2}, q_{3}) = \pdv{x}{q_{i}} \: \pdv{x}{q_{j}} + \pdv{y}{q_{i}} \: \pdv{y}{q_{j}} + \pdv{z}{q_{i}} \: \pdv{z}{q_{j}} = \pdv{\vb{r}}{q_{i}} \cdot \pdv{\vb{r}}{q_{j}}
 \label{eq:ecuacion_02_06}
-\end{equation}
-son los productos escalares de los vectores tangentes $\partial \mathbf{r} / \partial q_{i}$ de las curvas $\mathbf{r}$ para $q_{j} = \mbox{ constante}$, $j \neq i$. Como es natural, nos limitamos a  sistemas de coordenadas ortogonales (superficies mutuamente perpendiculares), lo que significa
-
-\begin{equation}
+\end{align}
+son los productos escalares de los vectores tangentes $\pdv*{\vb{r}}{q_{i}}$ de las curvas $\vb{r}$ para $q_{j} = \mbox{ constante}$, $j \neq i$. Esos coeficientes $g_{ij}$, que ahora procedemos a investigar, pueden considerarse como la especificación de la naturaleza del sistema de coordenadas $(q_{1}, q_{2}, q_{3})$. Colectivamente, estos coeficientes se denominan la \emph{métrica}. En la relatividad general, los componentes métricos están determinados por las propiedades de la materia; es decir, los $g_{ij}$ son soluciones de las ecuaciones de campo de Einstein con el tensor de energía-momento como término conductor; esto puede articularse como \emph{la geometría se fusiona con la física}.
+\par
+Como es natural, nos limitamos a  sistemas de coordenadas ortogonales (superficies mutuamente perpendiculares), lo que significa
+\begin{align}
 g_{ij} = 0, \hspace{1cm} i \neq j
 \label{eq:ecuacion_02_07}
-\end{equation}
-
-y también $\mathbf{\widehat{q}}_{i} \cdot \mathbf{\widehat{q}}_{j} = \delta_{ij}$.
+\end{align}
+y también $\vu{q}_{i} \cdot \vu{q}_{j} = \delta_{ij}$.
 \par
 Simplificando la notación, escribimos $g_{ii} = h_{i}^{2} > 0$, tal que
-\begin{equation}
-ds^{2} = (h_{1} \: dq_{1})^{2} + (h_{2} \: dq_{2})^{2} + (h_{3} \: dq_{3})^{2} = \sum_{i} (h_{i} \: dq_{i})^{2} 
+\begin{align}
+\dd{s^{2}} = (h_{1} \dd{q_{1})^{2}} + (h_{2} \dd{q_{2})^{2}} + (h_{3} \dd{q_{3})^{2}} = \sum_{i} (h_{i} \dd{q_{i})^{2}} 
 \label{eq:ecuacion_02_08}
-\end{equation}
-
-El sistema de coordenadas ortogonales específico lo vamos a describir más adelante, y están descritos por los factores de escala (positivos) $h_{1}, h_{2}, h_{3}$. Por el contrario, los factores de escala recuperan por la relación
-
-\begin{equation}
-ds_{i} = h_{i} \: dq_{i} \hspace{1cm} \dfrac{\partial \mathbf{r}}{\partial q_{i}} = h_{i} \: \mathbf{\widehat{q}}_{i} 
+\end{align}
+El sistema de coordenadas ortogonales específico lo vamos a describir más adelante, y están descritos por los factores de escala (positivos) $h_{1}, h_{2}, h_{3}$. Por el contrario, los factores de escala se recuperan por la relación
+\begin{align}
+\dd{s_{i}} = h_{i} \dd{q_{i}} \hspace{1cm} \pdv{\vb{r}}{q_{i}} = h_{i} \: \vu{q}_{i} 
 \label{eq:ecuacion_02_09}
-\end{equation}
-para cualquier elemento $dq_{i}$, manteniendo los otros $q$ constantes.
+\end{align}
+para cualquier elemento $\dd{q_{i}}$, manteniendo los otros $q$ constantes.
 \par
-El elemento $ds_{i}$ es un diferencial de longitud a lo largo de la dirección $\mathbf{\widehat{q}}_{i}$. Tomemos en cuenta que las tres coordenadas curvilíneas $q_{1},q_{2},q_{3}$ no necesariamente tienen  que ser longitudes. Los factores de escala $h_{i}$ pueden depender de $q$ y pueden tener dimensiones. El producto $h_{i} \: dq_{i}$ debe tener dimensión de longitud. El vector diferencial de distancia $d\mathbf{r}$ puede escribirse
+El elemento $\dd{s_{i}}$ es un diferencial de longitud a lo largo de la dirección $\vu{q}_{i}$. Tomemos en cuenta que las tres coordenadas curvilíneas $q_{1}, q_{2}, q_{3}$ no necesariamente tienen que ser longitudes. Los factores de escala $h_{i}$ pueden depender de $q$ y pueden tener dimensiones. El producto $h_{i} \dd{q_{i}}$ debe tener dimensión de longitud. El vector diferencial de distancia $\dd{\vb{r}}$ puede escribirse
 \begin{align*} 
-d \mathbf{r} =  h_{1} \: dq_{1} \: \mathbf{\widehat{q}}_{1} + h_{2} \: dq_{2} \: \mathbf{\widehat{q}}_{2} + h_{3} \: dq_{3} \: \mathbf{\widehat{q}}_{3} = \sum_{i} h_{i} \: dq_{i} \: \mathbf{\widehat{q}}_{i}
+\dd{\vb{r}} =  h_{1} \dd{q_{1}} \: \vu{q}_{1} + h_{2} \dd{q_{2}} \: \vu{q}_{2} + h_{3} \dd{q_{3}} \: \vu{q}_{3} = \sum_{i} h_{i} \dd{q_{i}} \: \vu{q}_{i}
 \end{align*}
-Usando esta forma de componente curvilíneo, encontramos que la integral de línea
-\[ \int \mathbf{V} \cdot d \mathbf{r} = \sum_{i} \int V_{i} \: h_{i} \: dq_{i}  \]
+Usando esta forma de componente curvilíneo, encontramos que la integral de línea es
+\begin{align*}
+\int \vb{V} \cdot \dd{\vb{r}} = \sum_{i} \int V_{i} \: h_{i} \dd{q_{i}}
+\end{align*}
 de las ecuaciones (\ref{eq:ecuacion_02_09}) podemos desarrollar entonces, elementos de área y de volumen:
-\begin{equation}
-d \sigma_{ij} = ds_{i} \: ds_{j} =  h_{i} \: h_{j} \: dq_{i} \: dq_{j}
+\begin{align}
+\dd{\sigma_{ij}} = \dd{s_{i}} \dd{s_{j}} =  h_{i} \: h_{j} \dd{q_{i}} \dd{q_{j}}
 \label{eq:ecuacion_02_10}
-\end{equation}
+\end{align}
 y
-\begin{equation}
-d \tau = ds_{1} \: ds_{2} \: ds_{3} =  h_{1} \: h_{2} \: h_{3} \: dq_{1} dq_{2} \: dq_{3}
+\begin{align}
+\dd{\tau} = \dd{s_{1}} \dd{s_{2}} \dd{s_{3}} =  h_{1} \: h_{2} \: h_{3} \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}
 \label{eq:ecuacion_02_11}
-\end{equation}
+\end{align}
 Las expresiones en las ecuaciones (\ref{eq:ecuacion_02_10}) y (\ref{eq:ecuacion_02_11}) concuerdan con los resultados de las ecuaciones de transformación.
 \par
 De la ecuación (\ref{eq:ecuacion_02_10}) un elemento de área puede expandirse:
 \begin{align*}
-d \bm{\sigma} &= ds_{2} \: ds_{3} \: \mathbf{\widehat{q}_{1}} + ds_{3} \: ds_{1} \: \mathbf{\widehat{q}_{2}} + ds_{1} \: ds_{2} \: \mathbf{\widehat{q}_{3}} \\
-&= h_{2} \: h_{3} \: d q_{2} \: d q_{3} \: \mathbf{\widehat{q}_{1}} + h_{3} \: h_{1} \: d q_{3} \: d q_{1} \: \mathbf{\widehat{q}_{2}} \\
-&+ h_{1} \: h_{2} \: d q_{1} \: d q_{2} \: \mathbf{\widehat{q}_{3}}
+\dd{\vb{\sigma}} &= \dd{s_{2}} \dd{s_{3}} \: \vu{q}_{1} + \dd{s_{3}} \dd{s_{1}} \: \vu{q}_{2} + \dd{s_{1}} \dd{s_{2}} \: \vu{q}_{3} \\
+&= h_{2} \: h_{3} \dd{q_{2}} \dd{q_{3}} \: \vu{q}_{1} + h_{3} \: h_{1} \dd{q_{3}} \dd{q_{1}} \: \vu{q}_{2} + \\
+&+ h_{1} \: h_{2} \: \dd{q_{1}} \dd{q_{2}} \: \vu{q}_{3}
 \end{align*}
 La integral de superficie será entonces
 \begin{align*}
-\int \mathbf{V} \cdot d \bm{\sigma} &= \int V_{1} \: h_{2} \: h_{3} \: d q_{2} \: d q_{3} + \int V_{2} \: h_{3} \: h_{1} \: d q_{3} \: d q_{1} \\
-&+ \int V_{3} \: h_{1} \: h_{2} \: d q_{1} \: d q_{2}
+\int \vb{V} \cdot \dd{\vb{\sigma}} &= \int V_{1} \: h_{2} \: h_{3} \dd{q_{2}} \dd{q_{3}} + \int V_{2} \: h_{3} \: h_{1} \dd{q_{3}} \dd{q_{1}} + \\
+&+ \int V_{3} \: h_{1} \: h_{2} \dd{q_{1}} \dd{q_{2}}
 \end{align*}
 Haremos énfasis en que el álgebra vectorial, sigue siendo la misma en las coordenadas curvilíneas ortogonales como en las coordenadas cartesianas. En concreto, para el producto escalar:
 \begin{align}
 \begin{aligned}
-\mathbf{A} \cdot \mathbf{B} &= \sum_{ik} A_{i} \: \mathbf{\widehat{q}_{i}} \cdot \mathbf{\widehat{q}_{k}} \: B_{k\cdot} = \sum_{ik} A_{i} \: B_{k} \: \delta_{ik} \\
+\vb{A} \cdot \vb{B} &= \sum_{ik} A_{i} \: \vu{q}_{i} \cdot \vu{q}_{k} \: B_{k} = \sum_{ik} A_{i} \: B_{k} \: \delta_{ik} \\
 &= \sum_{i} A_{i} \: B_{i} = A_{1} \: B_{1} + A_{2} \: B_{2} + A_{3} \: B_{3}
 \end{aligned}
 \label{eq:ecuacion_02_12}
 \end{align}
 donde los subíndices indican las componentes curvilíneas. Para el producto cruz
-\begin{equation}
-\mathbf{A} \times \mathbf{B} = \begin{bmatrix}
-\mathbf{\widehat{q}_{1}} & \mathbf{\widehat{q}_{2}} & \mathbf{\widehat{q}_{3}} \\
+\begin{align}
+\vb{A} \cp \vb{B} = \mdet{
+\vu{q}_{1} & \vu{q}_{2} & \vu{q}_{3} \\
 A_{1} & A_{2} & A_{3} \\
 B_{1} & B_{2} & B_{3}
-\end{bmatrix}
+}
 \label{eq:ecuacion_02_13}
-\end{equation}
+\end{align}
 
-Previamente, nos hemos enfocado en coordenadas rectangulares a nivel local que se adapten a ciertas simetrías especiales. Veamos ahora brevemente en el caso más general, donde las coordenadas no son necesariamente ortogonal. Los elementos de superficie y de volumen forman parte de las integrales múltiples, que son comunes en aplicaciones físicas, tal como determinar el centro de masa y los momentos de inercia.
-
-Normalmente, elegimos coordenadas de acuerdo con la simetría del problema particular. Para un sistema coordenado ortogonal, los elementos de superficie y volumen son productos de los elementos de línea $h_{i} \: dq_{i}$ (ver las ecs. \ref{eq:ecuacion_02_10} y \ref{eq:ecuacion_02_11}).
-
-Para el caso general, usamos el significado geométrico de $\partial \mathbf{r} / \partial q_{i}$ en la ecuación \ref{eq:ecuacion_02_05}, como vectores tangentes. Comenzamos con el elemento de superficie cartesiano $dx \: dy$, que se convierte en un rectángulo infinitesimal en las nuevas coordenadas $q_{1}, q_{2}$  formado por los dos vectores incrementales
+Previamente, nos hemos enfocado en coordenadas rectangulares a nivel local para que se adapten a ciertas simetrías especiales. Veamos ahora brevemente en el caso más general, donde las coordenadas no son necesariamente ortogonales. Los elementos de superficie y de volumen forman parte de las integrales múltiples, que son comunes en aplicaciones físicas, tal como determinar el centro de masa y los momentos de inercia.
+\par
+Normalmente, elegimos coordenadas de acuerdo con la simetría del problema particular. Para un sistema coordenado ortogonal, los elementos de superficie y de volumen son productos de los elementos de línea $h_{i} \dd{q_{i}}$ (ver las ecs. \ref{eq:ecuacion_02_10} y \ref{eq:ecuacion_02_11}).
+\par
+Para el caso general, usamos el significado geométrico de $\pdv*{\vb{r}}{q_{i}}$ en la ecuación \ref{eq:ecuacion_02_05}, como vectores tangentes. Comenzamos con el elemento de superficie cartesiano $\dd{x} \dd{y}$, que se convierte en un rectángulo infinitesimal en las nuevas coordenadas $q_{1}, q_{2}$  formado por los dos vectores incrementales
 \begin{align}
 \begin{aligned}
-d \mathbf{r}_{1} &= \mathbf{r} (q_{1} + dq_{1}, q_{2}) - \mathbf{r}(q_{1},q_{2}) = \dfrac{\partial \mathbf{r}}{\partial \: q_{1}} dq_{1} \\
-d \mathbf{r}_{2} &= \mathbf{r} (q_{1}, q_{2} + dq_{2}) - \mathbf{r}(q_{1},q_{2}) = \dfrac{\partial \mathbf{r}}{\partial q_{2}} \: dq_{2}
+\dd{\vb{r}_{1}} &= \vb{r} (q_{1} + \dd{q_{1}}, q_{2}) - \vb{r}(q_{1}, q_{2}) = \pdv{\vb{r}}{q_{1}} \dd{q_{1}} \\
+\dd{\vb{r}_{2}} &= \vb{r} (q_{1}, q_{2} + \dd{q_{2}}) - \vb{r}(q_{1}, q_{2}) = \pdv{\vb{r}}{q_{2}} \dd{q_{2}}
 \end{aligned}
 \label{eq:ecuacion_02_14}
 \end{align}
 cuya área es la componente $z$ de su producto cruz
 \begin{align}
 \begin{aligned}
-dx\: dy = d \mathbf{r}_{1} \times d \mathbf{r}_{2} \big\vert_{z} &= \left[ \dfrac{\partial x}{dq_{1}} \; \dfrac{\partial y}{dq_{2}} - \dfrac{\partial x}{dq_{2}} \; \dfrac{\partial y}{dq_{1}} \right] dq_{1} \: dq_{2} \\
+\dd{x} \dd{y} =\dd{\vb{r}_{1}} \cp \dd{\vb{r}_{2}} \eval_{z} &= \left[ \pdv{x}{q_{1}} \; \pdv{y}{q_{2}} - \pdv{x}{q_{2}} \; \pdv{y}{q_{1}} \right] \dd{q_{1}} \dd{q_{2}} = \\[1em]
 &= \begin{vmatrix}
-\dfrac{\partial x}{\partial q_{1}} & \dfrac{\partial x}{\partial q_{2}} \\[1em]
-\dfrac{\partial y}{\partial q_{1}} & \dfrac{\partial y}{\partial q_{2}} 
-\end{vmatrix} dq_{1} \: d q_{2}
+\displaystyle \pdv{x}{q_{1}} & \displaystyle \pdv{x}{q_{2}} \\[1em]
+\displaystyle \pdv{y}{q_{1}} & \displaystyle \pdv{y}{q_{2}} 
+\end{vmatrix} \dd{q_{1}} \dd{q_{2}}
 \end{aligned}
 \label{eq:ecuacion_02_15}
 \end{align}
-El coeficiente de transformación en forma de determinante se denomina \textbf{Jacobiano}.
+El coeficiente de transformación en forma de determinante se llama \textbf{Jacobiano}.
 \par
-De manera similar, el elemento de volumen $dx \: dy \: dz$ se convierte en el triple producto escalar de los tres vectores infinitesimales de desplazamiento $d \mathbf{r}_{i}  = d q_{i} \: \partial \mathbf{r} / \partial q_{i} $ a lo largo de las direcciones $q_{i}$ de $\mathbf{\widehat{q}_{i}}$, y toma la expresión
-\begin{equation}
-dx \: dy \: dz = \begin{vmatrix}
-\dfrac{\partial x}{\partial q_{1}} & \dfrac{\partial x}{\partial q_{2}} & \dfrac{\partial x}{\partial q_{3}} \\[1em]
-\dfrac{\partial y}{\partial q_{1}} & \dfrac{\partial y}{\partial q_{2}} & \dfrac{\partial y}{\partial q_{3}} \\[1em]
-\dfrac{\partial z}{\partial q_{1}} & \dfrac{\partial z}{\partial q_{2}} & \dfrac{\partial z}{\partial q_{3}} \\
-\end{vmatrix}
-d q_{1} \: d q_{2} \: d q_{3} 
+De manera similar, el elemento de volumen $\dd{x} \dd{y} \dd{z}$ se convierte en el triple producto escalar de los tres vectores infinitesimales de desplazamiento $\dd{\vb{r}_{i}}  = \dd{q_{i}} \: \pdv*{\vb{r}}{q_{i}}$ a lo largo de las direcciones $q_{i}$ de $\vu{q}_{i}$, y toma la expresión
+\begin{align}
+\dd{x} \dd{y} \dd{z} = \mdet{
+\displaystyle \pdv{x}{q_{1}} & \displaystyle \pdv{x}{q_{2}} & \displaystyle \pdv{x}{q_{3}} \\[1em]
+\displaystyle \pdv{y}{q_{1}} & \displaystyle \pdv{y}{q_{2}} & \displaystyle \pdv{y}{q_{3}} \\[1em]
+\displaystyle \pdv{z}{q_{1}} & \displaystyle \pdv{z}{q_{2}} & \displaystyle \pdv{z}{q_{3}}
+}
+\dd{q_{1}} \dd{q_{2}} \dd{q_{3}} 
 \label{eq:ecuacion_02_16}
-\end{equation}
-Aquí el determiante también es llamado Jacobiano, y así para dimensiones mayores.
+\end{align}
+Aquí el determinante también es llamado Jacobiano, y así para dimensiones mayores.
 \par
-Para coordenadas ortogonales los jacobianos simplifican los productos de vectores ortogonales (ec. \ref{eq:ecuacion_02_09}). Se sigue que son el producto de los $h_{i}$, por ejemplo, el jacobiano de volumen es
+Para coordenadas ortogonales los Jacobianos simplifican los productos de vectores ortogonales (ec. \ref{eq:ecuacion_02_09}). Se sigue que son el producto de los $h_{i}$, por ejemplo, el Jacobiano del volumen es
 \begin{align*}
-h_{1} \: h_{2} \: h_{3} \: (\mathbf{\widehat{q}_{1}} \times \mathbf{\widehat{q}_{2}} ) \cdot \mathbf{\widehat{q}_{3}} = h_{1} \: h_{2} \: h_{3}
+h_{1} \: h_{2} \: h_{3} \: (\vu{q}_{1} \cp \vu{q}_{2}) \cdot \vu{q}_{3} = h_{1} \: h_{2} \: h_{3}
 \end{align*}
 y así sucesivamente.
-\\
-Ejercicio:
-\\
-En el espacio de Minkowski se define $x_{1} = x, x_{2} = y, x_{3} = z, x_{0} = c \: t$. Esto se hace para que el elemento de la métrica sea $ds^{2} = dx_{0}^{2} - dx_{1}^{2} - dx_{2}^{2} - dx_{3}^{2}$, donde $c$ es la velocidad de la luz. Demuestra que la métrica del espacio de Minkowski es
-\[ (g_{ij}) = \begin{pmatrix}
+\begin{ejemplo}{Jacobiano para coordenadas polares y esféricas.}
+
+Para ejemplificar la transformación de un elemento de volumen en dos dimensiones $\dd{x} \dd{y}$ a coordenadas polares $\rho, \varphi$ con $x = \rho \cos \varphi, y = \rho \sin \varphi$, se tiene que
+\begin{align*}
+\dd{x} \dd{y} &= \mdet{
+\displaystyle \pdv{x}{\rho} & \displaystyle \pdv{x}{\varphi}  \\[1em]
+\displaystyle \pdv{y}{\rho} & \displaystyle \pdv{y}{\varphi} }
+\dd{\rho} \dd{\varphi} = \\[1em]
+&= \mdet{
+\cos \varphi & - \rho \sin \varphi \\
+\sin \varphi & \rho \cos \varphi
+}
+\dd{\rho} \dd{\varphi} = \rho \dd{\rho} \dd{\varphi}
+\end{align*}
+De manera similar en coordenadas esféricas, con $x =  r \sin \theta$, $y = r \sin \theta \sin \varphi$, $z = r \cos \theta$, el Jacobiano es
+\begin{align*}
+J &= \mdet{
+\displaystyle \pdv{x}{r} & \displaystyle \pdv{x}{\theta} & \displaystyle \pdv{x}{\varphi} \\[1em]
+\displaystyle \pdv{y}{r} & \displaystyle \pdv{y}{\theta} & \displaystyle \pdv{y}{\varphi} \\[1em]
+\displaystyle \pdv{z}{r} & \displaystyle \pdv{z}{\theta} & \displaystyle \pdv{z}{\varphi}
+} = \mdet{
+\sin \theta \: \cos \varphi & r \: \cos \theta \cos \varphi & - r \: \sin \theta \: \sin \varphi \\
+\sin \theta \: \sin \varphi & r \: \cos \theta \sin \varphi & - r \: \sin \theta \: \cos \varphi \\
+\cos \theta & - r \: \sin \theta & 0 \\
+} = \\[1em]
+&= \cos \theta \mdet{
+r \: \cos \theta \: \cos \varphi & - r\: \sin \theta \sin \varphi \\
+r \: \cos \theta \: \sin \varphi & r \: \sin \theta \cos \varphi
+} + r \: \sin \theta \mdet{
+\sin \theta \: \cos \varphi & - r\: \sin \theta \sin \varphi \\
+\sin \theta \: \sin \varphi & r \: \sin \theta \cos \varphi
+} \\[1em]
+&= r^{2} \left( \cos^{2} \theta \: \sin \theta + \sin^{3} \theta \right) = r^{2} \, \sin \theta
+\end{align*}
+que se obtiene al expandir el determinante a partir del tercer renglón. De aquí que el elemento de volumen se convierte en 
+\begin{align*}
+\dd{x} \dd{y} \dd{z} = r^{2} \dd{r} \sin \theta \dd{\theta} \dd{\varphi}
+\end{align*}
+La integral de volumen se puede escribir como
+\begin{align*}
+\int f(x, y, z) \dd{x} \dd{y} \dd{z} = \int f(x(r, \theta, \varphi), y(r, \theta, \varphi), z(r, \theta, \varphi)) \, r^{2} \dd{r} \sin \theta \dd{\theta} \dd{\varphi}
+\end{align*}
+\end{ejemplo}
+En resumen, hemos desarrollado el formalismo general para el análisis vectorial en coordenadas curvilíneas ortogonales en $\mathbb{R}^{3}$. Para la mayoría de las aplicaciones, se pueden elegir localmente coordenadas ortogonales para las cuales los elementos de superficie y volumen en integrales múltiples son productos de elementos lineales. Para el caso general no ortogonal, se usan los determinantes Jacobianos.
+\begin{ejer}{Sistemas coordenados y métricas:}
+\begin{enumerate}
+\item En el sistema coordenado esférico $q_{1} = r, q_{2} = \theta, q_{3} = \varphi$, las ecuaciones de transformación son
+\begin{align*}
+x &= r \: \sin \theta \cos \varphi \\
+y &= r \: \sin \theta \sin \varphi \\
+z &= r \: \cos \theta \\
+\end{align*}
+\begin{enumerate}[label=(\alph*)]
+\item Calcula los factores de escala para el sistema de coordenadas esféricas $h_{r}, h_{\theta}, h_{\varphi}$.
+\item Comprueba los factores de escala calculados por medio de la relación $\dd{s}_{i} = h_{i} \dd{q}_{i}$.
+\end{enumerate}
+\item El sistema coordenado $u, v, z$ que se utiliza frecuentemente en la electrostática y la hidrodinámica está definido por
+\begin{align*}
+x \: y = u \hspace{1cm} x^{2} - y^{2} = v \hspace{1cm} z = z
+\end{align*}
+\begin{enumerate}[label=(\alph*)]
+\item Describe brevemente en palabras la naturaleza de las tres familias de superficies coordenadas.
+\item Dibuja el sistema en el plano $xy$ mostrando las intersecciones de las superficies de $u$ constante y las superficies de $v$ constante en el plano $xy$.
+\item Indica las direcciones del vector unitario $\vu{u}$ y $vu{v}$ en cada uno de los cuatro cuadrantes.
+\item Indica si este sistema $u, v, z$ es derecho $(\vu{u} \cp \vu{v} = + \vu{z} )$ o izquierdo $(\vu{u} \cp \vu{v} = - \vu{z} )$
+\end{enumerate}
+\item En el espacio de Minkowski se define $x_{1} = x, x_{2} = y, x_{3} = z, x_{0} = c \: t$. Esto se hace para que el elemento de la métrica sea 
+\begin{align*}
+\dd{s^{2}} = \dd{x_{0}^{2}} - \dd{x_{1}^{2}} - \dd{x_{2}^{2}} - \dd{x_{3}^{2}}
+\end{align*}
+donde $c$ es la velocidad de la luz. Demuestra que la métrica en el espacio de Minkowski es
+\begin{align*}
+(g_{ij}) = \begin{pmatrix}
 1 & 0 & 0 & 0 \\
 0 & -1 & 0 & 0 \\
 0 & 0 & -1 & 0 \\
 0 & 0 & 0 & -1
-\end{pmatrix} \] 
+\end{pmatrix}
+\end{align*}
+\end{enumerate}
+\end{ejer}
 \section{Operadores diferenciales vectoriales.}
 \subsection{Gradiente.} 
 El punto de partida para desarrollar los operadores gradiente, la divergencia y el rotacional en el sistema de coordenadas curvilíneo, es la interpretación que le daremos al gradiente como el vector que tiene una magnitud y dirección donde la razón de cambio es mayor en el espacio.
