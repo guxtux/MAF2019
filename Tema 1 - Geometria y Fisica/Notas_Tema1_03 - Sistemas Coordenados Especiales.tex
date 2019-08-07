@@ -1,63 +1,15 @@
 \input{../preambulo_doc}
 \usepackage{tikz-3dplot}
 %\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
-\title{Matemáticas Avanzadas de la Física \\ {\large Operadores diferenciales vectoriales}}
-\date{ }
+\title{Sistemas coordenados especiales \\ {\large Matemáticas Avanzadas de la Física}\vspace{-1.5\baselineskip}}
+\date{}
+\author{}
 \begin{document}
 %\renewcommand\theenumii{\arabic{theenumii.enumii}}
 \renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
-% \section{Coordenadas cartesianas rectangulares.}
-% En previsión de las nuevas expresiones para el cálculo de vectores que aparecerán más adelante, vamos a enfatizar que álgebra vectorial es la misma en coordenadas curvilíneas ortogonales como en el sistema de coordenadas cartesianas. En concreto, para el producto escalar:
-% \[ \begin{split}
-% \mathbf{A} \cdot \mathbf{B} &=  \sum_{ik} A_{i} \mathbf{\widehat{q}}_{i} \cdot \mathbf{\widehat{q}}_{k} B_{k} = \sum_{ik} A_{i} B_{k} \delta_{ik} \\
-% &= \sum_{i} A_{i}B_{i} = A_{1}B_{1} + A_{2} B_{2} + A_{3} B_{3}
-% \end{split} \]
-% donde los subíndices indican las componentes curvilíneas. Para el producto punto
-% \[ \mathbf{A} \times \mathbf{B} = \left| \begin{matrix}
-% \mathbf{\widehat{q}}_{1} & \mathbf{\widehat{q}}_{2} & \mathbf{\widehat{q}}_{3} \\
-% A_{1} & A_{2} & A_{3} \\
-% B_{1} & B_{2} & B_{3}
-% \end{matrix} \right| \]
-% Previamente, nos enfocamos al manejo en coordenadas rectangulares localmente adaptadas a simetrías especiales. Veamos ahora brevemente en el caso más general, donde las coordenadas no son necesariamente ortogonales. Los elementos de superficie y de volumen son parte de integrales múltiples, que son comunes en aplicaciones físicas, como por ejemplo determinar el centro de masa y los momentos de inercia.
-% \\
-% Normalmente elegimos el sistema de coordenadas de acuerdo con la simetría del problema particular. Mediante el teorema de Gauus se transforma una integral de volumen a una integral de superficie, con el teorema de Stokes, se transforma una integral de superficie a una integral de línea. Para coordenadas ortogonales, los elementos de superficie y de volumen son productos de la elementos de la línea $h_{i}dq_{i}$. Para el caso general, usamos el significado geométrico de $\partial \mathbf{r} / \partial q_{i}$ como vectores tangentes. Comenzamos con los elementos cartesianos de superficie $dxdy$, que se convierten en un rectángulo infinitesimal en las nuevas coordenadas $q_{1}, q_{2}$ formado por el incremento de dos vectores
-% \[ \begin{split}
-% d \mathbf{r}_{1} &= \mathbf{r}(q_{1} + dq_{1},q_{2}) - \mathbf{r}(q_{1}, q_{2}) = \dfrac{\partial \mathbf{r}}{\partial q_{1}} dq_{1} \\
-% d \mathbf{r}_{2} &= \mathbf{r}(q_{1}, q_{2}+ dq_{2}) - \mathbf{r}(q_{1}, q_{2}) = \dfrac{\partial \mathbf{r}}{\partial q_{2}} dq_{2}
-% \end{split} \]
-% cuya área es la componente $z$ de su producto cruz o
-% \[ \renewcommand\arraystretch{2} \begin{split}
-% dx dy = d\mathbf{r}_{1} \times d \mathbf{r}_{2}\big\vert_{z} &= \left[ \dfrac{\partial x}{\partial q_{1}} \dfrac{\partial y}{\partial q_{2}} - \dfrac{\partial x}{\partial q_{2}} \dfrac{\partial y}{\partial q_{1}} \right] dq_{1} dq_{2} \\
-% &= \left| \begin{matrix}
-% \dfrac{\partial x}{\partial q_{1}} & \dfrac{\partial x}{\partial q_{2}} \\
-% \dfrac{\partial y}{\partial q_{1}} & \dfrac{\partial y}{\partial q_{2}}
-% \end{matrix} \right| dq_{1} dq_{2}
-% \end{split} \]
-% El coeficiente de transformación en forma de determinante, es el \emph{Jacobiano}.
-% \\
-% De manera similar, el elemento de volumen $dxdydz$ corresponde al triple producto escalar de los tres vectores de desplazamiento infinitesimales $d\mathbf{r}_{i} =  d q_{i} \partial \mathbf{r} / \partial q_{i}$ a lo largo de las $q_{i}$ direcciones $\mathbf{\widehat{q}}_{i}$, por lo que toma la forma:
-% \[ \renewcommand\arraystretch{2} dx dy dz = \left| \begin{matrix}
-% \dfrac{\partial x}{\partial q_{1}} & \dfrac{\partial x}{\partial q_{2}} & \dfrac{\partial x}{\partial q_{3}} \\
-% \dfrac{\partial y}{\partial q_{1}} & \dfrac{\partial y}{\partial q_{2}} & \dfrac{\partial y}{\partial q_{3}} \\
-% \dfrac{\partial z}{\partial q_{1}} & \dfrac{\partial z}{\partial q_{2}} & \dfrac{\partial z}{\partial q_{3}}
-% \end{matrix} \right| dq_{1} dq_{2} dq_{3} \]
-% \textbf{Ejemplo}: La transformación de un elemento de volumen en coordenadas cartesianas en dos dimensiones a coordenadas polares $\rho, \varphi$ con $x= \rho \cos \varphi$, $y= \rho \sin \varphi$, resulta
-% \[\renewcommand\arraystretch{2} dx dy = \left| \begin{matrix}
-% \dfrac{\partial x }{\partial \rho} & \dfrac{\partial x}{\partial \varphi} \\
-% \dfrac{\partial y }{\partial \rho} & \dfrac{\partial y}{\partial \varphi} 
-% \end{matrix} \right| d \rho d \varphi  =
-% \left| \renewcommand\arraystretch{1.5} \begin{matrix}
-% \cos \varphi & - \rho \sin \varphi \\
-% \sin \varphi & \rho \cos \varphi 
-% \end{matrix}  \right| d \rho d \varphi =  \rho d \rho d \varphi \]
-%  \textbf{Ejemplo (para casa)} De manera similar, en coordenadas esféricas, partiendo de $x = r \sin \theta \cos \varphi, y= r \sin \theta \sin \varphi, z = r \cos \theta $, el Jacobiano es
-%  \[ J = r^{2} (\cos^{2} \theta \sin \theta + \sin^{3} \theta) = r^{2} \sin \theta \]
-% Por lo que el elemento de volumen es: $dx dy dz = r^{2} dr \sin \theta d \theta d \varphi$. La integral de volumen se puede escribir como
-% \[ \int f(x,y,z) dxdydz = \int f(x(r,\theta, \varphi), y(r,\theta, \varphi), z(r,\theta, \varphi)) r^{2} dr \sin \theta d \theta d \varphi  \]
-% En resumen, hemos desarrollado un formalismo general para el análisis de vectores en coordenadas curvilíneas ortogonales en $\mathbb{R}^{3}$. Para la mayoría de aplicaciones, podemos elegir coordenadas ortogonales para las cuales, los elementos de superficie y de volumen en integrales múltiples son productos de los elementos de línea. Para el caso no ortogonal en general, se aplica el determinante Jacobiano.
-\section{Sistema coordenado cartesiano}
+\section{Sistema coordenado cartesiano.}
 Los factores de escala son:
 \begin{align}
 \begin{aligned}
@@ -66,17 +18,19 @@ h_{2} &=& h_{y} = 1 \\
 h_{3} &=& h_{z} = 1 \\
 \end{aligned}
 \end{align}
+Las familias de superficies coordenadas son tres conjuntos de planos paralelos $x=$ constante, $y=$ constante y $z=$ constantes. El sistema coordenado cartesiano es único en cuanto que todas las $h_{i}$ son constantes. Esto representará una ventaja considerable en el tratamiento de los tensores. Los vectores unitarios $\vu{i}, \vu{j}, \vu{k}$, tienen direcciones fijas.
+\par
 Las siguientes expresiones corresponden para el gradiente, divergencia, laplaciano y rotacional:
-\begin{eqnarray}
-\nabla \psi &=& \mathbf{i} \dfrac{\partial \psi}{\partial x} + \mathbf{j} \dfrac{\partial \psi}{\partial y} + \mathbf{k} \dfrac{\partial \psi}{\partial z} \\
-\nabla \cdot \mathbf{V} &=& \dfrac{\partial \psi}{\partial x} + \dfrac{\partial \psi}{\partial y} + \dfrac{\partial \psi}{\partial z} \\
-\nabla \cdot \nabla \psi &=& \dfrac{\partial^{2} \psi}{\partial x^{2}} + \dfrac{\partial^{2} \psi}{\partial y^{2}} +  \dfrac{\partial^{2} \psi}{\partial z^{2}} \\
-\nabla \times \mathbf{V} &=& \begin{vmatrix}
-\mathbf{i} & \mathbf{j} & \mathbf{k} \\
-\dfrac{\partial}{\partial x} & \dfrac{\partial}{\partial y} & \dfrac{\partial}{\partial z} \\
+\begin{align}
+\grad{\psi} &= \vu{i} \pdv{\psi}{x} + \vb{j} \pdv{\psi}{y} + \vu{k} \pdv{\psi}{z} \\[1em]
+\div{\vb{V}} &= \pdv{\psi}{x} + \pdv{\psi}{y} + \pdv{\psi}{z} \\[1em]
+\grad \cdot \grad{\psi} &= \pdv[2]{\psi}{x} + \pdv[2]{\psi}{y} +  \pdv[2]{\psi}{z} \\[1em]
+\curl{\vb{V}} &= \mdet{
+\vu{i} & \vu{j} & \vu{k} \\[0.5em]
+\displaystyle \pdv{x} & \displaystyle \pdv{y} & \displaystyle \pdv{z} \\[0.5em]
 V_{x} & V_{y} & V_{z}
-\end{vmatrix}
-\end{eqnarray}
+}
+\end{align}
 \section{Sistema coordenado cilíndrico ($\rho, \varphi, z$)}
 En el sistema coordenado cilíndrico las tres coordenadas curvilíneas del sistema generalizado $(q_{1}, q_{2}, q_{3})$, se renombran por $(\rho, \varphi, z)$. Las superficies coordenadas:
 \begin{enumerate}

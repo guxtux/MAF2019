@@ -292,11 +292,11 @@ donde $c$ es la velocidad de la luz. Demuestra que la métrica en el espacio de 
 \end{align*}
 \end{enumerate}
 \end{ejer}
-\section{Operadores diferenciales vectoriales.}
-\subsection{Gradiente.} 
+ \section{Operadores diferenciales vectoriales.}
+ \subsection{Gradiente.} 
 El punto de partida para desarrollar los operadores gradiente, la divergencia y el rotacional en el sistema de coordenadas curvilíneo, es nuestra interpretación que le daremos al gradiente como un vector que tiene la magnitud y dirección donde la razón de cambio es mayor en el espacio.
 \par
-Con esta interpretación, el componente de $\nabla \psi(q_{1}, q_{2}, q_{3})$ en la dirección normal de las familias de superficies $q_{1} = \text{constante}$, está dada por:
+ Con esta interpretación, el componente de $\grad{\psi}(q_{1}, q_{2}, q_{3})$ en la dirección normal de las familias de superficies $q_{1} = \text{constante}$, está dada por:
 \begin{equation}
 \vu{q}_{1} \cdot \grad{\psi} = \grad{\psi} \eval_{1} = \pdv{\psi}{s_{1}} = \dfrac{1}{h_{1}} \; \pdv{\psi}{q_{1}}
 \label{eq:ecuacion_02_17}
@@ -315,82 +315,84 @@ De manera análoga, al repetir la ec. (\ref{eq:ecuacion_02_17}) para $q_{2}$ y $
 \subsection{Divergencia.}
 El operador divergencia puede obtenerse del teorema de Gauss:
 \begin{equation}
-\div{\vb{V}}(q_{1},q_{2},q_{3}) = \lim_{\int \dd{\tau} \to 0} \dfrac{\displaystyle \int \vb{V}\cdot \dd{\vb{\sigma}}{\displaystyle \int \dd{\tau}}
+\div{\vb{V}}(q_{1}, q_{2}, q_{3}) = \lim_{\int \dd{\tau} \to 0} \dfrac{\displaystyle \int \vb{V}\cdot \dd{\vb{\sigma}}}{\displaystyle \int \dd{\tau}}
 \label{eq:ecuacion_02_19}
 \end{equation}
-con un volumen diferencial $h_{1} \: h_{2} \: h_{3} \: dq_{1} \: dq_{2} \: dq_{3}$.
-%\begin{figure}
-%\begin{tikzpicture}
-%	\draw [->] (0,0) -- (7,0) node [right] {$x$};
-%	\draw [->] (0,0) --  (0,5) node [right] {$y$};
-%\end{tikzpicture}
-%\end{figure}
+con un volumen diferencial $h_{1} \: h_{2} \: h_{3} \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}$ (figura \ref{fig:figura_001})
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/ElementoVolumen_01.png}
+    \caption{Elemento de volumen curvilíneo.}
+    \label{fig:figura_001}
+\end{figure}
+Nótese que las direcciones positivas se han elegido tal que $(\vu{q}_{1}, \vu{q}_{2}, \vu{q}_{3})$ o $(\vu{e}_{1}, \vu{e}_{2}, \vu{e}_{3})$ forman un conjunto con orientación derecha: $\vu{q}_{1} \cp \vu{q}_{2} = \vu{q}_{3}$.
 \par
-Nótese que las direcciones positivas se han elegido tal que $(\mathbf{\widehat{q}_{1}},\mathbf{\widehat{q}_{2}}, \mathbf{\widehat{q}_{3}})$ o $(\mathbf{\widehat{e}_{1}},\mathbf{\widehat{e}_{2}}, \mathbf{\widehat{e}_{3}})$ forman un conjunto con orientación derecha: $\mathbf{\widehat{q}_{1}} \times\mathbf{\widehat{q}_{2}} = \mathbf{\widehat{q}_{3}}$.
-\par
-La diferencia de área de las integrales para las dos caras $q_{1} = \text{constante}$ está dada por:
-\begin{eqnarray}
+La diferencia de área de las integrales para las dos caras de $q_{1} = \text{constante}$ está dada por:
+\begin{align}
 \begin{aligned}
-\left[ V_{1} \: h_{2} \: h_{3} + \dfrac{\partial}{\partial q_{1}} \: (V_{1} \: h_{2} \: h_{3}) \: dq_{1} \right] dq_{2} \: dq_{3} -& V_{1} \: h_{2} \: h_{3} \: dq_{2} \: dq_{3} \\
-=& \dfrac{\partial}{\partial q} (V_{1} \: h_{2} \: h_{3}) dq_{1} \: dq_{2} \: dq_{3}
+\left[ V_{1} \: h_{2} \: h_{3} + \pdv{q_{1}} \: (V_{1} \: h_{2} \: h_{3}) \dd{q_{1}} \right] \dd{q_{2}} \dd{q_{3}} -& V_{1} \: h_{2} \: h_{3} \: \dd{q_{2}} \dd{q_{3}} \\
+=& \pdv{q_{1}} (V_{1} \: h_{2} \: h_{3}) \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}
 \end{aligned}
 \label{eq:ecuacion_02_20}
-\end{eqnarray}
-Aquí  $v_{i} = \mathbf{V} \cdot \mathbf{\widehat{q}_{i}}$ es la proyección de $\mathbf{V}$ en la dirección  $\mathbf{\widehat{q}_{i}}$. Agregando los resultados que se obtienen de manera similar para las otras dos superficies, tenemos que:
-\begin{eqnarray}
-\begin{aligned}
-\int \mathbf{V}(q_{1}, q_{2}, q_{3}) \cdot d \bm{\sigma}  \\
-&= \left[ \dfrac{\partial}{\partial q_{1}} (V_{1} \: h_{2} \: h_{3}) + \dfrac{\partial}{\partial q_{2}} (V_{2} \: h_{3} \: h_{1}) +
-\dfrac{\partial}{\partial q_{3}} (V_{3} \: h_{1} \: h_{2}) \right] dq_{1} \: dq_{2} \: dq_{3}
-\end{aligned}
-\end{eqnarray}
+\end{align}
+Aquí  $\vb{V}_{i} = \vb{V} \cdot \vu{q}_{i}$ es la proyección de $\vb{V}$ en la dirección de $\vu{q}_{i}$. Sumando los resultados que se obtienen de manera similar para las otras dos superficies, tenemos que:
+\begin{align*}
+\int \vb{V} (q_{1}, q_{2}, q_{3}) \cdot \dd{\vb{\sigma}} &= \left[ \pdv{q_{1}} (V_{1} \: h_{2} \: h_{3}) + \pdv{q_{2}} (V_{2} \: h_{3} \: h_{1}) + \right. \\
++& \left. \pdv{q_{3}} (V_{3} \: h_{1} \: h_{2}) \right] \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}
+\end{align*}
 Usando la ecuación (\ref{eq:ecuacion_02_19}), dividiendo por el diferencial de volumen, se tiene que
-\begin{equation}
-\bm{\nabla \cdot V}(q_{1}, q_{2}, q_{3}) = \dfrac{1}{h_{1} \: h_{2} \: h_{3}} \; \left[ \dfrac{\partial}{\partial q_{1}} (V_{1} \: h_{2} \: h_{3}) + \dfrac{\partial}{\partial q_{2}} (V_{2}  \:h_{3} \: h_{1}) + \dfrac{\partial}{\partial q_{3}} (V_{3} \: h_{1} \: h_{2})   \right]
+\begin{align}
+\div{\vb{V}} (q_{1}, q_{2}, q_{3}) = \dfrac{1}{h_{1} \: h_{2} \: h_{3}} \; \left[ \pdv{q_{1}} (V_{1} \: h_{2} \: h_{3}) + \pdv{q_{2}} (V_{2}  \:h_{3} \: h_{1}) + \pdv{q_{3}} (V_{3} \: h_{1} \: h_{2})   \right]
 \label{eq:ecuacion_02_21}
-\end{equation}
-De las ecuaciones (\ref{eq:ecuacion_02_18}) y (\ref{eq:ecuacion_02_21}), obtenemos el operador Laplaciano, usando $\mathbf{V} = \nabla \psi(q_{1} q_{2} q_{3})$. Lo que nos devuelve
-\begin{eqnarray}
+\end{align}
+De las ecuaciones (\ref{eq:ecuacion_02_18}) y (\ref{eq:ecuacion_02_21}), obtenemos el operador Laplaciano, usando $\vb{V} = \grad{\psi} (q_{1}, q_{2}, q_{3})$. Lo que nos devuelve
+\begin{align}
 \begin{aligned}
-\nabla \cdot \nabla \psi (q_{1}, q_{2}, q_{3}) &= \\
-&= \dfrac{1}{h_{1} \: h_{2} \: h_{3}} \left[ \dfrac{\partial}{\partial q_{1}} \left( \dfrac{h_{2} \: h_{3}}{h_{1}} \: \dfrac{\partial \psi}{\partial q_{1}} \right) + \right. \\
-&+ \left.  \dfrac{\partial}{\partial q_{2}} \left( \dfrac{h_{3} \: h_{1}}{h_{2}} \: \dfrac{\partial \psi}{\partial q_{2}} \right) + \dfrac{\partial}{\partial q_{3}} \left( \dfrac{h_{1} \: h_{2}}{h_{3}} \: \dfrac{\partial \psi}{\partial q_{3}} \right) \right]  
+\grad \cdot \grad{\psi} (q_{1}, q_{2}, q_{3}) &= \dfrac{1}{h_{1} \: h_{2} \: h_{3}} \left[ \pdv{q_{1}} \left( \dfrac{h_{2} \: h_{3}}{h_{1}} \: \pdv{\psi}{q_{1}} \right) + \right. \\
+&+ \left.  \pdv{q_{2}} \left( \dfrac{h_{3} \: h_{1}}{h_{2}} \: \pdv{\psi}{q_{2}} \right) + \pdv{q_{3}} \left( \dfrac{h_{1} \: h_{2}}{h_{3}} \: \pdv{\psi}{q_{3}} \right) \right]  
 \end{aligned}
 \label{eq:ecuacion_02_22}
-\end{eqnarray}
+\end{align}
 \subsection{Rotacional.}
-Para desarrollar el rotacional $\nabla \times \mathbf{V}$, usamos el teorema de Stokes, en conjunto con la divergencia, tomamos el límite cuando el elemento de superficie tiende a cero. Trabajando un componente a la vez, consideramos un elemento diferencial de superficie en la superficie curvilínea $q_{1} = \text{constante}$. De:
-\begin{equation}
-\int_{s} \nabla \times \mathbf{V} \cdot d \bm{\sigma} = \mathbf{\widehat{q}_{1}} \cdot \left( \nabla \times \mathbf{V} \right) \: h_{2} \: h_{3} \: dq_{2} \: dq_{3}
+Para desarrollar el rotacional $\curl{\vb{V}}$, usamos el teorema de Stokes, en conjunto con la divergencia, tomamos el límite cuando el elemento de superficie tiende a cero. Trabajando un componente a la vez, consideramos un elemento diferencial de superficie en la superficie curvilínea $q_{1} = \text{constante}$. A partir de:
+\begin{align}
+\int_{s} \curl{\vb{V}} \cdot \dd{\bm{\sigma}} = \vu{q}_{1} \cdot \left( \curl{\vb{V}} \right) \: h_{2} \: h_{3} \dd{q_{2}} \dd{q_{3}}
 \label{eq:ecuacion_02_23}
-\end{equation}
-el teorema de Stokes nos devuelve
-\begin{equation}
-\mathbf{\widehat{q}_{1}} \cdot \left( \nabla \times \mathbf{V} \right) \: h_{2} \: h_{3} \: dq_{2} \: dq_{3} = \oint \mathbf{V} \cdot d \mathbf{r}
+\end{align}
+(del teorema del valor medio del cálculo integral) el teorema de Stokes nos devuelve
+\begin{align}
+\vu{q}_{1} \cdot \left( \curl{\vb{V}} \right) \: h_{2} \: h_{3} \dd{q_{2}} \dd{q_{3}} = \oint \vb{V} \cdot \dd{\vb{r}}
 \label{eq:ecuacion_02_24}
-\end{equation}
-con la integral de línea que rodea la superficie $q_{1}=\text{constante}$. Siguiendo el bucle $(1, 2, 3, 4)$ de la figura
-\begin{eqnarray}
+\end{align}
+de modo que la integral de línea que rodea la superficie $q_{1}=\text{constante}$. Siguiendo el bucle $(1, 2, 3, 4)$ de la figura (\ref{fig:figura_002})
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/ElementoCurvilineo_02.png}
+    \caption{Elemento de superficie curvilíneo con $q_{1}=$ constante.}
+    \label{fig:figura_002}
+\end{figure}
+\begin{align}
 \begin{aligned}
-\oint \mathbf{V}(q_{1}, q_{2}, q_{3}) \cdot d \mathbf{r} &= V_{2} \: h_{2} \: dq_{2} + \left[ V_{3} \: h_{3} + \dfrac{\partial}{\partial q_{2}} (V_{3} \: h_{3}) \: dq_{2} \right] dq_{3} \\
-&- \left[ V_{2} \: h_{2} + \dfrac{\partial}{\partial q_{3}} (V_{2} \: h_{2}) \: dq_{3} \right] dq_{2} - V_{3} \: h_{3} \: dq_{3} \\
-&= \left[ \dfrac{\partial}{\partial q_{2}} (h_{3} \: V_{3}) - \dfrac{\partial}{\partial q_{3}} (h_{2} \: V_{2}) \right] dq_{2} \: dq_{3}
+\oint \vb{V} (q_{1}, q_{2}, q_{3}) \cdot \dd{\vb{r}} &= V_{2} \: h_{2} \dd{q_{2}} + \left[ V_{3} \: h_{3} + \pdv{q_{2}} (V_{3} \: h_{3}) \dd{q_{2}} \right] \dd{q_{3}} \\
+&- \left[ V_{2} \: h_{2} + \pdv{q_{3}} (V_{2} \: h_{2}) \dd{q_{3}} \right] \dd{q_{2}} - V_{3} \: h_{3} \dd{q_{3}} \\
+&= \left[ \pdv{q_{2}} (h_{3} \: V_{3}) - \pdv{q_{3}} (h_{2} \: V_{2}) \right] \dd{q_{2}} \dd{q_{3}}
 \end{aligned}
 \label{eq:ecuacion_02_25}
-\end{eqnarray}
-Se da un signo positivo cuando vamos en la dirección positiva de las partes 1 y 2, y un signo negativo en las partes 3 y 4, ya que vamos en dirección negativa. Los términos de orden mayor en la expansión de la serie de Maclaurin o de Taylor se omiten, ya que tienden a cero cuando el límite del elemento de superficie se hace muy pequeño ($dq_{2} \rightarrow 0, dq_{3} \rightarrow 0$.)
+\end{align}
+Se da un signo positivo cuando vamos en la dirección positiva de las partes 1 y 2, y un signo negativo en las partes 3 y 4, ya que vamos en dirección negativa. Los términos de orden mayor en la expansión de la serie de Maclaurin o de Taylor se omiten, ya que tienden a cero cuando el límite del elemento de superficie se hace muy pequeño ($\dd{q_{2}} \rightarrow 0, \dd{q_{3}} \rightarrow 0$.)
 De la ecuación (\ref{eq:ecuacion_02_24}) tenemos
-\begin{equation}
-\nabla \times \mathbf{V} \big\vert_{1} = \dfrac{1}{h_{2} \: h_{3}} \; \left[ \dfrac{\partial}{\partial q_{2}} (h_{3} \: V_{3}) - \dfrac{\partial}{\partial q_{3}} (h_{2} \:V_{2}) \right]
+\begin{align}
+\curl{\vb{V}} \eval_{1} = \dfrac{1}{h_{2} \: h_{3}} \; \left[ \pdv{q_{2}} (h_{3} \: V_{3}) - \pdv{q_{3}} (h_{2} \:V_{2}) \right]
 \label{eq:ecuacion_02_26}
-\end{equation}
-Las dos componentes que restan de $\nabla \times \mathbf{V}$, se obtienen al realizar una permutación ciclíca de los índices. La mejor manera para escribir el rotacional, es una forma de determinante
-\begin{equation}
-\nabla \times V = \dfrac{1}{h_{1} \: h_{2} \:h_{3}} \begin{vmatrix}
-\mathbf{\widehat{q}_{1}} \: h_{1} & \mathbf{\widehat{q}_{2}} \: h_{2} & \mathbf{\widehat{q}_{3}} \: h_{3} \\[1em]
-\dfrac{\partial}{\partial q_{1}} &  \dfrac{\partial}{\partial q_{2}} & \dfrac{\partial}{\partial q_{3}} \\[1em]
+\end{align}
+Las dos componentes que restan de $\curl{\vb{V}}$, se obtienen al realizar una permutación ciclíca de los índices. La mejor manera para escribir el rotacional, es una forma de determinante
+\begin{align}
+\curl{\vb{V}} = \dfrac{1}{h_{1} \: h_{2} \:h_{3}} \mdet{
+\vb{q}_{1} \: h_{1} & \vb{q}_{2} \: h_{2} & \vb{q}_{3} \: h_{3} \\[1em]
+\pdv{q_{1}} & \pdv{q_{2}} & \pdv{q_{3}} \\[1em]
 h_{1} \: V_{1} & h_{2} \: V_{2} & h_{3} \: V_{3}
-\end{vmatrix}
-\end{equation}
-Recordemos que debido a la presencia de los operadores diferenciales, este determinante debe de expandrise de arriba hacia abajo. La ecuación en sí, no es idéntica a la forma del producto cruz de dos vectores, ya que $\nabla$ no es un vector común, es un operador vectorial.
+}
+\label{eq:ecuacion_02_27}
+\end{align}
+Recordemos que debido a la presencia de los operadores diferenciales, este determinante debe de expandrise de arriba hacia abajo. La ecuación en sí, no es idéntica a la forma del producto cruz de dos vectores, ya que $\grad$ no es un vector común, es un operador vectorial.
 \end{document}
