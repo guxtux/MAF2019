@@ -353,9 +353,114 @@ a_{\varphi} &= r \, \sin \theta \, \ddot{\varphi} +  2 \, \dot{r} \, \sin \theta
 \vb{r} = \vu*{r} (t) \, r(t) = [ \vu{x} \, \sin \theta (t)  \, \cos \varphi (t) + \vu{y} \, \sin \theta (t)  \, \sin \varphi (t) + \vu{z} \, \cos \theta (t) ] \, r(t)
 \end{align*}
 Utilizando las técnicas de Lagrange, estos resultados pueden obtenerse en una forma más elegante. La notación $\dot{r}, \dot{\theta}, \dot{\varphi}$ significa la derivada con respecto al tiempo $\dot{r} = \dv*{r}{t}$, $\dot{\theta} = \dv*{\theta}{t}$ y $\dot{\varphi} = \dv*{\varphi}{t}$.
-% \section{Construcción de sistemas coordenados.}
-% Para construir un sistema de coordenadas en un espacio euclidiano basta contar con una familia de curvas planas, definida en forma tal que a cada valor de un parámetro le corresponda una curva. La teoría vista nos permite construir una familia de curvas ortogonales a la familia original. De este modo se obtiene un sistema de coordenadas curvilíneas ortogonales en el plano. Por rotación o adición del eje $z$ pueden generarse sistemas coordenados en 3D. Así, las coordenadas cilíndricas y esféricas pueden ser obtenidas de las coordenadas polares incluyendo el eje $z$ o rotando alrededor del eje $y$.
-% \subsection*{Coordenadas parabólicas cilíndricas.}
+\section{Construcción de sistemas coordenados.}
+ Para construir un sistema de coordenadas en un espacio euclidiano basta contar con una familia de curvas planas, definida en forma tal que a cada valor de un parámetro le corresponda una curva. La teoría vista nos permite construir una familia de curvas ortogonales a la familia original. Consideremos primero los sistemas coordenados en el orden de sus propiedades de simetría, como aquellos que tienen un eje de traslación. Todos esos sistemas coordenados que tiene un eje de translación son esencialmente sistemas bidimensionales con una tercera dimensión adjunta: el eje $z$.
+ %De este modo se obtiene un sistema de coordenadas curvilíneas ortogonales en el plano. Por rotación o adición del eje $z$ pueden generarse sistemas coordenados en 3D. Así, las coordenadas cilíndricas y esféricas pueden ser obtenidas de las coordenadas polares incluyendo el eje $z$ o rotando alrededor del eje $y$.
+ \subsection{Coordenadas cilíndricas elípticas $(u, v, z)$.}
+ Para el sistema cilíndrico elíptico, se tienen las siguientes reglas de transformación:
+\begin{align}
+\begin{aligned}
+x &= a \, \cosh u \, \cos v \\
+y &= a \, \sinh u \, \sin v \\
+z &= z
+\end{aligned}
+\label{eq:ecuacion_02_73_esp}
+\end{align}
+Para identificar las superficies constantes, elevamos al cuadrado cada lado
+\begin{align}
+x^{2} &= a^{2} \, \cosh^{2} u \, \cos^{2} v \label{eq:ecuacion_02_74_esp} \\
+y^{2} &= a^{2} \, \sinh^{2} u \, \sin^{2} v \label{eq:ecuacion_02_75_esp} \\ 
+\end{align}
+Dividimos la primera expresión entre $\cos^{2} v$ y la segunda entre $\sin^{2} v$, recordando que $cos^{2} + \sin^{2} = 1$, así llegamos a
+\begin{align}
+\dfrac{x^{2}}{a^{2} \, \cosh^{2}} + \dfrac{y^{2}}{a^{2} \, \sinh{2}} &= \cos^{2} + \sin^{2} = 1 \label{eq:ecuacion_02_76_esp}\\[1em]
+\dfrac{x^{2}}{a^{2} \, \cos^{2}} - \dfrac{y^{2}}{a^{2} \, \sin^{2}} &= \cosh^{2} - \sinh^{2} = 1 \label{eq:ecuacion_02_77_esp}
+\end{align}
+Para $v=$ constante, la ec. (\ref{eq:ecuacion_02_76_esp}) genera una familia de elipses con el eje $x$, en el principal. Para $u=$ constante, la ec. (\ref{eq:ecuacion_02_77_esp}) genera hipérbolas con puntos focales en el eje $x$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.75]{Imagenes/EllipticCylindricalCoord_1000.png}
+    \caption{Sistema coordenado cilíndirco elíptico en el plano $x-y$.}
+    \label{fig:figura_coordenada_cilindricas_elipticas}
+\end{figure}
+La familia de superficies coordenadas son las siguientes:
+\begin{enumerate}
+\item Cilindros elípticos con $u$ constante, $0 \leq u < \infty$
+\item Cilindros hiperbólicos conb $v$ constante, $0 \leq v \leq 2 \, \pi$
+\item Planos paralelos al plano $x-y$ con $z$ constante, $-\infty < z < \infty$
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/Elliptic-cylindrical-coordinates_02.png}
+    \caption{Sistema coordenado cilíndirco elíptico vista en tres dimensiones.}
+    \label{fig:figura_coordenada_cilindricas_elipticas_3D}
+\end{figure}
+Calculamos los factores de escala o coeficientes métricos a partir de la expresión:
+\begin{align*}
+h_{i} = \sqrt{ \left( \pdv{x}{q_{i}} \right)^{2} + \left( \pdv{y}{q_{i}} \right)^{2} + \left( \pdv{z}{q_{i}} \right)^{2}}
+\end{align*}
+tenemos entonces que para $ i = u$
+\begin{align*}
+h_{1} = h_{u} = \sqrt{ \left( \pdv{x}{u} \right)^{2} + \left( \pdv{y}{u} \right)^{2} + \left( \pdv{z}{u} \right)^{2}}
+\end{align*}
+donde
+\begin{align*}
+\pdv{x}{u} &= a \, \sinh u \cos v \hspace{1cm} \Rightarrow \hspace{1cm} \left( \pdv{x}{u} \right)^{2} = a^{2} \, \sinh^{2} u \, \cos^{2} v \\[1em]
+\pdv{y}{u} &= a \, \cosh u \sin v \hspace{1cm} \Rightarrow \hspace{1cm} \left( \pdv{y}{u} \right)^{2} = a^{2} \, \cosh^{2} u \, \sin^{2} v \\[1em]
+\pdv{z}{u} &= 0
+\end{align*}
+al sumar los términos del radical
+\begin{align*}
+h_{u} = \sqrt{a^{2} \, \sinh^{2} u \, \cos^{2} v + a^{2} \, \cosh^{2} u \, \sin^{2} v}
+\end{align*}
+Haciendo el álgebra respectiva y considerando que $\cosh^{2} u - \sinh^{2} = 1$, entonces:
+\begin{align*}
+h_{u} &= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + \cosh^{2} u \, \sin^{2} v \right] } \\[1em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + (1 + \sinh^{2} u) \, \sin^{2} v \right] } \\[1em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + \sinh^{2} u \, \sin^{2} v + \sin^{2} v \right] } \\[1em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u ( \cos^{2} v + \sin^{2}v ) + \sin^{2} v \right] } \\[1em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u + \sin^{2} v  \right] } \\[1em]
+h_{u} &= a \, \sqrt{ \sinh^{2} u + \sin^{2} v}
+\end{align*}
+Para el factor $h_{v}$ se tiene que
+\begin{align*}
+h_{v} = \sqrt{ \left( \pdv{x}{v} \right)^{2} + \left( \pdv{y}{v} \right)^{2} + \left( \pdv{z}{v} \right)^{2}}
+\end{align*}
+entonces
+\begin{align*}
+\pdv{x}{v} &= - a \, \cosh u \sin v \hspace{1cm} \Rightarrow \hspace{1cm} \left( \pdv{x}{v} \right)^{2} = a^{2} \, \cosh^{2} u \, \sin^{2} v \\[1em]
+\pdv{y}{v} &= a \, \sinh u \cos v \hspace{1cm} \Rightarrow \hspace{1cm} \left( \pdv{y}{v} \right)^{2} = a^{2} \, \sinh^{2} u \, \cos^{2} v \\[1em]
+\pdv{z}{v} &= 0
+\end{align*}
+así llegamos a que
+\begin{align*}
+h_{v} &= \sqrt{a^{2} \left[ \cosh^{2} u \, \sin^{2} v + \sinh^{2} u \, \cos^{2} v \right] } \\[1em]
+&= \sqrt{a^{2} \left[ (1 + \sinh^{2} u) \, \sin^{2} v + \sinh^{2} u \, \cos^{2} v \right] } \\[1em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u (\cos^{2} v +  \sin^{2} v)+ \sin^{2} v \right] } \\[1em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u + \sin^{2} v  \right] } \\[1em]
+h_{v} &= a \, \sqrt{ \sinh^{2} u + \sin^{2} v}
+\end{align*}
+y para el último factor de escala $h_{z}$
+\begin{align*}
+h_{z} = \sqrt{ \cancelto{0}{\left( \pdv{x}{z} \right)^{2}} + \cancelto{0}{\left( \pdv{y}{z} \right)^{2}} + \cancelto{1}{\left( \pdv{z}{z} \right)^{2}}}
+\end{align*}
+Por lo que tenemos
+\begin{align*}
+h_{z} = 1
+\end{align*}
+Así los tres factores de escala para este sistema coordenado cilíndrico elíptico son:
+\begin{align*}
+h_{u} &= a \, \sqrt{ \sinh^{2} u + \sin^{2} v} \\[1em]
+h_{v} &= a \, \sqrt{ \sinh^{2} u + \sin^{2} v} \\[1em]
+h_{z} &= 1
+\end{align*}
+\textbf{Ejercicio a cuenta: } Calcula de manera explícita los factores de escala $(h_{u}, h_{v}, h_{\varphi})$ para el sistema de coordenadas esferoidales prolatas $(u, v, \varphi)$, cuyas reglas de transformación son:
+\begin{align*}
+x &= a \, \sinh u \, \sin v \, \cos \varphi \\
+y &= a \, \sinh u \, \sin v \, \sin \varphi \\
+z &= a \, \cosh u \, \cos v
+\end{align*}
+%\subsection*{Coordenadas parabólicas cilíndricas.}
 % La ecuación de la familia de parábolas confocales, cuyo foco coincide con el origen de coordenadas tiene la forma:
 % \begin{equation}
 % y^{2} = 4 \: p \: (p + x)
