@@ -1,4 +1,5 @@
 \input{../preambulo_doc}
+\DeclareUnicodeCharacter{00A0}{ }
 \author{}
 \usepackage{tikz-3dplot}
 %\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
@@ -8,6 +9,59 @@
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
+\section{Conceptos básicos y definiciones.}
+Una gran cantidad de situaciones físicas puede ser descrita utilizando ecuaciones diferenciales que incluyen funciones de dos o más variables. Las conocemos como ecuaciones diferenciales parciales pues incluyen derivadas respecto a cada una de las variables.
+\par
+Se denomina \emph{ecuación diferencial parcial de segundo orden} en las variables independientes $x$ y $y$, a una relación entre la función incógnita $u(x, y)$ y sus derivadas parciales hasta el segundo orden:
+\begin{align*}
+F (x, y, \ldots, u, u_{x}, u_{y}, \ldots, u_{xx}, u_{xy}, u_{yy}, \ldots) = 0
+\end{align*}
+y análogamente para un número mayor de variables independientes. El subíndice en las variables dependientes indican una diferenciación
+\begin{align*}
+u_{x} = \pdv{u}{x} \hspace{1.5cm} u_{x y} = \pdv[2]{u}{y}{x}
+\end{align*}
+Aquí la ecuación inicial se considera en un dominio adecuado $D$ del espacio n-dimensional $\mathbb{R}^{n}$ en las variables independientes $x, y, \ldots$. Buscamos funciones $u = u (x, y, \ldots)$ Que satisfagan la ecuación de forma idéntica en el dominio $D$.
+\par
+Dichas funciones, si existen, se denominan \emph{soluciones de la EDP}. De estas muchas soluciones posibles, intentamos seleccionar una particular introduciendo condiciones adicionales adecuadas.
+\par
+El \emph{orden} de una EDP es el orden más alto de la derivada parcial que tiene la expresión, por ejemplo
+\begin{align*}
+u_{x x} + 2 \, x \, u_{x y} + u_{y y} = e^{y}
+\end{align*}
+es una EDP de segundo orden, mientras que
+\begin{align*}
+u_{x x y} + x \, u_{y y} + 8 \, u = 7 \, y
+\end{align*}
+es una EDP de tercer orden.
+\par
+Se dice que una EDP es \emph{lineal} si es lineal en la función desconocida y todas sus derivadas con coeficientes que dependen sólo de las variables independientes; se dice que es \emph{casi lineal} si es lineal en la derivada de orden más alto de la función desconocida. Por ejemplo, la ecuación
+\begin{align*}
+y \, u_{xx} + 2 \, x \, y \, u_{yy} + u = 1
+\end{align*}
+es una EDP2 lineal, mientras que
+\begin{align*}
+u_{x} \, u_{x x} + x \, u \, y_{y} = \sin y
+\end{align*}
+es una EDP casi lineal. Las ecuaciones que no son lineales, se les llama ecuaciones \emph{no lineales.}
+\par
+\textbf{Ejercicio a cuenta: } Para cada una de las siguientes EDP indica y justifica:
+\begin{enumerate}[label=\alph*)]
+\item Si la ecuación es lineal, casi lineal o no lineal.
+\item Si la ecuación es homogénea o no homogénea.
+\item Indica el orden de la EDP.
+\end{enumerate}
+\begin{enumerate}[label=(\roman*)]
+\item $u \, u_{x} - 2 \, x \, y \, u_{y} = 0$
+\item $u_{x}^{2} + u \, u_{y} = 1$
+\item $u_{xx}^{2} + u_{x}^{2} + \sin u =  e^{y}$
+\end{enumerate}
+% Una ecuación diferencial parcial es lineal respecto a la derivada de segundo orden si tiene la forma:
+% \[ A \: u_{xx} + B \: u_{xy} + C \: u_{yy} + F_{1} (x, y, u, u_{x}, u_{y} ) = 0 \]
+% donde $A$, $B$, $C$ son en general, funciones de $x$ y $y$.
+% \par
+% La ecuación diferencial será lineal, si lo es respecto a la función $u$ y a sus primeras y segundas derivadas:
+% \[ A \: u_{xx} + B \: u_{xy} + C \: u_{yy} + D \: u_{x} + E \: u_{y} + F \: u = G \]
+% donde $A$, $B$, $C$, $D$, $E$, $F$, $G$ son en general, funciones de $x$ y $y$. La ecuación es homogénea si $G = 0$.
 \section{Ecuaciones de la Física Matemática.}
 A continuación se menciona un conjunto de ecuaciones diferenciales de gran importancia en la física matemática:
 \begin{enumerate}[label=\alph*)]
@@ -166,6 +220,12 @@ Dada esta EDP tenemos que:
 \end{enumerate}
 Este es un ejemplo en donde se muestra que el tipo de ecuaciones con coeficientes variables puede cambiar de forma en diferentes regiones del dominio.
 \end{ejemplo}
+\textbf{Ejercicio a cuenta: } Estudia los dominios en los que las siguientes EDP son elípticas, parabólicas o hiperbólicas:
+\begin{enumerate}[label=(\roman*)]
+\item $(x - l) \, u_{x x} + 2 \, x \, y \, u_{x y} - y^{2} \, u_{y y } = 0, \hspace{1.5cm} l > 0$
+\item $4 \, y^{2} \, u_{x x} - e^{2 x} \, u_{y y} - 4 \, y^{2} \, u_{y} = 0$
+\item $x^{2} \, u_{x x} + 2 \, x \, y \, u_{x y} + y^{2} \, u_{y y} = 0$
+\end{enumerate}
 \section{Clasificación de las EDP con más de dos variables.}
 Consideremos la forma general de una EDP2
 \begin{align}
@@ -565,5 +625,59 @@ Se conocen tres requisitos que deben cumplirse al formular un problema de valore
 Si no cumple con estos requisitos, el problema con la EDP se plantea incorrectamente.
 \par
 Las condiciones \ref{condicion_01} - \ref{condicion_02} requieren que la ecuación más las datos del problema sean tales que exista una única solución. La tercera condición establece que una pequeña variación de los datos para el problema debería causar una pequeña variación en la solución. Como los datos generalmente se obtienen de manera experimental y pueden estar sujetos a aproximaciones numéricas, requerimos que la solución sea estable bajo pequeñas variaciones en los valores iniciales y/o CDF. Es decir, no podemos permitir que ocurran grandes variaciones en la solución si los datos se alteran ligeramente.
-
+\section{Condiciones de frontera.}
+Por lo general, cuando sabemos que un sistema físico en algún momento está sometido a una ley que rige tal sistema, entonces seremos capaces de predecir la evolución de ese sistema. Tales valores iniciales son las condiciones de contorno (de frontera) más comunes que se asocian a las EDO y las EDP. La búsqueda de soluciones que responden a determinados puntos, curvas o superficies corresponde a problemas con condiciones de frontera. Las soluciones normalmente deben de satisfacer determinados condiciones de frontera impuestas (por ejemplo, asintóticas). Estas condiciones de frontera pueden clasificar en tres formas:
+\begin{enumerate}
+\item \textbf{Condiciones de frontera de Direchlet}. El valor de una función se especifica en la frontera.
+\item \textbf{Condiciones de frontera de Neumann}. La derivada normal (gradiente) de una función se especifica en la frontera. En el caso de la electrostática, serían $E_{n}$ y $\sigma$, la densidad de carga superficial.
+\item \textbf{Condiciones de frontera de Cauchy}. El valor de una función y la derivada se especifican en la frontera. En la electrostática esto significaría, el potencial $\varphi$, y la componente normal del campo eléctrico $E_{n}$.
+\end{enumerate}
+%Sepulveda - EDP Cap. 3
+Se puede hacer una segunda clasificación de las CDF, en función de su alcance: \emph{generales} y \emph{específicas}.
+\subsection*{CDF Generales.}
+Una condición de frontera general corresponde a situaciones donde un campo se extiende de un medio a otro. En estos casos no es posible especificar los valores de los campos y/o sus derivadas sobre las superficies de separación (interfases), sino alguna relación entre sus valores a ambos lados.
+\par
+Para un campo electrostático, por ejemplo, el potencial es continuo a través de la interfase $(\phi_{1} \eval_{S} = \phi_{2} \eval_{S})$ y, si no hay carga superficial en la interfase, la componente normal del vector de desplazamiento es continua a través de la interfase $(\vb{D}_{1} \vdot \vu{n} \eval_{S} = \vb{D}_{2} \vdot \vu{n} \eval_{S})$.
+\par
+En el caso del campo de temperatura, ésta es continua en la frontera de separación de dos medios ($T_{1} \eval_{S} = T_{2} \eval_{S})$.
+\subsection*{CDF Específica.}
+Una CDF específica establece los valores de los campos y/o sus derivadas espaciales y/o temporales en las fronteras espaciales (sean ellas superficies o líneas o puntos) y en puntos iniciales en el tiempo. A este tipo pertenecen las condiciones de Dirichlet, Neumann y Cauchy.
+\par
+Las condiciones de frontera específicas pueden subdividirse en homogéneas e inhomogéneas.
+\begin{enumerate}
+\item  Una CDF homogénea es del tipo:
+\begin{align*}
+\phi \eval_{S} = 0 \hspace{1cm} \mbox{o} \hspace{1cm} \pdv{\phi}{n} \eval_{S} \hspace{1.5cm} \hspace{1cm} \mbox{o} \hspace{1cm} \alpha \: \phi \eval_{S} + \beta \: \pdv{\phi}{n} \eval_{S} = 0
+\end{align*}
+La solución de problemas de tipo Sturm-Liouville, exige este tipo de condiciones.
+\item Las CDF inhomogéneas son del tipo:
+\begin{align*}
+\phi \eval{S} = f(\vb{r}) \hspace{1cm} \mbox{o} \hspace{1cm}\pdv{\phi}{n} \eval{S} = g(\vb{r})\hspace{1cm} \mbox{o} \hspace{1cm} \psi(\vb{r}, t) \eval_{t=0} = h(\vb{r})
+\end{align*}
+entre otras.
+\end{enumerate}
+\subsection*{Recapitulación.}
+La clasificación canónica anterior apunta hacia la conexión entre EDP y condiciones de frontera (CDF). Generalizando, podemos decir:
+\begin{enumerate}[label=\alph*)]
+\item Las ecuaciones elípticas satisfacen las CDF de tipo Dirichlet o Newmann o mixtas.
+\item Las ecuaciones hiperbólicas satisfacen las CDF de tipo Cauchy.
+\item Las ecuaciones parabólicas satisfacen las CDF de tipo la ecuación de calor.
+\end{enumerate}
+\newpage
+\begin{landscape}
+\begin{center}
+\captionof{table}{Tabla que relaciona el tipo de EDP y las CDF.}
+\begin{tabular}{ | c | c | c | c | c |} \hline
+\multirow{3}{3.5cm}[-7pt]{\makecell{Condiciones \\ de frontera}} & \multirow{3}{3.5cm}[-7pt]{\makecell{Tipo de \\ superficie}} & \multicolumn{3}{c |}{Tipo de EDP} \\ \cline{3-5}
+ & & \makecell{Elíptica} & \makecell{Hiperbólica} & \makecell{Parabólica} \\ \cline{3-5}
+ & & \makecell{Laplace, Poisson \\ en $(x,y)$} & \makecell{Ecuación de onda \\ en $(x,t)$} & \makecell{Ecuación de difusión \\ en $(x,t)$} \\ \hline
+\multirow{2}*{\textbf{Cauchy}} & \makecell{Superficie \\ abierta} & \makecell{Resultados sin \\ interpretación física} & \makecell{\underline{\textbf{Solución única}} \\ \underline{\textbf{estable}}} & \makecell{Demasiado \\ restrictiva} \\ \cline{2-5}
+ & \makecell{Superficie \\ cerrada} & \makecell{Demasiado \\ restrictiva} & \makecell{Demasiado \\ restrictiva} & \makecell{Demasiado \\ restrictiva} \\ \hline
+ \multirow{2}*{\textbf{Dirichlet}} & \makecell{Superficie \\ abierta} & \makecell{Insuficiente} & \makecell{Insuficiente}  &\makecell{\underline{\textbf{Solución única}} \\ \underline{\textbf{estable} en una dirección}} \\ \cline{2-5} 
+& \makecell{Superficie \\ cerrada} & \makecell{\underline{Solución única} \\ \underline{estable}} & \makecell{Más de \\ una solución} & \makecell{Demasiado \\ restrictiva} \\ \hline
+ \multirow{2}*{\textbf{Neumann}} & \makecell{Superficie \\ abierta} & \makecell{Insuficiente} & \makecell{Insuficiente}  &\makecell{\underline{\textbf{Solución única}} \\ \underline{\textbf{estable} en una dirección}} \\ \cline{2-5}
+& \makecell{Superficie \\ cerrada} & \makecell{\underline{\textbf{Solución única}} \\ \underline{\textbf{estable}}} & \makecell{Más de \\ una solución} & \makecell{Demasiado \\ restrictiva} \\ \hline
+\end{tabular}
+\end{center}
+\end{landscape}
 \end{document}
