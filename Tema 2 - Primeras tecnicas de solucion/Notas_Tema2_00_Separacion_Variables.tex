@@ -1,0 +1,116 @@
+\input{../preambulo_doc}
+\title{Tema 2 - Separación de variables \\ {\large Matemáticas Avanzadas de la Física}\vspace{-1.5\baselineskip}}
+\author{}
+\date{ }
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Separación de variables.}
+La idea de la técnica de separación de variables es suponer que la solución a la EDP $u (x, y, z)$ puede escribirse como
+\begin{align*}
+u (x, y ,z) =  X(x) \, Y(y) \, Z(z)
+\end{align*}
+que nos conduce a una EDO para cada una de las funciones $X(x) \, Y(y) \, Z(z)$.
+\par
+Estas EDO se resuelven y las soluciones \enquote{se unen} para dar la solución a la EDP. La \emph{validez de la solución} debe verificarse porque comenzamos con el supuesto de que las variables podrían separarse.
+\par
+Como primer ejemplo consideramos el caso de la ecuación de Laplace en dos variables. Veremos que las EDO resultantes son familiares y elementales de resolver.
+\section{Tres problemas.}
+Trabajaremos tres problemas con la ecuación de calor en estado estacionario, es decir, la temperatura en cada punto del espacio no varía con el tiempo. Recordemos que la ecuación de calor es
+\begin{align}
+\pdv{T}{t} = \alpha \, \pdv[2]{T}{x}, \hspace{1.5cm} \alpha = \dfrac{k}{\rho \, c}
+\label{eq:ecuacion_001}    
+\end{align}
+donde $\rho$ es la densidad del material, $c$ es el calor específico y $k$ la conductividad térmica.
+\par
+La ecuación de calor que consideraremos es
+\begin{align}
+\laplacian{u} = 0
+\label{eq:ecuacion_002}    
+\end{align}
+\subsection{Primer problema: Resolviendo la ecuación de Laplace en un rectángulo.}
+La ecuación de Laplace en dos variables es
+\begin{align}
+\laplacian{u} (x, y) = \pdv[2]{u}{x} + \pdv[2]{u}{y} = 0
+\label{eq:ecuacion_003}    
+\end{align}
+suponemos que tiene una solución del tipo
+\begin{align}
+u(x, y) = X(x) \, Y(y)
+\label{eq:ecuacion_004}
+\end{align}
+Hacemos la diferenciación de la solución con respecto a $x$ e $y$, entonces tenemos
+\begin{align*}
+\pdv[2]{u}{x} = X^{\prime \prime} \, Y(y) \hspace{1.5cm} \pdv[2]{u}{y} = Y^{\prime \prime} \, X(x)
+\end{align*}
+que al sustituir en la ec. (\ref{eq:ecuacion_003}) resulta
+\begin{align*}
+X^{\prime \prime}(x) \, Y(y) + X(x) \, Y^{\prime \prime}(y) = 0
+\end{align*}
+Por lo que al dividir la expresión entre $X(x) \, Y(y)$
+\begin{align*}
+\dfrac{X^{\prime \prime}(x) \, Y(y)}{X(x) \, Y(y)} + \dfrac{X(x) \, Y^{\prime \prime}(y)}{X(x) \, Y(y)} = \dfrac{X^{\prime \prime}(x)}{X(x)} + \dfrac{Y^{\prime \prime}(y)}{Y(y)} = 0
+\end{align*}
+Así llegamos a
+\begin{align}
+- \dfrac{X^{\prime \prime}(x)}{X(x)} = \dfrac{Y^{\prime \prime}(y)}{Y(y)}
+\label{eq:ecuacion_005}    
+\end{align}
+Vemos que el lado izquierdo de la ec. (\ref{eq:ecuacion_005}) es una función que sólo depende de $x$ y en el lado derecho la función sólo depende de $y$, para que esto ocurra, ambas expresiones deben de ser iguales a una constante, digamos $\lambda$, de tal manera que
+\begin{align*}
+- \dfrac{X^{\prime \prime}(x)}{X(x)} = \dfrac{Y^{\prime \prime}(y)}{Y(y)}
+ = \lambda
+\end{align*}
+Por lo que ahora tenemos un sistema de dos EDO de primer orden
+\begin{subequations}
+\begin{align}
+X^{\prime \prime} (x) + \lambda \, X(x) = 0 \label{eq:ecuacion_006a} \\
+Y^{\prime \prime} (y) - \lambda \, Y(y) = 0 \label{eq:ecuacion_006b}
+\end{align}
+\end{subequations}
+Revisemos los tres posibles casos:
+\begin{enumerate}[label=\roman*)]
+\item $\lambda = 0$
+\item $\lambda > 0$
+\item $\lambda < 0$
+\end{enumerate}
+Cuando $\lambda = 0$, entonces 
+\begin{align*}
+X^{\prime \prime}(x) &= 0 \\
+X(x) &= A \, x + B
+\end{align*}
+y de la misma manera tendremos que $Y(y) = C \, y + D$.
+\par
+Los casos más interesantes que permiten condiciones de frontera no triviales son cuando $\lambda > 0$ y $\lambda < 0$.
+\par
+Supongamos que $\lambda > 0$, entonces la EDO $X^{\prime \prime} (x) + \lambda \, X(x) = 0 $ tiene por solución
+\begin{align*}
+X(x) = A \, \cos (\sqrt{\lambda \, x}) + B \, \sin (\sqrt{\lambda \, x})
+\end{align*}
+mientras que la EDO $Y^{\prime \prime} (x) - \lambda \, X(x) = 0 $ tiene por solución
+\begin{align*}
+Y(y) = C \, \cosh (\sqrt{\lambda \, x}) + D \, \sinh (\sqrt{\lambda \, x})
+\end{align*}
+\textbf{Ejercicio a cuenta: } Determina las soluciones para las dos EDO cuando $\lambda < 0$.
+\par
+Establezcamos las condiciones de frontera en un rectángulo como se muestra en la figura (\ref{fig:figura_ecalor_01})
+\begin{figure}[!h]
+    \centering
+    \includestandalone{Figuras/01_Separacion_Variables_Cuadrado}
+    \caption{Rectángulo con dimensiones $0 \leq x \leq a$ y $0 \leq y \leq b$}
+    \label{fig:figura_ecalor_01}
+\end{figure}
+Establecemos las siguientes condiciones de frontera
+\begin{align*}
+u(x, 0) = f_{1} (x), \hspace{0.5cm} 0 \leq x \leq a \hspace{1.75cm} u(x, b) = f_{2} (x), \hspace{0.5cm} 0 \leq x \leq a \\[0.5em]
+u(0, y) = g_{1} (y), \hspace{0.5cm} 0 \leq y \leq b \hspace{1.75cm} u(a, y) = g_{2} (x), \hspace{0.5cm} 0 \leq y \leq b 
+\end{align*}
+La forma más sencilla de resolver el problema es considerar cuatro problemas $\laplacian{u}(x, y)$, con las CDF en tres de los lados siendo cero y el valor de la función dada en el cuarto lado, para luego resolver cada uno de los cuatro problemas y sumar las soluciones. El resultado será $\laplacian{u}(x, y)$ y se cumplirán las cuatro CDF. Uno de estos problemas con CDF, que ahora consideramos, será
+\begin{align*}
+\begin{gathered}
+\laplacian{u}(x, y) = 0 \\
+u(x, 0) = f_{1} (x), \hspace{0.5cm} 0 \leq x \leq a \hspace{1.75cm} u(x, b) = 0, \hspace{0.5cm} 0 \leq x \leq a \\[0.5em]
+u(0, y) = 0, \hspace{0.5cm} 0 \leq y \leq b \hspace{1.75cm} u(a, y) = 0, \hspace{0.5cm} 0 \leq y \leq b
+\end{gathered}
+\end{align*}
+\end{document}
