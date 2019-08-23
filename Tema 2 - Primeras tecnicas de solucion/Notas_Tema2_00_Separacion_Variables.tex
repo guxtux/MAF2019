@@ -85,16 +85,16 @@ Los casos más interesantes que permiten condiciones de frontera no triviales so
 \par
 Supongamos que $\lambda > 0$, entonces la EDO $X^{\prime \prime} (x) + \lambda \, X(x) = 0 $ tiene por solución
 \begin{align*}
-X(x) = A \, \cos (\sqrt{\lambda \, x}) + B \, \sin (\sqrt{\lambda \, x})
+X(x) = A \, \cos (\sqrt{\lambda} \, x) + B \, \sin (\sqrt{\lambda} \, x)
 \end{align*}
 mientras que la EDO $Y^{\prime \prime} (x) - \lambda \, X(x) = 0 $ tiene por solución
 \begin{align*}
-Y(y) = C \, \cosh (\sqrt{\lambda \, x}) + D \, \sinh (\sqrt{\lambda \, x})
+Y(y) = C \, \cosh (\sqrt{\lambda} \, x) + D \, \sinh (\sqrt{\lambda} \, x)
 \end{align*}
 \textbf{Ejercicio a cuenta: } Determina las soluciones para las dos EDO cuando $\lambda < 0$.
 \par
 Establezcamos las condiciones de frontera en un rectángulo como se muestra en la figura (\ref{fig:figura_ecalor_01})
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includestandalone{Figuras/01_Separacion_Variables_Cuadrado}
     \caption{Rectángulo con dimensiones $0 \leq x \leq a$ y $0 \leq y \leq b$}
@@ -115,19 +115,22 @@ u(0, y) = 0, \hspace{0.5cm} 0 \leq y \leq b \hspace{1.75cm} u(a, y) = 0, \hspace
 \end{align*}
 Tenemos entonces que
 \begin{align*}
-X(x) = A \, \cos \sqrt{\lambda \, x} + B \, \sin \sqrt{\lambda \, x} \hspace{1cm} X(0) = 0, \hspace{0.5cm} X(a) = 0
+X(x) = A \, \cos \left( \sqrt{\lambda} \, x \right) + B \, \sin \left( \sqrt{\lambda} \, x \right) \hspace{1cm} X(0) = 0, \hspace{0.5cm} X(a) = 0
 \end{align*}
-Entonces
+Entonces para la primera CDF $X(0) = 0$
 \begin{align*}
-X(0) = A
+0 &= A \, \cancelto{1}{\cos \sqrt{\lambda} \, 0} + B \, \cancelto{0}{\sin \sqrt{\lambda} \, 0} \\
+\Rightarrow \hspace{0.5cm} X(0) &= A
 \end{align*}
-por lo que
+y para la segunda CDF $X(a) = 0$ y considerando que $A = 0$, se tiene que
 \begin{align*}
-A = 0, \hspace{1cm} X(a) = B \, \sin \sqrt{\lambda \, a} = 0
+0 =  B \, \sin \left( \sqrt{\lambda} \, a \right)
 \end{align*}
-Para permitir sólo la solución trivial, debe de ocurrir que $\sqrt{\lambda} \, a = n \, \pi$, para cualquier entero $n$
+Para permitir una solución no trivial, debe de ocurrir que $\sqrt{\lambda} \, a = n \, \pi$, para cualquier entero $n$ sea una raíz de la función seno, por lo que
 \begin{align*}
-\lambda_{n} = \dfrac{n^{2} \, \pi^{2}}{a^{2}}
+\sqrt{\lambda_{n}} \, a &=  n \, \pi \\[0.5em]
+\sqrt{\lambda_{n}} &= \dfrac{n \, \pi}{a} \\[0.5em]
+\Rightarrow \hspace{0.5cm} \lambda_{n} &= \dfrac{n^{2} \, \pi^{2}}{a^{2}}
 \end{align*}
 que es un valor propio para el problema con CDF
 \begin{align*}
@@ -135,7 +138,7 @@ X^{\prime \prime} (x) + \lambda \, X(x) = 0 \hspace{1.5cm} X(0) = 0 \hspace{0.5c
 \end{align*}
 entonces tenemos que
 \begin{align*}
-X_{n} (x) = \sin \left( \dfrac{n \, \pi \, }{a} \right)
+X_{n} (x) = B \, \sin \left( \dfrac{n \, \pi \, x}{a} \right)
 \end{align*}
 es la correspondiente función propia.
 \par
@@ -181,10 +184,66 @@ o de la forma
 \begin{align*}
 u_{n} (x, y) = \sin \left( \dfrac{n \, \pi \, x}{a} \right) \, \sinh \left[ \dfrac{n \, \pi (b - y)}{a} \right]
 \end{align*}
-por tanto
+Como la EDP $\laplacian{u} = 0$ es lineal, podemos utilizar el principio de superposición para obtener
 \begin{align*}
-u (x, y) &= \sum_{n=1}^{\infty} c_{n} \, u_{n} (x, y) \\
+u (x, y) &= \sum_{n=1}^{\infty} c_{n} \, u_{n} (x, y) = \\
 &= \sum_{n=1}^{\infty} c_{n} \, \sin \left( \dfrac{n \, \pi \, x}{a} \right) \left[  \cosh \left( \dfrac{n \, \pi \, y}{a} \right) - \coth \left( \dfrac{n \, \pi \, b}{a} \right) \sinh \left( \dfrac{n \, \pi \, y}{a} \right) \right] \\
 &= \sum_{n=1}^{\infty} c_{n} \, \sin \left( \dfrac{n \, \pi \, x}{a} \right) \, \sinh \left[ \dfrac{n \, \pi (b - y)}{a} \right]
 \end{align*}
+Para especificar las constantes $c_{n}$, tenemos que considerar
+\begin{align*}
+f_{1} = u(x, 0) &= \sum_{n=1}^{\infty} c_{n} \, u_{n} (x, 0) \\[1em]
+&= \sum_{n=1}^{\infty} c_{n} \, \sin \left( \dfrac{n \, \pi \, x}{a} \right) \, \sinh \left[ \dfrac{n \, \pi (b - 0)}{a} \right] \\[1em]
+&= \sum_{n=1}^{\infty} c_{n} \, \sin \left( \dfrac{n \, \pi \, x}{a} \right) \, \sinh \left[ \dfrac{n \, \pi \, b}{a} \right]
+\end{align*}
+Al hacer
+\begin{align*}
+d_{n} = c_{n} \, \sinh \left[ \dfrac{n \, \pi \, b}{a} \right]
+\end{align*}
+obtenemos
+\begin{align*}
+f_{1} = u (x, 0) = \sum_{n=1}^{\infty} d_{n} \, \sin \left( \dfrac{n \, \pi \, x}{a} \right)
+\end{align*}
+que corresponde a la expansión en series de Fourier de $f_{1}$ en una serie de senos. Los coeficientes están dados entonces por
+\begin{align*}
+d_{n} = \dfrac{2}{a} \int_{0}^{a} f_{1} \, \sin  \left( \dfrac{n \, \pi \, x}{a} \right) \dd{x}
+\end{align*}
+por lo tanto
+\begin{align*}
+c_{n} = \dfrac{d_{n}}{\sinh \left[ \dfrac{n \, \pi \, b}{a} \right]} = \dfrac{\displaystyle \dfrac{2}{a} \int_{0}^{a} f_{1} \, \sin  \left( \dfrac{n \, \pi \, x}{a} \right) \dd{x}}{\sinh \left[ \dfrac{n \, \pi \, b}{a} \right]}
+\end{align*}
+así
+\begin{align*}
+u(x,y) &= \sum_{n=1}^{\infty} c_{n} \, u_{n} (x, y) = \\[0.5em]
+&= \sum_{n=1}^{\infty} c_{n} \, \sin \left( \dfrac{n \, \pi \, x}{a} \right) \, \sinh \left[ \dfrac{n \, \pi (b - y)}{a} \right] \\[0.5em]
+&= \sum_{n=1}^{\infty} \left[ \dfrac{\displaystyle \dfrac{2}{a} \int_{0}^{a} f_{1} \, \sin  \left( \dfrac{n \, \pi \, x}{a} \right) \dd{x}}{\sinh \left[ \dfrac{n \, \pi \, b}{a} \right]} \right] \, \sin \left( \dfrac{n \, \pi \, x}{a} \right) \, \sinh \left[ \dfrac{n \, \pi \, b}{a} \right]
+\end{align*}
+\textbf{Ejercicio a cuenta: } Demuestra que la solución a
+\begin{align*}
+\begin{gathered}
+\laplacian{u}(x, y) = 0 \\
+u(x, 0) = 0, \hspace{0.5cm} 0 \leq x \leq a \hspace{1.75cm} u(a, y) = 0, \hspace{0.5cm} 0 \leq x \leq a \\[0.5em]
+u(0, y) = g_{1} (y), \hspace{0.5cm} 0 \leq y \leq b \hspace{1.75cm} u(a, y) = 0, \hspace{0.5cm} 0 \leq y \leq b
+\end{gathered}
+\end{align*}
+es
+\begin{align*}
+u (x, u) &= \sum_{n=1}^{\infty} \left\{ \left[ \dfrac{2}{b} \int_{0}^{b} g_{1} (y) \, \sin \left( \dfrac{n \, \pi \, y}{b} \right) \dd{y} \right] \, \cosh \left( \dfrac{n \, \pi \, x}{b} \right) + \right. \\[1em]
+&- \left. \left[ \dfrac{2}{b} \int_{0}^{b} g_{1} (y) \, \sin \left( \dfrac{n \, \pi \, y}{b} \right) \dd{y} \right] \, \coth \left( \dfrac{n \, \pi \, a}{b} \right) \, \sinh \left( \dfrac{n \, \pi \, x}{b} \right) \right\} \cp \\[1em]
+&\cp \sinh \left( \dfrac{n \, \pi \, y}{b} \right)
+\end{align*}
+\subsection{Problema 2: Resolviendo la ecuación de Laplace en un cilindro.}
+En este problema resolveremos la misma ecuación de Laplace en coordenadas polares o cilíndricas. En coordenadas cartesianas, las EDO que surgieron eran fáciles de resolver. Veremos que en las coordenadas cilíndricas y esféricas, no todas las EDO son tan agradables. Las soluciones a estas ODE más difíciles se denominan \emph{funciones de Bessel} y \emph{polinomios de Legendre}, respectivamente.
+\par
+En coordenadas cilíndricas sólo necesitamos las funciones de Bessel, comenzaremos ésta sección mostrando cómo surgen estas ecuaciones.
+\subsection*{Un ejemplo de donde surge las funciones de Bessel.}
+Consideremos la ecuación de calor
+\begin{align*}
+u_{t} = K \, \laplacian{u}
+\end{align*}
+La razón por la cual las ecuaciones que surgen de la separación de variables en coordenadas cilíndricas no es tan simple como en las coordenadas cartesianas se debe a la forma del laplaciano. En coordenadas cilíndricas, el laplaciano viene dado por
+\begin{align*}
+\laplacian{u} = u_{r r} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta} + u_{z z}
+\end{align*}
+
 \end{document}
