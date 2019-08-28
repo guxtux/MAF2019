@@ -404,7 +404,299 @@ a_{1} \left[ (\alpha + 1)^{2} - \nu^{2} \right] &= a_{1} \left[ (\alpha + 1)^{2}
 \end{align*}
 Esta es la solución acotada, entonces $\alpha$ es un valor no negativo y $a_{1} = 0$.
 \item La relación de recurrencia es:
-
-
+\begin{align*}
+a_{n} \left[ (n + \alpha)((n + \alpha) - 1) + (n + \alpha) - \nu^{2} \right] +  a_{n-2} = 0
+\end{align*}
+o de manera equivalente
+\begin{align*}
+a_{n} \left[ (n + \alpha)((n + \alpha) - 1) + (n + \alpha) - \nu^{2} \right] = a_{n} \left[ (n + \alpha^{2} - \nu^{2}) \right] + a_{n-2} = 0
+\end{align*}
+sustituyendo $\nu$ para $\alpha$, tenemos
+\begin{align*}
+a_{n} \left[ (n + \nu^{2} - \nu^{2}) \right] = a_{n} \, n \, (n + 2 \, \nu) = - a_{n-2}
+\end{align*}
+para el coeficiente $a_{n}$
+\begin{align*}
+a_{n} = - \dfrac{a_{n-2}}{n \, (n + 2 \, \nu)}
+\end{align*}
+Como $a_{1} = 0$, entonces $a_{k} = 0$ para cualquier entero impar $k$.
+\item Ahora daremos una descripción general para los coeficientes $a_{2k}$. Tenemos que
+\begin{align*}
+a_{2} &= - \dfrac{a_{0}}{2 (2 + 2 \, \nu)} \\
+a_{4} &= - \dfrac{a_{2}}{4 (4 + 2 \, \nu)} = \dfrac{(-1)}{4 (4 + 2 \, \nu)} \, \dfrac{(-1) \, a_{0}}{2 (2 + 2 \, \nu)} \\
+a_{6} &= \dfrac{a_{4}}{6 (6 + 2 \, \nu)} = - \dfrac{a_{0}}{2^{3} \, (1 \cdot 2 \cdot 3)(3 + \nu)(2 + \nu)(1 + \nu)} \\
+&\vdots \\
+a_{2k} &= \dfrac{(-1)^{k} \, a_{0}}{2^{2 \, k} \, (k!) \, (k + \nu)(k - 1 + \nu) \ldots (1 + \nu)}
+\end{align*}
 \end{enumerate}
+Por lo que una de las soluciones a la ecuación de Bessel es
+\begin{align*}
+y_{1} (x) = a_{0} \, x^{\nu} \left[ 1 +  \sum_{k=1}^{\infty}  \dfrac{(-1)^{k} \, x^{2} \, k}{2^{2 \, k} \, (k!) \, (k + \nu)(k - 1 + \nu) \ldots (1 + \nu)} \right]
+\end{align*}
+Esta es una solución parqa cualquier valor de $v_{0}$, nótese que no hemos impuesto aún las CDF.
+\par
+Esta es la función de Bessel de primera clase de orden $\nu$, que definimos por $J_{\nu} (x)$. Si hacemos que $a_{0} = 1 / v! \, 2^{v}$, es posible expresar $J_{\nu} (x)$, como
+\begin{align}
+J_{\nu} (x) = \dfrac{(-1)^{k} \, x^{2 \, k + \nu}}{2^{2 \, k + \nu} \, (k!) \, (k + \nu)!} = \dfrac{(-1)^{k} \, \left( \dfrac{x}{2} \right)^{2 \, k + \nu}}{k! \, (k + \nu)!}
+\label{eq:ecuacion_013}
+\end{align}
+Haciendo la prueba de la razón, esta serie converge para todo valor de $x$.
+\par
+En el caso de una ecuación de la forma
+\begin{align*}
+R^{\prime \prime} (r) + \dfrac{1}{r} \, R^{\prime} (r) - \left( m^{2} + \dfrac{n^{2}}{r^{2}} \right) \, R (r) = 0
+\end{align*}
+que corresponde al caso de la ecuación de Laplace, la solución es la \emph{función modificada de Bessel}, también conocida como la función de Bessel con un argumento imaginario: $I_{\nu} (x)$, que está definida como
+\begin{align*}
+I_{\nu} (x) = \dfrac{x^{\nu}}{2^{\nu} \, \nu!} \left[ 1 +  \sum_{k=1}^{\infty} \dfrac{x^{2 \, n}}{2^{2 \, n} \, (n!) \, (1 + \nu) \ldots (n +\nu)} \right]
+\end{align*}
+La función modificada de Bessel se obtiene al reemplazar $x$ con $i \, x$ en la ecuación de Bessel.
+\par
+La ecuación de Bessel es una ecuación de segundo orden, por lo que habrá dos soluciones independientes iniciales. Para nuestros propósitos, no nos preocuparemos con la segunda solución ya que diverge en $x = 0$. La discusión y derivación de la segunda solución se verá más adelante, pero la segunda solución es de la forma
+\begin{align*}
+y_{2} (x) = y_{1} (x) \, \ln \abs{x} + \abs{x}^{\nu} \, \sum_{n=1}^{\infty} b_{n} \, x^{n}
+\end{align*}
+Las dos ecuaciones con las que se inició la discusión del problema, son de la forma
+\begin{align*}
+y^{\prime \prime} (r)  + \dfrac{(d - 1)}{r} \, y^{\prime} (r)+ \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, y(r) = 0
+\end{align*}
+Para coordenadas cilíndricas: $d = 2$ y $\mu = m^{2}$, mientras que para coordenadas esféricas, $d = 3$ y $\mu = k \, (k + 1)$.
+\subsection{La solución a la ecuación de Bessel en coordendas cilíndricas.}
+En nuestro análisis para la ecuación de calor en coordenadas cilíndricas mediante la técnica de separación de variables, llegamos a una expresión de la forma
+\begin{align*}
+r^{2} \, \dv[2]{R(r)}{r} + r \, \dv{R(r)}{r} + [ \lambda \, r^{2} - \mu ] \, R(r) = 0
+\end{align*}
+Para nuestro problema $\mu = n^{2}$ donde $n$ es un entero. Entonces, queremos resolver
+\begin{align}
+r^{2} \, \dv[2]{R(r)}{r} + r \, \dv{R(r)}{r} + [ \lambda \, r^{2} - n^{2} ] \, R(r) = 0
+\label{eq:ecuacion_014}
+\end{align}
+La ec. (\ref{eq:ecuacion_014}) no es una ecuación de tipo Bessel, pero podemos transformarla en una forma de Bessel haciendo el cambio de variable $x = r \, \sqrt{\lambda}$, como se verá. Tenemos que:
+\begin{align*}
+\dv{R(r)}{r} &= \dv{R(r)}{x} \, \dv{x}{r} = \dv{R(r)}{x} \, \sqrt{\lambda} \hspace{1cm} \mbox{y} \\[0.5em]
+\dv[2]{R(r)}{r} &= \dv[2]{R(x)}{x} \, \lambda
+\end{align*}
+por lo tanto
+\begin{align*}
+r^{2} \, \dv[2]{R(r)}{r} + r \, \dv{R(r)}{r} + [ \lambda \, r^{2} - n^{2} ] \, R(r) = 0
+\end{align*}
+Se transforma en
+\begin{align}
+\begin{aligned}
+\left( \dfrac{x}{\sqrt{\lambda}} \right)^{2} \, &\lambda \, \dv[2]{R(x)}{x} + \left( \dfrac{x}{\sqrt{\lambda}} \right) \, \sqrt{\lambda} \, \dv{R(0 x)}{x} + \left[ \lambda \, \dfrac{x^{2}}{\lambda} - n^{2} \right] \, R(x) = \\[0.5em]
+&= x^{2} \, \dv[2]{R(x)}{x} + x \, \dv{R(x)}{x} + [x^{2} - n^{2}] \, R(x) = 0
+\end{aligned}
+\label{eq:ecuacion_015}
+\end{align}
+La ec. (\ref{eq:ecuacion_015}) es una ecuación de tipo Bessel que tiene dos soluciones. La solución que está acotadea en $x = 0$ es la que normalmente presenta un mayor interés. Esa solución está dada por
+\begin{align*}
+R(x) = J_{n}(x) = J_{n} (r \, \sqrt{\lambda})
+\end{align*}
+Cualquier función de Bessel de primera clase tiene un conjunto infinito de raíces positivas.
+\par
+Sea $ \left\{ x_{nm} \right\}$ el conjunto de raíces positivas de $J_{n}$, es decir $J_{n}(x_{nm}) = 0$. En cualquier ecuación que involucre un cilindro, una de las CDF es tal que el valor de $R(r)$ en la superficie del cilindro es constante. Supongamos que el radio del cilindro es $a$ y que $R(a) = 0$. En el caso de que $R(a)$ sea diferente de una constante, la CDF se obtiene al hacer un reescalamiento. Podemos reescalar la longitud para hacer $a = 1$, que es lo más común. Entonces, en coordenadas cilíndricas, un problema de interés se presenta cuando
+\begin{align}
+x^{2} \, \dv[2]{R(x)}{x} + x \, \dv{R(x)}{x} + [x^{2} - n^{2}] \, R(x) = 0 \hspace{1.5cm} R(a) = 0
+\label{eq:ecuacion_016}
+\end{align}
+La solución a la ec. (\ref{eq:ecuacion_016})) que es continua en $x = 0$ es
+\begin{align*}
+R(x) = J_{n} (x) = J_{n} (r \, \sqrt{\lambda})
+\end{align*}
+y la CDF requiere que se cumpla $J_{n}(a) = 0$. Como tenemos que $J_{n}(x_{nm}) = 0$, si hacemos
+\begin{align*}
+R_{m}(r) = J_{n} \left( x_{nm} \, \dfrac{r}{a} \right)
+\end{align*}
+entonces
+\begin{align*}
+R_{m} (a) = J_{n} \left( x_{nm} \, \dfrac{a}{a} \right) = J_{n} (x_{nm}) = 0
+\end{align*}
+por tanto
+\begin{align*}
+R_{m} (r) = J_{n} \left( x_{nm} \, \dfrac{r}{a} \right)
+\end{align*}
+es una función propia del problema con CI dada por la ec. (\ref{eq:ecuacion_016}). El valor propio para $R_{m}(r)$ es $\left( \dfrac{x_{nm}}{a} \right)^{2}$.
+\par
+Como veremos más adelante, la ecuación de tipo Bessel (\ref{eq:ecuacion_016}) es del tipo \emph{Sturm-Liouville} con una función de peso $\omega (x) = x$, y las funciones propias son completas, esto es, si $f(x)$ es una función en el intervalo $[0, a]$, para la cual
+\begin{align*}
+\int_{0}^{a} x \, \bqty{ f(x) }^{2} \dd{x} < \infty
+\end{align*}
+entonces se tiene que
+\begin{align*}
+f(x) = \sum_{m=0}^{\infty} b_{m} \, J_{nm} \left( x_{nm} \, \dfrac{x}{a} \right)
+\end{align*}
+donde los coeficientes $b_{m}$ son
+\begin{align*}
+b_{m} = \dfrac{\displaystyle \int_{0}^{a} f(x) \, x \, J_{n} \left( x_{nm} \, \dfrac{x}{a} \right) \dd{x}}{\displaystyle \int_{0}^{a} x \, \left[ J_{n} \left( x_{nm} \, \dfrac{x}{a} \right) \right]^{2} \dd{x}}
+\end{align*}
+\subsection{Resolviendo la ecuación de Laplace en coordenadas cilíndricas mediante la separación de variables.}
+En coordenadas cilíndricas la ecuación de Laplace es
+\begin{align*}
+\laplacian{u} (r, \theta, z) = u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta} + u_{z z} = 0
+\end{align*}
+Usaremos las siguientes CDF
+\begin{align*}
+\begin{gathered}
+u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta} + u_{z z} = 0 \hspace{1.5cm} 0 < r < a, \hspace{1cm} 0 < z < b \\
+u(r, \theta, 0) = u(r, \theta, b) = 0, \hspace{1cm} u(a, \theta, z) = f(\theta, z)
+\end{gathered}
+\end{align*}
+Suponemos que existe una solución de la forma
+\begin{align*}
+u(r, \theta, z) = R(r) \, \Theta (\theta) \, Z(z) 
+\end{align*}
+por tanto
+\begin{align*}
+\laplacian{u} (r,\theta, z) &= R^{\prime \prime} (r) \, \Theta (\theta) \, Z (z) + \dfrac{1}{r} \, R (r)^{\prime} \, \Theta (\theta) \, Z (z) + \\
+&+ \dfrac{1}{r^{2}} \, R (r) \, \Theta^{\prime \prime} (\theta) \, Z (z) + R(r) \, \Theta (\theta) \, Z^{\prime \prime} (z) = 0
+\end{align*}
+al dividir entre $R(r) \, \Theta (\theta) \, Z(z)$ tenemos
+\begin{align*}
+\dfrac{R^{\prime \prime}(r)}{R(r)} + \dfrac{1}{r} \, \dfrac{R^{\prime} (r)}{R (r)} + \dfrac{1}{r^{2}} \, \dfrac{\Theta^{\prime \prime} (\theta)}{\Theta (\theta)} + \dfrac{Z^{\prime \prime}(z)}{Z(z)} = 0
+\end{align*}
+ordenando los términos
+\begin{align}
+\dfrac{R^{\prime \prime}(r)}{R(r)} + \dfrac{1}{r} \, \dfrac{R^{\prime} (r)}{R (r)} + \dfrac{1}{r^{2}} \, \dfrac{\Theta^{\prime \prime} (\theta)}{\Theta (\theta)} = - \dfrac{Z^{\prime}{\prime}(z)}{Z(z)}
+\label{eq:ecuacion_017}
+\end{align}
+El lado izquierdo de la ec. (\ref{eq:ecuacion_017}) es una función de $r$ y $\theta$, mientras que del lado derecho tenemos una función que sólo depende de $z$, por lo que ambas deben ser igual a una constante: $C$, por cuestiones de congruencia con la física del problema, $C$ debe de ser una constante positiva, así pues
+\begin{align*}
+- \dfrac{Z^{\prime}{\prime}(z)}{Z(z)} = C
+\end{align*}
+por tanto
+\begin{align*}
+Z^{\prime \prime} + C \, Z (z) = 0
+\end{align*}
+Entonces la solución a esta EDO es
+\begin{align*}
+Z (z) = A \, \cos (\sqrt{C} \, z) + B \, \sin (\sqrt{C} \, z)
+\end{align*}
+y de la CDF $Z(0) = 0$, se tiene que
+\begin{align*}
+A = 0, \hspace{2cm} Z(b) = 0
+\end{align*}
+así pues
+\begin{align*}
+\sqrt{C} = \dfrac{n \, \pi}{b} \hspace{1cm} \text{y} \hspace{1cm} C = \left( \dfrac{n \, \pi \, z}{b} \right)^{2}
+\end{align*}
+Por lo que
+\begin{align*}
+Z_{n} (z) = \sin \left( \dfrac{n \, \pi \, z}{b} \right)
+\end{align*}
+Tenemos entonces que
+\begin{align*}
+\dfrac{R^{\prime \prime}(r)}{R(r)} + \dfrac{1}{r} \, \dfrac{R^{\prime} (r)}{R (r)} + \dfrac{1}{r^{2}} \, \dfrac{\Theta^{\prime \prime} (\theta)}{\Theta (\theta)} = C
+\end{align*}
+por lo que
+\begin{align*}
+r^{2} \left( \dfrac{R^{\prime \prime}(r)}{R(r)} + \dfrac{1}{r} \, \dfrac{R^{\prime} (r)}{R (r)}  - C\right) = - \dfrac{\Theta^{\prime \prime} (\theta)}{\Theta (\theta)}
+\end{align*}
+encontramos que del lado izquierdo de la igualdad, tenemos una expresión que depende sólo de la variable $r$, mientras que del lado derecho, la dependencia es sólo en la varibale $\theta$, por lo que ambas expresiones son iguales a una constante $D$, así
+\begin{align*}
+- \dfrac{\Theta^{\prime \prime} (\theta)}{\Theta (\theta)} = D
+\end{align*}
+entonces tenemos el sistema de dos EDO, la ecuación en $\theta$
+\begin{align*}
+\Theta^{\prime \prime} (\theta) + D \, \Theta (\theta) = 0
+\end{align*}
+y la ecuación en $r$
+\begin{align}
+r^{2} \left( \dfrac{R^{\prime \prime}(r)}{R(r)} + \dfrac{1}{r} \, \dfrac{R^{\prime} (r)}{R (r)}  - C\right) = D
+\label{eq:ecuacion_018}
+\end{align}
+Las condiciones de periodicidad
+\begin{align*}
+\Theta (\pi) &= \Theta (- \pi) \\[0.5em]
+\Theta^{\prime} (\pi) &= \Theta^{\prime} (- \pi)
+\end{align*}
+necesitan que $D > 0$. Hacemos $D = m^{2}$ y tendremos
+\begin{align*}
+r^{2} \left( \dfrac{R^{\prime \prime}(r)}{R(r)} + \dfrac{1}{r} \, \dfrac{R^{\prime} (r)}{R (r)}  - C\right) = D \\[0.25em]
+\dfrac{R^{\prime \prime}(r)}{R(r)} + \dfrac{1}{r} \, \dfrac{R^{\prime} (r)}{R (r)}  - C - \dfrac{D}{r^{2}} = 0
+\end{align*}
+luego entonces
+\begin{align*}
+R (r) &+ \dfrac{1}{r} \, R^{\prime} (r) - \left( C + \dfrac{D}{r^{2}} \right) \, R(r) = \\[0.5em]
+&= R (r) + \dfrac{1}{r} \, R^{\prime} (r) - \left[ \left( \dfrac{n \, \pi}{b} \right)^{2} + \dfrac{m^{2}}{r^{2}} \right] \, R(r) = 0
+\end{align*}
+Para simplificar la notación, hacemos $b = \pi$, para obtener ahora
+\begin{align*}
+R (r) &+ \dfrac{1}{r} \, R^{\prime} (r) - \left( n^{2} + \dfrac{m^{2}}{r^{2}} \right) \, R (r) = 0
+\end{align*}
+Podemos recapitular, hemos obtenido un sistema de 3 EDO que tendrán que resolverse:
+\begin{align}
+\begin{gathered}
+Z^{\prime \prime} + n^{2} \, Z (z) = 0 \hspace{1.5cm} Z(0) = Z(\pi) = 0 \\[0.5em]
+\Theta^{\prime \prime} (\theta) + m^{2} \, \Theta (\theta) = 0 \hspace{1.5cm} \Theta (\pi) = \Theta (- \pi) \mbox{ y }
+\Theta^{\prime} (\pi) = \Theta^{\prime} (- \pi) \\[0.5em]
+R (r) + \dfrac{1}{r} \, R^{\prime} (r) - \left( n^{2} + \dfrac{m^{2}}{r^{2}} \right) \, R (r) = 0
+\end{gathered}
+\label{eq:ecuacion_019}
+\end{align}
+Nótese que la EDO para $r$ no tiene CDF. En cambio, necesitamos que la solución esté acotada en $r = 0$.
+\par
+Para resolver la ec. para $r$ usaremos la función de Bessel modificada. Tendremos entonces las soluciones para las EDO:
+\begin{align*}
+Z_{n} (z) = a_{n} \, \sin (n \, z)
+\end{align*}
+La ecuación
+\begin{align*}
+\Theta^{\prime \prime} (\theta) + m^{2} \, \Theta (\theta) = 0
+\end{align*}
+tiene solamente las condiciones de continuidad para $\Theta (\pi) = \Theta (- \pi), \Theta^{\prime} (\pi) = \Theta^{\prime} (- \pi)$, entonces
+\begin{align*}
+\Theta_{m} (\theta) = b_{m} \, \cos (m \, \theta) + c_{m} \, \sin (m \, \theta)
+\end{align*}
+La ecuación
+\begin{align*}
+R (r) + \dfrac{1}{r} \, R^{\prime} (r) - \left( n^{2} + \dfrac{m^{2}}{r^{2}} \right) \, R (r) = 0
+\end{align*}
+tiene por solución: $A_{mn} \, I_{m} ( n \, r)$. Escogemos $A_{mn} = 1 / I_{m \, a}$ para que de esta forma
+\begin{align*}
+R_{mn} (r) = A_{mn} \, I_{m} ( n \, r) = \dfrac{I_{m} (n \, r)}{I_{m} (n \, a)}
+\end{align*}
+por tanto
+\begin{align*}
+R_{mn} (a) = \dfrac{I_{m} (n \, a)}{I_{m} (n \, a)} = 1
+\end{align*}
+Entonces la solución completa para la ecuación de Laplace en coordenadas cilíndricas a partir de la separación de variables es
+\begin{align*}
+u_{mn} (r, \theta, z) &= R_{mn} \, \Theta_{m} (\theta) \, Z(z) = \\[0.5em]
+&= A_{mn} \, I_{m} ( n \, r) \left[ b_{m} \, \cos (m \, \theta) + c_{m} \, \sin (m \, \theta) \right] \, a_{n} \, \sin ( n \, z) = \\[0.5em]
+&= \dfrac{1}{I_{m} (n \, a)} \, I_{m} (n \, r) \, \left[ b_{m} \, \cos (m \, \theta) + c_{m} \, \sin (m \, \theta) \right] \, a_{n} \, \sin ( n \, z)
+\end{align*}
+Las constantes se pueden combinar para escribirse
+\begin{align*}
+u_{mn} (r, \theta, z) = \dfrac{1}{I_{m} (n \, a)} \, I_{m} (n \, r) \, \sin (n \, z) \, \left[ d_{mn} \, \cos (m \, \theta) + e_{nm} \, \sin (m \, \theta) \right]
+\end{align*}
+Usando el principio de superposición tenemos entonces que la solución es
+\begin{align*}
+u (r, \theta, z) &= \dfrac{1}{2} \sum_{n=1}^{\infty} d_{n0} \, \dfrac{1}{I_{0} (n \, a)} \, I_{0} (n \, r) + \\[0.5em]
+&+ \sum_{m,n=1}^{\infty} \dfrac{1}{I_{m} (n \, a)} \, I_{m} (n \, r) \, \sin (n \, z) \, \left[ d_{mn} \, \cos (m \, \theta) + e_{nm} \, \sin (m \, \theta) \right]
+\end{align*}
+Ocupamos la CDF $u(a, \theta, z) = f(\theta, z)$ para obtener
+\begin{align*}
+u(a, \theta, z) &= f(\theta, z) = \dfrac{1}{2} \sum_{n=1}^{\infty} d_{n0} \, \dfrac{1}{I_{0} (n \, a)} \, I_{0} (n \, a) + \\[0.5em]
+&+ \sum_{m,n=1}^{\infty} \dfrac{1}{I_{m} (n \, a)} \, I_{m} (n \, a) \, \sin (n \, z) \, \left[ d_{mn} \, \cos (m \, \theta) + e_{nm} \, \sin (m \, \theta) \right] = \\[0.5em]
+&= \dfrac{1}{2} \sum_{n=1}^{\infty} d_{n0} + \sum_{m,n=1}^{\infty} \sin (n \, z) \, \left[ d_{mn} \, \cos (m \, \theta) + e_{nm} \, \sin (m \, \theta) \right]
+\end{align*}
+Entonces los coeficientes $d_{nm}$ y $e_{nm}$, son correspondientemente
+\begin{align*}
+d_{nm} = \dfrac{1}{\pi} \, \dfrac{2}{\pi} \int_{z=0}^{\pi} \left[ \int_{\theta=0}^{2 \pi} f(\theta, z) \, \cos (m \, \theta) \dd{\theta} \right] \, \sin (n \, z) \dd{z}
+\end{align*}
+y
+\begin{align*}
+e_{nm} = \dfrac{1}{\pi} \, \dfrac{2}{\pi} \int_{z=0}^{\pi} \left[ \int_{\theta=0}^{2 \pi} f(\theta, z) \, \sin (m \, \theta) \dd{\theta} \right] \, \sin (n \, z) \dd{z}
+\end{align*}
+Vemos que la coordenada $z$ puede ser problemática. Algunos autores resuelven el problema sólo en coordenadas polares. Si no se establece una CDF en $Z (z)$, el signo de la constante de separación $C$, no se puede asignar.
+\section{Problema 3: Resolviendo la ecuación de Laplace en coordenadas esféricas.}
+En el ejercicio anterior usamos la separación de variables para resolver la EDP expresada en coordenadas cilíndricas en las que apareció el Laplaciano. Vimos que entre las EDO que surgieron había una ecuación de Bessel (o, al menos, una similar a la tipo Bessel). En este problema, seguiremos un enfoque similar, excepto que trabajaremos en coordenadas esféricas. Veremos que, además de una ecuación de Bessel, encontramos una ecuación diferencial llamada \emph{ecuación de Legendre}.
+\par
+Las ecuaciones de Legendre surgen cuando se resuelve una EDP en coordenadas esféricas que usan el Laplaciano. 
+\par
+En coordenadas esféricas, el laplaciano es
+\begin{align*}
+\laplacian{u} (r, \theta, \varphi) = \dfrac{1}{r^{2}} \, \pdv[2]{r} (r^{2} \, u_{r}) + \dfrac{1}{r^{2} \, \sin \theta} \, \pdv{\theta} (\sin \theta \, u_{\theta}) + \dfrac{1}{r^{2} \, \sin \theta} \, u_{\varphi \varphi}
+\end{align*}
+
 \end{document}
