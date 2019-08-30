@@ -698,5 +698,99 @@ En coordenadas esféricas, el laplaciano es
 \begin{align*}
 \laplacian{u} (r, \theta, \varphi) = \dfrac{1}{r^{2}} \, \pdv[2]{r} (r^{2} \, u_{r}) + \dfrac{1}{r^{2} \, \sin \theta} \, \pdv{\theta} (\sin \theta \, u_{\theta}) + \dfrac{1}{r^{2} \, \sin \theta} \, u_{\varphi \varphi}
 \end{align*}
+Veamos que
+\begin{align*}
+\pdv{\theta}(\sin \theta \, u_{\theta}) = \cos \theta \, u_{\theta} + \sin \theta \, u_{\theta \theta}
+\end{align*}
+y que
+\begin{align*}
+\dfrac{1}{r^{2}} \, \pdv{r} (r^{2} \, u_{r}) = \dfrac{1}{r^{2}} \, (2 \,r \, u_{r} + r^{2} \, u_{rr} ) = \dfrac{2}{r} \, u_{r} + u_{r r}
+\end{align*}
+entonces tenemos que
+\begin{align}
+&\laplacian{u} (r, \theta, \varphi) = \dfrac{1}{r^{2}} \pdv{r}(r^{2} \, u_{r}) + \dfrac{1}{r^{2} \, \sin \theta} \, \pdv{\theta} (\sin \theta \, u_{\theta}) + \dfrac{1}{r^{2} \ \sin \theta} \, u_{\theta \theta} = \nonumber \\[0.5em]
+&= \left[ \dfrac{2}{r} \, u_{r} + u_{r r} \right] + \dfrac{1}{r^{2} \, \sin \theta} \left( \cos \theta \, u_{\theta} + \sin \theta \, u_{\theta \theta} \right) + \dfrac{1}{r^{2} \, \sin \theta} \, u_{\theta \theta} \label{eq:ecuacion_020} \\[0.5em]
+&= \left[ \dfrac{2}{r} \, u_{r} + u_{r r} \right] + \dfrac{1}{r^{2}} \, \left( \cot \theta \, u_{\theta} + u_{\theta \theta} + \dfrac{u_{\theta \theta}}{\sin^{2} \theta} \right) \nonumber
+\end{align}
+Entonces suponemos que existe una solución de la forma
+\begin{align*}
+u (r, \theta, \varphi) = R(r)\, \Theta (\theta) \, \Phi (\varphi)
+\end{align*}
+Entonces la ec. $\laplacian{u} = 0$ se puede escribir como
+\begin{align*}
+\dfrac{\laplacian{u} (r, \theta, \varphi)}{u} = \dfrac{2}{r} \, \dfrac{R^{\prime}}{R} + \dfrac{R^{\prime \prime}}{R} + \dfrac{1}{r^{2}} \, \left( \cot \theta \, \dfrac{\Theta^{\prime}}{\Theta} + \dfrac{\Theta^{\prime \prime}}{\Theta} + \dfrac{1}{\sin^{2} \theta} \, \dfrac{\Phi^{\prime \prime}}{\Phi} \right) = 0  
+\end{align*}
+De donde obtenemos
+\begin{align*}
+\dfrac{2}{r} \, \dfrac{R^{\prime}}{R} + \dfrac{R^{\prime \prime}}{R} = - \dfrac{1}{r^{2}} \, \left( \cot \theta \, \dfrac{\Theta^{\prime}}{\Theta} + \dfrac{\Theta^{\prime \prime}}{\Theta} + \dfrac{1}{\sin^{2} \theta} \, \dfrac{\Phi^{\prime \prime}}{\Phi} \right)
+\end{align*}
+por tanto
+\begin{align}
+- r^{2} \left( \dfrac{2}{r} \, \dfrac{R^{\prime}}{R} + \dfrac{R^{\prime \prime}}{R} \right) = \cot \theta \, \dfrac{\Theta^{\prime}}{\Theta} + \dfrac{\Theta^{\prime \prime}}{\Theta} + \dfrac{1}{\sin^{2} \theta} \, \dfrac{\Phi^{\prime \prime}}{\Phi}
+\label{eq:ecuacion_021}
+\end{align}
+Tenemos que la expresión que está al lado izquierdo de la igualdad depende sólo de $r$ mientras que la del lado derecho, depende tanto de $\theta$ como de $\varphi$, para que se cumpla esto, deben de ser iguales a una constante, que dejaremos como negativa: $- \mu$:
+\begin{align}
+\cot \theta \, \dfrac{\Theta^{\prime}}{\Theta} + \dfrac{\Theta^{\prime \prime}}{\Theta} + \dfrac{1}{\sin^{2} \theta} \, \dfrac{\Phi^{\prime \prime}}{\Phi} = - \mu
+\label{eq:ecuacion_022}
+\end{align}
+además se tiene que
+\begin{align}
+r^{2} \left( \dfrac{2}{r} \, \dfrac{R^{\prime}}{R} + \dfrac{R^{\prime \prime}}{R} \right) = \mu
+\label{eq:ecuacion_023}    
+\end{align}
+Multiplicando la ec. (\ref{eq:ecuacion_021}) por $\sin^{2} \theta$ obtenemos
+\begin{align*}
+\sin^{2} \theta \, \cot \theta \, \dfrac{\Theta^{\prime}}{\Theta} + \sin^{2} \theta \dfrac{\Theta^{\prime \prime}}{\Theta} + \dfrac{\Phi^{\prime \prime}}{\Phi} = - \mu \, \sin^{2} \theta
+\end{align*}
+así
+\begin{align}
+\sin^{2} \theta \, \cot \theta \, \dfrac{\Theta^{\prime}}{\Theta} + \sin^{2} \theta \dfrac{\Theta^{\prime \prime}}{\Theta} + \mu \, \sin^{2} \theta = - \dfrac{\Phi^{\prime \prime}}{\Phi}
+\label{eq:ecuacion_024}    
+\end{align}
+El lado izquierdo de la ec. (\ref{eq:ecuacion_023}) es una función que depende sólo de $\theta$ y la función del lado derecho depende sólo de $\varphi$, por lo que la constante de separación será $\nu$. Veremos que $\nu > 0$, tenemos que
+\begin{align*}
+- \dfrac{\Phi^{\prime \prime}}{\Phi} &= \nu \\
+\Rightarrow \hspace{0.5cm} \Phi^{\prime \prime} + \nu \, \Phi &= 0
+\end{align*}
+La periodicidad de $\Phi$ nos obliga a considerar que $\nu > 0$. Hacemos $m^{2} = \nu$, por lo que
+\begin{align}
+\Phi^{\prime \prime} + m^{2} \, \Phi &= 0
+\label{eq:ecuacion_025}
+\end{align}
+También tenemos que
+\begin{align*}
+\sin^{2} \theta \, \cot \theta \, \dfrac{\Theta^{\prime}}{\Theta} + \sin^{2} \theta \dfrac{\Theta^{\prime \prime}}{\Theta} + \mu \, \sin^{2} \theta = m^{2}
+\end{align*}
+multiplicando por $\Theta / \sin ^{2} \theta$, obtenemos
+\begin{align*}
+\cot \theta \, \Theta^{\prime} + \Theta^{\prime \prime} + \mu \, \Theta = \dfrac{m^{2} \, \Theta}{\sin^{2} \theta}
+\end{align*}
+o de manera equivalente
+\begin{align}
+\Theta^{\prime \prime} + \cot \theta \, \Theta^{\prime} + \left( \mu + \dfrac{m^{2}}{\sin^{2} \theta} \right) \, \Theta = 0
+\label{eq:ecuacion_026}
+\end{align}
+De la ec. (\ref{eq:ecuacion_023}) para $r$, tenemos que
+\begin{align*}
+r^{2} \left( \dfrac{2}{r} \, \dfrac{R^{\prime}}{R} + \dfrac{R^{\prime \prime}}{R} \right) = \mu
+\end{align*}
+tenemos que
+\begin{align*}
+\dfrac{1}{R} \, \left( R^{\prime \prime} + \dfrac{2}{r} \, R^{\prime} \right) = \dfrac{\mu}{r^{2}}
+\end{align*}
+por lo que
+\begin{align*}
+R^{\prime \prime} + \dfrac{2}{r} \, R^{\prime} - \dfrac{\mu}{r^{2}} \, R = 0
+\end{align*}
+Si hacemos $\mu = \ell (\ell + 1)$, entonces tendremos
+\begin{align*}
+R^{\prime \prime} + \dfrac{2}{r} \, R^{\prime} - \dfrac{\ell (\ell + 1)}{r^{2}} \, R = 0
+\end{align*}
+que es equivalente a
+\begin{align}
+r^{2} \, R^{\prime \prime} +  2 \, r \, R^{\prime} - \ell (\ell + 1) \, R = 0
+\label{eq:ecuacion_027}    
+\end{align}
 
 \end{document}
