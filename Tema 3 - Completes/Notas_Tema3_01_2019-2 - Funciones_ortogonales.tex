@@ -1,38 +1,29 @@
 \input{../preambulo_doc}
-\usepackage[flushleft]{threeparttable}
-% \usepackage{mathrsfs}
-% \newcommand{\doblederivaday}[1]{#1^{\prime \prime}}
-% \newcommand{\derivaday}[1]{#1^{\prime}}
-% \newcommand{\dderivadacociente}[2]{\dfrac{d^{2} #1}{d #2^{2}}}
-% \newcommand{\derivadacociente}[2]{\dfrac{d {#1}}{d #2}}
-% %\renewcommand{\tablename}{Tabla}
-% %\newtheorem{defi}{{\it Definición}}[section]
-% %\newtheorem{ejemplo}{{\it Ejemplo}}[section]
-% %\usepackage{enumerate}
-\author{}
 \title{Funciones ortogonales \\ {\large Tema 3 - Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{}
 \date{ }
 \begin{document}
-%\renewcommand\theenumii{\arabic{theenumii.enumii}}
-\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
 %Notas Arken Capítulo 10 versión djvu
+\section{Introducción.}
+En el tema anterior desarrollamos dos soluciones linealmente independientes de la EDO2H lineal y probamos que no existía una tercera solución linealmente independiente. 
+\par
+En este tema, nos enfocaremos no a resolver la ED sino a \emph{desarrollar y comprender las propiedades generales de las soluciones}. Existe una estrecha analogía entre los conceptos de este capítulo y los de álgebra lineal: las funciones aquí desempeñan el papel de vectores allí, y los operadores lineales el de las matrices. La diagonalización de una matriz simétrica real corresponde aquí para la solución de un ODE definido por un \textbf{operador autoadjunto} $\mathcal{L}$ en términos de sus funciones propias, que son el análogo \enquote{continuo} de los vectores propios. Los ejemplos de la analogía correspondiente entre matrices hermitianas y operadores hermitianos son los Hamiltonianos en mecánica cuántica y sus funciones propias de energía.
+\par
+Trabajaremos con los conceptos de operador autoadjunto, función propia, valor propio y operador hermitiano. El concepto de operador adjunto, dado primero en términos de ecuaciones diferenciales, luego se redefine de acuerdo con el uso en mecánica cuántica, donde las funciones propias toman valores complejos. Se discutirán las propiedades relevantes de los valores propios y la ortogonalidad de las funciones propias, así como el procedimiento de Gram-Schmidt para construir sistemáticamente conjuntos de funciones ortogonales. Finalmente, veremos la propiedad general de la completes de un conjunto de funciones propias.
 \section{Ecuaciones diferenciales auto-adjuntas.}
-Ya hemos abordado y resuelto EDO2, cuya forma general en términos de un operador diferencial lineal de segundo orden ($\mathcal{L}$) es
-\begin{equation}
+Ya hemos estudiado, clasificado y resuelto EDO2 lineales, cuya forma general en términos de un operador diferencial lineal de segundo orden ($\mathcal{L}$) es
+\begin{align}
 \mathcal{L} u(x) = \left[ p_{0}(x) \, \dv[2]{x} + p_{1}(x) \, \dv{x} + p_{2}(x) \right] \, u(x)
 \label{eq:ecuacion_10_01}
-\end{equation}
-Donde reconocemos que $P(x) = p_{1}(x)/p_{0}(x)$ y $Q(x)= p_{2}(x)/p_{0}(x)$.
-\par
-%Revisaremos la ecuación diferencial en algún intervalo cerraro $[a,b]$ y que 
-Los coeficientes $p_{0}$, $p_{1}$, y $p_{2}$ son funciones reales de $x$ en todo el intervalo $a \leq x \leq b$. Hay que tomar en cuentas un par de condiciones adicionales para las tres funciones:
+\end{align}
+Los coeficientes $p_{0} (x)$, $p_{1} (x)$, y $p_{2} (x)$ son funciones reales de $x$ sobre la región de interés $a \leq x \leq b$. Hay que tomar en cuentas un par de condiciones adicionales para las tres funciones:
 \begin{enumerate}
 \item La función $p_{0}(x)$ es diferente de cero para todo punto en el intervalo abierto $(a,b)$.
 \item Las primeras $2-i$ derivadas de la función $p_{i}(x)$ son continuas.
 \end{enumerate}
-Los ceros de la función $p_{0}(x)$ son puntos singulares de la ecuación diferencial (\ref{eq:ecuacion_10_01}), podemos elegir el intervalo $[a,b]$ de tal manera que no hayan puntos singulares al interior del intervalo, sucede a menudo que los únicos puntos donde pueden existir puntos singulares son los puntos extremos del intervalo: $x = a$ y $x = b$.
+Donde reconocemos que $P(x) = p_{1}(x)/p_{0}(x)$ y $Q(x)= p_{2}(x)/p_{0}(x)$, por lo que $p_{00(x)}$ no puede anularse en $a < x < b$. Los ceros de la función $p_{0}(x)$ son puntos singulares de la ecuación diferencial (\ref{eq:ecuacion_10_01}), podemos elegir el intervalo $[a, b]$ de tal manera que no hayan puntos singulares al interior del intervalo, sucede a menudo que los únicos puntos donde pueden existir puntos singulares son los puntos extremos del intervalo: $x = a$ y $x = b$.
 \par
 Para un operador lineal $\mathcal{L}$, el análogo de una forma cuadrática para una matriz, es la integral
 \begin{align}
@@ -45,24 +36,26 @@ Para un operador lineal $\mathcal{L}$, el análogo de una forma cuadrática para
 donde las primadas de la función real $u(x)$ indican las derivadas. Si cambiamos las derivadas al primer factor, $u$, en la ec. (\ref{eq:ecuacion_10_02}) integrando por partes una o dos veces, nos dirige a la expresión equivalente
 \begin{align}
 \begin{aligned}
-\matrixel{u}{\mathcal{L}}{u} &= [ u(x) \, ( p_{1} - p_{0}^{\prime} ) \, u(x)] \eval_{x=a}^{b} \\
+\matrixel{u}{\mathcal{L}}{u} &= [ u(x) \, ( p_{1} - p_{0}^{\prime} ) \, u(x)] \eval_{x=a}^{b} + \\
 &+ \int_{a}^{b} \left\{ \dv[2]{x} [p_{0} \, u] - \dv{x} [p_{1} \, u] + p_{2} \, u \right\} \, u \, \dd{x}
 \end{aligned}
 \label{eq:ecuacion_10_03}
 \end{align}
 Se requiere que las integrales en las ecs. (\ref{eq:ecuacion_10_02}) y (\ref{eq:ecuacion_10_03}) sean idénticas \textbf{para todas las funciones $\bm{u}$ (diferenciables dos veces)}, por lo que los integrandos deben de ser iguales. La comparación nos deja que
-\[ u \, (p_{0}^{\prime \prime} - p_{1}) \, u + 2 \, u (p_{0}^{\prime} - p_{1}) \, u^{\prime} = 0 \]
+\begin{align*}
+u \, (p_{0}^{\prime \prime} - p_{1}) \, u + 2 \, u (p_{0}^{\prime} - p_{1}) \, u^{\prime} = 0
+\end{align*}
 o
-\begin{equation}
+\begin{align}
 p_{0}^{\prime} (x) = p_{1} (x)
 \label{eq:ecuacion_10_04}
-\end{equation}
+\end{align}
 como ganancia, los valores en los extremos $x=a$ y $x=b$ en la ec. (\ref{eq:ecuacion_10_03}) se anulan.
 \par
 Por la analogía a la matriz transpuesta, es conveniente definir el operador lineal en la ec. (\ref{eq:ecuacion_10_03})
 \begin{align}
 \begin{aligned}
-\overline{\mathcal{L}} \, u &= \dv[2]{x} [ p_{0} \, u(x)] - \dv{x} [p_{1} \, u(x)] + p_{2} \, u(x) \\
+\overline{\mathcal{L}} \, u &= \dv[2]{x} [ p_{0} \, u(x)] - \dv{x} [p_{1} \, u(x)] + p_{2} \, u(x) = \\
 &= p_{0} \dv[2]{u}{x} + \left[ 2 \; p_{0}^{\prime} - p_{1} \right] \; \dv{u}{x} + \left( p_{0}^{\prime \prime} - p_{1}^{\prime} + p_{2} \right) \, u
 \label{eq:ecuacion_10_05}
 \end{aligned}
@@ -85,7 +78,7 @@ Como ejemplos tenemos que la ecuación de Legendre y la ecuación del oscilador 
 se obtiene
 \begin{align}
 \begin{aligned}
-\dfrac{1}{p_{0}(x)} \exp \left[ \int^{x} \dfrac{p_{1}(t)}{p_{0}(t)} \dd{t} \right] \, \mathcal{L} \, u(x) &= \dv{x} \left[ \exp \left( \int^{x} \dfrac{p_{1}(t)}{p_{0}(t)} \, \dd{t} \right) \, \dv{u(x)}{x} \right] \\[1em]
+\dfrac{1}{p_{0}(x)} \exp \left[ \int^{x} \dfrac{p_{1}(t)}{p_{0}(t)} \dd{t} \right] \, \mathcal{L} \, u(x) &= \dv{x} \left[ \exp \left( \int^{x} \dfrac{p_{1}(t)}{p_{0}(t)} \, \dd{t} \right) \, \dv{u(x)}{x} \right] + \\[1em]
 &+ \dfrac{p_{2}(x)}{p_{0}(x)} \, \exp \left[ \int^{x} \dfrac{p_{1}(t)}{p_{0}(t)} \, \dd{t} \right] \, u
 \end{aligned}
 \label{eq:ecuacion_10_07}
@@ -99,10 +92,10 @@ H \, \psi (x) = E \, \psi (x)
 Es el ejemplo más importante de una ecuación de valores propios en física; aquí el operador diferencial $\mathcal{L}$ está definido por el hamiltoniano $H$ y puede que no sea real, y el valor propio se convierte en la energía total $E$ del sistema. La función propia $\psi (x)$ puede ser compleja y generalmente se denomina \textbf{función de onda}. Sobre la base de propiedades de simetría esféricas, cilíndricas o de otro sistema coordenado, una ecuación EDP o de valores propios de tres o cuatro dimensiones, como la ecuación de Schrödinger, puede separarse en ecuaciones de valores propios de una sola variable cada una.
 \par
 Sin embargo, a veces una ecuación de autovalores toma la forma autoadjunta más general
-\begin{equation}
+\begin{align}
 \mathcal{L} \, u(x) + \lambda \, w(x) \, u(x) = 0
 \label{eq:ecuacion_10_08}
-\end{equation}
+\end{align}
 donde la constante $\lambda$ es el valor propio y $w(x)$ es una función conocida de peso o densidad; $w(x) > 0$, excepto posiblemente en puntos aislados en los que $w(x) = 0$. Para una elección dada del parámetro $\lambda$, una función $u_{\lambda}(x)$, que satisface la ec. (\ref{eq:ecuacion_10_08}) \textbf{y las CDF impuestas}, se llama una \textbf{función propia} correspondiente a $\lambda$. La constante $\lambda$ es llamada \textbf{valor propio} por los matemáticos.
 \par
 No hay garantía de que exista una función propia $u_{\lambda} (x)$ para una elección arbitraria del parámetro $\lambda$. De hecho, el requisito de que haya una función propia a menudo restringe los valores aceptables de $\lambda$ en un conjunto discreto. 
@@ -112,6 +105,36 @@ El producto interno de dos funciones
 \ip{v}{u} = \int_{a}^{b} v^{*}(x) \, w(x) \, u(x) \, \dd{x}
 \end{align*}
 depende de la función de peso y generaliza nuestra definición previa, donde $w(x) = 1$. La función de peso también modifica la definición de \textbf{ortogonalidad} de dos funciones propias: son ortogonales si su producto interno $\ip{u_{\lambda^{\prime}}}{u_{\lambda}} = 0$. La función de peso adicional $w(x)$ aparece a veces como una función de onda asintótica $\psi_{\infty}$ que es un factor común en todas las soluciones de una EDP como la ecuación de Schrödinger, por ejemplo, cuando el potencial $V(x) \to 0$ cuando $x \to \infty$ en $H = T + V$. Podemos encontrar $\psi_{\infty}$ cuando establecemos $V = 0$ en la ecuación de Schrödinger. Otra fuente para $w(x)$ puede ser una barrera de momento angular no nulo $\ell (\ell +1)/x^{2}$ en una EDP o una EDO separada que tiene una singularidad regular y domina en $x \to 0$. En tal caso, la ecuación de índices, muestra que la función de onda tiene a $x^{\ell}$ como factor general. Dado que la función de onda entra dos veces en los elementos de la matriz y las relaciones de ortogonalidad, las funciones de peso en la tabla (\ref{tabla:tabla_01}) provienen de estos factores comunes en ambas funciones de onda radial. Así es como surge el $\exp(-x)$ para los polinomios de Laguerre y $x^{k} \, \exp(-x)$ para los polinomios asociados de Laguerre.
+\begin{ejemplo}{Ecuación de Legendre.}
+
+La ecuación de Legendre está dada por
+\begin{align}
+(1 - x^{2}) \, y^{\prime \prime} - 2 \, x \, y^{\prime} +  n(n -1) \, y = 0
+\label{eq:ecuacion_10_09}
+\end{align}
+De acuerdo con las ecs. (\ref{eq:ecuacion_10_01}), (\ref{eq:ecuacion_10_08}) y (\ref{eq:ecuacion_10_09}):
+\begin{center}
+\begin{minipage}{4cm}
+\begin{align*}
+p_{0} (x) &= 1 - x^{2} = p \\
+p_{1} (x) &= -2 \, x = p^{\prime} \\
+p_{2} (x) &= 0 = q
+\end{align*}
+\end{minipage}
+\hspace{2cm}
+\begin{minipage}{4cm}
+\begin{align*}
+\omega (x) &= 1 \\
+\lambda &= n (n + 1)
+\end{align*}
+\end{minipage}
+\end{center}
+\end{ejemplo}
+Como recordamos, las soluciones a la ecuación de Legendre divergen a menos de que $n$ se restrinja a uno de los números enteros. Esto representa una cuantificación del parámetro $\lambda$.
+\par
+Cuando las ecuaciones de la física matemática se transforman al modelo autoadjunto, se encuentran los siguientes valores de los coeficientes y parámetros, como se ve en la tabla (\ref{tabla:tabla_01}).
+\par
+El coeficiente $p(x)$ es el coeficiente de la segunda derivada de la función del valor propio, el valor propio $\lambda$ es el parámetro que se encuentra disponible en un término de la forma $\lambda \, \omega (x) \, y(x)$; cualquier dependencia de $x$ aparte de la función propia se transforma en la función de peso $\omega (x)$. Se se tiene otro término que contiene la función propia (no las derivadas), el coeficiente de la función propia en el término adicional se identifica como $q(x)$. En caso de que tal término no esté presente, $q(x)$ es simplemente cero.
 \begin{table}[!ht]
 \caption{Tabla con parámetros y coeficientes de ED con valores propios.\label{tabla:tabla_01}}
 \centering
@@ -143,38 +166,38 @@ Oscilador armónico simple & $1$ & $0$ & $n^{2}$ & $1$
 
 Para profundizar un poco más en los conceptos de funciones propias y valores propios, consideremos un modelo simple del deuterón.
 \par
-A partir de experimentos, la energía de enlace es aproximadamente del orden de $\SI{2}{\mega \electronvolt} \ll M \, c^{2} $, con $M = M_{p} = M_{n}$, la masa común de neutrones y protones cuya pequeña diferencia de masa se desprecia. Debido al corto alcance de la fuerza nuclear, las propiedades del deuterón no dependen mucho de la forma detallada del potencial de interacción. Por lo tanto, la interacción nuclear neutrón-protón puede ser modelada por un potencial de pozo cuadrado esféricamente simétrico: 
-\begin{equation}
+A partir de experimentos, la energía de enlace es aproximadamente del orden de $\SI{2}{\mega \electronvolt} \ll M \, c^{2} $, con $M = M_{p} = M_{n}$, que es la masa común de neutrones y protones cuya pequeña diferencia de masa se desprecia. Debido al corto alcance de la fuerza nuclear, las propiedades del deuterón no dependen mucho de la forma detallada del potencial de interacción. Por lo tanto, la interacción nuclear neutrón-protón puede ser modelada por un potencial de pozo cuadrado esféricamente simétrico: 
+\begin{align}
 V = \begin{cases}
 V_{0} < 0 \hspace{0.5cm} \text{para } 0 \leq r < a \\
 V = 0 \hspace{0.5cm} \text{para } r > a
 \end{cases}
-\end{equation}
+\end{align}
 La ecuación de onda de Schrödinger es
-\begin{equation}
+\begin{align}
 - \dfrac{\hbar^{2}}{M} \laplacian{\psi} + V \, \psi =  E \, \psi
 \label{eq:ecuacion_10_10}
-\end{equation}
+\end{align}
 donde el valor propio de energía $E < 0$ para el estado ligado. Para el estado base el momento angular $ \ell = 0$ por que $\ell \neq 0$ es la barrera del momento angular que se agrega. Así, con $\psi =  \psi(r)$, podemos escribir $u(r) = r \, \psi (r)$ podemos representar la ecuación como
-\begin{equation}
+\begin{align}
 \dv[2]{u}{r} + k_{1}^{2} \, u = 0
 \label{eq:ecuacion_10_11}
-\end{equation}
+\end{align}
 con
-\begin{equation}
+\begin{align}
 k_{1}^{2} =  \dfrac{M}{\hbar^{2}} (E - V_{0}) > 0
 \label{eq:ecuacion_10_12}
-\end{equation}
+\end{align}
 para el interior de la región $0 \leq r < a$. En la ecuación, $M$ es la masa reducida del sistema protón-neutrón. Para $a < r < \infty$, tenemos
-\begin{equation}
+\begin{align}
 \dv[2]{u}{r} - k_{2}^{2} \, u = 0
 \label{eq:ecuacion_10_13}
-\end{equation}
+\end{align}
 con
-\begin{equation}
+\begin{align}
 k_{2}^{2} = - \dfrac{M \, E}{\hbar^{2}} > 0
 \label{eq:ecuacion_10_14}
-\end{equation}
+\end{align}
 La CDF que permite $\psi$ sea finito en $r = 0$, implica que $u(0) = 0$ y
 \begin{equation}
 u_{1}(r) = \sin k_{1} \, r, \hspace{1.5cm} 0 \leq r < a
@@ -185,7 +208,7 @@ Fuera del pozo de potencial, tenemos una combinación lineal de dos exponenciale
 u_{2}(r) = A \, \exp(k_{2} \, r) + B \exp(-k_{2} \, r) \hspace{1.5cm} a < r < \infty
 \label{eq:ecuacion_10_16}
 \end{equation}
-De la continuidad de la partícula y de la densidad de corriente, hacen que $u_{1}(a) = u_{2}(a)$ y $u^{\prime}_{1}(a) = u^{\prime}_{2}(a)$, éstas condiciones de unión o coincidencia nos dan
+De la continuidad de la partícula y de la densidad de corriente, hacen que $u_{1}(a) = u_{2}(a)$ y $u^{\prime}_{1}(a) = u^{\prime}_{2}(a)$, éstas condiciones de acoplamiento nos dan
 \begin{align}
 \begin{aligned}
 \sin k_{1} \, a &= A \, \exp(k_{2} \, a) + B \, \exp(- k_{2} \, a) \\
@@ -193,7 +216,7 @@ k_{1} \, \cos k_{1} \, a &= k_{2} \, A \, \exp(k_{2} \, a) - k_{2} \, B \, \exp(
 \end{aligned}
 \label{eq:ecuacion_10_17}
 \end{align}
-La condición de que nos permite tener una combinación protón-neutrón es tal que
+La condición que nos permite tener una combinación protón-neutrón es tal que
 \begin{align*}
 \int_{0}^{\infty} u^{2}(r) \dd{r} = 1
 \end{align*}
