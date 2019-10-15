@@ -1,0 +1,386 @@
+\input{../preambulo_doc}
+\author{}
+\title{El grupo de rotaciones y los armónicos esféricos \\ {\large Matemáticas Avanzadas de la Física}\vspace{-1.5\baselineskip}}
+\date{ }
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+En este tema estudiaremos los polinomios de Legendre, los polinomios asociados de Legendre y los Armónicos esféricos, quienes son importantes para resolver la ecuación de Laplace y diversos problemas de electrodinámica y mecánica cuántica. Normalmente estas funciones se obtienen resolviendo ecuaciones diferenciales. Sin embargo, también es posible obtenerlas usando el grupo de rotaciones. Usaremos este último método debido a que nos introduce a las aplicación de la teoría de grupos en la física. Este tema se puede ver como una invitación al estudio de las aplicaciones de la teoría de grupos.
+\section{Transformación de coordenadas lineales.}
+Sea $f$ una función de la variable $x$, con el cambio de variable
+\begin{align}
+x^{\prime} = \alpha \, x \hspace{1.5cm} \mbox{con } \alpha = \mbox{ constante}
+\label{eq:ecuacion_10_001}
+\end{align}
+al diferenciar con respecto a $x$ tenemos que
+\begin{align}
+\dv{f}{x^{\prime}} = \dv{x}{x^{\prime}} \, \dv{f}{x} = \dfrac{1}{\alpha} \, \dv{f}{x}
+\label{eq:ecuacion_10_002}   
+\end{align}
+Entonces tenemos que si la variable $x$ transforma con $\alpha$, el operador derivada transforma con $\dfrac{1}{\alpha}$, es decir
+\begin{align}
+\begin{aligned}
+x \rightarrow x^{\prime} &= \alpha \, x \\
+\dv{x} \rightarrow \dv{x^{\prime}} &= \dfrac{1}{\alpha} \, \dv{f}{x}
+\end{aligned}
+\label{eq:ecuacion_10_003}
+\end{align}
+Veamos ahora que pasa en dos dimensiones. Consideremos la matriz de $2 \times 2$ con entradas constantes
+\begin{align}
+\Lambda = \mqty(a_{1} & a_{2} \\ a_{3} & a_{4})
+\label{eq:ecuacion_10_004}   
+\end{align}
+cuya matriz inversa es
+\begin{align}
+\Lambda^{-1} = \dfrac{1}{\abs{\Lambda}} \, \mqty(a_{4} & - a_{2} \\ - a_{3} & a_{1}) \hspace{1.5cm} \abs{\Lambda} = a_{1} \, a_{4} - a_{2} \, a_{3}
+\label{eq:ecuacion_10_005}   
+\end{align}
+También definamos los vectores columna
+\begin{align}
+X = \mqty(x^{1} \\ x^{2}) \hspace{1.5cm} \grad = \mqty(\displaystyle \pdv{x^{1}} \\[0.5em] \displaystyle \pdv{x^{2}})
+\label{eq:ecuacion_10_006}   
+\end{align}
+Entonces podemos hacer una transformación lineal de coordenadas de la forma $X^{\prime} = \Lambda \, X$, es decir
+\begin{align}
+\mqty(x^{\prime \, 1} \\ x^{\prime \, 2}) =
+\mqty(a_{1} & a_{2} \\ a_{3} & a_{4}) \, \mqty(x^{1} \\ x^{2})
+\label{eq:ecuacion_10_007}   
+\end{align}
+La cual tiene la transformación inversa: $X = \Lambda^{-1} \, X^{\prime}$
+\begin{align}
+\mqty(x^{1} \\ x^{2}) = \dfrac{1}{\abs{\Lambda}} \, 
+\mqty(a_{4} & - a_{2} \\ - a_{3} & a_{1}) \, \mqty(x^{\prime \, 1} \\ x^{\prime \, 2})
+\label{eq:ecuacion_10_008}   
+\end{align}
+es decir
+\begin{align}
+x^{1} &= \dfrac{a_{4} \, x^{\prime \, 1} - a_{2} \, x^{\prime \, 2}}{\abs{\Lambda}} \label{eq:ecuacion_10_009} \\[0.5em]
+x^{2} &= \dfrac{-a_{3} \, x^{\prime \, 1} + a_{1} \, x^{\prime \, 2}}{\abs{\Lambda}} \label{eq:ecuacion_10_010}
+\end{align}
+Además, al diferencias por la regla de la cadena se tiene
+\begin{align}
+\begin{aligned}
+\pdv{x^{\prime \, 1}} &= \pdv{x^{1}}{x^{\prime \, 1}} \, \pdv{x^{1}} + \pdv{x^{2}}{x^{\prime \, 1}} \, \pdv{x^{2}} \\[0.5em]
+\pdv{x^{\prime \, 2}} &= \pdv{x^{1}}{x^{\prime \, 2}} \, \pdv{x^{1}} + \pdv{x^{2}}{x^{\prime \, 2}} \, \pdv{x^{2}}
+\end{aligned}
+\label{eq:ecuacion_10_011}
+\end{align}
+de la regla de transformación ec. (\ref{eq:ecuacion_10_010}) se encuentra que
+\begin{align}
+\begin{aligned}
+\pdv{x^{\prime \ 1}} &= \dfrac{1}{\abs{\Lambda}} \, \left( a_{4} \, \pdv{x^{1}} - a_{3} \, \pdv{x^{2}} \right) \\[1em]
+\pdv{x^{\prime \ 2}} &= \dfrac{1}{\abs{\Lambda}} \, \left( - a_{2} \, \pdv{x^{1}} + a_{1} \, \pdv{x^{2}} \right)
+\end{aligned}
+\label{eq:ecuacion_10_012}
+\end{align}
+que se puede expresar como
+\begin{align}
+\mqty(\displaystyle \pdv{x^{\prime \, 1}} \\[0.75em] \displaystyle \pdv{x^{\prime \, 2}}) = \dfrac{1}{\abs{\Lambda}} \, \mqty(a_{4} & - a_{3} \\ - a_{2} & a_{1}) \, \mqty(\displaystyle \pdv{x^{1}} \\[0.75em] \displaystyle \pdv{x^{2}})
+\label{eq:ecuacion_10_013}   
+\end{align}
+De esta ecuación podemos ver que la matriz involucrada en la transformación de las derivadas parciales es la transpuesta de la matriz inverza de $\Lambda$, es decir
+$(\Lambda^{-1})^{T}$. Otra forma de escribir esta ecuación es
+\begin{align}
+\grad^{\prime} = (\Lambda^{-1})^{T} \, \grad
+\label{eq:ecuacion_10_014}
+\end{align}
+por lo que
+\begin{align}
+\grad = (\Lambda)^{T} \, \grad^{\prime}
+\label{eq:ecuacion_10_015}
+\end{align}
+Este resultado se puede generalizar para más dimensiones. En efecto, en general una transformación de coordenadas se escribe como
+\begin{align}
+x^{\prime \, i} = \Lambda_{ij} \, x^{j} \hspace{1.5cm} x^{i} = (\Lambda^{-1})_{ij} \, x^{\prime \, j}
+\label{eq:ecuacion_10_016}
+\end{align}
+Por la regla de la cadena se tiene que
+\begin{align}
+\pdv{x^{\prime \, i}} &= \pdv{x^{j}}{x^{\prime \, i}} \, \pdv{x^{j}} = \nonumber \\[0.5em]
+&= \pdv{(\Lambda^{-1})_{jk} \, x^{\prime \, k}}{x^{\prime \, i}} \, \pdv{x^{j}} = \nonumber \\[0.5em]
+&= (\Lambda^{-1})_{jk} \, \pdv{x^{\prime , k}}{x^{\prime \, i}} \, \pdv{x^{j}} = \nonumber \\[0.5em]
+&= (\Lambda^{-1})_{jk} \, \delta_{ki} \, \pdv{x^{j}} = \nonumber \\[0.5em]
+&= (\Lambda^{-1})_{ji} \, \pdv{x^{j}} = \nonumber \\[0.5em]
+&= \left( \left( \Lambda^{-1} \right)^{T} \right)_{ij} \, \pdv{x^{j}}
+\label{eq:ecuacion_10_017}
+\end{align}
+Por lo tanto, para cualquier dimensión se cumple
+\begin{align}
+\grad^{\prime} = (\Lambda^{-1})^{T} \, \grad
+\label{eq:ecuacion_10_018}
+\end{align}
+Esta ley de transformación será de gran utilidad para obtener las simetrías de la ecuación de Laplace.
+\section{Laplaciano y elemento de línea.}
+Supongamos que la matriz $\tilde{\eta}$ de $n \times n$, satisface
+\begin{align}
+\tilde{\eta} \, \tilde{\eta} = I
+\label{eq:ecuacion_10_019}
+\end{align}
+donde la matriz $I$ es la matriz identidad de $n \times n$. Entonces podemos definir un elemento de línea como
+\begin{align}
+\dd{s^{2}} = \dd{X^{T}} \, \tilde{\eta} \dd{X}, \hspace{1.5cm} \dd{X} = \mqty(\dd{x^{1}} \\ \dd{x^{2}} \\ \vdots \\ \dd{x^{n}})
+\label{eq:ecuacion_10_020}
+\end{align}
+A la matriz $\tilde{\eta}$ se le llama \emph{métrica}, un ejemplo en dos dimensiones de este tipo de matrices son
+\begin{align}
+\mqty(\pmat{0}) \hspace{1.5cm} \mqty(-1 & 0 \\ 0 & 1)
+\label{eq:ecuacion_10_021}
+\end{align}
+Con la matriz $\tilde{\eta}$ el \enquote{Laplaciano} se define como
+\begin{align}
+\laplacian = \grad^{T} \, \tilde{\eta} \, \grad
+\label{eq:ecuacion_10_022}
+\end{align}
+Notablemente, el elemento de línea está íntimamente relacionado con el Laplaciano, en particular tienen las mismas simetrías. Esta relación es importante
+y se da también para espacios no euclidianos. Veamos como se da esta relación.
+\par
+Bajo una transformación lineal de coordenadas se tiene
+\begin{align}
+\dd{s^{\prime \, 2}} &= \dd{X^{\prime \, T}} \tilde{\eta} \dd{X^{\prime}} = \nonumber \\[0.5em]
+&= \left(\Lambda \dd{X} \right)^{T} \, \tilde{\eta} \, \Lambda \, \dd{X} = \nonumber \\[0.5em]
+&= \dd{X^{T}} \left( \Lambda^{T} \, \tilde{\eta} \, \Lambda \right) \dd{X}
+\label{eq:ecuacion_10_023}
+\end{align}
+Las transformaciones $\Lambda$ que dejan invariante al elemento de línea, deben de cumplir $\dd{s^{2}} = \dd{s^{\prime \, 2}}$. Al igualar la ec. (\ref{eq:ecuacion_10_020}) con la ec. (\ref{eq:ecuacion_10_023}) se llega a la condición 
+\begin{align}
+\Lambda^{T} \, \tilde{\eta} \, \Lambda = \tilde{\eta}
+\label{eq:ecuacion_10_024}
+\end{align}
+Además, considerando que bajo una transformación lineal de coordenadas el gradiente transforma como eq. (\ref{eq:ecuacion_10_018}), se obtiene
+\begin{align}
+\grad^{\prime \, 2} &= \grad^{\prime \, T} \, \tilde{\eta} \, \grad^{\prime} = \nonumber \\[0.5em]
+&= \left( \left(\Lambda^{-1} \right)^{T} \, \grad \right)^{T} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} \, \grad = \nonumber \\[0.5em]
+&= \grad^{T} \, \left[ \left( \left( \Lambda^{-1} \right)^{T} \right)^{T} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} \right] \, \grad = \nonumber \\[0.5em]
+&= \grad^{T} \, \left( \Lambda^{-1} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} \right) \, \grad
+\label{eq:ecuacion_10_025}
+\end{align}
+Las transformaciones que dejan invariante al Laplaciano deben de cumplir
+\begin{align*}
+\laplacian = \grad^{\prime \, 2}
+\end{align*}
+entonces igualando la ec. (\ref{eq:ecuacion_10_022}) con la ec. (\ref{eq:ecuacion_10_025}), se tiene la condición
+\begin{align}
+\Lambda^{-1} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} = \tilde{\eta}
+\label{eq:ecuacion_10_026}
+\end{align}
+Como $(\tilde{\eta})^{-1} = \tilde{\eta}$, la condición dada por la ec. (\ref{eq:ecuacion_10_026}), tiene la forma
+\begin{align}
+\tilde{\eta} &= \left(\tilde{\eta} \right)^{-1} \nonumber \\[0.5em]
+&= \left( \Lambda^{-1} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} \right)^{-1} = \nonumber \\[0.5em]
+&= \left( \left( \Lambda^{-1} \right)^{T} \right)^{-1} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{-1} = \nonumber \\[0.5em]
+&= \Lambda^{T} \, \tilde{\eta} \, \Lambda
+\label{eq:ecuacion_10_027}
+\end{align}
+que coincide con la eq. (\ref{eq:ecuacion_10_024}). Por lo tanto, las transformaciones lineales, $\Lambda$, que
+dejan invariante al elemento de línea eq. (\ref{eq:ecuacion_10_020}) también dejan invariante al
+Laplaciano eq. (\ref{eq:ecuacion_10_022}), claramente la afirmació inversa también es correcta.
+\section{Grupo de transformaciones.}
+Antes de continuar recordemos lo que es un grupo. Sea $G$ un conjunto con una operación $\bullet \, : G \times G \rightarrow G$. El par $(G, \bullet)$ es un grupo si cumple:
+\begin{enumerate}[label=\arabic*)]
+\item Axioma de cerradura:
+\begin{align}
+g_{1} \in G, g_{2} \in G \hspace{1cm} \Rightarrow \hspace{1cm} g_{1} \bullet g_{2} \in G
+\label{eq:ecuacion_10_028}
+\end{align}
+\item Axioma de asociatividad:
+\begin{align}
+g_{1} \in G, g_{2} \in G, g_{3} \in G \hspace{1cm} \Rightarrow \hspace{1cm} g_{1} \bullet (g_{2} \bullet g_{3}) = (g_{1} \bullet g_{2}) \bullet g_{3}
+\label{eq:ecuacion_10_029}
+\end{align}
+\item Axioma del neutro:
+\begin{align}
+\exists \, e \in G, \hspace{1cm} g_{1} \in G \hspace{1cm} \Rightarrow \hspace{1cm} g_{1} \bullet e = e \bullet g_{1} = g_{1}
+\label{eq:ecuacion_10_030}
+\end{align}
+\item Axioma del inverso:
+\begin{align}
+\forall \, g_{1} \in G, \exists \, g_{1}^{-1} \in G, \hspace{1cm} g_{1} \bullet g_{1}^{-1} = g_{-1} \bullet g_{1} = e
+\label{eq:ecuacion_10_031}
+\end{align}
+\end{enumerate}
+Definamos a $T$ como el conjunto de transformaciones $\Lambda$ que dejan invariante al Laplaciano. Estas transformaciones cumplen
+\begin{align}
+\Lambda^{T} \, \tilde{\eta} \, \Lambda = \tilde{\eta} \hspace{1.5cm} \tilde{\eta}^{2} = I
+\label{eq:ecuacion_10_032}
+\end{align}
+Probaremos que $T$ es un grupo.
+\par
+Supongamos que $\Lambda_{1} \in T$ y $\Lambda_{2} \in T$, entonces cumplen
+\begin{align}
+\Lambda_{1}^{T} \, \tilde{\eta} \, \Lambda_{1} = \tilde{\eta}, \hspace{1.5cm} \Lambda_{2}^{T} \, \tilde{\eta} \, \Lambda_{2} = \tilde{\eta}
+\label{eq:ecuacion_10_033}
+\end{align}
+de donde
+\begin{align}
+(\Lambda_{1} \, \Lambda_{2})^{T} \, \tilde{\eta} \, (\Lambda_{1} \, \Lambda_{2}) =\Lambda_{2}^{T} \, \Lambda_{1}^{T} \, \tilde{\eta} \, \Lambda_{1} \, \Lambda_{2} = \Lambda_{2}^{T} \, \tilde{\eta} \, \Lambda_{2} = \tilde{\eta}
+\label{eq:ecuacion_10_034}
+\end{align}
+esto implica que $\Lambda_{1} \, \Lambda_{2} \in T$, es decir
+\begin{align}
+\Lambda_{1} \in T, \Lambda_{2} \in T \hspace{1cm} \Rightarrow \hspace{1cm} \Lambda_{1} \, \Lambda_{2} \in T
+\label{eq:ecuacion_10_035}
+\end{align}
+Por lo tanto, se cumple el axioma de la cerradura.
+\par
+El producto de matrices es asociativo, en particular el producto de las matrices que satisfacen la eq. (\ref{eq:ecuacion_10_032}). Además, la identidad $I$ satisface la eq. (\ref{eq:ecuacion_10_032}), es decir, $I \in T$. Así se cumplen el axioma de la asociatividad y el del elemento
+neutro.
+\par
+Se tiene que $\tilde{\eta}^{2} = I$, si $\Lambda$ está en $T$ entonces se cumple $\Lambda^{T} \, \tilde{\eta} \, \Lambda \, \tilde{\eta} = I$. De donde
+\begin{align}
+\tilde{\eta} \, \Lambda \, \tilde{\eta} = \left( \Lambda^{T} \right)^{-1} = \left( \Lambda^{-1} \right)^{T}
+\label{eq:ecuacion_10_036}
+\end{align}
+por lo tanto
+\begin{align}
+\left( \Lambda^{-1} \right)^{T}\, \tilde{\eta} \, \Lambda^{-1} = ( \tilde{\eta} \, \Lambda \, \tilde{\eta} ) \, \tilde{\eta} \, \Lambda^{-1} = \tilde{\eta} \, \Lambda \, \Lambda^{-1} = \tilde{\eta}
+\label{eq:ecuacion_10_037}
+\end{align}
+Así, cuando $\Lambda$ está en $T$, también $\Lambda^{-1}$ está en $T$. Esto nos indica que se cumple el axioma del inverso.
+\par
+En consecuencia el conjunto de matrices que satisface la eq. (\ref{eq:ecuacion_10_032}) es un grupo. Es decir, el conjunto de transformaciones que dejan invariante al elemento de línea eq. (\ref{eq:ecuacion_10_020}) forma un grupo, que es el mismo grupo que deja invariante al Laplaciano eq. (\ref{eq:ecuacion_10_022}).
+\section{El grupo de rotaciones.}
+Sea $\va{x} = (x_{1}, \ldots, x_{n})$ un vector en $\mathbb{R}^{n}$ y definamos la forma cuadrática $l^{2} = x_{1}^{2} + x_{2}^{2} + \ldots + x_{n}^{2}$, la cual representa la distancia de $\va{x}$ al origen. Note que si definimos la matriz columna
+\begin{align}
+X = \mqty(x_{1} \\ x_{2} \\ \vdots \\ x_{n})
+\label{eq:ecuacion_10_038}
+\end{align}
+y la matriz renglón
+\begin{align}
+X^{T} = \mqty(x_{1} & x_{2} & \ldots & x_{n})
+\label{eq:ecuacion_10_039}
+\end{align}
+la distancia se puede escribir como
+\begin{align}
+l^{2} = X^{T} \, X = X^{T} \, I \, X 
+\label{eq:ecuacion_10_040}
+\end{align}
+Ahora, si $\Lambda$ es una matriz de $n \times n$ y se hace la transformación de coordenadas
+\begin{align}
+X^{\prime} = \Lambda \, X
+\label{eq:ecuacion_10_041}
+\end{align}
+se tiene la distancia
+\begin{align}
+l^{2} = X^{\prime \, T} \, I , X^{\prime} = X^{T} \, \left( \Lambda^{T} \, I \, \Lambda \right) \, X 
+\label{eq:ecuacion_10_042}
+\end{align}
+Por lo tanto, si $\Lambda$ es tal que deja la distancia invariante, es decir $l^{2} = l^{\prime \, 2}$, debe cumplir
+\begin{align}
+\Lambda^{T} \, I \, \Lambda = I
+\label{eq:ecuacion_10_043}
+\end{align}
+Otra forma de expresar esta igualdad es $\Lambda^{T} = \Lambda^{-1}$. Claramente las matrices que cumplen la ec. (\ref{eq:ecuacion_10_043}) forman un grupo, a este grupo de matrices se le llama $O(n)$.
+\par
+Recordemos que para cualquier matriz $A$ se cumple que: $\det A = \det A^{T}$. Entonces, las matrices que satisfacen la eq. (\ref{eq:ecuacion_10_043}) deben cumplir $(\det \Lambda)^{2} = 1$, es decir $\det \Lambda = \pm 1$. El subconjunto de matrices $\Lambda$ que cumplen $\det \Lambda = - 1$ no forman un grupo, por ejemplo, la identidad no está en ese subconjunto. Sin embargo, las matrices $\Lambda$ que cumplen $\det \Lambda = 1$ sí forman un grupo, este es el grupo $SO(n)$.
+\par
+Note que la matriz de $n \times n$
+\begin{align}
+\Lambda = \mqty(\Lambda_{11} & \Lambda_{12} & \ldots & \Lambda_{1n} \\ \Lambda_{21} & \Lambda_{22} & \ldots & \Lambda_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \Lambda_{n1} & \Lambda_{n2} & \ldots & \Lambda_{nn})
+\label{eq:ecuacion_10_44}
+\end{align}
+se puede formar con los vectores columna
+\begin{align}
+\va{C}_{1} = \mqty(\Lambda_{11} \\ \Lambda_{21} \\ \vdots \\ \Lambda_{n1}), \hspace{0.5cm} \va{C}_{2} = \mqty(\Lambda_{12} \\ \Lambda_{22} \\ \vdots \\ \Lambda_{n2}), \hspace{0.5cm} \ldots, \va{C}_{n} = \mqty(\Lambda_{1n} \\ \Lambda_{2n} \\ \vdots \\ \Lambda_{nn})
+\label{eq:ecuacion_10_045}
+\end{align}
+Claramente, para la matriz transpuesta $\Lambda^{T}$, estos vectores representan los renglones. Por lo tanto, por la condición dada en la ec. (\ref{eq:ecuacion_10_043}), se puede escribir como
+\begin{align}
+\Lambda^{T} \, \Lambda &= \mqty(\Lambda_{11} & \Lambda_{21} & \ldots & \Lambda_{n1} \\ \Lambda_{12} & \Lambda_{22} & \ldots & \Lambda_{nn} \\ \vdots & \vdots & \ddots & \vdots \\ \Lambda_{1n} & \Lambda_{2n} & \ldots & \Lambda_{nn}) \, \mqty(\Lambda_{11} & \Lambda_{12} & \ldots & \Lambda_{1n} \\ \Lambda_{21} & \Lambda_{22} & \ldots & \Lambda_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \Lambda_{n1} & \Lambda_{n2} & \ldots & \Lambda_{nn}) \nonumber \\[1em]
+&= \mqty(\va{C}_{1} \cdot \va{C}_{1} & \va{C}_{1} \cdot \va{C}_{2} & \ldots & \va{C}_{1} \cdot \va{C}_{n} \\ \va{C}_{2} \cdot \va{C}_{1} & \va{C}_{2} \cdot \va{C}_{2} & \ldots & \va{C}_{n} \cdot \va{C}_{2} \\ \vdots & \vdots & \ddots & \vdots \\ \va{C}_{n} \cdot \va{C}_{1} & \va{C}_{n1} \cdot \va{C}_{2} & \ldots & \va{C}_{n} \cdot \va{C}_{n})
+\label{eq:ecuacion_10_046}
+\end{align}
+Otra forma de expresar esta igualdad es
+\begin{align}
+\va{C}_{i} \cdot \va{C}_{j} = \delta_{ij}
+\label{eq:ecuacion_10_047}
+\end{align}
+es decir si una matriz satisface la eq. (\ref{eq:ecuacion_10_043}), tiene sus columnas ortonormales.
+Ahora, si $\Lambda$ satisface la condición (\ref{eq:ecuacion_10_043}), entonces $\Lambda^{-1}$ también la satisface. Por lo tanto, $\Lambda^{-1}$ tiene sus columnas ortonormales entre sí. Pero se debe cumplir $\Lambda^{-1} = \Lambda^{T}$, entonces las columnas de $\Lambda^{T}$ son ortonormales entre sí.
+\par
+Considerando que las columnas de $\Lambda^{T}$ son los renglones de $\Lambda$, podemos ver que los renglones de $\Lambda$ son ortonormales entre sí. En conclusión, si $\Lambda$ satisface la eq. (\ref{eq:ecuacion_10_043}), sus columnas y renglones son ortonormales entre sí.
+\par
+Una matriz de $n \times n$ tiene $n^{2}$ parámetros libres, pero si satisface la ec. (\ref{eq:ecuacion_10_046}) no todos sus parámetros son libres. De la ec. (\ref{eq:ecuacion_10_046}) se puede ver que $\Lambda^{T} \, \Lambda$ es una matriz simétrica, por lo que la ec. (\ref{eq:ecuacion_10_046}) sólo tiene $\dfrac{n (n+1)}{2}$ ecuaciones independientes. Así, los parámetros libres de una matriz que satisface la ec. (\ref{eq:ecuacion_10_046}) son
+\begin{align*}
+n^{2} - \dfrac{n (n+1)}{2} = \dfrac{n (n-1)}{2}
+\end{align*}
+Para el caso $n = 3$ hay tres parámetros libres, para ésta dimensión cualquier matriz se puede escribir como
+\begin{align}
+\Lambda = \mqty(a_{1} & b_{1} & c_{1} \\ a_{2} & b_{2} & c_{2} \\ a_{3} & b_{3} & c_{3})
+\label{eq:ecuacion_10_048}
+\end{align}
+Si ésta matriz satisface la ec. (\ref{eq:ecuacion_10_046}), debe cumplir
+\begin{align}
+\begin{aligned}
+\va{a} \vdot \va{a} = \va{b} \vdot \va{b} = \va{c} \vdot \va{c} =  1 \\[0.5em]
+\va{a} \vdot \va{b} = \va{a} \vdot \va{c} = \va{b} \vdot \va{c} =  0
+\end{aligned}
+\label{eq:ecuacion_10_049}
+\end{align}
+esto nos dice que la punta de los vectores $\va{a}, \va{b},\va{c}$ están en una esfera y que son ortonormales entre sí. Un ejemplo de este tipo de matrices son
+\begin{align}
+\Lambda_{x} (\theta) = \mqty(1 & 0 & 0 \\ 0 & \cos \theta & \sin \theta \\ 0 & -\sin \theta & \cos \theta) \label{eq:ecuacion_10_050} \\[1em]
+\Lambda_{y} (\psi) = \mqty(\cos \psi & 0 & \sin \psi \\ 0 & 1 & 0 \\ - \sin \psi & 0 & \cos \psi) \label{eq:ecuacion_10_051} \\[1em]
+\Lambda_{z} (\phi) = \mqty(\cos \phi & \sin \phi & 0 \\ - \sin \phi & \cos \phi & 0 \\ 0 & 0 & 1) \label{eq:ecuacion_10_052}
+\end{align}
+Cada una de estas matrices representa una rotación
+\begin{itemize}
+\item $\Lambda_{x} (\theta)$ representa una rotación sobre el eje $x$.
+\item $\Lambda_{y} (\psi)$ representa una rotación sobre el eje $y$.
+\item $\Lambda_{z} (\phi)$ representa una rotación sobre el eje $z$
+\end{itemize}
+Por lo tanto, las rotaciones dejan invariante la distancia y al Laplaciano. Nótese que las tres matrices son linealmente independientes.
+\par
+Existen otras formas de reparametrizar una matriz de rotación, por ejemplo la base unitaria en coordenadas esféricas
+\begin{align*}
+\vu{e}_{r} &= \cos \varphi \sin \theta \, \vu{i} + \sin \varphi \sin \theta \, \vu{j} + \cos \theta , \vu{k} \\
+\vu{e}_{\theta} &= \cos \varphi \cos \theta \, \vu{i} + \sin \varphi \cos \theta \, \vu{j} - \sin \theta \, \vu{k}
+\end{align*}
+satisfacen la condición dada por la eq. (\ref{eq:ecuacion_10_049}), pero no son la solución más general, pues sólo dependen de dos parámetros mientras que la solución general de la eq. (\ref{eq:ecuacion_10_049}) depende de tres. Pero estos vectores nos sirven para obtener la solución general. Propondremos a $\va{c}$ como
+\begin{align}
+\va{c} = (\sin \psi \sin \theta, \cos \psi \sin \theta, \cos \theta)
+\label{eq:ecuacion_10_053}
+\end{align}
+Los vectores $\va{b}$ y $\va{c}$ deben ser tales que si $\theta = 0$ se cumple
+\begin{align}
+\eval{\va{b}}_{\phi=0} &= \vu{e}_{\theta} = (\sin \psi \cos \theta, \cos \psi \cos \theta, - \sin \theta) \label{eq:ecuacion_10_054} \\[1em]
+\eval{\va{c}}_{\phi=0} &= \vu{e}_{\psi} = (\cos \psi, -\sin \psi, 0) \label{eq:ecuacion_10_055}
+\end{align}
+Un par de vectores que satisfacen estas condiciones son:
+\begin{changemargin}{-0.25cm}{-0.25cm} 
+\begin{align*}
+\va{a} &= (\sin \phi \sin \psi \cos \theta + \cos \phi \cos \psi, - \sin \phi \cos \psi \cos \theta - \cos \phi \sin \psi, \sin \phi \sin \theta) \\[1em]
+\va{b} &= (\sin \phi \cos \psi + \cos \theta \sin \psi \cos \theta, -\sin \phi \sin \psi + \cos \phi \cos \psi \cos \theta, - \cos \phi \sin \theta)
+\end{align*}
+\end{changemargin}
+Se puede demostrar que los vectores $\va{a}, \va{b}$ y $\va{c}$ cumplen con la ec. (\ref{eq:ecuacion_10_049}). De esta manera $\Lambda$ se puede escribir como
+\begin{align}
+\begin{aligned}
+&\Lambda (\phi, \theta, \psi) = \\[0.5em]
+&= \mqty(
+c \, \phi \, c \, \psi - s \, \phi \, s \, \psi \, c \, \theta & s \, \theta \, c \, \phi + c \, \phi \, s \, \psi \, c \, \theta & s \, \psi \, s \, \theta \\
+- c \, \phi \, s \, \theta \, - s \, \phi \, c \, \psi c \, \theta & - s \, \phi \, s \, \psi + c \, \phi \, c \, \psi \, c \, \theta & c \, \psi \, s \, \theta \\
+s \, \phi \, s \, \theta & - c \, \phi \, s \, \theta & c \, \theta)
+\end{aligned}
+\label{eq:ecuacion_10_056}
+\end{align}
+Claramente aún hay cierta arbitrariedad, pues podemos cambiar el lugar de los vectores $\va{a}, \va{b}, \va{c}$, también podemos cambiar renglones por columnas y se seguirá cumpliendo la eq. (\ref{eq:ecuacion_10_043}). La ventaja de escribir $\Lambda$ de la forma (\ref{eq:ecuacion_10_056}) es que se puede expresar como el producto de tres matrices
+\begin{align}
+\Lambda (\phi, \theta, \psi) = \Lambda_{1} (\phi) \, \Lambda_{2} (\theta) \, \Lambda_{3} (\psi) 
+\label{eq:ecuacion_10_057}
+\end{align}
+con
+\begin{align}
+\Lambda_{1} (\phi) = \mqty(\cos \phi & \sin \phi & 0 \\ - \sin \phi & \cos \phi & 0 \\ 0 & 0 & 1) \label{eq:ecuacion_10_058} \\[1em]
+\Lambda_{2} (\theta) = \mqty(1 & 0 & 0 \\ 0 & \cos \theta & \sin \theta \\ 0 & - \sin \theta & \cos \theta) \label{eq:ecuacion_10_059} \\[1em]
+\Lambda_{3} (\psi) = \mqty(\cos \psi & \sin \psi & 0 \\ - \sin \psi & \cos \psi & 0 \\ 0 & 0 & 1) \label{eq:ecuacion_10_060}
+\end{align}
+Esta descomposición es muy útil para el estudio del movimiento del cuerpo rígido. A los parámetros $\theta, \psi, \phi$ se les llama \emph{ángulos de Euler}.
+\par
+Las rotaciones no son las únicas transformaciones de $O(3)$. Por ejemplo, las matrices
+\begin{align}
+\mqty(-1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1) \hspace{1cm} \mqty(1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1) \hspace{1cm} \mqty(-1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1)
+\label{eq:ecuacion_10_061}
+\end{align}
+cumplen la ec. (\ref{eq:ecuacion_10_049}) pero no son de rotación, tampoco son de $SO(3)$. Las rotaciones representan las transformaciones de $O(3)$ que se pueden conectar con la matriz unidad $I$. Pues al hacer $\phi = 0, \theta = 0, \psi = 0$, se obtiene la unidad $I$.
+\section{Transformaciones infinitesimales.}
+\end{document}
