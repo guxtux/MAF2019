@@ -383,4 +383,221 @@ Las rotaciones no son las únicas transformaciones de $O(3)$. Por ejemplo, las m
 \end{align}
 cumplen la ec. (\ref{eq:ecuacion_10_049}) pero no son de rotación, tampoco son de $SO(3)$. Las rotaciones representan las transformaciones de $O(3)$ que se pueden conectar con la matriz unidad $I$. Pues al hacer $\phi = 0, \theta = 0, \psi = 0$, se obtiene la unidad $I$.
 \section{Transformaciones infinitesimales.}
+Las transformaciones de $SO(n)$ que están infinitesimalmente cercanas a la unidad, es decir, aquellas que cumplen
+\begin{align}
+\Lambda \approx I + \varepsilon \, M \hspace{1.5cm} \varepsilon \ll 1
+\label{eq:ecuacion_10_062}
+\end{align}
+son particularmente importantes. Para este tipo de transformaciones la condición dada por la eq. (\ref{eq:ecuacion_10_043}) implica
+\begin{align}
+I = \Lambda^{T} \, \Lambda &\approx (I + \varepsilon \, M)^{T} \, (I + \varepsilon \, M) \label{eq:ecuacion_10_063} \\[0.5em]
+&= (I + \varepsilon \, M^{T}) \, (I + \varepsilon \, M)  \approx I + \varepsilon (M^{T} + M) \label{eq:ecuacion_10_064}
+\end{align}
+Por lo tanto
+\begin{align}
+M = - M^{T}
+\label{eq:ecuacion_10_065}
+\end{align}
+es decir, $M$ debe ser antisimétrica. Nótese que una matriz antisimétrica de $n \times n$ sólo puede tener
+\begin{align*}
+\dfrac{n(n-1)}{2}
+\end{align*}
+parámetros libres, este número de grados de libertad coincide con los parámetros libres del grupo $SO(n)$. Para el caso particular $n = 3$, cualquier matriz antisimétrica se puede escribir como
+\begin{align}
+M = \mqty(0 & -\alpha_{3} & \alpha_{2} \\ \alpha_{3} & 0 & -\alpha_{1} \\ -\alpha_{2} & \alpha_{1} & 0)
+\label{eq:ecuacion_10_066}
+\end{align}
+Definamos los vectores $\va{r} = (x, y ,z)$, $\delta \, \va{\alpha} = \varepsilon (\alpha_{1}, \alpha_{2}, \alpha_{3})$, entonces
+\begin{align}
+\delta \, X &= \varepsilon \, M \, X = \varepsilon \, \mqty(0 & -\alpha_{3} & \alpha_{2} \\ \alpha_{3} & 0 & -\alpha_{1} \\ -\alpha_{2} & \alpha_{1} & 0) \mqty(x \\ y \\ z) = \nonumber \\[0.5em]
+&= \delta \, \va{\alpha} \cp \va{r} \label{eq:ecuacion_10_067}
+\end{align}
+Por lo tanto, una rotación infinitesimal está dada por
+\begin{align}
+X^{\prime} = \Lambda \, X \approx ( I + \varepsilon \, M) \, X = (I \, M + \varepsilon \, M \, X)
+\label{eq:ecuacion_10_068}
+\end{align}
+es decir
+\begin{align}
+\va{r}^{\, \prime} = \va{r} + \delta \, \va{\alpha} \cp \va{r}
+\label{eq:ecuacion_10_069}
+\end{align}
+Estas rotaciones son importantes porque definen al resto de las transformaciones de $SO(3)$, para ver esto primero notemos que
+\begin{align}
+M &= \mqty(0 & -\alpha_{3} & \alpha_{2} \\ \alpha_{3} & 0 & -\alpha_{1} \\ -\alpha_{2} & \alpha_{1} & 0) = \alpha_{1} \, m_{1} + \alpha_{2} \, m_{2} + \alpha_{3} \, m_{3} = \nonumber \\[0.5em]
+&= \va{\alpha} \cdot \va{m} \label{eq:ecuacion_10_070}
+\end{align}
+donde
+\begin{align*}
+m_{1} = \mqty(0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0), \hspace{1cm} m_{2} = \mqty(0 & 0 & 1 \\ 0 & 0 & 0 \\ -1 & 0 & 0), \hspace{1cm} m_{3} = \mqty(0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0)
+\end{align*}
+Se puede observar que la matriz (\ref{eq:ecuacion_10_070}) no se modifica si hacemos el cambio $\va{\alpha} \rightarrow - i \, \va{\alpha}$ y $\va{m} \rightarrow - i \, \va{m} = \va{M}$, es decir
+\begin{align*}
+M_{1} = i \, \mqty(0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0), \hspace{1cm} M_{2} = i \, \mqty(0 & 0 & 1 \\ 0 & 0 & 0 \\ -1 & 0 & 0), \hspace{1cm} M_{3} = i \, \mqty(0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0)
+\end{align*}
+La ventaja de ocupar la matrices $M_{i}$ es que son Hermíticas, es decir, $M_{i}^{\dagger} = M_{i}$. Esto implica que sus valores propios son reales, por lo tanto las matrices
+$\va{M} = (M_{1} , M_{2} , M_{3})$ pueden representar cantidades físicas.
+\par
+Una transformación finita se debe hacer como producto infinito de transformaciones infinitesimales. Por ejemplo, ocupando
+\begin{align}
+X^{\prime} &\approx \left( \Lambda \left( \dfrac{\va{\alpha}}{N} \right) \right)^{N} \, X = \nonumber \\[0.5em]
+&= (I - i \, \delta \, \va{\alpha} \cdot \va{M})^{N} \, X = \nonumber \\[0.5em]
+&= \left( I - i \, \dfrac{1}{N} \, \va{\alpha} \cdot \va{M} \right)^{N} \, X \label{eq:ecuacion_10_071}
+\end{align}
+y considerando el resultado
+\begin{align}
+\lim_{N \to \infty} \left(  I + \dfrac{\beta \, x}{N} \right)^{N} = e^{\beta \, x}
+\label{eq:ecuacion_10_072}
+\end{align}
+se tiene que
+\begin{align}
+\lim_{N \to \infty} \left(  I - i \, \dfrac{1}{N} \, \va{\alpha} \cdot \va{M} \right)^{N} = e^{- i \, \va{\alpha} \cdot \va{M}}
+\label{eq:ecuacion_10_073}
+\end{align}
+Por lo tanto, una transformación finita, está dada por
+\begin{align}
+X^{\prime} = e^{- i \, \va{\alpha} \cdot \va{M}} \, X
+\label{eq:ecuacion_10_074}
+\end{align}
+Así, cualquier transformación infinitesimal conectada con la identidad tiene la forma
+\begin{align}
+\Lambda (\va{\alpha}) = e^{- i \, \va{\alpha} \cdot \va{M}}
+\label{eq:ecuacion_10_075}
+\end{align}
+En este sentido se dice que $M_{1}, M_{2}, M_{3}$ son los generadores del grupo $SO(3)$.
+\par
+Ahora veamos de forma explícita la expresión dada por la ec.(\ref{eq:ecuacion_10_075}) para algunos casos particulares. Primero notemos que si $n \geq 1$, se tiene
+\begin{align}
+M_{1}^{2n} = \mqty(0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1) = T_{1}, \hspace{1cm} M_{1}^{2n + 1} = M_{1}  \label{eq:ecuacion_10_076} \\[1em]
+M_{2}^{2n} = \mqty(1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1) = T_{2}, \hspace{1cm} M_{2}^{2n + 1} = M_{2}  \label{eq:ecuacion_10_077} \\[1em]
+M_{3}^{2n} = \mqty(1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0) = T_{3}, \hspace{1cm} M_{3}^{2n + 1} = M_{3}  \label{eq:ecuacion_10_078}
+\end{align}
+Entonces, considerando estos resultados, juntos con las series de $\cos \beta$ y $\sin \beta$, se tiene
+\begin{align}
+e^{i \, \beta \, M_{i}} &= \sum_{n \geq 0} \dfrac{1}{n!} \, (- i \, \beta \, M_{i})^{n} \nonumber \\[0.5em]
+&= \sum_{n \geq 0} \dfrac{1}{(2 n)!} \, (- i \, \beta)^{2 n} \, (M_{i})^{2 n} + \sum_{n \geq 0} \dfrac{1}{(2 n +1)!} \, (- i \, \beta)^{2 n + 1} \, (M_{i})^{2 n + 1} = \nonumber \\[0.5em]
+&= I + T_{i} \, \sum_{n \geq 1} \dfrac{1}{(2 n)!} \, (- i \, \beta)^{2 n} + M_{i} \, \sum_{n \geq 0} \dfrac{1}{(2 n +1)!} \, (- i \, \beta)^{2 n + 1} = \nonumber \\[0.5em]
+&= I - T{i} + T_{i} + \sum_{n \geq 1} \dfrac{(-1)^{n}}{(2 n)!} \, \beta^{2 n} - i \, M \, \sum_{n \geq 0} \dfrac{(-1)^{n}}{(2 n +1)!} \, \beta^{2 n + 1} = \nonumber \\[0.5em]
+&= I - T{i} + T_{i} \, \sum_{n \geq 0} \dfrac{(-1)^{n} \beta^{2 n}}{(2 n)!} - i \, M_{i} \, \sin \beta \nonumber \\[0.5em]
+&= I - T{i} + T_{i} \, \cos \beta - i \, M_{i} \, \sin \beta \label{eq:ecuacion_10_079}
+\end{align}
+De donde
+\begin{align}
+\begin{aligned}
+e^{-i \, \alpha_{1} \, M_{1}} = \mqty(1 & 0 & 0 \\ 0 & \cos \alpha_{1} & - \sin \alpha_{1} \\ 0 & \sin \alpha_{1} & \cos \alpha_{1}) \\[0.5em]
+e^{-i \, \alpha_{2} \, M_{2}} = \mqty(\cos \alpha_{2} & 0 & \sin \alpha_{2} \\ 0 & 1 & 0 \\ - \sin \alpha_{2} & 0 & \cos \alpha_{2}) \\[0.5em]
+e^{-i \, \alpha_{3} \, M_{3}} = \mqty(\cos \alpha_{3} & - \sin \alpha_{3} & 0 \\ \sin \alpha_{3} & \cos \alpha_{3} & 0 \\ 0 & 0 & 1)
+\end{aligned}
+\label{eq:ecuacion_10_080}
+\end{align}
+Así, $e^{-i \, \alpha_{1} \, M_{1}}$ representa una rotación sobre el eje $x$, $e^{-i \, \alpha_{2} \, M_{2}}$ representa una rotación sobre el eje $y$, mientras que $e^{-i \, \alpha_{3} \, M_{3}}$ representa una rotación sobre el eje $z$.
+\par
+Veamos que reglas de conmutación cumplen los generadores de las rotaciones $M_{1}, M_{2}, M_{3}$. Primero notemos que
+\begin{align}
+\begin{aligned}
+M_{1} \, M_{2} = - \mqty(0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0) \\[0.5em] 
+M_{1} \, M_{3} = - \mqty(0 & 0 & 0 \\ 0 & 0 & 0 \\ 1 & 0 & 0) \\[0.5em]
+M_{2} \, M_{3} = - \mqty(0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 0)
+\end{aligned}
+\qquad
+\begin{aligned}
+M_{2} \, M_{1} = - \mqty(0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0) \\[0.5em]
+M_{3} \, M_{1} = - \mqty(0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0) \\[0.5em]
+M_{3} \, M_{2} = - \mqty(0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0)
+\end{aligned}
+\label{eq:ecuacion_10_081}
+\end{align}
+por lo que
+\begin{align}
+\comm{M_{1}}{M_{2}} = i \, M_{3}, \hspace{1cm} \comm{M_{3}}{M_{1}} = i \, M_{2}, \hspace{1cm} \comm{M_{2}}{M_{3}} = i \, M_{1} \label{eq:ecuacion_10_082}
+\end{align}
+Estas reglas de conmutación se pueden escribir como
+\begin{align}
+\comm{M_{i}}{M_{j}} = i \, \varepsilon_{ijk} \, M_{k}
+\label{eq:ecuacion_10_083}
+\end{align}
+Por el hecho de que el conmutador de dos generadores de rotación nos de otro generador de rotación, se dice que \emph{estos generadores forman un álgebra de Lie}, el álgebra de Lie de $SO(3)$. Nótese que el conmutador entre dos generadores no es cero, dos generadores no se pueden diagonalizar simultáneamente. Ahora definamos
+\begin{align}
+M^{2} = M_{1}^{2} + M_{2}^{2} + M_{3}^{2}
+\label{eq:ecuacion_10_084}
+\end{align}
+de donde
+\begin{align}
+M^{2} = 2 \, I
+\label{eq:ecuacion_10_085}
+\end{align}
+por lo tanto
+\begin{align}
+\comm{M^{2}}{M_{i}} = 0
+\label{eq:ecuacion_10_086}
+\end{align}
+Así, los valores propios de $M^{2}$ se pueden obtener al mismo tiempo que los generadores $M_{i}$.
+\par
+Los valores propios de los generadores $M_{i}$ se pueden calcular directamente y están dados por
+\begin{align}
+M_{1} \, V = \lambda \, V \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \lambda = \pm 1 \hspace{1cm} V = a \dfrac{1}{\sqrt{2}} \mqty(0 \\ 1 \\ \pm i) \label{eq:ecuacion_10_087} \\[0.5em]
+M_{2} \, V = \lambda \, V \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \lambda = \pm 1 \hspace{1cm} V = a \dfrac{1}{\sqrt{2}} \mqty(1 \\ 0 \\ \pm i) \label{eq:ecuacion_10_088} \\[0.5em]
+M_{3} \, V = \lambda \, V \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \lambda = \pm 1 \hspace{1cm} V = a \dfrac{1}{\sqrt{2}} \mqty(1 \\ \pm i \\ 0) \label{eq:ecuacion_10_089}
+\end{align}
+Si $a = 1$, en cada caso se tienen vectores propios ortonormales. Estos resultados no son difíciles de obtener, posteriormente veremos que los generadores de las rotaciones en el espacio de las funciones de $\va{x}$ están relacionados con operadores diferenciales.
+\par
+Con el símbolo $\epsilon_{ijk}$ las matrices $\va{M} = (M_{1}, M_{2}, M_{3})$ se pueden escribir de forma más económica. En efecto, en componentes tenemos
+\begin{align}
+(M_{1})_{ij} = i \, \epsilon_{i 1 j} \hspace{1cm} (M_{2})_{ij} = i \, \epsilon_{i 2 j} \hspace{1cm} (M_{3})_{ij} = i \, \epsilon_{i 3 j} \label{eq:ecuacion_10_090}
+\end{align}
+Por ejemplo
+\begin{align}
+(M_{1})_{ij} = i \, \epsilon_{i 1 j} = i \, \mqty(\epsilon_{111} & \epsilon_{112} & \epsilon_{113} \\ \epsilon_{211} & \epsilon_{212} & \epsilon_{213} \\ \epsilon_{311} & \epsilon_{312} & \epsilon_{313}) = i \, \mqty(0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0)
+\label{eq:ecuacion_10_091}
+\end{align}
+se puede demostrar que las demás igualdades se cumplen.
+\par
+Así, las componentes de cualquier matriz antisimétrica se pueden escribir como
+\begin{align}
+M_{ik} = - i \, \alpha_{j} (M_{j})_{ik} = \alpha_{j} \, \epsilon_{ijk}
+\label{eq:ecuacion_10_092}
+\end{align}
+Ahora, si $\alpha_{i}$ es infinitesimal, por ejemplo $\delta \, \alpha_{i} = \alpha_{i} / N$ con $N$ grande, una transformación infinitesimal en el espacio de $\va{x}$ está dada por
+\begin{align}
+X^{\prime} = \Lambda \, X = (I - i \, \delta \, \va{\alpha} \cdot \va{M}) \, X
+\label{eq:ecuacion_10_093}
+\end{align}
+En componentes se tiene
+\begin{align}
+x_{i}^{\prime} &\approx \Lambda_{ik} \, x_{k} = (I - i \, \delta \, \alpha_{j} \, M_{j})_{ik} \, x_{k} = \nonumber \\[0.5em]
+&= (\delta_{ik} - i \, \delta \, \alpha_{j} \, (M_{j})_{ik}) \, x_{k} = \nonumber \\[0.5em]
+&= (\delta_{ik} + \delta \, \alpha_{j} \, \epsilon_{ijk}) \, x_{k} = \nonumber \\[0.5em]
+&= x_{i} + \epsilon_{ijk} \, \delta \, \alpha_{j} \, x_{k} = \nonumber \\[0.5em]
+&= x_{i} + (\delta \, \va{\alpha} \cp \va{x})_{i}
+\label{eq:ecuacion_10_094}
+\end{align}
+es decir
+\begin{align}
+x_{i}^{\prime} &\approx x_{i} + (\delta \, \va{\alpha} \cp \va{x})_{i} \label{eq:ecuacion_10_095}
+\end{align}
+\section{Armónicos esféricos.}
+Hasta el momento nos hemos enfocado en las trasformaciones que pasan del espacio $\va{r}$ al $\va{r}^{\, \prime}$. Ahora veamos que pasa con las funciones que actúan en estos espacios. Supongamos que tenemos una función, $F$, de $\mathbb{R}^{3} \rightarrow \mathbb{R}$. Entonces al evaluar esta función en un punto $\va{r}^{\, \prime}$ y ocupando la transformación infinitesimal dada por la eq. (\ref{eq:ecuacion_10_069}), se encuentra
+\begin{align}
+F(\va{r}^{\, \prime}) \approx F (\va{r} + \delta \, \va{\alpha} \cp \va{r}) = F(\va{r}) + (\delta \, \va{\alpha} \cp \va{r}) \cdot \va{\grad} F(\va{r})
+\label{eq:ecuacion_10_096}
+\end{align}
+Usando la propiedad cíclica del triple producto escalar, se tiene que
+\begin{align*}
+(\delta \, \va{\alpha} \cp \va{r}) \cdot \va{\grad} F(\va{r}) &= (\va{\grad} F(\va{r}) \cp \delta \, \va{\alpha}) \cdot \va{r} \\
+&= (\va{r} \cp \va{\grad} F(\va{r})) \cdot \delta \, \va{\alpha} \\
+&= i \, (\delta \, \va{\alpha} \cdot \va{L}) \, F(\va{r}) 
+\end{align*}
+con
+\begin{align}
+\va{L} = - i \, \va{r} \cp \va{\grad}
+\label{eq:ecuacion_10_097}
+\end{align}
+Entonces tenemos
+\begin{align}
+F(\va{r}^{\, \prime}) \approx (1 + i \, \delta \va{\alpha} \cdot \va{L}) \, F (\va{r})
+\label{eq:ecuacion_10_098}
+\end{align}
+Por lo tanto, el operador $\va{L}$ es el generador de las rotaciones en el espacio de las funciones. Anteriormente se vio que este operador es Hermítico, por lo que sus valores propios son reales.
+\par
+Veamos qué forma tiene una rotación finita. Al igual que en caso del espacio $\va{r}$ tomaremos $\delta \, \va{\alpha} = \va{\alpha} / N$ y consideraremos que para tener una transformación finita debemos hacer el producto de un número infinito de transformaciones infinitesimales. Entonces,
 \end{document}
