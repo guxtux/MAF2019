@@ -678,7 +678,7 @@ al ocupar esta igualdad en la ec. (\ref{eq:ecuacion_10_107}), se tiene que
 &= 0 \label{eq:ecuacion_10_109}
 \end{align}
 Por lo tanto, $L^{2}$ conmuta con cualquier $L_{i}$ . A $L^{2}$ se le llama \emph{el Casimir} del álgebra de Lie de $SO(3)$. Como $L^{2}$ conmuta con cualquier $L_{i}$, este operador comparte vectores propios con estos tres operadores.
-\section{Ecuación de valores propios de $L^{2}$.}
+\section{Ecuación de valores propios de \texorpdfstring{$L^{2}$.}{L2}}
 Para obtener los vectores y valores propios de $M_{i}$ y $M^{2}$ resolvimos un problema de álgebra lineal, mas para obtener los vectores propios de $L^{2}$ y por ejemplo, los de $L_{z}$, se deben plantear las ecuaciones
 \begin{align}
 \begin{aligned}
@@ -709,7 +709,7 @@ Por lo tanto, $m$ debe de ser un entero. Posteriormente veremos los posibles val
 \par
 Sustituyendo la ec. (\ref{eq:ecuacion_10_113}) en la ec. (\ref{eq:ecuacion_10_111}), se encuentra que
 \begin{align}
-\dfrac{1}{\sin \theta} \, \pdv{\theta} \left( \sin \theta \, \pdv{P_{\lambda}^{m} (\theta}{\theta} \right) - \dfrac{m^{2}}{\sin^{2} \theta} \pdv[2]{P_{\lambda}^{m} (\theta)}{\theta} = \lambda \, P_{\lambda}^{m} (\theta) \label{eq:ecuacion_10_115}
+\dfrac{1}{\sin \theta} \, \pdv{\theta} \left( \sin \theta \, \pdv{P_{\lambda}^{m} (\theta)}{\theta} \right) - \dfrac{m^{2}}{\sin^{2} \theta} \pdv[2]{P_{\lambda}^{m} (\theta)}{\theta} = - \lambda \, P_{\lambda}^{m} (\theta) \label{eq:ecuacion_10_115}
 \end{align}
 Con el cambio de variable $U = \cos \theta$, se tiene
 \begin{align}
@@ -722,9 +722,9 @@ Por lo que la ec. (\ref{eq:ecuacion_10_115}) toma la forma
 \label{eq:ecuacion_10_117}
 \end{align}
 Esta es la llamada \emph{ecuación asociada de Legendre}.
- Para el caso $m = 0$, se define $P_{\lambda}^{0} = \P_{\lambda} (u)$, que debe satisfacer
+ Para el caso $m = 0$, se define $P_{\lambda}^{0} = P_{\lambda} (u)$, que debe satisfacer
  \begin{align}
-\dv{u} \left( (1 - u^{2}) \, \dv{P_{\lambda}^{m} (u)}{u} \right) + \lambda \, P_{\lambda}^{m} (u) = 0
+\dv{u} \left( (1 - u^{2}) \, \dv{P_{\lambda} (u)}{u} \right) + \lambda \, P_{\lambda} (u) = 0
 \label{eq:ecuacion_10_118}
 \end{align}
 que es la llamada \emph{ecuación de Legendre}. En lo que sigue, estudiando la estructura del grupo de rotaciones, obtendremos las soluciones de estas ecuaciones. Primero se verá la ortonormalidad de las soluciones de la ec. (\ref{eq:ecuacion_10_115}).
@@ -777,7 +777,86 @@ Por lo tanto, las funciones $P_{\lambda^{\prime}}^{m} (\theta)$ son ortogonales.
 \par
 Empleando la ortogonalidad de las funciones $e^{i \, m \, \varphi}$ y $P_{\lambda}^{m}$, se puede escojer $\alpha_{l m}$ de tal forma que los armónicos esféricos sean ortonormales. En efecto, como los armónicos esféricos tienen la forma ec. (\ref{eq:ecuacion_10_113}), se encuentra
 \begin{align}
-\int Y_{\lambda^\prime m^{\prime}}^{*} (\theta, \varphi) \, Y_{\lambda m} (\theta, \varphi) = \nonumber [0.5em]
-\label{eq:ecuacion_10_125}
+&\int Y_{\lambda^\prime m^{\prime}}^{*} (\theta, \varphi) \, Y_{\lambda m} (\theta, \varphi) \dd{\Omega} = \nonumber \\[0.5em]
+&= \int_{0}^{2 \pi} \int_{0}^{\pi} \left( \sin \theta \, \alpha_{\lambda^{\prime} m^{\prime}}^{*} \, e^{-i  \, m \, \varphi} \, P_{\lambda^{\prime}}^{m^{\prime}} (\cos \theta) \, \alpha_{\lambda m} \, e^{i  \, m \, \varphi} \, P_{\lambda}^{m} (\cos \theta) \right) \dd{\theta} \dd{\varphi} = \nonumber \\[0.5em]
+&= \alpha_{\lambda^{\prime} m^{\prime}}^{*} \, \alpha_{\lambda m} \, \int_{0}^{2 \pi} e^{i (m - m^{\prime} \varphi)} \dd{\varphi} \, \int_{0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m^{\prime}} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) \dd{\theta} = \nonumber \\[0.5em]
+&= \alpha_{\lambda^{\prime} m^{\prime}}^{*} \, \alpha_{\lambda m} \, 2 \, \pi \, \delta_{m m^{\prime}} \, \int_{0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m^{\prime}} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) \dd{\theta} = \nonumber \\[0.5em]
+&= \alpha_{\lambda^{\prime} m}^{*} \, \alpha_{\lambda m} \, 2 \, \pi \, \delta_{m m^{\prime}} \, \int_{0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) \dd{\theta} = \nonumber \\[0.5em]
+&= \alpha_{\lambda^{\prime} m}^{*} \, \alpha_{\lambda m} \, 2 \, \pi \, \delta_{m m^{\prime}} \, \beta_{\lambda m} \, \delta_{\lambda^{\prime} \lambda} = \nonumber \\[0.5em]
+&= \abs{\alpha_{\lambda^{\prime} m}}^{2} \, 2 \, \pi \, \beta_{\lambda m} \, \delta_{m m^{\prime}} \,\delta_{\lambda^{\prime} \lambda} \label{eq:ecuacion_10_125}
 \end{align}
+Entonces si,
+\begin{align}
+\abs{\alpha_{\lambda^{\prime} m}}^{2} = \dfrac{1}{2 \, \pi \, \beta_{\lambda m}}
+\label{eq:ecuacion_10_126}
+\end{align}
+se cumple que
+\begin{align}
+\braket{Y_{\lambda^{\prime} m^{\prime}}(\theta, \varphi)}{Y_{\lambda m}(\theta, \varphi)} = \int Y_{\lambda^\prime m^{\prime}}^{*} (\theta, \varphi) \, Y_{\lambda m} (\theta, \varphi) \dd{\Omega} = \delta_{m m^{\prime}} \, \delta_{\lambda^{\prime} \lambda}
+\label{eq:ecuacion_10_127}
+\end{align}
+Así los armónicos esféricos son ortonormales.
+\section{Operadores escalera y espectro de \texorpdfstring{$L^{2}$}{L2}.}
+Antes de resolver la ED (\ref{eq:ecuacion_10_111}) veamos algunas propiedades de las funciones propias $Y_{\lambda m}$ y sus valores propios $\lambda, m$. Primero notemos que para cualquier función $f$, se tiene que
+\begin{align*}
+0 \leq \braket{L_{x} \, f}{L_{x} \, f} = \braket{f}{L_{x}^{\dagger} \, L_{x} \, f} = \braket{f}{L_{x}^{2} \, f} \\[0.5em]
+0 \leq \braket{L_{y} \, f}{L_{y} \, f} = \braket{f}{L_{y}^{\dagger} \, L_{y} \, f} = \braket{f}{L_{y}^{2} \, f}
+\end{align*}
+por lo que
+\begin{align*}
+0 \leq \braket{f}{(L_{2}^{2} + L_{y}^{2}) \, f} = \braket{f}{(L^{2} - L_{z}^{2}) \, f}
+\end{align*}
+En particular, si $f = Y_{\lambda m}$, se llega a
+\begin{align}
+(L^{2} - L_{z}^{2}) \, Y_{\lambda m} = (\lambda - m^{2}) \, Y_{\lambda m}
+\label{eq:ecuacion_10_128}
+\end{align}
+entonces
+\begin{align}
+0 \leq (\lambda - m^{2}) \, \braket{Y_{\lambda m}}{Y_{\lambda m}}
+\label{eq:ecuacion_10_129}
+\end{align}
+Nótese que la única forma de que se cumpla la desigualdad $(\lambda - m^{2}) < 0$ es que $\braket{Y_{\lambda m}}{Y_{\lambda m}} = 0$, es decir, $Y_{\lambda m} = 0$. Si $Y_{\lambda m} \geq 0$, entonces
+\begin{align}
+- \sqrt{\lambda} \leq m \leq \sqrt{\lambda}
+\label{eq:ecuacion_10_130}
+\end{align}                                                   
+Esta restricción nos permitirá encontrar los valores de $\lambda$.
+\par
+Veamos ahora los operadores de ascenso y descenso:
+\begin{align}
+L_{\pm} = L_{x} \pm i \, L_{y}
+\label{eq:ecuacion_10_131}
+\end{align}
+Notemos que
+\begin{align*}
+L_{\mp} \, L_{\pm} &= (L_{x} \mp i \, L_{y})(L_{x} \pm i \, L_{y}) = L_{x}^{2} + L_{y}^{2} \pm i (L_{x} \,L_{y} - L_{y} \,L_{x}) = \\[0.5em]
+&= L_{x}^{2} + L_{y}^{2} + L_{z}^{2} - L_{z}^{2} \mp L_{z} = \\[0.5em]
+&= L^{2} \mp L_{z} = \\[0.5em]
+&= L^{2} - (L_{z}^{2} \pm L_{z})
+\end{align*}
+es decir,
+\begin{align}
+L_{\mp} \, L_{\pm} = L^{2} - (L_{z}^{2} \pm L_{z})
+\label{eq:ecuacion_10_132}
+\end{align}
+Claramente $L_{\pm}$ conmuta con $L^{2}$:
+\begin{align}
+\comm{L^{2}}{L_{\pm}} = 0
+\label{eq:ecuacion_10_133}
+\end{align}
+Esto indica que $L_{\pm}$ tiene funciones propias comunes con $L^{2}$. Además
+\begin{align}
+\comm{L_{z}}{L_{x} \pm i \, L_{y}} &= \comm{L_{z}}{L_{x}} \pm \comm{L_{z}}{L_{y}} = \nonumber \\[0.5em]
+&= i \, L_{y} \pm L_{z} \nonumber \\[0.5em]
+&= \pm (L_{x} \pm i \, L_{y}) 
+\label{eq:ecuacion_10_134}
+\end{align}
+es decir
+\begin{align}
+\comm{L_{z}}{L_{\pm}} = \pm L_{\pm}
+\label{eq:ecuacion_10_135}
+\end{align}
+Por lo que $L_{\pm}$ no tiene funciones propias comunes con $L_{z}$.
+%pag 227
 \end{document}
