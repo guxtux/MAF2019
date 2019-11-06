@@ -1,4 +1,4 @@
-\RequirePackage[l2tabu, orthodox]{nag}
+%\RequirePackage[l2tabu, orthodox]{nag}
 \input{../preambulo_doc}
 \usepackage{mathrsfs}
 \usepackage{bigints}
@@ -9,7 +9,7 @@
 \newcommand{\prima}[1]{#1^{\prime}}
 \newtheorem{teorema}{{\it Teorema}}[section]
 %\usepackage{enumerate}
-%\author{M. en C. Gustavo Contreras Mayén. \texttt{curso.fisica.comp@gmail.com}}
+\author{}
 \title{Polinomios de Laguerre \\ {\large Matemáticas Avanzadas de la Física}}
 \date{ }
 \begin{document}
@@ -665,5 +665,76 @@ De la tabla es evidente que:
 \item Para cada valor de $\ell$, existen $(2 \, \ell + 1)$ valores posibles para $m$.
 \item Para cada valor de $n$, existen un total de $n^{2}$ funciones propias degeneradas.
 \end{enumerate}
+\newpage
+%Referencia: Arfken. Example 13.2.1 The hydrogen atom
+\section{El átomo de hidrógeno.}
+Tal vez la aplicación más importante de los polinomios de Laguerre en física, se presenta en las soluciones de la ecuación de onda de Schrödinger para el átomo de hidrógeno. Esta ecuación es
+\begin{align}
+- \dfrac{\hbar}{2 m} \laplacian{\psi} - \dfrac{Z \, e^{2}}{4 \, \pi \, \epsilon_{0} \, r} \, \psi = E \, \Psi\label{eq:ecuacion_13_084}
+\end{align}
+en donde $Z = 1$ para el átomo de hidrógeno, $Z = 2$ para el átomo de helio ionizado y así sucesivamente, $m$ es la masa del electrón y $-e$ su carga. Note que el segundo término de la ecuación corresponde al potencial Coulombiano atractivo. Desde luego estamos considerando que el protón (de carga $e$) está colocado en el origen de coordenadas. Dado que el potencial sólo depende de la coordenada radial $r$, es conveniente resolver esta ecuación en un sistema coordenado esférico.
+\par
+Mediante la separación de variables, se encuentra que la dependencia angular de $\psi$ es $Y_{l}^{m} (\theta, \varphi)$. 
+\par
+La parte radial $R(r)$ satisface la ecuación
+\begin{align}
+- \dfrac{\hbar}{2 m} \, \dfrac{1}{r} \, \dv{r} \left( r^{2} \, \dv{R}{r} \right) - \dfrac{Z \, e^{2}}{4 \, \pi \, \epsilon_{0} \, r} \, R + \dfrac{\hbar}{2 \, m} \, \dfrac{l (l + 1)}{r^{2}} \, R = E \, R
+\label{eq:ecuacion_13_085}
+\end{align}
+Para estados ligados, $R \to 0$ mientras $r \to \infty$, y $R$ es finito en el origen, $r = 0$. No consideramos estados continuos con energía positiva. Sólo cuando se incluyen estos últimos, las funciones de onda de hidrógeno forman un conjunto completo.
+\par
+Con la finalidad de re-escalar la variable $r$ a una variable $\rho$ adimensional, usaremos las siguientes expresiones
+\begin{align}
+\begin{aligned}
+\rho &= \alpha \, r \\[0.5em]
+\alpha^{2} &= - \dfrac{8 \, m \, E}{\hbar^{2}} \hspace{1cm} E < 0 \\[0.5em]
+\lambda &= \dfrac{m \, Z \, e^{2}}{ 2 \, \pi \, \epsilon_{0} \, \alpha \, \hbar^{2}}
+\end{aligned}
+\label{eq:ecuacion_13_086}
+\end{align}
+la ecuación (\ref{eq:ecuacion_13_085}) se transforma en
+\begin{align}
+\dfrac{1}{\rho^{2}} \, \dv{\rho} \left( \rho^{2} \, \dv{\chi (\rho)}{\rho} \right) + \left[ \dfrac{\lambda}{\rho} - \dfrac{1}{4} - \dfrac{l (l+1)}{\rho^{2}} \right] \, \chi (\rho) = 0
+\label{eq:ecuacion_13_087}
+\end{align}
+donde $\chi(\rho) = R \left( \dfrac{\rho}{\alpha} \right)$.
+\par
+Comparando la ec. (\ref{eq:ecuacion_08_80}) para $\psi_{p}^{n}$, tendremos que la ec. (\ref{eq:ecuacion_13_087}) se satisface con
+\begin{align}
+\rho \, \chi (\rho) = \exp \left( \dfrac{\rho}{2} \right) \, \rho^{l + 1} \, L_{\lambda - l + 1}^{2 l +1} (\rho)
+\label{eq:ecuacion_13_088}
+\end{align}
+en donde $n$ se sustituye por $ 2 \, l + 1$ y $p = \lambda - l + 1$.
+\par
+El parámetro $\lambda$ debe restringirse al requerir que $n$ sea un número entero\footnote{Esta es la notación convencional para $\lambda$, no es la misma $n$ que el índice $n$ en $\psi_{n}^{k}$.} $n = 1, 2, 3 , \ldots$. Esto es necesario debido a que la función de Laguerre para $n$ no entero, diverge igual que $\rho^{n} \, \exp(\rho)$ lo cual no es aceptable para nuestro problema físico, en el que
+\begin{align*}
+\lim_{r \to \infty} R(r) = 0
+\end{align*}
+La restricción en $\lambda$ impuesta por la condición de frontera, tiene el efecto en cuantificar la energía
+\begin{align}
+E_{n} = - \dfrac{Z^{2} \, m}{2 \, n^{2 \, \hbar^{2}}} \, \left( \dfrac{e^{2}}{4 \, \pi \, \epsilon_{0}} \right)^{2}
+\label{eq:ecuacion_13_089}
+\end{align}
+El signo negativo interviene debido a que en este caso se trata con los estados ligados $(E < 0)$ correspondientes a un electrón que tiene justamente la capacidad para escapar al infinito, donde el potencial coulombiano tiende a cero. Usando este resultado para $E_{n}$, tenemos que
+\begin{align}
+\begin{aligned}
+\alpha &= \dfrac{m \, e^{2}}{2 \, \pi \, \epsilon_{0} \, \hbar^{2}} \, \dfrac{Z}{n} = \dfrac{2 \, Z}{n \, a_{0}} \\[0.5em]
+\rho &= \dfrac{2 \, Z}{n \, a_{0}}
+\end{aligned}
+\label{eq:ecuacion_13_090}
+\end{align}
+con
+\begin{align*}
+a_{0} = \dfrac{4 \, \pi \, \epsilon_{0} \, \hbar^{2}}{m \, e^{2}} \hspace{1.5cm} \mbox{es el radio de Bohr}
+\end{align*}
+Por lo que la función de onda normalizada para el átomo de hidrógeno está dada por
+\begin{align}
+\begin{aligned}
+\psi_{n l m} (r , \theta, \varphi) &= \left[ \left( \dfrac{2 \, Z}{n \, a_{0}} \right)^{3} \, \dfrac{(n - l -1)!}{2 \, n \, (n + l)!} \right]^{1/2} \, \exp \left( - \dfrac{\alpha \, r}{2} \right) * \\[1em]
+&* (\alpha \, r)^{L} \, L_{n - l +1}^{2 l +1}(\alpha \, r) \, Y_{l}^{m} (\theta, \varphi)
+\end{aligned}
+\label{eq:ecuacion_13_091}  
+\end{align}
+Las soluciones regulares se tienen para $N \geq l + 1$, así el estado más bajo conb $l = 1$ (llamado estado $2p$), ocurre sólo con $n = 2$.
 \end{document}
 
