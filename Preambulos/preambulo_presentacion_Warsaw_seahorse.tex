@@ -1,0 +1,203 @@
+\RequirePackage{currfile}
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{standalone}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{hyperref}
+%\hypersetup{colorlinks,linkcolor=,urlcolor=blue}
+%\hypersetup{colorlinks,urlcolor=blue}
+\usepackage{xcolor,soul}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{multicol}
+\usepackage{bookmark}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{patterns, matrix, backgrounds, decorations,shapes, arrows.meta}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[os=win]{menukeys}
+\usepackage{pifont}
+\usepackage{pbox}
+\usepackage{caption}
+\captionsetup{font=scriptsize,labelfont=scriptsize}
+%\usepackage[sfdefault]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
+
+%Sección de definición de colores
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{bisque}{rgb}{1.0, 0.89, 0.77}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{armygreen}{rgb}{0.29, 0.33, 0.13}
+\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
+\definecolor{cadetblue}{rgb}{0.37, 0.62, 0.63}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{brown}{rgb}{0.59, 0.29, 0.0}
+\definecolor{OliveGreen}{rgb}{0,0.25,0}
+
+
+\usefonttheme[onlymath]{serif}
+%Sección de definición de nuevos comandos
+
+\newcommand*{\TitleParbox}[1]{\parbox[c]{1.75cm}{\raggedright #1}}%
+\newcommand{\python}{\texttt{python}}
+\newcommand{\textoazul}[1]{\textcolor{blue}{#1}}
+\newcommand{\azulfuerte}[1]{\textcolor{blue}{\textbf{#1}}}
+\newcommand{\funcionazul}[1]{\textcolor{blue}{\textbf{\texttt{#1}}}}
+\newcommand{\ptilde}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\stilde}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\ttilde}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\ntilde}[2]{\ensuremath{{#1}^{(#2)}}}
+\renewcommand{\arraystretch}{1.5}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\renewcommand{\rmdefault}{cmr}% cmr = Computer Modern Roman
+
+\linespread{1.5}
+
+\usefonttheme{professionalfonts}
+%\usefonttheme{serif}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+
+%Sección para el tema de beamer, con el theme, usercolortheme y sección de footers
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  
+  %\useoutertheme{infolines}
+  \useoutertheme{default}
+  \usecolortheme{spruce}
+  \setbeamercovered{invisible}
+  % or whatever (possibly just delete it)
+  \setbeamertemplate{section in toc}[sections numbered]
+  \setbeamertemplate{subsection in toc}[subsections numbered]
+  \setbeamertemplate{subsection in toc}{\leavevmode\leftskip=3.2em\rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}\inserttocsubsection\par}
+  \setbeamercolor{section in toc}{fg=blue}
+  \setbeamercolor{subsection in toc}{fg=blue}
+  \setbeamercolor{frametitle}{fg=blue}
+
+  \setbeamertemplate{footline}
+  \beamertemplatenavigationsymbolsempty
+  \setbeamertemplate{headline}{}
+}
+
+\makeatletter
+\setbeamercolor{section in foot}{bg=gray!30, fg=black!90!orange}
+\setbeamercolor{subsection in foot}{bg=blue!30!yellow, fg=red}
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+\makeatother  
+
+\makeatletter
+\patchcmd{\beamer@sectionintoc}
+  {\vfill}
+  {\vskip\itemsep}
+  {}
+  {}
+\makeatother
+
+% \makeatletter
+% \patchcmd{\hyper@link@}
+%   {{\Hy@tempb}{#4}}
+%   {{\Hy@tempb}{\ul{#4}}}
+%   {}{}
+% \makeatother
+
+
+% Sección para el código
+
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Keywords}{rgb}{255,0,0}
+\definecolor{Strings}{rgb}{255,0,255}
+\definecolor{Comments}{rgb}{0,0,255}
+\definecolor{Numbers}{rgb}{255,128,0}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{0.99\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\renewcommand{\lstlistingname}{Código}
+
+\lstset{
+basicstyle=\ttfamily,
+columns=fullflexible,
+breaklines=true
+}
+
+\lstdefinestyle{codigopython}{%
+  language=Python,                % choose the language of the code
+  %basicstyle=\footnotesize\small,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\scriptsize,      % the size of the fonts that are used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,   		% adds a frame around the code
+  tabsize=2,  		% sets default tabsize to 2 spaces
+  captionpos=t,   		% sets the caption-position to bottom
+  breaklines=true,    	% sets automatic line breaking
+  breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
+  escapeinside={\#},  % if you want to add a comment within your code
+  stringstyle =\color{OliveGreen},
+  texcl = true,
+  %otherkeywords={{as}},             % Add keywords here
+  keywordstyle = \color{blue},
+  commentstyle = \color{black},
+  identifierstyle = \color{black},
+  % literate=%
+  %         {á}{{\'a}}1
+  %         {é}{{\'e}}1
+  %         {í}{{\'i}}1
+  %         {ó}{{\'o}}1
+  %         {ú}{{\'u}}1
+  %
+  %keywordstyle=\ttb\color{deepblue}
+  %fancyvrb = true,
+literate={0}{{\textcolor{red}{0}}}{1}%
+            {1}{{\textcolor{red}{1}}}{1}%
+            {2}{{\textcolor{red}{2}}}{1}%
+            {3}{{\textcolor{red}{3}}}{1}%
+            {4}{{\textcolor{red}{4}}}{1}%
+            {5}{{\textcolor{red}{5}}}{1}%
+            {6}{{\textcolor{red}{6}}}{1}%
+            {7}{{\textcolor{red}{7}}}{1}%
+            {8}{{\textcolor{red}{8}}}{1}%
+            {9}{{\textcolor{red}{9}}}{1}%
+            {.0}{{\textcolor{red}{.0}}}{2}% Following is to ensure that only periods
+            {.1}{{\textcolor{red}{.1}}}{2}% followed by a digit are changed.
+            {.2}{{\textcolor{red}{.2}}}{2}%
+            {.3}{{\textcolor{red}{.3}}}{2}%
+            {.4}{{\textcolor{red}{.4}}}{2}%
+            {.5}{{\textcolor{red}{.5}}}{2}%
+            {.6}{{\textcolor{red}{.6}}}{2}%
+            {.7}{{\textcolor{red}{.7}}}{2}%
+            {.8}{{\textcolor{red}{.8}}}{2}%
+            {.9}{{\textcolor{red}{.9}}}{2}%
+            {\ }{{ }}{1}% handle the space
+        ,%
+        %mathescape=true
+        %escapeinside={*@}
+        escapeinside={A_}{_B}
+}
