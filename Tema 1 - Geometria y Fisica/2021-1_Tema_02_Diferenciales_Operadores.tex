@@ -201,7 +201,7 @@ Al pasar de un punto
 \begin{align*}
 P(u_{1}, u_{2}, u_{3})
 \end{align*}
-a otro infinitisimalmente cercano 
+a otro infinitesimalmente cercano 
 \begin{align*}
 P(u_{1} + \dd{u}_{1}, u_{2} + \dd{u_{2}} + u_{3} + \dd{u_{3}})
 \end{align*}
@@ -217,4 +217,142 @@ El cambio diferencial de una función (o campo) escalar $\phi(u_{1}, u_{2}, u_{3
 \label{eq:ecuacion_01_26}
 \end{align}
 \end{frame}
+\begin{frame}
+\frametitle{El gradiente}
+Teniendo en cuenta la ec. (\ref{eq:ecuacion_01_21}) se sigue que:
+\begin{align}
+\dd{\vb{r}} = \sum_{j=1}^{3} h_{j} \, \vu{e}_{j} \dd{u_{j}}
+\label{eq:ecuacion_01_27}
+\end{align}
+\pause
+Multiplicando escalarmente por $\vu{e}_{i}$ tenemos que:
+\end{frame}
+\begin{frame}
+\frametitle{El gradiente}
+\begin{align*}
+\dd{\vb{r}} \cdot \vu{e}_{i} &= \sum_{j=1}^{3} h_{j} \, \vu{e}_{j} \cdot \vu{e}_{j} \dd{u_{j}} = \sum_{j=1}^{3} h_{j} \, \delta_{ij} \dd{u_{j}} \\[0.5em]
+&= h_{i} \dd{u_{i}} \\[1em]
+&\Longrightarrow \dd{u_{i}} = \dfrac{1}{h_{i}} \dd{\vb{r}} \cdot \vu{e}_{i}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El gradiente}
+Al sustituir en la ec. (\ref{eq:ecuacion_01_26}), llegamos a:
+\begin{align*}
+\dd{\phi} &= \sum_{i=1}^{3} \pdv{\phi}{u_{i}} \, \dfrac{1}{h_{i}} \, \vu{e}_{i} \cdot \dd{\vb{r}} = \\[0.5em]
+&= \dd{\vb{r}} \cdot \left( \sum_{i=1}^{3} \dfrac{\vu{e_{i}}}{h_{i}} \, \pdv{\phi}{u_{i}} \right)
+\end{align*}
+\pause
+Al término entre paréntesis lo denotamos $\nabla{\phi}$.
+\end{frame}
+\begin{frame}
+\frametitle{Definición del gradiente}
+El operador \emph{nabla} es:
+\begin{align}
+\nabla{\phi} = \sum_{i=1}^{3} \dfrac{\vu{e_{i}}}{h_{i}} \, \pdv{\phi}{u_{i}} = \sum_{i=1}^{3} \vu{e}_{i} \left( \nabla{\phi} \right)_{i}
+\label{eq:ecuacion_01_28}
+\end{align}
+\pause
+Se le llamará \emph{gradiente de la función escalar} $\phi(u_{i})$, por tanto
+\begin{align}
+\dd{\phi} = \dd{\vb{r}} \cdot \nabla{\phi}
+\label{eq:ecuacion_01_29}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Derivada direccional}
+Como tenemos que
+\begin{align*}
+\dd{\vb{r}} = \vu{n} \dd{l}
+\end{align*}
+\pause
+Se sigue que:
+\begin{align*}
+\dv{\phi}{l} = \vu{n} \cdot \nabla{\phi}
+\end{align*}
+que corresponde a la definición de \emph{derivada direccional} de la función $\phi$ en la dirección de $\vu{n}$.
+\end{frame}
+\subsection{Propiedades del gradiente}
+\begin{frame}
+\frametitle{Superficies cercanas}
+Para estudiar las propiedades del gradiente tomemos un par de superficies infinitesimalmente cercanas, sobre cada una de las cuales la función $\phi$ toma valores constantes e infinitesimalmente distintos: $\phi$ y $\phi + \dd{\phi}$.
+\\
+\bigskip
+\pause
+En la teoría de campos se les llama \emph{superficies equipotenciales}.
+\end{frame}
+\begin{frame}
+\frametitle{Superficies equipotenciales}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/Superficies_Equipotenciales.png}
+    \caption{Superficies equipotenciales.}
+    \label{fig:Superficies_Equipotenciales}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades del gradiente}
+De la ec. (\ref{eq:ecuacion_01_29}) se tiene que:
+\begin{align*}
+\dd{\phi} = \dd{\vb{u}} \cdot \nabla{\phi} = \abs{\dd{\vb{r}}} \, \abs{\nabla{\phi}} \, \cos \theta
+\end{align*}
+donde $\theta$ es el ángulo entre $\dd{\vb{r}}$ y $\nabla{\phi}$.
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades del gradiene}
+Si el vector $\dd{vb{r}}$ se sitúa en el plano $\phi = \mbox{ constante}$, entonces: $\dd{\phi} = =$, por lo que
+\begin{align*}
+0 = \abs{\dd{\vb{r}}} \, \abs{\nabla{\phi}} \, \cos \theta
+\end{align*}
+\pause
+Como $\nabla{\phi}$ es en general diferente de cero, ya que $\phi(u_{i})$ es una función arbitraria, y como $\abs{\dd{\vb{r}}} \neq 0$, se sigue que $\cos \theta = 0$, entonces $\theta = \ang{90}$
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades del gradiente}
+En consecuencia: $\nabla{\phi}$ es \emph{perpendicular} a la superficie $\phi = \mbox{ constante}$.
+\\
+\bigskip
+\pause
+El valor máximo de $\dd{\phi}$ se presenta cuando $\theta = 0$, es decir:
+\begin{align*}
+\dd{\theta}_{\max} &= \abs{\nabla{\phi}} \, \abs{\dd{\vb{r}}} \dd{l} \\[1em]
+\mbox{o cuando } \hspace{0.5cm} \left( \dv{\phi}{l} \right)_{\max} &= \abs{\nabla{\phi}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Módulo del gradiente}
+Entonces el módulo del gradiente corresponde al valor máximo de la derivada direccional y el gradiente apunta en la dirección en que tal derivada es máxima.
+\end{frame}
+\begin{frame}
+\frametitle{Construcción de sistema curvilíneos}
+Dado que para cada punto de una línea o superficie equipotencial es posible trazar el vector $\nabla{\phi}$, entonces es posible construir una red coordenada ortogonal a las equipotenciales.
+\end{frame}
+\begin{frame}
+\frametitle{Construcción de sistema curvilíneos}
+Por lo que, dada una familia de curvas en el plano (o de superficies curvas en el espacio), es posible obtener otras que le sean ortogonales.
+\end{frame}
+\begin{frame}
+\frametitle{Construcción de sistema curvilíneos}
+Por lo que tenemos un método eficaz de construcción de sistemas de coordenadas curvilíneas ortogonales.
+\end{frame}
+\begin{frame}
+\frametitle{Consideración importante}
+Hay que tomar en cuenta que $\nabla$ \emph{no} es un vector, sino un \emph{operador vectorial}: $\nabla$ no tiene dirección, a menos que opere sobre una función.
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+Para ejercitar el avance que llevamos, resuelve:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}
+\item Demuestra que $\nabla{\phi \psi} = \phi \, \nabla{\psi} + \psi \, \nabla{\phi}$
+\item Si $f = f(r)$ con $r = \sqrt{x^{2} + y^{2}+ z^{2}}$, demuestra que
+\begin{align*}
+\nabla{f(r)} = \vu{r} \, \dv{f(r)}{r}
+\end{align*}
+\end{enumerate}
+\end{frame}
+\section{Divergencia}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Flujo de campo vectorial}
 \end{document}
