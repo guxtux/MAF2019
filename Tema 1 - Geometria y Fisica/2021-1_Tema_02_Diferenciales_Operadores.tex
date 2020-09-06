@@ -355,4 +355,376 @@ Para ejercitar el avance que llevamos, resuelve:
 \section{Divergencia}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Flujo de campo vectorial}
+\begin{frame}
+\frametitle{Flujo de campo vectorial}
+Dada una superficie diferencial orientada $\dd{\vb{S}}$ (figura \ref{fig:figura_superficie_diferencial}), se define el \emph{flujo} del campo vectorial $\vb{B}$ a través de $\dd{\vb{S}}$ como:
+\begin{align*}
+\mbox{flujo diferencial } = \dd{\Phi} = \vb{B} \cdot \dd{\vb{S}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Superficie diferencial}
+\begin{minipage}{0.45\linewidth}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.4]{Imagenes/Superficie_Diferencial.png}
+    \caption{Flujo del campo $\vb{B}$ a través de una superficie abierta.}
+    \label{fig:figura_superficie_diferencial}
+\end{figure}
+\end{minipage}
+\hspace{1.5cm}
+\pause
+\begin{minipage}{0.3\linewidth}
+\fontsize{12}{12} \selectfont
+El flujo es máximo si $\vb{B} \parallel \dd{\vb{S}}$ y es nulo si $\vb{B} \bot \dd{\vb{S}}$.
+\end{minipage}
+\end{frame}
+\begin{frame}
+\frametitle{Superficie diferencial cerrada}
+Nos enfocaremos en el cálculo del flujo a través de una superficie diferencial \emph{cerrada}, que contenga un volumen diferencial $\dd{V}$ limitado por superficies coordenadas.
+\end{frame}
+\begin{frame}
+\frametitle{Superficie diferencial cerrada}
+El volumen será entonces un paralelepípedo curvilineo:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/Diferencial_Volumen.png}
+    \caption{Elemento diferencial de volumen.}
+    \label{fig:Diferencial_Volumen}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Flujo total en una cara}
+Consideraremos el flujo total como la suma de los flujos a través de cada pareja de superficies.
+\\
+\bigskip
+Como primer paso, analizamos el flujo sobre las caras $\dd{\vb{S}_{1}}$:
+\end{frame}
+\begin{frame}
+\frametitle{Flujo total en un cara}
+El flujo sobre las caras $\dd{\vb{S}_{1}}$:
+\begin{eqnarray*}
+\dd{\Phi} &=& \dd{\Phi_{u_{1} + \dd{u_{1}}}} + \dd{\Phi_{u_{1}}} \\[0.5em] \pause
+&=& \left( B_{1} \dd{S_{1}} \right)_{u_{1} + \dd{u_{1}}} - \left( B_{1} \dd{S_{1}} \right)_{u_{1}} \\[0.5em] \pause
+&=& \left( B_{1} \, h_{2} \, h_{3} \dd{u_{2}} \dd{u_{3}} \right)_{u_{1} + \dd{u_{1}}} - \left( B_{1} \, h_{2} \, h_{3} \dd{u_{2}} \dd{u_{3}} \right)_{u_{1}} \\[0.5em] \pause
+&=& \left( B_{1} \, h_{2} \, h_{3} \right)_{u_{1} + \dd{u_{1}}} \dd{u_{2}} \dd{u_{3}} - \left( B_{1} \, h_{2} \, h_{3} \right)_{u_{1}} \dd{u_{2}} \dd{u_{3}}
+\end{eqnarray*}
+\end{frame} 
+\begin{frame}
+\frametitle{Elementos diferenciales}
+Los elementos diferenciales $\dd{u_{2}} \dd{u_{3}}$ han sido extraídos del primer término, ya que son independientes de $u_{1}$.
+\end{frame}
+\begin{frame}
+\frametitle{Expansión en serie de Taylor}
+Si hacemos una expansión en serie de Taylor alrededor de $u_{1}$, tendremos:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\left( B_{1} \, h_{2} \, h_{3} \right)_{u_{1} + \dd{u_{1}}} = \left( B_{1} \, h_{2} \, h_{3} \right)_{u_{1}} + \pdv{\left( B_{1} \, h_{2} \, h_{3} \right)}{u_{1}} \dd{u_{1}} + \ldots
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Flujo sobre una cara}
+Por lo que el flujo sobre una cara resulta:
+\begin{eqnarray*}
+\dd{\Phi_{1}} &=& \pdv{\left( B_{1} \, h_{2} \, h_{3} \right)}{u_{1}} \dd{u_{1}} \dd{u_{2}} \dd{u_{3}} = \\[0.5em] \pause
+&=& \pdv{\left( B_{1} \, h_{2} \, h_{3} \right)}{u_{1}} \, \dfrac{\dd{V}}{h_{1} h_{2} h_{3}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Flujo en las otras caras}
+De manera análoga, el flujo en las otras caras es:
+\begin{align*}
+\dd{\Phi_{2}} &= \pdv{\left( B_{2} \, h_{3} \, h_{1} \right)}{u_{2}} \, \dfrac{\dd{V}}{h_{1} h_{2} h_{3}} \\[1em]
+\dd{\Phi_{3}} &= \pdv{\left( B_{3} \, h_{1} \, h_{2} \right)}{u_{3}} \, \dfrac{\dd{V}}{h_{1} h_{2} h_{3}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Flujo total}
+El flujo total $\dd{\Phi}$ que atraviesa el volumen $\dd{V}$ es:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\dd{\Phi} &= \dd{\Phi_{1}} + \dd{\Phi_{2}} + \dd{\Phi_{3}} = \\[1em]
+&= \left[ \pdv{\left( B_{1} \, h_{2} \, h_{3} \right)}{u_{1}} + \pdv{\left( B_{2} \, h_{3} \, h_{1} \right)}{u_{2}} + \pdv{\left( B_{3} \, h_{1} \, h_{2} \right)}{u_{3}} \right] \, \dfrac{\dd{V}}{h_{1} h_{2} h_{3}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Flujo total simplificado}
+Hacemos $h \equiv h_{1} h_{2} h_{3}$, por lo que el flujo total es:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\dd{\Phi} &= \left[ \pdv{u_{1}} \left( \dfrac{B_{1} \, h}{h_{1}} \right) + \pdv{u_{2}} \left( \dfrac{B_{2} \, h}{h_{2}} \right) + \pdv{u_{3}} \left( \dfrac{B_{3} \, h}{h_{3}} \right) \right] = \\[1em]
+&= {\rm Div} \, \vb{B} \dd{V}
+\end{align*}
+\end{frame}
+\subsection*{Definición de divergencia}
+\begin{frame}
+\frametitle{Definición de divergencia}
+Se define la \emph{divergencia del campo $\vb{B}$} como la siguiente función escalar:
+\begin{align}
+{\rm Div} \, \vb{B} = \dfrac{1}{h} \sum_{i=1}^{3} \pdv{u_{i}} \left( \dfrac{B_{i} \, h}{h_{i}} \right)
+\label{eq:ecuacion_01_30}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{La divergencia}
+La divergencia es el \emph{flujo por unidad de volumen}:
+\begin{align*}
+{\rm Div} \, \vb{B} = \dfrac{\dd{\Phi}}{\dd{V}}
+\end{align*}
+\pause
+Este resultado se ha obtenido para una unidad de volumen diferencial.
+\end{frame}
+\begin{frame}
+\frametitle{Flujo para un volumen finito}
+Para un volumen finito tenemos que:
+\begin{align*}
+\Phi = \oint \vb{B} \cdot \dd{\vb{S}}
+\end{align*}
+donde ya sabemos que la integración se realiza sobre una superficie \emph{cerrada}.
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo de la integral}
+Para calcular la integral cerrada (que equivale a sumar flujos diferenciales), se descompone el volumen $V$ en un conjunto de volúmenes diferenciales $\dd{V}$.
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo de la integral}
+Las caras comumnes de los paralelepípedos diferenciales contribuyen con flujos iguales y opuestos en signo, que se cancelan al hacer la suma.
+\\
+\bigskip
+\pause
+Las partes no nulas de la integral de área son aquellas que corresponden a caras de la frontera.
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo de la integral}
+Por lo que:
+\begin{align*}
+\Phi = \oint \vb{B} \cdot \dd{\vb{S}} = \int {\rm Div} \, \vb{B} \dd{V}
+\end{align*}
+\pause
+La integral de la divergencia sobre un volumen puede transformarse en una integral que involucra sólo el valor del campo sobre la superficie.
+\end{frame}
+\subsection*{Teorema de la divergencia}
+\begin{frame}
+\frametitle{Teorema de la divergencia}
+El resultado anterior se conoce como el \emph{Teorema de la divergencia}:
+\begin{align}
+\oint \vb{B} \cdot \dd{\vb{S}} = \int {\rm Div} \, \vb{B} \dd{V}
+\label{eq:ecuacion_01_31}
+\end{align}
+La integral se extiende sobre la superficie que rodea al volumen $V$.
+\end{frame}
+\begin{frame}
+\frametitle{Otra expresión para la divergencia}
+De modo alterno tenemos que
+\begin{align*}
+{\rm Div} \, \vb{B} = \lim_{\Delta V \to 0} \dfrac{\displaystyle \oint \vb{S} \dd{\vb{S}}}{\Delta V}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Divergencia en coordenadsa curvilíneas}
+En coordenadas curvilíneas ortogonales se tiene que:
+\begin{align*}
+{\rm Div} \, \vb{B} = \div{\vb{B}}
+\end{align*}
+\pause
+El lado izquierdo de la igualdad se calcula con la ec. (\ref{eq:ecuacion_01_30}) y el lado derecho utilizando el operador gradiente de la ec. (\ref{eq:ecuacion_01_28}).
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+Demuestra que el campo eléctrico de una carga puntal
+\begin{align*}
+\vb{E} = \dfrac{q \, \vu{r}}{4 \, \pi \epsilon_{0} \, r^{2}}
+\end{align*}
+cumple $\div{E} = 0$, para $r \neq 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+La ley de Gauss para el campo eléctrico tiene la forma:
+\begin{align*}
+\oint \vb{E} \cdot \dd{\vb{S}} = \dfrac{q}{\epsilon_{0}}
+\end{align*}
+donde $q = \displaystyle \int \rho \dd{V}$ es la carga encerrada en la superficie y $\rho$ su densidad volumétrica.
+\\
+\bigskip
+Demuestra la ley de Gauss en forma diferencial
+\begin{align*}
+\div{E} = \dfrac{\rho}{\epsilon_{0}}
+\end{align*}
+\end{frame}
+\section{Rotacional}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Circulación de un vector}
+\begin{frame}
+\frametitle{Circulación de un vector}
+Se define la \emph{circulación} de un vector a lo largo de una curva cerrada como:
+\begin{align*}
+\oint \vb{B} \cdot \dd{\vb{l}}
+\end{align*}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.4]{Imagenes/Circulacion_Vector.png}
+    \caption{Trayectoria cerrada sobre la superficie $u_{1} \, u_{3}$}
+    \label{fig:figura_trayectoria_cerrada}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Circuito diferencial}
+Para el circuito diferencial de la figura (\ref{fig:figura_trayectoria_cerrada}):
+\begin{align*}
+\oint_{3} \vb{B} \cdot \dd{\vb{l}} &= - \left( B_{2} \dd{l_{2}} \right)_{u_{1}} + \left( B_{1} \dd{l_{1}} \right)_{u_{2}} + \\[0.5em]
+&+ \left( B_{2} \dd{l_{2}} \right)_{u_{1}+\dd{u_{1}}} - \left( B_{1} \dd{l_{1}} \right)_{u_{2}+\dd{u_{2}}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Expandiendo en una serie}
+Como en el caso de la divergencia, expandimos en una serie de Taylor para luego cancelar términos:
+\begin{eqnarray*}
+\oint_{3} \vb{B} \cdot \dd{\vb{l}} &=& \left[ \displaystyle \pdv{u_{1}} \left( B_{2} \, h_{2}\right) - \pdv{u_{2}} \left( B_{1} \, h_{1} \right) \right] \dd{u_{1}} \dd_{u_{2}} = \\[0.5em] \pause
+&=& \left[ \pdv{u_{1}} \left( B_{2} \, h_{2}\right) - \pdv{u_{2}} \left( B_{1} \, h_{1} \right) \right] \, \dfrac{\dd{S_{3}}}{h_{1} h_{2}} = \\[0.5em] \pause
+&=& ({\rm{Rot}} \, \vb{B})_{3} \dd{S_{3}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo para las otras dos superficies}
+El cálculo realizado ha sido considerando sólo la superficie $\dd{S_{3}}$, por lo que hay que incluir las trayectorias sobre las superficies $u_{1} = \mbox{cte.}$ y $u_{2} = \mbox{cte.}$, así tendremos:
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo para las otras dos superficies}
+Entonces:
+\begin{align*}
+\oint_{1} \vb{B} \cdot \dd{\vb{l}} &= ({\rm{Rot}} \, \vb{B})_{1} \dd{S_{1}} \\[1em]
+\oint_{2} \vb{B} \cdot \dd{\vb{l}} &= ({\rm{Rot}} \, \vb{B})_{2} \dd{S_{2}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El cálculo para una curva cerrada}
+Los resultados anteriores consideran solo a los paralelogramos curvilíneos localizados en las superficies coordenadas.
+\\
+\bigskip
+El caso general se presenta con la curva cerrada $c$ en el espacio, que rodea una superficie diferencial $\dd{\vb{S}}$.
+\end{frame}
+\begin{frame}
+\frametitle{El cálculo para una curva cerrada}
+La curva cerrada se puede descomponer en $\dd{S_{1}}$, $\dd{S_{2}}$, $\dd{S_{3}}$, entonces:
+\begin{align*}
+\oint_{c} \vb{B} \cdot \dd{\vb{l}} = ({\rm{Rot}} \, \vb{B})_{1} \cdot \dd{S} 
+\end{align*}
+\end{frame}
+\subsection*{Definición del rotacional}
+\begin{frame}
+\frametitle{El rotacional}
+Entonces llegamos a:
+\begin{align*}
+{\rm Rot} \, \vb{B} &= \dfrac{\vu{e}_{1}}{h_{2} h_{3}} \left[ \displaystyle \pdv{u_{2}} \left( B_{3} \, h_{3} \right) - \pdv{u_{3}} \left( B_{2} \, h_{2} \right) \right] + \\[0.5em]
+&+ \dfrac{\vu{e}_{2}}{h_{3} h_{1}} \left[ \displaystyle \pdv{u_{3}} \left( B_{1} \, h_{1} \right) - \pdv{u_{1}} \left( B_{3} \, h_{3} \right) \right] + \\[0.5em]
+&+ \dfrac{\vu{e}_{3}}{h_{1} h_{2}} \left[ \displaystyle \pdv{u_{1}} \left( B_{2} \, h_{2} \right) - \pdv{u_{2}} \left( B_{1} \, h_{1} \right) \right]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El rotacional}
+Ocupando el símbolo de Levi-Civita y con $h = h_{1} \, h_{2} \, h_{3}$, tenemos:
+\begin{align}
+\begin{aligned}
+{\rm Rot} \, \vb{B} &= \dfrac{1}{h} \sum_{i,j,k=1}^{3} \vu{e}_{i} \, \epsilon_{ijk} \, h_{i} \, \pdv{u_{j}} \left( B_{k} \, h_{k} \right) = \\[1em]
+&= \sum_{i=1}^{3} \vu{e}_{i} \left( {\rm Rot} \, \vb{B} \right)_{i}
+\end{aligned}
+\label{eq:ecuacion_01_34}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Forma matricial del rotacional}
+En forma matricial queda expresado como:
+\begin{align*}
+{\rm Rot} \vb{B} = \mdet{
+h_{1} \, \vu{e}_{1} & h_{2} \, \vu{e}_{2} & h_{3} \, \vu{e}_{3} \\
+\displaystyle \pdv{u_{1}} & \displaystyle \pdv{u_{2}} & \displaystyle \pdv{u_{3}} \\
+B_{1} \, h_{1} & B_{2} \, h_{2} & B_{3} \, h_{3}
+}
+\end{align*}
+El operador $\pdv*{u_{i}}$ opera solo sobre la tercera fila.
+\end{frame}
+\begin{frame}
+\frametitle{Resultado importante}
+Es posible demostrar que
+\begin{align*}
+{\rm Rot} \, \vb{B} = \curl{B}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Otro resultado imporante}
+De la expresión
+\begin{align*}
+\oint_{c} \vb{B} \cdot \dd{\vb{l}} = (\curl{B}) \cdot \dd{\vb{S}}
+\end{align*}
+\pause
+se sigue que
+\begin{align*}
+\oint \vb{B} \cdot \dd{\vb{l}} = \abs{\curl{B}} \dd{S \, \cos \theta}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Máxima circulación}
+La máxima circulación se obtiene con $\theta = 0$,
+\begin{align*}
+\left( \dfrac{\displaystyle \oint \vb{B} \cdot \dd{\vb{l}}}{\dd{S}} \right)_{\max} = \abs{\curl{\vb{B}}}
+\end{align*}
+Es decir: \emph{el módulo del rotacional es la máxima circulación por unidad de área}.
+\end{frame}
+\subsection*{Teorema de Stokes}
+\begin{frame}
+\frametitle{Cálculos para una superficie abierta}
+Los cálculos que se han realizado son válidos para un circuito diferencial.
+\\
+\bigskip
+En el caso de una curva cerrada que encierre una superficie abierta finita, se tendrán que sumar sobre el conjunto de circuitos elementales, como se muestra en la siguiente figura (\ref{fig:figura_superficie_elementos_diferenciables})
+\end{frame}
+\begin{frame}
+\frametitle{Cálculos para una superficie abierta}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/Superficie_Elementos_Diferenciables.png}
+    \caption{Descomposición de una superficie finita en elementos diferenciables.}
+    \label{fig:figura_superficie_elementos_diferenciables}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Cálculos para una superficie abierta}
+Los circuitos con lados comunes no contribuyen a la circulación.
+\\
+\bigskip
+La contribución neta se debe solo a los elementos de línea ubicados en el contorno $c$.
+\end{frame}
+\begin{frame}
+\frametitle{Teorema de Stokes}
+Entonces tenemos
+\begin{align}
+\oint_{c} \vb{B} \cdot \dd{\vb{l}} = \int_{S} \curl{\vb{B}} \cdot \dd{\vb{S}}
+\label{eq:ecuacion_01_35}
+\end{align}
+Que conocemos con el \emph{Teorema de Stokes}, que nos permite reemplazar integrales de área por integrales de línea.
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+Demuestra que:
+\begin{align*}
+\curl(\phi \, \vb{A}) = \phi \, \curl{\vb{A}} + \grad{\phi} \times \vb{A}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+El campo electrostático de un dipolo eléctrico $\vb{p} = p_{0} \, \vu{e}_{z}$ es
+\begin{align*}
+\vb{E} = \dfrac{p_{0} (2 \, \vb{e}_{r} \, \cos \theta + \vu{e}_{\theta} \, \sin \theta)}{r^{3}}
+\end{align*}
+Demuestra que:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}
+\item $\curl{\vb{E}} = 0$
+\item para $r \neq 0$, se tiene $\div{\vb{E}} = 0$
+\end{enumerate}
+\end{frame}
+\section{Laplaciano}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición}
 \end{document}
