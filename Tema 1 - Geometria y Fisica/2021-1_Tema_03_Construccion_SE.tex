@@ -1,0 +1,314 @@
+\input{../Preambulos/preambulo_presentacion_Warsaw_seahorse}
+\title{\large{Construcción de sistemas coordenados especiales}}
+\subtitle{Tema 1 - La física y la geometría}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{\today}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\section{Construcción de sistemas coordenados}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Introducción}
+\begin{frame}
+\frametitle{Introducción}
+Una pregunta importante que planteamos en este momento es: ¿para qué estamos revisando los sistemas coordenados curvílineos?
+\\
+\bigskip
+\pause
+Como respuesta presentamos la siguiente:
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+Ante un problema de la física, debemos de seleccionar el sistema coordenado de modo que se adapte al problema, \emph{para aprovechar cualquier oportunidad o simetría presente en el mismo}.
+\\
+\bigskip
+\pause
+De tal manera que resultará más fácil la solución que cuando se obliga a adaptar una solución en un sistema cartesiano.
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+Cuando se menciona que \enquote{es más fácil la solución}, significa que se tendrá una ecuación diferencial parcial (EDP) que puede separarse en ecuaciones diferenciales ordinarias (EDO), frecuentemente en la \enquote{forma estándar} en el nuevo sistema coordenado.
+\\
+\bigskip
+\pause
+La \emph{técnica de separación de variables}, se verá en el Tema 2 del curso.
+\end{frame}
+\subsection{Sistemas coordenados especiales}
+\begin{frame}
+\frametitle{Otros sistemas coordenados}
+Conocemos al menos tres sistemas coordenados con los que hemos trabajado en distintas áreas de nuestra carrera: cartesiano, cilíndrico (en 3D, polar en 2D) y esférico.
+\\
+\bigskip
+\pause
+De manera conveniente enlistamos catorce sistemas coordenados, que en algún momento nos podremos encontrar.
+\end{frame}
+\begin{frame}
+\frametitle{Aviso importante}
+Como punto importante debemos de señalar que no es intención de curso que se haga una revisión completa, detallada para cada uno de los sistemas.
+\\
+\bigskip
+\pause
+Más bien, veremos una metodología con la cual abordaremos el estudio de un sistema coordenado, y entonces tendremos la manera de estudiar otros de acuerdo a las necesidades que se nos presenten.
+\end{frame}
+\begin{frame}
+\frametitle{Otros sistemas coordenados}
+De manera conveniente se presenta una lista con catorce sistemas, clasificando los mismos de acuerdo con el hecho de que tengan o no:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}
+\item Un eje de traslación (perpendicular a la familia de superficies de plano paralelo)
+\item Un eje de simetría rotacional.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Sistemas coordenados especiales}
+\fontsize{8}{8}\selectfont
+{
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[H]
+\centering
+\begin{tabular}{p{3cm} p{4cm} p{2.5cm}}
+Eje de traslación & Eje de rotación & Ninguno \\ \hline
+Cartesiano ($3$ ejes) & & Confocal elipsoidal \\
+Circular cilíndrico & Circular cilíndrico & \\
+& Polar esferoidal ($3$ ejes) & \\
+Elíptico cilíndrico & Esferoidal prolato o alargado & \\
+& Esferoidal oblato & \\
+Parabólico cilíndrico & Parabólico & \\
+Bipolar & Toroidal & \\
+& Biesférico & \\[0.5em]
+& & Cónico \\
+& & Confocal paraboidal \\
+\end{tabular}
+\end{table}
+}
+\end{frame}
+\begin{frame}
+\frametitle{Sistemas coordenados especiales}
+El espaciamiento en la tabla indica las relaciones entre los diversos sistemas coordenados.
+\\
+\bigskip
+Si se considera el caso en dos dimensiones ($z = 0$) de un sistema con un eje de traslación (columna izquierda) y se le hace girar alrededor de un eje de simentría de reflexión, se genera el sistema coordenado correspondiente indicado en la columna central hacia la derecha.
+\end{frame}
+\begin{frame}
+\frametitle{Sistemas coordenados especiales}
+Por ejemplo: la rotación del plano $z = 0$ del sistema cilíndrico elíptico alrededor del eje principal genera el sistema esferoidal alargado; la rotación alrededor del eje menor resulta en el sistema esferoidal oblato.
+\end{frame}
+\begin{frame}
+\frametitle{Sistemas coordenados especiales}
+También se consideran tres sistemas que no tienen eje de traslación o eje de rotación.
+\\
+\bigskip
+En este grupo asimétrico, el sistema elipsoidal confocal se utiliza algunas veces como el sistema más general y del que casi todos los demás sistemas se obtienen del mismo.
+\end{frame}
+\section{Desarrollo de un sistema coordenado}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Coord. cilíndricas elípticas \texorpdfstring{$(u, v, z)$}{(u, v, z)}.}
+\begin{frame}
+\frametitle{Desarrollo para un sistema especial}
+A continuación veremos la manera de abordar un sistema coordenado especial, para determinar los las superficies constantes, los factores de escala, los operadores diferenciales, necesarios para resolver un problema con esta geometría en particular.
+\end{frame}
+\subsection{Reglas de transformación}
+\begin{frame}
+\frametitle{Reglas de transformación}
+Para el sistema cilíndrico elíptico, se tienen las siguientes reglas de transformación:
+\begin{align}
+\begin{aligned}
+x &= a \, \cosh u \, \cos v \\
+y &= a \, \sinh u \, \sin v \\
+z &= z
+\end{aligned}
+\label{eq:ecuacion_02_73_esp}
+\end{align}
+\end{frame}
+\subsection{Superficies coordenadas}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+Para identificar las superficies constantes, elevamos al cuadrado cada lado
+\begin{align}
+x^{2} &= a^{2} \, \cosh^{2} u \, \cos^{2} v \label{eq:ecuacion_02_74_esp} \\
+y^{2} &= a^{2} \, \sinh^{2} u \, \sin^{2} v \label{eq:ecuacion_02_75_esp} \\ 
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+Dividimos la primera expresión entre $\cos^{2} v$ y la segunda entre $\sin^{2} v$, recordando que $cos^{2} + \sin^{2} = 1$, así llegamos a
+\begin{align}
+\dfrac{x^{2}}{a^{2} \, \cosh^{2}} + \dfrac{y^{2}}{a^{2} \, \sinh{2}} &= \cos^{2} + \sin^{2} = 1 \label{eq:ecuacion_02_76_esp}\\[1em]
+\dfrac{x^{2}}{a^{2} \, \cos^{2}} - \dfrac{y^{2}}{a^{2} \, \sin^{2}} &= \cosh^{2} - \sinh^{2} = 1 \label{eq:ecuacion_02_77_esp}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+Para $v=$ constante, la ec. (\ref{eq:ecuacion_02_76_esp}) genera una familia de elipses con el eje $x$, en el principal.
+\\
+\bigskip
+Para $u=$ constante, la ec. (\ref{eq:ecuacion_02_77_esp}) genera hipérbolas con puntos focales en el eje $x$. Como se pueden ver en la siguiente figura (\ref{fig:figura_coordenada_cilindricas_elipticas})
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Imagenes/EllipticCylindricalCoord_1000.png}
+    \caption{Sistema coordenado cilíndirco elíptico en el plano $x-y$.}
+    \label{fig:figura_coordenada_cilindricas_elipticas}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+La familia de superficies coordenadas son las siguientes:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}
+\item Cilindros elípticos con $u$ constante, $0 \leq u < \infty$
+\item Cilindros hiperbólicos conb $v$ constante, $0 \leq v \leq 2 \, \pi$
+\item Planos paralelos al plano $x-y$ con $z$ constante, $-\infty < z < \infty$
+\end{enumerate}
+Como vemos en la siguiente figura (\ref{fig:figura_coordenada_cilindricas_elipticas_3D})
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{Imagenes/Elliptic-cylindrical-coordinates_02.png}
+    \caption{Sistema coordenado cilíndrico elíptico en una vista 3D.}
+    \label{fig:figura_coordenada_cilindricas_elipticas_3D}
+\end{figure}
+\end{frame}
+\subsection{Factores de escala}
+\begin{frame}
+\frametitle{Factores de escala}
+Calculamos los factores de escala o coeficientes métricos a partir de la expresión:
+\begin{eqnarray*}
+h_{i} &=& \abs{\pdv{\vb{r}}{u_{i}}} \\[0.5em]
+\pause
+h_{i} &=& \sqrt{ \left( \pdv{x}{u_{i}} \right)^{2} + \left( \pdv{y}{u_{i}} \right)^{2} + \left( \pdv{z}{u_{i}} \right)^{2}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Factores de escala}
+Tenemos entonces que
+\begin{align*}
+h_{1} = h_{u} = \sqrt{ \left( \pdv{x}{u} \right)^{2} + \left( \pdv{y}{u} \right)^{2} + \left( \pdv{z}{u} \right)^{2}}
+\end{align*}
+\pause
+donde las derivadas parciales son
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\pdv{x}{u} &= a \, \sinh u \cos v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \left( \pdv{x}{u} \right)^{2} = a^{2} \, \sinh^{2} u \, \cos^{2} v \\[0.5em]
+\pdv{y}{u} &= a \, \cosh u \sin v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \left( \pdv{y}{u} \right)^{2} = a^{2} \, \cosh^{2} u \, \sin^{2} v \\[0.5em]
+\pdv{z}{u} &= 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factores de escala}
+Al sumar los términos del radical
+\begin{align*}
+h_{u} = \sqrt{a^{2} \, \sinh^{2} u \, \cos^{2} v + a^{2} \, \cosh^{2} u \, \sin^{2} v}
+\end{align*}
+Haciendo el álgebra respectiva y considerando que $\cosh^{2} u - \sinh^{2} = 1$, entonces tenemos que:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Factores de escala}
+\fontsize{12}{12}\selectfont
+\begin{align*}
+h_{u} &= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + \cosh^{2} u \, \sin^{2} v \right] } \\[0.5em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + (1 + \sinh^{2} u) \, \sin^{2} v \right] } \\[0.5em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + \sinh^{2} u \, \sin^{2} v + \sin^{2} v \right] } \\[0.5em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u ( \cos^{2} v + \sin^{2} v ) + \sin^{2} v \right] } \\[0.5em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u + \sin^{2} v  \right] }
+\end{align*}
+\pause
+\vspace*{-0.35cm}
+\begin{equation*}
+\hspace{-4.5cm}
+\boxed{ h_{u} = a \, \sqrt{ \sinh^{2} u + \sin^{2} v}}
+\end{equation*}
+\end{frame}
+\begin{frame}
+\frametitle{El siguiente factor de escala}
+Para el factor $h_{v}$ se tiene que:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+h_{v} = \sqrt{ \left( \pdv{x}{v} \right)^{2} + \left( \pdv{y}{v} \right)^{2} + \left( \pdv{z}{v} \right)^{2}}
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El siguiente factor de escala}
+Entonces
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\pdv{x}{v} &= - a \, \cosh u \sin v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \left( \pdv{x}{v} \right)^{2} = a^{2} \, \cosh^{2} u \, \sin^{2} v \\[0.5em]
+\pdv{y}{v} &= a \, \sinh u \cos v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \left( \pdv{y}{v} \right)^{2} = a^{2} \, \sinh^{2} u \, \cos^{2} v \\[0.5em]
+\pdv{z}{v} &= 0
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El siguiente factor de escala}
+Así llegamos a:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+h_{v} &= \sqrt{a^{2} \left[ \cosh^{2} u \, \sin^{2} v + \sinh^{2} u \, \cos^{2} v \right] } \\[0.5em]
+&= \sqrt{a^{2} \left[ (1 + \sinh^{2} u) \, \sin^{2} v + \sinh^{2} u \, \cos^{2} v \right] } \\[0.5em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u (\cos^{2} v +  \sin^{2} v)+ \sin^{2} v \right] } \\[0.5em]
+&= \sqrt{a^{2} \left[ \sinh^{2} u + \sin^{2} v  \right] }
+\end{align*}
+\pause
+\vspace*{-0.35cm}
+\begin{equation*}
+\hspace{-4.5cm}
+\boxed{h_{v} = a \, \sqrt{ \sinh^{2} u + \sin^{2} v}}
+\end{equation*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Último factor de escala}
+Para el último factor de escala $h_{z}$:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+h_{z} = \sqrt{ \cancelto{0}{\left( \pdv{x}{z} \right)^{2}} + \cancelto{0}{\left( \pdv{y}{z} \right)^{2}} + \cancelto{1}{\left( \pdv{z}{z} \right)^{2}}}
+\end{align*}
+\pause
+\vspace*{-0.35cm}
+\begin{equation*}
+\hspace{-4.5cm}
+\boxed{h_{z} = 1}
+\end{equation*}
+\end{frame}
+\begin{frame}
+\frametitle{Los tres factores de escala}
+Los tres factores de escala para este sistema coordenado cilíndrico elíptico son:
+\begin{align*}
+h_{u} &= a \, \sqrt{ \sinh^{2} u + \sin^{2} v} \\[1em]
+h_{v} &= a \, \sqrt{ \sinh^{2} u + \sin^{2} v} \\[1em]
+h_{z} &= 1
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+\textbf{Ejercicio a cuenta: } 
+Para el sistema de coordenadas esferoidales prolatas $(u, v, \varphi)$, cuyas reglas de transformación son:
+\begin{align*}
+x &= a \, \sinh u \, \sin v \, \cos \varphi \\
+y &= a \, \sinh u \, \sin v \, \sin \varphi \\
+z &= a \, \cosh u \, \cos v
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+\textbf{Ejercicio a cuenta: } 
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}
+\item Describe las superficies coordenadas del sistema.
+\item Calcula de manera explícita los factores de escala $(h_{u}, h_{v}, h_{\varphi})$.
+\end{enumerate}
+\end{frame}
+\end{document}
