@@ -1,0 +1,127 @@
+\documentclass[12pt]{article}
+\usepackage[left=0.25cm,top=1cm,right=0.25cm,bottom=1cm]{geometry}
+%\usepackage{geometry}
+\textwidth = 20cm
+\hoffset = -1cm
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[tbtags]{amsmath}
+\usepackage{nccmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{color}
+\usepackage{float}
+\usepackage{multicol}
+%\usepackage{milista}
+\usepackage{enumitem}
+\usepackage{anyfontsize}
+\usepackage{anysize}
+\usepackage{enumitem}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{relsize}
+\spanishdecimal{.}
+\renewcommand{\baselinestretch}{1.5} 
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\title{Coordenadas generalizadas\\ \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Abraham Lima Buendía}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\maketitle
+\fontsize{14}{14}\selectfont
+Con la finalidad de realizar el estudio de diferentes problemas de física se requiere hacer uso de sistemas de coordenadas diferentes al sistema cartesiano; en este material abordaremos su construcción, cabe señalar que se hará uso de diferentes resultados, propios de un curso avanzado de geometría diferencial, sin  embargo, se explicará la construcción de ellos y si así lo deseas puedes revisar a profundidad los detalles en la bibliografía complementaria.
+\section{Variedades topológicas.}
+
+Una $\mathbf{M}-1$ variedad topológica puede ser definida como un espacio topológico, tal que, para cada punto $p$, elemento de un conjunto abierto $U$ en la variedad, se tiene un homeomorfismo a $\mathbb{R}^{M}$.
+\par
+Recordemos la definición de homeomorfismo, sean $X$ e $Y$ espacios topológicos y $\varphi$ una función de $X$ a $Y$, decimos que $\varphi$ es un homeomorfismo si $\varphi$ es biyectiva, además que tanto $\varphi$, como $\varphi^{-1}$ son funciones continuas. Diremos que, si dos espacios son homeomorfos, entonces tienen exactamente las mismas propiedades topológicas. Cuando $\varphi$ es un homeomorfismo diferenciable, se tiene que $\varphi$ también lo es, entonces diremos que $\varphi$ es un difeomorfismo.
+\par
+Cada homeomorfismo $(U, \varphi)$ es llamado una carta o sistema de coordenadas. Hasta este punto hemos conseguido pasar de un espacio topológico a un $\mathbb{R}^{M}$, sin embargo, extenderemos la idea para poder llevar cada sistema de coordenadas a un conjunto de funciones coordenadas $x_{1}, x_{2}, \ldots, x_{m}$, es decir, construimos una función $r_{j} : \mathbb{R}^{M} \rightarrow \mathbb{R}$ tal que: $x_{j} = r_{j} \circ \varphi_{p}$, en otras palabras, trasladamos los puntos de cada abierto en la variedad a un vector, a un espacio $\mathbb{R}^{M}$.
+\par
+El concepto de variedad topológica puede no tener una representación geométrica y estar ligado a un ser un espacio meramente abstracto, sin embargo, en el caso de una representación geométrica la composición $x_{j} = r_{j} \circ \varphi_{p}$ nos permite tener las funciones coordenadas en términos del conjunto de parámetros a través de los cuales se caracteriza la variedad:
+\begin{align}
+x^{j} = x^{j} (q_{1}, \ldots q_{n})
+\label{eq:ecuacion_01_01}
+\end{align}
+al conjunto de parámetros, que caracterizan las variedades, se les denomina \emph{coordenadas generalizadas}.
+\par
+Ahora sabemos cómo construir un mapeo que permite estudiar el comportamiento de un espacio topológico, desde un espacio $\mathbb{R}^{M}$, de esa forma, el siguiente paso es construir el espacio tangente a una variedad, para ello hacemos uso del $\mathbb{R}^{M}$ con el que la hemos asociado.
+\section{Mapeo de vectores.}
+
+Mediante un homeomorfismo (o más comúnmente un difeomorfismo), se construye la posición de un punto en $\mathbb{R}^{M}$, para ello hacemos uso de la base canónica de este espacio:
+\begin{align}
+\va{r} = \sum_{j=1}^{M} x^{j} \, (\va{q}) \, \vu{x}_{j} = x^{j} \, (\va{q}) \, \vu{x}_{j} = x^{j} (q_{1}, \ldots q_{n}) \, \vu{x}_{j}
+\label{eq:ecuacion_01_02}
+\end{align}
+La segunda igualdad se conoce como \emph{convención de Einstein}, en la cual la aparición de dos índices repetidos consecutivamente tiene el significado de una suma sobre ellos. Por otro lado, los vectores tangentes a $\va{e}_{a}$, se construyen mediante la igualdad:
+\begin{align}
+\va{e}_{a} = \pdv{\va{r}}{q^{a}}
+\label{eq:ecuacion_01_03}
+\end{align}
+es importante señalar que los vectores de la ec.(\ref{eq:ecuacion_01_03}) no son necesariamente ortogonales, cuando el sistema de coordenadas satisface esta condición, se conoce como sistema de coordenadas ortogonales.
+\par
+Notemos que las ecs. (\ref{eq:ecuacion_01_03}) dependen de cada punto $p$ en la variedad, consecuentemente, cada punto definirá un plano tangente a la variedad, la unión formada por todos los planos tangentes, es conocida como \emph{haz tangente} a la variedad, la teoría de haces vectoriales queda fuera de los alcances de este curso, sin embargo, seguiremos mediante la combinación de las ecuaciones (\ref{eq:ecuacion_01_02}) y (\ref{eq:ecuacion_01_03}):
+\begin{align}
+\va{e}_{a} = \pdv{\va{r}}{q^{a}} = \pdv{x^{j} (q_{1}, \ldots q_{n})}{q^{a}} \, \vu{x}_{j}
+\label{eq:ecuacion_01_04}
+\end{align}
+Notemos que la ec. (\ref{eq:ecuacion_01_04}) forma un sistema de ecuaciones entre la nueva base vectorial y una base canónica de $\mathbb{R}^{M}$, la condición suficiente y necesaria para que el sistema de ecuaciones pueda invertirse es:
+\begin{align}
+{\rm Det} \, \abs{\pdv{x^{j} (q_{1}, \ldots q_{n})}{q^{a}}} \neq 0
+\label{eq:ecuacion_01_05}
+\end{align}
+La ec.(\ref{eq:ecuacion_01_05}), puede interpretarse de diversas maneras: la primera de ellas es consecuencia directa del \emph{teorema de la función inversa}, el hecho de que la matriz Jacobiana posea un determinante distinto de cero se deriva del difeomorfismo de clase $C1$, con el cual hemos mapeado la variedad diferencial a un espacio $\mathbb{R}^{M}$, otra interpretación consiste en ver la ec.(\ref{eq:ecuacion_01_05}) como el triple producto escalar de los vectores de la nueva base vectorial, es decir, nuestra condición para que los vectores de la ec. (\ref{eq:ecuacion_01_03})  formen una base y que esta pueda invertirse es que el espacio tangente a la variedad se componga por vectores no coplanares, un resultado conocido del curso de geometría analítica.
+\par
+El que podamos cambiar entre bases vectoriales, nos permite traducir cualquier vector en la variedad,
+pero descrito desde el espacio canónico de $\mathbb{R}^{M}$, es decir, para cualquier vector $\va{A}$, tenemos la siguiente igualdad:
+\begin{align}
+\va{A} = A^{x} \, \vu{x} + A^{y} \, \vu{y} + A^{z} \, \vu{z} = A^{1} \, \vu{e}_{1} + A^{2} \, \vu{e}_{2} + A^{3} \, \vu{e}_{3}
+\label{eq:ecuacion_01_06}
+\end{align}
+Usando al ec. (\ref{eq:ecuacion_01_06}) escribimos el producto punto entre dos vectores:
+\begin{align}
+\begin{aligned}
+\va{A} \cdot \va{B} &= \left( A^{1} \, \vu{e}_{1} + A^{2} \, \vu{e}_{2} + A^{3} \, \vu{e}_{3} \right) \cdot \left( B^{1} \, \vu{e}_{1} + B^{2} \, \vu{e}_{2} + B^{3} \, \vu{e}_{3} \right) \\[0.5em]
+&= A^{l} \, B^{m} \, g_{lm}
+\end{aligned}
+\label{eq:ecuacion_01_07}
+\end{align}
+En el extremo derecho de la ec. (\ref{eq:ecuacion_01_07}) se ha empleado la convención de Einstein sobre índices repetidos, los elementos de matriz $g_{lm}$, están determinados mediante la siguiente igualdad:
+\begin{align}
+\begin{aligned}[b]
+g_{lm} &= \va{e}_{l} \cdot \va{e}_{m} = \\[0.5em]
+&= \left( \pdv{x^{r} (q_{1} \ldots q_{n})}{q^{l}} \, \vu{x}_{r} \right) \cdot \left( \pdv{x^{s} (q_{1} \ldots q_{n})}{q^{m}} \, \vu{x}_{s} \right) = \\[0.5em]
+&= \pdv{x^{r} (q_{1} \ldots q_{n})}{q^{l}} \, \pdv{x^{s} (q_{1} \ldots q_{n})}{q^{m}} \, \delta_{r,s} = \\[0.5em]
+&= \pdv{x^{r} (q_{1} \ldots q_{n})}{q^{l}} \, \pdv{x_{r} (q_{1} \ldots q_{n})}{q^{m}} = \\[0.5em]
+&= \pdv{x^{r}}{q^{l}} \, \pdv{x_{r}}{q^{m}}
+\end{aligned}
+\label{eq:ecuacion_01_08}
+\end{align}
+la ec.(\ref{eq:ecuacion_01_08}) es conocida, en la literatura, como \emph{matriz métrica}. Un caso particular de ésta ocurre cuando el sistema de coordenadas es ortogonal, es decir: 
+\begin{align*}
+\va{e}_{l} \cdot \va{e}_{m} = \delta_{l,m}
+\end{align*}
+pues en ella la matriz métrica se vuelve diagonal.
+\section{Derivadas temporales.}
+
+Finalizaremos esta revisión analizando algunas propiedades de la ec.(\ref{eq:ecuacion_01_03}) y la ec. (\ref{eq:ecuacion_01_04}), notemos que los vectores $\va{e}_{a}$ son funciones de las coordenadas generalizadas, así que para construir las derivadas temporales de cada uno de estos vectores $\va{e}_{a}$, debemos seguir el siguiente procedimiento:
+\begin{align}
+\begin{aligned}[b]
+\dv{\va{e}_{a}}{t} &= \dv{t} \left( \pdv{x^{j} (q_{1}, \ldots, q_{n})}{q^{a}} \, \vu{x}_{j} \right) = \\[0.5em]
+&= \dot{q}^{b} \, \pdv[2]{x^{j} (q_{1}, \ldots, q_{n})}{q^{b}}{q^{a}} \, \vu{x}_{j} = \\[0.5em]
+&= \dot{q}^{b} \, \pdv{\va{e}_{a}}{q^{b}}
+\end{aligned}
+\label{eq:ecuacion_01_09}
+\end{align}
+La construcción del último resultado con la derivada, abarca dos temas complejos que son el \emph{transporte paralelo} y la \emph{teoría de conexiones en variedades diferenciables}; consideremos esta diferenciación en una variedad libre de torsión y usando una conexión de Levi Civita, en estas condiciones la última derivada satisface lo siguiente:
+\begin{align}
+\pdv{\va{e}_{a}}{q^{b}} = {\mathlarger{\mathlarger\Gamma}}_{ab}^{c} \, \va{e}_{c}
+\label{eq:ecuacion_01_10}
+\end{align}
+El coeficiente ${\mathlarger{\mathlarger\Gamma}}_{ab}^{c}$ es conocido como \emph{símbolo de Christoffel}. Una interpretación simple de la ec. (\ref{eq:ecuacion_01_10}) consiste en descomponer el nuevo vector $\pdv*{\va{e}_{a}}{q^{b}}$, en términos de la base vectorial $\va{e}_{c}$, cada uno de los símbolos de Christoffel corresponderá a las componentes de dicho vector en la base mencionada.
+\end{document}
