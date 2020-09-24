@@ -1,0 +1,136 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Partícula en una esfera\\ \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Abraham Lima Buendía}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+Consideramos una partícula libre que se mueve en una esfera de radio variable, construiremos sus ecuaciones de movimiento y al mismo tiempo, obtendremos la información de esta 2-variedad.
+\section{Las cartas.}
+Las cartas que parametrizan la variedad son:
+\begin{align*}
+x &= r \, \cos \varphi \sin \theta \\
+y &= r \, \sin \varphi \sin \theta \\
+z &= r \, \cos \theta
+\end{align*}
+Notemos que las ecuaciones son continuas e invertibles, además sus inversas también son continuas, excepto en dos puntos de la esfera (el origen y ...?)
+\section{Posición de la partícula.}
+Usando las cartas podemos escribir la posición de la partícula como función del tiempo
+\begin{align*}
+\va{r} (t) = r \, \cos \varphi \sin \theta \, \vu{i} + r \, \sin \varphi \sin \theta \, \vu{j} + r \, \cos \theta \, \vu{k}
+\end{align*}
+Con ello construimos la base vectorial tangente a la esfera:
+\begin{align*}
+\va{e}_{r} &= \pdv{\va{r}}{r} = \cos \varphi \sin \theta \, \vu{i} + \sin \varphi \sin \theta \, \vu{j} + \cos \theta \, \vu{k} \\[0.5em]
+\va{e}_{\theta} &= \pdv{\va{r}}{\theta} = r\, \cos \varphi \cos \theta \, \vu{i} + r \, \sin \varphi \sin \theta \, \vu{j} - \sin \theta \, \vu{k} \\[0.5em]
+\va{e}_{\varphi} &= \pdv{\va{r}}{\varphi} = - r \, \sin \varphi \sin \theta \, \vu{i} + r \, \cos \varphi \sin \theta \, \vu{j}
+\end{align*}
+\section{Espacio tangente.}
+El espacio tangente puede descomponerse como una combinación de los vectores canónicos de $\mathbb{R}^{3}$ y de un sistema de ecuaciones invertible, pues el determinante no es nulo:
+\begin{align*}
+\textrm{det} \, \abs{\pdv{x, y, x}{r, \varphi, \theta}} \neq 0
+\end{align*}
+para resolver mediante el método de Kramer, tenemos que:
+{\fontsize{12}{12}\selectfont
+\begin{align*}
+\vu{i} &= \vu{e}_{r} \, \dfrac{\mdet{r \, \sin \varphi \cos \theta & - r \, \sin \theta \\ r \, \cos \varphi \sin \theta & 0}}{r^{2} \, \sin \theta} - \vu{e}_{\theta} \, \dfrac{\mdet{\sin \varphi \sin \theta & \cos \theta \\ r \, \cos \varphi \sin \theta & 0}}{r^{2} \, \sin \theta} + \vu{e}_{\varphi} \, \dfrac{\mdet{ \sin \varphi \sin \theta & \cos \theta \\ r \, \sin \varphi \cos \theta & - r \, \sin \theta}}{r^{2} \, \sin \theta}
+\end{align*}}
+por lo que
+\begin{align*}\addtolength{\fboxsep}{5pt}\boxed{
+\Longrightarrow \vu{i} = \sin \theta \cos \varphi \, \vu{e}_{r} + \dfrac{\cos \theta \cos \varphi}{r} \, \vu{e}_{\theta} - \dfrac{\sin \theta}{r \, \sin \theta} \, \vu{e}_{\varphi}}
+\end{align*}
+Siguiendo un desarrollo análogo para los vectores $\vu{j}$ y $\vu{k}$, se tiene que:
+{\fontsize{12}{12}\selectfont
+\begin{align*}
+\vu{j} &= - \vu{e}_{r} \, \dfrac{\mdet{r \, \cos \varphi \cos \theta & - r \, \sin \theta \\ - r \, \sin \varphi \sin \theta & 0}}{r^{2} \, \sin \theta} + \vu{e}_{\theta} \, \dfrac{\mdet{\cos \varphi \sin \theta & \cos \theta \\ - r \, \sin \varphi \sin \theta & 0}}{r^{2} \, \sin \theta} + \\[0.5em]
+&- \vu{e}_{\varphi} \, \dfrac{\mdet{ \cos \varphi \sin \theta & \cos \theta \\ r \, \cos \varphi \cos \theta & - r \, \sin \theta}}{r^{2} \, \sin \theta}
+\end{align*}}
+\begin{align*}\addtolength{\fboxsep}{5pt}\boxed{
+\Longrightarrow \vu{j} = \sin \theta \cos \varphi \, \vu{e}_{r} + \dfrac{\cos \theta \sin \varphi}{r} \, \vu{e}_{\theta} + \dfrac{\cos \varphi}{r \, \sin \theta} \, \vu{e}_{\varphi}}
+\end{align*}
+{\fontsize{12}{12}\selectfont
+\begin{align*}
+\vu{k} &= - \vu{e}_{r} \, \dfrac{\mdet{r \, \cos \varphi \cos \theta & r \, \sin \theta \cos \theta \\ - r \, \sin \varphi \sin \theta & r \, \cos \varphi \sin \theta}}{r^{2} \, \sin \theta} + \vu{e}_{\theta} \, \dfrac{\mdet{\cos \varphi \sin \theta & \sin \varphi \sin \theta \\ - r \, \sin \varphi \sin \theta & r \, \cos \varphi \sin \theta}}{r^{2} \, \sin \theta} + \\[0.5em]
+&+ \vu{e}_{\varphi} \, \dfrac{\mdet{ \cos \varphi \sin \theta & \sin \varphi \sin \theta \\ r \, \cos \varphi \cos \theta & r \, \sin \theta \cos \theta}}{r^{2} \, \sin \theta}
+\end{align*}}
+\begin{align*}\addtolength{\fboxsep}{5pt}\boxed{
+\Longrightarrow \vu{k} = \cos \theta \, \vu{e}_{r} - \dfrac{\sin \theta}{r} \, \vu{e}_{\varphi}}
+\end{align*}
+\section{Matriz métrica.}
+Se construye la matriz métrica de este espacio:
+\begin{align*}
+g_{ab} = \va{e}_{a} \cdot \va{e}_{b} \hspace{2cm} g = \mqty[1 & 0 & 0 \\ 0 & r^{2} & 0 \\ 0 & 0 & r^{2} \, \sin^{2} \theta]
+\end{align*}
+\section{Velocidad de la partícula.}
+Escribimos la velocidad de la partícula:
+\begin{align*}
+\va{v} &= \dv{\va{r}}{t} = \pdv{\va{r}}{r} \dot{\vb{r}} + \pdv{\va{r}}{\theta} \dot{\bm{\theta}} + \pdv{\va{r}}{\varphi} \dot{\bm{\varphi}} = \\[1em]
+&= \dot{\vb{r}} \, \va{e}_{r} + \dot{\bm{\theta}} \, \va{e}_{\theta} + \dot{\bm{\varphi}} \, \va{e}_{\varphi}
+\end{align*}
+Ahora es posible obtener la energía cinética de la partícula:
+\begin{align*}
+E_{k} = \dfrac{1}{2} = \dfrac{m}{2} \left( \dot{\vb{r}}^{2} + r^{2} \, \dot{\bm{\theta}} + r^{2} \, \sin^{2} \theta \dot{\bm{\varphi}}^{2} \right)
+\end{align*}
+\textbf{Nota: } Esta expresión se conoce como \emph{energía de la variedad}.
+\par
+En general:
+\begin{align*}
+\va{v} &= \dv{\va{r}}{t} = \pdv{\va{r}}{q^{a}} \, q^{a} = \dot{q}^{a} \, \va{e}_{a}
+\end{align*}
+entonces
+\begin{align*}
+\va{r} \cdot \va{r} &= \dot{q}^{a} \, \va{e}_{a} \cdot \dot{q}^{b} \, \va{e}_{b} = \dot{q}^{a} \, \dot{q}^{b} \, \va{e}_{a} \, \va{e}_{b} = \\[1em]
+&= \dot{q}^{a} \, \dot{q}^{a} \, g_{aa} = \\[1em]
+&= \left( h_{a} \, \dot{q}^{a} \right)^{2}
+\end{align*}
+Este último resultado es de utilidad en mecánica lagrangiana.
+\section{La aceleración.}
+Escribimos las aceleraciones:
+\begin{align*}
+\va{\vb{a}} &= \dv{\va{r}}{t} = \ddot{\vb{r}} \, \va{e}_{r} + \ddot{\bm{\theta}} \, \va{e}_{\theta} + \ddot{\bm{\varphi}} \, \va{e}_{\varphi} + \dot{\vb{r}} \, \dv{\va{e}_{r}}{t} + \dot{\bm{\theta}} \, \dv{\va{e}_{\theta}}{t} + \dot{\bm{\varphi}} \, \dv{\va{e}_{\varphi}}{t} = \\[1.5em]
+&= \dot{\vb{r}} \, \va{e}_{r} + \ddot{\bm{\theta}} \, \va{e}_{\theta} + \ddot{\bm{\varphi}} \, \va{e}_{\varphi} + \dot{\vb{r}} \left[ \dot{\vb{r}} \, \pdv{\va{e}_{r}}{r} + \dot{\bm{\theta}} \, \pdv{\va{e}_{r}}{\theta} + \dot{\bm{\varphi}} \, \pdv{\va{e}_{r}}{\varphi} \right] + \\[1.5em]
+&+ \dot{\bm{\theta}} \left[ \dot{\vb{r}} \, \pdv{\va{e}_{\theta}}{r} + \dot{\bm{\theta}} \, \pdv{\va{e}_{\theta}}{\theta} + \dot{\bm{\varphi}} \, \pdv{\va{e}_{\theta}}{\varphi} \right] + \dot{\bm{\varphi}} \left[ \dot{\vb{r}} \, \pdv{\va{e}_{\varphi}}{r} + \dot{\bm{\theta}} \, \pdv{\va{e}_{\varphi}}{\theta} + \dot{\bm{\varphi}} \, \pdv{\va{e}_{\varphi}}{\varphi} \right]
+\end{align*}
+Para realizar la diferenciación de los vectores, usamos su representación en la base $\mathbb{R}^{3}$, entonces:
+\begin{align*}
+\va{\vb{a}} &= \ddot{\vb{r}} \, \va{e}_{r} + \ddot{\bm{\theta}} \, \va{e}_{\theta} + \ddot{\bm{\varphi}} \, \va{e}_{\varphi} + \dot{\vb{r}} \dot{\bm{\theta}} \left[ \cos \varphi \cos \theta \, \vu{i} + \sin \varphi \cos \theta \, \vu{j} - \sin \theta \, \vu{k} \right] + \\[1em]
+&+ \dot{\vb{r}} \dot{\bm{\varphi}} \left[ - \sin \varphi \sin \theta \, \vu{i} + \cos \varphi \sin \theta \, \vu{j} \right] + \\[1em]
+&+ \dot{\bm{\theta}} \dot{\vb{r}} \left[ \cos \varphi \cos \theta \, \vu{i} + \sin \varphi \cos \theta \, \vu{j} - \sin \theta \, \vu{k} \right] + \\[1em]
+&+ \dot{\bm{\theta}}^{2} \, r \, \left[ \cos \varphi \sin \theta \, \vu{i} + \sin \varphi \sin \theta \, \vu{j} + \cos \theta \, \vu{k} \right] + \\[1em]
+&+ \dot{\bm{\theta}} \dot{\bm{\varphi}} \left[ -r \, \sin \varphi \cos \theta \, \vu{i} + r \, \cos \varphi \cos \theta \, \vu{j} \right] + \\[1em]
+&+ \dot{\bm{\varphi}} \dot{\vb{r}} \left[ -r \, \sin \varphi \sin \theta \, \vu{i} + \cos \varphi \sin \theta \, \vu{j} \right] + \\[1em]
+&+ \dot{\bm{\varphi}} \dot{\bm{\theta}} \left[ -r \, \sin \varphi \cos \theta \, \vu{i} + r \, \cos \varphi \cos \theta \, \vu{j} \right] + \\[1em]
+&+ \dot{\bm{\varphi}}^{2} \left[ - r \, \cos \varphi \sin \theta \, \vu{i} + r \, \sin \varphi \sin  \theta \, \vu{j} \right] = \\[1em]
+&= \ddot{\vb{r}} \, \va{e}_{r} + \ddot{\bm{\theta}} \, \va{e}_{\theta} + \ddot{\bm{\varphi}} \, \va{e}_{\varphi} + \dfrac{\dot{\vb{r}} \dot{\bm{\theta}}}{r} \, \va{e}_{r} + \dfrac{\dot{\vb{r}} \dot{\bm{\varphi}}}{r} \, \va{e}_{\varphi} + \dfrac{\dot{\vb{r}} \dot{\bm{\theta}}}{r} \, \va{e}_{\theta} - r \, \dot{\bm{\theta}}^{2} \, \va{e}_{r} + \dot{\bm{\varphi}} \dot{\bm{\theta}} \, \dfrac{\cos \theta}{\sin \theta} \, \va{e}_{\varphi} + \\[1em]
+&+ \dfrac{\dot{\bm{\varphi}} \dot{\vb{r}}}{r} \, \va{e}_{\varphi} + \dot{\bm{\varphi}}^{2} \left[ - r \, \va{e}_{r} + r \, \cos \theta \, \va{e}_{\varphi} - \cos \varphi \sin \theta  \, \va{e}_{\theta}\right] + \dot{\bm{\varphi}} \dot{\bm{\theta}} \dfrac{\cos \theta}{\sin \theta} \, \va{e}_{\varphi} = \\[1.5em]
+&= \left( \ddot{\vb{r}} - r \, \dot{\bm{\theta}}^{2} - r \, \sin^{2} \theta \, \dot{\bm{\varphi}}^{2} \right) \, \va{e}_{r} +  \left( \ddot{\bm{\theta}} + \dfrac{2 \, r \, \dot{\bm{\theta}}}{r} - \dot{\bm{\varphi}}^{2} \cos \theta \sin \theta \right) \, \va{e}_{\theta} + \\[1em]
+&+ \left( \ddot{\bm{\varphi}} + \dfrac{2 \, r \, \dot{\bm{\varphi}}}{r} + 2 \, \dot{\bm{\varphi}} \dot{\bm{\theta}} \dfrac{\cos \theta}{\sin \theta}  \right) \, \va{e}_{\varphi} 
+\end{align*}
+\section{Ecuación de movimiento.}
+La ecuación de movimiento para una partícula libre sobre una esfera está dada por:
+\begin{align*}
+F = m \, \va{a} \hspace{1cm} \Longrightarrow \hspace{1cm} 0 = m \, \va{a}
+\end{align*}
+Así pues
+\begin{align*}
+\left( \ddot{\vb{r}} - r \, \dot{\bm{\theta}}^{2} - r \, \sin^{2} \theta \, \dot{\bm{\varphi}}^{2} \right) \, \va{e}_{r} &+ \left( \ddot{\bm{\theta}} + \dfrac{2 \, r \, \dot{\bm{\theta}}}{r} - \dot{\bm{\varphi}}^{2} \cos \theta \sin \theta \right) \, \va{e}_{\theta} + \\[1em]
+&+ \left( \ddot{\bm{\varphi}} + \dfrac{2 \, r \, \dot{\bm{\varphi}}}{r} + 2 \, \dot{\bm{\varphi}} \dot{\bm{\theta}} \dfrac{\cos \theta}{\sin \theta}  \right) \, \va{e}_{\varphi} = 0
+\end{align*}
+Esta igualdad se cumple ya que los vectores no son coplanares, ya que
+\begin{align*}
+\abs{\pdv{(x, y, x)}{r, \varphi, \theta}} \neq 0
+\end{align*}
+Resultando en:
+\begin{align*}
+\ddot{\vb{r}} - r \, \dot{\bm{\theta}}^{2} - r \, \sin^{2} \theta \, \dot{\bm{\varphi}}^{2} &= 0 \\[1em]
+\ddot{\bm{\theta}} + \dfrac{2 \, r \, \dot{\bm{\theta}}}{r} - \dot{\bm{\varphi}}^{2} \cos \theta \sin \theta &= 0 \\[1em]
+\ddot{\bm{\varphi}} + \dfrac{2 \, r \, \dot{\bm{\varphi}}}{r} + 2 \, \dot{\bm{\varphi}} \dot{\bm{\theta}} \dfrac{\cos \theta}{\sin \theta} &= 0
+\end{align*}
+Estas ecuaciones se conocen como \emph{geodésicas} y de aquí podemos obtener los \emph{símbolos de Christoffel}:
+\begin{align*}
+\mathlarger{\mathlarger{\Gamma}}_{\theta \theta}^{r} = - r \hspace{1cm} \mathlarger{\mathlarger{\Gamma}}_{\varphi \varphi}^{r} = - r \, \sin^{2} \theta \hspace{1cm} \mathlarger{\mathlarger{\Gamma}}_{r \theta}^{\theta} = \mathlarger{\mathlarger{\Gamma}}_{\theta r}^{\theta} = \dfrac{1}{r} \\[1.5em]
+\mathlarger{\mathlarger{\Gamma}}_{r \varphi}^{\varphi} = \mathlarger{\mathlarger{\Gamma}}_{\varphi r}^{\varphi} = \dfrac{1}{r} \hspace{1cm} \mathlarger{\mathlarger{\Gamma}}_{\varphi \theta}^{\varphi} = \mathlarger{\mathlarger{\Gamma}}_{\theta \varphi}^{\varphi} = \dfrac{\cos \theta}{\sin \theta}
+\end{align*}
+Los demás símbolos son nulos.
+\end{document}
