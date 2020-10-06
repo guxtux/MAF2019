@@ -20,16 +20,37 @@ def y1(x):
 def y2(x):
     return -(1 - x**(b/c))**(c/b)
 
-plt.plot(t, y1(t), color='k')
-plt.plot(t, y2(t), color='k')
-plt.plot(-y1(t), t, color='k')
-plt.plot(y2(t), -t, color='k')
+def primerCuadrante(t):
+    plt.plot(t, y1(t), color='k')
+    
+def todosCuadrantes(t):
+    primerCuadrante(t)
+    plt.plot(t, y2(t), color='k')
+    plt.plot(-y1(t), t, color='k')
+    plt.plot(y2(t), -t, color='k')
+    plt.title('Curva $x^{b/c} + y^{b/c} = a^{b/c}$ donde $b < c$')
+    
+def ejesGrafica():
+    plt.axhline(y=0, lw=0.8, color='k')
+    plt.axvline(x=0, lw=0.8, color='k')
+    # Turn off tick labels
+    plt.gca().axes.get_yaxis().set_visible(False)
+    plt.gca().axes.get_xaxis().set_visible(False)
+    
+def cuadranteGrafica():
+    primerCuadrante
+    plt.fill_between(t, 0, y1(t), alpha=0.5)
+    plt.title('Primer cuadrante para la curva $x^{b/c} + y^{b/c} = a^{b/c}$ donde $b < c$')
+    plt.text(0.15, 0.25, "R", fontsize="20")
 
-plt.axhline(y=0, lw=0.8, color='k')
-plt.axvline(x=0, lw=0.8, color='k')
-# Turn off tick labels
-plt.gca().axes.get_yaxis().set_visible(False)
-plt.gca().axes.get_xaxis().set_visible(False)
+plt.figure(1)
+todosCuadrantes(t)
+ejesGrafica()
 
-plt.title('Curva $x^{b/c} + y^{b/c} = a^{b/c}$ donde $b < c$')
+plt.figure(2)
+primerCuadrante(t)
+ejesGrafica()
+cuadranteGrafica()
+
+
 plt.show()
