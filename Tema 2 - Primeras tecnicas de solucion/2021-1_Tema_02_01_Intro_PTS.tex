@@ -25,7 +25,7 @@ Enumeremos algunas EDP conocidas:
 \begin{itemize}
 \item $u_{t} = u_{xx}$ \hspace{3.5cm} Ecuación de calor en una dimensión.
 \item $u_{t} = u_{xx} + u_{yy}$ \hspace{2.3cm} Ecuación de calor en dos dimensiones.
-\item $u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta}$ \hspace{2cm} Ecuación de Laplace en coordenadas polares.
+\item $u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta} = 0$ \hspace{1cm} Ecuación de Laplace en coordenadas polares.
 \item $u_{tt} = u_{xx} + u_{yy} + u_{zz}$ \hspace{1cm} Ecuación de onda en tres dimensiones.
 \item $u_{tt} = u_{xx} + \alpha \, u_{t} + \beta \, u$ \hspace{0.9cm} Ecuación del telégrafo.
 \end{itemize}
@@ -38,4 +38,95 @@ la variable dependiente $u(x, t)$ es una función de dos variables independiente
 u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta}
 \end{align*}
 se tiene que $u(r, \theta, t)$ depende de las variables $r$, $\theta$ y $t$.
+\subsection*{¿Por qué son útiles las EDP?}
+
+La mayoría de las leyes naturales de la física, como las ecuaciones de Maxwell, la ley de enfriamiento de Newton, las ecuaciones de Navier-Stokes, las ecuaciones de movimiento de Newton y la ecuación de Schrödinger de la mecánica cuántica, se expresan (o pueden ser expresadas) en términos de EDP, es decir, estas leyes describen los fenómenos físicos relacionando las derivadas espaciales y temporales.
+\par
+Las derivadas se presentan en estas ecuaciones porque las derivadas modelan cosas naturales (como velocidad, aceleración, fuerza, fricción, flujo, corriente). Por tanto, tenemos ecuaciones que relacionan derivadas parciales de alguna cantidad desconocida que nos gustaría encontrar.
+
+\subsection{¿Cómo se resuelve una ecuación diferencial parcial?}
+
+Esta es una buena pregunta que debemos de plantearnos. Resulta que hay conjunto amplio de métodos disponibles para resolver las EDP; los métodos \emph{más importantes son los que convierten las EDP en EDO}, ya que simplifican el manejo y su solución. Diez técnicas útiles son:
+\begin{enumerate}
+\item \emph{Separación de variables}. Esta técnica reduce una EDP de $n$ variables, a un sistema de $n$ EDO.
+\item \emph{Transformadas integrales}. Este procedimiento reduce una EDP de $n$ variables independientes a una de $n - 1$ variables; por lo tanto, una EDP en dos variables podría cambiarse a una EDO.
+\item \emph{Cambio de coordenadas}. Este método cambia la EDP original a una EDO o bien a otra EDP (una más fácil) cambiando las coordenadas del problema (rotando el eje o transformaciones similares).
+\item \emph{Transformación de la variable dependiente}. Este método transforma la variable incógnita de una EDP en una nueva incógnita que es más fácil de encontrar.
+\item \emph{Métodos numéricos}. Estos métodos cambian una EDP a un sistema de ecuaciones en diferencias que puede resolverse mediante un algoritmo con técnicas iterativas en una computadora; en muchos casos, esta es la única técnica que funcionará. Además de los métodos que reemplazan las EDP por ecuaciones en diferencias, existen otros métodos que intentan aproximar soluciones mediante curvas polinomiales (aproximaciones spline).
+\item \emph{Métodos de perturbación}. Este método convierte un problema no lineal en una secuencia de problemas lineales que se aproxima al no lineal.
+\item \emph{Técnica impulso-respuesta}. Este procedimiento descompone las condiciones iniciales y de frontera del problema en impulsos simples y encuentra la respuesta a cada impulso. La respuesta general se encuentra luego agregando estas respuestas simples.
+\item \emph{Ecuaciones integrales}. Esta técnica cambia una EDP a una ecuación integral (una ecuación donde la incógnita está dentro de la integral). Luego, la ecuación integral se resuelve mediante varias técnicas.
+\item \emph{Métodos de cálculo de variaciones}. Estos métodos encuentran la solución a las EDP reformulando la ecuación como un problema de minimización. Resulta que el mínimo de cierta expresión (muy probablemente la expresión representará la energía total) también es la solución a la EDP.
+\item \emph{Expansión de funciones propias (eigenfunciones)}. Este método intenta encontrar la solución de una EDP como una suma infinita de funciones propias. Estas funciones propias se encuentran resolviendo lo que se conoce como un problema de valores propios correspondiente al problema original.
+\end{enumerate}
+\subsection{Tipos de EDP.}
+
+Las ecuaciones diferenciales parciales se clasifican de acuerdo a ciertas características que presentan. La clasificación es un concepto importante porque la teoría general y \emph{los métodos de solución generalmente se aplican solo a una clase determinada} de ecuaciones.
+\par
+A continuación enlistamos seis clasificaciones básicas:
+\begin{enumerate}
+\item \textbf{Orden de la EDP}. El orden de una EDP es el orden de la derivada parcial más alta, por ejemplo
+\begin{align*}
+u_{t} &= u_{xx} \hspace{3.3cm} \mbox{es de segundo orden} \\[0.5em]
+u_{t} &= u_{x} \hspace{3.5cm} \mbox{es de primer orden} \\[0.5em]
+u_{t} &= u \, u_{xx} + \sin x \hspace{1.4cm} \mbox{es de tercer orden}
+\end{align*}
+\item \textbf{Número de variables}. El número de variables es el número de variables independientes, por ejemplo
+\begin{align*}
+u_{t} &= u_{xx} \hspace{3cm} \hspace{1.61cm} \mbox{dos variables: } x, t \\[0.5em] 
+u_{t} &= u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta} \hspace{1.5cm} \mbox{tres variables: } r, \theta, t
+\end{align*}
+\item \textbf{Linealidad}. Las EDP son lineales o no lineales. En las lineales, la variable dependiente $u$ y todas sus derivadas aparecen de forma lineal (no se multiplican juntas ni al cuadrado, por ejemplo). Más precisamente, una \emph{ecuación lineal de segundo orden en dos variables} es una ecuación de la forma
+\begin{align}
+\addtolength{\fboxsep}{5pt}\boxed{ A \, u_{xx} + B \, u_{xy} + C \, u_{yy} + D \, u_{x} + E \, u_{y} + F \, u = G}
+\label{eq:ecuacion_01_01}
+\end{align}
+donde $A, B, C, D, E, F$ y $G$ pueden ser \emph{constantes} o \emph{funciones de} $(x, y)$, por ejemplo
+\begin{align*}
+e^{-t} \, u_{xx} + \sin t &= u_{tt} \hspace{2cm} \mbox{(lineal)} \\[0.5em]
+u \, u_{xx} + u_{t} &= 0 \hspace{2cm} \mbox{(no lineal)} \\[0.5em]
+u_{xx} + y \, u_{yy} &= 0 \hspace{2cm} \mbox{(lineal)} \\[0.5em]
+x \, u_{x} + y \, u_{y} + u^{2} &= 0 \hspace{2cm} \mbox{(no lineal)}
+\end{align*}
+\item \textbf{Homogeneidad}. La ec. (\ref{eq:ecuacion_01_01}) se denomina \emph{homgénea} si el lado derecho de la igualdad $G(x, y)$ es cero para todo $x$, e $y$. Mientras que si $G(x, y)$ no se anula, entonces la ecuación se denimina \emph{no homogénea}.
+\item \textbf{Tipo de coeficientes}. Si los coeficientes $A, B, C, D, E, F$ en la ec. (\ref{eq:ecuacion_01_01}) son constantes, entonces (\ref{eq:ecuacion_01_01}) tiene \emph{coeficientes constantes}, de otra manera, la ecuación tiene \emph{coeficientes variables}.
+\item \textbf{Tres tipos de ecuaciones lineales}. Toda EDP lineal como la ec. (\ref{eq:ecuacion_01_01}) puede clasificarse como de tipo:
+\begin{enumerate}[label=(\alph*)]
+\item Parabólico.
+\item Hiperbólico.
+\item Elíptico.
+\end{enumerate}
+Las ecuaciones \textbf{parabólicas} describen por ejemplo el flujo de calor y procesos de difusión, además satisfacen la propiedad $B^{2} - 4 \, A \, C = 0$.
+\par
+Las ecuaciones \textbf{hiperbólicas} describen sistemas que vibran así como el movimiento de las ondas, satistacen la propiedad $B^{2} - 4 \, A \, C > 0$.
+\par
+Las ecuaciones \textbf{elípticas} describe fenómenos estacionarios y satisfacen la propiedad $B^{2} - 4 \, A \, C < 0$.
+\par
+Como ejemplo veamos:
+\begin{enumerate}[label=(\alph*)]
+\setlength\itemsep{1em}
+\item $u_{t} = u_{xx}$ \hspace{1.5cm} $B^{2} - 4 \, A \, C = 0$ \hspace{1cm} (parabólica)
+\item $u_{tt} = u_{xx}$ \hspace{2cm} $B^{2} - 4 \, A \, C = 4$ \hspace{1cm} (hiperbólica)
+\item $u_{\xi \eta} = 0$ \hspace{2cm} $B^{2} - 4 \, A \, C = 1$ \hspace{1cm} (hiperbólica)
+\item $u_{xx} + u_{yy} = 0$ \hspace{1cm} $B^{2} - 4 \, A \, C = -4$ \hspace{1cm} (elíptica)
+\item $y \, u_{xx} + u_{yy} = 0$ \hspace{0.6cm} $B^{2} - 4 \, A \, C = - 4 \, y$ \hspace{0.7cm} $\begin{cases}
+\mbox{elíptica para } y > 0 \\
+\mbox{parabólica para } y = 0 \\
+\mbox{hipérbolica para } y < 0 \\
+\end{cases}$
+En el caso de coeficientes variables, el tipo de ecuación cambia de punto a punto.
+\end{enumerate}
+\end{enumerate}
+\subsection*{Consideraciones}
+\begin{enumerate}
+\item En general, $B^{2} - 4 \, A \, C$ es una función de las variables independientes; por lo tanto, una ecuación puede cambiar de un tipo básico a otro en todo el dominio de la ecuación (aunque no es común).
+\item La ecuación lineal general (\ref{eq:ecuacion_01_01}) se escribió con variables independientes $x$ e $y$. En muchos problemas, una de las dos variables representa el tiempo, por lo tanto, se escribiría en términos de $x$ y $t$.
+\item En la figura (\ref{fig:figura_clasificacion_EDP}) se muestra un diagrama de clasificación general:
+\begin{figure}[H]
+    \centering
+    \includegraphics{Imagenes/Cuadro_Clasificacion_EDP.eps}
+    \caption{Diagrama de clasificación de EDP.}
+    \label{fig:figura_clasificacion_EDP}
+\end{figure}
+\end{enumerate}
 \end{document}
