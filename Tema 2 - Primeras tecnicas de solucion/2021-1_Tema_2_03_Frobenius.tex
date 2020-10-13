@@ -1,0 +1,593 @@
+\input{../Preambulos/preambulo_presentacion_CambridgeUS_beaver}
+\title{\large{Método de Frobenius}}
+\subtitle{Tema 2 - Primeras técnicas de solución}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+\section{Series de potencias}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Introducción}
+%Ref. Bruzzone - Introducción al método de Frobenius
+\begin{frame}
+\frametitle{El método de Frobenius}
+El método propone la búsqueda de soluciones en series de potencias para ecuaciones diferenciales lineales de segundo orden.
+\\
+\bigskip
+Este procedimiento requiere el encontrar relaciones de recurrencia entre los coeficientes de las series buscadas, asumiendo un primer término no nulo.
+\end{frame}
+\subsection{Soluciones analíticas}
+\begin{frame}
+\frametitle{Soluciones analíticas}
+Una clase muy extensa de ecuaciones diferenciales poseen soluciones que se expresan en series de potencias, las cuales son válidas en un dominio determinado.
+\\
+\bigskip
+Las funciones que gozan de esta particularidad se les llama \emph{analíticas}.
+\end{frame}
+\begin{frame}
+\frametitle{Soluciones analíticas}
+ Las ecuaciones diferenciales más familiares como la ecuación de un oscilador armónico
+ \begin{align*}
+\ddot{x} + \omega^{2} \, x = 0
+ \end{align*}
+\pause
+ admite soluciones del tipo
+\begin{align*}
+x(s) = A_{1} \, \sin( \omega \, s) + A_{2} \, \cos (\omega \, s)
+\end{align*}
+siendo claro que $\sin( \omega \, s)$ y $\cos( \omega \, s)$ son funciones analiticas.
+\end{frame}
+\begin{frame}
+\frametitle{Soluciones analíticas}
+De igual manera para la ecuación de un oscilador amortiguado, como en un gran número de ecuaciones de la mecánica nos encontraremos que forman parte de este tipo de ecuaciones.
+\end{frame}
+\subsection{Definición}
+\begin{frame}
+\frametitle{Definición de serie de potencias}
+Una expresión de la forma:
+\begin{align}
+a_{0} + a_{1} \, (x - x_{0}) + \ldots + a_{n} \, x^{n} = \sum_{n=0}^{\infty} a_{n} \, (x - x_{0})^{n}
+\label{eq:ecuacion_01}    
+\end{align}
+se llama \textit{serie de potencias}.
+\end{frame}
+\begin{frame}
+\frametitle{Límite de la serie}
+La serie puede estar definida por el límite
+\begin{align*}
+\lim_{N \to \infty} \sum_{n=0}^{N} a_{n} \, (x - x_{0})
+\end{align*}
+para aquellos valores de $x$ en que exista el límite.
+\\
+\bigskip
+En ese caso, se le conoce a la serie como una serie convergente.
+\end{frame}
+\begin{frame}
+\frametitle{Criterio de convergencia}
+Para determinar los valores de $x$ que cumplen la condición de convergencia, se utiiza el criterio del cociente:
+\begin{align*}
+\lim_{n \to \infty} \dfrac{a_{n+1}}{a_{n}} = \rho \hspace{1.5cm} \begin{cases}
+\mbox{Converge si } & \rho < 1 \\
+\mbox{Diverge si } & \rho > 1
+\end{cases}
+\end{align*}
+El criterio no clasifica si $\rho = 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Criterio de convergencia}
+Más general es considerar el valor absoluto de dicho cociente, si está acotado por cierto numero $\sigma$ cuando $n \to \infty$, la serie converge cuando $\sigma < 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Criterio de convergencia}
+Por lo tanto, tendríamos que
+\begin{align*}
+\rho = \lim_{n \to \infty} \abs{\dfrac{a_{n+1}}{a_{n}}} \, \abs{x - x_{0}} = L \, \abs{x - x_{0}}
+\end{align*}
+en donde
+\begin{align*}
+L = \lim_{n \to \infty} \abs{\dfrac{a_{n+1}}{a_{n}}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Criterio de convergencia}
+Si este límite existe, se deduce por la ec. (\ref{eq:ecuacion_01}):
+\begin{align}
+\begin{aligned}        
+\mbox{converge si } &\abs{x - x_{0}} < \dfrac{1}{L} \\[0.5em]
+\mbox{diverge si } &\abs{x - x_{0}} > \dfrac{1}{L}
+\end{aligned}
+\label{eq:ecuacion_02}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Intervalo de convergencia}
+De esta manera tendremos un intervalo de convergencia cuando $L$ existe:
+\begin{align*}
+\left( x_{0} - \dfrac{1}{L}, x_{0} + \dfrac{1}{L} \right)
+\end{align*}
+\pause
+Este intervalo es simétrico respecto de $x_{0}$, de manera tal que \emph{la serie es convergente dentro} de este intervalo y \emph{divergente fuera} del mismo.
+\end{frame}
+\section{Puntos singulares}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definiciones}
+%Ref. Arfken
+\begin{frame}
+\frametitle{Definiendo puntos}
+Se presenta el concepto de un \emph{punto singular o singularidad} (tal como se aplica a una ecuación diferencial).
+\\
+\bigskip
+El interés en este concepto radica en su utilidad en
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Clasificar las ODE.
+\item Revisar la viabilidad de una solución en series, esta viabilidad es parte del teorema de Fuchs.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Punto ordinario}
+Usando la notación $\displaystyle \dv[2]{y}{x} = y^{\prime \prime}$, tenemos:
+\begin{align}
+y^{\prime \prime} = f(x, y, y^{\prime})
+\label{eq:ecuacion_09_74}
+\end{align}
+Ahora bien, si en la ec. (\ref{eq:ecuacion_09_74}) $y$ e $y^{\prime}$ pueden tener todos los valores finitos a $x = x_{0}$ e $y^{\prime \prime}$ permanece finita, el punto $x = x_{0}$ es un \emph{punto ordinario}.
+\end{frame}
+\begin{frame}
+\frametitle{Punto singular}
+Por otra parte, si $y^{\prime \prime}$ se vuelve infinita para cualquier selección finita de $y$ e  $y^{\prime \prime}$, el punto $x = x_{0}$ se denomina \emph{punto singular}.
+\end{frame}
+\begin{frame}
+\frametitle{Reescribiendo la EDO2}
+Si escribimos este EDO2H (en $y$) como
+\begin{align}
+y^{\prime \prime} + P(x) \: y^{\prime} + Q(x) \: y = 0
+\label{eq:ecuacion_09_75}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Punto singular}
+Ahora bien, si las funciones $P(x)$ y $Q(x)$ permanecen finitas a $x = x_{0}$, el punto $x = x_{0}$ es un \emph{punto ordinario}.
+\\
+\bigskip
+\pause
+Al contrario, si $P(x)$ y/o $Q(x)$ divergen mientras $x \to x_{0}$, el punto $x_{0}$ es un \emph{punto singular}.
+\end{frame}
+\begin{frame}
+\frametitle{Tipos de puntos singulares}
+Usando la ecuación (\ref{eq:ecuacion_09_75}) podemos distinguir entre dos tipos de puntos singulares:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}
+\item Si $P(x)$ y/o $Q(x)$ divergen a medida que $x \to x_{0}$, pero $(x - x_{0}) \: P(x)$ y $(x - x_{0})^{2} \: Q(x)$ permanecen finitas a medida que $x \to x_{0}$, entonces el punto $x = x_{0}$ se llama \textbf{punto singular regular o punto singular no esencial}.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Tipos de puntos singulares}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}
+\conti 
+\item Si $P(x)$ diverge más rápidamente que $\dfrac{1}{(x - x_{0})}$, de tal modo que $(x - x_{0}) \: P(x)$ tiene a infinito a medida que $x \to x_{0}$, o cuando $Q(x)$ diverge más rápidamente que $\dfrac{1}{(x - x_{0})^{2}}$, de modo que $(x - x_{0})^{2} \: Q(x)$ tiene a infinito, a medida que $x \to x_{0}$, entonces el punto $x = x_{0}$ se llama \textbf{singularidad esencial o singularidad irregular}.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Validez de las definiciones}
+Estas definiciones son válidas para todos los valores finitos de $x_{0}$. 
+\\
+\bigskip
+El análisis de los puntos al infinito $(x \to \infty)$ es similar al tratamiento que se hace para las funciones en variable compleja.
+\end{frame}
+\begin{frame}
+\frametitle{Análisis puntos al infinito}
+Hacemos el cambio de variable $x = 1/z$, sustituyendo en la ED y entonces hacemos que $z \to 0$. 
+\\
+\bigskip
+Haciendo el cambio de variable en las derivadas:
+\begin{align}
+\dv{y(x)}{x} = \dv{y(z^{-1})}{z} \: \dv{z}{x} = - \dfrac{1}{x^{2}} \dv{y(z^{-1})}{z} = -z^{2} \: \dv{y(z^{-1})}{z}
+\label{eq:ecuacion_09_76}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Análisis puntos al infinito}
+Entonces:
+\begin{align}
+\begin{aligned}
+\dv[2]{y(x)}{x} &= \dv{z} \left[ \dv{y(x)}{x} \right] \dv{z}{x} = \\
+&= (-z^{2}) \left[ -2 \: z \dv{y(z^{-1})}{z} - z^{2} \: \dv[2]{y(z^{-1})}{z} \right] = \\
+&= 2 \: z^{3} \: \dv{y(z^{-1})}{z} + z^{4} \: \dv[2]{y(z^{-1})}{z}
+\end{aligned}
+\label{eq:ecuacion_09_77}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Análisis puntos al infinito}
+Usando estos resultados, podemos transformar la ecuación (\ref{eq:ecuacion_09_75}) en
+\begin{align}
+z^{4} \: \dv[2]{y}{z} + [ 2 \: z^{3} - z^{2} \: P(z^{-1})] \: \dv{y}{z} + Q(z^{-1}) \: y = 0
+\label{eq:ecuacion_09_78}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Análisis puntos al infinito}
+El comportamiento en $x = \infty, (z = 0)$ entonces dependerá del comportamiento de los nuevos coeficientes
+\begin{align*}
+\dfrac{2 \: z - P(z^{-1})}{z^{2}} \hspace{1cm} \text{ y } \hspace{1cm} \dfrac{Q(z^{-1})}{z^{4}}
+\end{align*}
+a medida que $z \to 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Análisis puntos al infinito}
+Si estas dos expresiones se mantienen finitas, el punto $x = \infty$ es un punto ordinario.
+\\
+\bigskip
+Si las expresiones divergen con mayor rapidez que $1/z$ y $1/z^{2}$, respectivamente, el punto $x = \infty$ es un punto regular singular, de otra manera, el punto es irregular singular (una singularidad esencial).
+\end{frame}
+%Ref. Hassani 2009 Chap. 26
+\section{Método de Frobenius}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{El método}
+\begin{frame}
+\frametitle{Descripción del método}
+El supuesto básico del método de Frobenius es que la solución de la ED se puede \emph{representar mediante una serie de potencias}.
+\end{frame}
+\begin{frame}
+\frametitle{Descripción del método}
+Esta no es una suposición restrictiva porque todas las funciones encontradas en aplicaciones físicas pueden escribirse como series de potencias siempre que estemos interesados en sus valores que se encuentran en su intervalo de convergencia.
+\\
+\bigskip
+Este intervalo puede ser muy pequeño o puede cubrir toda la línea real.
+\end{frame}
+\begin{frame}
+\frametitle{La EDO2H general}
+Una ecuación diferencial de segundo orden homogénea y lineal, se puede escribir como
+\begin{align}
+p_{2} (x) \, \dv[2]{y}{x} + p_{1} (x) \, \dv{y}{x} + p_{0}(x) \, y = 0
+\label{eq:ecuacion_26_07}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Características de las $p_{i}(x)$}
+Para casi todas las aplicaciones que se encuentran en física, consideramos que $p_{0}, p_{1}, p_{2}$ son polinomios.
+\\
+\bigskip
+Es posible que la ED no se presenta en la forma que se muestra a partir de, digamos, el método de separación de variables, pero se puede \enquote{llevar} a esa forma.
+\end{frame}
+\begin{frame}
+\frametitle{Características de las $p_{i}(x)$}
+La forma más complicada de los coeficientes de las derivadas en una ED son típicamente funciones racionales (razones de dos polinomios).
+\\
+\bigskip
+Por lo tanto, multiplicar la ED por el producto de los tres denominadores nos devolverá la ED en la forma dada en la ec. (\ref{eq:ecuacion_26_07}).
+\end{frame}
+\begin{frame}
+\frametitle{El método de Frobenius}
+El primer paso en el método de Frobenius es \emph{asumir una serie de potencias infinita para y}.
+\\
+\bigskip
+Es común elegir que el punto de expansión sea $x = 0$.
+\end{frame}
+\begin{frame}
+\frametitle{El método de Frobenius}
+Si $p_{2} (0) \neq 0$, solo es necesario considerar las potencias no negativas de $x$.
+\\
+\bigskip
+\pause
+Si $p_{2} (0) = 0$, la ED pierde su carácter de \enquote{segundo orden}, y las soluciones no se revisarían en estas notas.
+\end{frame}
+\begin{frame}
+\frametitle{Dos opciones}
+Se tienen dos opciones:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Elegir un punto de expansión diferente a $x_{0} \neq 0$, tal que $p_{2} (x_{0}) \neq 0$.
+\item Permitir las potencias no positivas de $x$ en la expansión de $y$.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda opción}
+Rara vez se utiliza la primera opción. Resulta que la forma más económica, pero general, de incorporar la segunda opción es escribir la solución como se muestra a continuación:
+\end{frame}
+\begin{frame}
+\frametitle{Solución supuesta}
+La solución que suponemos es del tipo:
+\begin{align}
+\begin{aligned}
+y &= x^{r} \, \sum_{n=0}^{\infty} a_{n} \, x^{n} = \\[0.5em]
+&= \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = \\[0.5em]
+&= a_{0} \, x^{r} + a_{1} \, x^{r+1} + a_{2} \, x^{r+2} + \ldots
+\end{aligned}
+\label{eq:ecuacion_26_08}    
+\end{align}
+donde $r$ es un número real (no necesariamente un entero positivo) que quedará determinado por la ED.
+\end{frame}
+\begin{frame}
+\frametitle{El valor de $a_{0}$}
+Es habitual elegir $a_{0} = 1$ porque cualquier múltiplo constante de una solución también es una solución.
+\\
+\bigskip
+Si $a_{0} \neq 1$, entonces se multiplica la serie por $1/a_{0}$ y así obtener el valor.
+\end{frame}
+\begin{frame}
+\frametitle{Característica de la serie}
+Ya que una serie de potencias es uniformemente convergente (con su radio de convergencia), por lo que se puede diferenciar término a término.
+\end{frame}
+\begin{frame}
+\frametitle{Diferenciando la solución}
+Por lo que al diferenciar la solución en una primera ocasión, tenemos:
+\begin{align}
+\begin{aligned}
+\dv{y}{x} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} = \\[0.5em]
+&= r \, a_{0} \, x^{r-1} + (r + 1) \, a_{1} \, x^{r} + \ldots
+\end{aligned}
+\label{eq:ecuacion_26_09a}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Diferenciando nuevamente la solución}
+Por lo que al diferenciar por segunda vez, tenemos:
+\begin{align}
+\begin{aligned}
+\dv[2]{y}{x} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-1} = \\[0.5em]
+&= r \, (r - 1) \, a_{0} \, x^{r-2} + (r + 1) \, r \, a_{1} \, x^{r}-1 + \ldots
+\end{aligned}
+\label{eq:ecuacion_26_09b}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Siguiente paso}
+Ahora sustituimos las ecuaciones (\ref{eq:ecuacion_26_08}), (\ref{eq:ecuacion_26_09a}) y (\ref{eq:ecuacion_26_09b}) en la ED (\ref{eq:ecuacion_26_07}).
+\\
+\bigskip
+Multiplicamos los polinomios en la serie, agrupamos todas las potencias distintas de $x$ y establecemos el coeficiente de cada término igual a cero.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de índices}
+Así obtenemos un conjunto de ecuaciones cuya solución determina el valor de $r$ y las $a_{n}$.
+\\
+\bigskip
+\pause
+La ecuación que surge de la \emph{potencia más baja de x} involucra solo a $r$, se llama \textbf{ecuación de índices}.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de índices}
+Esta suele ser una ecuación cuadrática en $r$ que se puede resolver para obtener el(los) posible(s) valor(es) de $r$, cada uno de los cuales conduce generalmente a una solución diferente.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de índices}
+Las otras ecuaciones que provienen de potencias superiores de $x$ permiten establecer \emph{relaciones de recurrencia}, es decir, ecuaciones que dan $a_{n}$ en términos de $a_{n-1}$ y $a_{n-2}$.
+\\
+\bigskip
+Al iterar esta relación, se pueden obtener todos los $a_{n}$ en términos de solo dos coeficientes.
+\end{frame}
+\subsection{Ejercicio}
+%Ref. Zill ED pág. 279
+\begin{frame}
+\frametitle{Ejercicio práctico}
+Resuelve la siguiente EDO2H mediante el método de Frobenius:
+\begin{align}
+3 \, x \, y^{\prime \prime} + y^{\prime} - y = 0
+\label{eq:ecuacion_04}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Se propone una solución del tipo:
+\begin{align*}
+y = \sum_{n=0}^{\infty} a_{n} \, x^{n+r}
+\end{align*}
+\pause
+Así se tiene que:
+\begin{align*}
+y^{\prime} &= \sum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} \\[0.5em]
+y^{\prime \prime} &= \sum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+De modo que:
+\begin{align*}
+3 \, x \, y^{\prime \prime} + y^{\prime} - y &= 3 \, \sum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-1} + \\[0.5em]
+&+ \sum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorizando términos}
+Haciendo álgebra:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+&= x^{r} \, \bigg[ r (3 \, r - 2) \, a_{0} \, x^{-1} +  \\[0.5em]
+&+ \underbrace{\sum_{n=1} (n + r)\,(3 \, n + 3 \, r - 2) \, a_{n} \, x^{n-1}}_{k=n-1} + \\[0.5em]
+&- \underbrace{\sum_{n=0} a_{n} \, x^{n}}_{k=n} \bigg] =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Expresión resultante}
+Llegamos entonces a:
+\begin{align*}
+&= x^{r} \, \bigg[ r \, (3 \, r - 2) \, a_{0} \, x^{-1} + \\[0.5em]
+&+ \sum_{k=0}^{\infty} \left[ (k + r + 1)(3 \, k + 3 \, r + 1) \, a_{k+1} - a_{k} \right] \, x^{k} \bigg] = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultados importantes}
+Tenemos dos resultados importantes, el primero de ellos lo consideramos de la expresión con la potencia más pequeña del desarrollo:
+\begin{align*}
+r \, (3 \, r - 2) \, a_{0} = 0
+\end{align*}
+que se le conoce como \textbf{ecuación de índices}.
+\end{frame}
+\begin{frame}
+\frametitle{Resultados importantes}
+El segundo resultado es la \textbf{relación de recurrencia}:
+\begin{align*}
+(k + r + 1)(3 \, k + 3 \, r + 1) \, a_{k+1} - a_{k} = 0
+\end{align*}
+\pause
+Entonces:
+\begin{align}
+a_{k+1} = \dfrac{a_{k}}{(k + r + 1)(3 \, k + 3 \, r + 1)}
+\label{eq:ecuacion_07}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Soluciones ec. de índices}
+De la ecuación de índices, sabemos desde el inicio que $a_{0} \neq 0$, por lo que
+\begin{align}
+r (3 \, r - 2) = 0
+\label{eq:ecuacion_06}
+\end{align}
+\pause
+Que tiene por raíces
+\begin{align*}
+r_{1} = \dfrac{2}{3} \hspace{1.5cm} r_{2} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Primera raíz}
+Ocupamos la primera raíz $r_{1} = 2/3$ en la relación de recurrencia (\ref{eq:ecuacion_07}):
+\begin{align}
+a_{k+1} = \dfrac{a_{k}}{(3 \, k + 5)(k + 1)} \hspace{1.5cm} k = 0, 1, 2, \ldots
+\label{eq:ecuacion_08}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Primera raíz}
+Entonces:
+\begin{eqnarray*}
+a_{1} &=& \dfrac{a_{0}}{5 \cdot 1} \\[0.5em] \pause
+a_{2} &=& \dfrac{a_{1}}{8 \cdot 2} = \dfrac{a_{0}}{2! \, 5 \cdot 8} \\[0.5em] \pause
+a_{3} &=& \dfrac{a_{2}}{11 \cdot 3} = \dfrac{a_{0}}{3! \, 5 \cdot 8 \cdot 11} \\
+\vdots \\[0.5em] \pause
+a_{n} &=& \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \hspace{1cm} n = 1, 2, 3, \ldots
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Primera solución obtenida}
+Hemos obtenido la primera solución $y_{1}$ ocupando la raíz $r_{1}$:
+\begin{align}
+y_{1} = a_{0} \, x^{2/3} \left[ 1 + \sum_{n=1}^{\infty} \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \, x^{n} \right]
+\label{eq:ecuacion_10}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda raíz}
+La segunda raíz de la ecuación de índices: $r_{2} = 0$ nos genera una regla de recurrencia distinta:
+\begin{align}
+a_{k+1} = \dfrac{a_{k}}{(k+1)(3 \, k +1)} \hspace{1.5cm} k = 0, 1, 2, \ldots
+\label{eq:ecuacion_09}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Coeficientes}
+Los coeficientes que se obtienen son:
+\begin{eqnarray*}
+a_{1} &=& \dfrac{a_{0}}{1 \cdot 1} \\[0.5em] \pause
+a_{2} &=& \dfrac{a_{1}}{2 \cdot 4} = \dfrac{a_{0}}{2! \, 1 \cdot 4}  \\[0.5em] \pause
+a_{3} &=& \dfrac{a_{2}}{3 \cdot 7} = \dfrac{a_{0}}{3! \, 4 \cdot 7}  \\[0.5em]
+\vdots \\ \pause
+a_{n} &=& \dfrac{a_{0}}{n! \, 1 \cdot 4 \cdot 7 \ldots (3 \, n - 2)} \hspace{1cm} n = 1, 2, 3, \ldots
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución}
+La segunda solución que obtenemos es:
+\begin{align}
+y_{2} = a_{0} \, x^{0} \left[ 1 + \sum_{n=1}^{\infty} \dfrac{1}{n! \, 1 \cdot 4 \cdot 7 \ldots (3\, n - 2)} \, x^{n} \right]
+\label{eq:ecuacion_11}
+\end{align}    
+\end{frame}
+\begin{frame}
+\frametitle{Convergencia de las soluciones}
+Se puede demostrar que las soluciones (\ref{eq:ecuacion_10}) y (\ref{eq:ecuacion_11}) convergen ambas para todos los valores finitos de $x$.
+\end{frame}
+\begin{frame}
+\frametitle{Independencia de las series}
+También es posible ver que las soluciones no es múltiplo de la otra, por lo que $y_{1}(x)$ y $y_{2}(x)$ son linealmente independientes con respecto a $x$.
+\end{frame}
+\begin{frame}
+\frametitle{Principio de superposición}
+Por el principio de superposición, tenemos que:
+\begin{align*}
+y &= C_{1} \, y_{1} (x) + C_{2} \, y_{2} = \\[0.5em]
+&= C_{1} \, \left[ x^{2/3} + \sum_{n=1}^{\infty} \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \, x^{n} \right] + \\[0.5em]
+&+ C_{2} \, \left[ 1 + \sum_{n=1}^{\infty} \dfrac{1}{n! \, 1 \cdot 4 \cdot 7 \ldots (3\, n - 2)} \, x^{n} \right]
+\end{align*}
+\end{frame}
+\subsection{Casos de las raíces}
+\begin{frame}
+\frametitle{La ecuación de índices}
+Al ocupar el método de Frobenius se pueden presentar tres casos, que corresponden a la naturaleza de las raíces de la ecuación de índices.
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de índices}
+Haremos la suposición ie $r_{1}$ y $r_{2}$ son las soluciones \emph{reales} de la ecuación de índices, que cuando son distintas, $r_{1}$ representa la raíz mayor.
+\end{frame}
+\subsection*{Caso 1}
+\begin{frame}
+\frametitle{Caso 1}
+\textbf{Las raíces no difieren un entero}. Si $r_{1}$ y $r_{2}$ son distintas, pero no difieren  en un entero, entonces existen dos soluciones linealmente independientes de la ED, cuya forma es:
+\begin{subequations}
+\begin{align}
+y_{1} &= \sum_{n=0}^{\infty} a_{n} \, x^{n+r_{1}} \hspace{0.5cm} a_{0} \neq 0 \label{eq:ecuacion_14a} \\[0.5em]
+y_{2} &= \sum_{n=0}^{\infty} b_{n} \, x^{n+r_{2}} \hspace{0.5cm} b_{0} \neq 0 \label{eq:ecuacion_14b}
+\end{align}
+\end{subequations}
+\end{frame}
+\subsection*{Caso 2}
+\begin{frame}
+\frametitle{Caso 2}
+\textbf{Las raíces difieren en un entero positivo.} Si $r_{1} - r_{2} = N$, donde $N$ es un entero positivo, entonces existe dos soluciones linealmente independientes de la ED, de la forma:
+\begin{subequations}
+\begin{align}
+y_{1} &= \sum_{n=0}^{\infty} a_{n} \, x^{n+r_{1}} \hspace{0.5cm} a_{0} \neq 0 \label{eq:ecuacion_20a} \\[0.5em]
+y_{2} &= C \, y_{1} (x) \ln x + \sum_{n=0}^{\infty} b_{n} \, x^{n+r_{2}} \hspace{0.5cm} b_{0} \neq 0 \label{eq:ecuacion_20b}
+\end{align}
+\end{subequations}
+\end{frame}
+\subsection*{Caso 3}
+\begin{frame}
+\frametitle{Caso 3}
+\textbf{Las raíces son iguales.} Si $r_{1} = r_{2}$, siempre existen dos soluciones linealmente independientes de la ED, de la forma:
+\begin{subequations}
+\begin{align}
+y_{1} &= \sum_{n=0}^{\infty} a_{n} \, x^{n+r_{1}} \hspace{0.5cm} a_{0} \neq 0 \label{eq:ecuacion_21a} \\[0.5em]
+y_{2} &= y_{1} (x) \ln x + \sum_{n=0}^{\infty} b_{n} \, x^{n+r_{1}} \hspace{0.5cm} b_{0} \neq 0 \label{eq:ecuacion_21b}
+\end{align}
+\end{subequations}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+Determina los puntos singulares de las siguientes ED, clasifica cada punto singular en regular o irregular.
+\begin{enumerate}
+\item $x^{3} \, y^{\prime \prime} + 4 \, x^{2} \, y^{\prime} + 3 \, y = 0$
+\item $x \, y^{\prime \prime} - (x + 3)^{-2} \, y = 0$
+\item $(x^{2} - 9)^{2} \, y^{\prime \prime} + (x + 3) \, y^{\prime} + 2 \, y = 0$
+\item $y^{\prime \prime} - \dfrac{1}{x} \, y^{\prime} + \dfrac{1}{(x - 1)^{3}} \, y = 0$
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+Resuelve las siguientes ED con el método de Frobenius:
+\begin{enumerate}
+\item $2 \, x \, y^{\prime \prime} - y^{\prime} + 2 \, y = 0$
+\item $2 \, x \, y^{\prime \prime} + 5 \, y^{\prime} + x \, y = 0$
+\item $x (x - 1) \, y^{\prime \prime} + 3 \, y^{\prime} - 2 \, y = 0$
+\item $y^{\prime \prime} - \dfrac{3}{x} \, y^{\prime} - 2 \, y = 0$
+\end{enumerate}
+\end{frame}
+\end{document}
