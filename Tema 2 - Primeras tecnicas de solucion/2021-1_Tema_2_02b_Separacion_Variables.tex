@@ -1,0 +1,403 @@
+\input{../Preambulos/preambulo_presentacion_CambridgeUS_beaver}
+\title{\large{Ejercicio con Separación de variables}}
+\subtitle{Tema 2 - Primeras técnicas de solución}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+\section{Clasificación de EDP}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Valor del discriminante}
+\begin{frame}
+\frametitle{EDP general}
+Ya hemos comentado que una EDP en dos variables se puede escribir de la forma:
+\begin{align*}
+A \, u_{xx} + B \, u_{xy} + C \, u_{yy} + D \, u_{x} + E \, u_{y} + F \, u = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Clasificación de las EDP}
+Una EDP se clasifica de acuerdo al discriminante:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Elíptico si $B^{2} - 4 \, A \, C < 0$
+\item Hiperbólico si $B^{2} - 4 \, A \, C > 0$
+\item Parabólico si $B^{2} = 4 \, A \, C$
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos}
+A partir del discriminante identifica la siguientes EDP de dos variables.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 1}
+La EDP es:
+\begin{align*}
+u_{xx} + u_{yy} + 3 \, u_{xy} = 0
+\end{align*}
+\pause
+Entonces tenemos que $A = 1$, $B = 3$ y $C = 1$, entonces:
+\begin{align*}
+B^{2} - 4 \, A \, C = (3)^{2} - 4 (1)(1) = 9 - 4 = 5 > 0
+\end{align*}
+\pause
+entonces la EDP es \textcolor{blue}{hiperbólica}.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+La EDP es:
+\begin{align*}
+u_{xx} + u_{yy} + u_{xy} = 0
+\end{align*}
+\pause
+Entonces tenemos que $A = 1$, $B = 1$ y $C = 1$, entonces:
+\begin{align*}
+B^{2} - 4 \, A \, C = (1)^{2} - 4 (1)(1) = 1 - 4 = -3 < 0
+\end{align*}
+\pause
+entonces la EDP es \textcolor{blue}{elíptica}.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 3}
+La EDP es:
+\begin{align*}
+u_{xx} + u_{yy} + 2 \, u_{xy} = 0
+\end{align*}
+\pause
+Entonces tenemos que $A = 1$, $B = 2$ y $C = 1$, entonces:
+\begin{align*}
+B^{2} - 4 \, A \, C = (2)^{2} - 4 (1)(1) = 4 - 4 = 0
+\end{align*}
+entonces la EDP es \textcolor{blue}{parabólica}.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 4}
+La EDP es:
+\begin{align*}
+u_{xx} + u_{yy} + u_{xy} = 0
+\end{align*}
+\pause
+Entonces tenemos que $A = 1$, $B = 1$ y $C = 1$, entonces:
+\begin{align*}
+B^{2} - 4 \, A \, C = (1)^{2} - 4 (1)(1) = 1 - 4 = -3 < 0
+\end{align*}
+\pause
+entonces la EDP es \textcolor{blue}{elíptica}.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 5}
+La EDP es:
+\begin{align*}
+u_{xx} + x \, u_{yy} = 0
+\end{align*}
+\pause
+Entonces tenemos que $A = 1$, $B = 0$ y $C = x$, entonces:
+\begin{align*}
+B^{2} - 4 \, A \, C = (0)^{2} - 4 (1)(x) = - 4 \, x
+\end{align*}
+\pause
+Tenemos que fijarnos en los valores de $x$:
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 5}
+Si $x > 0$ entonces tenemos que el discriminante es negativo, por lo tanto la EDP es \textcolor{blue}{elíptica}.
+\\
+\bigskip
+\pause
+Si $x < 0$ entonces tenemos que el discriminante es positivo, por lo tanto la EDP es \textcolor{red}{hiperbólica}.
+\end{frame}
+\section{Ecuación de Laplace}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Planteamiento}
+\begin{frame}
+\frametitle{Problema de estudio}
+Ahora consideramos la ecuación de Laplace en un cubo.
+\\
+\bigskip
+Resolveremos el problema en un cubo cuyos lados tienen una longitud de $\pi$, en lugar de un paralelepípedo arbitrario, esto con la finalidad de hacer los cálculos algo menos engorrosos.
+\end{frame}
+\begin{frame}
+\frametitle{Problema de estudio}
+Debemos de considerar que el problema plantea el estudio en seis caras en lugar de cuatro bordes y las condiciones de frontera son funciones de dos variables.
+\end{frame}
+\begin{frame}
+\frametitle{Características del problema}
+El problema a resolver cuenta con las siguientes características
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\laplacian{u(x, y, z)} = \pdv[2]{u}{x} + \pdv[2]{u}{y} + \pdv[2]{u}{z} = 0 \hspace{1cm} \begin{cases}
+0 < x < \pi \\
+0 < y < \pi \\
+0 < z < \pi 
+\end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Condiciones iniciales}
+Además tenemos que:
+\begin{align*}
+u(x, y , z) = 0 \mbox{  si  } x = 0, x = \pi, y = 0, y = \pi , z = \pi 
+\end{align*}
+\pause
+\begin{align*}
+u(x, y , 0) = f (x, y)
+\end{align*}
+\end{frame}
+\subsection{Separación de variables}
+\begin{frame}
+\frametitle{Usando el método}
+Para resolver esta ecuación mediante el método de separación de variables, haremos la suposición de que tiene una solución del tipo:
+\begin{align*}
+u(x, y, z) = X(x) \, Y(y) \, Z(z)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando el método}
+Entonces tendremos que:
+\begin{eqnarray*}
+\pdv[2]{u}{x} &=& \stilde{X} (x) \, Y(y) \, Z (z) \\[0.5em] \pause
+\pdv[2]{u}{y} &=& X (x) \, \stilde{Y} (y) \, Z (z) \\[0.5em] \pause
+\pdv[2]{u}{z} &=& X (x) \, Y(y) \, \stilde{Z} (z)
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Sustituyendo}
+Al sustituir en la ec. de Laplace, tendremos:
+\begin{align*}
+\pdv[2]{u}{x} + \pdv[2]{u}{y} + \pdv[2]{u}{z} &= \stilde{X} (x) \, Y(y) \, Z (z) + \\[0.5em]
+&+ X (x) \, \stilde{Y} (y) \, Z (z) + \\[0.5em]
+&+ X (x) \, Y(y) \, \stilde{Z} (z) = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Dividiendo términos}
+Al dividir entre $X(x) \, Y(y) \, Y(y)$ obtenemos:
+\begin{align*}
+\dfrac{\stilde{X} (x)}{X(x)} + \dfrac{\stilde{Y} (y)}{Y(y)} + \dfrac{\stilde{Z} (z)}{Z(x)} =
+\end{align*}
+\pause
+de manera equivalente:
+\begin{align}
+\dfrac{\stilde{X} (x)}{X(x)} + \dfrac{\stilde{Y} (y)}{Y(y)} = -  \dfrac{\stilde{Z} (z)}{Z(x)}
+\label{eq:ecuacion_Kejer_01}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Primera constante de separación}
+Vemos que el lado izquierdo de la ec. (\ref{eq:ecuacion_Kejer_01}) es \emph{función solo de x e y}, mientras que el lado derecho es \emph{función solo de z}.
+\\
+\bigskip
+\pause
+Por lo que debe de ser igual a una constante: $\alpha$, la primera constante de separación.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuaciones resultantes}
+Entonces ahora tenemos:
+\begin{align*}
+\dfrac{\stilde{X} (x)}{X(x)} + \dfrac{\stilde{Y} (y)}{Y(y)} &= \alpha \\[1em]
+\dfrac{\stilde{Z} (z)}{Z(x)} &= - \alpha
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Continua el método}
+Tenemos entonces que:
+\begin{align*}
+\dfrac{\stilde{X} (x)}{X(x)} + \dfrac{\stilde{Y} (y)}{Y(y)} = \alpha
+\end{align*}
+\pause
+Entonces es cierto que:
+\begin{align}
+\dfrac{\stilde{X} (x)}{X(x)} = \alpha - \dfrac{\stilde{Y} (y)}{Y(y)}
+\label{eq:ecuacion_Kejer_02}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda constante de Separación}
+Siguiendo el razonamiento anterior, cada lado de la ec. (\ref{eq:ecuacion_Kejer_02}) debe ser igual a una constante.
+\\
+\bigskip
+\pause
+Sea $\beta$ la segunda constante de separación.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuaciones separadas}
+Entonces hacemos:
+\begin{align*}
+\beta = \dfrac{\stilde{X} (x)}{X(x)} 
+\end{align*}
+\pause
+Por tanto
+\begin{align*}
+\stilde{X} (x) - \beta \, X(x) = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuaciones separadas}
+Además:
+\begin{align*}
+\dfrac{\stilde{Y} (y)}{Y(y)} = \alpha - \dfrac{\stilde{X} (x)}{X(x)} = \alpha - \beta
+\end{align*}
+\pause
+Entonces:
+\begin{align*}
+\stilde{Y} (y) - (\alpha - \beta) Y(y) = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando las CDF}
+Tomamos las EDO2H para cada variable y ocupamos las CDF:
+\begin{eqnarray}
+\stilde{X} (x) - \beta \, X(x) &=& 0, \hspace{0.5cm} X(0) = X(\pi) = 0 \label{eq:ecuacion_Kejer_03} \\[0.5em] \pause
+\stilde{Y} (y) - (\alpha - \beta) Y(y) &=& 0, \hspace{0.5cm} Y(0) = Y(\pi) = 0 \label{eq:ecuacion_Kejer_04} \\[0.5em] \pause
+\stilde{Z} (z) - \alpha \, Z(z) &=& 0, \hspace{0.5cm} Z(\pi) = 0 \label{eq:ecuacion_Kejer_05}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Encontrando las constantes}
+Vamos a determinar el valor apropiado para las constantes. \pause De la ecuación
+\begin{align*}
+\stilde{X} (x) - \beta \, X(x) = 0, \hspace{0.5cm} X(0) = X(\pi) = 0
+\end{align*}
+debe de ocurrir que $-\beta > 0$ por la condiciones de frontera.
+\end{frame}
+\subsection{Solución general}
+\begin{frame}
+\frametitle{Resolviendo la EDO}
+Proponemos que $\beta = - n^{2}$.\pause  Por lo que la ec. (\ref{eq:ecuacion_Kejer_03}) es:
+\begin{align*}
+\stilde{X} (x) + n^{2} \, X(x) = 0, \hspace{0.5cm} X(0) = X(\pi) = 0
+\end{align*}
+\pause
+La solución a esta EDO2H (que puedes corroborar) es:
+\begin{align*}
+X_{n} (x) =  \sin (n \, x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la EDO}
+De manera similar, para la ecuación
+\begin{align*}
+\stilde{Y} (y) - (\alpha - \beta) \, Y(y) = 0, \hspace{0.5cm} Y(0) = Y(\pi) = 0
+\end{align*}
+\pause
+debe de ocurrir que $-(\alpha - \beta) > 0$. \pause Hacemos que $\alpha - \beta = - m^{2}$.
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la EDO}
+Entonces tenemos que para la ec. (\ref{eq:ecuacion_Kejer_04}) es:
+\begin{align*}
+\stilde{Y} (y) + m^{2} \, Y(y) &=& 0, \hspace{0.5cm} Y(0) = Y(\pi) = 0
+\end{align*}
+\pause
+que tiene por solución:
+\begin{align*}
+Y_{m} (y) = \sin (m \, y)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la EDO}
+Notemos que
+\begin{align*}
+\alpha = - \beta - m^{2} = m^{2} - n^{2}
+\end{align*}
+\pause
+Por lo que la ecuación
+\begin{align*}
+\stilde{Z} (z) - \alpha \, Z(z) = 0, \hspace{0.5cm} Z(\pi) = 0
+\end{align*}
+pasa a ser:
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la EDO}
+\begin{align*}
+\stilde{Z} (z) - (m^{2} + n^{2}) \, Z(z) = 0, \hspace{0.5cm} Z(\pi) = 0
+\end{align*}
+\pause
+Entonces la solución (que también puedes corroborar) para esta ecuación es:
+\begin{align*}
+Z_{mn} (z) = \sinh \sqrt{m^{2} + n^{2}} (\pi - z)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución general}
+La solución general al problema de la ec. de Laplace en un cubo es:
+\begin{align*}
+u(x, y, z) &= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} a_{mn} \sin (n \, x) \, \sin (m \, y) \times \\[0.5em]
+&\times \sinh \sqrt{m^{2} + n^{2}}(\pi - z)
+\end{align*}
+\end{frame}
+\subsection{Solución con las CI}
+\begin{frame}
+\frametitle{Calculando las constantes $a_{mn}$}
+Para determinar las constantes $a_{mn}$, ocupamos la CI:
+\begin{align*}
+u(x, y, 0) = f(x, y)
+\end{align*}
+Entonces tenemos que:
+\end{frame}
+\begin{frame}
+\frametitle{Solución con las CI}
+Así se tiene:
+\begin{eqnarray*}
+u(x, y, 0) &= \displaystyle \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} a_{mn} \sin (n \, x) \, \sin (m \, y) \times \\[0.5em]
+&\times \sinh \sqrt{m^{2} + n^{2}}(\pi - 0) = \\[0.5em] \pause
+&= \displaystyle \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} a_{mn} \sin (n \, x) \, \sin (m \, y) \times \\[0.5em]
+&\times \sinh \pi \, \sqrt{m^{2} + n^{2}} 
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución con las CI}
+Hagamos
+\begin{align*}
+c_{mn} = a_{mn} \, \sinh \pi \, \sqrt{m^{2} + n^{2}}
+\end{align*}
+\pause
+Entonces se tendrá:
+\begin{align*}
+f(x, y) = u(x, y, 0) = \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} c_{mn} \sin (n \, x) \, \sin (m \, y)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Condición inicial}
+Para satisfacer la condición de frontera $u(x, y, 0) = f(x, y)$, debemos elegir
+\begin{align*}
+c_{mn} = \dfrac{4}{\pi^{2}} \int_{0}^{\pi} \left( \int_{0}^{\pi} \sin (n \, x) \dd{x} \right) \, \sin (m \, y) \dd{y}
+\end{align*}
+Entonces:
+\end{frame}
+\begin{frame}
+\frametitle{Los coeficientes $c_{mn}$}
+Entonces:
+\begin{eqnarray*}
+a_{mn} &=& \dfrac{c_{mn}}{\sinh \pi \, \sqrt{m^{2} + n^{2}}} = \\[1em] \pause
+&=& \dfrac{\displaystyle \dfrac{4}{\pi^{2}} \int_{0}^{\pi} \left( \int_{0}^{\pi} \sin (n \, x) \dd{x} \right) \, \sin (m \, y) \dd{y}}{\sinh \pi \, \sqrt{m^{2} + n^{2}}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución al problema}
+Entonces la solución general al problema de la ec. de Laplace para un cubo, con las CDF y la CI dadas en el enunciado, es:
+\pause
+\begin{align*}
+u(x, y, z) &= \displaystyle \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} a_{mn} \sin (n \, x) \, \sin (m \, y) \times \\[0.5em]
+&\times \sinh \sqrt{m^{2} + n^{2}}(\pi - z) =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución al problema}
+\fontsize{12}{12}\selectfont
+\begin{align*}
+u(x, y, z)  &= \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} \dfrac{\displaystyle \dfrac{4}{\pi^{2}} \int_{0}^{\pi} \left( \int_{0}^{\pi} \sin (n \, x) \dd{x} \right) \, \sin (m \, y) \dd{y}}{\sinh \pi \, \sqrt{m^{2} + n^{2}}} \times \\[0.5em]
+&\times \sin (n \, x) \, \sin (m \, y) \, \sinh \sqrt{m^{2} + n^{2}}(\pi - z)
+\end{align*}
+\end{frame}
+\end{document}

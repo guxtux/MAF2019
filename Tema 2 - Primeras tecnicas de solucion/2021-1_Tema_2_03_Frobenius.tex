@@ -590,4 +590,178 @@ Resuelve las siguientes ED con el método de Frobenius:
 \item $y^{\prime \prime} - \dfrac{3}{x} \, y^{\prime} - 2 \, y = 0$
 \end{enumerate}
 \end{frame}
+%Ref Kirkwood
+\section{Ecuación de calor}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Problema completo}
+\begin{frame}
+\frametitle{Ecuación para resolver}
+Considera la ecuación de calor:
+\begin{align*}
+u_{t} =  \alpha^{2} \,  \laplacian{u}
+\end{align*}
+La razón por la que las ecuaciones que se obtienen por el método de separación de variables en coordenadas cilíndricas no es tan simple como en coordenadas cartesianas, se debe a la forma del Laplaciano. 
+\end{frame}
+\begin{frame}
+\frametitle{Laplaciano en cilíndricas}
+En coordenadas cilíndricas, el laplaciano está dado por
+\begin{align*}
+u_{xx} = u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta} + u_{zz}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Primera observación}
+Vamos a simplifcar nuestros cálculos y nos permitirá demostrar cómo surgen las funciones de Bessel si suponemos que $u$ es una función de $r$, $\theta$ y $t$, pero no una función de $z$.
+\end{frame}
+\subsection{Separación de variables}
+\begin{frame}
+\frametitle{Separación de variables}
+Ocupando el método de separación de variables, suponemos que existe una solución para $u$, tal que:
+\begin{align*}
+u_{t} = \alpha^{2} \, \laplacian{u}
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Separación de variables}
+Puede expresarse como:
+\begin{align*}
+R(r) \, \Theta (\theta) \, T^{\prime} &= \alpha^{2} \bigg[ \stilde{T} (r) \, \Theta (\theta) \, T(t) + \\[0.5em]
+&+ \dfrac{1}{r} \ptilde{R} (r) \, \Theta(\theta) \, T(t) + \dfrac{1}{r^{2}} \, R(r) \, \stilde{\Theta} \, T(t) \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Acomodando los términos}
+Dividiendo entre $\alpha^{2} R(r) \, \Theta (\theta) \, T(t)$, tenemos que:
+\begin{align}
+\dfrac{1}{K} \, \dfrac{\ptilde{T} (t)}{T (t)} = \dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (t)}{R (t)} + \dfrac{1}{r^{2}} \, \dfrac{\stilde{\Theta} (\theta)}{\Theta (\theta)}
+\label{eq:ecuacion_K01}
+\end{align}
+\pause
+El lado izquierdo de la ecuación es función sólo de $t$.
+\end{frame}
+\begin{frame}
+\frametitle{Separación de variables}
+Mientras que el lado derecho de la ecuación es función de $r$ y $\theta$, por lo que deben ser igual a una constante.
+\\
+\bigskip
+\pause
+En este caso, corresponde a la primera constante de separación: $- \lambda$.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuaciones resultantes}
+Entonces tenemos que:
+\begin{align*}
+\dfrac{1}{\alpha^{2}} \, \dfrac{\ptilde{T} (t)}{T (t)} = - \lambda
+\end{align*}
+o de manera equivalente
+\begin{align}
+\ptilde{T}(t) + \lambda \, \alpha^{2} \, T(t) = 0
+\label{eq:ecuacion_K02}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda ecuación}
+También tenemos que:
+\begin{align*}
+\dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \dfrac{1}{r^{2}} \, \dfrac{\stilde{\Theta} (\theta)}{\Theta (\theta)} = - \lambda
+\end{align*}
+\pause
+Separando nuevamente las funciones
+\begin{align*}
+\dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \lambda = - \dfrac{1}{r^{2}} \, \dfrac{\stilde{\Theta} (\theta)}{\Theta (\theta)}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda constante de separación}
+Así tenemos:
+\begin{align}
+r^{2} \left[ \dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \lambda \right] = - \dfrac{\stilde{\Theta} (\theta)}{\Theta (\theta)}
+\label{eq:ecuacion_K03}    
+\end{align}
+El lado izquierdo de esta ecuación es función solo de $r$ y el lado derecho es una función de $\theta$, por lo que debe ser igual a una constante: $\mu$, la segunda constante de separación.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación con respecto a $\theta$}
+\begin{align}
+\stilde{\Theta} (\theta) + \mu \, \Theta (\theta) = 0
+\label{eq:ecuacion_K04}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando la expresión}
+Entonces hacemos:
+\begin{align*}
+r^{2} \left[ \dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \lambda \right] = \mu
+\end{align*}
+\pause
+Que al acomodar los términos:
+\begin{align*}
+\dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \lambda = \dfrac{\mu}{r^{2}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación resultante}
+La ecuación a la que llegamos es:
+\begin{align}
+\stilde{R} (r) + \dfrac{1}{r} \, \ptilde{R} (r) + \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, R(r) = 0
+\label{eq:ecuacion_K05}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Solución de la EDO2H}
+Por lo tanto, para resolver la ecuación de calor en coordenadas polares, necesitamos resolver las ecuaciones (\ref{eq:ecuacion_K02}), (\ref{eq:ecuacion_K04}) y (\ref{eq:ecuacion_K05}).
+\\
+\bigskip
+\pause
+De éstas, solo la ecuación (\ref{eq:ecuacion_K05}) requiere atención adicional.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación especial}
+La ecuación (\ref{eq:ecuacion_K05}) es (como) una \emph{ecuación de Bessel}, es decir, presenta la forma de la ED de Bessel, que es una ecuación que como veremos más adelante, va a definir un conjunto de ecuaciones diferenciales de la física matemática que nos llevan a un conjunto de \emph{funciones especiales}.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación especial}
+La ecuación que obtuvimos, se presenta cuando usamos el Laplaciano en coordenadas polares o cilíndricas en la ecuación de onda o la ecuación de calor.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación especial}
+Como punto importante hay que señalar que a partir de una ecuación inicial, bajo cierta geometría encontramos una ED resultante, para obtener su solución. Este modo de trabajo lo retomaremos en el Tema 5 - Funciones Especiales.
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de Laplace}
+En la ecuación de Laplace, veremos que la ecuación tiene la forma
+\begin{align*}
+\stilde{R} (r) + \dfrac{1}{r} \, \ptilde{R} (r) + \left( m^{2} - \dfrac{n^{2}}{r^{2}} \right) \, R(r) = 0
+\end{align*}
+y tendrá que manejarse de manera diferente . Si hubiéramos asumido que la función u también dependía de zy que
+\end{frame}
+\begin{frame}
+\frametitle{Caso especial}
+Si hubiéramos asumido que la función $u$ también dependía de $z$ y que la solución propuesta fuese:
+\begin{align*}
+u(r, \theta, z, t) =  R(r) \, \Theta (\theta) \, T(t) \, Z(z)
+\end{align*}
+la ec. (\ref{eq:ecuacion_K05}) todavía habría sido la única EDO complicada que habría surgido.
+\end{frame}
+\subsection{Solución en series}
+\begin{frame}
+\frametitle{Resolviendo la ecuación}
+La ecuación (\ref{eq:ecuacion_K05}) es una ecuación tipo Bessel.
+\\
+\bigskip
+\pause
+A continuación, definimos una ecuación de Bessel, demostraremos una solución a tales ecuaciones y luego haremos una transformación que nos permitirá resolver la ecuación anterior
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la ecuación}
+Dado que esta es una ED de segundo orden, hay dos soluciones pero una no está acotada en $r=0$.
+\\
+\bigskip
+\pause
+Debido a consideraciones físicas, esta será una solución inadmisible para nuestros problemas.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación tipo Bessel}
+Una ecuación de Bessel es una ecuación de la forma
+\end{frame}
 \end{document}
