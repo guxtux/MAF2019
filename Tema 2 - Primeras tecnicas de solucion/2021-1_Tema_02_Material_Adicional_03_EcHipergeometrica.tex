@@ -1,0 +1,163 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Ecuación hipergeométrica \\ \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Abraham Lima Buendía}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{La ecuación hipergeométrica.}
+Consideremos la siguiente ecuación diferencial
+\begin{align*}
+x (x - 1) \, \stilde{y} + [(1 + a + b) \, x - c] \, \ptilde{y} + a \, b \, y = 0
+\end{align*}
+que es conocida como la \emph{ecuación diferencial hipergeométrica}. Esta ecuación posee $3$ singularidades, para analizar las singularidades reescribimos de la siguiente manera:
+\begin{align*}
+\stilde{y} + \dfrac{[(1 + a + b) \, x - c]}{x (x -1)} \, \ptilde{y} + \dfrac{a \, b}{x (x - 1)} \, y = 0
+\end{align*}
+Este proceso nos permite evaluar las singularidades en $x = 0$ y $x = 1$, la tercera singularidad está en $x = \infty$, la cual puede resolverse al hacer el cambio de variable $z = 1 /x$ en la ecuación diferencial.
+\par
+Desarrollaremos la solución en torno al punto $x = 0$, tomamos entonces:
+\begin{align*}
+y &= \sum_{\ell=0}^{\infty} q_{\ell} \, x^{\ell + \lambda} \\[0.5em]
+\ptilde{y} &= \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, x^{\ell+\lambda-1} \\[0.5em]
+\stilde{y} &= \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, (\ell + \lambda - 1) \, x^{\ell+\lambda-2}
+\end{align*}
+Sustituimos en la ecuación diferencial para obtener:
+\begin{align*}
+&x^{2} \, \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, (\ell + \lambda - 1) \, x^{\ell+\lambda-2} - x \, \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, (\ell + \lambda - 1) \, x^{\ell+\lambda-2} + \\[0.5em]
++& (1 + a + b) \, \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, x^{\ell+\lambda} - c \, \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, x^{\ell+\lambda-1} + \\[0.5em]
+&+ a \, b \, \sum_{\ell=0}^{\infty} q_{\ell} \, x^{\ell + \lambda} = 0
+\end{align*}
+Desarrollamos los productos:
+\begin{align*}
+&\sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, (\ell + \lambda - 1) \, x^{\ell+\lambda} - \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, (\ell + \lambda - 1) \, x^{\ell+\lambda-1} + \\[0.5em]
+&+ (1 + a + b) \, \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, x^{\ell+\lambda} - c \, \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) \, x^{\ell+\lambda-1} + \\[0.5em]
+&+ a \, b \, \sum_{\ell=0}^{\infty} q_{\ell} \, x^{\ell + \lambda} = 0
+\end{align*}
+Reorganizamos las series:
+\begin{align*}
+&\sum_{\ell}^{\infty} q_{\ell} \big[ (\ell + \lambda) (\ell + \lambda + a + b) + a \, b \big] \, x^{\ell + \lambda} + \\[0.5cm]
+&- \sum_{\ell=0}^{\infty} q_{\ell} \, (\ell + \lambda) (\ell + \lambda - 1 + c) \, x^{\ell+\lambda-1} = 0
+\end{align*}
+Tomamos la potencia más baja para remover la singularidad, esto es, en $\ell = 0$, por lo que tomamos:
+\begin{align*}
+q_{0} \big[ (\lambda) (\lambda + a + b) + a \, b \big] \, x^{\lambda} - q_{0} \, \lambda (\lambda - 1 + c) \, x^{\lambda} \, \dfrac{1}{x} = 0
+\end{align*}
+Entonces tenemos que la potencia más baja es $x^{-1}$ y deseamos removerla, con ello tenemos que la ecuación de índices es:
+\begin{align*}
+\lambda (\lambda - 1 + c) = 0
+\end{align*}
+cuyas raíces son:
+\begin{align*}
+\lambda = 0 \hspace{1cm} \lambda = 1 - c
+\end{align*}
+que serán las raíces con las que trabajaremos.
+\par
+Tomaremos el caso cuando $\lambda = 0$:
+\begin{align*}
+\sum_{\ell=0}^{\infty} q_{\ell} \big[ (\ell) (\ell + a + b) + a \, b \big] \, x^{\ell} - \underbrace{\sum_{\ell=0}^{\infty} q_{\ell} \, \ell (\ell + c - 1) \, x^{\ell-1}}_{\text{(*)}} = 0
+\end{align*}
+(*) Esta suma comienza en $\ell = 1$, por el factor $\ell$ que multiplica a $a_{\ell}$.
+
+Entonces:
+\begin{align*}
+\sum_{\ell=0}^{\infty} q_{\ell} \big[ (\ell) (\ell + a + b) + a \, b \big] \, x^{\ell} - \sum_{\ell=1}^{\infty} \underbrace{q_{\ell}}_{\text{*}} \, \ell (\ell + c - 1) \, x^{\ell-1} = 0
+\end{align*}
+(*) Reescribimos este término, reorganizando los índices.
+
+Así pues:
+\begin{align*}
+\sum_{\ell=0}^{\infty} q_{\ell} \big[ (\ell^{2} + \ell \, a + \ell \, b + a \, b \big] \, x^{\ell} - \sum_{\ell=0}^{\infty} q_{\ell+1} \, (\ell + 1) (\ell + c) \, x^{\ell} = 0
+\end{align*}
+Que de manera equivalente es:
+\begin{align*}
+\sum_{\ell=0}^{\infty} q_{\ell} \big[ (\ell (\ell + a) + (\ell + a) \, b \big] \, x^{\ell} - \sum_{\ell=0}^{\infty} q_{\ell+1} \, (\ell + 1) (\ell + c) \, x^{\ell} = 0
+\end{align*}
+Entonces:
+\begin{align*}
+\sum_{\ell=0}^{\infty} q_{\ell} \big[ (\ell (\ell +  b) + (\ell + a) \big] \, x^{\ell} - \sum_{\ell=0}^{\infty} q_{\ell+1} \, (\ell + 1) (\ell + c) \, x^{\ell} = 0
+\end{align*}
+por lo que:
+\begin{align*}
+\sum_{\ell=0}^{\infty} \bigg[ q_{\ell} \big[ (\ell (\ell +  b) + (\ell + a) \, b \big] \, x^{\ell} - \sum_{\ell=0}^{\infty} q_{\ell+1} \, (\ell + 1) (\ell + c) \, x^{\ell} \bigg] \, x^{\ell} = 0
+\end{align*}
+De donde
+\begin{align*}
+q_{\ell+1} = q_{\ell} \dfrac{(\ell +  b) (\ell + a)}{(\ell + 1) (\ell + c)}
+\end{align*}
+Con esto construimos los coeficientes de la serie:
+\begin{align*}
+q_{0} &\neq 0 \\[0.5em]
+q_{1} &= q_{0} \, \dfrac{(0+b)(0+1)}{(0+c)(1)} \\[0.5em]
+q_{2} &= q_{1} \, \dfrac{(1+b)(1+a)}{(1+c)(2)} = q_{0} \, \dfrac{[(b)(1+b)][(a)(a+1)]}{[(c)(1+c)] \, 2!} \\[0.5em]
+q_{3} &= q_{2} \, \dfrac{(2+b)(2+a)}{(2+c)(3)} = q_{0} \, \dfrac{[(b)(1+b)(2+b)][(a)(a+1)]}{[(c)(1+c)(2+c)] \, 3!} \\[0.5em]
+&\vdots
+\end{align*}
+Para reescribir los coeficientes de la siguiente manera:
+\begin{align*}
+\mathlarger{\Gamma}(\ell + n) &= (\ell + n - 1)! = 1 \cdot 2 \cdot 3 \ldots (\ell + n - 1) \\[0.5em]
+\mathlarger{\Gamma} (\ell) &= (\ell - 1)! = 1 \cdot 2 \ldots (\ell - 1) \\[0.5em]
+&\Rightarrow \dfrac{\mathlarger{\Gamma(\ell + n)}}{\mathlarger{\Gamma}} = \ell (\ell + 1) (\ell + 2) \ldots (\ell + n -1)  = (\ell)_{n}
+\end{align*}
+El término $(\ell)_{n}$ se conoce como \emph{símbolo de Pochhammer}, con esto, el $n$-ésimo coeficiente está determinado por:
+\begin{align*}
+q_{n} =  q_{0} \, \dfrac{(b)_{n} \, (a)_{n}}{(c_{n}) \, n!}
+\end{align*}
+De esta forma tendremos
+\begin{align*}
+y(x) = \sum_{n=0}^{\infty} \dfrac{(b)_{n} \, (a)_{n}}{(c_{n}) \, n!} \, x^{n} = {}_{2}F_{1} (a, b, c, x)
+\end{align*}
+Donde ${}_{2}F_{1} (a, b, c, x)$ representa la función hipergeométrica:
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{
+y(x) = {}_{2}F_{1} (a, b, c, x) }
+\end{align*}
+Consideremos el segundo caso para la raíz, es decir $\lambda = 1 - c$, por lo que tenemos:
+\begin{align*}
+&\sum_{\ell=0}^{\infty} q_{\ell} (\ell + 1 - c)\big[ (\ell + 1 - c + a + b ) + a \, b \big] \, x^{\ell} + \\[0.5em]
+&- \sum_{\ell=0}^{\infty} q_{\ell} (\ell + 1 - c) (\ell + 1 - c - 1 + c) \, x^{\ell-1} = 0
+\end{align*}
+Volvemos a reagrupar términos:
+\begin{align*}
+&\sum_{\ell=0}^{\infty} q_{\ell} (\ell + 1 - c) \big[ (\ell + 1 - c + [ a + b] + a \, b \big] \, x^{\ell} + \\[0.5em]
+&- \sum_{\ell=0}^{\infty} q_{\ell} (\ell + 1 - c) (\ell) \, x^{\ell-1} = 0
+\end{align*}
+Entonces:
+\begin{align*}
+&\sum_{\ell=0}^{\infty} q_{\ell} \bigg[ (\ell + 1 - c)^{2} + (\ell + 1 - c) \, a (\ell + 1 - c) \, b] + a \, b \bigg] \, x^{\ell} + \\[0.5em]
+&- \sum_{\ell=0}^{\infty} q_{\ell} (\ell + 1 - c) (\ell) \, x^{\ell-1} = 0
+\end{align*}
+Por lo que:
+\begin{align*}
+&\sum_{\ell=0}^{\infty} q_{\ell} \bigg[ (\ell + 1 - c)^{2} + (\ell + 1 - c) \, a (\ell + 1 - c) \, b] + a \, b \bigg] \, x^{\ell} + \\[0.5em]
+&- \sum_{\ell=0}^{\infty} q_{\ell+1} (\ell + 2 - c) (\ell + 1) \, x^{\ell} = 0
+\end{align*}
+así:
+\begin{align*}
+&\sum_{\ell=0}^{\infty} q_{\ell} \bigg[ (\ell + 1 - c) (\ell + 1 - c + a) (\ell + 1 - c +  a) \, b] + b \bigg] \, x^{\ell} + \\[0.5em]
+&- \sum_{\ell=0}^{\infty} q_{\ell+1} (\ell + 2 - c) (\ell + 1) \, x^{\ell} = 0
+\end{align*}
+que al agrupar los términos:
+\begin{align*}
+\sum_{\ell=0}^{\infty} \bigg[ q_{\ell} \, (\ell + 1 - c + a) (\ell + 1 - c + b) + q_{\ell+1} (\ell + 2 - c)(\ell + 1) \bigg] \, x^{\ell} = 0
+\end{align*}
+De donde obtenemos la siguiente regla de recurrencia:
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{
+q_{\ell + 1} = q_{\ell} \, \dfrac{(\ell + 1 - c + a) (\ell + 1 - c + b)}{(\ell + 2 - c)(\ell + 1)}}
+\end{align*}
+La solución es análoga al caso $\lambda = 0$, pero en esta ocasión los coeficientes tienen la forma:
+\begin{align*}
+q_{\ell+1} = q_{\ell} \dfrac{(a + 1 -c)_{\ell} \, (b + 1 - c)_\ell}{(2 - c)_{\ell} \, \ell!}
+\end{align*}
+Por lo que:
+\begin{align*}
+y(x) = x^{1-c} \, \sum_{\ell=0}^{\infty} \dfrac{(a + 1 -c)_{\ell} \, (b + 1 - c)_\ell}{(2 - c)_{\ell} \, \ell!} \, x^{\ell}
+\end{align*}
+Que en términos de la función hipergeométrica:
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{
+y(x) = x^{1-c} \, {}_{2}F_{1} (a+1-c, b+1-c, 2-x; x)}
+\end{align*}
+\end{document}

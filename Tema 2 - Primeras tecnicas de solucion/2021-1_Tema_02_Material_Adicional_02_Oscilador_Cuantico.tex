@@ -1,0 +1,208 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Oscilador armónico cuántico\\ \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Abraham Lima Buendía}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Oscilador armónico cuántico.}
+
+El oscilador armónico cuántico está descrito mediante el Hamiltoniano:
+\begin{align*}
+- \dfrac{k^{2}}{2 m} \, \dv[2]{x} \psi + \dfrac{m \, \omega^{2}}{2} \, x^{2} \, \psi
+ = E \, \psi
+\end{align*}
+Encontraremos el espectro de energía y las soluciones de esta ecuación diferencial.
+\par
+Para facilitar el trabajo, construimos una variable adimensional, en la cual resolveremos la ecuación diferencial.
+\par
+Dividimos el Hamiltoniano entre $\- 2 \, m/ \hbar^{2}$, así:
+\begin{align*}
+\dv[2]{x} \psi - \left( \dfrac{m \, \omega}{\hbar} \right)^{2} \, x^{2} \, \psi =  \dfrac{2 \, m \, E}{\hbar^{2}} = \left( - \dfrac{2 \, E}{\hbar \, \omega} \right) \bigg( \dfrac{m \, \omega}{\hbar} \bigg) \, \psi
+\end{align*}
+Sea la variable $\xi$ tal que:
+\begin{align*}
+\xi = \sqrt{\dfrac{m \, \omega}{\hbar}} \, x
+\end{align*}
+Entonces hacemos
+\begin{align*}
+\dv{x} = \dv{\xi} \, \dv{\xi}{x} = \sqrt{\dfrac{m \, \omega}{\hbar}} \, \dv{\xi} \hspace{0.2cm} \Longrightarrow \hspace{0.2cm} \dv[2]{x} = \left( \dfrac{m \, \omega}{\hbar} \right) \, \dv[2]{\xi}
+\end{align*}
+Así llegamos a:
+\begin{align*}
+\left( \dfrac{m \, \omega}{\hbar} \right) \, \dv[2]{\xi} \psi - \left( \dfrac{m \, \omega}{\hbar} \right) \left( \sqrt{\dfrac{m \, \omega}{\hbar}} \, x \right)^{2} \, \psi = \left( - \dfrac{2 \, E}{\hbar \, \omega} \right) \bigg( \dfrac{m \, \omega}{\hbar} \bigg) \, \psi
+\end{align*}
+Entonces
+\begin{align*}
+\dv[2]{\xi} \psi -  \left( \sqrt{\dfrac{m \, \omega}{\hbar}} \, x \right)^{2} \, \psi = \left( - \dfrac{2 \, E}{\hbar \, \omega} \right) \, \psi = \dv[2]{\xi} \psi - \xi^{2} \, \psi = - k \, \psi
+\end{align*}
+con $k = 2 \, E / \hbar \, \omega$.
+\par
+Por lo anterior, la ecuación diferencial a resolver es:
+\begin{align*}
+\dv[2]{\xi} \psi + (k - \xi^{2}) \, \psi = 0
+\end{align*}
+Hemos revisado la forma de remover las singularidades del infinito (la ecuación es regular en el origen), sin embargo, veremos una forma alternativa de estudiar las divergencias en el infinito.
+\par
+Tomemos el límite cuando $\xi \to \infty$:
+\begin{align*}
+\dv[2]{\xi} \psi \simeq \xi^{2} \, \psi
+\end{align*}
+La forma de remover las singularidades en el infinito es con una función exponencial, con la potencia más alta, con la cual diverge la ecuación diferencial, es decir, con $\xi^{2}$.
+\par
+La solución propuesta con la que trabajaremos es
+\begin{align*}
+\psi = f(\xi) \, e^{-a \xi^{2}}
+\end{align*}
+La justificación de esta función de prueba es construir una función que converga, para ello removeremos el término $\xi^{2}$ mediante la función exponencial, posteriormente encontraremos la expansión en una serie de potencias de la función $f(\xi)$.
+\par
+Para simplificar, podemos ocupar la regla de Leibinz para obtener la derivada de orden $n$ de un producto de funciones:
+\begin{align*}
+\dv[n]{x} f(x) \cdot g(x) = \sum_{m=0}^{n} \begin{pmatrix}
+n \\ m \end{pmatrix} \, \dv[n-m]{f(x)}{x}  \, \dv[m]{g(x)}{x}
+\end{align*}
+Entonces tendremos que:
+\begin{align*}
+\psi &= f(\xi) \, e^{-a \xi^{2}} \\[0.5em]
+\ptilde{\psi} &= \ptilde{f}(\xi) \, e^{-a \xi^{2}} - 2 \, a \, \xi  \, e^{-a \xi^{2}} \, f(\xi) = \\[0.5em]
+&= e^{-a \xi^{2}} \big[ \ptilde{f}(\xi) -  2 \, a \, \xi \, f(\xi) \big] \\[0.5em]
+\stilde{\psi} &= \stilde{f}(\xi) \, e^{-a \xi^{2}} - 4 \, a \, e^{-a \xi^{2}} \, \ptilde{f}(\xi) \, \xi + f(\xi) \big[ 4 \, a^{2} \, \xi^{2} - 2 \, a \big] = \\[0.5em]
+&= e^{-a \xi^{2}} \big[ \stilde{f}(\xi) - 4 \, a \, \ptilde{f}(\xi) \, \xi + f(\xi) (4 \, a^{2} \xi^{2} - 2 \, a) \big]
+\end{align*}
+Sustituyendo las expresiones anteriores en la ecuación de Schrödinger, tenemos que:
+\begin{align*}
+e^{-a \xi^{2}} \bigg[ &\stilde{f}(\xi) - 4 \, a \, \ptilde{f}(\xi) \, \xi + f(\xi) (4 \, a^{2} \xi^{2} - 2 \, a) \bigg] + \\[0.5em]
+&+ k \, e^{-a \xi^{2}} \, f(\xi) - \xi^{2} \, e^{-a \xi^{2}} \, f(\xi) = 0
+\end{align*}
+Por lo que:
+\begin{align*}
+\stilde{f}(\xi) - 4 \, a \, \ptilde{f}(\xi) \, \xi + f(\xi) \big[ 4 \, a^{2} \xi^{2} - 2 \, a) \big] + k \, f(\xi) - \xi^{2} \, f(\xi) = 0
+\end{align*}
+Removemos los términos con potencias $\xi^{2}$
+\begin{align*}
+\stilde{f}(\xi) - 4 \, a \, \ptilde{f}(\xi) \, \xi + f(\xi) \big[ 4 \, a^{2} \xi^{2} - 2 \, a - \xi^{2} +  k) \big] = 0
+\end{align*}
+Por tanto:
+\begin{align*}
+4 \, a^{2} \, \xi^{2} =  \xi^{2} \hspace{0.2cm} \Longrightarrow \hspace{0.2cm} a = \dfrac{1}{2}
+\end{align*}
+Así llegamos a:
+\begin{align*}
+\stilde{f}(\xi) - 4 \, a \, \xi \, \ptilde{f}(\xi) + (k - 2 \, a) \, f(\xi) = 0
+\end{align*}
+Entonces
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{
+\stilde{f} (\xi) - 2 \, \xi \, \ptilde{f}(\xi) + (k - 1) \, f(\xi) = 0}
+\end{align*}
+que es la \emph{ecuación diferencial de Hermite}.
+\par
+El siguiente paso es resolver la ecuación diferencial de Hermite mediante una serie de potencias.
+\par
+Sea
+\begin{align*}
+f(\xi) = \sum_{\ell=0}^{\infty} a_{\ell} \, \xi^{\ell}
+\end{align*}
+Se propones esta solución ya que la ecuación de Hermite no posee singularidades en un valor infinito.
+\par
+Entonces diferenciamos la solución en dos ocasiones:
+\begin{align*}
+\ptilde{f}(\xi) &= \sum_{\ell=1}^{\infty} a_{\ell} \, \ell \, \xi^{\ell-1} \\[0.5em]
+\stilde{f}(\xi) &= \sum_{\ell=2}^{\infty} a_{\ell} \, \ell \, (\ell - 1) \, \xi^{\ell-2} 
+\end{align*}
+Entonces al sustituir en la ecuación diferencial:
+\begin{align*}
+\underbrace{\sum_{\ell=2}^{\infty} a_{\ell} \, \ell \, (\ell - 1) \, \xi^{\ell-2} - 2 \, \ell \, \sum_{\ell=1}^{\infty} a_{\ell} \, \ell \, \xi^{\ell-1}}_{\text{esta suma se reorganiza para comenzar en } 0} + (k - 1) \sum_{\ell=0}^{\infty} a_{\ell} \, \xi^{\ell} = 0
+\end{align*}
+por lo que
+\begin{align*}
+\underbrace{\sum_{\ell=2}^{\infty} a_{\ell} \, \ell \, (\ell - 1) \, \xi^{\ell-2}}_{\text{se recorren los índices}} - 2 \underbrace{\sum_{\ell=0}^{\infty} a_{\ell} \, \ell \, \xi^{\ell}}_{\text{(*)}} + (k - 1) \sum_{\ell=0}^{\infty} a_{\ell} \, \xi^{\ell} = 0
+\end{align*}
+(*) ponemos el primer contador en cero, ya que el primer término es nulo.
+\par
+
+Agrupando las sumas, tenemos que:
+\begin{align*}
+\sum_{\ell=0}^{\infty} \big[ a_{\ell+2} \, (\ell + 2)(\ell + 1) + (- 2 \, \ell + k - 1) \, a_{\ell} \big] \, \xi^{\ell} = 0
+\end{align*}
+de donde obtenemos la relación de recurrencia:
+\begin{align*}
+a_{\ell + 2} = \dfrac{2\, \ell - (k - 1)}{(\ell + 2)(\ell + 1)} \, a_{\ell}
+\end{align*}
+Nótese que la relación es entre ordenes de dos grados consecutivos, es decir, la solución construye una función de paridad definida, lo que corresponde a la situación física que modelamos.
+\par
+Consideremos entonces las siguientes condiciones iniciales:
+\begin{align*}
+a_{0} \neq 0, \hspace{1cm} a_{1} = 0
+\end{align*}
+Entonces:
+\begin{align*}
+a_{2} &= \dfrac{- (k - 1)}{(2)(1)} \, a_{0} = \dfrac{-(k - 1)}{2!} \, a_{0} \\[0.5em]
+a_{4} &= \dfrac{4 - (k - 1)}{(4)(3)} \, a_{2} = \dfrac{4 -(k - 1)(0 - (k - 1))}{4!} \, a_{0} \\[0.5em]
+a_{6} &= \dfrac{6 - (k - 1)}{(6)(5)} \, a_{4} = \dfrac{(6 - k - 1)) (4 -(k - 1))(0 - (k - 1))}{6!} \, a_{0} \\[0.5em]
+\vdots \\[0.5em]
+a_{m} &= \dfrac{[m - (k - 1)]}{m (m -1)} \, a_{m-2}
+\end{align*}
+Tomamos ahora el otro caso: $a_{0} = 0, \hspace{0.2cm} a_{1} \neq 0$, entonces la relación de recurrencia es:
+\begin{align*}
+a_{3} &= \dfrac{[2 - (k - 1)]}{(2)(3)} \, a_{1} \\[0.5em]
+a_{5} &= \dfrac{[6 - (k - 1)]}{(5)(4)} \, a_{3} = \dfrac{[6 - (k - 1)][2 - (k -  1)]}{5!} \, a_{1} \\[0.5em]
+a_{7} &= \dfrac{[10 - (k - 1)][6 - (k - 1)]}{7!} \, a_{1} \\[0.5em]
+\vdots \\[0.5em]
+a_{4n+3} &= \dfrac{[4 \, n + 2 - (k - 1)]}{(4 \, n + 2)} \, a_{4n+1}
+\end{align*}
+Notemos que las series tienen la forma:
+\begin{align*}
+f(\xi) = a_{0} + a_{2} \, \xi^{2} + a_{4} \, \xi^{4} + \ldots + a_{2n} \, \xi^{2n} \simeq e^{\xi^{2}}
+\end{align*}
+y
+\begin{align*}
+f(\xi) &= a_{1} \, \xi + a_{3} \, \xi^{3} + \ldots + a_{2n+1} \, \xi^{2n+1} = \\[0.5em]
+&= \xi \left( a_{1} + a_{3} \, \xi^{2} + \ldots + a_{2n+1} \, \xi^{2} \right) \simeq \xi \, e^{\xi^{2}}
+\end{align*}
+Es decir, las series formadas divergen como una exponencial cuadrática, recordemos que nuestra función de onda ha sido propuesta como
+\begin{align*}
+\psi = e^{\xi^{2}/k} \, f(\xi)
+\end{align*}
+Entonces la función de onda será divergente a menos que la serie $f(\xi)$ se vea truncada. Para conseguirlo, tomamos la condición de los coeficientes, es decir, la estructura recurrente de
+\begin{align*}
+\text{Caso par} \hspace{0.3cm} &a_{m} = \dfrac{[m - (k - 1)]}{m(m - 1)} \, a_{m-2} \\[0.5em]
+\text{Caso impar} \hspace{0.3cm} &a_{4m+3} = \dfrac{[4 \, m + 2 - (k - 1)]}{4 \, m + 2)} \, a_{4m+1}
+\end{align*}
+Para ambos casos tenemos:
+\begin{align*}
+a_{\ell + 2} = \dfrac{a_\ell [2 \, \ell - k + 1]}{(\ell + 2)(\ell + 1)}
+\end{align*}
+Entonces para que con cierto valor $m$ la serie se anule, tomamos:
+\begin{align*}
+2 \, m - k + 1 = 0 \hspace{0.3cm} \Longrightarrow \hspace{0.3cm} 2 \, m + 1 = k = \dfrac{2 \, E}{\hbar \, \omega}
+\end{align*}
+Así tenemos que:
+\begin{align*}
+E = \hbar \, \omega \left( m + \dfrac{1}{2} \right)
+\end{align*}
+Donde vemos que la energía está cuantizada y tiene valores igualmente espaciados.
+\par
+Entonces hemos obtenido una solución polinomial para la función de onda:
+\begin{align*}
+\psi = e^{\xi^{2}/2} \, H_{n} (\xi)
+\end{align*}
+donde los $H_{n} (\xi)$ son polinomios.
+\par
+Cabe señalar que aún no hemos resuelto los valores de $a_{0}$ y de $a_{1}$, éstos se calculan mediante la condición de normalización:
+\begin{align*}
+\int_{-\infty}^{\infty} \psi^{*} (\xi) \, \psi(\xi) \dd{\xi} = \int_{-\infty}^{\infty} e^{\xi^{2}} \, H_{n} (\xi) \, H_{m} (\xi) =  1
+\end{align*}
+Esas integrales se analizarán en el \emph{Tema 3 - Bases completas}; por ahora listemos los resultados que se justificarán más adelante:
+\begin{align*}
+H_{0} &= 1 \\[0.5em]
+H_{1} &= 2 \, x \\[0.5em]
+H_{2} &= 4 \, x^{2} - 2 \\[0.5em]
+H_{3} &= 8 \, x^{3} - 12 \, x \\[0.5em]
+H_{4} &= 16 \, x^{4} - 48 \, x^{2} + 12 \\[0.5em]
+H_{5} &= 32 \, x^{5} - 160 \, x^{3} + 120 \, x \\[0.5em]
+\vdots
+\end{align*}
+
+\end{document}
