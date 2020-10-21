@@ -1,0 +1,289 @@
+\input{../Preambulos/preambulo_presentacion_CambridgeUS_beaver}
+\title{\large{Ejercicio con el método de Frobenius}}
+\subtitle{Tema 2 - Primeras técnicas de solución}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+\section{Ejercicio 1}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Solución con Frobenius}
+\begin{frame}
+\frametitle{Problema}
+Presenta una solución en series de potencias mediante el método de Frobenius para la siguiente ecuación diferencial:
+\begin{align*}
+3 \, x \, \stilde{y} + \ptilde{y} - y = 0
+\end{align*}
+con $a_{0} \neq 0$
+\end{frame}
+\subsection{Puntos singulares}
+\begin{frame}
+\frametitle{Veamos los puntos singulares}
+El primer paso es determinar si la ecuación tiene puntos singulares regulares o irregulares en $x_{0}=0$.
+\end{frame}
+\begin{frame}
+\frametitle{Los puntos singulares}
+Recordemos que hay que revisar los límites de las funciones $p(x)$ y $q(x)$ tal que tengamos la ED de la forma:
+\begin{align*}
+x^{2} \, \stilde{y} + x \, \ptilde{y} - y = 0
+\end{align*}
+\pause
+Entonces:
+\begin{align*}
+x^{2} \, \stilde{y} + \left( \dfrac{x}{3 \, x} \right) \, x \, \ptilde{y} - y = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Revisón de los límites}
+Entonces ahora veamos los límites de $p(x)$ y de $q(x)$ cuando $ x \to 0$:
+\begin{align*}
+\lim_{x \to 0} \left( \dfrac{1}{3} \right) = \dfrac{1}{3} \hspace{1.5cm} \lim_{x \to 0} 1 =  1
+\end{align*}
+por tanto $p(x)$ y $q(x)$ son analíticas y $x = 0$ es punto singular.
+\end{frame}
+\begin{frame}
+\subsection{Aplicando el método}
+\frametitle{Comenzamos con el método}
+Una vez que identificamos a $x = 0$ como punto singular, entonces proponemos una solución en términos de una serie de potencias:
+\begin{align*}
+y(x) = \sum_{n=0}^{\infty} a_{n} \, x^{n+r}
+\end{align*}
+\pause
+Se procede a calcular la primera y segunda derivada de $y(x)$.
+\end{frame}
+\begin{frame}
+\frametitle{Derivadas}
+Tenemos entonces que:
+\begin{align*}
+\ptilde{y} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} \\[1em]
+\stilde{y} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n+ r - 1) \, x^{n+r-2}
+\end{align*}
+que sustituimos en la ED inicial.
+\end{frame}
+\begin{frame}
+\frametitle{Sustitución en la ED}
+\begin{align*}
+&3 \, x \left[ \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n+ r - 1) \, x^{n+r-2} \right] + \\[0.5em]
+&+ \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Simplificación}
+Comenzamos a simplificar la expresión
+\begin{align*}
+&\sum_{n=0}^{\infty} 3 \, a_{n} \, (n + r) \, (n+ r - 1) \, x^{n+r-1} + \\[0.5em]
+&+ \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de términos}
+Factorizamos los términos con la misma potencia de $x$:
+\begin{align*}
+&\sum_{n=0}^{\infty} \left[  3 \, a_{n} \, (n + r) \, (n+ r - 1) + a_{n} \, (n + r) \right] \, x^{n+r-1} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\fontsize{12}{12}\selectfont
+Revisa con cuidado los signos, el último término se está restando.
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando nuevamente}
+Simplificamos los términos del coeficiente de la primera suma:
+\begin{align*}
+&\sum_{n=0}^{\infty} \left[  a_{n} \, (n + r) \, (n+ r - 1) + a_{n} \, (n + r) \right] \, x^{n+r-1} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}   
+\end{frame}
+\begin{frame}
+\frametitle{Otra simplificación}
+Resolvemos los coeficientes de nuevo en la primera suma:
+\begin{align*}
+&\sum_{n=0}^{\infty} \left[  a_{n} \, (n + r) \, (3 \, n + 3 \, r - 2) \right] \, x^{n+r-1} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Obtenemos el coeficiente $a_{0}$}
+El enunuciado del ejercicio nos señala que debemos de tomar en cuenta que $a_{0}$, por lo que debemos de obtener este coeficiente de la suma con potencia menor, es decir, la primera suma.
+\end{frame}
+\begin{frame}
+\frametitle{Obtenemos el coeficiente $a_{0}$}
+Entonces tendremos
+%\fontsize{12}{12}\selectfont
+\begin{eqnarray*}
+&{}& a_{0} \big[ r (3 \, r - 2) \big] \, x^{r-1} + \\[0.5em] \pause
+&+& \sum_{n=1}^{\infty} \left[  a_{n} \, (n + r) \, (3 \, n + 3 \, r - 2) \right] \, x^{n+r} + \\[0.5em] \pause
+&-& \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Acomodando términos}
+Vemos que los coeficientes de las series tienen la misma potencia $x^{n+r}$ pero el índice de la primera suma no comienza en $n=0$.
+\\
+\bigskip
+\pause
+Para agrupar los coeficientes, necesitamos que las sumas comiencen en el mismo valor.
+\end{frame}
+\begin{frame}
+\frametitle{Acomodando términos}
+Para hacer que el índice de las sumas comience en el mismo valor, ocupamos la siguiente propiedad de las sumas:
+\begin{align*}
+\sum_{n=k}^{\infty} f(n) = \sum_{n=0}^{\infty} f(n+k)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorizando coeficientes}
+Entonces tendremos que:
+\begin{eqnarray*}
+&{}& a_{0} \big[ r (3 \, r - 2) \big] \, x^{r-1} + \\[0.5em] \pause
+&+& \sum_{n=0}^{\infty} \left[  a_{n+1} \, ((n + 1) + r) \, (3 \, (n + 1) + 3 \, r - 2) \right] \, x^{n+r} + \\[0.5em] \pause
+&-& \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0   
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorizando coeficientes}
+Obteniendo
+\begin{eqnarray*}
+&{}& a_{0} \big[ r (3 \, r - 2) \big] \, x^{r-1} + \\[0.5em] \pause
+&+& \sum_{n=1}^{\infty} \bigg[  a_{n+1} \, (n + r + 1) \, (3 \, (n + 1) + 3 \, r - 2) + \\[0.5em]
+&-& a_{n} \bigg] \, x^{n+r} = 0
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación simplificada}
+Una vez que hemos obtenido la mayor simplificación en las términos de la expresión, y hemos factorizado para una misma potencia, ahora podemos identificar la \emph{ecuación de índices} y la \emph{regla de recurrencia}.
+\end{frame}
+\begin{frame}
+\frametitle{Para la ecuación de índices}
+Sabemos que todos los coeficientes de la serie deben de anularse, por lo que del primer término de la expresión
+\begin{align*}
+a_{0} \big[ r (3 \, r - 2) \big] \, x^{r-1}
+\end{align*}
+y como $a_{0} \neq 0$.
+\pause
+Tenemos que
+\begin{align*}
+\big[ r (3 \, r - 2) \big] = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de índices}
+Tenemos la ecuación de índices:
+\begin{align*}
+\big[ r (3 \, r - 2) \big] = 0
+\end{align*}
+\pause
+que tiene como raíces:
+\begin{align*}
+r_{1} = 0 \hspace{2cm} r_{2} = \dfrac{2}{3}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Regla de recurrencia}
+Ocupando nuevamente el hecho de que todos los coeficientes de la serie deben de anularse, entonces del término con potencia $x^{n+r}$, obtenemos la regla de recurrencia:
+\begin{align*}
+a_{n+1} = \dfrac{a_{n}}{(n + r + 1)(3 \, n+ 3 \, r + 1)}
+\end{align*}
+\end{frame}
+\subsection{Obteniendo las soluciones}
+\begin{frame}
+\frametitle{La primera solución}
+Ahora tenemos los elementos para calcular los coeficientes para la primera solución $y_{1}(x)$ con la raíz $r_{1}$ y la regla de recurrencia, por lo que:
+\end{frame}
+\begin{frame}
+\frametitle{La primera solución}
+Sustituimos el valor de $r_{1}$ en la regla de recurrencia:
+\begin{align*}
+a_{n+1} = \dfrac{a_{n+1}}{(n+1)(3 \, n +1)}
+\end{align*}
+\pause
+Procedemos a evaluar para los valores de $n = 0, 1, 2, \ldots$
+\end{frame}
+\begin{frame}
+\frametitle{La primera solución}
+\begin{eqnarray*}
+n &=& 0 \hspace{0.2cm} \Rightarrow \hspace{0.2cm} a_{1} = \dfrac{a_{0}}{(1)(1)} = a_{0} \\[0.45em] \pause
+n &=& 1 \hspace{0.2cm} \Rightarrow \hspace{0.2cm} a_{2} = \dfrac{a_{1}}{(2)(4)} = \dfrac{a_{0}}{8} \\[0.45em] \pause
+n &=& 2 \hspace{0.2cm} \Rightarrow \hspace{0.2cm} a_{3} = \dfrac{a_{2}}{(3)(7)} = \dfrac{a_{0}}{(21)(8)} = \dfrac{a_{0}}{168} \\[0.45em] \pause
+n &=& 4 \hspace{0.2cm} \Rightarrow \hspace{0.2cm} a_{4} = \dfrac{a_{3}}{(4)(10)} = \dfrac{a_{0}}{(40)(168)} = \dfrac{a_{0}}{6720} \\[0.45em]
+\vdots
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Primera solución}
+Entonces tenemos que la primera solución es:
+\begin{align*}
+y_{1} (x) = a_{0} + a_{0} \, x + \dfrac{a_{0} \, x^{2}}{8} + \dfrac{a_{0} \, x^{3}}{168} + \dfrac{a_{0} \, x^{4}}{6720} + \ldots 
+\end{align*}
+\pause
+que expresamos como
+\begin{align*}
+y_{1}(x) = C_{1} \left[ 1 + x + \dfrac{x^{2}}{8} + \dfrac{x^{3}}{168} + \dfrac{x^{4}}{6720} + \ldots \right]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución}
+Ahora ocupamos la segunda raíz $r_{2} = 2/3$ con la regla de recurrencia que debe de ajustarse con este valor:
+\begin{align*}
+a_{n+1} = \dfrac{a_{n}}{\left( n + \dfrac{2}{3} + 1  \right)\left( 3 \, n + 3 \left( \dfrac{2}{3} \right) + 1 \right)}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución}
+Luego del álgebra para simplificar la expresión, tenemos que la regla de recurrencia es:
+\begin{align*}
+a_{n+1} = \dfrac{a_{n}}{(3 \, n + 5)(n + 1)}
+\end{align*}
+Evaluamos para $n = 0, 1, 2, 3, \ldots$
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución}
+\begin{eqnarray*}
+n &=& 0 \hspace{0.2cm} \Rightarrow \hspace{0.2cm} a_{1} = \dfrac{a_{0}}{(5)(1)} = \dfrac{a_{0}}{5} \\[0.45em] \pause
+n &=& 1 \hspace{0.2cm} \Rightarrow \hspace{0.2cm} a_{2} = \dfrac{a_{1}}{(8)(2)} = \dfrac{a_{0}}{(16)(5)} = \dfrac{a_{0}}{80} \\[0.45em] \pause
+n &=& 2 \hspace{0.2cm} \Rightarrow \hspace{0.2cm} a_{3} = \dfrac{a_{2}}{(11)(13)} = \dfrac{a_{0}}{(33)(80)} = \dfrac{a_{0}}{2640} \\[0.45em] \pause
+n &=& 4 \hspace{0.2cm} \Rightarrow \hspace{0.2cm} a_{4} = \dfrac{a_{3}}{(14)(4)} = \dfrac{a_{0}}{(56)(2640)} = \dfrac{a_{0}}{147840} \\[0.45em]
+\vdots
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución}
+Entonces tenemos que la solución solución es:
+\begin{align*}
+y_{2}(x) = \sum_{n=0}^{\infty} a_{n} \, x^{n + 2/3}
+\end{align*}
+Que podemos expresar como:
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución}
+\begin{align*}
+y_{2}(x) = x^{2/3} \, \sum_{n=0}^{\infty} a_{n} \, x^{n} = 
+\end{align*}
+\pause
+\begin{align*}
+y_{2} (x) =  x^{2/3} \left( a_{0} + a_{1} \, x + a_{2} \, x^{2} + a_{3} \, x^{3} + \ldots \right)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución}
+Por tanto la segunda solución es:
+\begin{align*}
+y_{2}(x) = C_{2} \, x^{2/3} \, \left[ 1 + \dfrac{x}{5} + \dfrac{x^{2}}{80} + \dfrac{x^{3}}{2640} + \dfrac{x^{4}}{147840} + \ldots \right]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución general}
+Entonces la solución a la ED inicial es una combinación lineal de las dos soluciones obtenidas:
+\begin{align*}
+y(x) =  A \, y_{1}(x) + B \, y_{2}(x)
+\end{align*}
+\end{frame}
+\end{document}
