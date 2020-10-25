@@ -1,0 +1,144 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Ejercicios con el Método de Frobenius\\ \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\section{Ejercicio 3.}
+Utiliza el método de Frobenius para obtener la solución general de la siguiente ecuación diferencial, para un entorno de $x = 0$:
+\begin{align}
+2 \, x \, \dv[2]{y}{x} + (1 - x^{2}) \dv{y}{x} - y = 0
+\label{eq:ecuacion_inicial}
+\end{align}
+Consideramos que $x = 0$ es un punto singular, que bien puedes demostrar sin complicación, por lo tanto, adelantamos y proponemos una solución en serie de potencias:
+\begin{align*}
+y(x) = \sum_{n=0}^{\infty} a_{n} \, x^{n+r}
+\end{align*}
+de tal manera que procedemos a calcular la primera y segunda derivada con respecto a $x$:
+\begin{align*}
+\ptilde{y} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} \\[0.5em]
+\stilde{y} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2}
+\end{align*}
+Estas dos expresiones las sustituimos en la ecuación diferencial inicial ec. (\ref{eq:ecuacion_inicial}), entonces tendremos que:
+\begin{align*}
+2 \, x \, \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2} &+ (1 - x^{2}) \, \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} &+\\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+Comenzamos a simplificar la expresión, por lo que multiplicamos la variable $x$ en donde aparezca, y en el término de la suma que representa la primera derivada, separamos los términos:
+\begin{align*}
+&\sum_{n=0}^{\infty} 2 \, a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-1} + \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r+1} -
+\sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+Agrupamos los términos que tienen una potencia en común, para luego ordenarlos de la potencia menor a la potencia mayor:
+\begin{align*}
+&\sum_{n=0}^{\infty} \bigg[ 2 \, a_{n} \, (n + r) \, (n + r - 1) + a_{n} \, (n + r) \bigg] \, x^{n+r-1} -
+\sum_{n=0}^{\infty} a_{n} \, x^{n+r} +  \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r+1}  = 0
+\end{align*}
+Reducimos el coeficiente para la suma de potencia $x^{n+r-1}$ para agilizar los cálculos:
+\begin{align*}
+&\sum_{n=0}^{\infty} \bigg[ a_{n} \, (n + r) \, (2 \, n + 2 \, r - 1) + \bigg] \, x^{n+r-1} -
+\sum_{n=0}^{\infty} a_{n} \, x^{n+r} +  \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r+1}  = 0
+\end{align*}
+De la potencia más baja, que en este caso es $x^{n+r-1}$ obtenemos el coeficiente para $n=0$, por tanto:
+\begin{align*}
+\bigg[ a_{0} \, r (2 \, r - 1) \bigg] \, x^{r-1} &+ \sum_{n=1}^{\infty} \bigg[ a_{n} \, (n + r) \, (2 \, n + 2 \, r - 1) + \bigg] \, x^{n+r-1} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} - \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r+1}  = 0
+\end{align*}
+Recordemos que para factorizar términos necesitamos que tanto el índice de las sumas debe de comenzar en el mismo índice, así como tener la misma potencia, por lo que en la primera suma recorremos el índice de $n = 1$ a $n = 0$, de tal modo que:
+\begin{align*}
+&\bigg[ a_{0} \, r (2 \, r - 1) \bigg] \, x^{r-1} + \sum_{n=0}^{\infty} \bigg[ a_{n+1} \, (n + 1 + r) \, (2 \, (n + 1) + 2 \, r - 1) \bigg] \, x^{n+r} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} - \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r+1}  = 0
+\end{align*}
+Antes de factorizar los términos en común para la potencia $x^{n+r}$, simplificamos el factor de la primera suma, por lo que:
+\begin{align*}
+&\bigg[ a_{0} \, r (2 \, r - 1) \bigg] \, x^{r-1} + \sum_{n=0}^{\infty} \bigg[ a_{n+1} \, (n + r + 1) \, (2 \, n + 2 \, r + 1) \bigg] \, x^{n+r} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} - \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r+1}  = 0
+\end{align*}
+Ahora ya es posible factorizar los términos en común de la potencia más baja, entonces resulta:
+\begin{align*}
+&\bigg[ a_{0} \, r (2 \, r - 1) \bigg] \, x^{r-1} + \sum_{n=0}^{\infty} \bigg[ a_{n+1} \, \big[ (n + r + 1) \, (2 \, n + 2 \, r + 1) \big] - a_{n} \bigg] \, x^{n+r} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r+1}  = 0
+\end{align*}
+Nos encontramos con que las sumas inician con el índice $n = 0$ pero la potencia no es la misma, entonces procedemos a extraer el coeficiente de la primera suma con $n = 0$, lo que nos va a recorrer el índice a $n = 1$:
+\begin{align*}
+&\bigg[ a_{0} \, r (2 \, r - 1) \bigg] \, x^{r-1} + \bigg[ a_{1} \big[ (r + 1)(2 \, r + 1) \big] - a_{0} \bigg] \, x^{r} + \\[0.5em]
+&+ \sum_{n=1}^{\infty} \bigg[ a_{n+1} \, \big[ (n + r + 1) \, (2 \, n + 2 \, r + 1) \big] - a_{n} \bigg] \, x^{n+r} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r+1}  = 0
+\end{align*}
+Para factorizar nuevamente los términos comunes a una misma potencia, debemos de recorrer el índice de la primera suma de $n = 1$ a $n = 0$, lo que nos dejaría una misma potencia $x^{n+r+1}$, entonces:
+\begin{align*}
+&\bigg[ a_{0} \, r (2 \, r - 1) \bigg] \, x^{r-1} + \bigg[ a_{1} \big[ (r + 1)(2 \, r + 1) \big] - a_{0} \bigg] \, x^{r} + \\[0.5em]
+&+ \sum_{n=0}^{\infty} \bigg[ a_{n+2} \, \big[ ((n+1) + r + 1) \, (2 \, (n+1) + 2 \, r + 1) \big] - a_{n+1} \bigg] \, x^{n+r+1} + \\[0.5em]
+&- \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r+1}  = 0
+\end{align*}
+Simplificando los términos del coeficiente de la suma:
+\begin{align*}
+&\bigg[ a_{0} \, r (2 \, r - 1) \bigg] \, x^{r-1} + \bigg[ a_{1} \big[ (r + 1)(2 \, r + 1) \big] - a_{0} \bigg] \, x^{r} + \\[0.5em]
+&+ \sum_{n=0}^{\infty} \bigg[ a_{n+2} \, \big[ (n + r + 2) \, (2 \, n + 2 \, r + 3) \big] - a_{n+1} - a_{n } \bigg] \, x^{n+r+1} = 0
+\end{align*}
+Al tener la misma potencia y el índice de las sumas con el mismo valor, es posible factorizar los términos, para llegar a:
+\begin{align}
+\begin{aligned}
+&\bigg[ a_{0} \, r (2 \, r - 1) \bigg] \, x^{r-1} + \bigg[ a_{1} \big[ (r + 1)(2 \, r + 1) \big] - a_{0} \bigg] \, x^{r} + \\[0.5em]
+&+ \sum_{n=0}^{\infty} \bigg[ a_{n+2} \, \big[ (n + r + 2) \, (2 \, n + 2 \, r + 3) \big] - a_{n+1} - a_{n } \bigg] \, x^{n+r+1} = 0
+\end{aligned}
+\label{eq:ecuacion_simplificada}
+\end{align}
+Con este paso hemos logrado la mayor simplificación de la expresión, dejando una suma, de acuerdo al método de Frobenius: todos los coeficientes de la suma se deben de anular, si nos fijamos del coeficiente de la suma más baja, de aquí obtendremos la \emph{ecuación de índices}, entonces de la expresión anterior, cada uno de los coeficientes de la suma debe de anularse, además también sabemos que $a_{0} \neq 0$, veamos entonces cada término de la ec. (\ref{eq:ecuacion_simplificada}):
+\begin{align*}
+a_{0} \, r (2 \, r - 1) = 0 \hspace{1cm} \mbox{como } a_{0} \neq 0 \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \addtolength{\fboxsep}{5pt}\boxed{r \, (2 \, r - 1) = 0}
+\end{align*}
+es la ecuación de índices.
+\par
+De donde tenemos que las raíces son:
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{r_{1} = 0 \hspace{1.5cm} r_{2} = \dfrac{1}{2}}
+\end{align*}
+Luego tenemos que el siguiente coeficiente de la ec. (\ref{eq:ecuacion_simplificada})
+\begin{align}
+\begin{aligned}[b]
+&a_{1} \big[ (r + 1)(2 \, r + 1) \big] - a_{0} = 0 \\[0.5em]
+a_{1} &= \dfrac{a_{0}}{(r + 1)(2 \, r + 1)}
+\end{aligned}
+\label{eq:ecuacion_coeficientea1}
+\end{align}
+Del tercer coeficiente de la ec. (\ref{eq:ecuacion_simplificada}) obtendremos la \emph{regla de recurrencia}, de tal modo que:
+\begin{align}
+\begin{aligned}[b]
+&\bigg[ a_{n+2} \, \big[ (n + r + 2) \, (2 \, n + 2 \, r + 3) \big] - a_{n+1} - a_{n} \bigg] = 0 \\[0.5em]
+a_{n+2} &= \dfrac{a_{n+1} + a_{n}}{(n + r + 2) \, (2 \, n + 2 \, r + 3)}
+\end{aligned}
+\label{eq:ecuacion_reglarecurrencia}
+\end{align}
+Entonces ahora ya podemos calcular los coeficientes para las soluciones $y_{1}(x)$ e $y_{2}(x)$, con las raíces $r_{1}$ y $r_{2}$ respectivamente, primero calculando el valor del coeficiente $a_{1}$ ec. (\ref{eq:ecuacion_coeficientea1}) y luego con la regla de recurrencia ec. (\ref{eq:ecuacion_reglarecurrencia}).
+\par
+Primero ocuparemos $r_{1} = 0$, por lo tanto:
+\begin{align*}
+a_{1} = \dfrac{a_{0}}{(0+1)(2(0)+1)} = \dfrac{a_{0}}{(1)(1)} = a_{0}
+\end{align*}
+Ocupamos el valor de $r_{1}$ en la regla de recurrencia:
+\begin{align*}
+a_{n+2} &= \dfrac{a_{n+1} + a_{n}}{(n + 2) \, (2 \, n + 3)}
+\end{align*}
+Con la regla de recurrencia calcularemos algunos coeficientes a partir de $n = 0, 1, 2, 3, \ldots$, como ya conocemos el valor de $a_{1}$ entonces se ocupará para dejar el coeficiente en términos de $a_{0}$, de tal modo que:
+\begin{align*}
+n &= 0 \hspace{0.3cm} \Rightarrow \hspace{0.3cm} a_{2} = \dfrac{a_{1} + a_{0}}{(2)(3)} = \dfrac{2 \, a_{0}}{(2)(3)} = \dfrac{a_{0}}{3} \\[0.5em]
+n &= 1 \hspace{0.3cm} \Rightarrow \hspace{0.3cm} a_{3} = \dfrac{a_{2} + a_{1}}{(3)(5)} = \dfrac{\left( \dfrac{a_{0}}{3} \right) + a_{0}}{(3)(5)} = \dfrac{4 \, a_{0}}{45} \\[0.5em]
+n &= 2 \hspace{0.3cm} \Rightarrow \hspace{0.3cm} a_{4} = \dfrac{a_{3} + a_{2}}{(4)(7)} = \dfrac{\left( \dfrac{4 \, a_{0}}{45} \right) + \dfrac{a_{0}}{3}}{28} = \dfrac{ \left( \dfrac{19 a_{0}}{45}\right)}{28} = \dfrac{19 a_{0}}{1260} \\[0.5em]
+n &= 3 \hspace{0.3cm} \Rightarrow \hspace{0.3cm} a_{5} = \dfrac{a_{4} + a_{3}}{(5)(9)} = \dfrac{131 \, a_{0}}{56700} \\[0.5em]
+\vdots
+\end{align*}
+La solución $y_{1}(x)$ con la raíz $r_{1} = 0$ es:
+\begin{align*}
+y_{1}(x) = \sum_{n=0}^{\infty} a_{n} \, x^{n} = a_{0} + a_{1} \, x + a_{2} \, x^{2} + a_{3} \, x^{3} + a_{4} \, x^{4} + a_{5} \, x^{5} + \ldots
+\end{align*}
+Por lo tanto:
+\begin{align}
+y_{1}(x) = a_{0} \bigg[ 1 + x + \dfrac{x^{2}}{3}  + \dfrac{4 \, x^{3}}{45} + \dfrac{19 \, x^{4}}{1260} + \dfrac{131 \, x^{5}}{56700} + \ldots \bigg]
+\end{align}
+\end{document}
