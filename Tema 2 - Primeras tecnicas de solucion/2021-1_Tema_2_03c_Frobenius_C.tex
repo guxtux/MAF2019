@@ -140,5 +140,42 @@ y_{1}(x) = \sum_{n=0}^{\infty} a_{n} \, x^{n} = a_{0} + a_{1} \, x + a_{2} \, x^
 Por lo tanto:
 \begin{align}
 y_{1}(x) = a_{0} \bigg[ 1 + x + \dfrac{x^{2}}{3}  + \dfrac{4 \, x^{3}}{45} + \dfrac{19 \, x^{4}}{1260} + \dfrac{131 \, x^{5}}{56700} + \ldots \bigg]
+\label{eq:ecuacion_soluciony1}
 \end{align}
+La segunda solución la obtendremos con la raíz $r_{2} = 1/2$, por lo que habrá que calcular inicialmente el valor de $a_{1}$ para luego de la regla de recurrencia, ajustar la expresión, por tanto:
+\begin{align}
+a_{1} = \dfrac{a_{0}}{\left( \dfrac{1}{2} + 1 \right)\left( 2 \left[ \dfrac{1}{2} \right] + 1 \right) } = \dfrac{a_{0}}{3}
+\label{eq:ecuacion_coeficientea1_r2}
+\end{align}
+La regla de recurrencia con la raíz $r_{2}$ queda como:
+\begin{align}
+\begin{aligned}[b]
+a_{n+2} &= \dfrac{a_{n+1} + a_{n}}{\left( n + \dfrac{1}{2} + 2 \right) \left( 2 \, n + 2 \left[ \dfrac{1}{2}\right] + 3 \right)} = \\[0.5em]
+&= \dfrac{2 \big[ a_{n+1} + a_{n} \big]}{(2 \, n + 5)(2 \, n + 4)}
+\end{aligned}
+\label{eq:ecuacion_reglarecurrencia_r2}
+\end{align}
+Por lo que ahora procedemos a calcular algunos coeficientes de la solución a partir de $n = 0, 1, 2, \ldots$:
+\begin{align*}
+n &= 0 \hspace{0.3cm} \Rightarrow \hspace{0.3cm} a_{2} = \dfrac{2 \big[ a_{1} + a_{0} \big]}{(5)(4)} = \dfrac{2 \bigg[ \dfrac{a_{0}}{3} + a_{0} \bigg]}{20} = \dfrac{a_{0}}{5}
+\\[0.5em]
+n &= 1 \hspace{0.3cm} \Rightarrow \hspace{0.3cm} a_{3} = \dfrac{2 \big[ a_{2} + a_{1} \big]}{(7)(6)} =  \dfrac{8 \, a_{0}}{315} \\[0.5em]
+n &= 2 \hspace{0.3cm} \Rightarrow \hspace{0.3cm} a_{4} = \dfrac{2 \big[ a_{3} + a_{2} \big]}{(9)(8)} = \dfrac{71 \, a_{0}}{11340} \\[0.5em]
+\vdots
+\end{align*}
+La solución $y_{2}(x)$ con la raíz $r_{2} = 1/2$ es:
+\begin{align*}
+y_{2}(x) &= \sum_{n=0}^{\infty} a_{n} x^{n+1/2} =  \sum_{n=0}^{\infty} x^{1/2} \bigg[ a_{n} x^{n} \bigg] = \\[0.5em]
+&= x^{1/2} \bigg[ a_{0} + a_{1} \, x + a_{2} \, x^{2} + a_{3} \, x^{3} + a_{4} + \ldots \bigg]
+\end{align*}
+Por lo tanto:
+\begin{align}
+y_{2}(x) = a_{0} \, x^{1/2} \bigg[ 1 + \dfrac{x}{3} + \dfrac{x^{2}}{5}  + \dfrac{8 \, x^{3}}{315} + \dfrac{71 \, x^{4}}{11340} + \ldots \bigg]
+\label{eq:ecuacion_soluciony2}
+\end{align}
+Tenemos que las soluciones encontradas ecs. (\ref{eq:ecuacion_soluciony1}) y (\ref{eq:ecuacion_soluciony2}) son soluciones linealmente independientes, por lo que la solución general de la ED será una combinación lineal de las anteriores, por lo que:
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{
+y(x) = A \, y_{1}(x) + B \, y_{2}(x) }
+\end{align*}    
 \end{document}
