@@ -1,0 +1,136 @@
+\RequirePackage{currfile}
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{standalone}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage[outdir=./]{epstopdf}
+%\hypersetup{colorlinks,linkcolor=,urlcolor=blue}
+%\hypersetup{colorlinks,urlcolor=blue}
+\usepackage{xcolor,soul}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{tcolorbox}
+\usepackage{physics}
+\usepackage{multicol}
+\usepackage{bookmark}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{cancel}
+\usepackage{wrapfig}
+\usepackage{empheq}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc, patterns, matrix, backgrounds, decorations,shapes, arrows.meta}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[os=win]{menukeys}
+\usepackage{pifont}
+\usepackage{pbox}
+\usepackage{bm}
+\usepackage{caption}
+\captionsetup{font=scriptsize,labelfont=scriptsize}
+%\usepackage[sfdefault]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
+
+%Sección de definición de colores
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{bisque}{rgb}{1.0, 0.89, 0.77}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{armygreen}{rgb}{0.29, 0.33, 0.13}
+\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
+\definecolor{cadetblue}{rgb}{0.37, 0.62, 0.63}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{brown}{rgb}{0.59, 0.29, 0.0}
+\definecolor{OliveGreen}{rgb}{0,0.25,0}
+\definecolor{mycolor}{rgb}{0.122, 0.435, 0.698}
+
+\newcommand*{\boxcolor}{orange}
+\makeatletter
+\newcommand{\boxedcolor}[1]{\textcolor{\boxcolor}{%
+\tikz[baseline={([yshift=-1ex]current bounding box.center)}] \node [rectangle, minimum width=1ex, thick, rounded corners,draw] {\normalcolor\m@th$\displaystyle#1$};}}
+ \makeatother
+
+\newtcbox{\mybox}{on line,
+  colframe=mycolor,colback=mycolor!10!white,
+  boxrule=0.5pt,arc=4pt,boxsep=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt}
+
+\usefonttheme[onlymath]{serif}
+%Sección de definición de nuevos comandos
+
+\newcommand*{\TitleParbox}[1]{\parbox[c]{1.75cm}{\raggedright #1}}%
+\newcommand{\python}{\texttt{python}}
+\newcommand{\textoazul}[1]{\textcolor{blue}{#1}}
+\newcommand{\azulfuerte}[1]{\textcolor{blue}{\textbf{#1}}}
+\newcommand{\funcionazul}[1]{\textcolor{blue}{\textbf{\texttt{#1}}}}
+\newcommand{\ptilde}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\stilde}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\ttilde}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\ntilde}[2]{\ensuremath{{#1}^{(#2)}}}
+\renewcommand{\arraystretch}{1.5}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\renewcommand{\rmdefault}{cmr}% cmr = Computer Modern Roman
+
+\linespread{1.5}
+
+\usefonttheme{professionalfonts}
+%\usefonttheme{serif}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+
+%Sección para el tema de beamer, con el theme, usercolortheme y sección de footers
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  
+  %\useoutertheme{infolines}
+  \useoutertheme{default}
+  \usecolortheme{crane}
+  \setbeamercovered{invisible}
+  % or whatever (possibly just delete it)
+  \setbeamertemplate{section in toc}[sections numbered]
+  \setbeamertemplate{subsection in toc}[subsections numbered]
+  \setbeamertemplate{subsection in toc}{\leavevmode\leftskip=3.2em\rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}\inserttocsubsection\par}
+  % \setbeamercolor{section in toc}{fg=blue}
+  % \setbeamercolor{subsection in toc}{fg=blue}
+  % \setbeamercolor{frametitle}{fg=blue}
+  \setbeamertemplate{caption}[numbered]
+
+  \setbeamertemplate{footline}
+  \beamertemplatenavigationsymbolsempty
+  \setbeamertemplate{headline}{}
+}
+
+\makeatletter
+\setbeamercolor{section in foot}{bg=brown!75, fg=white}
+\setbeamercolor{subsection in foot}{bg=cadetblue}
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+\makeatother  
+
+\makeatletter
+\patchcmd{\beamer@sectionintoc}
+  {\vfill}
+  {\vskip\itemsep}
+  {}
+  {}
+\makeatother
+
