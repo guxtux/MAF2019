@@ -1,12 +1,15 @@
-\input{../preambulo_doc}
-\author{}
-\title{Función delta de Dirac \\ \large {Tema 2 - Matemáticas Avanzadas de la Física} \vspace{-1.5\baselineskip}}
-\date{}
+\input{../Preambulos/preambulo_materiales}
+%\usepackage{showframe}
+\usepackage{apacite}
+\title{Función delta de Dirac \\ \large {Tema 3 - Bases completas y ortogonales} \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
 \begin{document}
-%\renewcommand\theenumii{\arabic{theenumii.enumii}}
-\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\vspace{-4cm}
 \maketitle
 \fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
 \section{Introducción.}
 En física a menudo nos encontramos con fenómenos donde se involucra el concepto de un pulso de duración \enquote{infinitamente corto}.
 \par
@@ -22,83 +25,83 @@ El término \enquote{repentino} implica que $\tau$ se considera infinitamente pe
 tipo de descripciones no se puede formular apropiadamente con los conceptos matemáticos que conocemos, más aún, la descripción tampoco es rigurosa desde un punto de vista físico.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{Imagenes/delta_dirac_01.png}
-    \label{fig_figura_delta_01}
+    \includegraphics[scale=1]{Imagenes/delta_Dirac_01.eps}
     \caption{Representación del pico para la función.}
+    \label{fig:figura_delta_Dirac_01}
 \end{figure}
-En realidad, la gráfica de la fuerza es una curva muy \enquote{picuda} (muy estrecha y muy alta) y satisface la propiedad que el área bajo la curva es igual a $I$. En la gran mayoría de los problemas físicos, la forma exacta de la gráfica no se conoce, sin embargo, en lo correspondiente a los efectos físicos observables asociados con tal función, usualmente esta falta de información no importa. Lo que tiene significado es la integral de la fuerza, esto es, el valor del impulso
+En realidad, la gráfica de la fuerza es una curva muy \enquote{picuda}: muy estrecha y muy alta, como se aprecia en la figura (\ref{fig:figura_delta_Dirac_01}) y satisface la propiedad que el área bajo la curva es igual a $I$. En la gran mayoría de los problemas físicos, la forma exacta de la gráfica no se conoce, sin embargo, en lo correspondiente a los efectos físicos observables asociados con tal función, usualmente esta falta de información no importa. Lo que tiene significado es la integral de la fuerza, esto es, el valor del impulso:
 \begin{align*}
 I = \int_{t_{0}}^{t_{0} + \tau } F(t) \dd{t}
 \end{align*}
-Las funciones puntiagudas son comunes en cualquier área de la física, por ejemplo: una fuerza concentrada sobre una barra, es una distribución puntiaguda de la carga, ver la figura (\ref{fig_figura_delta_02}). 
+Las funciones puntiagudas son comunes en cualquier área de la física, por ejemplo: una fuerza concentrada sobre una barra, es una distribución puntiaguda de la carga, ver la figura (\ref{fig:figura_delta_Dirac_02}). 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{Imagenes/delta_dirac_02.png}
+    \includegraphics[scale=1]{Imagenes/delta_Dirac_02.eps}
     \caption{Representación de una fuerza aplicada de manera ideal contra la real.}
-    \label{fig_figura_delta_02}
+    \label{fig:figura_delta_Dirac_02}
 \end{figure}
-En los circuitos eléctricos, las corrientes \enquote{puntiaguadas} de una duración extremadamente corta, se presentan cuando se conecta el interruptor, como en el caso de la redistribución de carga entre dos condensadores, como se ve en la figura (\ref{fig_figura_delta_03}).
+En los circuitos eléctricos, las corrientes \enquote{puntiaguadas} de una duración extremadamente corta, se presentan cuando se conecta el interruptor, como en el caso de la redistribución de carga entre dos condensadores, como se ve en la figura (\ref{fig_figura_delta_Dirac_03}).
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{Imagenes/delta_dirac_03.png}
+    \includegraphics[scale=1.4]{Imagenes/delta_Dirac_03.eps}
     \caption{Circuito eléctrico antes de cerrar el interruptor.}
-    \label{fig_figura_delta_03}
+    \label{fig_figura_delta_Dirac_03}
 \end{figure}
-\section{Distribuciones}
-Las ideas que nos permitieron desarrollar el concepto de la delta de Dirac previamente, se pueden sistematizar en lo que se conoce como \emph{la teoría de distribuciones o funciones generalizadas}.
-\par
-Las funciones generalizadas fueron introducidas en 1935 por el matemático ruso, Sergei Lvóvich Sóbolev (1908 - 1989). De manera independientemente a finales de la década de 1940, el matemático francés, Laurent Schwartz (1915 - 2002) formalizó la teoría de distribuciones, lo que le valió la Medalla Fields en 1950 (que no recibió durante la entrega ya que se le negó la visa para ingresar a los Estados Unidos.)
-\par
-Como el nombre lo sugiere, la teoría tiene como objetivo  \emph{extender la definición de una función}, de manera tal que conceptos como el de la delta de Dirac $\delta (x)$ cuenten con una base matemática firme. En particular la teoría permite extender el concepto de derivada a todas las funciones localmente integrables y a entes aún más generales. Existen varias formas de presentar la teoría de distribuciones, se dará una breve introducción utilizando las integrales de secuencias de funciones del tipo
-\begin{equation}
-\int f_{n}(x) \: g(x) \dd{x} \hspace{1cm} n = 1, 2, 3 , \ldots
-\label{eq:ecuacion_1_99}
-\end{equation}
-Para ello es necesario introducir tres conceptos:
-\begin{enumerate}
-\item El concepto de función de prueba.
-\item El concepto de función admisible.
-\item El concepto de convergencia débil.
-\end{enumerate}
-Hemos visto que una secuencia de funciones $f_{n}(x)$ tal como la secuencia delta de funciones, definida en \ref{secuencias_delta}, nos lleva al concepto matemático de \enquote{función} delta, si la secuencia de integrales converge para funciones apropiadas $g(x)$. Pero ¿Qué quiere decir que sean apropiadas? En la sección anterior vimos que si queremos definir conceptos tales como las derivadas de la función delta, entonces las funciones $g(x)$ deben ser diferenciables. Para definir las derivadas también hemos visto que al integrar por partes, para que las derivadas totales no contribuyan, es necesario que la función $g(x)$ tenga un comportamiento apropiado en infinito. Definimos entonces las funciones $g(x)$ como
-\begin{defi}
-Funciones de prueba.
-Decimos que las función $g(x)$ en la ec. (\ref{eq:ecuacion_1_99}), es de prueba, si es infinitamente diferenciable (clase $C^{\infty}$) y es idénticamente cero fuera de algún intervalo $(a, b)$ (en general este intervalo es diferente para funciones $g(x)$ diferentes).
-\end{defi}
-El nombre de funciones de prueba es adecuado, dado que por ejemplo, la propiedad de filtro de las secuencias delta, se prueba sobre estas funciones. Habiendo definido las funciones de prueba, podemos ahora definir las funciones admisibles (de las cuales seleccionaremos las funciones $f_{n}(x)$ y la convergencia débil.
-\begin{defi}
-Funciones admisibles.
+% \section{Distribuciones.}
+% Las ideas que nos permitieron desarrollar el concepto de la delta de Dirac previamente, se pueden sistematizar en lo que se conoce como \emph{la teoría de distribuciones o funciones generalizadas}.
+% \par
+% Las funciones generalizadas fueron introducidas en 1935 por el matemático ruso, Sergei Lvóvich Sóbolev (1908 - 1989). De manera independientemente a finales de la década de 1940, el matemático francés, Laurent Schwartz (1915 - 2002) formalizó la teoría de distribuciones, lo que le valió la Medalla Fields en 1950 (que no recibió durante la entrega ya que se le negó la visa para ingresar a los Estados Unidos.)
+% \par
+% Como el nombre lo sugiere, la teoría tiene como objetivo  \emph{extender la definición de una función}, de manera tal que conceptos como el de la delta de Dirac $\delta (x)$ cuenten con una base matemática firme. En particular la teoría permite extender el concepto de derivada a todas las funciones localmente integrables y a entes aún más generales. Existen varias formas de presentar la teoría de distribuciones, se dará una breve introducción utilizando las integrales de secuencias de funciones del tipo
+% \begin{equation}
+% \int f_{n}(x) \: g(x) \dd{x} \hspace{1cm} n = 1, 2, 3 , \ldots
+% \label{eq:ecuacion_1_99}
+% \end{equation}
+% Para ello es necesario introducir tres conceptos:
+% \begin{enumerate}
+% \item El concepto de función de prueba.
+% \item El concepto de función admisible.
+% \item El concepto de convergencia débil.
+% \end{enumerate}
+% Hemos visto que una secuencia de funciones $f_{n}(x)$ tal como la secuencia delta de funciones, definida en \ref{secuencias_delta}, nos lleva al concepto matemático de \enquote{función} delta, si la secuencia de integrales converge para funciones apropiadas $g(x)$. Pero ¿Qué quiere decir que sean apropiadas? En la sección anterior vimos que si queremos definir conceptos tales como las derivadas de la función delta, entonces las funciones $g(x)$ deben ser diferenciables. Para definir las derivadas también hemos visto que al integrar por partes, para que las derivadas totales no contribuyan, es necesario que la función $g(x)$ tenga un comportamiento apropiado en infinito. Definimos entonces las funciones $g(x)$ como
+% \begin{defi}
+% Funciones de prueba.
+% Decimos que las función $g(x)$ en la ec. (\ref{eq:ecuacion_1_99}), es de prueba, si es infinitamente diferenciable (clase $C^{\infty}$) y es idénticamente cero fuera de algún intervalo $(a, b)$ (en general este intervalo es diferente para funciones $g(x)$ diferentes).
+% \end{defi}
+% El nombre de funciones de prueba es adecuado, dado que por ejemplo, la propiedad de filtro de las secuencias delta, se prueba sobre estas funciones. Habiendo definido las funciones de prueba, podemos ahora definir las funciones admisibles (de las cuales seleccionaremos las funciones $f_{n}(x)$ y la convergencia débil.
+% \begin{defi}
+% Funciones admisibles.
 
-Decimos que las funciones $f_{n}(x)$ en la ec. (\ref{eq:ecuacion_1_99}) son admisibles, si son infinitamente diferenciables. Su comportamiento en infinito puede ser arbitrario.
-\end{defi}
-\begin{defi}
-Convergencia débil.
+% Decimos que las funciones $f_{n}(x)$ en la ec. (\ref{eq:ecuacion_1_99}) son admisibles, si son infinitamente diferenciables. Su comportamiento en infinito puede ser arbitrario.
+% \end{defi}
+% \begin{defi}
+% Convergencia débil.
 
-Consideremos una secuencia de funciones admisibles $f_{n}(x)$ con \\ $n = 1, 2, 3, \ldots$
-Decimos que esta secuencia es débilmente convergente si el límite
-\begin{equation}
-\lim_{n \to \infty} \int_{-\infty}^{\infty} f_{n}(x) \:  g(x) \, \dd{x}
-\label{eq:ecuacion_1_100}
-\end{equation}
-existe para todas las funciones de prueba $g(x)$.
-\end{defi}
-Una secuencia débilmente convergente puede o no puede converger en alguno de los sentidos de convergencia usual, como convergencia puntual.
-\par
-Podemos presentar ahora una definición rigurosa de una distribución de la siguiente manera:
-\begin{defi}
-Distribuciones.
+% Consideremos una secuencia de funciones admisibles $f_{n}(x)$ con \\ $n = 1, 2, 3, \ldots$
+% Decimos que esta secuencia es débilmente convergente si el límite
+% \begin{equation}
+% \lim_{n \to \infty} \int_{-\infty}^{\infty} f_{n}(x) \:  g(x) \, \dd{x}
+% \label{eq:ecuacion_1_100}
+% \end{equation}
+% existe para todas las funciones de prueba $g(x)$.
+% \end{defi}
+% Una secuencia débilmente convergente puede o no puede converger en alguno de los sentidos de convergencia usual, como convergencia puntual.
+% \par
+% Podemos presentar ahora una definición rigurosa de una distribución de la siguiente manera:
+% \begin{defi}
+% Distribuciones.
 
-Una distribución $\varphi (x)$ es un concepto matemático asociado con una secuencia débilmente convergente de funciones admisibles para la cual la integral simbólica
-\begin{equation}
-\int_{-\infty}^{\infty} \phi (x) \:  g(x) \, \dd{x}
-\label{eq:ecuacion_1_101}
-\end{equation}
-tiene un significado preciso, por medio de la prescripción
-\begin{equation}
-\int_{-\infty}^{\infty} \phi (x) \: g(x) \, dx = \lim_{n \to \infty} f_{n}(x) \: g(x) \, \dd{x}
-\label{eq:ecuacion_1_102}
-\end{equation}
-\end{defi}
+% Una distribución $\varphi (x)$ es un concepto matemático asociado con una secuencia débilmente convergente de funciones admisibles para la cual la integral simbólica
+% \begin{equation}
+% \int_{-\infty}^{\infty} \phi (x) \:  g(x) \, \dd{x}
+% \label{eq:ecuacion_1_101}
+% \end{equation}
+% tiene un significado preciso, por medio de la prescripción
+% \begin{equation}
+% \int_{-\infty}^{\infty} \phi (x) \: g(x) \, dx = \lim_{n \to \infty} f_{n}(x) \: g(x) \, \dd{x}
+% \label{eq:ecuacion_1_102}
+% \end{equation}
+% \end{defi}
 \section{La delta de Dirac.}
 Informalmente la delta de Dirac es una \enquote{función} que representa un pico infinitamente agudo expresado simbólicamente por
 \begin{equation}
@@ -196,45 +199,33 @@ En el límite cuando $n \to \infty$, $\xi \to 0$. De la continuidad de la funci�
 \end{align*}
 lo que nos dice que la secuencia (\ref{eq:ecuacion_delta_04}) es una secuencia delta.
 \par
-Nótese que la secuencia delta (\ref{eq:ecuacion_delta_04}) no es derivable en $0$. Para muchos propósitos es deseable
-construir secuencias delta de funciones que sean continuas y diferenciables. Por ejemplo, algunas secuencias delta con estas características son:
-\\
-\begin{minipage}{4cm}
-\begin{align*}
-\phi_{n} &= \dfrac{n}{\pi} \: \dfrac{1}{1 + x^{2} \, n^{2}}
-\end{align*}
-\end{minipage}
-\hspace{1cm}
-\begin{minipage}{9cm}
+Nótese que la secuencia delta (\ref{eq:ecuacion_delta_04}) no es derivable en el punto $x = 0$. Para muchos propósitos es deseable
+construir secuencias delta de funciones que sean continuas y diferenciables. Por ejemplo, en las figuras (\ref{fig:plot_secuencia_01}), (\ref{fig:plot_secuencia_02}) y (\ref{fig:plot_secuencia_03}) podemos apreciar algunas secuencias delta con estas características:
+
 \begin{figure}[H]
-\includegraphics[scale=0.6]{Imagenes/secuencia_delta_01.eps}
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/secuencia_delta_01.eps}
+    \caption{Secuencia para $\phi_{n}$ con $n=1,2,3$}
+    \label{fig:plot_secuencia_01}
 \end{figure}
-\end{minipage}
-\\
-\begin{minipage}{4cm}
-\begin{align*}
-\phi_{n} &= \dfrac{n}{\sqrt{\pi}} e^{-n^{2} x^{2}}
-\end{align*}
-\end{minipage}
-\hspace{1cm}
-\begin{minipage}{9cm}
+
+
 \begin{figure}[H]
-\includegraphics[scale=0.6]{Imagenes/secuencia_delta_02.eps}
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/secuencia_delta_02.eps}
+    \caption{Secuencia para $\phi_{n}$ con una función exponencial.}
+    \label{fig:plot_secuencia_02}
 \end{figure}
-\end{minipage}
-\\
-\begin{minipage}{4cm}
-\begin{align*}
-\phi_{n} &= \dfrac{1}{n \: \pi} \dfrac{\sin^{2} n \: x}{x^{2}}
-\end{align*}
-\end{minipage}
-\hspace{1cm}
-\begin{minipage}{9cm}
+
 \begin{figure}[H]
-\includegraphics[scale=0.6]{Imagenes/secuencia_delta_03.eps}
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/secuencia_delta_03.eps}
+    \caption{Secuencia para $\phi_{n}$ con una función $\sin^{2}(x)/x$}
+    \label{fig:plot_secuencia_03}
 \end{figure}
-\end{minipage}
-\\
+
+
+
 Tomemos en cuenta que no es correcto expresar que éstas secuencias convergen a la función delta: los límites de esas secuencias \emph{no existen} (de acuerdo a las definiciones conocidas de convergencia).
 
 Todas estas funciones están normalizadas a la unidad
@@ -255,7 +246,7 @@ entonces, al diferenciar la secuencia
 \end{align*}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.6]{Imagenes/secuencia_delta_04.eps}
+    \includegraphics[scale=0.8]{Imagenes/secuencia_delta_04.eps}
     \caption{Derivada de la secuencia delta.}
     \label{fig:fig_figura_delta_04}
 \end{figure}
@@ -333,25 +324,25 @@ Las propiedades de filtro
 \section{Introduciendo más variables.}
 Al introducir más variables:
 \begin{equation}
-\delta (\vv{\bm{r}} - \vv{\bm{r_{0}}}) = \delta (x - x_{0}) \: \delta (y - y_{0}) \: \delta (z - z_{0})
+\delta (\va{\bm{r}} - \va{\bm{r_{0}}}) = \delta (x - x_{0}) \: \delta (y - y_{0}) \: \delta (z - z_{0})
 \label{eq:ecuacion_A_03}
 \end{equation}
 de manera que al integrar sobre todo el espacio tenemos
-\[ \int \delta (\vv{\bm{r}} - \vv{\bm{r_{0}}}) \: \dd{x} \dd{y}  \dd{z} = 1 \]
+\[ \int \delta (\va{\bm{r}} - \va{\bm{r_{0}}}) \: \dd{x} \dd{y}  \dd{z} = 1 \]
 \textbf{Ejemplo:}
 
 La función delta permite especificar la densidad de
-carga debida a un conjunto de $N$ cargas puntuales de valores $q_{i}$ situadas en posiciones $\vv{r_{i}}$  como:
+carga debida a un conjunto de $N$ cargas puntuales de valores $q_{i}$ situadas en posiciones $\va{r_{i}}$  como:
 \begin{equation}
-\rho (\vv{r}) = \sum_{i=1}^{N} q_{i} \: \delta(\vv{r} - \vv{r_{i}})
+\rho (\va{r}) = \sum_{i=1}^{N} q_{i} \: \delta(\va{r} - \va{r_{i}})
 \label{eq:ecuacion_A_04}
 \end{equation}
-Las propiedades de la función delta permiten obtener el potencial $\varphi(\vv{r})$ evaluando la función dentro de la integral en los puntos $\vv{r_{i}}$, es decir
+Las propiedades de la función delta permiten obtener el potencial $\varphi(\va{r})$ evaluando la función dentro de la integral en los puntos $\va{r_{i}}$, es decir
 \begin{equation}
-\varphi(\vv{r}) = \int \dfrac{\rho(\vv{r^{\prime}})}{\vert \vv{r} - \vv{r^{\prime}} \vert} \: d^{3}r^{\prime} = \sum_{i=1}^{N} q_{i} \int \dfrac{\delta ( \vv{r} - \vv{r_{i}})}{\vert \vv{r} - \vv{r^{\prime}} \vert} \: d^{3}r^{\prime} = \sum_{i=1}^{N} \dfrac{q_{i}}{\vert \vv{r} - \vv{r_{i}} \vert}
+\varphi(\va{r}) = \int \dfrac{\rho(\va{r^{\prime}})}{\vert \va{r} - \va{r^{\prime}} \vert} \: d^{3}r^{\prime} = \sum_{i=1}^{N} q_{i} \int \dfrac{\delta ( \va{r} - \va{r_{i}})}{\vert \va{r} - \va{r^{\prime}} \vert} \: d^{3}r^{\prime} = \sum_{i=1}^{N} \dfrac{q_{i}}{\vert \va{r} - \va{r_{i}} \vert}
 \label{eq:ecuacion_A_05}
 \end{equation}
-Nótese que $\delta (x)$ tiene unidades de inverso de $x$ y $\delta (\vv{r})$ tiene unidades de densidad númerica.
+Nótese que $\delta (x)$ tiene unidades de inverso de $x$ y $\delta (\va{r})$ tiene unidades de densidad númerica.
 \par
 La función $\delta$ toma una forma particular en coordenadas cilíndricas y esféricas, dadas por la condición de normalización:
 \begin{enumerate}
@@ -363,7 +354,7 @@ La función $\delta$ toma una forma particular en coordenadas cilíndricas y esf
 \begin{equation}
 \begin{aligned}
 \int & \delta (\va{r} - \va{r}_{0}) \: r^{2} \, \dd{r} \, \sin \theta \, \dd{\theta} \, \dd{\varphi} = 1 \\
-&\Rightarrow \delta (\vv{r}) = \dfrac{1}{r^{2}} \: \delta (r - r_{0}) \, \delta (\cos \theta - \cos \theta_{0}) \, \delta (\varphi - \varphi_{0})
+&\Rightarrow \delta (\va{r}) = \dfrac{1}{r^{2}} \: \delta (r - r_{0}) \, \delta (\cos \theta - \cos \theta_{0}) \, \delta (\varphi - \varphi_{0})
 \end{aligned}
 \end{equation}
 \end{enumerate}
@@ -378,12 +369,12 @@ Algunas funciones generan en el límite la función delta:
 \displaystyle \lim_{L \to \infty} \dfrac{1}{2 \, \pi} \int_{- \abs{L}}^{\abs{L}} \exp(i \, k \, x) \dd{k} & \mbox{Fourier}
 \end{cases}
 \end{align*}
-\section*{Ejercicios a cuenta}
-\begin{enumerate}[label=\roman*.]
-\item Demuestra que 
-\[ \nabla \vdot \left( \dfrac{e_{r}}{r^{2}} \right) = 0 \hspace{1cm} \mbox{para } r > 0 \]
-Tip: Se puede resolver en coordenadas cartesianas, pero es más fácil usando coordenadas esféricas.
-\item Demuestra que 
-\[ \nabla \left( \dfrac{1}{r} \right) = - \dfrac{e_{r}}{r^{2}} \]
-\end{enumerate}
+% \section*{Ejercicios a cuenta}
+% \begin{enumerate}[label=\roman*.]
+% \item Demuestra que 
+% \[ \nabla \vdot \left( \dfrac{e_{r}}{r^{2}} \right) = 0 \hspace{1cm} \mbox{para } r > 0 \]
+% Tip: Se puede resolver en coordenadas cartesianas, pero es más fácil usando coordenadas esféricas.
+% \item Demuestra que 
+% \[ \nabla \left( \dfrac{1}{r} \right) = - \dfrac{e_{r}}{r^{2}} \]
+% \end{enumerate}
 \end{document}

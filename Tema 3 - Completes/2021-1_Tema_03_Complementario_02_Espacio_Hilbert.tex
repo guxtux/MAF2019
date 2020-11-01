@@ -1,0 +1,851 @@
+\input{../Preambulos/preambulo_materiales}
+%\usepackage{showframe}
+\usepackage{apacite}
+\title{Espacios de Hilbert y notación de Dirac \\ \large {Tema 3 - Bases completas y ortogonales}  \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+%Referencia: Zettili - Quantum Mechanics. Concepts and Applications. 2d. Edition.
+%Chapter 2. Mathematical tools of quantum mechanics.
+Trataremos en este subtema con la \emph{maquinaria matemática} necesaria para estudiar la mecánica cuántica. Aunque esta revisión tiene un alcance matemático, no se intenta que sea matemáticamente completo o riguroso. Nos limitamos a los temas prácticos que son relevantes para el formalismo de la mecánica cuántica.
+\par
+La ecuación de Schrödinger es una de las piedras angulares de la teoría de la mecánica cuántica; Tiene la estructura de una ecuación lineal. El formalismo de la mecánica cuántica trata con operadores que son lineales y funciones de onda que pertenecen a un \textbf{espacio abstracto de Hilbert}. Las propiedades matemáticas y la estructura de los espacios de Hilbert son esenciales para una comprensión adecuada del formalismo de la mecánica cuántica.
+\par
+Para esto, vamos a revisar brevemente las propiedades de los espacios de Hilbert y las de los operadores lineales. Luego consideraremos la notación bra-ket de Dirac.
+\par
+Schrödinger y Heisenberg formularon la mecánica cuántica de dos maneras diferentes. La mecánica ondulatoria de Schrödinger y la mecánica matricial de Heisenberg son las representaciones del formalismo general de la mecánica cuántica en sistemas de base continua y discreta, respectivamente. Para esto, también examinaremos las matemáticas involucradas en la representación de kets, bras, bra-kets y operadores en bases discretas y continuas.
+\section{El espacio de Hilbert y funciones de onda.}
+\subsection{El espacio vectorial lineal.}
+Un espacio vectorial lineal consiste de dos conjuntos de elementos y dos reglas algebraicas:
+\begin{enumerate}
+\item Un conjunto de vectores $\psi, \phi, \chi, \ldots$ y un conjunto de escalares $a, b, c, \ldots$
+\item Una regla de suma de vectores y una regla de multiplicación por escalares.
+\end{enumerate}
+\textbf{(a) Regla de la suma.}
+
+La regla de la suma tiene las propiedades y estructura de un grupo abeliano:
+\begin{enumerate}
+\item Si $\psi$ y $\phi$ son vectores (elementos) de un espacio, su suma $\psi + \phi$, es también un vector del mismo espacio.
+\item Conmutatividad: $\psi + \phi = \phi + \psi$
+\item Asociatividad: $(\psi + \phi) + \chi = \psi + (\phi + \chi)$
+\item La existencia de un vector cero o vector neutro: para cada vector $\psi$, debe de existir un vector cero $0$, tal que $0 + \psi = \psi + 0 = \psi$
+\item La existencia de un vector simétrico o vector inverso: cada vector $\psi$ debe de tener un vector simétrico $(-\psi)$, tal que $\psi + (-\psi) = (-\psi) + \psi = 0$
+\end{enumerate}
+\textbf{(b) Regla de multiplicación.}
+
+La multiplicación de vectores por escalares (que pueden ser número reales o complejos), tiene las siguientes propiedades:
+\begin{enumerate}
+\item El producto de un escalar por un vector, genera otro vector. En general, si $\psi$ y $\phi$ son dos vectores de ese espacio, cualquier combinación lineal $a \, \psi + b \, \phi$, es también un vector del espacio, $a$ y $b$ siendo escalares.
+\item Distribución con respecto a la suma:
+\begin{align}
+a (\psi + \phi) = a \, \psi + a \, \phi \hspace{1.5cm} (a + b) \, \psi = a \, \psi + b \, \psi
+\label{eq:ecuacion_02_01}
+\end{align}
+\item Asociación con respecto a la multiplicación de escalares:
+\begin{align}
+a (b \, \psi) = (a \, b) \, \psi
+\label{eq:ecuacion_02_02}
+\end{align}
+\item Para cada elemento $\psi$, existe al menos un escalar unitario $I$, y un cero escalar $o$ tal que
+\begin{align}
+I \, \psi = \psi \, I = \psi \hspace{1.5cm} \mbox{ y } \hspace{1cm} o \, \psi = \psi \, o = o
+\label{eq:ecuacion_02_03}
+\end{align}
+\end{enumerate}
+\subsection{El espacio de Hilbert.}
+Un espacio de Hilbert $\mathcal{H}$ es un conjunto de vectores $\psi, \phi, \chi, \ldots$ y un conjunto de escalares $a, b, c, \ldots$ \emph{el cual satisface las siguientes cuatro propiedades}:
+
+\textbf{(1) $\mathcal{H}$ es un espacio lineal.}
+
+Debe de cumplir con las propiedades de un espacio lineal mencionadas previamente.
+
+\textbf{(2) $\mathcal{H}$ tiene definido un producto escalar que es estrictamente positivo.}
+
+El producto escalar de un elemento $\psi$ con otro elemento $\phi$, es en general un número complejo descrito por $(\psi, \phi)$, donde $(\psi, \phi) =$ número complejo. \textbf{Nota: } Cuidado con el orden! Ya que el producto escalar es un número complejo, la cantidad  $(\psi, \phi)$ en general no es igual a  $(\phi, \psi) : (\psi, \phi) = \phi^{*} \, \psi$ mientras que $(\phi, \psi) = \phi^{*} \, \psi$. El producto escalar satisface las siguientes propiedades:
+\begin{enumerate}[label=\roman*)]
+\item El producto escalar de $\psi$ con $\phi$ es igual al complejo conjugado del producto escalar de $\phi$ con $\psi$:
+\begin{align}
+(\psi, \phi) = (\phi, \psi)^{*}
+\label{eq:ecuacion_02_04}
+\end{align}
+\item El producto escalar de $\phi$ con $\psi$ es lineal con respecto al segundo factor, si $\psi = a \, \psi_{1} + b \, \psi_{2}$:
+\begin{align}
+(\phi, a \, \psi_{1} + b \, \psi_{2} ) = a (\phi, \psi_{1}) + b (\phi, \psi_{2})
+\label{eq:ecuacion_02_05}
+\end{align}
+y es antilineal con respecto al primer factor si $\phi = a \, \phi_{1} + b \, \phi_{2}$:
+\begin{align}
+(a \, \phi + b \, \phi_{2}, \psi) = a^{*} (\phi_{1}, \psi) + b^{*} (\phi_{2}, \psi)
+\label{eq:ecuacion_02_06}
+\end{align}
+\item El producto escalar de un vector $\psi$ consigo mismo, es un número real positivo:
+\begin{align}
+(\psi, \psi) = \norm{\psi}^{2} \geq 0
+\label{eq:ecuacion_02_07}
+\end{align}
+donde la igualdad se mantiene sólo si $\psi = 0$.
+\end{enumerate}
+\textbf{(c) $\mathcal{H}$ es separable.}
+
+Existe una secuencia de Cauchy $\psi_{n} \in \mathcal{H} \, (n = 1, 2, 3, \ldots)$ tal que para cualquier $\psi$ de $\mathcal{H}$ y $\varepsilon > 0$, existe al menos un $\psi_{n}$ en la secuencia, para el cual
+\begin{equation}
+\norm{ \psi - \psi_{n}} < \varepsilon
+\label{eq:ecuacion_02_08}
+\end{equation}
+
+\textbf{(c) $\mathcal{H}$ es completo.}
+
+Cualquier secuencia $\psi_{n} \in \mathcal{H}$ converge a un elemento de $\mathcal{H}$. Esto es, para cualquier $\psi_{n}$, la relación
+\begin{equation}
+\lim_{n, m \to \infty} \norm{\psi_{n} - \psi_{m}} = 0
+\label{eq:ecuacion_02_09}
+\end{equation}
+define un único límite $\psi$ de $\mathcal{H}$, para el cual
+\begin{equation}
+\lim_{n \to \infty} \norm{\psi - \psi_{n}} = 0
+\label{eq:ecuacion_02_10}
+\end{equation}
+\textbf{Observación:}
+
+Debemos tener en cuenta que en un producto escalar $(\phi, \psi)$, el segundo factor $\psi$, pertenece al espacio de Hilbert $\mathcal{H}$, mientras que el primer factor $\phi$, pertenece al espacio de Hilbert dual $\mathcal{H}_{d}$. La distinción entre $\mathcal{H}$ y $\mathcal{H}_{d}$ se debe al hecho de que, como se mencionó anteriormente, el producto escalar no es conmutativo: $(\phi, \psi) \neq (\psi, \phi)$ ¡el orden importa! Del álgebra lineal, sabemos que cada espacio vectorial se puede asociar con un espacio vectorial dual.
+\subsection{Dimensión y base de un espacio vectorial.}
+Un conjunto de $N$ vectores no nulos $\phi_{1}, \phi_{2}, \ldots, \phi_{N}$ se dice que son \emph{linealmente independientes} si y sólo si, la solución de la ecuación
+\begin{equation}
+\sum_{i=1}^{N} a_{i} \, \phi_{i} = 0
+\label{eq:ecuacion_02_11}
+\end{equation}
+es $a_{1} = a_{2} = \ldots = a_{N} = 0$. Pero si existe un conjunto de escalares, de los cuales, no todos son nulos, tal que uno de los vectores (digamos $\phi_{N}$) puede expresarse como una combinación lineal de los otros
+\begin{equation}
+\phi_{n} = \sum_{i=1}^{n-1} a_{i} \, \phi_{i} + \sum_{i=n+1}^{N} a_{i} \, \phi_{i}
+\label{eq:ecuacion_02_12} 
+\end{equation} 
+el conjunto $\left\{ \phi_{i} \right\}$ se dice que es \emph{linealmente independiente}.
+
+\textbf{Dimensión: } La \emph{dimensión} de un espacio vectoral está dado por el valor mayor de vectores linelmente independientes que ese espacio puede tener. Por ejemplo, si el número mayor de vectores linealmente independientes que esl espacio tiene es $N$ (por decir, $\phi_{1}, \phi_{2}, \ldots, \phi_{N}$), se dice que este espacio es $N-$ dimensional.
+\par
+En este espacio vectorial $N-$ dimensional, cualquier vector $\psi$ puede expandirse como una combinación lineal
+\begin{equation}
+\psi = \sum_{n=1}^{N} a_{i} \, \phi_{i}
+\label{eq:ecuacion_02_13}
+\end{equation}
+
+\textbf{Base: } La \emph{base} de un espacio vectorial consiste en un conjunto del número máximo posible de vectores linealmente independientes que pertenecen a ese espacio.
+\par
+Este conjunto de vectores $\phi_{1}, \phi_{2}, \ldots, \phi_{N}$ que se escribe de manera corta como $\left\{ \phi_{n} \right\}$, es llamado la base del espacio vectorial, mientras que los vectores $\phi_{1}, \phi_{2}, \ldots, \phi_{N}$, se les llama: vectores base.
+\par
+Aunque el conjunto de estos vectores linealmente independientes es arbitrario, es conveniente elegirlos \emph{ortonormales}, es decir, sus productos escalares satisfacen la relación $\phi_{i}, \phi_{j} = \delta_{ij}$, recordemos que $\delta_{ij} = 1$ cuando $i = j$, y cero cuando $i \neq j$.
+\par
+Se dice que la base es ortonormal si consiste en un conjunto de vectores ortonormales. Además, se dice que la base está completa si abarca todo el espacio; es decir, no es necesario introducir ningún vector base adicional.
+\par
+La expansión de los coeficientes $a_{i}$ en la ec. (\ref{eq:ecuacion_02_13}) son llamados los \emph{componentes} del vector $\psi$ en la base. Cada componente está dado por el producto escalar de $\psi$ con el correspondiente vector base, $a_{j} = (\phi_{j}, \psi)$.
+\par
+\textbf{Ejemplos de espacios vectoriales lineales.}
+
+Veamos dos ejemplso de espacios lineales que son espacios de Hilbert: uno con un conjunto \emph{finito} de vectores base; el otro ejemplo, tiene una base \emph{infinita (continua)}.
+\begin{itemize}
+\item El primer ejemplo es el espacio euclidiano tridimensional, la vase de este espacio consiste de tres vectores linealmente independientes, llamados $(\va*{i}, \va*{j}, \va*{k})$. Cualquier vector del espacio euclidiano puede escribirse en términos de los vectores base $\va{A} = a_{1} \, \va*{i} + a_{2} \, \va*{j} + a_{3} \, \va*{k}$ donde $a_{1}, a_{2}, a_{3}$ son las componentes del vector $\va{A}$ en la base, cada componente puede estar determinada tomando el producto escalar de $va{A}$ con el correspondiente vector base $a_{1} = \va*{i} \cdot \va{A}, a_{2} = \va*{j} \cdot \va{A}, a_{3} = \va*{k} \cdot \va{A}$.
+\par
+Nótese que el producto escalar en el espacio euclidinao es real y siempre simétrico. La norma en este espacio es la conocida longitud de los vectores: $\norm{\va{A}} = A$. También veamos que para cualesquiera $a_{1} \, \va*{i} + a_{2} \, \va*{j} + a_{3} \, \va*{k} = 0$, se tiene que $a_{1} = a_{2} = a_{3} = 0$ y ninguno de los tres vectores unitarios $(\va*{i}, \va*{j}, \va*{k})$, puede ser expresado como combinación lineal de los otros dos.
+\item El segundo ejemplo es el espacio de todas las funciones complejas $\psi (x)$, la dimensión de este espacio es infinita, ya que tiene un número infinito de vectores base linealmente independientes.
+\end{itemize}
+\subsection{Funciones de cuadrado integrable: las funciones de onda.}
+
+En el caso de los espacios de funciones, un \enquote{vector} está dado por una \emph{función compleja} y el \emph{producto escalar} por \emph{integrales}. Esto es, el producto escalar de dos funciones $\psi (x)$ y $\phi (x)$ está dado por
+\begin{equation}
+(\psi, \phi) = \int \psi^{*} (x) \, \phi (x) \dd{x}
+\label{eq:ecuacion_02_21}
+\end{equation}
+Si esta integral diverge, el producto escalar \emph{no existe}. Como un resultado, si queremos que el espacio de funciones tenga un producto escalar, debemos de seleccionar solo aquellas funciones para las cuales el producto $(\psi, \phi)$ existe.
+\par
+%Referencia: Sepúlveda - Cap. 5, 5.2.2 Espacios de funciones.
+La condición de que las funciones $\psi$ y $\phi$ sean ortogonales en el intervalo $(a, b)$, es:
+\begin{align*}
+(\psi, \phi) = \int_{a}^{b} \psi^{*} (x) \, \phi (x) \dd{x} = 0
+\end{align*}
+Por definición, la base discreta $\left\{ \varphi_{n} \right\}$, con $n \in \mathbb{N},$ es ortogonal en el intervalo $(a, b)$ si
+\begin{equation}
+(\varphi_{n}, \varphi_{m}) = \int \varphi_{n}^{*} (x) \, \varphi_{m} (x) \dd{x} = A_{nm} \, \delta_{nm}
+\label{eq:ecuacion_05_02}
+\end{equation}
+La base es ortonormal si  $A_{n} = 1$.
+\par
+En particular, una función $\varphi_{n} (x)$ se dice que es \emph{cuadrado integrable}, si el producto escalar de $\varphi_{n}$ consigo misma $(n = m)$
+\begin{equation}
+(\varphi_{n}, \varphi_{m}) = \int \abs{\varphi_{n} (x)}^{2} \dd{x} =  A_{n}
+\label{eq:ecuacion_02_22}
+\end{equation}
+es \emph{finito.}
+\par
+La base $\left\{ \varphi_{n} (x) \right\}$ es un conjunto completo de funciones propias de un operador lineal.
+\par
+La condición de ortogonalidad puede extenderse para incluir un factor de peso: por lo que la base $\left\{ \varphi_{n} (x) \right\}$ es ortogonal de peso $w(x) \in \mathbb{R}$, en el intervalo $a \leq x \leq b$ si
+\begin{align*}
+(w \, \varphi_{n}, \varphi_{m}) &= \int_{a}^{b} w(x) \,  \varphi_{n}^{*} (x) \, \varphi_{m} (x) \dd{x} = \\
+&=\delta_{nm} \, \int_{a}^{b} w(x) \, \abs{\varphi_{n}}^{2} \dd{x} = \\
+&= \delta_{nm} \, (w \, \varphi_{n}, \varphi_{n}) = \\
+&= A_{n} \, \delta_{nm}
+\end{align*}
+y es ortonormal de peso $w(x)$, si además:
+\begin{align*}
+A_{n} = \int_{a}^{b} w(x) \, \abs{\varphi_{n}}^{2} \dd{x} = 1
+\end{align*}
+\vfill{}
+Es fácil verificar que el espacio de funciones de cuadrado integrables posee las propiedades de un espacio de Hilbert. Por ejemplo, cualquier combinación lineal de funciones de cuadrado integrables es también una función integrable cuadrada y la ec. (\ref{eq:ecuacion_02_21}) satisface todas las propiedades del producto escalar de un espacio de Hilbert.
+\par
+Toma en cuenta que la dimensión del espacio de Hilbert de las funciones de cuadrado integrables es infinita, ya que cada función de onda puede expandirse en términos de un número infinito de funciones linealmente independientes. La dimensión de un espacio viene dada por el número máximo de vectores de base linealmente independientes requeridos para abarcar ese espacio.
+\par
+Un buen ejemplo de una función de cuadrado integrable es la \emph{función de onda} que aparece en la mecánica cuántica $\psi (\va*{r}, t)$. De acuerdo a la interpretación probabilística de Bohr para $\psi (\va*{r}, t)$, la cantidad $\abs{\psi (\va*{r}, t)}^{2} \dd[3]{r}$, representa la probabilidad de encontrar al tiempo $t$, la partícula en un volumen $\dd[3]{x}$ centrada alrededor del punto $\va*{r}$. La probabilidad de encontrar la partícula en cualquier parte del espacio debe de ser igual $1$:
+\begin{equation}
+\int \abs{\psi (\va*{r}, t)}^{2} \dd[3]{x} = \int_{-\infty}^{+\infty} \dd{x} \, \int_{-\infty}^{+\infty} \dd{y} \int_{-\infty}^{+\infty} \abs{\psi (\va*{r}, t)}^{2} \dd{z} = 1
+\label{eq:ecuacion_02_23}
+\end{equation}
+Por lo tanto, las funciones de onda de la mecánica cuántica son de tipo cuadrado integrables. Las funciones de onda que satisfacen la ec. (\ref{eq:ecuacion_02_23}) se dice que están normalizadas o son cuadrado integrables. Como la mecánica de ondas se ocupa de funciones de tipo cuadrado integrables, cualquier función de onda que no sea cuadrado integrable, no tiene ningún significado físico en mecánica cuántica.
+\vfill{}
+Considérese que:
+\begin{itemize}
+\item Si $\left\{ \varphi_{n} (x) \right\}$ es una base ortogonal de peso $w(x)$, entonces 
+\begin{align*}
+\left\{ \sqrt{w(x)} \: \varphi_{n} (x) \right\}
+\end{align*}
+es una base ortogonal de peso $w(x) = 1$.
+\item Se elige siempre una función de peso tal que $w(x) \in \mathbb{R}$, de esta manera se garantiza que el producto interno $(w \, \varphi_{n}, \varphi_{m})$ sea real.
+\item Si $\left\{ \varphi_{n} (x) \right\}$ es una base ortogonal de peso $w(x)$:
+\begin{align*}
+\int_{a}^{b} w(x) \,  \varphi_{n}^{*} (x) \, \varphi_{m} (x) \dd{x} = A_{n} \, \delta_{nm}
+\end{align*}
+entonces: $\left\{ \varphi_{n} (x) \: \sqrt{w(x) / A_{n}} \right\}$ es un base ortonormal de peso $1$.
+\end{itemize}
+
+Si consideramos $\left\{ \varphi_{n} (x) \right\}$ como un conjunto completo de \enquote{vectores unitarios}, cualquier función $f(x)$ de cuadrado integrable, continua o con un número finito de discontinuidades, puede expresarse como una combinación lineal de $\varphi_{n}$:
+\begin{equation}
+f(x) = \sum_{n} C_{n} \, \varphi_{n} (x)
+\label{eq:ecuacion_05_03}
+\end{equation}
+En el sentido del álgebra lineal $f(x)$ es un \emph{vector}, pues es una combi¡nación lineal de los vectores base $\left\{ \varphi_{n} (x) \right\}$. Los coeficientes constantes $C_{n}$ son las \emph{componentes} del vector $f(x)$.
+\par
+Los coeficientes $C_{n}$ pueden obtenerse si conocemos $f(x)$, al multiplicar la ec. (\ref{eq:ecuacion_05_03}) por $w(x) \: \varphi_{m}^{*} (x)$, para luego integrar, tomando en cuenta la ortogonalidad de la base:
+\begin{align*}
+\int_{a}^{b} w(x) \, f(x) \, \varphi_{m}^{*} (x) \dd{x} &= \sum_{n} C_{n} \: \int_{a}^{b} w(x) \, \varphi_{m}^{*} (x) \, \varphi_{n} (x) \dd{x} = \\
+&= \sum_{n} C_{n} \, \delta_{mn} = C_{m}
+\end{align*}
+entonces
+\begin{align*}
+C_{n} = \int_{a}^{b} w(x^{\prime}) \, f(x^{\prime}) \, \varphi_{n}^{*} (x^{\prime}) \dd{x^{\prime}}
+\end{align*}
+Al sustituir en la ec. (\ref{eq:ecuacion_05_03}), se tiene
+\begin{align*}
+f(x) &= \sum_{n=1}^{\infty} \varphi_{n} (x) \: \int_{a}^{b} w(x^{\prime}) \, f(x^{\prime}) \, \varphi_{n}^{*} (x^{\prime}) \dd{x^{\prime}} = \\
+&= \int_{a}^{b} f(x^{\prime}) \left( \sum_{n} w(x) \, \varphi_{n}^{*} (x^{\prime}) \, \varphi_{n} (x) \right) \dd{x^{\prime}}
+\end{align*}
+y como
+\begin{align*}
+f(x) = \int_{a}^{b} f(x^{\prime}) \, \delta(x - x^{\prime}) \dd{x^{\prime}}
+\end{align*}
+se sigue que
+\begin{align*}
+\int_{a}^{b} f(x^{\prime}) \, \delta(x - x^{\prime}) \dd{x^{\prime}} = \int_{a}^{b} f(x^{\prime}) \left( \sum_{n} w(x) \, \varphi_{n}^{*} (x^{\prime}) \, \varphi_{n} (x) \right) \dd{x^{\prime}}
+\end{align*}
+por tanto
+\begin{equation}
+\sum_{n} w(x^{\prime}) \, \varphi_{n}^{*} (x^{\prime}) \, \varphi_{n} (x) = \delta(x - x^{\prime})
+\label{eq:ecuacion_05_04}
+\end{equation}
+La ecuación (\ref{eq:ecuacion_05_04}) es conocida como la condición de \emph{completez} del conjunto $\left\{ \varphi_{n} (x) \right\}$, que es a la vez, una representación de la delta de Dirac.
+\par
+% \textbf{Ejercicio a cuenta: } Escribe las condiciones de ortonormalidad y completez para las siguientes bases de peso unitario:
+% \begin{enumerate}[label=\roman*)]
+% \item $\left\{ \varphi_{n} (x) \right\} = \left\{ \sqrt{\dfrac{2}{L}} \, \sin (\dfrac{n \pi x}{L}) \right\} \hspace{2.5cm} 0 \leq x \leq L$
+% \item $\left\{ \varphi_{n} (x) \right\} = \left\{ \sqrt{\dfrac{2}{L}} \, \cos (\dfrac{n \pi x}{L}), \dfrac{1}{\sqrt{L}} \right\} \hspace{1.5cm} 0 \leq x \leq L$
+% \item $\left\{ \varphi_{n} (\phi) \right\} = \left\{ \dfrac{1}{\sqrt{2 \, \beta}} \exp(i n \pi \phi / \beta) \right\} \hspace{2cm} c \leq \phi \leq c + 2 \, \beta$
+% \end{enumerate}
+\newpage
+\section{Notación de Dirac.}
+El estado físico de un sistema está representado en la mecánica cuántica por elementos de un espacio de Hilbert; estos elementos se denominan vectores de estado. 
+\par
+Podemos representar los vectores de estado en diferentes bases mediante expansiones de funciones. Esto es análogo a la especificación de un vector ordinario (euclidiano) por sus componentes en varios sistemas de coordenadas. Por ejemplo, podemos representar de manera equivalente un vector por sus componentes en un sistema de coordenadas cartesiano, en un sistema de coordenadas esféricas o en un sistema de coordenadas cilíndricas. El significado de un vector es, por supuesto, independiente del sistema de coordenadas elegido para representar sus componentes. De manera similar, el estado de un sistema microscópico tiene un significado independiente de la base sobre la cual se expande.
+\par
+Para liberar los vectores de estado del significado coordenado, Paul Dirac introdujo lo que se convertiría en una notación inestimable en la mecánica cuántica; permite manipular el formalismo de la mecánica cuántica con mayor facilidad y claridad. Dirac introdujo los conceptos de \emph{kets, bras y bra-kets}, que veremos a continuación.
+\par
+\textbf{Kets: elementos de un espacio vectorial.}
+
+Paul Dirac estableció el vector de estado $\psi$ por el símbolo $\ket{\psi}$, al cual llamó vector \emph{ket}, o simplmente ket. Los kets pertencen al espacio (vectorial) de Hilbert $\mathcal{H}$, o en corto, al espacio de kets.
+\par
+\textbf{Bras: elementos del espacio dual.}
+
+Como se mencionó anteriormente, sabemos del álgebra lineal que un espacio dual puede asociarse con cada espacio vectorial. Dirac denotó los elementos de un espacio dual mediante el símbolo $\bra{ \, }$, al que llamó bra, o simplemente bra; por ejemplo, el elemento $\bra{\psi}$, representa un bra.
+\par
+\textit{Nota: } \emph{Para cualquier ket $\ket{\psi}$ existe un único bra $\bra{\psi}$ y viceversa}. Mientras los kets pertenecen al espacio de Hilbert $\mathcal{H}$, los correspondientes bras, pertenecen al espacio dual de Hilbert $\mathcal{H}_{d}$.
+\par
+\textbf{Bra-Ket: la notación de Dirac para el producto escalar.}
+
+Dirac estableció el producto escalar (producto interno) por el símbolo $\braket{\,}{\,}$, al que se le llama, \emph{bra-ket}. Por ejemplo, el producto escalar $(\phi, \psi)$ se escribe como el bra-ket $\braket{\phi}{\psi}$:
+\begin{equation}
+(\phi, \psi) \hspace{0.5cm} \longrightarrow \hspace{0.5cm} \braket{\phi}{\psi}
+\label{eq:ecuacion_02_24}
+\end{equation}
+\textbf{Nota: } Cuando un ket (o un bra) está multiplicado por un número complejo, se obtiene un ket (o un bra).
+
+\textbf{Observación:} En la mecánica de ondas tratamos con las funciones de onda $\psi(\va*{r}, t)$, pero en el formalismo más general de la mecánica cuántica tratamos con los kets abstractos $\ket{\psi}$. Las funciones de onda, como kets, son elementos de un espacio de Hilbert. Debemos tener en cuenta que, como una función de onda, un ket representa el sistema por completo, y por lo tanto, conociendo $\ket{\psi}$, significa que podemos conocer todas sus amplitudes en todas las representaciones posibles.
+\par
+Como se mencionó anteriormente, los kets son independientes de cualquier representación particular. No hay ninguna razón para seleccionar una base de representación particular, como la representación en el espacio de posición. Por supuesto, si queremos conocer la probabilidad de encontrar la partícula en alguna posición en el espacio, necesitamos elaborar el formalismo dentro de la representación coordinada. El vector de estado de esta partícula en el tiempo $t$ estará dado por la función de onda espacial $\braket{\va*{r}, t}{\psi} = \psi(\va*{r}, t)$. En la representación de coordenadas, el producto escalar $\braket{\phi}{\psi}$ está dado por
+\begin{equation}
+\braket{\phi}{\psi} = \int \phi^{*}(\va*{r}, t) \, \psi(\va*{r}, t) \dd[3]{r}
+\label{eq:ecuacion_02_25}
+\end{equation}
+De manera similar, si consideramos que el momento tridimensional de una partícula, el ket $\ket{\psi}$, tendrá que ser expresado en el espacio de momento. En este caso se describirá el estado de la partícula por una función de onda $\psi( \va*{p}, t)$, donde $\va*{p}$ es el momento de la partícula.
+\subsection*{Propiedades de los kets, bras y brakets.}
+\begin{enumerate}[label=\alph*)]
+\item \textbf{Para cualquier ket $\ket{\psi}$, hay en correspondencia, un único bra $\bra{\psi}$ y viceversa}:
+\begin{equation}
+\ket{\psi} \hspace{0.5cm} \longleftrightarrow \hspace{0.5cm} \bra{\psi}
+\label{eq:ecuacion_02_26}
+\end{equation}
+Existe una correspondencia uno a uno entre bras y kets:
+\begin{equation}
+a \, \ket{\psi} + b \, \ket{\phi} \hspace{0.5cm} \longleftrightarrow \hspace{0.5cm} a^{*} \, \bra{\psi}
++ b^{*} \, \bra{\phi} \label{eq:ecuacion_02_27}
+\end{equation}
+donde $a$ y $b$ son números complejos. La siguiente notación es muy común:
+\begin{equation}
+\ket{a \, \psi} =  a \, \ket{\psi}, \hspace{2cm} a \, \bra{\psi} = a^{*} \, \bra{\psi}
+\label{eq:ecuacion_02_28}
+\end{equation}
+\item \textbf{Propiedades del producto escalar.}
+
+En mecánica cuántica, dado que el producto escalar es un número complejo, el orden importa mucho. Debemos de tener cuidado para distinguir un producto escalar de su complejo conjugado; $\braket{\psi}{\phi}$ no es lo mismo que $\braket{\phi}{\psi}$:
+\begin{equation}
+\braket{\phi}{\psi}^{*} = \braket{\psi}{\phi}
+\label{eq:ecuacion_02_29}
+\end{equation}
+Esta propiedad se obtiene si la aplicamos a la ec. (\ref{eq:ecuacion_02_21}):
+\begin{equation}
+\braket{\phi}{\psi}^{*} = \left( \int \phi^{*} (\va*{r},t) \, \psi (\va*{r}, t) \dd[3]{x} \right)^{*} = \int \psi^{*} (\va*{r}, t) \, \phi (\va*{r}, t) \dd[3]{t} = \braket{\psi}{\phi}
+\label{eq:ecuacion_02_30}
+\end{equation}
+Donde $\bra{\psi}$ y $\bra{\phi}$ son reales, tendríamos $\braket{\psi}{\phi} = \braket{\phi}{\psi}$. A continuación se enlistan algunas propiedades adicionales del producto escalar:
+\begin{align}
+\braket{\psi}{a_{1} \, \psi_{1} + a_{2} \, \psi_{2}} &= a_{1} \, \braket{\psi}{\psi_{1}} + a_{2} \, \braket{\psi}{\psi_{2}} \label{ec:ecuacion_02_31} \\[1em]
+\braket{a_{1} \, \phi_{1} + a_{2} \, \phi_{2}}{\psi} &= a_{1}^{*} \, \braket{\phi_{1}}{\psi} + a_{2}^{*} \braket{\phi_{2}}{\psi} \label{ec:ecuacion_02_32} \\[1em]
+\begin{split}
+\braket{a_{1} \, \phi_{1} + a_{2} \, \phi_{2}}{b_{1} \, \psi_{1} + b_{2} \, \psi_{2}} &= a_{1}^{*} \, b_{1} \, \braket{\phi_{1}}{\psi_{1}} + a_{1}^{*} \, b_{2} \braket{\phi_{1}}{\psi_{2}} + \\
+&+ a_{2}^{*} \, b_{1} \, \braket{\phi_{2}}{\psi_{1}} + a_{2}^{*} \, b_{2} \, \braket{\phi_{2}}{\psi_{2}} 
+\end{split}
+\end{align}
+\item \textbf{La norma es real y positiva.}
+
+Para cualquier vector de estado $\ket{\psi}$ del espacio de Hilbert $\mathcal{H}$, la norma $\ip{a}{a}$ es real y positiva; $\ip{a}{a}$ es igual a cero solo para el caso donde $\ket{\psi} = \vb{0}$, donde $\vb{0}$ es el vector cero. Si el estado $\ket{\psi}$ está normalizado, entonces $\ip{\psi}{\psi} = 1$.
+\item \textbf{Desigualdad de Schwarz.}
+
+Para cualesquiera dos estados $\ket{\psi}$ y $\ket{\phi}$ del espacio de Hilbert, se puede demostrar que
+\begin{equation}
+\abs{\braket{\psi}{\phi}}^{2} \leq \ip{\psi}{\psi} \, \ip{\phi}{\phi}
+\label{eq:ecuacion_02_34}
+\end{equation}
+Si $\ket{\psi}$ y $\ket{\phi}$ son linealmente independientes (es decir, proporcional $\ket{\psi} = \alpha \, \ket{\phi}$, donde $\alpha$ es un escalar), esta relación se convierte en una igualdad. La desigualdad de Schwarz es análoga a la siguiente relación en el espacio real euclidiano:
+\begin{equation}
+\abs{\va*{A} \cdot \va*{B}}^{2} \leq \abs{\va*{A}}^{2} \: \abs{\va*{B}}^{2}
+\label{eq:ecuacion_02_35}
+\end{equation}
+\item \textbf{Desigualdad del triángulo.}
+
+\begin{equation}
+\sqrt{\braket{\psi + \phi}{\psi + \phi}} \leq \sqrt{\braket{\psi}{\psi}} + \sqrt{\braket{\phi}{\phi}}
+\label{eq:ecuacion_02_36}
+\end{equation}
+Si $\ket{\psi}$ y $\ket{\phi}$ son linealmente independientes, $\ket{\psi} = \alpha \, \ket{\phi}$, y si el escalar de proporción $\alpha$ es real y positivo, la desigualdad del triángulo, se convierte en una igualdad. La contraparte de esta desigualdad en el espacio euclidiano, está dado por
+\begin{align*}
+\abs{\va*{A} +  \va*{B}} \leq \abs{\va*{A}} + \abs{\va*{B}}
+\end{align*}
+\item \textbf{Estados ortogonales.}
+
+Dados dos kets $\ket{\psi}$ y $\ket{\phi}$, se dice que son ortogonales si su producto escalar se anula:
+\begin{equation}
+\braket{\psi}{\phi} = 0
+\label{eq:ecuacion_02_37}
+\end{equation}
+\item \textbf{Estados ortonormales.}
+
+Dados dos kets $\ket{\psi}$ y $\ket{\phi}$, se dice que son ortonormales si ortogonales y si cada uno de ellos tiene una norma unitaria:
+\begin{equation}
+\braket{\psi}{\phi} = 0, \hspace{1.5cm} \ip{\psi}{\psi} = 1, \hspace{1.5cm} \ip{\phi}{\phi} = 1
+\label{eq:ecuacion_02_38}
+\end{equation}
+\item \textbf{Cantidades prohibidas.}
+
+Si dos kets $\ket{\psi}$ y $\ket{\phi}$ pertenecen al mismo espacio vectorial (de Hilbert), los productos del tipo $\ket{\psi} \, \ket{\phi}$ y $\bra{\psi} \, \bra{\phi}$ están prohibidos.
+\par
+No tienen sentido, ya que no $\ket{\psi} \, \ket{\phi}$ y $\bra{\psi} \, \bra{\phi}$ no son ni kets ni bras (una ilustración explícita de esto se llevará a cabo en el siguiente ejemplo y más adelante, cuando discutamos la representación de forma discreta). Sin embargo, si $\ket{\psi}$ y $\ket{\phi}$ pertenecen a diferentes espacios vectoriales (por ejemplo, $\ket{\psi}$ pertenece a un espacio de spin y $\ket{\phi}$ a un espacio de momento angular orbital), entonces el producto $\ket{\psi} \, \ket{\phi}$, escrito como $\ket{\psi} \bigotimes \ket{\phi}$, representa un producto tensorial de $\ket{\psi}$ y $\ket{\phi}$. Sólo en estos casos típicos, tales productos tienen sentido.
+\end{enumerate}
+\subsection*{Interpretación física del producto escalar.}
+El producto escalar puede interpretarse de dos maneras:
+\begin{enumerate}[label=\arabic*)]
+\item En analogía con el producto escalar de vectores ordinarios en el espacio euclidiano, donde $\va*{A} \cdot \va*{B}$ representa la proyección de $\va*{B}$ sobre $\va*{A}$, el producto $\braket{\phi}{\psi}$ también representa la proyección de $\ket{\psi}$ sobre $\ket{\phi}$.
+\item En el caso de estados normalizados y de acuerdo con la interpretación probabilística de Bohr, la cantidad $\braket{\phi}{\psi}$, representa la amplitud de probabilidad que el estado del sistema $\ket{\psi}$ después de que se realice una medición en el sistema, se encontrará que se encuentra en otro estado $\ket{\phi}$.
+\end{enumerate}
+% \textbf{Ejercicios a cuenta: }
+% \begin{enumerate}[label=\roman*)]
+% \item Considera los dos estados
+% \begin{align*}
+% \ket{\psi_{1}} &= \ket{\phi_{1}} + 4 \, i \, \ket{\phi_{2}} + 5 \, \ket{\phi_{3}} \\
+% \ket{\psi_{2}} &= b \, \ket{\phi_{1}} + 4 \, \ket{\phi_{2}} - 3 \, i \, \ket{\phi_{3}}
+% \end{align*}
+% donde $\ket{\phi_{1}}$, $\ket{\phi_{2}}$, $\ket{\phi_{3}}$, son ortonormales, y $b$ es una constante. Calcula el valor de $b$, para el cual, $\ket{\psi_{1}}$ y $\ket{\psi_{2}}$ son ortogonales.
+% \item Si $\ket{\phi_{1}}$, $\ket{\phi_{2}}$, $\ket{\phi_{3}}$, son ortonormales, demuestra que los estados
+% \begin{align*}
+% \ket{\psi} &= i \, \ket{\phi_{1}} + 3 \, i \, \ket{\phi_{2}} - \ket{\phi_{3}} \\
+% \ket{\chi} &= \ket{\phi_{1}} - i \, \ket{\phi_{2}} + 5 \, i \, \ket{\phi_{3}}
+% \end{align*}
+% Satisfacen:
+% \begin{enumerate}[label=\alph*)]
+% \item la desigualdad del triángulo.
+% \item la desigualdad de Schwarz.
+% \end{enumerate}
+% \end{enumerate}
+\section{Operadores.}
+\subsection{Definiciones generales.}
+\textbf{Operador: } Un operador $\hat{A}$ es una \emph{regla matemática} que cuando se aplica a un ket $\ket{\psi}$, lo transforma en otro ket $\ket{\psi^{\prime}}$ del mismo espacio, y cuando el operador actúa sobre un bra $\bra{\phi}$, lo transforma en otro bra $\bra{\phi^{\prime}}$:
+\begin{equation}
+\hat{A} \, \ket{\psi} = \ket{\psi^{\prime}} \hspace{1.5cm} \bra{\phi} \, \hat{A} = \bra{\phi^{\prime}}
+\label{eq:ecuacion_02_51}
+\end{equation}
+Una definición similar se aplica para las funciones de onda:
+\begin{equation}
+\hat{A} \, \psi(\va*{r}) =  \psi^{\prime} (\va*{r}) \hspace{1.5cm} \phi(\va*{r}) \, \hat{A} =  \phi^{\prime} (\va*{r})
+\label{eq:ecuacion_02_52}
+\end{equation}
+Ejemplos de operadores:
+\begin{itemize}
+\item Operador unitario: deja cualquier ket sin cambios:
+\begin{align*}
+\hat{I} \, \ket{\psi} = \ket{\psi}
+\end{align*}
+\item El operador gradiente
+\begin{align*}
+\gradient \psi(\va*{r}) = \sum_{i} \pdv{\psi(\va*{r})}{\vu{e}_{i}}
+\end{align*}
+\item El operador de momento lineal
+\begin{align*}
+\va*{P} \, \psi(\va*{r}) =  - i \, \hbar \, \gradient \psi(\va*{r})
+\end{align*}
+\item El operador Laplaciano
+\begin{align*}
+\laplacian \psi(\va*{r}) = \sum_{i} \pdv[2]{\psi(\va*{r})}{x_{i}}
+\end{align*}
+\item El operador de paridad
+\begin{align*}
+\mathcal{P} \, \psi(\va*{r}) = \psi(- \va*{r}) 
+\end{align*}
+\end{itemize}
+
+\textbf{Producto entre operadores.}
+
+El producto de dos operadores es en general, no conmutativo
+\begin{equation}
+\hat{A} \, \hat{B} \neq \hat{B} \, \hat{A}
+\label{eq:ecuacion_02_53}
+\end{equation}
+El producto entre dos operadores es en general, asociativo
+\begin{equation}
+\hat{A} \, \hat{B} \, \hat{C} =  \hat{A} \, (\hat{B} \, \hat{C}) = (\hat{A} \, \hat{B}) \, \hat{C} 
+\label{eq:ecuacion_02_54}
+\end{equation}
+También se puede escribir:
+\begin{align*}
+\hat{A}^{n} \, \hat{A}^{m} = \hat{A}^{n + m}
+\end{align*}
+Cuando el producto $\hat{A} \, \hat{B}$ opera sobre un ket $\ket{\psi}$, el orden en el que se aplica, es importante: el operador $\hat{B}$ primero actúa en $\ket{\psi}$, luego entonces el operador $\hat{A}$ actúa en el nuevo ket $(B \, \ket{\psi}$
+\begin{equation}
+\hat{A} \, \hat{B} \, \ket{\psi} = \hat{A} \, (\hat{B} \, \ket{\psi})
+\label{eq:ecuacion_02_55}
+\end{equation}
+De manera similar, cuando el producto de $\hat{A} \, \hat{B} \, \hat{C} \, \hat{D}$ opera sobre un ket $\ket{\psi}$, primero actúa $\hat{D}$, luego $\hat{C}$, luego $\hat{B}$ y al final $\hat{A}$.
+\par
+Cuando un operador $\hat{A}$ está en medio de un bra $\bra{\phi}$ y un ket $\ket{\psi}$, devuelve en general un número complejo: $\bra{\phi} \, A \, \ket{\psi} =$ número complejo, el resultado puede ser un número real puro o un imaginario puro.
+\par
+En la evaluación de $\bra{\phi} \, A \, \ket{\psi}$, no importa si primero $\hat{A}$ opera sobre el ket, y luego opera sobre el braket, o si primero $\hat{A}$ aplica primero sobre el bra, y luego sobre el braket, es decir
+\begin{align*}
+(\bra{\phi} \, A) \, \ket{\psi} = \bra{\phi} \, (A \, \ket{\psi})
+\end{align*}
+\textbf{Operadores lineales.}
+
+Un operador $\hat{A}$ se dice que es lineal, si obedece la ley distributiva, y como en todos los operadores, conmuta con las constantes.
+\par
+Esto es, si para cualesquiera vectores $\ket{\psi_{1}}$ y $\ket{\psi_{2}}$ y cualesquiera números complejos $a_{1}$ y $a_{2}$, se tiene
+\begin{align}
+\hat{A} \, (a_{1} \, \ket{\psi_{1}} + a_{2} \, \ket{\psi_{2}}) &= a_{1} \, \hat{A} \, \ket{\psi_{1}} + a_{2} \, \hat{A} \, \ket{\psi_{2}} \label{eq:ecuacion_02_56} \\[1.75em]
+( \bra{\psi_{1}} \, a_{1} +  \bra{\psi_{2}} \, a_{2}) \, \hat{A} &= a_{1} \, \bra{\psi_{1}} \, \hat{A} + a_{2} \, \bra{\psi_{2}} \, \hat{A} \label{eq:ecuacion_02_57}
+\end{align}
+\newpage
+\textbf{Observaciones:}
+\begin{itemize}
+\item El \emph{valor esperado o promedio} $\langle{\hat{A}}\rangle$ de un operador $\hat{A}$ con respecto a un estado $\ket{\psi}$, está definido por:
+\begin{equation}
+\langle{\hat{A}}\rangle = \dfrac{\bra{\psi} \, \hat{A} \, \ket{\psi}}{\braket{\psi}{\psi}}
+\label{eq:ecuacion_02_58}
+\end{equation}
+\item La cantidad $\dyad{\phi}{\psi}$ (el producto de un ket con un bra), es un operador lineal en la notación de Dirac. Esto es, cuando $\dyad{\phi}{\psi}$ es aplicado a un ket $\ket{\psi^{\prime}}$, se obtiene otro ket:
+\begin{equation}
+\ket{\phi} \, \braket{\psi}{\psi^{\prime}} =  \braket{\psi}{\psi^{\prime}} \, \ket{\phi}
+\label{eq:ecuacion_02_59}
+\end{equation}
+donde $\braket{\psi}{\psi^{\prime}}$ es un número complejo.
+\item Los productos del tipo $\ket{\psi} \, \hat{A}$ y $\hat{A} \, \bra{\psi}$, es decir, cuando un operador está a la derecha de un ket o a la izquierda de un bra, los productos están prohibidos. No son operadores, ni kets, ni bras, no tienen sentido matemático ni físico.
+\end{itemize}
+\subsection{Operadores Hermitianos.}
+El operador Hermitiano o conjugado $\alpha^{\dagger}$, de un número complejo $\alpha$ es el conjugado complejo de este número: $\alpha^{\dagger} = \alpha^{*}$.
+\par
+El adjunto Hermitiano, o simplemente el adjunto $\hat{A}^{\dagger}$, de un operador $\hat{A}$, está definido por la relación:
+\begin{equation}
+\bra{\psi} \, \hat{A}^{\dagger} \, \ket{\psi} = \bra{\psi} \, \hat{A} \, \ket{\psi}^{*}
+\label{eq:ecuacion_02_60}
+\end{equation}
+\textbf{Propiedades de la regla del Hermitiano conjugado.}
+
+Para obtener el adjunto Hermitiano de cualquier expresión, debemos invertir cíclicamente el orden de los factores y hacer tres reemplazos:
+\begin{itemize}
+\item Reemplazar las constantes por sus conjugados complejos: $\alpha^{\dagger} = \alpha^{*}$
+\item Reemplazar los kets (bras) por los correspondientes bras (kets): $(\ket{\psi})^{\dagger} = \bra{\psi}$ y $(\bra{\psi})^{\dagger} = \ket{\psi}$
+\item Reemplazar los operadores por sus adjuntos.
+\end{itemize}
+Siguiendo estas reglas, podemos escribir:
+\begin{align}
+(\hat{A}^{\dagger})^{\dagger} &= \hat{A} \label{eq:ecuacion_02_61} \\
+(a \, \hat{A})^{\dagger} &= a^{*} \, \hat{A}^{\dagger} \label{eq:ecuacion_02_62} \\
+(\hat{A}^{n})^{\dagger} &= (\hat{A}^{\dagger})^{n} \label{eq:ecuacion_02_63} \\
+(\hat{A} + \hat{B} + \hat{C} + \hat{D})^{\dagger} &= \hat{A}^{\dagger} + \hat{B}^{\dagger} + \hat{C}^{\dagger} + \hat{D}^{\dagger} \label{eq:ecuacion_02_64} \\
+(\hat{A} \, \hat{B} \, \hat{C} \, \hat{D})^{\dagger} &= \hat{D}^{\dagger} \, \hat{C}^{\dagger} \, \hat{B}^{\dagger} \, \hat{A}^{\dagger} \label{eq:ecuacion_02_65} \\
+(\hat{A} \, \hat{B} \, \hat{C} \, \hat{D} \, \ket{\psi})^{\dagger} &= \bra{\psi} \, \hat{D}^{\dagger} \, \hat{C}^{\dagger} \, \hat{B}^{\dagger} \, \hat{A}^{\dagger} \label{eq:ecuacion_02_66}
+\end{align}
+El adjunto Hermitiano del operador $\dyad{\psi}{\phi}$ está dado por:
+\begin{equation}
+(\dyad{\psi}{\phi})^{\dagger} = \dyad{\phi}{\psi}
+\label{eq:ecuacion_02_67}
+\end{equation}
+Los operadores actúan dentro de los kets y bras, respectivamente como sigue
+\begin{equation}
+\ket{\alpha \, \hat{A} \, \psi} = \alpha \, \hat{A} \, \ket{\psi} \hspace{1.5cm} \bra{\alpha \, \hat{A} \, \psi} = \alpha^{*} \, \bra{\psi} \, \hat{A}^{\dagger} \label{eq:ecuacion_02_68}
+\end{equation}
+Nótese también que
+\begin{align*}
+\bra{\alpha \, \hat{A}^{\dagger} \, \psi} = \alpha^{*} \, \bra{\psi} (\hat{A}^{\dagger})^{\dagger} = \alpha^{*} \, \bra{\psi} \, \hat{A}
+\end{align*}
+Entonces, podemos escribir
+\begin{equation}
+\bra{\psi} \, \hat{A} \, \ket{\phi} = \braket{\hat{A}^{\dagger} \, \psi}{\phi} = \braket{\psi}{\hat{A} \, \phi}
+\label{eq:ecuacion_02_69}
+\end{equation}
+\textbf{Operadores Hermitianos y Hermitianos anti-simétricos.}
+Un operador $\hat{A}$ se dice que es Hermitiano si es igual a su adjunto $\hat{A}^{\dagger}$:
+\begin{align}
+\begin{aligned}
+\hat{A} &= \hat{A}^{\dagger}  \hspace{1cm} \mbox{ o } \\
+\bra{\psi} \, \hat{A} \, \ket{\phi} &= \bra{\phi} \, \hat{A} \, \ket{\psi}^{*}
+\end{aligned}
+\label{eq:ecuacion_02_70}
+\end{align}
+Por otro lado, un operador $\hat{B}$, se dice que es operador Hermitiano anti-simétrico o anti-Hermitiano, siempre
+\begin{align}
+\begin{aligned}
+\hat{B}^{\dagger} &= - \hat{B}  \hspace{1cm} \mbox{ o } \\
+\bra{\psi} \, \hat{B} \, \ket{\phi} &= - \bra{\phi} \, \hat{B} \, \ket{\psi}^{*}
+\end{aligned}
+\label{eq:ecuacion_02_71}
+\end{align}
+
+\textbf{Observación: }
+
+El adjunto Hermitiano de un operador, no es en general, igual a su complejo conjugado $\hat{A}^{\dagger} \neq \hat{A}^{*}$
+\subsection{Operador de proyección.}
+Un operador $\hat{P}$ se dice que es un \emph{operador de proyección} si es Hermitiano y es igual a su propio cuadrado:
+\begin{equation}
+\hat{P}^{\dagger} = \hat{P} \hspace{1.5cm} \hat{P}^{2} = \hat{P}
+\label{eq:ecuacion_02_76}
+\end{equation}
+El operador unitario $\hat{I}$ es un ejemplo directo de un operador de proyección, ya que 
+\begin{align*}
+\hat{I}^{\dagger} = \hat{I} \hspace{0.5cm} \hat{I}^{2} = \hat{I}
+\end{align*}
+\textbf{Propiedades de los operadores de proyección.}
+
+\begin{itemize}
+\item El producto de dos operadores $\hat{P}_{1}$ y $\hat{P}_{2}$, es también un operador de proyección, ya que
+\begin{align}
+\begin{aligned}
+(\hat{P}_{1} \, \hat{P}_{2})^{\dagger} &= \hat{P}_{2}^{\dagger} \, \hat{P}_{1}^{\dagger} = \hat{P}_{2} \, \hat{P}_{1} =  \hat{P}_{1} \, \hat{P}_{2} \\
+(\hat{P}_{1} \, \hat{P}_{2})^{2} &= \hat{P}_{1} \, \hat{P}_{2} \, \hat{P}_{1} \, \hat{P}_{2} = \hat{P}_{1}^{2} \, \hat{P}_{2}^{2} = \hat{P}_{1} \, \hat{P}_{2}
+\end{aligned}
+\label{eq:ecuacion_02_77}
+\end{align}
+\item La suma de dos operadores de proyección, en general no es un operador de proyección.
+\item Dos operadores de proyección se dice que son ortogonales si su producto es cero.
+\item Para que una suma de operadores de proyección $\hat{P}_{1} + \hat{P}_{2} + \hat{P}_{3} + \ldots$ sea un operador de proyección, es necesario y suficiente que estos operadores de proyección sean ortogonales entre sí (es decir, los términos del producto cruzado deben anularse).
+\end{itemize}
+\subsection{Álgebra de conmutadores.}
+El conmutador de dos operadores $\hat{A}$  y $\hat{B}$, que se escribe como $[\hat{A}, \hat{B}]$, se define como
+\begin{equation}
+[\hat{A}, \hat{B}] = \hat{A} \, \hat{B} - \hat{B} \, \hat{A}
+\label{eq:ecuacion_02_79}
+\end{equation}
+y el anticonmutador $\{ \hat{A}, \hat{B} \}$, se define como
+\begin{equation}
+\{ \hat{A}, \hat{B} \} = \hat{A} \, \hat{B} + \hat{B} \, \hat{A}
+\label{eq:ecuacion_02_80}
+\end{equation}
+Dos operadores se dice que conmutan si su conmutador es igual a cero, por tanto
+\begin{align*}
+\hat{A} \, \hat{B} = \hat{B} \, \hat{A}
+\end{align*}
+Cualquier operador conmuta consigo mismo
+\begin{equation}
+[\hat{A}, \hat{A}] = 0
+\label{eq:ecuacion_02_81}
+\end{equation}
+Nótese que si dos operadores son Hermitianos y su producto es también Hermitiano, entonces esos operadores conmutan:
+\begin{equation}
+(\hat{A} \, \hat{B})^{\dagger} = \hat{B}^{\dagger} \, \hat{A}^{\dagger} = \hat{B} \, \hat{A}
+\label{eq:ecuacion_02_82}
+\end{equation}
+y como $(\hat{A} \, \hat{B})^{\dagger} = \hat{A} \, \hat{B}$, tenemos $\hat{A} \, \hat{B} = \hat{B} \, \hat{A}$
+\par
+Como ejemplo, podemos mencionar a los conmutadores que involucran el operador de posición en el eje $x$, $\hat{X}$, y el operador de momento en la componente $x$, $\hat{P}_{x} = - i \, \hbar \, \pdv*{x}$, así como las componentes en $y$ y $z$:
+\begin{align}
+\begin{aligned}
+[\hat{X}, \hat{P}_{x}] &= i \, \hbar \, \hat{I} \\
+[\hat{Y}, \hat{P}_{y}] &= i \, \hbar \, \hat{I} \\
+[\hat{Z}, \hat{P}_{z}] &= i \, \hbar \, \hat{I}
+\end{aligned}
+\label{eq:ecuacion_02_83}
+\end{align}
+donde $\hat{I}$ es el operador unitario.
+
+\textbf{Propiedades de los conmutadores.}
+
+Usando la relación de conmutadores (\ref{eq:ecuacion_02_79}), se pueden establecer las siguientes propiedades:
+\begin{itemize}
+\item Antisimetría:
+\begin{equation}
+[\hat{A}, \hat{B}] = - [\hat{B}, \hat{A}]
+\label{eq:ecuacion_02_84}
+\end{equation}
+\item Linealidad:
+\begin{equation}
+[\hat{A} + \hat{B} + \hat{C} + \hat{D} + \ldots] = [\hat{A} , \hat{B}] + [\hat{A} , \hat{C}] + [\hat{A} , \hat{D}] + \ldots
+\label{eq:ecuacion_02_85} 
+\end{equation}
+\item Conjugado Hermitiano de un conmutador:
+\begin{equation}
+[\hat{A}, \hat{B}]^{\dagger} = [\hat{B}^{\dagger}, \hat{A}^{\dagger}]
+\label{eq:ecuacion_02_86}
+\end{equation}
+\item Distribución:
+\begin{align}
+[\hat{A},  \hat{B} \, \hat{C}] &= [\hat{A} , \hat{B}] \,  \hat{C} + \hat{B} \, [\hat{A} , \hat{C}]
+\label{eq:ecuacion_02_87} \\[1em]
+[\hat{A} \, \hat{B} , \hat{C}] &= \hat{A} \,[ \hat{B} ,  \hat{C}] + [\hat{A} , \hat{C}] \, \hat{B}
+\label{eq:ecuacion_02_88}
+\end{align}
+\item Identidad de Jacobi:
+\begin{equation}
+[\hat{A},  [\hat{B} , \hat{C}]] = [\hat{B}, [\hat{C} , \hat{A}]] + [\hat{C},  [\hat{A} , \hat{B}]] = 0
+\label{eq:ecuacion_02_89}
+\end{equation}
+\item Repitiendo la aplicación de (\ref{eq:ecuacion_02_87}), podemos ver que
+\begin{align}
+[\hat{A},  \hat{B}^{n}] = \sum_{j=0}^{n-1} \hat{B}^{j} \, [\hat{A},  \hat{B}] \, \hat{B}^{n-j-1} \label{eq:ecuacion_02_90} \\
+[\hat{A}^{n},  \hat{B}] = \sum_{j=0}^{n-1} \hat{A}^{n-j-1} \, [\hat{A},  \hat{B}] \, \hat{A}^{j} \label{eq:ecuacion_02_91}
+\end{align}
+\item Los operadores conmutan con escalares: un operador $\hat{A}$ conmuta con cualquier escalar $b$:
+\begin{equation}
+[ \hat{A}, b ] = 0
+\label{eq:ecuacion_02_92}
+\end{equation}
+\end{itemize}
+% \textbf{Ejercicios a cuenta:}
+% \begin{enumerate}
+% \item Demuestra que el conmutador de dos operadores Hermitianos es antiHermitiano.
+% \item Evalúa el conmutador:
+% \begin{align*}
+% [ \hat{A}, [\hat{B}, \hat{C}] \, \hat{D} ]
+% \end{align*}
+% \end{enumerate}
+\subsection{Relación de incertidumbre entre dos operadores.}
+Una aplicación interesante del álgebra de conmutadores es obtener la relación general dadas las incertidumbres de dos operadores: $\hat{A}$ y $\hat{B}$. En particular, queremos obtener una derivación formal de la incertidumbre de Heisenberg.
+\par
+Sean $\langle \hat{A} \rangle$ y $ \langle \hat{B} \rangle$ que representan los valores esperados de dos operadores Hermitianos $\hat{A}$ y $\hat{B}$, con respecto a un vector de estado normalizado 
+\begin{align*}
+\ket{\psi}: \langle \hat{A} \rangle &= \bra{\psi} \, \hat{A} \, \ket{\psi} \\
+\langle \hat{B} \rangle &= \bra{\psi} \, \hat{B} \, \ket{\psi}
+\end{align*}
+Sean los operadores $\Delta \hat{A}$ y $\Delta \hat{B}$, tales que:
+\begin{align}
+\begin{aligned}
+\Delta \hat{A} &= \hat{A} - \langle \hat{A} \rangle \\
+\Delta \hat{B} &= \hat{B} - \langle \hat{B} \rangle
+\end{aligned}
+\label{eq:ecuacion_02_95}
+\end{align}
+tenemos que
+\begin{align*}
+(\Delta \hat{A})^{2} &= \hat{A}^{2} - 2 \, \hat{A} \, \langle \hat{A} \rangle + \langle \hat{A} \rangle^{2} \\
+(\Delta \hat{B})^{2} &= \hat{B}^{2} - 2 \, \hat{B} \, \langle \hat{B} \rangle + \langle \hat{B} \rangle^{2}
+\end{align*}
+y de aquí
+\begin{align}
+\begin{aligned}
+\bra{\psi} \, (\Delta \hat{A}^{2}) \, \ket{\psi} &= \langle (\Delta \hat{A})^{2} \rangle = \langle \hat{A}^{2} \rangle - \langle \hat{A} \rangle \\[0.5em]
+\langle (\Delta \hat{B}^{2}) \rangle &= \langle \hat{B^{2}} \rangle - \langle \hat{B} \rangle^{2}
+\end{aligned}
+\label{eq:ecuacion_02_96}
+\end{align}
+donde
+\begin{align*}
+\langle \hat{A}^{2} \rangle &= \bra{\psi} \, \hat{A}^{2} \, \ket{\psi} \\[0.5em]
+\langle \hat{B}^{2} \rangle &= \bra{\psi} \, \hat{B}^{2} \, \ket{\psi}
+\end{align*}
+Las incertidumbres $\Delta \hat{A}$ y $\Delta \hat{B}$ están definidas por
+\begin{empheq}[box=\fbox]{align}
+\begin{aligned}
+\Delta \hat{A} &= \sqrt{\langle (\Delta \hat{A})^{2} \rangle} = \sqrt{\langle \hat{A}^{2} \rangle - \langle \hat{A} \rangle^{2}} \\[1em]
+\Delta \hat{B} &= \sqrt{\langle (\Delta \hat{B})^{2} \rangle} = \sqrt{\langle \hat{B}^{2} \rangle - \langle \hat{B} \rangle^{2}}
+\end{aligned}
+\label{eq:ecuacion_02_97}
+\end{empheq}
+Escribamos la acción de los operadores (\ref{eq:ecuacion_02_95}) en cualquier estado $\ket{\psi}$ como se indica a continuación:
+\begin{align}
+\begin{aligned}
+\ket{\chi} &= \Delta \hat{A} \, \ket{\psi} = \left( \hat{A} - \langle \hat{A} \rangle \right) \, \ket{\psi} \\
+\ket{\phi} &= \Delta \hat{B} \, \ket{\psi} = \left( \hat{B} - \langle \hat{B} \rangle \right) \, \ket{\psi}
+\end{aligned}
+\label{eq:ecuacion_02_98}
+\end{align}
+La desigualdad de Schwarz para los estados $\ket{\chi}$ y $\ket{\psi}$, está dada por
+\begin{equation}
+\braket{\chi}{\chi} \, \braket{\phi}{\phi} \geq \abs{\braket{\chi}{\phi}}^{2}
+\label{eq:ecuacion_02_99}
+\end{equation}
+Como $\hat{A}$ y $\hat{B}$ son Hermitianos, $\Delta \hat{A}$ y $\Delta \hat{B}$ deben de ser Hermitianos:
+\begin{align*}
+\Delta \hat{A}^{\dagger} &= \hat{A}^{\dagger} - \langle \hat{A} \rangle = \hat{A} - \langle \hat{A} \rangle = \Delta \hat{A} \\[0.5em]
+\Delta \hat{B}^{\dagger} &= \hat{B} - \langle \hat{B} \rangle = \Delta \hat{B}
+\end{align*}
+Entonces, será posible demostrar las siguientes tres relaciones:
+\begin{align}
+\begin{aligned}
+\braket{\chi}{\chi} &= \bra{\psi} \, (\Delta \hat{A})^{2} \, \ket{\psi} \\
+\braket{\phi}{\phi} &= \bra{\psi} \, (\Delta \hat{B})^{2} \, \ket{\psi} \\
+\braket{\chi}{\phi} &= \bra{\psi} \, \Delta \hat{A} \, \Delta \hat{B} \, \ket{\psi}
+\end{aligned}
+\label{eq:ecuacion_02_100}
+\end{align}
+Por ejemplo, ya que $\Delta \hat{A}^{\dagger} = \Delta \hat{A}$, tenemos que
+\begin{align*}
+\braket{\chi}{\chi} = \bra{\psi} \, \Delta \hat{A}^{\dagger} \, \Delta \hat{A} \, \ket{\psi} = \bra{\psi} \, (\Delta \hat{A})^{2} \, \ket{\psi} = \langle (\Delta \hat{A})^{2} \rangle
+\end{align*}
+Por lo que la desigualdad de Schwarz (eq. \ref{eq:ecuacion_02_99}),
+\begin{equation}
+\langle (\Delta \hat{A})^{2} \rangle \, \langle (\Delta \hat{B})^{2} \rangle \geq \abs{\langle \Delta \hat{A} \, \Delta \hat{B}\rangle}^{2} 
+\label{eq:ecuacion_02_101}
+\end{equation}
+Nótese que el último término $\Delta \hat{A} \, \Delta \hat{B}^{2}$ de la ecuación, se puede escribir como
+\begin{align}
+\begin{aligned}
+\Delta \hat{A} \, \Delta \hat{B} &= \dfrac{1}{2} \left[ \Delta \hat{A} , \Delta \hat{B} \right] + \dfrac{1}{2} \left\{ \Delta \hat{A} , \Delta \hat{B} \right\} = \\[0.5em]
+&= \dfrac{1}{2}  \left[ \hat{A} , \hat{B} \right] + \dfrac{1}{2} \left\{ \Delta \hat{A} , \Delta \hat{B} \right\}
+\end{aligned}
+\label{eq:ecuacion_02_102}
+\end{align}
+donde hemos utilizado el hecho de que $[\Delta \hat{A},\Delta \hat{B}]= [\hat{A}, \hat{B}]$. Como $[\hat{A}, \hat{B}]$ es antiHermitiano y $\left\{ \Delta \hat{A},\Delta \hat{B} \right\}$ es Hermitiano, además el valor esperado de un operador Hermitiano es real, mientras que el valor esperado de un operador antiHermitiano es imaginario, el valor esperado $\langle \Delta \hat{A}, \Delta \hat{B} \rangle$ de la ec. (\ref{eq:ecuacion_02_102}) es igual a la suma de la parte real y la parte imaginaria
+\begin{align*}
+\langle \Delta \hat{A} \, \Delta \hat{B} \rangle = \dfrac{\langle \left\{ \Delta \hat{A},\Delta \hat{B} \right\} \rangle}{2} + \dfrac{\langle [\hat{A}, \hat{B}] \rangle}{2}
+\end{align*}
+por lo que
+\begin{equation}
+\abs{ \langle \Delta \hat{A} \, \Delta \hat{B} \rangle}^{2} = \dfrac{1}{4} \abs{\langle \left[ \hat{A}, \hat{B} \right] \rangle}^{2} + \dfrac{1}{4} \abs{ \langle \left\{ \Delta \hat{A}, \Delta \hat{B}] \right\} \rangle}^{2}
+\label{eq:ecuacion_02_103}
+\end{equation}
+Ya que el último término es un número positivo real, podemos inferir la siguiente relación
+\begin{equation}
+\abs{ \langle \Delta \hat{A} \, \Delta \hat{B} \rangle}^{2} \geq \dfrac{1}{4} \abs{\langle \left[ \hat{A}, \hat{B} \right] \rangle}^{2}
+\label{eq:ecuacion_02_104}
+\end{equation}
+Comparando las ecuaciones (\ref{eq:ecuacion_02_101}) y (\ref{eq:ecuacion_02_104}), concluimos que
+\begin{equation}
+\langle (\Delta \hat{A})^{2} \rangle \, \langle (\Delta \hat{B})^{2} \rangle \geq \dfrac{1}{4} \abs{\langle \left[ \hat{A}, \hat{B} \right] \rangle}^{2}
+\label{eq:ecuacion_02_105}
+\end{equation}
+que al tomar la raíz cuadrada, se puede reducir a
+\begin{equation}
+\Delta \hat{A} \, \Delta \hat{B} \geq \dfrac{1}{2} \abs{\langle [ \hat{A}, \hat{B} ] \rangle}
+\label{eq:ecuacion_02_106}
+\end{equation}
+Esta relación es importante en el formalismo de la mecánica cuántica. Su uso con los operadores de posición y momento, nos conducen a la relación de incertidumbre de Heisenberg.
+\subsection{Funciones de operadores.}
+Sea $F(\hat{A})$ una función de un operador $\hat{A}$. Si $\hat{A}$ es un operador lineal, podemos expandir con un desarrollo en series de Taylor a $F(\hat{A})$:
+\begin{equation}
+F(\hat{A}) = \sum_{n=0}^{\infty} a_{n} \, \hat{A}^{n}
+\label{eq:ecuacion_02_108}
+\end{equation}
+donde los $a_{n}$ son los coeficientes de la expansión. Como ejemplo de operadores de una función, considera $\exp(a \, \hat{A})$, donde $a$ es un escalar, el cual puede ser complejo o real. La expansión se puede desarrollar como sigue:
+\begin{equation}
+\exp(a \, \hat{A}) = \sum_{n=0}^{\infty} \dfrac{a^{n}}{n!} \, \hat{A} = \hat{I} + a \, \hat{A} + \dfrac{a^{2}}{2!} \, \hat{A}^{2} + \dfrac{a^{1}}{3!} \, \hat{A}^{3} + \ldots
+\label{eq:ecuacion_02_109}
+\end{equation}
+\subsection*{Conmutadores que involucran funciones de operadores.}
+Si $\hat{A}$ conmuta con otro operador $\hat{B}$, entonces el operador $\hat{B}$ conmuta con cualquier otra función de operadores que dependa de $\hat{A}$:
+\begin{equation}
+[\hat{A}, \hat{B}] = 0 \hspace{1cm} \Longrightarrow \hspace{1cm} [\hat{B}, F(\hat{A})] = 0
+\label{eq:ecuacion_02_110}
+\end{equation}
+En particular, $F(\hat{A})$ conmuta con $\hat{A}$ y con cualquier otra función $G(\hat{A})$ que dependa de $\hat{A}$, es decir:
+\begin{equation}
+[\hat{A}, F(\hat{A})] = 0 \hspace{0.5cm} [\hat{A}^{n}, F(\hat{A})]= 0 \hspace{0.5cm} [F(\hat{A}), G(\hat{A})] = 0
+\label{eq:ecuacion_02_111}
+\end{equation}
+\subsection*{Adjunto Hermitiano de una función de operadores.}
+El adjunto de $F(\hat{A})$ está dado por
+\begin{equation}
+[F(\hat{A})]^{\dagger} = F^{*}(\hat{A}^{\dagger})
+\label{eq:ecuacion_02_112}
+\end{equation}
+Nótese que si $\hat{A}$ es Hermitiano, $F(\hat{A})$ no necesariamente es Hermitiano; $F(\hat{A})$ será Hermitiano sólo si $F$ es una función real y $\hat{A}$ es Hermitiano. Un ejemplo es:
+\begin{align}
+\begin{aligned}
+\left( \exp(\hat{A}) \right)^{\dagger} &= \exp(\hat{A}^{\dagger}) \\[1em]
+\left( \exp(i \, \hat{A}) \right)^{\dagger} &= \exp(-i \, \hat{A}^{\dagger}) \\[1em]
+\left( \exp(i \, \alpha \, \hat{A}) \right)^{\dagger} &= \exp(-i \, \alpha^{*} \, \hat{A}^{\dagger})
+\end{aligned}
+\label{eq:ecuacion_02_113}
+\end{align}
+donde $\alpha$ es un número complejo.
+\par
+Si $\hat{A}$ es Hermitiano, una función de operadores puede expandirse como
+\begin{align*}
+F(\hat{A}) = \sum_{n=0}^{\infty} a_{n} \, \hat{A}^{n}
+\end{align*}
+será Hermitiana sólo si en la expansión los coeficientes $a_{n}$ son números reales. Pero en general, $F(\hat{A})$ es no Hermitiano, aún así $\hat{A}$ sea Hermitiano, ya que
+\begin{equation}
+F^{*}(\hat{A}^{\dagger}) = \sum_{n=0}^{\infty} a_{n}^{*} \, (\hat{A}^{\dagger})^{n}
+\label{eq:ecuacion_02_114}
+\end{equation}
+\subsection*{Relaciones que involcuran funciones de operadores.}
+Nótese que
+\begin{equation}
+[\hat{A}, \hat{B}] \neq 0 \hspace{1cm} \Longrightarrow \hspace{1cm} [\hat{B} , F(\hat{A}) ] \neq 0
+\label{eq:ecuacion_02_115}
+\end{equation}
+en particular
+\begin{align*}
+\exp(\hat{A}) \, \exp(\hat{B}) \neq \exp(\hat{A} + \hat{B})
+\end{align*}
+Usando la ec. (\ref{eq:ecuacion_02_109}) podemos determinar que
+\begin{align}
+\exp(\hat{A}) \, \exp(\hat{B}) &= \exp(\hat{A} + \hat{B}) \, \exp([\hat{A}, \hat{B}]/2) \label{eq:ecuacion_02_116} \\[1em]
+\exp(\hat{A}) \, \hat{B} \, \exp(\hat{-A}) &= \hat{B} + [\hat{A}, \hat{B}] + \dfrac{1}{2!} [\hat{A}, [\hat{A}, \hat{B}]] + \dfrac{1}{3!} [\hat{A}, [ \hat{A}, [\hat{A}, \hat{B}]]] + \ldots \label{eq:ecuacion_02_117}
+\end{align}
+
+\end{document}
