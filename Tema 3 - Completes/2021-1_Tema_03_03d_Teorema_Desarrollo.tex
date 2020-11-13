@@ -1,0 +1,386 @@
+\input{../Preambulos/preambulo_presentacion_Warsaw_crane}
+\title{\large{Teorema del Desarrollo}}
+\subtitle{Ejercicios}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\section{Teorema del desarrollo}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Introducción}
+\begin{frame}
+\frametitle{Introducción}
+En mecánica cuántica (MQ) las cantidades físicas se representan mediante operadores hermíticos y lineales, en general, la representación de estos se realiza mediante espacios vectoriales abstractos, sin embargo, para poder realizar cálculos se requiere hacer uso de una base vectorial.
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+El teorema del desarrollo nos permite representar a un operador en una base determinada y al mismo tiempo, podemos hacer uso de éste, para representar estados.
+\\
+\bigskip
+\pause
+El formalismo puede ser heredado al electromagnetismo y emplearlo para resolver ecuaciones diferenciales no homógeneas.
+\end{frame}
+\section{Notación de Dirac}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Bras y Kets}
+\begin{frame}
+\frametitle{Vectores y matrices}
+Consideraremos una contracción de vectores y matrices de la siguiente manera:
+\begin{equation}
+\resizebox{0.6\hsize}{!}{%
+$\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{m}{3}{3}) \, \smqty(\xmat*{b}{3}{1})$%
+}
+\label{eq:ecuacion_01}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+Por otra parte, un producto interno entre vectores lo podemos escribir como:
+\begin{equation}
+\resizebox{0.35\hsize}{!}{%
+$\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{b}{3}{1})$%
+}
+\label{eq:ecuacion_02}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+La forma de operar las ecs. (\ref{eq:ecuacion_01}) y (\ref{eq:ecuacion_02}) es conocida, en ambos casos el resultado es un escalar, sin embargo, escribamos ambas expresiones mediante notación de índices:
+\begin{equation}
+\resizebox{0.5\hsize}{!}{%
+$\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{m}{3}{3}) \, \smqty(\xmat*{b}{3}{1})$%
+} \Rightarrow \sum_{ij} m_{j}^{i} \, a^{j} \, b_{i} = m_{j}^{i} \, a^{j} \, b_{i} 
+\label{eq:ecuacion_03}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+Para el producto interno
+\begin{equation}
+\resizebox{0.25\hsize}{!}{%
+$\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{b}{3}{1})$%
+} \Rightarrow \sum_{ij} a^{j} \, b_{i} = a^{j} \, b_{i}
+\label{eq:ecuacion_04}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+En las Ec.(\ref{eq:ecuacion_03}) y (\ref{eq:ecuacion_04}) tenemos la suma sobre todos los índices para obtener un escalar al mismo tiempo notamos que las componentes vectoriales tienen esta representación:
+\pause
+\begin{align}
+\begin{aligned}
+\resizebox{0.1\hsize}{!}{%
+$\smqty(\xmat*{b}{3}{1})$%
+} &\Rightarrow b_{j} \hspace{0.5cm} \mbox{vector covariante}
+\\[0.5em]
+\resizebox{0.15\hsize}{!}{%
+$\smqty(\xmat*{a}{1}{3})$%
+} &\Rightarrow a^{i} \hspace{0.5cm} \mbox{vector contravariante}
+\end{aligned}
+\label{eq:ecuacion_05}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+Es decir, tenemos que los vectores fila (renglón) son elementos del espacio vectorial (espacio dual) y derivado de esto, las matriz de la ecs.(\ref{eq:ecuacion_01}) y (\ref{eq:ecuacion_03}) están formadas por una combinación entre ambos: el espacio vectorial y su espacio dual.
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+La notación de índices permite manejar en forma compacta las ecs. (\ref{eq:ecuacion_01}) y (\ref{eq:ecuacion_02}), no obstante, la información de los objetos matemáticos se da a través de sus componentes, lo que las hace dependientes de la base en la cual son escritos.
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+El siguiente paso consiste en utilizar una notación independiente de la base en la cual estos objetos son escritos:
+\begin{align}
+\begin{aligned}
+\resizebox{0.1\hsize}{!}{%
+$\smqty(\xmat*{b}{3}{1})$%
+} &\Rightarrow b_{j} \hspace{0.5cm} \Rightarrow \ket{b} \hspace{0.5cm} \mbox{ket}
+\\[0.5em]
+\resizebox{0.15\hsize}{!}{%
+$\smqty(\xmat*{a}{1}{3})$%
+} &\Rightarrow a^{i} \hspace{0.5cm} \Rightarrow \bra{a} \hspace{0.5cm} \mbox{bra}
+\end{aligned}
+\label{eq:ecuacion_06}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+En la ec.(\ref{eq:ecuacion_06}) los \emph{vectores covariantes se representan mediante un ket}, mientras que los vectores \emph{contravariantes se representan mediante un bra} y no se hace referencia a la base en la que estos vectores son escritos.
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+Esta asignación es la que comúnmente se hace en los textos de MQ, sin embargo, tiene su correspondiente respaldo matemático en el teorema de representación de Riesz.
+\end{frame}
+\begin{frame}
+\frametitle{Vectores y matrices}
+Usando ésta notación el producto interno de la ec.(\ref{eq:ecuacion_04}) puede escribirse como:
+\begin{equation}
+\resizebox{0.25\hsize}{!}{%
+$\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{b}{3}{1})$%
+} \Rightarrow a^{j} \, b_{i} \hspace{0.5cm} \Rightarrow \braket{a}{b}
+\label{eq:ecuacion_07}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Producto tensorial}
+Para escribir las matrices necesitamos hacer referencia al producto tensorial, este tipo de productos se puede aplicar entre dos tensores de distintos rangos para generar un nuevo tensor, cuyo rango es igual a la suma de los dos anteriores.
+\end{frame}
+\begin{frame}
+\frametitle{Producto tensorial}
+Un ejemplo es el siguiente:
+\fontsize{12}{12}\selectfont
+\begin{align}
+\va{a} \otimes \va{b} = 
+\mqty(a_{1} \\ a_{2} \\ a_{3}) \otimes \mqty(b_{1} & b_{2} & b_{3}) = \mqty(
+a_{1} b_{1} & a_{1} b_{2} & a_{1} b_{3} \\
+a_{2} b_{1} & a_{2} b_{2} & a_{2} b_{3} \\
+a_{3} b_{1} & a_{3} b_{2} & a_{3} b_{3}
+)
+\label{eq:ecuacion_08}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Producto tensorial}
+En la ec.(\ref{eq:ecuacion_08}) hemos construido un tensor de rango 2 usando dos tensores de rango 1, usando la notación de Dirac reescribimos la misma ec.(\ref{eq:ecuacion_08}):
+\pause
+\fontsize{12}{12}\selectfont
+\begin{align}
+\mqty(a_{1} \\ a_{2} \\ a_{3}) \otimes \mqty(b_{1} & b_{2} & b_{3}) = \mqty(
+a_{1} b_{1} & a_{1} b_{2} & a_{1} b_{3} \\
+a_{2} b_{1} & a_{2} b_{2} & a_{2} b_{3} \\
+a_{3} b_{1} & a_{3} b_{2} & a_{3} b_{3}
+) = \ket{a} \bra{b}
+\label{eq:ecuacion_09}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Producto tensorial}
+De ese modo, se puede construir una matriz usando como base el producto tensorial de dos bases vectoriales, para ello requerimos analizar un elemento extra, consideramos una base vectorial discreta $\left\{ \ket{\varphi_{n}} \right\} $ y realizamos el siguiente producto $\ket{\varphi_{n}} \bra{\varphi_{n}}$:
+\end{frame}
+\begin{frame}
+\frametitle{Producto tensorial}
+Ahora tomamos la suma sobre cada producto:
+\begin{align}
+\sum_{n} \ket{\varphi_{n}} \bra{\varphi_{n}}
+\label{eq:ecuacion_10}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Operador identidad}
+Sea $\mathbf{1}$ el operador identidad, cuando la Ec.(\ref{eq:ecuacion_10}) satisface la siguiente condición:
+\begin{align}
+\sum_{n} \ket{\varphi_{n}} \bra{\varphi_{n}} = \mathbf{1}
+\label{eq:ecuacion_11}
+\end{align}
+diremos que la base es completa.
+\end{frame}
+\begin{frame}
+\frametitle{Base completa}
+Sin pérdida de generalidad podemos pedir la condición:
+\begin{align*}
+\braket{\varphi_{n}}{\varphi_{m}} = \delta_{nm}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Base completa}
+Un ejemplo de base completa, es la base canónica de $\mathbb{R}^{3}$:
+\fontsize{12}{12}\selectfont
+\begin{eqnarray*}
+&\sum_{n=1}^{3}& \ket{x_{n}} \bra{x_{n}} = \ket{x} \bra{x} + \ket{y} \bra{y} + \ket{z} \bra{z} = \\[0.5em] \pause
+&=& \! \! \! \! \mqty(1 \\ 0 \\ 0) \mqty(1 & 0 & 0) + \mqty(0 \\ 1 \\ 0) \mqty(0 & 1 & 0) + \mqty(0 \\ 0 \\ 1) \mqty(0 & 0 & 1) =
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Base completa}
+\fontsize{12}{12}\selectfont
+\begin{eqnarray*}
+&{}&\mqty(
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+) +
+\mqty(
+0 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 0
+) + 
+\mqty(
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 1
+) = \\[0.5em] \pause
+&=& \mqty(
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+)  
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Base completa}
+En este caso hemos obtenido la matriz identidad de $\mathbb{R}^{3}$, ahora usamos este resultado para representar una matriz mediante la notación de Dirac.
+\end{frame}
+\section{Teorema del desarrollo}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Fundamento}
+\begin{frame}
+\frametitle{Introducción}
+Sea $\mathbf{M}$ un operador, construiremos una representación de este objeto matemático en términos de una base finita, usamos el operador unidad de la siguiente manera:
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+\fontsize{12}{12}\selectfont
+\begin{eqnarray}
+\begin{aligned}[b]
+\mathbf{M} &= \underbrace{\mathbf{1 \, M \, 1} =  \left( \sum_{m=1}^{n} \ket{\varphi_{m}} \bra{\varphi_{m}} \right) \, \mathbf{M} \, \left( \sum_{l=1}^{n} \ket{\varphi_{l}} \bra{\varphi_{l}} \right)}_{\text{usando una base completa}} = \\[0.5em] \pause
+&= \sum_{m=1}^{n} \sum_{l=1}^{n} \ket{\varphi_{m}} \bra{\varphi_{m}} \, \mathbf{M} \, \ket{\varphi_{l}} \bra{\varphi_{l}} = \\[0.5em] \pause
+&= \sum_{m=1}^{n} \sum_{l=1}^{n} \underbrace{\left\{ \bra{\varphi_{m}} \, \mathbf{M} \, \ket{\varphi_{l}} \right\}}_{\text{Ver nota*}} \, \ket{\varphi_{m}} \bra{\varphi_{l}} =
+\end{aligned}
+\nonumber
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+\fontsize{12}{12}\selectfont
+\begin{eqnarray}
+\begin{aligned}[b]
+&= \sum_{m=1}^{n} \sum_{l=1}^{n} \underbrace{\left\{ \bra{\varphi_{m}} \, \mathbf{M} \, \ket{\varphi_{l}} \right\}}_{\text{Ver nota*}} \, \ket{\varphi_{m}} \bra{\varphi_{l}} = \\[0.5em] \pause
+&= \sum_{m=1}^{n} \sum_{l=1}^{n} \mathbf{M}_{ml} \ket{\varphi_{m}} \bra{\varphi_{l}} = \\[0.5em] \pause
+&= \mathbf{M}_{ml} \ket{\varphi_{m}} \bra{\varphi_{l}}
+\end{aligned}
+\label{eq:ecuacion_12}
+\end{eqnarray}
+\textbf{Nota*: } El término entre llaves es un número complejo correspondiente a las componentes matriciales en esta base.
+\\
+\bigskip
+\pause
+La ec.(\ref{eq:ecuacion_12}) es conocida como \emph{el teorema del desarrollo}.
+\end{frame}
+\begin{frame}
+\frametitle{Teorema del desarrollo}
+ Por otro lado, podemos usar este teorema para representar un vector cualquiera en una base arbitraria:
+\begin{eqnarray}
+\begin{aligned}[b]
+\ket{\alpha} = \mathbf{1} \, \ket{\alpha} &= \sum_{n} \ket{\varphi_{n}} \bra{\varphi_{n}} \ket{\alpha} = \\[0.5em] \pause
+&= \sum_{n} \ket{\varphi_{n}} \braket{\varphi_{n}}{\alpha} = \\[0.5em] \pause
+&= \sum_{n} \alpha_{n} \, \ket{\varphi_{n}}
+\end{aligned}
+\label{eq:ecuacion_13}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Relevancia del teorema}
+La relevancia del teorema radica en que los operadores de la MQ que se representan mediante operadores lineales y hermíticos, el teorema del desarrollo nos permite asociar una base a dicho operador y de esa manera, los problemas de mecánica cuántica son llevados a problemas de álgebra de matrices.
+\end{frame}
+\section{Límite continuo}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Cambio de discreto a continuo}
+\begin{frame}
+\frametitle{Límite continuo}
+En el desarrollo anterior, nos hemos referido a una base discreta, no obstante, podemos llevar los resultados obtenidos a un límite continuo:
+\fontsize{12}{12}\selectfont
+\begin{eqnarray}
+\begin{aligned}[b]
+\braket{\varphi_{n}}{\varphi_{m}} &= \delta_{nm} \hspace{0.1cm} \Rightarrow \hspace{0.1cm} \pause \braket{x}{\ptilde{x}} = \delta(x - \ptilde{x}) \\[0.5em] \pause
+&= \sum_{n} \ket{\varphi_{n}} \bra{\varphi_{n}} = \mathbf{1} \hspace{0.1cm} \Rightarrow \hspace{0.cm} \pause \int \ket{x} \bra{x} \dd[3]{x} = \mathbf{1}
+\end{aligned}
+\label{eq:ecuacion_14}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Producto punto}
+Análogamente el producto punto entre dos vectores puede representarse de este modo:
+\begin{eqnarray}
+\begin{aligned}[b]
+\braket{\phi}{\psi} &= \bra{\phi} \, \mathbf{1} \, \ket{\psi} = \\[0.5em] \pause
+&= \int \braket{\phi}{x} \, \braket{x}{\psi} \dd[3]{x} = \\[0.5em] \pause
+&= \int \phi^{*}(x) \, \psi (x) \dd[3]{x}
+\end{aligned}
+\label{eq:ecuacion_15}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Condición particular}
+Así mismo, sin pérdida de generalidad, podemos pedir la condición
+\begin{eqnarray*}
+\braket{\varphi_{n}}{\varphi_{m}} &=& \delta_{nm} \\[0.5em] \pause
+&=& \int \phi^{*}(x) \, \psi (x) \dd[3]{x}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollo de una función}
+Usaremos esto para desarrollar una función de variable continua a la que llamaremos $f(x)$, para este fin, partimos de una base discreta de variable continua $\left\{ \varphi_{n}(x) \right\}$, asumiremos que $f(x)$ tiene la siguiente estructura:
+\begin{align}
+f(x) = \sum_{n} c_{n} \, \varphi_{n}(x)
+\label{eq:ecuacion_16}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollo de una función}
+Para que la propuesta de la ec.(\ref{eq:ecuacion_16}) sea válida, necesitamos exhibir las condiciones suficientes y necesarias para construir los coeficientes $c_{n}$ de manera unívoca.
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollo de una función}
+Comenzamos por tomar el siguiente producto interior de $\varphi_{m}$, con la ec.(\ref{eq:ecuacion_16}):
+\fontsize{12}{12}\selectfont
+\begin{eqnarray}
+\begin{aligned}
+\bigg[ \varphi_{m}^{*} \, f(x) \bigg] \dd{x} &= \int \bigg[ \varphi_{m}^{*} \bigg] \, \sum_{n} c_{n} \, \varphi_{n} (x) = \\[0.5em] \pause
+&= \sum_{n} c_{n} \, \bigg[ \varphi_{m}^{*} \, \varphi_{n} (x) \bigg] = \\[0.5em] \pause
+&= \sum_{n} c_{n} \, \delta_{nm} = \\[0.5em] \pause
+&= c_{n}
+\end{aligned}
+\label{eq:ecuacion_17}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollo de una función}
+De esa forma concluimos que:
+\begin{align}
+\int \bigg[ \varphi_{m}^{*} \, f(x) \bigg] \dd{x} = c_{m}
+\label{eq:ecuacion_18}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollo de una función}
+De la ec. (\ref{eq:ecuacion_18}) notamos que $c_{m}$ existe y es unívocamente determinado (por construcción de una integral) sí y solo sí
+\begin{align*}
+\int \bigg[ \varphi_{m}^{*}(x) \, f(x) \bigg] \dd{x} 
+\end{align*}
+es convergente.
+\end{frame}
+\begin{frame}
+\frametitle{Estructura de $f(x)$}
+Daremos un paso más analizando la estructura de $f(x)$:
+\begin{eqnarray}
+\begin{aligned}
+f(x) &= \sum_{n} c_{n} \, \varphi_{n}(x) = \\[0.5em] \pause
+&= \int \bigg[ \varphi_{m}^{*}(\ptilde{x}) \, f(\ptilde{x}) \bigg] \dd{\ptilde{x}} \, \varphi_{n} (x) = \\[0.5em] \pause
+&= \int f(\ptilde{x}) \, \sum_{n} \bigg[ \varphi_{n}^{*}(\ptilde{x}) \, \varphi_{n}(x) \bigg] \dd{\ptilde{x}}
+\end{aligned}
+\label{eq:ecuacion_19}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Estructura de $f(x)$}
+Esta última expresión solo es posible si se satisface la condición:
+\begin{align}
+\sum_{n} \bigg[ \varphi_{n}^{*}(\ptilde{x}) \, \varphi_{n}(x) \bigg] = \delta(\ptilde{x} - x)
+\label{eq:ecuacion_20}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Utilidad del límite continuo}
+En el límite continuo la ec.(\ref{eq:ecuacion_19}) es la condición de que permite afirmar que la base usada es completa, está propiedad es la que permite generar una técnica de solución para resolver ecuaciones diferenciales no homogéneas.
+\end{frame}
+\end{document}
