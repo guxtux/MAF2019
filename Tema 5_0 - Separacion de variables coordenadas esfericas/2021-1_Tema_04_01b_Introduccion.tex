@@ -1,0 +1,368 @@
+\input{../Preambulos/preambulo_presentacion_Dresden_seahorse}
+\title{\large{Polinomios de Legendre}}
+\subtitle{Construcción alterna - 2a. parte}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\section{Función generatriz}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Derivando con respecto a \texorpdfstring{$t$}{t}}
+\begin{frame}
+\frametitle{La función generatriz}
+A partir del estudio del desarrollo multipolar, presentamos la función generatriz de los Polinomios de Legendre:
+\begin{align*}
+g(x, t) = \dfrac{1}{\left[ 1 - 2 \, t \, x + t^{2} \right]^{1/2} } = \sum_{\ell=0}^{\infty} t^{\ell} \, P_{\ell} (x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo de los polinomios}
+Y hemos llegado a una expresión que nos permite calcular los Polinomios de Legendre de orden $\ell$.
+\\
+\bigskip
+\pause
+Estudiaremos ahora a la derivada parcial de la función generatriz.
+\end{frame}
+\begin{frame}
+\frametitle{Derivada parcial}
+La derivada parcial con respecto a t, de la función generatriz es:
+\begin{eqnarray*}
+\pdv{t} g(x, t) = \pause \dfrac{x - t}{( 1 - 2 x \, t + t^{2})^{3/2}} = \sum_{n=0}^{\infty} \ell \, P_{\ell} (x) t^{\ell -1}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Extendiendo el desarrollo}
+Así tenemos que:
+\begin{align*}
+&\Rightarrow \left\{ \dfrac{x - t}{( 1 - 2 x \, t + t^{2})^{1/2}} \right\} \left\{ \dfrac{1}{ 1 - 2 x \, t + t^{2}} \right\} = \\[0.5em]
+&= \sum_{n=0}^{\infty} \ell \, P_{\ell} (x) \, t^{\ell -1}
+\end{align*}
+\pause
+Al usar de nuevo la definición de los Polinomios de Legendre:
+\end{frame}
+\begin{frame}
+\frametitle{Extendiendo el desarrollo}
+Ahorrando espacio, escribiremos $P_{\ell}$. Entonces:
+\begin{align*}
+(t {-} x) \sum_{\ell=0}^{\infty} P_{\ell} \, t^{\ell} + ( 1 {-} 2 x t {+} t^{2}) \, \sum_{\ell=1}^{\infty} \ell \, P_{\ell} \, t^{\ell-1} = 0
+\end{align*}
+\pause
+Ordenando términos de menor a mayor potencia:
+\begin{align*}
+(1 {-} 2 x t {+} t^{2}) \, \sum_{\ell=1}^{\infty} \ell \, P_{\ell} \, t^{\ell-1} {+} (t {-} x) \sum_{\ell=0}^{\infty} P_{\ell} \, t^{\ell} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Extendiendo las sumas}
+Ya que cada una de las sumas tiene factores previos, hay que separarlos y revisar lo que ocurre con cada una de las sumas:
+\end{frame}
+\begin{frame}
+\frametitle{Extendiendo las sumas}
+\begin{align*}
+&\sum_{\ell=1}^{\infty} \ell \, P_{\ell} \, t^{\ell-1} - 2 \, x \, \sum_{\ell=1}^{\infty} \ell \, P_{\ell} \, t^{\ell} - x \, \sum_{\ell=0}^{\infty} P_{\ell} \, t^{\ell} + \\[0.5em]
+&+ \sum_{\ell=1}^{\infty} \ell \, P_{\ell} \, t^{\ell+1} + \sum_{\ell=0}^{\infty} P_{\ell} \, t^{\ell+1} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando índices y potencias}
+Ya que tenemos sumas cuyos índices son distintos, además de la potencia de $t$, por lo que habrá que uniformizar tanto el índice de las sumas y la potencia de la variable $t$.
+\\
+\bigskip
+\pause
+Dejemos el índice de las sumas comience en $\ell = 2$, tal que las potencias queden en $t^{\ell}$. 
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando cada suma}
+Primera suma:
+\begin{align*}
+\sum_{\ell=1}^{\infty} \ell \, P_{\ell} \, t^{\ell-1} = P_{1} +  2 \, P_{2} \, t + \sum_{\ell=2}^{\infty} (\ell + 1) \, P_{\ell+1} \, t^{\ell}
+\end{align*}
+\pause
+Segunda suma:
+\begin{align*}
+- 2 \, x \, \sum_{\ell=1}^{\infty} \ell \, P_{\ell} \, t^{\ell} = - 2 \, x \, P_{1} \, t \,  \sum_{\ell=2}^{\infty} P_{\ell} \, t^{\ell}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando cada suma}
+Tercera suma:
+\begin{align*}
+- x \, \sum_{\ell=0}^{\infty} P_{\ell} \, t^{\ell} = - x \, P_{0} - x \, P_{1} \, t - \sum_{\ell=2}^{\infty} x \, P_{\ell} \, t^{\ell}
+\end{align*}
+\pause
+Cuarta suma:
+\begin{align*}
+\sum_{\ell=1}^{\infty} \ell \, P_{\ell} \, t^{\ell+1} = \sum_{\ell=2} (\ell - 1) P_{\ell-1} \, t^{\ell}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando cada suma}
+Quinta suma:
+\begin{align*}
+\sum_{\ell=0}^{\infty} P_{\ell} \, t^{\ell+1} = P_{0} \, t + \sum_{\ell=2}^{\infty} P_{\ell-1} \, t^{\ell}
+\end{align*}
+\pause
+Arreglamos todos los términos de la suma, comenzando con los términos independientes de $t$, luego los que se multiplican por $t$ y al final, los que se multiplican por $t^{\ell}$.
+\end{frame}
+\begin{frame}
+\frametitle{Todos los términos}
+\begin{align*}
+&\bigg[ P_{1} - x \, P_{0} \bigg] + \bigg[ 2 \, P_{2} - 3 \, x \, P_{1} + P_{0} \bigg] \, t + \\[0.5em]
+&+ \sum_{\ell=2}^{\infty} \bigg[ (\ell + 1) \, P_{\ell+1} {-} (2 \, \ell + 1) \, x \, P_{\ell} {+} \ell \, P_{\ell-1} \bigg] \, t^{\ell} = 0
+\end{align*}
+\pause
+Como sabemos que al tener una serie infinita, todos los coeficientes de la serie deben de anularse, por lo que:
+\end{frame}
+\begin{frame}
+\frametitle{Todos los términos}
+Sabemos de antemano que $P_{0} = 1$ y $P_{1} = x$, entonces:
+\pause
+\begin{align*}
+&\bigg[ P_{1} - x \, P_{0} \bigg] + \bigg[ 2 \, P_{2} - 3 \, x \, P_{1} + P_{0} \bigg] \, t + \\[0.5em]
+&+ \sum_{\ell=2}^{\infty} \bigg[ (\ell + 1) \, P_{\ell+1} {-} (2 \, \ell + 1) \, x \, P_{\ell} {+} \ell \, P_{\ell-1} \bigg] \, t^{\ell} = 0
+\end{align*}
+\begin{tikzpicture}[overlay]
+\draw[fill=red, opacity=0.3] (0.2, 2.25) rectangle (2.6, 3.6); \pause
+\draw[fill=yellow, opacity=0.3] (3.3, 2.25) rectangle (7.6, 3.6); \pause
+\draw[fill=blue, opacity=0.3] (1.5, 0.5) rectangle (9.3, 2);
+\end{tikzpicture}
+\end{frame}
+\begin{frame}
+\frametitle{Regla de recurrencia}
+Entonces tendremos en particular que:
+\begin{align*}
+(\ell + 1) \, P_{\ell+1} (x) - (2 \, \ell + 1) \, x \, P_{\ell} (x) + \ell \, P_{\ell-1} (x) = 0
+\end{align*}
+Esta relación es válida para $\forall \, \ell$, entonces podremos construir el polinomio de Legendre del grado deseado, a partir de $P_{0}(x)$ y de $P_{1}(x)$.
+\end{frame}
+\subsection{Derivando con respecto a \texorpdfstring{$x$}{x}}
+\begin{frame}
+\frametitle{Derivando con respecto a $x$}
+Ahora tomamos la derivada parcial con respecto a $x$ de la función generatriz:
+\pause
+\begin{align*}
+\pdv{x} g(x, t) = \dfrac{t}{(1 - 2 \, x \, t + t^{2})^{3/2}} = \sum_{\ell=0}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell}
+\end{align*}
+\pause
+Nuevamente, ocupamos la definición de la función generatriz, para obtener así:
+\end{frame}
+\begin{frame}
+\frametitle{Los términos obtenidos:}
+\begin{align*}
+\dfrac{t}{(1 - 2 \, x \, t + t^{2})^{1/2}} = (1 - 2 \, x \, t + t^{2}) \, \sum_{\ell=0}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell}
+\end{align*}
+\pause
+Entonces:
+\begin{align*}
+t \, \sum_{\ell=0}^{\infty} P_{\ell} (x) \, t^{\ell} = (1 - 2 \, x \, t + t^{2}) \, \sum_{\ell=0}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Separando la suma}
+Extendemos la suma que tenemos del lado derecho de la igualdad:
+\pause
+\begin{align*}
+&t \, \sum_{\ell=0}^{\infty} P_{\ell} (x) \, t^{\ell} = \sum_{\ell=0}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell} - 2 \, x \, \sum_{\ell=0}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell+1} + \\[0.5em]
+&+ \sum_{\ell=0}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell+2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando la expresión}
+Como sabemos que $P_{0}(x) = 1 \, \Rightarrow \, \ptilde{P}_{0}(x)= 0$, así:
+\pause
+\begin{align*}
+&\sum_{\ell=0}^{\infty} P_{\ell} (x) \, t^{\ell+1} = \sum_{\ell=1}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell} - 2 \, x \, \sum_{\ell=1}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell+1} + \\[0.5em]
+&+ \sum_{\ell=1}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell+2}
+\end{align*}
+\pause
+Procedemos a ajustar los índices de las sumas:
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando los índices de las sumas}
+\begin{align*}
+&P_{0}(x) \, t \, \sum_{\ell=1}^{\infty} P_{\ell} (x) \, t^{\ell+1} = \ptilde{P}_{1} (x) \, t {+} \sum_{\ell=1}^{\infty} \ptilde{P}_{\ell+1} (x) \, t^{\ell+1} + \\[0.5em]
+&- 2 \, x \, \sum_{\ell=1}^{\infty} \ptilde{P}_{\ell} (x) \, t^{\ell+1} + \sum_{\ell=1}^{\infty} \ptilde{P}_{\ell-1} (x) \, t^{\ell+1}
+\end{align*}
+\pause
+Una vez dejando los índices de las sumas con el mismo valor, así como la potencia de $t$, agrupamos los términos:
+\end{frame}
+\begin{frame}
+\frametitle{Agrupando los términos}
+Tomemos en cuenta que $\ptilde{P}_{1}(x) = P_{0}(x) = 1$, así:
+\pause
+\begin{align*}
+\sum_{\ell=1}^{\infty} t^{n+1} \bigg[ \ptilde{P}_{\ell+1} (x) {+} \ptilde{P}_{\ell-1} (x) {-} 2 x \, \ptilde{P}_{\ell} (x) {+} P_{\ell} (x) \bigg] = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado importante}
+Por lo que:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\ptilde{P}_{\ell+1} (x) + \ptilde{P}_{\ell-1} (x) = 2 \, x \, \ptilde{P}_{\ell} (x) + P_{\ell} (x)
+}
+\end{align*}
+\pause
+Que es válida $\forall \, \ell$.
+\end{frame}
+\begin{frame}
+\frametitle{Observación}
+La expresión que se obtuvo relaciona la derivadas de los polinomios de Legendre de grados vecinos, vemos que incluye a $\ptilde{P}_{\ell}(x)$.
+\\
+\bigskip
+\pause
+Nos interesa tener una expresión que dependa solo de órdenes previos:
+\end{frame}
+\subsection{Expresión para la derivada}
+\begin{frame}
+\frametitle{Nueva expresión}
+Partimos entonces de la siguiente igualdad:
+\begin{align*}
+(\ell + 1) \, P_{\ell+1} (x) - (2 \, \ell + 1) \, x \, P_{\ell} (x) + \ell \, P_{\ell-1} (x) = 0
+\end{align*}
+\pause
+Que ahora derivamos con respecto a $x$:
+\end{frame}
+\begin{frame}
+\frametitle{Derivando la igualdad}
+Entonces:
+\begin{align}
+\begin{aligned}
+&(\ell + 1) \ptilde{P}_{\ell+1} (x) - (2 \, \ell + 1) P_{\ell} (x) + \\[0.5em]
+&- (2 \, \ell +  1) \, x \ptilde{P}_{\ell} (x) + \ell \, \ptilde{P}_{\ell-1} (x) = 0
+\end{aligned}
+\label{eq;ecuacion_a}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando un resultado}
+Usamos ahora la igualdad encontrada al derivar la función generatriz:
+\begin{align}
+\begin{aligned}
+&\dfrac{(2 \, \ell + 1)}{2} \, \ptilde{P}_{\ell+1} (x) + \dfrac{(2 \, \ell + 1)}{2} \, \ptilde{P}_{\ell-1} (x) + \\[0.5em]
+&- (2 \, \ell + 1) \, x \, \ptilde{P}_{\ell} (x) - \dfrac{(2 \, \ell + 1)}{2} \, \ptilde{P}_{\ell} (x) = 0
+\end{aligned}
+\label{eq:ecuacion_b}
+\end{align}
+\pause
+Como siguiente paso: restamos la ec. (\ref{eq;ecuacion_a}) de (\ref{eq:ecuacion_b}):
+\end{frame}
+\begin{frame}
+\frametitle{Restando de las expresiones}
+\begin{align*}
+&\left[ \ell + \dfrac{1}{2} {-} \ell {-} 1 \right] \, \ptilde{P}_{\ell+1} (x) + \left[ 2 \, \ell {+} 1 {-} \ell {-} \dfrac{1}{2} \right] \, P_{\ell} (x) + \\[0.5em]
+&+ \left[ \ell + \dfrac{1}{2} - \ell \right] \, \ptilde{P}_{\ell-1} (x) = 0
+\end{align*}
+\pause
+Reduciendo la expresión:
+\begin{align*}
+\left[ - \dfrac{1}{2} \right] \, \ptilde{P}_{\ell+1} (x) {+} \left[ \ell + \dfrac{1}{2} \right] \, P_{\ell} (x) {+} \left[ \dfrac{1}{2} \right] \, \ptilde{P}_{\ell-1} (x) = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Nueva expresión}
+La nueva expresión queda como:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+(2 \, \ell + 1) \, P_{\ell} (x) =    \ptilde{P}_{\ell+1} (x) - \ptilde{P}_{\ell-1} (x) = 0
+}
+\end{align*}
+\pause
+Esta expresión requiere solo de órdenes posterior y anterior de la derivada de $P_{\ell}(x)$.
+\end{frame}
+\subsection{Relaciones de recurrencia}
+\begin{frame}
+\frametitle{Creando relaciones de recurrencia}
+Con un poco de álgebra se pueden encontrar relaciones similares:
+\begin{align*}
+\ptilde{P}_{\ell+1} &= (\ell + 1) \, P_{\ell}(x) + x \, \ptilde{P}_{\ell} \\[0.5em]
+\ptilde{P}_{\ell-1} &= - \ell \, P_{\ell}(x) + x \, \ptilde{P}_{\ell} \\[0.5em]
+(1 - x^{2}) P_\ell (x) &= \ell \, P_{\ell-1} (x) - \ell \, x \, P_{\ell} (x)
+\end{align*}
+\end{frame}
+\subsection{Polinomio ordinario de Legendre}
+\begin{frame}
+\frametitle{Obteniendo el polinomio ordinario}
+Usando la última expresión de las relaciones de recurrencia que mostramos:
+\begin{align*}
+(1 - x^{2}) \ptilde{P}_\ell (x) &= \ell \, P_{\ell-1} (x) - \ell \, x \, P_{\ell} (x)
+\end{align*}
+\pause
+La derivamos con respecto a $x$, para obtener:
+\begin{align*}
+&(1 {-} x^{2}) \stilde{P}_\ell (x) {-} 2 \, x \, \ptilde{P}_\ell (x) = \ell \, \ptilde{P}_{\ell-1} (x) - \ell \, x \, P_{\ell} (x) + \\[0.5em]
+&- \ell \, x \, \ptilde{P}_{\ell}(x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo el polinomio ordinario}
+Ocuparemos el siguiente resultado \pause (¿lo podrías obtener?):
+\begin{align*}
+\ell \, \ptilde{P}_{\ell} (x) = - \ell^{2} \, P_{\ell} (x) +  n \, x \, \ptilde{P}_{\ell} (x)
+\end{align*}
+para eliminar el término $\ptilde{P}_{\ell-1} (x)$
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo el polinomio ordinario}
+\begin{eqnarray*}
+&(&1 {-} x^{2}) \stilde{P}_\ell (x) {-} 2 \, x \, \ptilde{P}_\ell (x) = \ell^{2} \, \ptilde{P}_{\ell} (x) + \cancel{\ell \, x \, \ptilde{P_{\ell} (x)}} + \\[0.5em]
+&-& \ell \, P_{\ell}(x) - \cancel{\ell \, x \, \ptilde{P}_{\ell}(x)} = \\[0.5em] \pause
+&=& \ell (\ell + 1) \, P_{\ell} (x)
+\end{eqnarray*}
+Por tanto:
+\end{frame}
+\begin{frame}
+\frametitle{El polinomio ordinario}
+Tenemos que:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+(1 {-} x^{2}) \stilde{P}_\ell (x) {-} 2 \, x \, \ptilde{P}_\ell (x) + \ell (\ell + 1) \, P_{\ell} (x) = 0
+}
+\end{align*}
+\pause
+A esta ecuación se le conoce en la literatura de física matemática como el \emph{Polinomio Ordinario de Legendre}.
+\\
+\bigskip
+\pause
+Si resolvemos esta EDO2H mediante el método de Frobenius, obtendremos los mismos resultados.
+\end{frame}
+\subsection{Paridad de los polinomios}
+\begin{frame}
+\frametitle{Paridad de los polinomios}
+Otra característica importante es la \emph{paridad} de los polinomios de Legendre.
+\\
+\bigskip
+\pause
+Para ello debemos de estudiar el cambio de variables:
+\begin{align*}
+x \hspace{0.2cm} \rightarrow \hspace{0.2cm} - x \hspace{1.5cm} t \hspace{0.2cm} \rightarrow \hspace{0.2cm} - t
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Aplicando el cambio de variable}
+Hacemos el cambio de variable en la función generatriz
+\begin{eqnarray*}
+g(x, t) &=& \dfrac{1}{(1 - 2 \, x \, t + t^{2})^{1/2}} = \sum_{\ell=0}^{\infty} P_{\ell} (x) \, t^{\ell} = \\[0.5em] \pause
+&=& \dfrac{1}{(1 {-} 2 \, (-x) \, (-t) {+} (-t)^{2})^{1/2}} = \\[0.5em] \pause
+&=& \sum_{\ell=0}^{\infty} P_{\ell} (-x) \, (-t)^{\ell} = \pause \sum_{\ell=0}^{\infty} (-1)^{\ell} \, P_{\ell} (-x) \, t^{\ell} = 
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Paridad de los polinomios}
+Entonces la relación de paridad de los polinomios de Legendre está dada por la expresión:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+P_{\ell}(x) = (-1)^{\ell} \, P_\ell(-x)
+}
+\end{align*}
+\end{frame}
+\end{document}
