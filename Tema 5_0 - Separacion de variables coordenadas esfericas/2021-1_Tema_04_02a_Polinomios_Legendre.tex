@@ -1,0 +1,317 @@
+\input{../Preambulos/preambulo_presentacion_Dresden_seahorse}
+\title{\large{Ejercicios con Polinomios de Legendre}}
+\subtitle{Geometría esférica con simetría azimutal}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\section{Termodinámica y las esferas}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicio 1}
+\begin{frame}
+\frametitle{Enunciado}
+Dos hemisferios sólidos conductores de calor de radio $a$, separados por un hueco muy pequeño aislante, forman una esfera. Las dos mitades de la esfera están en contacto - por fuera - con dos baños de calor (infinitos) a temperaturas $T_{0}$ y $-T_{0}$. 
+\\
+\bigskip
+\pause
+Queremos encontrar la distribución de temperatura $T (r, \theta, \varphi)$ en el interior de la esfera.
+\end{frame}
+\begin{frame}
+\frametitle{Geometría del problema}
+\begin{figure}[H]
+\centering
+\includestandalone{Figuras/esfera_2}
+\caption{Dos semiesferas separadas infinitesimalmente a temperaturas contrarias.}
+\label{fig:figura2}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Descripción del problema}
+Elegimos un sistema de coordenadas esféricas en donde el origen coincide con el centro de la esfera y el eje polar es perpendicular al plano ecuatorial.
+\\
+\bigskip
+El hemisferio con temperatura $T_{0}$ suponemos que es el hemisferio norte.
+\end{frame}
+\subsection{Solución completa Ec. Laplace}
+\begin{frame}
+\frametitle{Solución completa}
+ Para encontrar la solución más general con simetría azimutal de la ecuación de Laplace en coordenadas esféricas, multiplicamos la solución radial y la solución angular (polinomio de Legendre) para cada $k$ y sumamos sobre todos los valores posibles de $k$:
+ \pause
+\begin{align}
+\Phi (r, \theta) = \sum_{k=0}^{\infty} \left( A_{k} \; r^{k} + \dfrac{B_{k}}{r^{k+1}} \right) \; P_{k} (\cos \theta)
+\label{eq:ecuacion_029a}
+\end{align}
+donde $A_{k}$ y $B_{k}$ son constantes y se ha sustituido $\cos \theta$ por $x$.
+\end{frame}
+\begin{frame}
+\frametitle{Ventaja en el problema}
+Dado que el problema tiene simetría azimutal, $T$ es independiente de $\varphi$, y podemos escribir inmediatamente la solución general de la ecuación (\ref{eq:ecuacion_029a}).
+\end{frame}
+\begin{frame}
+\frametitle{Ventaja en el problema}
+Sin embargo, dado que el origen se encuentra en la región de interés, es necesario excluir a todos los potencias negativas de $r$.
+\begin{align*}
+\Phi (r, \theta) = \sum_{k=0}^{\infty} \left( A_{k} \; r^{k} + \dfrac{B_{k}}{r^{k+1}} \right) \; P_{k} (\cos \theta)
+\end{align*}
+\pause    
+Esto se logra dejando que todos los coeficientes de $B$ se anulen.
+\end{frame}
+\begin{frame}
+\frametitle{Simplificación en la expresión}
+Por lo tanto, tenemos
+\begin{align}
+T(r, \theta) = \sum_{n=0}^{\infty} A_{n} \; r^{n} \, P_{n} (\cos \theta)
+\label{eq:ecuacion_050a}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Coeficientes por calcular}
+Quedando pendiente calcular las constantes $A_{n}$.
+\\
+\bigskip
+\pause
+Pero notemos que
+\begin{align*}
+T(a, \theta) = 
+\begin{cases}
+T_{0} & \mbox{ si } 0 \leq \theta < \dfrac{\pi}{2} \\[0.5em]
+-T_{0} & \mbox{ si } \frac{\pi}{2} < \theta \leq \pi 
+\end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ajuste en las variables}
+En términos de $u = \cos \theta$, podemos escribir
+\begin{align*}
+T(a, u) = 
+\begin{cases}
+T_{0} & \mbox{ si } -1 \leq u < 0 \\[0.5em]
+-T_{0} & \mbox{ si } 0 < u \leq 1 
+\end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Expresión de trabajo}
+Sustituyendo en la ecuación (\ref{eq:ecuacion_050a}), obtenemos
+\begin{align} 
+\begin{aligned}
+T(a, u) &= 
+\begin{cases}
+T_{0} & \mbox{ si } -1 \leq u < 0 \\[0.5em]
+-T_{0} & \mbox{ si } 0 < u \leq 1 
+\end{cases} = \\[0.5em]
+&= \sum_{n=0}^{\infty} \underbrace{A_{n} a^{n}}_{\equiv c_{n}} \, P_{n}(u)
+\end{aligned}
+\label{eq:ecuacion_051a}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando un resultado previo}
+Podemos ocupar el resultado que se revisó en el material de trabajo: \pause La expansión en polinomios de Legendre de la función $f(x)$ definida por:
+\begin{align*}
+f(x) = \begin{cases}
+V_{0} & \mbox{ si } 0 < x \leq 1 \\[0.5em]
+- V_{0} & \mbox{ si } -1 \leq x < 0
+\end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando un resultado previo}
+La expansión de la función $f(x)$ en Polinomios de Legendre se escribe como:
+\begin{align*}
+f(x) &= \begin{cases}
+V_{0} & \mbox{ si } 0 < x \leq 1 \\[0.5em]
+-V_{0} & \mbox{ si } -1 \leq x < 0
+\end{cases}
+= \\[0.5em]
+&= V_{0} \, \sum_{k=0}^{\infty} \dfrac{(-1)^{k}(4 \, k + 3)(2 \, k!)}{2^{2k+1} \; k! \; (k+1)!} \, P_{2k+1} (x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando el resultado}
+Usando $u$ en lugar de $x$ del resultado anterior, vemos que es equivalente a la expansión en series, tal que los coeficientes pares están ausentes, así
+\begin{align*}
+c_{2k+1} \equiv A_{2k+1} \, a^{2k+1} = \dfrac{(-1)^{k} \, (4 \, k + 3)(2 \, k)!}{2^{2k+1} \; k! \; (k + 1)!} \, T_{0}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando los coeficientes}
+Encontrando $A_{2k+1}$ de esta ecuación y agregándolo en la ecuación (\ref{eq:ecuacion_050a}) se obtiene
+\begin{align*}
+&T(r, \theta) = \\[0.5em]
+&= T_{0} \sum_{k=0}^{\infty} \dfrac{(-1)^{k} (4 k {+} 3)(2 k)!}{2^{2k+1} \; k! \; (k {+} 1)!} \left( \dfrac{r}{a} \right)^{2k+1} \, P_{2k+1} (\cos \theta)
+%\label{eq:ecuacion_052a}
+\end{align*}
+donde se ha sustituido $\cos \theta$ por $u$.
+\end{frame}
+\section{Esferas y electrostática}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicio 2}
+\begin{frame}
+\frametitle{Enunciado}
+Considera dos semiesferas conductoras de radio $a$ que tienen una pequeña separación aislante en el ecuador.
+\\
+\bigskip
+\pause
+La semiesfera superior se encuentra a un potencial $V_{0}$, mientras que la semiesfera inferior a un potencial $-V_{0}$, como se muestra en la figura (\ref{fig:figura_03}):
+\end{frame}
+\begin{frame}
+\frametitle{Geometría del problema}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.9]{Figuras/esfera_3.tex}
+    \caption{Dos semiesferas separadas infinitesimalmente con potenciales contrarios.}
+\label{fig:figura_03}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Problema a resolver}
+¿Cuál es el potencial en puntos por fuera de la esfera completa?
+\\
+\bigskip
+\pause
+Podemos ocupar nuevamente la expresión para la ecuación de Laplace con simetría azimutal.
+\end{frame}
+\begin{frame}
+\frametitle{Elementos a considerar}
+Ya que el potencial se debe de anular en el infinito, esperamos que el primer término de la ecuación se anule:
+\begin{align*}
+\Phi (r, \theta) = \sum_{k=0}^{\infty} \left( A_{k} \; r^{k} + \dfrac{B_{k}}{r^{k+1}} \right) \; P_{k} (\cos \theta)
+\end{align*}
+\pause
+Es decir que $A_{k} = 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Calculando los coeficientes $B_{k}$}
+Para encontrar los coeficientes $B_{k}$, \pause susituimos $a$ en $r$ en la ecuación anterior, y hacemos $\cos \theta = u$, entonces:
+\begin{align*}
+\Phi (a, u) = \sum_{k=0}^{\infty} \dfrac{B_{k}}{\underbrace{a^{k+1}}_{\equiv c_{k}}} \; P_{k} (u)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando los coeficientes $B_{k}$}
+Donde:
+\begin{align*}
+\Phi(a, u) &= \begin{cases}
+-V_{0} & \mbox{ si } -1 < u < 0 \\[0.5em]
++V_{0} & \mbox{ si } 0 < u < 1
+\end{cases}
+\end{align*}
+\pause
+El cálculo de los coeficientes se realiza de la misma manera que en el ejemplo anterior.
+\end{frame}
+\begin{frame}
+\frametitle{Calculando los coeficientes $B_{k}$}
+Así, los $c_{k} = 0$ para los k pares y
+\begin{align*}
+c_{2m+1} = \dfrac{B_{2m+1}}{a^{2m+2}} = (-1)^{m} \, \dfrac{(4 \, m + 3) ( 2 \, m)!}{2^{2m+1} \, (m + 1)! \, m!} \, V_{0}
+\end{align*}
+\pause
+Que es lo mismo:
+\begin{align*}
+B_{2m+1} = \dfrac{(-1)^{m} \, (4 \, m + 3) ( 2 \, m)!}{2^{2m+1} \, (m + 1)! \, m!} \, a^{2m+2} \, V_{0}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El potencial resultante}
+Una vez calculados los coeficientes, podemos expresar el potencial como:
+\begin{align*}
+\Phi(r, \theta) &= V_{0} \, \sum_{m=0}^{\infty} (-1)^{m} \, \dfrac{(4 \, m + 3) ( 2 \, m)!}{2^{2m+1} \, (m + 1)! \, m!} \times \\[0.5em]
+&\times \left( \dfrac{a}{r} \right)^{2m+2} \, P_{2m+1} (\cos \theta)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+El potencial encontrado $\Phi(r, \theta)$ es la expansión multipolar del potencial en las dos semiesferas.
+\\
+\bigskip
+\pause
+Es interesante observar que el término monopolar: el término de tipo $1/r$ no aparece.
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+Esto se debe a que la carga total en las dos semiesferas debe ser nula.
+\\
+\bigskip
+\pause
+Siendo consistente con la simentría del problema, en donde se espera una densidad superficial de carga igual pero de signos contrarios en las semiesferas.
+\end{frame}
+\section{Otros problemas}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Posibles problemas para el examen}
+\begin{frame}
+\frametitle{Posibles problemas}
+Una vez revisados estos dos ejercicios, es claro que se pueden modificar las condiciones de los ejercicios, manteniendo una geometría esférica con simetría azimutal, como los siguientes casos:
+\end{frame}
+\begin{frame}
+\frametitle{Posible ejercicio 1}
+Dos esferas conductoras: una de radio $a$ a un potencial $V_{1}$ está dentro de otra esfera de radio $b$ a un potencial $V_{2}$. Calcular el potencial en los puntos dentro de la esfera con radio $a$, los puntos en $ a < r < b$ y los puntos por fuera de la esfera $b$.
+\end{frame}
+\begin{frame}
+\frametitle{Posible ejercicio 1}
+\begin{figure}
+    \centering
+    \includestandalone[scale=0.8]{Figuras/esfera_4}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Posible ejercicio 2}
+\fontsize{12}{12}\selectfont
+Calcular el potencial electrostático dentro de una esfera de radio $a$ con un pequeño espacio aislante en su ecuador, la semiesfera inferior se encuentra aterrrizada, mientras que la semiesfera superior se mantiene aun potencial constante $V_{0}$.
+\begin{figure}
+    \centering
+    \includestandalone[scale=0.7]{Figuras/esfera_5}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Posible ejercicio 3}
+\fontsize{12}{12}\selectfont
+Calcular el potencial electrostático en puntos dentro y fuera de una esfera de radio $a$ que se mantiene a un potencial constante $V_{0}$.
+\begin{figure}
+    \centering
+    \includestandalone[scale=0.7]{Figuras/esfera_6}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Posible ejercicio 4}
+Una esfera conductora de radio $a$ está dentro de otra esfera conductora de radio $b$, ésta se compone de dos semiesferas con una separación infinitesimal aislante.
+\\
+\bigskip
+La esfera interior está a un potencial $V_{1}$. La semiesfera superior externa está a un potencial $+V_{2}$, mientras que la semiesfera inferior a un potencial $-V_{2}$.
+\end{frame}
+\begin{frame}
+\frametitle{Posible ejercicio 4}
+\begin{figure}
+    \centering
+    \includestandalone[scale=0.7]{Figuras/esfera_7}
+\end{figure}
+\fontsize{12}{12}\selectfont
+Calcula el potencial dentro de la esfera inferior, entre las dos esferas, y por fuera de la esfera exterior.
+\end{frame}
+\begin{frame}
+\frametitle{Posible ejercicio 5}
+Una esfera conductora de radio $a$ se compone de dos semiesferas con una separación infinitesimal aislante, está dentro de otra esfera conductora de radio $b$, 
+\\
+\bigskip
+La semiesfera superior interna está a un baño térmico $+T_{1}$, mientras que la semiesfera inferior a un baño térmico $-T_{1}$. La esfera exterior se mantiene en un baño térmico $T_{2}$.
+\end{frame}
+\begin{frame}
+\frametitle{Posible ejercicio 5}
+\begin{figure}
+    \centering
+    \includestandalone[scale=0.7]{Figuras/esfera_1}
+\end{figure}
+\fontsize{12}{12}\selectfont
+Calcula la temperatura dentro de la esfera inferior, entre las dos esferas, y por fuera de la esfera exterior.
+\end{frame}
+    
+\end{document}

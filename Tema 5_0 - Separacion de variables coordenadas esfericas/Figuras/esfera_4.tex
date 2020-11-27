@@ -1,0 +1,39 @@
+\documentclass[margin=0.2mm]{standalone}
+\usepackage{tikz}   
+\usepackage{tikz-3dplot}
+
+\begin{document}
+%Angle Definitions
+%-----------------
+%set the plot display orientation
+%synatax: \tdplotsetdisplay{\theta_d}{\phi_d}
+\tdplotsetmaincoords{65}{110}
+\pgfmathsetmacro{\rvec}{1.2}
+\pgfmathsetmacro{\thetavecc}{55}
+\pgfmathsetmacro{\phivecc}{35}
+\pgfmathsetmacro{\thetaveccc}{39.7}
+\pgfmathsetmacro{\phiveccc}{55}
+\begin{tikzpicture}[scale=2,tdplot_main_coords]
+
+\node [font= \Large] at (0,1.4,1) {$V_{1}$};
+\node [font= \Large] at (0, 0.3, 2.3) {$V_{2}$};
+
+\shadedraw[tdplot_screen_coords,ball color = white] (0,0) circle (\rvec);
+\shadedraw[tdplot_screen_coords, ball color=white, opacity=0.5] (0,0) circle (1.7);
+
+%-----------------------
+\coordinate (O) at (0,0,0);
+
+\tdplotsetcoord{B}{\rvec}{\thetavecc}{\phivecc}
+
+\tdplotsetcoord{C}{2}{\thetaveccc}{\phiveccc}
+\tdplotsetcoord{D}{2.19}{20}{60}
+
+\draw[-stealth,very thick,color=blue!60!black] (O) -- (C) node [font=\large, midway, above = 5] {a} ;
+\draw[-stealth,very thick,color=red!60!black] (O) -- (D) node [font=\large, midway, above = 1cm] {b} ;
+
+\tdplotsetthetaplanecoords{\phivecc}
+\tdplotsetthetaplanecoords{\phiveccc}
+
+\end{tikzpicture}
+\end{document}
