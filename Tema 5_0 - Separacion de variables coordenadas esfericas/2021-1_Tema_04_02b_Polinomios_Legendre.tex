@@ -1,0 +1,309 @@
+\input{../Preambulos/preambulo_presentacion_Dresden_seahorse}
+\usepackage{anyfontsize}
+\title{\large{Ejercicios con Polinomios de Legendre}}
+\subtitle{Potenciales y armónicos esféricos}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\section{Cálculo de potenciales eléctricos}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicio 1}
+\begin{frame}
+\frametitle{Enunciado del problema}
+Considera un arreglo de cargas en el eje $x$:
+\begin{itemize}
+\item Una carga $+q$ está en la posición $x = -a$.
+\item Una carga $-2 \, q$ está en la posición $x = 0$.
+\item Una carga $+q$ está en la posición $x = a$.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Geometría del problema}
+Haciendo un esquema del problema tenemos que:
+\begin{figure}
+    \centering
+    \includestandalone[scale=0.9]{Figuras/cuadrupolo_01}
+\end{figure}
+\pause
+Calcula el potencial electrostático de este arreglo, conocido como el \emph{cuadruplo lineal eléctrico}.
+\end{frame}
+\subsection{Solución}
+\begin{frame}
+\frametitle{Estableciendo el potencial}
+Como se revisó en el curso de Electromagnetismo, es posible describir el potencial debido a las tres cargas:
+\pause
+\begin{align}
+V = k \, q \, \left( \dfrac{1}{r_{1}} + \dfrac{1}{r_{2}} \right) - \dfrac{2 \, k \, q}{r}
+\label{eq:ecuacion_01}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Estableciendo el potencial}
+\begin{figure}
+    \centering
+    \includestandalone[scale=0.7]{Figuras/cuadrupolo_02}
+\end{figure}
+\pause
+\fontsize{12}{12}\selectfont
+donde:
+\begin{itemize}
+\item $r_{1}$ es la distancia de la carga ($0, -a)$ al punto $P$.
+\item $r_{2}$ es la distancia de la carga ($0, +a)$ al punto $P$.
+\item $r$ es la distancia de la carga en el origen al punto $P$.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+A partir de la ley de los cosenos escribimos $r_{1}$ y $r_{2}$:
+\pause
+\begin{eqnarray*}
+r_{1}^{2} &=& r^{2} + a^{2} - 2 \, a \, r \, \cos \theta =  \\[0.5em] \pause 
+r_{1} &=& r \sqrt{1 + \left( \dfrac{a}{r} \right)^{2} - 2 \left( \dfrac{a}{r} \right) \, \cos \theta}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Para $r_{2}$:
+\pause
+\begin{eqnarray*}
+r_{2}^{2} &=& r^{2} + a^{2} + 2 \, a \, r \, \cos \theta =  \\[0.5em]
+r_{2} &=& r \sqrt{1 + \left( \dfrac{a}{r} \right)^{2} + 2 \left( \dfrac{a}{r} \right) \, \cos \theta}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Uso de los polinomios de Legendre}
+Sabemos que la expresión para el potencial es muy similar a la función generatriz de los polinomios de Legendre.
+\\
+\bigskip
+\pause
+Si nos enfocámos solamente en el potencial de las dos cargas en $(0,\pm a)$:
+\end{frame}
+\begin{frame}
+\frametitle{Potencial de las dos cargas}
+El potencial debido a esas dos cargas es:
+\begin{align}
+\begin{aligned}
+V_{\pm a} &= \dfrac{k \, q}{r} \bigg[ \sum_{n=0}^{\infty} \left( \dfrac{a}{r} \right)^{\ell} P_{\ell}(x) + \\[0.5em]
+&+ \sum_{n=0}^{\infty} (-1)^{\ell} \left( \dfrac{a}{r} \right)^{\ell} P_{\ell}(x) \bigg]
+\end{aligned}
+\label{eq:ecuacion_03}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{La expresión obtenida}
+Vemos que la ec. (\ref{eq:ecuacion_03}) es muy similar a la expresión para el dipolo eléctrico lineal.
+\\
+\bigskip
+\pause
+La diferencia es que las dos sumas suman (en lugar de restar); esto ocurre porque las dos cargas en $(0, \pm a)$ son positivas, en lugar de tener signos opuestos como en el caso del dipolo.
+\end{frame}
+\begin{frame}
+\frametitle{La expresión obtenida}
+Observemos el término $(-1)^{\ell}$ en la segunda suma: esto surge de la expresión de la ley de cosenos para $r_{2}$, en la que el ángulo entre $r$ y $a$ es $(\ang{180} - \theta)$, de modo que $\cos (\ang{180} - \theta) = - \cos \theta$.
+\end{frame}
+\begin{frame}
+\frametitle{Revisando la expresión}
+Si revisamos la ec. (\ref{eq:ecuacion_03}), nos damos cuenta de que las sumas se anula si $n$ es impar, dejándonos solo los términos pares:
+%\fontsize{12}{12}\selectfont
+\begin{align}
+\begin{aligned}
+V_{\pm a} &= \dfrac{2 \, k \, q}{r} \bigg[ P_{0} \left( \dfrac{a}{r} \right)^{0} + P_{2} \left( \dfrac{a}{r} \right)^{2} \, P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg]
+\end{aligned}
+\label{eq:ecuacion_04}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Completando la expresión}
+Recordemos que la ec. (\ref{eq:ecuacion_04}) describe solo el potencial debido a las cargas $+q$ colocadas en $(0, \pm a)$.
+\\
+\bigskip
+\pause
+Usando el principio de superposición, podemos determinar el potencial total del sistema, agregando a la ec. (\ref{eq:ecuacion_04}) el potencial debido a la carga $-2q$ colocada en el origen.
+\end{frame}
+\begin{frame}
+\frametitle{Completando la expresión}
+El potencial debido solo a la carga $-2q$ es:
+\begin{align*}
+V_{O} = - \dfrac{2 \, k \, q}{r}
+\end{align*}
+\pause
+Por lo que el potencial completo del cuadrupolo es:
+\end{frame}
+\begin{frame}
+\frametitle{Potencial completo}
+El potencial completo es:
+\begin{align}
+\begin{aligned}
+V_{T} &= \dfrac{2 \, k \, q}{r} \bigg[ P_{0} \left( \dfrac{a}{r} \right)^{0} + \\[0.5em]
+&+ P_{2} \left( \dfrac{a}{r} \right)^{2} \, P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg] - \dfrac{2 \, k \, q}{r}
+\end{aligned}
+\label{eq:ecuacion_05}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Usando resultados previos}
+Del primero término en los corchetes de la ec. (\ref{eq:ecuacion_05}), $P_{0}(x) = 1$, tendremos que:
+\begin{eqnarray*}
+V_{T} &=& \dfrac{2 \, k \, q}{r} + \dfrac{k \, q}{r} \bigg[ P_{2} \left( \dfrac{a}{r} \right)^{2} \, P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg] - \dfrac{2 \, k \, q}{r} = \\[0.5em] \pause
+&=& \dfrac{2 \, k \, q}{r} \bigg[ P_{2} \left( \dfrac{a}{r} \right)^{2} \, P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg]
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Vemos que la expansión del cuadrupolo eléctrico comienza con el término $P_{2}(x)$:
+\begin{align*}
+V_{T} = \dfrac{2 \, k \, q}{r} \bigg[ P_{2} \left( \dfrac{a}{r} \right)^{2} \, P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg]
+\end{align*}
+\end{frame}
+\section{Armónicos esféricos}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicio 2}
+\begin{frame}
+\frametitle{Tres incisos}
+Para este ejercicio tendremos tres incisos:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Usando la relación:
+\begin{align*}
+Y_{\ell}^{0} \, (\theta, \phi) = \sqrt{\dfrac{2 \, \ell + 1}{4 \, \pi}} \, P_{\ell} (\cos \theta)
+\end{align*}
+\\
+\bigskip
+Determina $Y_{3}^{0} \, (\theta, \phi)$
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Tres incisos}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item Determina la expresión de $Y_{3}^{0}$ en coordenadas cartesianas.
+\item A partir de $Y_{3}^{0} (\theta, \phi)$ infiere el valor de $Y_{3}^{\pm 1} (\theta, \phi)$
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Inciso 1}
+Usando la relación:
+\begin{align*}
+Y_{\ell}^{0} (\theta, \phi) = \sqrt{\dfrac{2 \, \ell + 1}{4 \, \pi}} \, P_{\ell} (\cos \theta)
+\end{align*}
+\\
+\bigskip
+\pause
+Determina $Y_{3}^{0} (\theta, \phi)$
+\end{frame}
+\begin{frame}
+\frametitle{Solución del inciso 1}
+Sabemos que:
+\begin{align*}
+P_{3} (\cos \theta) = \dfrac{1}{2} (5 \, \cos^{3} \theta - 3 \, \cos \theta)
+\end{align*}
+\pause
+entonces:
+\begin{eqnarray*}
+Y_{3}^{0} (\theta, \phi) &=& \sqrt{\dfrac{7}{4 \, \pi}} \, P_{3} (\cos \theta) = \\[0.5em] \pause
+&=& \sqrt{\dfrac{7}{16 \, \pi}} \, (5 \, \cos^{3} \theta - 3 \, \cos \theta)
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Inciso 2}
+Determina la expresión de $Y_{3}^{0}$ en coordenadas cartesianas:
+\\
+\bigskip
+\pause
+Ya que $\cos \theta = z/r$, tenemos que:
+\begin{eqnarray*}
+5 \, \cos^{3} \theta - 3 \, \cos \theta &=& 5 \, \cos \theta(5 \, \cos^{2} \theta - 3) = \\[0.5em] \pause
+&=& \dfrac{z \, (5 \, z^{2} - 3 \, r^{2})}{r^{3}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución inciso 2}
+Por lo tanto:
+\pause
+\begin{align*}
+Y_{3}^{0} \, (x, y, z) = \sqrt{\dfrac{7}{16 \, \pi}} \, \dfrac{z}{r^{3}} \, (5 z^{2} - 3 \, r^{2})
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Inciso 3}
+A partir de $Y_{3}^{0} \, (\theta, \phi)$ infiere el valor de $Y_{3}^{\pm 1} \, (\theta, \phi)$
+\\
+\bigskip
+\pause
+Para calular $Y_{3}^{1}$ a partir de $Y_{3}^{0}$, necesitaremos utilizar el operador de ascenso $\hat{L}_{+}$ en $Y_{3}^{0}$.
+\end{frame}
+\begin{frame}
+\frametitle{Primer paso}
+De manera algebraica tenemos que:
+\begin{align}
+\hat{L}_{+} \, Y_{3}^{0} = \hbar \, \sqrt{3 (3 + 1) - 0} \, Y_{3}^{1} = 2 \, \hbar \, \sqrt{3} \, Y_{3}^{1}
+\label{eq:ecuacion_05_194}
+\end{align}
+\pause
+por lo que
+\begin{align}
+Y_{3}^{1} = \dfrac{1}{2 \, \hbar \, \sqrt{3}} \hat{L}_{+} \, Y_{3}^{0}
+\label{eq:ecuacion_05_195}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Segundo paso}
+Ahora usamos la forma diferencial de $\hat{L}_{+}$:
+\begin{eqnarray*}
+&{}&\hat{L}_{+} \, Y_{3}^{0} \, (\theta, \phi) = \hbar \, e^{i \phi} \left[ \pdv{\theta} + i \, \dfrac{\cos \theta}{\sin \theta} \right] \, Y_{3}^{0} \, (\theta, \phi) = \\[0.5em] \pause
+&=& \hbar \, \sqrt{\dfrac{7}{16 \, \pi}} \, e^{i \phi} \, \left[ \pdv{\theta} + i \, \dfrac{\cos \theta}{\sin \theta} \right] \, (5 \, \cos^{3} \theta {-} 3 \, \cos \theta) = \\[0.5em] \pause
+&=& - 3 \, \hbar \, \sqrt{\dfrac{7}{16 \, \pi}} \, \sin \theta \, (5 \, \cos^{2} \theta - 1) \, e^{i \phi}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Al agregar el resultado tenemos que:
+\begin{align*}
+Y_{3}^{1} &= \dfrac{1}{2 \, \hbar \, \sqrt{3}} \hat{L}_{+} \, Y_{3}^{0} = \\[0.5em]
+&= - \sqrt{\dfrac{21}{64 \, \pi}} \sin \theta \, (5 \cos^{2} \theta - 1) \, e^{i \phi}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El otro resultado}
+Para calcular $Y_{3}^{-1}$ a partir de $Y_{3}^{0}$ aplicamos ahora el operador de descenso $\hat{L}_{-}$:
+\begin{align*}
+\hat{L}_{-} \, Y_{3}^{0} = \hbar \, \sqrt{3 (3 + 1) - 0} \, Y_{3}^{-1} = 2 \, \hbar \, \sqrt{3} \, Y_{3}^{-1}
+\end{align*}
+Por lo que:
+\begin{align}
+Y_{3}^{-1} = \dfrac{1}{2 \, \hbar \, \sqrt{3}} \hat{L}_{-} \, Y_{3}^{0}
+\label{eq:ecuacion_05_199}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Segundo paso}
+Ahora usamos la forma diferencial de $\hat{L}_{-}$:
+\begin{eqnarray*}
+&{}&\hat{L}_{-} \, Y_{3}^{0} \, (\theta, \phi) = - \hbar \, e^{-i \phi} \left[ \pdv{\theta}  - i \, \dfrac{\cos \theta}{\sin \theta} \right] \, Y_{3}^{0} \, (\theta, \phi) = \\[0.5em] \pause
+&=& -\hbar \, \sqrt{\dfrac{7}{16 \, \pi}} \, e^{-i \phi} \, \left[ \pdv{\theta} - i \, \dfrac{\cos \theta}{\sin \theta} \right] \, (5 \, \cos^{3} \theta {-} 3 \, \cos \theta) = \\[0.5em] \pause
+&=& 3 \, \hbar \, \sqrt{\dfrac{7}{16 \, \pi}} \, \sin \theta \, (5 \, \cos^{2} \theta {-} 1) \, e^{-i \phi}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado}
+Siguiendo el mismo procedimiento, tendremos que el armónico esférico es:
+\begin{align*}
+Y_{3}^{-1} &= \dfrac{1}{2 \, \hbar \, \sqrt{3}} \hat{L}_{-} \, Y_{3}^{0} = \\[0.5em]
+&= - \sqrt{\dfrac{21}{64 \, \pi}} \sin \theta \, (5 \cos^{2} \theta - 1) \, e^{-i \phi}
+\end{align*}
+\end{frame}
+\end{document}
