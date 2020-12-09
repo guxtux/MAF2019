@@ -38,17 +38,17 @@ def normalise(x,y):#Doesnt normalise. Calculates integral, we want area under th
 def plotPsi(r,psi):
     #plt.subplot(311)
     plt.plot(r, psi, color = 'black')
-    plt.grid(True)
+#    plt.grid(True)
     plt.xlabel("r/a (m)")
     plt.ylabel("$R_{n \ell}(r)$")
     plt.title('Funciones radiales de onda $R_{n \ell}(r)$')
     plt.xlim((0,15))
-    plt.annotate('$10$', xy=(0.3,2.3), xytext=(0.7, 2.5), arrowprops=dict(arrowstyle="->"))
+#    plt.annotate('$10$', xy=(0.3,2.3), xytext=(0.7, 2.5), arrowprops=dict(arrowstyle="->"))
     plt.annotate('$20$', xy=(0.18,1.7), xytext=(1.7, 2.2), arrowprops=dict(arrowstyle="->"))
     plt.annotate('$21$', xy=(4,0.93), xytext=(6, 1.5), arrowprops=dict(arrowstyle="->"))
-    plt.annotate('$30$', xy=(0.3, 1.3), xytext=(3, 2.2), arrowprops=dict(arrowstyle="->"))
-    plt.annotate('$31$', xy=(8.25, 1.95), xytext=(9.04, 2.18), arrowprops=dict(arrowstyle="->"))
-    plt.annotate('32', xy=(6.07, 0.32), xytext=(7.1, 0.54), arrowprops=dict(arrowstyle="->"))
+#    plt.annotate('$30$', xy=(0.3, 1.3), xytext=(3, 2.2), arrowprops=dict(arrowstyle="->"))
+#    plt.annotate('$31$', xy=(8.25, 1.95), xytext=(9.04, 2.18), arrowprops=dict(arrowstyle="->"))
+#    plt.annotate('32', xy=(6.07, 0.32), xytext=(7.1, 0.54), arrowprops=dict(arrowstyle="->"))
 
 def plotPsiSquared(r,psi):
     psiSquared = psi**2

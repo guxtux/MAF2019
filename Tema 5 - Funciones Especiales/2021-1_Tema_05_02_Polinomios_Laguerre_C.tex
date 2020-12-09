@@ -10,7 +10,7 @@
 \fontsize{14}{14}\selectfont
 \tableofcontents
 \newpage
-\section{Las funciones de Laguerre.}
+\section{Funciones ordinarias de Laguerre.}\label{sec:seccion_01}
 %Ref. Riley - 18.7 Laguerre functions
 La ecuación diferencial de Laguerre es de la forma:
 \begin{align}
@@ -63,7 +63,7 @@ En la figura (\ref{fig:grafica_Laguerre_01}) se puede apreciar una gráfica con 
     \label{fig:grafica_Laguerre_01}
 \end{figure}
 
-\subsection{Propiedades de los polinomios de Laguerre.}
+\subsection{Propiedades de los polinomios ordinarios de Laguerre.}
 Los polinomios de Laguerre y las funciones derivadas de ellos son importantes en el análisis del comportamiento de algunos sistemas físicos en la mecánica cuántica, como lo hemos revisado en los materiales de trabajo previos.
 \par
 Notarán que el orden en que se revisan las propiedades y características es diferente al que se presentó con los polinomios de Legendre, no hay como tal, un orden preciso de revisión, pero si es importante presentar todas las propiedades, en el caso de las relaciones de recurrencia, recuerden que pueden extender las que se presenten en este material de trabajo, para así tener preparada la \enquote{monografía} correspondiente a esta función especial.
@@ -131,7 +131,7 @@ La función generatriz para los polinomios de Laguerre está dada por:
 G(x, h) = \dfrac{e^{-xh/(1-h)}}{1- h} = \sum_{n=0}^{\infty} L_{n} (x) \, h^{n}
 \label{eq:ecuacion_18_114}
 \end{align}
-\subsubsection{Relaciones de recurrencia.}
+\subsubsection{Relaciones de recurrencia.}\label{sec:subsub_relaciones_recurrencia}
 
 Podemos probar este resultado diferenciando la función generatriz con respecto a $x$ y $h$, respectivamente, para obtener relaciones de recurrencia para los polinomios de Laguerre, que luego pueden combinarse para mostrar que las funciones $L_{n} (x)$ en la ec. (\ref{eq:ecuacion_18_114}) satisfacen efectivamente la fórmula de Laguerre.
 \par
@@ -171,5 +171,128 @@ Haciendo una combinación de los resultados obtenidos en las ecs. (\ref{eq:ecuac
 \begin{align}
 x \, \ptilde{L}_{n} (x) = n \, L_{n} (x) - n \, L_{n-1} (x)
 \label{eq:ecuacion_18_117}
+\end{align}
+
+\section{Funciones asociadas de Laguerre.}
+
+El ecuación diferencial de Laguerre es de la forma:
+\begin{align}
+x \, \stilde{y} + (m +  1 - x) \, \ptilde{y} + n \, y = 0
+\label{eq:ecuacion_18_118}
+\end{align}
+tiene una singularidad regular en $x = 0$ y una singularidad esencial en $x = \infty$. Restringimos nuestra atención a la situación en la que los parámetros $n$ y $m$ son números enteros no negativos, como es el caso de casi todos los problemas físicos. La ecuación de Laguerre asociada ocurre con mayor frecuencia en aplicaciones de la mecánica cuántica. Cualquier solución de la ec. (\ref{eq:ecuacion_18_118}) se denomina \emph{función asociada de Laguerre}.
+\par
+Las soluciones de (18.118) para números enteros no negativos $n$ y $m$ están dadas por los polinomios de asociados de Laguerre:
+\begin{align}
+L_{n}^{m} (x) = (-1)^{m} \dv[m] L_{n+m} (x) \hspace{1.5cm} m \leq n
+\label{eq:ecuacion_18_119}
+\end{align}
+donde $L_{n}(x)$ son los polinomios ordinarios de Laguerre.
+\par
+En particular debemos de revisar que $L_{n}^{0} (x) = L_{n}(x)$, ya hemos comentado que $L_{n}(x)$ es un polinomio de orden $n$ por lo que $L_{n}^{m} (x)$ también lo es.
+\par
+Los primeros polinomios asociados de Laguerre se calculan fácilmente a partir de la ec. (\ref{eq:ecuacion_18_119}):
+\begin{align*}
+L_{0}^{m} (x) &= 1 \\[0.5em]
+L_{1}^{m} (x) &= -x + m + 1 \\[0.5em]
+2! \, L_{2}^{m} (x) &= x^{2} - 2 (m + 2) \, x + (m + 1)(m + 2) \\[0.5em]
+\vdots
+\end{align*}
+En la figura (\ref{fig:grafica_Laguerre_02}) se presenta una gráfica con los primeros polinomios asociados de Laguerre.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Imagenes/Polinomios_Laguerre_04.eps}
+    \caption{Primeros polinomios asociados de Laguerre.}
+    \label{fig:grafica_Laguerre_02}
+\end{figure}
+De hecho, en el caso general, se puede demostrar directamente, a partir de la definición (\ref{eq:ecuacion_18_119}) y la ec. (\ref{eq:ecuacion_18_111}) para los polinomios ordinarios de Laguerre, que:
+\begin{align}
+L_{n}^{m} (x) = \sum_{k=0}^{n} (-1)^{k} \, \dfrac{(n + m)!}{k! \, (n - k)! \, (k + m)!} \, x^{k}
+\label{eq:ecuacion_18_120}
+\end{align}
+
+\subsection{Propiedades de los polinomios asociados de Laguerre}
+
+Las propiedades de los polinomios asociados de Laguerre se derivan directamente de las de los polinomios ordinarios de Laguerre a través de la definición ec. (\ref{eq:ecuacion_18_119}). Por lo tanto, aquí sólo describiremos brevemente los resultados más útiles.
+
+\subsubsection{Fórmula de Rodrigues.}
+
+La fórmula de Rodrigues de los polinomios asociados de Laguerre está dada por la expresión:
+\begin{align}
+L_{n}^{m} (x) = \dfrac{e^{x} \, x^{-m}}{n!} \, \dv[n]{x} \left( x^{n+m} \, e^{-x} \right)
+\label{eq:ecuacion_18_121}
+\end{align}
+Que se puede demostrar al evaluar la enésima derivada usando el teorema de Leibnitz.
+
+\subsubsection{Ortogonalidad mutua.}
+
+Del Tema 3 del curso sabemos que la ecuación diferencial asociada de Laguerre podría transformarse en una ecuación de tipo Sturm Liouville con $p = x^{m+1} \, e^{-x}$, $q = 0$, $\lambda = n$ y $\omega = x^{m} \, e^{-x}$, y su intervalo natural es entonces $[0, \infty]$.
+\par
+Dado que los polinomios asociados de Laguerre $L_{m}^{n} (x)$ son soluciones de la ecuación y son regulares en los puntos extremos, aquellos con el mismo $m$ pero valores diferentes del valor propio $\lambda = n$ deben ser mutuamente ortogonales en este intervalo con respecto a la función de peso $\omega = x^{m} \, e^{-x}$, es decir:
+\begin{align*}
+\int_{0}^{\infty} L_{n}^{m} (x) \, L_{k}^{m} (x) \, x^{m} \, e^{-x} \dd{x} = 0 \hspace{1.5cm} \mbox{si } n \neq k
+\end{align*}
+Este resultado también se puede demostrar utilizando la fórmula de Rodrigues (\ref{eq:ecuacion_18_121}), al igual que la condición de normalización cuando $k = n$:
+\begin{align}
+I \equiv \int_{0}^{\infty} L_{n}^{m} (x) \, L_{n}^{m} (x) \, x^{m} \, e^{-x} \dd{x} =\dfrac{(n + m)!}{n!}
+\label{eq:ecuacion_18_122}
+\end{align}
+Usando la fórmula de Rodrigues (\ref{eq:ecuacion_18_121}), podemos escribir:
+\begin{align*}
+I = \dfrac{1}{n!} \int_{0}^{\infty} L_{n}^{m} \, \dv[n]{x} \left( x^{n+m} \, e^{-x} \right) \dd{x} = \dfrac{(-1)^{n}}{n!} \int_{0}^{\infty} \dv[n]{L_{n}^{m}}{x} \, x^{n+m} \, e^{-x} \dd{x}
+\end{align*}
+en la segunda igualdad se ha integrado por partes $n$ veces y se ha utilizado el hecho de que los términos en los extremos se anulan. De la ec. (\ref{eq:ecuacion_18_120}) tenemos que 
+\begin{align*}
+I = \dfrac{1}{n!} \int_{0}^{\infty} x^{n+m} \, e^{-x} \dd{x} = \dfrac{(n + m)!}{n!}
+\end{align*}
+en la segunda igualdad, se ha ocupado la definición de la función Gamma.
+
+\subsubsection{Expansión de funciones.}
+
+Dada las condiciones de ortogonalidad y normalización, es posible expandir cualquier función (razonable) en el intervalo $0 \leq x < \infty$ en una serie de la forma:
+\begin{align*}
+f(x) = \sum_{n=0}^{\infty} a_{n} \, L_{n}^{m} (x)
+\end{align*}
+en la cual, los coeficientes $a_{n}$ están dado por la expresión:
+\begin{align*}
+a_{n} = \dfrac{n!}{(n + m)!} \int_{0}^{\infty} f(x) \, L_{n}^{m}(x) \, x^{m} \, e^{-x} \dd{x}
+\end{align*}
+Es conveniente conocer que en ocasiones se definen las \emph{funciones ortogonales asociadas de Laguerre}:
+\begin{align*}
+\phi_{n}^{m} (x) = x^{m/2} \, e^{-x/2} \, L_{n}^{m} (x)
+\end{align*}
+que también se puede utilizar para producir una expansión en series de una función en el intervalo $0 \leq x < \infty$.
+
+\subsubsection{Función generatriz.}
+
+La función generatriz de los polinomios asociados de Laguerre están dados por:
+\begin{align}
+G(x, h) = \dfrac{\exp\big[(-x \, h)/(1 - h)\big]}{(1 - h)^{m+1}} = \sum_{n=0}^{\infty} L_{n}^{m} (x) \, h^{n}
+\label{eq:ecuacion_18_123}
+\end{align}
+Esta expresión se obtiene al diferenciar $m$ veces con respecto a $x$ la función generatriz (\ref{eq:ecuacion_18_114}) de los polinomios ordinarios de Laguerre y ocupando la ec. (\ref{eq:ecuacion_18_119}).
+\par
+Como ejemplo del uso de la función generatriz veamos su manejo para obtener una expresión de $L_{n}^{m}(0)$:
+\par
+Tenemos entonces que:
+\begin{align*}
+&\sum_{n=0}^{\infty} L_{n}^{m} (0) \, h^{n} = \dfrac{1}{(1 - h)^{m+1}} = \\[0.5em]
+&= 1 + (m + 1) \, h + \dfrac{(m + 1)(m + 2)}{2!} \, h^{2} + \ldots + \\[0.5em]
+&+ \dfrac{(m + 1)(m + 2) \ldots (m + n)}{n!} \, h^{n} + \ldots  
+\end{align*}
+en la segunda igualdad, se ha expandido el lado derecho usando el teorema del binomio. Al igualar los coeficientes de $h^{n}$, se obtiene:
+\begin{align*}
+L_{n}^{m} (0) = \dfrac{(n + m)!}{n! \, m!}
+\end{align*}
+
+\subsubsection{Relaciones de recurrencia.}
+
+Las distintas relaciones de recurrencia por los polinomios asociados de Laguerre se obtienen diferenciando la función generadora (\ref{eq:ecuacion_18_123}) con respecto a uno o ambos de $x$ y $h$, o diferenciando con respecto a $x$ las relaciones de recurrencia de los polinomios ordinarios de Laguerre, discutidos en la subsección (\ref{sec:subsub_relaciones_recurrencia}). De las relaciones de recurrencia de los polinomios asociados de Laguerre, se presentan a continuación las más útiles:
+\begin{align}
+(n + 1) \, L_{n+1}^{m} (x) &= (2 \, n + m + 1 - x) \, L_{n}^{m} (x) - (n + m) \, L_{n-1}^{m} (x) \label{eq:ecuacion_18_124} \\[0.5em]
+x \, \ptilde{(L_{n}^{m})} (x) &= n \, L_{n}^{m} (x) - (n + m) \, L_{n-1}^{m} (x) \label{eq:ecuacion_18_125} \\[0.5em]
+\ptilde{L_{n}^{m}} &= - L_{n-1}^{m+1} (x) \label{eq:ecuacion_18_125a} \\[0.5em]
+L_{n}^{m} (x) &= L_{n}^{m+1} (x) - L_{n-1}^{m+1} (x) \label{eq:ecuacion_18_125b} \\[0.5em]
+n \, L_{n}^{m} (x) &= (n + m) \, L_{n-1}^{m} (x) - x \, L_{n-1}^{m+1} (x) \label{eq:ecuacion_18_125c}
 \end{align}
 \end{document}
