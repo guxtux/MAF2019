@@ -1,0 +1,134 @@
+\input{../Preambulos/preambulo_materiales}
+%\usepackage{showframe}
+\usepackage{apacite}
+\title{La ecuación de Jacobi y de Gengenbauer \\ \large {Tema 5 - Funciones especiales} \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+\section{Ecuación de Jacobi.}
+
+Cuando se estudian las funciones hipergeométricas notamos que si $a$ o $b$ es un entero negativo por ejemplo $-n$ (con $n$ natural) la serie queda truncada y resulta un polinomio de grado $n$.
+\par
+Consideremos entonces la ecuación hipergeométrica con las siguientes particularidades:
+\begin{align*}
+a &= -n \\[0.5em]
+b &= n + \alpha + \beta + 1 \\[0.5em]
+c &= \alpha + 1
+\end{align*}
+La ecuación queda modificada es:
+\begin{align*}
+z (1 - z) \, \stilde{y} (z) + \big[ 1 + \alpha - (\alpha + \beta + 2) \, z \big] \, \ptilde{y} (z) + n(n + \alpha + \beta + 1) \, y(z) = 0
+\end{align*}
+Al hacer el cambio de variable $z = (1 - x)/2$, se obtiene la llamada \emph{ecuación de Jacobi}:
+\begin{align*}
+(1 {-} x^{2}) \, \dv[2]{x} y(x) + \big[ \beta {-} \alpha {-} (\alpha {+} \beta {+} 2) \, x \big] \, \dv{x} y(x) + n(n {+} \alpha {+} \beta {+} 1) \, y(x) = 0
+\end{align*}
+Para cada $n \in \mathbb{N}$ y para cada $\alpha$ y $\beta$, la solución de esta ecuación que satisfaga la condición:
+\begin{align*}
+P_{n}^{\alpha \beta} \, (1) = \dfrac{\Gamma (\alpha + n + 1)}{\Gamma (\alpha + 1) \, n!}
+\end{align*}
+son los denominados \emph{polinomios de Jacobi}. Con esta condición entre los polinomios de Jacobi y la función hipergeométrica será:
+\begin{align*}
+P_{n}^{\alpha \beta} \, (x) = \dfrac{\Gamma (\alpha + n + 1)}{\Gamma (\alpha + 1) \, n!} \, F \left( -n, n + \alpha + \beta + 1, \alpha + 1; \dfrac{1 - x}{2} \right)
+\end{align*}
+
+\subsection{Relación de recurrencia.}
+
+Dada la relación entre los polinomios de Jacobi y la función hipergeométrica, se pueden aplicar las relaciones contiguas para establecer las relaciones entre polinomios de Jacobi de distintos grados. A partir de las relaciones contiguas:
+\begin{align*}
+(c - a) \, F(a - 1, b, c; z) &+ \big[ 2 \, a - c - (a - b) \, z \big] \, F(a, b, c; z) + \\[0.5em]
+&+ a(z - 1) \, F( a + 1, b, c; z) = 0
+\end{align*}
+y con la relación:
+\begin{align*}
+(c - b) \, F(a, b - 1, c; z) &+ \big[ 2 \, b - c - (b - a) \, z \big] \, F(a, b, c; z) + \\[0.5em]
+&+ b(z - 1) \, F( a, b + 1, c; z) = 0
+\end{align*}
+y teniendo en cuenta que:
+\begin{align*}
+P_{n+1}^{\alpha \beta} \, (x) = \dfrac{\Gamma (\alpha + n + 2)}{\Gamma (\alpha + 1) \, (n + 1)!} \, F \left( -n + 1, n + \alpha + \beta + 2, \alpha + 1; \dfrac{1 - x}{2} \right)
+\end{align*}
+además de:
+\begin{align*}
+P_{n-1}^{\alpha \beta} \, (x) = \dfrac{\Gamma (\alpha + n)}{\Gamma (\alpha + 1) \, (n + 1)!} \, F \left( -n + 1, n + \alpha + \beta + 2, \alpha + 1; \dfrac{1 - x}{2} \right)
+\end{align*}
+podemos establecer la relación entre los polinomios:
+\begin{align*}
+&(\alpha + \beta + 2 \, n + 1) \big[ \alpha^{2} - \beta^{2} + (\alpha + \beta + 2 \, n)(\alpha + \beta + 2 \, n + 2) \big] \, P_{n}^{\alpha \beta} \, (x) = \\[0.5em]
+&= 2 (n + 1)(\alpha + \beta + n + 1)(\alpha + \beta +  2 \, n) \, P_{n+1}^{\alpha \beta} \, (x) + \\[0.5em]
+&+ 2 (\alpha + n)(\beta + n)(\alpha + \beta +  2 \, n + 2) \, P_{n-1}^{\alpha \beta} \, (x)
+\end{align*}
+Existen otras relaciones de recurrencia que vinculan diferentes valores de $\alpha$ y $\beta$, las cuales se pueden obtener a partir de las relaciones contiguas.
+
+\subsection{Función generatriz.}
+
+Los polinomios de Jacobi admiten como función generatriz:
+\begin{align*}
+g(x, t) = \dfrac{2^{\alpha+\beta}}{\vb{R}} \, \big[ 1 - t + \vb{R} \big]^{-\alpha} \, \big[ 1 + t + \vb{R} \big]^{-\beta}
+\end{align*}
+donde
+\begin{align*}
+\vb{R} = \sqrt{1 - 2 \, x \, t + t^{2}}
+\end{align*}
+de manera tal que al desarrollar $g(x, t)$ en potencias de $t$:
+\begin{align*}
+g(x, t) = \sum_{\ell=0}^{\infty} P_{\ell}^{\alpha \beta} \, (x) \, t^{\ell}
+\end{align*}
+siendo un desarrollo válido para $\abs{t} < 1$.
+
+\subsection{Fórmula de Rodrigues.}
+
+Además de la función generatriz, los polinomios de Jaconi pueden calcularse directamente a partir de la fórmula de Rodrigues, la cual viene dada por la expresión:
+\begin{align*}
+P_{n}^{\alpha \beta} \, (x) = \dfrac{(-1)^{n}}{2^{n} \, n!} (1 - x)^{-\alpha} \, (1 + x)^{-\beta} \, \dv[n]{x} \big[ (1 - x)^{\alpha+n} \, (1 + x)^{\beta+n} \big]
+\end{align*}
+Como ejemplo calculemos el polinomio $P_{1}^{\alpha \beta} \, (x)$, como:
+\begin{align*}
+P_{1}^{\alpha \beta} \, (x) = - \dfrac{1}{2} (1 - x)^{- \alpha} \, (1 + x)^{-\beta} \, \dv{x} \big[ (1 - x)^{\alpha+1} \, (1 + x)^{\beta+1} \big]
+\end{align*}
+entonces:
+\begin{align*}
+P_{1}^{\alpha \beta} \, (x) &= \dfrac{1}{2} (\alpha + 1)(1 + x) - (\beta + 1) \, \dfrac{1}{2} (1 - x) = \\[0.5em]
+&= \dfrac{\alpha - \beta}{2} + \dfrac{\alpha + \beta + 2}{2} \, x
+\end{align*}
+En particular, si $\alpha$ y $\beta$ son nulos, se tiene que:
+\begin{align*}
+P_{1}^{0 \, 0} \, (x) =  x
+\end{align*}
+
+\section{Ecuación de Gegenbauer.}
+
+Si la ecuación de Jacobi, consideramos los valores para $\alpha$ y $\beta$:
+\begin{align*}
+\alpha = \beta = \lambda - \dfrac{1}{2}
+\end{align*}
+entonces se obtiene la denominada \emph{ecuación de Gegenbauer}:
+\begin{align*}
+(1 - x^{2}) \, \dv[2]{x} \omega (x) - (2 \, \lambda + 1) \, x \, \dv{x} \omega (x) +  n(n + 2 \, \lambda) \, \omega (x) = 0
+\end{align*}
+Cuya solución normalizada:
+\begin{align*}
+C_{n} (1) = \dfrac{\Gamma (2 \, \lambda + n)}{\Gamma (2 \, \lambda) \, n!}
+\end{align*}
+son los denominados \emph{polinomios de Gegenbauer} o también conocidos como \emph{funciones ultraesféricas}:
+\begin{align*}
+C_{n}^{\lambda} = \dfrac{\Gamma (2 \, \lambda + n)}{\Gamma (2 \, \lambda) \, n!} \, F \left( -n, n + 2 \, \lambda, \lambda + \dfrac{1}{2}; \dfrac{1 - x}{2} \right)
+\end{align*}
+Claramente, al ser los polinomios de Gegenbauer propiamente unos polinomios de Jacobi, éstos satisfacerán las relaciones de recurrencia, la fórmula de Rodrigues y generatriz, solo es necesario determinar los valores de $\alpha$ y $\beta$.
+
+\subsection{Caso particular \texorpdfstring{$\lambda = 1/2$}{}.}
+
+Partiendo de la ecuación de Gegenbauer, haciendo que $\lambda = 1/2$, por lo que en términos de los polinomios de Jacobi se tiene que $\alpha = \beta = 0$, se obtiene la \emph{ecuación de Legendre}:
+\begin{align*}
+(1 - x^{2}) \, \dv[2]{x} \omega(x) - 2 \, x \, \dv{x} \omega (x) + n(n + 1) \, \omega (x) = 0
+ \end{align*}
+cuya solución son los \emph{polinomios de Legendre}, que en términos de la función hipergeométrica es:
+\begin{align*}
+P_{n} (x) =  F \left( -n, n + 1, 1; \dfrac{1 - x}{2} \right)
+\end{align*}
+\end{document}

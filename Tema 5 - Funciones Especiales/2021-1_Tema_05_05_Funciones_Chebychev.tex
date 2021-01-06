@@ -155,4 +155,101 @@ U_{2n+1} (0) &= 0
 
 \section{Propiedades de los polinomios de Chebychev.}
 
+Los polinomios de Chebyshev $T_{n} (x)$ y $U_{n} (x)$ tienen sus principales aplicaciones en el análisis numérico.
+\par
+Su uso para representar otras funciones en el rango $\abs{x} < 1$ juega un papel importante en la integración numérica; la cuadratura Gauss-Chebyshev es de particular relevancia para la evaluación precisa de integrales cuyos integrandos contienen factores del tipo $(1 - x)^{\pm 1/2}$.
+\par
+Por tanto, conviene destacar algunas de sus principales propiedades.
+\subsection{Fórmula de Rodrigues.}
+Los polinomios de Chebychev $T_{n}(x)$ y $U_{n}(x)$ se pueden expresar en términos de una fórmula de Rodrigues, de manera similar que las otras funciones especiales; se tiene que:
+\begin{align*}
+T_{n}(x) &= \left[ \dfrac{(-1)^{n} \, \sqrt{\pi} \, (1 - x^{2})^{1/2}}{2^{n} \, \left( n - \dfrac{1}{2} \right)!} \right] \, \dv[n]{x} (1 - x^{2})^{n-1/2} \\[0.5em]
+U_{n}(x) &= \left[ \dfrac{(-1)^{n} \, \sqrt{\pi} \, (n+1)}{2^{n+1} \, \left( n - \dfrac{1}{2} \right)! (1 - x^{2})^{1/2}} \right] \, \dv[n]{x} (1 - x^{2})^{n+1/2}
+\end{align*}
+
+\subsection{Ortogonalidad mutua.}
+La ecuación diferencial de Chebychev se puede ajustar a una del tipo Sturm-Liouville con $p = (1 - x^{2})^{1/2}$, $\lambda = n^{2}$ y $\rho = (1 - x^{2})^{-1/2}$, su intervalo natural es $[-1, 1]$.
+\par
+Como los polinomios de Chebychev de primera clase $T_{n}(x)$, son soluciones de la ecuación diferencial de Chebychev y son regulares en los puntos extremos $x = \pm 1$, deben de ser mutuamente ortogonales en este intervalo con respecto a la función de peso $\rho = (1 - x^{2})^{1/2}$, es decir:
+\begin{align}
+\int_{-1}^{1} T_{n}(x) \, T_{m}(x) \, (1 - x^{2})^{-1/2} \dd{x} = 0 \hspace{1.5cm} \mbox{si  } n \neq m
+\label{ec:ecuacion_18_061}
+\end{align}
+La ortogonalización cuando $m = n$, es fácil de deducir haciendo la sustitución $x = \cos \theta$ y usando la ec. (\ref{eq:ecuacion_18_055}), de donde se obtiene el resultado:
+\begin{align}
+\int_{-1}^{1} T_{n} (x) \, T_{n} (x) (1 - x^{2})^{-1/2} \dd{x} = \begin{cases}
+\pi & \mbox{para  } n = 0 \\[0.5em]
+\dfrac{\pi}{2} & \mbox{para  } n = 1, 2, 3, \ldots
+\end{cases}
+\label{eq:ecuacion_18_062}
+\end{align}
+Para los polinomios de Chebychev de segunda clase $U_{n}(x)$, vemos que de la ec. (\ref{eq:ecuacion_18_058}):
+\begin{align*}
+(1 - x^{2})^{1/2} \, U_{n} (x) = V_{n+1} (x)
+\end{align*}
+satisface la ecuación diferencial de Chebychev (\ref{eq:ecuacion_18_054}) con $\nu = n + 1$. Por lo que la relación de ortogonalidad para los $U_{n}(x)$ se obtiene al reemplazar $T_{i}(x)$ por $V_{i+1} (x)$ en la ec. (\ref{ec:ecuacion_18_061}), obteniendo:
+\begin{align*}
+\int_{-1}^{1} U_{n}(x) \, U_{m}(x) \, (1 - x^{2})^{1/2} \dd{x} = 0 \hspace{1.5cm} \mbox{si  } n \neq m
+\end{align*}
+La correspondiente condición de normalización cuando $n = m$, se puede obtener al hacer nuevamente la sustitución $x  = \cos \theta$:
+\begin{align*}
+\int_{-1}^{1} U_{n}(x) \, U_{n}(x) \, (1 - x^{2})^{1/2} \dd{x} = \dfrac{\pi}{2}
+\end{align*}
+
+\subsection{Expansión de funciones.}
+Dadas las condiciones de ortogonalización y normalización, permiten que cualquier función (razonable) pueda expandirse en el intervalo $\abs{x} < 1$ en una serie de la forma:
+\begin{align*}
+f(x) = \dfrac{a_{0}}{2} + \sum_{n=1}^{\infty} a_{n} \, T_{n} (x)
+\end{align*}
+en donde los coeficienes en la expresión están dados por:
+\begin{align*}
+a_{n} = \dfrac{2}{\pi} \int_{-1}^{1} f(x) \, T_{n} (x) \, (1 - x^{2})^{-1/2} \dd{x}
+\end{align*}
+Para los polinomios de Chebychev de segunda clase, también es posible expandir cualquier función razonable, en el intervalo $\abs{x} < 1$ en una serie de la forma:
+\begin{align*}
+f(x) = \sum_{n=0}^{\infty} a_{n} \, U_{n} (x)
+\end{align*}
+en donde los coeficientes $a_{n}$ están dados por:
+\begin{align*}
+a_{n} = \dfrac{2}{\pi} \int_{-1}^{1} f(x) \, U_{n}(x) \, 
+\end{align*}
+
+\subsection{Funciones generatrices.}
+
+Las fuciones generatrices para los polinomios de Chebychev de primera y segunda clase, están dados respectivamente por las expresiones:
+\begin{align}
+G_{I} (x, h) &= \dfrac{1 - x \, h}{1 - 2 \, x \, h + h^{2}} = \sum_{n=0}^{\infty} T_{n} (x) \, h^{n} \label{eq:ecuacion_18_063} \\[0.5em]
+G_{II} (x, h) &= \dfrac{1}{1 - 2 \, x \, h + h^{2}} = \sum_{n=0}^{\infty} U_{n} (x) \, h^{n} \label{eq:ecuacion_18_064}
+\end{align}
+Estas definiciones pueden probarse de manera similar a la utilizada para la función generadora de los polinomios de Legendre. Para los polinomios de Chebyshev, sin embargo, las funciones generadoras son de uso menos práctico, ya que la mayoría de los resultados útiles se pueden obtener más fácilmente aprovechando las formas trigonométricas (\ref{eq:ecuacion_18_055}), como se verá a continuación.
+
+\subsection{Relaciones de recurrencia.}
+
+Hay varias relaciones de recurrencia útiles para los polinomios de Chebychev $T_{n}(x)$ y $U_{n}(x)$, la mayoría de ellas se deducen fácilmente al hacer $x = \cos \theta$ y usando las ecs. (\ref{eq:ecuacion_18_055}) y (\ref{eq:ecuacion_18_058}), así tendremos:
+\begin{align}
+T_{n} (x) &= T_{n} (\cos \theta) = \cos n \theta \label{eq:ecuacion_18_065} \\[0.5em]
+U_{n} (x) &= U_{n} (\cos \theta) = \dfrac{\sin (n + 1) \theta}{\sin \theta} \label{eq:ecuacion_18_066} 
+\end{align}
+Luego, se puede usar la fórmula estándar para las funciones trigonométricas para derivar una amplia variedad de relaciones de recurrencia. De particular utilidad son las identidades trigonométricas:
+\begin{align}
+\cos (n \pm 1)\theta &= \cos n \theta \, \cos \theta \mp \sin n \theta \, \sin \theta \label{eq:ecuacion_18_067} \\[0.5em]
+\sin (n \pm 1)\theta &= \sin n \theta \, \cos \theta \pm \cos n \theta \, \sin \theta \label{eq:ecuacion_18_068}
+\end{align}
+Dos importantes relaciones de recurrencia son:
+\begin{align}
+T_{n+1} (x) - 2 \, x \, T_{n} (x) + T_{n-1} (x) &= 0 \label{eq:ecuacion_18_069} \\[0.5em]
+U_{n+1} (x) - 2 \, x \, U_{n} (x) + U_{n-1} (x) &= 0 \label{eq:ecuacion_18_070}
+\end{align}
+Las relaciones de recurrencia (\ref{eq:ecuacion_18_069}) y (\ref{eq:ecuacion_18_070}) son extremadamente útiles en el cálculo práctico de polinomios de Chebyshev. Por ejemplo, dados los valores de $T_{0} (x)$ y $T_{1} (x)$ en algún punto $x$, el resultado dado por la ec. (\ref{eq:ecuacion_18_069}) puede usarse iterativamente para obtener el valor de cualquier $T_{n} (x)$ en ese punto; de manera similar, la ec. (\ref{eq:ecuacion_18_070}) puede usarse para calcular el valor de cualquier $U_{n} (x)$ en algún punto $x$, dados los valores de $U_{0} (x)$ y $U_{1} (x)$ en ese punto.
+\par
+Otras relaciones de recurrencia que satisfacen los polinomios de Chebyshev son:
+\begin{align}
+T_{n} (x) &= U_{n}(x) - x \, U_{n-1} (x) \label{eq:ecuacion_18_071} \\[0.5em]
+(1 - x^{2}) \, U_{n} (x) &= x \, T_{n+1} (x) - T_{n+2} (x) \label{eq:ecuacion_18_072}
+\end{align}
+que establecen relaciones útiles entre los dos conjuntos de polinomios $T_{n} (x)$ y $U_{n} (x)$. La relación (\ref{eq:ecuacion_18_071}) se sigue inmediatamente de (\ref{eq:ecuacion_18_068}), mientras que la ec. (\ref{eq:ecuacion_18_072}) se sigue de la ec. (\ref{eq:ecuacion_18_067}), con $n$ reemplazado por $n + 1$, al observar que $\sin \theta = 1 - x^{2}$. Pueden obtenerse resultados útiles adicionales relacionados con los derivadas de los polinomios de Chebyshev a partir de las ecs. (\ref{eq:ecuacion_18_065}) y (\ref{eq:ecuacion_18_066}):
+\begin{align*}
+\ptilde{T}_{n} (x) &= n \, U_{n-1} (x) \\[0.5em]
+(1 - x^{2}) \, \ptilde{U}_{n} (x) &= x \, U_{n} (x) - (n + 1) \, T_{n+1} (x)
+\end{align*}
 \end{document}
