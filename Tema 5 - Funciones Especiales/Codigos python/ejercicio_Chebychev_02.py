@@ -1,4 +1,3 @@
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import quad
@@ -15,7 +14,7 @@ def integrando(f,p):
 
 x = np.linspace(-1,1)
 
-n = 3
+n = 10
 x1 = 2./(n-1)
 
 x2 = np.arange(-1,1.1,x1)
@@ -95,7 +94,7 @@ plt.text(-0.85,25,'El distancia máxima es: ' + str(round(diferencia, 2)))
 plt.figure(2)
 plotbase()
 plt.plot(raices, f(raices), 'or')
-plt.plot(t, p_raices(t), color='r')
+plt.plot(t, p_raices(t), color='g')
 plt.title('Ajuste con las raíces de $T_{n}$')
 plt.text(-0.85,40,'El error es: ' + str(round(normaC, 2)))
 plt.text(-0.85,25,'El distancia máxima es: ' + str(round(diferenciaC, 2)))
