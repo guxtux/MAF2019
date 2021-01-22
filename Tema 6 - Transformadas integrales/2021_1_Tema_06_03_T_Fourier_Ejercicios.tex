@@ -1,0 +1,76 @@
+\input{../Preambulos/preambulo_materiales}
+%\usepackage{showframe}
+\title{Ejercicios Transformadas de Fourier \\ \large {Tema 6 - Transformadas integrales} \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+\section{Temperatura en una placa semiinfinita.}
+
+La temperatura constante de una placa semiinfinita está dada por la siguiente ecuación diferencial, condiciones iniciales y de frontera:
+\begin{align*}
+&\pdv[2]{u}{x} + \pdv[2]{u}{y} = 0 \hspace{1cm} 0 < x < \pi, \hspace{0.3cm} y > 0 \\[0.5cm]
+&u(0, y) = 0 \hspace{1cm} u(\pi, u) = e^{-y} \hspace{0.3cm} y > 0 \\[0.5cm]
+&\pdv{u}{y} \eval_{y=0} = 0 \hspace{1cm} 0 < x < \pi
+\end{align*}
+\textbf{Encuentra el valor de temperatura de $u(x,y)$}.
+\\[0.5em]
+\texttt{Solución. } El dominio de la variable y la condición prescrita en $y = 0$, indican que se puede aplicar la transformada coseno de Fourier al problema, así:
+\begin{align*}
+F_{c} \big[u(x,y)\big] = \int_{0}^{\infty} u(x, y) \, \cos \alpha \, y \dd{y} = U(x, \alpha)
+\end{align*}
+Como la transformada coseno de Fourier de la derivada de una función es:
+\begin{align*}
+F_{c} \big[\stilde{y}(x)] = - \alpha^{2} \, F[\alpha] - \ptilde{f} (0)
+\end{align*}
+se tiene que:
+\begin{align*}
+F_{c} \left[\pdv[2]{u}{x} \right] + F_{c} \left[\pdv[2]{u}{y} \right] = F_{c} [0]
+\end{align*}
+por lo tanto:
+\begin{align*}
+\dv[2] - \alpha^{2} \, U(x, \alpha) - u_{y} (x, 0) = 0 \hspace{0.3cm} \Rightarrow \hspace{0.3cm} \dv[2]{U}{x} - \alpha^{2} \, U = 0
+\end{align*}
+Puesto que el dominio de $x$ es un intervalo finito, es preferible escribir la solución a la EDO como:
+\begin{align}
+U(x, \alpha) = c_{1} \, \cosh (\alpha \, x) + c_{2} \, \senh (\alpha \, x)
+\label{eq:ecuacion_016}
+\end{align}
+Ahora bien:
+\begin{align*}
+F_{c} \big[ u(0, y)\big] &= F_{c} [0] \\[0.5em]
+F_{c} \big[ u(\pi, y)\big] &= F_{c} \big[ e^{-y} \big]
+\end{align*}
+son equivalentes a
+\begin{align*}
+U(0, \alpha) &= 0 \\[0.5em]
+U(\pi, \alpha) &= \dfrac{1}{1 +  \alpha^{2}}
+\end{align*}
+respectivamente.
+
+Cuando se aplican estas últimas condiciones, la solución(\ref{eq:ecuacion_016}) nos devuelve:
+\begin{align*}
+c_{1} &= 0 \\[0.5em]
+c_{2} &= \dfrac{1}{(1 + \alpha^{2}) \, \sinh \alpha \pi}
+\end{align*}
+Por lo tanto
+\begin{align*}
+U(x, \alpha) = \dfrac{\senh \alpha \, x}{1 + \alpha^{2}) \, \sinh \alpha \pi}
+\end{align*}
+de modo que al ocupar la transformada coseno inversa de Fourier:
+\begin{align*}
+F_{c}^{-1} \big[F(\alpha)\big] = \dfrac{2}{\pi} \int_{0}^{\infty} F[\alpha] \, \cos \alpha \, x \dd{x}
+\end{align*}
+obtenemos el siguiente resultado:
+\begin{align*}
+u(x, y) = \dfrac{2}{\pi} \int_{0}^{\infty}  \dfrac{\senh \alpha \, x}{1 + \alpha^{2}) \, \sinh \alpha \pi} \, \cos \alpha \, x \dd{x}
+\end{align*}
+
+
+
+\end{document}
