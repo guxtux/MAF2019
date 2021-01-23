@@ -11,10 +11,10 @@ def solucion(alfa, k, omega):
 
 
 t = np.linspace(-10, 10, 200)
-t2 = np.linspace(-3, 3, 100)
+t2 = np.linspace(-4, 4, 150)
 
 alfa = 1
-k = 0.6
+k = 0.2
 
 plt.figure(1)
 plt.plot(t, f(t, k, alfa))
