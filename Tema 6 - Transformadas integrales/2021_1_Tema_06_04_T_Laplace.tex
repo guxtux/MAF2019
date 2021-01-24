@@ -681,4 +681,35 @@ i(t) = \dfrac{E}{R - a \, L} \, \big[ e^{-a t} - e^{-R t /L}\big]
 \subsection{Solución de EDO simultáneas con coeficientes constantes.}
 
 La EDO que involucra más de una variable dependiente pero con una sola variable independiente da lugar a ecuaciones simultáneas. El procedimiento para resolver tales ecuaciones simultáneas es casi el mismo que se discutió previamente. Aquí también, tenemos que tomar la transformada de Laplace de las ecuaciones simultáneas para reducirlas al número correspondiente de ecuaciones algebraicas que luego pueden resolverse para las variables dependientes transformadas de Laplace. Finalmente invirtiendo estas relaciones podemos recuperar las variables dependientes formando las soluciones requeridas.
+
+\begin{ejemplo}
+Resolvamos el siguiente problema de valores iniciales definido por las EDO simultáneas:
+\begin{align*}
+\dv{x}{t} - y &= e^{t} \hspace{1.5cm} x(0) =  1 \\[0.5em]
+\dv{y}{t} + x &= \sin t \hspace{1.5cm} y(0) =  0
+\end{align*}
+Solución:
+\\[0.5em]
+Aplicando la transformada de Fourier de las dos EDO con las condiciones iniciales indicadas, se tiene que:
+\begin{align*}
+p \, \overline{x} (p) - 1 - \overline{y} (p) = \dfrac{1}{p -1} \\[0.5em]
+p \, \overline{y} (p) + \overline{x} (p) = \dfrac{1}{p^{2} -1}
+\end{align*}
+Resolviendo éstas dos ecuaciones para $\overline{x}(p)$ y $\overline{y}(p)$, llegamos a:
+\begin{align*}
+\overline{x}(p) = \dfrac{p}{p^{2} + 1} + \dfrac{p}{(p - 1)(p^{2} + 1)} + \dfrac{1}{(p^{2} + 1)^{2}}
+\end{align*}
+Usando la transformada inversa de Laplace, se tiene:
+\begin{align*}
+x(t) = \dfrac{1}{2} \big[ \cos t + 2 \, \sin t +  e^{t} - t \, \cos t \big]
+\end{align*}
+De la misma manera se llega a:
+\begin{align*}
+\overline{y} (p) = - 1 - \dfrac{1}{p - 1} + p \, \overline{x} (p)
+\end{align*}
+Que al aplicar la transformada inversa de Laplace y simplificando la expresión, tenemos que:
+\begin{align*}
+y(t)= \dfrac{1}{2} \big[ t \, \sin t - e^{t} + \cos t - \sin t \big]
+\end{align*}
+\end{ejemplo}
 \end{document}
