@@ -1,0 +1,390 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\makeatletter
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.8em}{}{}
+\makeatother
+\date{10 de marzo de 2021}
+\title{Sistemas de coordenadas generalizadas}
+\subtitle{La física y la geometría}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame{\frametitle{Contenido}\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Sistemas de coordenadas}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+%Ref. Moon (1988) - Field Theory Handbook. Section I
+
+\subsection{Métrica de un sistema}
+
+\begin{frame}
+\frametitle{Coeficientes métricos}
+Un sistema coordenado ortogonal $(u^{1}, u^{2}, u^{3})$ se puede expresar mediante los coeficientes métricos:
+\begin{align*}
+g_{11}, g_{22}, g_{33}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Tensor métrico}
+El tensor métrico es un tensor de rango $2$ que define los conceptos como distancia, ángulo y volumen en un espacio euclídeo.
+\pause
+\begin{align*}
+g = \mqty(
+g_{11} & g_{12} & g_{13} \\
+g_{21} & g_{22} & g_{23} \\
+g_{31} & g_{32} & g_{33}
+)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Relación con los factores de escala}
+La relación que existe entre los coeficientes métricos y los factores de escala es la siguiente:
+\pause
+\begin{align*}
+g = \mqty(
+h_{1}^{2} & g_{12} & g_{13} \\
+g_{21} & h_{2}^{2} & g_{23} \\
+g_{31} & g_{32} & h_{3}^{2}
+)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Diferencial de desplazamiento}
+Definimos el diferencial del desplazamiento (una distancia infinitesimal) como:
+\pause
+\begin{align}
+(\dd{s})^{2} = g_{11} \, (\dd{u^{1}})^{2} + g_{22} \, (\dd{u^{2}})^{2} + g_{33} \, (\dd{u^{3}})^{2}
+\label{eq:ecuacion_01_01}
+\end{align}
+Donde \pause
+\begin{align}
+g_{ii} = \left( \pdv{x^{1}}{u^{i}} \right)^{2} + \left( \pdv{x^{2}}{u^{i}} \right)^{2} + \left( \pdv{x^{3}}{u^{i}} \right)^{2}
+\label{eq:ecuacion_01_02}
+\end{align}
+y las $x^{i}$ son las coordenadas rectangulares.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo con coordenadas parabólicas}
+Consideremos el sistema de coordenadas parabólicas, tal que: $u^{1} = \mu$, $u^{2} = \nu$, $u^{3} = \psi$.
+\\
+\bigskip
+\pause
+Entoces:
+\begin{align*}
+\begin{cases}
+x^{1} = \mu \, \nu \, \cos \psi \\
+x^{2} = \mu \, \nu \, \sin \psi \\
+x^{3} = \dfrac{1}{2} (\mu^{2} - \nu^{2})
+\end{cases}
+\end{align*}  
+\end{frame}
+\begin{frame}
+\frametitle{Coeficientes métricos del sistema}
+Los coeficientes métricos para el sistema de coordenadas parabólico los obtenemos al usar la ec. (\ref{eq:ecuacion_01_02}):
+\pause
+\begin{eqnarray*}
+g_{11} &=& \left( \pdv{x^{1}}{\mu} \right)^{2} + \left( \pdv{x^{2}}{\mu} \right)^{2} + \left( \pdv{x^{3}}{\mu} \right)^{2} = \\[0.5em] \pause
+&=& \big( \nu \, \cos \psi \big)^{2} + \big( \nu \, \sin \psi \big)^{2} + \mu^{2} = \\[0.5em] \pause
+&=& \mu^{2} + \nu^{2}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Coeficientes métricos del sistema}
+Haciendo el cálculo de manera similar para los otros dos coeficientes métricos:
+\begin{align*}
+g_{22} &= \mu^{2} + \nu^{2} \\[0.5em]
+g_{33} &= \mu^{2} \, \nu^{2}
+\end{align*}
+\pause
+Una vez conocidos los coeficientes métricos, podemos obtener de manera fácil el volumen, el gradiente, rotacional, etc.
+\end{frame}
+\begin{frame}
+\frametitle{Desplazamientos infinitesimales sobre los ejes}
+La ec. (\ref{eq:ecuacion_01_01}) nos dice que las distancias infinitesimales sobre los ejes coordenados son:
+\begin{align*}
+\big( g_{11} \big)^{\frac{1}{2}} \dd{u^{1}}, \hspace{0.5cm} \big( g_{22} \big)^{\frac{1}{2}} \dd{u^{2}}, \hspace{0.5cm} \big( g_{33} \big)^{\frac{1}{2}} \dd{u^{3}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Elemento de área}
+El elemento de área sobre la superficie $u^{1} \, u^{2}$ está dado por:
+\begin{eqnarray}
+\dd{A} &=& \big[ (g_{11})^{\frac{1}{2}} \dd{u^{1}} \big] \, \big[ (g_{22})^{\frac{1}{2}} \dd{u^{2}} \big] = \nonumber \\[0.5em] \pause
+&=& (g_{11} \, g_{22})^{\frac{1}{2}} \dd{u^{1}} \dd{u^{2}}
+\label{ec:ecuacion_01_03}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Elemento de volumen}
+De manera similar, el elemento de volumen está dado por:
+\begin{eqnarray}
+\dd{V} &=& (g_{11} \, g_{22} \, g_{33})^{\frac{1}{2}} \, \dd{u^{1}} \dd{u^{2}} \dd{u^{3}} = \nonumber \\[0.5em] \pause
+&=& g^{\frac{1}{2}} \, \dd{u^{1}} \dd{u^{2}} \dd{u^{3}} \label{eq:ecuacion_01_04}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo: Área de un paraboloide de revolución}
+¿Cuál es el área de un paraboloide de revolución $(\mu = \mu_{0})$ a partir del vértice a una altura definida por $\nu_{0}$?
+\\
+\bigskip
+\pause
+Vamos a usar las coordenadas parabólicas ($\mu, \nu, \psi)$, y con:
+\begin{align*}
+g_{11} = g_{22} = \mu^{2} + v^{2} \hspace{1cm} g_{33} = \mu^{2} \, \nu^{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Área del paraboloide de revolución}
+Entonces al ocupar la ec. (\ref{ec:ecuacion_01_03}), llegamos a: \pause
+\begin{align*}
+\dd{A} = \mu_{0} \, \nu \, \big( \mu_{0}^{2} + \nu^{2} \big)^{\frac{1}{2}} \dd{\nu} \dd{\psi}
+\end{align*}
+\\
+\bigskip
+\pause
+¿Cuál es el área total de paraboloide?
+\end{frame}
+\begin{frame}
+\frametitle{Área del paraboloide de revolución}
+El área total es:
+\begin{eqnarray*}
+A &=& \int_{0}^{2 \pi} \int_{0}^{\nu_{0}} \mu_{0} \, \nu \, \big( \mu_{0}^{2} + \nu^{2} \big)^{\frac{1}{2}} \dd{\nu} \dd{\psi} = \\[0.5em] \pause
+&=& \dfrac{2 \, \pi \, \mu_{0}}{3} \, \big[ \big( \mu_{0}^{2} + \nu^{2} \big)^{\frac{3}{2}} - \mu_{0}^{2} \big]
+\end{eqnarray*}
+\end{frame}
+%Ref. Spiegel - Análisis vectorial. Cap. 7 Coord. generalizadas
+\section{Expresando ecuaciones de la física}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Utilidad de las coordenadas generalizadas}
+
+\begin{frame}
+\frametitle{Presentando ecuaciones conocidas}
+La utilidad de expresar una ecuación de la física matemática en un sistema coordenado distinto al cartesiano, radica en el hecho de que facilita su solución.
+\end{frame}
+\begin{frame}
+\frametitle{Primer paso hecho}
+Si el primer paso ha sido manejar el cambio de un sistema coordenado a otro, el siguiente paso que veremos ya en el Tema 2, se ocupará de resolver la ecuación obtenida con alguna técnica de solución.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de Laplace}
+Veamos el siguiente ejemplo: expresa la ecuación de Laplace:
+\begin{align*}
+\laplacian{\psi} = 0
+\end{align*}
+en el sistema de coordenadas cilíndricas parabólicas.
+\end{frame}
+\begin{frame}
+\frametitle{El Laplaciano en coordenadas generalizadas}
+El Laplaciando en coordenadas curvilíneas generalizadas se expresa por:
+\begin{align*}
+\laplacian{\psi} &= \dfrac{1}{h_{1} h_{2} h_{3}} \left[ \pdv{u^{1}} \left( \dfrac{h_{2} h_{3}}{h_{1}} \pdv{\psi}{u^{1}} \right) + \pdv{u^{2}} \left( \dfrac{h_{3} h_{1}}{h_{2}} \pdv{\psi}{u^{2}} \right) + \right. \\[1em]
++& \left. \pdv{u^{3}} \left( \dfrac{h_{1} h_{2}}{h_{3}} \pdv{\psi}{u^{3}} \right) \right]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando la información del sistema parabólico}
+Para el sistema de coordenadas cilíndricas parabólicas, sabemos que: \pause
+\begin{align*}
+u^{1} = u, \hspace{1cm} u^{2} = v, \hspace{1cm} u^{3} = z
+\end{align*}
+\pause
+\begin{align*}
+x &= \dfrac{1}{2}  \big( u^{2} - v^{2} \big) \\[0.5em]
+y &=  u \, v \\[0.5em]
+z &= z
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La matriz métrica}
+La matriz métrica de este sistema coordenado cilíndrico parabólico es:
+\begin{align*}
+g = \mqty(
+u^{2} + v^{2} & 0 & 0 \\
+0 & u^{2} + v^{2} & 0 \\
+0 & 0 & 1
+)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Los factores de escala}
+Por lo que los factores de escala son:
+\begin{align*}
+h_{u} = h_{v} &= \sqrt{u^{2} + v^{2}} \\[0.5em]
+h_{z} &= 1
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El Laplaciano}
+Al ocupar los factores de escala y sustiyendo en la expresión para el Laplaciano, tenemos que:
+\begin{align*}
+\laplacian{\psi} &= \dfrac{1}{u^{2} +v^{2}} \left[ \pdv{u} \left( \pdv{\psi}{u} \right) + \pdv{v} \left( \pdv{\psi}{v} \right) + \right. \\[1em]
++& \left. \pdv{z} \left( (u^{2} + v^{2}) \pdv{\psi}{z} \right) \right] =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El resultado}
+\begin{align*}
+= \dfrac{1}{u^{2} + v^{2}} \left( \pdv[2]{\psi}{u} + \pdv[2]{\psi}{v} \right) + \pdv[2]{\psi}{z}
+\end{align*}
+\pause
+Entonces tenemos que:
+\begin{align*}
+\pdv[2]{\psi}{u} + \pdv[2]{\psi}{v} + (u^{2} + v^{2}) \, \pdv[2]{\psi}{z} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de calor }
+Expresa la ecuación de calor
+\begin{align*}
+\pdv{U}{t} = \kappa \, \laplacian{U}
+\end{align*}
+en un sistema de coordenadas cilíndricas elípticas.
+\end{frame}
+\begin{frame}
+\frametitle{Coordenadas cilíndricas elípticas}
+Para este sistema tenemos que:
+\begin{align*}
+u^{1} = u, \hspace{1cm} u^{2} = v, \hspace{1cm} u^{3} = z
+\end{align*}
+\pause
+\begin{align*}
+x &= a \, \cosh u \, \cos v \\[0.5em]
+y &=  a \, \sinh u \, \sin v \\[0.5em]
+z &= z
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La matriz métrica}
+La matriz métrica de este sistema coordenado cilíndrico parabólico es:
+\begin{align*}
+g = \mqty(
+a^{2} \,\sinh^{2} u + \sin^{2} v & 0 & 0 \\
+0 & a^{2} \, \sinh^{2} u + \sin^{2} v & 0 \\
+0 & 0 & 1
+)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Los factores de escala}
+Por lo que los factores de escala son:
+\begin{align*}
+h_{u} = h_{v} &= a \, \sqrt{\sinh^{2} u + \sin^{2} v} \\[0.5em]
+h_{z} &= 1
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando el Laplaciano}
+Ocupamos la expresión para el Laplaciano en coordenadas curvilíneas generalizadas:
+\begin{align*}
+\laplacian{U} &= \dfrac{1}{a^{2} (\sinh^{2} u + \sin^{2} v)} \left[ \pdv{u} \left( \pdv{U}{u} \right) + \right. \\[1em]
+&+ \left. \pdv{v} \left( \pdv{U}{v} \right) + \pdv{z} \big( a^{2} (\sinh^{2} u + \sin^{2} v) \big) \, \pdv{U}{z} \right] =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El Laplaciano}
+\begin{align*}
+= \dfrac{1}{a^{2} (\sinh^{2} u + \sin^{2} v)}  \left[ \pdv[2]{U}{u} + \pdv[2]{U}{v} \right] + \pdv[2]{U}{z}
+\end{align*}
+Por lo que la ecuación de calor en coordenadas cilíndricas parabólicas resulta:
+\begin{align*}
+\setlength{\fboxsep}{2\fboxsep}\boxed{
+\pdv{U}{t} = \kappa \, \dfrac{1}{a^{2} (\sinh^{2} u + \sin^{2} v)}  \left[ \pdv[2]{U}{u} + \pdv[2]{U}{v} \right] + \pdv[2]{U}{z}
+}
+\end{align*}
+\end{frame}
+
+\section{Propiedades sistemas generalizados}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+
+\subsection{Coordenadas generalizadas}
+
+\begin{frame}
+\frametitle{Característica importante}
+Consideremos el sistema de coordenadas generales $u_{1}, u_{2}, u_{3}$.
+\\
+\bigskip
+Demuestra que
+\begin{align*}
+\pdv{\vb{r}}{u_{1}}, \pdv{\vb{r}}{u_{2}}, \pdv{\vb{r}}{u_{3}} \hspace{0.5cm} \mbox{y} \hspace{0.5cm} \grad{u_{1}}, \grad{u_{2}}, \grad{u_{3}}  
+\end{align*}
+son sistemas de vectores recíprocos.
+\end{frame}
+\begin{frame}
+\frametitle{El punto a demostrar}
+Lo que se nos pide en el ejercicio es demostrar que:
+\begin{align*}
+\pdv{\vb{r}}{u_{p}} \cdot \grad{u_{q}} = \begin{cases}
+1 & \mbox{si } p = q \\
+0 & \mbox{si } p \neq q
+\end{cases}
+\end{align*}
+con $p, q = 1, 2, 3$
+\end{frame}
+\begin{frame}
+\frametitle{Solución al ejercicio}
+Tenemos que:
+\begin{align*}
+\dd{\vb{r}} = \pdv{\vb{r}}{u_{1}} \dd{u_{1}} + \pdv{\vb{r}}{u_{2}} \dd{u_{2}} + \pdv{\vb{r}}{u_{3}} \dd{u_{3}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución al ejercicio}
+Al multiplicar por $\grad{u_{1}} \cdot$, \pause tenemos que:
+\begin{eqnarray*}
+&{}& \grad{u_{1}} \cdot \dd{\vb{r}} = \pause \dd{u_{1}} = \\[0.5em] \pause
+&=& \left( \grad{u_{1}} \cdot \pdv{\vb{r}}{u_{1}} \right) \dd{u_{1}} {+} \left( \grad{u_{1}} \cdot \pdv{\vb{r}}{u_{2}} \right) \dd{u_{2}} {+} \\[0.5em]
+&+& \left( \grad{u_{1}} \cdot \pdv{\vb{r}}{u_{3}} \right) \dd{u_{3}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución al ejercicio}
+Que nos dice: \pause
+\begin{align*}
+\grad{u_{1}} \cdot \pdv{\vb{r}}{u_{1}} = 1, \hspace{0.5cm} \grad{u_{1}} \cdot \pdv{\vb{r}}{u_{2}} = 0, \hspace{0.5cm} \grad{u_{1}} \cdot \pdv{\vb{r}}{u_{3}}  = 0
+\end{align*}
+\pause
+\\
+\bigskip
+De manera análoga, las dos relaciones restantes, se demuestran con la multiplicación por
+\begin{align*}
+\grad{u_{2}} \cdot \hspace{1cm} \grad{u_{3}} \cdot
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Semana 3 del curso}
+La semana del 14 al 19 de marzo (el lunes 15 es día feriado) se deberán de atender las actividades de trabajo para el Tema de las funciones Gamma y Beta.
+\\
+\bigskip
+\pause
+El lunes 15 de marzo se publicará en Moodle el bloque de la Semana 3 con los materiales de trabajo, lista de ejercicios a cuenta, el espacio para el envío de los ejercicios de la Semana 2.
+\end{frame}
+\begin{frame}
+\frametitle{Primer - Examen Tarea}
+Al estar ya en la fase final del Tema 1, se enviará durante la siguiente semana la relación de ejercicios para el examen - tarea 1 del curso.
+\\
+\bigskip
+\pause
+Con las indicaciones de solución y la fecha de entrega.
+\end{frame}
+\end{document}

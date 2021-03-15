@@ -2,9 +2,6 @@
 \usepackage{../Estilos/BeamerMAF}
 \input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
 \makeatletter
-% \setbeamercolor{section in foot}{bg=gray!30, fg=black!90!orange}
-% \setbeamercolor{subsection in foot}{bg=blue!30!yellow, fg=red}
-% \setbeamercolor{date in foot}{bg=black, fg=white}
 \setbeamertemplate{footline}
 {
   \leavevmode%
@@ -21,6 +18,9 @@
   \end{beamercolorbox}}%
   \vskip0pt%
 }
+\makeatother
+\makeatletter
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.8em}{}{}
 \makeatother
 \date{5 de marzo de 2021}
 \title{Trabajando con vectores}
@@ -55,9 +55,11 @@ Cuando estos números obedecen a ciertas leyes de transformación, se convierten
 \frametitle{Generalización}
 En general, los campos escalares se denominan campos tensoriales de rango u orden cero, mientras que los campos vectoriales se denominan campos tensoriales de rango u orden uno.
 \end{frame}
+
 \section{Notación de índices}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Utilidad de los índices}
+
 \begin{frame}
 \frametitle{El uso de índices}
 La notación indicial o de índices está estrechamente asociada con el cálculo tensorial.
@@ -813,109 +815,185 @@ Se obtiene como resultado $\delta_{i}^{i}$, que se suma en el rango del índice 
 Utilizando el rango $1, 2, \ldots, N$ tenemos:
 \begin{eqnarray*}
 \delta_{i}^{i} &=& \delta_{1}^{1} + \delta_{2}^{2} + \ldots + \delta_{N}^{N} \\[0.5em] \pause
-\delta_{i}^{1} &=& 1 + 1 + \ldots +  1 \\[0.em] \pause
-\delta_{i}^{1} &=& N
+\delta_{i}^{i} &=& 1 + 1 + \ldots +  1 \\[0.em] \pause
+\delta_{i}^{i} &=& N
 \end{eqnarray*}
 \end{frame}
-% En tres dimensiones tenemos $\delta_{j}^{i}$ con $i, j = 1, 2, 3$ y
-% \begin{align*}
-% \delta_{k}^{k} = \delta_{1}^{1} + \delta_{2}^{2} + \delta_{3}^{3} = 3
-% \end{align*}
-% En determinadas circunstancias, la delta de Kronecker se puede escribir solo con subíndices. Por ejemplo, $\delta_{ij}$ con $i, j = 1, 2, 3$. Encontraremos que estas circunstancias nos permiten realizar una contracción en los índices inferiores, de modo que $\delta_{ii} = 3$.
-% \\[0.5em]
-% \noindent
-% \textbf{Ejemplo: } El determinante de una matriz $A = (a_{ij})$ se puede expresar con notación de índices. Ocupando el símbolo de e-permutación, el determinante de una matriz de $N \times N$ se expresa como:
-% \begin{align*}
-% \abs{A} = e_{ij \ldots k} \, a_{1i} \, a_{2j} \, \ldots \, a_{Nk} 
-% \end{align*}
-% donde $e_{ij \ldots k}$ es un sistema de orden $N$. En el caso especial de una matriz de $2 times N$, escribimos:
-% \begin{align*}
-% \abs{A} = e_{ij} \, a_{1i} \, a_{2j}
-% \end{align*}
-% donde la suma se realiza en el rango $1, 2$, y el símbolo de e-permutación es de orden $2$. En el caso especial de una matriz de $3 \times 3$, se tiene que:
-% \begin{align*}
-% \abs{A} = \mqty|
-% a_{11} & a_{12} & a_{13} \\
-% a_{21} & a_{22} & a_{23} \\
-% a_{31} & a_{32} & a_{33}
-% | = e_{ijk} \, a_{i1} \, a_{j2} \, a_{k3} = e_{ijk} \, a_{11} \, a_{2j} \, a_{3k}
-% \end{align*}
-% donde $i, j, k$ son los índices de suma y la suma está en el rango $1, 2, 3$. Aquí $e_{ijk}$ denota el símbolo de e-permutación de orden $3$. Tengamos en cuenta que al intercambiar las filas de la matriz de $3 \times 3$ podemos obtener resultados más generales. Consideremos $(p,q, r)$ una permutación de los enteros $(1, 2, 3)$ y veamos que el determinante se puede expresar como:
-% \begin{align*}
-% \Delta = \mqty|
-% a_{p1} & a_{p2} & a_{p3} \\
-% a_{q1} & a_{q2} & a_{q3} \\
-% a_{r1} & a_{r2} & a_{r3}
-% | = e_{ijk} \, a_{p1} \, a_{q2} \, a_{r3}
-% \end{align*}
-% \begin{table}[H]
-% \large
-% \centering
-% \begin{tabular}{l l}
-% Si $(p, q, r)$ es una permutación par de $(1, 2, 3)$, entonces & $\Delta = \abs{A}$ \\
-% Si $(p, q, r)$ es una permutación impar de $(1, 2, 3)$, entonces & $\Delta = -\abs{A}$ \\
-% Si $(p, q, r)$ no es una permutación de $(1, 2, 3)$, entonces & $\Delta = 0$    
-% \end{tabular}
-% \end{table}
-% Entonces podemos escribir:
-% \begin{align*}
-% e_{ijk} \, a_{pi} \, a_{qj} \, a{rk} = e_{pqr} \, \abs{A}
-% \end{align*}
-
-% \noindent
-% \textbf{Ejemplo: } La expresión $e_{ijk} \, B_{ij} \, C_{i}$ no tiene sentido ya que el índice $i$ se repite más de dos veces y la convención de suma no lo permite. Si realmente se deseaba sumar sobre un índice que ocurre más de dos veces, entonces debe usarse un signo de suma. Por ejemplo, la expresión anterior sería:
-% \begin{align*}
-% \sum_{i=1}^{n} e_{ijk} \, B_{ij} \, C_{i}
-% \end{align*}
-
-% \noindent
-% \textbf{Ejemplo: } El producto cruz de los vectores unitarios $\vu{e}_{1}, \vu{e}_{2}, \vu{e}_{3}$ se puede expresar en notación de índices como: 
-% \begin{align*}
-% \vu{e}_{i} \times \vu{e}_{j} = \begin{cases}
-% \vu{e}_{k} & \mbox{si } (i, j, k) \mbox{ es una permutación par de } (1, 2, 3) \\
-% -\vu{e}_{k} & \mbox{si } (i, j, k) \mbox{ es una permutación impar de } (1, 2, 3) \\
-% 0 & \mbox{para todos los demás casos}
-% \end{cases}
-% \end{align*}
-% Este resultado se puede escribir de la forma:
-% \begin{align*}
-% \vu{e}_{i} \times \vu{e}_{j} = e_{kij} \, \vu{e}_{k}
-% \end{align*}
-% Este último resultado se puede verificar sumando sobre l índice $k$ y escribir las $9$ combinaciones posibles para $i$ y $j$.
-% \\[0.5em]
-% \noindent
-% \textbf{Ejemplo: } Dados los vectores $A_{p}$, con $p = 1, 2, 3$ y $B_{p}$ con $p = 1, 2, 3$ el producto cruz de los dos vectores  es un vector $C_{p}$ con $p = 1, 2, 3$, con componentes:
-% \begin{align}
-% C_{i} = e_{ijk} \, A_{j} \, B_{k} \hspace{1cm} i, j, k = 1, 2, 3
-% \label{eq:ecuacion_01_02}
-% \end{align}
-% Las cantidades $C_{i}$ representan las componentes del vector producto cruz:
-% \begin{align*}
-% \va{C} = \va{A} \cp \va{B} = C_{1} \, \vu{e}_{1} + C_{2} \, \vu{e}_{2} + C_{3} \, \vu{e}_{3} 
-% \end{align*}
-% La ec. (\ref{eq:ecuacion_01_02}) define las componentes de $\va{C}$, se sumará en cada uno de los índices que
-% se repite. Sumando sobre el índice $k$:
-% \begin{align}
-% C_{i} = e_{ij1} \, A_{j} \, B_{1} + e_{ij2} \, A_{j} \, B_{2} + e_{ij3} \, A_{j} \, B_{3}
-% \label{eq:ecuacion_01_03}     
-% \end{align}
-% La siguiente suma sobre el índice $j$ el cual se repite en cada término de la ecuación (\ref{eq:ecuacion_01_03}), obteniendo:
-% \begin{align}
-% \begin{aligned}
-% C_{i} &= e_{i11} \, A_{1} \, B_{1} + e_{i21} \, A_{2} \, B_{1} + e_{i31} \, A_{3} \, B_{1} \, + \\[0.5em]
-% &+ e_{i12} \, A_{1} \, B_{2} + e_{i22} \, A_{2} \, B_{2} + e_{i32} \, A_{3} \, B_{2} \, + \\[0.5em]
-% &+ e_{i13} \, A_{1} \, B_{3} + e_{i23} \, A_{2} \, B_{3} + e_{i33} \, A_{3} \, B_{3}
-% \end{aligned}
-% \label{eq:ecuacion_01_04}
-% \end{align}
-% Ahora nos quedamos con $i$ como un índice libre que puede tener cualquiera de los valores de $1, 2$ o $3$. Dejando que $i = 1$, luego dejando $i = 2$, y finalmente dejando que $i = 3$ produce los componentes del producto cruz:
-% \begin{align*}
-% C_{1} &= A_{2} \, B_{3} - A_{3} \, B_{2} \\[0.5em]
-% C_{2} &= A_{3} \, B_{1} - A_{1} \, B_{3} \\[0.5em]
-% C_{3} &= A_{1} \, B_{2} - A_{2} \, B_{1}
-% \end{align*}
-% El producto cruz también puede expresarse de la forma:
-% \begin{align*}
-% \va{A} \cp \va{B} = e_{ijk} \, A_{j} \, B_{k} \, \vu{e}_{i}
-% \end{align*}
+\begin{frame}
+\frametitle{En más dimensiones}
+En tres dimensiones tenemos $\delta_{j}^{i}$ con $i, j = 1, 2, 3$ y
+\begin{align*}
+\delta_{k}^{k} = \delta_{1}^{1} + \delta_{2}^{2} + \delta_{3}^{3} = 3
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Casos especiales}
+En determinadas circunstancias, la delta de Kronecker se puede escribir solo con subíndices. Por ejemplo, $\delta_{ij}$ con $i, j = 1, 2, 3$.
+\\
+\bigskip
+Encontraremos que estas circunstancias nos permiten realizar una contracción en los índices inferiores, de modo que $\delta_{ii} = 3$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 6}
+El determinante de una matriz $A = (a_{ij})$ se puede expresar con notación de índices.
+\\
+\bigskip
+\pause
+Ocupando el símbolo de e-permutación, el determinante de una matriz de $N \times N$ se expresa como:
+\begin{align*}
+\abs{A} = e_{ij \ldots k} \, a_{1i} \, a_{2j} \, \ldots \, a_{Nk} 
+\end{align*}
+donde $e_{ij \ldots k}$ es un sistema de orden $N$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 6. Matriz de $2 \times 2$}
+En el caso especial de una matriz de $2 \times 2$, escribimos:
+\begin{align*}
+\abs{A} = e_{ij} \, a_{1i} \, a_{2j}
+\end{align*}
+donde la suma se realiza en el rango $1, 2$, y el símbolo de e-permutación es de orden $2$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 6. Matriz de $3 \times 3$}
+{\fontsize{12}{12}\selectfont En el caso especial de una matriz de $3 \times 3$, se tiene que:}
+\begin{align*}
+\abs{A} = \mqty|
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+| = e_{ijk} \, a_{i1} \, a_{j2} \, a_{k3} {=} e_{ijk} \, a_{1i} \, a_{2j} \, a_{3k}
+\end{align*}
+{\fontsize{12}{12}\selectfont
+donde $i, j, k$ son los índices de suma y la suma está en el rango $1, 2, 3$.}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 6. Matriz de $3 \times 3$}
+El $e_{ijk}$ denota el símbolo de e-permutación de orden $3$.
+\\
+\bigskip
+\pause
+Tengamos en cuenta que al intercambiar las filas de la matriz de $3 \times 3$ podemos obtener resultados más generales.
+\end{frame}
+\begin{frame}
+\frametitle{El determinante}
+Consideremos $(p, q, r)$ una permutación de los enteros $(1, 2, 3)$ y veamos que el determinante se puede expresar como:
+\begin{align*}
+\Delta = \mqty|
+a_{p1} & a_{p2} & a_{p3} \\
+a_{q1} & a_{q2} & a_{q3} \\
+a_{r1} & a_{r2} & a_{r3}
+| = e_{ijk} \, a_{p1} \, a_{q2} \, a_{r3}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El determinante}
+Para la secuencia $(1, 2, 3)$:
+\fontsize{12}{12}\selectfont
+\begin{table}[H]
+\large
+\centering
+\begin{tabular}{l}
+Si $(p, q, r)$ es una p. par $\Rightarrow \Delta = \abs{A}$ \\
+Si $(p, q, r)$ es una p. impar $\Rightarrow \Delta = -\abs{A}$ \\
+Si $(p, q, r)$ no es una p. $\Rightarrow \Delta = 0$    
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{El determinante}
+Entonces podemos escribir:
+\begin{align*}
+e_{ijk} \, a_{pi} \, a_{qj} \, a_{rk} = e_{pqr} \, \abs{A}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 7}
+La expresión $e_{ijk} \, B_{ij} \, C_{i}$ no tiene sentido ya que el índice $i$ se repite más de dos veces y la convención de suma no lo permite.
+\\
+\bigskip
+\pause
+Si realmente se deseaba sumar sobre un índice que ocurre más de dos veces, entonces debe usarse un signo de suma.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 7}
+Por ejemplo, la expresión anterior sería:
+\begin{align*}
+\sum_{i=1}^{n} e_{ijk} \, B_{ij} \, C_{i}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 8}
+El producto cruz de los vectores unitarios $\vu{e}_{1}, \vu{e}_{2}, \vu{e}_{3}$ y con la secuencia $(1, 2, 3)$ se puede expresar en notación de índices como: 
+\begin{align*}
+\vu{e}_{i} \times \vu{e}_{j} = \begin{cases}
+\vu{e}_{k} & \mbox{si } (i, j, k) \mbox{ es una p. par} \\
+-\vu{e}_{k} & \mbox{si } (i, j, k) \mbox{ es una p. impar} \\
+0 & \mbox{para todos los demás casos}
+\end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 8}
+Este resultado se puede escribir de la forma:
+\begin{align*}
+\vu{e}_{i} \times \vu{e}_{j} = e_{kij} \, \vu{e}_{k}
+\end{align*}
+Este último resultado se puede verificar sumando sobre l índice $k$ y escribir las $9$ combinaciones posibles para $i$ y $j$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 9}
+Dados los vectores $A_{p}$, con $p = 1, 2, 3$ y $B_{p}$ con $p = 1, 2, 3$ el producto cruz de los dos vectores es un vector $C_{p}$ con $p = 1, 2, 3$, con componentes:
+\begin{align}
+C_{i} = e_{ijk} \, A_{j} \, B_{k} \hspace{1cm} i, j, k = 1, 2, 3
+\label{eq:ecuacion_01_02}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 9}
+Donde las cantidades $C_{i}$ representan las componentes del vector producto cruz:
+\begin{align*}
+\va{C} = \va{A} \cp \va{B} = C_{1} \, \vu{e}_{1} + C_{2} \, \vu{e}_{2} + C_{3} \, \vu{e}_{3} 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 9}
+La ec. (\ref{eq:ecuacion_01_02}) define las componentes de $\va{C}$, se sumará en cada uno de los índices que
+se repite.
+\\
+\bigskip
+\pause
+Sumando sobre el índice $k$:
+\begin{align}
+C_{i} = e_{ij1} \, A_{j} \, B_{1} + e_{ij2} \, A_{j} \, B_{2} + e_{ij3} \, A_{j} \, B_{3}
+\label{eq:ecuacion_01_03}     
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 9}
+La siguiente suma sobre el índice $j$ el cual se repite en cada término de la ecuación (\ref{eq:ecuacion_01_03}), obteniendo:
+\begin{align}
+\begin{aligned}
+C_{i} &= e_{i11} \, A_{1} \, B_{1} + e_{i21} \, A_{2} \, B_{1} + e_{i31} \, A_{3} \, B_{1} \, + \\[0.5em]
+&+ e_{i12} \, A_{1} \, B_{2} + e_{i22} \, A_{2} \, B_{2} + e_{i32} \, A_{3} \, B_{2} \, + \\[0.5em]
+&+ e_{i13} \, A_{1} \, B_{3} + e_{i23} \, A_{2} \, B_{3} + e_{i33} \, A_{3} \, B_{3}
+\end{aligned}
+\label{eq:ecuacion_01_04}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 9}
+Ahora nos quedamos con $i$ como un índice libre que puede tener cualquiera de los valores de $1, 2$ o $3$. Dejando que $i = 1$, luego dejando $i = 2$, y finalmente dejando que $i = 3$ produce los componentes del producto cruz:
+\begin{align*}
+C_{1} &= A_{2} \, B_{3} - A_{3} \, B_{2} \\[0.5em]
+C_{2} &= A_{3} \, B_{1} - A_{1} \, B_{3} \\[0.5em]
+C_{3} &= A_{1} \, B_{2} - A_{2} \, B_{1}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 9}
+El producto cruz también puede expresarse de la forma:
+\begin{align*}
+\va{A} \cp \va{B} = e_{ijk} \, A_{j} \, B_{k} \, \vu{e}_{i}
+\end{align*}
+\end{frame}
 \end{document}

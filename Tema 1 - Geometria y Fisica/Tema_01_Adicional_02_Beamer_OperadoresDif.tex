@@ -1,0 +1,539 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\makeatletter
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.8em}{}{}
+\makeatother
+\date{10 de marzo de 2021}
+\title{Operadores diferenciales}
+\subtitle{La física y la geometría}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame{\frametitle{Contenido}\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Coord. cartesianas}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+%Ref. Riley (2006) Chap. 10 Vector Calculus
+\subsection{Velocidad y aceleración}
+
+\begin{frame}
+\frametitle{Ejercicio 1 - Calular la velocidad y aceleración}
+El vector de posición de una partícula al tiempo $t$, en un sistema cartesiano está dado por:
+\begin{align*}
+\vb{r}(t) = 2 \, t^{2} \, \vu{i} +  (3 \, t - 2) \, \vu{j} + (3 \, t^{2} - 1) \, \vu{k}
+\end{align*}
+\pause
+Calcula:
+\begin{enumerate}
+\item La rapidez de la partícula en $t = 1$.
+\item La componente de la aceleración en la dirección del vector:
+\begin{align*}
+\vb{s} = \vu{i} + 2 \, \vu{j} + \vu{k}
+\end{align*}
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{La velocidad y aceleración}
+La velocidad y aceleración de la partícula están dadas por:
+\begin{eqnarray*}
+\vb{v} (t) &=& \pause \dv{\vb{r}}{t} = \pause 4 \, t \, \vu{i} + 3 \, \vu{j} + 6 \, t \, \vu{k} \\[0.5em]
+\vb{a} (t) &=& \pause \dv{\vb{v}}{t} = \pause 4 \, \vu{i} + 6 \, \vu{k}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{La rapidez de la partícula}
+La rapidez de la partícula al tiempo $t = 1$ es:
+\begin{align*}
+\abs{\vb{v}(t = 1)} = \sqrt{4^{2} + 3^{2} + 6^{2}} = \sqrt{61}
+\end{align*}
+\pause
+La aceleración de la partícula es constante, es decir, es independiente de $t$.
+\end{frame}
+\begin{frame}
+\frametitle{Componente en dirección de $\vb{s}$}
+La componente de la aceleración en la dirección del vector $\vb{s}$ está dada por:
+\begin{eqnarray*}
+\vb{a} \cdot \vu{s} = \pause \dfrac{(4 \, \vu{i} + 6 \, \vu{k}) \cdot (\vu{i} + 2 \, \vu{j} + \vu{k})}{\sqrt{1^{2} + 2^{2} + 1^{2}}} = \pause \dfrac{5 \, \sqrt{6}}{3}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Consideración importante}
+Tomemos en cuenta que en el ejemplo anterior, los vectores $\vu{i}$, $\vu{j}$ y $\vu{k}$ son vectores de base independientes del tiempo.
+\\
+\bigskip
+\pause
+Esto puede no ser cierto para los vectores base en general; cuando utilizamos coordenadas generalizadas, los vectores base también deben de diferenciarse.
+\end{frame}
+
+\section{Coord. polares}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Velocidad y aceleración}
+
+\begin{frame}
+\frametitle{Coordenadas polares}
+Consideremos ahora las coordenadas polares $\rho, \phi$.
+\\
+\bigskip
+\pause
+Donde el dominio de las variables y reglas de transformación son:
+\\
+\begin{minipage}{0.4\textwidth}
+\begin{align*}
+\rho &\in [0,\infty) \\[0.5em]
+\phi &\in [0, 2 \, \pi) 
+\end{align*}
+\end{minipage}
+\hspace{1cm}
+\begin{minipage}{0.4\textwidth}
+\begin{align*}
+x &= \rho \, \cos \phi \\[0.5em]
+y &= \rho \, \sin \phi
+\end{align*}
+\end{minipage}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores base}
+Los vectores unitarios base en coordenadas polares en términos de los vectores base cartesianos son:
+\begin{align*}
+\vu{e}_{\rho} &= \cos \phi \, \vu{i} + \sin \phi \, \vu{j} \\[0.5em]
+\vu{e}_{\phi} &= -\sin \phi \, \vu{i} + \cos \phi \, \vu{j} \\[0.5em]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Diferencia entre los vectores base}
+Una diferencia importante entre los dos conjuntos de vectores base es que, mientras $\vu{i}$ y $\vu{j}$ son constantes en magnitud y dirección, los vectores $\vu{e}_{\rho}$ y $\vu{e}_{\phi}$ tienen magnitudes constantes pero sus direcciones cambian a medida que $\rho$ y $\phi$ varían.
+\end{frame}
+\begin{frame}
+\frametitle{Diferencia entre los vectores base}
+Por tanto, al calcular la derivada de un vector escrito en coordenadas polares también debemos diferenciar los vectores base.
+\end{frame}
+\begin{frame}
+\frametitle{Derivadas de los vectores base}
+Al derivar con respecto al tiempo, tenemos que:
+\begin{eqnarray}
+\dv{\vu{e}_{\rho}}{t} &=& \pause - \sin \phi \, \dv{\phi}{t} \, \vu{i} + \cos \phi \, \dv{\phi}{t} \, \vu{j} = \pause \dot{\phi} \, \vu{e}_{\phi} \label{eq:ecuacion_10_02} \\[0.5em]
+\dv{\vu{e}_{\phi}}{t} &=& \pause - \cos \phi \, \dv{\phi}{t} \, \vu{i} - \sin \phi \, \dv{\phi}{t} \, \vu{j} = \pause - \dot{\phi} \, \vu{e}_{\rho} \label{eq:ecuacion_10_03}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 2 - Velocidad y aceleración}
+El vector de posición de una partícula en coordenadas polares es:
+\begin{align*}
+\vb{r} (t) = \rho (t) \, \vu{e}_{r}
+\end{align*}
+\pause
+Determina las expresiones para la velocidad y aceleración de la partícula en ese sistema coordenado.
+\end{frame}
+\begin{frame}
+\frametitle{Derivando los vectores base}
+La velocidad de la partícula está dada por:
+\begin{eqnarray*}
+\vb{v}(t) = \pause \dot{\vb{r}}(t) = \pause \dot{\rho} \, \vu{e}_{\rho} + \rho \, \dot{\vu{e}}_{\rho} = \pause \dot{\rho} \, \vu{e}_{\rho} + \rho \, \dot{\phi} \, \vu{e}_{\phi}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Estimando la aceleración}
+De manera similar, al derivar la velocidad tenemos que:
+\begin{eqnarray*}
+\vb{a}(t) &=& \dv{t} \big( \dot{\rho} \, \vu{e}_{\rho} + \rho \, \dot{\phi} \, \vu{e}_{\phi} \big) = \\[0.5em] \pause
+&=& \ddot{\rho} \, \vu{e}_{\rho} + \dot{\rho} \, \dot{\vu{e}}_{\rho} + \pause \rho \, \dot{\phi} \, \dot{\vu{e}}_{\phi} + \rho \, \ddot{\phi} \, \vu{e}_{\phi} + \dot{\rho} \, \dot{\phi} \, \vu{e}_{\phi} = \\[0.5em] \pause
+&=& \ddot{\rho} \, \vu{e}_{\rho} + \dot{\rho} (\dot{\phi} \, \vu{e}_{\phi}) + \rho \, \dot{\phi} (- \dot{\phi} \, \vu{e}_{\rho}) + \rho \, \ddot{\phi} \, \vu{e}_{\phi} + \dot{\rho} \, \dot{\phi} \, \vu{e}_{\phi} = \\[0.5em] \pause
+&=& (\ddot{\rho} - \rho \, \dot{\phi}^{2}) \, \vu{e}_{\rho} + (\rho \, \ddot{\phi} + 2 \, \dot{\rho} \, \dot{\phi}) \, \vu{e}_{\phi}
+\end{eqnarray*}
+\end{frame}
+
+\section{Operadores diferenciales}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Gradiente}
+
+\begin{frame}
+\frametitle{Ejercicio 3 - Gradiente de una función}
+Demuestra que $\grad{r^{n}} = n \, r^{n-2} \, \vb{r}$
+\\
+\bigskip
+\pause
+Partimos del hecho que:
+\begin{align*}
+r^{n} = \left( \sqrt{x^{2} + y^{2} + z^{2}} \right)^{n}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución - Por la definición de gradiente}
+Entonces:
+\begin{eqnarray*}
+\grad{r^{n}} &=& \grad{\left( \sqrt{x^{2} + y^{2} + z^{2}} \right)^{n}} = \pause \grad \, (x^{2} + y^{2} + z^{2})^{n/2} = \\[0.5em] \pause
+&=& \vu{i} \, \pdv{x} \big[ (x^{2} + y^{2} + z^{2})^{n/2} \big] + \\[0.5em]
+&+& \vu{j} \, \pdv{y} \big[ (x^{2} + y^{2} + z^{2})^{n/2} \big] + \\[0.5em]
+&+& \vu{k} \, \pdv{z} \big[ (x^{2} + y^{2} + z^{2})^{n/2} \big]
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución - Expresión obtenida}
+\begin{eqnarray*}
+\grad{r^{n}} &=& \vu{i} \big[ \dfrac{n}{2} \, (x^{2} + y^{2} + z^{2})^{n/2 - 1} \, 2 \, x \big] + \\[0.5em]
+&+& \vu{j} \big[ \dfrac{n}{2} \, (x^{2} + y^{2} + z^{2})^{n/2 - 1} \, 2 \, y \big] + \\[0.5em]
+&+& \vu{k} \big[ \dfrac{n}{2} \, (x^{2} + y^{2} + z^{2})^{n/2 - 1} \, 2 \, z \big]
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución - Simplificando el resultado}
+\begin{eqnarray*}
+\grad{r^{n}} &=&  n (x^{2} + y^{2} + z^{2})^{n/2 - 1} \, (x \, \vu{i} + y \, \vu{j} + z \, \vu{k}) = \\[0.5em] \pause
+&=&  n \, (r^{2})^{n/2-1} \, \vb{r} = \\[0.5em] \pause
+&=& n \, r^{n-2} \, \vb{r}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Operaciones compuestas}
+
+\begin{frame}
+\frametitle{Ejercicio 4 - Divergencia y producto cruz}
+Supongamos que $\curl{\vb{A}} = 0$. Evalúa $\div{(\vb{A} \cp \vb{r})}$
+\\
+\bigskip
+\pause
+Hagamos que:
+\begin{eqnarray*}
+\vb{A} &=& A_{1} \, \vu{i} + A_{2} \, \vu{j} + A_{3} \, \vu{k} \\[0.5em] \pause
+\vb{r} &=& x \, \vu{i} + y \, \vu{j} + z \, \vu{k}
+\end{eqnarray*}
+Entonces:
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollando el producto cruz}
+\begin{eqnarray*}
+\vb{A} \cp \vb{r} &=& \mqty|
+\vu{i} & \vu{j} & \vu{k} \\
+A_{1} & A_{2} & A_{3} \\
+x & y & z | = \\[1em] \pause
+&=& (z \, A_{2} - y \, A_{3}) \, \vu{i} + (x \, A_{3} - z \, A_{1}) \, \vu{j} + \\[0.5em]
+&+& (y \, A_{1} - x \, A_{2}) \, \vu{k} 
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando la divergencia}
+\begin{eqnarray*}
+\div{\vb{A} \cp \vb{r}} &=& \pdv{x} \big( z \, A_{2} - y \, A_{3} \big) + \pdv{y} \big( x \, A_{3} - z \, A_{1} \big) + \\[0.5em]
+&+& \pdv{z} \big( y \, A_{1} - x \, A_{2} \big)=
+\end{eqnarray*}
+\pause
+\begin{align*}
+&= z \, \pdv{A_{2}}{x} - y \, \pdv{A_{3}}{x} + x \, \pdv{A_{3}}{y} - z \, \pdv{A_{1}}{y} + \\[0.5em]
+&+ y \, \pdv{A_{1}}{z} - x \, \pdv{A_{2}}{z} = 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando la expresión}
+\vspace{-1cm}
+\begin{align*}
+\div{\vb{A} \cp \vb{r}} &= x \left( \pdv{A_{3}}{y} - \pdv{A_{2}}{z} \right) + y \left( \pdv{A_{1}}{z} - \pdv{A_{3}}{x} \right) + \\[0.5em]
+&+ z \left( \pdv{A_{2}}{x} - \pdv{A_{1}}{y} \right) =
+\end{align*}
+\pause
+\begin{align*}
+&= \big[ x \, \vu{i} + y \, \vu{j} + z \vu{k} \big] \cdot \left[ \left( \pdv{A_{3}}{y} - \pdv{A_{2}}{z} \right) \, \vu{i} + \right. \\[0.5em]
+&+ \left( \pdv{A_{1}}{z} - \pdv{A_{3}}{x} \right) \vu{j} + \left. \left( \pdv{A_{2}}{x} - \pdv{A_{1}}{y} \right) \, \vu{k} \right] =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Llegamos al resultado}
+\begin{align*}
+\div{\vb{A} \cp \vb{r}} = \vb{r} \cdot  (\curl{\vb{A}})
+\end{align*}
+\pause
+El enunciado nos indicó que $\curl{\vb{A}} = \vb{0}$, entonces:
+\begin{align*}
+\div{\vb{A} \cp \vb{r}} = \vb{r} \cdot \vb{0} = 0
+\end{align*}
+\end{frame}
+
+\subsection{Rotacional}
+
+\begin{frame}
+\frametitle{Ejercicio 5 - Rotacional}
+Supongamos que $\vb{v} = \bm{\omega} \cp \vb{r}$.
+\\
+\bigskip
+Demuestra que:
+\begin{align*}
+\bm{\omega} = \dfrac{1}{2} \curl{\vb{v}}
+\end{align*}
+donde $\bm{\omega}$ es un vector constante.
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Calculamos el rotacional de $\vb{v}$:
+\begin{eqnarray*}
+\curl{\vb{v}} &=& \curl{(\bm{\omega} \cp \vb{r})} = \curl{\mqty|
+\vu{i} & \vu{j} & \vu{k} \\
+\omega_{1} & \omega_{2} & \omega_{3} \\
+x & y & z|} = \\[0.5em] \pause
+&=& \curl{ \big[ (\omega_{2} \, z - \omega_{3} \, y) \vu{i} + (\omega_{3} \, x - \omega_{1} \, z) \vu{j} + \\[0.5em]
+&+& (\omega_{1} \, y - \omega_{2} \, x) \vu{k} \big] } =
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Reexpresando el resultado}
+\begin{eqnarray*}
+&=& \mqty|
+\vu{i} & \vu{j} & \vu{k} \\
+\displaystyle \pdv{x} & \displaystyle \pdv{y} & \displaystyle \pdv{z} \\
+(\omega_{2} \, z - \omega_{3} \, y) & (\omega_{3} \, x - \omega_{1} \, z) & (\omega_{1} \, y - \omega_{2} \, x) | = \\[0.5em] \pause
+&=& 2 (\omega_{1} \, \vu{i} + \omega_{2} \, \vu{j} + \omega_{3} \, \vu{k}) = \\[0.5em] \pause
+&=& 2 \, \bm{\omega}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado}
+Entonces $\bm{\omega} = 1/2 \, \curl{\vb{v}}$.
+\\
+\bigskip
+\pause
+Este ejercicio nos indica que el rotacional de un campo vectorial tiene que ver con las propiedades rotacionales del campo.
+\end{frame}
+\begin{frame}
+\frametitle{Interpretación}
+Por ejemplo, si el campo $\vb{F}$ corresponde a un fluido en movimiento, entonces una rueda con paletas colocada en distintos puntos del campo tenderá a rotar en aquellas regiones en las que $F \neq 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Interpretación}
+Mientras que si $\curl{\vb{F}} = 0$ en cierta región, no habría rotación y el campo $\vb{F}$ se denominaría \emph{irrotacional}.
+\\
+\bigskip
+\pause
+Un campo que no sea irrotacional, en ocasiones recibe el nombre de \emph{campo vórtice}.
+\end{frame}
+
+\subsection{Caso especial}
+
+\begin{frame}
+\frametitle{Caso especial}
+¿Tiene algún significado $\grad{\vb{B}}$?
+\\
+\bigskip
+\pause
+Partamos del hecho que:
+\begin{align*}
+\vb{B} = B_{1} \, \vu{i} + B_{2} \, \vu{j} + B_{3} \, \vu{k}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando las definiciones}
+Al usar la definión del operador gradiente, se tiene que:
+\begin{align*}
+\grad{\vb{B}} = \left( \pdv{x} \, \vu{i} + \pdv{y} \, \vu{j} + \pdv{z} \, \vu{k} \right) \left( B_{1} \, \vu{i} + B_{2} \, \vu{j} + B_{3} \, \vu{k} \right) = 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollando la expresión}
+\begin{eqnarray*}
+\grad{\vb{B}} &=& \pdv{B_{1}}{x} \, \vb{ii} + \pause \pdv{B_{2}}{x} \, \vb{ij} + \pause \pdv{B_{3}}{x} \, \vb{ik} + \\[0.5em] \pause
+&+& \pdv{B_{1}}{y} \, \vb{ji} + \pdv{B_{2}}{y} \, \vb{jj} + \pdv{B_{3}}{y} \, \vb{jk} + \\[0.5em]\pause
+&+& \pdv{B_{1}}{z} \, \vb{ki} + \pdv{B_{2}}{z} \, \vb{kj} + \pdv{B_{3}}{z} \, \vb{kk}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Interpretación}
+Las cantidades $\vb{ii}, \vb{ij}$, etc., se llaman \emph{díadas unitarias}; veamos que $\vb{ij}$, no es lo mismo que $\vb{ji}$.
+\\
+\bigskip
+\pause
+Una cantidad de la forma
+\begin{align*}
+a_{11} \vb{ii} &+ a_{12} \vb{ij} + a_{13} \vb{ik} + a_{21} \vb{ji} + a_{22} \vb{jj} + a_{23} \vb{jk} + \\[0.5em]
+&+ a_{31} \vb{ki} + a_{32} \vb{kj} + a_{33} \vb{kk}
+\end{align*}
+se llama \textcolor{red}{diádica} y los coeficientes $a_{11}, a_{12}, \ldots$ son sus \textcolor{red}{componentes}
+.
+\end{frame}
+\begin{frame}
+\frametitle{Interpretación}
+Un arreglo de estas nueve componentes en la forma
+\begin{align*}
+\mqty[
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} \\
+]
+\end{align*}
+se llama \emph{matriz} de $3 \cp 3$.
+\end{frame}
+\begin{frame}
+\frametitle{Generalización}
+Una diádica es una generalización de un vector.
+\\
+\bigskip
+\pause
+Una mayor generalización conduce a las \textcolor{blue}{triádicas}, que son cantidades que consisten en $27$ términos de la forma
+\begin{align*}
+a^{111} \vb{iii} + a^{211} \vb{jii} + \ldots 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Generalización}
+Un estudio de la forma en que las componentes de una diádica o triádica se transforman de un sistema de coordenadas a otro lleva al \underline{análisis tensorial}.
+\end{frame}
+
+\section{Notación de índices}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definiciones}
+
+\begin{frame}
+\frametitle{El símbolo de Levi-Civita}
+El símbolo de e-permutación que describimos, se le conoce también como el símbolo de Levi-Civita:
+\begin{align*}
+\epsilon_{ijk} = \begin{cases}
+1 & \mbox{si } ijk \mbox{ es cíclica} \\
+-1 & \mbox{si } ijk \mbox{ es no cíclica} \\
+0 & \mbox{para cualquier otro caso}
+\end{cases}
+\end{align*}
+Los índices $i, j, k$ tienen el rango de $1, 2, 3$
+\end{frame}
+\begin{frame}
+\frametitle{Producto de dos símbolos de Levi-Civita}
+El producto de dos símbolos de Levi-Civita se puede expresar en términos de la delta de Kronecker:
+\begin{align*}
+\epsilon_{ijk} \, \epsilon_{klm} = \delta_{il} \, \delta_{jm} - \delta_{im} \, \delta_{jl}
+\end{align*}
+\end{frame}
+
+\subsection{Operadores diferenciales e índices}
+
+\begin{frame}
+\frametitle{Usando Levi-Civita y $\delta_{ij}$}
+Ocupando tanto el símbolo de Levi-Civita y la delta de Kronecker, podemos definir a los operadores diferenciales que hemos revisado previamente.
+\end{frame}
+\begin{frame}
+\frametitle{Operadores diferenciales con índices}
+Gradiente
+\begin{align*}
+\big( \grad{\phi} \big)_{i} = \pdv{\phi}{x_{i}}
+\end{align*}
+\pause
+Divergencia
+\begin{align*}
+\div{\vb{A}} = \delta_{ij} \, \pdv{x_{i}} \, A_{j}
+\end{align*}
+\pause
+Rotacional
+\begin{align*}
+\curl{\vb{A}} = \epsilon_{ijk} \, \pdv{x_{j}} \, A_{k}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 6 - De la mecánica}
+Consideremos el siguiente caso:
+\begin{align*}
+\div{r^{3} \, \va{r}}
+\end{align*}
+Calcula el resultado ocupando notación de índices.
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+\begin{eqnarray*}
+\div{r^{3} \, \va{r}} &=& \pause \pdv{x_{i}} \big( r^{3} \, x_{i} \big) = \\[0.5em] \pause
+&=& x_{i} \left( 3 \, r^{2} \, \dfrac{x_{i}}{r} \right) + 3 \, r^{3} = \\[0.5em] \pause
+&=& 3 \, r \, x_{i}^{2} + 3 \, r^{3} = \\[0.5em] \pause
+&=& 3 \, r (r^{2}) + 3 \, r^{3} = \\[0.5em]
+&=& 6 \, r^{3}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Demostración alterna}
+Tomemos en cuenta que la demostración anterior se obtiene utilizando coordenadas cartesianas (que es lo que hemos venido haciendo durante la carrera), pero la desarrollo nos lleva más tiempo y líneas en comparación con la notación de índices.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 7 - Rotacional con índices}
+Calcula:
+\begin{align*}
+\curl{\left( \dfrac{\va{r}}{r^{2}} \right)}
+\end{align*}
+\pause
+Ahora resolveremos esta identidad mediante la notación de índices.
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+\begin{eqnarray*}
+\curl{\left( \dfrac{\va{r}}{r^{2}} \right)} &=& \pause \epsilon_{ijk} \, \pdv{x_{j}} \left( \dfrac{x_{k}}{r} \right) = \\[0.5em] \pause
+&=& \epsilon_{ijk} \, (x_{k}) \left( \dfrac{-x_{j}}{r^{2}} \right) = \\[0.5em] \pause
+&=& \dfrac{\va{r} \cp \va{r}}{r^{2}} = 0
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Laplaciano con índices}
+Resuelve
+\begin{align*}
+\laplacian{\ln r}
+\end{align*}
+Ocupando la notación de índices.
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+\begin{eqnarray*}
+\laplacian{\ln r} &=& \pdv{x_{i}} \left\{ \pdv{x_{i}} (\ln r) \right\} = \\[0.5em] \pause
+&=& \pdv{x_{i}} \left\{ \dfrac{x_{i}}{r^{2}} \right\} = \\[0.5em] \pause
+&=& \dfrac{3 \, r^{2} - 2 \, r^{2}}{r^{4}} = \\[0.5em] \pause
+&=& \dfrac{1}{r^{2}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 8 - Rotacional del producto cruz}
+Usando la notación de índices, calcula:
+\begin{align*}
+\left( \curl{(\va{A} \cp \va{B})} \right)_{i}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando Levi-Civita}
+\begin{eqnarray*}
+&{}& \! \left( \curl{(\va{A} \cp \va{B})} \right)_{i} = \epsilon_{ijk} \, \pdv{x_{j}} \big( \va{A} \cp \va{B} \big)_{k} = \\[0.5em] \pause
+&=& \epsilon_{ijk} \, \pdv{x_{j}} \big( \epsilon_{klm} \, A_{l} \, B_{m} \big)= \\[0.5em] \pause
+&=& \epsilon_{ijk} \, \epsilon_{klm} \, \pdv{x_{j}} \big( A_{l} \, B_{m} \big) = \\[0.5em] \pause
+&=& \big( \delta_{il} \, \delta_{jm} - \delta_{im} \, \delta_{jl} \big) \left( A_{l} \, \pdv{B_{m}}{x_{j}} + B_{m} \, \pdv{A_{l}}{x_{j}} \right) =
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollando la expresión}
+\begin{align*}
+&= \delta_{il} \, \delta_{jm} \, A_{l} \, \pdv{B_{m}}{x_{j}} - \delta_{im} \, \delta_{jl} \, A_{l} \, \pdv{B_{m}}{x_{j}} + \\[0.5em] 
+&+ \delta_{il} \, \delta_{jm} \, B_{m} \, \pdv{A_{l}}{x_{j}} - \delta_{im} \, \delta_{jl} \, B_{m} \, \pdv{A_{l}}{x_{j}} =
+\end{align*}
+\pause
+\begin{align*}
+A_{i} \pdv{B_{j}}{x_{j}} - A_{j} \pdv{B_{i}}{x_{j}} + B_{j} \pdv{A_{i}}{x_{j}} - B_{i} \pdv{A_{j}}{x_{j}} =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando las definiciones iniciales}
+\fontsize{12}{12}\selectfont
+\begin{align*}
+= A_{i} \, \big( \div{\va{B}} \big) - \big( \va{A} \cdot \grad \big) \, B_{i} + \big( \va{B} \cdot \grad \big) \, A_{i} - B_{i} \, \big( \div{\va{A}} \big) =
+\end{align*}
+\pause
+\begin{align*}
+= \va{A} \, \big( \div{\va{B}} \big) - \big( \va{A} \cdot \grad \big) \, \va{B} + \big( \va{B} \cdot \grad \big) \, \va{A} - \va{B} \, \big( \div{\va{A}} \big)
+\end{align*}
+\end{frame}
+\end{document}
