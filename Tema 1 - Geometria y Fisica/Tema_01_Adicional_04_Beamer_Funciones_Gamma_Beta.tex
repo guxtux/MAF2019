@@ -2,7 +2,7 @@
 \title{\large{Ejercicios}}
 \subtitle{Funciones Gamma y Beta}
 \author{M. en C. Gustavo Contreras Mayén}
-\date{\today}
+\date{}
 \institute{Facultad de Ciencias - UNAM}
 \titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
    \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
@@ -17,190 +17,19 @@
 
 \section{Función Gamma}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Identidad 1}
-
-\begin{frame}
-\frametitle{Propiedad función $\Gamma(x)$}
-\textbf{Demuestra} la siguiente identidad:
-\begin{align*}
-\Gamma (x + 1) = x \, \Gamma (x)
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Solución}
-Antes de demostrar la identidad directamente de la integral Gamma para todo $x$ positivo, veamos que esta identidad se usa para definir la función Gamma primero para $-1 < x < 0$ escribiéndola en la forma 
-\begin{align*}
-\Gamma(x) = \dfrac{\Gamma (x + 1)}{x}
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Solución}
-Tendremos entonces que la expresión es válida para el intervalo $-2 < x < -1$, y así sucesivamente para todos los valores no enteros negativos de $x$.
-\\
-\bigskip
-\pause
-Por lo que nos queda demostrar que se cumple
-\begin{align*}
-\Gamma (x + 1) =  x \, \Gamma (x)
-\end{align*}
-para todo $x$ positivo.
-\end{frame}
-\begin{frame}
-\frametitle{Demostración}
-Haciendo que $x$ sea cualquier número positivo, escribimos la integral Gamma para el argumento $x + 1$:
-\begin{eqnarray*}
-\Gamma (x + 1) &= \displaystyle \int_{0}^{\infty} t^{(x+1)-1} \, e^{-t} \dd{t} = \\[1em] \pause
-&= \displaystyle \int_{0}^{\infty} t^{x} \, e^{-t} \dd{t}
-\end{eqnarray*}
-\end{frame}
-\begin{frame}
-\frametitle{Demostración}
-Resolvemos usando la integración por partes, haciendo:
-\begin{align*}
-u = t^{x} \hspace{1cm} \dd{v} = e^{-t} \dd{t}
-\end{align*}
-entonces
-\pause
-\begin{align*}
-\Gamma (x + 1) = t^{x} \, \left( - e^{-t}\right)\eval_{0}^{\infty} - \int_{0}^{\infty} \left( -e^{-t}\right) \, x \, t^{x-1} \dd{t}
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Demostración}
-Por lo que:
-\begin{align*}
-\Gamma (x + 1) = - \lim_{t \to \infty} \dfrac{t^{x}}{e^t} + \dfrac{0^{x}}{e^{0}} + x \int_{0}^{\infty} t^{x-1} \, e^{-t} \dd{t}
-\end{align*}
-\pause
-Veamos ahora lo que pasa con este resultado:
-\end{frame}
-\begin{frame}
-\frametitle{Demostración}
-El límite en el primer sumando de la expresión de la derecha sabemos que se anula, a partir de la indeterminación $\infty / \infty$, ya que usamos la regla de L'Hopital.
-\begin{align*}
-\Gamma (x + 1) = \cancelto{0}{- \lim_{t \to \infty} \dfrac{t^{x}}{e^t}} + \dfrac{0^{x}}{e^{0}} + x \int_{0}^{\infty} t^{x-1} \, e^{-t} \dd{t}
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Demostración}
-El segundo término de la derecha también se anula
-\begin{align*}
-\Gamma (x + 1) = \cancelto{0}{- \lim_{t \to \infty} \dfrac{t^{x}}{e^t}} + \cancelto{0}{\dfrac{0^{x}}{e^{0}}} + x \int_{0}^{\infty} t^{x-1} \, e^{-t} \dd{t}
-\end{align*}
-\pause
-Por lo que nos queda el tercero, pero vemos que la integral que queda, es la definición de la función Gamma, así:
-\end{frame}
-\begin{frame}
-\frametitle{Demostración}
-Tenemos que
-\begin{align}
-\Gamma (x + 1) = x \, \Gamma (x) \qed
-\label{eq:ecuacion_01_04_01}
-\end{align}
-\end{frame}
-\subsection{Identidad 2}
-\begin{frame}
-\frametitle{Demostrar la identidad}
-Demuestra la siguiente identidad
-\begin{align*}
-2 \cdot 4 \cdot 6 \ldots \cdot 2 \, n = 2^{n} \, \Gamma (n + 1)
-\end{align*}
-\pause
-Que como ya habrás identificado, corresponde a una variante de la definición del doble factorial para números pares.
-\end{frame}
-\begin{frame}[t]
-\frametitle{Solución}
-Para demostrar la identidad, pondremos atención al lado izquierdo de la igualdad anterior:
-\pause
-\begin{align*}
-\boxedcolor{2 \cdot 4 \cdot 6 \ldots \cdot 2 \, n } = 2^{n} \, \Gamma (n + 1)
-\end{align*}
-\pause
-Por lo que veremos un desarrollo para el producto de los números pares:
-\end{frame}
-\begin{frame}
-\frametitle{Solución}
-Entonces tenemos que:
-\begin{eqnarray}
-2 \cdot 4 \cdot 6 \ldots \cdot 2 \, n  &=& (2 \cdot 1) (2 \cdot 2) (2 \cdot 3) \ldots (2 \cdot n) = \nonumber \\[0.5em] \pause
-&=& 2^{n} \, n! \nonumber \\[0.5em] \pause
-&=& 2^{n} \, \Gamma (n + 1) \qed \label{eq:ecuacion_01_16}
-\end{eqnarray}
-\end{frame}
-\begin{frame}
-\frametitle{Un ajuste para $n$}
-Si cambiamos $n - 1$ en lugar de $n$, obtenemos lo siguiente:
-\begin{align*}
-2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)  = 2^{n-1} \, \Gamma (n)
-\end{align*}
-\end{frame}
-\subsection{Identidad 3}
-\begin{frame}
-\frametitle{Demostrar la Propiedad}
-Demuestra que se cumple la siguiente propiedad:
-\begin{align*}
-1 \cdot 3 \cdot 5 \ldots \cdot (2 \, n - 1) = \dfrac{2^{1-n} \, \Gamma (2 n)}{\Gamma (n)}
-\end{align*}
-\pause
-Para resolver este ejercicio, nuevamente tendremos que revisar la expresión de la izquierda para que con un juego algebraico, se simplique la expresión:
-\end{frame}
-\begin{frame}
-\frametitle{Solución}
-Consideremos un \enquote{uno} que ocuparemos para multiplicar la expresión de la izquierda:
-\begin{align*}
-1 = \dfrac{ 2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)}{ 2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)}
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Solución}
-Multiplicamos el \enquote{uno} anterior, por la parte izquierda de la igualdad inicial, así tendremos que:
-{\fontsize{12}{12}\selectfont
-\begin{align*}
-1 \cdot 3 \cdot 5 \ldots \cdot (2 \, n - 1) = \dfrac{1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \ldots \cdot (2 \, n - 2)(2 \, n -1)}{2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)}
-\end{align*}}
-\pause
-Revisemos tanto el numerador como el denominador obtenidos:
-\end{frame}
-\begin{frame}
-\frametitle{Solución}
-Del numerador encontramos que:
-\begin{eqnarray*}
-1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \ldots \cdot (2 \, n - 2)(2 \, n -1) &=& (2 \, n - 1)! \\[0.5em] \pause
-&=& \Gamma (2 \, n)
-\end{eqnarray*}
-\end{frame}
-\begin{frame}
-\frametitle{Solución}
-Para el denominador
-\begin{align*}
-2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)
-\end{align*}
-\pause
-Ocupamos el resultado obtenido en la ec. (\ref{eq:ecuacion_01_16}), por lo que
-\begin{align*}
-2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2) = 2^{n-1} \, \Gamma (n)
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Solución}
-Entonces llegamos a que:
-\begin{eqnarray*}
-1 \cdot 3 \cdot 5 \ldots \cdot (2 \, n - 1) &=& \dfrac{\Gamma (2 n)}{2^{n-1} \, \Gamma (n)} = \\[0.5em] \pause
-&=& \dfrac{2^{1-n} \, \Gamma(2n)}{\Gamma (n)} \qed
-\end{eqnarray*}
-\end{frame}
 
 \subsection{Ejemplo de la mecánica}
 
 \begin{frame}
-\frametitle{Ejemplo}
-Una partícula de masa $m$ en el eje $x$ positivo es atraía hacia el origen por una fuerza variable tal que el producto de la magnitud de la fuerza por la distancia desde el origen es una constante $k$. La partícula parte del reposo en $x = L$.
+\frametitle{Ejercicio}
+Una partícula de masa $m$ en el eje $x$ positivo es atraída hacia el origen por una fuerza variable tal que el producto de la magnitud de la fuerza por la distancia desde el origen es una constante $k$. La partícula parte del reposo en $x = L$.
 \\
 \bigskip
-Determina el tiempo necesario para que la partícula llegue el origen.
+\pause
+\textbf{Determina el tiempo necesario para que la partícula llegue el origen}.
 \end{frame}
 \begin{frame}
-\frametitle{El problema}
+\frametitle{Representando el problema}
 Con un esquema tenemos que nuestro problema es:
 \begin{figure}
     \centering
@@ -210,56 +39,76 @@ Con un esquema tenemos que nuestro problema es:
 \end{frame}
 \begin{frame}
 \frametitle{Solución}
-Partimos de la segunda ley de Newton $F = m \, a$, vemos que la única componente que permanece es en la dirección del eje $x$.
+Partimos de la segunda ley de Newton $F = m \, a$, donde tenemos que la única componente que permanece está en la dirección del eje $x$.
 \\
 \bigskip
+\pause
 Entonces tenemos que
 \begin{align*}
 - \dfrac{k}{x} = m \, \dv[2]{x}{t}
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Solución}
+\frametitle{Manejo algebraico}
 Acomodemos los términos y multipliquemos ambos lados por $\dv*{x}{t}$:
 \begin{align*}
-m \left( \dv[2]{x}{t} \right) \left( \dv{x}{t} \right) = - \dfrac{k}{t} \,  \left( \dv{x}{t} \right)
+m \left( \dv[2]{x}{t} \right) \left( \dv{x}{t} \right) = - \dfrac{k}{x} \,  \left( \dv{x}{t} \right)
 \end{align*}
 \pause
-Entonces podemos integrar ambos lados de la igualdad:
+Antes de integrar ambos lados de la igualdad, expresemos una derivada de manera conveniente:
 \end{frame}
 \begin{frame}
-\frametitle{Solución}
+\frametitle{Representación de una derivada}
 Tomemos en cuenta que la derivada:
 \begin{align*}
 \left[ \left( \dv{x}{t} \right)^{2} \right]^{\prime} = 2 \, \left( \dv{x}{t} \right) \left( \dv[2]{x}{t} \right)
 \end{align*}
 \pause
-Entonces nos queda por resolver:
+Al integrar ambos lados de la igualdad, nos queda por resolver:
 \begin{align*}
 \dfrac{1}{2} \, m \, \left( \dv{x}{t} \right)^{2} = - k \int_{L}^{x} \dfrac{\left( \dv{x}{t} \right)}{x} \dd{t}
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Solución}
-Consideramos ahora la condición inicial:
+\frametitle{Resolviendo la integral}
+Se tiene entonces que:
+\begin{eqnarray*}
+\dfrac{1}{2} \, m \, \left( \dv{x}{t} \right)^{2} &=& - k \int_{L}^{x} \dfrac{\left( \dv{x}{t} \right)}{x} \dd{t} \\[0.5cm] \pause
+&=& - k \, \ln(x) + k \, \ln(L)
+\end{eqnarray*}
+\pause
+Vemos que esta ecuación hace que:
 \begin{align*}
 \dv{x}{t} = 0 \hspace{1cm} \mbox{cuando } x = L
 \end{align*}
-\pause
-Resolvemos la ecuación para la velocidad $\dv*{x}{t}$, tomamos el valor negativo de la raíz cuadrada ya que el movimiento se presenta en la dirección negativa del eje $x$.
+en concordancia con la condición de frontera.
 \end{frame}
 \begin{frame}
-\frametitle{Solución}
-Separamos las variables e integramos:
+\frametitle{Resolviendo la ecuación}
+Resolvemos la ecuación para la velocidad $\dv*{x}{t}$:
+\begin{eqnarray*}
+\dfrac{1}{2} \, m \, \left( \dv{x}{t} \right)^{2} &=& - k \, \ln(x) + k \, \ln(L) \\[0.5em] \pause
+\left( \dv{x}{t} \right)^{2} &=& \dfrac{2 \, k}{m} \ln(\dfrac{L}{x}) \\[0.em] \pause
+\dv{x}{t} &=& - \sqrt{\dfrac{2 \, k}{m} \ln(\dfrac{L}{x})} \\[0.em] \pause
+\dd{t} &=& - \sqrt{\dfrac{m}{2 \, k}} \left[ \ln(\dfrac{L}{x}) \right]^{-\frac{1}{2}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la ecuación}
+Tomamos el valor negativo de la raíz cuadrada ya que el movimiento se presenta en la dirección negativa del eje $x$.
+\\
+\bigskip
+\pause
+Al haber separado las variables, ya podemos integrar:
 \begin{align*}
-t = - \sqrt{\dfrac{m}{2 \, k}} \int_{L}^{0} \left( \ln \dfrac{L}{x} \right)^{-1/2} \dd{x}
+t = - \sqrt{\dfrac{m}{2 \, k}} \int_{L}^{0} \left[ \ln(\dfrac{L}{x}) \right]^{-\frac{1}{2}} \dd{x}
 \end{align*}
 \pause
 Al parecer se complica con respecto a la integración!
 \end{frame}
 \begin{frame}
 \frametitle{Uso de una identidad}
-Vamos a ocupar una identidad (que podrán demostrar sin problema):
+Vamos a ocupar la siguiente identidad:
 \begin{align}
 \int_{0}^{\infty} t^{a} \, \exp(-b \, t^{c}) \dd{t} = \dfrac{\Gamma \left( \dfrac{a + 1}{c} \right)}{c \, b^{(a+1)/c}}
 \label{eq:identidad_Gamma}
@@ -267,7 +116,7 @@ Vamos a ocupar una identidad (que podrán demostrar sin problema):
 donde $b$ y $c$ son constantes positivas, mientras que $a$ es una constante tal que $a > - 1$.
 \end{frame}
 \begin{frame}
-\frametitle{Otra resultado}
+\frametitle{Otro resultado}
 Consideremos la siguiente integral:
 \begin{align*}
 \int_{0}^{1} x^{m} \, \left( \ln \dfrac{1}{x} \right)^{n} \dd{x} \hspace{1cm} m > -1, n > -1
@@ -292,11 +141,11 @@ x^{m} &= e^{-m t} \\[0.5em]
 \frametitle{Otro resultado}
 Entonces al reexpresar la integral con el cambio de variable y considerando que al invertir los límites de integración, se cancela el signo negativo, tendremos que:
 \begin{align*}
-\int_{0}^{1} x^{m} \, \left( \ln \dfrac{1}{x} \right)^{n} \dd{x} = \int_{0}^{\infty} t^{n} \, \exp(-(m+1) \, t) \dd{t}
+\int_{0}^{1} x^{m} \, \left( \ln \dfrac{1}{x} \right)^{n} \dd{x} = \int_{0}^{\infty} t^{n} \, \exp \big[-(m + 1) \, t \big] \dd{t}
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Otro resultado}
+\frametitle{Usando el resultado}
 Utilizando la propiedad (\ref{eq:identidad_Gamma}), con $a = n$, $b = m + 1$ y $c = 1$, el valor de la integral es:
 \begin{align}
 \int_{0}^{1} x^{m} \, \left( \ln \dfrac{1}{x} \right)^{n} \dd{x} = \dfrac{\Gamma (n + 1)}{(m + 1)^{n+1}}
@@ -307,15 +156,25 @@ Utilizando la propiedad (\ref{eq:identidad_Gamma}), con $a = n$, $b = m + 1$ y $
 \frametitle{Regresando al problema}
 Una vez revisados los dos resultados anteriores, para el problema de la partícula moviéndose al origen, entonces hacemos el cambio de variable $x = L \, u$ para obtener:
 \begin{align*}
-t = L \, \sqrt{\dfrac{m}{2 \, k}} \, \int_{0}^{1} u^{0} \, \left( \ln \dfrac{1}{c} \right)^{-1/2} \dd{u}
+t &= - \sqrt{\dfrac{m}{2 \, k}} \int_{L}^{0} \left[ \ln(\dfrac{L}{x}) \right]^{-\frac{1}{2}} \dd{x} \\[0.5em]
+t &= L \, \sqrt{\dfrac{m}{2 \, k}} \, \int_{0}^{1} u^{0} \, \left( \ln \dfrac{1}{u} \right)^{-1/2} \dd{u}
 \end{align*}
-\pause
-Del resultado obtenido en la ec. (\ref{eq:ecuacion_propiedad_Gamma})
 \end{frame}
 \begin{frame}
 \frametitle{Solución}
-Entonces tenemos que: $m = 0$ y $n = -1/2$, por lo que:
-\fontsize{12}{12}\selectfont
+Del resultado obtenido en la ec. (\ref{eq:ecuacion_propiedad_Gamma})
+\begin{align*}
+\int_{0}^{1} x^{m} \, \left( \ln \dfrac{1}{x} \right)^{n} \dd{x} = \dfrac{\Gamma (n + 1)}{(m + 1)^{n+1}}
+\end{align*}    
+\pause
+\begin{align*}
+t &= L \, \sqrt{\dfrac{m}{2 \, k}} \, \int_{0}^{1} u^{0} \, \left( \ln \dfrac{1}{u} \right)^{-1/2} \dd{u}
+\end{align*}
+Entonces tenemos que: $m = 0$ y $n = -1/2$.
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Por lo que:
 \begin{eqnarray*}
 t &=& L \, \sqrt{\dfrac{m}{2 \, k}} \, \Gamma(-1/2 + 1) = \\[0.5em] \pause
 &=& L \, \sqrt{\dfrac{m}{2 \, k}} \, \Gamma(1/2) = \\[0.5em] \pause
@@ -326,7 +185,8 @@ t &=& L \, \sqrt{\dfrac{m \, \pi}{2 \, k}} \qed
 
 \section{Función Beta}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Ejercicio}
+\subsection{Ejercicio de la geometría}
+
 
 \begin{frame}
 \frametitle{Enunciado del problema}
@@ -349,6 +209,10 @@ donde: $a$ es una constante positiva, $b$ es un entero par positivo y $c$ es un 
 \begin{frame}
 \frametitle{Enunciado del problema}
 Calcula el área dentro de la curva (ec. \ref{eq:ecuacion_curva_estrella}) en términos de la función Gamma cuando el exponente $b/c$ es $2/3$.
+\\
+\bigskip
+\pause
+El enunciado nos pide el resultado en términos de la función Gamma, cuando en esta sección veremos la función Beta\pause, entonces habrá que ocupar la relación que vincula la función Gamma con la Beta.
 \end{frame}
 \begin{frame}
 \frametitle{Antes de la Solución}
@@ -378,22 +242,27 @@ En cualquier caso, la curva es simétrica en ambos ejes de coordenadas, de modo 
 \end{figure}
 \end{frame}
 \begin{frame}
-\frametitle{solución}
-Obtendremos inicialmente una solución general para valores $a$, $b$ y $c$, posteriomente calcularemos la solución particular con los valores que nos da el enunciado: $b = 2$ y $c = 3$.
+\frametitle{Solución al problema}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Obtendremos inicialmente una solución general para valores $a$, $b$ y $c$.
+\item Posteriomente calcularemos la solución particular con los valores que nos da el enunciado: $b = 2$ y $c = 3$.
+\end{enumerate}
 \end{frame}
 \begin{frame}
-\frametitle{Solución}
+\frametitle{Previo a la solución}
 Tenemos entonces que:
 \begin{align*}
 \mbox{Área = } 4 \iint \limits_{R} \dd{A}
 \end{align*}
-donde $R$ representa la región en el primer cuadrante rodeado por la curva y los ejes.
+donde $R$ representa la región en el primer cuadrante rodeado por la curva y los ejes, revisa la figura (\ref{fig:figura_curva_estrella_cuadrante}).
 \end{frame}
 \begin{frame}
-\frametitle{Solución}
-Hacemos la doble integral a una integral equivalente con límites:
+\frametitle{Detallando la integral a resolver}
+Pasamos de la integral doble a una integral doble equivalente con límites:
 \begin{align*}
-A = 4 \int_{0}^{a} \dd{x} \, \int_{0}^{\left( a^{b/c} - x^{b/c} \right)^{c/b}} \dd{y}
+A = 4 \int_{0}^{a} \dd{x} \, \int_{0}^{\left( a^{\frac{b}{c}} - x^{\frac{b}{c}} \right)^{\frac{c}{b}}} \dd{y}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -448,15 +317,25 @@ Para resolver la expresión en términos mucho más sencillos, debemos de ocupar
 \end{frame}
 \begin{frame}
 \frametitle{Ocupando propiedades}
-Conocemos una expresión que relaciona la función Beta con la Gamma, entonces tendremos que:
+Conocemos una expresión que relaciona la función Beta con la Gamma:
 \begin{align*}
-A = 4 \, \left( \dfrac{c}{b} \right) \, a^{2} \, \left[ \dfrac{\mathlarger{\Gamma} \left( \dfrac{c}{b} \right) \, \mathlarger{\Gamma} \left( \dfrac{c}{b} + 1 \right)}{\mathlarger{\Gamma} \left( \dfrac{2 \, c}{b} + 1 \right)} \right]
+B (x, y) = \dfrac{\Gamma (x) \, \Gamma (y)}{\Gamma (x + y)}
+\end{align*}
+Que podemos ocupar en el resultado anterior.
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando propiedades}
+Así tenemos que:
+\begin{align*}
+A &= 4 \, \left( \dfrac{c}{b} \right) \, a^{2} \, B \left( \dfrac{c}{b}, \dfrac{c}{b} + 1 \right) \\[0.5em]
+A &= 4 \, \left( \dfrac{c}{b} \right) \, a^{2} \, \left[ \dfrac{\mathlarger{\Gamma} \left( \dfrac{c}{b} \right) \, \mathlarger{\Gamma} \left( \dfrac{c}{b} + 1 \right)}{\mathlarger{\Gamma} \left( \dfrac{2 \, c}{b} + 1 \right)} \right]
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Ocupando propiedades}
 Seguimos ocupando las identidades de la función Gamma:
 \begin{align*}
+\mathlarger{\Gamma} (x + 1) &= x \, \mathlarger{\Gamma} (x) \\[0.5em]
 \mathlarger{\Gamma} \left( \dfrac{c}{b} + 1 \right) &= \dfrac{c}{b} \, \mathlarger{\Gamma} \left( \dfrac{c}{b} \right) \\[1em]
 \mathlarger{\Gamma} \left( \dfrac{2 \, c}{b} + 1 \right) &= \dfrac{2 \, c}{b} \, \mathlarger{\Gamma} \left( \dfrac{2 \, c}{b} \right)
 \end{align*}
@@ -465,17 +344,24 @@ Seguimos ocupando las identidades de la función Gamma:
 \frametitle{Solución general}
 La solución general para el área contenida en el astroide es:
 \begin{align*}
+A &= 4 \, \left( \dfrac{c}{b} \right) \, a^{2} \, \left[ \dfrac{\mathlarger{\Gamma} \left( \dfrac{c}{b} \right) \, \mathlarger{\Gamma} \left( \dfrac{c}{b} + 1 \right)}{\mathlarger{\Gamma} \left( \dfrac{2 \, c}{b} + 1 \right)} \right] \\[1em]
+A &= \dfrac{\mathlarger{\Gamma} \left( \dfrac{c}{b} \right) \, \mathlarger{\Gamma} \left( \dfrac{c}{b} \right)}{\mathlarger{\Gamma} \left( \dfrac{2 \, c}{b} \right)} \, \left( \dfrac{2 \, c \, a^{2}}{b} \right)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución general}
+Por lo que tenemos una expresión más sencilla que involucra la evaluación de la función Gamma, para cualesquiera valores de $b$ y $c$.
+\begin{align*}
 A = \dfrac{\mathlarger{\Gamma} \left( \dfrac{c}{b} \right) \, \mathlarger{\Gamma} \left( \dfrac{c}{b} \right)}{\mathlarger{\Gamma} \left( \dfrac{2 \, c}{b} \right)} \, \left( \dfrac{2 \, c \, a^{2}}{b} \right)
 \end{align*}
-\pause
-Por lo que tenemos una expresión más sencilla que involucra la evaluación de la función Gamma, para cualesquiera valores de $b$ y $c$.
 \end{frame}
 \begin{frame}
 \frametitle{Solución particular}
 El área del astroide cuando $b = 2$ y $c = 3$ es:
-\begin{align*}
-A &= \dfrac{\mathlarger{\Gamma} \left( \dfrac{3}{2} \right) \, \mathlarger{\Gamma} \left( \dfrac{3}{2} \right)}{\mathlarger{\Gamma} (3)} \, (2) \left( \dfrac{3}{2} \right) \, a^{2} \\[1em]
-&= \dfrac{3 \, a^{2} \, \pi}{8} \qed
-\end{align*}
+\begin{eqnarray*}
+A &=& \dfrac{\mathlarger{\Gamma} \left( \dfrac{3}{2} \right) \, \mathlarger{\Gamma} \left( \dfrac{3}{2} \right)}{\mathlarger{\Gamma} (3)} \, (2) \left( \dfrac{3}{2} \right) \, a^{2} = \\[1em] \pause
+&=& \dfrac{\dfrac{\sqrt{\pi}}{2} \, \dfrac{\sqrt{\pi}}{2}}{2} \, 3 \, a^{2} = \\[1em] \pause
+&=& \dfrac{3 \, a^{2} \, \pi}{8} \qed
+\end{eqnarray*}
 \end{frame}
 \end{document}
