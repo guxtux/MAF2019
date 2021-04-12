@@ -1,0 +1,373 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} {Material adicional} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\makeatletter
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.8em}{}{}
+\makeatother
+
+\title{\large{Ejercicios}}
+\subtitle{Identidades Gamma y Beta}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Función Gamma}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+
+\subsection{Introducción}
+\begin{frame}
+\frametitle{Las identidades para la función Gamma}
+Ya conocemos la función Gamma a partir de al menos tres definiciones que se revisaron en el material de trabajo.
+\\
+\bigskip
+\pause
+Así mismo, conocemos una serie de identidades tanto para la función Gamma y Beta.
+\end{frame}
+\begin{frame}
+\frametitle{Las identidades para la función Gamma}
+Aunque las identidades que se han presentado en una lista, son útiles para simplificar el trabajo en la solución de un problema, es conveniente realizar la demostración de las identidades, siendo un ejercicio muy atractivo para reforzar las definiciones de las funciones.
+\\
+\bigskip
+\pause
+En esta sesión demostraremos algunas propiedades de esa lista, como buen ejercicio moral, podrías demostrar las identidades faltantes.
+\end{frame}
+
+\subsection{Identidad 1}
+
+\begin{frame}
+\frametitle{Propiedad de la función $\Gamma(x)$}
+\textbf{Demuestra} la siguiente identidad:
+\begin{align*}
+\Gamma (x + 1) = x \, \Gamma (x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Antes de demostrar la identidad directamente de la integral Gamma para todo valor de $x$ positivo, veamos que esta identidad se usa para definir la función Gamma primero para $-1 < x < 0$ escribiéndola en la forma:
+\begin{align*}
+\Gamma(x) = \dfrac{\Gamma (x + 1)}{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Tendremos entonces que la expresión es válida para el intervalo $-2 < x < -1$, y así sucesivamente para todos los valores no enteros negativos de $x$.
+\\
+\bigskip
+\pause
+Por lo que nos queda demostrar que se cumple
+\begin{align*}
+\Gamma (x + 1) =  x \, \Gamma (x)
+\end{align*}
+para todo $x$ positivo.
+\end{frame}
+\begin{frame}
+\frametitle{Demostración}
+Haciendo que $x$ sea cualquier número positivo, escribimos la integral Gamma para el argumento $x + 1$:
+\begin{eqnarray*}
+\Gamma (x + 1) &= \displaystyle \int_{0}^{\infty} t^{(x+1)-1} \, e^{-t} \dd{t} = \\[1em] \pause
+&= \displaystyle \int_{0}^{\infty} t^{x} \, e^{-t} \dd{t}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Demostración}
+Resolvemos usando la integración por partes, haciendo:
+\begin{align*}
+u = t^{x} \hspace{1cm} \dd{v} = e^{-t} \dd{t}
+\end{align*}
+entonces
+\pause
+\begin{align*}
+\Gamma (x + 1) = t^{x} \, \left( - e^{-t}\right)\eval_{0}^{\infty} - \int_{0}^{\infty} \left( -e^{-t}\right) \, x \, t^{x-1} \dd{t}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Demostración}
+Por lo que:
+\begin{align*}
+\Gamma (x + 1) = - \lim_{t \to \infty} \dfrac{t^{x}}{e^t} + \dfrac{0^{x}}{e^{0}} + x \int_{0}^{\infty} t^{x-1} \, e^{-t} \dd{t}
+\end{align*}
+\pause
+Veamos ahora lo que pasa con este resultado:
+\end{frame}
+\begin{frame}
+\frametitle{Demostración}
+El límite en el primer sumando de la expresión de la derecha sabemos que se anula, a partir de la indeterminación $\infty / \infty$, ya que usamos la regla de L'Hopital.
+\pause
+\begin{align*}
+\Gamma (x + 1) = \cancelto{0}{- \lim_{t \to \infty} \dfrac{t^{x}}{e^t}} + \dfrac{0^{x}}{e^{0}} + x \int_{0}^{\infty} t^{x-1} \, e^{-t} \dd{t}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Demostración}
+El segundo término de la derecha también se anula
+\begin{align*}
+\Gamma (x + 1) = \cancelto{0}{- \lim_{t \to \infty} \dfrac{t^{x}}{e^t}} + \cancelto{0}{\dfrac{0^{x}}{e^{0}}} + x \int_{0}^{\infty} t^{x-1} \, e^{-t} \dd{t}
+\end{align*}
+\pause
+Por lo que nos queda el tercero, pero vemos que la integral que queda, es la definición de la función Gamma, así:
+\end{frame}
+\begin{frame}
+\frametitle{Demostración}
+Llegamos al resultado de la identidad:
+\begin{align}
+\Gamma (x + 1) = x \, \Gamma (x) \qed
+\label{eq:ecuacion_01_04_01}
+\end{align}
+\end{frame}
+\subsection{Identidad 2}
+\begin{frame}
+\frametitle{Demostrar la identidad}
+Demuestra la siguiente identidad
+\begin{align*}
+2 \cdot 4 \cdot 6 \ldots \cdot 2 \, n = 2^{n} \, \Gamma (n + 1)
+\end{align*}
+\pause
+Que como ya habrás identificado, corresponde a una variante de la definición del doble factorial para números pares.
+\end{frame}
+\begin{frame}[t]
+\frametitle{Solución}
+Para demostrar la identidad, pondremos atención al lado izquierdo de la igualdad anterior:
+\pause
+\begin{align*}
+\boxedcolor{2 \cdot 4 \cdot 6 \ldots \cdot 2 \, n } = 2^{n} \, \Gamma (n + 1)
+\end{align*}
+\pause
+Por lo que veremos un desarrollo para el producto de los números pares:
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Entonces tenemos que:
+\begin{eqnarray}
+2 \cdot 4 \cdot 6 \ldots \cdot 2 \, n  &=& (2 \cdot 1) (2 \cdot 2) (2 \cdot 3) \ldots (2 \cdot n) = \nonumber \\[0.5em] \pause
+&=& 2^{n} \, n! \nonumber \\[0.5em] \pause
+&=& 2^{n} \, \Gamma (n + 1) \qed \label{eq:ecuacion_01_16}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Un ajuste para $n$}
+Si cambiamos $n - 1$ en lugar de $n$, obtenemos lo siguiente:
+\begin{align*}
+2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)  = 2^{n-1} \, \Gamma (n)
+\end{align*}
+\end{frame}
+\subsection{Identidad 3}
+\begin{frame}
+\frametitle{Demostrar la Propiedad}
+Demuestra que se cumple la siguiente propiedad:
+\begin{align*}
+1 \cdot 3 \cdot 5 \ldots \cdot (2 \, n - 1) = \dfrac{2^{1-n} \, \Gamma (2 n)}{\Gamma (n)}
+\end{align*}
+\pause
+Para resolver este ejercicio, nuevamente tendremos que revisar la expresión de la izquierda para que con un juego algebraico, se simplique la expresión:
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Consideremos un \enquote{uno} que ocuparemos para multiplicar la expresión de la izquierda:
+\begin{align*}
+1 = \dfrac{ 2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)}{ 2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Multiplicamos el \enquote{uno} anterior, por la parte izquierda de la igualdad inicial, así tendremos que:
+{\fontsize{12}{12}\selectfont
+\begin{align*}
+1 \cdot 3 \cdot 5 \ldots \cdot (2 \, n - 1) = \dfrac{1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \ldots \cdot (2 \, n - 2)(2 \, n -1)}{2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)}
+\end{align*}}
+\pause
+Revisemos tanto el numerador como el denominador obtenidos:
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Del numerador encontramos que:
+\begin{eqnarray*}
+1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \ldots \cdot (2 \, n - 2)(2 \, n -1) &=& (2 \, n - 1)! \\[0.5em] \pause
+&=& \Gamma (2 \, n)
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Para el denominador
+\begin{align*}
+2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2)
+\end{align*}
+\pause
+Ocupamos el resultado obtenido en la ec. (\ref{eq:ecuacion_01_16}), por lo que
+\begin{align*}
+2 \cdot 4 \cdot 6 \ldots \cdot (2 \, n - 2) = 2^{n-1} \, \Gamma (n)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Entonces llegamos a que:
+\begin{eqnarray*}
+1 \cdot 3 \cdot 5 \ldots \cdot (2 \, n - 1) &=& \dfrac{\Gamma (2 n)}{2^{n-1} \, \Gamma (n)} = \\[0.5em] \pause
+&=& \dfrac{2^{1-n} \, \Gamma(2n)}{\Gamma (n)} \qed
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Identidad 4}
+
+\begin{frame}
+\frametitle{Identidad 4}
+Una identidad que será de mucha utilidad es la siguiente:
+\begin{align*}
+\int_{0}^{\infty} t^{a} \, \exp \big( -b \, t^{c} \big) \dd{t} = \dfrac{\mathlarger\Gamma \left( \dfrac{a + 1}{c} \right) }{c \, b^{(a+1)/c}}
+\end{align*}
+donde $b$ y $c$ son constantes positivas, $a$ es una constante tal que $a > -1$.
+\\
+\bigskip
+\pause
+Hagamos la demostración!
+\end{frame}
+\begin{frame}
+\frametitle{Demostración}
+Hagamos el siguiente cambio de variable: $b \, t^{c} = x$, por lo que ahora podemos escribir algunas potencias de $t$:
+\begin{eqnarray*}
+t &=& \dfrac{x^{\frac{1}{c}}}{b^{\frac{1}{c}}}, \hspace{1cm} t^{a} = \dfrac{x^{\frac{a}{c}}}{b^{\frac{a}{c}}} \\[0.5em] \pause
+t^{c-1} &=& \dfrac{x^{(c-1)/c}}{b^{(c-1)/c}}, \hspace{1cm} \pause \dfrac{1}{t^{c-1}} = \dfrac{b \, x^{1/(c-1)}}{b^{1/c}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo los diferenciales}
+Del cambio de variable $b \, t^{c} = x$, tenemos que:
+\begin{align*}
+c \, b \, t^{c-1} \dd{t} = \dd{x}
+\end{align*}
+\pause
+Entonces al despejar el diferencial con respecto a $t$:
+\begin{eqnarray*}
+\dd{t} &=& \left( \dfrac{1}{t^{c-1}} \right) \dfrac{\dd{x}}{c \, b} = \\[0.5em] \pause
+&=& \dfrac{x^{1/c-1}}{c \, b^{1/c}} \dd{x}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Regresando a la integral inicial}
+De la integral inicial ahora la presentamos con el cambio de variable, revisemos con cuidado que los límites de integración no se modifican, por lo tanto:
+\begin{eqnarray*}
+\int_{0}^{\infty} t^{a} \, \exp \big( -b \, t^{c} \big) \dd{t} = \pause  \displaystyle \scalerel{\int_{\text{\tiny{0}}}^{\text{\tiny{$\infty$}}}}{\dfrac{x^{\frac{a}{c}} (e^{-x})}{b^{\frac{a}{c}}}} \, \dfrac{x^{1/c - 1}}{c \, b^{\frac{1}{c}}} \dd{x}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Acomodando los términos}
+Si reordenamos los términos en el integrando y dejando las constantes fuera de la integral, tendremos que:
+\begin{align*}
+\int_{0}^{\infty} t^{a} \, \exp \big( -b \, t^{c} \big) \dd{t} = \dfrac{1}{c \, b^{\frac{(a+1)}{c}}} \scaleto{\int_{\text{\tiny{0}}}^{\text{\tiny{$\infty$}}}}{30pt} x^{\frac{a+1}{c} - 1} \, e^{-x} \dd{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+Reconocemos la integral en el lado derecho de la igualdad, como la función Gamma con argumento $(a+1)/c$, por lo tanto, hemos completado la demostración:
+\begin{align*}
+\int_{0}^{\infty} t^{a} \, \exp \big( -b \, t^{c} \big) \dd{t} = \dfrac{\mathlarger{\Gamma \left( \dfrac{a + 1}{c} \right)}}{c \, b^{\frac{(a+1)}{c}}} 
+\end{align*}
+\end{frame}
+
+\section{Función Beta}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Introducción}
+
+\begin{frame}
+\frametitle{La función Beta}
+Conocemos la expresión para la función Beta:
+\begin{align*}
+B(x, y) = \int_{0}^{1} t^{x-1} \, (1 - t)^{y-1} \dd{t} \hspace{1cm} x > 0, \hspace{0.3cm} y > 0
+\end{align*}
+\pause
+Revisaremos algunas identidades que involucran a la función Beta.
+\end{frame}
+
+\subsection{Identidad 1}
+
+\begin{frame}
+\frametitle{Primera identidad}
+Demuestra que:
+\begin{align*}
+B(y, x) = B(x, y)
+\end{align*}
+\pause
+Como punto de partida debemos de considerar la definición de la función Beta.
+\end{frame}
+\begin{frame}
+\frametitle{Consideramos la definición}
+Tomamos la definición de la función Beta:
+\begin{align*}
+B(y, x) = \int_{0}^{1} t^{y-1} \, (1 - t)^{x-1} \dd{t} \hspace{1cm} y > 0, \hspace{0.3cm} x > 0
+\end{align*}
+\pause
+Al hacer el cambio de variable en la integración tal que: $1 - t = s$, tenemos que:
+\pause
+\begin{eqnarray*}
+B(y, x) = \pause {-} \int_{0}^{1} (1 {-} s)^{y-1} \, s^{x-1} \dd{s} = \pause \int_{0}^{1} s^{x-1} \, (1 {-} s)^{y-1} \dd{s}
+\end{eqnarray*}  
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+El resultado obtenido es el mismo de la definición para la función Beta, aunque ahora una letra diferente representa la variable de integración. \pause Por lo tanto:
+\begin{align*}
+B(y, x) = B(x, y) \hspace{1cm} \qed
+\end{align*}
+\end{frame}
+
+\subsection{Identidad 2}
+
+\begin{frame}
+\frametitle{Identidad 2}
+Demuestra la siguiente identidad:
+\begin{align*}
+B(x, y) = \int_{0}^{\frac{\pi}{2}} 2 \, \sin^{2x-1} \theta \, \cos^{2y-1} \theta \dd{\theta}
+\end{align*} 
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Partimos nuevamente de la definición de la función Beta:
+\begin{align*}
+B(x, y) = \int_{0}^{1} t^{x-1} \, (1 - t)^{y-1} \dd{t} \hspace{1cm} x > 0, \hspace{0.3cm} y > 0
+\end{align*}
+\pause
+Proponemos el cambio de variable $t = \sin^{2} \theta$. \pause Entonces el diferencial con respecto a $t$ es:
+\begin{align*}
+\dd{t} = 2 \, \sin \theta \, \cos \theta \dd{\theta}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Como el rango de $t$ cubre el intervalo de integración de $0$ a $1$, \pause podemos hacer que $\theta$ cubra cualquier intervalo en el cual la función $\sin \theta$ se incremente continúamente de $0$ a $1$, digamos de $\theta = 0$ a $\theta = \pi/2$.
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Entonces la ecuación inicial queda como:
+\begin{eqnarray*}
+B(x, y) &=& \int_{0}^{\frac{\pi}{2}} \big( \sin^{2} \theta \big)^{x-1} \, \big( \cos^{2} \theta \big)^{y-1} \, 2 \, \sin \theta \, \cos \theta \dd{\theta} \\[0.5em] \pause
+&=& \int_{0}^{\frac{\pi}{2}} 2 \, \sin^{2x -1} \theta \, \cos^{2y-1} \theta \dd{\theta} \hspace{1cm} \qed
+\end{eqnarray*}
+\end{frame}
+\end{document}

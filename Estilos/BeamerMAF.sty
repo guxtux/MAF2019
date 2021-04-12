@@ -35,6 +35,8 @@
 \RequirePackage{pifont}
 \RequirePackage{pbox}
 \RequirePackage{bm}
+\RequirePackage{bigints}
+\RequirePackage{scalerel}
 \RequirePackage{caption}
 \captionsetup{font=scriptsize,labelfont=scriptsize}
 \spanishdecimal{.}
@@ -74,6 +76,16 @@
 \usefonttheme{professionalfonts}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \spanishdecimal{.}
+
+\newcommand*{\boxcolor}{orange}
+\makeatletter
+\newcommand{\boxedcolor}[1]{\textcolor{\boxcolor}{%
+\tikz[baseline={([yshift=-1ex]current bounding box.center)}] \node [rectangle, minimum width=1ex, thick, rounded corners,draw] {\normalcolor\m@th$\displaystyle#1$};}}
+ \makeatother
+
+\newtcbox{\mybox}{on line,
+  colframe=mycolor,colback=mycolor!10!white,
+  boxrule=0.5pt,arc=4pt,boxsep=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt}
 
 %Sección para el tema de beamer, con el theme, usercolortheme y sección de footers
 % \usetheme{Berlin}
