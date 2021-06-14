@@ -1,0 +1,420 @@
+\input{../Preambulos/preambulo_presentacion_Warsaw_seahorse}
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+\title{\large{Asesoría Repaso Tema 1}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{\today}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Sistema de coordenadas generalizadas}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+
+%Moon (1988) - Field Theory. Table 1.09 Conical coordinates
+\subsection{Ejercicio de transformación}
+
+\begin{frame}
+\frametitle{Planteamiento}
+Un sistema de coordenadas cónico que utiliza las coordenadas $(r, \theta, \lambda)$:
+\begin{align*}
+u^{1} &= r \hspace{1.5cm} 0 \leq t < \infty \\[0.5cm]
+u^{2} &= \theta \hspace{1.5cm} 0 < \theta^{2} < c^{2} \\[0.5cm]
+u^{3} &= \lambda \hspace{1.5cm} 0 < \lambda^{2} < b^{2} \\[0.5cm]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Planteamiento}
+Se puede formar a partir de las coordenadas cartesianas:
+\begin{align*}
+(x)^{2} &= \left( \dfrac{r \, \theta \, \lambda}{b \, c} \right)^{2} \\[0.5em]
+(y)^{2} &= \dfrac{r^{2} \, (\theta^{2} - b^{2})(b^{2} - \lambda^{2})}{b^{2} \, (c^{2} - b^{2})} \\[0.5em]
+(z)^{2} &= \dfrac{r^{2} \, (c^{2} - \theta^{2})(c^{2} - \lambda^{2})}{c^{2} \, (c^{2} - b^{2})}
+\end{align*}
+con $c^{2} > \theta^{2} > b^{2} > \lambda^{2} > 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Planteamiento}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Describe las superficies coordenadas para $r$, $\theta$ y $\lambda$ constantes.
+\item Obtén los factores de escala $h_{i}$ para este sistema de coordenadas cónico.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Planteamiento}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item Escribe las expresiones para los operadores diferenciales: gradiente $\grad \phi$, divergencia $\div{\vb{A}}$ y rotacional $\curl{\vb{A}}$.
+\item ¿Cómo escribiríamos la ecuación de Laplace en este sistema de coordenadas cónico?
+\end{enumerate}
+\end{frame}
+
+\section{Solución del ejercicio}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Superficies coordenadas}
+
+\begin{frame}
+\frametitle{Superficies coordenadas}
+Las superficies coordenadas son aquellas que se obtienen fijando sucesivamente cada una de las coordenadas de un punto.
+\\
+\bigskip
+\pause
+Iniciamos con $r$ constante.
+\end{frame}
+\begin{frame}
+\frametitle{Álgebra para las superficies coordenadas $r$}
+Simplificamos el álgebra al expandir las expresiones para $y^{2}$ y $z^{2}$, para luego sumarlas:
+\pause
+\begin{eqnarray*}
+y^{2} &=& \dfrac{r^{2} \, \theta^{2}}{c^{2} - b^{2}} - \dfrac{r^{2} \, \theta^{2} \, \lambda^{2}}{b^{2}(c^{2} - b^{2})} - \dfrac{r^{2} \, b^{2}}{c^{2} - b^{2}} + \dfrac{r^{2} \, \lambda^{2}}{c^{2} - b^{2}} \\[1em] \pause
+z^{2} &=& \dfrac{r^{2} \, c^{2}}{c^{2} - b^{2}} - \dfrac{r^{2} \, \lambda^{2}}{c^{2} - b^{2}} - \dfrac{r^{2} \, \theta^{2}}{c^{2} - b^{2}} + \dfrac{r^{2} \, \theta^{2} \, \lambda^{2}}{c^{2} (c^{2} - b^{2})}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Álgebra para las superficies coordenadas $r$}
+\begin{align*}
+y^{2} + z^{2} &= \Cancel[red]{\dfrac{r^{2} \, \theta^{2}}{c^{2} - b^{2}}} - \dfrac{r^{2} \, \theta^{2} \, \lambda^{2}}{b^{2}(c^{2} - b^{2})} - \dfrac{r^{2} \, b^{2}}{c^{2} - b^{2}} + \\[1em]
++& \Cancel[blue]{\dfrac{r^{2} \, \lambda^{2}}{c^{2} - b^{2}}} + \dfrac{r^{2} \, c^{2}}{c^{2} - b^{2}} - \Cancel[blue]{\dfrac{r^{2} \, \lambda^{2}}{c^{2} - b^{2}}} - \Cancel[red]{\dfrac{r^{2} \, \theta^{2}}{c^{2} - b^{2}}} + \\[0.5em]
+&+ \dfrac{r^{2} \, \theta^{2} \, \lambda^{2}}{c^{2} (c^{2} - b^{2})} =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Álgebra para las superficies coordenadas $r$}
+\begin{align*}
+y^{2} + z^{2} &= - \dfrac{r^{2} \, \theta^{2} \, \lambda^{2}}{b^{2}(c^{2} - b^{2})} - \dfrac{r^{2} \, b^{2}}{c^{2} - b^{2}} + \\[1em]
++& \dfrac{r^{2} \, c^{2}}{c^{2} - b^{2}} + \dfrac{r^{2} \, \theta^{2} \, \lambda^{2}}{c^{2} (c^{2} - b^{2})} =
+\end{align*}
+\pause
+Obtenemos el m.c.m. del denominador.
+\end{frame}
+\begin{frame}
+\frametitle{Reduciendo la expresión}
+\begin{eqnarray*}
+&=& \dfrac{-b^{2} c^{2} (r^{2} b^{2}) + b^{2} c^{2} (r^{2} c^{2}) - r^{2} c^{2} \theta^{2} \lambda^{2} + r^{2} b^{2} \theta^{2} \lambda^{2}}{b^{2} c^{2} (c^{2} - b^{2})} = \\[1em] \pause
+&=& \dfrac{-r^{2} c^{2} b^{4} + r^{2} b^{2} c^{4} - r^{2} \theta^{2} \lambda^{2} (c^{2} - b^{2})}{b^{2} c^{2} (c^{2} - b^{2})} = \\[1em] \pause
+&=& - \dfrac{r^{2} b^{2}}{c^{2} - b^{2}} + \dfrac{r^{2} c^{2}}{c^{2} - b^{2}} - \dfrac{r^{2} \theta^{2} \lambda^{2}}{b^{2} c^{2}} =
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado de la suma de $y^{2} + z^{2}$}
+\begin{align*}
+y^{2} + z^{2} &= r^{2} \cancelto{1}{\left[ \dfrac{c^{2} + b^{2}}{c^{2} + b^{2}} \right]} - \dfrac{r^{2} \theta^{2} \lambda^{2}}{b^{2} c^{2}} = \\[1em]
+&= r^{2} \left[ 1 - \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} \right]
+\end{align*}
+\\
+\bigskip
+\pause
+Ahora sumamos el término de $x^{2}$:
+\end{frame}
+\begin{frame}
+\frametitle{Sumando $x^{2} + y^{2} + z^{2}$}
+\begin{eqnarray*}
+x^{2} + y^{2} + z^{2} &=& \dfrac{r^{2} \, \theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} + r^{2} \left[ 1 - \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} \right] = \\[1em] \pause
+&=& r^{2} \left[ 1 - \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} + \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} \right] = \\[1em] \pause
+&=& r^{2}
+\end{eqnarray*}
+\\
+\bigskip
+\pause
+Que define una familia de esferas de radio $r =$ cte.
+\end{frame}
+\begin{frame}
+\frametitle{Las otras superficies coordenadas}
+Siguiendo el mismo procedimiento, se determinan las superficies coordenadas para $\theta=$ constante y para $\lambda=$ constante:
+\end{frame}
+\begin{frame}
+\frametitle{Las otras superficies coordenadas}
+Conos elípticos, con $\theta=$ cte.
+\begin{align*}
+\dfrac{x^{2}}{\theta^{2}} + \dfrac{y^{2}}{\theta^{2} - b^{2}} - \dfrac{z^{2}}{c^{2} - \theta^{2}} = 0
+\end{align*}
+\pause
+Conos elípticos, con $\lambda=$ cte.
+\begin{align*}
+\dfrac{x^{2}}{\lambda^{2}} + \dfrac{y^{2}}{b^{2} - \lambda^{2}} - \dfrac{z^{2}}{c^{2} - \lambda^{2}} = 0
+\end{align*}
+\\
+\bigskip
+Como podremos ver en la siguiente figura:
+\end{frame}
+\begin{frame}
+\frametitle{Sistema de coordenadas cónico}
+\begin{figure}
+   \centering
+   \includegraphics[scale=0.3]{Imagenes/Sistema_Conico.eps}
+\end{figure}
+\end{frame}
+
+\subsection{Factores de escala}
+
+\begin{frame}
+\frametitle{Los factores de escala}
+Calculamos los factores de escala o coeficientes métricos a partir de la expresión:
+\begin{eqnarray*}
+h_{i} &=& \abs{\pdv{\vb{r}}{u_{i}}} \\[0.5em]
+\pause
+h_{i} &=& \sqrt{ \left( \pdv{x}{u_{i}} \right)^{2} + \left( \pdv{y}{u_{i}} \right)^{2} + \left( \pdv{z}{u_{i}} \right)^{2}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{El factor de escala  $h_{r}$}
+\begin{align*}
+h_{r} = \sqrt{\left( \pdv{x}{r} \right)^{2} + \left( \pdv{y}{r} \right)^{2} + \left( \pdv{z}{r} \right)^{2}}
+\end{align*}
+\\
+\bigskip
+\pause
+Con la finalidad de llevar la secuencia, calculemos primero las derivadas parciales con respecto a $r$, para luego elevarlas al cuadrado, luego las sumamos y obtenemos la raíz cuadrada.
+\end{frame}
+\begin{frame}
+\frametitle{Derivada parcial de $x$ con respecto a $r$}
+\begin{eqnarray*}
+x &=& \dfrac{r \, \theta \, \lambda}{b \, c} \hspace{0.3cm} \Rightarrow \hspace{0.3cm} \pause \displaystyle \pdv{x}{r} = \dfrac{\theta \, \lambda}{b \, c} \\[1em] \pause
+&\Rightarrow& \displaystyle \left( \pdv{x}{r} \right)^{2} = \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Derivada parcial de $y$ con respecto a $r$}
+\begin{eqnarray*}
+y &=& \dfrac{r}{b} \sqrt{\dfrac{(\theta^{2} - b^{2})(b^{2} - \lambda^{2})}{(c^{2} - b^{2})}} \\[1em] \pause
+&\Rightarrow& \hspace{0.3cm} \displaystyle \pdv{y}{r} = \dfrac{1}{b} \sqrt{\dfrac{(\theta^{2} - b^{2})(b^{2} - \lambda^{2})}{(c^{2} - b^{2})}} \\[1em] \pause
+&\Rightarrow& \left( \pdv{y}{r} \right)^{2} = \dfrac{1}{b^{2}} \left( \dfrac{(\theta^{2} - b^{2})(b^{2} - \lambda^{2})}{(c^{2} - b^{2})}\right)
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Derivada parcial de $z$ con respecto a $r$}
+\begin{eqnarray*}
+z &=& \dfrac{r}{c} \sqrt{\dfrac{(c^{2} - \theta^{2})(c^{2} - \lambda^{2})}{(c^{2} - b^{2})}} \\[1em] \pause
+&\Rightarrow& \hspace{0.3cm} \displaystyle \pdv{z}{r} = \dfrac{1}{c} \sqrt{\dfrac{(c^{2} - \theta^{2})(c^{2} - \lambda^{2})}{(c^{2} - b^{2})}} \\[1em] \pause
+&\Rightarrow& \left( \pdv{z}{r} \right)^{2} = \dfrac{1}{c^{2}} \left( \dfrac{(c^{2} - \theta^{2})(c^{2} - \lambda^{2})}{(c^{2} - b^{2})} \right)
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{La suma del cuadrado de las parciales}
+\begin{eqnarray*}
+&{}& \left( \pdv{x}{r} \right)^{2} + \left( \pdv{y}{r} \right)^{2} + \left( \pdv{z}{r} \right)^{2} = \\[0.5em] \pause
+&=& \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} + \dfrac{(\theta^{2} - b^{2})(b^{2} - \lambda^{2})}{b^{2} (c^{2} - b^{2})} + \dfrac{(c^{2} - \theta^{2})(c^{2} - \lambda^{2})}{c^{2} (c^{2} - b^{2})}
+\end{eqnarray*}
+\\
+\bigskip
+\pause
+Desarrollamos la expresión y veamos qué términos se pueden cancelar
+\end{frame}
+\begin{frame}
+\frametitle{Haciendo el álgebra}
+\begin{eqnarray*}
+&=& \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} - \dfrac{b^{2}}{c^{2} - b^{2}} + \Cancel[red]{\dfrac{\theta^{2}}{c^{2} - b^{2}}} + \Cancel[blue]{\dfrac{\lambda^{2}}{c^{2} - b^{2}}} + \\[1em]
+&-& \dfrac{\theta^{2} \lambda^{2}}{b^{2} (c^{2} - b^{2})} + \dfrac{c^{2}}{c^{2} - b^{2}} - \Cancel[red]{\dfrac{\theta^{2}}{c^{2} - b^{2}}} - \Cancel[blue]{\dfrac{\lambda^{2}}{c^{2} - b^{2}}} + \\[1em]
+&+& \dfrac{\theta^{2} \lambda^{2}}{c^{2} (c^{2} - b^{2})} = 
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Haciendo el álgebra}
+\begin{eqnarray*}
+&=& \cancelto{1}{\dfrac{c^{2} - b^{2}}{c^{2} - b^{2}}} + \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} + \\[1em]
+&-& \dfrac{\theta^{2} \lambda^{2}}{b^{2} (c^{2} - b^{2})} + \dfrac{\theta^{2} \lambda^{2}}{c^{2} (c^{2} - b^{2})} = \\[1em] \pause
+&=& 1 + \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} - \dfrac{c^{2} \theta^{2} \lambda^{2} + b^{2} \theta^{2} \lambda^{2}}{b^{2} c^{2} (c^{2} - b^{2})} = 
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Haciendo el álgebra}
+\begin{eqnarray*}
+&=& 1 + \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} - \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} \, \cancelto{1}{\dfrac{(c^{2} - b^{2})}{(c^{2} - b^{2})}} = \\[1em] \pause
+&=& 1 + \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} - \dfrac{\theta^{2} \, \lambda^{2}}{b^{2} \, c^{2}} =  1
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Haciendo el álgebra}
+Por lo que ya tenemos el primer factor de escala:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{h_{r} = \abs{\pdv{\vb{r}}{r}} = \sqrt{1} = 1}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Los factores de escala $h_{\theta}$ y $h_{\lambda}$}
+Seguimos el mismo procedimiento de diferenciación parcial para obtener los factores de escala $h_{\theta}$ y $h_{\lambda}$:
+\begin{align*}
+h_{\theta} &= \sqrt{\left( \pdv{x}{\theta} \right)^{2} + \left( \pdv{y}{\theta} \right)^{2} + \left( \pdv{z}{\theta} \right)^{2}} \\[1em]
+h_{\lambda} &= \sqrt{\left( \pdv{x}{\lambda} \right)^{2} + \left( \pdv{y}{\lambda} \right)^{2} + \left( \pdv{z}{\lambda} \right)^{2}} \\[1em]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Los factores de escala $h_{\theta}$ y $h_{\lambda}$}
+Así tenemos que:
+\begin{align*}
+h_{\theta} = \sqrt{\dfrac{r^{2} (\theta^{2} - \lambda^{2})}{(\theta^{2} - b^{2})(c^{2} - \theta^{2})}}
+\end{align*}
+\pause
+\begin{align*}
+h_{\lambda} = \sqrt{\dfrac{r^{2} (\theta^{2} - \lambda^{2})}{(b^{2} - \lambda^{2})(c^{2} - \lambda^{2})}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Matriz métrica}
+La matriz métrica está definida por:
+\begin{align*}
+g = \mqty(
+g_{11} & 0 & 0 \\
+0 & g_{22} & 0 \\
+0 & 0 & g_{3} \\
+) = 
+\mqty(
+h_{r}^{2} & 0 & 0 \\
+0 & h_{\theta}^{2} & 0 \\
+0 & 0 & h_{\lambda}^{2}
+)
+\end{align*}
+\end{frame}
+
+\subsection{Operadores diferenciales}
+
+\begin{frame}
+\frametitle{El gradiente}
+\begin{align*}
+\grad{\phi} = \sum_{i=1}^{3} \dfrac{\vu{e_{i}}}{h_{i}} \, \pdv{\phi}{u_{i}} = \sum_{i=1}^{3} \vu{e}_{i} \left( \grad{\phi} \right)_{i}
+\end{align*}
+\\
+\bigskip
+\pause
+Por tanto:
+\begin{align*}
+\grad{\phi} = \sum_{i=1}^{3} \dfrac{\vu{e}_{i}}{h_{i}} \pdv{\phi}{u_{i}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El gradiente}
+\begin{align*}
+\grad{\phi} &= \vu{e}_{r} \, \pdv{\phi}{r} + \dfrac{1}{r (\theta^{2} - \lambda^{2})^{1/2}} \times \\[1em]
+&\times \left[ \vu{e}_{\theta} \, (\theta^{2} - b^{2})^{1/2} \, (c^{2} - \theta^{2})^{1/2} \, \pdv{\phi}{\theta} + \right. \\[1em]
+&+ \left. \vu{e}_{\lambda} \, (b^{2} - \lambda^{2})^{1/2} \, (c^{2} - \lambda^{2})^{1/2} \, \pdv{\phi}{\lambda} \right]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La divergencia}
+Para un campo vectorial $\vb{E}$, habíamos llegado al resultado:
+\begin{align*}
+\div{\vb{E}} = \dfrac{1}{h} \, \sum_{i=1}^{3} \pdv{u_{i}} \left( \dfrac{E_{i} \, h}{h_{i}} \right)
+\end{align*}
+donde $h = h_{1} \, h_{2} \, h_{3}$
+\end{frame}
+\begin{frame}
+\frametitle{La divergencia}
+Así entonces:
+\begin{align*}
+\div{\vb{E}} &= \dfrac{1}{h} \left[ \pdv{r} \left( E_{r} \, h_{\theta} \, h_{\lambda} \right) + \pdv{\theta} \left( E_{\theta} \, h_{r} \, h_{\lambda} \right) + \right. \\[1em]
+&+ \left. \pdv{\lambda} \left( E_{\lambda} \, h_{r} \, h_{\theta} \right) \right]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando la divergencia}
+\begin{align*}
+\dfrac{1}{h} &= \dfrac{1}{ h_{r} \, h_{\theta} \, h_{\lambda}} = \\[1em]
+&= \dfrac{1}{\sqrt{\dfrac{r^2 \left(\theta ^2-\lambda ^2\right)}{\left(\theta ^2-b^2\right) \left(c^2-\theta ^2\right)}} \sqrt{\dfrac{r^2 \left(\theta ^2-\lambda ^2\right)}{\left(b^2-\lambda ^2\right) \left(c^2-\lambda ^2\right)}}} = \\[1em]
+&= \dfrac{(\theta^{2} {-} b^{2})^{1/2} \, (c^{2} {-} \theta^{2})^{1/2} \, (b^{2} {-} \lambda^{2})^{1/2} \, (c^{2} {-} \lambda^{2})^{1/2}}{r^{2}} 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando la divergencia}
+\begin{eqnarray*}
+\pdv{r} (E_{r} \, h_{\theta} \, h_{\lambda}) &=& \pdv{r} \left[ E_{r} \, \sqrt{\dfrac{r^{2} \left(\theta^{2}{-} \lambda^{2}\right)}{\left(\theta^{2} {-} b^{2}\right) \left(c^{2} {-} \theta^{2}\right)}} \times \right. \\[1em]
+&{}& \times \left. \sqrt{\dfrac{r^{2} \left(\theta^{2} {-} \lambda^{2}\right)}{\left(b^{2} {-} \lambda^{2}\right) \left(c^{2} {-} \lambda^{2}\right)}} \right] = \\[1em] \pause
+&=& \dfrac{1}{r^{2}} \, \pdv{r} \bigg( r^{2} \, E_{r} \bigg)
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio moral}
+Como ejercicio moral, desarrolla las otras derivadas parciales para obtener la divergencia en este sistema coordenado cónico:
+\end{frame}
+\begin{frame}
+\frametitle{La divergencia}
+\begin{align*}
+&\div{\vb{E}} = \dfrac{1}{r^{2}} \, \pdv{r} \bigg( r^{2} \, E_{r} \bigg) + \dfrac{1}{r^{2} \, (\theta^{2} {-} \lambda^{2})} \times \\[1em]
+&\times \biggl\{ (\theta^{2} {-} b^{2})^{1/2} \, (c^{2} {-} \theta^{2})^{1/2} \, \pdv{\theta} \bigg[ (\theta^{2} {-} \lambda^{2})^{1/2} \, E_{\theta} \bigg] + \\[1em]
+&+ (b^{2} {-} \lambda^{2})^{1/2} \, (c^{2} {-} \lambda^{2})^{1/2} \, \pdv{\lambda} \bigg[ (\theta^{2} {-} \lambda^{2})^{1/2} \, E_{\lambda} \bigg] \biggl\}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El rotacional}
+Para calcular el rotacional de un campo vectorial, ocupamos la expresión:
+\begin{align*}
+\curl{\vb{E}} = \dfrac{1}{h_{1} h_{2} h_{3}} \, \mdet{
+h_{1} \, \vu{e}_{1} & h_{2} \, \vu{e}_{2} & h_{3} \, \vu{e}_{3} \\
+\displaystyle \pdv{u_{1}} & \displaystyle \pdv{u_{2}} & \displaystyle \pdv{u_{3}} \\
+E_{1} \, h_{1} & E_{2} \, h_{2} & E_{3} \, h_{3}
+}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Rotacional para el sistema coordenado cónico}
+Para nuestro ejercicio, el rotacional se expresa como:
+\begin{align*}
+\curl{\vb{E}} = \dfrac{1}{h_{r} h_{\theta} h_{\lambda}} \, \mdet{
+h_{r} \, \vu{e}_{r} & h_{\theta} \, \vu{e}_{\theta} & h_{\lambda} \, \vu{e}_{\lambda} \\
+\displaystyle \pdv{u_{r}} & \displaystyle \pdv{u_{\theta}} & \displaystyle \pdv{u_{\lambda}} \\
+E_{r} \, h_{r} & E_{\theta} \, h_{\theta} & E_{\lambda} \, h_{\lambda}
+} = 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El rotacional}
+Haciendo con calma cada una de los operaciones indicadas en el determinante, simplificando al máximo las expresiones, obtenemos el rotacional en el sistema coordenado cónico:
+\end{frame}
+\begin{frame}
+\frametitle{El rotacional}
+\fontsize{12}{12}\selectfont
+\begin{align*}
+&\curl{\vb{E}} = \dfrac{\big[ (\theta^{2} {-} b^{2}) (c^{2} {-} \theta^{2}) (b^{2} {-} \lambda^{2}) (c^{2} {-} \lambda^{2}) \big]^{1/2}}{(\theta^{2} {-} \lambda^{2})} \times \\[1em]
+&\times \mqty| \dfrac{\vu{e}_{r}}{r} & \vu{e}_{\theta} \dfrac{(\theta^{2} {-} \lambda^{2})^{1/2}}{(\theta^{2} {-} b^{2})^{1/2} (c^{2} {-} \theta^{2})^{1/2}} & \vu{e}_{r} \dfrac{(\theta^{2} {-} \lambda^{2})^{1/2}}{(b^{2} {-} \lambda^{2})^{1/2} (c^{2} {-} \lambda^{2})^{1/2}} \\[0.5em]
+\displaystyle \pdv{r} & \displaystyle \pdv{\theta} & \displaystyle \pdv{\lambda} \\[0.5em]
+\dfrac{E_{r}}{r} & E_{\theta} \dfrac{(\theta^{2} {-} \lambda^{2})^{1/2}}{(\theta^{2} {-} b^{2})^{1/2} (c^{2} {-} \theta^{2})^{1/2}} & E_{\lambda} \dfrac{(\theta^{2} {-} \lambda^{2})^{1/2}}{(b^{2} {-} \lambda^{2})^{1/2} (c^{2} - \lambda^{2})^{1/2}}
+|
+\end{align*}
+\end{frame}
+
+\subsection{Ec. de Laplace}
+
+\begin{frame}
+\frametitle{La ecuación de Laplace}
+Sabemos que la ecuación de Laplace la escribimos como:
+\begin{align*}
+\laplacian{\phi} = 0
+\end{align*}
+\\
+\bigskip
+\pause
+Por lo que ahora deberemos de escribirla en el sistema coordenada cónico, expresando el operador laplaciano en ese sistema:
+\end{frame}
+\begin{frame}
+\frametitle{El laplaciano}
+Para una función escalar $\phi$, definimos el Laplaciano como:
+\begin{align*}
+\laplacian{\phi} = \dfrac{1}{h} \, \sum_{i=1}^{3} \pdv{u_{i}} \left( \dfrac{h}{h_{i}^{2}}  \pdv{\phi}{u_{i}} \right)
+\end{align*}
+con $h = h_{r} \, h_{\theta} \, h_{\lambda}$.
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de Laplace}
+Resolvemos las correspondientes diferenciaciones de segundo orden, simplificamos las expresiones y presentamos la ecuación de Laplace en coordenadas cónicas:
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de Laplace}
+\begin{align*}
+&\laplacian{\phi} = \pdv[2]{\phi}{r} + \dfrac{2}{r} \pdv{\phi}{r} + \dfrac{1}{r^{2} (\theta^{2} {-} \lambda^{2})} \times \\[1em]
+&\times \left\{ (\theta^{2} {-} b^{2})(c^{2} {-} \lambda^{2}) \pdv[2]{\phi}{\theta} - \theta \big[ 2 \theta^{2} {-} (b^{2} {+} c^{2}) \big] \pdv{\phi}{\theta} + \right.\\[0.5em]
+&+ \left. (b^{2} {-} \lambda^{2})(c^{2} {-} \lambda^{2}) \pdv[2]{\phi}{\lambda} + \lambda \big[ 2 \lambda^{2} {-} (b^{2} {+} c^{2}) \big] \pdv{\phi}{\lambda} \right\} = \\[0.5em]
+&= 0
+\end{align*}
+\end{frame}
+\end{document}
