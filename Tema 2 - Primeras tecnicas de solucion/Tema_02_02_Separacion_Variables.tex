@@ -28,7 +28,9 @@ u(x, y) = G(x) + F (y)
 donde $G$, $F$ son funciones arbitrarias.
 \par
 Dado que se quieren resolver problemas específicos, hay que estudiar el tipo de condiciones que hay que imponer para garantizar \emph{la unicidad} de la solución. Como se revisó en la presentación anterior, tenemos una clasificación con tres tipos de ecuaciones (parabólica, hiperbólica y elíptica) a continuación presentamos un posible tipo de condiciones de frontera (CDF) que se pueden presentar.
+
 \subsection{EDP Parabólica.}
+
 Consideremos la ecuación del calor
 \begin{align*}
 u_{t} =  \alpha^{2} \,  u_{xx}
@@ -58,7 +60,9 @@ u_{x}(0,t) = f(t) \hspace{1cm} u_{x}(L,t) = g(t) \hspace{1cm} \mbox{condiciones 
 \end{align}
 \item \textbf{Condiciones mixtas (de Robin)}: Consiste en especificar una combinación de $u$ y de $u_{x}$ en los extremos de la barra.
 \end{enumerate}
+
 \subsection{EDP Elíptica.}
+
 Sea la ecuación de Laplace:
 \begin{align*}
 u_{xx} + u_{yy} = 0
@@ -84,7 +88,9 @@ u(x, 0) &= g_{1}(x) \hspace{1.5cm} u(x, b) = g_{2}(x)
 \label{eq:ecuacion_06_01_06}
 \end{align}
 \end{enumerate}
+
 \subsection{EDP Hiperbólica.}
+
 La ecuación de onda
 \begin{align*}
 u_{tt} = v^{2} \, u_{xx}
@@ -319,12 +325,13 @@ Este seguimiento de pasos es el que se debe de utilizar cuando aplicamos el mét
 %Ref. Zamora (2012) - Notas EDP 2.1.6 Lámina rectangular
 \section{Ecuación de calor en un lámina rectangular.}
 
-Consideremos ahora el problema de \emph{conducción de calor en dos dimensiones}:
+Consideremos ahora el problema de \emph{conducción de calor en dos dimensiones} en un sistema cartesiano:
 \begin{align}
 u_{t} = \alpha^{2} \, \laplacian{u}
 \label{eq:ecuacion_02_187}
 \end{align}
-Condiciones de frontera (CDF):
+
+Con las condiciones de frontera (CDF):
 \begin{align}
 u(0, y, t) &= 0 \label{eq:ecuacion_02_188} \\
 u(a, y, t) &= 0 \label{eq:ecuacion_02_189} \\
@@ -332,10 +339,12 @@ u(x, 0, t) &= 0 \label{eq:ecuacion_02_190} \\
 u(x, b, t) &= 0 \label{eq:ecuacion_02_191} \\
 0 < t &< \infty \nonumber
 \end{align}
-Condiciones iniciales (CI):
+
+Y las condiciones iniciales (CI):
 \begin{align}
 u(x, y, 0) = f (x, y) \label{eq:ecuacion_02_192}
 \end{align}
+
 definido para $0 < x < a$, $0  < y < b$ y $t > 0$.
 \begin{figure}[H]
     \centering
@@ -343,7 +352,8 @@ definido para $0 < x < a$, $0  < y < b$ y $t > 0$.
     \caption{Región de una lámina cuadrada para resolver el problema.}
     \label{fig:figura_lamina_cuadrada}
 \end{figure}
-Se ha ocupado la definición del operador de Laplace o Laplaciano en dos dimensiones:
+
+Ocuparemos la definición del operador de Laplace o Laplaciano en dos dimensiones $x$, $y$:
 \begin{align}
 \laplacian{u} = u_{xx} + u_{yy}
 \label{eq:ecuacion_02_193}
@@ -357,6 +367,9 @@ La propuesta de solución para la técnica de separación de variables es para e
 u (x, y, t) = X(x) \, Y(y) \, T(t)
 \label{eq:ecuacion_02_194}
 \end{align}
+
+Recordemos que cada función con mayúscula depende de una sola variable.
+\par
 Calculamos las derivadas parciales que habrá que sustituir en la ecuación (\ref{eq:ecuacion_02_194}):
 \begin{align*}
 u_{t} &= X(x) \, Y(y) \, \ptilde{T} (t) \\[0.5em]
@@ -367,24 +380,41 @@ por lo que tendremos:
 \begin{align*}
 X(x) \, Y(y) \, \ptilde{T} (t) = \alpha^{2} \left[ \stilde{X} (x) \, Y(y) \, T(t) + X(x) \, \stilde{Y} (y) \, T(t) \right]
 \end{align*}
-Ahora dividimos entre $X(x) \, Y(y) \, T(t)$, resultando:
+
+Continuamos con el siguiente paso: que es dividir entre la solución propuesta.
+\par
+Ahora dividimos entre $X(x) \, Y(y) \, T(t)$, obteniendo:
 \begin{align*}
 \dfrac{\ptilde{T}(t)}{\alpha^{2}  \, T(t)} = \left[ \dfrac{\stilde{X}(x)}{X(x)} + \dfrac{\ptilde{Y}(y)}{Y(y)} \right]
 \end{align*}
-en donde encontramos que la expresión del lado izquierdo de la igualdad depende solo de la variable $t$, mientras que la expresión del lado derecho depende tanto de $x$ e $y$. De donde obtenemos la primera constante de separación: $A$ (que aún está pendiente por determinar):
+
+en donde encontramos que la expresión del lado izquierdo de la igualdad depende solo de la variable $t$, mientras que la expresión del lado derecho depende tanto de $x$ e $y$.
+\par
+Como $t$, $x$, $y$ son variables independientes, la igualdad solo puede ser posible si ambas funciones son iguales a una función constante.
 \begin{align*}
-\ptilde{T}(t) = \dfrac{A}{\alpha^{2}} \, T(t)
+\dfrac{\ptilde{T}(t) }{T(t)} =  \alpha^{2} \left[ \dfrac{\stilde{X}(x)}{X(x)} + \dfrac{\ptilde{Y}(y)}{Y(y)} \right] = A
 \end{align*}
-Así entonces:
+
+Donde $A$ es una constante por determinar.
+
+Tendremos entonces la primera EDO:
 \begin{align}
-\ptilde{T}(t) - \dfrac{A}{\alpha^{2}} \, T(t) = 0
+\ptilde{T}(t) - A \, T(t) = 0
 \label{eq:ecuacion_02_195}
 \end{align}
+
+Del curso de EDO I, ya tenemos una idea de cómo resolver esta ecuación, quedando pendiente definir primera constante de separación $A$.
+\par
+Tomando por separado la igualdad del lado derecho, tendremos una segunda constante de separación:
+\begin{align*}
+    \left[ \dfrac{\stilde{X}(x)}{X(x)} + \dfrac{\ptilde{Y}(y)}{Y(y)} \right]  = \dfrac{A}{\alpha^{2}} = B
+\end{align*}    
+
 Avanzando en la revisión del término para las variables $x$ e $y$, se tiene que:
 \begin{align*}
 \dfrac{\stilde{X}(x)}{X(x)} = -  \dfrac{\ptilde{Y}(y)}{Y(y)} = C
 \end{align*}
-Al tener ahora del lado izquierdo una función que depende de $x$ y del lado derecho, una función que depende solo de $y$, como son independientes entre sí, esto se cumple solo cuando son iguales a una constante, por lo que llegamos a las siguientes dos expresiones:
+y además
 \begin{align}
 \stilde{X}(x) - C \, X(x) = 0 \label{eq:ecuacion_02_196} \\[0.5em]
 \stilde{Y}(y) - D \, Y(y) = 0 \label{eq:ecuacion_02_197}
@@ -396,7 +426,8 @@ X(a) &= 0 \label{eq:ecuacion_02_199} \\[0.5em]
 Y(0) &= 0 \label{eq:ecuacion_02_200} \\[0.5em]
 Y(b) &= 0 \label{eq:ecuacion_02_201} \\[0.5em]
 \end{align}
-Abreviando las soluciones para las EDO2H (\ref{eq:ecuacion_02_196}) y (\ref{eq:ecuacion_02_197}), se tiene que:
+
+Expresando las soluciones para las EDO2H (\ref{eq:ecuacion_02_196}) y (\ref{eq:ecuacion_02_197}) - que son más fáciles de resolver, ya que las derivadas son ordinarias-, se tiene que:
 \begin{align}
 X(x) &= \sin \left( \dfrac{n \, \pi}{a} \, x \right) \hspace{0.5cm} n = \pm 1, \pm, 2, \ldots \label{eq:ecuacion_02_202} \\[0.5em]
 Y(x) &= \sin \left( \dfrac{m \, \pi}{b} \, y \right) \hspace{0.5cm} m = \pm 1, \pm, 2, \ldots \label{eq:ecuacion_02_203}
@@ -406,7 +437,9 @@ Por lo que ya es posible determinar las constantes $C$ y $D$:
 C &= - \dfrac{n^{2} \, \pi^{2}}{a^{2}} \\[0.5em]
 D &= - \dfrac{m^{2} \, \pi^{2}}{b^{2}}
 \end{align*}
-que son constantes negativas. Notemos el hecho de que $C = 0$ (o $D = 0$) no es posible, ya que la solución sería:
+que son constantes negativas.
+\par
+Notemos el hecho de que $C = 0$ (o $D = 0$) no es posible, ya que la solución sería:
 \begin{align*}
 X(x) = c_{1} \, x + c_{2} \hspace{1cm} \mbox{o } \hspace{0.3cm} Y(y) = c_{1} \, y + c_{2}
 \end{align*}
@@ -414,9 +447,9 @@ que nos daría $X(x) \equiv 0$ (o $Y(y) \equiv 0$) al utilizar las condiciones d
 \par
 Ahora entonces, ya podemos calcular la constante $B$:
 \begin{align*}
-B = - \left( \dfrac{n^{2}}{a^{2}} + \dfrac{m^{2}}{b^{2}} \right) \, \pi^{2}
+B = C + D = - \left( \dfrac{n^{2}}{a^{2}} + \dfrac{m^{2}}{b^{2}} \right) \, \pi^{2}
 \end{align*}
-y como $B = A / \alpha^{2}$, tenemos que:
+y como la constante $B = A / \alpha^{2}$, tenemos que:
 \begin{align}
 A = - \left( \dfrac{n^{2}}{a^{2}} + \dfrac{m^{2}}{b^{2}} \right) \, \pi^{2} \, \alpha^{2}
 \label{eq:ecuacion_02_204}
@@ -431,12 +464,13 @@ Al tener ya una solución para cada una de las EDO2H, presentamos la solución g
 u_{nm}(x, y, t) = \sin \left( \dfrac{n \, \pi}{a} \, x \right) \, \sin \left( \dfrac{m \, \pi}{b} \, y \right) \, \exp\left[ - \left( \dfrac{n^{2}}{a^{2}} + \dfrac{m^{2}}{b^{2}} \right) \, \pi^{2} \, \alpha^{2} \, t \right]
 \label{eq:ecuacion_02_206}
 \end{align}
-en donde, tomamos la combinación lineal más general e intercambiando la suma sobre los enteros negaticos por una sobre los positivos, llegamos a:
+Tomando la combinación lineal más general (principio de superposición) e intercambiando la suma sobre los enteros negativos por una sobre los positivos, llegamos a:
 \begin{align}
 u(x, y, t) &= \sum_{n=1}^{\infty} \sum_{m=1}^{\infty} b_{mn} \, u_{nm} (x, y, t) \label{eq:ecuacion_02_207} \\[0.5em]
 &= \sum_{n=1}^{\infty} \sum_{m=1}^{\infty} b_{mn} \sin \left( \dfrac{n \pi}{a} x \right) \sin \left( \dfrac{m \pi}{b} y \right) \exp\left[ - \left( \dfrac{n^{2}}{a^{2}} {+} \dfrac{m^{2}}{b^{2}} \right) \pi^{2} \alpha^{2} t \right] \label{eq:ecuacion_02_208}
 \end{align}
-donde los coeficientes $b_{mn}$ están aún por determinar por la condición inicial (\ref{eq:ecuacion_02_192}). Evaluando ésta en $u(x, y, t)$ en $t = 0$ y con la condición (\ref{eq:ecuacion_02_192}), obtenemos que:
+
+Esta ecuación satisface las CDF e iniciales, pero donde los coeficientes $b_{mn}$ están aún por determinar por la condición inicial (\ref{eq:ecuacion_02_192}). Evaluando ésta en $u(x, y, t)$ en $t = 0$ y con la condición (\ref{eq:ecuacion_02_192}), obtenemos que:
 \begin{align}
 f(x,y) = \sum_{p=1}^{\infty} \sum_{q=1}^{\infty} b_{pq} \sin \left( \dfrac{p \pi}{a} x \right) \sin \left( \dfrac{q \pi}{b} y \right) 
 \end{align}
