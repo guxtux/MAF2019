@@ -1,0 +1,314 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
+\date{}
+\title{Ecuación de Helmholtz \\ \Large{Separación de variables}}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Enunciado}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{El ejercicio a resolver}
+
+\begin{frame}
+\frametitle{El problema}
+Demostrar que la ecuación de Helmholtz:
+\begin{align*}
+\laplacian{\psi} + k^{2} \, \psi = 0
+\end{align*}
+\emph{es separable} en coordenadas cilíndricas circulares, \pause si $k^{2}$ se generaliza como:
+\pause
+\begin{align*}
+k^{2} + f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \, g(\varphi) + h(z)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Reexpresando la ecuación}
+La ecuación que debemos de demostrar que es separable es:
+\begin{align*}
+\laplacian{\psi} + \left[ k^{2} + f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \, g(\varphi) + h(z) \right] \, \psi = 0
+\end{align*}
+\pause
+Debemos de utilizar el operador laplaciano en el sistema de coordenadas cilíndricas circulares.
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando lo que ya conocemos}
+Recordemos que tenemos una expresión que nos determina el operador diferencial laplaciano en términos de un sistema de coordenadas generalizado.
+\\
+\bigskip
+\pause
+Será necesario contar con las reglas de transformación así como de los factores de escala de ese sistema, para obtener el operador, todo esto lo recuperamos del Tema 1.
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación en el sistema cilíndrico}
+Tenemos entonces que la expresión resulta ser:
+\pause
+\begin{align*}
+&{} \dfrac{1}{\rho} \, \pdv{\rho} \left( \rho \, \pdv{\psi}{\rho} \right) + \dfrac{1}{\rho^{2}} \, \pdv[2]{\psi}{\varphi} + \pdv[2]{\psi}{z} + \\[1em]
+&+ \left[ k^{2} + f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \, g(\varphi) + h(z) \right] \, \psi = 0
+\end{align*}
+\end{frame}
+
+\section{Resolviendo el problema}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Propuesta de solución}
+
+\begin{frame}
+\frametitle{Proponemos una solución}
+Para aplicar el método de separación de variables, proponemos la siguiente solución:
+\begin{align*}
+\psi (\rho, \varphi, z) = R(\rho) \, \Phi (\varphi) \, Z(z)
+\end{align*}
+\pause
+donde cada función con letra mayúscula, depende de una sola variable.
+\end{frame}
+
+\subsection{Obteniendo las derivadas}
+
+\begin{frame}
+\frametitle{Obteniendo las derivadas}
+Como ya propusimos una solución, ahora hay que calcular las derivadas parciales y sustituirlas en la ecuación de Helmholtz.
+\\
+\bigskip
+\pause
+Haremos en este ejercicio el procedimiento de diferenciación.
+\end{frame}
+\begin{frame}
+\frametitle{Calculando las derivadas}
+Comenzamos con las derivadas parciales con respecto a $\rho$:
+\pause
+\begin{eqnarray*}
+\rho \, \pdv{\psi}{\rho} = \pause \rho \, \pdv{\rho} R(\rho) \Phi (\varphi) Z(z) = \pause \rho \left( \ptilde{R} \, \Phi Z \, \right)
+\end{eqnarray*}
+\pause
+Notemos que:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Cada función con mayúsculas depende de una sola variable.
+\item El primado indica que tenemos una derivada ordinaria de la función con respecto a su variable.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Continuamos derivando con respecto a $\rho$}
+La siguiente derivada parcial es:
+\begin{align*}
+\dfrac{1}{\rho} \pdv{\rho} \left( \rho \, \pdv{\psi}{\rho}  \right) = \pause \stilde{R} \, \Phi \, Z + \dfrac{1}{\rho} \, \ptilde{R} \, \Phi \, Z
+\end{align*}
+\\
+\bigskip
+\pause
+Ya concluimos las diferenciaciones con respecto a $\rho$, por lo que podemos continuar con las otras dos variables.
+\end{frame}
+\begin{frame}
+\frametitle{Las otras dos derivadas}
+Tendremos entonces:
+\begin{eqnarray*}
+\dfrac{1}{\rho^{2}} \, \pdv[2]{\phi}{\varphi} &=& \pause \dfrac{1}{\rho^{2}} \, \pdv[2]{\phi} \, R(\rho) \Phi (\varphi) Z(z) = \pause \dfrac{1}{\rho^{2}} \, R \, \stilde{\Phi} \, Z \\[1em] \pause
+\pdv[2]{\phi}{z} &=& \pause \pdv[2]{z} \, R(\rho) \Phi (\varphi) Z(z) = \pause R \, \Phi \, \stilde{Z}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Juntado los elementos en la ecuación}
+Al incluir las derivadas que hemos obtenido, la ecuación resulta ser:
+\begin{align*}
+&{} \stilde{R} \, \Phi \, Z + \dfrac{1}{\rho} \, \ptilde{R} \, \Phi \, Z + \dfrac{1}{\rho^{2}} R \, \stilde{\Phi} \, Z + R \, \Phi \, \stilde{Z} + \\[1em]
+&+ \left[ k^{2} + f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \, g(\varphi) + h(z) \right] \, R \, \Phi \, Z = 0
+\end{align*}
+\end{frame}
+
+\subsection{Siguien paso: dividir entre la solución}
+
+\begin{frame}
+\frametitle{El siguiente paso}
+El paso que debemos de realizar es: dividir toda la expresión entre la solución propuesta, es decir, entre: $R \, \Phi \, Z$, por lo que tenemos:
+\pause
+\begin{align*}
+&{} \dfrac{1}{R} \left( \stilde{R} + \dfrac{1}{\rho} \, \ptilde{R} \right) + \dfrac{1}{\rho^{2}} \, \dfrac{\stilde{\Phi}}{\Phi} + \dfrac{\stilde{Z}}{Z} + \\[1em]
+&+ k^{2} + f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \, g(\varphi) + h(z) = 0    
+\end{align*}
+\end{frame}
+
+\subsection{Constantes de separación}
+
+\begin{frame}
+\frametitle{Reacomodando los términos}
+Procedemos a reacomodar los términos por cada una de las variables, buscando que haya una dependencia en una sola de ellas en la expresión.
+\\
+\bigskip
+\pause
+Veamos lo qué pasa cuando pasamos los términos que involucran a la variable $z$ al lado derecho de la expresión.
+\end{frame}
+\begin{frame}
+\frametitle{La expresión separada}
+Entonces vemos que:
+\pause
+\begin{align*}
+&{} \dfrac{1}{R} \left( \stilde{R} + \dfrac{1}{\rho} \, \ptilde{R} \right) + \dfrac{1}{\rho^{2}} \, \dfrac{\stilde{\Phi}}{\Phi} + k^{2} + \\[1em]
+&+ f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \, g(\varphi) = - \dfrac{\stilde{Z}}{Z} - h(z)
+\end{align*}
+\pause
+La expresión del lado izquierdo depende solo de $\rho$ y de $\varphi$, mientras que la del lado derecho depende solo de $z$.
+\end{frame}
+\begin{frame}
+\frametitle{La constante de separación}
+Para que la igualdad anterior se mantenga, la única manera posible es que ambos lados de la expresión sean iguales a una constante, en este caso, la \emph{primera constante de separación}:
+\pause
+\begin{align*}
+- \dfrac{\stilde{Z}}{Z} - h(z) = \alpha^{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación resultante}
+Reacomodamos los términos por cada variable, al ocupar la primera constante de separación $\alpha^{2}$, la ecuación queda expresada como:
+\pause
+\begin{align*}
+&{} \dfrac{1}{R} \left( \stilde{R} + \dfrac{1}{\rho} \, \ptilde{R} \right) +  f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \, g(\varphi) + \\[1em]
+&+ \dfrac{1}{\rho^{2}} \, \dfrac{\stilde{\Phi}}{\Phi} + k^{2} - \alpha^{2} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Siguiente separación}
+La expresión anterior ya depende solo de las variables $\rho$ y $\varphi$, que son independientes entre sí.
+\\
+\bigskip
+\pause
+Por lo que podemos repetir la separación de la ecuación, dejando en cada lado de la igualdad una variable.
+\end{frame}
+\begin{frame}
+\frametitle{Siguiente separación}
+Tendremos ahora que:
+\pause
+\begin{align*}
+\dfrac{1}{R} \left( \stilde{R} + \dfrac{1}{\rho} \, \ptilde{R} \right) + f(\rho) + k^{2} - \alpha^{2} = - \dfrac{1}{\rho^{2}} \, \dfrac{\stilde{\Phi}}{\Phi} - \left( \dfrac{1}{\rho^{2}} \right) \, g(\varphi)
+\end{align*}
+\\
+\bigskip
+\pause
+Aunque hay un factor $1/\rho^{2}$ en el lado derecho de la igualdad, para tener una dependencia solo de $\varphi$ hay que cancelar ese término, \pause por lo que multiplicamos toda la expresión por $\rho^{2}$.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación resultante}
+Multiplicando por el factor mencionado:
+\pause
+\begin{align*}
+\dfrac{\rho}{R} \left( \stilde{R} + \dfrac{1}{\rho} \, \ptilde{R} \right) + \rho^{2} \bigg[ f(\rho) + k^{2} - \alpha^{2} \bigg] = - \dfrac{\stilde{\Phi}}{\Phi} - g(\varphi)
+\end{align*}
+\pause
+Que ahora si ya tenemos de cada lado de la igualdad, la dependencia de una sola variable.
+\end{frame}
+\begin{frame}
+\frametitle{Segunda constante de separación}
+Como vimos anteriormente, para que esto sea válido, la única manera es que las funciones sean iguales a una constante: \pause la \emph{segunda constante de separación}.
+\pause
+\begin{align*}
+- \dfrac{\stilde{\Phi}}{\Phi} - g(\varphi) = \beta^{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+Hemos demostrado que la ecuación de Helmholtz en coordenadas cilíndricas con la $k^{2}$ generalizada:
+\pause
+\begin{align*}
+\dfrac{\rho}{R} \left( \stilde{R} + \dfrac{1}{\rho} \, \ptilde{R} \right) + \rho^{2} \bigg[ f(\rho) + k^{2} - \alpha^{2} \bigg] - \beta^{2} = 0
+\end{align*}
+\pause
+es una \textcolor{blue}{ecuación separable}.
+\end{frame}
+
+\subsection{Un extra}
+
+\begin{frame}
+\frametitle{Particularidad de la Ec. de Helmholtz}
+La ecuación diferencial de Helmholtz se puede resolver mediante la separación de variables en 11 sistemas coordenados.
+\\
+\bigskip
+\pause
+Donde 10 sistemas (con excepción del sistema coordenado paraboloide confocal) con casos particulares del sistema coordenado elipsoidal confocal.
+\end{frame}
+\begin{frame}
+\frametitle{Sistemas donde es separable la ecuación}
+\setbeamercolor{item projected}{bg=red!80!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Cartesiano.
+\item Elipsoidal confocal.
+\item Paraboloide confocal.
+\item Cónico.
+\item Cilíndrico.
+\item Cilíndrico elíptico.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Sistemas donde es separable la ecuación}
+\setbeamercolor{item projected}{bg=red!80!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti    
+\item Esferoidal oblato.
+\item Esferoidal prolato.
+\item Cilíndrico parabólico.
+\item Parabólico.
+\item Esférico.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Sistemas donde es separable la ecuación}
+Si $k = 0$, recuperamos la ecuación de Laplace, que es separable en otros dos sistemas coordenados:
+\setbeamercolor{item projected}{bg=red!80!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Biesférico.
+\item Toroidal.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Propuesta}
+¿Aceptas el reto de elegir al azar dos sistemas que hemos mencionado y concluir que se cumple este hecho?
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio de repaso}
+Con la finalidad de repasar lo que hemos trabajado en este ejercicio, te pedimos que demuestres que la ecuación de Helmholtz \emph{es separable} en un sistema de coordenadas esférico
+\begin{align*}
+\laplacian{\psi} + k^{2} \, \psi = 0
+\end{align*}
+si $k^{2}$ se generaliza como
+\begin{align*}
+k^{2} + f(r) + \dfrac{1}{r^{2}} \, g(\theta) + \dfrac{1}{r^{2} \, \sin \theta} \, h(\varphi)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Puntos a resolver}
+Buscando que haya un repaso completo de lo que hemos visto, te pedimos que ocupes en este sistema coordenado esférico:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Las reglas de transformación de $(x, y, z) \to (r, \theta, \varphi)$
+\item Calcules los factores de escala.
+\item Obtengas el operador laplaciano.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Puntos a resolver}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti    
+\item Ocupes una propuesta de solución
+\begin{align*}
+\phi(r, \theta, \varphi) = R(r)\, T(\theta) \, F(\varphi)
+\end{align*}
+\item Obtengas las correspondientes constantes de separación.
+\item Concluyas que la ecuación admite la separación de variables.
+\end{enumerate}
+\end{frame}
+\end{document}

@@ -1,0 +1,151 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Introducción a las Ecuaciones Diferenciales Parciales \\[0.3em]  \large{Tema 2 - Primeras técnicas de solución} \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Curso MAF}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{16pt}%
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Farlow (1993) PDE for scientists and engeneers. Lesson 1 - Intro to PDE
+\section{Ecuaciones diferenciales parciales.}
+
+\subsection{Introducción.}
+
+La mayoría de los fenómenos físicos, ya sea en el dominio de la dinámica de fluidos, la electricidad, el magnetismo, la mecánica clásica o cuántica, la óptica o el flujo de calor, pueden describirse en general mediante \emph{ecuaciones diferenciales parciales} (EDP).
+\par
+Encontraremos que la mayoría de la física matemática son EDP. Es cierto que se pueden hacer simplificaciones que reduzcan las ecuaciones en cuestión a ecuaciones diferenciales ordinarias, sin embargo, la descripción completa de estos sistemas reside en el área general de las EDP.
+
+\subsection*{Definición.}
+
+Una ecuación diferencial parcial es una ecuación que contiene derivadas parciales. En contraste con las ecuaciones diferenciales ordinarias (EDO), donde la función desconocida depende solo de una variable, en las EDP, la función desconocida depende de varias variables (como la temperatura $u (x, t)$ depende tanto de la posición $x$ como del tiempo $t$).
+\par
+La representación de una derivada parcial se acostumbra utilizar la notación de Leibniz, como un cociente $\pdv*{u}{t}$, para simplificar la escritura, haremos uso de la siguiente notación tensorial, es decir, con subíndices:
+\begin{align*}
+\text{\Large{$
+u_{t} = \pdv{u}{t} \hspace{1cm} u_{x} = \pdv{u}{x} \hspace{1cm} u_{xx} = \pdv[2]{u}{x} \hspace{1cm} u_{xy} = \pdv[2]{u}{x}{y}$}}
+\end{align*}
+La forma general de una ecuación diferencial parcial ( EDP) que involucra a dos variables independientes: $x$ e $y$, está dada por:
+\begin{align}
+F(x, y, \phi_{x}, \phi_{y}, \phi_{xx}, \phi_{yy}, \phi_{xy}, \phi_{xxx}, \phi_{yyy}, \ldots) = 0, \hspace{0.5cm} x, y \in \Omega
+\label{eq:ecuacion_B01_01}
+\end{align}
+donde $\Omega$ es un dominio dado, $F$ es una función con los argumentos que se indican y $\phi$ es una función arbitraria de $(x, y)$. Una solución de la ec. (\ref{eq:ecuacion_B01_01}) corresponde a la función $\phi(x, y)$ que cumple (\ref{eq:ecuacion_B01_01}) para todos los valores de $x$ e $y$.
+\par
+Si estamos manejando $n$ variables independientes $x_{1}, x_{2}, \ldots, x_{n}$, el dominio $\Omega$ se refiere al espacio n-dimensional que contiene una hipersuperficie $(n-1)$-dimensional. Una hipersuperficie de dimensión $(n-1)$ está dada por la ecuación de la forma $x_{1}^{2} + x_{2}^{2} + \ldots + x_{n}^{2} = 1$ en el espacio Euclidiano n-dimensional.
+\par
+Veamos de los ejemplos anteriores que la función desconocida $u$ siempre depende de más de una variable. La variable $u$ (que diferenciamos) se llama \textbf{variable dependiente}, mientras que aquellas con respecto a las que diferenciamos se llaman \textbf{variables independientes}. Por ejemplo, de la ecuación
+\begin{align*}
+\text{\Large{$u_{t} = u_{xx}$}}
+\end{align*}
+la variable dependiente $u(x, t)$ es una función de dos variables independientes $x$ y $t$; mientras que para la ecuación
+\begin{align*}
+\text{\Large{$u_{t} = u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta}$}}
+\end{align*}
+se tiene que $u(r, \theta, t)$ depende de las variables $r$, $\theta$ y $t$.
+
+\subsection*{¿Por qué son útiles las EDP?}
+
+La mayoría de las leyes naturales de la física, como las ecuaciones de Maxwell, la ley de enfriamiento de Newton, las ecuaciones de Navier-Stokes, las ecuaciones de movimiento de Newton y la ecuación de Schrödinger de la mecánica cuántica, se expresan (o pueden ser expresadas) en términos de EDP, es decir, estas leyes describen los fenómenos físicos relacionando las derivadas espaciales y temporales.
+\par
+Las derivadas se presentan en estas ecuaciones porque las derivadas modelan cosas naturales (como velocidad, aceleración, fuerza, fricción, flujo, corriente). Por tanto, tenemos ecuaciones que relacionan derivadas parciales de alguna cantidad desconocida que nos gustaría encontrar.
+
+\subsection{Tipos de EDP.}
+
+Las ecuaciones diferenciales parciales se clasifican de acuerdo a ciertas características que presentan. La clasificación es un concepto importante porque la teoría general y \emph{los métodos de solución generalmente se aplican solo a una clase determinada} de ecuaciones.
+\par
+A continuación enlistamos seis clasificaciones básicas:
+\begin{enumerate}
+\item \textbf{Orden de la EDP}. El orden de una EDP es el orden de la derivada parcial más alta, por ejemplo:
+\begin{table}[H]
+\centering
+\large
+\begin{tabular}{l l}
+\Large{$u_{t} = u_{xx}$} & es de segundo orden \\
+\Large{$u_{t} = u_{x}$} & es de primer orden \\
+\Large{$u_{t} = u \, u_{xx} + \sin x$} & es de tercer orden
+\end{tabular}
+\end{table}
+
+\item \textbf{Número de variables}. El número de variables es el número de variables independientes, por ejemplo:
+\begin{table}[H]
+\centering
+\large
+\begin{tabular}{l l}
+\Large{$u_{t} = u_{xx}$} & dos variables: $x, t$ \\
+\Large{$u_{t} = u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta}$} & tres variables: $r, \theta, t$
+\end{tabular}
+\end{table}
+\item \textbf{Linealidad}. Las EDP son lineales o no lineales. En las lineales, la variable dependiente $u$ y todas sus derivadas aparecen de forma lineal (no se multiplican juntas ni al cuadrado, por ejemplo). Más precisamente, una \emph{ecuación lineal de segundo orden en dos variables} es una ecuación de la forma
+\begin{align}
+\addtolength{\fboxsep}{5pt}\boxed{ A \, u_{xx} + B \, u_{xy} + C \, u_{yy} + D \, u_{x} + E \, u_{y} + F \, u = G}
+\label{eq:ecuacion_01_01}
+\end{align}
+donde $A, B, C, D, E, F$ y $G$ pueden ser \emph{constantes} o \emph{funciones de} $(x, y)$, por ejemplo
+\begin{table}[H]
+\centering
+\large
+\begin{tabular}{l p{1cm} l}
+\Large{$e^{-t} \, u_{xx} + \sin t = u_{tt}$} & & lineal \\
+\Large{$u \, u_{xx} + u_{t} = 0$} & & no lineal \\
+\Large{$u_{xx} + y \, u_{yy} = 0$} & & lineal \\
+\Large{$x \, u_{x} + y \, u_{y} + u^{2} = 0$} & & no lineal
+\end{tabular}
+\end{table}
+\item \textbf{Homogeneidad}. La ec. (\ref{eq:ecuacion_01_01}) se denomina \emph{homogénea} si el lado derecho de la igualdad $G(x, y)$ es cero para todo $x$, e $y$. Mientras que si $G(x, y)$ no se anula, entonces la ecuación se denimina \emph{no homogénea}.
+\item \textbf{Tipo de coeficientes}. Si los coeficientes $A, B, C, D, E, F$ en la ec. (\ref{eq:ecuacion_01_01}) son constantes, entonces (\ref{eq:ecuacion_01_01}) tiene \emph{coeficientes constantes}, de otra manera, la ecuación tiene \emph{coeficientes variables}.
+\item \textbf{Tres tipos de ecuaciones lineales}. Toda EDP lineal como la ec. (\ref{eq:ecuacion_01_01}) puede clasificarse como de tipo:
+\begin{enumerate}[label=(\alph*)]
+\item Parabólico.
+\item Hiperbólico.
+\item Elíptico.
+\end{enumerate}
+Las ecuaciones \textbf{parabólicas} describen por ejemplo el flujo de calor y procesos de difusión, además satisfacen la propiedad $B^{2} - 4 \, A \, C = 0$.
+\par
+Las ecuaciones \textbf{hiperbólicas} describen sistemas que vibran así como el movimiento de las ondas, satistacen la propiedad $B^{2} - 4 \, A \, C > 0$.
+\par
+Las ecuaciones \textbf{elípticas} describe fenómenos estacionarios y satisfacen la propiedad $B^{2} - 4 \, A \, C < 0$.
+\par
+Como ejemplo veamos:
+\begin{table}[H]
+\centering
+\large
+\begin{tabular}{c l l l l l}
+(a) & \Large{$u_{t} = u_{xx}$} & & \large{$B^{2} - 4 \, A \, C = 0$} & & parabólica \\
+(b) & \Large{$u_{tt} = u_{xx}$} & & \large{$B^{2} - 4 \, A \, C = 4$} & & hiperbólica \\
+(c) & \Large{$u_{\xi \eta} = 0$} & & \large{$B^{2} - 4 \, A \, C = 1$} & & hiperbólica \\
+(d) & \Large{$u_{xx} + u_{yy} = 0$} & & \large{$B^{2} - 4 \, A \, C = -4$} & & elíptica \\
+(e) & \Large{$y \, u_{xx} + u_{yy} = 0$} & & \large{$B^{2} - 4 \, A \, C = - 4 \, y$} & & \\
+ & & & es $\begin{cases}
+    \mbox{elíptica para } y > 0 \\
+    \mbox{parabólica para } y = 0 \\
+    \mbox{hipérbolica para } y < 0 \\
+    \end{cases}$ &
+\end{tabular}
+\end{table}
+En el caso de coeficientes variables, el tipo de ecuación cambia de punto a punto.
+\end{enumerate}
+
+\subsection*{Consideraciones}
+\begin{enumerate}
+\item En general, $B^{2} - 4 \, A \, C$ es una función de las variables independientes; por lo tanto, una ecuación puede cambiar de un tipo básico a otro en todo el dominio de la ecuación (aunque no es común).
+\item La ecuación lineal general (\ref{eq:ecuacion_01_01}) se escribió con variables independientes $x$ e $y$. En muchos problemas, una de las dos variables representa el tiempo, por lo tanto, se escribiría en términos de $x$ y $t$.
+\item En la figura (\ref{fig:figura_clasificacion_EDP}) se muestra un diagrama de clasificación general:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1.1]{Imagenes/Cuadro_Clasificacion_EDP.eps}
+    \caption{Diagrama de clasificación de EDP.}
+    \label{fig:figura_clasificacion_EDP}
+\end{figure}
+\end{enumerate}
+\end{document}
