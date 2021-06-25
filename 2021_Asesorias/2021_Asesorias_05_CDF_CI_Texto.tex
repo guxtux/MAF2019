@@ -1,0 +1,143 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Condiciones de frontera e iniciales en las EDP} \vspace{-3ex}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+\section{Condiciones de frontera e iniciales.}
+\subsection{Características de la EDP.}
+
+Una vez que se ha realizado la formulación de una EDP el siguiente paso es resolver la ecuación, en un primer momento podemos considerar la solución general de la EDP, entonces en vez de constantes arbitrarias aparecen funciones arbitrarias.
+
+Por ejemplo, la solución general de $u_{xy} = 0$ es 
+\begin{align*}
+u(x, y) = G(x) + F (y)
+\end{align*}
+
+donde $G$, $F$ son funciones arbitrarias.
+
+Dado que se quieren resolver problemas específicos, hay que estudiar el tipo de condiciones que hay que imponer para garantizar \emph{la unicidad} de la solución.
+\par
+Como se revisó en la presentación anterior, tenemos una clasificación con tres tipos de ecuaciones (parabólica, hiperbólica y elíptica) a continuación presentamos un posible tipo de condiciones de frontera (CDF) que se pueden presentar.
+
+\subsection{Condiciones para una EDP Parabólica.}
+
+Consideremos la ecuación del calor
+\begin{align*}
+u_{t} =  \alpha^{2} \,  u_{xx}
+\end{align*}
+
+En este caso se trabajará con un problema unidimensional, es decir, la transmisión del calor a lo largo de una barra de longitud $L$.
+\par
+Para que el problema tenga solución se debe de especificar la distribución inicial de temperatura de la barra, es decir, hay que dar una función $\varphi (x)$ de modo que
+\begin{align}
+u(x, 0) = \alpha (x) \hspace{1.5cm} 
+\label{eq:ecuacion_06_02_02}
+\end{align}
+
+sería una distribución inicial de temperatura. En analogía con las ODE, tiene sentido llamar tal condición una \emph{condición inicial}.
+\par
+A su vez, como la barra tiene una longitud finita, hay que especificar la interacción de los extremos de la barra con el medio ambiente.
+
+Tales condiciones se conocen como \emph{condiciones de frontera}.
+
+Para los problemas de una dimensión hay tres tipos de condiciones de frontera usuales, aunque solo se estudiarán las primeras dos en esta revisión:
+\begin{enumerate}
+\item \textbf{Condición de Dirichlet}:
+Consiste en especificar la temperatura en los extremos de la barra en todo instante, es decir, dar dos funciones $f(t)$ y $g(t)$ de modo que:
+\begin{align}
+u(0, t) = f (t)  \hspace{1cm} u(L, t) = g(t)
+\label{eq:ecuacion_06_02_03}    
+\end{align}
+\item \textbf{Condición de Neumann}:
+Consiste en especificar la derivada de la temperatura en los extremos de la barra, es decir, especificar el flujo de calor en los extremos de la barra:
+\begin{align}
+u_{x}(0,t) = f(t) \hspace{1cm} u_{x}(L,t) = g(t)
+\label{eq:ecuacion_06_02_04}    
+\end{align}
+\item \textbf{Condiciones mixtas (de Robin)}:
+Consiste en especificar una combinación de $u$ y de $u_{x}$ en los extremos de la barra.
+\end{enumerate}
+
+\subsection{Condiciones para una EDP Elíptica.}
+
+Sea la ecuación de Laplace:
+\begin{align*}
+u_{xx} + u_{yy} = 0
+\end{align*}
+
+Se puede interpretar como la ecuación de un potencial electrostático sobre una región del plano $x \, y$ o bien la distribución de temperatura en el caso estacionario para una placa o una región del plano $x \, y$.
+
+En este caso no hay que especificar condiciones iniciales pues la función no depende del tiempo.
+
+Se estudiarán dos tipos de condiciones:
+
+\begin{enumerate}
+\item \textbf{Condición de Dirichlet}:
+Si se trabaja sobre una lámina rectangular $0 < x < a$ y $0 < y < b$ las condiciones de Dirichlet consisten en especificar los valores de la temperatura (o el potencial) sobre todos los lados, es decir:
+\begin{align}
+\begin{aligned}
+u(0, y) &= f_{1}(y) \hspace{1.5cm} u(a, y) = f_{2}(y) \\
+u(x, 0) &= g_{1}(x) \hspace{1.5cm} u(x, b) = g_{2}(x)
+\end{aligned}
+\label{eq:ecuacion_06_02_05}
+\end{align}
+\item \textbf{Condiciones Mixtas}:
+Para los lados de la placa se toman dos de las condiciones de Dirichlet y las otras dos de Neumann, por ejemplo:
+\begin{align}
+\begin{aligned}
+u_{y}(0, y) &= f_{1}(y) \hspace{1.5cm} u_{y}(a, y) = f_{2}(y) \\
+u(x, 0) &= g_{1}(x) \hspace{1.5cm} u(x, b) = g_{2}(x)
+\end{aligned}
+\label{eq:ecuacion_06_01_06}
+\end{align}
+\end{enumerate}
+
+\subsection{Condiciones para una EDP Hiperbólica.}
+
+La ecuación de onda:
+\begin{align*}
+u_{tt} = v^{2} \, u_{xx}
+\end{align*}
+
+En este caso se considera una cuerda de longitud $L$.
+
+Como la ecuación es de segundo orden en el tiempo, tiene sentido esperar que haya que especificar la posición inicial de la cuerda así como su velocidad inicial, es decir, proporcionar las \emph{condiciones iniciales}:
+\begin{align}
+u(x, 0) = \phi (x) \hspace{1.5cm} u_{t}(x, 0) = \psi (x)
+\label{eq:ecuacion_06_02_07}
+\end{align}
+
+A su vez, hay que especificar como se relaciona la cuerda con su frontera y nuevamente se van a estudiar las condiciones de Dirichlet y de Neumann.
+
+\begin{enumerate}
+\item \textbf{Condición de Dirichlet}:
+Se especifica la posición de los extremos de la cuerda, es decir:
+\begin{align}
+u(0, t) = f (t) \hspace{1.5cm} u(L, t) = g(t)
+\label{eq:ecuacion_06_02_08}   
+\end{align}
+\item \textbf{Condición de Neumann}:
+Se especifica la forma en que se están \enquote{jalando} los extremos de la cuerda, es decir:
+\begin{align}
+u_{x}(0, t) = f(t) \hspace{1.5cm} u_{x}(L,t) = g(t)
+\label{eq:ecuacion_06_02_09}    
+\end{align}
+\end{enumerate}
+
+
+\section{Condición para separar variables.}
+\subsection{Separación de variables.}
+
+Como se veremos más adelante, el \emph{método de separación de variables} consiste en suponer que la solución depende como un producto de funciones, cada una de las cuales depende exclusivamente de una de las variables independientes.
+\par
+Para que tenga éxito el método, se ocupará que varias de las condiciones de frontera estén igualadas a cero, de forma que se utilicen para restringir las soluciones a las ecuaciones diferenciales ordinarias que aparecen.
+\par
+Luego, dado que las ecuaciones son lineales se propone por el principio de superposición una combinación lineal (de hecho una serie en la mayoría de los casos) de tales soluciones y las constantes que aparecen se hallan tomando el desarrollo de Fourier de las otras condiciones iniciales o de frontera que todavía no se han utilizado.
+\end{document}
