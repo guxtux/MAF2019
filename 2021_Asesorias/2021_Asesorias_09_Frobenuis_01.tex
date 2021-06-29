@@ -153,21 +153,21 @@ El interés en este concepto radica en su utilidad para:
 \frametitle{Punto ordinario}
 Usando la notación $\displaystyle \dv[2]{y}{x} = \stilde{y}$, tenemos que una EDO2 es del tipo:
 \begin{align}
-\stilde{y} = f(x, y, \stilde{y})
+\stilde{y} = f(x, y, \ptilde{y})
 \label{eq:ecuacion_09_74}
 \end{align}
 \pause
-Ahora bien, si en la ec. (\ref{eq:ecuacion_09_74}): las funciones $y$ e $y^{\prime}$ pueden tener todos los valores finitos a $x = x_{0}$ e $y^{\prime \prime}$ permanece finita, el punto $x = x_{0}$ es un \emph{punto ordinario}.
+Ahora bien, si en la ec. (\ref{eq:ecuacion_09_74}): las funciones $y$ e $\ptilde{y}$ pueden tener todos los valores finitos en $x = x_{0}$ e $\stilde{y}$ permanece finita, el punto $x = x_{0}$ es un \emph{\textcolor{blue}{punto ordinario}}.
 \end{frame}
 \begin{frame}
 \frametitle{Punto singular}
-Por otra parte, si $y^{\prime \prime}$ se vuelve infinita para cualquier selección finita de $y$ e  $y^{\prime \prime}$, el punto $x = x_{0}$ se denomina \emph{punto singular}.
+Por otra parte, si $\stilde{y}$ se vuelve infinita para cualquier selección finita de $y$ e  $\ptilde{y}$, el punto $x = x_{0}$ se denomina \emph{\textcolor{red}{punto singular}}.
 \end{frame}
 \begin{frame}
 \frametitle{Reescribiendo la EDO2}
 Si escribimos esta EDO2H (en $y$) como
 \begin{align}
-y^{\prime \prime} + P(x) \: y^{\prime} + Q(x) \: y = 0
+\stilde{y} + P(x) \, \ptilde{y} + Q(x) \: y = 0
 \label{eq:ecuacion_09_75}
 \end{align}
 \pause
@@ -356,7 +356,7 @@ La solución que suponemos es del tipo:
 \begin{aligned}
 y &= x^{r} \, \sum_{n=0}^{\infty} a_{n} \, x^{n} = \\[0.5em] \pause
 &= \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = \\[0.5em] \pause
-&= a_{0} \, x^{r} + a_{1} \, x^{r+1} + a_{2} \, x^{r+2} + \ldots
+&= a_{0} \, x^{r} + a_{1} \, x^{r+1} + a_{2} \, x^{r+2} + \ldots \hspace{1cm} a_{0} \neq 0
 \end{aligned}
 \label{eq:ecuacion_26_08}    
 \end{eqnarray}
@@ -379,7 +379,7 @@ Ya que una serie de potencias es uniformemente convergente (con su radio de conv
 Por lo que al diferenciar la solución en una primera ocasión, tenemos:
 \begin{eqnarray}
 \begin{aligned}
-\dv{y}{x} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-21} = \\[0.5em] \pause
+\dv{y}{x} &= \ptilde{y} = \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} = \\[0.5em] \pause
 &= r \, a_{0} \, x^{r-1} + (r + 1) \, a_{1} \, x^{r} + \ldots
 \end{aligned}
 \label{eq:ecuacion_26_09a}
@@ -390,8 +390,8 @@ Por lo que al diferenciar la solución en una primera ocasión, tenemos:
 Por lo que al diferenciar por segunda vez, tenemos:
 \begin{eqnarray}
 \begin{aligned}
-\dv[2]{y}{x} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2} = \\[0.5em] \pause
-&= r \, (r - 1) \, a_{0} \, x^{r-2} + (r + 1) \, r \, a_{1} \, x^{r}-1 + \ldots
+\dv[2]{y}{x} &= \stilde{y} =  \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2} = \\[0.5em] \pause
+&= r \, (r - 1) \, a_{0} \, x^{r-2} + r \, (r + 1) \, a_{1} \, x^{r-1} + \ldots
 \end{aligned}
 \label{eq:ecuacion_26_09b}
 \end{eqnarray}
@@ -401,32 +401,71 @@ Por lo que al diferenciar por segunda vez, tenemos:
 Ahora sustituimos las ecuaciones (\ref{eq:ecuacion_26_08}), (\ref{eq:ecuacion_26_09a}) y (\ref{eq:ecuacion_26_09b}) en la EDO (\ref{eq:ecuacion_26_07}).
 \pause
 \begin{align*}
-&p_{2}(x) \bigg[ \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 2) \, x^{n+r-1} \bigg] + \\[1em]
-&+ p_{1} (x) \big[ \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} \bigg] + p_{0}(x) \bigg[ \sum_{n=0}^{\infty} a_{n} \, x^{n+r} \bigg] = 0
+&p_{2}(x) \bigg[ \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2} \bigg] + \\[1em]
+&+ p_{1} (x) \bigg[ \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} \bigg] + p_{0}(x) \bigg[ \sum_{n=0}^{\infty} a_{n} \, x^{n+r} \bigg] = 0
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Resolviendo la expresión}
-Multiplicamos los polinomios en la serie, agrupamos todas las potencias distintas de $x$ y establecemos el coeficiente de cada término igual a cero.
+Los pasos a seguir son los siguientes:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Multiplicar los polinomios $p_{i}$ con cada suma en la serie.
+\item Agrupamos todas las potencias distintas para $x$.
+\item Establecemos el coeficiente de cada término igual a cero.
+\end{enumerate}
 \end{frame}
 \begin{frame}
-\frametitle{Ecuación de índices}
-Así obtenemos un conjunto de ecuaciones cuya solución determina el valor de $r$ y de los coeficientes $a_{n}$.
+\frametitle{Ecuaciones con los coeficientes}
+Al realizar el procedimiento anterior nos conduce a identificar dos ecuaciones: la primera involucra al  coeficiente de la potencia más baja de la variable $x$.
 \\
 \bigskip
 \pause
+La otra ecuación nos indica la relación entre los coeficientes dentro de la suma infinita.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de índices}
 La ecuación que surge de la \emph{potencia más baja de x} involucra solo a $r$, se llama \textbf{ecuación de índices}.
+\\
+\bigskip
+\pause
+Cuya solución determina el valor de las raíces: $r_{1}$ y $r_{2}$.
 \end{frame}
 \begin{frame}
 \frametitle{Ecuación de índices}
 Esta suele ser una ecuación cuadrática en $r$ que se puede resolver para obtener el(los) posible(s) valor(es) de $r$, cada uno de los cuales conduce generalmente a una solución diferente.
+\\
+\bigskip
+\pause
+Veremos más adelante el trato que debemos darle a las raíces, ya que existe el caso de que tengamos raíces iguales (de duplicidad de orden 2) $\to r_{1} = r_{2}$.
+\end{frame}
+\begin{frame}
+\frametitle{Punto a resolver}
+Si tenemos raíces repetidas, nos enfrentamos al problema de que obtendremos solo una solución a la EDO2H, mientras que la teoría nos dice que debe de tener dos soluciones linealmente independientes.
+\\
+\bigskip
+\pause
+Tendremos que obtener de alguna manera la segunda solución linealmente independiente.
 \end{frame}
 \begin{frame}
 \frametitle{Relaciones de recurrencia}
-Las otras ecuaciones que provienen de potencias superiores de $x$ permiten establecer \emph{relaciones de recurrencia}, es decir, ecuaciones que dan $a_{n}$ en términos de $a_{n-1}$ y $a_{n-2}$.
+La segunda ecuación que proviene de potencias superiores de $x$, permite establecer las \emph{relaciones de recurrencia}, es decir, ecuaciones que permiten calcular $a_{n}$ en términos de $a_{n-1}$ y $a_{n-2}$, por ejemplo.
 \\
 \bigskip
 Al iterar esta relación, se pueden obtener todos los $a_{n}$ en términos de solo dos coeficientes.
+\end{frame}
+\begin{frame}
+\frametitle{Las soluciones a la EDO}
+Si tenemos el caso $r_{1} \neq r_{2}$, usando $r_{1}$ en la relación de recurrencia, llegaremos a una solución $y_{1}(x)$ de la EDO.
+\\
+\bigskip
+\pause
+Con $r_{2}$ en la relación de recurrencia, obtendremos la segunda solución $y_{2}(x)$ de la EDO.
+\end{frame}
+\begin{frame}
+\frametitle{Usando la linealidad}
+Al tener una EDO2H lineal, las soluciones serán lineales, por lo que para obtener la solución a la EDO, ocupamos el principio de superposición ocupando $y_{1}(x)$ así como $y_{2}(x)$ para definir la solución $y(x)$ como una combinación lineal de las anteriores.
 \end{frame}
 \subsection{Ejercicio}
 %Ref. Zill ED pág. 279
@@ -434,9 +473,12 @@ Al iterar esta relación, se pueden obtener todos los $a_{n}$ en términos de so
 \frametitle{Ejercicio práctico}
 Resuelve la siguiente EDO2H mediante el método de Frobenius:
 \begin{align}
-3 \, x \, y^{\prime \prime} + y^{\prime} - y = 0
+3 \, x \, \stilde{y} + \ptilde{y} - y = 0
 \label{eq:ecuacion_04}    
 \end{align}
+Para $x_{0} = 0$.
+\\
+\bigskip
 \pause
 Obtén la(s) solución(es) en términos de una serie de potencias.
 \end{frame}
@@ -450,16 +492,39 @@ Cuando $p_{2}(x)$, $p_{1}(x)$ y $p_{0}(x)$ son polinomios \emph{sin factores com
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
 \item Punto ordinario, si $p_{2}(x_{0}) \neq 0$, o bien.
-\item Punto singular,  si $p_{2}(x_{0}) = 0$.
+\item Punto singular regular,  si $p_{2}(x_{0}) = 0$.
 \end{enumerate}
 \end{frame}
 \begin{frame}
-\frametitle{Punto singular}
-Tenemos entonces que $x = 0$ es punto singular, por lo que es posible utilizar el método de Frobenius.
+\frametitle{Comprobando el punto }
+Tenemos que:
+\begin{align*}
+P(x) = \dfrac{1}{3 x} \hspace{1.5cm} Q(x) = -\dfrac{1}{3 x}
+\end{align*}
+\pause
+Revisamos con la definición de punto regular singular.
+\end{frame}
+\begin{frame}
+\frametitle{Comprobando el punto}
+Si $x \to x_{0}$ tenemos que $P(x)$ y $Q(x)$ divergen.
 \\
 \bigskip
 \pause
-Recordemos que para que el método funciones, a lo más, debemos de tener puntos singulares.
+Pero cuando $x \to x_{0}$:
+\begin{eqnarray*}
+(x - x_{0}) \, P(x) = x \, \left( \dfrac{1}{3 x} \right) = \dfrac{1}{3} \\[1em] \pause
+(x - x_{0})^{2} \, Q(x) = x^{2} \, \left( \dfrac{1}{3 x} \right) = \dfrac{x}{3} = 0
+\end{eqnarray*}
+\pause
+Estos valores son finitos, por lo tanto: $x_{0} = 0$ es punto singular regular.
+\end{frame}
+\begin{frame}
+\frametitle{Punto singular regular}
+Tenemos entonces que $x = 0$ es punto singular regular\footnote{Esta comprobación se debe de realizar, la guía breve nos orienta pero la revisión del tipo de punto singular es obligatorio.}, por lo que es posible utilizar el método de Frobenius.
+\\
+\bigskip
+\pause
+Recordemos que para que el método funcione, a lo más, debemos de tener puntos singulares regulares.
 \end{frame}
 
 \subsection*{Solución propuesta}
@@ -485,14 +550,23 @@ Al diferenciar con respecto a $x$ en dos ocasiones, tenemos:
 Al incorporar las expresiones de las derivadas en la EDO, se tiene que:
 \pause
 \begin{align*}
-&3 \, x \, \stilde{y} + \ptilde{y} - y = 3 \, \sum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-1} + \\[0.5em]
+&3 \, x \, \stilde{y} + \ptilde{y} - y = 3 \, x \, \sum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-2} + \\[0.5em]
 &+ \sum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
 \end{align*}
 \pause
 Recomendamos escribir los términos de izquierda a derecha con las potencias más bajas a las más altas.
 \end{frame}
+\begin{frame}
+\frametitle{Incorporando $x$ en las sumas}
+En la expresión anterior tenemos un producto de $3 \, x$ por la suma que contiene el término $x^{n+r-2}$, el producto aumenta el exponente y así dejamos el coeficiente $3$ que multiplica a la suma:
+\pause
+\begin{align*}
+&3 \, \sum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-1} + \\[0.5em]
+&+ \sum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}    
+\end{frame}
 
-\subsection*{Simplificación la expresión}
+\subsection*{Simplificación de la expresión}
 
 \begin{frame}
 \frametitle{Simplificando la expresión}
@@ -511,6 +585,8 @@ El factor común dentro de los corchetes es $a_{n} \, (n + r)$, así que:
 \sum_{n=0}^{\infty} &\bigg[ a_{n} \, (n + r) [3 \, (n + r - 1) + 1 ] \bigg] \, x^{n+r-1} + \\[1em]
 &- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
 \end{align*}
+\pause
+Que resolvemos para reducir la expresión.
 \end{frame}
 \begin{frame}
 \frametitle{Simplificando la expresión}
@@ -542,10 +618,6 @@ Para factorizar los términos de las sumas, necesitamos que:
 \end{enumerate}
 \pause
 Encontramos que los exponentes de $x$ son distintos y los índices de la sumas, en la primera comienza con $n = 1$, mientras que la segunda con $n = 0$.
-\end{frame}
-\begin{frame}
-\frametitle{Agrupando de nuevo las sumas}
-Si buscamos realizar la agrupación, se requiere que las sumas  tengan el mismo exponente en el término de $x$ y que comiencen con el mismo índice.
 \end{frame}
 \begin{frame}
 \frametitle{Uso de una propiedad de las sumas infinitas}
