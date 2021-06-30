@@ -1,0 +1,570 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Método de Frobenius} \vspace{-3ex}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+\section{Series de potencias.}
+\subsection{Introducción.}
+%Ref. Bruzzone - Introducción al método de Frobenius
+
+El método propone la búsqueda de soluciones en series de potencias para ecuaciones diferenciales lineales de segundo orden.
+\par
+Este procedimiento requiere el deducir:
+\begin{enumerate}
+\item Una ecuación de índices y sus raíces.
+\item Determinar las relaciones de recurrencia.
+\item Calcular los coeficientes de las series buscadas, a partir de las raíces y las relaciones de recurrencia.
+\end{enumerate}
+
+\subsection{Soluciones analíticas.}
+
+Una clase muy extensa de ecuaciones diferenciales poseen soluciones que se expresan en series de potencias, las cuales son válidas en un dominio determinado.
+\par
+Las funciones que gozan de esta particularidad se les llama \emph{analíticas}.
+\par
+Las ecuaciones diferenciales más familiares como la ecuación de un oscilador armónico
+\begin{align*}
+\ddot{x} + \omega^{2} \, x = 0
+\end{align*}
+admite soluciones del tipo
+\begin{align*}
+x(s) = A_{1} \, \sin( \omega \, s) + A_{2} \, \cos (\omega \, s)
+\end{align*}
+siendo claro que $\sin( \omega \, s)$ y $\cos( \omega \, s)$ son funciones analíticas.
+\par
+De igual manera para la ecuación de un oscilador amortiguado, como en un gran número de ecuaciones de la física matemática, nos encontraremos que forman parte de este tipo de ecuaciones.
+
+% \subsection{Definición}
+
+% 
+
+% Una expresión de la forma:
+% \begin{align}
+% a_{0} + a_{1} \, (x - x_{0}) + \ldots + a_{n} \, x^{n} = \sum_{n=0}^{\infty} a_{n} \, (x - x_{0})^{n}
+% \label{eq:ecuacion_01}    
+% \end{align}
+% se llama \textit{serie de potencias}.
+% 
+% 
+
+% La serie puede estar definida por el límite
+% \begin{align*}
+% \lim_{N \to \infty} \sum_{n=0}^{N} a_{n} \, (x - x_{0})
+% \end{align*}
+% para aquellos valores de $x$ en que exista el límite.
+
+% 
+% 
+% En ese caso, se le conoce a la serie como una \textcolor{blue}{serie convergente}.
+% 
+% 
+
+% Para determinar los valores de $x$ que cumplen la condición de convergencia, se utiliza el criterio del cociente:
+% 
+% \begin{align*}
+% \lim_{n \to \infty} \dfrac{a_{n+1}}{a_{n}} = \rho \hspace{1.5cm} \begin{cases}
+% \mbox{Converge si } & \rho < 1 \\
+% \mbox{Diverge si } & \rho > 1
+% \end{cases}
+% \end{align*}
+% 
+% El criterio no clasifica si $\rho = 1$.
+% 
+% 
+
+% Más general es considerar el valor absoluto de dicho cociente, si está acotado por cierto numero $\sigma$ cuando $n \to \infty$, la serie converge cuando $\sigma < 1$.
+% 
+% 
+% Por lo tanto, tendríamos que
+% \begin{align*}
+% \rho = \lim_{n \to \infty} \abs{\dfrac{a_{n+1}}{a_{n}}} \, \abs{x - x_{0}} = L \, \abs{x - x_{0}}
+% \end{align*}
+% en donde
+% \begin{align*}
+% L = \lim_{n \to \infty} \abs{\dfrac{a_{n+1}}{a_{n}}}
+% \end{align*}
+% 
+% 
+% Si este límite existe, se deduce por la ec. (\ref{eq:ecuacion_01}):
+% 
+% \begin{align}
+% \begin{aligned}        
+% \mbox{converge si } &\abs{x - x_{0}} < \dfrac{1}{L} \\[0.5em]
+% \mbox{diverge si } &\abs{x - x_{0}} > \dfrac{1}{L}
+% \end{aligned}
+% \label{eq:ecuacion_02}    
+% \end{align}
+% 
+% 
+% De esta manera tendremos un intervalo de convergencia cuando $L$ existe:
+% \begin{align*}
+% \left( x_{0} - \dfrac{1}{L}, x_{0} + \dfrac{1}{L} \right)
+% \end{align*}
+% 
+% Este intervalo es simétrico respecto de $x_{0}$, de manera tal que \emph{la serie es convergente dentro} de este intervalo y \emph{divergente fuera} del mismo.
+% 
+
+\section{Puntos singulares.}
+\subsection{Definiciones}
+
+%Ref. Arfken
+
+Se presenta el concepto de un \emph{punto singular o singularidad} (tal como se aplica a una ecuación diferencial).
+\par
+El interés en este concepto radica en su utilidad para:
+\begin{enumerate}
+\item Clasificar las EDO.
+\item Revisar la viabilidad de una solución en series, ésta viabilidad es parte del teorema de Fuchs.
+\end{enumerate}
+
+Usando la notación $\displaystyle \dv[2]{y}{x} = \stilde{y}$, tenemos que una EDO2 es del tipo:
+\begin{align}
+\stilde{y} = f(x, y, \ptilde{y})
+\label{eq:ecuacion_09_74}
+\end{align}
+
+Ahora bien, si en la ec. (\ref{eq:ecuacion_09_74}): las funciones $y$ e $\ptilde{y}$ pueden tener todos los valores finitos en $x = x_{0}$ e $\stilde{y}$ permanece finita, el punto $x = x_{0}$ es un \emph{\textcolor{blue}{punto ordinario}}.
+\par
+Por otra parte, si $\stilde{y}$ se vuelve infinita para cualquier selección finita de $y$ e  $\ptilde{y}$, el punto $x = x_{0}$ se denomina \emph{\textcolor{red}{punto singular}}.
+\par
+Si escribimos esta EDO2H (en $y$) como
+\begin{align}
+\stilde{y} + P(x) \, \ptilde{y} + Q(x) \: y = 0
+\label{eq:ecuacion_09_75}
+\end{align}
+
+Esta es una ecuación diferencial de segundo orden, lineal y homogénea, con coeficientes variables $P(x)$ y $Q(x)$.
+\par
+Ahora bien, si las funciones $P(x)$ y $Q(x)$ permanecen finitas con $x = x_{0}$, el punto $x = x_{0}$ es un \emph{\textcolor{red}{punto ordinario}}.
+\par
+Al contrario, si $P(x)$ y/o $Q(x)$ divergen mientras $x \to x_{0}$, el punto $x_{0}$ es un \emph{\textcolor{green!50!black}{punto singular}}.
+\par
+Usando la ecuación (\ref{eq:ecuacion_09_75}) podemos distinguir entre dos tipos de puntos singulares:
+\begin{enumerate}
+\item Si $P(x)$ y/o $Q(x)$ divergen a medida que $x \to x_{0}$, pero
+\begin{align*}
+(x - x_{0}) \: P(x) \hspace{0.5cm} \mbox{y} \hspace{0.5cm} (x - x_{0})^{2} \: Q(x)
+\end{align*}
+permanecen finitas a medida que $x \to x_{0}$,  entonces el punto $x = x_{0}$ se llama \textbf{punto singular regular o punto singular no esencial}.
+\item Si $P(x)$ diverge más rápidamente que $\dfrac{1}{(x - x_{0})}$, de tal modo que:
+\begin{align*}
+(x - x_{0}) \: P(x) \to \infty \hspace{0.4cm} \mbox{a medida que} \hspace{0.4cm} x \to x_{0}
+\end{align*}
+ 
+o cuando $Q(x)$ diverge más rápidamente que $\dfrac{1}{(x - x_{0})^{2}}$, de modo que:
+\begin{align*}
+(x - x_{0})^{2} \: Q(x) \to \infty \hspace{0.4cm} \mbox{a medida que} \hspace{0.4cm} x \to x_{0}
+\end{align*}
+
+entonces el punto $x = x_{0}$ se llama \textbf{singularidad esencial o singularidad irregular}.
+\end{enumerate}
+
+Estas definiciones son válidas para todos los valores finitos de $x_{0}$. 
+\par
+El análisis de los puntos al infinito $(x \to \infty)$ es similar al tratamiento que se hace para las funciones en variable compleja.
+
+% 
+% Análisis puntos al infinito}
+% Hacemos el cambio de variable $x = 1/z$, sustituyendo en la ED y entonces hacemos que $z \to 0$. 
+% \\
+% 
+% Haciendo el cambio de variable en las derivadas:
+% \begin{align}
+% \dv{y(x)}{x} = \dv{y(z^{-1})}{z} \: \dv{z}{x} = - \dfrac{1}{x^{2}} \dv{y(z^{-1})}{z} = -z^{2} \: \dv{y(z^{-1})}{z}
+% \label{eq:ecuacion_09_76}
+% \end{align}
+% 
+% 
+% Análisis puntos al infinito}
+% Entonces:
+% \begin{align}
+% \begin{aligned}
+% \dv[2]{y(x)}{x} &= \dv{z} \left[ \dv{y(x)}{x} \right] \dv{z}{x} = \\
+% &= (-z^{2}) \left[ -2 \: z \dv{y(z^{-1})}{z} - z^{2} \: \dv[2]{y(z^{-1})}{z} \right] = \\
+% &= 2 \: z^{3} \: \dv{y(z^{-1})}{z} + z^{4} \: \dv[2]{y(z^{-1})}{z}
+% \end{aligned}
+% \label{eq:ecuacion_09_77}
+% \end{align}
+% 
+% 
+% Análisis puntos al infinito}
+% Usando estos resultados, podemos transformar la ecuación (\ref{eq:ecuacion_09_75}) en
+% \begin{align}
+% z^{4} \: \dv[2]{y}{z} + [ 2 \: z^{3} - z^{2} \: P(z^{-1})] \: \dv{y}{z} + Q(z^{-1}) \: y = 0
+% \label{eq:ecuacion_09_78}
+% \end{align}
+% 
+% 
+% Análisis puntos al infinito}
+% El comportamiento en $x = \infty, (z = 0)$ entonces dependerá del comportamiento de los nuevos coeficientes
+% \begin{align*}
+% \dfrac{2 \: z - P(z^{-1})}{z^{2}} \hspace{1cm} \text{ y } \hspace{1cm} \dfrac{Q(z^{-1})}{z^{4}}
+% \end{align*}
+% a medida que $z \to 0$.
+% 
+% 
+% Análisis puntos al infinito}
+% Si estas dos expresiones se mantienen finitas, el punto $x = \infty$ es un punto ordinario.
+% \\
+% 
+% Si las expresiones divergen con mayor rapidez que $1/z$ y $1/z^{2}$, respectivamente, el punto $x = \infty$ es un punto regular singular, de otra manera, el punto es irregular singular (una singularidad esencial).
+% 
+
+%Ref. Hassani 2009 Chap. 26
+\section{Método de Frobenius.}
+\subsection{El método.}
+
+El supuesto básico del método de Frobenius es que la solución de la ED se puede \emph{representar mediante una serie de potencias}.
+\par
+Esta no es una suposición restrictiva porque todas las funciones encontradas en aplicaciones físicas pueden escribirse como series de potencias siempre que estemos interesados en sus valores que se encuentran en su intervalo de convergencia.
+\par
+Este intervalo puede ser muy pequeño o puede cubrir toda la línea real.
+\par
+Una ecuación diferencial ordinaria de segundo orden, lineal y  homogénea, se puede escribir como:
+\begin{align}
+p_{2} (x) \, \dv[2]{y}{x} + p_{1} (x) \, \dv{y}{x} + p_{0}(x) \, y = 0
+\label{eq:ecuacion_26_07}    
+\end{align}
+
+Para casi todas las aplicaciones que se encuentran en física, consideramos que $p_{0}, p_{1}, p_{2}$ son polinomios.
+\par
+Es posible que la EDO no se presente en la forma que se muestra a partir de, digamos, el método de separación de variables, pero se puede \enquote{llevar} a esa forma.
+\par
+La forma más complicada de los coeficientes de las derivadas en una ED son típicamente funciones racionales (razones de dos polinomios).
+\par
+Por lo tanto, multiplicar la EDO por el producto de los tres denominadores nos devolverá la EDO en la forma dada en la ec. (\ref{eq:ecuacion_26_07}).
+\par
+El primer paso que se debe de realizar, es identificar la presencia de singularidades esenciales, ya que el método de Frobenius servirá siempre y cuando tengamos a lo más, puntos singulares regulares.
+\par
+Veremos más adelante que será común en algunos problemas, que la EDO2H tendrá singularidades irregulares, por lo que el método en sí, no sería el pertinente para resolver la EDO.
+\par
+Antes de descartar el método, podemos revisar la posibilidad de \emph{remover las singularidades} en la EDO.
+\par
+El siguiente paso en el método de Frobenius es \emph{asumir que existe una solución en serie de potencias infinita para $y$}. Es común elegir que el punto de expansión sea $x = 0$.
+\par
+Si $p_{2} (0) \neq 0$, solo es necesario considerar las potencias no negativas de $x$.
+\par
+Si $p_{2} (0) = 0$, la EDO pierde su carácter de \enquote{segundo orden}, y las soluciones no se revisarían en estas notas.
+\par
+Se tienen dos opciones:
+\begin{enumerate}
+\item Elegir un punto de expansión diferente a $x_{0} \neq 0$, tal que $p_{2} (x_{0}) \neq 0$.
+\item Permitir las potencias no positivas de $x$ en la expansión de $y$.
+\end{enumerate}
+
+Rara vez se utiliza la primera opción. Resulta que la forma más económica, pero general, de incorporar la segunda opción, es escribir la solución como se muestra a continuación:
+\par
+La solución que suponemos es del tipo:
+\begin{align}
+\begin{aligned}
+y &= x^{r} \, \sum_{n=0}^{\infty} a_{n} \, x^{n} = \\[0.5em] 
+&= \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = \\[0.5em] 
+&= a_{0} \, x^{r} + a_{1} \, x^{r+1} + a_{2} \, x^{r+2} + \ldots \hspace{1cm} a_{0} \neq 0
+\end{aligned}
+\label{eq:ecuacion_26_08}    
+\end{align}
+donde $r$ es un número real (no necesariamente un entero positivo) que quedará determinado por la ED.
+\par
+Es habitual elegir $a_{0} = 1$ porque cualquier múltiplo constante de una solución también es una solución.
+\par
+Si $a_{0} \neq 1$, entonces se multiplica la serie por $1/a_{0}$ y así obtener el valor.
+\par
+Ya que una serie de potencias es uniformemente convergente (con su radio de convergencia), entonces podemos diferenciar término a término la serie.
+\par
+Por lo que al diferenciar la solución en una primera ocasión, tenemos:
+\begin{align}
+\begin{aligned}
+\dv{y}{x} &= \ptilde{y} = \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} = \\[0.5em] 
+&= r \, a_{0} \, x^{r-1} + (r + 1) \, a_{1} \, x^{r} + \ldots
+\end{aligned}
+\label{eq:ecuacion_26_09a}
+\end{align}
+
+Por lo que al diferenciar por segunda vez, tenemos:
+\begin{align}
+\begin{aligned}
+\dv[2]{y}{x} &= \stilde{y} =  \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2} = \\[0.5em] 
+&= r \, (r - 1) \, a_{0} \, x^{r-2} + r \, (r + 1) \, a_{1} \, x^{r-1} + \ldots
+\end{aligned}
+\label{eq:ecuacion_26_09b}
+\end{align}
+
+Ahora sustituimos las ecuaciones (\ref{eq:ecuacion_26_08}), (\ref{eq:ecuacion_26_09a}) y (\ref{eq:ecuacion_26_09b}) en la EDO (\ref{eq:ecuacion_26_07}).
+\begin{align*}
+&p_{2}(x) \bigg[ \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2} \bigg] + \\[1em]
+&+ p_{1} (x) \bigg[ \sum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} \bigg] + p_{0}(x) \bigg[ \sum_{n=0}^{\infty} a_{n} \, x^{n+r} \bigg] = 0
+\end{align*}
+
+Los pasos a seguir son los siguientes:
+\begin{enumerate}
+\item Multiplicar los polinomios $p_{i}$ con cada suma en la serie.
+\item Agrupamos todas las potencias distintas para $x$.
+\item Establecemos el coeficiente de cada término igual a cero.
+\end{enumerate}
+
+Al realizar el procedimiento anterior nos conduce a identificar dos ecuaciones: la primera involucra al  coeficiente de la potencia más baja de la variable $x$.
+\par
+La otra ecuación nos indica la relación entre los coeficientes dentro de la suma infinita.
+\par
+La ecuación que surge de la \emph{potencia más baja de x} involucra solo a $r$, se llama \textbf{ecuación de índices}.
+\par
+Cuya solución determina el valor de las raíces: $r_{1}$ y $r_{2}$.
+\par
+Esta suele ser una ecuación cuadrática en $r$ que se puede resolver para obtener el(los) posible(s) valor(es) de $r$, cada uno de los cuales conduce generalmente a una solución diferente.
+\par
+Veremos más adelante el trato que debemos darle a las raíces, ya que existe el caso de que tengamos raíces iguales (de duplicidad de orden 2) $\to r_{1} = r_{2}$.
+\par
+Si tenemos raíces repetidas, nos enfrentamos al problema de que obtendremos solo una solución a la EDO2H, mientras que la teoría nos dice que debe de tener dos soluciones linealmente independientes.
+\par
+Tendremos que obtener de alguna manera la segunda solución linealmente independiente.
+\par
+La segunda ecuación que proviene de potencias superiores de $x$, permite establecer las \emph{relaciones de recurrencia}, es decir, ecuaciones que permiten calcular $a_{n}$ en términos de $a_{n-1}$ y $a_{n-2}$, por ejemplo.
+\par
+Al iterar esta relación, se pueden obtener todos los $a_{n}$ en términos de solo dos coeficientes.
+\par
+Si tenemos el caso $r_{1} \neq r_{2}$, usando $r_{1}$ en la relación de recurrencia, llegaremos a una solución $y_{1}(x)$ de la EDO.
+\par
+Con $r_{2}$ en la relación de recurrencia, obtendremos la segunda solución $y_{2}(x)$ de la EDO.
+\par
+Al tener una EDO2H lineal, las soluciones serán lineales, por lo que para obtener la solución a la EDO, ocupamos el principio de superposición ocupando $y_{1}(x)$ así como $y_{2}(x)$ para definir la solución $y(x)$ como una combinación lineal de las anteriores.
+
+\subsection{Ejercicio.}
+%Ref. Zill ED pág. 279
+
+Resuelve la siguiente EDO2H mediante el método de Frobenius:
+\begin{align}
+3 \, x \, \stilde{y} + \ptilde{y} - y = 0
+\label{eq:ecuacion_04}    
+\end{align}
+Para $x_{0} = 0$.
+\par
+Obtén la(s) solución(es) en términos de una serie de potencias.
+
+\subsection*{Tipos de puntos.}
+
+Cuando $p_{2}(x)$, $p_{1}(x)$ y $p_{0}(x)$ son polinomios \emph{sin factores comunes}, un punto $x = x_{0}$ es:
+\begin{enumerate}
+\item Punto ordinario, si $p_{2}(x_{0}) \neq 0$, o bien.
+\item Punto singular regular,  si $p_{2}(x_{0}) = 0$.
+\end{enumerate}
+
+Tenemos que:
+\begin{align*}
+P(x) = \dfrac{1}{3 x} \hspace{1.5cm} Q(x) = -\dfrac{1}{3 x}
+\end{align*}
+
+Revisamos con la definición de punto regular singular.
+
+Si $x \to x_{0}$ tenemos que $P(x)$ y $Q(x)$ divergen.
+\par
+Pero cuando $x \to x_{0}$:
+\begin{align*}
+(x - x_{0}) \, P(x) = x \, \left( \dfrac{1}{3 x} \right) = \dfrac{1}{3} \\[1em] 
+(x - x_{0})^{2} \, Q(x) = x^{2} \, \left( - \dfrac{1}{3 x} \right) = - \dfrac{x}{3} = 0
+\end{align*}
+
+Estos valores son finitos, por lo tanto: $x_{0} = 0$ es punto singular regular.
+\par
+Tenemos entonces que $x = 0$ es punto singular regular\footnote{Esta comprobación se debe de realizar, la guía breve nos orienta pero la revisión del tipo de punto singular es obligatorio.}, por lo que es posible utilizar el método de Frobenius.
+\par
+Recordemos que para que el método funcione, a lo más, debemos de tener puntos singulares regulares.
+
+\subsection*{Solución propuesta.}
+
+Se propone una solución en serie de potencias del tipo:
+\begin{align*}
+y(x) = \sum_{n=0}^{\infty} a_{n} \, x^{n+r} \hspace{1.5cm} a_{0} \neq 0
+\end{align*}
+
+Al diferenciar con respecto a $x$ en dos ocasiones, tenemos:
+\begin{align*}
+\ptilde{y} &= \sum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} \\[0.5em] 
+\stilde{y} &= \sum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-2}
+\end{align*}
+
+\subsection*{Recuperando la EDO.}
+
+Al incorporar las expresiones de las derivadas en la EDO, se tiene que:
+\begin{align*}
+&3 \, x \, \stilde{y} + \ptilde{y} - y = 3 \, x \, \sum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-2} + \\[0.5em]
+&+ \sum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+
+Recomendamos escribir los términos de izquierda a derecha con las potencias más bajas a las más altas.
+\par
+En la expresión anterior tenemos un producto de $3 \, x$ por la suma que contiene el término $x^{n+r-2}$, el producto aumenta el exponente y así dejamos el coeficiente $3$ que multiplica a la suma:
+
+\begin{align*}
+&3 \, \sum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-1} + \\[0.5em]
+&+ \sum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}    
+
+
+\subsection*{Simplificación de la expresión.}
+
+Como tenemos términos que se multiplican por el mismo término $x^{n+r-1}$, factorizamos los correspondientes términos:
+\begin{align*}
+\sum_{n=0}^{\infty} \bigg[ 3 \, a_{n} \, (n + r) \, (n + r - 1) + a_{n} \, (n + r) \bigg] \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\\
+El factor común dentro de los corchetes es $a_{n} \, (n + r)$, así que:
+\begin{align*}
+\sum_{n=0}^{\infty} \bigg[ a_{n} \, (n + r) [3 \, (n + r - 1) + 1 ] \bigg] \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\\
+Que resolvemos para reducir la expresión.
+\par
+Entonces se obtiene:
+\begin{align*}
+\sum_{n=0}^{\infty} \bigg[ a_{n} \, (n + r) (3 \, n +  3 \, r - 2 ) \bigg] \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\\
+Notemos que las sumas inician en el mismo índice $n = 0$.
+\par
+Será necesario obtener el coeficiente de la potencia más baja, para ello hacemos que $n = 0$ en la primera suma, por lo tanto:
+\begin{align*}
+a_{0} \, r (3 \, r {-}  2) \, x^{r-1} + \sum_{n=1}^{\infty} \bigg[ a_{n} \, (n {+} r) (3 \, n {+}  3 \, r {-} 2 ) \bigg] \, x^{n+r-1} - \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\\
+Para factorizar los términos de las sumas, necesitamos que:
+\begin{enumerate}
+\item El exponente del término $x$ sea el mismo.
+\item Los índices de las sumas deben de iniciar en el mismo valor.
+\end{enumerate}
+
+Encontramos que los exponentes de $x$ son distintos y los índices de la sumas, en la primera comienza con $n = 1$, mientras que la segunda con $n = 0$.
+\par
+De la teoría de las sumas infinitas, se tiene una propiedad que nos será de mucha utilidad para dejar los índices en el mismo valor inicial:
+\begin{align*}
+\sum_{n = k}^{\infty} f(n) = \sum_{n=0}^{\infty} f(n + k)
+\end{align*}
+Que usaremos en la expresión de nuestras sumas.
+\par
+Al ocupar la propiedad anterior en la primera suma infinita, llegamos a:
+\begin{align*}
+&a_{0} \, r (3 \, r {-}  2) \, x^{r-1} + \sum_{n=0}^{\infty} \bigg[ a_{n+1} \, (n + 1 {+} r) (3 \, (n + 1) {+}  3 \, r {-} 2 ) \bigg] \, x^{n+r} + \\[1em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\\
+Simplificando los términos
+\begin{align*}
+&a_{0} \, r (3 \, r {-}  2) \, x^{r-1} + \sum_{n=0}^{\infty} \bigg[ a_{n+1} \, (n + 1 {+} r) (3 \, n {+}  3 \, r {+} 1 ) \bigg] \, x^{n+r} + \\[1em]
+&- \sum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+\\
+Dado que las sumas tienen el mismo factor $x^{n+r}$ y comienzan con el mismo índice, $n = 0$, podemos factorizar los términos:
+\begin{align*}
+a_{0} \, r (3 \, r {-}  2) \, x^{r-1} + \sum_{n=0}^{\infty} \bigg[ a_{n+1} \, (n + 1 {+} r) (3 \, n {+}  3 \, r {+} 1 ) - a_{n} \bigg] \, x^{n+r} = 0
+\end{align*}    
+
+\subsection*{Coeficientes de la expresión.}
+
+Para que la expresión anterior se anule, los coeficientes deben de anularse, recordemos que $a_{0} \neq 0$, entonces:
+\begin{align}
+&{} a_{0} \, r \, (3 \, r - 2) = 0 \label{eq:ecuacion_indices}\\[1em] 
+&{} a_{n+1} \, (n + 1 {+} r) (3 \, n {+}  3 \, r {+} 1 ) - a_{n} = 0 \label{eq:ecuacion_recurrencia}
+\end{align}
+
+\subsection*{Ecuación de índices.}
+
+De la ecuación\footnote{En algunos textos se le conoce como \emph{ecuación indicial}.} (\ref{eq:ecuacion_indices}), como $a_{0} \neq 0$, obtenemos la \textbf{ecuación de índices}:
+
+\begin{align*}
+r \, (3 \, r - 2) = 0
+\end{align*}
+
+Que tiene por raíces:
+
+\begin{align*}
+r_{1} = \dfrac{2}{3}, \hspace{1.5cm} r_{2} = 0
+\end{align*}
+
+\subsection*{Relación de recurrencia.}
+
+De la ec. (\ref{eq:ecuacion_recurrencia}), tenemos el segundo resultado importante: la \textbf{relación de recurrencia}:
+\begin{align*}
+a_{n+1} (n + r + 1)(3 \, n + 3 \, r + 1) - a_{n} = 0
+\end{align*}
+\\
+Resolviendo para $a_{n+1}$, llegamos a:
+\begin{align}
+a_{n+1} = \dfrac{a_{n}}{(n + r + 1)(3 \, n + 3 \, r + 1)}
+\label{eq:ecuacion_07}
+\end{align}
+\\
+Lo que nos dice la relación de recurrencia, es que podemos conocer el coeficiente $a_{n+1}$ a partir del coeficiente $a_{n}$, ocupando el valor de las raíces, y el término $n$.
+\par
+Ocuparemos el valor de las raíces en la relación de recurrencia para determinar el valor de los coeficientes, para así obtener una solución a la EDO con $r_{1}$ y la otra solución con $r_{2}$.
+
+\subsection*{Obteniendo los coeficientes con $r_{1}$.}
+
+Ocupamos la primera raíz $r_{1} = 2/3$ en la relación de recurrencia (\ref{eq:ecuacion_07}) y con $a_{0} \neq 0$:
+\begin{align}
+a_{n+1} = \dfrac{a_{n}}{(3 \, n + 5)(n + 1)} \hspace{1.5cm} n = 0, 1, 2, \ldots
+\label{eq:ecuacion_08}    
+\end{align}
+\\
+Entonces comenzamos a evaluar para valores de $n$, de tal manera con unos cuantos, podamos obtener la expresión general que nos indique cómo es el coeficiente $a_{n}$:
+\begin{align*}
+a_{1} &= \dfrac{a_{0}}{(3 \cdot 0 + 5)(0 + 1)}  = \dfrac{a_{0}}{5 \cdot 1} \\[0.5em] 
+a_{2} &= \dfrac{a_{1}}{8 \cdot 2} = \dfrac{a_{0}}{2! \, 5 \cdot 8} \\[0.5em] 
+a_{3} &= \dfrac{a_{2}}{11 \cdot 3} = \dfrac{a_{0}}{3! \, 5 \cdot 8 \cdot 11} \\
+\vdots \\[0.5em] 
+a_{n} &= \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \hspace{1cm} n = 1, 2, 3, \ldots
+\end{align*}
+
+\subsection*{Primera solución de la EDO.}
+
+Hemos obtenido la primera solución de la EDO, que llamaremos $y_{1}(x)$ ocupando la raíz $r_{1}$:
+\begin{align}
+y_{1}(x) = a_{0} \, x^{2/3} \left[ 1 + \sum_{n=1}^{\infty} \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \, x^{n} \right]
+\label{eq:ecuacion_10}    
+\end{align}
+
+
+\subsection*{Obteniendo los coeficientes con $r_{2}$.}
+
+La segunda raíz de la ecuación de índices: $r_{2} = 0$ nos genera una regla de recurrencia distinta a la anterior:
+\begin{align}
+a_{n+1} = \dfrac{a_{n}}{(n+1)(3 \, n +1)} \hspace{1.5cm} n = 0, 1, 2, \ldots
+\label{eq:ecuacion_09}    
+\end{align}
+
+Los coeficientes que se obtienen son:
+\begin{align*}
+a_{1} &= \dfrac{a_{0}}{(0+1)(3 \cdot 0 +1)} = \dfrac{a_{0}}{1 \cdot 1} \\[0.5em] 
+a_{2} &= \dfrac{a_{1}}{2 \cdot 4} = \dfrac{a_{0}}{2! \, 1 \cdot 4}  \\[0.5em] 
+a_{3} &= \dfrac{a_{2}}{3 \cdot 7} = \dfrac{a_{0}}{3! \, 4 \cdot 7}  \\[0.5em]
+\vdots \\ 
+a_{n} &= \dfrac{a_{0}}{n! \, 1 \cdot 4 \cdot 7 \ldots (3 \, n - 2)} \hspace{1cm} n = 1, 2, 3, \ldots
+\end{align*}
+
+\subsection*{Segunda solución de la EDO.}
+
+La segunda solución de la EDO que llamamos $y_{2}(x)$ es:
+\begin{align}
+y_{2}(x) = a_{0} \, x^{0} \left[ 1 + \sum_{n=1}^{\infty} \dfrac{1}{n! \, 1 \cdot 4 \cdot 7 \ldots (3\, n - 2)} \, x^{n} \right]
+\label{eq:ecuacion_11}
+\end{align}    
+
+\subsection*{Propiedades de las soluciones.}
+
+Se puede demostrar que las soluciones (\ref{eq:ecuacion_10}) y (\ref{eq:ecuacion_11}) convergen ambas para todos los valores finitos de $x$.
+\par
+También es posible ver que las soluciones no son múltiplo una  de la otra, por lo que $y_{1}(x)$ y $y_{2}(x)$ son linealmente independientes con respecto a $x$.
+\par
+Por el principio de superposición, expresamos la solución:
+\begin{align*}
+y(x) &= C_{1} \, y_{1} (x) + C_{2} \, y_{2} = \\[0.5em]
+&= C_{1} \, \left[ x^{2/3} + \sum_{n=1}^{\infty} \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \, x^{n} \right] + \\[0.5em]
+&+ C_{2} \, \left[ 1 + \sum_{n=1}^{\infty} \dfrac{1}{n! \, 1 \cdot 4 \cdot 7 \ldots (3\, n - 2)} \, x^{n} \right]
+\end{align*}
+
+\end{document}
