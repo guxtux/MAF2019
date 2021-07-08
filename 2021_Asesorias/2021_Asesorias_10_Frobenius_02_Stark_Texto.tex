@@ -1,0 +1,472 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Método de Frobenius} \vspace{-3ex}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+\section{Ejercicio de mecánica cuántica.}
+\subsection{Planteamiento.}
+
+A partir del estudio en mecánica cuántica del efecto Stark (en coordenadas parabólicas), nos conduce a la ecuación diferencial
+\begin{align*}
+\dv{\xi} \left( \xi\, \dv{u}{\xi} \right) + \left( \dfrac{1}{2} \, E \, \xi + \alpha - \dfrac{m^{2}}{4 \, \xi} - \dfrac{1}{4} \, F \, \xi^{2} \right) \, u = 0
+\end{align*}
+\\
+Donde:
+\begin{enumerate}
+\item $\alpha$ es la constante de separación.
+\item $E$ es la energía total del sistema.
+\item $F$ es una constante.
+\item $F \, z$ es la energía potencial que se agrega al introducir un campo eléctrico.
+\end{enumerate}
+
+\textbf{Problema: } Con el método de Frobenius y usando la raíz más grande de la ecuación de índices $(r_{1}$), desarrolla una solución en series de potencias, alrededor de $\xi=0$.
+\\
+Evalúa los primeros tres coeficientes en términos de $a_{0}$.
+\par
+Debemos de tomar en cuenta que lo que se nos pide, es obtener lo siguiente:
+\begin{align*}
+u(\xi) = a_{0} \, \xi^{r_{1}} + a_{1} \, \xi ^{r_{1}+1} + a_{2} \, \xi ^{r_{1}+2} + \ldots 
+\end{align*}
+
+\section{Solución.}
+\subsection{Desarrollo.}
+
+Inicialmente simplificamos la expresión que contiene la segunda derivada:
+\begin{align*}
+\dv{\xi} \left( \xi\, \dv{u}{\xi} \right) + \left( \dfrac{1}{2} \, E \, \xi + \alpha - \dfrac{m^{2}}{4 \, \xi} - \dfrac{1}{4} \, F \, \xi^{2} \right) \, u = 0
+\end{align*}
+\\
+Que nos lleva a la EDO2H:
+\begin{align*}
+\xi \, \dv[2]{u}{\xi} + \dv{u}{\xi} + \left( \dfrac{1}{2} \, E \, \xi + \alpha - \dfrac{m^{2}}{4 \, \xi} - \dfrac{1}{4} \, F \, \xi^{2} \right) \, u = 0
+\end{align*}
+
+\subsection{Puntos singulares.}
+
+Al estudiar los puntos singulares de la EDO, tenemos que llevar la expresión a la forma conocida con $P(\xi)$ y $Q(\xi)$:
+\begin{align*}
+\stilde{u} + \dfrac{1}{\xi} \, \ptilde{u} + \dfrac{1}{\xi} \, \left( \dfrac{1}{2} \, E \, \xi + \alpha - \dfrac{m^{2}}{4 \, \xi} - \dfrac{1}{4} \, F \, \xi^{2} \right) \, u = 0 \\[1em]
+\stilde{u} + \dfrac{1}{\xi} \, \ptilde{u} + \left( \dfrac{1}{2} \, E \, + \dfrac{\alpha}{\xi} - \dfrac{m^{2}}{4 \, \xi^{2}} - \dfrac{1}{4} \, F \, \xi \right) \, u = 0
+\end{align*}
+\\
+Por lo que las funciones $P(\xi)$ y $Q(\xi)$ son:
+\begin{align*}
+P(\xi) &= \dfrac{1}{\xi} \\[1em]
+Q(\xi) &= \left( \dfrac{1}{2} \, E \, + \dfrac{\alpha}{\xi} - \dfrac{m^{2}}{4 \, \xi^{2}} - \dfrac{1}{4} \, F \, \xi \right)
+\end{align*}
+\\
+Ahora ocupamos el estudio del tipo de puntos singulares: Cuando $\xi \to 0$, tanto $P(\xi)$ como $Q(\xi)$ divergen.
+\begin{align*}
+P(\xi) \hspace{0.2cm} \mbox{diverge como} \hspace{0.2cm} \dfrac{1}{(\xi - \xi_{0})}
+\end{align*}
+\\
+Mientras que el producto:
+\begin{align*}
+(\xi - \xi_{0}) \, P(x) = \xi \, \dfrac{1}{\xi} = 1
+\end{align*}
+\\
+Se mantiene finito mientras que $\xi \to 0$
+\par
+Tenemos que cuando $\xi \to 0$:
+\begin{align*}
+Q(\xi) \hspace{0.2cm} \mbox{diverge como} \hspace{0.2cm} \dfrac{1}{(\xi - \xi_{0})^{2}}
+\end{align*}
+\\
+Mientras que el producto:
+\begin{align*}
+(\xi - \xi_{0})^{2} \, Q(x) &= \xi^{2} \, \left( \dfrac{1}{2} \, E \, + \dfrac{\alpha}{\xi} - \dfrac{m^{2}}{4 \, \xi^{2}} - \dfrac{1}{4} \, F \, \xi \right) \\[1em]
+&= \dfrac{1}{2} \, E \, \xi^{2} \, + \alpha \, \xi - \dfrac{m^{2}}{4} - \dfrac{1}{4} \, F \, \xi^{3} \\[1em]
+&= \dfrac{1}{2} \, E \, \xi^{2} \, + \alpha \, \xi - \dfrac{m^{2}}{4} - \dfrac{1}{4} \, F \, \xi^{3} = - \dfrac{m^{2}}{4}
+\end{align*}
+\\
+se mantiene finito mientras que $\xi \to 0$.
+\par
+Por lo que determinamos que la EDO tiene un punto singular regular $\xi = 0$.
+\par
+Siendo viable el método de Frobenius para obtener una solución en serie de potencias como lo pide el enunciado.
+
+\subsection{Solución propuesta.}
+
+Proponemos una solución $u(\xi)$ como una serie de potencias:
+\begin{align*}
+u(\xi) = \sum_{n=0}^{\infty} a_{n} \, \xi^{n+r}
+\end{align*}
+\\
+Procedemos a calcular la primera y segunda derivada de $u(\xi)$.
+
+\subsection{Construyendo la serie de potencias.}
+
+Las derivadas de primer y segundo orden de $u$ con respecto a $\xi$ son:
+\begin{align*}
+\ptilde{u} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, \xi^{n+r-1} \\[1em]
+\stilde{u} &= \sum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, \xi^{n+r-2}
+\end{align*}
+\\
+Sustituimos las derivadas en la EDO inicial:
+\begin{align*}
+&\xi \, \left[ \sum_{n=0}^{\infty} a_{n} \, (n {+} r) \, (n {+} r {-} 1) \, \xi^{n{+}r{-}2} \right] + \sum_{n=0}^{\infty} a_{n} \, (n {+} r) \, \xi^{n{+}r{-}1} + \\[1em]
+&+ \left( \dfrac{1}{2} \, E \, \xi {+} \alpha {-} \dfrac{m^{2}}{4 \, \xi} {-} \dfrac{1}{4} \, F \, \xi^{2} \right) \, \sum_{n=0}^{\infty} a_{n} \, \xi^{n{+}r} = 0
+\end{align*}
+\\
+Con la finalidad de reducir términos y simplificar la expresión, multiplicamos donde aparezca $\xi$ con la respectiva potencia. Además de que separamos cada término.
+\begin{align*}
+&{} \sum_{n=0}^{\infty} a_{n} (n {+} r) (n {+} r {-} 1) \xi^{n{+}r{-}1} + \sum_{n=0}^{\infty} a_{n} (n {+} r) \xi^{n{+}r{-}1} + \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n{+}r{+}1} + \\[1em]
+&+ \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n{+}r} - \sum_{n=0}^{\infty}  \dfrac{m^{2}}{4} \, a_{n} \, \xi^{n{+}r{-}1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n{+}r{+}2} = 0
+\end{align*}
+\\
+Vemos que hay tres términos con la potencia $\xi^{n+k-1}$, por lo que los factorizamos en una sola suma.
+\begin{align*}
+&{} \textcolor{red}{\sum_{n=0}^{\infty} a_{n} \, (n {+} r) \, (n {+} r {-} 1) \, \xi^{n{+}r{-}1}} + \textcolor{red}{\sum_{n=0}^{\infty} a_{n} \, (n {+} r) \, \xi^{n{+}r{-}1}} + \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n{+}r{+}1} + \\[1em]
+&+ \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n{+}r} - \textcolor{red}{\sum_{n=0}^{\infty}  \dfrac{m^{2}}{4} \, a_{n} \, \xi^{n{+}r{-}1}} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n{+}r{+}2} = 0
+\end{align*}
+% \begin{tikzpicture}[overlay]
+% \draw[fill=red, opacity=0.3] (2.2, 5.2) rectangle (8.4, 6.5);
+% \draw[fill=red, opacity=0.3] (2.2, 3.7) rectangle (6.4, 5);
+% \draw[fill=red, opacity=0.3] (5.4, 2.2) rectangle (9, 3.5);
+% \end{tikzpicture}
+\\
+Luego de factorizar los términos comunes a $\xi^{n+r-1}$, es momento de ordenar los términos del exponente menor al mayor, de izquierda a derecha.
+\begin{align*}
+&{} \sum_{n=0}^{\infty} \bigg[ a_{n} (n {+} r) (n {+} r {-} 1) {+} a_{n} (n {+} r) + a_{n} \left( \dfrac{m^{2}}{4} \right) \bigg] \xi^{n+r-1} + \\[0.5em] 
+&{+}  \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n+r} {+}  \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+r+1} {-} \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+r+2} = 0
+\end{align*}
+\\
+Notemos que aunque el índice $n$ de cada una de las sumas, comienza en $n=0$, el exponente de la variable $\xi$ tiene un valor distinto, por lo que no podemos factorizar los términos.
+\par
+Vamos a simplificar los términos de la suma con el término  $\xi^{n+r-1}$, para reducir al máximo la expresión.
+\begin{align*}
+&{} \sum_{n=0}^{\infty} \textcolor{blue}{\bigg[ a_{n} (n {+} r) (n {+} r {-} 1) {+} a_{n} (n {+} r) + a_{n} \left( \dfrac{m^{2}}{4} \right) \bigg]} \xi^{n+r-1} + \\[1em] 
+&+ \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n+r} + \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+r+1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+r+2} = 0
+\end{align*}
+% \begin{tikzpicture}[overlay]
+%    \draw[fill=yellow, opacity=0.3] (1.8, 3.6) rectangle (10.6, 5.2);
+% \end{tikzpicture}
+\\
+Al fijarnos en los términos dentro de los corchetes, se tiene que:
+\begin{align*}
+&{} \bigg[ a_{n} (n {+} r) (n {+} r {-} 1) {+} a_{n} (n {+} r) {+} a_{n} \left( \dfrac{m^{2}}{4} \right) \bigg] = \\[0.5em] 
+&= a_{n} \, \bigg[  (n {+} r) \, (n {+} r {-} 1) {+} (n {+} r) {-} \dfrac{m^{2}}{4} \bigg] = \\[0.5em]
+&= a_{n} \, \bigg[  (n {+} r) \, (n {+} r {-} 1 {+} {1}) {-} \dfrac{m^{2}}{4} \bigg] = \\[0.5em]
+&= a_{n} \, \bigg[ (n {+} r)^{2} {-} \dfrac{m^{2}}{4} \bigg]
+\end{align*}
+\\
+Una vez simplificado el término, lo regresamos a la suma y continuamos en el desarrollo.
+\begin{align}
+\begin{aligned}[b]
+&{} \sum_{n=0}^{\infty} a_{n} \, \bigg[ (n {+} r)^{2} {-} \dfrac{m^{2}}{4} \bigg] \, \xi^{n+r-1} + \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n+r} + \\[1em] 
+&+ \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+r+1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+r+2} = 0 
+\end{aligned}
+\label{eq:ecuacion_reducida}
+\end{align}
+\\
+Hemos realizado la máxima simplificación para los términos de un exponente en común, además de tener ordenada la expresión del exponente de menor al de mayor valor. Procederemos a calcular la \emph{ecuación de índices.}
+
+\subsection{Ecuación de índices.}
+
+En la suma con el exponente más bajo para $\xi$, hacemos que $n = 0$, para obtener:
+\begin{align*}
+&{} a_{0} \bigg[ r^{2} {-} \dfrac{m^{2}}{4} \bigg] \, \xi^{r-1} + \sum_{n=1}^{\infty} a_{n} \, \bigg[ (n {+} r)^{2} {-} \dfrac{m^{2}}{4} \bigg] \, \xi^{n+r-1} + \\[1em] 
+&+  \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n+r} + \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+r+1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+r+2} = 0
+\end{align*}    
+\\
+Para que la expresión anterior sea válida, se requiere que todos los coeficientes de las sumas que multiplican a $\xi$ deben de anularse. En este caso, hemos considerado que $a_{0} \neq 0$.
+\par
+Tenemos entonces que se cumple:
+\begin{align*}
+&{} a_{0} \bigg[ r^{2} - \dfrac{m^{2}}{4} \bigg] = 0 \hspace{1cm} a_{0} \neq 0 \\[1em]
+&{} \Longrightarrow \hspace{0.2cm} \addtolength{\fboxsep}{5pt}\boxed{ r^{2} - \dfrac{m^{2}}{4} = 0}
+\end{align*}
+Que es la ecuación de índices para la EDO del problema.
+
+% % \begin{align*}
+% % &a_{0}& \!\! \left( k^{2} {-} \dfrac{m^{2}}{4} \right) \xi^{k} +  \\ \sum_{n=1}^{\infty} \left[ a_{n} \left( (n {+} k)^{2} {-} \dfrac{m^{2}}{4} \right) \right] \xi^{n+k-1} + \\[0.5em] \\
+% % &+& \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n+k} + \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+k+1} + \\[0.5em] 
+% % &-& \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+k+2} = 0
+% % \end{align*}
+% % 
+% % 
+% % Ecuación de índices}
+% % Sabemos que todos los coeficientes de las potencias de $\xi$ se anulan y que $a_{0}$, por lo que:
+% % \begin{align*}
+% % &a_{0} \left( k^{2} {-} \dfrac{m^{2}}{4} \right) = 0 \\[1em] \\
+% % \Longrightarrow \hspace{0.2cm} & \addtolength{\fboxsep}{5pt}\boxed{ \left( k^{2} {-} \dfrac{m^{2}}{4} \right) = 0}
+% % \end{align*}
+% % Es la ecuación de índices buscada.
+% % 
+\par
+Ahora determinamos el valor de las raíces ($r_{1}$ y $r_{2}$) de la ecuación:
+\begin{align*}
+&{} r^{2} {-} \dfrac{m^{2}}{4} = 0 \\[1em]
+&\Rightarrow \hspace{0.5cm} r_{1} = \dfrac{m}{2} \hspace{1cm} r_{2} = -\dfrac{m}{2}
+\end{align*}
+\\
+El enunciado del ejercicio nos pide que ocupemos la raíz más grande, en este caso: $r_{1}$.
+
+\subsection{Tres primeros coeficientes.}
+
+El enunciado nos pide que calculemos los tres primeros términos de la solución en serie de potencias, por lo que no será necesario determinar la \emph{regla de recurrencia} en este ejercicio. Ocuparemos el valor de $r_{1}$ en la expresión (\ref{eq:ecuacion_reducida}) que obtuvimos:
+\begin{align*}
+&{} \sum_{n=0}^{\infty} \bigg\{ a_{n} \bigg[ \left(n {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \bigg] \bigg\} \, \xi^{n+\frac{m}{2}-1} + \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n+\frac{m}{2}} + \\[1em]
+&+ \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+\frac{m}{2}+1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+\frac{m}{2}+2} = 0
+\end{align*}
+\\
+Para tener una mayor legibilidad en la escritura de la ecuación, factorizamos en toda la expresión el exponente $\xi^{m/2}$
+\begin{align*}
+&{} \xi^{\frac{m}{2}} \left\{ \sum_{n=0}^{\infty} \left[ a_{n} \left( \left(n {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \right) \right] \xi^{n-1} + \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n} + \right. \\[1em] 
+&+ \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} - \left. \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+\end{align*}
+\\
+Simplificamos el coeficiente del término con el exponente más bajo, para facilitar el desarrollo.
+\begin{align*}
+&{} \xi^{\frac{m}{2}} \left\{  \sum_{n=0}^{\infty} \left[ a_{n} \left( n^{2} {+} n \, m {+} \Cancel[red]{\dfrac{m^{2}}{4} {-} \dfrac{m^{2}}{4}} \right) \right] \xi^{n-1} + \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n} + \right. \\[1em]
+&+ \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} - \left. \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+\end{align*}
+\\
+Por lo que:
+\begin{align*}
+&{} \xi^{\frac{m}{2}} \left\{ \sum_{n=0}^{\infty} \bigg[ a_{n} \left( n^{2} {+} n \, m \right) \bigg] \xi^{n-1} + \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n} + \right. \\[1em]
+&+ \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} - \left. \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+\end{align*}
+\\
+% % 
+% % Recorriendo índices}
+% % Recordemos que si queremos factorizar nuevamente términos de potencias en común, el índice de las sumas debe de iniciar en el mismo valor, tenemos que para la primera suma, el índice es $n=1$, por lo que debemos de recorrer dicho índice.
+% % 
+Ahora desarrollamos los términos de la serie hasta el exponente  $\xi^{2}$, recordemos que buscamos hasta el tercer término de la serie.
+\begin{align*}
+&{} \xi^{\frac{m}{2}} \bigg\{ \Cancel[blue]{a_{0} \big[ 0^{2}} + \Cancel[blue]{(0)(m)} \big] \cancelto{0}{\xi^{-1}} + \alpha \, a_{0} \, \xi^{0} + \dfrac{E}{2} a_{0} \xi^{1} - \dfrac{F}{4} a_{0} \, \xi^{2} + \hspace{1cm} \\[1em]
+&{} a_{1} \big[ 1^{2} + (1)(m) \big] \xi^{0} + \alpha \, a_{1} \, \xi^{1} + \dfrac{E}{2} a_{1} \xi^{2} - \dfrac{F}{4} a_{1} \, \xi^{3} + \\[1em]
+&{} a_{2} \big[ 2^{2} + (2)(m) \big] \xi^{1} + \alpha \, a_{2} \, \xi^{2} + \dfrac{E}{2} a_{2} \xi^{3} - \dfrac{F}{4} a_{2} \, \xi^{4} \bigg\} = 0
+\end{align*}
+\\
+Tenemos un exponente del orden $\xi^{-1}$ que pudiera comprometer la expresión y por tanto el método.
+\par
+Pero tenemos que el coeficiente de este exponente $\xi^{-1}$ se cancela, por lo que podemos continuar con nuestra solución.
+\begin{align*}
+&{} \xi^{\frac{m}{2}} \, \bigg\{ \alpha \, a_{0} \, \xi^{0} + \dfrac{E}{2} a_{0} \xi^{1} - \dfrac{F}{4} a_{0} \, \xi^{2} + \hspace{1cm} \\[1em]
+&{} \big[ 1 + m \big] \, a_{1} \, \xi^{0} + \alpha \, a_{1} \, \xi^{1} + \dfrac{E}{2} a_{1} \xi^{2} - \dfrac{F}{4} a_{1} \, \xi^{3} + \\[1em]
+&{} \big[ 4 + 2 \, m \big] \, a_{2} \, \xi^{1} + \alpha \, a_{2} \, \xi^{2} + \dfrac{E}{2} a_{2} \xi^{3} - \dfrac{F}{4} a_{2} \, \xi^{4} \bigg\} = 0
+\end{align*}
+\\
+Ahora agrupamos los términos de acuerdo a la potencia que tienen, recordemos que los términos de potencia mayor a $\xi^{2}$ no son de interés para nuestra solución.
+\begin{align*}
+&{} \xi^{\frac{m}{2}} \, \bigg\{ \alpha \, a_{0} + (m + 1) \, a_{1} \bigg]  \, \xi^{0} + \bigg[ \dfrac{E}{2} \, a_{0} + \alpha \, a_{1} + 2 \, (m + 2) \, a_{2} \bigg] \,  \xi + \\[1em]
+&+ \bigg[ - \dfrac{F}{4} a_{0} + \dfrac{E}{2} \, a_{1} + \alpha \, a_{2} \bigg] \, \xi^{2} \bigg\}= 0
+\end{align*}
+\\
+Recordemos que expresión anterior será válida si todos los coeficientes de los términos $\xi$ se anulan, y como $a_{0} \neq 0$, tendremos que:
+\par
+De la ecuación anterior es posible obtener el coeficiente $a_{1}$ en términos de $a_{0}$:
+\begin{align*}
+\alpha \, a_{0} &+ (m + 1) \, a_{1} = 0 \\[1em]
+&\Rightarrow \hspace{0.3cm} a_{1} = - \dfrac{\alpha \, a_{0}}{(m + 1)}
+\end{align*}
+\\
+Ahora para obtener el coeficiente $a_{2}$:
+\begin{align*}
+\dfrac{E}{2} \, a_{0} &+ \alpha \, a_{1} + 2 \, (m + 2) \, a_{2} = 0 \\[1em]
+&\Rightarrow \hspace{0.3cm} a_{2} =  \dfrac{- \alpha \, a_{1} - \dfrac{E}{2} \, a_{0}}{2(m + 2)}
+\end{align*}
+\\
+Sustituyendo el valor de $a_{1}$:
+\begin{align*}
+a_{2} &=  \dfrac{- \alpha \, \left( - \dfrac{\alpha \, a_{0}}{(m + 1)} \right) - \dfrac{E}{2} \, a_{0}}{2(m + 2)} \\[1em]
+a_{2} &=  \left[ \dfrac{\alpha^{2}}{2 \, (m + 1)(m + 2)} - \dfrac{E}{4 \, (m + 1)(m + 2)} \right] \, a_{0}
+\end{align*}
+% % 
+% % El índice recorrido}
+% % \vspace{-1cm}
+% % \begin{align*}
+% % &{}& \xi^{m/2} \left\{  \sum_{n=0}^{\infty} \left[ a_{n+1} \left( \left(n+1 {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \right) \right] \xi^{n} +  \right. \\[0.5em] \\
+% % &+& \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n} + \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} + \\[0.5em] 
+% % &-& \left. \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+% % \end{align*}
+% % 
+% % 
+% % Factorizando}
+% % Ahora tenemos dos términos de la expresión que podemos factorizar y reducir.
+% % 
+% % 
+% % El índice recorrido}
+% % \vspace{-1cm}
+% % \begin{align*}
+% % &{}& \xi^{m/2} \left\{  \sum_{n=0}^{\infty} \left[ a_{n+1} \left( \left(n+1 {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \right) \right] \xi^{n} +  \right. \\[0.5em]
+% % &+& \sum_{n=0}^{\infty} \alpha \, a_{n} \, \xi^{n} + \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} + \\[0.5em] 
+% % &-& \left. \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+% % \end{align*}
+% % \begin{tikzpicture}[overlay]
+% % \draw[fill=blue, opacity=0.2] (3.1, 4.2) rectangle (10.8, 5.7);
+% % \draw[fill=blue, opacity=0.2] (1.1, 2.3) rectangle (4, 3.9);
+% % \end{tikzpicture}
+% % 
+% % 
+% % Términos agrupados}
+% % \vspace{-1cm}
+% % \begin{align*}
+% % &{}& \xi^{m/2} \bigg\{  \\[0.5em]
+% % &{}& \sum_{n=0}^{\infty} \left[ a_{n{+}1} \left[ \left(n{+}1 {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \right] {+} \alpha \, a_{n}   \right] \xi^{n} +  \\[0.5em] \\
+% % &+& \left. \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+% % \end{align*}
+% % 
+% % 
+% % Obteniendo el segundo coeficiente}
+% % El segundo coeficiente se obtiene de la suma con menor potencia haciendo que $n=0$.
+% % 
+% % 
+% % Segundo coeficiente}
+% % \vspace{-1cm}
+% % \begin{align*}
+% % &{}& \xi^{m/2} \left\{ \left( a_{1} \left[ \left( 1 {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \right] {+} \alpha \, a_{0} \right) \right. + \\[0.5em] \\
+% % &{+}& \sum_{n=1}^{\infty} \left[ a_{n{+}1} \left[ \left(n{+}1 {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \right] {+} \alpha \, a_{n}   \right] \xi^{n} +  \\[0.5em] \\
+% % &+& \left. \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+% % \end{align*}
+% % 
+% % 
+% % Anulando coeficientes}
+% % Volvemos a utilizar la premisa de que todos los coeficientes de la serie de potencias se anulan, por lo que:
+% % \\
+% % \begin{align*}
+% % a_{1} \left[ \left( 1 {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \right] {+} \alpha \, a_{0} = 0
+% % \end{align*}
+% % entonces simplificamos la expresión y así conocer el valor de $a_{1}$
+% % 
+% % 
+% % Simplificando coeficientes}
+% % \begin{align*}
+% % &{}& a_{1} \left[ \left( 1 {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \right] {+} \alpha \, a_{0} = \\[0.5em] \\
+% % &= a_{1} \left[ 1 {+} m {+} \dfrac{m^{2}}{4} {-} \dfrac{m^{2}}{4} \right] {+} \alpha \, a_{0} = \\[0.5em] \\
+% % &= a_{1} \left( 1 {+} m \right) {+} \alpha \, a_{0} = 0 \\[0.5em] \\
+% % &\Rightarrow& a_{1} = - \dfrac{\alpha \, a_{0}}{(1{+}m)}
+% % \end{align*}
+% % 
+% % 
+% % Para el tercer coeficiente}
+% % Regresamos a la expresión para determinar el tercer coeficiente, pero notamos que el índice de la suma inicia en $n=1$, por lo que recorremos el índice y vemos si es posible factorizar términos.
+% % 
+% % 
+% % Para el tercer coeficiente}
+% % \vspace{-1cm}
+% % \begin{align*}
+% % &{}& \xi^{m/2} \left\{ \sum_{n=1}^{\infty} \left[ a_{n{+}1} \left[ \left(n{+}1 {+} \dfrac{m}{2} \right)^{2} {-} \dfrac{m^{2}}{4} \right] {+} \alpha \, a_{n} \right] \xi^{n} + \right. \\[0.5em] \\
+% % &+& \left. \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+% % \end{align*}
+% % Recorremos el índice de $n=1$ a $n=0$
+% % 
+% % 
+% % Recorriendo el índice}
+% % \vspace{-1cm}
+% % \begin{align*}
+% % &{}& \xi^{m/2} \left\{ \sum_{n=0}^{\infty} \left[ a_{n{+}2} \! \left[ \left(n{+}2 {+} \dfrac{m}{2} \right)^{2} \! {-} \dfrac{m^{2}}{4} \right] {+} \alpha \, a_{n+1} \right] \xi^{n+1} + \right. \\[0.5em] \\
+% % &+& \left. \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+% % \end{align*}
+% % 
+% % 
+% % Factorizando términos}
+% % Encontramos una potencia en común $\xi^{n+1}$ por lo que podemos factorizar nuevamente.
+% % 
+% % 
+% % Factorizando términos}
+% % \vspace{-1cm}
+% % \begin{align*}
+% % &\xi^{m/2} \left\{ \sum_{n=0}^{\infty} \left[ a_{n{+}2} \! \left[ \left(n{+}2 {+} \dfrac{m}{2} \right)^{2} \! {-} \dfrac{m^{2}}{4} \right] {+} \alpha \, a_{n+1} \right] \xi^{n+1} + \right. \\[0.5em] \\
+% % &+ \left. \sum_{n=0}^{\infty} \dfrac{E}{2} \, a_{n} \, \xi^{n+1} - \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+% % \end{align*}
+% % \begin{tikzpicture}[overlay]
+% % \draw[fill=cadetblue, opacity=0.2] (1.7, 2.2) rectangle (11.3, 4);
+% % \draw[fill=cadetblue, opacity=0.2] (0.8, 0.5) rectangle (4, 2.1);
+% % \end{tikzpicture}
+% % 
+% % 
+% % Factorizando términos}
+% % \vspace{-1cm}
+% % \begin{align*}
+% % &\xi^{m/2}& \left\{ \sum_{n=0}^{\infty} \bigg[ a_{n{+}2} \! \left[ \left(n{+}2 {+} \dfrac{m}{2} \right)^{2} \! {-} \dfrac{m^{2}}{4} \right] + \right. \\[0.5em]
+% % &{+}& \! \alpha \, a_{n+1} {+} \dfrac{E}{2} \, a_{n} \bigg] \xi^{n+1} + \\[0.5em] \\
+% % &-& \! \left. \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+% % \end{align*}
+% % 
+% % 
+% % Anulando coeficientes}
+% % Nuevamente tomamos el hecho de que todos los coeficientes de la suma se deben de anular, por lo que en la potencia más baja hacemos que $n = 0$
+% % 
+% % 
+% % Anulando coeficientes}
+% % \vspace{-1cm}
+% % \begin{align*}
+% % &\xi^{m/2}& \left\{ a_{2} \! \left[ \left(2 {+} \dfrac{m}{2} \right)^{2} \! {-} \dfrac{m^{2}}{4} \right] + \alpha \, a_{1} {+} \dfrac{E}{2} \, a_{0} + \right. \\[0.5em] \\
+% % &+& \!\sum_{n=0}^{\infty} \bigg[ a_{n{+}2} \! \left[ \left(n{+}2 {+} \dfrac{m}{2} \right)^{2} \! {-} \dfrac{m^{2}}{4} \right] + \\[0.5em]
+% % &{+}& \! \alpha \, a_{n+1} {+} \dfrac{E}{2} \, a_{n} \bigg] \xi^{n+1} + \\[0.5em] \\
+% % &-& \! \left. \sum_{n=0}^{\infty} \dfrac{F}{4} \, a_{n} \, \xi^{n+2} \right\} = 0
+% % \end{align*}
+% % 
+% % 
+% % Tercer coeficiente}
+% % Tenemos entonces que:
+% % \begin{align*}
+% % &a_{2}& \! \left[ \left(2 {+} \dfrac{m}{2} \right)^{2} \! {-} \dfrac{m^{2}}{4} \right] + \alpha \, a_{1} {+} \dfrac{E}{2} \, a_{0} = \\[0.5em] \\
+% % &a_{2}& \! \left[ 4 + 2 m {+} \dfrac{m^{2}}{4} {-} \dfrac{m^{2}}{4} \right] + \alpha \, a_{1} {+} \dfrac{E}{2} \, a_{0} = \\[0.35em] \\
+% % &a_{2}& \! \left[ 2 (2 + m) \right] + \alpha \, a_{1} {+} \dfrac{E}{2} \, a_{0} = 0 \\[0.35em] \\
+% % &a_{2}& \! =  \dfrac{{-}\alpha \, a_{1} {+} \dfrac{E}{2} \, a_{0}}{2(2{+}m)}
+% % \end{align*}
+% % 
+% % 
+% % Ocupando un valor conocido}
+% % Ahora ocupamos el valor que ya conocemos de $a_{1}$ para sustituirlo en la expresión anterior:
+% % \begin{align*}
+% % &a_{2}& \! =  \dfrac{{-}\alpha \, a_{1} {+} \dfrac{E}{2} \, a_{0}}{2(2{+}m)} = \dfrac{{-}\alpha \, \left[ - \dfrac{\alpha a_{0}}{(1+m)} \right] {+} \dfrac{E}{2} \, a_{0}}{2(2{+}m)} = \\[0.5em] \\
+% % &= \dfrac{\left[ \dfrac{\alpha^{2} \, a_{0}}{(1+m)} \right] {-} \dfrac{E \, a_{0}}{2}}{2(2{+}m)} = \\[0.5em] \\
+% % \end{align*}
+% % 
+% % 
+% % Simplificando el coeficiente}
+% % \vspace*{-1cm}
+% % \begin{align*}
+% % &a_{2}& \! =  \dfrac{\left[ \dfrac{\alpha^{2}}{(1+m)} {-} \dfrac{E}{2} \right] a_{0}}{2(2{+}m)} = \\[0.5em] \\
+% % &= \dfrac{\left[ \dfrac{2 \, \alpha^{2} - E (1- m)}{2(1{+}m)} \right] a_{0}}{2(2+m)} = \\[0.5em] \\
+% % &= \dfrac{\left[ 2 \, \alpha^{2} - E (1- m) \right] a_{0}}{4(1+m)(2+m)}= 
+% % \end{align*}
+% % 
+% % 
+% % El tercer coeficiente}
+% % Entonces el tercer coeficiente que requiere el enunciado es:
+% % \begin{align*}
+% % a_{2} =  \left[ \dfrac{\alpha^{2}}{2(1+m)(2+m)} - \dfrac{E}{4(1+m)(2+m)} \right] \, a_{0}
+% % \end{align*}
+% % 
+% % 
+% % Coeficientes calculados}
+% % Ya hemos obtenido los coeficientes $a_{0}$, $a_{1}$ y $a_{2}$ con los que podemos responder al enunciado del ejercicio.
+% % \\
+% % 
+% % \\
+% % Entonces tendremos:
+% % 
+
+% Solución al ejercicio}
+% \vspace*{-1cm}
+% % \begin{align*}
+% % u(\xi) = a_{0} \, \xi^{r} + a_{1} \, \xi ^{1+k} + a_{2} \, \xi ^{2+k} + \ldots 
+% % \end{align*}
+
+Los primeros tres coeficientes de la solución $u(\xi)$ en una serie de potencias para el ejercicio, son los siguientes:
+\begin{align*}
+u(\xi) &= a_{0} \, \xi^{\frac{m}{2}} - \dfrac{\alpha \, a_{0}}{m + 1} \, \xi^{\frac{m}{2}+1} + \left[ \dfrac{\alpha^{2}}{2(m + 1)(m + 2)} + \right. \\[1em]
+&- \left. \dfrac{E}{4 \, (m + 1)(m + 2)} \right] \, a_{0} \, \xi^{\frac{m}{2}+2} + \ldots
+\end{align*}
+\\
+Factorizando el término $\xi^{\frac{m}{2}}$, tendremos la solución en una expresión más sencilla:
+\begin{align*}
+%\addtolength{\fboxsep}{5pt}\boxed{
+u(\xi) &= a_{0} \, \xi^{m/2}  \bigg[ 1 - \dfrac{\alpha}{m + 1} \, \xi + \bigg[ \dfrac{\alpha^{2}}{2 \, (m + 1)(m + 2)} + \\[1em]
+&- \dfrac{E}{4 \, (m + 1)(m + 2)} \bigg] \, \xi^{2} + \ldots \bigg]
+\end{align*}
+\\
+Luego de haber resuelto el ejercicio, nos damos cuenta de que la perturbación $F$ se presenta hasta que aparece el término $a_{3}$.
+\end{document}
