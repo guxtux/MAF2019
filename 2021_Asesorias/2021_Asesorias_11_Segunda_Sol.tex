@@ -1,0 +1,157 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Segunda solución linealmente independiente} \vspace{-3ex}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Makarenko. 17. Integración de las ED mediante series
+\section{Solución mediante series.}
+
+Este método resulta muy común al aplicarlo a las ecuaciones diferenciales lineales, como se ha visto en el tema, seguiremos manejando ecuaciones de segundo orden.
+\par
+Sea la EDO2H lineal:
+\begin{align}
+\stilde{y} + p(x) \, \ptilde{y} + q(x) \, y = 0
+\label{eq:ecuacion_17_01}
+\end{align}
+
+Haremos la suposición que los coeficientes $p(x)$ y $q(x)$ son funciones analíticas, es decir, se expresan en forma de series de potencias, dispuestas según las potencias enteras positivas de $x$, de modo que la ec. (\ref{eq:ecuacion_17_01}) se puede escribir de la forma:
+\begin{align}
+\stilde{y} + \big( a_{0} + a_{1} \, x + a_{2} \, x^{2} + \ldots \big) \, \ptilde{y} + (b_{0} + b_{1} \, x + b_{2} + x^{2} + \ldots) \, y = 0
+\label{eq:ecuacion_17_02}
+\end{align}
+
+\section{Solución en una serie de potencias generalizada.}
+
+Definimos la serie de la forma:
+\begin{align}
+x^{\rho} \sum_{n=0}^{\infty} c_{n} \, x^{n}, \hspace{1.5cm} c_{0} \neq 0
+\label{eq:ecuacion_17_14}
+\end{align}
+donde $\rho$ es un número dado y la serie de potencias
+\begin{align*}
+\sum_{n=0}^{\infty} c_{n} \, x^{n}
+\end{align*}
+converge para $\abs{x} < R$, se le denomina \emph{serie de potencias generalizada.}
+\par
+Si $\rho$ es un número entero no negativo, la serie de potencias generalizada (\ref{eq:ecuacion_17_14}) se convierte en una serie de potencias ordinaria.
+\begin{teo}
+Si $x = 0$ es un punto singular regular de la ec. (\ref{eq:ecuacion_17_01}), cuyos coeficientes $p(x)$ y $q(x)$ admiten desarrollos:
+\begin{align}
+\begin{aligned}
+p(x) &= \dfrac{\displaystyle \sum_{n=0}^{\infty} a_{n} \, x^{n}}{x} \\[1em]
+q(x) &= \dfrac{\displaystyle \sum_{n=0}^{\infty} b_{n} \, x^{n}}{x^{2}}
+\end{aligned}
+\label{eq:ecuacion_17_15}
+\end{align}
+donde las series que figuran en los numeradores son convergentes en $\abs{x} < R$, y los coeficientes $a_{0}$, $b_{0}$, $c_{0}$ no son simultáneamente iguales a cero, entonces la ec. (\ref{eq:ecuacion_17_01}) posee al menos una solución en forma de serie de potencias generalizada:
+\begin{align}
+y(x) = x^{\rho} \sum_{n=0}^{\infty} C_{n} \, x^{n}, \hspace{1.5cm} C_{n} \neq 0
+\label{eq:ecuacion_17_16}
+\end{align}
+que es convergente al menos en el mismo intervalo $\abs{x} < R$.
+\end{teo}
+
+Para hallar el exponente $\rho$ y los coeficientes $C_{n}$, es necesario expresar la serie (\ref{eq:ecuacion_17_16}) en la ec. (\ref{eq:ecuacion_17_01}), simplificar para $x^{\rho}$ e igualar a cero los coeficientes en distintas potencias de $x$ (método de coeficientes indeterminados).
+
+\subsection{Obteniendo el exponente \texorpdfstring{$\rho$}{r}.}
+
+Al considerar la solución propuesta:
+\begin{align*}
+y = \sum_{n=0}^{\infty} c_{n} \, x^{n+\rho}
+\end{align*}
+se requiere conocer la primera y  segunda derivada de $y$ con respecto a $x$:
+\begin{align*}
+\ptilde{y} &= \sum_{n=0}^{\infty} (n + \rho) \, c_{n} \, x^{n+\rho-1} \\[1em]
+\stilde{y} &= \sum_{n=0}^{\infty} (n + \rho)(n + \rho - 1) \, c_{n} \, x^{n+\rho-2}
+\end{align*}
+
+que se sustituyen en la ec. (\ref{eq:ecuacion_17_01}) en conjunto con las definiciones de $p(x)$ y $q(x)$ dadas en la ec. (\ref{eq:ecuacion_17_15}):
+\begin{align*}
+\sum_{n=0}^{\infty} (n &+ \rho)(n + \rho + 1) \, c_{n} \, x^{n+\rho-2} + \left[ \dfrac{\displaystyle \sum_{n=0}^{\infty} a_{n} \, x^{n}}{x} \right] \, \left[ \sum_{n=0}^{\infty} (n + \rho) \, c_{n} \, x^{n+\rho-1} \right] + \\[1em]
+&+ \left[ \dfrac{\displaystyle \sum_{n=0}^{\infty} b_{n} \, x^{n}}{x^{2}} \right] \, \sum_{n=0}^{\infty} c_{n} \, x^{n+\rho} = 0
+\end{align*}
+
+Simplificando la expresión:
+\begin{align*}
+\sum_{n=0}^{\infty} (n &+ \rho)(n + \rho + 1) \, c_{n} \, x^{n+\rho-2} + \sum_{n=0}^{\infty} a_{n} \, x^{n-1} \, \sum_{n=0}^{\infty} (n + \rho) \, c_{n} \, x^{n+\rho-1} + \\[1em]
+&+ \sum_{n=0}^{\infty} b_{n} \, x^{n-2} \, \sum_{n=0}^{\infty} c_{n} \, x^{n+\rho} = 0
+\end{align*}
+
+Abreviando el producto de las sumas:
+\begin{align*}
+\sum_{n=0}^{\infty} \big[ (n &+ \rho)(n + \rho + 1) \, c_{n} \big] \, x^{n+\rho-2} + \sum_{n=0}^{\infty} \big[ (n + \rho) \, a_{n} \, c_{n} \big] \, x^{2n+\rho-2} + \\[1em]
+&+ \sum_{n=0}^{\infty} \big[ b_{n} \, c_{n} \big] \, x^{2n+\rho-2} = 0
+\end{align*}
+
+Factorizando para el exponente mayor de $x$:
+\begin{align*}
+\sum_{n=0}^{\infty} \big[ (n &+ \rho)(n + \rho + 1) \, c_{n} \big] \, x^{n+\rho-2} + \\[1em]
+&+ \sum_{n=0}^{\infty} \big[ (n + \rho) \, a_{n} \, c_{n} + b_{n} \, c_{n} \big] \, x^{2n+\rho-2} = 0
+\end{align*}
+
+Haciendo $n = 0$ obtenemos:
+\begin{align*}
+\big[ \rho (\rho - 1) c_{0} + \rho \, a_{0} \, c_{0} + b_{0} \, c_{0} \big] \, x^{\rho-2} = 0
+\end{align*}
+
+En este producto los coeficientes deben de anularse y como $c_{0} \neq 0$, se tiene que:
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\rho (\rho - 1) + \rho \, a_{0} + b_{0} = 0 }
+\label{eq:ecuacion_17_17}
+\end{align}
+a esta expresión se le denomina \emph{ecuación determinativa}.
+\par
+Donde:
+\begin{align}
+a_{0} = \lim_{x \to 0} x \, p(x) \hspace{1cm} \mbox{y} \hspace{1cm} b_{0} = \lim_{x \to 0} x^{2} \, q(x)
+\label{eq:ecuacion_17_18}
+\end{align}
+
+\section{Tres casos.}
+
+Supongamos que $\rho_{1} > \rho_{2}$ son las raíces de la ec. (\ref{eq:ecuacion_17_17}), se distinguen tres casos en la solución de la ec. (\ref{eq:ecuacion_17_01}):
+
+\subsection{Caso 1.}\label{caso1}
+
+Si la diferencia $\rho_{1} - \rho_{2}$ no es un número entero o cero, se pueden construir dos soluciones de la forma:
+\begin{align*}
+y_{1}(x) &= x^{\rho_{1}} \sum_{n=0}^{\infty} c_{n} \, x^{n} \hspace{1.5cm} c_{0} \neq 0 \\ 
+y_{2}(x) &= x^{\rho_{2}} \sum_{n=0}^{\infty} a_{n} \, x^{n} \hspace{1.5cm} a_{0} \neq 0
+\end{align*}
+
+\subsection{Caso 2.}
+
+Si la diferencia $\rho_{1} - \rho_{2}$ es un número entero positivo, por lo general, solo se puede construir una serie como solución de la ec. (\ref{eq:ecuacion_17_01}):
+\begin{align}
+y_{1}(x) = x^{\rho_{1}} \sum_{n=0}^{\infty} c_{n} \, x^{n}
+\label{eq:ecuacion_17_19}
+\end{align}
+
+\subsection{Caso 3.}
+
+Si la ec. (\ref{eq:ecuacion_17_17}) posee una raíz múltiple $\rho_{1} = \rho_{2}$, también se construye solo una serie como solución a la ec. \ref{eq:ecuacion_17_01}.
+
+Queda claro que en el caso \ref{caso1}, las soluciones $y_{1}(x)$ e $y_{2}(x)$ son linealmente independientes. En el segundo y tercer caso, se ha obtenido una única solución como se indica en la ec. (\ref{eq:ecuacion_17_19}).
+\par
+Se puede demostrar que si la diferencia $\rho_{1} - \rho_{2}$ es un número entero positivo o cero, además de la solución (\ref{eq:ecuacion_17_19}), habrá una solución de la forma:
+\begin{align}
+y_{2}(x) = A \, y_{1}(x) \, \ln x + x^{\rho_{2}} \sum_{n=0}^{\infty} A_{n} \, x^{n}
+\label{eq:ecuacion_17_20}
+\end{align}
+
+Vemos que $y_{2}(x)$ contiene un término complementario de la forma:
+\begin{align*}
+A \, y_{1} (x) \, \ln x
+\end{align*}
+\noindent
+donde $y_{1}(x)$ es de la forma (\ref{eq:ecuacion_17_19}). Como punto importante hay que considerar que la constante $A$ en la ec. (\ref{eq:ecuacion_17_20}) sea nula, por lo que la segunda solución $y_{2}(x)$ resulta una expresión de la forma de una serie de potencias generalizada.
+
+\end{document}
