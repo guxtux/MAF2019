@@ -37,7 +37,7 @@ def Hermite(n, x):
 fig = plt.figure(figsize=(8, 6), frameon=False)
 axs = fig.add_subplot('111')
 
-X = np.linspace(-3, 4, 300)
+X = np.linspace(-3, 3, 300)
 
 for n in range(5):
     Y = [Hermite(n, x) for x in X]
