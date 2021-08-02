@@ -1,0 +1,474 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
+\date{}
+\title{El átomo de hidrógeno \\ \large{Polinomios de Legendre y Polinomios de Lagurre}}
+\author{M. en C. Gustavo Contreras Mayén}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Ecuación de Schrödinger}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Planteamiento inicial}
+
+\begin{frame}
+\frametitle{Repaso de mecánica cuántica}
+La ecuación de Schrödinger es:
+\begin{align}
+i \, \hbar \, \pdv{\Psi}{t} = H \, \Psi
+\label{eq:ecuacion_04_01}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{El Hamiltoniano}
+Donde el operador Hamiltoniano se obtiene de la energía clásica:
+\begin{align*}
+\dfrac{1}{2} m \, v^{2} + V = \dfrac{1}{2 \, m} \big( p_{x}^{2} + p_{y}^{2} + p_{z}^{2} \big)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Operador momento}
+La componente del operador momento es:
+\begin{align}
+p_{x} \to \dfrac{\hbar}{i} \pdv{x}, \hspace{1cm} p_{y} \to \dfrac{\hbar}{i} \pdv{y}, \hspace{1cm} p_{z} \to \dfrac{\hbar}{i} \pdv{z}
+\label{eq:ecuacion_04_02}
+\end{align}
+\pause
+de manera equivalente:
+\begin{align}
+\vb{p} \to \dfrac{\hbar}{i} \nabla
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Reexpresando la ecuación}
+Entonces la ecuación de Schrödinger resulta:
+\begin{align}
+i \, \hbar \, \pdv{\Psi}{t} = -\dfrac{\hbar^{2}}{2 \, m} \, \Psi + V \, \Psi
+\label{eq:ecuacion_04_04}    
+\end{align}
+donde $\laplacian$ es el operador Laplaciano en coordenadas cartesianas.
+\end{frame}
+\begin{frame}
+\frametitle{Energía potencial}
+La energía potencial $V$ y la función de onda $\Psi$ son ahora funciones de $\vb{r}(x, y, z)$ y $t$.
+\pause
+\\
+\bigskip
+La probabilidad de encontrar a una partícula en un volumen infinitesimal $\dd[3]{\vb{r}} = \dd{x} \dd{y} \dd{z}$ es $\abs{\Psi(\vb{r}, t)}^{2} \dd[3]{\vb{r}}$ y la condición de normalización es:
+\pause
+\begin{align}
+    \int \abs{\Psi}^{2} \dd[3]{\vb{r}} = 1
+    \label{eq:ecuacion_04_06}
+\end{align}
+la integral se calcula en todo el espacio. 
+\end{frame}
+\begin{frame}
+\frametitle{Potencial independiente de $t$}
+Si el potencial es independiente del tiempo, entonces tendremos un conjunto completo de estados estacionarios:
+\begin{align}
+    \Psi_{n} (\vb{r}, t) = \psi_{n} (\vb{r}) \, \exp \left(-\dfrac{i \, E_{n} \, t}{\hbar} \right)
+    \label{eq:ecuacion_04_07}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Potencial independiente de $t$}
+Donde la función de onda espacial $\psi_{n}$ satisface la ecuación de Schrödinger independiente del tiempo:
+\begin{align}
+    - \dfrac{\hbar^{2}}{2 \, m} \, \laplacian{\psi_{n}} + V \, \psi_{n} = E \, \psi_{n}
+    \label{eq:ecuacion_04_08}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Solución general}
+La solución general, dependiente del tiempo para la ecuación de Schrödinger es:
+\begin{align}
+    \Psi (\vb{r}, t) = \nsum c_{n} \, \psi_{n} (\vb{r}) \exp \left( -\dfrac{i \, E_{n} \, t}{\hbar} \right)
+    \label{eq:ecuacion_04_09}
+\end{align}
+donde con las constantes $c_{n}$ se determinan a partir de la condición inicial de la función de onda $\Psi(\vb{r}, 0)$.
+\end{frame}
+
+\subsection{Separación de variables}
+
+\begin{frame}
+\frametitle{Cambiando el sistema coordenado}
+Normalmente, el potencial es solo función de la distancia a partir del origen. Si ocupamos un sistema de coordenadas esférico $(r, \theta, \phi$), el Laplaciano se expresa mediante la siguiente ecuación:
+\pause
+\begin{align}
+\begin{aligned}[b]
+\laplacian = \dfrac{1}{r^{2}} \pdv{r} \left( r^{2} \pdv{\phi}{r} \right) &+ \dfrac{1}{r^{2} \sin \theta} \pdv{\theta} \left( \sin \theta \pdv{\phi}{\theta} \right) + \\[1em]
+&+ \dfrac{1}{r^{2} \sin^{2} \theta} \pdv[2]{\phi}{\phi} 
+\end{aligned}
+\label{eq:ecuacion_04_13}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de onda en coord. esféricas}
+Entonces, en coordenadas esféricas la ecuación de Schrödinger independiente del tiempo es:
+\pause
+\begin{align}
+- \dfrac{\hbar^{2}}{2 \, m}  \left[ \dfrac{1}{r^{2}} \pdv{r} \left( r^{2} \pdv{\phi}{r} \right) + \dfrac{1}{r^{2} \sin \theta} \pdv{\theta} \left( \sin \theta \pdv{\phi}{\theta} \right) + \right. \nonumber \\[0.5em]
++ \left. \dfrac{1}{r^{2} \sin^{2} \theta} \, \pdv[2]{\phi}{\phi} \right] + V \, \psi = E \, \psi
+\label{eq:ecuacion_04_14}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la ecuación de onda}
+Para resolver esta ecuación, buscamos una solución mediante la técnica de separación de variables, es decir, una solución como producto de dos funciones:
+\pause
+\begin{align}
+\psi(r, \theta, \phi) = R(r) \, Y(\theta, \phi)
+\label{eq:ecuacion_04_15}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Aplicando la técnica de separación}
+Si ocupamos esta solución en la ec. (\ref{eq:ecuacion_04_14}), se tiene que:
+\pause
+\begin{align*}
+- \dfrac{\hbar^{2}}{2 \, m}  \left[ \dfrac{Y}{r^{2}} \pdv{r} \left( r^{2} \pdv{R}{r} \right) + \dfrac{R}{r^{2} \sin \theta} \, \pdv{\theta} \left( \sin \theta \pdv{Y}{\theta} \right) + \right. \nonumber \\[0.5em]
++ \left. \dfrac{1}{r^{2} \sin^{2} \theta} \, \pdv[2]{Y}{\phi} \right] + V \, R \, Y = E \, R \, Y
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Aplicando la técnica de separación}
+Dividiendo entre $Y \, R$ y multiplicando por $-2 \, m \, r^{2} / \hbar^{2}$:
+\pause
+\begin{align*}
+&\bigg[ \dfrac{1}{R} \, \dv{r} \left( r^{2} \, \dv{R}{r} \right) - \dfrac{2 \, m \, r^{2}}{\hbar^{2}} \bigg( V(r) - E \bigg) \bigg] + \\[0.5em]
+&+ \dfrac{1}{Y} \left[ \dfrac{1}{\sin \theta} \, \pdv{\theta} \bigg( \sin \theta \, \pdv{Y}{\theta} \bigg) + \dfrac{1}{\sin^{2}} \, \pdv[2]{Y}{\phi} \right] = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La constante de separación}
+El término en el primer corchete depende solo de $r$, mientras que el segundo término depende tanto de $\theta$ como de $\phi$, sabemos que las variables son independientes entre sí, por lo que la única manera en que sea válida la expresión es que sean iguales a una constante.
+\\
+\bigskip
+\pause
+Podemos adelantar que la constante de separación es de la forma $\ell(\ell + 1)$.
+\end{frame}
+\begin{frame}
+\frametitle{Logrando la separación de variables}
+Tendremos entonces que:
+\begin{align}
+\dfrac{1}{R} \, \dv{r} \left( r^{2} \, \dv{R}{r} \right) - \dfrac{2 \, m \, r^{2}}{\hbar^{2}} \bigg( V(r) - E \bigg) &= \ell (\ell + 1) \label{eq:ecuacion_04_16} \\[0.5em]
++ \dfrac{1}{Y} \left[ \dfrac{1}{\sin \theta} \, \pdv{\theta} \bigg( \sin \theta \, \pdv{Y}{\theta} \bigg) + \dfrac{1}{\sin^{2}} \, \pdv[2]{Y}{\phi} \right] &= \ell (\ell + 1) \label{eq:ecuacion_04_17}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo las ecuaciones}
+Llegamos a una primera etapa de solución, con una ecuación diferencial que cubre la parte radial $R(r)$, ec. (\ref{eq:ecuacion_04_16}) y una ecuación diferencial parcial, que depende tanto de $\theta$, como de $\phi$, ec. (\ref{eq:ecuacion_04_17}).
+\end{frame}
+\begin{frame}
+\frametitle{Solución completa a la ecuación de onda}
+La solución general a la ecuación de Schrödinger, será entonces el producto de las soluciones de las ecuaciones en su parte radial y angular.
+\\
+\bigskip
+\pause
+Veremos que el estudio de cada una de esas ecuaciones, nos conducirán al desarrollo de nuevas funciones especiales, nuevas en el sentido de que estaremos ampliando la familia de funciones con bastante importancia en la física matemática.
+\end{frame}
+
+\section{Solución parte angular}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Usando los operadores de momento angular}
+
+\begin{frame}
+\frametitle{Uso de los operadores}
+Para resolver de una manera más accesible la ecuación angular del átomo de hidrógeno, se ocupa la teoría de los operadores, en particular, la del operador de momento angular.
+\\
+\bigskip
+Expresando nuestro problema, en un problema de valores propios para el operador $\hat{L}^{2}$ como:
+\begin{align}
+\hat{L}^{2} \, Y(\theta, \phi) = \lambda \, \hbar^{2} \, Y(\theta, \phi)
+\label{eq:ecuacion_027}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Valores propios}
+\begin{align*}
+\hat{L}^{2} \, Y(\theta, \phi) = \lambda \, \hbar^{2} \, Y(\theta, \phi)
+\end{align*}    
+donde $\lambda \, \hbar^{2}$ representan los valores propios de $\hat{L}^{2}$, y $Y(\theta, \phi)$ corresponde a las funciones propias. 
+\end{frame}
+\begin{frame}
+\frametitle{Valores propios}
+Veremos que $\lambda$ toma valores $\ell (\ell + 1)$ con $\ell = 0, 1, 2, \ldots$ y las correspondientes funciones propias son los \emph{armónicos esféricos}.
+\\
+\bigskip
+\pause
+Para cada valor de $\ell$, habrá un orden $(2 \, \ell + 1)$ de degeneración, es decir, habrá $(2 \, \ell + 1)$ funciones propias que corresponden al mismo valor propio $\ell (\ell + 1) \, \hbar^{2}$.
+\end{frame}
+\begin{frame}
+\frametitle{Aplicando el álgebra de los operadores}
+El operador $\hat{L}^{2}$:
+\begin{align*}
+\hat{L}^{2} = - \hbar^{2} \left( \dfrac{1}{\sin \theta} \pdv{\theta} \, \sin \theta \, \pdv{\theta} + \dfrac{1}{\sin^{2} \theta} \, \pdv[2]{\phi} \right)
+\end{align*}
+\pause
+lo sustituimos en la ec. (\ref{eq:ecuacion_027}), así que:
+\begin{align}
+    \dfrac{1}{\sin \theta} \pdv{\theta} \, \sin \theta \, \pdv{Y}{\theta} + \dfrac{1}{\sin^{2} \theta} \, \pdv[2]{Y}{\phi} + \lambda \, Y(\theta, \phi) = 0
+\end{align}
+\end{frame}
+
+\subsection{Técnica de separación de variables}
+
+\begin{frame}
+\frametitle{Resolviendo la ecuación}
+Para resolver esta ecuación, usamos la técnica de separación de variables. Proponemos una solución de la forma:
+\begin{align}
+Y(\theta, \phi) = \Theta(\theta) \, \Phi(\phi)
+\label{eq:ecuacion_029}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Aplicando separación de variables}
+Que susituimos en la expresión anterior, para luego multiplicar por:
+\begin{align*}
+\dfrac{\sin^{2} \theta}{Y(\theta, \phi)}
+\end{align*}
+\pause
+Entonces obtendremos:
+\begin{align}
+\dfrac{\sin^{2} \theta}{\Theta} \left[ \dfrac{1}{\sin \theta} \pdv{\theta} \, \sin \theta \, \pdv{\Theta}{\theta} + \lambda \, \Theta (\theta) \right] = -  \dfrac{1}{\Phi} \, \dv[2]{\Phi}{\phi} = m^{2}
+\label{eq:ecuacion_030}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación separable}
+De hecho, las variables se han separado y hemos establecido cada lado igual a una constante positiva $m^{2}$, cuya razón quedará clara en breve.
+\\
+\bigskip
+\pause
+La ec. (\ref{eq:ecuacion_030}) nos da:
+\begin{align*}
+    \dv[2]{\Phi}{\phi} + m^{2} \Phi (\phi) = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución para $\phi$}
+Cuya solución está dada por:
+\begin{align*}
+    \Phi(\phi) \sim e^{i m \phi}
+\end{align*}
+\\
+\bigskip
+Para que la función de onda sea univaluada, debe de ocurrir que:
+\begin{align}
+    \Phi(\phi +  2 \, \pi) = \Phi(\phi)
+    \label{eq:ecuacion_031}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Solución para $\phi$}
+De manera equivalente:
+\begin{align*}
+    e^{2 \pi m i} = 1
+\end{align*}
+\\
+\bigskip
+\pause
+Obteniendo entonces que:
+\begin{align*}
+    m = 0, \pm 1, \pm 2, \ldots
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El por qué de la constante de separación}
+En este paso se justifica que no podríamos haber establecido una constante positiva (o compleja) porque entonces la función de onda no habría sido de un solo valor.
+\\
+\bigskip
+\pause
+Al identificar las funciones con un subíndice $m$, tenemos:
+\begin{align}
+    \Phi_{m}(\phi) = \dfrac{1}{\sqrt{2 \, \pi}} \, e^{i m \phi} \hspace{1cm} m = \pm 1, \pm 2, \ldots
+    \label{eq:ecuacion_032}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Condición de normalización}
+Donde el factor $\dfrac{1}{\sqrt{2 \, \pi}}$ asegura que:
+\begin{align*}
+\int_{0}^{2 \pi} \abs{\Phi_{m}(\phi)}^{2} \dd{\phi} = 1
+\end{align*}
+que es la condición de normalización.
+\\
+\bigskip
+\pause
+Entonces se tendrá que:
+\begin{align}
+\int_{0}^{2 \pi} \Phi_{\ptilde{m}}^{*}(\phi) \, \Phi_{m}(\phi) \dd{\phi} = \delta_{m \ptilde{m}}
+\label{eq:ecuacion_033}
+\end{align}
+representa la condición de ortonormalización para $\Phi_{m}(\phi)$.
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la segunda ecuación}
+Para la segunda ecuación $\Theta (\theta)$ (ec. \ref{eq:ecuacion_030}), tendremos que:
+\begin{align}
+\dfrac{1}{\sin \theta} \dv{\theta} \left( \sin \theta \, \dv{\Theta}{\theta} \right) + \left( \lambda - \dfrac{m^{2}}{\sin^{2} \theta} \right) \, \Theta (\theta) = 0
+\label{eq:ecuacion_034}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Haciendo cambio de variable}
+Hacemos el siguiente cambio de variable: $\cos \theta = \mu$ y $\Theta(\theta) = F(\mu)$, para obtener:
+\begin{align}
+\dv{\mu} \left[ (1 - \mu^{2}) \, \dv{F}{\mu} \right] + \left[ \lambda - \dfrac{m^{2}}{1 - \mu^{2}} \right] \, F(\mu) = 0
+\label{eq:ecuacion_035}
+\end{align}
+\\
+\bigskip
+\pause
+Hay que considerar dos casos: $m = 0$ y $m \neq 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Caso 1. $m = 0$}
+Con $m = 0$, la ec. (\ref{eq:ecuacion_035}) se reduce a:
+\begin{align}
+    (1 - \mu^{2}) \, \dv[2]{F}{\mu} - 2  \, \mu \, \dv{F}{\mu} + \lambda \, F(\mu) = 0
+    \label{eq:ecuacion_036a}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Caso 1. $m = 0$}
+Con $m = 0$, la ec. (\ref{eq:ecuacion_035}) se reduce a:
+\begin{align}
+    (1 - x^{2}) \, \dv[2]{F}{x} - 2  \, x \, \dv{F}{x} + \lambda \, F(x) = 0
+    \label{eq:ecuacion_036b}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Caso 2. $m \neq 0$}
+Tendríamos entonces la siguiente EDO2H:
+\begin{align}
+\dv{x} \left[ (1 - x^{2}) \, \dv{F}{x} \right] + \left[ \lambda - \dfrac{m^{2}}{1 - x^{2}} \right] \, F(x) = 0
+\label{eq:ecuacion_037}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Soluciones a las EDOs}
+Las soluciones a las EDOs con los casos anteriores, nos conducen a:
+\pause
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Con $n = 0$: los Polinomios ordinarios de Legendre.
+\item Con $n \neq 0$: los Polinomios asociados de Legendre.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Consulten las notas de trabajo}
+En las notas de trabajo se detalla el desarrollo para las funciones especiales tanto ordinarias como asociadas de Legendre.
+\pause
+Mismas que nos serán de utilidad para obtener la función de onda solución a la ecuación de Schrödinger.
+\end{frame}
+
+\section{Solución parte radial}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Planteamiento inicial}
+
+\begin{frame}
+\frametitle{Potencial en la parte radial}
+En la revisión de la parte angular de la función de onda $Y(\theta, \phi)$ es la misma para todo potencial esférico simétrico; la forma para el potencial en la parte angular $V(r)$, \emph{afecta solo la parte radial} de la función de onda $R(r)$, que queda determinada por la ec. (\ref{eq:ecuacion_04_16}):
+\pause
+\begin{align*}
+    \dfrac{1}{R} \, \dv{r} \left( r^{2} \, \dv{R}{r} \right) - \dfrac{2 \, m \, r^{2}}{\hbar^{2}} \bigg( V(r) - E \bigg) &= \ell (\ell + 1)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando la expresión}
+Esta ecuación se simplifica si hacemos el cambio de variable:
+\pause
+\begin{align}
+    u(r) = r \, R(r)
+    \label{eq:ecuacion_04_36}
+\end{align}
+\pause
+por lo que:
+\begin{align*}
+    R &= \dfrac{u}{r} \\[0.5em]
+    \dv{R}{u} &= \dfrac{ \big[ r \, \displaystyle \dv{u}{r} - u \big]}{r^{2}} \\[0.5em]
+    \dv{r} \, \bigg[ r^{2} \, \left( \dv{R}{r} \right) \bigg] &= r \, \dv[2]{u}{r}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando la expresión}
+Por tanto:
+\begin{align}
+    - \dfrac{\hbar^{2}}{2 \, m} \, \dv[2]{u}{r} + \bigg[ V + \dfrac{\hbar^{2}}{2 \, m} \,\dfrac{\ell (\ell + 1)}{r^{2}} \bigg] \, u =  E \, u
+    \label{eq:ecuacion_04_37}
+\end{align}
+\pause
+Esta ecuación es llamada \textbf{ecuación radial}, que es idéntica en forma a la ecuación de Schrödinger unidimensional.
+\end{frame}
+
+\subsection{El potencial de Coulomb}
+
+\begin{frame}
+\frametitle{Ocupando un potencial definido}
+A partir de la ley de Coulomb, la energía potencial (en unidades SI) es:
+\begin{align}
+    V(r) = - \dfrac{e^{2}}{4 \, \pi \, \epsilon_{0}} \, \dfrac{1}{r}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación radial}
+La ecuación radial (\ref{eq:ecuacion_04_37}) es:
+\begin{align}
+    - \dfrac{\hbar^{2}}{2 \, m} \; \dv[2]{u}{r} + \left[ - \dfrac{e^{2}}{4 \, \pi \, \epsilon_{0}} \; \dfrac{1}{r} + \dfrac{\hbar^{2}}{2 \, m} \; \dfrac{\ell(\ell +1)}{r^{2}} \right] \, u =  E \, u
+    \label{eq:ecuacion_04_53}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Problema a resolver}
+Nuestro problema es resolver esta ecuación para $u(r)$ y determinar las energías permitidas $E$ de los electrones. 
+\\
+\bigskip
+\pause
+El potencial de Coulomb admite estados continuos (con $E > 0$), describiendo la dispersión  electrón - protón, así como estados ligados discretos, representando el átomo de hidrógeno, pero nos limitaremos nuestra atención a este último.
+\end{frame}
+
+\section{Solución completa}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Solución con funciones especiales}
+
+\begin{frame}
+\frametitle{Funciones especiales obtenidas}
+El desarrollo de la ecuación radial nos conduce a las funciones especiales:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Polinomios ordinarios de Laguerre.
+\item Polinomios asociados de Laguerre.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Solución a la ecuación de onda}
+Al conocer las soluciones a las ecuaciones en la parte angular y radial, nos indica la naturaleza de la solución a la ecuación de onda.
+\\
+\bigskip
+\pause
+Las funciones de onda espaciales para el hidrógeno se etiquetan con tres números cuánticos ($n$, $\ell$ y $m$):
+\begin{align}
+\psi_{n \ell m} (r, \theta, \phi) =  R_{n \ell} (r) Y_{\ell}^{m} (\theta, \phi)
+\label{eq:ecuacion_04_74}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Solución con las funciones especiales}
+Las funciones de onda normalizadas para el átomo de hidrógeno son:
+\begin{align}
+\begin{aligned}
+\psi_{n \ell m} &= \sqrt{\left(\dfrac{2}{n \, a} \right)^{3} \dfrac{(n - \ell - 1)}{2 \, n[(n + \ell)!]^{3}}} e^{-r/na} \; \left( \dfrac{2 \, r}{n \, a} \right)^{\ell} \times \\[1em]
+&\times L_{n - \ell -1}^{2 \ell + 1} \left( \dfrac{2 \, r}{n \, a} \right) Y_{\ell}^{m} \, (\theta, \phi)
+\end{aligned}
+\label{eq:ecuacion_04_89}
+\end{align}
+\end{frame}
+\end{document}
