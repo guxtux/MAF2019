@@ -285,7 +285,7 @@ Suponemos que el hemisferio con temperatura $T_{0}$ es el hemisferio norte, el h
 Dado que el problema tiene simetría azimutal, $T$ es independiente de $\varphi$, y podemos escribir inmediatamente la solución general con simetría azimutal de la ecuación Laplace en coordenadas esféricas:
 \pause
 \begin{align*}
-\Phi = (r, \theta) = \sum_{k=0}^{\infty} \left( A_{k} \, r^{k} + \dfrac{B_{k}}{r^{k+1}} \right) \, P_{k} (\cos \theta)
+\Phi (r, \theta) = \sum_{k=0}^{\infty} \left( A_{k} \, r^{k} + \dfrac{B_{k}}{r^{k+1}} \right) \, P_{k} (\cos \theta)
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -319,27 +319,26 @@ T_{0} & \mbox{ si } 0 < u \leq 1
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Expresando un avance de la solución}
-Sustituyendo este resultado en la ecuación (\ref{eq:ecuacion_26_50}), se obtiene
-\begin{align}
-T (a, \theta) = \begin{cases}
-- T_{0}  & \mbox{ si } -1 \leq u < 0 \\[1em]
-T_{0} & \mbox{ si } 0 < u \leq 1 
-\end{cases} 
-% \hspace{0.5cm} = \nsum_{n=0}^{\infty} A_{n} \, a^{n} \, P_{n}(u)
-\label{eq:ecuacion_26_51}
-\end{align}
+\frametitle{Llegando a una expresión importante}
+La solución que se ha encontrado para la ecuación de Laplace en coordenadas esféricas con simetría azimutal, incluye un término con los $P_{n}(x)$, y un factor $A_{n} \, r^{n}$.
+\\
+\bigskip
+\pause
+Si hacemos que $c_{n} = A_{n} \, r^{n}$, tendremos entonces:
+\begin{align*}
+T(r, \theta) = \sum_{n=0}^{\infty} c_{n} \, P_{n} (\cos \theta)
+\end{align*}
 \end{frame}
 
 \subsection{Usando propiedades de los \texorpdfstring{$P_{n}(x)$}{Pn(x)}}
 
 \begin{frame}
 \frametitle{Para el cálculo de los coeficientes}
-De la ecuación anterior vemos que para expresar la temperatura en los puntos de los hemisferios, aparecen los polinomios de Legendre $P_{n}(x)$.
+De la ecuación anterior vemos que si $f(x) = T(r, \theta)$, \pause sabemos que a partir de una de las propiedades de los $P_{n}$ nos permite expresar la función $f(x)$ en términos de esos $P_{n}(x)$.
 \\
 \bigskip
 \pause
-Siendo necesario ocupar las propiedades de esta función especial.
+En este caso, la propiedad de que los $P_{n}(x)$ forman una base completa y por tanto, podemos representar una función $f(x)$ en términos de los polinomios ordinarios de Legendre.
 \end{frame}
 \begin{frame}
 \frametitle{Conjunto completo}
@@ -356,14 +355,14 @@ Debiendo calcular los coeficientes $c_{n}$
 \frametitle{Usando la ortogonalidad de los $P_{n}(x)$}
 Para calcular los coeficientes $c_{n}$, se multiplica ambos lados de la expresión (\ref{eq:ecuacion_26_46}) por $P_{m}(x)$ para luego integrar de $-1$ a $1$:
 \pause
-\begin{align*}
-\scaleint{5ex}_{\bs -1}^{1} f(x) \, P_{m}(x) \dd{x} &= \scaleint{5ex}_{\bs -1}^{1} \left( \nsum_{n=0}^{\infty} c_{n} \, P_{n}(x) \right) \, P_{m}(x) \dd{x} = \\[1em]
+\begin{eqnarray*}
+\scaleint{5ex}_{\bs -1}^{1} f(x) \, P_{m}(x) \dd{x} &= \scaleint{5ex}_{\bs -1}^{1} \left( \nsum_{n=0}^{\infty} c_{n} \, P_{n}(x) \right) \, P_{m}(x) \dd{x} = \\[1em] \pause
 &= \nsum_{n=0}^{\infty} c_{n} \, \scaleint{5ex}_{\bs -1}^{1} P_{n}(x) \, P_{m}(x) \dd{x} =
-\end{align*}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Resultado de la ortogonalidad}
-Llegando a:
+Ocupando la propiedad de ortogonalidad de los $P_{n}(x)$, llegamos a:
 \pause
 \begin{align*}
 \scaleint{5ex}_{\bs -1}^{1} f(x) \, P_{m}(x) \dd{x} = c_{m} \, \dfrac{2}{2 \, m + 1}
@@ -391,7 +390,7 @@ V_{0}  & \mbox{ si } 0 < x \leq 1, \\[1em]
 \end{frame}
 \begin{frame}
 \frametitle{Resultados del ejercicio}
-Los coeficientes en el ejercicio son:
+Los coeficientes obtenidos en el ejercicio son:
 \begin{align*}
 c_{2k+1} = \dfrac{(-1)^{k} (4 \, k + 3)(2 \, k)!}{2^{2k+1} \, k! \, (k+1)!} \, V_{0}
 \end{align*}
@@ -409,7 +408,7 @@ c_{2k+1} \equiv A_{2k+1} \, a^{2k+1} = \dfrac{(-1)^{k} (4 \, k + 3)(2 \, k)!}{2^
 \end{frame}
 \begin{frame}
 \frametitle{Los coeficientes}
-Despejando $A_{2k+1}$ de la ecuación anterior, para utilizarlo dentro de la ec. (\ref{eq:ecuacion_26_50}) nos lleva a:
+Despejando $A_{2k+1}$ de la ecuación anterior, para utilizarlo dentro de la ec. (\ref{eq:ecuacion_26_50}) nos lleva a la solución, que \emph{determina la temperatura en puntos interiores de la esfera}:
 \pause
 \begin{align}
 T(r, \theta) = T_{0} \, \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} (4 \, k {+} 3)(2 \, k)!}{2^{2k+1} \, k! \, (k {+} 1)!} \, \left( \dfrac{r}{a} \right)^{2k+1} \, P_{2k+1} (\cos \theta)
@@ -417,6 +416,9 @@ T(r, \theta) = T_{0} \, \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} (4 \, k {+} 3)(2 \,
 \end{align}
 donde se ha sustituido $\cos \theta$ por $u$.
 \end{frame}
+
+\subsection*{Ejercicios similares}
+
 \begin{frame}
 \frametitle{Ejercicios más elaborados}
 Consideremos un ejercicio similar: dos hemisferios conductores, se encuentran a un potencial $V_{0}$ y -$V_{0}$, como se muestra en la siguiente figura:
@@ -426,12 +428,22 @@ Consideremos un ejercicio similar: dos hemisferios conductores, se encuentran a 
 \end{figure}
 \end{frame}
 \begin{frame}
-\frametitle{Enunciado}
+\frametitle{Enunciado para los hemisferios con potencial}
 Se nos pide calcular el valor del potencial en puntos exteriores a la esfera, es decir, para puntos tales que $r > a$.
 \\
 \bigskip
 \pause
-El problema sigue manteniendo una simetría azimutal, conocemos ya la expresión que nos determina la solución, solo debemos de tomar en cuenta la condición que establece el problema. \pause Los coeficientes $A_{k}$ deben de anularse ya que se espera que el potencial se cancele en el infinito. \pause Debiendo calcular entonces los coeficientes $B_{k}$.
+El problema sigue manteniendo una simetría azimutal, conocemos ya la expresión que nos determina la solución, solo debemos de tomar en cuenta la condición que establece el problema.
+\end{frame}
+\begin{frame}
+\frametitle{Análisis de la solución general}
+\begin{align*}
+\Phi (r, \theta) = \sum_{k=0}^{\infty} \left( A_{k} \, r^{k} + \dfrac{B_{k}}{r^{k+1}} \right) \, P_{k} (\cos \theta)
+\end{align*}
+Los coeficientes $A_{k}$ deben de anularse ya que se espera que el potencial se cancele en el infinito. \pause
+\\
+\bigskip
+Debiendo calcular entonces los coeficientes $B_{k}$.
 \end{frame}
 \begin{frame}
 \frametitle{Otro caso con esferas}
@@ -461,6 +473,6 @@ Ya sabemos como abordar la solución en el caso para puntos interiores de la esf
 \\
 \bigskip
 \pause
-Para los puntos intermedios debemos de considerar las condiciones de continuidad que marca el ejercicio, de tal manera que en esta parte si será necesario considerar ambos coeficientes de la expresión que se dedujo.
+Para los puntos intermedios debemos de considerar las condiciones de continuidad que marca el ejercicio, de tal manera que en esta parte si será necesario considerar ambos coeficientes de la expresión $\Phi(r,\theta)$ que se dedujo.
 \end{frame}
 \end{document}
