@@ -1,21 +1,23 @@
 \input{../Preambulos/preambulo_materiales}
-%\usepackage{showframe}
-\title{Transformadas de Fourier \\ \large {Tema 6 - Transformadas integrales} \vspace{-3ex}}
+\title{Transformada de Fourier} \vspace{-3ex}
 \author{M. en C. Gustavo Contreras Mayén}
 \date{ }
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
 \begin{document}
 \vspace{-4cm}
 \maketitle
 \fontsize{14}{14}\selectfont
 \tableofcontents
 \newpage
-%Referencia. Debnath - Integral transforms and their applications. Sec. 1.4
+
+%Referencia. Patra - Integral transforms and their applications. Sec. 1.4
 \section{Las transformadas de Fourier.}
 
 Una vez revisado el material introductorio, podemos definir la \emph{transformada de Fourier} (TF) de una función continua por partes $f(x) \in P^{1} (R)$ y tal que $f(x) \in A_{1} (R)$. La transformada se define por:
 \begin{align}
 \begin{aligned}[b]
-F \big[ f(x); x \to \xi \big] = F \big[f(x) \big] = F(\xi) = \overline{f} (\xi) &= \\[0.5em] 
+F \big[ f(x); x \to \xi \big] &= F \big[f(x) \big] \\[0.5em]
+&= F(\xi) = \overline{f} (\xi) = \\[0.5em] 
 &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} f(x) \, \exp(i \, \xi \, x) \dd{x}
 \end{aligned}
 \label{eq:ecuacion_01_12}
@@ -35,6 +37,7 @@ F \big[ f(x); x \to \xi \big] = F(\xi) = \int_{-\infty}^{+\infty} f(x) \, \exp(i
 f(x) = \dfrac{1}{2 \, \pi} \int_{-\infty}^{+\infty} F(\xi) \, \exp(-i \, \xi \, x) \dd{\xi}
 \label{eq:ecuacion_01_15}
 \end{align}
+
 En un punto de discontinuidad de $x \in R$, el lado izquierdo de las ecs. (\ref{eq:ecuacion_01_13}) y (\ref{eq:ecuacion_01_15}), toman la forma:
 \begin{align*}
 \dfrac{1}{2} \big[ f(x + 0) + f(x - 0) \big]
@@ -63,7 +66,7 @@ Esto demuestra que los operadores $F$ y $F^{-1}$ son conmutativos.
 
 \subsection{Transformadas seno y coseno de Fourier.}
 
-Consideremos que la función $f(x)$ sea una función \emph{impar} de $x \in R$, perteneciente además a las clases $P^{1} (R)$ y $A_{1} (R)$. Tenemos claramente que $f(-x) = - f(x)$. 
+Consideremos que la función\footnote{Para las definiciones de este tipo de funciones, revisa las notas de Introducción a las Transformadas Integrales.} $f(x)$ sea una función \emph{impar} de $x \in R$, perteneciente además a las clases $P^{1} (R)$ y $A_{1} (R)$. Tenemos claramente que $f(-x) = - f(x)$. 
 \par
 De la ec. (\ref{eq:ecuacion_01_12}):
 \begin{align}
@@ -74,14 +77,14 @@ F \big[ f(x); x \to \xi \big] = F(\xi) &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{0}^{\
 \end{aligned}
 \label{eq:ecuacion_01_17}
 \end{align}
-donde
+donde:
 \begin{align}
 F_{s} (\xi) = \sqrt{\dfrac{2}{\pi}} f(x) \, \sin \xi \, x \dd{x}
 \label{eq:ecuacion_01_18}
 \end{align}
 La ec. (\ref{eq:ecuacion_01_18}) define la \emph{transformada seno de Fourier} de la función $f(x)$.
 \par
-Su conexión con la transformada de Fourier, está dada por la ec. (\ref{eq:ecuacion_01_17}) proporcionando $f (x)$ una función impar de $x \in R$. La expresión para la transformada inversa de (\ref{eq:ecuacion_01_18}) se define por:
+Su conexión con la transformada de Fourier, está dada por la ec. (\ref{eq:ecuacion_01_17}) donde $f (x)$ es una función impar de $x \in R$. La expresión para la transformada inversa de (\ref{eq:ecuacion_01_18}) se define por:
 \begin{align}
 f(x) = \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} F_{s}(\xi) \, \sin \xi \, x \dd{\xi}
 \label{eq:ecuacion_01_19}
@@ -95,14 +98,14 @@ F \big[ f(x); x \to \xi \big] = F(\xi) &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{0}^{\
 \end{aligned}
 \label{eq:ecuacion_01_20}
 \end{align}
-donde
+donde:
 \begin{align}
 F_{c} (\xi) = \sqrt{\dfrac{2}{\pi}} f(x) \, \cos \xi \, x \dd{x}
 \label{eq:ecuacion_01_21}
 \end{align}
 La ec. (\ref{eq:ecuacion_01_21}) define la \emph{transformada coseno de Fourier} de la función $f(x)$.
 \par
-Su conexión con la transformada de Fourier, está dada por la ec. (\ref{eq:ecuacion_01_20}) proporcionando $f (x)$ una función par de $x \in R$. La expresión para la transformada inversa de (\ref{eq:ecuacion_01_21}) se define por:
+Su conexión con la transformada de Fourier, está dada por la ec. (\ref{eq:ecuacion_01_20}) donde $f (x)$ es una función par de $x \in R$. La expresión para la transformada inversa de (\ref{eq:ecuacion_01_21}) se define por:
 \begin{align}
 f(x) = \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} F_{c}(\xi) \, \cos \xi \, x \dd{\xi}
 \label{eq:ecuacion_01_22}
@@ -110,7 +113,7 @@ f(x) = \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} F_{c}(\xi) \, \cos \xi \, x \dd{\
 
 \subsection{Propiedad de linealidad.}
 
-Si $c_{1}$ y $c_{2}$ son constantes, entonces:
+Si $c_{1}$ y $c_{2}$ son constantes, se tiene entonces que:
 \begin{enumerate}[\thesubsection .1)]
 \item \label{inciso_01} $F \big[c_{1} \, f_{1} (x) + c_{2} \, f_{2} (x)\big] = c_{1} \, F \big[ f_{1} (x)\big] + c_{2} \, F \big[ f_{2} (x)\big]$
 \item $F_{s} \big[c_{1} \, f_{1} (x) + c_{2} \, f_{2} (x)\big] = c_{1} \, F_{s} \big[ f_{1} (x)\big] + c_{2} \, F_{s} \big[ f_{2} (x)\big]$
@@ -128,19 +131,20 @@ La demostración de los otros dos incisos es análoga.
 \subsection{Propiedad de cambio de escala.}
 
 \begin{enumerate}[\thesubsection .1)]
-\item Si $F \big[ f(x); x \to \xi \big] = F(\xi)$, entonces
+\item Si $F \big[ f(x); x \to \xi \big] = F(\xi)$, entonces:
 \begin{align*}
 F \big[ f(a \, x); x \to \xi \big] = \dfrac{1}{a} \, F \left( \dfrac{\xi}{a} \right)
 \end{align*}
-\item \label{inciso_01_06_01} Si $F_{s} \big[f(x)\big] = F_{s}(\xi)$, entonces
+\item \label{inciso_01_06_01} Si $F_{s} \big[f(x)\big] = F_{s}(\xi)$, entonces:
 \begin{align*}
 F_{s} \big[f(a \, x)\big] = \dfrac{1}{a} \, F_{s} \left( \dfrac{\xi}{a} \right)
 \end{align*}
-\item Si $F_{c} \big[f(x); x \to \xi\big] = F_{c}(\xi)$, entonces
+\item Si $F_{c} \big[f(x); x \to \xi\big] = F_{c}(\xi)$, entonces:
 \begin{align*}
 F_{c} \big[f(a \, x); x \to \xi \big] = \dfrac{1}{a} \, F_{c} \left( \dfrac{\xi}{a} \right)
 \end{align*}
 \end{enumerate}
+
 La demostración del inciso (\ref{inciso_01_06_01} se sigue de la definición:
 \begin{align*}
 F_{s} \big[f(x); x \to \xi \big] = \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} f(x) \, \sin \xi \, x \dd{\xi} = F_{s} (\xi)
@@ -159,6 +163,7 @@ Si $F(\xi)$ es la transformada de Fourier de $f(x)$ en $R$, entonces la transfor
 \begin{align*}
 f(x - a) = \exp(i \, \xi \, a) \, F(\xi)
 \end{align*}
+
 Comenzamos la demostración de la propiedad de desplazamiento a partir de la definición:
 \begin{align*}
 F(\xi) = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} f(x) \, \exp(i \, \xi \, x) \dd{x} = F \big[f(x); x \to \xi \big]
@@ -173,10 +178,11 @@ F \big[f(x - a); x \to \xi \big] &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+
 
 \subsection{El teorema de modulación.}
 
-\textbf{Teorema:} Si $F \big[f(x); x \to \xi \big] = F(\xi)$, entonces
+\textbf{Teorema:} Si $F \big[f(x); x \to \xi \big] = F(\xi)$, entonces:
 \begin{align*}
 F \big[f(x) \, \cos a \, x; x \to \xi \big] = \dfrac{1}{2} \big[F(\xi + a) + F(\xi - a) \big]
 \end{align*}
+
 \textbf{Demostración:}
 \\
 Ya que se tiene:
@@ -190,21 +196,23 @@ F \big[f(x); x \to \xi \big] &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\inf
 &+ \left. \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} f(x) \, \exp(i \, (\xi - a) \, x)  \dd{x} \right] = \\[0.5em]
 &= \big[ F(\xi + a) + F (\xi - a \big]
 \end{align*}
+
 Otras tres partes del teorema son:
 \begin{enumerate}[label=\alph*)]
-\item Si $F_{s} \big[f(x); x \to \xi \big] = F_{s} (\xi)$, entonces
+\item Si $F_{s} \big[f(x); x \to \xi \big] = F_{s} (\xi)$, entonces:
 \begin{align*}
 F_{s} \big[f(x) \, \cos a \, x; x \to \xi \big] = \dfrac{1}{2} \big[F_{s} (\xi +  a) + F_{s} (\xi - a) \big]
 \end{align*}
-\item Si $F_{s} \big[f(x); x \to \xi \big] = F_{s} (\xi)$, entonces
+\item Si $F_{s} \big[f(x); x \to \xi \big] = F_{s} (\xi)$, entonces:
 \begin{align*}
 F_{c} \big[f(x) \, \sin a \, x; x \to \xi \big] = \dfrac{1}{2} \big[F_{s} (\xi +  a) - F_{s} (\xi - a) \big]
 \end{align*}
-\item Si $F_{c} \big[f(x); x \to \xi \big] = F_{c} (\xi)$, entonces
+\item Si $F_{c} \big[f(x); x \to \xi \big] = F_{c} (\xi)$, entonces:
 \begin{align*}
 F_{s} \big[f(x) \, \sin a \, x; x \to \xi \big] = \dfrac{1}{2} \big[F_{c} (\xi -  a) - F_{c} (\xi + a) \big]
 \end{align*}
 \end{enumerate}
+
 Estos resultados pueden demostrarse de manera similar como se hizo en el primer caso al reemplazar $\cos a \, x$ y $\sin a \, x$ por sus formas exponenciales en las definiciones de las transformadas correspondientes del lado izquierdo.
 
 \subsection{Evaluación de integrales mediante transformadas inversas.}
@@ -219,7 +227,7 @@ En primer lugar consideramos:
 \begin{align*}
 I_{1} = \int_{0}^{\infty} \exp (-b \, x) \, \cos a \, x \dd{x}, \hspace{1cm} I_{2} = \int_{0}^{\infty} \exp (-b \, x) \, \sin a \, x \dd{x}
 \end{align*}
-Integrando por partes podemos evaluar $I_{1}$ e $I_{2}$ como
+Integrando por partes podemos evaluar $I_{1}$ e $I_{2}$ como:
 \begin{align*}
 I_{1} = \dfrac{b}{a^{2} + b^{2}},  \hspace{1.5cm} I_{2} = \dfrac{a}{a^{2} + b^{2}}
 \end{align*}
@@ -245,7 +253,7 @@ f(x) = \begin{cases}
 0, & x > a
 \end{cases}
 \end{align*}
-entonces
+entonces:
 \begin{align*}
 F_{c}(\xi) = \dfrac{2}{\pi} \int_{0}^{a} 1 \, \cos \xi \, x \dd{x} = \sqrt{\dfrac{2}{\pi}} \, \dfrac{\sin \xi \, a}{\xi}
 \end{align*}
@@ -266,6 +274,7 @@ f(x) = \begin{cases}
 1, & x > 0
 \end{cases}
 \end{align*}
+
 Esta función se conoce como la \emph{función de paso unitario de \textbf{Heaviside}}, que se representa como $H(x)$. Entonces se tiene que:
 \begin{align*}
 H(x) = \begin{cases}
@@ -273,6 +282,7 @@ H(x) = \begin{cases}
 1, & x > 0
 \end{cases}
 \end{align*}
+
 Casi todas las funciones escalonadas se pueden expresar como una combinación de funciones escalonadas unitarias de Heaviside. Por ejemplo:
 \begin{align*}
 f(x) = \begin{cases}
@@ -284,6 +294,7 @@ es equivalente a:
 \begin{align*}
 f(x) = H(x + a) - H(x- a) \equiv H(a - \abs{x})
 \end{align*}
+
 La función escalón:
 \begin{align*}
 f(x) = \begin{cases}
@@ -304,7 +315,6 @@ Evaluar la transformada de Fourier de:
 \begin{align*}
 H(x + a) - H(x - a)
 \end{align*}
-
 Por definición:
 \begin{align*}
 &F \big[H(x + a) - H(x - a); x \to \xi\big] = \\[0.5em]
@@ -314,6 +324,7 @@ Por definición:
 &= \dfrac{1}{\sqrt{2\, \pi} \, i \, \xi} \, \big[\exp(i \, \xi \, a) - \exp(-i \, \xi \, ) \big] = \\[0.5em]
 &= \sqrt{\dfrac{2}{\pi}} \dfrac{\sin a \, \xi}{\xi}
 \end{align*}
+
 Por lo que, usando la transformada de Fourier inversa, se obtiene:
 \begin{align*}
 \dfrac{1}{\sqrt{2 \, \pi}} \, \int_{-\infty}^{+\infty} \sqrt{\dfrac{2}{\pi}} \, \dfrac{\sin a \, \xi}{\xi} \,  \exp(- i \, \xi \, x) \dd{\xi}  = H(x + a) - H(x- a)
@@ -338,7 +349,7 @@ lo que implica que:
 \begin{align*}
 \int_{0}^{\infty} \dfrac{\sin a \, \xi}{\xi} = \dfrac{\pi}{2}
 \end{align*}
-y además
+y además:
 \begin{align*}
 \int_{-\infty}^{+\infty} \dfrac{\sin a \, \xi \, \sin \xi \, x}{\xi} = 0
 \end{align*}
@@ -346,18 +357,19 @@ y además
 \subsection{Convolución de dos funciones integrables.}
 
 La convolución\footnote{El término convolución no aparece en el diccionario de la Real Academia Española; su empleo matemático es una castellanización del término inglés \enquote{Convolution} (twist together) cuyo significado más idóneo es: \enquote{retorcido conjunto}. En alemán es\enquote{faltung} (doblar), y en francés, \enquote{composition}.} de dos funciones integrables $f(x)$ y $g(x)$, donde \hfill \break
-$-\infty < x < \infty$ se escribe y se define como
+$-\infty < x < \infty$ se escribe y se define como:
 \begin{align}
 f * g = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} f(x - u) \, g(u) \dd{u}
 \label{eq:ecuacion_01_23}
 \end{align}
+
 La convolución tiene varias propiedades como:
 \begin{align*}
 f * (\lambda \, g) &= (\lambda \, f) * g = \lambda (f * g), \hspace{1cm} \lambda = \mbox{constante} \\[0.5em]
 f * g &= g * f \hspace{1.5cm} \mbox{propiedad conmutativa} \\[0.5em]
 f * (g + h) &= f * g + f * h
 \end{align*}
-que se puede verificar fácilmente directamente desde la definición (\ref{eq:ecuacion_01_23}). \hfill \break 
+que se pueden verificar fácilmente directamente desde la definición (\ref{eq:ecuacion_01_23}). \hfill \break 
 Además, si tanto $f (x)$ como $g (x)$ pertenecen a las clases $C^{1} (R)$ y $A_{1} (R)$, entonces también lo hace su convolución $h (x) = f * g$, ya que:
 \begin{align*}
 \sqrt{2 \, \pi} \, \int_{-\infty}^{+\infty} \abs{h(x)} \dd{x} &= \int_{-\infty}^{+\infty} \dd{x} \, \abs{\int_{-\infty}^{+\infty} f(u) g(x - u) \dd{u}} < \\[0.5em]
@@ -365,7 +377,7 @@ Además, si tanto $f (x)$ como $g (x)$ pertenecen a las clases $C^{1} (R)$ y $A_
 &= \int_{-\infty}^{+\infty} \abs{f(u)} \dd{u} \, \int_{-\infty}^{+\infty} \abs{g(x - u)} \dd{u} \\[0.5em]
 \Rightarrow \int_{-\infty}^{+\infty} \abs{h(x)} \dd{x} &< \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} \abs{f(u)} \dd{u} \, \int_{-\infty}^{+\infty} \abs{g(\nu)} \dd{\nu}
 \end{align*}
-y el resultado se sigue del hecho que tanto $f(x)$ y $g(x)$ perteneces a la clase $A_{1}(R)$.
+y el resultado se sigue del hecho que tanto $f(x)$ y $g(x)$ pertenecen a la clase $A_{1}(R)$.
 \par
 Nuevamente $(f * g) * h = f * (g * h)$ es cierto haciendo una revisión directa. Por lo tanto la propiedad de convolución es también asociativa.
 \par
@@ -381,6 +393,7 @@ F \big[f * g; x \to \xi \big] &= F(\xi) \, G(\xi) \\[0.5em]
 \mbox{donde } \hspace{0.4cm} F(\xi) &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} f(x) \, \exp(i \, \xi, x) \dd{x} \hspace{0.3cm} \mbox{y} \\[0.5em]
 G(\xi) &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} g(x) \, \exp(i \, \xi, x) \dd{x}
 \end{align*}
+
 \textbf{Demostración: }
 
 Ya que tanto $f(x)$ como $g(x)$ pertenecen ambas a las clases $C^{1}(R)$ y $A_{1}(R)$, se tiene que $f * g$ también pertenece a las clases $C^{1}(R)$ y $A_{1}(R)$, por lo que la transformada de Fourier de $f * g$ también existe. Por lo que:
@@ -396,6 +409,7 @@ F \big[f * g; x \to \xi \big] &= F(\xi) \, G(\xi)
 \end{aligned}
 \label{eq:ecuacion_01_24}
 \end{align}
+
 Lo que demuestra el teorema.
 \\
 \bigskip
@@ -405,18 +419,20 @@ Lo que demuestra el teorema.
 Otra interpretación del teorema de convolución de la ec. (\ref{eq:ecuacion_01_24}) es tal que:
 \begin{align}
 \begin{aligned}[b]
-&F^{-1} \, \big[F(\xi) \, G(\xi); \xi \to x\big] = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} f(x - u) \, g(u) \dd{u} \\[0.5em]
-&\mbox{O}, \hspace{0.4cm} \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} F(\xi) \, G(\xi) \, \exp(- i \xi x) \dd{\xi} = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} f(\nu) g(x - \nu) \dd{\nu} \\[0.5em]
+F^{-1} \, \big[F(\xi) \, G(\xi); \xi \to x\big] &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} f(x - u) \, g(u) \dd{u} \\[0.5em]
+\mbox{O}, \hspace{0.4cm} \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} F(\xi) \, G(\xi) \, \exp(- i \xi x) \dd{\xi} &= \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} f(\nu) g(x - \nu) \dd{\nu} \\[0.5em]
 &= f * g
 \end{aligned}
 \label{eq:ecuacion_01_25}
 \end{align}
+
 \newpage
+
 \textbf{Corolario 2.}
 
 Del resultado anterior (\ref{eq:ecuacion_01_25}), se tiene que:
 \begin{align*}
-\dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} F(\xi) \, G(\xi) \, \exp(- i \xi x) \dd{\xi} &= f * g \\[0.5em]
+\dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} F(\xi) \, G(\xi) \, \exp(- i \xi x) \dd{\xi} &= f * g =\\[0.5em]
 &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} f(\nu) g(x - \nu) \dd{\nu}
 \end{align*}
 Haciendo que $x = 0$ en la ecuación anterior, vemos que:
@@ -452,6 +468,7 @@ F_{c} \big[g(x); x \to \xi \big] &= \sqrt{\dfrac{2}{\pi}} \int_{0}^{\infty} g(x)
 \end{aligned}
 \label{eq:ecuacion_01_28}
 \end{align}
+
 También si $f(x)$ y $g(x)$ son funciones impares de $x \in R$ y si
 \begin{align}
 \begin{aligned}[b]
@@ -471,19 +488,19 @@ Si $F(\xi)$ y $G(\xi)$ son las transformadas de Fourier complejas de $f(x)$ y $g
 \end{align}
 donde el signo de barra sobre la función significa el conjugado complejo de las funciones complejas o el valor absoluto para funciones reales.
 
-\subsection{Transformada de Fourier de la derivada de una función}
+\subsection{Transformada de Fourier de la derivada de una función.}
 
 En varias aplicaciones de la física matemática de la transformada de Fourier a problemas con valores en la frontera, es necesario expresar la transformada de Fourier de la derivada de una función $f(x)$ en términos de la transformada de Fourier de la función $f(x)$.
 \par
 De esta manera podemos expresar la transformada de Fourier de \hfill \break
 $\dv*[n]{f(x)}{x}$ por $\ntilde{F}{n} (\xi)$. Tendremos entonces que:
 \begin{align*}
-\ntilde{F}{n}(\xi) &= -\dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} (i \, \xi) \, \dv[n-1]{f(x)}{x} \, \exp(i \, \xi \, x) \dd{x} + \\[0.5em]
-&+ \left[ \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} (i \, \xi) \, \dv[n-1]{f(x)}{x} \, \exp(i \, \xi \, x) \right] \eval_{-\infty}^{\infty}
+\ntilde{F}{n}(\xi) &= -\dfrac{1}{\sqrt{2 \, \pi}} \scaleint{6ex}_{\bs-\infty}^{\infty} (i \, \xi) \, \dv[n-1]{f(x)}{x} \, \exp(i \, \xi \, x) \dd{x} + \\[0.5em]
+&+ \left[ \dfrac{1}{\sqrt{2 \, \pi}} \scaleint{6ex}_{\bs -\infty}^{\infty} (i \, \xi) \, \dv[n-1]{f(x)}{x} \, \exp(i \, \xi \, x) \right] \eval_{-\infty}^{\infty}
 \end{align*}
 que se obtiene después de integrar por partes el lado derecho de la definición de:
 \begin{align}
-\ntilde{F}{n}(\xi) &= \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} \dv[n-1]{f(x)}{x} \, \exp(i \, \xi \, x) \dd{x}
+\ntilde{F}{n}(\xi) &= \dfrac{1}{\sqrt{2 \, \pi}} \scaleint{6ex}_{\bs -\infty}^{\infty} \dv[n-1]{f(x)}{x} \, \exp(i \, \xi \, x) \dd{x}
 \label{eq:ecuacion_01_36}
 \end{align}
 Si suponemos que:
@@ -513,6 +530,7 @@ p_{a}(t) = \begin{cases}
 0 & \text{ para cualquier otro valor} \end{cases}
 \label{eq:ecuacion_06_10_Beerends}
 \end{align}
+
 Se puede ver de la figura (\ref{fig:figura_funcionpaso}) que $p_{a}(t)$ es integrable.
 \begin{figure}[H]
     \centering
@@ -520,29 +538,35 @@ Se puede ver de la figura (\ref{fig:figura_funcionpaso}) que $p_{a}(t)$ es integ
     \caption{Función paso rectangular.}
     \label{fig:figura_funcionpaso}
 \end{figure}
+
 Para $\omega \neq 0$ se tiene que la transformada de Fourier es:
 \begin{align*}
 F \big[p_{a} (\omega)\big] &= \int_{-\infty}^{\infty} p_{a}(t) \; \exp{-i \, \omega \, t} \dd{t} = \\[0.5em]
-&= \int_{-a/2}^{a/2} \exp(-i \, \omega \ t) \dd{t} = \left[ \dfrac{- \exp(- i \, \omega \, t)}{i \, \omega} \right] \eval_{-a/2}^{a/2} \\[0.5em]
+&= \scaleint{6ex}_{\bs -a/2}^{a/2} \exp(-i \, \omega \ t) \dd{t} = \left[ \dfrac{- \exp(- i \, \omega \, t)}{i \, \omega} \right] \eval_{-a/2}^{a/2} \\[0.5em]
 &= \dfrac{\exp(i \, a \, \omega/2) - \exp(-i \, a \, \omega/2)}{i \, \omega} = \dfrac{2 \, \sin (a \, \omega/2)}{\omega}
 \end{align*}
-mientras que para $\omega = 0$, se tiene
+
+mientras que para $\omega = 0$, se tiene:
 \begin{align*}
 F \big[p_{a}(0)\big] = \int_{-\infty}^{\infty} p_{a}(t) \dd{t} = \int_{-a/2}^{a/2} \dd{t} = a
 \end{align*}
-Es bien sabido que el límite
+
+Es bien sabido que el límite:
 \begin{align*}
 \lim_{x \to 0} \dfrac{\sin x}{x} = 1
 \end{align*}
-entonces obtenemos 
+
+entonces obtenemos:
 \begin{align*}
 \lim_{\omega \to 0}  (g \, p_{a}) \, (\omega) = \lim_{\omega \to 0} \dfrac{2 \, \sin (a \, \omega /2)}{\omega} = a
 \end{align*}
-A pesar de que $p_{a}(t)$ en sí, no es continua, vemos que
+
+A pesar de que $p_{a}(t)$ en sí, no es continua, vemos que:
 \begin{align}
 F \big[p_{a}(\omega)\big] = \dfrac{2 \sin (a \, \omega/2)}{\omega}
 \label{eq:ecuacion_06_11_Beerends}
 \end{align}
+
 es continua en $\mathbb{R}$.
 \begin{figure}[H]
     \centering
@@ -564,51 +588,56 @@ es continua en $\mathbb{R}$.
 
 \subsection*{Ejemplo. La ecuación de onda.}
 
-Aprovecharemos la ventaja de la transformada de Fourier de la deriva para manejar ecuaciones diferenciales parciales. Consideremos una cuerda infinita que vibra, la amplitud $y$ de las vibraciones es pequeña, y satisface la ecuación de onda
+Aprovecharemos la ventaja de la transformada de Fourier de la deriva para manejar ecuaciones diferenciales parciales. Consideremos una cuerda infinita que vibra, la amplitud $y$ de las vibraciones es pequeña, y satisface la ecuación de onda:
 \begin{equation}
 \pdv[2]{y}{x} = \dfrac{1}{v^{2}} \, \pdv[2]{y}{t}
 \label{eq:ecuacion_15_42}
 \end{equation}
-con la condición inicial
+
+con la condición inicial:
 \begin{equation}
 y(x, 0) = f(x)
 \label{eq:ecuacion_15_43}
 \end{equation}
+
 donde $f$ está localizada, es decir, tiende a cero para valores grandes de $x$.
 \par
-Aplicar la transformada de Fourier en $x$, significa multiplicar por $\exp(i \, \omega \, x)$ y luego integrar sobre $x$, así que
+Aplicar la transformada de Fourier en $x$, significa multiplicar por $\exp(i \, \omega \, x)$ y luego integrar sobre $x$, así que:
 \begin{align}
-\int_{-\infty}^{\infty} \pdv[2]{y(x, t)}{x} \; \exp(i \, \omega \, x) \dd{x} = \dfrac{1}{v^{2}} \, \int_{-\infty}^{\infty} \pdv[2]{y (x, t)}{t} \; \exp(i \, \omega \, x) \dd{x}
+\scaleint{6ex}_{\bs -\infty}^{\infty} \pdv[2]{y(x, t)}{x} \; \exp(i \, \omega \, x) \dd{x} = \dfrac{1}{v^{2}} \, \scaleint{6ex}_{\bs -\infty}^{\infty} \pdv[2]{y (x, t)}{t} \; \exp(i \, \omega \, x) \dd{x}
 \label{eq:ecuacion_15_44}
 \end{align}
-o que es lo mismo
+
+o que es lo mismo:
 \begin{equation}
 (-i \, \alpha)^{2} \; Y(\alpha, t) = \dfrac{1}{v^{2}} \; \pdv[2]{Y(\alpha, t)}{t}
 \label{eq:ecuacion_15_45}
 \end{equation}
-donde se ha utilizado
+
+donde se ha utilizado:
 \begin{equation}
-Y(\alpha, t) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} y(x, t) \; e^{i \alpha x} \, \dd x
+Y(\alpha, t) = \dfrac{1}{\sqrt{2 \pi}} \scaleint{6ex}_{\bs -\infty}^{\infty} y(x, t) \; e^{i \alpha x} \, \dd x
 \label{eq:ecuacion_15_46}
 \end{equation}
+
 Nótese que parte del integrando se anula: la onda aún no se ha desplazado a $\pm \infty$ porque se está propagando hacia adelante en el tiempo, y no hay una fuente en el infinito porque $f(\pm \infty) = 0$.
 \par
-Dado que no se tienen derivadas con respecto a $\alpha$, la ec. (\ref{eq:ecuacion_15_45}) es un EDO, de hecho la \emph{ecuación del oscilador armónico}. La transformación de una EDP a una EDO es un logro significativo. Resolvemos la ec. (\ref{eq:ecuacion_15_45}) sujeta a las condiciones iniciales. En $t=0$, aplicando las ecuaciones (\ref{eq:ecuacion_15_43}) y (\ref{eq:ecuacion_15_46}), se simplifica a
+Dado que no se tienen derivadas con respecto a $\alpha$, la ec. (\ref{eq:ecuacion_15_45}) es un EDO, de hecho la \emph{ecuación del oscilador armónico}. La transformación de una EDP a una EDO es un logro significativo. Resolvemos la ec. (\ref{eq:ecuacion_15_45}) sujeta a las condiciones iniciales. En $t=0$, aplicando las ecuaciones (\ref{eq:ecuacion_15_43}) y (\ref{eq:ecuacion_15_46}), se simplifica a:
 \begin{align}
 Y(\alpha, 0) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(x) \; e^{i \alpha x} \, \dd x =  F(\alpha)
 \label{eq:ecuacion_15_47}
 \end{align}
-La solución general de la ec. (\ref{eq:ecuacion_15_45}) es de una forma exponencial
+La solución general de la ec. (\ref{eq:ecuacion_15_45}) es de una forma exponencial:
 \begin{align}
 Y(\alpha, t) = F(\alpha) \; \exp(\pm  i \, v \, \alpha \, t)
 \label{eq:ecuacion_15_48}
 \end{align}
-Usando la fórmula de inversión, se tiene
+Usando la fórmula de inversión, se tiene:
 \begin{align}
 y(x,t) = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} Y(\alpha, t) \; \exp(-i \, \alpha \, x) \dd{\alpha}
 \label{eq:ecuacion_15_49}
 \end{align}
-y, por la ecuación (\ref{eq:ecuacion_15_48})
+y, por la ecuación (\ref{eq:ecuacion_15_48}):
 \begin{align}
 y(x, t) = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} F(\alpha) \; \exp(- i \, \alpha (x \mp v \, t)) \dd{\alpha}
 \label{eq:ecuacion_15_50}
@@ -626,24 +655,29 @@ Para nuevamente ejemplificar la transformación de una EDP a una EDO, usemos la 
 \begin{align*}
 \pdv{\psi}{t} = a^{2} \; \pdv[2]{\psi}{x}
 \end{align*}
-donde la solución $\psi(x,t)$ es la temperatura en el espacio como función del tiempo. Tomando la transformada de Fourier en ambos lados de la ecuación, nótese que $\omega$ es la variable conjugada compleja para $x$ ya que $t$ es el tiempo en la EDP de flujo de calor, donde
+
+donde la solución $\psi(x,t)$ es la temperatura en el espacio como función del tiempo. Tomando la transformada de Fourier en ambos lados de la ecuación, nótese que $\omega$ es la variable conjugada compleja para $x$ ya que $t$ es el tiempo en la EDP de flujo de calor, donde:
 \begin{align*}
 \Psi(\omega, t) = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{\infty} \psi(x, t) \; \exp(i \, \omega \, x) \dd{x}
 \end{align*}
-Esto nos lleva a una EDO para la transformada de Fourier $\Psi$ de $\psi$ en la variable temporal $t$
+
+Esto nos lleva a una EDO para la transformada de Fourier $\Psi$ de $\psi$ en la variable temporal $t$:
 \begin{align*}
 \pdv{\Psi(\omega, t)}{t} = -a^{2} \, \omega^{2} \, \Psi(\omega, t)
 \end{align*}
-Al integrar, obtenemos
+
+Al integrar, obtenemos:
 \begin{align*}
 \ln \Psi = -a^{2} \, \omega^{2} \, t + \ln C \hspace{1.5cm} \text{ o } \hspace{1.5cm} \Psi = C \; \exp(-a^{2} \, \omega^{2} \, t)
 \end{align*}
+
 donde la constante de integración $C$ dependerá de $\omega$ y en general queda determinada por las condiciones iniciales. De hecho $C = \Psi(\omega, 0)$ es la distribución espacial inicial de $\Psi$, que está dada por la transformación (en $x$) de la distribución inicial de $\psi$, llamada $\psi(x,0)$.
 \par
 Dejando la solución en la transformada inversa de Fourier, se obtiene
 \begin{align*}
 \psi(x, t) = \dfrac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} C(\omega) \; \exp(-i \, \omega \, x) \; \exp(-a^{2} \, \omega^{2} \, t) \, \dd{\omega}
 \end{align*}
+
 Por razones de simplicidad, tomamos $C$ independiente de $\omega$ (suponiendo una distribución inicial de temperatura como una función delta), al integrar completando el cuadrado en $\omega$ y realizando los cambios de variable ($a^{2} \to a^{2} \, t$, $\omega \to x$, $t \to -\omega$. Nos encontramos con una solución particular de la EDP de flujo de calor
 \begin{align*}
 \psi(x,t) = \dfrac{C}{a \sqrt{2 t}} \; \exp \left( - \dfrac{x^{2}}{4 \, a^{2} \, t} \right)

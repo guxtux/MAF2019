@@ -8,15 +8,22 @@
    \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
 }
 \setbeamertemplate{navigation symbols}{}
+\usepackage{scalerel}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\bs{\mkern-12mu}
+
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
 \spanishdecimal{.}
+
 \section*{Contenido}
 \frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
 \section{Áreas de aplicación}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Uso de la Transformada de Fourier}
+
 \begin{frame}
 \frametitle{Introducción}
 Las aplicaciones de la Transformada de Fourier (TF) son muy extensas, ya que abarcan diversas ramas de la física matemática.
@@ -46,12 +53,14 @@ La TF también se utiliza para:
 \item Analizar el comportamiento armónico de una señal.
 \end{enumerate}
 \end{frame}
+
 \subsection{Ejemplos concretos}
+
 \begin{frame}
 \frametitle{Electromagnetismo y de microondas}
 La Transformada de Fourier está relacionada con:
 \begin{itemize}[<+->]
-\item El cálculo del campo cercano transitorio irradiado por dipositivos electrónicos.
+\item El cálculo del campo cercano transitorio irradiado por dispositivos electrónicos.
 \item El análisis de fenómenos ópticos en microondas.
 \item El cálculo del campo electromagnético de rayos, la formación de haz y la radiación de microondas solares.
 \end{itemize}
@@ -61,7 +70,7 @@ La Transformada de Fourier está relacionada con:
 El análisis de la TF está relacionado con:
 \begin{itemize}[<+->]
 \item El análisis espectral del comportamiento global de los cromosomas.
-\item El análisis espectral de la variabilidad de la frecuencia cardiaca.
+\item El análisis espectral de la variabilidad de la frecuencia cardíaca.
 \item El procesamiento de imágenes generadas por econogramas, resonancias magnéticas y tomografía axial.
 \end{itemize}
 \end{frame}
@@ -101,7 +110,7 @@ Algo de lo que podemos hacer con la TF de una imagen es eliminar algunos compone
 \\
 \bigskip
 \pause
-Si eliminamos las frecuencias bajas, menores de cierto valor $\omega_{f}$, se le llama \textbf{filtro de paso alto}. Una gran cantidad de ruido de fondo se produce a bajas frecuencias, por lo que un filtro de paso alto puede limpiar una señal.
+Si eliminamos las frecuencias bajas, menores de cierto valor $\omega_{f}$, se le llama \textbf{filtro de paso alto}. \pause Una gran cantidad de ruido de fondo se produce a bajas frecuencias, por lo que un filtro de paso alto puede limpiar una señal.
 \end{frame}
 \begin{frame}
 \frametitle{Filtro pasa bajos}
@@ -110,7 +119,8 @@ Si eliminamos las frecuencias bajas, menores de cierto valor $\omega_{f}$, se le
  \bigskip
  \pause
  Se puede usar un filtro de paso bajo para suavizar los datos (como una foto digital), ya que arroja ruido de alta frecuencia.
- 
+ \pause
+
  Un filtro que corta las frecuencias altas y bajas se llama \emph{filtro de paso de banda}.
 \end{frame}
 \begin{frame}
@@ -142,9 +152,11 @@ Si eliminamos las frecuencias bajas, menores de cierto valor $\omega_{f}$, se le
     \caption{Filtro pasa bajo Einstein + pasa alto Marylin}
 \end{figure}
 \end{frame}
+
 \section{Ecuación de calor}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Temperatura en una placa semiinfinita}
+
 \begin{frame}
 \frametitle{Enunciado}
 La temperatura constante de una placa semiinfinita está dada por la siguiente ecuación diferencial, condiciones iniciales y de frontera:
@@ -162,7 +174,7 @@ La temperatura constante de una placa semiinfinita está dada por la siguiente e
 \frametitle{Solución}
 El dominio de la variable y la condición prescrita en $y = 0$, indican que se puede aplicar la transformada coseno de Fourier al problema, así:
 \begin{align*}
-F_{c} \big[u(x,y)\big] = \int_{0}^{\infty} u(x, y) \, \cos \alpha \, y \dd{y} = U(x, \alpha)
+F_{c} \big[u(x,y)\big] = \scaleint{5ex}_{\bs 0}^{\infty} u(x, y) \, \cos \alpha \, y \dd{y} = U(x, \alpha)
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -224,15 +236,17 @@ U(x, \alpha) = \dfrac{\sinh \alpha \, x}{(1 + \alpha^{2}) \, \sinh \alpha \pi}
 \begin{frame}
 \frametitle{Usando la transformada inversa}
 De modo que al ocupar la transformada coseno inversa de Fourier:
+\pause
 \begin{align*}
-F_{c}^{-1} \big[F(\alpha)\big] = \dfrac{2}{\pi} \int_{0}^{\infty} F[\alpha] \, \cos \alpha \, x \dd{x}
+F_{c}^{-1} \big[F(\alpha)\big] = \dfrac{2}{\pi} \scaleint{5ex}_{\bs 0}^{\infty} F[\alpha] \, \cos \alpha \, x \dd{x}
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Resultado en el espacio inicial}
-obtenemos el siguiente resultado:
+Obtenemos el siguiente resultado:
+\pause
 \begin{align*}
-u(x, y) = \dfrac{2}{\pi} \int_{0}^{\infty}  \dfrac{\sinh \alpha \, x}{(1 + \alpha^{2}) \, \sinh \alpha \pi} \, \cos \alpha \, x \dd{x}
+u(x, y) = \dfrac{2}{\pi} \scaleint{6ex}_{\bs 0}^{\infty} \dfrac{\sinh \alpha \, x}{(1 + \alpha^{2}) \, \sinh \alpha \pi} \, \cos \alpha \, x \dd{x}
 \end{align*}
 La solución obtenida se le conoce como \emph{solución fundamental}.
 \end{frame}
