@@ -153,6 +153,106 @@ Si eliminamos las frecuencias bajas, menores de cierto valor $\omega_{f}$, se le
 \end{figure}
 \end{frame}
 
+\section{Transformada de Fourier}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición}
+
+\begin{frame}
+\frametitle{La transformada de Fourier}
+Se define la transformada de Fourier como:
+\begin{align}
+F \big[ f(x); x \to \xi \big] = \dfrac{1}{\sqrt{2 \, \pi}} \scaleint{5ex}_{\bs -\infty}^{+\infty} f(x) \, \exp(i \, \xi \, x) \dd{x}
+\label{eq:ecuacion_01_12}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{La transformada inversa de Fourier}
+Se define la transformada inversa de Fourier como:
+\begin{align}
+f(x) = F^{-1} \big[ F(\xi) \big] = \dfrac{1}{\sqrt{2 \, \pi}} \int_{-\infty}^{+\infty} F(\xi) \, \exp(-i \, \xi \, x) \dd{\xi}
+\label{eq:ecuacion_01_13}
+\end{align}
+en un punto continuo de $f(x)$.
+\end{frame}
+
+\subsection{Ejercicios con la TF}
+
+\begin{frame}
+\frametitle{Calculando la transformada de Fourier}
+Evalúa la transformada de Fourier de:
+\begin{align*}
+f(x) = \begin{cases}
+x, & \abs{x} < a \\
+0, & \abs{x} > a
+\end{cases}
+\end{align*}
+\pause
+Ocupamos la definición de la transformada de Fourier, ec. (\ref{eq:ecuacion_01_12}).
+\end{frame}
+\begin{frame}
+\frametitle{Definición de la TF}
+Por la definición de la TF:
+\begin{align*}
+F \big[ f(x); x \to \xi \big] = \dfrac{1}{\sqrt{2 \, \pi}} \scaleint{5ex}_{\bs -a}^{a} x \, \exp(i \, \xi \, x) \dd{x}
+\end{align*}
+\pause
+Resolvemos la integral por partes.
+\end{frame}
+\begin{frame}
+\frametitle{Integración por partes}
+Se tiene que:
+\pause
+\begin{eqnarray*}
+&=& \dfrac{1}{\sqrt{2 \, \pi}} \left\{ \bigg[ x \, \dfrac{\exp(i \, \xi \, x)}{i \, \xi} \bigg] \bigg\vert_{-a}^{a} - \dfrac{1}{i \, \xi} \scaleint{5ex}_{\bs -a}^{a} \exp(i \xi \, x) \dd{x} \right\} \\[1em] \pause
+&=& \dfrac{1}{\sqrt{2 \, \pi}} \bigg[ \dfrac{a \, e^{i \xi a} + a \, e^{-i \xi a}}{i \, \xi} + \dfrac{1}{\xi^{2}} \left( e^{i a \xi} - e^{-i a \xi} \right) \bigg] =
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Reduciendo términos}
+Ocupando identidades conocidas, se tiene que:
+\pause
+\begin{eqnarray*}
+&=& \dfrac{1}{\sqrt{2 \, \pi}} \bigg[ \dfrac{2 \, a \, \cos a \xi}{i \, \xi} + \dfrac{2 \, i \, \sin a \xi}{\xi^{2}} \bigg] = \\[1em] \pause
+&=& \sqrt{\dfrac{2}{\pi}} \, i \, \bigg[ \dfrac{\sin a \xi - a \, \xi \, \cos a \, \xi}{\xi^{2}} \bigg]
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Otro Ejercicio}
+Calcula la transformada de Fourier de:
+\begin{align*}
+f(x) = \exp(-a \, \abs{x}), \hspace{1cm} a > 0
+\end{align*}
+\pause
+Ocupamos nuevamente la definición de la TF.
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando la definición de la TF}
+Con la definición de TF se tiene que:
+\pause
+\begin{align*}
+F \big[ f(x); x \to \xi \big] {=} \dfrac{1}{\sqrt{2 \pi}} \scaleint{5ex}_{\bs -\infty}^{+\infty} \exp(-a \abs{x}) \, \exp(i \xi x) \dd{x}
+\end{align*}
+Para resolver la integral, primero \enquote{separamos} en el dominio el integrando:
+\end{frame}
+\begin{frame}
+\frametitle{Separando la integral}
+\begin{eqnarray*}
+&=& \dfrac{1}{\sqrt{2 \pi}} \bigg[ \scaleint{5ex}_{\bs -\infty}^{0} e^{ a  x} \, e^{i \xi x} \dd{x} + \scaleint{5ex}_{\bs 0}^{\infty} e^{ -a  x} \, e^{i \xi x} \dd{x} \bigg] =
+\end{eqnarray*}
+\pause
+Cada integral se resuelve directamente y se evalúa en los límites de integración.
+\end{frame}
+\begin{frame}
+\frametitle{Resultado}
+Se obtiene entonces:
+\pause
+\begin{eqnarray*}
+&=& \dfrac{1}{\sqrt{2 \pi}} \bigg[ \dfrac{1}{a + i \, \xi} + \dfrac{1}{a - i \xi} \bigg] = \\[0.5em] \pause
+&=& \sqrt{\dfrac{2}{\pi}} \dfrac{a}{a^{2} + \xi^{2}}
+\end{eqnarray*}
+\end{frame}
+
 \section{Ecuación de calor}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Temperatura en una placa semiinfinita}
