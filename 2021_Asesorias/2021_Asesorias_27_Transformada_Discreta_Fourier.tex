@@ -1,0 +1,552 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+\input{../Preambulos/pre_codigo}
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+\date{}
+\title{Análisis de señales con DTF}
+\author{M. en C. Gustavo Contreras Mayén}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section{Análisis de Fourier}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Conceptos importantes}
+
+\begin{frame}
+\frametitle{Análisis de Fourier}
+El análisis de Fourier es un conjunto de técnicas matemáticas basadas en descomponer una señal en una onda senoidal.
+\\
+\bigskip
+\pause
+Algunos textos refieren la descomposición de una señal en \enquote{sinusoides}, siendo éste concepto el equivalente a la curva que representa a la función seno.
+\end{frame}
+\begin{frame}
+\frametitle{Concepto nuevo}
+La Transformada de Fourier Discreta (Discret Fourier Transform, \emph{DFT} en inglés) es la herramienta utilizada cuando se trabaja con señales discretas.
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo de la DFT}
+En la práctica la DFT se calcula de manera eficiente con la Transformada de Fourier Rápida (Fast Fourier Transform, \emph{FFT}, en inglés).
+\end{frame}
+\begin{frame}
+\frametitle{Descomposición en ondas senoidales}
+La respuesta de un sistema lineal e invariante en el tiempo a una onda senoidal, es también una onda senoidal de \textcolor{blue}{igual frecuencia}, pudiendo tener \textcolor{blue}{distinta amplitud y fase.}
+\end{frame}
+\begin{frame}
+\frametitle{Descomposición en ondas senoidales}
+El análisis de Fourier junto con el principio de superposición, permiten caracterizar la respuesta en el dominio de frecuencia de un sistema LTI.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/Transformada_Discreta_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Tipos de Transformada}
+Series de Fourier.
+\\
+\bigskip
+Señales continuas y periódicas.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/TDF_01.png}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Tipos de Transformada}
+Transformada de Fourier.
+\\
+\bigskip
+Señales continuas y no periódicas.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/TDF_02.png}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Tipos de Transformada}
+Transformada de Fourier de tiempo discreto.
+\\
+\bigskip
+Señales discretas y no periódicas.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/TDF_03.png}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Tipos de Transformada}
+Transformada de Fourier discreta.
+\\
+\bigskip
+Señales discretas y periódicas.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/TDF_04.png}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Primera complicación en el estudio}
+Las ondas senoidales (o cosenoidales) están definidas en el intervalo $(-\infty, \infty)$.
+\\
+\bigskip
+\pause
+¿Cómo se analiza un conjunto de muestras finito?
+\end{frame}
+\begin{frame}
+\frametitle{La complicación}
+No es posible utilizar un conjunto de señales infinitas para analizar una señal de duración finita.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/Transformada_Discreta_02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{¿Cómo se resuelve esta complicación?}
+La solución es hacer que la señal \emph{parezca infinita}.
+\\
+\bigskip
+\pause
+Veamos dos alternativas para ello.
+\end{frame}
+\begin{frame}
+\frametitle{Primera propuesta: señal discreta y aperiódica}
+Se extiende la señal:
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.9]{Imagenes/TDF_06.png}
+\end{figure}
+\pause
+Con muestras de valor cero:
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.9]{Imagenes/TDF_03.png}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda propuesta: señal discreta y periódica}
+Se extiende la señal:
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.9]{Imagenes/TDF_06.png}
+\end{figure}
+\pause
+repitiendo las muestras reales:
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.9]{Imagenes/TDF_04.png}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{¿Cómo se calcula la TF computacionalmente?}
+Se necesita de infinitas ondas senoidales para analizar una señal no periódica.
+\\
+\bigskip
+\pause
+Pero una computadora solo puede trabajar con \emph{señales discretas y finitas}, por lo que la única transformada que se utiliza en el procesamiento y análisis de señales es la Transformada Discreta de Fourier.
+\end{frame}
+
+\section{La Transformada Discreta de Fourier}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición}
+
+\begin{frame}
+\frametitle{Expresión de la DFT}
+La forma más general de la DFT es:
+\begin{align*}
+X[k] = \dfrac{1}{N} \nsum_{n=0}^{N-1} x[n] \, \exp(-i \, 2 \, \pi \, k \, n / N)
+\end{align*}
+\pause
+donde:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item $X[k]$ es un número complejo que representa un elemento de la DFT.
+\item $x[n]$ es un número complejo que representa un elemento de la señal.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Sobre las operaciones a realizar}
+El cálculo de cada punto de la DFT implica $N$ multiplicaciones complejas y $(N {-} 1)$ sumas complejas.
+\\
+\bigskip
+\pause
+Por tanto, los $N$ puntos de la DFT pueden obtenerse tras $N^{2}$ multiplicaciones complejas y
+$N (N {-} 1)$ sumas complejas.
+\end{frame}
+\begin{frame}
+\frametitle{Modificando la expresión para la DFT}
+La expresión para la DFT se puede expresar de la siguiente manera:
+\begin{align*}
+X[k] = \dfrac{1}{N} \nsum_{n=0}^{N-1} x[n] \, W_{N}^{k \, n}
+\end{align*}
+donde:
+\begin{align*}
+W_{N} = \exp(-i \, 2 \, \pi / N)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Definición de vectores}
+Sean los vectores:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}
+\item  $x_{N}$ de $N$ puntos de la secuencia $x[n]$ con $n = 0, 1, \ldots, N-1$
+\begin{align*}
+x_{n} = \mqty[
+x_{0} \\
+x_{1} \\
+\vdots \\
+x_{n-1} \\
+]
+\end{align*}
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Definición de vectores}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti    
+\item $X_{N}$ de $N$ puntos de la muestra en frecuencias $X[N]$.
+\begin{align*}
+X_{n} = \mqty[
+X_{0} \\
+X_{1} \\
+\vdots \\
+X_{n-1} \\
+]
+\end{align*}
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Una matriz importante}
+Sea la matriz $W_{N}$, una matriz de $N \times N$:
+\begin{align*}
+W_{N} =
+\mqty[
+1 & 1 & 1 & \ldots & 1 \\
+1 & W_{N} & W_{N}^{2} & \ldots & W_{N}^{N-1} \\
+1 & W_{N}^{2} & W_{N}^{4} & \ldots & W_{N}^{2(N-1)} \\
+\vdots & \vdots & \vdots & \vdots & \vdots \\
+1 & W_{N}^{N-1} & W_{N}^{2(N-1)} & \ldots & W_{N}^{(N-1)(N-1)} \\
+]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Nueva expresión para la DFT}
+Con los vectores y matriz definidos, la DFT de $N$ puntos se puede expresar en forma matricial como:
+\begin{align*}
+X_{N} = W_{N} \, x_{N}
+\end{align*}
+donde $W_{N}$ es la matriz de la transformación lineal. Nótese que $W_{N}$ es una matriz simétrica.
+\end{frame}
+\begin{frame}
+\frametitle{Primer ejemplo}
+Calcular la DFT de la secuencia de $4$ puntos:
+\begin{align*}
+x_{n} = (0, 1, 2, 3)
+\end{align*}
+\pause
+Por lo que habrá que determinar la matriz $W_{4}$, podemos ocupar la propiedad de simetría:
+\pause
+\begin{align*}
+W_{N}^{k + N / 2} = - W_{N}^{k}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando la matriz}
+Entonces la matriz $W_{4}$ es:
+\begin{align*}
+W_{N} = \mqty[
+W_{4}^{0} & W_{4}^{0} & W_{4}^{0} & W_{4}^{0} \\
+W_{4}^{0} & W_{4}^{1} & W_{4}^{2} & W_{4}^{3} \\
+W_{4}^{0} & W_{4}^{2} & W_{4}^{4} & W_{4}^{6} \\
+W_{4}^{0} & W_{4}^{3} & W_{4}^{6} & W_{4}^{9}
+ ] {=}
+\mqty[
+1 & 1 & 1 & 1 \\
+1 & W_{4}^{1} & W_{4}^{2} & W_{4}^{3} \\
+1 & W_{4}^{2} & W_{4}^{0} & W_{4}^{2} \\
+1 & W_{4}^{3} & W_{4}^{2} & W_{4}^{1}
+ ] =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando la matriz}
+\begin{align*}
+W_{N} = \mqty[
+1 & 1 & 1 & 1 \\
+1 & -i & -1 & i \\
+1 & -1 & 1 & -1 \\
+1 & i & -1 & -i
+ ]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El resultado de la DFT}
+Entonces se tiene que:
+\begin{eqnarray*}
+X_{4} = W_{4} \, x_{4} = \pause
+\mqty[
+1 & 1 & 1 & 1 \\
+1 & -i & -1 & i \\
+1 & -1 & 1 & -1 \\
+1 & i & -1 & -i
+ ]
+ \cdot [0 \, 1 \, 2 \, 3] = \pause
+ \mqty[
+6 \\
+-2 + 2 \, i \\
+-2 \\
+-2 - 2 \, j
+ ]
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Algoritmo para un $N$ grande}
+Si queremos calcular la DFT de un conjunto discreto de puntos, pero el valor de $N$ es grande, se debe de contar con un algoritmo computacional que optimize el cálculo por el número de operaciones involucradas.
+\\
+\bigskip
+\pause
+En lenguajes como \texttt{python}, se incluyen librerías científicas para el cálculo de la DFT.
+\end{frame}
+\begin{frame}
+\frametitle{Librerías científicas}
+Las librerías \texttt{numpy} y \texttt{scipy} contienen un conjunto de módulos con funciones matemáticas de alto nivel.
+\\
+\bigskip
+\pause
+En particular el módulo \texttt{scipy.fftpack} contiene la función que calcula la transformada rápida de Fourier, que es la que ocuparemos en los siguientes ejemplos.
+\end{frame}
+
+\section{Ejercicios computacionales}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejemplo 1 - Puntos discretos}
+
+\begin{frame}
+\frametitle{Cálculo de la DFT}
+Calcular la DFT para el siguiente conjunto de puntos:
+\begin{align*}
+x_{n} = [0, \, 1, \, 2, \, 3, \, 4] 
+\end{align*}
+En comparación del ejemplo \enquote{a mano}, se tiene un punto más en la secuencia, pero el tamaño de la matriz $W_{N}$ aumenta.
+\end{frame}
+\begin{frame}[fragile, allowframebreaks]
+\frametitle{Código en \texttt{python}}
+En \texttt{python ocupamos el siguiente código}:
+\begin{lstlisting}
+import numpy as np
+import scipy.fftpack as fourier
+
+xn = [0, 1, 2, 3, 4] 
+Xk = fourier.fft(xn) 
+
+print('DFT: ', Xk)
+
+# Calculamos la Magnitud de la FFT
+M_Xk = abs(Xk)   
+
+# Calculamos la Fase de la FFT
+Ph_Xk = np.angle(Xk)
+
+print('Magnitud: ', M_Xk)
+print('Angulo: ', Ph_Xk*180/np.pi)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Al ejecutar el código se obtiene}
+\pause
+\begin{verbatim}
+DFT: [10. -0.j  -2.5+3.4409548j  
+-2.5+0.81229924j -2.5  -0.81229924j
+-2.5-3.4409548j]
+
+Magnitud: [10.  4.25325404  2.62865556
+  2.62865556  4.25325404]
+
+Angulo: [  -0. 126. 162. -162. -126.]
+\end{verbatim}
+\end{frame}
+
+\subsection{Ejemplo 2 - Una señal compuesta}
+\begin{frame}
+\frametitle{Una señal compuesta con más datos}
+Vamos a generar una una señal compuesta por dos ondas sinusoidales de $\SI{60}{\hertz}$ y de $\SI{223}{\hertz}$, con $1000$ puntos.
+\\
+\bigskip
+\pause
+Le vamos a incorporar \enquote{ruido} a la señal compuesta y luego mediante la FFT se identificarán las frecuencias predominantes de la señal.
+\end{frame}
+\begin{frame}
+\frametitle{Primera señal $w_{1}$}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/DFT_Analisis_Senal_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda señal $w_{2}$}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/DFT_Analisis_Senal_02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Obteniendo la señal compuesta}
+Para generar la señal compuesta, hacemos que:
+\begin{lstlisting}
+Ts = 0.001
+Fs = 1/Ts
+n = Ts*np.arange(0, 1000)
+
+w1 = 3*np.sin(2*np.pi*60*n)
+w2 = 2.3*np.sin(2*np.pi*223*n)
+
+ruido = np.random.random(len(n))
+xn = w1 + w2 + ruido 
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Señal compuesta: $w_{1} + w_{2} +$ ruido}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/DFT_Analisis_Senal_03.eps}
+\end{figure}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Obtenemos el espectro de frecuencias}
+\begin{lstlisting}
+Xk = fourier.fft(xn)
+M_Xk = abs(Xk)
+
+F = Fs*np.arange(0, len(xn))/len(xn)
+\end{lstlisting}
+Incorporamos una rutina de graficación:
+\end{frame}
+\begin{frame}
+\frametitle{Espectro de frecuencias con la DFT}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/DFT_Analisis_Senal_04.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Resultados}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item La gráfica es simétrica, por lo que podemos ocupar la parte izquierda de la misma.
+\item Las frecuencias dominantes en la señal son: $\SI{60}{\hertz}$ y $\SI{223}{\hertz}$
+\item Estos resultados ya los conocíamos de antemano, por la definición de las señales primarias $w_{1}$ y $w_{2}$.
+\end{enumerate}
+\end{frame}
+
+\subsection{Ejemplo 3 - Una nota musical}
+
+\begin{frame}
+\frametitle{Ejemplo 3: Variante en la señal de entrada}
+El ejemplo que veremos considera una señal de audio, obtenida al \enquote{pisar} la cuerda en una guitarra clásica para recuperar la nota \emph{Sol}.
+\\
+\bigskip
+\pause
+En \texttt{python} existen librerías para el análisis de señales en distintos formatos, en este caso, con un archivo \texttt{*.wav}.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La señal de entrada}
+Al ocupar las librerías:
+\begin{verbatim}
+import scipy.io.wavfile as waves
+import winsound
+\end{verbatim}
+Toma en cuenta que la librería \texttt{winsound} funciona bien en entornos \emph{Windows}.
+\end{frame}
+\begin{frame}
+\frametitle{La nota en la guitarra}
+Al recuperar los valores de la señal de audio, graficamos los mismos para visualizar la nota \emph{Sol}, como se presenta en la siguiente diapositiva:
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica de la nota musical}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/DFT_Analisis_Senal_Audio_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Análisis de la señal}
+Una vez recuperados los puntos de la señal:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item A partir de la longitud de la señal: $91008$, se define un vector de tiempo de la misma longitud.
+\item Se calcula la DFT.
+\item Se obtiene la magnitud de la DFT.
+\item Configuramos el entorno gráfico para una mejor visualización.
+\item Con el algoritmo se determina la magnitud máxima de la frecuencia.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica del espectro de frecuencias}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/DFT_Analisis_Senal_Audio_02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Resultados del análisis}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item La frecuencia dominante de la nota \emph{Sol} es: $\SI{195.767}{\hertz}$.
+\item De la gráfica del espectro de frecuencias se identifican los armónicos de la señal.
+\end{enumerate}
+\end{frame}
+
+\subsection{Ejemplo 4 - Análisis en tiempo real}
+
+\begin{frame}
+\frametitle{Análisis espectral}
+Haremos ahora el análisis espectral en tiempo real usando como entrada un micrófono (HyperX SoloCast).
+\\
+\bigskip
+\pause
+En este formato de videoconferencia se complica el registro de la señal, por lo que se grabó en tiempo real cada muestra y los resultados del análisis del cálculo de la DFT se muestran al mismo tiempo.
+\end{frame}
+\begin{frame}
+\frametitle{Ajustes en \texttt{python}}
+Se ocuparán otras librerías y se ajustará el entorno gráfico en \texttt{python} para mostrar en una misma ventana, dos subgráficas:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item En la parte superior la señal de entrada tomada del micrófono (puerto USB)
+\item En la parte inferior, el espectro de frecuencias en tiempo real.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Aclaraciones importante}
+Con el micrófono externo se graba la señal directamente, pero también hay ruido ambiental, por lo se notará de repente, cambios en la señal de entrada.
+\\
+\bigskip
+\pause
+Por la grabación se presenta un \emph{lag}, esperamos que no sea tan grande para perder el seguimiento en las señales.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Muestras de señales}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Se hace una lectura en voz alta de un párrafo.
+\item Canción del grupo U2.
+\item Canción del grupo VCMG.
+\item Canción del grupo Maximum The Hormone.
+\item Señales con generador de audio.
+\end{enumerate}
+\centering
+\movie[externalviewer]{
+    \includegraphics[scale=0.25]{Imagenes/logo_mp4.png}}{Audios/2021_Asesorias_27_DFT_Ejercicios_Audio_01_Lectura.mp4}}
+\end{frame}
+
+\end{document}
