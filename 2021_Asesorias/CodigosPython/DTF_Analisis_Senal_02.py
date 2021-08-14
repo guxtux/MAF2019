@@ -29,12 +29,12 @@ xn = w1 + w2 + ruido              # Construimos una señal compuesta por la señ
 
 plt.figure(1)
 plt.plot(n, w1)
-plt.title('Gráfica de la señal $w_{1} = 3 \cos (2 \pi * 60 t)$')
+plt.title('Gráfica de la señal $w_{1} = 3 \, \sin (2 \pi * 60 t)$')
 pieGrafica()
 
 plt.figure(2)
 plt.plot(n, w2)
-plt.title('Gráfica de la señal $w_{1} = 2.3 \cos (2 \pi * 223 t)$')
+plt.title('Gráfica de la señal $w_{1} = 2.3 \, \sin (2 \pi * 223 t)$')
 pieGrafica()
 
 plt.figure(3)
@@ -48,7 +48,7 @@ M_Xk = abs(Xk)                   # Calculamos la Magnitud de la FFT
 
 F = Fs*np.arange(0, len(xn))/len(xn)   # Definimos el Vector de Frecuencias
 
-plt.figure(2)
+plt.figure(4)
 plt.plot(F, M_Xk, color='red')
 plt.xlabel('Frecuencia (Hz)', fontsize='14')
 plt.ylabel('Amplitud FFT', fontsize='14')
