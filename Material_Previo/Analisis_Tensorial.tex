@@ -1,0 +1,230 @@
+\input{../Preambulos/preambulo_materiales}
+\usepackage{apacite}
+\title{Breviario de análisis tensorial \\ \large{Material de consulta previo}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Spiegel - Análisis vectorial. Cap. 8
+\section{Introducción.}
+
+Las leyes físicas, si han de ser válidas, deben ser independientes de cualquier sistema de coordenadas que se utilice para describirlas matemáticamente. Un estudio de las consecuencias de este requerimiento lleva al \emph{análisis tensorial}, que es de gran utilidad en la teoría general de la relatividad, la geometría diferencial, la mecánica, la elasticidad, la hidrodinámica, la teoría electromagnética y muchos otros campos de la física e ingeniería.
+
+\section{Espacios de \texorpdfstring{$N$}{N} dimensiones.}
+
+Un punto en un espacio tridimensional es un conjunto de tres números, llamados coordenadas, determinados por medio de un sistema particular de coordenadas o marco de referencia. Por ejemplo: $(x, y, z)$, $(\rho, \phi, z)$, $(r, \theta, \phi)$, son coordenadas de un punto en sistemas de coordenadas rectangulares, cilíndricas y esféricas, respectivamente.
+\par
+De manera análoga, un punto en un espacio $N$ dimensional es un conjunto de $N$ números que se denotan con $(x^{1}, x^{2}, \ldots, x^{N})$, donde $1, 2, \ldots, N$ son \emph{superíndices} y no exponentes, práctica que demostrará su utilidad más adelante.
+\par
+El hecho de que no podamos visualizar puntos en espacios con más de tres dimensiones no tiene, por supuesto, nada que ver con su existencia.
+
+\section{Transformaciones de coordenadas.}
+
+Sean $(x^{1}, x^{2}, \ldots, x^{N})$ y $(\overline{x}^{1}, \overline{x}^{2}, \ldots , \overline{x}^{N})$ las coordenadas de un punto en dos diferentes marcos de referencia. Suponga- mos que existen N relaciones independientes entre las coordenadas de los dos sistemas, con la forma:
+\begin{align}
+\begin{aligned}
+\overline{x}^{1} &= \overline{x}^{1} (x^{1}, x^{2}, \ldots, x^{N}) \\
+\overline{x}^{2} &= \overline{x}^{2} (x^{1}, x^{2}, \ldots, x^{N}) \\
+\vdots &{} \hspace{2cm} \vdots \\
+\overline{x}^{N} &= \overline{x}^{N} (x^{1}, x^{2}, \ldots, x^{N})
+\end{aligned}
+\label{eq:ecuacion_08_01}
+\end{align}
+que se indicarán en forma abreviada de la siguiente manera:
+\begin{align}
+\overline{x}^{k} = \overline{x}^{k} (x^{1}, x^{2}, \ldots, x^{N}) \hspace{1cm} k = 1, 2, \ldots, N
+\label{eq:ecuacion_08_02}
+\end{align}
+donde se supone que las funciones involucradas se evalúan en un solo valor (univaluadas), son continuas y tienen derivadas continuas. Entonces, a cada conjunto de coordenadas $(\overline{x}^{1}, \overline{x}^{2}, \ldots, \overline{x}^{N})$, corresponderá un conjunto único $(x^{1}, x^{2}, \ldots, x^{N})$ dado por:
+\begin{align}
+x^{k} = x^{k} (\overline{x}^{1}, \overline{x}^{2}, \ldots, \overline{x}^{N}) \hspace{1cm} k = 1, 2, \ldots, N
+\label{eq:ecuacion_08_03}
+\end{align}
+Las relaciones dadas por (\ref{eq:ecuacion_08_02}) o (\ref{eq:ecuacion_08_03}) definen \emph{una transformación de coordenadas} de un marco de referencia a otro.
+
+\subsection*{Convención de suma.}
+
+Considera la expresión:
+\begin{align*}
+a_{1} \, x^{1} + a_{2} \, x^{2} + \ldots + a_{N} \, x^{N}
+\end{align*}
+La cual puede escribirse con el uso de la notación:
+\begin{align*}
+\sum_{j=1}^{N} a_{j} \, x^{j}
+\end{align*}
+Una notación aún más breve consiste en escribir simplemente $a_{j} \, x^{j}$, donde adoptamos la convención de que siempre que un índice (superíndice o subíndice) se repita en un término dado, hemos de sumar sobre ese índice desde $1$ hasta $N$, a menos que se especifique algo diferente. Ésta se llama convención de suma\footnote{También se conoce como convenio de suma de Einstein, notación de Einstein o notación indexada, se abrevia la escritura del símbolo de la suma. El convenio fue introducido por Albert Einstein en 1916.}. Es evidente que en vez de usar el índice $j$ podríamos emplear otra literal, por ejemplo $p$, y la suma se escribiría como $a_{p} \, x^{p}$. Cualquier índice que se repita en un término dado de modo que se aplique la convención de la suma se llama \emph{índice mudo o índice umbral}.
+\par
+Un índice que ocurra sólo una vez en un término dado recibe el nombre de \emph{índice libre} y denota cualquiera de los números $1, 2, \ldots, N$, como $k$ en la ecuación (\ref{eq:ecuacion_08_02}) o en la (\ref{eq:ecuacion_08_03}), cada uno de los cuales representa $N$ ecuaciones.
+
+\section{Vectores contravariante y covariante.}
+
+Supongamos que en un sistema de coordenadas $(x^{1}, x^{2}, \ldots, x^{N})$ hay $N$ cantidades $A^{1}, A^{2}, \ldots, A^{N}$ relacionadas con otras $N$ cantidades $\overline{A}^{1}, \overline{A}^{2}, \ldots, \overline{A}^{N}$ en otro sistema de coordenadas $(\overline{x}^{1}, \overline{x}^{2}, \ldots, \overline{x}^{N})$ por las ecuaciones de transformación:
+\begin{align*}
+\overline{A}^{p} = \nsum_{q=1}^{N} \pdv{\overline{x}^{p}}{x^{q}} \, A^{q} \hspace{1cm} p = 1, 2, \ldots, N
+\end{align*}
+que según las convenciones adoptadas podría escribirse como:
+\begin{align*}
+\overline{A}^{p} = \pdv{\overline{x}^{p}}{x^{q}} \, A^{q}
+\end{align*}    
+Entonces éstas se llaman componentes de un \emph{vector contravariante o tensor contravariante de primer rango o primer orden}. 
+\par
+Por otro lado, supongamos ahora que en un sistema de coordenadas \hfill \break $(x^{1}, x^{2}, \ldots, x^{N}$) hay $N$ cantidades $A_{1}, A_{2}, \ldots, A_{N}$ relacionadas con otras $N$ cantidades $\overline{A}_{1}, \overline{A}_{2}, \ldots, \overline{A}_{N}$ en otro sistema de coordenadas $(\overline{x}^{1}, \overline{x}^{1}, \ldots, \overline{x}^{N})$ mediante las ecuaciones de transformación:
+\begin{align*}
+\overline{A}_{p} = \nsum_{q=1}^{N} \pdv{x^{q}}{\overline{x}^{p}} \, A_{q} \hspace{1cm} p = 1, 2, \ldots, N
+\end{align*}
+que al ocupar nuevamente la convención de suma, se tiene que:
+\begin{align*}
+\overline{A}_{p} = \pdv{x^{q}}{\overline{x}^{p}} \, A_{q}
+\end{align*}        
+Entonces, éstas reciben el nombre de \emph{vector covariante o tensor covariante de primer rango o primer orden}.
+\par
+Notemos que se usa un superíndice para indicar las componentes contravariantes, mientras que un subíndice se em-
+plea para denotar las componentes covariantes; una excepción a esto ocurre en la notación para las coordenadas.
+\par
+En vez de hablar de un tensor cuyas componentes son $A^{p}$ o $A_{p}$, será frecuente que hagamos referencia a él como
+el tensor $A^{p}$ o $A_{p}$. Por lo que no debiera haber ninguna confusión en esto.
+
+\section{Tensores contravariantes, covariantes y mixtos.}
+
+Supongamos que en un sistema de coordenadas $(x^{1}, x^{2}, \ldots, x^{N})$ hay $N^{2}$ cantidades $\overline{A}^{qs}$ relacionadas con otras $N^{2}$ cantidades $\overline{A}^{pr}$ en otro sistema de coordenadas $(\overline{x}^{1}, \overline{x}^{2}, \ldots, \overline{x}^{N})$ mediante las ecuaciones de transformación:
+\begin{align*}
+\overline{A}^{pr} = \nsum_{s=1}^{N} \nsum_{q=1}^{N} \pdv{\overline{x}^{p}}{x^{q}} \, \pdv{\overline{x}^{r}}{x^{s}} \, A^{qs} \hspace{1cm} p, r = 1, 2, \ldots, N
+\end{align*}
+o bien:
+\begin{align*}
+\overline{A}^{pr} = \pdv{\overline{x}^{p}}{x^{q}} \, \pdv{\overline{x}^{r}}{x^{s}} \, A^{qs}
+\end{align*}    
+según las convenciones adoptadas se denominan \emph{componentes contravariantes de un tensor de segundo rango o de rango dos}.
+\par
+Las $N^{2}$ cantidades $A_{qs}$ se llaman \emph{componentes covariantes de un tensor de segundo rango} si:
+\begin{align*}
+\overline{A}_{pr} = \pdv{x^{q}}{\overline{x}^{p}} \, \pdv{x^{s}}{\overline{x}^{r}} \, A_{qs}
+\end{align*}
+De manera similar, las $N^{2}$ cantidades $A_{s}^{q}$ se denominan \emph{componentes de un tensor mixto de segundo rango} si:
+\begin{align*}
+\overline{A}_{r}^{p} = \pdv{\overline{x}^{p}}{x^{q}} \, \pdv{x^{s}}{\overline{x}^{r}} \, A_{s}^{q}
+\end{align*}
+
+De la delta de Kronecker, podemos expresarla como $\delta_{k}^{j}$, con la clásica definición:
+\begin{align*}
+\delta_{k}^{j} = \begin{cases}
+0 & \mbox{si } j \neq k \\
+1 & \mbox{si } j = k
+\end{cases}
+\end{align*}
+como lo indica la notación, se trata de un tensor mixto de segundo rango.
+
+\section{Tensores de rango mayor que dos, campos tensoriales.}
+
+Los tensores de rango tres o más se definen con facilidad. En específico, por ejemplo, $A_{kl}^{qst}$ son las componentes de un tensor mixto de rango $5$, contravariante de orden $3$ y covariante de orden $2$, donde se transforman de acuerdo con las relaciones:
+\begin{align*}
+\overline{A}_{ij}^{prm} = \pdv{\overline{x}^{p}}{x^{q}} \, \pdv{\overline{x}^{r}}{x^{s}} \, \pdv{\overline{x}^{m}}{x^{t}} \, \pdv{x^{k}}{\overline{x}^{i}} \, \pdv{x^{t}}{\overline{x}^{j}} \, A_{kl}^{qst}
+\end{align*}
+
+\subsection*{Escalares o invariantes.}
+
+Supongamos que $\phi$ es una función de las coordenadas $x^{k}$, y sea que $\overline{\phi}$ denota el valor funcional bajo una transformación a un nuevo conjunto de coordenadas $\overline{x}^{k}$. Entonces, $\phi$ se llama \emph{escalar o invariante} con respecto de la transformación de coordenadas si $\phi = \overline{\phi}$. Un escalar o invariante también se llama \emph{tensor de rango cero}.
+
+\subsection*{Campos tensoriales.}
+
+Si a cada punto de una región en un espacio $N$ dimensional le corresponde un tensor definido, decimos que se ha definido un \emph{campo tensorial}. Éste es un \emph{campo vectorial} o un \emph{campo escalar}, en función de si el tensor es de rango uno o cero. Debe notarse que un tensor o campo tensorial no sólo es el conjunto de sus componentes en un sistema especial de coordenadas, sino \emph{todos los posibles conjuntos} con \emph{cualquier} transformación de coordenadas.
+
+\subsection*{Tensores simétricos y simétricos oblicuos.}
+
+Un tensor se llama \emph{simétrico con respecto de dos índices contravariantes o covariantes} si sus componentes no se alteran con el intercambio de los índices. Así, si $A_{qs}^{mpr} = A_{qs}^{pmr}$, el tensor es simétrico en $m$ y $p$. Si un tensor es simétrico con respecto de \emph{cualesquiera} dos índices contravariantes y \emph{cualesquiera} dos índices covariantes, se llama \emph{simétrico}.
+\par
+Un tensor recibe el nombre de \emph{simétrico oblicuo con respecto de dos índices contravariantes o covariantes} si sus
+componentes cambian de signo con el intercambio de los índices. Así, si $A_{qs}^{mpr} = -A_{qs}^{pmr}$, el tensor es simétrico oblicuo en $m$ y $p$. Si un tensor es simétrico oblicuo con respecto de \emph{cualesquiera} dos índices contravariantes y \emph{cualesquiera} dos índices covariantes, se denomina \emph{simétrico oblicuo}.
+
+\section{Operaciones fundamentales con tensores.}
+
+Con los tensores se aplican las siguientes operaciones:
+\begin{enumerate}
+\item \textbf{Adición.} La suma de dos o más tensores del mismo rango y tipo (es decir, el mismo número de índices contravariantes y el mismo número de índices covariantes) también es un tensor del mismo rango y tipo.
+\par
+Por lo que, si $A_{q}^{mp}$ y $B_{q}^{mp}$ son tensores, entonces:
+\begin{align*}
+C_{q}^{mp} = A_{q}^{mp} + B_{q}^{mp}
+\end{align*}
+también es un tensor. La adición de tensores es conmutativa y asociativa.
+\item \textbf{Sustracción.} La diferencia de dos tensores del mismo rango y tipo también es un tensor del mismo rango y tipo. Así, si $A_{q}^{mp}$ y $B_{q}^{mp}$ son tensores, entonces:
+\begin{align*}
+D_{q}^{mp} = A_{q}^{mp} - B_{q}^{mp}
+\end{align*}
+también es un tensor.
+\item \textbf{Producto externo.} El producto de dos tensores es un tensor cuyo rango es la suma de los rangos de los
+tensores dados. Este producto, que involucra la multiplicación ordinaria de los componentes del tensor, se
+llama \emph{producto externo}.
+\par
+Por ejemplo:
+\begin{align*}
+A_{q}^{pr} \, B_{s}^{m} = C_{qs}^{prm}
+\end{align*}
+es el producto externo de $A_{q}^{pr}$ y $B_{s}^{m}$. Sin embargo, tengamos en cuenta que no todo tensor puede escribirse como el producto de dos tensores de rango menor. Por esta razón, la división de tensores no siempre es posible.
+\item \textbf{Contracción.} Si se igualan un índice contravariante y uno covariante de un tensor, el resultado indica que ha de tomarse una suma sobre los índices iguales de acuerdo con la convención de la suma. Esta
+suma resultante es un tensor de rango dos menos el del tensor original.
+\par
+El proceso se llama \emph{contracción}. Por ejemplo, en el tensor de rango $5$, $A_{qs}^{mpr}$, se hace $r = s$ para obtener $A_{qr}^{mpr} = B_{q}^{mp}$, que es un tensor de rango $3$. Además, al hacer $p = q$, obtenemos $B_{q}^{mp} = C^{m}$, que es un tensor de rango $1$.
+\item \textbf{Producto interno.} Por el proceso del producto externo de dos tensores seguido de una contracción, se obtiene un nuevo tensor llamado \emph{producto interno} de los tensores dados. El proceso se llama \emph{multiplicación interna}.
+\par
+Por ejemplo, dados los tensores $A_{q}^{mp}$ y $B_{st}^{r}$, el producto externo resultante es $A_{q}^{mp} \, B_{st}^{r}$. Al hacer $q = r$ obtenemos el producto interno $A_{r}^{mp} \, B_{st}^{r}$. Al hacer $q = r$ y $p = s$, obtenemos otro producto $A_{r}^{mp} \, B_{pt}^{r}$. La multiplicación interna y externa de tensores es conmutativa y asociativa.
+\item \textbf{Ley del cociente}. Supongamos que no se sabe si una cantidad $X$ es un tensor o no. Si un producto interno de $X$ con un tensor arbitrario es un tensor, entonces $X$ también es un tensor. Ésta se llama ley del cociente.
+\end{enumerate}
+
+\section{Elemento de línea y tensor métrico.}
+
+La diferencial de longitud de arco $\dd{s}$ en coordenadas rectangulares $(x, y, z)$ se obtiene a partir de $\dd{s}^{2} = \dd{x}^{2} + \dd{y}^{2} + \dd{z}^{2}$. Al transformar a coordenadas curvilíneas generales, ésta se transforma en:
+\begin{align*}
+\dd{s}^{2} = \nsum_{p=1}^{3} \nsum_{q=1}^{3} g_{pq} \, \dd{u}_{p} \dd{u}_{q}
+\end{align*}
+Tales espacios se denominan \emph{espacios euclidianos tridimensionales}.
+\par
+La generalización a un espacio $N$ dimensional con coordenadas \hfill \break $(x^{1}, x^{2}, \ldots, x^{N})$ es inmediata. En este espacio se define el \emph{elemento de línea} $\dd{s}$ como el que está dado por la forma cuadrática siguiente, llamada \emph{forma métrica}:
+\begin{align*}
+\dd{s}^{2} = \nsum_{p=1}^{N} \nsum_{q=1}^{N} g_{pq} \, \dd{x}_{p} \dd{u}^{q}
+\end{align*}
+o bien, con el uso de la convención de suma:
+\begin{align*}
+\dd{s}^{2} = g_{pq} \dd{x}^{p} \dd{x}^{q}
+\end{align*}
+
+En el caso especial en que existe una transformación de coordenadas de $x^{j}$ a $\overline{x}^{k}$ de modo que la forma métrica se transforma a:
+\begin{align*}
+(\dd{\overline{x}}^{1})^{2} + (\dd{\overline{x}}^{2})^{2} + \ldots + (\dd{\overline{x}}^{N})^{2}
+\end{align*}
+o $\dd{\overline{x}}^{k} \, \dd{\overline{x}}^{k}$, entonces el espacio se llama \emph{espacio euclidiano $N$ dimensional}. En el caso general, sin embargo, el espacio se llama \emph{riemanniano}.
+\par
+Las cantidades $g_{pq}$ son las componentes de un tensor covariante de rango dos llamado \emph{tensor métrico o tensor fundamental}. Es posible elegir, y siempre será así, que este tensor sea simétrico.
+
+\subsection*{Tensores conjugados o recíprocos.}
+
+Sea que se denote con $g = \abs{g_{pq}}$ el determinante con elementos $g_{pq}$, y supongamos que $g \neq 0$. Se define $g^{pq}$ como:
+\begin{align*}
+g^{pq} = \dfrac{\mbox{cofactor de } g_{pq}}{g}
+\end{align*}
+Entonces, $g^{pq}$ es un tensor contravariante simétrico de rango dos llamado \emph{tensor conjugado o recíproco} de $g_{pq}$. Se puede demostrar que:
+\begin{align*}
+g^{pq} \, g_{rq} = \delta_{r}^{p}
+\end{align*}
+
+\section{Tensores asociados.}
+
+Dado un tensor, es posible obtener otros tensores por medio de aumentar o disminuir índices. Por ejemplo, dado el tensor $A_{pq}$, si se aumenta el índice $p$ obtenemos el tensor $A_{\, . q}^{p}$, donde el punto indica la posición original del índice movido. Asimismo, al subir el índice $q$ obtenemos $A_{..}^{pq}$. Donde no hay lugar para la confusión es frecuente que se omitan los puntos; así, $A_{..}^{pq}$ se puede escribir como $A^{pq}$. Estos tensores derivados se obtienen formando productos internos entre el tensor dado y el tensor métrico $g_{pq}$ o su conjugado $g^{pq}$. Por ejemplo:
+\begin{align*}
+A_{. q}^{p} = g^{rp} \, A_{rq}, \hspace{1cm} A^{pq} = g^{rp} \, g^{sq} \, A_{rs}, \\[0.5em]
+A_{. rs}^{p} = g^{rq} \, A_{.. s}^{pq}, \hspace{1cm} A_{..n}^{qm . tk} = g^{pk} \, g_{sn} \, g^{rm} \, A_{. r .. p}^{q . st}
+\end{align*}
+Esto queda claro si se interpreta la multiplicación por $g^{rp}$ con el significado siguiente: sea $r = p$ (o $p = r$) en cualquier cosa que siga y sube este índice. De manera similar, se da a la multiplicación por $g_{rq}$ el significado: sea $r = q$ (o $q = r$) en cualquier cosa que siga y baje este índice.
+\par
+Todos los tensores obtenidos a partir de un tensor dado, por medio de formar productos internos con el tensor métrico y su conjugado se llaman \emph{tensores asociados} del tensor dado. Por ejemplo, $A^{m}$ y $A_{m}$ son tensores asociados, las primeras son componentes contravariantes y las segundas son componentes covariantes. La relación entre ellas está dada por:
+\begin{align*}
+A_{p} = g_{pq} \, A^{q} \hspace{1cm} {mbox{o}} \hspace{1cm} A^{p} = g^{pq} \, A_{q}
+\end{align*}
+Para coordenadas rectangulares, $g_{pq} = 1$ si $p = q$, y $0$ si $p \neq q$, de modo que $A_{p} = A^{p}$.
+
+\end{document}
