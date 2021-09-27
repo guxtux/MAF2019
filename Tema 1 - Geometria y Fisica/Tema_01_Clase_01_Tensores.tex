@@ -1,0 +1,459 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\date{24 de septiembre de 2021}
+\title{Tensores especiales}
+\subtitle{La física y la geometría}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+%Ref. Heinbockel (1996) Introduction to tensor calculus and continuum mechanics.
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Introducción}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Tensores especiales}
+
+\begin{frame}
+\frametitle{Introducción}
+Saber cómo se definen los tensores y reconocer un tensor cuando se nos presenta son dos cosas diferentes.
+\\
+\bigskip
+\pause
+Algunas cantidades, que son tensores, aparecen con frecuencia en problemas aplicados y debemos aprender a reconocer estos tensores especiales cuando ocurren.
+\end{frame}
+
+\section{Midiendo distancias}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Distancia entre dos puntos}
+
+\begin{frame}
+\frametitle{Distancia entre dos puntos}
+Definimos $y^{i}, i = 1, \ldots, N$ como coordenadas independientes en un sistema de coordenadas cartesiano ortogonal $N$ dimensional. \pause La distancia al cuadrado entre dos puntos $y^{i}$ e $y^{i} + \dd{y}^{i}, i = 1, \ldots, N$ está definida por la expresión:
+\pause
+\begin{eqnarray}
+\begin{aligned}
+\dd{s}^{2} &= \dd{y}^{m} \, \dd{y}^{m} = \\[0.5em] \pause
+&= (\dd{y}^{1})^{2} + (\dd{y}^{2})^{2} + \ldots + (\dd{y}^{N})^{2}
+\end{aligned}
+\label{eq:ecuacion_01_03_01}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Relación con coordenadas generalizadas}
+Suponemos que las coordenadas $y^{i}$ están relacionadas con un conjunto de coordenadas independientes generalizadas $x^{i}, i = 1, \ldots, N$ mediante un conjunto de ecuaciones de transformación:
+\pause
+\begin{align}
+y^{i} = y^{i} (x^{1}, x^{2}, \ldots, x^{N}), \hspace{1cm} i = 1, \ldots, N
+\label{eq:ecuacion_01_03_02}
+\end{align}
+\pause
+Para enfatizar que cada $y^{i}$ depende de las coordenadas $x$, a veces usamos la notación $y^{i} = y^{i} (x)$, para $i = 1, \ldots, N$.
+\end{frame}
+\begin{frame}
+\frametitle{Diferencial de la coordenada}
+El diferencial de cada coordenada se puede escribir como:
+\pause
+\begin{align}
+\dd{y}^{m} = \pdv{y^{m}}{x^{j}} \dd{x}^{j}, \hspace{1cm} m = 1, \ldots, N
+\label{eq:ecuacion_01_03_03}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Distancia al cuadrado}
+En consecuencia, en las coordenadas generalizadas $x$, la distancia al cuadrado, calculada a partir de la ec. (\ref{eq:ecuacion_01_03_03}), se convierte en una forma cuadrática.
+\\
+\bigskip
+\pause
+Sustituyendo la ec. (\ref{eq:ecuacion_01_03_03}) en la ec. (\ref{eq:ecuacion_01_03_01}) encontramos que:
+\pause
+\begin{align}
+\dd{s}^{2} = \pdv{y^{m}}{x^{i}} \, \pdv{y^{m}}{x^{j}} \dd{x}^{i} \dd{x}^{j} = g_{ij} \dd{x}^{i} \dd{x}^{j}
+\label{eq:ecuacion_01_03_04}
+\end{align}
+\end{frame}
+
+\subsection{El tensor métrico}
+
+\begin{frame}
+\frametitle{El tensor métrico}
+\begin{align*}
+\dd{s}^{2} = g_{ij} \dd{x}^{i} \dd{x}^{j}
+\end{align*}
+En donde la cantidad:
+\pause
+\begin{align}
+g_{ij} = \pdv{y^{m}}{x^{i}} \, \pdv{y^{m}}{x^{j}}
+\end{align}
+\pause
+es llamada \textcolor{blue}{el tensor métrico} del espacio definido por las coordenadas $x^{i}$ donde \hfill \break $i = 1, \ldots, N$.
+\end{frame}
+\begin{frame}
+\frametitle{Propiedad del tensor métrico}
+Se tiene que $g_{ij}$ son \emph{funciones de las coordenadas} $x$, a veces, se escriben como $g_{ij} = g_{ij} (x)$.
+\\
+\bigskip
+\pause
+Además, las métricas $g_{ij}$ son \emph{simétricas en los índices} $i$ y $j$, de modo que $g_{ij} = g_{ji} \hspace{0.3cm} \forall \, i, j$ en el rango de los índices.
+\end{frame}
+\begin{frame}
+\frametitle{Longitud de arco}
+Si transformamos a otro sistema de coordenadas, digamos $\overline{x}^{i}, i = 1, \ldots, N$, entonces el elemento de longitud de arco al cuadrado se expresa en términos de las coordenadas barradas:
+\pause
+\begin{align*}
+\dd{s}^{2} = \overline{g}_{ij} \dd{\overline{x}}^{i} \dd{\overline{x}}^{j}
+\end{align*}
+donde $\overline{g}_{ij} = \overline{g}_{ij} (\overline{x})$ es una función de las coordenadas barradas.
+\end{frame}
+
+\section{Coordenadas curvilíneas}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Reglas de transformación}
+
+\begin{frame}
+\frametitle{Reglas de transformación}
+Considera un conjunto de ecuaciones de transformación generales desde coordenadas rectangulares $(x, y, z)$ a coordenadas curvilíneas $(u, v, w)$.
+\end{frame}
+\begin{frame}
+\frametitle{Reglas de transformación}
+Estas ecuaciones de transformación y las correspondientes transformaciones inversas se representan como:
+\pause
+\begin{align}
+\begin{aligned}
+x &= x(u, v, w) \hspace{1.3cm} u = u(x, y, z) \\[0.5em]
+y &= y(u, v, w) \hspace{1.3cm} v = v(x, y, z) \\[0.5em]
+z &= z(u, v, w) \hspace{1.3cm} w = w(x, y, z)
+\end{aligned}
+\label{eq:ecuacion_01_03_10}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Identificando coordenadas}
+Aquí: 
+\pause
+\begin{align*}
+y^{1} = x, \hspace{0.5cm} y^{2} = y, \hspace{0.5cm} y^{3} = z
+\end{align*}
+son las coordenadas cartesianas, \pause mientras que:
+\begin{align*}
+x^{1} = u, \hspace{0.5cm} x^{2} = v, \hspace{0.5cm} x^{3} = w
+\end{align*}
+son las coordenadas generalizadas y $N = 3$.
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+La intersección de las superficies coordenadas $u = c_{1}, v = c_{2}$ y $w = c_{3}$ define las curvas coordenadas del sistema de coordenadas curvilíneas.
+\end{frame}
+
+\subsection{Vector de posición}
+
+\begin{frame}
+\frametitle{Vector de posición}
+La sustitución de las ecuaciones de transformación dadas en la ec. (\ref{eq:ecuacion_01_03_10}) en el vector de posición $\va{r} = x\, \vu{e}_{1} + y\, \vu{e}_{2} + z\, \vu{e}_{3}$ genera el vector de posición que es una función de las coordenadas generalizadas y:
+\pause
+\begin{align*}
+\va{r} &= \va{r} (u, v, w) = x (u, v, w) \, \vu{e}_{1} + y (u, v, w) \, \vu{e}_{2} + \\[0.5em]
+&+ z (u, v, w) \, \vu{e}_{3}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Vector de posición}
+En consecuencia:
+\pause
+\begin{align*}
+\dd{\va{r}} = \pdv{\va{r}}{u} \dd{u} + \pdv{\va{r}}{v} \dd{v} + \pdv{\va{r}}{w} \dd{w}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes del vector de posición}
+Donde:
+\pause
+\begin{align}
+\begin{aligned}
+\va{E}_{1} &= \pdv{\va{r}}{u} = \pdv{x}{u} \, \vu{e}_{1} + \pdv{y}{u} \, \vu{e}_{2} + \pdv{z}{u} \, \vu{e}_{3} \\[0.5em]
+\va{E}_{2} &= \pdv{\va{r}}{v} = \pdv{x}{v} \, \vu{e}_{1} + \pdv{y}{v} \, \vu{e}_{2} + \pdv{z}{v} \, \vu{e}_{3} \\[0.5em]
+\va{E}_{3} &= \pdv{\va{r}}{w} = \pdv{x}{w} \, \vu{e}_{1} + \pdv{y}{w} \, \vu{e}_{2} + \pdv{z}{w} \, \vu{e}_{3}
+\end{aligned}
+\label{eq:ecuacion_01_03_11}
+\end{align}
+son los vectores tangentes a las curvas coordenadas.
+\end{frame}
+
+\subsection{Longitud de arco}
+
+\begin{frame}
+\frametitle{Longitud de arco}
+El elemento de longitud de arco en las coordenadas curvilíneas es:
+\pause
+\begin{equation}
+\begin{aligned}
+&\dd{s}^{2} = \dd{\va{r}} \cdot \dd{\va{r}} = \\[0.5em] \pause
+&= \pdv{\va{r}}{u} \cdot \pdv{\va{r}}{u} \dd{u} \dd{u} {+} \pdv{\va{r}}{u} \cdot \pdv{\va{r}}{v} \dd{u} \dd{v} {+} \pdv{\va{r}}{u} \cdot \pdv{\va{r}}{w} \dd{u} \dd{w} + \\[0.5em]
+&+ \pdv{\va{r}}{v} \cdot \pdv{\va{r}}{u} \dd{v} \dd{u} {+} \pdv{\va{r}}{v} \cdot \pdv{\va{r}}{v} \dd{v} \dd{v} {+} \pdv{\va{r}}{v} \cdot \pdv{\va{r}}{w} \dd{v} \dd{w} + \\[0.5em]
+&+ \pdv{\va{r}}{w} \cdot \pdv{\va{r}}{u} \dd{w} \dd{u} {+} \pdv{\va{r}}{w} \cdot \pdv{\va{r}}{v} \dd{w} \dd{v} {+} \pdv{\va{r}}{w} \cdot \pdv{\va{r}}{w} \dd{w} \dd{w}
+\end{aligned}
+\label{eq:ecuacion_01_03_12}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Usando notación de índices}
+Utilizando la convención para la suma, la expresión anterior la podemos escribir con notación de índices.
+\end{frame}
+\begin{frame}
+\frametitle{Usando notación de índices}
+Por lo que se definen las cantidades:
+\pause
+\begin{align*}
+g_{11} &= \pdv{\va{r}}{u} \cdot \pdv{\va{r}}{u} \hspace{0.8cm} g_{12} = \pdv{\va{r}}{u} \cdot \pdv{\va{r}}{v} \hspace{0.8cm} g_{13} = \pdv{\va{r}}{u} \cdot \pdv{\va{r}}{w} \\[0.5em]
+g_{21} &= \pdv{\va{r}}{v} \cdot \pdv{\va{r}}{u} \hspace{0.8cm} g_{22} = \pdv{\va{r}}{v} \cdot \pdv{\va{r}}{v} \hspace{0.8cm} g_{23} = \pdv{\va{r}}{v} \cdot \pdv{\va{r}}{w} \\[0.5em]
+g_{31} &= \pdv{\va{r}}{w} \cdot \pdv{\va{r}}{u} \hspace{0.8cm} g_{32} = \pdv{\va{r}}{w} \cdot \pdv{\va{r}}{v} \hspace{0.8cm} g_{33} = \pdv{\va{r}}{w} \cdot \pdv{\va{r}}{w}
+\end{align*}
+y haciendo que: $x^{1} = u$, $x^{2} = v$, $x^{3} = w$.
+\end{frame}
+\begin{frame}
+\frametitle{Longitud de arco}
+Entonces el elemento de longitud de arco de la ec. (\ref{eq:ecuacion_01_03_12}), se puede escribir como:
+\pause
+\begin{align*}
+\dd{s}^{2} = \va{E}_{i} \cdot \va{E}_{j} \dd{x}^{i} \dd{x}^{j} = g_{ij} \dd{x}^{i} \dd{x}^{j}, \hspace{0.8cm} i, j = 1, 2, 3
+\end{align*}
+\pause
+donde:
+\pause
+\begin{align}
+\begin{aligned}
+g_{ij} = \va{E}_{i} \cdot \va{E}_{j} &= \pdv{\va{r}}{x^{i}} \cdot \pdv{\va{r}}{x^{j}} = \pdv{y^{m}}{x^{i}} \, \pdv{y^{m}}{x^{j}} \\[0.5em]
+&\mbox{con \quad} i, j \quad \mbox{ índices libres}
+\end{aligned}
+\label{eq:ecuacion_01_03_13}
+\end{align}
+son llamados \emph{componentes métricos del sistema coordenado curvilíneo}.
+\end{frame}
+
+\subsection{Matriz métrica}
+
+\begin{frame}
+\frametitle{Elemento de la matriz métrica}
+Los componentes métricos pueden considerarse como los elementos de una matriz simétrica, ya que $g_{ij} = g_{ji}$.
+\end{frame}
+\begin{frame}
+\frametitle{Coordenadas rectangulares}
+En el sistema de coordenadas rectangular $x, y, z$, el elemento de la longitud del arco al cuadrado es $\dd{s}^{2} = \dd{x}^{2} + \dd{y}^{2} + \dd{z}^{2}$.
+\pause
+En este espacio los componentes métricos son:
+\begin{align*}
+g_{ij} = \mqty(
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 )
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Coordenadas cilíndricas}
+\textbf{Ejemplo: } Coordenadas cilíndricas $(r, \theta, z)$.
+La regla de transformación de coordenadas cartesianas a coordenadas cilíndricas está dada por:
+\par
+\begin{align*}
+x = r \, \cos \theta, \hspace{1cm} y = r \, \sin \theta, \hspace{1cm} z = z
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando el tensor métrico}
+Hacemos que:
+\pause
+\begin{align*}
+y^{1} = x, \hspace{1cm} y^{2} = y, \hspace{1cm} y^{3} = z
+\end{align*}
+\pause
+y también que:
+\begin{align*}
+x^{1} = r, \hspace{1cm} x^{2} = \theta, \hspace{1cm} x^{3} = z
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Vector de posición}
+Por lo que el vector de posición se puede escribir de la forma:
+\pause
+\begin{align*}
+\va{r} = \va{r} (r, \theta, z) = r \, \cos \theta \, \vu{e}_{1} + r \, \sin \theta \, \vu{e}_{2} + z \, \vu{e}_{3}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Vector de posición}
+Calculamos las derivadas de ese vector de posición y encontramos que:
+\pause
+\begin{align*}
+\va{E}_{1} &= \pdv{\va{r}}{r} = \cos \theta \, \vu{e}_{1} + \sin \theta \, \vu{e}_{2} \\[0.5em]
+\va{E}_{2} &= \pdv{\va{r}}{\theta} = -r \, \sin \theta \, \vu{e}_{1} + r \, \cos \theta \, \vu{e}_{2} \\[0.5em]
+\va{E}_{3} &= \pdv{\va{r}}{z} = \vu{e}_{3}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes métricos}
+Del resultado en la ec. (\ref{eq:ecuacion_01_03_13}), los componentes métricos de este espacio son:
+\pause
+\begin{align*}
+g_{ij} = \pdv{y^{m}}{x^{i}} \, \pdv{y^{m}}{x^{j}} \hspace{1cm} i, j \quad \mbox{ índices libres}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes métricos}
+Entonces tendremos que:
+\pause
+\begin{eqnarray*}
+g_{11} &=& \pdv{y^{1}}{x^{1}} \, \pdv{y^{1}}{x^{1}} + \pdv{y^{2}}{x^{1}} \, \pdv{y^{2}}{x^{1}} + \pdv{y^{3}}{x^{1}} \, \pdv{y^{3}}{x^{1}} = \\[0.5em] \pause
+g_{11} &=& \cos \theta \, \cos \theta + \pause \sin \theta \, \sin \theta = \pause \cos^{2} \theta + \sin^{2} \theta = \pause 1 \\[0.5em] \pause
+g_{12} &=& \pdv{y^{1}}{x^{1}} \, \pdv{y^{1}}{x^{2}} + \pdv{y^{2}}{x^{1}} \, \pdv{y^{2}}{x^{2}} + \pdv{y^{3}}{x^{1}} \, \pdv{y^{3}}{x^{2}} = \\[0.5em] \pause
+g_{12} &=& - r \, \cos \theta \, \sin \theta + r \, \cos \theta \, \sin \theta = 0 \\[0.5em] \pause
+g_{13} &=& 0
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes métricos}
+\begin{eqnarray*}
+g_{21} &=& - r \, \sin \theta \, \cos \theta + r \, \cos \theta \, \sin \theta = 0 \\[0.5em] \pause
+g_{22} &=& (-r \, \sin \theta)(- r \, \sin \theta) + (r \, \cos \theta \, \cos \theta) = \\[0.5em]
+&=& r^{2} \, (\sin^{2} \theta + \cos \theta) = r^{2} \\[0.5em] \pause
+g_{23} &=& (- r \, \sin \theta)(0) + (r \, \cos \theta)(0) + (0)(1) = 0 \\[0.5em]
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes métricos}
+\begin{eqnarray*}
+g_{31} &=& (0)(\cos \theta) + 0 (\sin \theta) + (1)(0) = 0 \\[0.5em]
+g_{32} &=& (0)(- r \, \cos \theta) + (0)(r \cos \theta) + (1)(0) = 0 \\[0.5em]
+g_{33} &=& 0 + 0 + (1)(1) = 1
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{El tensor métrico}
+Entonces el tensor métrico es:
+\pause
+\begin{align*}
+g_{ij} = \mqty(
+1 & 0 & 0 \\
+0 & r^{2} & 0 \\
+0 & 0 & 1 )
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Longitud de arco}
+Por lo que el diferencial de longitud de arco en el sistema coordenado cilíndrico es:
+\pause
+\begin{align*}
+\dd{s}^{2} = g_{ij} \, \dd{x}^{i} \dd{x}^{j}
+\end{align*}
+\end{frame}  
+\begin{frame}
+\frametitle{Longitud de arco}
+Así llegamos a:
+\pause
+\begin{align*}
+\dd{s}^{2} = (\dd{r})^{2} + r^{2} \, (\dd{\theta})^{2} + (\dd{z})^{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Comentario relevante}
+Si $\dd{s}^{2} > 0$, al elemento de longitud de arco que es un valor real, se le conoce como \textcolor{blue}{distancia elemental}.
+\\
+\bigskip
+\pause
+Pero si $\dd{s}^{2} < 0$ como en el espacio de Minkowski, al elemento de longitud de arco es un valor complejo, se le conoce como \textcolor{red}{intervalo elemental.}
+\end{frame}
+\begin{frame}
+\frametitle{Punto importante}
+Notemos que mientras $g_{ij} = 0$ cuando $i \neq j$, el sistema coordenado es ortogonal.
+\end{frame}    
+\begin{frame}
+\frametitle{Componentes métricos}
+Dado un conjunto de transformaciones de la forma encontrada en la ec. (\ref{eq:ecuacion_01_03_10}), se pueden calcular fácilmente los componentes métricos asociados con las coordenadas generalizadas.
+\end{frame}
+\begin{frame}
+\frametitle{Componentes métricos sistema ortogonal}
+Los componentes métricos de un sistema ortogonal tienen la forma:
+\pause
+\begin{align*}
+g_{ij} = \mqty(
+h_{1}^{2} & 0 & 0 \\
+0 & h_{2}^{2} & 0 \\
+0 & 0 & h_{3}^{2})
+\end{align*}
+donde los $h_{i}$ son los llamados \emph{factores de escala}.
+\end{frame}
+\begin{frame}
+\frametitle{Longitud de arco}
+Entonces el elemento de longitud de arco al cuadrado es:
+\pause
+\begin{align*}
+\dd{s}^{2} = h_{1}^{2} \, (\dd{x}^{1})^{2} + h_{2}^{2} \, (\dd{x}^{2})^{2} + h_{3}^{2} \, (\dd{x}^{3})^{2}
+\end{align*}
+\end{frame}
+
+\subsection{Otras medidas}
+
+\begin{frame}
+\frametitle{Elemento de área}
+El elemento de área en la superficie generada por $x^{1} \, x^{2}$, está dado por:
+\pause
+\begin{eqnarray*}
+\dd{A} &=& (g_{11})^{\frac{1}{2}} \, (g_{22})^{\frac{1}{2}} \, \dd{x}^{1} \dd{x}^{2} = \\[0.5em] \pause 
+&=& (g_{11} \, g_{22})^{\frac{1}{2}} \, \dd{x}^{1} \dd{x}^{2}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Elemento de volumen}
+El elemento de volumen se obtiene a partir de:
+\begin{eqnarray*}
+\dd{V} &=& (g_{11} \, g_{22} \, g_{33})^{\frac{1}{2}} \dd{x}^{1} \dd{x}^{2} \dd{x}^{3} = \\[0.5em] \pause
+&=& g^{\frac{1}{2}} \dd{x}^{1} \dd{x}^{2} \dd{x}^{3}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Para ir practicando}
+Trabajaremos con un sistema coordenado cónico, tal que:
+\pause
+\begin{align*}
+y^{1} = x, \hspace{1cm} y^{2} = y, \hspace{1cm} y^{3} = z
+\end{align*}
+\pause
+junto con:
+\begin{align*}
+x^{1} &= r \hspace{1.5cm} 0 \leq r < \infty \\[0.35em]
+x^{2} &= \theta \hspace{1.5cm} b^{2} < \theta < c^{2} \\[0.35em]
+x^{3} &= \lambda \hspace{1.5cm} 0 < \lambda < b^{2}
+\end{align*}
+donde $c^{2} > \theta^{2} > b^{2} > \lambda^{2} > 0$
+\end{frame}
+\begin{frame}
+\frametitle{Reglas de transformación}
+Además:
+\begin{align*}
+x &= \dfrac{r \, \theta \, \lambda}{b \, c} \\[0.5em]
+y &= \dfrac{r}{b} \, \sqrt{\dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{(b^{2} - c^{2})}} \\[0.5em]
+z &= \dfrac{r}{c} \, \sqrt{\dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^{2} - b^{2})}}
+\end{align*}
+\pause
+Y nos interesa conocer el tensor métrico de este sistema coordenado.
+\end{frame}
+\end{document}
