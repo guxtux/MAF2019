@@ -1,0 +1,203 @@
+\input{../Preambulos/preambulo_materiales}
+\usepackage{apacite}
+\title{Cinemática en coordenadas generalizadas \\[0.3em]  \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+
+\section{Introducción.}
+
+El objetivo de este material es extender el texto de coordenadas ortogonales, concretamente de la sección correspondiente a teoría de la transformación, el presente introduce el concepto de coordenadas generalizadas y derivado de éste se construirán las velocidades y aceleraciones generalizadas, para finalmente obtener las ecuaciones geodésicas. Este texto tiene un análisis fuera de los elementos de geometría diferencial, pero realiza una construcción intuitiva de diferentes conceptos.
+
+\section{Coordenadas generalizadas.}
+
+Describir el movimiento de una partícula mediante coordenadas generalizadas tiene dos ventajas, en primer lugar, las ecuaciones de movimiento de una partícula pueden ser llevadas a una forma conveniente que permita integrarlas con facilidad, la segunda es que la que la nueva base vectorial está construida en términos de la base canónica $\mathbb{R}$ y con ello la construcción de la nueva base se realiza en términos de operaciones conocidas.
+\par
+Para dar una definición formal de las coordenadas generalizadas se requieren de conceptos de geometría diferencial que son descritos en un material adicional, de momento entenderemos a las coordenadas generalizadas como un conjunto cualquiera de parámetros numéricos $\left\{ q_{l} \right\}$ que determinan de manera unívoca la posición de una partícula con un número finito de grados de libertad, la cantidad mínima de coordenadas generalizadas que definen el estado del sistema se conoce como coordenadas independientes, esta condición queda expresada como:
+\begin{align*}
+\pdv{q_{l}}{q_{m}} = \delta_{l m}
+\end{align*}
+
+Considerando el movimiento de una partícula con tres grados de libertad, tendremos la misma cantidad de coordenadas generalizadas $q_{1}, q_{2}. q_{3}$, partiendo de esto, la posición de la partícula quedará descrita como:
+\begin{align}
+\va{r} = x \, (q_{1}, q_{2}, q_{3}) \, \vu{i} + y \, (q_{1}, q_{2}, q_{3}) \, \vu{j} + z \, (q_{1}, q_{2}, q_{3}) \, \vu{k}
+\label{eq:ecuacion_01_01}
+\end{align}
+cada uno de los vectores base $\va{b}_{l}$ de las coordenadas generalizadas es construido mediante la variación infinitesimal de la posición de la partícula en una determinada coordenada generalizada $q_{{l}}$, es decir:
+\begin{align*}
+\va{b}_{l} = \pdv{\va{r}}{q_{l}}
+\end{align*}
+trabajamos sobre está última expresión:
+\begin{align}
+\va{b}_{l} = \pdv{\va{r}}{q_{l}} = \pdv{x}{q_{l}} \, \vu{i} + \pdv{y}{q_{l}} \, \vu{j} + \pdv{z}{q_{l}} \, \vu{k}
+\label{eq:ecuacion_01_02}
+\end{align}
+Obsérvese que el conjunto de vectores $\left\{ \va{b}_{l} \right\}$ , no es necesariamente ortogonal, ni tampoco son vectores normalizados, sin embargo cada uno de los $\va{b}_{l}$, está escrito como una combinación lineal de los vectores canónicos, usando esto último calculamos la norma de los vectores $\va{b}_{l}$:
+\begin{align}
+h_{l} = \sqrt{\left( \pdv{x}{q_{l}} \right)^{2} + \left( \pdv{y}{q_{l}} \right)^{2} + \left( \pdv{z}{q_{l}} \right)^{2}}
+\label{eq:ecuacion_01_03}
+\end{align}
+la ec. (1.3), es la definición de los factores de escala, justo como se discutió en las notas previamente, por otra parte, en las mismas se discutió que la condición para que los vectores de la ec. (\ref{eq:ecuacion_01_02}) definan una base es:
+\begin{align}
+b_{1} \cdot b_{2} \cp b_{3} \neq 0
+\label{eq:ecuacion_01_04}
+\end{align}
+la ec. (\ref{eq:ecuacion_01_04}) define el Jacobiano de la transformación y al ser este diferente cero, por el \textbf{teorema de la función inversa se interpreta} a la transformación de coordenadas generalizadas $x(q_{1}, q_{2}, q_{3}), \, y(q_{1}, q_{2}, q_{3}), \, z(q_{1}, q_{2}, q_{3})$, como un difeomorfismo\footnote{El concepto de diferenciabilidad para funciones vectoriales de variable vectorial, se conoce también como \emph{aplicaciones}. Una aplicación es entonces: una función $f : X \to \mathbb{R}^{m}$, donde $X$ es un subconjunto de $\mathbb{R}^{n}$. \\ Una aplicación $f : U \to V$, donde $U \, \subset \, \mathbb{R}^{n}, V \, \subset \, \mathbb{R}^{m}$, ambos abiertos, es un \emph{difeomorfismo} cuando es biyectiva, diferenciable en $U$, y su aplicación inversa $f^{-1} : V \to U$ es diferenciable en $V$. Cuando existe un difeomorfismo $f : U \to V$ decimos que $U$ y $V$ son \emph{difeomorfos}.} local de clase $C^{1}$, ahora construimos la base reciproca de vectores $\left\{ b_{l}^{*} \right\}$.
+\par
+Por la independencia lineal de las coordenadas generalizadas se tiene la condición $\pdv*{q_{l}}{q_{m}} = \delta_{l m}$ , exploremos está expresión:
+\begin{align}
+\begin{aligned}
+\pdv{q_{l}}{q_{m}} &= \pdv{q_{l}}{x} \, \pdv{x}{q_{m}} + \pdv{q_{l}}{y} \, \pdv{y}{q_{m}} + \pdv{q_{l}}{z} \, \pdv{z}{q_{m}} \\[0.5em]
+\Rightarrow \pdv{q_{l}}{q_{m}} &= \left( \vu{i} \, \pdv{q_{l}}{x} + \vu{j} \, \pdv{q_{l}}{y} + \vu{k} \, \pdv{q_{l}}{z} \right) \cdot \left( \vu{i} \, \pdv{x}{q_{m}} + \vu{j} \, \pdv{y}{q_{m}} + \vu{k} \, \pdv{z}{q_{m}} \right) = \\[0.5em]
+\va{b}_{l}^{*} \cdot \va{b}_{m} &\Leftrightarrow \va{b}_{l}^{*} = \left( \vu{i} \, \pdv{q_{l}}{x} + \vu{j} \, \pdv{q_{l}}{y} + \vu{k} \, \pdv{q_{l}}{z} \right) = \grad{q_{l}}
+\end{aligned}
+\label{eq:ecuacion_01_05}
+\end{align}
+Observa que la condición $\va{b}_{l}^{*} \cdot \va{b}_{m} = \delta_{l, m}$, está definida en ambas bases, partiendo de este hecho, surge la necesidad de definir un espacio covariante y uno contravariante, al mismo tiempo se verifica el caso particular de un sistema ortogonal $\va{b}_{l}^{*} = \va{b}_{l} / h_{l}$, usando estos elementos escribimos la velocidad y la aceleración de una partícula.
+
+\section{Velocidad y aceleración generalizadas.}
+
+En primer lugar, construimos el vector velocidad, tanto en la base covariante como en la contravariante:
+\begin{align}
+\begin{aligned}
+\va{v} &= (\va{v} \cdot \va{b}_{l}^{*}) \, \va{b}_{l} = v_{l}^{*} \, b_{l} \\[0.5em]
+\va{v} &= (\va{v} \cdot \va{b}_{l}) \, \va{b}_{l}^{*} = v_{l} \, b_{l}^{*}
+\end{aligned}
+\label{eq:ecuacion_01_06}
+\end{align}
+donde\footnote{Recuerda que en la ec. (\ref{eq:ecuacion_01_06}) se usa la convención de la suma o convención de Einstein.} $(\va{v} \cdot \va{b}_{l}^{*}) = v_{l}^{*} $ y $(\va{v} \cdot \va{b}_{l}) = v_{l}$, ahora construimos un procedimiento directo, para obtener expresiones sencillas que permitan realizar cálculos.
+\begin{align}
+\begin{aligned}
+v_{l} &= \vb{v} \cdot \va{b}_{l} = (\vu{i} \, \dot{x} + \vu{j} \, \dot{y} + \vu{k} \, \dot{z}) \cdot \left( \vu{i} \, \pdv{x}{q_{l}} + \vu{j} \, \pdv{y}{q_{l}} + \vu{k} \, \pdv{z}{q_{l}}\right) = \\[0.5em]
+&= \dot{x} \, \pdv{x}{q_{l}} + \dot{y} \, \pdv{y}{q_{l}} + \dot{z} \, \pdv{z}{q_{l}}
+\end{aligned}
+\label{eq:ecuacion_01_07}
+\end{align}
+
+Ahora veamos que cada una de las componentes de la velocidad está definida por:
+\begin{align}
+\begin{aligned}[b]
+\dot{x} &= \pdv{x}{q_{m}} \, \dot{q}_{m} \hspace{1cm} \dot{y} = \pdv{y}{q_{m}} \, \dot{q}_{m} \hspace{1cm} \dot{z} = \pdv{z}{q_{m}} \, \dot{q}_{m} \\[0.5em]
+\Rightarrow \pdv{\dot{x}}{\dot{q}_{m}} &= \pdv{x}{q_{m}} \, \dot{q}_{m} \hspace{1cm} \pdv{\dot{y}}{\dot{q}_{m}} = \pdv{y}{q_{m}} \, \dot{q}_{m} \hspace{1cm} \pdv{\dot{z}}{\dot{q}_{m}} = \pdv{z}{q_{m}} \, \dot{q}_{m}
+\end{aligned}
+\label{eq:ecuacion_01_08}
+\end{align}
+Sustituyendo la ec. (\ref{eq:ecuacion_01_08}) en la ec. (\ref{eq:ecuacion_01_07}) se obtiene una expresión para el cálculo de $v_{l}$:
+\begin{align}
+\begin{aligned}[b]
+v_{l} &= \dot{x} \, \pdv{\dot{x}}{\dot{q}_{l}} + \dot{y} \, \pdv{\dot{y}}{\dot{q}_{l}} + \dot{z} \, \pdv{\dot{z}}{\dot{q}_{l}} = \\[0.5em]
+&= \dfrac{1}{2} \, \pdv{\dot{q}_{l}} \left( \dot{x}^{2} + \dot{y}^{2} + \dot{z}^{2} \right) = \\[0.5em]
+&= \pdv{\dot{q}_{l}} \, \dfrac{\dot{v}}{2}
+\end{aligned}
+\label{eq:ecuacion_01_09}
+\end{align}
+la ventaja de la ec. (\ref{eq:ecuacion_01_09}) radica en que es expresión de tipo escalar, aún con esto damos un paso más, escribamos el término $v^{2}$ usando la matriz métrica $g_{l,m}$ que se ha discutio en los materiales de trabajo:
+\begin{align}
+v^{2} = g_{l,m} \, v_{l}^{*} \, v_{m}^{*}
+\label{eq:ecuacion_01_10}
+\end{align}
+Sólo resta expresar las componentes contravariantes $v_{l}^{*}$:
+\begin{align}
+\begin{aligned}[b]
+v_{l}^{*} &= \va{v} \cdot \va{b}_{l}^{*} = (\vu{i} \, \dot{x} + \vu{j} \, \dot{y} + \vu{k} \, \dot{z}) \cdot \left( \vu{i} \, \pdv{q_{l}}{x} + \vu{j} \, \pdv{q_{l}}{y} + \vu{k} \, \pdv{q_{l}}{z} \right) = \\[0.5em]
+&= \dot{x} \, \pdv{q_{l}}{x} + \dot{y} \, \pdv{q_{l}}{y} + \dot{z} \, \pdv{q_{l}}{z}
+\end{aligned}
+\label{eq:ecuacion_01_11}
+\end{align}
+a estas expresiones se les conoce como \emph{velocidades generalizadas}, al sustituir la ec. (\ref{eq:ecuacion_01_11}) en la ec. (\ref{eq:ecuacion_01_10}) se obtiene:
+\begin{align}
+\begin{aligned}[b]
+\end{aligned}
+v^{2} &= g_{l,m} \, \dot{q}_{l} \, \dot{q}_{m} \\[0.5em]
+\Rightarrow v_{l} &= \pdv{\dot{q}_{l}} \, \dfrac{g_{l,m} \, \dot{q}_{l} \, \dot{q}_{m}}{2}
+\label{ec:ecuacion_01_12}
+\end{align}
+el lado derecho de la ec. (\ref{ec:ecuacion_01_12}) es referido en textos de geometría diferencial como \emph{energía de la variedad} y el lado izquierdo brinda una expresión que es más manejable e incluso fácil de recordar, en el caso particular de un sistema ortogonal la ec. (\ref{ec:ecuacion_01_12}) se reduce a $v_{l} = h_{i}^{2} \, \dot{q}_{l}$ (muy útil para exámenes). Sin embargo, las ecuaciones de movimiento de una partícula requieren conocer las aceleraciones de ésta, así que conectamos la ec. (\ref{ec:ecuacion_01_12}) con las ecuaciones de movimiento de una partícula. La aceleración es:
+
+% 	  	,(1.13)
+
+% además, reescribimos la Ec.(1.13) de la siguiente forma:
+
+% 	  	,(1.14)
+
+% Los términos en color azul, se obtiene al sustituir la Ec.(1.8) en la Ec.(1.14),  para el caso particular del movimiento de una partícula libre la Ec.(1.14) define las trayectorias geodésicas de la partícula.
+
+% 	  	,(1.15)
+% El operador   es conocido en la literatura como operador Lagrangiano de primer orden, con un par de pasos adicionales, la descripción mecánica que se ha presentado concluye en las ecuaciones de Euler-Lagrange. Por otra parte, la teoría aquí descrita es la base de la descripción de variedades diferenciables, el desarrollo desde esta perspectiva se presenta en un material adicional.
+
+% Para finalizar este material veamos un ejemplo del movimiento de una partícula en un sistema de coordenadas parabólico, las condiciones de transformación son:
+% 	  	,(1.16)
+% partiendo de la Ec.(1.16) y Ec.(1.2) construimos la base vectorial:
+
+% 	  	(1.17)
+% Con la Ec.(1.17) y la Ec.(1.3) obtenemos los factores de escala:
+
+% 	  	(1.18)
+
+% Usando la Ec.(1.4) verificamos la condición:
+
+% 	  	,(1.19)
+% de la Ec.(1.17) verificamos la condición de ortogonalidad: 
+% 	  	(1.20)
+
+% tomando la definición  se construye la base recíproca:
+
+% 	  	(1.21)
+
+% Queda a tu consideración emplear la Ec.(1.5) para obtener la el mismo resultado de la Ec.(1.21) , la matriz métrica es:
+
+% 	  	,(1.22)
+
+% con la Ec.(1.22) y Ec.(1.12) escribimos la energía de la variedad:
+
+% 	  	(1.23)
+
+% Por último, encontramos las ecuaciones geodésicas a través de  , 
+
+% 	  	(1.24)
+
+% La forma general de una geodésica es:
+
+% 	  	(1.25)
+% identificando, los términos azules de la Ec.(1.24), con la Ec.(1.25) se pueden leer los términos   que son conocidos en la literatura como símbolos de Christoffel.
+  
+
+% Ahora hacemos la construcción de la Ec.(1.25).
+
+% SÍMBOLOS DE CHRISTOFFEL
+% En los textos de geometría diferencial los símbolos de Christoffel son expresiones obtenidas en términos de la matriz métrica cuya definición emerge del cálculo de la derivada covariante de un campo vectorial, en este material se explica su interpretación geométrica y una forma de calcularlos. Cuando un vector   cambia infinitesimalmente a lo largo de una coordenada  , se obtiene un nuevo vector, mismo que escribiremos en la base contravariante:
+
+% 	  	,(1.26)
+
+% es decir, los coeficientes   son las componentes covariantes del cambio un vector   en la dirección de la coordenada generalizada  , al tomar el producto punto de la Ec.(1.26) con el vector   se obtiene una forma de calcularlos:
+
+% 	  	,(1.27)
+
+% antes de construir una fórmula para calcular los   debe observarse que la diferenciabilidad de las transformaciones permite establecer la simetría:
+
+% 	  	(1.28)
+
+% con la Ec.(1.28) se reescribe el lado izquierdo de la Ec.(1.27):
+% 	  	(1.29)
+
+% los símbolos de Christoffel también tienen una contra parte covariante construida de la siguiente forma:
+
+% 	  	(1.30)
+
+% estas ideas pueden extenderse a los campos vectoriales, lo que nos lleva al concepto de derivada covariante:
+
+% 	  	(1.31)
+% el mismo razonamiento puede aplicarse al cálculo de las aceleraciones, partiendo de las Ec.(1.6) y Ec.(1.8) tenemos
+
+% 	  	(1.32)
+
+% la Ec.(1.32) recupera la Ec.(1.25) en el caso  .
+
+% Finalmente veamos que toda la construcción presentada es válida para transformaciones independientes de tiempo, nota que la transformación está descrita como la composición definida en Ec.(1.1), esto nos limita la descripción de variedades encajadas en   el tratamiento en espacios topológicos arbitrarios es ligeramente diferente aunque sigue los mismos principios. 
+\end{document}
