@@ -1,0 +1,270 @@
+\input{../Preambulos/preambulo_materiales}
+\usepackage{apacite}
+\title{Funciones Gamma y Beta \\[0.3em]  \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+\section{Identidades Función Gamma.}
+\subsection{Primera identidad.}
+
+%Ref. Farrell - 1-18
+\textbf{Demuestra que}:
+\begin{align*}
+\sqrt{\pi} \, \Gamma(2 \, n + 1) = 2^{2n} \, \Gamma \left( n + \dfrac{1}{2} \right) \, \Gamma(n + 1)
+\end{align*}
+donde $n$ es cualquier valor entero positivo.
+\par
+Para resolver este ejercicio será necesario apoyarse de otras identidades que se indican en las notas de trabajo y también en los videos del canal de YouTube.
+\par
+La primera identidad que ocuparemos es:
+\begin{align*}
+\Gamma\left( n + \dfrac{1}{2} \right) = \dfrac{(2 \, n {-} 1)(2 \, n {-} 3)(2 \, n {-} 5) \ldots (3)(1)\sqrt{\pi}}{2^{n}}
+\end{align*}
+Como es una identidad fácil de demostrar, veremos su desarrollo para luego regresar a la identidad del problema inicial. El argumento $n + 1/2$ se puede escribir como: $(2 \, n + 1)/2$.
+\par
+Una identidad de apoyo que conocemos es:
+\begin{align*}
+\Gamma(x) = (x - 1) \, \Gamma (x - 1)
+\end{align*}
+Si hacemos que:
+\begin{align*}
+x = \dfrac{(2 \, n + 1)}{2}
+\end{align*}
+Tendremos que:
+\begin{align*}
+\Gamma \left( \dfrac{2 \, n + 1}{2} \right) = \left( \dfrac{2 \, n + 1}{2} - 1 \right) \, \Gamma \left( \dfrac{2 \, n + 1}{2} - 1 \right)
+\end{align*}
+Es decir:
+\begin{align*}
+\Gamma \left( n + \dfrac{1}{2} \right) = \left( \dfrac{2 \, n - 1}{2} \right) \, \Gamma \left( \dfrac{2 \, n - 1}{2} \right)
+\end{align*}
+Seguimos reduciendo el argumento en una unidad para $\Gamma [(2 \, n - 1)/2]$:
+\begin{align*}
+\Gamma \left( \dfrac{2 \, n - 1}{2} \right) = \left( \dfrac{2 \, n - 3}{2} \right) \, \Gamma \left( \dfrac{2 \, n - 3}{2} \right)
+\end{align*}
+Así tendremos que:
+\begin{align*}
+\Gamma \left( n + \dfrac{1}{2} \right) = \left( \dfrac{2 \, n - 1}{2} \right) \, \left( \dfrac{2 \, n - 3}{2} \right) \, \Gamma \left( \dfrac{2 \, n - 3}{2} \right)
+\end{align*}
+
+Recordemos que $\Gamma(\frac{1}{2}) = \sqrt{\pi}$,  queremos repetir el cambio en el argumento de la función Gamma, para llegar a $\Gamma(\frac{1}{2})$.
+\par
+Por ejemplo: podemos escribir:
+\begin{align*}
+\Gamma \left( \dfrac{7}{2} \right) = \dfrac{5}{2} \cdot \dfrac{3}{2} \cdot \dfrac{1}{2} \, \Gamma \left( \dfrac{1}{2} \right)
+\end{align*}
+Vemos que obtuvimos $\Gamma(\frac{1}{2})$ multiplicado por tres factores;  es más, este número tres es el mismo entero que se presenta en el argumento de $\Gamma(\frac{7}{2})$ cuando se escribe $\Gamma(3 + \frac{1}{2})$. Este $3$ corresponde a $n$ de $\Gamma \left(n + \frac{1}{2}\right)$.
+\par
+Po lo que podemos decir que si comenzamos con $\Gamma \left(n + \frac{1}{2}\right)$, tenemos que ir disminuyendo el argumento en una unidad $n$ veces para llegar a $\frac{1}{2}$.
+\par
+También observamos que cada vez que se repite el proceso hay otro $2$ en el denominador. Como el proceso se repetirá $n$ veces, podemos factorizar los $2$ y escribir $2^{n}$.
+\par
+Entonces llegamos al resultado:
+\begin{align*}
+\Gamma\left( n + \dfrac{1}{2} \right) = \dfrac{(2 \, n {-} 1)(2 \, n {-} 3)(2 \, n {-} 5) \ldots (3)(1)\sqrt{\pi}}{2^{n}}
+\end{align*}    
+
+\begin{mdframed}
+ \textbf{Ejercicio. Un punto adicional.}
+ 
+Demuestra que si $n$ es un entero positivo, se tiene que:
+\begin{align*}
+\Gamma\left( n - \dfrac{1}{2} \right) = \dfrac{(2 \, n {-} 3)(2 \, n {-} 5) \ldots (3)(1)\sqrt{\pi}}{2^{n-1}}
+\end{align*}
+\end{mdframed}
+
+Con el resultado obtenido, regresamos al ejercicio inicial:
+\begin{align*}
+2^{2n} \, \Gamma \left( n + \dfrac{1}{2} \right) \, \Gamma(n + 1) =
+\end{align*}    
+
+Donde ahora usamos el resultado de la identidad de apoyo anterior:
+\begin{align*}
+= \dfrac{2^{2n} (2 \, n {-} 1)(2 \, n - 3) \ldots 3 \cdot 1 \, \sqrt{\pi} \, \Gamma(n + 1)}{2^{n}}
+\end{align*}
+
+Multiplicamos el lado derecho de la igualdad por un $1$:
+\begin{align*}
+\dfrac{2 \, n (2 \, n - 2)(2 \, n - 4) \ldots (4)(2)}{2 \, n (2 \, n - 2)(2 \, n - 4) \ldots (4)(2)}
+\end{align*}
+Para obtener:
+\begin{align*}
+= \dfrac{2^{2n} (2 n) (2 n {-} 2)(2 n {-} 4) \ldots 4 \cdot 3 \cdot 2 \cdot 1 \, \sqrt{\pi} \, \Gamma(n {+} 1)}{2^{n} (2 n)(2 n {-} 2)(2 n {-} 4) \ldots (4) (2)}
+\end{align*}
+
+% \begin{tikzpicture}[overlay]
+%     \draw [fill, color=yellow!50, opacity=0.3] (1.4, 1.3) rectangle (8.1, 2); 
+%     \draw [fill, color=blue!50, opacity=0.3] (2.3, 0.7) rectangle (9, 1.2);
+% \end{tikzpicture}
+
+El numerador del resultado anterior es:
+\begin{align*}
+2^{2n} (2 n)! \, \sqrt{\pi} \, \Gamma(n + 1)
+\end{align*}
+Mientras que el denominador es igual a:
+\begin{align*}
+2^{n} \, 2^{n} \, n!
+\end{align*}
+
+Si escribimos la cantidad:
+\begin{align*}
+(2 \, n)! = \Gamma(2 \, n + 1)
+\end{align*}
+y dejando que: $n! = \Gamma(n + 1)$, el resultado:
+\begin{align*}
+\dfrac{\Cancel[red]{2^{2n}} \, \sqrt{\pi} \, \Gamma(2 \, n + 1) \, \Cancel[blue]{\Gamma(n + 1)}}{\Cancel[red]{2^{2n}} \Cancel[blue]{\Gamma(n + 1)}}
+\end{align*}
+
+Entonces hemos demostrado que:
+\begin{align*}
+\sqrt{\pi} \, \Gamma(2 \, n + 1) = 2^{2n} \, \Gamma \left( n + \dfrac{1}{2} \right) \, \Gamma(n + 1) \qed
+\end{align*}    
+
+Si usamos:
+\begin{align*}
+2 \, n \, \Gamma( 2 \, n) &= \Gamma(2 \, n + 1) \\[0.5em] 
+n \, \Gamma(n) &= \Gamma(n + 1)
+\end{align*}
+
+Es posible reescribir la ecuación obtenida como:
+\begin{align*}
+\sqrt{\pi} \, \Gamma(2 \, n) = 2^{2n-1} \, \Gamma(n) \, \Gamma \left( n + \dfrac{1}{2} \right)
+\end{align*}
+
+Que es conocida como la \emph{fórmula de duplicación de Legendre}. Es conveniente utilizar la fórmula de duplicación de Legendre expresada como una razón:
+\begin{align*}
+\dfrac{\Gamma(2 \, n)}{\Gamma (n)} = \dfrac{\Gamma \left( n + \dfrac{1}{2} \right)}{\sqrt{\pi} \, 2^{1- 2n}}
+\end{align*}
+
+
+\section{Problema con \texorpdfstring{$\Gamma(x)$}{G(x)} y \texorpdfstring{$B(x, y)$}{B(x,y)}.}
+\subsection{Ejercicio 2.}
+
+%REf. Farrell 1.31
+
+\textbf{Demuestra que}: 
+\begin{align*}
+\Gamma(p) \, \Gamma(1 - p) = \dfrac{\pi}{\sin p \, \pi} \hspace{1cm} p \mbox{ no entero}
+\end{align*}
+La razón por que $p$ sea un valor no entero es evidente: No se puede ocupar cualquier valor entero para $p$, ya que el denominador sería cero. Nuevamente haremos uso de una serie de identidades tanto de la función Gamma como de la función Beta.
+\par
+La demostración de alguna de ellas se puede revisar en el canal de YouTube, mencionaremos la idea general para demostrar una identidad en particular.
+\par
+Ocuparemos las siguientes identidades:
+\begin{align}
+B(x, y) = \dfrac{\Gamma(x) \, \Gamma(y)}{\Gamma(x + y)}
+\label{eq:ecuacion_01}
+\end{align}
+
+\begin{align}
+B(p, 1 - p) = \dfrac{\pi}{\sin p \, \pi} \hspace{1cm} 0 < p < 1
+\label{eq:ecuacion_02}
+\end{align}
+De esta identidad hablaremos más adelante. Las otras identidades que ocuparemos son:
+\begin{align}
+\Gamma(x + 1) &= x \, \Gamma(x) \label{eq:ecuacion_03} \\[0.5em]
+\Gamma(-x) &= \dfrac{\Gamma(1 - x)}{-x}, \hspace{1cm} x \neq 0, 1, 2, \ldots \label{eq:ecuacion_04}
+\end{align}
+
+Comenzamos haciendo que $0 < p < 1$, así que ocupamos la ec. (\ref{eq:ecuacion_01}), que es la identidad que relaciona a la función Gamma con la función Beta:
+\begin{align*}
+\dfrac{\Gamma(p) \, \Gamma(1 - p)}{\Gamma(p + 1 - p)} = B(p, 1 - p) 
+\end{align*}
+Hacemos que $h = p + 1$, usando las ecs. (\ref{eq:ecuacion_03}) y (\ref{eq:ecuacion_04}) y el resultado de la diapositiva anterior, se tiene que:
+\begin{align*}
+\Gamma(h) \, \Gamma(1 - h) &=  \Gamma(p + 1) \, \Gamma(-p) = \\[0.5em] 
+&= p \, \Gamma(p)  \, \dfrac{\Gamma(1 - p)}{- p} = \\[0.5em] 
+&= \dfrac{-\pi}{\sin p \, \pi} \hspace{1cm} 0 < p < 1 \\[0.5em]
+&= \dfrac{-\pi}{\sin (h - 1) \, \pi} \\[0.5em] 
+&= \dfrac{-\pi}{- \sin h \, \pi} \\[0.5em] 
+&= \dfrac{\pi}{\sin h \, \pi} \hspace{1cm} 1 < p < 2
+\end{align*}
+
+Se puede demostrar que la expresión sigue siendo válida para \hfill \break $2 < h < 3$, para luego por medio de inducción matemática ver que se cumple para cualquier \emph{valor no entero positivo} $h$.
+\par
+Ahora tomamos el intervalo $0 < p < 1$ y hacemos que $h = p - 1$,  procedemos de la misma manera que con los valores no enteros positivos.
+\begin{align*}
+\Gamma(h) \, \Gamma(1 - h) = \dfrac{\pi}{\sin h \, \pi} \hspace{1cm} -1 < h < 0
+\end{align*}
+
+Como se vio previamente, esta expresión es válida para $-2 < h < -1$,  se puede demostrar por inducción que se cumple para cualquier \emph{valor no entero negativo} $h$.
+\par
+Entonces llegamos a que:
+
+\begin{align*}
+\Gamma(p) \, \Gamma(1 - p) = \dfrac{\pi}{\sin p \, \pi}
+\end{align*}
+se cumple para cualquier valor no entero $p$ ya sea positivo o negativo.
+
+\section{La identidad para \texorpdfstring{$B(x, y)$}{B(x, y)}.}
+\subsection{Primer paso.}
+
+Se requiere inicialmente demostrar que la función Beta:
+\begin{align*}
+B(x, y) = \int_{0}^{1} t^{x - 1} \, (1 - y)^{y-1} \dd{t}
+\end{align*}
+se puede expresar como una integral cuyo intervalo de integración es $[0, \infty)$
+\par
+El problema en primer lugar es buscar un cambio de la variable de integración,  $t = f(u)$,  de modo que a medida que $t$, en la integral de $B (x, y)$ recorra el intervalo de cero a la unidad. La nueva variable $u$ variará continua y monótonamente de cero a infinito. También requerimos que la relación $t = f(u)$ tenga una derivada continua para todo $u \geq 0$.
+\par
+Dado que tenemos que \enquote{extender} el intervalo $0 \leq t < 1$ hasta el intervalo $0 \leq u < \infty$,  luego de una breve reflexión que una fórmula fraccionaria funcionará:
+\begin{align*}
+t = \dfrac{u}{u + 1}
+\end{align*}
+Entonces:
+\begin{align*}
+\dv{t}{u} &= \dfrac{1}{(u + 1)^{2}} \\[1em] 
+1 - t &= \dfrac{1}{u + 1}
+\end{align*}
+
+Entonces de la definición de la función $B(x, y)$:
+\begin{align*}
+B(x, y) = \int_{0}^{1} t^{x - 1} \, (1 - y)^{y-1} \dd{t}
+\end{align*}
+También se puede expresar por una integral cuyo intervalo va de $0$ a  $\infty$:
+\begin{align*}
+B(x, y) = \scaleint{5ex}_{\bs 0}^{\infty} \dfrac{u^{x-1}}{(u + 1)^{x+y}} \dd{u} \hspace{1cm} x > 0, y > 0
+\end{align*}
+
+\subsection{Segundo paso.}
+
+Lo que queremos ahora es evaluar:
+\begin{align*}
+B(p, 1 - p)
+\end{align*}
+donde $p$ es cualquier número positivo menor que uno.
+
+Haciendo que  $x = p$ con $0 < p < 1$  y $y = 1 - p$, entonces en la integral del resultado anterior:
+\begin{align*}
+B(x, y) = \scaleint{5ex}_{\bs 0}^{\infty} \dfrac{u^{x-1}}{(u + 1)^{x+y}} \dd{u} \hspace{1cm} x > 0, y > 0
+\end{align*}
+Tenemos que:
+\begin{align*}
+B(p, 1 - p) = \scaleint{5ex}_{\bs 0}^{\infty} \dfrac{u^{p-1}}{(u + 1)} \dd{u} \hspace{1cm} 0 < p < 1
+\end{align*}
+
+¿Cómo resolvemos esta integral? Si el intervalo de integración fuera de $(-\infty, \infty)$ podríamos evaluar la integral con un integral de contorno en el plano complejo de $z = x +  i \, y$ 
+\par
+Hagamos que el intervalo de integración se \enquote{extienda} a $(-\infty, \infty)$  mediante la transformación $u = e^{x}$, que deja a $x$ en $-\infty$ cuando $u = 0$, y deja a $x$ en $+\infty$ cuando $u$ está en $+\infty$. Como $\dv*{u}{x} = e^{x}$, se tiene que:
+\begin{align*}
+B(p, 1 - p) = \scaleint{5ex}_{\bs -\infty}^{\infty} \dfrac{e^{px}}{1 + e^{x}} \dd{x} \hspace{1cm} 0 < p < 1
+\end{align*}
+
+Para resolver la integral anterior, nos podemos apoyar con la siguiente expresión:
+\begin{align*}
+\scaleoint{6ex}_{C} = \dfrac{e^{pz}}{1 + e^{z}} \hspace{1cm} z = x + i \, y
+\end{align*}
+tomando el sentido positivo alrededor del rectángulo $C$ en el plano complejo, con vértices en $z = -R$, $z = R$, $z = R + 2 \,  \pi \, i$, $z = -R +  2 \, \pi \, i$. Como se revisó en el curso de Variable Compleja I, habrá que revisar si el integrando es analítico, qué puntos son polos, etc.
+\par
+Luego de resolver la integral con la teoría de variable compleja, podemos garantizar que la identidad para la función Beta es:
+\begin{align*}
+B(p, 1 - p) = \dfrac{\pi}{\sin p \, \pi} \hspace{1cm} 0 < p < 1
+\end{align*}
+\end{document}
+

@@ -1,0 +1,528 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\date{1 de octubre de 2021}
+\title{Funciones Gamma y Beta}
+\subtitle{La física y la geometría}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
+% \section{Avisos}
+% \frame{\tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Sobre la participación en las sesiones}
+
+% \begin{frame}
+% \frametitle{Participación en las sesiones}
+% Con la finalidad de impulsar la participación en las sesiones síncronas, \pause durante la exposición se presentará una diapositiva que incluye un ejercicio para resolver.
+% \\
+% \bigskip
+% \pause
+% El ejercicio que sea resuelto y enviado por Moodle, contará como ejercicio a cuenta, es decir, otorgará un punto (o su parte) en la contabilidad de ejercicios.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Para que sea contabilizado}
+% Para que el ejercicio y su puntaje sea tomado en cuenta, \pause deberá de enviarse resuelto por Moodle a más tardar las 8 pm del día de la sesión en Zoom.
+% \\
+% \bigskip
+% \pause
+% Estará habilitado en Moodle el espacio para recibirlo y se dejará programado para que a las 8:00 pm sea la hora límite.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Solo por Moodle}
+% Se tomarán en cuenta aquellos ejercicios que se reciban en Moodle, por lo que enviar la solución por correo se revisará pero ya no contabiliza.
+% \\
+% \bigskip
+% \pause
+% Tenemos $14$ semanas por delante del semestre, así que $28$ ejercicios bien resueltos, apoyarían mucho para el $50\%$ de la calificación final.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Para que sea contabilizado}
+% La manera de registrar a quiénes se les va a contabilizar el ejercicio, es la siguiente:
+% \\
+% \bigskip
+% \pause
+% Al entrar a la sesión en Zoom, deberán de \textbf{enviar por chat al profesor}, el mensaje: \emph{Buenas tardes, su nombre}. 
+% \end{frame}
+% \begin{frame}
+% \frametitle{Para que sea contabilizado}
+% Si por alguna razón se recibe por Moodle el problema resuelto pero no hay registro del mensaje en Zoom, el ejercicio no contabiliza.
+% \\
+% \bigskip
+% \pause
+% Zoom nos da un reporte completo de entrada a la sala.
+% \end{frame}
+% \begin{frame}
+% \frametitle{En dónde estará el ejercicio}
+% El ejercicio se presentará en la exposición durante la sesión de Zoom, pero en el video que se subirá en el canal de YouTube, se retirará la diapositiva, por lo que recomendamos ampliamente que asistan en las sesiones.
+% \\
+% \bigskip
+% \pause
+% Son $28$ ejercicios que bien pueden otorgar $28$ puntos.
+% \end{frame}
+
+% \subsection{Del Examen Tarea 1}
+
+% \begin{frame}
+% \frametitle{El Examen Tarea 1}
+% Al final de la presentación, se comentará sobre los ejercicios que deberán de resolver y enviar como Examen Tarea 1.
+% \end{frame}
+
+\section{Identidades Función Gamma}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Primera identidad}
+
+%Ref. Farrell - 1-18
+\begin{frame}
+\frametitle{Identidad a demostrar}
+Demuestra que:
+\begin{align*}
+\sqrt{\pi} \, \Gamma(2 \, n + 1) = 2^{2n} \, \Gamma \left( n + \dfrac{1}{2} \right) \, \Gamma(n + 1)
+\end{align*}
+para cualquier valor $n$ entero positivo.
+\end{frame}
+\begin{frame}
+\frametitle{Identidades de apoyo}
+Para resolver este ejercicio será necesario apoyarse de otras identidades que se indican en las notas de trabajo y también en los videos del canal de YouTube.
+\end{frame}
+\begin{frame}
+\frametitle{Identidades de apoyo}
+La primera identidad que ocuparemos es:
+\pause
+\begin{align*}
+\Gamma\left( n + \dfrac{1}{2} \right) = \dfrac{(2 \, n {-} 1)(2 \, n {-} 3)(2 \, n {-} 5) \ldots (3)(1)\sqrt{\pi}}{2^{n}}
+\end{align*}
+\pause
+Como es una identidad fácil de demostrar, veremos su desarrollo para luego regresar a la identidad del problema 1.
+\end{frame}
+\begin{frame}
+\frametitle{Demostrando la identidad de apoyo}
+El argumento $n + 1/2$ se puede escribir como: $(2 \, n + 1)/2$.
+\\
+\bigskip
+\pause
+Una identidad de apoyo que conocemos es:
+\pause
+\begin{align*}
+\Gamma(x) = (x - 1) \, \Gamma (x - 1)
+\end{align*}
+\pause
+Si hacemos que:
+\begin{align*}
+x = \dfrac{(2 \, n + 1)}{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Demostrando la identidad de apoyo}
+Tendremos que:
+\pause
+\begin{align*}
+\Gamma \left( \dfrac{2 \, n + 1}{2} \right) = \left( \dfrac{2 \, n + 1}{2} - 1 \right) \, \Gamma \left( \dfrac{2 \, n + 1}{2} - 1 \right)
+\end{align*}
+\pause
+Es decir:
+\begin{align*}
+\Gamma \left( n + \dfrac{1}{2} \right) = \left( \dfrac{2 \, n - 1}{2} \right) \, \Gamma \left( \dfrac{2 \, n - 1}{2} \right)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Repitiendo el proceso}
+Seguimos reduciendo el argumento en una unidad para $\Gamma [(2 \, n - 1)/2]$:
+\pause
+\begin{align*}
+\Gamma \left( \dfrac{2 \, n - 1}{2} \right) = \left( \dfrac{2 \, n - 3}{2} \right) \, \Gamma \left( \dfrac{2 \, n - 3}{2} \right)
+\end{align*}
+\pause
+Así tendremos que:
+\begin{align*}
+\Gamma \left( n + \dfrac{1}{2} \right) = \left( \dfrac{2 \, n - 1}{2} \right) \, \left( \dfrac{2 \, n - 3}{2} \right) \, \Gamma \left( \dfrac{2 \, n - 3}{2} \right)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Otra identidad de apoyo}
+Recordemos que $\Gamma(\frac{1}{2}) = \sqrt{\pi}$, \pause queremos repetir el cambio en el argumento de la función Gamma, para llegar a $\Gamma(\frac{1}{2})$.
+\\
+\bigskip
+\pause
+Por ejemplo: podemos escribir:
+\begin{align*}
+\Gamma \left( \dfrac{7}{2} \right) = \dfrac{5}{2} \cdot \dfrac{3}{2} \cdot \dfrac{1}{2} \, \Gamma \left( \dfrac{1}{2} \right)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado obtenido}
+Vemos que obtuvimos $\Gamma(\frac{1}{2})$ multiplicado por tres factores; \pause es más, este número tres es el mismo entero que se presenta en el argumento de $\Gamma(\frac{7}{2})$ cuando se escribe $\Gamma(3 + \frac{1}{2})$
+\\
+\bigskip
+\pause
+Este $3$ corresponde a $n$ de $\Gamma \left(n + \frac{1}{2}\right)$.
+\end{frame}
+\begin{frame}
+\frametitle{Número de pasos necesarios}
+Por lo que podemos decir que si comenzamos con $\Gamma \left(n + \frac{1}{2}\right)$, tenemos que ir disminuyendo el argumento en una unidad $n$ veces para llegar a $\mathlarger{\Gamma}(\frac{1}{2})$.
+\\
+\bigskip
+\pause
+También observamos que cada vez que se repite el proceso hay otro $2$ en el denominador. Como el proceso se repetirá $n$ veces, podemos factorizar los $2$ y escribir $2^{n}$.
+\end{frame}
+\begin{frame}
+\frametitle{Resultado}
+Entonces llegamos al resultado:
+\begin{align*}
+\Gamma\left( n + \dfrac{1}{2} \right) = \dfrac{(2 \, n {-} 1)(2 \, n {-} 3)(2 \, n {-} 5) \ldots (3)(1)\sqrt{\pi}}{2^{n}}
+\end{align*}    
+\end{frame}
+% \begin{frame}
+% \frametitle{Un punto adicional}
+% Demuestra que si $n$ es un entero positivo, se tiene que:
+% \begin{align*}
+% \Gamma\left( n - \dfrac{1}{2} \right) = \dfrac{(2 \, n {-} 3)(2 \, n {-} 5) \ldots (3)(1)\sqrt{\pi}}{2^{n-1}}
+% \end{align*}
+% \pause
+% Se debe de enviar hoy a más tardar a las 8 pm!
+% \end{frame}
+\begin{frame}
+\frametitle{Regresamos al ejercio inicial}
+Con el resultado obtenido, regresamos al ejercicio inicial:
+\begin{align*}
+2^{2n} \, \Gamma \left( n + \dfrac{1}{2} \right) \, \Gamma(n + 1) =
+\end{align*}    
+\pause
+Donde ahora usamos el resultado de la identidad de apoyo anterior:
+\pause
+\begin{align*}
+= \dfrac{2^{2n} (2 \, n {-} 1)(2 \, n - 3) \ldots 3 \cdot 1 \, \sqrt{\pi} \, \Gamma(n + 1)}{2^{n}}
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Usando el álgebra}
+Multiplicamos el lado derecho de la igualdad por un $1$:
+\begin{align*}
+\dfrac{2 \, n (2 \, n - 2)(2 \, n - 4) \ldots (4)(2)}{2 \, n (2 \, n - 2)(2 \, n - 4) \ldots (4)(2)}
+\end{align*}
+\pause
+Para obtener:
+\begin{align*}
+= \dfrac{2^{2n} (2 n) (2 n {-} 2)(2 n {-} 4) \ldots 4 \cdot 3 \cdot 2 \cdot 1 \, \sqrt{\pi} \, \Gamma(n {+} 1)}{2^{n} (2 n)(2 n {-} 2)(2 n {-} 4) \ldots (4) (2)}
+\end{align*}
+\pause
+\begin{tikzpicture}[overlay]
+    \draw [fill, color=yellow!50, opacity=0.3] (1.4, 1.3) rectangle (8.1, 2); \pause
+    \draw [fill, color=blue!50, opacity=0.3] (2.3, 0.7) rectangle (9, 1.2);
+\end{tikzpicture}
+\end{frame}
+\begin{frame}
+\frametitle{Abreviando expresiones}
+El numerador del resultado anterior es:
+\pause
+\begin{align*}
+2^{2n} (2 n)! \, \sqrt{\pi} \, \Gamma(n + 1)
+\end{align*}
+\pause
+Mientras que el denominador es igual a:
+\begin{align*}
+2^{n} \, 2^{n} \, n!
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando un expresión}
+Si escribimos la cantidad:
+\pause
+\begin{align*}
+(2 \, n)! = \Gamma(2 \, n + 1)
+\end{align*}
+\pause
+y dejando que: $n! = \Gamma(n + 1)$, el resultado:
+\pause
+\begin{align*}
+\dfrac{\Cancel[red]{2^{2n}} \, \sqrt{\pi} \, \Gamma(2 \, n + 1) \, \Cancel[blue]{\Gamma(n + 1)}}{\Cancel[red]{2^{2n}} \Cancel[blue]{\Gamma(n + 1)}}
+\end{align*}
+\pause
+\begin{align*}
+\sqrt{\pi} \, \Gamma(2 \, n + 1) = 2^{2n} \, \Gamma \left( n + \dfrac{1}{2} \right) \, \Gamma(n + 1) \qed
+\end{align*}    
+\end{frame}
+\begin{frame}
+\frametitle{Identidad adicional}
+Si usamos:
+\pause
+\begin{eqnarray*}
+2 \, n \, \Gamma( 2 \, n) &=& \Gamma(2 \, n + 1) \\[0.5em] \pause
+n \, \Gamma(n) &=& \Gamma(n + 1)
+\end{eqnarray*}
+\pause
+Es posible reescribir la ecuación obtenida como:
+\begin{align*}
+\sqrt{\pi} \, \Gamma(2 \, n) = 2^{2n-1} \, \Gamma(n) \, \Gamma \left( n + \dfrac{1}{2} \right)
+\end{align*}
+\pause
+Que es conocida como la \emph{fórmula de duplicación de Legendre}.
+\end{frame}
+\begin{frame}
+\frametitle{Expresión conveniente}
+Es conveniente utilizar la fórmula de duplicación de Legendre expresada como una razón:
+\pause
+\begin{align*}
+\dfrac{\Gamma(2 \, n)}{\Gamma (n)} = \dfrac{\Gamma \left( n + \dfrac{1}{2} \right)}{\sqrt{\pi} \, 2^{1- 2n}}
+\end{align*}
+\end{frame}
+
+\section{Problema con \texorpdfstring{$\Gamma(x)$}{G(x)} y \texorpdfstring{$B(x, y)$}{B(x,y)}}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicio 2}
+
+%REf. Farrell 1.31
+\begin{frame}
+\frametitle{Enunciado 2}
+Demuestra que:
+\begin{align*}
+\Gamma(p) \, \Gamma(1 - p) = \dfrac{\pi}{\sin p \, \pi} \hspace{1cm} p \mbox{ no entero}
+\end{align*}
+
+
+\end{frame}
+\begin{frame}
+\frametitle{Restricción necesaria}
+La razón por que $p$ sea un valor no entero es evidente:
+\pause
+\begin{align*}
+= \dfrac{\pi}{\sin p \, \pi} 
+\end{align*}
+No se puede ocupar cualquier valor entero para $p$, ya que el denominador sería cero.
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el ejercicio}
+Nuevamente haremos uso de una serie de identidades tanto de la función Gamma como de la función Beta.
+\\
+\bigskip
+\pause
+La demostración de alguna de ellas se puede revisar en el canal de YouTube, \pause mencionaremos la idea general para demostrar una identidad en particular.
+\end{frame}
+\begin{frame}
+\frametitle{Identidades de apoyo}
+Ocuparemos las siguientes identidades:
+\pause
+\begin{align}
+B(x, y) = \dfrac{\Gamma(x) \, \Gamma(y)}{\Gamma(x + y)}
+\label{eq:ecuacion_01}
+\end{align}
+\pause
+\begin{align}
+B(p, 1 - p) = \dfrac{\pi}{\sin p \, \pi} \hspace{1cm} 0 < p < 1
+\label{eq:ecuacion_02}
+\end{align}
+\pause
+De esta identidad hablaremos más adelante.
+\end{frame}
+\begin{frame}
+\frametitle{Identidades de apoyo}
+Las otras identidades que ocuparemos son:
+\pause
+\begin{align}
+\Gamma(x + 1) = x \, \Gamma(x)
+\label{eq:ecuacion_03}
+\end{align}
+y también:
+\pause
+\begin{align}
+\Gamma(-x) = \dfrac{\Gamma(1 - x)}{-x}, \hspace{1cm} x \neq 0, 1, 2, \ldots
+\label{eq:ecuacion_04}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Avanzando en la solución}
+Comenzamos haciendo que $0 < p < 1$, así que ocupamos la ec. (\ref{eq:ecuacion_01}), que es la identidad que relaciona a la función Gamma con la función Beta:
+\pause
+\begin{align*}
+\dfrac{\Gamma(p) \, \Gamma(1 - p)}{\Gamma(p + 1 - p)} = B(p, 1 - p) 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Otro paso en la solución}
+Hacemos que $h = p + 1$, usando las ecs. (\ref{eq:ecuacion_03}) y (\ref{eq:ecuacion_04}) y el resultado de la diapositiva anterior, se tiene que:
+\begin{eqnarray*}
+\Gamma(h) \, \Gamma(1 - h) &=& \pause \Gamma(p + 1) \, \Gamma(-p) = \\[0.5em] \pause
+&=& p \, \Gamma(p) \pause \, \dfrac{\Gamma(1 - p)}{- p} = \\[0.5em] \pause
+&=& \dfrac{-\pi}{\sin p \, \pi} \hspace{1cm} 0 < p < 1
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando el valor de $h$}
+\begin{eqnarray*}
+&=& \dfrac{-\pi}{\sin p \, \pi} \hspace{1cm} 0 < p < 1 \\[0.5em] \pause
+&=& \dfrac{-\pi}{\sin (h - 1) \, \pi} \\[0.5em] \pause
+&=& \dfrac{-\pi}{- \sin h \, \pi} \\[0.5em] \pause
+&=& \dfrac{\pi}{\sin h \, \pi} \hspace{1cm} 1 < p < 2
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Expresión para valores positivos}
+Se puede demostrar que la expresión sigue siendo válida para $2 < h < 3$, para luego por medio de inducción matemática ver que se cumple para cualquier \emph{valor no entero positivo} $h$.
+\end{frame}
+\begin{frame}
+\frametitle{Evaluando con valores negativos}
+Ahora tomamos el intervalo $0 < p < 1$ y hacemos que $h = p - 1$, \pause procedemos de la misma manera que con los valores no enteros positivos.
+\pause
+\begin{align*}
+\Gamma(h) \, \Gamma(1 - h) = \dfrac{\pi}{\sin h \, \pi} \hspace{1cm} -1 < h < 0
+\end{align*}
+\pause
+Como se vio previamente, esta expresión es válida para $-2 < h < -1$, \pause se puede demostrar por inducción que se cumple para cualquier \emph{valor no entero negativo} $h$.
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+Entonces llegamos a que:
+\pause
+\begin{align*}
+\Gamma(p) \, \Gamma(1 - p) = \dfrac{\pi}{\sin p \, \pi}
+\end{align*}
+se cumple para cualquier valor no entero $p$ ya sea positivo o negativo.
+\end{frame}
+
+\section{La identidad para \texorpdfstring{$B(x, y)$}{B(x, y)}}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Primer paso}
+
+\begin{frame}
+\frametitle{Resultado necesario}
+Se requiere inicialmente demostrar que la función Beta:
+\begin{align*}
+B(x, y) = \int_{0}^{1} t^{x - 1} \, (1 - y)^{y-1} \dd{t}
+\end{align*}
+\pause
+se puede expresar como una integral cuyo intervalo de integración es $[0, \infty)$
+\end{frame}
+\begin{frame}
+\frametitle{Buscando el cambio de variable}
+El problema en primer lugar es buscar un cambio de la variable de integración, \pause $t = f(u)$, \pause de modo que a medida que $t$, en la integral de $B (x, y)$ recorra el intervalo de cero a la unidad.
+\end{frame}
+\begin{frame}
+\frametitle{Buscando el cambio de variable}
+La nueva variable $u$ variará continua y monótonamente de cero a infinito.
+\\
+\bigskip
+\pause
+También requerimos que la relación $t = f(u)$ tenga una derivada continua para todo $u \geq 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Buscando el cambio de variable}
+Dado que tenemos que \enquote{extender} el intervalo $0 \leq t < 1$ hasta el intervalo $0 \leq u < \infty$, \pause luego de una breve reflexión que una fórmula fraccionaria funcionará:
+\pause
+Sea:
+\begin{align*}
+t = \dfrac{u}{u + 1}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Haciendo el cambio de variable}
+Entonces:
+\pause
+\begin{eqnarray*}
+\dv{t}{u} &=& \dfrac{1}{(u + 1)^{2}} \\[1em] \pause
+1 - t &=& \dfrac{1}{u + 1}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado obtenido}
+Entonces de la definición de la función $B(x, y)$:
+\pause
+\begin{align*}
+B(x, y) = \int_{0}^{1} t^{x - 1} \, (1 - y)^{y-1} \dd{t}
+\end{align*}
+\pause
+También se puede expresar por una integral cuyo intervalo va de $0$ a  $\infty$:
+\begin{align*}
+B(x, y) = \scaleint{5ex}_{\bs 0}^{\infty} \dfrac{u^{x-1}}{(u + 1)^{x+y}} \dd{u} \hspace{1cm} x > 0, y > 0
+\end{align*}
+\end{frame}
+
+\subsection{Segundo paso}
+
+\begin{frame}
+\frametitle{La identidad que utilizamos}
+Lo que queremos ahora es evaluar:
+\pause
+\begin{align*}
+B(p, 1 - p)
+\end{align*}
+donde $p$ es cualquier número positivo menor que uno.
+\end{frame}
+\begin{frame}
+\frametitle{Primer cambio de variable}
+Haciendo que \pause $x = p$ con $0 < p < 1$ \pause y $y = 1 - p$, entonces en la integral del resultado anterior:
+\pause
+\begin{align*}
+B(x, y) = \scaleint{5ex}_{\bs 0}^{\infty} \dfrac{u^{x-1}}{(u + 1)^{x+y}} \dd{u} \hspace{1cm} x > 0, y > 0
+\end{align*}
+\pause
+Tenemos que:
+\begin{align*}
+B(p, 1 - p) = \scaleint{5ex}_{\bs 0}^{\infty} \dfrac{u^{p-1}}{(u + 1)} \dd{u} \hspace{1cm} 0 < p < 1
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{¿Cómo resolver la integral?}
+\begin{align*}
+B(p, 1 - p) = \scaleint{5ex}_{\bs 0}^{\infty} \dfrac{u^{p-1}}{(u + 1)} \dd{u} \hspace{1cm} 0 < p < 1
+\end{align*}
+\pause
+Si el intervalo de integración fuera de $(-\infty, \infty)$ podríamos evaluar la integral con un integral de contorno en el plano complejo de $z = x +  i \, y$ 
+\end{frame}
+\begin{frame}
+\frametitle{Extendiendo el intervalo}
+Hagamos que el intervalo de integración se \enquote{extienda} a $(-\infty, \infty)$ \pause mediante la transformación $u = e^{x}$, que deja a $x$ en $-\infty$ cuando $u = 0$, y deja a $x$ en $+\infty$ cuando $u$ está en $+\infty$.
+\end{frame}
+\begin{frame}
+\frametitle{Integral con intervalo extendido}
+Como $\dv*{u}{x} = e^{x}$, se tiene que:
+\pause
+\begin{align*}
+B(p, 1 - p) = \scaleint{5ex}_{\bs -\infty}^{\infty} \dfrac{e^{px}}{1 + e^{x}} \dd{x} \hspace{1cm} 0 < p < 1
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Integral de apoyo}
+Para resolver la integral anterior, nos podemos apoyar con la siguiente expresión:
+\pause
+\begin{align*}
+\scaleoint{6ex}_{C} \dfrac{e^{pz}}{1 + e^{z}} \hspace{1cm} z = x + i \, y
+\end{align*}
+\pause
+tomando el sentido positivo alrededor del rectángulo $C$ en el plano complejo, con vértices en $z = -R$, $z = R$, $z = R + 2 \,  \pi \, i$, $z = -R +  2 \, \pi \, i$.
+\end{frame}
+\begin{frame}
+\frametitle{Integral de apoyo}
+Como se revisó en el curso de Variable Compleja I, habrá que revisar si el integrando es analítico, qué puntos son polos, etc.
+\end{frame}
+\begin{frame}
+\frametitle{Resultado de la identidad}
+Luego de resolver la integral con la teoría de variable compleja, podemos garantizar que la identidad para la función Beta es:
+\pause
+\begin{align*}
+B(p, 1 - p) = \dfrac{\pi}{\sin p \, \pi} \hspace{1cm} 0 < p < 1
+\end{align*}
+\end{frame}
+\end{document}

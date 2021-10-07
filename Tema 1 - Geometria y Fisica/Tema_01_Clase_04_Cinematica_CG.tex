@@ -1,0 +1,651 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\date{5 de octubre de 2021}
+\title{Cinemática de una partícula}
+\subtitle{La física y la geometría}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section{Introducción}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{El movimiento de una partícula}
+
+\begin{frame}
+\frametitle{Avances en el Tema 1}
+Luego de estudiar el sistema de coordenadas generalizado, podemos expresar las superficies coordenadas, calcular el tensor métrico y por ende, los factores de escala, así como los operadores diferenciales.
+\end{frame}
+\begin{frame}
+\frametitle{Expresar una ecuación}
+También podemos reescribir una ecuación de la Física Matemática en términos de un nuevo sistema.
+\\
+\bigskip
+\pause
+Hemos planteado que la EDP obtenida, será resuelta en el próximo Tema 2 del curso.
+\end{frame}
+\begin{frame}
+\frametitle{¿Qué hay del movimiento de una partícula?}
+El estudio de fenómenos en esos sistemas nuevo, no se limita a describir las características del mismo.
+\\
+\bigskip
+\pause
+También se considera el análisis del movimiento de una partícula dentro de ese sistema, es decir, la cinemática propia en el sistema coordenado.
+\end{frame}
+\begin{frame}
+\frametitle{Descripción del movimiento}
+Sabemos que para describir el movimiento de una partícula, se requieren al menos tres cantidades físicas:
+\pause
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Posición.
+\item Velocidad.
+\item Aceleración.
+\end{enumerate}
+\pause
+Con el estudio previo de sistemas coordenados, la posición de una partícula es algo que ya debemos de manejar sin contratiempos.
+\end{frame}
+\begin{frame}
+\frametitle{La velocidad y aceleración generalizadas}
+Ahora abordaremos la descripción de la velocidad y aceleración generalizada, de tal manera que la información recabada en el estudio del sistema coordenado (tensor métrico) nos sea de apoyo.
+\\
+\bigskip
+\pause
+De tal manera que podremos ocupar las expresiones generalizadas en cualquier otro sistema coordenado.
+\end{frame}
+
+\section{Sistema coord. generalizado}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición}
+
+\begin{frame}
+\frametitle{Sistema coordenado generalizado}
+Definimos a las coordenadas generalizadas como un conjunto cualquiera de parámetros numéricos $\left\{ q_{l} \right\}$ que determinan de manera unívoca la posición de una partícula con un número finito de grados de libertad.
+\end{frame}
+\begin{frame}
+\frametitle{Coordenadas independientes}
+La cantidad mínima de coordenadas generalizadas que definen el estado del sistema se conoce como coordenadas independientes, esta condición queda expresada como:
+\pause
+\begin{align*}
+\pdv{q_{l}}{q_{m}} = \delta_{l m}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Movimiento en tres direcciones}
+Considerando el movimiento de una partícula con tres grados de libertad, tendremos la misma cantidad de coordenadas generalizadas $q_{1}, q_{2}, q_{3}$, partiendo de esto, la posición de la partícula quedará descrita como:
+\pause
+\begin{align}
+\va{r} = x \, (q_{1}, q_{2}, q_{3}) \, \vu{i} + y \, (q_{1}, q_{2}, q_{3}) \, \vu{j} + z \, (q_{1}, q_{2}, q_{3}) \, \vu{k}
+\label{eq:ecuacion_01_01}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores base}
+Cada uno de los vectores base $\va{b}_{l}$ de las coordenadas generalizadas es construido mediante la variación infinitesimal de la posición de la partícula en una determinada coordenada generalizada $q_{{l}}$, es decir:
+\pause
+\begin{align*}
+\va{b}_{l} = \pdv{\va{r}}{q_{l}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores base}
+Trabajamos sobre está última expresión:
+\pause
+\begin{align}
+\va{b}_{l} = \pdv{\va{r}}{q_{l}} = \pdv{x}{q_{l}} \, \vu{i} + \pdv{y}{q_{l}} \, \vu{j} + \pdv{z}{q_{l}} \, \vu{k}
+\label{eq:ecuacion_01_02}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores base no normalizados}
+Obsérvese que el conjunto de vectores $\left\{ \va{b}_{l} \right\}$ , no es necesariamente ortogonal, ni tampoco son vectores normalizados.
+\end{frame}
+\begin{frame}
+\frametitle{Normalizando la base}
+Al dividir entre la propia magnitud, que nos devuelve el concepto ya visto de factor de escala:
+\pause
+\begin{align*}
+h_{i} = \abs{\pdv{\va{r}}{q_{i}}}
+\end{align*}
+\pause
+Por lo que el vector base unitario queda expresado como:
+\pause
+\begin{align*}
+\vu{e}_{i} = \dfrac{\va{b}_{i}}{h_{i}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Condición necesaria}
+Recordemos que una condición necesaria que debe de cumplirse en el caso de vectores base no ortogonales, es que no deben de ser coplanares, es decir:
+\begin{align*}
+\va{b}_{1} \cdot \va{b}_{2} \cp \va{b}_{3} = \pdv{(x, y, z)}{(q_{1}, q_{2}, q_{3})} \neq 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Con el Jacobiano distinto de cero}
+Donde el Jacobiano es:
+\begin{align*}
+\pdv{(x, y, z)}{(q_{1}, q_{2}, q_{3})} = \mqty|
+\displaystyle \pdv{x}{q_{1}} & \displaystyle \pdv{y}{q_{1}} & \displaystyle \pdv{z}{q_{1}} \\[0.5em]
+\displaystyle \pdv{x}{q_{2}} & \displaystyle \pdv{y}{q_{2}} & \displaystyle \pdv{z}{q_{2}} \\[0.5em]
+\displaystyle \pdv{x}{q_{3}} & \displaystyle \pdv{y}{q_{3}} & \displaystyle \pdv{z}{q_{3}} |
+\end{align*}
+\end{frame}
+\begin{frame}[t]
+\frametitle{Independencia coordenadas generalizadas}
+Las coordenadas generalizadas $(q_{1}, q_{2}, q_{3})$ son coordenadas independientes, por lo que:
+\pause
+\begin{align*}
+\pdv{q_{1}}{q_{1}} = \pdv{q_{2}}{q_{2}} = \pdv{q_{3}}{q_{3}} = 1
+\end{align*}
+\pause
+y además:
+\begin{align*}
+\pdv{q_{1}}{q_{2}} = \pdv{q_{1}}{q_{3}} = \pdv{q_{2}}{q_{1}} = \pdv{q_{2}}{q_{3}} = \pdv{q_{3}}{q_{1}} = \pdv{q_{3}}{q_{2}} = 0
+\end{align*}
+\pause
+\begin{tikzpicture}[overlay]
+\draw [fill, color=blue, text=white, opacity=0.95](1, 0) rectangle (10, 5) node[pos=0.5] {$\displaystyle \pdv{q_{i}}{q_{j}} = \begin{cases}
+    0 & i \neq j \\
+    1 & i = j
+    \end{cases}$
+    };
+\draw [fill, color=white, text=black](1, 4) rectangle (10, 5) node[pos=0.5] {Es decir:};
+\end{tikzpicture}
+\end{frame}
+\begin{frame}
+\frametitle{Base recíproca}
+Ahora construimos la base recíproca de vectores $\left\{ b_{l}^{*} \right\}$.
+\pause
+Por la independencia lineal de las coordenadas generalizadas se tiene la condición:
+\pause
+\begin{align*}
+\pdv{q_{l}}{q_{m}} = \delta_{l m}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Exploremos está expresión}
+\begin{equation}
+\begin{aligned}
+\pdv{q_{l}}{q_{m}} &= \pause \pdv{q_{l}}{x} \, \pdv{x}{q_{m}} + \pdv{q_{l}}{y} \, \pdv{y}{q_{m}} + \pdv{q_{l}}{z} \, \pdv{z}{q_{m}} \\[0.5em] \pause
+\Rightarrow \pdv{q_{l}}{q_{m}} &= \left( \vu{i} \, \pdv{q_{l}}{x} + \vu{j} \, \pdv{q_{l}}{y} + \vu{k} \, \pdv{q_{l}}{z} \right) \cdot \\[0.5em]
+&\cdot \left( \vu{i} \, \pdv{x}{q_{m}} + \vu{j} \, \pdv{y}{q_{m}} + \vu{k} \, \pdv{z}{q_{m}} \right) = \pause
+\va{b}_{l}^{*} \cdot \va{b}_{m} \\[0.5em] \pause
+&\Leftrightarrow \va{b}_{l}^{*} = \left( \vu{i} \, \pdv{q_{l}}{x} + \vu{j} \, \pdv{q_{l}}{y} + \vu{k} \, \pdv{q_{l}}{z} \right) \pause = \grad{q_{l}}
+\end{aligned}
+\label{eq:ecuacion_01_05}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Base recíproca}
+Observa que la condición:
+\pause
+\begin{align*}
+\va{b}_{l}^{*} \cdot \va{b}_{m} = \delta_{l, m}
+\end{align*}
+está definida en ambas bases, partiendo de este hecho, surge la necesidad de definir un espacio covariante y uno contravariante.
+\end{frame}
+\begin{frame}
+\frametitle{Base recíproca}
+Al mismo tiempo se verifica el caso particular de un sistema ortogonal:
+\begin{align*}
+\va{b}_{l}^{*} = \dfrac{\va{b}_{l}}{h_{l}} 
+\end{align*}
+usando estos elementos escribimos la velocidad y la aceleración de una partícula.
+\end{frame}
+
+\section{Velocidad de una partícula}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Velocidad y vectores base}
+
+\begin{frame}
+\frametitle{Velocidad}
+Construimos el vector velocidad, tanto en la base covariante como en la contravariante:
+\pause
+\begin{align}
+\begin{aligned}
+\va{v} &= (\va{v} \cdot \va{b}_{l}^{*}) \, \va{b}_{l} = v_{l}^{*} \, b_{l} \\[0.5em]
+\va{v} &= (\va{v} \cdot \va{b}_{l}) \, \va{b}_{l}^{*} = v_{l} \, b_{l}^{*}
+\end{aligned}
+\label{eq:ecuacion_01_06}
+\end{align}
+\pause
+donde:
+\begin{align*}
+(\va{v} \cdot \va{b}_{l}^{*}) &= v_{l}^{*} \\
+(\va{v} \cdot \va{b}_{l}) &= v_{l}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes de la velocidad}
+Podemos construir un procedimiento directo, para obtener expresiones sencillas que permitan realizar cálculos:
+\pause
+\begin{equation}
+\begin{aligned}
+v_{l} &= \vb{v} \cdot \va{b}_{l} {=} \pause (\vu{i} \, \dot{x} {+} \vu{j} \, \dot{y} {+} \vu{k} \, \dot{z}) \cdot \left( \vu{i} \, \pdv{x}{q_{l}} + \vu{j} \, \pdv{y}{q_{l}} + \vu{k} \, \pdv{z}{q_{l}}\right) {=} \\[0.5em] \pause
+&= \dot{x} \, \pdv{x}{q_{l}} + \dot{y} \, \pdv{y}{q_{l}} + \dot{z} \, \pdv{z}{q_{l}}
+\end{aligned}
+\label{eq:ecuacion_01_07}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes de la velocidad}
+Ahora veamos que cada una de las componentes de la velocidad está definida por:
+\begin{equation}
+\begin{aligned}[b]
+\dot{x} &= \pdv{x}{q_{m}} \, \dot{q}_{m} \hspace{1cm} \dot{y} = \pdv{y}{q_{m}} \, \dot{q}_{m} \hspace{1cm} \dot{z} = \pdv{z}{q_{m}} \, \dot{q}_{m} \\[0.5em] \pause
+\Rightarrow \pdv{\dot{x}}{\dot{q}_{m}} &= \pdv{x}{q_{m}}  \hspace{1cm} \pdv{\dot{y}}{\dot{q}_{m}} = \pdv{y}{q_{m}}  \hspace{1cm} \pdv{\dot{z}}{\dot{q}_{m}} = \pdv{z}{q_{m}} 
+\end{aligned}
+\label{eq:ecuacion_01_08}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Las componentes de la velocidad}
+Sustituyendo la ec. (\ref{eq:ecuacion_01_08}) en la ec. (\ref{eq:ecuacion_01_07}) se obtiene una expresión para el cálculo de $v_{l}$:
+\pause
+\begin{equation}
+\begin{aligned}[b]
+v_{l} &= \dot{x} \, \pdv{\dot{x}}{\dot{q}_{l}} + \dot{y} \, \pdv{\dot{y}}{\dot{q}_{l}} + \dot{z} \, \pdv{\dot{z}}{\dot{q}_{l}} = \\[0.5em] \pause
+&= \dfrac{1}{2} \, \pdv{\dot{q}_{l}} \left( \dot{x}^{2} + \dot{y}^{2} + \dot{z}^{2} \right) = \\[0.5em] \pause
+&= \pdv{\dot{q}_{l}} \, \left( \dfrac{v^{2}}{2} \right)
+\end{aligned}
+\label{eq:ecuacion_01_09}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{La expresión para la velocidad}
+\begin{align*}
+v_{l} = \pdv{\dot{q}_{l}} \, \left( \dfrac{v^{2}}{2} \right)
+\end{align*}
+La ecuación anterior (\ref{eq:ecuacion_01_09}) nos indica que las componente covariantes de la velocidad son iguales a las derivadas parciales, con respecto a las $\dot{q}_{l}$ de la mitad del cuadrado de la velocidad.
+\end{frame}
+\begin{frame}
+\frametitle{Procedimiento para obtener la velocidad}
+Antes de derivar, debemos de expresar $\frac{1}{2} v^{2}$ en función de las coordenadas generalizadas $q_{l}$ y de sus derivadas con respecto a $\dot{q}_{l}$.
+\end{frame}
+\begin{frame}
+\frametitle{Velocidad en coordenadas esféricas}
+\textbf{Ejemplo: } Consideremos en el sistema de coordenadas esféricas, tal que:
+\pause
+\begin{align*}
+\dfrac{1}{2} \, v^{2} = \dfrac{1}{2} \left( \dot{r}^{2} + r^{2} \, \dot{\theta}^{2} + r^{2} \, \sin \theta \, \dot{\phi}^{2} \right)
+\end{align*}
+\pause
+Ocuparemos la expresión de la ec. (\ref{eq:ecuacion_01_09}).
+\end{frame}
+\begin{frame}
+\frametitle{Componentes covariantes de la velocidad}
+Entonces tendremos que las componentes covariantes son:
+\begin{equation*}
+\begin{aligned}
+v_{r} &= \pdv{\dot{r}} \left( \dfrac{1}{2} \, v^{2} \right) = \pause \dot{r} \\[0.5em] \pause
+v_{\theta} &= \pdv{\dot{\theta}} \left( \dfrac{1}{2} \, v^{2} \right) = \pause r^{2} \, \dot{\theta} \\[0.5em] \pause
+v_{\varphi} &= \pdv{\dot{\phi}} \left( \dfrac{1}{2} \, v^{2} \right) = \pause r^{2} \, \sin^{2} \theta \, \dot{\phi}
+\end{aligned}
+\end{equation*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando el tensor métrico}
+Podemos escribir la $v^{2}$ en términos del tensor métrico $g_{lm}$, así que:
+\pause
+\begin{align}
+v^{2} = g_{lm} \, v_{l}^{*} \, v_{m}^{*}
+\label{eq:ecuacion_01_10}
+\end{align}
+Donde debemos de expresar las componentes contravariantes de la velocidad: $v_{l}^{*}$.
+\end{frame}
+\begin{frame}
+\frametitle{Componentes contravariantes de la velocidad}
+\begin{equation}
+\begin{aligned}[b]
+v_{l}^{*} &= \va{v} \cdot \va{b}_{l}^{*} = \\[0.5em] \pause
+&= (\vu{i} \, \dot{x} {+} \vu{j} \, \dot{y} {+} \vu{k} \, \dot{z}) \cdot \left( \vu{i} \, \pdv{q_{l}}{x} + \vu{j} \, \pdv{q_{l}}{y} + \vu{k} \, \pdv{q_{l}}{z} \right) = \\[0.5em] \pause
+&= \dot{x} \, \pdv{q_{l}}{x} + \dot{y} \, \pdv{q_{l}}{y} + \dot{z} \, \pdv{q_{l}}{z}
+\end{aligned}
+\label{eq:ecuacion_01_11}
+\end{equation}
+a estas expresiones se les conoce como \emph{velocidades generalizadas}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando las velocidades generalizadas}
+Al sustituir la ec. (\ref{eq:ecuacion_01_11}) en la ec. (\ref{eq:ecuacion_01_10}) se obtiene:
+\pause
+\begin{equation}
+\begin{aligned}[b]
+v^{2} &= g_{lm} \, \dot{q}_{l} \, \dot{q}_{m} \\[0.5em] \pause
+\Rightarrow v_{l} &= \pdv{\dot{q}_{l}} \, \dfrac{g_{lm} \, \dot{q}_{l} \, \dot{q}_{m}}{2}
+\end{aligned}
+\label{eq:ecuacion_01_12}
+\end{equation} 
+\pause
+el lado derecho de la ec. (\ref{eq:ecuacion_01_12}) es referido en textos de geometría diferencial como \emph{energía de la variedad}.
+\end{frame}
+\begin{frame}
+\frametitle{Expresión muy útil}
+En el caso particular de un sistema ortogonal, la ec. (\ref{eq:ecuacion_01_12}) se reduce a:
+\pause
+\begin{align*}
+v_{l} = h_{i}^{2} \, \dot{q}_{l}
+\end{align*}
+Que es muy útil para exámenes!!
+\end{frame}
+
+\section{Aceleración de una partícula}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Construyendo las componentes}
+
+\begin{frame}
+\frametitle{Ecuaciones de movimiento}
+Las ecuaciones de movimiento de una partícula requieren conocer las aceleraciones de ésta, así que conectamos la ec. (\ref{eq:ecuacion_01_12}) con las ecuaciones de movimiento de una partícula.
+\end{frame}
+\begin{frame}
+\frametitle{Componentes covariantes de la aceleración}
+La aceleración es:
+\pause
+\begin{equation}
+\begin{aligned}[b]
+\va{a} &= \left( \va{a} \cdot \va{b}_{l} \right) \, \va{b}_{l}^{*} = \\[0.5em] \pause
+&= \left( \vu{i} \, \ddot{x} {+} \vu{j} \, \ddot{y} {+} \vu{k} \, \ddot{z} \right) \cdot \left( \vu{i} \, \pdv{x}{q_{j}} \!+ \vu{j} \, \pdv{y}{q_{j}} \!+ \vu{k} \, \pdv{z}{q_{j}} \right) \, \va{b}_{l}^{*} = \\[0.5em] \pause
+&= \left( \ddot{x} \, \pdv{x}{q_{j}} \!+ \ddot{y} \, \pdv{y}{q_{j}} \!+ \ddot{z} \, \pdv{z}{q_{j}} \right) \, \va{b}_{l}^{*} = \\[0.5em] \pause
+&= a_{l} \, \va{b}_{l}^{*}
+\end{aligned}
+\label{eq:ecuacion_01_13}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Las componentes covariantes de la aceleración}
+Reescribimos la ec.(\ref{eq:ecuacion_01_13}) de la forma, mostrado para la coordenada $x$:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\ddot{x} \, \pdv{x}{q_{j}} &= \pause \dv{t} \dot{x} \, \pdv{x}{q_{l}} \!- \dot{x} \, \dv{t} \, \pdv{x}{q_{l}} = \\[0.5em] \pause
+&= \dv{t} \left( \dot{x} \, \pdv{x}{q_{l}} \right) \!- \dot{x} \, \pdv{\dot{x}}{q_{l}} 
+\end{aligned}
+\end{eqnarray*}
+\pause
+Como se cumple que:
+\begin{align*}
+\pdv{x}{q_{l}} = \pdv{\dot{x}}{\dot{q}_{l}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes covariantes de la aceleración}
+Llegamos a:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\ddot{x} \, \pdv{x}{q_{j}} &= \pause \dv{t} \pdv{\dot{q}_{l}} \left( \dfrac{1}{2} \, \dot{x}^{2} \right) \!- \pdv{q_{l}} \left( \dfrac{1}{2} \, \dot{x}^{2} \right)
+\end{aligned}
+\end{eqnarray*}
+\pause
+Haciendo de manera análoga el desarrollo para:
+\begin{align*}
+\ddot{y} \, \pdv{y}{q_{j}} \hspace{1.5cm} \ddot{z} \, \pdv{z}{q_{j}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes covariantes de la aceleración}
+Encontramos que las componentes son:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+a_{l} &= \pause \dv{t} \pdv{\dot{q}_{l}} \left( \dfrac{\dot{x}^{2} {+} \dot{y}^{2} {+} \dot{z}^{2}}{2} \right) \!- \pdv{q_{l}} \left( \dfrac{\dot{x}^{2} {+} \dot{y}^{2} {+} \dot{z}^{2}}{2} \right) = \\[0.5em] \pause
+&= \dv{t} \, \pdv{\dot{q}_{l}} \left( \dfrac{v^{2}}{2} \right) - \pdv{q_{l}} \left( \dfrac{v^{2}}{2} \right) = \\[0.5em] \pause
+&= \bigg[ \dv{t} \, \pdv{\dot{q}_{l}} - \pdv{q_{l}} \bigg] \left( \dfrac{v^{2}}{2} \right)
+\end{aligned}
+\label{eq:ecuacion_01_14}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{\textbf{Ejemplo: } Aceleración en coordenadas cilíndricas}
+Para determinar las componentes de la aceleración en coordenadas cilíndricas, tenemos que:
+\pause
+\begin{align*}
+v^{2} = \dot{\rho}^{2} + \rho^{2} \, \dot{\phi}^{2} + \dot{z}^{2}
+\end{align*}
+\pause
+El siguiente paso es calcular las derivadas parciales y ordinarias.
+\end{frame}
+\begin{frame}
+\frametitle{Calculando las componentes}
+Así tenemos que:
+\begin{eqnarray*}
+\begin{aligned}
+a_{\rho} &= \va{a} \cdot \vu{e}_{\rho} = \\[0.5em] \pause
+&= \bigg[ \dv{t} \, \pdv{\dot{q}_{l}} - \pdv{q_{l}} \bigg] \left( \dfrac{\dot{\rho}^{2} + \rho^{2} \, \dot{\phi}^{2} + \dot{z}^{2}}{2} \right) = \\[0.5em] \pause
+&= \ddot{\rho} - \rho \, \dot{\phi}^{2}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando las otras componentes}
+\begin{eqnarray*}
+\begin{aligned}
+a_{\phi} &= \va{a} \cdot (\rho \, \vu{e}_{\phi}) = \\[0.5em] \pause
+&= \dv{t} (\rho^{2} \, \phi) = \\[0.5em] \pause
+&= \rho^{2} \, \ddot{\phi} + 2 \, \rho \, \dot{\rho} \, \dot{\phi}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando las otras componentes}
+\begin{eqnarray*}
+\begin{aligned}
+a_{z} &= \va{a} \cdot \vu{k} = \\[0.5em] \pause
+&= \dv{t} \dot{z} = \\[0.5em] \pause
+&= \ddot{z}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\section{Ejercicio: Coordenadas Parabólicas}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Obtener la velocidad y aceleración}
+
+\begin{frame}
+\frametitle{Reglas de transformación}
+Para finalizar veamos un ejemplo del movimiento de una partícula en un sistema de coordenadas parabólico, las reglas de transformación son:
+\pause
+\begin{align}
+\begin{aligned}
+x &= \varepsilon \, \eta \, \cos \varphi \\[0.3em]
+y &= \varepsilon \, \eta \, \sin \varphi \\[0.3em]
+z &= \dfrac{\varepsilon^{2} - \eta^{2}}{2}
+\end{aligned}
+\label{eq:ecuacion_01_16}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Base vectorial}
+Construimos la base vectorial:
+\pause
+\begin{align}
+\begin{aligned}
+\va{b}_{\varepsilon} &= \pdv{\va{r}}{\varepsilon} = \vu{i} \, \eta \, \cos \varphi + \vu{j} \, \eta \, \sin \varphi + \vu{k} \, \varepsilon \\[0.5em]
+\va{b}_{\eta} &= \pdv{\va{r}}{\eta} = \vu{i} \, \varepsilon \, \cos \varphi + \vu{j} \, \varepsilon \, \sin \varphi - \vu{k} \, \eta \\[0.5em]
+\va{b}_{\varphi} &= \pdv{\va{r}}{\varphi} = - \vu{i} \, \varepsilon \, \eta \, \sin \varphi + \vu{j} \, \varepsilon \, \eta \, \cos \varphi
+\end{aligned}
+\label{eq:ecuacion_01_17}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Factores de escala}
+Calculamos los factores de escala:
+\pause
+obtenemos los factores de escala:
+\begin{align}
+\begin{aligned}
+h_{\varepsilon} &= \abs{\va{b}_{\varepsilon}} = \sqrt{\varepsilon^{2} + \eta^{2}} \\[0.5em]
+h_{\eta} &= \abs{\va{b}_{\eta}} = \sqrt{\varepsilon^{2} + \eta^{2}} \\[0.5em]
+h_{\varphi} &= \abs{\va{b}_{\varphi}} = \varepsilon \, \eta
+\end{aligned}
+\label{eq:ecuacion_01_18}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Vectores no coplanares de la base}
+Verificamos la condición:
+\pause
+\begin{align}
+\va{b}_{\varepsilon} \cdot \va{b}_{\eta} \cp \va{b}_{\varphi} = \left( \varepsilon^{2} + \eta^{2} \right) \, \varepsilon \, \eta
+\label{eq:ecuacion_01_19}
+\end{align}
+Vemos que el Jacobiano es distinto de cero, por lo tanto, los vectores de la base son no coplanares.
+\end{frame}
+\begin{frame}
+\frametitle{Vectores ortogonales}
+Revisamos la condición de ortogonalidad entre los vectores de la base:
+\pause
+\begin{align}
+\va{b}_{\varepsilon} \cdot \va{b}_{\eta} = \va{b}_{\varepsilon} \cdot \va{b}_{\varphi} = \va{b}_{\eta} \cdot \va{b}_{\varphi} = 0
+\label{eq:ecuacion_01_20}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Base recíproca}
+Tomando la definición:
+\pause
+\begin{align*}
+\va{b}_{l}^{*} = \dfrac{\va{b}_{l}}{h_{l}}
+\end{align*}
+\pause
+Se construye la base recíproca:
+\pause
+\begin{align}
+\begin{aligned}
+\va{b}_{\varepsilon}^{*} &= \dfrac{\vu{i} \, \eta \, \cos \varphi + \vu{j} \, \eta \, \sin \varphi + \vu{k} \, \varepsilon}{\sqrt{\varepsilon^{2} + \eta^{2}}} \\[0.5em]
+\va{b}_{\eta}^{*} &= \dfrac{\vu{i} \, \varepsilon \, \cos \varphi + \vu{j} \, \varepsilon \, \sin \varphi - \vu{k} \, \eta}{\sqrt{\varepsilon^{2} + \eta^{2}}} \\[0.5em]
+\va{b}_{\varphi}^{*} &= - \vu{i} \, \sin \varphi + \vu{j} \, \cos \varphi
+\end{aligned}
+\label{eq:ecuacion_01_21}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{\textbf{Ejercicio de la sesión: se entrega hoy}}
+Verifica que la base recíproca se obtiene por:
+\begin{align*}
+\va{b}_{\varepsilon}^{*} &= \dfrac{\vb{b}_{\eta} \times \vb{b}_{\varphi}}{\vb{b}_{\varepsilon} \cdot \vb{b}_{\eta} \times \vb{b}_{\varphi}} \\[0.35em]
+\va{b}_{\eta}^{*} &= \dfrac{\vb{b}_{\varphi} \times \vb{b}_{\varepsilon}}{\vb{b}_{\varepsilon} \cdot \vb{b}_{\eta} \times \vb{b}_{\varphi}} \\[0.35em]
+\va{b}_{\phi}^{*} &= \dfrac{\vb{b}_{\varepsilon} \times \vb{b}_{\eta}}{\vb{b}_{\varepsilon} \cdot \vb{b}_{\eta} \times \vb{b}_{\varphi}}
+\end{align*}
+Recuerda anotar tu nombre en el chat de Zoom y envía un  mensaje directo al Profesor.
+\end{frame}
+\begin{frame}
+\frametitle{El tensor métrico}
+Sabemos que el tensor métrico para este sistema coordenado es:
+\begin{align}
+\vb{g} = \mqty(
+\varepsilon^{2} + \eta^{2} & 0 &  0 \\
+0 & \varepsilon^{2} + \eta^{2} &  0 \\
+0 & 0 & \varepsilon^{2} \, \eta^{2} )
+\label{eq:ecuacion_01_22}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Energía de la variedad}
+Con la ec. (\ref{eq:ecuacion_01_22}) y ec. (\ref{eq:ecuacion_01_12}) escribimos la energía de la variedad:
+\pause
+\begin{align}
+\dfrac{v^{2}}{2} = \dfrac{1}{2} \bigg[ \big( \varepsilon^{2} + \eta^{2} \big) \, \big( \dot{\varepsilon}^{2} + \dot{\eta}^{2} \big) + \varepsilon^{2} \, \eta^{2} \, \dot{\varphi}^{2} \bigg]
+\label{eq:ecuacion_01_23}
+\end{align}  
+\end{frame}
+\begin{frame}
+\frametitle{Componentes de la aceleración}
+Para obtener las componentes de la aceleración, ocupamos la expresión:
+\pause
+\begin{align*}
+\bigg[ \dv{t} \, \pdv{\dot{q}_{l}} - \pdv{q_{l}} \bigg] \left( \dfrac{v^{2}}{2} \right)
+\end{align*}
+\pause
+Para abreviar se mostrará el resultado obtenido, pero no es mala idea que realicen las correspondientes derivadas parciales y ordinarias.
+\end{frame}
+\begin{frame}
+\frametitle{Componentes de la aceleración}
+Para $a_{\varepsilon}$:
+\pause
+\begin{align*}
+a_{\varepsilon} &= \bigg[ \dv{t} \pdv{\dot{\varepsilon}} - \pdv{\varepsilon} \bigg] \left( \dfrac{v^{2}}{2} \right) = \\[0.5em] 
+&= \textcolor{blue}{\ddot{\varepsilon} {+} \dfrac{\varepsilon \dot{\varepsilon}^{2}}{\varepsilon^{2} {+} \eta^{2}} {-} \dfrac{\varepsilon \dot{\eta}^{2}}{\varepsilon^{2} {+} \eta^{2}} {-} \dfrac{\varepsilon \eta^{2} \dot{\varphi}^{2}}{\varepsilon^{2} {+} \eta^{2}} {+} \dfrac{2 \eta \dot{\eta} \dot{\varepsilon}}{\varepsilon^{2} {+} \eta^{2}}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes de la aceleración}
+Para $a_{\eta}$:
+\pause
+\begin{align*}
+a_{\eta} &= \bigg[ \dv{t} \pdv{\dot{\eta}} - \pdv{\eta} \bigg] \left( \dfrac{v^{2}}{2} \right) = \\[0.5em]
+&= \textcolor{blue}{\ddot{\eta} {+} \dfrac{\eta \dot{\eta}^{2}}{\varepsilon^{2} {+} \eta^{2}} {-} \dfrac{\eta \dot{\varepsilon}^{2}}{\varepsilon^{2} {+} \eta^{2}} {-} \dfrac{\varepsilon^{2} \eta \dot{\varphi}^{2}}{\varepsilon^{2} {+} \eta^{2}} {+} \dfrac{2 \varepsilon \dot{\varepsilon} \dot{\eta}}{\varepsilon^{2} {+} \eta^{2}}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes para la aceleración}
+Para $a_{\varphi}$:
+\pause
+\begin{align*}
+a_{\varphi} &= \bigg[ \dv{t} \pdv{\dot{\varphi}} - \pdv{\varphi} \bigg] \left( \dfrac{v^{2}}{2} \right) = \\[0.5em]
+&=  \textcolor{blue}{\ddot{\varphi} + \dfrac{2 \dot{\varepsilon} \dot{\varphi}}{\varepsilon} + \dfrac{2 \dot{\eta} \dot{\varphi}}{\eta}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{\textbf{Ejercicio de la sesión: se entrega mañana}}
+Desarrolla explícitamente la expresión:
+\begin{align*}
+\bigg[ \dv{t} \pdv{\dot{\varepsilon}} - \pdv{\varepsilon} \bigg] \left( \dfrac{1}{2} \bigg[ \big( \varepsilon^{2} + \eta^{2} \big) \, \big( \dot{\varepsilon}^{2} + \dot{\eta}^{2} \big) + \varepsilon^{2} \, \eta^{2} \, \dot{\varphi}^{2} \bigg] \right)
+\end{align*}
+\end{frame}
+
+\subsection*{Caso Especial}
+
+\begin{frame}
+\frametitle{Caso particular}
+Para el caso particular del movimiento de una partícula libre la ec. (\ref{eq:ecuacion_01_14}) define las trayectorias geodésicas de la partícula:
+\begin{align*}
+\left( \dv{t} \, \pdv{\dot{q}_{l}} - \pdv{q_{l}} \right) &\dfrac{v^{2}}{2} = 0 \\[0.5em] 
+\left( \dv{t} \, \pdv{\dot{q}_{l}} - \pdv{q_{l}} \right) &\dfrac{g_{lm} \, \dot{q}_{l} \, \dot{q}_{m}}{2} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El Lagrangiano}  
+El operador:
+\begin{align*}
+\left( \dv{t} \, \pdv{\dot{q}_{l}} - \pdv{q_{l}} \right)
+\end{align*}
+es conocido en la literatura como \emph{operador Lagrangiano de primer orden}.
+\end{frame}
+\begin{frame}
+\frametitle{Las trayectorias geodésicas}
+La forma general de una geodésica es:
+\pause
+\begin{align}
+\ddot{q}_{l} + \mathlarger{\Gamma}_{mk}^{l} \, \dot{q}_{m} \, \dot{q}_{k} = 0
+\label{eq:ecuacion_01_25}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Las geodésicas}
+Identificando en la ecs. para $a_{\varepsilon}, a_{\eta}, a_{\varphi}$ los términos en color azul, y con la ec. (\ref{eq:ecuacion_01_25}) se pueden leer los términos $\mathlarger{\Gamma}_{mk}^{l}$ que son conocidos en la literatura como los \emph{símbolos de Christoffel}.
+\end{frame}
+
+\end{document}
+
