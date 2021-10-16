@@ -1,0 +1,48 @@
+\input{../Preambulos/preambulo_materiales}
+\usepackage{titling}
+\setlength{\droptitle}{-3cm}
+\title{Apoyo para el Problema 9 \\[0.3em]  \large{Examen Tarea 1} \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+
+El Problema 9 del Examen Tarea pide resolver la siguiente integral:
+\begin{align*}
+\scaleint{5ex}_{\bs 0}^{1} \dfrac{x^{5}}{\sqrt[3]{1 - x^{4}}} \dd{x}
+\end{align*}
+
+Que podemos expresarla como:
+\begin{align*}
+\scaleint{5ex}_{\bs 0}^{1} x^{5} \, (1 - x^{4})^{\frac{1}{3}} \dd{x}
+\end{align*}
+
+Una integral de este tipo la podemos ver como de manera general como:
+\begin{align}
+\int_{0}^{a} x^{b} \, (a^{c} - x^{c})^{d} \dd{x}
+\label{eq:integral_cambio}
+\end{align}
+donde $a, b, c, d$ son constantes, tales que $a > 0$, $c > 0$, $b > -1$, $d > 1$, $b + c \, d > -1$. 
+
+Recordando la integral de la función Beta:
+\begin{align}
+B(x, y) = \int_{0}^{1} t^{x-1} \, (1 -t)^{y-1} \dd{t} \hspace{1cm} x > 0, y > 0
+\label{eq:funcion_Beta}
+\end{align}
+
+Consideramos que las integrales (\ref{eq:integral_cambio}) y (\ref{eq:funcion_Beta}) \enquote{se parecen}, por lo que se tendría que buscar un cambio de variable que nos conduzca a la integral de la función de Beta y luego ocupar alguna de las identidades. El cambio de variable es el punto crítico, por ello presentamos una ayuda. 
+\par
+El cambio de variable propuesto es: $x^{c} = a^{c} \, u$, por lo que la integral (\ref{eq:integral_cambio}) resulta:
+\begin{align*}
+\dfrac{1}{c} \, a^{b+cd+1} \,\int_{0}^{1} u^{\frac{b+1}{c}} \, (1 - u)^{d} \dd{u}
+\end{align*}
+Que ya tiene la forma de la integral Beta (\ref{eq:funcion_Beta}). Al hacer uso de la identidad de la función Beta que la relaciona con la función Gamma, se tiene que:
+\begin{align}
+\scaleint{5ex}_{\bs 0}^{a} x^{b} \, (a^{c} - x^{c})^{d} \dd{x} = \dfrac{a^{b+cd+1} \, \mathlarger{\Gamma} \left( \dfrac{b + 1}{c} \right) \, \Gamma (d + 1)}{(b + c \, d + 1) \, \Gamma \left( \dfrac{b + c \, d + 1}{c} \right)}
+\label{eq:identidad_Gamma}
+\end{align}
+
+\end{document}

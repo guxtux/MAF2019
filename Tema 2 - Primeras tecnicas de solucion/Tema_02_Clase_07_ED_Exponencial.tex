@@ -1,0 +1,260 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\date{13 de octubre de 2021}
+
+\title{\large{Solución EDO con términos trascendentes}}
+\subtitle{Tema 2 - Primeras técnicas de solución}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Planteamiento}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Problemas Tipo}
+
+\begin{frame}
+\frametitle{En dónde tendremos estos problemas}
+Al resolver problemas de dispersión en mecánica cuántica, la ecuación de Schrödinger incluye términos trascendentes.
+\\
+\bigskip
+\pause
+Resolveremos el caso más simple de una ecuación diferencial, que incluye un término exponencial.
+\end{frame}
+
+\section{El problema a resolver}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Sustituyendo la solución en series}
+
+\begin{frame}
+\frametitle{Con el método de Frobenius}
+Ocupando el método de Frobenius, encuentra los primeros seis términos de la solución de la siguiente EDO2H:
+\pause
+\begin{align}
+\stilde{y} - y \, e^{x} = 0
+\label{ec:ecuacion_01}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Tipo de ecuación}
+Tenemos que la EDO no presenta singularidades, por lo que proponemos una solución de la forma:
+\pause
+\begin{align*}
+y = \sum_{n=0}^{\infty} a_{n} \, x^{n}
+\end{align*}
+\pause
+Que debemos de sustituir en la EDO inicial.
+\end{frame}
+\begin{frame}
+\frametitle{Las derivadas de $y$}
+Se tiene entonces que:
+\begin{eqnarray*}
+\ptilde{y} &=& \sum_{n=0}^{\infty} n \, a_{n} \, x^{n-1} \\[0.5em] \pause
+\stilde{y} &=& \sum_{n=0}^{\infty} n \, (n - 1) \, a_{n} \, x^{n-2}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{EDO como serie de potencias}
+La ec. (\ref{ec:ecuacion_01}) en términos de una serie de potencias es:
+\pause
+\begin{align}
+\nsum_{n=0}^{\infty} n( n - 1) \, a_{n} \, x^{n-2} -  \nsum_{n=0}^{\infty} a_{n} \, x^{n} \, e^{x} = 0
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ajuste en el índice de la primera suma}
+Sin pérdida de generalidad, ajustamos el índice de la primera suma, ya que los dos primeros términos (con $n= 0, 1)$ no aportan elementos:
+\pause
+\begin{align}
+\nsum_{n=2}^{\infty} n( n - 1) \, a_{n} \, x^{n-2} - \nsum_{n=0}^{\infty} a_{n} \, x^{n} \, e^{x} = 0
+\end{align}
+\end{frame}
+
+\subsection{Regla de recurrencia}
+
+\begin{frame}
+\frametitle{El siguiente paso}
+El método de Frobenius requiere que se establezca una relación de recurrencia para obtener los coeficientes de la serie de potencias, \pause pero tenemos la función trascendente $e^{x}$.
+\end{frame}
+\begin{frame}
+\frametitle{Función trascendente}
+Recordemos que una función trascendente no satisface una ecuación polinomial cuyos coeficientes sean a su vez polinomios.
+\\
+\bigskip
+\pause
+A diferencia con las funciones algebraicas, las cuales satisfacen dicha ecuación.
+\end{frame}
+\begin{frame}
+\frametitle{Función trascendente}
+Una función trascendente es una función que \emph{trasciende} al álgebra en el sentido que no puede ser expresada en términos de una secuencia infinita de operaciones algebraicas de suma, resta y extracción de raíces.
+\end{frame}
+\begin{frame}
+\frametitle{Complicación para la relación de recurrencia}
+Tenemos entonces un problema que debemos de resolver antes de lograr la relación de recurrencia.
+\\
+\bigskip
+\pause
+Como el enunciado nos pide los primeros seis términos de las soluciones, \pause ocupemos un desarrollo en una serie de Taylor de $e^{x}$.
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollando la serie de Taylor}
+Considerando el caso $0 < x \ll 1$ para desarrollar la serie de Taylor de $e^{x}$:
+\pause
+\begin{align*}
+\nsum_{n=2}^{\infty} n( n - 1) \, a_{n} \, x^{n-2} - \nsum_{n=0}^{\infty} a_{n} \, x^{n} \, \bigg[ \textcolor{blue}{1 + x + \dfrac{x^{2}}{2} + \ldots} \bigg] = 0
+\end{align*}
+\pause
+Procedemos a separar los términos de la segunda suma.  
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollando las sumas}
+Se tiene que:
+\pause
+\begin{align*}
+&\textcolor{blue}{\underbrace{\nsum_{n=2}^{\infty} n( n - 1) \, a_{n} \, x^{n-2}}_{1}} \textcolor{red}{\underbrace{- \nsum_{n=0}^{\infty} a_{n} \, x^{n}}_{2}} \textcolor{brown}{\underbrace{- \nsum_{n=0}^{\infty} a_{n} \, x^{n+1}}_{3}}+ \\[0.5em] 
+&\textcolor{OliveGreen}{\underbrace{- \dfrac{1}{2} \, \nsum_{n=0}^{\infty} a_{n} \, x^{n+2}}_{4}} - \ldots = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ajuste en los índices}
+Para operar las sumas se requiere que todas deben de iniciar siempre en el mismo índice, la primera suma comienza en $n=2$.
+\\
+\bigskip
+\pause
+Para ajustar los índices en esa primera suma, \enquote{bajamos} el índice a $n = 0$, modificando los respectivos términos de $n$.
+\end{frame}
+\begin{frame}
+\frametitle{Sumas con el mismo índice}
+Las sumas son:
+\pause
+\begin{align*}
+&\textcolor{blue}{\underbrace{\nsum_{n=0}^{\infty} (n + 2)(n +1) \, a_{n+2} \, x^{n}}_{1}} \, \textcolor{red}{\underbrace{- \nsum_{n=0}^{\infty} a_{n} \, x^{n}}_{2}} + \\[0.5em] 
+&\textcolor{brown}{\underbrace{- \nsum_{n=0}^{\infty} a_{n} \, x^{n+1}}_{3}} \, \textcolor{OliveGreen}{\underbrace{- \dfrac{1}{2} \, \nsum_{n=0}^{\infty} a_{n} \, x^{n+2}}_{4}} - \ldots = 0
+\end{align*} 
+\pause
+Ahora ya podemos agrupar los coeficientes de $x^{n}$ en las primeras dos sumas.
+\end{frame}
+\begin{frame}
+\frametitle{Expresión simplificada}
+Entonces se tiene que:
+\pause
+\begin{align*}
+&\textcolor{blue}{\underbrace{\nsum_{n=0}^{\infty} \bigg[ (n + 2)(n +1) \, a_{n+2}  - a_{n} \bigg] \, x^{n}}_{1}} + \\[0.5em] 
+&\textcolor{brown}{\underbrace{- \nsum_{n=0}^{\infty} a_{n} \, x^{n+1}}_{2}} \, \textcolor{OliveGreen}{\underbrace{- \dfrac{1}{2} \, \nsum_{n=0}^{\infty} a_{n} \, x^{n+2}}_{3}} - \ldots = 0
+\end{align*} 
+\pause
+Desarrollamos los primeros términos de las sumas anteriores.
+\end{frame}
+\begin{frame}
+\frametitle{Los primeros términos}
+Encontramos que:
+\pause
+\begin{align*}
+&\textcolor{blue}{[2 a_{2} {-} a_{0}] x^{0} + [6 a_{3} {-} a_{1}] x^{1} + [12 a_{4} {-} a_{2}] x^{2} +} \\[0.5em]
+&\textcolor{blue}{+ [20 a_{5} - a_{3}] x^{3} + [30 a_{6} - a_{4}] x^{4} + \ldots} + \\[0.5em]
+&\textcolor{brown}{- a_{0} x^{2} -a_{1} x^{2} -a_{2} x^{3} -a_{3} x^{4} - \ldots} + \\[0.5em]
+&\textcolor{OliveGreen}{-\dfrac{a_{0} x^{2}}{2} - \dfrac{a_{1} x^{3}}{2} - \dfrac{a_{2} x^{4}}{2} \ldots} - = 0 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Agrupando los términos}
+Agrupamos los coeficientes comunes:
+\pause
+\begin{align*}
+&\big[2 a_{2} {-} a_{0}\big] x^{0} + \big[6 a_{3} {-} a_{1} {-} a_{0}\big] x^{1} + \big[12 a_{4} {-} a_{2} {-} a_{1} {-} \dfrac{a_{0}}{2} \big] x^{2} + \\[0.5em]
+&+ \big[ 20 a_{5} {-}a_{3} {-} a_{2} {-} \dfrac{a_{1}}{2} \big] x^{3} + \big[ 30 a_{6} - a_{4} - a_{3} - \dfrac{a_{2}}{2} \big] x^{4} + \\[0.5em]
+&+ \ldots + = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Propiedad de las sumas}
+Se revisó en las notas de trabajo que para una suma infinita se tiene que los coeficientes de la variable $x$ deben de anularse, por ello $a_{0} \neq 0$.
+\\
+\bigskip
+\pause
+Siguiendo esta definición, se tiene que:
+\end{frame}
+\begin{frame}
+\frametitle{Anulando los coeficientes}
+\begin{eqnarray*}
+\begin{aligned}
+2 a_{2} {-} a_{0} &= 0 \pause \hspace{0.3cm} \Rightarrow a_{2} = \dfrac{a_{0}}{2} \\[0.5em]
+6 a_{3} {-} a_{1} {-} a_{0} &= 0 \pause \hspace{0.3cm} \Rightarrow a_{3} = \dfrac{a_{1} + a_{0}}{6} \\[0.5em]
+12 a_{4} {-} a_{2} {-} a_{1} {-} \dfrac{a_{0}}{2} &= 0 \pause \hspace{0.3cm} \Rightarrow a_{4} = \dfrac{a_{1} + a_{0}}{12} \\[0.5em]
+20 a_{5} {-}a_{3} {-} a_{2} {-} \dfrac{a_{1}}{2} &= 0 \pause \hspace{0.3cm} \Rightarrow a_{5} = \dfrac{a_{1} + a_{0}}{30} \\[0.5em]
+30 a_{6} - a_{4} - a_{3} - \dfrac{a_{2}}{2} &= 0 \pause \hspace{0.3cm} \Rightarrow a_{6} = \dfrac{a_{1} + 2 \, a_{0}}{120}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Punto importante}
+Vemos que conseguir una relación de recurrencia no es posible debido al término de la función $e^{x}$, pero con el cálculo de los primeros seis coeficientes, tendremos la solución al problema.
+\\
+\bigskip
+\pause
+Notemos que se requieren los coeficientes: $a_{0}$ y $a_{1}$.
+\end{frame}
+\begin{frame}
+\frametitle{Aproximación a la solución}
+Ocupando los resultados obtenidos llegamos a:
+\begin{align*}
+y(x) &= a_{0} + a_{1} x + \left( \dfrac{a_{0}}{2} \right) x^{2} + \left( \dfrac{a_{1} {+} a_{0}}{6} \right) x^{3} + \\[0.5em]
+&+ \left( \dfrac{a_{1} {+} a_{0}}{12} \right) x^{4} + \left( \dfrac{a_{1} {+} a_{0}}{30} \right) x^{5} + \left( \dfrac{a_{1} {+} 2 a_{0}}{120} \right) x^{6} + \ldots +
+\end{align*}
+\end{frame}  
+\begin{frame}
+\frametitle{Dos soluciones independientes}
+Para obtener dos soluciones linealmente independientes $y_{1}(x)$ y $y_{2}(x)$, en este tipo de problemas, \pause se recurre al siguiente paso:
+\begin{eqnarray*}
+y_{1}(x) \quad \mbox{se obtiene con } a_{0} = 1, a_{1} = 0 \\[0.5em] \pause
+y_{2}(x) \quad \mbox{se obtiene con } a_{0} = 0, a_{1} = 1
+\end{eqnarray*}
+\pause
+Si el enunciado indica los coeficientes $a_{0}$ y $a_{1}$, entonces se deberán de ocupar para la solución.
+\end{frame}
+\begin{frame}
+\frametitle{Las soluciones $y_{1}(x)$ $y_{2}(x)$}
+Las soluciones son:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+&y_{1}(x) = a_{0} \bigg[ 1 + \dfrac{x^{2}}{2} + \dfrac{x^{3}}{6} + \dfrac{x^{4}}{12} + \dfrac{x^{5}}{30} + \dfrac{x^{6}}{60} + \ldots + \bigg] \\[0.5em] \pause
+&y_{2}(x) = a_{1} \, x \, \bigg[ 1 + \dfrac{x^{2}}{6} + \dfrac{x^{3}}{12} + \dfrac{x^{4}}{302} + \dfrac{x^{5}}{120} + \ldots + \bigg]
+\end{aligned}
+\end{eqnarray*}
+\pause
+Las soluciones $y_{1}(x)$ e $y_{2}(x)$ son linealmente independientes. $\qed$
+\end{frame}
+\begin{frame}
+\frametitle{Más términos}
+En caso de que se solicite incorporar más términos debidos a la función exponencial, el desarrollo se continua como se ha expuesto.
+\\
+\bigskip
+En las soluciones se tendrán términos de orden mayor.
+\end{frame}
+\end{document}
