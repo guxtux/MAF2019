@@ -1,0 +1,252 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Warsaw_crane}
+
+% \makeatletter
+% \setbeamertemplate{footline}
+% {
+%   \leavevmode%
+%   \hbox{%
+%   \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+%     \usebeamerfont{section in foot} \insertsection
+%   \end{beamercolorbox}%
+%   \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+%     \usebeamerfont{subsection in foot}  \insertsubsection
+%   \end{beamercolorbox}%
+%   \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+%     \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+%     \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+%   \end{beamercolorbox}}%
+%   \vskip0pt%
+% }
+% \makeatother
+\date{20 de octubre de 2021}
+
+\title{\large{Segunda solución linealmente independiente}}
+\subtitle{Tema 2 - Primeras técnicas de solución}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+
+%Ref. Makarenko. 17. Integración de las ED mediante series
+\section{Solución mediante series}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ecuaciones lineales de 2o. orden}
+
+\begin{frame}
+\frametitle{Tipo de EDO}
+Este método resulta muy común al aplicarlo a las ecuaciones diferenciales lineales, como se ha visto en el tema, seguiremos manejando ecuaciones de segundo orden.
+\\
+\bigskip
+\pause
+Consideremos la EDO2H lineal:
+\pause
+\begin{align}
+    \stilde{y} + p(x) \, \ptilde{y} + q(x) \, y = 0
+    \label{eq:ecuacion_17_01}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Funciones analíticas}
+Haremos la suposición que los coeficientes $p(x)$ y $q(x)$ son funciones analíticas, \pause es decir, se expresan en forma de series de potencias, dispuestas según las potencias enteras positivas de $x$.
+\end{frame}
+\begin{frame}
+\frametitle{EDO como serie de potencias}
+De modo que la ec. (\ref{eq:ecuacion_17_01}) se puede escribir de la forma:
+\pause
+\begin{align}
+\begin{aligned}[b]
+\stilde{y} &+ \big( a_{0} + a_{1} \, x + a_{2} \, x^{2} + \ldots \big) \, \ptilde{y} + \\[0.5em]
+&+ (b_{0} + b_{1} \, x + b_{2} \, x^{2} + \ldots) \, y = 0
+\end{aligned}
+\label{eq:ecuacion_17_02}
+\end{align}
+\end{frame}
+
+\section{Serie de potencias generalizada}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición}
+
+\begin{frame}
+\frametitle{Serie de potencias generalizada}
+Definimos la serie de la forma:
+\pause
+\begin{align}
+x^{\rho} \nsum_{n=0}^{\infty} c_{n} \, x^{n}, \hspace{1.5cm} c_{0} \neq 0
+\label{eq:ecuacion_17_14}
+\end{align}
+donde $\rho$ es un número dado \pause y la serie de potencias:
+\pause
+\begin{align*}
+\nsum_{n=0}^{\infty} c_{n} \, x^{n}
+\end{align*}
+converge para $\abs{x} < R$, se le denomina \emph{\textcolor{red}{serie de potencias generalizada.}}
+\end{frame}
+\begin{frame}
+\frametitle{Serie de potencias ordinaria}
+Si $\rho$ es un número entero no negativo, la serie de potencias generalizada (\ref{eq:ecuacion_17_14}) se convierte en una \emph{\textcolor{blue}{serie de potencias ordinaria}}.
+\end{frame}
+\begin{frame}
+\frametitle{Serie con puntos regulares}
+Si $x = 0$ es un punto singular regular de la ec. (\ref{eq:ecuacion_17_01}), cuyos coeficientes $p(x)$ y $q(x)$ admiten desarrollos:
+\pause
+\begin{align}
+p(x) = \dfrac{\displaystyle \nsum_{n=0}^{\infty} a_{n} \, x^{n}}{x} \hspace{1cm} q(x) = \dfrac{\displaystyle \nsum_{n=0}^{\infty} b_{n} \, x^{n}}{x^{2}}
+\label{eq:ecuacion_17_15}
+\end{align}
+\pause
+donde las series que figuran en los numeradores son convergentes en $\abs{x} < R$, y los coeficientes $a_{0}$, $b_{0}$, $c_{0}$ no son simultáneamente iguales a cero
+\end{frame}
+\begin{frame}
+\frametitle{Series convergentes}
+Entonces la ec. (\ref{eq:ecuacion_17_01}) posee al menos una solución en forma de serie de potencias generalizada:
+\pause
+\begin{align}
+y(x) = x^{\rho} \, \nsum_{n=0}^{\infty} C_{n} \, x^{n}, \hspace{1.5cm} C_{n} \neq 0
+\label{eq:ecuacion_17_16}
+\end{align}
+que es convergente al menos en el mismo intervalo $\abs{x} < R$.
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo $\rho$}
+Para hallar el exponente $\rho$ y los coeficientes $C_{n}$, es necesario:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Expresar la serie (\ref{eq:ecuacion_17_16}) en la ec. (\ref{eq:ecuacion_17_01}).
+\item Simplificar para $x^{\rho}$.
+\item Igualar a cero los coeficientes en distintas potencias de $x$ (método de coeficientes indeterminados).
+\end{enumerate}
+\end{frame}
+
+\subsection{Obteniendo el exponente \texorpdfstring{$\rho$}{r}.}
+
+\begin{frame}
+\frametitle{Solución propuesta}
+Al considerar la solución propuesta:
+\pause
+\begin{align*}
+y = \nsum_{n=0}^{\infty} c_{n} \, x^{n+\rho}
+\end{align*}
+\pause
+se requiere conocer la primera y  segunda derivada de $y$ con respecto a $x$:
+\begin{align*}
+\ptilde{y} &= \sum_{n=0}^{\infty} (n + \rho) \, c_{n} \, x^{n+\rho-1} \\[1em]
+\stilde{y} &= \sum_{n=0}^{\infty} (n + \rho)(n + \rho - 1) \, c_{n} \, x^{n+\rho-2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Sustituyendo en la EDO}
+Sustituimos las derivadas en la ec. (\ref{eq:ecuacion_17_01}) en conjunto con las definiciones de $p(x)$ y $q(x)$ dadas en la ec. (\ref{eq:ecuacion_17_15}):
+\end{frame}
+\begin{frame}
+\begin{align*}
+&\nsum_{n=0}^{\infty} (n {+} \rho)(n {+} \rho {+} 1) \, c_{n} \, x^{n+\rho-2} + \\[0.5em] 
+&+ \left[ \dfrac{\displaystyle \nsum_{n=0}^{\infty} a_{n} \, x^{n}}{x} \right] \, \left[ \nsum_{n=0}^{\infty} (n {+} \rho) \, c_{n} \, x^{n+\rho-1} \right] + \\[1em]
+&+ \left[ \dfrac{\displaystyle \nsum_{n=0}^{\infty} b_{n} \, x^{n}}{x^{2}} \right] \, \nsum_{n=0}^{\infty} c_{n} \, x^{n+\rho} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando la expresión}
+\begin{align*}
+&\nsum_{n=0}^{\infty} (n {+} \rho)(n {+} \rho {+} 1) \, c_{n} \, x^{n+\rho-2} + \\[0.5em]
+&+ \nsum_{n=0}^{\infty} a_{n} \, x^{n-1} \, \nsum_{n=0}^{\infty} (n {+} \rho) \, c_{n} \, x^{n+\rho-1} + \\[1em]
+&+ \nsum_{n=0}^{\infty} b_{n} \, x^{n-2} \, \nsum_{n=0}^{\infty} c_{n} \, x^{n+\rho} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Abreviando el producto de las sumas}
+\begin{align*}
+&\nsum_{n=0}^{\infty} \big[ (n {+} \rho)(n {+} \rho {+} 1) \, c_{n} \big] \, x^{n+\rho-2} + \\[0.5em] 
+&+ \nsum_{n=0}^{\infty} \big[ (n {+} \rho) \, a_{n} \, c_{n} \big] \, x^{2n+\rho-2} + \\[1em]
+&+ \nsum_{n=0}^{\infty} \big[ b_{n} \, c_{n} \big] \, x^{2n+\rho-2} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorizando para el exponente mayor de $x$}
+\begin{align*}
+&\nsum_{n=0}^{\infty} \big[ (n {+} \rho)(n {+} \rho {+} 1) \, c_{n} \big] \, x^{n+\rho-2} + \\[1em]
+&+ \nsum_{n=0}^{\infty} \big[ (n {+} \rho) \, a_{n} \, c_{n} + b_{n} \, c_{n} \big] \, x^{2n+\rho-2} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Haciendo $n = 0$ obtenemos}
+\begin{align*}
+\big[ \rho (\rho - 1) c_{0} + \rho \, a_{0} \, c_{0} + b_{0} \, c_{0} \big] \, x^{\rho-2} = 0
+\end{align*}
+\end{frame}
+
+% En este producto los coeficientes deben de anularse y como $c_{0} \neq 0$, se tiene que:
+% \begin{align}
+% \setlength{\fboxsep}{3\fboxsep}\boxed{
+% \rho (\rho - 1) + \rho \, a_{0} + b_{0} = 0 }
+% \label{eq:ecuacion_17_17}
+% \end{align}
+% a esta expresión se le denomina \emph{ecuación determinativa}.
+% \par
+% Donde:
+% \begin{align}
+% a_{0} = \lim_{x \to 0} x \, p(x) \hspace{1cm} \mbox{y} \hspace{1cm} b_{0} = \lim_{x \to 0} x^{2} \, q(x)
+% \label{eq:ecuacion_17_18}
+% \end{align}
+
+% \section{Tres casos.}
+
+% Supongamos que $\rho_{1} > \rho_{2}$ son las raíces de la ec. (\ref{eq:ecuacion_17_17}), se distinguen tres casos en la solución de la ec. (\ref{eq:ecuacion_17_01}):
+
+% \subsection{Caso 1.}\label{caso1}
+
+% Si la diferencia $\rho_{1} - \rho_{2}$ no es un número entero o cero, se pueden construir dos soluciones de la forma:
+% \begin{align*}
+% y_{1}(x) &= x^{\rho_{1}} \sum_{n=0}^{\infty} c_{n} \, x^{n} \hspace{1.5cm} c_{0} \neq 0 \\ 
+% y_{2}(x) &= x^{\rho_{2}} \sum_{n=0}^{\infty} a_{n} \, x^{n} \hspace{1.5cm} a_{0} \neq 0
+% \end{align*}
+
+% \subsection{Caso 2.} \label{caso2}
+
+% Si la diferencia $\rho_{1} - \rho_{2}$ es un número entero positivo, por lo general, solo se puede construir una serie como solución de la ec. (\ref{eq:ecuacion_17_01}):
+% \begin{align}
+% y_{1}(x) = x^{\rho_{1}} \sum_{n=0}^{\infty} c_{n} \, x^{n}
+% \label{eq:ecuacion_17_19}
+% \end{align}
+
+% Se puede demostrar que si la diferencia $\rho_{1} - \rho_{2}$ es un número entero positivo o cero, además de la solución (\ref{eq:ecuacion_17_19}), habrá una solución de la forma:
+% \begin{align}
+% y_{2}(x) = A \, y_{1}(x) \, \ln x + x^{\rho_{2}} \sum_{n=0}^{\infty} A_{n} \, x^{n}
+% \label{eq:ecuacion_17_20}
+% \end{align}
+
+% Vemos que $y_{2}(x)$ contiene un término complementario de la forma:
+% \begin{align*}
+% A \, y_{1} (x) \, \ln x
+% \end{align*}
+% \noindent
+% donde $y_{1}(x)$ es de la forma (\ref{eq:ecuacion_17_19}). Como punto importante hay que considerar que la constante $A$ en la ec. (\ref{eq:ecuacion_17_20}) sea nula, por lo que la segunda solución $y_{2}(x)$ resulta una expresión de la forma de una serie de potencias generalizada.
+
+
+% \subsection{Caso 3.}
+
+% Si la ec. (\ref{eq:ecuacion_17_17}) posee una raíz múltiple $\rho_{1} = \rho_{2}$, también se construye solo una serie como solución a la ec. \ref{eq:ecuacion_17_01}.
+% \begin{align*}
+% y_{1}(x) = x^{\rho_{1}} \sum_{n=0}^{\infty} c_{n} \, x^{n}
+% \end{align*}
+
+% También es posible demostrar que en este caso, se puede obtener una segunda solución de la forma:
+% \begin{align}
+% y_{2}(x) = y_{1}(x) \, \ln x + x^{\rho_{2}} \sum_{n=1}^{\infty} b_{n} \, x^{n+\rho_{1}}
+% \label{eq:ecuacion_22_Zill}
+% \end{align}
+
+% Comparando con la ec. (\ref{eq:ecuacion_17_20}) se tiene que $A = 1$.
+% \\[0.5em]
+% \noindent
+% Queda claro que en el caso \ref{caso1}, las soluciones $y_{1}(x)$ e $y_{2}(x)$ son linealmente independientes. En el segundo y tercer caso, se ha obtenido una única solución tomando la raíz $\rho_{1}$ de la ecuación de índices, como se indica en la ec. (\ref{eq:ecuacion_17_19}).
+
+
+\end{document}
