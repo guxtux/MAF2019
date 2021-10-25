@@ -154,7 +154,7 @@ Aplicar la ec. (\ref{eq:ecuacion_05_03}) a las tres integrales independientes de
 
 Hay dos formas comunes de definir la función $\delta$ de Dirac. El enfoque más riguroso, desde la teoría de funciones generalizadas, lo define por su comportamiento dentro de las operaciones integrales. De hecho, nunca se supone que la función $\delta$ exista fuera de una integral. En general, en ciencia e ingeniería se un poco más laxos y usan una segunda definición. A menudo definen la función $\delta$ como el límite de una secuencia infinita de funciones continuas. Además, como se demostró en los dos ejemplos anteriores, con frecuencia manipulan la función $\delta$ fuera de las integrales. Por lo general, no hay problemas con este enfoque menos riguroso.
 
-\subsection{La función \texorpdfstring{$\delta(t)$}{d(t)} como límite de una secuencia.}
+\subsection{La función \texorpdfstring{$\delta(t)$}{d(t)} como límite de una secuencia.}\label{secuencias_delta}
 
 La función $\delta$ puede verse como el límite de una secuencia de funciones, es decir:
 \begin{align}
@@ -242,7 +242,7 @@ Como $f (t)$ es una función continua, sobre la región infinitesimal es efectiv
 \end{align}
 Esto \enquote{demuestra} la primera parte de la ec.(\ref{eq:ecuacion_05_14}) La segunda parte, cuando $t_{0}$  no está dentro del rango $t_{-} < t_{0}  < t_{+}$, se sigue fácilmente porque, en este caso, $\delta (t - t_{0})$ es cero para todo el rango del integrando.
 \par
-La figura () muestra una representación de la integración en la ec. (\ref{eq:ecuacion_05_14}). El integrando es un producto de una función de $\delta$ desplazada y la función continua $f (t)$. Debido a que la función $\delta$ es cero en todas partes excepto en $t = t_{0}$, el integrando va a una función $\delta$ ubicada en $t = t_{0}$, con un área escalada por el valor de $f (t_{0})$.
+La figura (\ref{fig:figura_05_10}) muestra una representación de la integración en la ec. (\ref{eq:ecuacion_05_14}). El integrando es un producto de una función de $\delta$ desplazada y la función continua $f (t)$. Debido a que la función $\delta$ es cero en todas partes excepto en $t = t_{0}$, el integrando va a una función $\delta$ ubicada en $t = t_{0}$, con un área escalada por el valor de $f (t_{0})$.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1]{Imagenes/plot_propiedad_desplazamiento.eps}
@@ -250,6 +250,225 @@ La figura () muestra una representación de la integración en la ec. (\ref{eq:e
     \label{fig:figura_05_10}
 \end{figure}
 
+\section{Distribuciones.}
 
+Las ideas que nos permitieron desarrollar el concepto de la delta de Dirac previamente, se pueden sistematizar en lo que se conoce como \emph{la teoría de distribuciones o funciones generalizadas}.
+\par
+Las funciones generalizadas fueron introducidas en 1935 por el matemático ruso, Sergei Lvóvich Sóbolev (1908 - 1989). De manera independientemente a finales de la década de 1940, el matemático francés, Laurent Schwartz (1915 - 2002) formalizó la teoría de distribuciones, lo que le valió la Medalla Fields en 1950 (que no recibió durante la entrega ya que se le negó la visa para ingresar a los Estados Unidos.)
+\par
+Como el nombre lo sugiere, la teoría tiene como objetivo  \emph{extender la definición de una función}, de manera tal que conceptos como el de la delta de Dirac $\delta (x)$ cuenten con una base matemática firme. En particular la teoría permite extender el concepto de derivada a todas las funciones localmente integrables y a entes aún más generales. Existen varias formas de presentar la teoría de distribuciones, se dará una breve introducción utilizando las integrales de secuencias de funciones del tipo:
+\begin{equation}
+\int f_{n}(x) \: g(x) \dd{x} \hspace{1cm} n = 1, 2, 3 , \ldots
+\label{eq:ecuacion_1_99}
+\end{equation}s
+Para ello es necesario introducir tres conceptos:
+\begin{enumerate}
+\item El concepto de función de prueba.
+\item El concepto de función admisible.
+\item El concepto de convergencia débil.
+\end{enumerate}
+
+Hemos visto que una secuencia de funciones $f_{n}(x)$ tal como la secuencia de funciones delta, definida en \ref{secuencias_delta}, nos lleva al concepto matemático de \enquote{función} delta, si la secuencia de integrales converge para funciones apropiadas $g(x)$. Pero, ¿qué quiere decir que sean apropiadas? Si queremos definir conceptos tales como las derivadas de la función delta, entonces las funciones $g(x)$ deben ser diferenciables. Para definir las derivadas también hemos visto que al integrar por partes, para que las derivadas totales no contribuyan, es necesario que la función $g(x)$ tenga un comportamiento apropiado en infinito. Definimos entonces las funciones $g(x)$ como:
+\begin{defi}
+Funciones de prueba.
+Decimos que las función $g(x)$ en la ec. (\ref{eq:ecuacion_1_99}), es de prueba, si es infinitamente diferenciable (clase $C^{\infty}$) y es idénticamente cero fuera de algún intervalo $(a, b)$ (en general este intervalo es diferente para funciones $g(x)$ diferentes).
+\end{defi}
+El nombre de funciones de prueba es adecuado, dado que por ejemplo, la propiedad de filtro de las secuencias delta, se prueba sobre estas funciones. Habiendo definido las funciones de prueba, podemos ahora definir las funciones admisibles (de las cuales seleccionaremos las funciones $f_{n}(x)$ y la convergencia débil.
+\begin{defi}
+Funciones admisibles.
+
+Decimos que las funciones $f_{n}(x)$ en la ec. (\ref{eq:ecuacion_1_99}) son admisibles, si son infinitamente diferenciables. Su comportamiento en infinito puede ser arbitrario.
+\end{defi}
+\begin{defi}
+Convergencia débil.
+
+Consideremos una secuencia de funciones admisibles $f_{n}(x)$ con \\ $n = 1, 2, 3, \ldots$
+Decimos que esta secuencia es débilmente convergente si el límite:
+\begin{equation}
+\lim_{n \to \infty} \int_{-\infty}^{\infty} f_{n}(x) \:  g(x) \, \dd{x}
+\label{eq:ecuacion_1_100}
+\end{equation}
+existe para todas las funciones de prueba $g(x)$.
+\end{defi}
+Una secuencia débilmente convergente puede o no puede converger en alguno de los sentidos de convergencia usual, como convergencia puntual.
+\par
+Podemos presentar ahora una definición rigurosa de una distribución de la siguiente manera:
+\begin{defi}
+Distribuciones.
+
+Una distribución $\varphi (x)$ es un concepto matemático asociado con una secuencia débilmente convergente de funciones admisibles para la cual la integral simbólica:
+\begin{equation}
+\int_{-\infty}^{\infty} \phi (x) \:  g(x) \, \dd{x}
+\label{eq:ecuacion_1_101}
+\end{equation}
+tiene un significado preciso, por medio de la expresión:
+\begin{equation}
+\int_{-\infty}^{\infty} \phi (x) \: g(x) \, dx = \lim_{n \to \infty} f_{n}(x) \: g(x) \, \dd{x}
+\label{eq:ecuacion_1_102}
+\end{equation}
+\end{defi}
+
+\section{Propiedades de la delta de Dirac.}
+
+Una vez que hemos definido la delta de Dirac, nos gustaría saber ahora como operar con y en ella. ¿Es posible decir algo sobre su derivada? La respuesta a esta pregunta es afirmativa y las secuencias delta hechas de funciones diferenciables nos permiten responder a la pregunta de manera precisa.
+\par
+Por ejemplo, sea la secuencia delta:
+\begin{align*}
+\phi_{n} &= \dfrac{n}{\sqrt{\pi}} e^{-n^{2} x^{2}}
+\end{align*}
+
+entonces, al diferenciar la secuencia:
+\begin{align*}
+\dv{\phi_{n}(x)}{x} = - \dfrac{2 \: n^{3}}{\sqrt{\pi}} \: x \: \exp(-n^{2} \: x^{2})
+\end{align*}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/secuencia_delta_04.eps}
+    \caption{Derivada de la secuencia delta.}
+    \label{fig:fig_figura_delta_04}
+\end{figure}
+
+Consideremos ahora la integral
+\begin{align*}
+\scaleint{5ex}_{\bs -\infty}^{+\infty} \dv{\phi_{n}(x)}{x} \: f(x) \dd{x}
+\end{align*}
+
+donde $f(x)$ es diferenciable. Integrando por partes, se obtiene:
+\begin{align*}
+\scaleint{5ex}_{\bs -\infty}^{+\infty} \dv{\phi_{n}(x)}{x} \: f(x) \dd{x} = \phi_{n} \: f(x) \eval_{-\infty}^{+\infty} - \scaleint{5ex}_{\bs -\infty}^{+\infty} \phi_{n} \: \dv{f(x)}{x} \dd{x}
+\end{align*}
+Suponemos que:
+\begin{align*}
+\lim_{n \to \infty} \left( \dfrac{n}{\sqrt{\pi}} \right) \exp(-n^{2} \, x^{2}) \, f(x) = 0
+\end{align*}
+
+Esto normalmente es cierto, ya que estamos considerando funciones para las cuales la integral:
+\begin{align*}
+\scaleint{5ex}_{\bs -\infty}^{+\infty} \phi_{n}(x) \, f(x) \dd{x} 
+\end{align*}
+converge.
+\par
+Entonces, haciendo que $n \to \infty$, tenemos que:
+\begin{align*}
+\lim_{n \to \infty} \scaleint{5ex}_{\bs -\infty}^{+\infty} \dv{\phi_{n}(x)}{x} \: f(x) \dd{x} = - \lim_{n \to \infty} \phi_{n}(x) \: \ptilde{f} (x) \dd{x} =  - \ptilde{f}(0)
+\end{align*}
+
+Vemos entonces que la secuencia $\ptilde{\phi}(x)$ está relacionada con la propiedad de filtro.
+
+\begin{propiedad}
+Propiedad de filtro de las derivadas.
+\\
+La delta de Dirac satisface la siguiente propiedad:
+\begin{align*}
+\scaleint{5ex}_{\bs -\infty}^{+\infty} \dv{\delta(x)}{x} \, f(x) \, \dd{x} = - \dv{f(0)}{x}
+\end{align*}
+
+con $f(x)$ una función diferenciable.
+\par
+Con la idea anterior, se presenta la propiedad para las derivadas de orden superior de $\delta (x)$:
+\begin{align*}
+\scaleint{5ex}_{\bs -\infty}^{+\infty} \dv[m]{\delta (x)}{x} \, f(x) \dd{x} =  (-1)^{m} \, \dv[m]{f(0)}{x}
+\end{align*}
+
+Es necesario enfatizar que la expresión anterior tiene significado sólo cuando asumimos directamente que las funciones involucradas son $m$ veces diferenciables y que las integrales:
+\begin{align*}
+\scaleint{5ex}_{\bs -\infty}^{+\infty} \dv[k]{\phi_{n}(x)}{x} \, f(x) \dd{x}
+\end{align*}
+convergen para todo valor de $n$ y para todo valor de $k$ de $0$ a $m$.
+\end{propiedad}
+
+La delta de Dirac satisface varias propiedades y conocerlas es de mucha utilidad cuando resolvemos problemas específicos en física. 
+\par
+
+\begin{propiedad}
+Para el producto de la delta de Dirac con una función se tiene que:
+\begin{align}
+x \: \delta(x) &= 0 \\[0.5em]
+f(x) \: \delta(x - a) &= f(a) \: \delta(x - a)
+\end{align}
+\end{propiedad}
+
+\begin{propiedad}
+La paridad de la delta de Dirac y su derivada es:
+\begin{align}
+\delta (-x) &= \delta (x) \\[0.5em]
+\ptilde{\delta} (-x) &= - \ptilde{\delta} (x)
+\end{align}
+
+\end{propiedad}
+
+\begin{propiedad}
+También satisface las relaciones:
+\begin{align}
+\delta(a \, x) &= \dfrac{1}{\abs{a}} \, \delta (x), \hspace{1cm} a \neq 0 \\[0.5em]
+\delta (x^{2} - a^{2}) &= \dfrac{1}{2 \, a} \big[ \delta (x + a) + \delta (x - a) \big] \hspace{1cm} a > 0
+\end{align}
+\end{propiedad}
+
+\begin{propiedad}
+Las propiedades de filtro:
+\begin{align}
+\scaleint{5ex}_{\bs -\infty}^{\infty} f(x) \, \delta (x - a) \, \dd{x} &= f(a) \\[0.5em]
+\scaleint{5ex} \delta (a - x) \, \delta (x - b) \, \dd{x} &= \delta (a - b)
+\end{align}
+
+\end{propiedad}
+
+\subsection{Introduciendo más variables.}
+
+Al introducir más variables:
+\begin{align}
+\delta (\va{\bm{r}} - \va{\bm{r_{0}}}) = \delta (x - x_{0}) \, \delta (y - y_{0}) \, \delta (z - z_{0})
+\label{eq:ecuacion_A_03}
+\end{align}
+
+de manera que al integrar sobre todo el espacio tenemos:
+\begin{align*}
+\scaleint{5ex} \, \delta (\va{\bm{r}} - \va{\bm{r_{0}}}) \, \dd{x} \dd{y} \dd{z} = 1
+\end{align*}
+
+\textbf{Ejemplo:}
+
+La función delta permite especificar la densidad de carga debida a un conjunto de $N$ cargas puntuales de valores $q_{i}$ situadas en posiciones $\va{r_{i}}$  como:
+\begin{align}
+\rho (\va{r}) = \nsum_{i=1}^{N} q_{i} \, \delta(\va{r} - \va{r_{i}})
+\label{eq:ecuacion_A_04}
+\end{align}
+
+Las propiedades de la función delta permiten obtener el potencial $\varphi(\va{r})$ evaluando la función dentro de la integral en los puntos $\va{r_{i}}$, es decir:
+\begin{align}
+\varphi(\va{r}) = \scaleint{5ex} \, \dfrac{\rho(\va{\ptilde{r}})}{\abs{\va{r} - \va{\ptilde{r}}}} \: d^{3}\ptilde{r} = \sum_{i=1}^{N} q_{i} \scaleint{5ex} \, \dfrac{\delta ( \va{r} - \va{r_{i}})}{\abs{\va{r} - \va{\ptilde{r}}}} \: d^{3}\ptilde{r} = \sum_{i=1}^{N} \dfrac{q_{i}}{\abs{\va{r} - \va{r_{i}}}}
+\label{eq:ecuacion_A_05}
+\end{align}
+
+Nótese que $\delta (x)$ tiene unidades de inverso de $x$ y $\delta (\va{r})$ tiene unidades de densidad numérica.
+\par
+La función $\delta$ toma una forma particular en coordenadas cilíndricas y esféricas, dadas por la condición de normalización:
+\begin{enumerate}
+\item Para coordenadas cilíndricas
+\begin{equation}
+\scaleint{5ex} \, \delta (\va{r} - \va{r}_{0}) \: R \: \dd{R} \: \dd{\varphi} \: \dd{z} \Rightarrow \delta (\va{r}) =  \dfrac{1}{R} \: \delta (R - R_{0}) \: \delta (\varphi - \varphi_{0}) \: \delta (z - z_{0})
+\end{equation}
+\item  Para coordenadas esféricas
+\begin{equation}
+\begin{aligned}
+\scaleint{5ex} \, & \delta (\va{r} - \va{r}_{0}) \: r^{2} \, \dd{r} \, \sin \theta \, \dd{\theta} \, \dd{\varphi} = 1 \\
+&\Rightarrow \delta (\va{r}) = \dfrac{1}{r^{2}} \: \delta (r - r_{0}) \, \delta (\cos \theta - \cos \theta_{0}) \, \delta (\varphi - \varphi_{0})
+\end{aligned}
+\end{equation}
+\end{enumerate}
+
+A continuación se indican algunas funciones que en el límite generan la función delta:
+\begin{align*}
+\delta(x) = \begin{cases}
+\displaystyle
+\lim_{\varepsilon \to 0^{+}} \dfrac{1}{\pi} \, \dfrac{\varepsilon}{x^{2} + \varepsilon^{2}} & \mbox{Lorentz} \\[1.5em]
+\displaystyle
+\lim_{\sigma \to 0^{+}} \dfrac{1}{\sigma \, \sqrt{2 \, \pi}} \, \exp \left( - \dfrac{x^{2}}{2 \, \sigma^{2}} \right) & \mbox{Gaussiana} \\[1.5em]
+\displaystyle \lim_{\varepsilon \to 0^{+}} \dfrac{\sin(x / \varepsilon)}{ \pi \, x} & \mbox{Dirichlet} \\[1.5em]
+\displaystyle \lim_{L \to \infty} \dfrac{1}{2 \, \pi} \int_{- \abs{L}}^{\abs{L}} \exp(i \, k \, x) \dd{k} & \mbox{Fourier}
+\end{cases}
+\end{align*}
 
 \end{document}
