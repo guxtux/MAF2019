@@ -1,0 +1,195 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Completes de las funciones propias \\ \large {Tema 3 - Bases completas y ortogonales}\vspace{-3ex}}
+
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Curso MAF}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{16pt}%
+
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+\section{Completes de las funciones propias.}
+
+La tercera propiedad importante de un operador autoadjunto (Hermitiano) consiste en que las funciones propias forman un conjunto completo. Esta completes significa que cualquier función bien portada (al menos en partes pero continua) $F(x)$ se puede aproximar por una serie:
+\begin{align}
+F(x) = \nsum_{n=0}^{\infty} a_{n} \, \phi_{n}(x) 
+\label{eq:ecuacion_10_62}
+\end{align}
+con cualquier grado de precisión. Con mayor formalismo, el conjunto $\phi_{n} (x)$ se dice que es \textbf{completo}\footnote{Desde el punto de vista matemático, se ocupa el término cerrado.}, si en el límite el error medio cuadrado se anula:
+\begin{align}
+\lim_{m \to \infty} \scaleint{6ex}_{\bs a}^{b} \left[ F(x) - \nsum_{n=0}^{m} a_{n} \, \phi_{n} \right]^{2} \, \sigma (x) \dd{x} = 0
+\label{eq:ecuacion_10_63}
+\end{align}
+Técnicamente, esta es una integral de Lebesgue. No necesariamente el error es nulo en $[a,b]$, pero sólo la integral del error al cuadrado debe ser cero.
+\par
+La convergencia en la media (ec. \ref{eq:ecuacion_10_63}) debe compararse con la convergencia uniforme. La convergencia uniforme implica la convergencia en la media, pero de manera inversa no se garantiza, la convergencia en la media es menos restrictiva.
+\par
+En la ecuación (\ref{eq:ecuacion_10_63}) no es válida para funciones continuas en piezas, ya que hay un número finito de discontinuidades. Un ejemplo relevante es el fenómeno de Gibbs de las series discontinuas de Fourier, que también ocurre para otras series de funciones propias.
+\par
+ En la ecuación (\ref{eq:ecuacion_10_62}) la expansión de los coeficientes $a_{m}$ se determinar mediante:
+\begin{align}
+a_{m} = \scaleint{5ex}_{\bs a}^{b} F(x) \, \phi_{m}^{*} (x) \, \sigma (x) \dd{x}
+\label{eq:ecuacion_10_64}
+\end{align}
+Que se obtiene al multiplicar la ecuación (\ref{eq:ecuacion_10_62}) por $\phi_{m}^{*} \, w(x)$ y luego se integra\footnote{Recordemos que se puede escribir el complejo conjugado de $\overline{\phi} = \phi^{*}$}. De la ortogonalidad de las funciones propias $\phi_{n}(x)$, solo el $m$-ésimo término sobrevive, por lo que la ortogonalidad es importante. La ecuación (\ref{eq:ecuacion_10_64}) puede compararse con el producto interno de vectores. En ocasiones los coeficientes $a_{m}$ son llamados \textbf{coeficientes generalizados de Fourier}.
+\par
+Para una función conocida $F(x)$, la ecuación (\ref{eq:ecuacion_10_64}) proporciona $a_{m}$ como una \textbf{integral definida} que siempre se puede evaluar, ya sea numéricamente si es que no es de manera analítica.
+\par
+En términos del álgebra lineal, tenemos un espacio lineal, un espacio de funciones. Las funciones linealmente independientes, ortonormales $\phi_{n}(x)$ forman una base de ese espacio (infinito-dimensional). La ecuación (\ref{eq:ecuacion_10_62}) es un punto que nos dice que las funciones $\phi_{n}(x)$ cubre ese espacio lineal. Con un producto punto definido por la ec. (\ref{eq:ecuacion_10_64}), el espacio lineal que tenemos, se convierte en un \textbf{espacio de Hilbert}.
+\par
+Por simplicidad, dejando la función de peso $\sigma (x) = 1$, la cerradura en forma de un operador para un conjunto discreto de funciones propias $\ket{\phi_{i}}$ es:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\nsum_{i} \ket{\varphi_{i}} \bra{\varphi_{i}} =  1}
+\end{align*}
+Multiplicando la relación de cerradura por $\ket{F}$ obtenemos la expansión de la función propia:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\ket{F} = \nsum_{i} \ket{\phi_{i}} \braket{\phi_{i}}{F}}
+\end{align*}
+con el coeficiente generalizado de Fourier $a_{i} = \braket{\phi_{i}}{F}$. De manera equivalente en una representación coordenada:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\nsum_{i} \phi_{i}^{*} (y) \, \phi_{i} (x) = \delta (x - y)}
+\end{align*}
+implica que:
+\begin{align*}
+F(x) = \scaleint{5ex} \, F(y) \, \delta (x - y) \, \dd{y} = \nsum_{i} \phi_{i} (x) \, \scaleint{5ex} \, \ phi_{i}^{*} (y) \, F(y) \dd{y}
+\end{align*}
+Sin pruebas, afirmamos que el espectro de un operador lineal $A$ que mapea un espacio de Hilbert\footnote{Recuerda que en la sección de material complementario, hay una revisión sobre las características y propiedades del espacio de Hilbert.} $\mathcal{H}$ en sí mismo puede dividirse en un espectro discreto (o puntual) con vectores propios de longitud finita, un espectro continuo para que la ecuación de valores propios $A \, v = \lambda \, v$ con $v$ en $\mathcal{H}$ no tiene una inversa limitada única $(A - \lambda)^{-1}$ en un dominio denso de $\mathcal{H}$ y un espectro residual donde $(A - \lambda)^{-1}$.
+
+\subsection{Desigualdad de Bessel.}
+
+Si el conjunto de funciones $\phi_{n} (x)$ no forma un conjunto completo, posiblemente sea por que no se han incluido el número infinito de elementos del conjunto completo, esto nos conduce a la \emph{desigualdad de Bessel}. Consideremos primero un caso finito. Sea $\vb{A}$ un vector de $n$ componentes:
+\begin{align}
+\vb{A} = \vu{e}_{1} \, a_{1} + \vu{e}_{2} \, a_{2} + \ldots + \vu{e}_{n} \, a_{n} 
+\label{eq:ecuacion_10_66}
+\end{align}
+en donde $\vu{e}_{i}$ es un vector unitario y $a_{i}$ es la correspondiente componente (proyección) de $\vb{A}$, esto es:
+\begin{align}
+a_{i} = \vb{A} \cdot \vu{e}_{i}
+\label{eq:ecuacion_10_67}
+\end{align}
+Entonces:
+\begin{align}
+\left( \vb{A} - \nsum_{i} \vu{e}_{i} \, a_{i} \right)^{2} \geq 0
+\label{eq:ecuacion_10_68}
+ \end{align}
+Si sumamos todos los $n$ componentes, la suma se iguala a $\vb{A}$ por lo que la ecuación (\ref{eq:ecuacion_10_66}) se mantiene, pero si la suma, no incluye a todos los $n$ componentes, la desigualdad se mantiene. Pero si la suma no incluye todos los $n$ componentes, se presenta la desigualdad.
+\par
+Expandiendo la ecuación (\ref{eq:ecuacion_10_68}) y eligiendo los vectores unitarios para que satisfagan la relación de ortogonalidad:
+\begin{align}
+\vu{e}_{i} \cdot \vu{e}_{j} =  \delta_{ij}
+\label{eq:ecuacion_10_69}
+\end{align}
+tenemos que:
+\begin{align}
+\vb{A}^{2} \geq \nsum_{i} a_{i}^{2}
+\label{eq:ecuacion_10_70}
+\end{align}
+Que es \underline{la desigualdad de Bessel}.
+\par
+Para funciones reales debemos de considerar la integral:
+\begin{align}
+\scaleint{7ex}_{\bs a}^{b} \left[ f(x) - \nsum_{i} a_{i} \, \phi_{i}(x) \right]^{2} \, \sigma (x) \dd{x} \geq 0
+\label{eq:ecuacion_10_71}
+\end{align}
+que es el análogo continuo de la ecuación (\ref{eq:ecuacion_10_68}), haciendo $n \to \infty$ y reemplazando la suma por la integración. Nuevamente, con el factor de peso $\sigma (x) > 0 $, el integrando es no negativo. La integral se anula por la ecuación (\ref{eq:ecuacion_10_62}) si tenemos un conjunto completo. De otra forma, es positiva.
+
+Si expandimos el término al cuadrado obtenemos:
+\begin{equation}
+\scaleint{5ex}_{\bs a}^{b} \big[ f(x) \big]^{2} \, \sigma (x) \dd{x} - 2 \nsum_{i} a_{i} \, \scaleint{5ex}_{\bs a}^{b} f(x) \, \phi (x) \, \sigma (x) \dd{x} + \nsum_{i} a_{i}^{2} \geq 0
+\label{eq:ecuacion_10_72}
+\end{equation}
+Usando la ecuación (\ref{eq:ecuacion_10_64}), tenemos
+\begin{equation}
+\scaleint{5ex}_{\bs a}^{b} \big[ f(x) \big]^{2} \, \sigma (x) \dd{x} \geq \nsum_{i} a_{i}^{2}
+\label{eq:ecuacion_10_73}
+\end{equation}
+De aquí que la suma de los cuadrados de la expansión de los coeficientes $a_{i}$ es menor o igual que la integral de peso de $[f(x)]^{2}$, la igualdad se mantiene si y sólo si, la expansión es exacta, esto ocurre si el conjunto de soluciones $\phi_{n}(x)$ es un conjunto completo. Cuando se considera que las funciones propias que forman conjuntos completos (como los polinomios de Legendre), la ec. (\ref{eq:ecuacion_10_73}) con el signo igual que se mantiene se llamará \textbf{relación de Parseval}.
+\par
+La desigualdad de Bessel tiene distintos usos, incluida la prueba de convergencia para las series de Fourier.
+
+\subsection{Desigualdad de Schwarz.}
+
+La desigualdad de Schwarz se usa comúnmente y es similar a la desigualdad de Bessel. Consideremos la ecuación cuadrática con la incógnita $x$:
+\begin{align}
+\nsum_{i=1}^{n} (a_{i} \, x + b_{i})^{2} = \nsum_{i=1}^{n} a_{i}^{2} \left( x + \frac{b_{i}}{a_{i}} \right)^{2} = 0
+\label{eq:ecuacion_10_74}
+\end{align}
+con $a_{i}$, $b_{i}$ reales. Si $b_{i}/a_{i}$ es la constante $c$, independiente del índice $i$, la solución es $x= - c$. 
+\par
+Si $b_{i}/a_{i}$ no es constante en $i$, todos los términos no se anulan simultáneamente para un $x$ real, por lo que la solución debe de ser compleja. Expandiendo, tenemos que:
+\begin{align}
+x^{2} \, \nsum_{i}^{n} a_{i}^{2} + 2 \, x \, \nsum_{i}^{n} a_{i} \, b_{i} + \nsum_{i}^{n} b_{i}^{2} = 0
+\label{eq:ecuacion_10_75}
+\end{align}
+como $x$ es complejo (o = $-b_{i}/a_{i}$), la fórmula cuadrática para $x$ conduce a: 
+\begin{align}
+\left( \nsum_{i=1}^{n} a_{i} \, b_{i} \right)^{2} \leq \left( \nsum_{i=1}^{n} a_{i}^{2} \right) \, \left( \nsum_{i=1}^{n} b_{i}^{2} \right)
+\label{eq:ecuacion_10_76}
+\end{align}
+la igualdad se mantiene cuando $b_{i}/a_{i}$ es una constante independiente de $i$.
+\par
+Nuevamente, en términos de vectores, tenemos:
+\begin{align}
+( \vb{a} \cdot \vb{b} )^{2} =  a^{2} \, b^{2} \, \cos^{2} \theta \leq a^{2} \, b^{2}
+\label{eq:ecuacion_10_77}
+\end{align}
+donde $\theta$ es el ángulo entre $\vb{a}$ y $\vb{b}$.
+\par
+La desigualdad de Schwarz para funciones complejas tiene la expresión:
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\abs{ \scaleint{5ex}_{\bs a}^{b} f^{*} (x) \, g(x) \dd{x} }^{2} \leq \scaleint{5ex}_{\bs a}^{b} f^{*}(x) \, f(x) \dd{x} \scaleint{5ex}_{\bs a}^{b} g^{*}(x) \, g(x) \dd{x}}
+\label{eq:ecuacion_10_78}
+\end{align}
+La desigualdad se mantiene si y sólo si $g(x) = \alpha \, f(x)$, siendo $\alpha$ una constante. Para probar esta forma de la función de la desigualdad de Schwarz, consideremos la función compleja $\psi(x) = f(x) + \lambda \, g(x)$ con $\lambda$ una constante compleja, donde las funciones $f(x)$ y $g(x)$ son cualesquiera dos funciones de cuadrado integrable (para las cuales, las integrales del lado derecho existen). Multiplicando por el conjugado complejo y luego integrando, tenemos:
+\begin{align}
+\begin{aligned}
+\scaleint{5ex}_{\bs a}^{b} \psi^{*} \, \psi \dd{x} &\equiv \scaleint{5ex}_{\bs a}^{b} f^{*} \, f \dd{x} + \lambda \, \int_{a}^{b} f^{*} \, g \dd{x} + \lambda^{*} \, \scaleint{5ex}_{\bs a}^{b} g^{*} \, f \dd{x} + \\
+&+ \lambda \, \lambda^{*} \, \scaleint{5ex}_{\bs a}^{b} g^{*} \, g \, \dd{x}  \geq 0
+\end{aligned}
+\label{eq:ecuacion_10_79}
+\end{align}
+El $\geq 0$ aparece ya que $\psi^{*} \, \psi$ es no negativo, el signo igual $(=)$ se mantiene sólo si $\psi (x)$ es idéntico a cero. Nótese que $\lambda$ y $\lambda^{*}$ son linealmente independientes, diferenciamos con respecto a uno de ellos, e igualamos la derivada a cero para minimizar $\displaystyle \int_{a}^{b} \psi^{*} \, \psi \dd{x}$:
+\begin{align*}
+\pdv{\lambda^{*}} \scaleint{5ex}_{\bs a}^{b} \psi^{*} \, \psi \dd{x} = \scaleint{5ex}_{\bs a}^{b} g^{*} \, f \dd{x}  + \lambda \scaleint{5ex}_{\bs a}^{b} g^{*} g \dd{x} = 0
+\end{align*}
+que nos lleva a:
+\begin{align}
+\lambda = - \, \dfrac{\displaystyle \scaleint{5ex}_{\bs a}^{b} g^{*} \, f \dd{x}}{\displaystyle \scaleint{5ex}_{\bs a}^{b} g^{*} \, g \dd{x}}
+\label{eq:ecuacion_10_80a}
+\end{align}
+tomando el conjugado complejo: 
+\begin{align}
+\lambda^{*} = - \dfrac{\displaystyle \scaleint{5ex}_{\bs a}^{b} f^{*} \, g \dd{x}}{\displaystyle \scaleint{5ex}_{\bs a}^{b} g^{*} \, g \dd{x}}
+\label{eq:ecuacion_80b}
+\end{align}
+sustituyendo esos valores de $\lambda$ y $\lambda^{*}$ en la ecuación (\ref{eq:ecuacion_10_79}), obtenemos la ecuación (\ref{eq:ecuacion_10_78}), \underline{la desigualdad de Schwarz}.
+\par
+En mecánica cuántica las funciones $f(x)$ y $g(x)$ podrían representar un estado o una configuración de un sistema físico, es decir, una combinación lineal de funciones de onda. Entonces la desigualdad e Schwarz garantiza que el producto punto $\displaystyle \int_{a}^{b} f^{*} \, g(x) \, \dd{x}$ existe. En algunos textos, la desigualdad de Schwarz es un paso para llegar al principio de incertidumbre de Heisenberg.
+\par
+La notación de las funciones de las ecuaciones (\ref{eq:ecuacion_10_78}) y (\ref{eq:ecuacion_10_79}) es a veces incómoda; en mecánica cuántica es común utilizar la notación de Dirac. Con esta notación, se simplifica tanto el rango de integración $(a, b)$, como la función de peso $\sigma (x) \geq 0$. La desigualdad de Schwarz ahora se representa:
+\begin{align}
+\abs{\braket{f}{g}}^{2} \leq \braket{f}{f} \, \braket{g}{g}
+\label{eq:ecuacion_10_78a}
+\end{align}
+Si $g(x)$ es una función propia normalizada, $\varphi_{i}(x)$, la ecuación (\ref{eq:ecuacion_10_78}) lleva a (donde $w(x)=1$)
+\begin{align}
+a_{i}^{*} \, a_{i} \leq \scaleint{5ex}_{\bs a}^{b} f^{*}(x) \, f(x) \dd{x} 
+\label{eq:ecuacion_10_81}
+\end{align}
+Un resultado que se sigue de la ecuación (\ref{eq:ecuacion_10_73}).
+
+\end{document}
