@@ -1,0 +1,616 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Dresden_seahorse}
+
+\date{3 de noviembre de 2021}
+
+\title{\large{Funciones ortonormales y operadores}}
+\subtitle{Tema 3 - Bases completas y ortogonales}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+
+%Ref. Romero (2013)
+\section{Bases ortonormales}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Algunos conjuntos}
+
+\begin{frame}
+\frametitle{Conjuntos de funciones}
+Veremos algunos ejemplos de conjuntos de funciones que forman una base ortonormal.
+\\
+\bigskip
+Es decir, que las funciones son ortogonales y normalizadas a la unidad.
+\end{frame}
+\begin{frame}
+\frametitle{Exponencial compleja}
+Consideremos el conjunto de funciones:
+\pause
+\begin{align}
+\Phi_{n} (\varphi) = \dfrac{1}{\sqrt{2 \, \pi}} \, e^{i n \varphi}
+\label{eq:ecuacion_06_67}
+\end{align}
+definidas en el intervalo $[0, 2 \, \pi]$, con $n$ un número entero.
+\end{frame}
+\begin{frame}
+\frametitle{Revisando la ortogonalidad}
+De acuerdo a la definición de ortogonalidad:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\braket{\Phi_{n}(\varphi)}{\Phi_{m}(\varphi)} &= \scaleint{6ex}_{\bs 0}^{2 \pi} \big[ \Phi_{n}(\varphi) \big]^{*} \, \Phi_{m}(\varphi) \dd{\varphi} = \\[0.5em] \pause
+&= \dfrac{1}{2 \pi} \, \scaleint{6ex}_{\bs 0}^{2 \pi} \exp(i (m - n)) \dd{\varphi}
+\end{aligned}
+\label{eq:ecuacion_06_68}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Caso $m = n$}
+Es claro que:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\dfrac{1}{2 \pi} \, \scaleint{6ex}_{\bs 0}^{2 \pi} &\exp(i (m - n)) \dd{\varphi} =  \\[0.5em] \pause
+&= \dfrac{1}{2 \pi} \, \scaleint{6ex}_{\bs 0}^{2 \pi} \exp(i (n - n)) \dd{\varphi} = \\[0.5em] \pause
+&= 1
+\end{aligned}
+\label{eq:ecuacion:06_70}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Caso $n \neq m$}
+Ahora resulta en:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\dfrac{1}{2 \pi} \, \scaleint{6ex}_{\bs 0}^{2 \pi} &\exp(i (m - n)) \dd{\varphi} = \\[0.5em] \pause
+&= \dfrac{1}{2 \pi} \, \dfrac{1}{i(n -m)} \, \exp(i (m - n)) \eval_{0}^{2 \pi} = \\[0.5em] \pause
+&= \dfrac{1}{2 \pi} \, \dfrac{1}{i(n -m)} \, \big[ (-1)^{2 (m-n)} - 1 \big] = \\[0.5em] \pause
+&= 0
+\end{aligned}
+\label{eq:ecuacion:06_69}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión de la ortogonalidad}
+Entonces tenemos que:
+\pause
+\begin{align}
+\braket{\Phi_{n}(\varphi)}{\Phi_{m}(\varphi)} = \delta_{mn}
+\label{eq:ecuacion_06_70}    
+\end{align}
+Es un conjunto ortogonal, \pause y entonces, linealmente independiente.
+\end{frame}
+
+\begin{frame}
+\frametitle{Operador momento angular}
+Consideremos las funciones propias del operador $\vb{L}^{2}$, el operador momento angular.
+\pause
+\begin{align*}
+\vb{L}^{2} \, Y_{\lambda} (\theta, \varphi) =  \lambda \, Y_{\lambda} (\theta, \varphi)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación diferencial}
+Que deben de satisfacer:
+\pause
+\begin{align*}
+&\vb{L}^{2} \, Y_{\lambda} (\theta, \varphi) = - \bigg[ \dfrac{1}{\sin \theta} \, \pdv{\theta} \left( \sin \theta \, \pdv{\theta} Y_{\lambda} (\theta, \varphi) \right) + \\[0.5em]
+&+ \dfrac{1}{\sin^{2} \theta} \, \pdv[2]{\varphi} \, Y_{\lambda} (\theta, \varphi) \bigg] = \lambda \, Y_{\lambda} (\theta, \varphi)
+\end{align*}
+\pause
+En este momento no resolveremos la ecuación, pero veremos algunas de sus propiedades con respecto a la ortonormalidad.
+\end{frame}
+\begin{frame}
+\frametitle{Solución propuesta}
+Se propone la siguiente solución: $Y_{\lambda} (\theta, \varphi) = \Theta(\theta) \, \Phi(\varphi)$, de tal modo que:
+\pause
+\begin{align*}
+&\vb{L}^{2} \, Y_{\lambda} (\theta, \varphi) =  - \bigg[ \dfrac{\Phi(\varphi)}{\sin \theta} \, \pdv{\theta} \left( \sin \theta \, \pdv{\Theta(\theta)}{\theta} Y_{\lambda} (\theta, \varphi) \right) + \\[0.5em]
+&+ \dfrac{\Theta(\theta)}{\sin^{2} \theta} \, \pdv[2]{\Phi(\varphi)}{\varphi} \, Y_{\lambda} (\theta, \varphi) \bigg] = \lambda \, \Theta(\theta) \, \Phi(\varphi)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Separando la ecuación}
+Se tiene que:
+\pause
+\begin{equation}
+\begin{aligned}[b]
+&\left( \dfrac{\sin^{2} \theta \, \vb{L}^{2} \, Y_{\lambda} (\theta, \varphi)}{Y_{\lambda m} (\theta, \varphi)} \right) = \\[0.5em] \pause 
+&= - \bigg[ \dfrac{\sin \theta}{\Theta} \, \pdv{\theta} \left( \sin \theta \, \pdv{\Theta}{\theta} \right) + \dfrac{1}{\Phi} \, \pdv[2]{\Phi}{\varphi} \bigg] = \\[0.5em] \pause
+&= \lambda \, \sin^{2} \theta
+\end{aligned}
+\label{eq:ecuacion_06_91}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Avanzando en la separación}
+Esto implica que:
+\pause
+\begin{align}
+\pdv{\varphi} \left( \dfrac{\sin^{2} \theta \, \vb{L}^{2} \, Y_{\lambda} (\theta, \varphi)}{Y_{\lambda m} (\theta, \varphi)} \right) = - \left( \dfrac{1}{\Phi} \, \pdv[2]{\Phi}{\varphi} \right) = 0
+\end{align}
+\pause
+entonces:
+\pause
+\begin{eqnarray}
+\dfrac{1}{\Phi} \, \dv[2]{\Phi}{\varphi} &=& - m^{2} \hspace{1cm} \mbox{constante} \label{eq:ecuacion_06_93} \\[0.5em] \pause
+\dv[2]{\Phi}{\varphi} &=& - m^{2} \, \Phi \label{eq:ecuacion_06_94}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Seguimos en la separación}
+Sustituyendo la ec. (\ref{eq:ecuacion_06_93}) en la ec. (\ref{eq:ecuacion_06_91}), llegamos a:
+\begin{align}
+- \bigg[ \dfrac{\sin \theta}{\Theta} \, \pdv{\theta} \left( \sin \theta \, \pdv{\Theta}{\theta} \right) - m^{2} \bigg] = \lambda \, \sin^{2} \theta
+\label{eq:ecuacion_06_95}
+\end{align}
+\pause
+que se puede escribir como:
+\pause
+\begin{align}
+\pdv{\theta} \left( \sin \theta \, \pdv{\Theta (\theta)}{\theta} \right) {+} \left( \lambda \, \sin \theta {-} \dfrac{m^{2}}{\sin \theta} \right) \, \Theta (\theta) = 0
+\label{eq:ecuacion_06_96}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Dependencia de la ecuación}
+La ec. (\ref{eq:ecuacion_06_96}) depende de los parámetros $\lambda$ y $m$, por lo que se redefine la función $\Theta(\theta)$ como:
+\begin{align*}
+\Theta(\theta) = P_{\lambda}^{m} (\cos \theta).
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de tipo S-L}
+La misma ec. (\ref{eq:ecuacion_06_96}) es de tipo Sturm-Liouville, con:
+\pause
+\begin{align}
+p(\theta) = \sin \theta, \hspace{0.5cm} q(\theta) = \sin \theta, \hspace{0.5cm} \sigma(\theta) = - \dfrac{m^{2}}{\sin \theta}
+\label{eq:ecuacion_06_97}
+\end{align}
+\pause
+Además se tiene que:
+\pause
+\begin{align*}
+p(0) = \sin 0  = p(\pi) = \sin \pi = 0
+\end{align*}
+las soluciones de la ec. (\ref{eq:ecuacion_06_96}) son ortonormales en el intervalo $[0, \pi]$, con función de peso $\sin \theta$.
+\end{frame}
+\begin{frame}
+\frametitle{Ortogonalidad de las funciones}
+Es decir que:
+\pause
+\begin{align}
+\scaleint{5ex}_{\bs 0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) = \alpha_{\lambda m} \, \delta_{\lambda^{\prime} \lambda}
+\label{eq:ecuacion_06_98}
+\end{align}
+donde $\alpha_{\lambda m} =$ constante $> 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Solución a una EDO}
+Revisemos que las funciones:
+\pause
+\begin{align}
+\Phi_{m} (\varphi) = A_{0} \, \exp(i \, m \, \varphi)
+\label{eq:ecuacion_06_99}
+\end{align}
+\pause
+son soluciones de la ec. (\ref{eq:ecuacion_06_94}). \pause En particular si todos los $m$ son enteros, el conjunto de funciones:
+\pause
+\begin{align}
+\Phi_{m}(\varphi) = \dfrac{\exp(i m \varphi)}{\sqrt{2 \, \pi}
+}
+\label{eq:ecuacion_06_100}
+\end{align}
+son ortonormales en el intervalo $[0, 2 \, \pi]$.
+\end{frame}
+\begin{frame}
+\frametitle{Funciones ortonormales}
+Entonces, si el conjunto de $m$ está en los enteros, las funciones:
+\pause
+\begin{align}
+Y_{\lambda m} (\theta, \varphi) = \dfrac{1}{\sqrt{\alpha_{\lambda m}} \, \sqrt{2 \, \pi}} \, \exp(i \, m \, \varphi) \, P_{\lambda}^{m} (\cos \theta)
+\label{eq:ecuacion_06_101}
+\end{align}
+son ortonormales.
+\end{frame}
+\begin{frame}
+\frametitle{La ortogonalidad de las funciones}
+Considerando la ortonormalidad de las funciones:
+\begin{align*}
+\dfrac{\exp(i \, m \, \varphi)}{\sqrt{2 \, \pi}} \hspace{1.5cm} P_{\lambda}^{m} (\cos \theta)
+\end{align*}
+se tiene que:
+\pause
+\begin{align*}
+\braket{Y_{\lambda^{\prime} m^{\prime}} (\theta, \varphi)}{Y_{\lambda m} (\theta, \varphi)} = \scaleint{6ex} \, Y_{\lambda^{\prime} m^{\prime}} (\theta, \varphi) \, Y_{\lambda m} (\theta, \varphi) \dd{\Omega}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La ortogonalidad de las funciones}
+\begin{eqnarray*}
+\begin{aligned}
+&\braket{Y_{\lambda^{\prime} m^{\prime}} (\theta, \varphi)}{Y_{\lambda m} (\theta, \varphi)} = \\[0.5em] \pause
+&= \scaleint{6ex}_{\bs 0}^{2 \pi} \scaleint{6ex}_{\bs 0}^{\pi}  \sin \theta \, Y_{\lambda^{\prime} m^{\prime}}^{*} (\theta, \varphi) \, Y_{\lambda m} (\theta, \varphi) \dd{\theta} \dd{\varphi} = \\[0.5em] \pause
+&= \scaleint{6ex}_{\bs 0}^{2 \pi} \scaleint{6ex}_{\bs 0}^{\pi}  \sin \theta \left( \dfrac{1}{\sqrt{\alpha_{\lambda^{\prime} m^{\prime}}} \sqrt{2 \, \pi}} \, e^{i  m \varphi} P_{\lambda}^{m} (\cos \theta) \right)^{*} \times \\[0.5em]
+&\times \left( \dfrac{1}{\sqrt{\alpha_{\lambda m}} \, \sqrt{2 \, \pi}} \, e^{i m \varphi} \, P_{\lambda}^{m} (\cos \theta) \right) \dd{\theta} \dd{\varphi} =
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{La ortogonalidad de las funciones}
+\begin{eqnarray*}
+\begin{aligned}
+&= \scaleint{6ex}_{\bs 0}^{2 \pi} \scaleint{6ex}_{\bs 0}^{\pi}  \sin \theta \, \left( \dfrac{1}{\sqrt{\alpha_{\lambda^{\prime} m^{\prime} } } \sqrt{2 \, \pi}} \, e^{i  m^{\prime} \varphi} P_{\lambda^{\prime}}^{m^{\prime}} (\cos \theta) \right) \times \\[0.5em]
+&\times \left( \dfrac{1}{\sqrt{\alpha_{\lambda m}} \, \sqrt{2 \, \pi}} \, e^{i m \varphi} \, P_{\lambda}^{m} (\cos \theta) \right) \dd{\theta} \dd{\varphi} = 
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{La ortogonalidad de las funciones}
+\begin{eqnarray*}
+\begin{aligned}
+&= \dfrac{1}{\sqrt{\alpha_{\lambda^{\prime} m^{\prime}}}  \sqrt{\alpha_{\lambda m}}} \, \bigg[ \dfrac{1}{2 \pi} \scaleint{6ex}_{\bs 0}^{2 \pi}  e^{-i m \varphi} \, e^{i m \varphi} \dd{\varphi} \bigg] \times \\[0.5em] 
+&\times \scaleint{6ex}_{\bs 0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m^{\prime}} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) \dd{\theta} =
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{La ortogonalidad de las funciones}
+\begin{eqnarray*}
+\begin{aligned}
+&= \dfrac{1}{\sqrt{\alpha_{\lambda^{\prime} m^{\prime}}}  \sqrt{\alpha_{\lambda m}}} \delta_{m m^{\prime}}
+\scaleint{6ex}_{\bs 0}^{\pi} \! \sin \theta \, P_{\lambda^{\prime}}^{m^{\prime}} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) \dd{\theta} = \\[0.5em] \pause
+&= \dfrac{1}{\sqrt{\alpha_{\lambda^{\prime} m}}  \sqrt{\alpha_{\lambda m}}} \delta_{m m^{\prime}}
+\scaleint{6ex}_{\bs 0}^{\pi} \! \sin \theta \, P_{\lambda^{\prime}}^{m} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) \dd{\theta} = \\[0.5em] \pause
+&= \dfrac{1}{\sqrt{\alpha_{\lambda^{\prime} m}}  \sqrt{\alpha_{\lambda m}}} \delta_{m m^{\prime}} \, \alpha_{\lambda m} \, \delta_{\lambda^{\prime} \lambda}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{La ortogonalidad de las funciones}
+\begin{eqnarray*}
+\begin{aligned}    
+\dfrac{1}{\sqrt{\alpha_{\lambda m}}  \sqrt{\alpha_{\lambda m}}} \, \alpha_{\lambda m} \, \delta_{\lambda^{\prime} \lambda} = \pause \delta_{m m^{\prime}} \, \delta_{\lambda \lambda^{\prime}}
+\end{aligned}
+\end{eqnarray*}
+\pause
+Es decir:
+\begin{align}
+\braket{Y_{\lambda^{\prime} m^{\prime}} (\theta, \varphi)}{Y_{\lambda m} (\theta, \varphi)} = \delta_{m m^{\prime}} \, \delta_{\lambda \lambda^{\prime}}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+Aunque no sabemos aún cuál es la forma explícita de las funciones $Y_{\lambda m} (\theta, \varphi)$, pero podemos concluir que son un \textcolor{blue}{conjunto de funciones ortogonales}.
+\\
+\bigskip
+\pause
+Las funciones $Y_{\lambda m} (\theta, \varphi)$ conocidas como \textcolor{red}{\emph{armónicos esféricos}}, son de importancia en la mecánica cuántica y en la electrodinámica.
+\end{frame}
+
+\section{Operadores}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Operadores lineales}
+
+\begin{frame}
+\frametitle{Definición}
+Sea $V$ un espacio vectorial, una función $O:V \to V$ es un operador lineal (\emph{transformación lineal}) si:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+&\forall v_{1}, v_{2} \in V, \forall \alpha, \beta \in K  \\[0.5em] \pause
+&O(\alpha \, v_{1} + \beta \, v_{2}) = \alpha \, O(v_{1}) + \beta \, O(v_{2})
+\end{aligned}
+\label{eq:ecuacion_06_116}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{El operador derivada}
+El operador derivada es lineal, ya que:
+\pause
+\begin{align*}
+&\pdv{x} \bigg[ \alpha \, f_{1}(x) + \beta \, f_{2}(x) \bigg] = \\[0.5em]
+&= \alpha \, \pdv{x} \, f_{1}(x) + \beta \, \pdv{x} \, f_{2}(x)
+%\label{eq:ecuacion_06_117}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Operador lineal con una función}
+Usando el producto por un escalar, con una función $f(x)$, se puede definir el operador lineal $O$, como:
+\pause
+\begin{align*}
+O(v_{1}) = f(x) \, v_{1}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Operador lineal con una función}
+Esto operador es lineal, ya que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+O(\alpha \, v_{1} + \beta \, v_{2}) &= f(x) (\alpha \, v_{1} + \beta \, v_{2}) = \\[0.5em] \pause
+&= \alpha \, f(x) \, v_{1} + \beta \, f(x) \, v_{2} = \\[0.5em] \pause
+&= \alpha \, O(v_{1}) + \beta \, O(v_{2})
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Combinación lineal de operadores}
+Dadas las transformaciones lineales $O_{1}$ y $O_{2}$, cualquier combinación lineal de ellas también es una transformación lineal.
+\\
+\bigskip
+\pause
+Con los escalares $a$ y $b$, se construye la combinación lineal:
+\begin{align*}
+O = a \, O_{1} + b \, O_{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Combinación lineal de operadores}
+\vspace*{-1cm}
+\begin{eqnarray*}
+\begin{aligned}
+&O(\alpha \, v_{1} + \beta \, v_{2}) = (a \, O_{1} + b \, O_{2})(\alpha \, v_{1} + \beta \, v_{2}) = \\[0.15em] \pause
+&= a \, O_{1} \, (\alpha \, v_{1} + \beta \, v_{2}) + b \, O_{2} \, (\alpha \, v_{1} + \beta \, v_{2}) = \\[0.15em] \pause
+&= a \big[ \alpha \, O_{1} (v_{1}) + \beta \, O_{1}(v_{2})  \big] + b \big[ \alpha \, O_{2} (v_{1}) + \beta \, O_{2}(v_{2}) \big] = \\[0.15em] \pause
+&= \alpha \big[ a \, O_{1}(v_{1}) + b \, O_{2}(v_{1}) \big] + \beta \big[ a \, O_{1}(v_{2}) + b \, O_{2}(v_{2}) \big] = \\[0.15em] \pause
+&= \alpha \big[ a \, O_{1} + b \, O_{2} \big] (v_{1}) + \beta \big[ a \, O_{1} + b \, O_{2} \big] (v_{2}) = \\[0.15em] \pause
+&= \alpha \, O(v_{1}) + \beta \, O(v_{2})
+\end{aligned}
+\end{eqnarray*}
+Cualquier combinación lineal de dos operadores lineales, devuelve otro operador lineal.
+\end{frame}
+\begin{frame}
+\frametitle{Producto de dos operadores}
+Definimos el producto de dos operadores lineales como:
+\pause
+\begin{align*}
+O = O_{1} \, O_{2}
+\end{align*}
+\pause
+Entonces:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+O(\alpha \, v_{1} + \beta \, v_{2}) &= (O_{1} \, O_{2})(\alpha \, v_{1} + \beta \, v_{2}) = \\[0.5em] \pause
+&= \ldots \\[0.5em] \pause
+&= \alpha \, O(v_{1}) + \beta \, O(v_{2})
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Producto de dos operadores}
+Por lo tanto, el producto de dos operadores lineales, devuelve otro operador lineal.
+\\
+\bigskip
+\pause
+Revisemos algunos ejemplos de operadores lineales.
+\end{frame}
+
+\subsection{Ejemplos de operadores lineales}
+
+\begin{frame}
+\frametitle{Ejemplos de operadores lineales}
+Los operadores:
+\pause
+\begin{align*}
+\pdv{x} \hspace{1cm} \pdv{y} \hspace{1cm} \pdv{z} 
+\end{align*}
+son operadores lineales. \pause Esto implica que el operador Laplaciano:
+\begin{align*}
+\laplacian = \pdv[2]{x} + \pdv[2]{y} + \pdv[2]{z}
+\end{align*}
+sea un operador lineal.
+\end{frame}
+\begin{frame}
+\frametitle{Funciones como operadores}
+Cualquier función $V(x, y, z)$ como operador, es lineal. \pause Entonces el operador Hamiltoniano:
+\begin{align*}
+H = - \dfrac{\hbar}{2 m} \, \laplacian + V(x, y, z)
+\end{align*}
+\pause
+es lineal, ya que es una combinación lineal de operadores lineales.
+\end{frame}
+\begin{frame}
+\frametitle{Variables como operadores}
+Las variables: \pause $x, y, z$ como operadores, son lineales. \pause Entonces los operadores:
+\pause
+\begin{align*}
+L_{x} &= -i \left( y \pdv{z} - z \pdv{y} \right) \\[0.25em]
+L_{y} &= -i \left( z \pdv{x} - x \pdv{z} \right) \\[0.25em]
+L_{z} &= -i \left( x \pdv{y} - y \pdv{x} \right)
+\end{align*}
+\pause
+Son lineales, ya que son combinaciones lineales de productos de operadores lineales.
+\end{frame}
+\begin{frame}
+\frametitle{Operador momento angular}
+Por la misma razón, el operador:
+\begin{align*}
+\vb{L}^{2} = L_{x}^{2} + L_{y}^{2} + L_{z}^{2}
+\end{align*}
+es lineal.
+\end{frame}
+
+\subsection{Operador adjunto}
+
+\begin{frame}
+\frametitle{Definición}
+Dado un operador $A$ se define el operador adjunto $A^{\dagger}$ como el operador que satisface:
+\pause
+\begin{align*}
+\braket{A \, v}{u} = \braket{v}{A^{\dagger} \, u}
+\end{align*}
+\\
+\bigskip
+\pause
+Revisemos la derivada y dos propiedades importantes de los operadores adjuntos.
+\end{frame}
+\begin{frame}
+\frametitle{El operador derivada}
+Para el espacio vectorial de las funciones, el adjunto de un operador depende fuertemente del dominio, las CDF que se satisfacen y del producto escalar.
+\end{frame}
+\begin{frame}
+\frametitle{El operador derivada}
+En el espacio de las funciones suaves e integrables $\psi (x)$ definidas en $[a, b]$ y que cumplen:
+\pause
+\begin{align*}
+\psi(a) = \psi(b) = 0
+\end{align*}
+\pause
+se define el operador:
+\pause
+\begin{align*}
+A = \alpha \, \pdv{x}
+\end{align*}
+con $\alpha$ un número complejo.
+\end{frame}
+\begin{frame}
+\frametitle{El operador adjunto}
+El adjunto de este operador (que se puede demostrar sin contratiempo) es:
+\pause
+\begin{align*}
+\left( \alpha \, \pdv{x} \right)^{\dagger} = - \alpha^{*} \, \pdv{x}
+\end{align*}
+Este resultado depende necesariamente de que se cumpla:
+\begin{align*}
+\psi(a) = \psi(b) = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Propiedad de la suma}
+Si $A$ y $B$ son dos operadores lineales, se tiene que:
+\pause
+\begin{align*}
+\braket{(A + B) \, v}{u} = \braket{v}{(A + B)^{\dagger} \, u}
+\end{align*}
+\pause
+Pero:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\braket{(A + B) \, v}{u} &= \braket{(A \, v + B \, v) }{u} = \\[0.5em] \pause
+&= \braket{A \, v}{u} + \braket{B \, v}{u} = \\[0.5em] \pause
+&= \braket{v}{A^{\dagger} \, u} + \braket{v}{B^{\dagger} \, u} = \\[0.5em]  \pause
+&= \braket{v}{(A^{\dagger} + B^{\dagger}) \, u}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Propiedad de la suma}
+Por lo tanto:
+\pause
+\begin{align*}
+\braket{v}{(A + B)^{\dagger} \, u} = \braket{v}{(A^{\dagger} + B^{\dagger}) \, u}
+\end{align*}
+\pause
+Este resultado es válido para cualquier par de vectores $v$ y $u$, entonces:
+\pause
+\begin{align*}
+(A + B)^{\dagger}  = A^{\dagger} + B^{\dagger}
+\end{align*}    
+\end{frame}
+\begin{frame}
+\frametitle{Propiedad con el producto de dos operadores}
+Para el producto de dos operadores:
+\begin{eqnarray*}
+\begin{aligned}
+\braket{(A \, B) \, v}{u} &= \braket{A (B \, v)}{u} = \\[0.5em] \pause
+&= \braket{ B \, v}{A^{\dagger} \, u} = \\[0.5em] \pause
+&= \braket{v}{B^{\dagger} \, A^{\dagger} \, u} = \\[0.5em] \pause
+&= \braket{v}{(A \, B)^{\dagger} \, u} \\[0.5em] \pause
+\Rightarrow (A \, B)^{\dagger} &= B^{\dagger} \, A^{\dagger}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Operadores Hermíticos}
+
+\begin{frame}
+\frametitle{Definición}
+Una clase importante de operadores son los autoadjuntos que satisfacen:
+\pause
+\begin{align*}
+A^{\dagger} = A
+\end{align*}
+\pause
+Estos operadores se les conoce como Hermíticos o Hermitianos.
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades de los operadores Hermíticos}
+De la propiedad $(A + B)^{\dagger} = A^{\dagger} + B^{\dagger}$ se sigue que la suma de dos operadores Hermíticos, devuelve otro operador Hermítico.
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades de los operadores Hermíticos}
+Con la propiedad $(A \, B)^{\dagger} = B^{\dagger} \, A^{\dagger}$, es claro que si $A$ y $B$ son operadores Hermíticos y \textbf{conmutan}, es decir $A \, B = B \, A$, se tiene que:
+\pause
+\begin{align*}
+(A \, B)^{\dagger} = B^{\dagger} \, A^{\dagger} = B \, A = A \, B
+\end{align*}
+\\
+\bigskip
+\pause
+El producto de dos operadores Hermíticos que \textbf{conmutan} es Hermítico.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos de operadores Hermíticos}
+En el espacio de funciones, cualquier función real $f(\va{r})$ es un operador Hermítico.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos de operadores Hermíticos}
+Del resultado:
+\begin{align*}
+\left( \alpha \, \pdv{x} \right)^{\dagger} = - \alpha^{*} \, \pdv{x}
+\end{align*}
+\pause
+si $\alpha$ es complejo, por ejemplo: $\alpha = -i \hbar$, el operador: \pause
+\begin{align*}
+P_{x} = -i \, \hbar \, \pdv{x}
+\end{align*}
+es Hermítico.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos de operadores Hermíticos}
+Como $P_{x}$ conmuta con $P_{x}$, entonces:
+\pause
+\begin{align*}
+P_{x} \, P_{x} = P_{x}^{2}
+\end{align*}
+es un operador Hermítico.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos de operadores Hermíticos}
+Si $V(x)$ es un potencial real, el operador Hamiltoniano de la mecánica cuántica:
+\pause
+\begin{align*}
+H = \dfrac{1}{2 \, m} \, P_{x}^{2} + V(x)
+\end{align*}
+\pause
+es Hermítico, ya que es la suma de dos operadores Hermíticos.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos de operadores Hermíticos}
+Los operadores:
+\pause
+\begin{align*}
+P_{x} = -i \, \hbar \, \pdv{x}, \hspace{0.3cm} P_{y} = -i \, \hbar \, \pdv{y}, \hspace{0.3cm} P_{z} = -i \, \hbar \, \pdv{z}
+\end{align*}
+son Hermíticos.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos de operadores Hermíticos}
+Si $V(\va{r})$ es una función real, el operador:
+\pause
+\begin{align*}
+H = \dfrac{1}{2 \, m} \, P^{2} +  V(\va{r}) = - \dfrac{\hbar^{2}}{2 \, m} \, \laplacian + V(\va{r})
+\end{align*}
+es Hermítico.
+\end{frame}
+\end{document}

@@ -1,0 +1,374 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Los bra y los ket de Dirac \\ \large {Tema 3 - Bases completas y ortogonales}\vspace{-3ex}}
+
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Curso MAF}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{16pt}%
+
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Ghatak (2004) Quantum Mechanics. Chap. 11
+\section{Introducción.}
+
+En este material presentaremos el álgebra bra y ket de Dirac en la que los estados de un sistema dinámico se denotarán mediante ciertos vectores (que, siguiendo a Dirac, se denominarán vectores bra y ket) y operadores que representan variables dinámicas (como coordenadas de posición, componentes del momento y momento angular) mediante matrices.Se m¡mostrará la ventaja de utilizar el álgebra de operadores para obtener soluciones de varios problemas.
+
+\section{La notación de bra y ket.}
+
+El estado de un sistema se puede representar mediante un cierto tipo de vector, que llamamos vector \emph{ket} y representamos con el símbolo $\ket{ \quad }$. Para distinguir los vectores ket correspondientes a diferentes estados, insertamos una etiqueta; así, el vector ket (o simplemente el ket) correspondiente al estado $A$ se describe con el símbolo $\ket{A}$. Las kets forman un espacio vectorial lineal, lo que implica que si tenemos dos estados descritos por las kets $\ket{A}$ e $\ket{B}$, entonces la combinación lineal:
+\begin{align}
+c_{1} \, \ket{A} + c_{2} \, \ket{B}
+\label{eq:ecuacion_01}
+\end{align}
+es un vector en el mismo espacio vectorial, en la ec. (\ref{eq:ecuacion_01}) $c_{1}$ y $c_{2}$ son dos números complejos arbitrarios.
+
+Para citar a Dirac:
+\begin{quote}
+... cada estado de un sistema dinámico en un momento particular corresponde a un vector ket; siendo la correspondencia tal que si un estado resulta de la superposición de ciertos otros estados, su vector ket correspondiente es expresable linealmente en términos de los vectores ket correspondientes de los otros estados, y viceversa.
+\end{quote}
+
+Además, el ket $\ket{A}$ y $c \, \ket{A}$ (donde $c$ es un número complejo arbitrario distinto de cero) corresponden al mismo estado. En otras palabras, el estado del sistema está definido por la \enquote{dirección} de los vectores. A este respecto, el principio de superposición en las teorías clásica y cuántica difieren. Por ejemplo, la superposición de una cuerda vibrante sobre sí misma da, en la física clásica, un modo con el doble de amplitud y cuatro veces la energía del estado inicial de vibración. Por el contrario, en la mecánica cuántica, \emph{la superposición de un estado sobre sí mismo da el mismo estado}.
+\par
+Ahora, con cada espacio vectorial se puede asociar un espacio vectorial dual de modo que se pueda formar un producto escalar de los dos vectores, uno de cada espacio. Los vectores del espacio dual al de los vectores ket se denominarán vectores bra o simplemente \enquote{bras} y se denotarán por $\bra{ \quad }$. El producto escalar del ket $\ket{A}$ y el bra $\bra{B}$ se denota por $\braket{B}{A}$ y es un número complejo. La lógica es muy similar a la que se tiene en la teoría de matrices donde a cada vector columna se le puede asociar un vector fila y el producto escalar de los dos devuelve un número.
+\par
+Se dice que un bra es un bra nulo si el producto escalar se anula para cualquier ket, es decir:
+\begin{align}
+\bra{B} = 0 \hspace{0.3cm} \mbox{si} \hspace{0.4cm} \braket{B}{A} = 0 \hspace{0.3cm} \mbox{para cualquier} \hspace{0.3cm} \ket{A}
+\label{eq:ecuacion_02}
+\end{align}
+
+Se dice que dos bras son iguales si su producto escalar con un ket arbitrario son iguales, por lo tanto:
+\begin{align}
+\bra{B_{1}} = \bra{B_{2}} \hspace{0.3cm} \mbox{si} \hspace{0.3cm} \braket{B_{1}}{A} = \braket{B_{2}}{A} \hspace{0.3cm} \mbox{para cualquier} \hspace{0.3cm} \ket{A}
+\label{eq:ecuacion_03}
+\end{align}
+
+Se asume además que:
+\begin{enumerate}[label=(\roman*)]
+\item Existe una correspondencia uno a uno entre kets y bras en el sentido de que un estado de un sistema dinámico representado por $\ket{A}$ está igualmente bien representado por el bra correspondiente $\bra{A}$. Además, si:
+\begin{align}
+\ket{P} = \ket{A} + \ket{B} \hspace{0.3cm} \mbox{entonces} \hspace{0.3cm} \bra{P} = \bra{A} + \bra{B}
+\label{eq:ecuacion_04}
+\end{align}
+y si:
+\begin{align}
+\ket{R} = c \, \ket{A} \hspace{0.3cm} \mbox{entonces} \hspace{0.3cm} \bra{R} = c^{*} \, \bra{A}
+\label{eq:ecuacion_05}
+\end{align}
+donde $c$ es un número complejo y $c^{*}$ es su conjugado complejo.
+\item \begin{align}
+\braket{A}{B} = \braket{B}{A}^{*}
+\label{eq:ecuacion_06}
+\end{align}
+donde el ${}^{*}$ representa el complejo conjugado de la cantidad. Haciendo que: $\ket{B} = \ket{A}$, se tiene:
+\begin{align*}
+\braket{A}{A} = \braket{A}{A}^{*}
+\end{align*}
+lo que implica que el producto escalar $\braket{A}{A}$ es un número real. Es posible afirmar que:
+\begin{align}
+\braket{A}{A} \geq 0
+\label{eq:ecuacion_07}
+\end{align}
+el signo de igualdad se presenta solo cuando $\ket{A} = 0$, es decir, cuando $\ket{A}$ es el ket nulo.
+\par
+\noindent
+Si $\braket{A}{B} = 0$ entonces lo kets $\ket{A}$ y $\ket{B}$ se dice que son ortogonales entre ellos.
+\par
+\noindent
+Si $\braket{A}{A} = 1$, entonces se dice que el ket $\ket{A}$ está normalizado.
+\par
+Dado que los kets $\ket{A}$ y $c \, \ket{A}$ corresponden al mismo estado, siempre podemos asociar kets normalizados a cada estado. Puede verse fácilmente que un ket normalizado se define solo dentro de un factor de fase arbitrario $e^{i \gamma}$ (donde $\gamma$ es un número real).
+\end{enumerate}
+
+Podemos mencionar la relación entre las funciones de onda de Schrödinger con los bra y kets. Si $\ket{\psi}$ e $\ket{\phi}$ representan las kets correspondientes a los estados descritos por las funciones de onda $\psi(\vb{r})$ y $\phi(\vb{r})$ respectivamente, entonces:
+
+\noindent
+El producto escalar:
+\begin{align}
+\braket{\phi}{\psi} = \scaleint{6ex} \, \phi^{*} (\vb{r}) \, \psi (\vb{r}) \dd{\tau} = \braket{\psi}{\phi}^{*}
+\label{eq:ecuacion_08}
+\end{align}
+donde la integración se realiza en todo el espacio. Esta integral se refiere como el producto escalar de dos funciones.
+
+\section{Operadores lineales.}
+
+Un operador $\alpha$ convierte un ket $\ket{A}$ en otro ket $\ket{B}$:
+\begin{align}
+\ket{B} = \alpha \, \ket{A}
+\label{eq:ecuacion_09}
+\end{align}
+
+Un operador se dice que es lineal si satisface la siguiente ecuación:
+\begin{align}
+\alpha \, \big( c_{1} \, \ket{A_{1}} + c_{2} \, \ket{A_{2}} + \cdots  \big) = c_{1} \, \alpha \, \ket{A_{1}} + c_{2} \, \alpha \, \ket{A_{2}} + \cdots
+\label{eq:ecuacion_10}
+\end{align}
+donde $c_{1}, c_{2}, \ldots$ son números complejos arbitrarios. De ahora en adelante, consideraremos solo operadores lineales.
+\par
+Se dice que un operador $\alpha$ es un \emph{operador nulo} si:
+\begin{align}
+\alpha \, \ket{A} = 0 \hspace{0.4cm} \mbox{para cualquier} \hspace{0.2cm} \ket{A}
+\label{eq:ecuacion_11}
+\end{align}
+Por tanto, una condición necesaria y suficiente para que un operador sea un operador nulo es:
+\begin{align}
+\expval{A}{\alpha} = 0 \hspace{0.4cm} \mbox{para cualquier} \hspace{0.2cm} \ket{A}
+\end{align}
+
+Se dice que un operador es \emph{unitario} si:
+\begin{align}
+\alpha \, \ket{A} = \ket{A} \hspace{0.4cm} \mbox{para cualquier} \hspace{0.2cm} \ket{A}
+\label{eq:ecuacion_13}
+\end{align}
+
+Puede verse fácilmente que un número puede considerarse un operador lineal.
+\par
+Se dice que dos operadores $\alpha$ y $\beta$ son iguales si y solo si:
+\begin{align}
+\expval{A}{\alpha} = \expval{A}{\beta} \hspace{0.4cm} \mbox{para cualquier} \hspace{0.2cm} \ket{A}
+\label{eq:ecuacion_14}
+\end{align}
+
+La suma (o diferencia) de dos operadores $\alpha$ y $\beta$ se define mediante la ecuación:
+\begin{align}
+\big( \alpha \pm \beta \big) \, \ket{A} = \alpha \, \ket{A} \pm \beta \, \ket{A}
+\label{eq:ecuacion_15}
+\end{align}
+
+Con lo anterior, podemos presentar:
+\\
+Ley asociativa:
+\begin{align}
+\alpha + \big( \beta + \gamma \big) = \big( \alpha + \beta \big) + \gamma = \alpha + \beta + \gamma
+\label{eq:ecuacion_16}
+\end{align}
+y también:
+\begin{align}
+\big( c_{1} \, \alpha \big) \, \ket{A} = c_{1} \, \big( \alpha \, \ket{A} \big)
+\label{eq:ecuacion_17}
+\end{align}
+donde $c_{1}$ es una constante compleja arbitraria.
+\par
+El producto de dos operadores $\alpha$ y $\beta$ está
+definido a través de la ecuación:
+\begin{align}
+\big( \beta \, \alpha \big) \, \ket{A} = \beta \, \big( \alpha \, \ket{A} \big) = \beta \, \ket{B}
+\label{eq:ecuacion_18}
+\end{align}
+donde $\ket{B} = \alpha \, \ket{A}$. En general:
+\begin{align}
+\beta \, \alpha \neq \alpha \, \beta
+\label{eq:ecuacion_19}
+\end{align}
+
+El \emph{conmutador} de dos operadores está definido por: 
+\begin{align}
+\big[ \alpha, \beta \big] = \alpha \, \beta - \beta \, \alpha = - \big[ \beta, \alpha \big]
+\label{eq:ecuacion_20}
+\end{align}
+
+Hasta ahora hemos asumido que un operador lineal actúa sobre kets; también podemos hacer que un operador lineal $\alpha$ opere los bras; la regla es que el bra se tiene que poner a la izquierda del operador como $\bra{P}  \, \alpha$ y la operación se define a través de la ecuación:
+\begin{align*}
+\left\{ \bra{P} \, \alpha \right\} \, \ket{A} &= \bra{P} \, \left\{ \alpha \, \ket{A} \right\} \hspace{0.4cm} \mbox{para cualquier} \hspace{0.2cm} \ket{A} \\[0.5em]
+&= \braket{P}{B}
+\end{align*}
+donde:
+\begin{align*}
+\ket{B} = \alpha \, \ket{A}
+\end{align*}
+(La combinación $\alpha \, \bra{B}$ no tiene sentido). De hecho, debido a la ley asociativa no se necesita poner corchetes y simplemente escribir:
+\begin{align*}
+\mel{P}{\alpha \, \beta \, \gamma}{A}
+\end{align*}
+Es interesante notar que la combinación $\ket{B} \, \bra{A}$ puede considerarse como un operador porque:
+\begin{align*}
+\left\{ \ket{B} \, \bra{A} \right\} \, \ket{P} &= \ket{B} \, \left\{ \braket{A}{P} \right\} \\[0.5em]
+&= c \, \ket{B}
+\end{align*}
+porque $\braket{A}{P} \, (= c)$ es solo un número complejo.
+\\[0.5em]
+\emph{Adjunto de un operador}.
+
+El adjunto del operador $\alpha$ se denota por $\alpha^{\dagger}$ y se define mediante la ecuación:
+\begin{align}
+\mel{A}{\alpha^{\dagger}}{B} = \mel{B}{\alpha}{A}^{*}
+\label{eq:ecuacion_21}
+\end{align}
+donde $\mel{B}{\alpha}{A}^{*}$ es el conjugado complejo del número $\mel{A}{\alpha^{\dagger}}{B}$. Ahora:
+\begin{align}
+\begin{aligned}[b]
+\mel{A}{\big( \alpha^{\dagger} \big)^{\dagger}}{B} &= \mel{A}{\beta^{\dagger}}{B} \hspace{1cm} \big( \beta^{\dagger} \equiv \alpha \big) \\[0.5em]
+&= \mel{B}{\beta}{A}^{*} = \mel{B}{\alpha^{\dagger}}{A}^{*} = \\[0.5em]
+&= \big( \mel{A}{\alpha}{B}^{*} \big)^{*} = \mel{A}{\alpha}{B}
+\end{aligned}
+\label{eq:ecuacion_22}
+\end{align}
+porque el conjugado complejo del conjugado complejo de un número es el número original en sí mismo. Dado que la ec. (\ref{eq:ecuacion_22}) se cumple para $\ket{A}$ y $\ket{B}$ arbitrarios, se tiene:
+\begin{align}
+\big( \alpha^{\dagger} \big)^{\dagger} = \alpha
+\label{eq:ecuacion_23}
+\end{align}
+
+\noindent
+\emph{Adjunto de un producto de dos operadores}.
+\\[0.5em]
+\noindent
+Es decir, el adjunto del adjunto de un operador lineal es el operador original en sí. Además, el adjunto del producto de los dos operadores $\alpha$ y $\beta$ es el producto del adjunto de los dos operadores en orden inverso, esto es:
+\begin{align}
+\alpha^{\dagger} \, \beta^{\dagger} = \beta^{\dagger} \, \alpha^{\dagger}
+\label{eq:ecuacion_24}
+\end{align}
+
+\noindent
+\emph{Operador Autoadjunto}.
+\\[0.5em]
+\noindent
+Se dice que un operador es autoadjunto si:
+\begin{align}
+\alpha^{\dagger} = \alpha
+\label{eq:ecuacion_29}
+\end{align}
+Un operador autoadjunto es llamado \emph{operador real} o también \emph{operador Hermitiano}.
+
+\section{La ecuación de valores propios.}
+
+Para el operador lineal $\alpha$, considera la ecuación:
+\begin{align}
+\alpha \, \ket{A_{n}} = a_{n} \, \ket{A_{n}}
+\label{eq:ecuacion_30}
+\end{align}
+donde $a_{n}$ es un número complejo arbitrario. La ec. (\ref{eq:ecuacion_30}) representa una ecuación de valores propios; se dice que $\ket{A_{n}}$ es un \emph{conjunto propio} del operador $\alpha$, siendo $a_{n}$ todos los valores propios correspondientes. Puede verse fácilmente que $c \, \ket{A_{n}}$ (donde $c$ es un número complejo arbitrario) también es un \emph{eigenket} que pertenece al mismo valor propio $a_{n}$. Ahora, si hay más de un ket (y no son linealmente dependientes\footnote{Un ket $\ket{P}$ se dice que es linealmente independiente de los kets $\ket{A_{1}}, \ket{A_{2}}, \ldots, \ket{A_{N}}$ si podemos escribir: \[
+\ket{P} = \nsum_{n=1}^{N} c_{n} \, \ket{A_{n}} \]} entre sí) pertenecientes al mismo valor propio, es decir, si:
+
+\noindent
+\emph{Degeneracion}.
+\begin{align}
+\alpha \, \ket{A_{1}} &= a_{1} \, \ket{A_{1}} \label{eq:ecuacion_31} \\
+\alpha \, \ket{A_{2}} &= a_{1} \, \ket{A_{2}} \label{eq:ecuacion_32}
+\end{align}
+entonces se dice que el estado es un \emph{estado degenerado}. Si hay $g$ kets linealmente independientes que pertenecen al mismo valor propio, entonces se dice que el estado está $g$-veces degenerado. En aras de la simplicidad, consideremos un estado degenerado doble descrito por las ecs. (\ref{eq:ecuacion_31}) y (\ref{eq:ecuacion_32}). Si multiplicamos la ec. (\ref{eq:ecuacion_31}) por $c_{1}$ y la ec. (\ref{eq:ecuacion_32}) por $c_{2}$ y sumamos, obtendríamos:
+\begin{align*}
+\alpha \, \ket{P} = a_{1} \, \ket{P}
+\end{align*}
+donde:
+\begin{align*}
+\ket{P} = c_{1} \, \ket{A_{1}} + c_{2} \, \ket{A_{2}}
+\end{align*}
+lo que implica que la combinación lineal $c_{1} \, \ket{A_{1}} + c_{2} \, \ket{A_{2}}$ es también un eigenket que pertenece al mismo valor propio. De manera similar, se puede discutir por un estado degenerado $g$-veces.
+
+\section{Ortogonalidad de las funciones propias.}
+
+Cuando el valor $\alpha$ es real, se puede demostrar fácilmente que todos los valores propios son reales y para dos valores propios diferentes (es decir, $a_{n} \neq a_{m}$) las funciones propias correspondientes son necesariamente ortogonales, es decir:
+\begin{align}
+\ip{A_n}{A_{m}} = 0 \hspace{1cm} a_{n} \neq a_{m}
+\label{eq:ecuacion_33}
+\end{align}
+
+Además, siempre se pueden normalizar las kets y elegir una combinación lineal apropiada para las kets que pertenecen a un estado degenerado tal que:
+\begin{align}
+\ip{A_{n}}{A_{m}} = \delta_{n m}
+\label{eq:ecuacion_34}
+\end{align}
+
+La demostración es muy simple. Multiplicamos por la izquierda la ec. (\ref{eq:ecuacion_30}) por $\bra{A_{n}}$, para obtener:
+\begin{align*}
+\mel{A_{n}}{\alpha}{A_{n}} = a_{n} \, \ip{A_{n}}{A_{n}}
+\end{align*}
+Ahora $\ip{A_{n}}{A_{n}}$ es siempre real y no un ket nulo (de lo contrario, la ec. (\ref{eq:ecuacion_30}) no tiene
+sentido). Además, dado que $\alpha$ es real:
+\begin{align*}
+\mel{A_{n}}{\alpha}{A_{n}} = \mel{A_{n}}{\alpha^{\dagger}}{A_{n}} = \mel{A_{n}}{\alpha}{A_{n}}^{*}
+\end{align*}
+lo que implica que $\mel{A_{n}}{\alpha}{A_{n}}$ también es real y, por tanto, $a_{n}$ debe ser real. Además, para probar la ec. (\ref{eq:ecuacion_33}) consideramos:
+\begin{align}
+\alpha \, \ket{A_{1}} &= a_{1} \, \ket{A_{1}} \label{eq:ecuacion_35} \\
+\alpha \, \ket{A_{2}} &= a_{2} \, \ket{A_{2}} \label{eq:ecuacion_36}
+\end{align}
+Si hacemos que $\ket{P} = \alpha \, \ket{A_{2}}$, entonces:
+\begin{align*}
+\bra{P} = \bra{A_{2}} \, \alpha^{\dagger} = \bra{A_{2}} \, \alpha
+\end{align*}
+Además:
+\begin{align*}
+\bra{P} = a_{2}^{\dagger} \, \bra{A_{2}} = a_{2} \, \bra{A_{2}}
+\end{align*}
+ya que $a_{2}$ es real. Entonces:
+\begin{align}
+\bra{A_{2}} \, \alpha = a_{2} \, \bra{A_{2}}
+\label{eq:ecuacion_37}
+\end{align}
+
+Multiplicando por la izquierda a la ec. (\ref{eq:ecuacion_35}) por $\bra{A_{2}}$ y por la derecha a la ec. (\ref{eq:ecuacion_37}) por $\ket{A_{1}}$, se obtiene:
+\begin{align*}
+\mel{A_{2}}{\alpha}{A_{1}} = a_{1} \, \ip{A_{2}}{A_{1}} = a_{2} \, \ip{A_{2}}{A_{1}}
+\end{align*}
+que da inmediatamente la condición de ortogonalidad dada por la ec. (\ref{eq:ecuacion_33}).
+\par
+Dado que el formalismo es simétrico con respecto a los bras y kets, también tenemos la ecuación de valores propios:
+\begin{align}
+\bra{B_{n}} \, \alpha = \bra{B_{n}} \, b_{n} = b_{n} \, \bra{B_{n}}
+\end{align}
+donde $\bra{B_{n}}$ son las eigenbras y $b_{n}$ los valores propios correspondientes. Se puede ver fácilmente que cuando $\alpha$ es un operador real y si $\ket{A}$ es un autoket, entonces $\bra{A}$ es una autobra que pertenece al mismo valor propio. La ec. (\ref{eq:ecuacion_37}) nos dice que $\bra{A_{2}}$ es un eigenbra del operador $\alpha$ que pertenece al mismo valor propio $a_{2}$.
+
+\section{Observables.}
+
+Cualquier cantidad dinámica (como las coordenadas de posición, o componentes del momento o momento angular, etc.) que pueda medirse se conoce como \emph{observable}.
+\par
+Suponemos que los observables se pueden representar mediante operadores lineales y que los operadores correspondientes a diferentes observables no necesitan conmutar. Además, el resultado de la medición de cualquier observable debe ser un valor propio del operador correspondiente al observable y, dado que el valor medido debe ser un número real, asumimos que \textbf{un observable siempre está representado por un operador lineal real}. Denotamos los eigenkets del observable $\alpha$ por $\ket{\alpha_{n}}$ que suponemos que forman un conjunto ortonormal:
+\begin{align*}
+\braket{\alpha_{m}}{\alpha_{n}} = \delta_{mn}
+\end{align*}
+Dado que $\ket{\alpha_{n}}$ forman un conjunto completo, un ket $\ket{P}$ arbitrario se puede expandir en términos de ellos:
+\begin{align*}
+\ket{P} = \nsum_{n} c_{n} \, \alpha_{n}
+\end{align*}
+
+Si ahora medimos $\alpha$, la probabilidad del resultado: $\alpha_{n}$ es $\abs{c_{n}}^{2}$; hemos asumido que $\ket{P}$ está normalizado. Además, como resultado de la medición, el sistema \emph{colapsaría} a uno de los estados $\bra{\alpha_{n}}$. Para los estados degenerados, siempre se puede elegir una combinación lineal apropiada para que formen un conjunto ortonormal.
+\par
+Supongamos que un sistema dinámico está en un estado que es un eigenket del observable $\alpha$ perteneciente al valor propio $\alpha_{1}$. Ahora bien, si se hace una medición del observable $\alpha$, entonces es seguro que se obtendrá el valor $\alpha_{1}$. Por otro lado, si el sistema se encuentra en un estado descrito por el ket normalizado:
+\begin{align*}
+\ket{P} = c_{1} \, \ket{\alpha_{1}} + c_{2} \, \ket{\alpha_{2}}
+\end{align*}
+donde $\big[ \braket{P}{P} = 1 \big]$, entonces una medida de $\alpha$ conduciría $\alpha_{1}$ o $\alpha_{2}$ con probabilidades $\abs{c_{1}}^{2}$ y $\abs{c_{2}}^{2}$ respectivamente. Dado que $\braket{P}{P} = 1$, se sigue inmediatamente que:
+\begin{align}
+\abs{c_{1}}^{2} + \abs{c_{2}}^{2} = 1
+\end{align}
+
+En general, el resultado de la medición de un observable es uno de sus valores propios y, por lo tanto, si el sistema está en un estado arbitrario, la medición de $\alpha$ hará que el sistema dinámico salte a uno de los estados propios de $\alpha$. Suponemos además que los posibles estados propios de $\alpha$ a los que puede saltar el sistema dinámico son tales que el estado original debería ser expresable linealmente en términos de los estados propios. Por lo tanto, cualquier estado puede expresarse como una combinación lineal de los eigenkets del observable y, por lo tanto, \textbf{los eigenkets de un observable deben formar un conjunto completo}.
+\par
+Un hermoso ejemplo del argumento anterior es el famoso experimento de Stern-Gerlach donde un campo magnético no homogéneo (en la dirección $z$) divide un haz de átomos de plata en dos componentes, uno en la dirección $+z$ y el otro en la dirección $-z$; el experimento intenta medir la componente $z$ del momento angular (que denotamos por $L_{z}$) y el resultado muestra que $L_{z}$ tiene solo dos valores propios.
+
+\section{Condición de completitud.}
+
+Acabamos de afirmar que los eigenkets de un observable forman un conjunto completo. Sea $\ket{n}, n = 0, 1, 2, \ldots$ denota estos eigenkets y sea $\ket{P}$ que denota un ket arbitrario. Por lo tanto
+\begin{align*}
+\ket{P} = \nsum_{n} c_{n} \, \ket{n}
+\end{align*}
+donde la suma $\sum$ denota una suma sobre los estados discretos y una integración sobre los estados continuos. Dado que se puede suponer que los eigenkets forman un conjunto ortonormal $(\ip{m}{n} = \delta_{mn})$ tenemos:
+\begin{align*}
+\braket{m}{P} = \nsum_{n} c_{n} \braket{m}{n} = \nsum_{n} c_{n} \, \delta_{mn} = c_{m}
+\end{align*}
+Por lo tanto:
+\begin{align}
+\ket{P} = \nsum_{n} \ket{n} \, c_{n} = \left\{ \nsum_{n} \dyad{n} \right\} \, \ket{P}
+\label{eq:ecuacion_39}
+\end{align}
+
+Dado que la ecuación anterior es válida para un ket arbitrario $\ket{P}$, la cantidad dentro de las llaves deben ser un operador de unidad:
+\begin{align}
+\nsum_{n} \dyad{n} = 1
+\label{eq:ecuacion_40}
+\end{align}
+que generalmente se conoce como \emph{condición de completitud}.
+
+\end{document}
