@@ -1,0 +1,359 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Dresden_seahorse}
+
+\date{12 de noviembre de 2021}
+
+\title{\large{Ejercicios bases completas y ortogonales}}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Bases completas}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Expansión en serie de funciones propias}
+
+\begin{frame}
+\frametitle{Punto de partida}
+Sabemos que una función $f(x)$ se puede desarrollar en términos de una serie de funciones propias ortonormales:
+\pause
+\begin{align*}
+f(x) = \nsum_{n=0}^{\infty} a_{n} \, \varphi_{n}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 1}
+Vamos a demostrar que \emph{el desarrollo en series es único para un conjunto dado de funciones ortonormales} $\varphi_{n}(x)$.
+\\
+\bigskip
+\pause
+Las funciones $\varphi_{n}(x)$ como se consideran en este ejercicio son los \textcolor{blue}{vectores base} en un espacio de Hilbert de dimensión infinita.
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el ejercicio}
+Suponemos que existen $b_{n}$, tales que:
+\pause
+\begin{align*}
+f(x) = \nsum_{n=0}^{\infty} b_{n} \, \varphi_{n} (x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Multiplicando e integrando}
+Multiplicamos por $\varphi_{n}^{*} (x) \, \omega(x)$ para luego integrar en el intervalo $[a, b]$:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\scaleint{6ex}_{\bs a}^{b} \varphi_{n}^{*} \, \omega \, f  \dd{x} &= \nsum_{n=0}^{\infty} b_{n} \scaleint{6ex}_{\bs a}^{b} \varphi_{n}^{*} \, \varphi_{n} \, \omega \dd{x} \\[0.5em] \pause
+&= \nsum_{n=0}^{\infty} b_{n} \, \delta_{nm} \hspace{1cm} \mbox{por la ortonormalidad} \\[0.5em] \pause
+&= b_{n}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado obtenido}
+Este resultado implica:
+\pause
+\begin{align*}
+b_{n} = \scaleint{6ex}_{\bs a}^{b} \varphi_{n}^{*} \, \omega \, f  \dd{x}
+\end{align*}
+\pause
+Esta expresión es la misma que para los $a_{n}$.
+\\
+\bigskip
+\pause
+Concluimos que $a_{n} = b_{n}, \forall n$, \pause por lo que la expansión de la función en una serie de funciones propias ortonormales, \textbf{es única}.
+\end{frame}
+
+\subsection{Una base completa y ortogonal}
+%Ref. Zettili Problem 2.2
+\begin{frame}
+\frametitle{Enunciado del Ejercicio 2}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Encuentra una base completa y ortonormal para el espacio de las funciones trigonométricas de la forma:
+\pause
+\begin{align*}
+\psi(\theta) = \nsum_{n=0}^{N} a_{n} \, \cos (n \, \theta)
+\end{align*}
+\item Calcula los vectores base con $N = 5$.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Aprovechando identidades}
+Para resolver el primer inciso, ocupemos una identidad conocida para expresar $\psi(\theta)$:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\psi(\theta) &= \nsum_{n=0}^{N} a_{n} \, \cos (n \, \theta) = \\[0.5em] \pause
+&= \dfrac{1}{2} \nsum_{n=0}^{N} a_{n} \bigg[ e^{i n \theta} + e^{-i n \theta}\bigg] = \\[0.5em] \pause
+&= \dfrac{1}{2} \bigg[ \nsum_{n=0}^{N} a_{n} \, e^{i n \theta} + \nsum_{n=-N}^{0} a_{-n} \, e^{i n \theta} \bigg] = 
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando la expresión}
+\begin{eqnarray*}
+\begin{aligned}
+= \nsum_{n=-N}^{N} C_{n} \, e^{i n \theta}
+\end{aligned}
+\end{eqnarray*}
+\pause
+donde:
+\begin{align*}
+C_{n} &= \dfrac{a_{n}}{2} \mbox{ para } n > 0 \\[0.5em]
+C_{n} &= \dfrac{a_{-n}}{2} \mbox{ para } n < 0 \\[0.5em]
+C_{0} &= a_{0}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Apoyo con un resultado}
+Ya que cualquier función trigonométrica de la forma:
+\begin{align*}
+\psi(\theta) = \nsum_{n=0}^{N} a_{n} \, \cos (n \, \theta) 
+\end{align*}
+\pause
+Puede expresarse en términos de las funciones:
+\pause
+\begin{align*}
+\phi_{n}(\theta) = \dfrac{e^{i n \theta}}{\sqrt{2}}
+\end{align*}
+\pause
+intentemos usar este conjunto de funciones $\phi_{n}(\theta)$ como una base.
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades de la base propuesta}
+Como el conjunto de las $\phi_{n}(\theta)$ es completo, \pause veamos si es ortonormal.
+\\
+\bigskip
+\pause
+Evaluemos el producto escalar $\ip{\phi_{m}}{\phi_{n}}$.
+\end{frame}
+\begin{frame}
+\frametitle{Calculando el producto escalar}
+\begin{eqnarray*}
+\begin{aligned}
+\ip{\phi_{m}}{\phi_{n}} &= \scaleint{6ex}_{\bs - \pi}^{\pi} \phi_{m}^{*} (\theta) \, \phi_{n} (\theta) \dd{\theta} = \\[0.5em] \pause
+&= \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs - \pi}^{\pi} \exp(i (n -m )\theta) \dd{\theta} &= \\[0.5em] \pause
+&= \delta_{nm}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Revisando los casos}
+Llegando a este resultado, debemos de considerar dos casos:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item $n = m$
+\item $n \neq m$
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Caso cuando $n = m$}
+En el primer caso: $n = m$, es obvio que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\ip{\phi_{m}}{\phi_{n}} &= \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs - \pi}^{\pi} \dd{\theta} = \\[0.5em] \pause
+&= 1
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Caso cuando $n \neq m$}
+En el segundo caso: $n \neq m$, se tiene que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\ip{\phi_{m}}{\phi_{n}} &= \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs - \pi}^{\pi} \exp(i(n - m) \theta) \dd{\theta} = \\[0.5em] \pause
+&= \dfrac{1}{2 \, \pi} \, \dfrac{\exp(i(n - m) \pi) - \exp(-i(n - m) \pi)}{i (n - m)} = \\[0.5em] \pause
+&= \dfrac{2 \, i \, \sin \big( \big[ n - m \big] \, \pi \big) }{2 \, i \, \pi \, (n - m)} = \\[0.5em] \pause
+&= 0
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+Por lo que el conjunto de funciones:
+\pause
+\begin{align*}
+\phi_{n}(\theta) = \dfrac{e^{i n \theta}}{\sqrt{2}}
+\end{align*}
+forman una base completa y ortonormal.
+\end{frame}
+\begin{frame}
+\frametitle{Información adicional}
+Del resultado:
+\begin{align*}
+\nsum_{n=-N}^{N} C_{n} \, e^{i n \theta}
+\end{align*}
+\pause
+vemos que la base tiene $2 \, N + 1$ funciones $\phi_{n}(\theta)$, \pause por lo que la dimensión de este espacio de funciones es igual a $2 \, N + 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Segundo inciso}
+Una vez que ya tenemos la expresión para la base ortonormal, podemos calcular los vectores base.
+\pause
+\\
+\bigskip
+Con $N = 5$, se tiene que la dimensión del espacio es igual a $11$, \pause por lo que la base tiene $11$ vectores.
+\end{frame}
+\begin{frame}
+\frametitle{Vectores base}
+\begin{eqnarray*}
+\begin{aligned}
+\phi_{-5} (\theta) &= \exp(- 5 \, i \, \theta) / \sqrt{2 \, \pi} \\
+\phi_{-4} (\theta) &= \exp(- 4 \, i \, \theta) / \sqrt{2 \, \pi} \\
+\vdots \\
+\phi_{0} (\theta) &= 1 / \sqrt{2 \, \pi} \\
+\vdots \\
+\phi_{4} (\theta) &= \exp(4 \, i \, \theta) / \sqrt{2 \, \pi} \\
+\phi_{5} (\theta) &= \exp(5 \, i \, \theta) / \sqrt{2 \, \pi}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\section{Valores propios y operadores}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Valores y funciones propias}
+%Ref. Zettili Problem 2.18
+\begin{frame}
+\frametitle{Enunciado del ejercicio 3}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Calcula los valores propios así como las funciones propias del operador $\hat{A} = - \dv*[2]{x}$.
+\\
+Limita la búsqueda de las funciones propias a aquellas funciones complejas que se anulan en todas partes excepto en la región $0 < x < a$.
+\item Normaliza la función propia y encuentra la probabilidad en la región $0 < x  < \dfrac{a}{2}$.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el inciso $\mathbf{1)}$}
+El problema de valores propios para $- \dv*[2]{x}$ consiste en resolver la siguiente ecuación diferencial:
+\pause
+\begin{align*}
+- \dv[2]{\psi}{x} = \alpha \, \psi (x)
+\end{align*}
+\pause
+y encontrar los valores propios $\alpha$ y las funciones propias $\psi(x)$.
+\end{frame}
+\begin{frame}
+\frametitle{Solución general a la EDO}
+Las solución más general para esta EDO es:
+\pause
+\begin{align*}
+\psi(x) = A \, \exp (i \, b \, x ) + B \, \exp (-i \, b \, x )
+\end{align*}
+con $\alpha = b^{2}$.
+\end{frame}
+\begin{frame}
+\frametitle{Usando las CDF}
+Ocupando las condiciones de frontera de $\psi(x)$ en $x = 0$ y en $x = a$, se tiene que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\psi (0) &= A + B = 0 \hspace{0.3cm} \Rightarrow \hspace{0.3cm} B = - A \\[0.5em] \pause
+\psi (a) &= A \, \exp (i b a) + B \, \exp(- i b a) = 0
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando los resultados}
+Al sustituir $B = - A$ en la segunda ecuación, nos lleva a:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\psi (a) &= A \big[ \exp (i \, b \, a) - \exp(- i \, b \, a) \big] = 0 \\[0.5em] \pause
+\Rightarrow  \exp (i \, b \, a) &= \exp(- i \, b \, a) \big) \\[0.5em] \pause
+\Rightarrow  \exp (2 \, i \, b \, a) &= 1
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando los valores propios}
+Por lo que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\sin ( 2 \, b \, a) &= 0 \\[0.5em] \pause
+\cos ( 2 \, b \, a) &= 1 \\[0.5em] \pause
+\Rightarrow b \, a &= n \, \pi
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Valores y funciones propias}
+Los valores propios son:
+\pause
+\begin{align*}
+\alpha_{n} = \dfrac{n^{2} \, \pi^{2}}{a^{2}}
+\end{align*}
+\pause
+Y las funciones propias son:
+\pause
+\begin{align*}
+\psi_{n}(x) = A \, \bigg[ \exp \bigg(\dfrac{i \, n \, \pi \, x}{a} \bigg) - \exp \bigg(- \dfrac{i \, n \, \pi \, x}{a} \bigg) \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Valores y funciones propias}
+Es decir que los valores propios y las funciones propias son:
+\pause
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\alpha_{n} = \dfrac{n^{2} \, \pi^{2}}{a^{2}} \hspace{1cm} \psi_{n}(x) = C_{n} \, \sin \bigg(\dfrac{\, n \, \pi \, x}{a} \bigg) }
+\end{align*}
+\pause
+Por lo que el espectro de valores propios del operador $\hat{A} = - \dv*[2]{x}$ \textbf{es discreto}, ya que los valores propios y las funciones propias dependen de un número discreto $n$.
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el inciso $\mathbf{2)}$}
+La normalización de las funciones propias $\psi_{n}(x)$ será tal que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+1 &= C_{n}^{2} \, \scaleint{6ex}_{\bs 0}^{a} \sin^{2} \bigg(\dfrac{n \, \pi \, x}{a} \bigg) \dd{x} = \\[0.5em] \pause
+&= \dfrac{C_{n}^{2}}{2} \scaleint{6ex}_{\bs 0}^{a} \bigg[ 1 - \cos \bigg(\dfrac{2 \, n \, \pi \, x}{a} \bigg) \bigg] \dd{x} = \\[0.5em] \pause
+&= \dfrac{C_{n}^{2}}{2} \, a
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Normalizando las funciones propias}
+Los que nos lleva a:
+\pause
+\begin{align*}
+C_{n} = \sqrt{\dfrac{2}{a}}
+\end{align*}
+\pause
+De aquí se obtienen las funciones propias normalizadas:
+\pause
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\psi_{n}(x) = \sqrt{\dfrac{2}{a}} \, \sin \bigg(\dfrac{n \, \pi \, x}{a} \bigg) }
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El valor de probabilidad}
+La probabilidad en la región $0 < x < \dfrac{a}{2}$ estará dada por:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{2}{a} \scaleint{6ex}_{\bs 0}^{\frac{a}{2}} &\sin^{2} \bigg(\dfrac{n \pi x}{a} \bigg) \dd{x} = \pause \dfrac{1}{a} \scaleint{6ex}_{\bs 0}^{\frac{a}{2}} \bigg[ 1 {-} \cos \bigg(\dfrac{2 n \pi x}{a} \bigg) \bigg] \dd{x} = \pause \dfrac{1}{2}
+\end{aligned}
+\end{eqnarray*}
+\pause
+Este se esperaba, ya que la probabilidad total es $1$:
+\begin{align*}
+\scaleint{6ex}_{0}^{a} \abs{\psi_{n} (x)}^{2} \dd{x} = 1
+\end{align*}
+\end{frame}
+\end{document}
