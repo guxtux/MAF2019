@@ -1,0 +1,152 @@
+\input{../Preambulos/preambulo_materiales}
+\usepackage{arydshln}
+\title{Introducción a la teoría de grupos \\ {\large Tema 4}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Curso MAF}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{16pt}%
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Arfken (1981) 4.7 Introducción a la teoría de grupos
+\section{Introducción.}
+
+La teoría de los grupos finitos, desarrollada originalmente como una rama de las matemáticas puras, puede convertirse en una diversión bella y fascinante. Para el físico, la teoría de grupos, sin ninguna pérdida de su belleza, también constituye una herramienta de extraordinaria utilidad en la formalización de los conceptos semiintuitivos y para la explotación de las simetrías. La teoría de grupos se transforma en una herramienta útil en el desarrollo de la física de la cristalografía y del estado sólido cuando se introducen las representaciones específicas (\emph{matrices}) y se inicia el cálculo de los caracteres de grupo (\emph{trazas}). Probablemente de mayor importancia en la física es la extensión de la teoría de grupos a los grupos continuos y la aplicación de estos grupos continuos a la teoría cuántica y las partículas de la física de altas energías.
+\par
+A medida que el conocimiento de nuestro mundo físico se amplió explosivamente en la primera tercera parte de este siglo, Wigner\footnote{Eugene Paul Wigner (Budapest, 1902 - Princeton, 1995) Fue un físico norteamericano de origen húngaro. Los trabajos de Wigner versaron sobre la física de sólidos, los núcleos atómicos y los reactores nucleares. En física nuclear, formuló el principio de la simetría de las partículas elementales o de conservación de la paridad; es muy conocida su hipótesis de que las energías potenciales de interacción entre nucleones son iguales si tienen el mismo momento angular y el mismo spin. Descubrió asimismo el efecto que lleva su nombre (\enquote{efecto Wigner}), que consiste en el desplazamiento de un átomo en una red cristalina bajo la acción de un neutrón o de un ión de energía suficiente.} y otros comprendieron que la invariancia era un concepto clave en la comprensión de los nuevos fenómenos y en el desarrollo de las teorías apropiadas. La herramienta matemática para el tratamiento de la invariancia y las simetrías es la teoría de grupos. Representa la unificación y formalización de los principios tales como: la paridad y el momento angular, de amplia utilización por parte de los físicos. La paridad está relacionada con la invariancia bajo la inversión. La conservación del momento angular es una consecuencia directa de la simetría rotacional, lo cual significa invariancia bajo las rotaciones espaciales. Aun cuando las técnicas formales de la teoría de grupos pudieran no ser necesarias, estas técnicas matemáticas poderosas pueden ahorrar mucho trabajo. La teoría de grupos puede producir la unificación que (una vez comprendida) permite lograr una mayor simplificación.
+
+\section{Teoría de grupos.}
+\subsection{Definición.}
+
+Un grupo $G$ puede definirse como un conjunto de objetos u operaciones (denominados \emph{elementos}), que pueden combinarse o \enquote{multiplicarse} para formar un producto bien definido y que satisface las siguientes cuatro condiciones. Establecemos el conjunto de elementos $a, b, c, \ldots$ :
+\begin{enumerate}
+\item Si $a$ y $b$ son dos elementos cualesquiera, entonces el producto $a \, b$ también es un miembro del conjunto.
+\item La multiplicación definida es asociativa: $(a \, b) \, c =  a \, (b \, c)$.
+\item Existe un elemento unitario $I$ tal que $I \, a = a \, I = a$ para cada elemento en el conjunto.
+\item Debe existir un inverso o recíproco de cada elemento. El conjunto debe contener un elemento $b = a^{-1}$ tal que $a \, a^{-1} \, a = a^{-1} \, a = I$ para cada elemento del conjunto.
+\end{enumerate}
+En la física, estas condiciones abstractas frecuentemente adquieren un significado físico directo en términos de las transformaciones de los vectores, spins y tensores.
+\par
+Como ejemplo simple, pero no trivial, considera el conjunto $1, a, b, c$ que se combina de acuerdo con la tabla de multiplicación de grupos:
+\begin{table}[H]
+\Large
+\centering
+\begin{tabular}{c | c c c c}
+  & $1$ & \multicolumn{1}{c:}{$a$} & \multicolumn{1}{c:}{$b$} & $c$ \\ \hline
+$1$ & $1$ & \multicolumn{1}{c:}{$a$} & \multicolumn{1}{c:}{$b$} & $c$ \\  \cdashline{1-3}
+$a$ & $a$ & $b$ & \multicolumn{1}{c:}{$c$} & $1$ \\ \cdashline{1-4}
+$b$ & $b$ & $c$ & $1$ & $a$ \\ 
+$c$ & $c$ & $1$ & $a$ & $b$ \\ 
+\end{tabular}
+\end{table}
+Para representar estos elementos de grupo, sea:
+\begin{align}
+1 \to 1, \hspace{0.5cm} a \to i, \hspace{0.5cm} b \to -1, \hspace{0.5cm} c \to -i
+\label{eq:ecuacion_04_183}
+\end{align}
+combinando mediante la multiplicación ordinaria. Evidentemente, las cuatro condiciones de grupo se satisfacen, y estos cuatro elementos forman un grupo. Ya que la multiplicación de los elementos de grupo es conmutativa, el grupo se denomina \emph{conmutativo o abeliano}. Nuestro grupo también es un \emph{grupo cíclico} en cuanto a que los elementos pueden indicar­ se como potencias sucesivas de un elemento, que en este caso es $i^{n}, n = 0, 1, 2, 3$. Observa que al establecer la ec. \ref{eq:ecuacion_04_183}, hemos seleccionado una \emph{representación específica} para este grupo de cuatro objetos.
+\par
+Podemos reconocer que los elementos del grupo $1, i, -1, -i$ pueden interpretarse como rotaciones de $\SI{90}{\degree}$ sucesivas en el plano complejo. Luego, a partir de:
+\begin{align}
+\vb{A} = \mqty(
+\cos \varphi & \sin \varphi \\
+-\sin \varphi & \cos \varphi )
+\end{align}
+se establece el conjunto de cuatro matrices de $2 \times 2$:
+\begin{align}
+\begin{aligned}
+\vb{1} &= \mqty(
+1 & 0 \\
+0 & 1 ) \hspace{2cm} \vb{A} = \mqty(
+0 & -1 \\
+1 & 0 ) \\[1em]
+\vb{B} &= \mqty(
+-1 & 0 \\
+0 & -1 ) \hspace{1.5cm} \vb{C} = \mqty(
+0 & 1 \\
+-1 & 0 )
+\end{aligned}
+\label{eq_ecuacion_04_184}
+\end{align}
+Este conjunto de cuatro matrices forma un grupo en que la ley de combinación es la multiplicación de matrices. Esto establece una segunda representación, ahora en términos de matrices. Un poco de trabajo e multiplicación de matrices verifica que esta representación también es abeliana y cíclica. Evidentemente existe una correspondencia entre las dos representaciones:
+\begin{align}
+1 \leftrightarrow 1 \leftrightarrow 1 \hspace{1cm}  a \leftrightarrow i \leftrightarrow \vb{A} \hspace{1cm}  b \leftrightarrow -1 \leftrightarrow \vb{B} \hspace{1cm} c \leftrightarrow -i \leftrightarrow \vb{C}
+\end{align} 
+
+\subsection{Isomorfismo, Homomorfismo.}
+
+Si la correspondencia entre los elementos de dos grupos (o entre sus representaciones) es de uno a uno con cada conjunto de elementos satisfaciendo la misma tabla de multiplicación de grupo, se dice que los grupos son isomórficos. Si la correspondencia es dos a uno (o muchos a uno), pero aún se conservan las relaciones de multiplicación, entonces los grupos son \emph{homomórficos}. En el caso justamente considerado, las dos representaciones $(1, i, -1, -i)$ y $(\vb{1}, \vb{A}, \vb{B}, \vb{C})$ son isomórficas. La representación siempre posible pero trivial $(1, 1, 1, 1)$ sería homomórfica.
+\par
+En contraste con esto, no existe correspondencia entre cualquiera de estas representaciones y otro grupo de cuatro objetos, el vierergruppe\footnote{En alemán significa \emph{grupo de cuatro}.}. Como confirmación de esto, observa que aun cuando el vierergruppe es abeliano, no es cíclico.
+
+\subsection{Representaciones de Matriz: Reducibles e Irreducibles.}
+
+La representación de los elementos de grupo por medio de matrices es una técnica bastante poderosa y ha sido adoptada casi universalmente dentro del grupo de los físicos. El uso de las matrices no impone ninguna limitación considerable. Se puede demostrar que los elementos de cualquier grupo finito y de los grupos continuos pueden representarse por medio de matrices y, en particular, mediante matrices unitarias. En la mecánica cuántica, estas representaciones unitarias adquieren una importancia particular ya que las matrices unitarias se pueden diagonalizar, y los valores propios pueden servir para la clasificación de los estados cuánticos.
+\par
+En caso de existir una transformación unitaria que transforme nuestras matrices de representación a la forma diagonal o de bloque-diagonal, por ejemplo:
+\begin{align}
+\mqty(
+r_{11} & r_{12} & r_{13} & r_{14} \\
+r_{21} & r_{22} & r_{23} & r_{24} \\
+r_{31} & r_{32} & r_{33} & r_{34} \\
+r_{41} & r_{42} & r_{43} & r_{44} ) \hspace{0.2cm} \to \hspace{0.2cm} \mqty(
+p_{11} & p_{12} & 0 & 0 \\
+p_{21} & p_{22} & 0 & 0 \\
+0 & 0 & q_{11} & q_{12} \\
+0 & 0 & q_{21} & q_{22} )
+\label{eq:ecucion_04_186}
+\end{align}
+de modo que las porciones menores o submatrices ya no se encuentren
+acopladas entre sí. entonces la representación original es \emph{reducible}. De manera equivalente, se tiene:
+\begin{align}
+\vb{S} \, \vb{R} \, \vb{S}^{-1} = \mqty( 
+\vb{P} & \vb{0} \\
+\vb{0} & \vb{Q} )
+\label{eq:ecuacion_04_187}
+\end{align}
+
+Si $\vb{R}$ es una matriz de $n \times n$, $\vb{P}$ podría ser una matriz de $m \times m$, $\vb{Q}$ una matriz de $(n-m) \times (n - m)$. Los términos $\vb{Q}$ son entonces matrices rectangulares $m \times (n - m)$ y $(n - m) \times m$ en que todos los elementos son cero. Este resultado se puede indicar en la forma:
+\begin{align}
+\vb{R} = \vb{P} \oplus \vb{Q}
+\label{eq:ecuacion_04_188}
+\end{align}
+y decir que $\vb{R}$ ha sido descompuesta en las representaciones $\vb{P}$ y $\vb{Q}$. Por ejemplo, todas las representaciones de dimensión mayor que uno de los grupos abelianos son reducibles. 
+\par
+Las representaciones irreducibles tienen una intervención en la teoría
+de grupos que, en términos generales, es análoga a los vectores unitarios del análisis vectorial. Constituyen las representaciones más simples; todas las demás representaciones pueden elaborarse a partir de las mismas.
+\\[1em]
+\noindent
+\textbf{Carácter}.
+
+Se sabe que una matriz verdadera se transforma bajo la rotación de las coordenadas por medio de una transformación de similaridad ortogonal. Dependiendo de la selección de la estructura de referencia, prácticamente la misma matriz puede adquirir una infinidad de formas distintas. De modo similar, nuestras re­presentaciones de grupo pueden establecerse en una infinidad de formas distintas utilizando las transformaciones unitarias. Sin embargo, cada una de las representaciones transformadas es isomórfica, con respecto a la
+original. La traza de cada elemento (cada matriz de nuestra representación) es invariante bajo las transformaciones unitarias. Simplemente a causa de que es invariante, la traza (que ahora se ha denominado \emph{carácter}) tiene una intervención de cierta importancia en la teoría de grupos, particularmente en las aplicaciones a la física del estado sólido.
+\\[1em]
+\noindent
+\textbf{Subgrupo}.
+
+Frecuentemente sucede que un subconjunto de los elementos de grupo (incluyendo el elemento unitario $\vb{1}$) satisface por si mismo los requisitos de grupo y consecuentemente constituye un grupo. Tal subconjunto se denomina subgrupo. Los elementos $1$ y $b$ del grupo de cuatro elementos considerado antes forman un subgrupo.
+\par
+En algunas ocasiones, la transformación de similaridad de cada miembro $x$ del subgrupo por todos los miembros $g$ del grupo entero es un miembro de un subgrupo:
+\begin{align}
+y = g \, x \, g^{-1}
+\label{eq:ecuacion_04_189}
+\end{align}
+Tal subgrupo se denomina \emph{subgrupo invariante} y está relacionado con los múltipletes de los espectros atómico y nuclear. Todos los subgrupos de un grupo abeliano son automáticamente invariantes.
+
+
+
+
+\end{document}

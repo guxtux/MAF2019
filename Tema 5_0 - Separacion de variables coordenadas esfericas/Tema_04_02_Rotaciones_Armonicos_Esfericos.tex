@@ -1,0 +1,1361 @@
+\input{../Preambulos/preambulo_materiales}
+
+\title{El grupo de rotaciones y los armónicos esféricos \\ {\large Tema 4}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Curso MAF}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{16pt}%
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Romero (2013) Funciones especiales. Cap. 10
+
+En este tema estudiaremos los polinomios asociados de Legendre, los polinomios ordinarios de Legendre, y los armónicos esféricos, quienes son importantes para resolver la ecuación de Laplace y diversos problemas de electrodinámica y mecánica cuántica. Normalmente estas funciones se obtienen resolviendo ecuaciones diferenciales. Sin embargo, también es posible obtenerlas usando el grupo de rotaciones. Usaremos este último método debido a que nos introduce a las aplicación de la teoría de grupos en la física. Este tema se puede ver como una invitación al estudio de las aplicaciones de la teoría de grupos.
+
+\section{Transformación de coordenadas lineales.}
+
+Sea $f$ una función de la variable $x$, con el cambio de variable:
+\begin{align}
+\pderivada{x} = \alpha \, x \hspace{1.5cm} \mbox{con } \alpha = \mbox{ constante}
+\label{eq:ecuacion_10_001}
+\end{align}
+al diferenciar con respecto a $x$ tenemos que:
+\begin{align}
+\dv{f}{\pderivada{x}} = \dv{x}{\pderivada{x}} \, \dv{f}{x} = \dfrac{1}{\alpha} \, \dv{f}{x}
+\label{eq:ecuacion_10_002}   
+\end{align}
+Entonces tenemos que si la variable $x$ transforma con $\alpha$, el operador derivada transforma con $\dfrac{1}{\alpha}$, es decir:
+\begin{align}
+\begin{aligned}
+x \rightarrow \pderivada{x} &= \alpha \, x \\[0.5em]
+\dv{x} \rightarrow \dv{\pderivada{x}} &= \dfrac{1}{\alpha} \, \dv{f}{x}
+\end{aligned}
+\label{eq:ecuacion_10_003}
+\end{align}
+
+Veamos ahora que pasa en dos dimensiones. Consideremos la matriz de $2 \times 2$ con entradas constantes:
+\begin{align}
+\Lambda = \mqty(a_{1} & a_{2} \\ a_{3} & a_{4})
+\label{eq:ecuacion_10_004}   
+\end{align}
+cuya matriz inversa es:
+\begin{align}
+\Lambda^{-1} = \dfrac{1}{\abs{\Lambda}} \, \mqty(a_{4} & - a_{2} \\ - a_{3} & a_{1}) \hspace{1.5cm} \abs{\Lambda} = a_{1} \, a_{4} - a_{2} \, a_{3}
+\label{eq:ecuacion_10_005}   
+\end{align}
+También definamos los vectores columna:
+\begin{align}
+X = \mqty(x^{1} \\ x^{2}) \hspace{1.5cm} \grad = \mqty(\displaystyle \pdv{x^{1}} \\[0.5em] \displaystyle \pdv{x^{2}})
+\label{eq:ecuacion_10_006}   
+\end{align}
+Entonces podemos hacer una transformación lineal de coordenadas de la forma: $\pderivada{X} = \Lambda \, X$, es decir:
+\begin{align}
+\mqty(x^{\prime \, 1} \\ x^{\prime \, 2}) =
+\mqty(a_{1} & a_{2} \\ a_{3} & a_{4}) \, \mqty(x^{1} \\ x^{2})
+\label{eq:ecuacion_10_007}   
+\end{align}
+La cual tiene la transformación inversa: $X = \Lambda^{-1} \, \pderivada{X}$
+\begin{align}
+\mqty(x^{1} \\ x^{2}) = \dfrac{1}{\abs{\Lambda}} \, 
+\mqty(a_{4} & - a_{2} \\ - a_{3} & a_{1}) \, \mqty(x^{\prime \, 1} \\ x^{\prime \, 2})
+\label{eq:ecuacion_10_008}   
+\end{align}
+es decir:
+\begin{align}
+x^{1} &= \dfrac{a_{4} \, x^{\prime \, 1} - a_{2} \, x^{\prime \, 2}}{\abs{\Lambda}} \label{eq:ecuacion_10_009} \\[0.5em]
+x^{2} &= \dfrac{-a_{3} \, x^{\prime \, 1} + a_{1} \, x^{\prime \, 2}}{\abs{\Lambda}} \label{eq:ecuacion_10_010}
+\end{align}
+Además, al diferenciar por la regla de la cadena se tiene que:
+\begin{align}
+\begin{aligned}
+\pdv{x^{\prime \, 1}} &= \pdv{x^{1}}{x^{\prime \, 1}} \, \pdv{x^{1}} + \pdv{x^{2}}{x^{\prime \, 1}} \, \pdv{x^{2}} \\[0.5em]
+\pdv{x^{\prime \, 2}} &= \pdv{x^{1}}{x^{\prime \, 2}} \, \pdv{x^{1}} + \pdv{x^{2}}{x^{\prime \, 2}} \, \pdv{x^{2}}
+\end{aligned}
+\label{eq:ecuacion_10_011}
+\end{align}
+de la regla de transformación ec. (\ref{eq:ecuacion_10_010}) se encuentra que:
+\begin{align}
+\begin{aligned}
+\pdv{x^{\prime \ 1}} &= \dfrac{1}{\abs{\Lambda}} \, \left( a_{4} \, \pdv{x^{1}} - a_{3} \, \pdv{x^{2}} \right) \\[1em]
+\pdv{x^{\prime \ 2}} &= \dfrac{1}{\abs{\Lambda}} \, \left( - a_{2} \, \pdv{x^{1}} + a_{1} \, \pdv{x^{2}} \right)
+\end{aligned}
+\label{eq:ecuacion_10_012}
+\end{align}
+que se puede expresar como:
+\begin{align}
+\mqty(\displaystyle \pdv{x^{\prime \, 1}} \\[0.75em] \displaystyle \pdv{x^{\prime \, 2}}) = \dfrac{1}{\abs{\Lambda}} \, \mqty(a_{4} & - a_{3} \\ - a_{2} & a_{1}) \, \mqty(\displaystyle \pdv{x^{1}} \\[0.75em] \displaystyle \pdv{x^{2}})
+\label{eq:ecuacion_10_013}   
+\end{align}
+De esta ecuación podemos ver que la matriz involucrada en la transformación de las derivadas parciales es la transpuesta de la matriz inversa de $\Lambda$, es decir $(\Lambda^{-1})^{T}$. Otra forma de escribir esta ecuación es:
+\begin{align}
+\grad^{\prime} = (\Lambda^{-1})^{T} \, \grad
+\label{eq:ecuacion_10_014}
+\end{align}
+por lo que:
+\begin{align}
+\grad = (\Lambda)^{T} \, \grad^{\prime}
+\label{eq:ecuacion_10_015}
+\end{align}
+
+Este resultado se puede generalizar para más dimensiones. En efecto, en general una transformación de coordenadas se escribe como:
+\begin{align}
+x^{\prime \, i} = \Lambda_{ij} \, x^{j} \hspace{1.5cm} x^{i} = (\Lambda^{-1})_{ij} \, x^{\prime \, j}
+\label{eq:ecuacion_10_016}
+\end{align}
+Por la regla de la cadena se tiene que:
+\begin{align}
+\begin{aligned}[b]
+\pdv{x^{\prime \, i}} &= \pdv{x^{j}}{x^{\prime \, i}} \, \pdv{x^{j}} = \\[0.5em]
+&= \pdv{(\Lambda^{-1})_{jk} \, x^{\prime \, k}}{x^{\prime \, i}} \, \pdv{x^{j}} = \\[0.5em]
+&= (\Lambda^{-1})_{jk} \, \pdv{x^{\prime , k}}{x^{\prime \, i}} \, \pdv{x^{j}} =  \\[0.5em]
+&= (\Lambda^{-1})_{jk} \, \delta_{ki} \, \pdv{x^{j}} =  \\[0.5em]
+&= (\Lambda^{-1})_{ji} \, \pdv{x^{j}} = \\[0.5em]
+&= \bigg[ \left( \Lambda^{-1} \right)^{T} \bigg]_{ij} \, \pdv{x^{j}}
+\end{aligned}
+\label{eq:ecuacion_10_017}
+\end{align}
+Por lo tanto, para cualquier dimensión se cumple:
+\begin{align}
+\grad^{\prime} = (\Lambda^{-1})^{T} \, \grad
+\label{eq:ecuacion_10_018}
+\end{align}
+Esta ley de transformación será de gran utilidad para obtener las simetrías de la ecuación de Laplace.
+
+\section{Laplaciano y elemento de línea.}
+
+Supongamos que la matriz $\tilde{\eta}$ de tamaño $n \times n$, satisface:
+\begin{align}
+\tilde{\eta} \, \tilde{\eta} = I
+\label{eq:ecuacion_10_019}
+\end{align}
+donde la matriz $I$ es la matriz identidad de $n \times n$. Entonces podemos definir un elemento de línea como:
+\begin{align}
+\dd{s^{2}} = \dd{X^{T}} \, \tilde{\eta} \dd{X}, \hspace{1.5cm} \dd{X} = \mqty(\dd{x^{1}} \\ \dd{x^{2}} \\ \vdots \\ \dd{x^{n}})
+\label{eq:ecuacion_10_020}
+\end{align}
+A la matriz $\tilde{\eta}$ se le llama \emph{métrica}, un ejemplo en dos dimensiones de este tipo de matrices son:
+\begin{align}
+\mqty(\pmat{0}) \hspace{1.5cm} \mqty(-1 & 0 \\ 0 & 1)
+\label{eq:ecuacion_10_021}
+\end{align}
+
+Con la matriz $\tilde{\eta}$ el \enquote{Laplaciano} se define como:
+\begin{align}
+\laplacian = \nabla^{T} \, \tilde{\eta} \, \nabla
+\label{eq:ecuacion_10_022}
+\end{align}
+Notablemente, el elemento de línea está íntimamente relacionado con el Laplaciano, en particular tienen las mismas simetrías. Esta relación es importante y se da también para espacios no euclidianos. Veamos como se da esta relación.
+\par
+Bajo una transformación lineal de coordenadas se tiene:
+\begin{align}
+\begin{aligned}[b]
+\dd{s^{\prime \, 2}} &= \dd{X^{\prime \, T}} \tilde{\eta} \dd{X^{\prime}} = \\[0.5em]
+&= \left(\Lambda \dd{X} \right)^{T} \, \tilde{\eta} \, \Lambda \, \dd{X} = \\[0.5em]
+&= \dd{X^{T}} \left( \Lambda^{T} \, \tilde{\eta} \, \Lambda \right) \dd{X}
+\end{aligned}
+\label{eq:ecuacion_10_023}
+\end{align}
+
+Las transformaciones $\Lambda$ que dejan invariante al elemento de línea, deben de cumplir $\dd{s^{2}} = \dd{s^{\prime \, 2}}$. Al igualar la ec. (\ref{eq:ecuacion_10_020}) con la ec. (\ref{eq:ecuacion_10_023}) se llega a la condición: 
+\begin{align}
+\Lambda^{T} \, \tilde{\eta} \, \Lambda = \tilde{\eta}
+\label{eq:ecuacion_10_024}
+\end{align}
+Además, considerando que bajo una transformación lineal de coordenadas el gradiente transforma como eq. (\ref{eq:ecuacion_10_018}), se obtiene:
+\begin{align}
+\begin{aligned}[b]
+\nabla^{\prime \, 2} &= \nabla^{\prime \, T} \, \tilde{\eta} \, \nabla^{\prime} = \\[0.5em]
+&= \bigg[ \left(\Lambda^{-1} \right)^{T} \, \nabla \bigg]^{T} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} \, \nabla = \\[0.5em]
+&= \nabla^{T} \, \left[ \left( \left( \Lambda^{-1} \right)^{T} \right)^{T} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} \right] \, \nabla = \\[0.5em]
+&= \nabla^{T} \, \left( \Lambda^{-1} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} \right) \, \nabla
+\end{aligned}
+\label{eq:ecuacion_10_025}
+\end{align}
+Las transformaciones que dejan invariante al Laplaciano deben de cumplir:
+\begin{align*}
+\laplacian = \nabla^{\prime \, 2}
+\end{align*}
+entonces igualando la ec. (\ref{eq:ecuacion_10_022}) con la ec. (\ref{eq:ecuacion_10_025}), se tiene la condición:
+\begin{align}
+\Lambda^{-1} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} = \tilde{\eta}
+\label{eq:ecuacion_10_026}
+\end{align}
+Como $(\tilde{\eta})^{-1} = \tilde{\eta}$, la condición dada por la ec. (\ref{eq:ecuacion_10_026}), tiene la forma:
+\begin{align}
+\begin{aligned}[b]
+\tilde{\eta} &= \left(\tilde{\eta} \right)^{-1} \\[0.5em]
+&= \bigg[ \Lambda^{-1} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{T} \bigg]^{-1} = \\[0.5em]
+&= \bigg[ \left( \Lambda^{-1} \right)^{T} \bigg]^{-1} \, \tilde{\eta} \, \left( \Lambda^{-1} \right)^{-1} = \\[0.5em]
+&= \Lambda^{T} \, \tilde{\eta} \, \Lambda
+\end{aligned}
+\label{eq:ecuacion_10_027}
+\end{align}
+que coincide con la eq. (\ref{eq:ecuacion_10_024}). Por lo tanto, las transformaciones lineales, $\Lambda$, que dejan invariante al elemento de línea eq. (\ref{eq:ecuacion_10_020}) también dejan invariante al Laplaciano eq. (\ref{eq:ecuacion_10_022}), claramente la afirmación inversa también es correcta.
+
+\newpage
+\section{Grupo de transformaciones.}
+
+% Antes de continuar recordemos lo que es un grupo. Sea $G$ un conjunto con una operación\footnote{Con la finalidad de mejorar la lectura de la operación, se muestra un símbolo más remarcado $\bullet$ en comparación del símbolo $\cdot$, que representa la misma operación.} $\bullet \, : G \times G \rightarrow G$. El par $(G, \bullet)$ es un grupo si cumple los siguientes axiomas:
+% \begin{enumerate}[label=\arabic*)]
+% \item Axioma de cerradura:
+% \begin{align}
+% g_{1} \in G, \, g_{2} \in G \hspace{0.7cm} \Rightarrow \hspace{0.7cm} g_{1} \bullet g_{2} \in G
+% \label{eq:ecuacion_10_028}
+% \end{align}
+% \item Axioma de asociatividad:
+% \begin{align}
+% g_{1} \in G, g_{2} \in G, g_{3} \in G \hspace{0.5cm} \Rightarrow \hspace{0.5cm} g_{1} \bullet (g_{2} \bullet g_{3}) = (g_{1} \bullet g_{2}) \bullet g_{3}
+% \label{eq:ecuacion_10_029}
+% \end{align}
+% \item Axioma del neutro:
+% \begin{align}
+% \exists \, e \in G, \hspace{1cm} g_{1} \in G \hspace{1cm} \Rightarrow \hspace{1cm} g_{1} \bullet e = e \bullet g_{1} = g_{1}
+% \label{eq:ecuacion_10_030}
+% \end{align}
+% \item Axioma del inverso:
+% \begin{align}
+% \forall \, g_{1} \in G, \exists \, g_{1}^{-1} \in G, \hspace{1cm} g_{1} \bullet g_{1}^{-1} = g_{-1} \bullet g_{1} = e
+% \label{eq:ecuacion_10_031}
+% \end{align}
+% \end{enumerate}
+Definamos a $T$ como el conjunto de transformaciones $\Lambda$ que dejan invariante al Laplaciano. Estas transformaciones cumplen:
+\begin{align}
+\Lambda^{T} \, \tilde{\eta} \, \Lambda = \tilde{\eta} \hspace{1.5cm} \tilde{\eta}^{2} = I
+\label{eq:ecuacion_10_032}
+\end{align}
+Ahora probaremos que $T$ es un grupo\footnote{Recordemos que ya hemos definido las cuatro propiedades que se deben de cumplir en un conjunto de elementos, de tal manera que la satisfacerse, forman un grupo.}.
+\par
+Supongamos que $\Lambda_{1} \in T$ y $\Lambda_{2} \in T$, entonces cumplen:
+\begin{align}
+\Lambda_{1}^{T} \, \tilde{\eta} \, \Lambda_{1} = \tilde{\eta}, \hspace{1.5cm} \Lambda_{2}^{T} \, \tilde{\eta} \, \Lambda_{2} = \tilde{\eta}
+\label{eq:ecuacion_10_033}
+\end{align}
+de donde:
+\begin{align}
+(\Lambda_{1} \, \Lambda_{2})^{T} \, \tilde{\eta} \, (\Lambda_{1} \, \Lambda_{2}) = \Lambda_{2}^{T} \, \Lambda_{1}^{T} \, \tilde{\eta} \, \Lambda_{1} \, \Lambda_{2} = \Lambda_{2}^{T} \, \tilde{\eta} \, \Lambda_{2} = \tilde{\eta}
+\label{eq:ecuacion_10_034}
+\end{align}
+esto implica que $\Lambda_{1} \, \Lambda_{2} \in T$, es decir:
+\begin{align}
+\Lambda_{1} \in T, \Lambda_{2} \in T \hspace{1cm} \Rightarrow \hspace{1cm} \Lambda_{1} \, \Lambda_{2} \in T
+\label{eq:ecuacion_10_035}
+\end{align}
+Por lo tanto, se cumple el axioma de la cerradura.
+\par
+El producto de matrices es asociativo, en particular el producto de las matrices que satisfacen la eq. (\ref{eq:ecuacion_10_032}). Además, la identidad $I$ satisface la eq. (\ref{eq:ecuacion_10_032}), es decir, $I \in T$. Así se cumplen el axioma de la asociatividad y el del elemento
+neutro.
+\par
+Se tiene que $\tilde{\eta}^{2} = I$, si $\Lambda$ está en $T$ entonces se cumple $\Lambda^{T} \, \tilde{\eta} \, \Lambda \, \tilde{\eta} = I$. De donde:
+\begin{align}
+\tilde{\eta} \, \Lambda \, \tilde{\eta} = \left( \Lambda^{T} \right)^{-1} = \left( \Lambda^{-1} \right)^{T}
+\label{eq:ecuacion_10_036}
+\end{align}
+por lo tanto:
+\begin{align}
+\left( \Lambda^{-1} \right)^{T}\, \tilde{\eta} \, \Lambda^{-1} = ( \tilde{\eta} \, \Lambda \, \tilde{\eta} ) \, \tilde{\eta} \, \Lambda^{-1} = \tilde{\eta} \, \Lambda \, \Lambda^{-1} = \tilde{\eta}
+\label{eq:ecuacion_10_037}
+\end{align}
+Así, cuando $\Lambda$ está en $T$, también $\Lambda^{-1}$ está en $T$. Esto nos indica que se cumple el axioma del inverso.
+\par
+En consecuencia el conjunto de matrices que satisface la eq. (\ref{eq:ecuacion_10_032}) es un grupo. Es decir, el conjunto de transformaciones que dejan invariante al elemento de línea eq. (\ref{eq:ecuacion_10_020}) forma un grupo, que es el mismo grupo que deja invariante al Laplaciano eq. (\ref{eq:ecuacion_10_022}).
+
+\section{El grupo de rotaciones.}
+
+Sea $\va{x} = (x_{1}, \ldots, x_{n})$ un vector en $\mathbb{R}^{n}$ y definamos la forma cuadrática $l^{2} = x_{1}^{2} + x_{2}^{2} + \ldots + x_{n}^{2}$, la cual representa la distancia de $\va{x}$ al origen. Nota que si definimos la matriz columna:
+\begin{align}
+X = \mqty(x_{1} \\ x_{2} \\ \vdots \\ x_{n})
+\label{eq:ecuacion_10_038}
+\end{align}
+y la matriz renglón:
+\begin{align}
+X^{T} = \mqty(x_{1} & x_{2} & \ldots & x_{n})
+\label{eq:ecuacion_10_039}
+\end{align}
+la distancia se puede escribir como:
+\begin{align}
+l^{2} = X^{T} \, X = X^{T} \, I \, X 
+\label{eq:ecuacion_10_040}
+\end{align}
+Ahora, si $\Lambda$ es una matriz de $n \times n$ y se hace la transformación de coordenadas:
+\begin{align}
+X^{\prime} = \Lambda \, X
+\label{eq:ecuacion_10_041}
+\end{align}
+se tiene la distancia:
+\begin{align}
+l^{2} = X^{\prime \, T} \, I , X^{\prime} = X^{T} \, \left( \Lambda^{T} \, I \, \Lambda \right) \, X 
+\label{eq:ecuacion_10_042}
+\end{align}
+Por lo tanto, si $\Lambda$ es tal que deja la distancia invariante, es decir $l^{2} = l^{\prime \, 2}$, debe cumplir que:
+\begin{align}
+\Lambda^{T} \, I \, \Lambda = I
+\label{eq:ecuacion_10_043}
+\end{align}
+
+Otra forma de expresar esta igualdad es $\Lambda^{T} = \Lambda^{-1}$. Claramente las matrices que cumplen la ec. (\ref{eq:ecuacion_10_043}) forman un grupo, a este grupo de matrices se le llama $O(n)$.
+\par
+Recordemos que para cualquier matriz $A$ se cumple que: $\det A = \det A^{T}$. Entonces, las matrices que satisfacen la eq. (\ref{eq:ecuacion_10_043}) deben cumplir $(\det \Lambda)^{2} = 1$, es decir $\det \Lambda = \pm 1$. El subconjunto de matrices $\Lambda$ que cumplen $\det \Lambda = - 1$ no forman un grupo, por ejemplo, la identidad no está en ese subconjunto. Sin embargo, las matrices $\Lambda$ que cumplen $\det \Lambda = 1$ sí forman un grupo, este es el grupo\footnote{La letra S, indica el carácter especial (\emph{special} en inglés), del subgrupo de matrices ortogonales} $SO(n)$.
+\par
+Notemos que la matriz de $n \times n$:
+\begin{align}
+\Lambda = \mqty(\Lambda_{11} & \Lambda_{12} & \ldots & \Lambda_{1n} \\ \Lambda_{21} & \Lambda_{22} & \ldots & \Lambda_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \Lambda_{n1} & \Lambda_{n2} & \ldots & \Lambda_{nn})
+\label{eq:ecuacion_10_44}
+\end{align}
+se puede formar con los siguientes vectores columna:
+\begin{align}
+\va{C}_{1} = \mqty(\Lambda_{11} \\ \Lambda_{21} \\ \vdots \\ \Lambda_{n1}), \hspace{0.5cm} \va{C}_{2} = \mqty(\Lambda_{12} \\ \Lambda_{22} \\ \vdots \\ \Lambda_{n2}), \hspace{0.5cm} \ldots, \va{C}_{n} = \mqty(\Lambda_{1n} \\ \Lambda_{2n} \\ \vdots \\ \Lambda_{nn})
+\label{eq:ecuacion_10_045}
+\end{align}
+Claramente, para la matriz transpuesta $\Lambda^{T}$, estos vectores representan los renglones. Por lo tanto, por la condición dada en la ec. (\ref{eq:ecuacion_10_043}), se puede escribir como:
+\begin{align}
+\Lambda^{T} \, \Lambda &= \mqty(\Lambda_{11} & \Lambda_{21} & \ldots & \Lambda_{n1} \\ \Lambda_{12} & \Lambda_{22} & \ldots & \Lambda_{nn} \\ \vdots & \vdots & \ddots & \vdots \\ \Lambda_{1n} & \Lambda_{2n} & \ldots & \Lambda_{nn}) \, \mqty(\Lambda_{11} & \Lambda_{12} & \ldots & \Lambda_{1n} \\ \Lambda_{21} & \Lambda_{22} & \ldots & \Lambda_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \Lambda_{n1} & \Lambda_{n2} & \ldots & \Lambda_{nn}) \nonumber \\[1em]
+&= \mqty(\va{C}_{1} \cdot \va{C}_{1} & \va{C}_{1} \cdot \va{C}_{2} & \ldots & \va{C}_{1} \cdot \va{C}_{n} \\ \va{C}_{2} \cdot \va{C}_{1} & \va{C}_{2} \cdot \va{C}_{2} & \ldots & \va{C}_{n} \cdot \va{C}_{2} \\ \vdots & \vdots & \ddots & \vdots \\ \va{C}_{n} \cdot \va{C}_{1} & \va{C}_{n1} \cdot \va{C}_{2} & \ldots & \va{C}_{n} \cdot \va{C}_{n}) = I
+\label{eq:ecuacion_10_046}
+\end{align}
+Otra forma de expresar esta igualdad es:
+\begin{align}
+\va{C}_{i} \cdot \va{C}_{j} = \delta_{ij}
+\label{eq:ecuacion_10_047}
+\end{align}
+es decir si una matriz satisface la eq. (\ref{eq:ecuacion_10_043}), tiene sus columnas ortonormales. Ahora, si $\Lambda$ satisface la condición (\ref{eq:ecuacion_10_043}), entonces $\Lambda^{-1}$ también la satisface. Por lo tanto, $\Lambda^{-1}$ tiene sus columnas ortonormales entre sí. Pero se debe cumplir $\Lambda^{-1} = \Lambda^{T}$, entonces las columnas de $\Lambda^{T}$ son ortonormales entre sí.
+\par
+Considerando que las columnas de $\Lambda^{T}$ son los renglones de $\Lambda$, podemos ver que los renglones de $\Lambda$ son ortonormales entre sí. En conclusión, si $\Lambda$ satisface la eq. (\ref{eq:ecuacion_10_043}), sus columnas y renglones son ortonormales entre sí.
+\par
+Una matriz de $n \times n$ tiene $n^{2}$ parámetros libres, pero si satisface la ec. (\ref{eq:ecuacion_10_046}) no todos sus parámetros son libres. De la ec. (\ref{eq:ecuacion_10_046}) se puede ver que $\Lambda^{T} \, \Lambda$ es una matriz simétrica, por lo que la ec. (\ref{eq:ecuacion_10_046}) sólo tiene $\dfrac{n (n+1)}{2}$ ecuaciones independientes. Así, los parámetros libres de una matriz que satisface la ec. (\ref{eq:ecuacion_10_046}) son:
+\begin{align*}
+n^{2} - \dfrac{n (n+1)}{2} = \dfrac{n (n-1)}{2}
+\end{align*}
+Para el caso $n = 3$ hay tres parámetros libres, para ésta dimensión cualquier matriz se puede escribir como:
+\begin{align}
+\Lambda = \mqty(a_{1} & b_{1} & c_{1} \\ a_{2} & b_{2} & c_{2} \\ a_{3} & b_{3} & c_{3})
+\label{eq:ecuacion_10_048}
+\end{align}
+Si ésta matriz satisface la ec. (\ref{eq:ecuacion_10_046}), debe cumplir:
+\begin{align}
+\begin{aligned}
+\va{a} \vdot \va{a} = \va{b} \vdot \va{b} = \va{c} \vdot \va{c} =  1 \\[0.5em]
+\va{a} \vdot \va{b} = \va{a} \vdot \va{c} = \va{b} \vdot \va{c} =  0
+\end{aligned}
+\label{eq:ecuacion_10_049}
+\end{align}
+esto nos dice que la punta de los vectores $\va{a}, \va{b},\va{c}$ están en una esfera y que son ortonormales entre sí. Un ejemplo de este tipo de matrices son:
+\begin{align}
+\Lambda_{x} (\theta) = \mqty(1 & 0 & 0 \\ 0 & \cos \theta & \sin \theta \\ 0 & -\sin \theta & \cos \theta) \label{eq:ecuacion_10_050} \\[1em]
+\Lambda_{y} (\psi) = \mqty(\cos \psi & 0 & \sin \psi \\ 0 & 1 & 0 \\ - \sin \psi & 0 & \cos \psi) \label{eq:ecuacion_10_051} \\[1em]
+\Lambda_{z} (\phi) = \mqty(\cos \phi & \sin \phi & 0 \\ - \sin \phi & \cos \phi & 0 \\ 0 & 0 & 1) \label{eq:ecuacion_10_052}
+\end{align}
+Cada una de estas matrices representa una rotación:
+\begin{itemize}
+\item $\Lambda_{x} (\theta)$ representa una rotación sobre el eje $x$.
+\item $\Lambda_{y} (\psi)$ representa una rotación sobre el eje $y$.
+\item $\Lambda_{z} (\phi)$ representa una rotación sobre el eje $z$
+\end{itemize}
+Por lo tanto, las rotaciones dejan invariante la distancia y al Laplaciano. Nótese que las tres matrices son linealmente independientes.
+\par
+Existen otras formas de reparametrizar una matriz de rotación, por ejemplo la base unitaria en coordenadas esféricas:
+\begin{align*}
+\vu{e}_{r} &= \cos \phi \sin \theta \, \vu{i} + \sin \phi \sin \theta \, \vu{j} + \cos \theta \, \vu{k} \\
+\vu{e}_{\theta} &= \cos \phi \cos \theta \, \vu{i} + \sin \phi \cos \theta \, \vu{j} - \sin \theta \, \vu{k}
+\end{align*}
+satisfacen la condición dada por la eq. (\ref{eq:ecuacion_10_049}), pero no son la solución más general, pues sólo dependen de dos parámetros mientras que la solución general de la eq. (\ref{eq:ecuacion_10_049}) depende de tres. Pero estos vectores nos sirven para obtener la solución general. Propondremos a $\va{c}$ como:
+\begin{align}
+\va{c} = (\sin \psi \sin \theta, \cos \psi \sin \theta, \cos \theta)
+\label{eq:ecuacion_10_053}
+\end{align}
+Los vectores $\va{b}$ y $\va{c}$ deben ser tales que si $\phi = 0$ se cumple:
+\begin{align}
+\va{b}\eval_{\phi=0} &= \vu{e}_{\theta} = (\sin \psi \cos \theta, \cos \psi \cos \theta, - \sin \theta) \label{eq:ecuacion_10_054} \\[1em]
+\eval{\va{c}}_{\phi=0} &= \vu{e}_{\psi} = (\cos \psi, -\sin \psi, 0) \label{eq:ecuacion_10_055}
+\end{align}
+Un par de vectores que satisfacen estas condiciones son:
+\begin{changemargin}{-0.25cm}{-0.25cm} 
+\begin{align*}
+\va{a} &= (\sin \phi \sin \psi \cos \theta + \cos \phi \cos \psi, - \sin \phi \cos \psi \cos \theta - \cos \phi \sin \psi, \sin \phi \sin \theta) \\[1em]
+\va{b} &= (\sin \phi \cos \psi + \cos \theta \sin \psi \cos \theta, -\sin \phi \sin \psi + \cos \phi \cos \psi \cos \theta, - \cos \phi \sin \theta)
+\end{align*}
+\end{changemargin}
+Se puede demostrar que los vectores $\va{a}, \va{b}$ y $\va{c}$ cumplen con la ec. (\ref{eq:ecuacion_10_049}). De esta manera $\Lambda$ se puede escribir como\footnote{Con el fin de abreviar, $c \, \psi = \cos \psi$, así también $s \, \phi = \sin \phi$, etc.}:
+\begin{align}
+\begin{aligned}
+&\Lambda (\phi, \theta, \psi) = \\[0.5em]
+&= \mqty(
+c \, \phi \, c \, \psi - s \, \phi \, s \, \psi \, c \, \theta & s \, \theta \, c \, \phi + c \, \phi \, s \, \psi \, c \, \theta & s \, \psi \, s \, \theta \\
+- c \, \phi \, s \, \theta \, - s \, \phi \, c \, \psi c \, \theta & - s \, \phi \, s \, \psi + c \, \phi \, c \, \psi \, c \, \theta & c \, \psi \, s \, \theta \\
+s \, \phi \, s \, \theta & - c \, \phi \, s \, \theta & c \, \theta)
+\end{aligned}
+\label{eq:ecuacion_10_056}
+\end{align}
+Claramente aún hay cierta arbitrariedad, pues podemos cambiar el lugar de los vectores $\va{a}, \va{b}, \va{c}$, también podemos cambiar renglones por columnas y se seguirá cumpliendo la eq. (\ref{eq:ecuacion_10_043}). La ventaja de escribir $\Lambda$ de la forma (\ref{eq:ecuacion_10_056}) es que se puede expresar como el producto de tres matrices:
+\begin{align}
+\Lambda (\phi, \theta, \psi) = \Lambda_{1} (\phi) \, \Lambda_{2} (\theta) \, \Lambda_{3} (\psi) 
+\label{eq:ecuacion_10_057}
+\end{align}
+con:
+\begin{align}
+\Lambda_{1} (\phi) = \mqty(\cos \phi & \sin \phi & 0 \\ - \sin \phi & \cos \phi & 0 \\ 0 & 0 & 1) \label{eq:ecuacion_10_058} \\[1em]
+\Lambda_{2} (\theta) = \mqty(1 & 0 & 0 \\ 0 & \cos \theta & \sin \theta \\ 0 & - \sin \theta & \cos \theta) \label{eq:ecuacion_10_059} \\[1em]
+\Lambda_{3} (\psi) = \mqty(\cos \psi & \sin \psi & 0 \\ - \sin \psi & \cos \psi & 0 \\ 0 & 0 & 1) \label{eq:ecuacion_10_060}
+\end{align}
+Esta descomposición es muy útil para el estudio del movimiento del cuerpo rígido. A los parámetros $\theta, \psi, \phi$ se les llama \emph{ángulos de Euler}.
+\par
+Las rotaciones no son las únicas transformaciones de $O(3)$. Por ejemplo, las matrices:
+\begin{align}
+\mqty(-1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1) \hspace{1cm} \mqty(1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1) \hspace{1cm} \mqty(-1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1)
+\label{eq:ecuacion_10_061}
+\end{align}
+cumplen la ec. (\ref{eq:ecuacion_10_049}) pero no son de rotación, tampoco son de $SO(3)$. Las rotaciones representan las transformaciones de $O(3)$ que se pueden conectar con la matriz unidad $I$. Pues al hacer $\phi = 0, \theta = 0, \psi = 0$, se obtiene la unidad $I$.
+
+\section{Transformaciones infinitesimales.}
+
+Las transformaciones de $SO(n)$ que están infinitesimalmente cercanas a la unidad, es decir, aquellas que cumplen:
+\begin{align}
+\Lambda \approx I + \varepsilon \, M \hspace{1.5cm} \varepsilon \ll 1
+\label{eq:ecuacion_10_062}
+\end{align}
+son particularmente importantes. Para este tipo de transformaciones la condición dada por la eq. (\ref{eq:ecuacion_10_043}) implica que:
+\begin{align}
+I = \Lambda^{T} \, \Lambda &\approx (I + \varepsilon \, M)^{T} \, (I + \varepsilon \, M) \label{eq:ecuacion_10_063} \\[0.5em]
+&= (I + \varepsilon \, M^{T}) \, (I + \varepsilon \, M)  \approx I + \varepsilon (M^{T} + M) \label{eq:ecuacion_10_064}
+\end{align}
+Por lo tanto:
+\begin{align}
+M = - M^{T}
+\label{eq:ecuacion_10_065}
+\end{align}
+es decir, $M$ debe ser antisimétrica. Notemos que una matriz antisimétrica de $n \times n$ sólo puede tener:
+\begin{align*}
+\dfrac{n(n-1)}{2}
+\end{align*}
+parámetros libres, este número de grados de libertad coincide con los parámetros libres del grupo $SO(n)$. Para el caso particular $n = 3$, cualquier matriz antisimétrica se puede escribir como:
+\begin{align}
+M = \mqty(0 & -\alpha_{3} & \alpha_{2} \\ \alpha_{3} & 0 & -\alpha_{1} \\ -\alpha_{2} & \alpha_{1} & 0)
+\label{eq:ecuacion_10_066}
+\end{align}
+Definamos los vectores $\va{r} = (x, y ,z)$, $\delta \, \va{\alpha} = \varepsilon (\alpha_{1}, \alpha_{2}, \alpha_{3})$, entonces:
+\begin{align}
+\begin{aligned}[b]
+\delta \, X &= \varepsilon \, M \, X = \\[0.5em]
+&= \varepsilon \, \mqty(0 & -\alpha_{3} & \alpha_{2} \\ \alpha_{3} & 0 & -\alpha_{1} \\ -\alpha_{2} & \alpha_{1} & 0) \mqty(x \\ y \\ z) = \\[0.5em]
+&= \varepsilon \mqty(\alpha_{2} \, z - \alpha_{3} \, y \\ \alpha_{3} \, x - \alpha_{1} \, z \\ \alpha_{1} \, x - \alpha_{2} \, y) \\[0.5em]
+&= \delta \, \va{\alpha} \cp \va{r}
+\end{aligned}
+\label{eq:ecuacion_10_067}
+\end{align}
+Por lo tanto, una rotación infinitesimal está dada por:
+\begin{align}
+X^{\prime} = \Lambda \, X \approx ( I + \varepsilon \, M) \, X = (I \, M + \varepsilon \, M \, X)
+\label{eq:ecuacion_10_068}
+\end{align}
+es decir:
+\begin{align}
+\va{r}^{\, \prime} = \va{r} + \delta \, \va{\alpha} \cp \va{r}
+\label{eq:ecuacion_10_069}
+\end{align}
+Estas rotaciones son importantes porque definen al resto de las transformaciones de $SO(3)$, para ver esto primero notemos que:
+\begin{align}
+\begin{aligned}
+M &= \mqty(0 & -\alpha_{3} & \alpha_{2} \\ \alpha_{3} & 0 & -\alpha_{1} \\ -\alpha_{2} & \alpha_{1} & 0) = \alpha_{1} \, m_{1} + \alpha_{2} \, m_{2} + \alpha_{3} \, m_{3} = \\[0.5em]
+&= \va{\alpha} \cdot \va{m}
+\end{aligned}
+\label{eq:ecuacion_10_070}
+\end{align}
+donde:
+\begin{align*}
+m_{1} = \mqty(0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0), \hspace{1cm} m_{2} = \mqty(0 & 0 & 1 \\ 0 & 0 & 0 \\ -1 & 0 & 0), \hspace{1cm} m_{3} = \mqty(0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0)
+\end{align*}
+Se puede observar que la matriz (\ref{eq:ecuacion_10_070}) no se modifica si hacemos el cambio $\va{\alpha} \rightarrow - i \, \va{\alpha}$ y $\va{m} \rightarrow - i \, \va{m} = \va{M}$, es decir:
+\begin{align*}
+M_{1} = i \, \mqty(0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0), \hspace{1cm} M_{2} = i \, \mqty(0 & 0 & 1 \\ 0 & 0 & 0 \\ -1 & 0 & 0), \hspace{1cm} M_{3} = i \, \mqty(0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0)
+\end{align*}
+La ventaja de ocupar la matrices $M_{i}$ es que son Hermíticas, es decir, \break \hfill $M_{i}^{\dagger} = M_{i}$. Esto implica que sus valores propios son reales, por lo tanto las matrices
+$\va{M} = (M_{1} , M_{2} , M_{3})$ pueden representar cantidades físicas.
+\par
+Una transformación finita se debe hacer como producto infinito de transformaciones infinitesimales. Por ejemplo, ocupando:
+\begin{align}
+\begin{aligned}[b]
+X^{\prime} &\approx \bigg[ \Lambda \left( \dfrac{\va{\alpha}}{N} \right) \bigg]^{N} \, X = \\[0.5em]
+&= \big[ I - i \, \delta \, \va{\alpha} \cdot \va{M} \big]^{N} \, X = \\[0.5em]
+&= \bigg[ I - i \, \dfrac{1}{N} \, \va{\alpha} \cdot \va{M} \bigg]^{N} \, X
+\end{aligned}
+\label{eq:ecuacion_10_071}
+\end{align}
+y considerando el siguiente resultado:
+\begin{align}
+\lim_{N \to \infty} \left(  I + \dfrac{\beta \, x}{N} \right)^{N} = e^{\beta \, x}
+\label{eq:ecuacion_10_072}
+\end{align}
+se tiene que:
+\begin{align}
+\lim_{N \to \infty} \left(  I - i \, \dfrac{1}{N} \, \va{\alpha} \cdot \va{M} \right)^{N} = e^{- i \, \va{\alpha} \cdot \va{M}}
+\label{eq:ecuacion_10_073}
+\end{align}
+Por lo tanto, una transformación finita, está dada por:
+\begin{align}
+X^{\prime} = e^{- i \, \va{\alpha} \cdot \va{M}} \, X
+\label{eq:ecuacion_10_074}
+\end{align}
+Así, cualquier transformación infinitesimal conectada con la identidad tiene la forma:
+\begin{align}
+\Lambda (\va{\alpha}) = e^{- i \, \va{\alpha} \cdot \va{M}}
+\label{eq:ecuacion_10_075}
+\end{align}
+En este sentido se dice que $M_{1}, M_{2}, M_{3}$ son \emph{los generadores} del grupo $SO(3)$.
+\par
+Ahora veamos de forma explícita la expresión dada por la ec.(\ref{eq:ecuacion_10_075}) para algunos casos particulares. Primero notemos que si $n \geq 1$, se tiene:
+\begin{align}
+M_{1}^{2n} = \mqty(0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1) = T_{1}, \hspace{1cm} M_{1}^{2n + 1} = M_{1}  \label{eq:ecuacion_10_076} \\[1em]
+M_{2}^{2n} = \mqty(1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1) = T_{2}, \hspace{1cm} M_{2}^{2n + 1} = M_{2}  \label{eq:ecuacion_10_077} \\[1em]
+M_{3}^{2n} = \mqty(1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0) = T_{3}, \hspace{1cm} M_{3}^{2n + 1} = M_{3}  \label{eq:ecuacion_10_078}
+\end{align}
+Entonces, considerando estos resultados en conjunto con las series de $\cos \beta$ y $\sin \beta$, se tiene:
+\begin{align}
+\begin{aligned}
+e^{i \, \beta \, M_{i}} &= \nsum_{n \geq 0} \dfrac{1}{n!} \, (- i \, \beta \, M_{i})^{n} = \\[0.5em]
+&= \nsum_{n \geq 0} \dfrac{1}{(2 n)!} \, (- i \, \beta)^{2n} \, (M_{i})^{2n} + \nsum_{n \geq 0} \dfrac{1}{(2 n +1)!} \, (- i \, \beta)^{2n+1} \, (M_{i})^{2n+1} = \\[0.5em]
+&= I + T_{i} \, \nsum_{n \geq 1} \dfrac{1}{(2 n)!} \, (- i \, \beta)^{2n} + M_{i} \, \nsum_{n \geq 0} \dfrac{1}{(2 n +1)!} \, (- i \, \beta)^{2n+1} = \\[0.5em]
+&= I - T{i} + T_{i} + \nsum_{n \geq 1} \dfrac{(-1)^{n}}{(2 n)!} \, \beta^{2n} - i \, M \, \nsum_{n \geq 0} \dfrac{(-1)^{n}}{(2 n +1)!} \, \beta^{2n+1} = \\[0.5em]
+&= I - T{i} + T_{i} \, \nsum_{n \geq 0} \dfrac{(-1)^{n} \beta^{2 n}}{(2 n)!} - i \, M_{i} \, \sin \beta =\\[0.5em]
+&= I - T{i} + T_{i} \, \cos \beta - i \, M_{i} \, \sin \beta
+\end{aligned}
+\label{eq:ecuacion_10_079}
+\end{align}
+De donde:
+\begin{align}
+\begin{aligned}
+e^{-i \, \alpha_{1} \, M_{1}} = \mqty(1 & 0 & 0 \\ 0 & \cos \alpha_{1} & - \sin \alpha_{1} \\ 0 & \sin \alpha_{1} & \cos \alpha_{1}) \\[0.5em]
+e^{-i \, \alpha_{2} \, M_{2}} = \mqty(\cos \alpha_{2} & 0 & \sin \alpha_{2} \\ 0 & 1 & 0 \\ - \sin \alpha_{2} & 0 & \cos \alpha_{2}) \\[0.5em]
+e^{-i \, \alpha_{3} \, M_{3}} = \mqty(\cos \alpha_{3} & - \sin \alpha_{3} & 0 \\ \sin \alpha_{3} & \cos \alpha_{3} & 0 \\ 0 & 0 & 1)
+\end{aligned}
+\label{eq:ecuacion_10_080}
+\end{align}
+Así, $e^{-i \, \alpha_{1} \, M_{1}}$ representa una rotación sobre el eje $x$, $e^{-i \, \alpha_{2} \, M_{2}}$ representa una rotación sobre el eje $y$, mientras que $e^{-i \, \alpha_{3} \, M_{3}}$ representa una rotación sobre el eje $z$.
+\par
+Veamos qué reglas de conmutación\footnote{Ya conocemos el concepto de conmutador $[A, B] = A \, B - B \, A$.} cumplen los generadores de las rotaciones $M_{1}, M_{2}, M_{3}$. Primero notemos que:
+\begin{align}
+\begin{aligned}
+M_{1} \, M_{2} = - \mqty(0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0) \\[0.5em] 
+M_{1} \, M_{3} = - \mqty(0 & 0 & 0 \\ 0 & 0 & 0 \\ 1 & 0 & 0) \\[0.5em]
+M_{2} \, M_{3} = - \mqty(0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 0)
+\end{aligned}
+\qquad
+\begin{aligned}
+M_{2} \, M_{1} = - \mqty(0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0) \\[0.5em]
+M_{3} \, M_{1} = - \mqty(0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0) \\[0.5em]
+M_{3} \, M_{2} = - \mqty(0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0)
+\end{aligned}
+\label{eq:ecuacion_10_081}
+\end{align}
+por lo que:
+\begin{align}
+\comm{M_{1}}{M_{2}} = i \, M_{3}, \hspace{1cm} \comm{M_{3}}{M_{1}} = i \, M_{2}, \hspace{1cm} \comm{M_{2}}{M_{3}} = i \, M_{1} \label{eq:ecuacion_10_082}
+\end{align}
+Estas reglas de conmutación se pueden escribir como:
+\begin{align}
+\comm{M_{i}}{M_{j}} = i \, \varepsilon_{ijk} \, M_{k}
+\label{eq:ecuacion_10_083}
+\end{align}
+Por el hecho de que el conmutador de dos generadores de rotación nos de otro generador de rotación, se dice que \emph{estos generadores forman un álgebra de Lie}, el álgebra de Lie de $SO(3)$. Nótese que el conmutador entre dos generadores no es cero, dos generadores no se pueden diagonalizar simultáneamente. Ahora definamos:
+\begin{align}
+M^{2} = M_{1}^{2} + M_{2}^{2} + M_{3}^{2}
+\label{eq:ecuacion_10_084}
+\end{align}
+de donde:
+\begin{align}
+M^{2} = 2 \, I
+\label{eq:ecuacion_10_085}
+\end{align}
+por lo tanto:
+\begin{align}
+\comm{M^{2}}{M_{i}} = 0
+\label{eq:ecuacion_10_086}
+\end{align}
+Así, los valores propios de $M^{2}$ se pueden obtener al mismo tiempo que los generadores $M_{i}$.
+\par
+Los valores propios de los generadores $M_{i}$ se pueden calcular directamente y están dados por:
+\begin{align}
+M_{1} \, V = \lambda \, V \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \lambda = \pm 1 \hspace{1cm} V = a \dfrac{1}{\sqrt{2}} \mqty(0 \\ 1 \\ \pm i) \label{eq:ecuacion_10_087} \\[0.5em]
+M_{2} \, V = \lambda \, V \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \lambda = \pm 1 \hspace{1cm} V = a \dfrac{1}{\sqrt{2}} \mqty(1 \\ 0 \\ \pm i) \label{eq:ecuacion_10_088} \\[0.5em]
+M_{3} \, V = \lambda \, V \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \lambda = \pm 1 \hspace{1cm} V = a \dfrac{1}{\sqrt{2}} \mqty(1 \\ \pm i \\ 0) \label{eq:ecuacion_10_089}
+\end{align}
+Si $a = 1$, en cada caso se tienen vectores propios ortonormales. Estos resultados no son difíciles de obtener, posteriormente veremos que los generadores de las rotaciones en el espacio de las funciones de $\va{x}$ están relacionados con los operadores diferenciales.
+\par
+Con el símbolo $\epsilon_{ijk}$ las matrices $\va{M} = (M_{1}, M_{2}, M_{3})$ se pueden escribir de forma más económica. En efecto, en componentes tenemos:
+\begin{align}
+(M_{1})_{ij} = i \, \epsilon_{i 1 j} \hspace{1cm} (M_{2})_{ij} = i \, \epsilon_{i 2 j} \hspace{1cm} (M_{3})_{ij} = i \, \epsilon_{i 3 j} \label{eq:ecuacion_10_090}
+\end{align}
+Por ejemplo:
+\begin{align}
+(M_{1})_{ij} = i \, \epsilon_{i 1 j} = i \, \mqty(\epsilon_{111} & \epsilon_{112} & \epsilon_{113} \\ \epsilon_{211} & \epsilon_{212} & \epsilon_{213} \\ \epsilon_{311} & \epsilon_{312} & \epsilon_{313}) = i \, \mqty(0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0)
+\label{eq:ecuacion_10_091}
+\end{align}
+se puede demostrar que las demás igualdades se cumplen.
+\par
+Así, las componentes de cualquier matriz antisimétrica se pueden escribir como:
+\begin{align}
+M_{ik} = - i \, \alpha_{j} (M_{j})_{ik} = \alpha_{j} \, \epsilon_{ijk}
+\label{eq:ecuacion_10_092}
+\end{align}
+Ahora, si $\alpha_{i}$ es infinitesimal, por ejemplo $\delta \, \alpha_{i} = \alpha_{i} / N$ con $N$ grande, una transformación infinitesimal en el espacio de $\va{x}$ está dada por:
+\begin{align}
+X^{\prime} = \Lambda \, X = (I - i \, \delta \, \va{\alpha} \cdot \va{M}) \, X
+\label{eq:ecuacion_10_093}
+\end{align}
+En componentes se tiene:
+\begin{align}
+\begin{aligned}[b]
+x_{i}^{\prime} &\approx \Lambda_{ik} \, x_{k} = \\[0.5em]
+&= (I - i \, \delta \, \alpha_{j} \, M_{j})_{ik} \, x_{k} = \\[0.5em]
+&= (\delta_{ik} - i \, \delta \, \alpha_{j} \, (M_{j})_{ik}) \, x_{k} = \\[0.5em]
+&= (\delta_{ik} + \delta \, \alpha_{j} \, \epsilon_{ijk}) \, x_{k} = \\[0.5em]
+&= x_{i} + \epsilon_{ijk} \, \delta \, \alpha_{j} \, x_{k} = \\[0.5em]
+&= x_{i} + (\delta \, \va{\alpha} \cp \va{x})_{i}
+\end{aligned}
+\label{eq:ecuacion_10_094}
+\end{align}
+es decir:
+\begin{align}
+x_{i}^{\prime} &\approx x_{i} + (\delta \, \va{\alpha} \cp \va{x})_{i} \label{eq:ecuacion_10_095}
+\end{align}
+
+\section{Armónicos esféricos.}
+
+Hasta el momento nos hemos enfocado en las trasformaciones que pasan del espacio $\va{r}$ al $\va{r}^{\, \prime}$. Ahora veamos que pasa con las funciones que actúan en estos espacios.
+\par
+Supongamos que tenemos una función, $F$, de $\mathbb{R}^{3} \rightarrow \mathbb{R}$. Entonces al evaluar esta función en un punto $\va{r}^{\, \prime}$ y ocupando la transformación infinitesimal dada por la eq. (\ref{eq:ecuacion_10_069}), se encuentra que:
+\begin{align}
+F(\va{r}^{\, \prime}) \approx F (\va{r} + \delta \, \va{\alpha} \cp \va{r}) = F(\va{r}) + (\delta \, \va{\alpha} \cp \va{r}) \cdot \va{\nabla} F(\va{r})
+\label{eq:ecuacion_10_096}
+\end{align}
+Usando la propiedad cíclica del triple producto escalar, se tiene que:
+\begin{align*}
+(\delta \, \va{\alpha} \cp \va{r}) \cdot \va{\nabla} F(\va{r}) &= \big( \va{\nabla} F(\va{r}) \cp \delta \, \va{\alpha} \big) \cdot \va{r} \\[0.5em]
+&= \big( \va{r} \cp \va{\nabla} F(\va{r}) \big) \cdot \delta \, \va{\alpha} \\[0.5em]
+&= i \, \big( \delta \, \va{\alpha} \cdot \va{L}) \, F(\va{r} \big) 
+\end{align*}
+con:
+\begin{align}
+\va{L} = - i \, \va{r} \cp \va{\nabla}
+\label{eq:ecuacion_10_097}
+\end{align}
+Entonces tenemos que:
+\begin{align}
+F(\va{r}^{\, \prime}) \approx \big( 1 + i \, \delta \va{\alpha} \cdot \va{L} \big) \, F (\va{r})
+\label{eq:ecuacion_10_098}
+\end{align}
+Por lo tanto, \textbf{el operador $\va{L}$ es el generador de las rotaciones en el espacio de las funciones}. Anteriormente se vio que este operador es Hermítico, por lo que sus valores propios son reales.
+\par
+Veamos qué forma tiene una rotación finita. Al igual que en caso del espacio $\va{r}$ tomaremos $\delta \, \va{\alpha} = \va{\alpha} / N$ y consideraremos que para tener una transformación finita debemos hacer el producto de un número infinito de transformaciones infinitesimales. Entonces:
+\begin{align}
+F(\va{r}^{\, \prime}) \approx \bigg( 1 + \dfrac{\va{\alpha}}{N} \cdot \va{L} \bigg)^{N} \, F(\va{r})
+\label{eq:ecuacion_10_099}
+\end{align}
+Al ocupar el resultado obtenido en la ec. (\ref{eq:ecuacion_10_072}), se encuentra que:
+\begin{align}
+\lim_{N \to \infty} \left( I + i \, \dfrac{1}{N} \, \va{\alpha} \cdot \va{L} \right)^{N} = U(\va{\alpha}) = e^{i \, \va{\alpha} \cdot \va{L}}
+\label{eq:ecuacion_10_100}
+\end{align}
+Por lo tanto, una transformación finita está dada por:
+\begin{align}
+F(\va{r}^{\, \prime}) = e^{i \, \va{\alpha} \cdot \va{L}} \, F(\va{r})
+\label{eq:ecuacion_10_101}
+\end{align}
+Nótese que el operador $U(\va{\alpha})$ satisface:
+\begin{align}
+U(\va{\alpha})^{\dagger} = U(- \va{\alpha}) = U^{-1} (\va{\alpha})
+\label{eq:ecuacion_10_102}
+\end{align}
+Cuando un operador $A$ cumple:
+\begin{align*}
+A^{\dagger} = A^{-1}
+\end{align*}
+se dice que es \emph{un operador unitario}. Así, el operador $U(\va{\alpha})$ es unitario.
+
+\subsection{Reglas de conmutación del momento angular.}
+
+Anteriormente vimos que los generadores $M_{i}$ satisfacen las reglas de conmutación dadas por la ec. (\ref{eq:ecuacion_10_083}). Veamos qué reglas de conmutación cumplen los operadores $L_{i}$. Primero notemos que definiendo $\va{p} = - i \, \va{\nabla}$, se tiene que $\va{L} = \va{r} \cp \va{p}$. En componentes se encuentra que $L_{i} = \epsilon_{ijk} \, x_{j} \, p_{k}$. De donde
+\begin{align}
+\begin{aligned}[b]
+\comm{L_{i}}{L_{j}} &= \comm{\epsilon_{ilm} \, x_{l} \, p_{m}}{\epsilon_{jrs} \, x_{r} \, p_{s}} = \\[0.5em]
+&= \epsilon_{ilm} \, \epsilon_{jrs} \, \comm{x_{l} \, p_{m}}{x_{r} \, p_{s}} = \\[0.5em]
+&= \epsilon_{ilm} \, \epsilon_{jrs} \, (x_{l} \, \comm{p_{m}}{x_{r}} \, p_{s} + x_{r} \, \comm{x_{l}}{p_{s}} \, p_{m}) = \\[0.5em]
+&= \epsilon_{ilm} \, \epsilon_{jrs} \, (- i \, x_{l} \, p_{s} \, \delta_{mr} + i \, x_{r} \, p_{m} \, \delta_{ls}) = \\[0.5em]
+&= i \, (- \epsilon_{ilr} \, \epsilon_{jrs} \, x_{l} \, p_{s} + \epsilon_{ism} \, \epsilon_{jrs} \, x_{r} \, p_{m}) = \\[0.5em]
+&= i \, (\epsilon_{ilr} \, \epsilon_{rjs} \, x_{l} \, p_{s} - \epsilon_{ims} \, \epsilon_{sjr} \, x_{r} \, p_{m}) = \\[0.5em]
+&= i \, (\epsilon_{iar} \, \epsilon_{rjb} - \, x_{a} \, p_{b} - \epsilon_{ibs} \, \epsilon_{sja} \, x_{r} \, p_{b}) = \\[0.5em]
+&= i \, (\epsilon_{iar} \, \epsilon_{rjb} - \epsilon_{ibs} \, \epsilon_{sja}) \, x_{a} \, p_{b}
+\end{aligned}
+\label{eq:ecuacion_10_103}
+\end{align}
+Ahora veamos que:
+\begin{align}
+\begin{aligned}[b]
+\epsilon_{iar} \, \epsilon_{rjb} - \epsilon_{ibs} \, \epsilon_{sja} &= (\delta_{ij} \, \delta_{ab} - \delta_{ib} \, \delta_{aj}) - (\delta_{ij} \, \delta_{ba} - \delta_{ia} \, \delta_{bj}) = \\[0.5em]
+&= \delta_{ia} \, \delta_{bj} - \delta_{ib} \, \delta_{aj} = \\[0.5em]
+&= \epsilon_{ijk} \, \epsilon_{kab}
+\end{aligned}
+\label{eq:ecuacion_10_104}
+\end{align}
+Ocupando este resultado, tenemos que:
+\begin{align*}
+\comm{L_{i}}{L_{j}} = i \, \epsilon_{ijk} \, \epsilon_{kab} \, x_{a} \, p_{b}
+\end{align*}
+es decir:
+\begin{align}
+\comm{L_{i}}{L_{j}} = i \, \epsilon_{ijk} \, L_{k}
+\label{eq:ecuacion_10_105}
+\end{align}
+Se puede observar que son las mismas reglas de conmutación que cumple $M_{i}$ ec. (\ref{eq:ecuacion_10_083}). A éstas reglas de conmutación se les llama \emph{el álgebra de Lie} de $SO(3)$.
+\par
+Anteriormente vimos que la matriz $M^{2} = M_{1}^{2} + M_{2}^{2} + M_{3}^{2}$ conmuta con todas las matrices $M_{i}$. Para los operadores $L_{i}$ el operador equivalente a $M^{2}$ es:
+\begin{align}
+L^{2} = L_{x}^{2} + L_{y}^{2} + L_{z}^{2} = L_{j} , L_{j} 
+\label{eq:ecuacion_10_106}
+\end{align}
+El cual cumple con:
+\begin{align}
+\begin{aligned}[b]
+\comm{L^{2}}{L_{i}} &= \comm{L_{j} \, L_{j}}{L_{i}} = \\[0.5em]
+&= L_{j} \, \comm{L_{j}}{L_{i}} + \comm{L_{j}}{L_{i}} \, L_{j} \\[0.5em]
+&= i \, \epsilon_{jil} \, L_{j} \, L_{l} + i \, \epsilon_{jil} \, L_{l} \, L_{j} \\[0.5em]
+&= - i \, (\epsilon_{ijl} \, L_{j} \, L_{l} + i + \epsilon_{ijl} \, L_{l} \, L_{j})
+\end{aligned}
+\label{eq:ecuacion_10_107}
+\end{align}
+ahora, al renombrar los índices se encuentra que:
+\begin{align}
+\begin{aligned}[b]
+\epsilon_{ijl} \, L_{j} \, L_{l} &= \nsum_{j=1}^{3} \nsum_{l=1}^{3} \epsilon_{ijl} \, L_{j} \, L_{l} = \\[0.5em]
+&= \nsum_{l=1}^{3} \nsum_{j=1}^{3} \epsilon_{ilj} \, L_{l} \, L_{j} \\[0.5em]
+&= \epsilon_{ilj} \, L_{l} \, L_{j}
+\end{aligned}
+\label{eq:ecuacion_10_108}
+\end{align}
+al ocupar esta igualdad en la ec. (\ref{eq:ecuacion_10_107}), se tiene que:
+\begin{align}
+\begin{aligned}
+\comm{L^{2}}{L_{i}} &= - i \, (\epsilon_{ilj} \, L_{j} \, L_{l} + \epsilon_{ijl} \, L_{l} \, L_{j}) = \\[0.5em]
+&= - i \, (- \epsilon_{ijl} \, L_{l} \, L_{j} + \epsilon_{ijl} \, L_{l} \, L_{j}) = \\[0.5em]
+&= 0
+\end{aligned}
+\label{eq:ecuacion_10_109}
+\end{align}
+Por lo tanto, $L^{2}$ conmuta con cualquier $L_{i}$ . Al operador $L^{2}$ se le llama \emph{el Casimir} del álgebra de Lie de $SO(3)$. Como $L^{2}$ conmuta con cualquier $L_{i}$, este operador comparte vectores propios con estos tres operadores.
+
+\subsection{Ecuación de valores propios de \texorpdfstring{$L^{2}$.}{L2}}
+
+Para obtener los vectores y valores propios de $M_{i}$ y $M^{2}$ resolvimos un problema de álgebra lineal, mas para obtener los vectores propios de $L^{2}$ y por ejemplo, los de $L_{z}$, se deben plantear las ecuaciones:
+\begin{align}
+\begin{aligned}[b]
+L^{2} \, Y_{\lambda m} &= \lambda \, Y_{\lambda m} \\[0.5em]
+L_{z} \, Y_{\lambda m} &= m \, Y_{\lambda m}
+\end{aligned}
+\label{eq:ecuacion_10_110}
+\end{align}
+Estas son dos ecuaciones diferenciales. En efecto considerando las expresiones de $L^{2}$ y $L_{z}$ en coordenadas esféricas, se encuentra que:
+\begin{align}
+\begin{aligned}[b]
+L^{2} \, Y_{\lambda m} (\theta, \varphi) &= - \left[ \dfrac{1}{\sin \theta} \, \pdv{\theta} \left( \sin \theta \, \pdv{Y_{lm} (\theta, \varphi)}{\theta} \right) + \dfrac{1}{\sin^{2} \theta} \pdv[2]{Y_{lm} (\theta, \varphi)}{\varphi}  \right] = \\[0.5em]
+&= \lambda \, Y_{\lambda m} (\theta, \varphi)
+\end{aligned}
+\label{eq:ecuacion_10_111}
+\end{align}
+\begin{align}
+L_{z} \, Y_{\lambda m} (\theta, \varphi) &= - i \, \pdv{Y_{\lambda m} (\theta, \varphi)}{\varphi} = m \, Y_{\lambda m} (\theta, \varphi) \label{eq:ecuacion_10_112}
+\end{align}
+De la segunda ecuación, es claro que $Y_{\lambda m} (\theta, \varphi)$ es de la forma:
+\begin{align}
+Y_{\lambda m} (\theta, \varphi) = \alpha_{\lambda m} \, e^{i m \varphi} \, P_{\lambda}^{m} (\theta)
+\label{eq:ecuacion_10_113}
+\end{align}
+Si queremos que la función $Y_{\lambda m} (\theta, \varphi) $ no sea multivaluada, debemos pedir que $Y_{\lambda m} (\theta, \varphi + 2 \pi) = Y_{\lambda m} (\theta, \varphi)$. Esto implica $e^{i m \phi} = e^{i m (\phi + 2\pi})$, lo cual se cumple sólo si:
+\begin{align}
+m = 0, \pm 1, \pm 2, \pm 3, \ldots
+\label{eq:ecuacion_10_114}
+\end{align}
+Por lo tanto, $m$ debe de ser un entero. Posteriormente veremos los posibles valores de $\lambda$.
+\par
+Sustituyendo la ec. (\ref{eq:ecuacion_10_113}) en la ec. (\ref{eq:ecuacion_10_111}), se encuentra que:
+\begin{align}
+\dfrac{1}{\sin \theta} \, \pdv{\theta} \left( \sin \theta \, \pdv{P_{\lambda}^{m} (\theta)}{\theta} \right) - \dfrac{m^{2}}{\sin^{2} \theta} \pdv[2]{P_{\lambda}^{m} (\theta)}{\theta} = - \lambda \, P_{\lambda}^{m} (\theta) \label{eq:ecuacion_10_115}
+\end{align}
+Con el cambio de variable $U = \cos \theta$, se tiene:
+\begin{align}
+\sin \theta = \sqrt{1 - u^{2}}, \hspace{1.5cm} \partial_{\theta} = - \sqrt{1 - u^{2}} \, \partial_{u}
+\label{eq:ecuacion_10_116}
+\end{align}
+Por lo que la ec. (\ref{eq:ecuacion_10_115}) toma la forma:
+\begin{align}
+\dv{u} \left( (1 - u^{2}) \, \dv{P_{\lambda}^{m} (u)}{u} \right) + \left( \lambda - \dfrac{m^{2}}{1 - u^{2}} \right) \, P_{\lambda}^{m} (u) = 0
+\label{eq:ecuacion_10_117}
+\end{align}
+Esta es la llamada \emph{ecuación asociada de Legendre}.
+ Para el caso $m = 0$, se define $P_{\lambda}^{0} = P_{\lambda} (u)$, que debe satisfacer:
+\begin{align}
+\dv{u} \bigg[ (1 - u^{2}) \, \dv{P_{\lambda} (u)}{u} \bigg] + \lambda \, P_{\lambda} (u) = 0
+\label{eq:ecuacion_10_118}
+\end{align}
+que es la llamada \emph{ecuación ordinaria de Legendre}. En lo que sigue, estudiando la estructura del grupo de rotaciones, obtendremos las soluciones de estas ecuaciones. Primero se verá la ortonormalidad de las soluciones de la ec. (\ref{eq:ecuacion_10_115}).
+
+\subsection{Relaciones de ortonormalidad.}
+
+Supongamos que $m$ y $m^{\prime}$ son enteros y que $m \neq m^{\prime}$, entonces
+\begin{align}
+\begin{aligned}[b]
+\scaleint{6ex}_{\bs 0}^{2 \pi} \left( e^{i \, m^{\prime} \, \varphi} \right)^{*} \, e^{i \, m \, \varphi} \dd{\varphi} &= \scaleint{6ex}_{\bs 0}^{2 \pi} e^{-i \, m^{\prime} \, \varphi} \, e^{i \, m \, \varphi} \dd{\varphi} = \\[0.5em]
+&= \scaleint{6ex}_{\bs 0}^{2 \pi} e^{-i \, (m - m^{\prime} )\, \varphi} \dd{\varphi} = \\[0.5em]
+&= \dfrac{e^{-i \, (m - m^{\prime} )\, \varphi}}{i \, (m - m^{\prime})} \eval_{0}^{2 \pi} = \\[0.5em]
+&= \dfrac{e^{-i \, (m - m^{\prime} )\, 2 \, \pi} - 1}{i \, (m - m^{\prime})} = 0 
+\end{aligned}
+\label{eq:ecuacion_10_119}
+\end{align}
+Si $m = m^{\prime}$, se encuentra que:
+\begin{align}
+\begin{aligned}[b]
+\scaleint{6ex}_{\bs 0}^{2 \pi} \left( e^{i \, m^{\prime} \, \varphi} \right)^{*} \, e^{i \, m \, \varphi} \dd{\varphi} &= \scaleint{6ex}_{\bs 0}^{2 \pi} e^{-i \, m^{\prime} \, \varphi} \, e^{i \, m \, \varphi} \dd{\varphi} = \\[0.5em]
+&= \scaleint{6ex}_{\bs 0}^{2 \pi} \dd{\varphi} = 2 \, \pi
+\end{aligned}
+\label{eq:ecuacion_10_120}
+\end{align}
+De donde, si $m$ y $m^{\prime}$ son enteros, se tiene que:
+\begin{align}
+\scaleint{6ex}_{\bs 0}^{2 \pi} \left( e^{i \, m^{\prime} \, \varphi} \right)^{*} \, e^{i \, m \, \varphi} \dd{\varphi} &= \scaleint{6ex}_{\bs 0}^{2 \pi} e^{-i \, m^{\prime} \, \varphi} \, e^{i \, m \, \varphi} \dd{\varphi} = 2 \, \pi \, \delta_{m m^{\prime}}
+\label{eq:ecuacion_10_121}
+\end{align}
+Por lo tanto, las funciones $e^{i \, m \, \varphi}$ son ortogonales en el intervalo $[2, \pi]$.
+\par
+Nótese que la ec. (\ref{eq:ecuacion_10_115}) se puede escribir como:
+\begin{align}
+\pdv{\theta} \left( \sin \theta \pdv{P_{\lambda}^{m} (\theta)}{\theta} \right) + \left(\lambda \, \sin \theta - \dfrac{m^{2}}{\sin \theta} \right) \, P_{\lambda}^{m} (\theta) = 0
+\label{eq:ecuacion_10_122}
+\end{align}
+Como se puede observar, ésta ecuación es de tipo Sturm-Liouville. En este caso:
+\begin{align*}
+p(\theta) = \sin \theta \, \hspace{1.5cm} r(\theta) = - \dfrac{m^{2}}{\sin \theta}
+\end{align*}
+Considerando los resultados para las ecuaciones tipo Sturm-Liouville, como $p(0) = p(\pi) = 0$, se llega a:
+\begin{align*}
+(\lambda^{\prime} - \lambda) \, \scaleint{6ex}_{\bs 0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m} (\theta) \, P_{\lambda}^{m} (\theta) \dd{\theta} = 0
+\end{align*}
+En particular, si $\lambda^{\prime} \neq \lambda$, se tiene:
+\begin{align}
+\scaleint{6ex}_{\bs 0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m} (\theta) \, P_{\lambda}^{m} (\theta) \dd{\theta} = 0
+\label{eq:ecuacion_10_123}
+\end{align}
+En general el resultado es:
+\begin{align}
+\scaleint{6ex}_{\bs 0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m} (\theta) \, P_{\lambda}^{m} (\theta) \dd{\theta} = \delta_{\lambda \lambda^{\prime}} \, \beta_{\lambda m} \hspace{1.5cm} \beta_{\lambda m} = \mbox{ constante } > 0
+\label{eq:ecuacion_10_124}
+\end{align}
+Por lo tanto, las funciones $P_{\lambda^{\prime}}^{m} (\theta)$ son ortogonales.
+\par
+Empleando la ortogonalidad de las funciones $e^{i \, m \, \varphi}$ y $P_{\lambda}^{m}$, se puede escoger $\alpha_{l m}$ de tal forma que los armónicos esféricos sean ortonormales. En efecto, como los armónicos esféricos tienen la forma ec. (\ref{eq:ecuacion_10_113}), se encuentra que:
+\begin{align}
+\begin{aligned}[b]
+&\int Y_{\lambda^\prime m^{\prime}}^{*} (\theta, \varphi) \, Y_{\lambda m} (\theta, \varphi) \dd{\Omega} = \\[0.5em]
+&= \int_{0}^{2 \pi} \int_{0}^{\pi} \left( \sin \theta \, \alpha_{\lambda^{\prime} m^{\prime}}^{*} \, e^{-i  \, m \, \varphi} \, P_{\lambda^{\prime}}^{m^{\prime}} (\cos \theta) \, \alpha_{\lambda m} \, e^{i  \, m \, \varphi} \, P_{\lambda}^{m} (\cos \theta) \right) \dd{\theta} \dd{\varphi} = \\[0.5em]
+&= \alpha_{\lambda^{\prime} m^{\prime}}^{*} \, \alpha_{\lambda m} \, \int_{0}^{2 \pi} e^{i (m - m^{\prime} \varphi)} \dd{\varphi} \, \int_{0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m^{\prime}} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) \dd{\theta} = \\[0.5em]
+&= \alpha_{\lambda^{\prime} m^{\prime}}^{*} \, \alpha_{\lambda m} \, 2 \, \pi \, \delta_{m m^{\prime}} \, \int_{0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m^{\prime}} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) \dd{\theta} = \\[0.5em]
+&= \alpha_{\lambda^{\prime} m}^{*} \, \alpha_{\lambda m} \, 2 \, \pi \, \delta_{m m^{\prime}} \, \int_{0}^{\pi} \sin \theta \, P_{\lambda^{\prime}}^{m} (\cos \theta) \, P_{\lambda}^{m} (\cos \theta) \dd{\theta} = \\[0.5em]
+&= \alpha_{\lambda^{\prime} m}^{*} \, \alpha_{\lambda m} \, 2 \, \pi \, \delta_{m m^{\prime}} \, \beta_{\lambda m} \, \delta_{\lambda^{\prime} \lambda} = \\[0.5em]
+&= \abs{\alpha_{\lambda^{\prime} m}}^{2} \, 2 \, \pi \, \beta_{\lambda m} \, \delta_{m m^{\prime}} \,\delta_{\lambda^{\prime} \lambda}
+\end{aligned}
+\label{eq:ecuacion_10_125}
+\end{align}
+Entonces si:
+\begin{align}
+\abs{\alpha_{\lambda^{\prime} m}}^{2} = \dfrac{1}{2 \, \pi \, \beta_{\lambda m}}
+\label{eq:ecuacion_10_126}
+\end{align}
+se cumple que:
+\begin{align}
+\braket{Y_{\lambda^{\prime} m^{\prime}}(\theta, \varphi)}{Y_{\lambda m}(\theta, \varphi)} = \scaleint{6ex} Y_{\lambda^\prime m^{\prime}}^{*} (\theta, \varphi) \, Y_{\lambda m} (\theta, \varphi) \dd{\Omega} = \delta_{m m^{\prime}} \, \delta_{\lambda^{\prime} \lambda}
+\label{eq:ecuacion_10_127}
+\end{align}
+Así los armónicos esféricos son ortonormales.
+
+\subsection{Operadores escalera y espectro de \texorpdfstring{$L^{2}$}{L2}.}
+
+Antes de resolver la ED (\ref{eq:ecuacion_10_111}) veamos algunas propiedades de las funciones propias $Y_{\lambda m}$ y sus valores propios $\lambda, m$. Primero notemos que para cualquier función $f$, se tiene que:
+\begin{align*}
+0 \leq \braket{L_{x} \, f}{L_{x} \, f} = \braket{f}{L_{x}^{\dagger} \, L_{x} \, f} = \braket{f}{L_{x}^{2} \, f} \\[0.5em]
+0 \leq \braket{L_{y} \, f}{L_{y} \, f} = \braket{f}{L_{y}^{\dagger} \, L_{y} \, f} = \braket{f}{L_{y}^{2} \, f}
+\end{align*}
+por lo que:
+\begin{align*}
+0 \leq \braket{f}{(L_{2}^{2} + L_{y}^{2}) \, f} = \braket{f}{(L^{2} - L_{z}^{2}) \, f}
+\end{align*}
+En particular, si $f = Y_{\lambda m}$, se llega a:
+\begin{align}
+(L^{2} - L_{z}^{2}) \, Y_{\lambda m} = (\lambda - m^{2}) \, Y_{\lambda m}
+\label{eq:ecuacion_10_128}
+\end{align}
+entonces:
+\begin{align}
+0 \leq (\lambda - m^{2}) \, \braket{Y_{\lambda m}}{Y_{\lambda m}}
+\label{eq:ecuacion_10_129}
+\end{align}
+Nótese que la única forma de que se cumpla la desigualdad $(\lambda - m^{2}) < 0$ es que $\braket{Y_{\lambda m}}{Y_{\lambda m}} = 0$, es decir, $Y_{\lambda m} = 0$. Si $Y_{\lambda m} \geq 0$, entonces:
+\begin{align}
+- \sqrt{\lambda} \leq m \leq \sqrt{\lambda}
+\label{eq:ecuacion_10_130}
+\end{align}                                                   
+Esta restricción nos permitirá encontrar los valores de $\lambda$.
+\par
+Veamos ahora los operadores de ascenso y descenso\footnote{También conocidos como operadores de creación y aniquilamiento, respectivamente.}:
+\begin{align}
+L_{\pm} = L_{x} \pm i \, L_{y}
+\label{eq:ecuacion_10_131}
+\end{align}
+Notemos que:
+\begin{align*}
+L_{\mp} \, L_{\pm} &= (L_{x} \mp i \, L_{y})(L_{x} \pm i \, L_{y}) = \\[0.5em]
+&= L_{x}^{2} + L_{y}^{2} \pm i (L_{x} \,L_{y} - L_{y} \,L_{x}) = \\[0.5em]
+&= L_{x}^{2} + L_{y}^{2} + L_{z}^{2} - L_{z}^{2} \mp L_{z} = \\[0.5em]
+&= L^{2} \mp L_{z} = \\[0.5em]
+&= L^{2} - (L_{z}^{2} \pm L_{z})
+\end{align*}
+es decir:
+\begin{align}
+L_{\mp} \, L_{\pm} = L^{2} - (L_{z}^{2} \pm L_{z})
+\label{eq:ecuacion_10_132}
+\end{align}
+Claramente $L_{\pm}$ conmuta con $L^{2}$:
+\begin{align}
+\comm{L^{2}}{L_{\pm}} = 0
+\label{eq:ecuacion_10_133}
+\end{align}
+Esto indica que $L_{\pm}$ tiene funciones propias comunes con $L^{2}$. Además:
+\begin{align}
+\begin{aligned}[b]
+\comm{L_{z}}{L_{x} \pm i \, L_{y}} &= \comm{L_{z}}{L_{x}} \pm \comm{L_{z}}{L_{y}} = \\[0.5em]
+&= i \, L_{y} \pm L_{z} \\[0.5em]
+&= \pm (L_{x} \pm i \, L_{y}) 
+\end{aligned}
+\label{eq:ecuacion_10_134}
+\end{align}
+es decir:
+\begin{align}
+\comm{L_{z}}{L_{\pm}} = \pm L_{\pm}
+\label{eq:ecuacion_10_135}
+\end{align}
+Por lo que $L_{\pm}$ no tiene funciones propias comunes con $L_{z}$.
+\par
+Veamos qué efecto tiene el operador $L_{pm}$ sobre las funciones propias de $L_{z}$. Definimos la función:
+\begin{align}
+\tilde{Y} = L_{\pm} \, Y_{\lambda m}
+\label{eq:ecuacion_10_136}
+\end{align}
+entonces tomando en cuenta que $L^{2}$ y $L_{\pm}$ conmutan, se tiene que:
+\begin{align}
+L^{2} \, \tilde{Y} = L^{2} \, L_{\pm} \, Y_{\lambda m} = L_{\pm} \, L^{2} \, Y_{\lambda m} = \lambda \, L_{\pm} \, Y_{\lambda m} = \lambda \tilde{Y} 
+\label{eq:ecuacion_10_137}
+\end{align}
+Por lo tanto, $L_{\pm} \, Y_{\lambda m}$ también es una función propia de $L^{2}$ con el mismo valor propio $\lambda$ que $Y_{\lambda m}$. Además considerando el conmutador de la ec. (\ref{eq:ecuacion_10_135}), se tiene que:
+\begin{align}
+\begin{aligned}
+L_{z} \, \tilde{Y} &= L_{z} \, L_{\pm} \, Y_{\lambda m} = \\[0.5em]
+&= \big( L_{\pm} \, L_{z} \pm L_{\pm} \big) \, Y_{\lambda m} = \\[0.5em]
+&= \big( L_{\pm} \, L_{z} \, Y_{\lambda m} \pm L_{\pm}  \, Y_{\lambda m} \big) = \\[0.5em]
+&= \big( m \, L_{\pm} \, Y_{\lambda m} \pm L_{\pm} \, Y_{\lambda m} \big) = \\[0.5em]
+&= (m \pm 1) L_{\pm} \, Y_{\lambda m} = \\[0.5em]
+&= (m \pm  1) \, \tilde{Y}
+\end{aligned}
+\label{eq:ecuacion_10_138}
+\end{align}
+es decir:
+\begin{align}
+L_{z} \, L_{\pm} \, Y_{\lambda m} = (m \pm 1) L_{\pm} \, Y_{\lambda m}
+\label{eq:ecuacion_10_139}
+\end{align}
+Por lo tanto, $\tilde{Y} = L_{\pm} \, Y_{\lambda m}$ es vector propio de $L_{z}$, pero no con el valor propio de $Y_{\lambda m}$, sino con el de $Y_{\lambda m \pm 1}$. De donde, como $L_{z}$ tiene un espectro no degenerado, se debe cumplir:
+\begin{align}
+L_{\pm} \, Y_{\lambda m} = \alpha (\lambda, m) \, Y_{\lambda m \pm 1} \hspace{1.5cm} \alpha(\lambda, m) = \mbox{ constante}
+\label{eqe:ecuacion_10_140}
+\end{align}
+El valor de $\alpha (\lambda , m)$ se obtendrá más adelante.
+\par
+Como se puede ver, el operador $L_{\pm}$ es de mucha utilidad, ya que nos permite pasar de una función propia $Y_{\lambda m}$ a otra $Y_{\lambda m \pm 1}$. Si se aplica $n$ veces este operador, se obtiene:
+\begin{align}
+\big( L_{\pm} \big)^{n} \, Y_{\lambda m} = \tilde{\alpha} (\lambda, m) \, Y_{\lambda m \pm + n}
+\label{eq:ecuacion_10_141}
+\end{align}
+con:
+\begin{align}
+L_{z} \, Y_{\lambda m \pm n} = (m \pm n) \, Y_{\lambda m \pm n}
+\label{eq:ecuacion_10_142}
+\end{align}
+Así, $Y_{\lambda m \pm n}$ es vector propio de $L_{z}$  con valor propio $(m \pm +n)$, sin importar el valor de $n$. Es claro que dado cualesquiera dos números $\lambda$ y $m$ existen otros dos números: $n_{a}$ y $n_{b}$, tales que:
+\begin{align*}
+\sqrt{\lambda} < (m + n_{a}), \hspace{1.5cm} (m - n_{b}) < - \sqrt{\lambda}
+\end{align*}
+En estos casos no se cumple la restricción dada por la ec. (\ref{eq:ecuacion_10_130}), por lo que $Y_{\lambda m + n_{a}} = 0$ y $Y_{\lambda m -n_{b}} = 0$. Esto nos dice que:
+\begin{align}
+\big( L_{+} \big)^{n_{a}} \, Y_{\lambda m} = 0 \hspace{1.5cm} \big( L_{-} \big)^{n_{b}} \, Y_{\lambda m} = 0
+\label{eq:ecuacion_10_143}
+\end{align}
+
+Ahora definamos el conjunto:
+\begin{align}
+A_{+} = \left\{ n | \big( L_{+} \big)^{n}  \, Y_{\lambda m } = 0\right\}
+\label{eq:ecuacion_10_144}
+\end{align}
+y sea $N_{+}$ el mínimo de $A_{+}$. Notemos que:
+\begin{align}
+\big( L_{+} \big)^{N_{+}-1} \, Y_{\lambda m} \neq 0
+\label{eq:ecuacion_10_145}
+\end{align}
+esto es cierto, pues de lo contrario $N_{+}$ no sería mínimo de $A_{+}$. También definimos $l = N_{+} - 1 + m$, es decir, $l - m = N_{+} - 1$, se puede revisar que:
+\begin{align*}
+\big( L_{+} \big)^{N_{+}-1} \, Y_{\lambda m} = \big( L_{+} \big)^{l-m} \, Y_{\lambda m} = \gamma \, Y_{\lambda m} \neq 0, \hspace{1.5cm} \gamma = \mbox{ constante}
+\end{align*}
+Por lo tanto, existe $l$ tal que $Y_{\lambda m} \neq 0$ y
+\begin{align*}
+L_{+} \, Y_{\lambda m} = 0
+\end{align*}
+notemos que $l$ es el valor máximo que puede tomar $m$, de forma que $Y_{\lambda m} \neq 0$.
+\par
+Ahora definimos el conjunto:
+\begin{align}
+A_{-} = \left\{ n | \big( L_{-} \big)^{n}  \, Y_{\lambda m } = 0 \right\}
+\label{eq:ecuacion_10_146}
+\end{align}
+y sea $N_{-}$ el mínimo de $A_{-}$. Se puede observar que:
+\begin{align}
+\big( L_{-} \big)^{N_{-}-1}  \, Y_{\lambda m } \neq 0
+\end{align}
+pues de lo contrario $N_{-}$ no sería el mínimo de $A_{-}$. También se define:
+\begin{align}
+\pderivada{l} = m - (N_{-} - 1)
+\end{align}
+es decir:
+\begin{align}
+N_{-} - 1 = \pderivada{l} - m
+\end{align}
+notando que:
+\begin{align*}
+\big( L_{-} \big)^{N_{-}-1} \, Y_{\lambda m} = \big( L_{-} \big)^{\pderivada{l}-m} \, Y_{\lambda m} = \pderivada{\gamma} \, Y_{\lambda \pderivada{l}} \neq 0, \hspace{1.5cm} \pderivada{\gamma} = \mbox{ constante}
+\end{align*}
+Por lo tanto, existe $\pderivada{l}$ tal que $Y_{\lambda \pderivada{l}} \neq 0$ y
+\begin{align*}
+L_{-} \, Y_{\lambda \pderivada{l}} = 0
+\end{align*}
+notemos que $\pderivada{l}$ es el valor mínimo que puede tomar $m$, de forma que $Y_{\lambda m} \neq 0$. De estos resultados se tiene que si $Y_{\lambda m} \neq 0$, entonces se cumple $\pderivada{l} \leq m \leq l$.
+\par
+Ahora, como $l$ es el valor propio máximo que puede tener $L_{z}$, entonces considerando la ec. (\ref{eq:ecuacion_10_132}), se tiene:
+\begin{align}
+L_{-} \, L_{+} \, Y_{\lambda m} = \big( L^{2} - (L_{z}^{2} + L_{z}) \big) \, Y_{\lambda m} = \big[ \lambda - l (l + 1) \big] \, Y_{\lambda m} = 0
+\end{align}
+esto implica que:
+\begin{align*}
+\lambda = l (l + 1)
+\end{align*}
+Además, como $\pderivada{l}$ es el valor propio mínimo que puede tener $L_{z}$, entonces:
+\begin{align*}
+L_{+} \, \big( L_{-} \, Y_{\lambda \pderivada{l}} \big) &= \big[ L^{2} - (L_{z}^{2} + L_{z}) \big] \, Y_{\lambda \pderivada{l}} = \\[0.5em]
+&= \big[ l (l + 1) - \pderivada{l} (\pderivada{l} - 1) \big] \, Y_{\lambda \pderivada{l}} = \\[0.5em]
+&= 0
+\end{align*}
+de donde:
+\begin{align}
+\begin{aligned}[b]
+l (l + 1) - \pderivada{l} (\pderivada{l} - 1) &= l^{2} - l^{\prime \, 2} + l + \pderivada{l} = \\[0.5em]
+&= (l + \pderivada{l})(l - \pderivada{l}) + l + \pderivada{l} = \\[0.5em]
+&= (l + \pderivada{l})(l + 1 - \pderivada{l}) = \\[0.5em]
+&= 0
+\end{aligned}
+\label{eq:ecuacion_10_148}
+\end{align}
+Entonces:
+\begin{align}
+\pderivada{l}_{+} = (l + 1) \hspace{0.5cm} \mbox{o} \hspace{0.5cm} \pderivada{l}_{-} = - l
+\label{eq:ecuacion_10_149}
+\end{align}
+claramente el único valor permitido es $\pderivada{l}_{-} = - l$, y el valor mínimo que puede tomar $m$ es $-l$. Así, los valores propios de $L_{z}$ deben de cumplir con:
+\begin{align}
+-l \leq m \leq l \hspace{1.5cm} l = 0, \pm 1, \pm 2, \ldots, \pm l
+\label{eq:ecuacion_10_150}
+\end{align}
+
+Notemos que hay $(2 \, l + 1)$ funciones propias con el mismo valor propio $l (l + 1)$. Es decir, que para cada valor propio $l (l + 1)$ hay $2 \, l + 1$ funciones que satisfacen:
+\begin{align*}
+L^{2} \, Y_{l m} (\theta, \varphi) = l (l + 1)\, Y_{l m} (\theta, \varphi)
+\label{eq:ecuacion_10_151}
+\end{align*}
+con valores propios de $L_{z}$ que satisfacen la ec. (\ref{eq:ecuacion_10_150}).
+\par
+Un resultado importante de todo este desarrollo es que , dado un valor $l$, basto obtener un armónico esférico $Y_{lm} (\theta, \varphi)$ para que mediante los operadores $L_{\pm}$, se obtengan los $2 \, l$ restantes. Por ejemplo, podemos obtener el armónico esférico $Y_{l l} (\theta, \varphi)$ y con el operador $L_{-}$ obtener los restantes. De la misma forma, si conocemos la función $Y_{l 0}$, cualquier otro armónico esférico está dado por:
+\begin{align}
+\big( L_{-} \big)^{m} \, Y_{l 0} = \alpha \, Y_{l, -m}
+\end{align}
+o por:
+\begin{align}
+\big( L_{+} \big)^{m} \, Y_{l 0} = \alpha \, Y_{l, m}
+\end{align}
+
+\subsection{Constante \texorpdfstring{$\alpha$}{a}.}
+
+Haremos la definición de la $\alpha$ de la ec. (\ref{eqe:ecuacion_10_140}). Como sabemos que los armónicos esféricos son ortonormales y que se cumple $L_{\pm} \, Y_{l m} = \alpha \, Y_{l m \pm 1}$, entonces usando las propiedades del producto escalar se tiene lo siguiente:
+\begin{align}
+\begin{aligned}[b]
+\ip{L_{\pm} \, Y_{l m}}{L_{\pm} \, Y_{l m}} &= \ip{\alpha_{\pm} \, Y_{l m}}{\alpha_{\pm} \, Y_{l m}} =  \\[0.5em]
+&= \alpha_{\pm}^{*} \, \alpha_{\pm} \, \ip{Y_{l m \pm 1}}{Y_{l m \pm 1}} = \\[0.5em]
+&= \abs{\alpha_{\pm}}^{2}
+\end{aligned}
+\label{eq:ecuacion_10_154}
+\end{align}
+además:
+\begin{align}
+\begin{aligned}[b]
+\ip{L_{\pm} \, Y_{l m}}{L_{\pm} \, Y_{l m}} &= \ip{Y_{l m}}{L_{\pm}^{\dagger} \, L_{\pm} \, Y_{l m}} = \\[0.5em]
+&= \ip{Y_{l m}}{\big[ L^{2} - (L_{z}^{2}) \big] \, Y_{ l m}} = \\[0.5em]
+&= \ip{Y_{l m}}{ \big[ l (l + 1) - (m^{2} \pm m) \big] \, Y_{l m}} = \\[0.5em]
+&= \big( l^{2} + l - m ^{2} \mp m \big) \, \ip{Y_{l m}}{Y_{l m}} = \\[0.5em]
+&= \big( l^{2} - m ^{2} + l \mp m \big) = \\[0.5em]
+&= ( l \pm m)(l \mp m) + (l \mp m) = \\[0.5em]
+&= (l \mp m)(l \pm m + 1)
+\end{aligned}
+\label{eq:ecuacion_10_155}
+\end{align}
+Igualando la ec. (\ref{eq:ecuacion_10_154}) con la ec. (\ref{eq:ecuacion_10_155}), se encuentra que:
+\begin{align}
+\abs{\alpha_{\pm}}^{2} = (l \mp m)(l \pm m + 1)
+\label{eq:ecuacion_10_156}
+\end{align}
+por lo tanto:
+\begin{align}
+\alpha_{\pm} = \sqrt{(l \mp m)(l \pm m + 1)}
+\label{eq:ecuacion_10_157}
+\end{align}
+Entonces la ec. (\ref{eqe:ecuacion_10_140}) tiene la forma:
+\begin{align}
+L_{\pm} \, Y_{l m} (\theta, \varphi) = \sqrt{(l \mp m)(l \pm m + 1)} \, Y_{l m \pm 1} (\theta, \varphi)
+\label{eq:ecuacion_10_158}
+\end{align}
+
+\subsection{Reglas de recurrencia.}
+
+Como vamos a aplicar varias veces el operador $L_{\pm}$, se revisarán algunas reglas de recurrencia de estos operadores.
+\par
+Ocuparemos los operadores $L_{x}$ y $L_{y}$ en coordenadas esféricas, así:
+\begin{align}
+\begin{aligned}[b]
+&L_{\pm} = L_{x} \pm i \, L_{y} = \\[0.5em]
+&= i \bigg( \sin \varphi \pdv{\theta} + \cot \theta \cos \varphi \pdv{\varphi} \bigg) \pm i (-i) \times \\[0.5em]
+&\times \bigg( \cos \varphi \pdv{\theta} - \cot \theta \sin \varphi \pdv{\varphi} \bigg) = \\[0.5em]
+&= \bigg[ \big( \pm \cos \varphi + i \sin \varphi \big) \pdv{\theta} + \cot \theta \big( i \cos \varphi \mp \sin \varphi \big) \pdv{\varphi} \bigg] = \\[0.5em]
+&= \bigg[ \big( \pm \cos \varphi \pm i \sin \varphi \big) \pdv{\theta} + i \cot \theta \big( i \cos \varphi \pm \sin \varphi \big) \pdv{\varphi} \bigg] = \\[0.5em]
+&= \bigg[ \pm e^{\pm i \varphi} \, \pdv{\theta} + i \, e^{\pm i \varphi} \, \cot \theta \, \pdv{\varphi} \bigg] = \\[0.5em]
+&= e^{\pm i \varphi} \bigg[ \pm \pdv{\theta} + i \, \cot \theta \, \pdv{\varphi} \bigg]
+\end{aligned}
+\label{eq:ecuacion_10_159}
+\end{align}
+Veamos ahora que:
+\begin{align*}
+\pdv{\theta} \bigg[ (\sin \theta)^{\mp k} \, f(\theta) \bigg] &= \mp k \, (\sin \theta)^{\mp k-1} \, (\cos \theta) f(\theta) + (\sin \theta)^{\mp k} \, \pdv{f(\theta)}{\theta} = \\[0.5em]
+&= (\sin \theta)^{\mp k} \bigg[ \pdv{f(\theta)}{\theta} \mp k (\cot \theta) \, f(\theta) \bigg]
+\end{align*}
+así entonces:
+\begin{align*}
+(\sin \theta)^{\mp k} \, \pdv{\theta} \bigg[ (\sin \theta)^{\mp k} \, f(\theta) \bigg] = \bigg[ \pdv{f(\theta)}{\theta} \mp k (\cot \theta) \, f(\theta) \bigg]
+\end{align*}
+Entonces, usando que:
+\begin{align*}
+(\sin \theta)^{1 \pm k} = (\sin \theta)^{\pm (k \pm 1)}
+\end{align*}
+y con el cambio de variable $u = \cos \theta$, se llega a:
+\begin{align*}
+-(\sin \theta)^{\mp k \pm 1} \, \pdv{u} \bigg[ (\sin \theta)^{\mp k} \, f(\theta) \bigg] = \bigg[ \pdv{f(\theta)}{\theta} \mp k (\cot \theta) \, f(\theta) \bigg]
+\end{align*}
+ocupando este resultado, se obtiene lo siguiente:
+\begin{align*}
+L_{\pm} \, \big( f(\theta) \, e^{i k \varphi} \big) &= e^{\pm i \varphi} \bigg[ \pm \pdv{\theta} + i (\cot \theta) \, \pdv{\varphi} \bigg] \, \big( f(\theta) \, e^{i k \varphi} \big) = \\[0.5em]
+&= e^{\pm i \varphi} \bigg[ \pm \pdv{f(\theta}{\theta} - k (\cot \theta) \, f(\theta) \big] = \\[0.5em]
+&= \pm e^{i (k \pm 1) \varphi} \bigg[ \pdv{f(\theta}{\theta} \mp k (\cot \theta) \, f(\theta) \big] = \\[0.5em]
+&= \mp e^{i (k \pm 1) \varphi} \, (\sin \theta)^{\pm (k \pm 1)} \, \pdv{u} \bigg[ (\sin \theta)^{\mp l} \, f(\theta) \bigg]
+\end{align*}
+Adicionalmente, utilizando esta igualdad y definiendo:
+\begin{align*}
+\pderivada{k} = k \pm 1, \hspace{1.5cm} g(\theta) = (\sin \theta)^{\pm (k \pm 1)} \, \pdv{u} \bigg[ (\sin \theta)^{\mp k} \, f(\theta) \bigg]
+\end{align*}
+se encuentra que:
+\begin{align*}
+L_{\pm}^{2} \big( f(\theta) \, e^{i k \varphi} \big) &= (\mp) L_{\pm} \bigg[ e^{i \pderivada{k} \varphi} \, g(\theta) \bigg] = \\[0.5em]
+&= (\mp)^{2} \, e^{i (\pderivada{k} \pm 1) \varphi} \, (\sin \theta)^{\pm (\pderivada{k} \pm 1)} \, \pdv{u} \bigg[ (\sin \theta)^{\mp \pderivada{k}} \, g(\theta) \bigg] = \\[0.5em]
+&= (\mp)^{2} \, e^{i (k \pm 2) \varphi} \, (\sin \theta)^{\pm (k \pm 2)} \times \\[0.5em]
+&\times \pdv{u} \bigg[ (\sin \theta)^{\mp (k \pm 1)} \, (\sin \theta)^{\pm (k \pm 1)} \, \pdv{u} \bigg( (\sin \theta)^{\mp k} \, f(\theta) \bigg) \bigg] = \\[0.5em]
+&= (\mp)^{2} \, e^{i (k \pm 2) \varphi} \, (\sin \theta)^{\pm (k \pm 2)} \, \pdv[2]{u} \bigg[ (\sin \theta)^{\mp k} \, f(\theta) \bigg]
+\end{align*}
+en general se tiene que:
+\begin{align}
+\big( L_{\pm} \big)^{2} \, \big( f(\theta) \, e^{i k \varphi} \big) = (\mp)^{n} \, e^{i (k \pm n) \varphi} \, (\sin \theta)^{\pm (k \pm n)} \, \pdv[n]{u} \bigg[ (\sin \theta)^{\mp k} \, f(\theta) \bigg]
+\label{eq:ecuacion_10_160}
+\end{align}
+donde:
+\begin{align*}
+u = \cos \theta
+\end{align*}
+
+\subsection{El armónico esférico \texorpdfstring{$Y_{ll} (\theta, \varphi)$}{Yll (t, f)}.}
+
+Se obtendrá el armónico esférico $Y_{ll} (\theta, \varphi)$, con el cual, se podrá construir el resto de los armónicos esféricos.
+\par
+De la ec. (\ref{eq:ecuacion_10_113}) se sabe que:
+\begin{align}
+Y_{l l} (\theta, \varphi) = \dfrac{\alpha_{l l} \, e^{i l \varphi} \, \Theta_{l}^{l} (\theta)}{\sqrt{2}}
+\label{eq:ecuacion_10_161}
+\end{align}
+y de la ec. (\ref{eq:ecuacion_10_158}), se debe de cumplir que $L_{+} \, Y_{l l} (\theta, \varphi) = 0$, es decir:
+\begin{align}
+L_{+} \, Y_{l l} (\theta, \varphi) = e^{i \varphi} \bigg( \pdv{\theta} + i \cot \theta \, \pdv{\varphi} \bigg) \, \dfrac{\alpha_{l l} \, e^{i l \varphi} \, \Theta_{l}^{l} (\theta)}{\sqrt{2}} = 0
+\label{eq:ecuacion_10_162}
+\end{align}
+Por lo que $\Theta_{l}^{l} (\theta)$ debe de satisfacer:
+\begin{align}
+\bigg( \pdv{\theta} - l \cot \theta \bigg) \, \Theta_{l}^{l} (\theta) = 0
+\label{eq:ecuacion_10_163}
+\end{align}
+así se tiene:
+\begin{align}
+\Theta_{l}^{l} (\theta) = \alpha \, \sin^{l} \theta, \hspace{1.5cm} \alpha = \mbox{ constante}
+\label{eq:ecuacion_10_164}
+\end{align}
+Esto nos dice que:
+\begin{align}
+Y_{l l} (\theta, \varphi) = \dfrac{\alpha_{l l} \, e^{i l \varphi} \, \sin^{l} (\theta)}{\sqrt{2}}
+\label{eq:ecuacion_10_165}
+\end{align}
+La constante $\alpha_{l l}$ se determina pidiendo la condición $\ip{Y_{l l}}{Y_{l l}} = 1$, que es:
+\begin{align*}
+\scaleint{6ex} Y_{ll}^{*} (\theta, \varphi) \, Y_{ll} (\theta, \varphi) \dd{\Omega} &= \scaleint{6ex}_{\bs 0}^{2 \pi} \scaleint{6ex}_{\bs 0}^{\pi} \sin \theta \, \bigg( \dfrac{\alpha_{l l} \, e^{i l \varphi} \, \sin^{l} (\theta)}{\sqrt{2}} \bigg)^{*} \times \\[0.5em]
+&\times \bigg( \dfrac{\alpha_{l l} \, e^{i l \varphi} \, \sin^{l} (\theta)}{\sqrt{2}} \bigg) \dd{\theta} \dd{\varphi} = \\[0.5em]
+&= \dfrac{\abs{\alpha_{ll}}^{2}}{2 \, \pi} \scaleint{6ex}_{\bs 0}^{2 \pi} \scaleint{6ex}_{\bs 0}^{\pi} \sin^{2l+1} \theta \, e^{i(l-l) \varphi} \dd{\theta} \dd{\varphi} = \\[0.5em]
+&= \abs{\alpha_{ll}}^{2} \scaleint{6ex}_{\bs 0}^{\pi} \sin^{2l+1} \theta \dd{\theta} = \\[0.5em]
+&= 1
+\end{align*}
+entonces:
+\begin{align}
+\abs{\alpha_{ll}}^{2} = \dfrac{1}{\displaystyle \scaleint{6ex}_{\bs 0}^{\pi} \sin^{2l+1} \theta \dd{\theta}}
+\label{eq:ecuacion_10_166}
+\end{align}
+Para obtener esta constante, notemos que:
+\begin{align*}
+\dv{\theta} \big( \sin^{n-1} \theta \, \cos \theta \big) &= (n - 1) \, \sin^{n-2} \theta \, \cos^{2} \theta - \sin^{n-1} \theta \, \sin \theta = \\[0.5em]
+&= (n - 1) \, \sin^{n-2} \theta \, \big( 1 - \sin^{2} \theta \big) - \sin^{n} \theta
+\end{align*}
+de donde:
+\begin{align}
+\sin^{n} \theta = \dfrac{n - 1}{n} \, \sin^{n-2} \theta - \dfrac{1}{n} \, \dv{\theta} \big( \sin^{n-1} \theta \, \cos \theta \big)
+\label{eq:ecuacion_10_167}
+\end{align}
+Así se tiene que:
+\begin{align}
+\scaleint{6ex}_{\bs 0}^{\pi} \sin^{n} \theta \dd{\theta} = \dfrac{n - 1}{n} \scaleint{6ex}_{\bs 0}^{\pi} \sin^{n-2} \theta \dd{\theta}
+\label{eq:ecuacion_10_168}
+\end{align}
+En particular:
+\begin{align*}
+\scaleint{6ex}_{\bs 0}^{\pi} \sin^{2l+1} \theta \dd{\theta} &= \dfrac{2 \, l}{2 \, l + 1} \scaleint{6ex}_{\bs 0}^{\pi} \sin^{2l+1} \theta \dd{\theta} = \\[0.5em]
+&= \dfrac{2 \, l}{2 \, l + 1} \scaleint{6ex}_{\bs 0}^{\pi} \sin^{2(l-1)+1} \theta \dd{\theta} = \\[0.5em]
+&= \dfrac{(2 \, l)(2 (l - 1))}{(2 \, l + 1)(2 (l - 1) + 1)} \scaleint{6ex}_{\bs 0}^{\pi} \sin^{2(l-2)+1} \theta \dd{\theta} = \\[0.5em]
+&= \dfrac{(2 \, l)(2 (l - 1))(2 (l - 2))}{(2 \, l + 1)(2 (l - 1) + 1)(2(l - 2) + 1)} \scaleint{6ex}_{\bs 0}^{\pi} \sin^{2(l-3)+1} \theta \dd{\theta} = \\[0.5em]
+&= \vdots \\[0.5em]
+&= \dfrac{(2 \, l)(2 (l - 1))(2 (l - 2)) \cdots (2 (l - i))}{(2 \, l + 1)(2 (l - 1) + 1)(2(l - 2) + 1)(2(l-i) + 1)} \times \\[0.5em]
+&\times \bigg( \scaleint{6ex}_{\bs 0}^{\pi} \sin^{2(l-(i+1))+1} \theta \dd{\theta} \bigg)
+\end{align*}
+Este proceso se puede hacer hasta que $2 (l - (i + 1)) + 1 = 1 $, lo que implica $l = i + 1$, es decir, $i = l - 1$. En este caso:
+\begin{align*}
+\scaleint{6ex}_{\bs 0}^{\pi} \sin^{2l+1} \theta \dd{\theta} &= \dfrac{( 2 \, l) (2 \, l - 1)(2 (l - 2)) \cdots 2}{(2 \, l + 1)( 2 \, l - 1)(2 \, l - 3) \cdots 3} \, \scaleint{6ex}_{\bs 0}^{\pi} \sin \theta \dd{\theta} = \\[0.5em]
+&= \dfrac{ 2^{l} \, (l) (l - 1)(l - 2)) \cdots 1}{(2 \, l + 1)( 2 \, l - 1)(2 \, l - 3) \cdots 3} \, 2 = \\[0.5em]
+&= \dfrac{2^{l+1} \, l!}{(2 \, l + 1)( 2 \, l - 1)(2 \, l - 3) \cdots 3}
+\end{align*}
+considerando que:
+\begin{align}
+\begin{aligned}[b]
+(2 l {+} 1)( &2 l {-} 1)(2 l {-} 3) \cdots 3 = \\[0.5em]
+&= \dfrac{(2 l {+} 1)(2 l) (2 l {-} 1)(2 (l {-} 2))(2 l {-} 3) \cdots 3 \cdot 2}{(2 l)(2 (l {-} 1)) \cdots 2} = \\[0.5em]
+&= \dfrac{(2 \, l + 1)!}{2^{l} \, l!}
+\end{aligned}
+\label{eq:ecuacion_10_169}
+\end{align}
+se llega a:
+\begin{align}
+\scaleint{6ex}_{\bs 0}^{\pi} \sin^{2l+1} \theta \dd{\theta} = \dfrac{2^{2l+1} \, (l!)^{2}}{(2 \, l + 1)!}
+\label{eq:ecuacion_10_170}
+\end{align}
+Tomando en cuenta este resultado en la ec. (\ref{eq:ecuacion_10_166}), se tiene lo siguiente:
+\begin{align}
+\alpha_{ll} = \sqrt{\dfrac{(2 l + 1)!}{2}} \, \dfrac{1}{2^{l} \, l!}
+\label{eq:ecuacion_10_171}
+\end{align}
+entonces:
+\begin{align}
+Y_{ll} (\theta, \varphi) = \sqrt{\dfrac{(2 l + 1)!}{4 \, \pi}} \, \dfrac{e^{i l \varphi}}{2^{l} \, l!} \, \sin^{l} \theta
+\label{eq:ecuacion_10_172}
+\end{align}
+
+\subsection{Forma explícita de los armónicos esféricos.}
+
+Una vez obtenido un armónico esférico, ocupando el operador escalera $L_{\pm}$ se pueden obtener los demás. Por ejemplo, supongamos que se tiene el armónico esférico $Y_{ll}$, entonces al utilizar de manera reiterada la ec. (\ref{eq:ecuacion_10_158}), se tiene:
+\begin{align}
+\begin{aligned}[b]
+L_{-} \, Y_{ll} &= \sqrt{2 \, l} \, Y_{ll-1} \\[0.5em]
+L_{-}^{2} \, Y_{ll} &= \sqrt{2 \, l} \, L_{-} \, Y_{ll-1} = \sqrt{(2 l)(2 l - 1) 2} \, Y_{ll-2} = \sqrt{\dfrac{(2 l)! \, 2!}{(2 l - 2)!}} \, Y_{ll-2} \\[0.5em]
+L_{-}^{3} \, Y_{ll} &= \sqrt{\dfrac{(2 \, l)! 2!}{(2 l - 2)!}} \, L_{-} \, Y_{ll-2} = \sqrt{\dfrac{(2 \, l)! 2!}{(2 l - 2)!}} \,\sqrt{(2 l)(2 l - 1) 3} \, Y_{ll-3} = \\[0.5em]
+&= \sqrt{\dfrac{(2 l)! \, 3!}{(2 l - 3)!}} \, Y_{ll-3} \\[0.5em]
+&\vdots \\[0.5em]
+L_{-}^{n} \, Y_{ll} &= \sqrt{\dfrac{(2 l)! \, n!}{(2 l - n)!}} \, Y_{ll-n}
+\end{aligned}
+\label{eq:ecuacion_10_173}
+\end{align}
+Por lo tanto, si $n = l - m$, se encuentra que:
+\begin{align}
+Y_{lm} (\theta, \varphi) = \sqrt{\dfrac{(l + m)!}{(2 l)! (l - m)!}} \, L_{-}^{l-m} \, Y_{ll}(\theta, \varphi)
+\label{eq:ecuacion_10_174}
+\end{align}
+Se puede revisar que con los resultados previos de las ecs. (\ref{eq:ecuacion_10_172}) y (\ref{eq:ecuacion_10_160}) para $k = l$ y $n = l - m$, se tiene lo siguiente:
+\begin{align*}
+Y_{lm}(\theta, \varphi) &= \sqrt{\dfrac{(l + m)!}{(2 l)! (l - m)!}} \, L_{-}^{l-m} \, \bigg( \sqrt{\dfrac{(2 l + 1)!}{4 \, \pi}} \, \dfrac{e^{i l \varphi}}{2^{l} \, l!} \, \sin^{l} \theta \bigg) = \\[0.5em]
+&= \sqrt{\dfrac{(l + m)!}{(2 l)! (l - m)!}} \, \dfrac{1}{2^{l} \, l!} (L_{-})^{l-m} \, \big( e^{i l \varphi} \, \sin^{l} \theta \big) = \\[0.5em]
+&= \sqrt{\dfrac{(l + m)!}{(2 l)! (l - m)!}} \, \dfrac{1}{2^{l} \, l!} \, (+)^{l-m} \, e^{i(l-(l-m))\varphi} \times \\[0.5em]
+&\times \sin^{-[l-(l-m)]} \theta \, \pdv[l-m]{u} \big( \sin^{l} \theta \, \sin^{l} \theta \big) = \\[0.5em]
+&= \sqrt{\dfrac{(2 l + 1)(l + m)!}{4 \pi (l -m)!}} \, \dfrac{e^{i m \varphi}}{2^{l} \, l!} \sin^{-m} \theta \, \pdv[l-m]{(\sin \theta)^{2l}}{u} 
+\end{align*}
+Notemos que ninguna propiedad de estas funciones cambia si las multiplicamos por un factor de norma uno, es decir por una potencia de $\pm i$ o de $\pm 1$. En la literatura existen diferentes elecciones de este factor, por conveniencia tomaremos $(-1)^{l}$. Entonces, los armónicos esféricos son:
+\begin{align}
+\begin{aligned}
+Y_{lm} (\theta, \varphi) &= (-1)^{l} \, \sqrt{\dfrac{(2 l + 1)(l + m)!}{4 \pi (l -m)!}} \, \dfrac{e^{i m \varphi}}{2^{l} \, l!} \sin^{-m} \theta \, \pdv[l-m]{(\sin^{2} \theta)^{l}}{u} \\[0.5em]
+&u = \cos \theta \hspace{1.5cm} -l \leq m \leq l
+\end{aligned}
+\label{eq:ecuacion_10_175}
+\end{align}
+
+Esta expresión de los armónicos esféricos es común en la mecánica cuántica.
+
+\section{Ejercicios a cuenta.}
+
+%Ref. Arfken (2006) 12.7.5
+\noindent
+Verifica mediante cálculo explícito que:
+\\
+\noindent
+\textbf{Ejercicio a cuenta (37).}  $L_{+} \, Y_{1}^{0} (\theta, \varphi) = - \sqrt{\dfrac{3}{4 \pi}} \, \sin \theta \, e^{i \varphi} = \sqrt{2} \, Y_{1}^{1} (\theta, \varphi)$ 
+\\[1em]
+\noindent
+\textbf{Ejercicio a cuenta (38).}  $L_{-} \, Y_{1}^{0} (\theta, \varphi) = + \sqrt{\dfrac{3}{4 \pi}} \, \sin \theta \, e^{-i \varphi} = \sqrt{2} \, Y_{1}^{-1} (\theta, \varphi)$ 
+\\[1em]
+Estos signos (fase de Condon-Shortley) son una consecuencia de los operadores sucesivos $L_{+}$ y $L_{-}$.
+
+\end{document}
