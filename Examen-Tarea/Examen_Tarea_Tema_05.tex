@@ -1,0 +1,84 @@
+\input{../Preambulos/preambulo_materiales}
+\usepackage{apacite}
+\title{Examen - Tarea 5 \\[0.3em]  \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+
+\textbf{Indicaciones: } Deberás de resolver cada ejercicio de la manera más completa, ordenada y clara posible, anotando cada paso así como las operaciones involucradas. El puntaje de cada ejercicio es de \textbf{2 puntos}, excepto en donde se indica.
+
+\begin{enumerate}
+%Ref. Arfken (2006) 13.2.9
+\item \textbf{Laguerre. } De acuerdo con la ecuación:
+\begin{align*}
+\psi_{n l m} (r , \theta, \varphi) &= \left[ \left( \dfrac{2 \, Z}{n \, a_{0}} \right)^{3} \, \dfrac{(n - l -1)!}{2 \, n \, (n + l)!} \right]^{1/2} \, \exp \left( - \dfrac{\alpha \, r}{2} \right) \times \\[1em]
+&\times (\alpha \, r)^{L} \, L_{n - l +1}^{2 l +1} \, (\alpha \, r) \, Y_{l}^{m} \, (\theta, \varphi)
+\end{align*}
+la parte normalizada de la función de onda para el átomo de hidrógeno es:
+\begin{align*}
+R_{n l} (r) = \left[ \alpha^{3} \dfrac{(n -l -1)!}{2 \, n \, (n + l)!} \right]^{1/2} \, \exp \left( \dfrac{-\alpha \, r}{2} \right) \, (\alpha \, r)^{l} \, L_{n - l +1}^{2 l +1} \, (\alpha \, r) 
+\end{align*}
+en donde: 
+\begin{align*}
+\alpha = \dfrac{2 \, Z}{n \, a_{0}} = \dfrac{2 \, Z \, m \, e^{2}}{4 \, \pi \, \epsilon_{0} \, \hbar^{2}}
+\end{align*}
+La cantidad $\expval{r}$ es el desplazamiento promedio del electrón con respecto al núcleo, mientras que $\expval{r^{-1}}$ es el promedio del movimiento recíproco.
+\par
+Demuestra que al evaluar las siguientes integrales se obtienen los valores indicados:
+\begin{enumerate}
+\item $\displaystyle \expval{r} = \int_{0}^{\infty} r \, R_{n l} (\alpha \, r) \, R_{n l} (\alpha \, r) \, r^{2} \dd{r} = \dfrac{a_{0}}{2} [3 \, n^{2} - l (l + 1)]$
+\item $\displaystyle \expval{r^{-1}} = \int_{0}^{\infty} r^{-1} \, R_{n l} (\alpha \, r) \, R_{n l} (\alpha \, r) \, r^{2} \dd{r} = \dfrac{1}{n^{2} \, a_{0}}$
+\\[0.5em]
+Tip: Ocupa las propiedades de ortonormalización de los polinomios asociados de Laguerre.
+\end{enumerate}
+%Ref. Arfken (2006) 13.1.14
+\item \textbf{Hermite. }Con
+\begin{align*}
+\psi_{n} (x) = \exp \bigg( - \dfrac{x^{2}}{2} \bigg) \, \dfrac{H_{n}(x)}{\big( 2^{n} \, n! \, \pi^{\frac{1}{2}})^{\frac{1}{2}}}
+\end{align*}
+verifica que:
+\begin{align*}
+\hat{a}_{n} \, \psi (x) &= \dfrac{1}{\sqrt{2}} \bigg( x + \dv{x} \bigg) \, \psi (x) = n^{\frac{1}{2}} \, \psi_{n-1} (x) \\[0.5em]
+\hat{a}_{n}^{\dagger} \, \psi (x) &= \dfrac{1}{\sqrt{2}} \bigg( x - \dv{x} \bigg) \, \psi (x) = \big( n + 1 \big)^{\frac{1}{2}} \, \psi_{n+1} (x)
+\end{align*}
+El procedimiento del operador mecánico cuántico usual establece estas propiedades de ascenso y descenso \emph{antes} de conocer la forma de $\psi_{n}(x)$.
+%Ref. Arfken (2006) 11.1.12
+\item \textbf{Bessel. (Un punto) } Un análisis de los patrones de difracción de antena para un sistema con una abertura circular, involucra la ecuación:
+\begin{align*}
+g(u) = \scaleint{6ex}_{\bs 0}^{1} f(r) \, J_{0}(u \, r) \, r \dd{r}
+\end{align*}
+Si $f(r) = 1 - r^{2}$. Demuestra que:
+\begin{align*}
+g(u) = \dfrac{2}{u^{2}} \, J_{2} (u)
+\end{align*}
+%Ref. Arfken (2006) 11.1.15
+\item \textbf{Bessel. (Un punto) } Una partícula (de masa $m$) se encuentra contenida en un cilindro circular recta (\emph{caja de píldoras}) de radio $R$ y altura $H$. La partícula se describe por medio de una función de onda que satisface la ecuación de Schrödinger:
+\begin{align*}
+- \dfrac{\hbar^{2}}{2 \, m} \laplacian \psi (\rho, \varphi, z) = E \, \psi (\rho, \varphi, z)
+\end{align*}
+y la condición de que la función de onda se anula en la superficie de la caja de píldoras. Demuestra que la energía permisible más baja (punto cero) es:
+\begin{align*}
+E = \dfrac{\hbar}{2 \, m} \bigg[ \bigg( \dfrac{z_{pq}}{R} \bigg)^{2} + \bigg( \dfrac{n \, \pi}{H} \bigg)^{2} \bigg] 
+\end{align*}
+en donde $z_{pq}$ es el q-ésimo cero de $J_{p}$ y en donde el índice $p$ está fijado por la dependencia azimutal. Entonces:
+\begin{align*}
+E_{\min} = \dfrac{\hbar}{2 \, m} \bigg[ \bigg( \dfrac{2.405}{R} \bigg)^{2} + \bigg( \dfrac{\pi}{H} \bigg)^{2} \bigg] 
+\end{align*}
+%Ref. Arfken (2006) 13.3.20
+\item \textbf{Chebyshev. } Existen varias ecuaciones que relacionan los dos tipos de polinomios de Chebyshev. Demuestra que:
+\begin{enumerate}
+\item $T_{n}(x) = U_{n}(x) - x \, U_{n-1}(x)$
+\item $(1 - x^{2}) \, U_{n}(x) = x \, T_{n+1}(x) - T_{n+2}(x)$
+\end{enumerate}
+%Ref. Arfken (2006) 13.4.3 (b)-(c)
+\item \textbf{Hipergeométrica. } Demuestra que los siguiente polinomios transformados a funciones hipergeométricas con argumento $x^{2}$, son:
+\begin{enumerate}
+\item $x^{-1} \, T_{2n+1} (x) = (-1)^{n} \, (2 \, n + 1 ) \, \, {}_{2}F_{1} \bigg(-n, n+1; \dfrac{3}{2}; x^{2} \bigg)$
+\item $U_{2n} (x) = (-1)^{n} \, \, \, {}_{2}F_{1} \bigg(-n, n + 1; \dfrac{1}{2}; x^{2} \bigg)$
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

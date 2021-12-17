@@ -1,0 +1,268 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Copenhagen_wolverine}
+
+\date{15 diciembre de 2021}
+
+\title{\large{Propiedades de las funciones de Bessel}}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
+%Referencia: Funciones de Bessel pdf
+\section{Funciones de Bessel}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Relaciones de recurrencia}
+
+\begin{frame}
+\frametitle{Definición de las funciones de Bessel}
+Partiendo de la definición de las funciones de Bessel de orden $n$, se tiene que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+x^{n} \, J_{n}(x) &= x^{n} \, \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} \, x^{n+2k}}{k! \, \Gamma (n + k + 1)} = \\[0.5em] \pause
+&=  \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} \, x^{2n+2k}}{ 2^{n+2k} \, k! \, \Gamma (n + k + 1)}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Diferenciando la expresión}
+Al diferenciar con respecto a $x$ la expresión anterior resulta:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dv{x} \big[ x^{n} \, J_{n}(x) \big] &= \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} \, (2 \, n + 2 \, k) \, x^{2n+2k-1}}{ 2^{n+2k} \, k! \, \Gamma (n + k + 1)} = \\[0.5em] \pause
+&= \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} \, 2(n + k) \, x^{2n+2k-1}}{ 2^{n+2k} \, k! \, \big( n + k\big) \, \Gamma (n + k)} = \\[0.5em] \pause
+&= x^{n} \, \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} \, (x/2)^{(n-1)+2k}}{ k! \, \Gamma \big[ (n - 1) + k + 1 \big]}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Primer resultado}
+Lo que significa que:
+\pause
+\begin{align}
+\dv{x} \big[ x^{n} \, J_{n}(x) \big] = x^{n} \, J_{n-1}(x)
+\label{eq:ecuacion_14}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Segundo resultado}
+De manera análoga, se demuestra que:
+\pause
+\begin{align}
+\dv{x} \big[ x^{-n} \, J_{n}(x) \big] = -x^{-n} \, J_{n+1}(x)
+\label{eq:ecuacion_15}
+\end{align}    
+\end{frame}
+\begin{frame}
+\frametitle{Derivando un resultado}
+Al derivar el lado izquierdo de la ec. (\ref{eq:ecuacion_14}) como un producto, se tiene que:
+\pause
+\begin{align*}
+n \, x^{n-1} \, J_{n}(x) + x^{n} \, \pderivada{J}_{n}(x) = x^{n} \, J_{n-1}(x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Manejando la expresión}
+De donde, al multiplicar por $x^{-n}$, se obtiene:
+\begin{align}
+\dfrac{n}{x} \, J_{n}(x) + \pderivada{J}_{n}(x) = J_{n-1}(x)
+\label{eq:ecuacion_16}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo otro resultado}
+De la misma manera, desarrollando la derivada en la ec. (\ref{eq:ecuacion_15}) y multiplicando luego por $x^{n}$, se llega a:
+\pause
+\begin{align}
+-\dfrac{n}{x} \, J_{n}(x) + \pderivada{J}_{n}(x) = - J_{n+1}(x)
+\label{eq:ecuacion_17}    
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Operando nuevamente las expresiones}
+Sumando y restando las ecs. (\ref{eq:ecuacion_16}) y (\ref{eq:ecuacion_17}), resultan las relaciones de recurrencia:
+\begin{eqnarray}
+\begin{aligned}
+2 \, \pderivada{J}_{n}(x) &= J_{n-1} (x) - J_{n+1}(x) \label{eq:ecuacion_18} \\[0.5em] \pause
+\dfrac{2 \, n}{x} \, \pderivada{J}_{n}(x) &= J_{n-1} (x) + J_{n+1}(x) \label{eq:ecuacion_19}
+\end{aligned}
+\end{eqnarray}
+respectivamente.
+\end{frame}
+\begin{frame}
+\frametitle{Expresión en términos de $J_{0}(x)$ y $J_{1}(x)$}
+Notemos que utilizando repetidamente la ec. (\ref{eq:ecuacion_19}), cualquier función de Bessel $J_{n}(x) (n = 2, 3, \ldots)$ puede expresarse en términos de $J_{0}(x)$ y $J_{1}(x)$.
+\end{frame}\begin{frame}
+\frametitle{Expresión integral}
+Las ecs. (\ref{eq:ecuacion_14}) y (\ref{eq:ecuacion_15}) también resultan útiles cuando se escriben de la forma integral:
+\pause
+\begin{eqnarray}
+\begin{aligned}
+\scaleint{6ex} x^{n} \, J_{n-1} (x) \dd{x} &= x^{n} \, J_{n}(x) + C \label{eq:ecuacion_20} \\[0.5em] \pause
+\scaleint{6ex} x^{-n} \, J_{n+1} (x) \dd{x} &= - x^{-n} \, J_{n}(x) + C \label{eq:ecuacion_21}
+\end{aligned}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Caso particular con $n = 0$}
+Haciendo que $n = 0$ en las ecs. (\ref{eq:ecuacion_15}) y (\ref{eq:ecuacion_21}), se obtiene el caso particular:
+\pause
+\begin{align*}
+\pderivada{J}_{0} (x) = - J_{1}(x) \hspace{1.5cm} \scaleint{6ex} J_{1}(x) \dd{x} = - J_{0}(x) + C
+\end{align*}
+que se ocupa frecuentemente.
+\end{frame}
+\begin{frame}
+\frametitle{Relaciones de recurrencia válidas}
+Las funciones $Y_{n}(x)$, $H_{n}^{(1)} (x)$ y $H_{n}^{(2)} (x)$ satisfacen las mismas fórmulas de recurrencia.
+\end{frame}
+
+\section{Ejercicios con las relaciones de recurrencia}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicio 1}
+
+\begin{frame}
+\frametitle{Enunciado del ejercicio}
+Calcular:
+\begin{align*}
+\dv{x} \big[ x^{2} \, J_{3}(2 x) \big]
+\end{align*}
+en términos de funciones de Bessel.
+\end{frame}
+\begin{frame}
+\frametitle{Punto importante}
+Al derivar la función de Bessel, se multiplica por la derivada del argumento, así:
+\pause
+\begin{align*}
+\dv{x} \big[ x^{2} \, J_{3}(2 x) \big] = 2 \, x \, J_{3} (2 x) + x^{2} \cdot 2 \, \pderivada{J}_{3} (2 x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando las relaciones mencionadas}
+Usando la ec. (\ref{eq:ecuacion_16}) con $n = 3$ y $2 x$ en lugar de $x$, se tiene:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{3}{2 x} \, J_{3}(2 x) + \pderivada{J}_{3}(2 x) &= J_{2} (2 x) \\[0.5em] \pause
+\Rightarrow \hspace{0.2cm} \pderivada{J}_{3} (2 x) &= J_{2}(x) - \dfrac{3}{2 x} \, J_{3} (2 x)
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Manejando la expresión}
+Sustituyendo $\pderivada{J}_{3}(2 x)$, se obtiene:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dv{x} \big[ x^{2} \, J_{3}(2 x) \big] &=  2 \, x \, J_{3} (2 x) + 2 \, x^{2} \bigg[ J_{2}(x) - \dfrac{3}{2 x} \, J_{3} (2 x) \bigg] = \\[0.5em] \pause
+ &= 2 \, x^{2} \, J_{2} (2 x) - x \, J_{3} (2 x) \qed
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Ejercicio 2}
+
+\begin{frame}
+\frametitle{Enunciado del ejercicio 2}
+Demostrar que:
+\begin{align*}
+\pderivada{J}_{2}(x) = \big( 1 - 4 \, x^{-2} \big) \, J_{1}(x) + 2 \, x^{-1} \, J_{0} (x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando resultados previos}
+Usando la ec. (\ref{eq:ecuacion_16}) con $n = 2$, se tiene que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{2}{x} \, J_{2}(x) + \pderivada{J}_{2}(x) &= J_{1}(x) \\[0.5em] \pause
+\Rightarrow \hspace{0.2cm} \pderivada{J}_{2}(x) &= {J}_{1} (x) - \dfrac{2}{x} \, J_{2}(x)
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando valores determinados}
+Haciendo que $n = 1$ en la ec. (\ref{eq:ecuacion_19}), llegamos a:
+\pause
+\begin{align*}
+\dfrac{2}{x} \, J_{1}(x) &= J_{0} (x) + J_{2}(x) \\[0.5em] \pause
+\Rightarrow \hspace{0.2cm} J_{2}(x) &= \dfrac{2}{x} \, J_{1}(x) - J_{0}(x)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Completando la solución}
+Luego:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\pderivada{J}_{2}(x) &= J_{1}(x) - \dfrac{2}{x} \bigg[ \dfrac{2}{x} \, J_{1}(x) - J_{0}(x) \bigg] \\[0.5em] \pause
+\Rightarrow \hspace{0.2cm} \pderivada{J}_{2} (x) &= \big( 1 - 4 \, x^{-2} \big) \, J_{1}(x) - 2 \, x^{-1} \, J_{0}(x) \qed
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Ejercicio 3}
+
+\begin{frame}
+\frametitle{Enunciado del ejercicio 3}
+Hallar:
+\begin{align*}
+I = \displaystyle \scaleint{6ex} x^{4} \, J_{1}(x) \dd{x}
+\end{align*}
+en términos de $J_{0}(x)$ y $J_{1}(x)$.
+\end{frame}
+\begin{frame}
+\frametitle{Cambiando la expresión de la integral}
+La integral $I$ la podemos ver como:
+\pause
+\begin{align*}
+I = \scaleint{6ex} x^{2} \cdot x^{2} \, J_{1}(x) \dd{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la integral}
+Que al integrar por partes:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+u = x^{2} \hspace{0.5cm} &\Rightarrow \hspace{0.5cm} \dd{u} = 2\, x \, \dd{u} \\[0.5em] \pause
+\dd{v} = x^{2} \, J_{1} (x) \hspace{0.5cm} &\Rightarrow \hspace{0.5cm} \scaleint{6ex} x^{2} \, J_{1}(x) \dd{x} = x^{2} \, J_{2}(x) \\[0.5em]
+& \hspace{1.5cm} \mbox{-según la ec. (\ref{eq:ecuacion_20})-}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la integral}
+Entonces se tiene que:
+\pause
+\begin{align*}
+I = u \, v - \scaleint{6ex} v \dd{u} = x^{4} \, J_{2}(x) - 2 \scaleint{6ex} x^{3} \, J_{2} (x) \dd{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando la expresión integral}
+Usando de nuevo la ec. (\ref{eq:ecuacion_20}), llegamos a:
+\pause
+\begin{align*}
+I = x^{4} \, J_{2}(x) - 2 \, x^{3} \, J_{3}(x) + C
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando la expresión integral}
+Ocupando la ec. (\ref{eq:ecuacion_19}), finalmente tenemos que:
+\pause
+\begin{align*}
+I = \scaleint{6ex} x^{4} J_{1}(x) \dd{x} &= \big( 8 \, x^{2} - x^{4} \big) \, J_{0} (x) + \\[0.5em]
+&+ \big( 4 \, x^{3} - 16 \, x \big) \, J_{1}(x) + C \qed
+\end{align*}
+\end{frame}
+
+\end{document}
