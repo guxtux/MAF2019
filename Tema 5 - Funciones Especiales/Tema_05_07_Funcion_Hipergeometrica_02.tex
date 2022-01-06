@@ -1,0 +1,239 @@
+\input{../Preambulos/preambulo_materiales}
+%\usepackage{showframe}
+\title{Funciones hipergeométricas generalizadas \\ \large {Tema 5 - Funciones especiales} \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+
+%Ref. Slater (1996) - Generalized hypergeometric functions
+\section{La función de Gauss.}
+
+La serie:
+\begin{align}
+1 + \dfrac{a b}{c} \dfrac{z}{1!} + \dfrac{a (a {+} 1) b (b {+} 1)}{c( c {+} 1)} \dfrac{z^{2}}{2!} + \dfrac{a (a {+} 1)(a {+} 2) b (b {+} 1)(b {+} 2)}{c (c {+} 1)(c {+} 2)} \dfrac{z^{3}}{3!} + \ldots
+\label{eq:ecuacion_01_01_01}
+\end{align}
+es llamada \emph{serie de Gauss} o \emph{serie hipergeométrica ordinaria}. Normalmente se representa con la notación:
+\begin{align*}
+{}_{2} F_{1} \big[ a, b; c; z \big]
+\end{align*}
+La variable es $z$, y $a$, $b$ y $c$ son los parámetros  de la función. Si alguna de las cantidades $a$ o $b$ es un entero negativo $-n$, la serie tiene solo un número finito de términos y se convierte de hecho en un polinomio:
+\begin{align*}
+{}_{2} F_{1} \big[ -n, b; c; z \big]
+\end{align*}
+
+Por ejemplo, si $a = -2$, entonces la serie es:
+\begin{align*}
+{}_{2} F_{1} \big[ -2, b: c; z \big] &= 1 + \dfrac{(-2) b}{c} \dfrac{z}{1!} + \dfrac{(-2) (-1) b (b + 1)}{c( c + 1)} \dfrac{z^{2}}{2!} + 0 
+\end{align*}    
+esto es:
+\begin{align}
+{}_{2} F_{1} \big[ -2, b; c; z \big] = 1 - \dfrac{2 b z}{c} + \dfrac{b( b + 1) z^{2}}{c (c + 1)}
+\label{eq:ecuacion_01_01_02}
+\end{align}
+ya que los restantes términos se anulan.
+\par
+En su trabajo \emph{Arithmetica Infinitorum} (1655), el profesor de Oxford John Wallis (1616 - 1703) fue el primero en utilizar el término \enquote{hipergeométrica} (del griego $\acute{\nu} \pi \epsilon \rho$, por arriba o más allá de) para denotar cualquier serie que estuviera más allá de las serie geométrica ordinaria:
+\begin{align*}
+1 + x + x^{2} + x^{3} + \ldots
+\end{align*}
+En particular, él estudió las series:
+\begin{align*}
+1 + a + a( a + 1) + a (a + 1)(a + 2) + \ldots
+\end{align*}
+
+Durante los siguientes ciento cincuenta años, muchos otros
+matemáticos estudiaron series similares, notablemente el suizo Leonard Euler (1783) dio, entre muchos otros resultados, la famosa relación:
+\begin{align}
+{}_{2} F_{1} \big[ -n, b; c; z \big] = (1 - z)^{c+n-b} \, {}_{2} F_{1} \big[ c + n, c - b; c; z \big]
+\label{eq:ecuacion_01_01_03} 
+\end{align}
+
+En 1770, el francés A. T. Vandermonde (1735-1796) estableció su teorema, una extensión del teorema del binomio, en la forma:
+\begin{align}
+{}_{2} F_{1} \big[ -n, b; c; 1 \big] = \dfrac{(c {-} b)(c {-} b {+} 1)(c {-} b {+} 2) \cdots (c {-} b {+} n {-} 1)}{c (c {+} 1)(c {+} 2)(c {+} 3) \cdots (c {+} n {-} 1)}
+\label{eq:ecuacion_01_01_04}
+\end{align}
+pero durante los siguientes cuarenta años, la escuela de Göttingen bajo C. F. Hindenberg (1741-1808) desperdició mucho esfuerzo en varias extensiones complicadas de los teoremas binomial y multinomial. Todo esto cambió drásticamente cuando el 20 de enero de 1812 C. F. Gauss (1777-1855) pronunció su famosa tesis \enquote{Disquisitiones generales circa seriem infinitam} ante la Real Sociedad de Göttingen. En el, este brillante matemático definió la serie infinita moderna de la ec. (\ref{eq:ecuacion_01_01_01}) e introdujo la notación $F \big[a, b; c; z \big]$ para ello. También demostró su famoso teorema de suma:
+\begin{align}
+{}_{2} F_{1} \big[ a, b; c; 1 \big] = \dfrac{\Gamma (c) \Gamma (c - a - b)}{\Gamma(c - a) \Gamma (c - b)}
+\label{eq:ecuacion_01_01_05}
+\end{align}
+y dio muchas relaciones entre dos o más de estas series. Él
+mostró claramente que ya estaba considerando ${}_{2} F_{1} \big[ a, b; c; z \big]$ como una función de cuatro variables, en lugar de una serie en $z$, y en una nota agregada el 10 de febrero de 1812, dio una discusión notablemente completa de la convergencia de tales series.
+\par
+El siguiente gran avance fue realizado en 1836 por E. E. Kummer (1810 - 1893), quien utilizó por primera vez el término \enquote{hipergeométrico} únicamente para series del tipo (\ref{eq:ecuacion_01_01_01}). Mostró que la ecuación diferencial:
+\begin{align}
+z (1 - z) \dv[2]{y}{z} + \big[ c - \big( 1 + a + b \big) z \big] \dv{y}{z} - a b y = 0
+\label{eq:ecuacion_01_01_06}
+\end{align}
+se satisface por la función:
+\begin{align*}
+{}_{2} F_{1} \big[ a, b; c; z \big]
+\end{align*}
+y tiene en total veinticuatro soluciones en términos de funciones de Gauss similares. En 1857, G. F. B. Riemann (1826 - 1866) amplió esta teoría mediante la introducción de sus funciones $P$, que en cierto modo, son generalizaciones de la Gaussiana:
+\begin{align*}
+{}_{2} F_{1} \big[ a, b; c; z \big]
+\end{align*}    
+
+Riemann también discutió la teoría general de la transformación de la variable en una ecuación diferencial y esta teoría fue aplicada al trabajo de Kummer por J. Thomae quien, en 1879, elaboró en detalle las relaciones entre las veinticuatro soluciones de Kummer.
+\par
+La primera representación integral de la función de Gauss se remonta a Euler, quien demostró que:
+\begin{align}
+\begin{aligned}[b]
+{}_{2} F_{1} \big[ -n, b; c; z \big] &= \dfrac{n!}{c (c {+} 1)(c {+} 2) \cdots (c {+} {-} 1)} \times \\[0.5em]
+&\times \scaleint{6ex}_{\bs 0}^{1} t^{-n-1} \, (1 {-} t)^{c+n-1} \, (1 - t z)^{-b} \dd{t}
+\end{aligned}
+\label{eq:ecuacion_01_01_07}
+\end{align}
+
+La idea básica de representar una función mediante una integral de contorno con funciones Gamma en el integrando parece deberse a S. Pincherle (1853 - 1936), quien utilizó contornos de un tipo que proviene del trabajo de Riemann. Este lado del tema fue desarrollado extensamente por R. Mellin y E. W. Barnes. En 1907, Barnes publicó sus representaciones integrales de contorno de las veinticuatro funciones de Kummer, y más tarde, en 1910, demostró el análogo integral del teorema de Gauss.
+\begin{align}
+\begin{aligned}[b]
+\dfrac{1}{2 \pi i} \scaleint{6ex}_{\bs -\infty}^{\infty} \, &\Gamma (a {+} s) \, \Gamma (b {+} s) \, \Gamma(c {-} s) \, \Gamma (d {-} s) \dd{s} = \\[0.5em]
+&= \dfrac{\Gamma (a {+} c) \, \Gamma (a {+} d) \, \Gamma(b {+} c) \, \Gamma (b {+} d)}{\Gamma (a {+} b {+} c) {+ d}}
+\end{aligned}
+\label{eq:ecuacion_01_01_08}
+\end{align}
+
+\newpage
+\section{Las series de Gauss y su convergencia.}
+
+Escribamos lo siguiente:
+\begin{align}
+\big( a \big)_{n} = a ( a + 1)(a + 2)(a + 3) \cdots (a + n - 1)
+\label{eq:ecuacion_01_01_01_01}
+\end{align}
+y en particular $\big( a \big)_{0} \equiv 1$, por ejemplo:
+\begin{align*}
+\big( 3 \big)_{5} = 3 \cdot 4 \cdot 5 \cdot 6 \cdot 7 = 2520
+\end{align*}
+y también se tiene que $\big( 1 \big) = n!$. Entonces:
+\begin{align}
+\big( a \big)_{n} = \dfrac{\Gamma (a + n)}{\Gamma (a)}
+\label{eq:ecuacion_01_01_01_02}
+\end{align}
+y
+\begin{align}
+\lim_{n \to \infty} \big( a \big)_{n} = \dfrac{1}{\Gamma (a)}
+\label{eq:ecuacion_01_01_01_03}
+\end{align}
+
+Si $a$ es un entero negativo $-m$, entonces:
+\begin{align*}
+\big( a \big)_{n} = \begin{cases}
+\big( -m \big)_{n} & \mbox{si } m \geq n \\
+0 & \mbox{si } m < n
+\end{cases}
+\end{align*}
+por lo que:
+\begin{align*}
+\big( -3 \big)_{3} = (-3)(-2)(-1) = -6 \hspace{1cm} \mbox{pero} \hspace{1cm} \big( -3 \big)_{4} = 0
+\end{align*}
+
+En esta notación, la función de Gauss es:
+\begin{align}
+{}_{2} &F_{1} \big[ a, b; c; z \big] = \nsum_{n=1}^{\infty} \dfrac{\big( a \big)_{n} \big( b \big)_{n} \, z^{n}}{\big( c \big)_{n} \, n!}
+\label{eq:ecuacion_01_01_01_04}
+\end{align}
+donde $a$, $b$, $c$ y $z$ pueden ser reales o complejos. A partir de esto, vemos que si cualquiera de los números $a$ o $b$ es cero o un número entero negativo, la función se reduce a un polinomio, pero si $c$ es cero o un número entero negativo, la función no está definida, ya que todos menos un número finito de los términos de la serie se vuelven infinitos. También tenemos inmediatamente que:
+\begin{align}
+\dv{z} \bigg( {}_{2} F_{1} \big[ a, b; c; z \big] \bigg) = \dfrac{a b}{c} \, {}_{2} F_{1} \big[ a + 1, b + 1; c + 1; z \big]
+\label{eq:ecuacion_01_01_01_05}
+\end{align}
+
+La función de Gauss se puede encontrar en distintas notaciones, por ejemplo:
+\begin{enumerate}[label=\alph*)]
+\item Appell (1926):
+\begin{align}
+{}_{2} F_{1} \bigg[
+\begin{tabular}{c c}
+a, b; & \multirow{2}{*}{z} \\
+c; &
+\end{tabular} \bigg] = {}_{2} F_{1} \big[ a, b; c; z \big]
+\label{eq:ecuacion_01_01_01_06}
+\end{align}
+\item Bailey (1935):
+\begin{align}
+F \big( a, b; c; z \big) = {}_{2} F_{1} \big[ a, b; c; z \big]
+\label{eq:ecuacion_01_01_01_07}
+\end{align}
+\item Meijer (1953):
+\begin{align}
+\Phi \big( a, b; c; z \big) = \dfrac{{}_{2} F_{1} \big[ a, b; c; z \big]}{\Gamma (c)}
+\label{eq:ecuacion_01_01_01_08}
+\end{align}
+\item MacRobert (1947):
+\begin{align}
+E \big( 2; a, b; 1; c; -\dfrac{1}{z} \big) = \dfrac{\Gamma (a) \Gamma (b)}{\Gamma (c)} \, {}_{2} F_{1} \big[ a, b; c; z \big]
+\label{eq:ecuacion_01_01_01_9}
+\end{align}
+\end{enumerate}
+
+Hagamos que:
+\begin{align*}
+u_{n} = \dfrac{\big( a \big)_{n} \big( b \big)_{n}}{\big( c \big)_{n} \big( 1 \big)_{n}}
+\end{align*}
+entonces se tiene que:
+\begin{align}
+(1 + n)(c + n) \, u_{n+1} = (a + n)(b +  n) \, u_{n}
+\label{eq:ecuacion_01_01_01_12}
+\end{align}
+la razón de dos términos sucesivos $u_{n}$ y $u_{n+1}$ de la serie Gaussiana es:
+\begin{align}
+\dfrac{(a + n)(b +  n)}{(c + n)(1 +  n)} \, z = \dfrac{(1 + a/n)(1 + b/n)}{(1 + c/n)(1 + 1/n)} \, z
+\label{eq:ecuacion_01_01_01_13}
+\end{align}
+tal que, cuando $n \to \infty$, la razón:
+\begin{align*}
+\abs{\dfrac{u_{n+1}}{u_{n}}} \to \abs{z}
+\end{align*}
+Por tanto, según la prueba de D'Alembert, la serie es convergente para todos los valores de $z$, reales o complejos tales que $\abs{z} < 1$, y divergente para todos los valores de $z$ reales o complejos, tales que $\abs{z} > 1$.
+\par
+Cuando $\abs{z} = 1$:
+\begin{align}
+\begin{aligned}[b]
+\abs{\dfrac{u_{n+1}}{u_{n}}} &= \abs{\left\{ 1 + \dfrac{a + b}{n} + \order{\dfrac{1}{n^{2}}} \right\} \left\{ 1 - \dfrac{1 + c}{n} + \order{\dfrac{1}{n^{2}}} \right\}} = \\[0.5em]
+&= \abs{1 + \dfrac{a + b - c - 1}{n} + \order{\dfrac{1}{n^{2}}}} \\[0.5em]
+&\leq 1 + \left\{ \Re (a + b - c - 1) / n \right\} + \order{\dfrac{1}{n^{2}}}
+\end{aligned}
+\label{eq:eq:ecuacion_01_01_01_14}
+\end{align}
+Entonces, cuando $z = 1$, por la prueba de Raabe, la serie es convergente si $\Re (c - a - b) > 0$, y divergente si $\Re (c - a - b) < 0$.
+\par
+También es divergente cuando $\Re (c - a - b) = 0$, en este caso:
+\begin{align*}
+\abs{\dfrac{u_{n+1}}{u_{n}}} > 1 - \dfrac{1}{n} - \dfrac{C}{n^{2}}
+\end{align*}
+donde $C$ es una constante.
+\par
+Cuando $\abs{z} = 1$, pero $z \neq 1$, la serie es absolutamente convergente cuando $\Re (c - a - b) > 0$, convergente pero no de manera absoluta solo cuando:
+\begin{align*}
+- 1 < \Re (c - a - b) \leq 0
+\end{align*}
+y divergente cuando $\Re (c - a - b) < -1$. Si $\Re (c - a - b) = -1$, se requieren pruebas de convergencia más delicadas. En este caso, se tiene que:
+\begin{align}
+\abs{\dfrac{u_{n+1}}{u_{n}}} = 1 - \dfrac{\Re (a + b - a b + 1)}{n^{2}} + \order{\dfrac{1}{n^{3}}}
+\label{eq:ecuacion_01_01_01_15}
+\end{align}
+De aquí la serie es convergente si $\Re (a + b) > \Re \, a \, b$, y divergente si \break \hfill $\Re (a + b) \leq \Re \, a \, b$.
+\par
+Por ejemplo, la serie:
+\begin{align}
+1 - \dfrac{2}{3} + \dfrac{3}{4} - \dfrac{4}{5} + \dfrac{5}{6} - \dfrac{6}{7} + \cdots = \dfrac{1}{2} \left\{ 1 + \, {}_{2} F_{1} \big[ 2, 2; 3; -1 \big] \right\}
+\label{eq:ecuacion_01_01_01_16}
+\end{align}
+es divergente.
+\par
+Notemos que:
+\begin{align*}
+\dfrac{\big( a \big)_{n} \big( b \big)_{n}}{\big( c \big)_{n}} \to 0 \hspace{1cm} \mbox{cuando} \hspace{0.2cm} n \to \infty, \hspace{0.2cm} \mbox{si } 0 < \Re (1 + c - a - b) < 1
+\label{eq:ecuacion_01_01_01_17}
+\end{align*}
+\end{document}
