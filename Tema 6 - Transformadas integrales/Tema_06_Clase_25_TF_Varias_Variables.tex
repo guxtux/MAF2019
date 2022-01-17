@@ -1,0 +1,200 @@
+\input{../Preambulos/preambulo_materiales}
+%\usepackage{showframe}
+\title{Transformadas de Fourier para varias variables \\ \large {Tema 6 - Transformadas integrales} \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Referencia. Debnath - Integral transforms and their applications. Sec. 1.18
+\section{La transformada de Fourier de funciones de varias variables.}
+
+La transformada de Fourier de funciones de varias variables se puede obtener, veamos lo siguiente, por simplicidad consideremos una función $f(x, y)$ de dos variables independientes. En caso de que se incluyan más variables, se denomina \emph{transformada de Fourier múltiple}.
+\par
+Definamos entonces:
+\begin{align*}
+F \big[ f(x, y); x \to \xi \big] &= F \big[ \xi, y \big] = \dfrac{1}{\sqrt{2 \pi}} \scaleint{6ex}_{\bs -\infty}^{+\infty} f(x, y) \, \exp(i \xi x) \dd{x} \\[0.5em]
+F_{c} \big[ f(x, y); x \to \xi \big] &= F_{c} \big[ \xi, y \big] = \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} f(x, y) \, \cos \xi x \dd{x} \\[0.5em]
+F_{s} \big[ f(x, y); x \to \xi \big] &= F_{s} \big[ \xi, y \big] = \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} f(x, y) \, \sin \xi x \dd{x}
+\end{align*}
+Las correspondientes transformadas inversas están dadas por las expresiones:
+\begin{align*}
+F^{-1} \big[ f(x, y); \xi \ to \big] &= F^{-1} \big( \xi, y \big) = \dfrac{1}{\sqrt{2 \pi}} \scaleint{6ex}_{\bs -\infty}^{+\infty} F(\xi, y) \cdot \exp(-i \xi x) \dd{\xi} \\[0.5em]
+F^{-1} \big[ F_{c}(x, y); \xi \to x \big] &= F_{c}^{-1} \big( \xi, y \big) = \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} F_{c} (x, y) \, \cos \xi x \dd{\xi} \\[0.5em]
+F^{-1} \big[ F_{s} (x, y); \xi \to x \big] &= F_{s}^{-1} \big( \xi, y \big) = \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} F_{s} (x, y) \, \sin \xi x \dd{\xi}
+\end{align*}
+respectivamente.
+\par
+También tendremos resultados para la derivada de la transformada de Fourier de una función $f(x, y)$:
+\begin{align*}
+F \bigg[ \pdv{f}{x}; x \to \xi \bigg] &= i \, \xi \, F (\xi, y) \\[0.5em]
+F_{c} \bigg[ \pdv{f}{x}; x \to \xi \bigg] &= - f(0, y) +  \xi \, F_{s} (\xi, y) \\[0.5em]
+F_{s} \bigg[ \pdv{f}{x}; x \to \xi \bigg] &= - \xi \, F_{c} (\xi, y)
+\end{align*}
+Aplicando de manera iterativa estos resultados, tendremos que la derivada de segundo orden de $f(x, y)$ con respecto a $x$ es:
+\begin{align*}
+F \bigg[ \pdv[2]{f}{x}; x \to \xi \bigg] &= - \xi^{2} \, F (\xi, y) \\[0.5em]
+F_{c} \bigg[ \pdv[2]{f}{x}; x \to \xi \bigg] &= - \xi^{2} \, F_{c} (\xi, y) - \pdv{f}{x} (0, y) \\[0.5em]
+F_{s} \bigg[ \pdv[2]{f}{x}; x \to \xi \bigg] &= - \xi{2} \, F_{s} (\xi, y) + \xi \, f(0, y)
+\end{align*}
+De manera similar, se puede deducir la transformada de Fourier de otras derivadas parciales de orden superior con respecto a las variables correspondientes. Estos resultados nos ayudarán a reducir la ecuación diferencial parcial a una ecuación de variables de menor dimensión. Por lo tanto, la transformada de Fourier se puede usar para resolver los problemas de valores en la frontera en dos o más dimensiones.
+\par
+Las ideas anteriores se pueden extender a varias variables. Sea $f (x, y)$ una función de dos variables independientes $x, y$. Considerando en este momento que $f (x, y)$ es una función de $x$, tenemos que:
+\begin{align*}
+F \big[ f(x, y); x \to \xi \big] = \overline{f} \big( \xi, y \big) = \dfrac{1}{\sqrt{2 \pi}} \scaleint{6ex}_{\bs -\infty}^{+\infty} f(x, y) \, \exp(i \xi x) \dd{x}
+\end{align*}
+Entonces al considerar $\overline{f} \big( \xi, y \big)$ como una función de la variable independiente $y$, su transformada de Fourier está dada por:
+\begin{align*}
+\overline{\overline{f}} \big( \xi, y \big) = \dfrac{1}{\sqrt{2 \pi}} \scaleint{6ex}_{\bs -\infty}^{+\infty} \overline{f} (\xi, y) \, \exp(i \eta y) \dd{y} = F \big[ \overline{f} (\xi, y); y \to \eta \big]
+\end{align*}
+Por lo que finalmente llegamos a:
+\begin{align*}
+\overline{\overline{f}} \big( \xi, \eta \big) = \dfrac{1}{2 \pi} \scaleint{6ex}_{\bs -\infty}^{+\infty} \, \scaleint{6ex}_{\bs -\infty}^{+\infty} f (x, y) \, \exp\big[ i (\xi x + \eta y) \big] \dd{x} \dd{y}
+\end{align*}
+donde la correspondiente transformada inversa es:
+\begin{align*}
+f \big( x, y \big) = \dfrac{1}{2 \pi} \scaleint{6ex}_{\bs -\infty}^{+\infty} \, \scaleint{6ex}_{\bs -\infty}^{+\infty} \overline{\overline{f}} \big( \xi, \eta \big) \, \exp\big[ -i (\xi x + \eta y) \big] \dd{\xi} \dd{\eta}
+\end{align*}
+
+Consideremos que se pueden extender estos resultados a las transformadas de Fourier seno y coseno en funciones de varias variables, los resultados correspondientes se pueden deducir fácilmente.
+\par
+Usando las definiciones anteriores de la transformada de Fourier a funciones de varias variables, también podemos aplicar la transformada de Fourier a derivadas parciales mixtas que presentan en ecuaciones diferenciales parciales para resolver problemas con valores de frontera.
+
+\section{Aplicación de la Transformada de Fourier a Problemas de Valores en la Frontera.}
+
+Primero discutimos el uso de las transformadas de Fourier seno y coseno para luego discutir el uso de las transformadas complejas de Fourier que surgen en problemas de valores en la frontera.
+\par
+Las transformadas de Fourier seno y coseno se pueden aplicar cuando el rango de la variable seleccionada para la exclusión va de $0$ a $\infty$. La elección de la transformada de Fourier seno y coseno se decide por la forma de las condiciones de frontera en el límite inferior de la variable seleccionada para la exclusión.
+\par
+Por ejemplo:
+\begin{align}
+\begin{aligned}[b]
+F_{s} \bigg[ \pdv[2]{u(x, y)}{x}; x \to \xi \bigg] &= \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} \pdv[2]{u}{x} \, \sin \xi x \dd{x} = \\[0.5em]
+&= \sqrt{\dfrac{2}{\pi}} \, \xi \scaleint{6ex}_{\bs 0}^{\infty} \pdv{u}{x} \, \cos \xi x \dd{x} = \\[0.5em]
+&= \sqrt{\dfrac{2}{\pi}} \, \xi \, u(0, y) - \sqrt{\dfrac{2}{\pi}} \, \xi^{2} \, \overline{u}_{s} \big( \xi, y  \big)
+\end{aligned}
+\label{eq:ecuacion_01_66}
+\end{align}
+siempre que se conozca $u (x, y)$ en $x = 0$ y
+\begin{align*}
+\pdv{u}{x} \to 0 \mbox{ mientras que } x \to \infty
+\end{align*}
+De manera similar:
+\begin{align}
+\begin{aligned}[b]
+F_{c} \bigg[ \pdv[2]{u(x, y)}{x}; x \to \xi \bigg] &= \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} \pdv[2]{u}{x} \, \cos \xi x \dd{x} = \\[0.5em]
+&= - \sqrt{\dfrac{2}{\pi}} \, \bigg[ \pdv{u(x,y)}{x} \bigg]_{x=0} + \\[0.5em]
+&+ \sqrt{\dfrac{2}{\pi}} \, \xi^{2} \scaleint{6ex}_{\bs 0}^{\infty} u (x, y) \, \cos \xi x \dd{x}
+\end{aligned}
+\label{eq:ecuacion_01_67}
+\end{align}
+siempre que se conozca $\pdv*{u (0, y)}{x}$ en $u$ y
+\begin{align*}
+\pdv{u}{x} \to 0 \mbox{ mientras que } x \to \infty
+\end{align*}
+
+Observando cuidadosamente los resultados en las ecs. (\ref{eq:ecuacion_01_66}) y (\ref{eq:ecuacion_01_67}) se puede ver que removiendo un término $\pdv*[2]{u(x, y)}{x}$ de una ecuación diferencial parcial requiere el conocimiento de $u (0, y)$ para usar una transformada de Fourier seno, mientras que el uso de una transformada de Fourier coseno para el mismo propósito, requiere el conocimiento de $u_{x} (0, y)$.
+\par
+Cabe señalar que un término $\pdv*{u}{x}$ o cualquier derivada parcial de orden impar no se puede eliminar con la ayuda de transformadas de Fourier seno o coseno.
+\par
+Nuevamente, la transformada compleja de Fourier será útil para el mismo propósito que el anterior, si el rango de la variable es de $- \infty$ a $+ \infty$ en la ecuación diferencial parcial.
+\\[0.5cm]
+\noindent
+\textbf{Ejemplo 1: } La temperatura $u (x, t)$ de una barra semiinfinita está determinada por la ecuación diferencial parcial:
+\begin{align*}
+\pdv{u}{t} = \pdv[2]{u}{x}, \hspace{1.5cm} x > 0, \hspace{0.2cm} t > 0
+\end{align*}
+sujeta a la condición inicial:
+\begin{align*}
+u(x, 0) = \begin{cases}
+1, & 0 < x < 1 \\
+0, & x > 1
+\end{cases}
+\end{align*}
+y a la condición de frontera $u(0, t) = 0$. Determina la temperatura para cualquier tiempo $t$ y en cualquier punto $x$ de la barra, a partir de $x = 0$.
+\\[0.5em]
+\textit{Solución:} Dado que la variable $x$ cambia de $0$ a $\infty$ y dado que se indica el valor de $u (x, t)$ en $x = 0$, se debe de tomar la transformada de Fourier seno de ambos lados de la ecuación diferencial parcial, quedando la variable $x$ excluida en la ecuación transformada. Entonces la ecuación dada se convierte en:
+\begin{align}
+\begin{aligned}[b]
+\dv{x} \overline{u}_{s} \big( \xi, t \big) &= \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} \pdv[2]{u}{x} \sin \xi x \dd{x} = \\[0.5em]
+&= \sqrt{\dfrac{2}{\pi}} \big[ \xi \, u(0, t) \big] - \xi^{2} \, \overline{u}_{s} (\xi, t) = \\[0.5em]
+&= - \xi^{2} \, \overline{u}_{s} (\xi, t) \\[0.5em]
+\therefore \quad \overline{u}_{s} (\xi, t) &= c \, \exp\big( - \xi^{2} t \big)
+\end{aligned}
+\label{eq:ecuacion_ejemplo_01_i}
+\end{align}
+donde $c$ es una constante arbitraria.
+\par
+Se indica inicialmente que:
+\begin{align*}
+u(x, 0) = \begin{cases}
+1, & 0 < x < 1 \\
+0, & x > 1
+\end{cases}
+\end{align*}
+por lo tanto:
+\begin{align}
+\begin{aligned}
+\overline{u}_{s} (\xi, 0) &= \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} u(x, 0) \cdot \sin \xi x \dd{x} = \\[0.5em]
+&= \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{1} \sin \xi x \dd{x} = \\[0.5em]
+&= \sqrt{\dfrac{2}{\pi}} \, \bigg[ \dfrac{- \cos \xi x}{\xi} \bigg]\eval_{0}^{1} = \\[0.5em]
+&= \sqrt{\dfrac{2}{\pi}} \, \bigg[ \dfrac{1 - \cos \xi}{\xi} \bigg]
+\end{aligned}
+\label{eq:ecuacion_ejemplo_01_ii}
+\end{align}
+Por lo tanto, con las ecs. (\ref{eq:ecuacion_ejemplo_01_i}) y (\ref{eq:ecuacion_ejemplo_01_ii}), tenemos que:
+\begin{align*}
+c = \sqrt{\dfrac{2}{\pi}} \, \dfrac{1 - \cos \xi}{\xi}
+\end{align*}
+usando este valor de $c$ en la ec. (\ref{eq:ecuacion_ejemplo_01_i}), se obtiene:
+\begin{align*}
+u(x, t) = \dfrac{2}{\pi} \scaleint{6ex}_{0}^{\infty} \dfrac{1 - \cos \xi}{\xi} \, \exp(- \xi^{2} t) \, \sin \xi x \dd{\xi}
+\end{align*}
+Que es la función de temperatura solicitada $u (x, t)$.
+\\[0.5cm]
+\noindent
+\textbf{Ejemplo 2: } Resuelve la ecuación de difusión:
+\begin{align*}
+\pdv{u}{t} = \pdv[2]{u}{x}, \hspace{1.5cm} x > 0, \hspace{0.2cm} t > 0
+\end{align*}
+sujeta a la condición inicial $u_{x} (0, t) = 0$ y $u (x, t)$ está acotada. La condición de frontera está dada por:
+\begin{align*}
+u(x, 0) = \begin{cases}
+1, & 0 \leq x \leq 1 \\
+0, & x > 1
+\end{cases}
+\end{align*}
+\\[0.5em]
+\textit{Solución:} Dado que el rango de $x$ es de $0$ a $\infty$ y se indica el valor de $u_{x} (0, t)$, es útil aplicar la transformada de Fourier coseno para eliminar la variable $x$ de la EDP.
+\par
+Por lo que tenemos:
+\begin{align*}
+\dv{t} \overline{u}_{c} (\xi, t) &= \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} \pdv[2]{u}{x} \cos \xi x \dd{x} = \\[0.5em]
+&= \sqrt{\dfrac{2}{\pi}} \bigg[ \cos \xi u \, \pdv{u}{x} \eval_{0}^{\infty} + \xi \scaleint{6ex}_{\bs 0}^{\infty} \pdv{u}{x} \sin \xi x \dd{x} \bigg] = \\[0.5em]
+&= - \sqrt{\dfrac{2}{\pi}} \xi^{2} \scaleint{6ex}_{0}^{\infty} u (x, t) \, \cos \xi x \dd{x} = \\[0.5em]
+&= - \xi^{2} \, \overline{u}_{c} (\xi, t) \\[0.5em]
+\therefore \quad \overline{u}_{c} (\xi, t) &= A \, \exp\big( - \xi^{2} t \big) \\[0.5em]
+\Rightarrow \quad \overline{u}_{c} (\xi, 0) &= A \hspace{1.5cm} \mbox{una constante arbitraria}
+\end{align*}
+Ahora bien:
+\begin{align*}
+\overline{u}_{c} (\xi, 0) &= \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} u(x, 0) \, \cos \xi x \dd{x} = \\[0.5em]
+&= \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{1} x \, \cos \xi x \dd{x}
+\end{align*}
+que al usar la condición inicial, es decir:
+\begin{align*}
+\overline{u}_{c} (\xi, 0) = \sqrt{\dfrac{2}{\pi}} \bigg[ \dfrac{\sin \xi}{\xi} + \dfrac{\cos \xi - 1}{\xi^{2}} \bigg] = A
+\end{align*}
+Este resultado nos dice que:
+\begin{align*}
+\overline{u}_{c} (\xi, 0) &= \sqrt{\dfrac{2}{\pi}} \bigg[ \dfrac{\sin \xi}{\xi} - \dfrac{1 - \cos \xi}{\xi^{2}} \bigg] \cdot \exp\big( -\xi^{2} t \big)
+\end{align*}
+Tomando la transformada inversa de Fourier coseno, la solución buscada es:
+\begin{align*}
+u(x, t) = \dfrac{2}{\pi} \scaleint{6ex}_{\bs 0}^{\infty} \dfrac{\xi \, \sin \xi - 1 + \cos \xi}{\xi^{2}} \, \exp \big( - \xi^{2} t \big) \, \cos \xi x \dd{\xi}
+\end{align*}
+\end{document}

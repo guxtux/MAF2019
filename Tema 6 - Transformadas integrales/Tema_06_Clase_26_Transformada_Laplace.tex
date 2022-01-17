@@ -1,0 +1,304 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Copenhagen_wolverine}
+
+\makeatletter
+\setbeamercolor{section in foot}{bg=cadetblue!20}
+\setbeamercolor{subsection in foot}{bg=OliveGreen!30}
+\makeatother
+
+\date{14 de enero de 2022}
+
+\title{\large{Transformada de Laplace}}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
+
+%Referencia. Debnath - Chap. 2 Laplace Transform 3.9
+\section{Definiciones}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{la TF y su inversa}
+
+\begin{frame}
+\frametitle{La Transformada de Laplace}
+Definimos la transformada de Laplace de una función continua en tramos de variable real $t$, definida en un semieje $t \geq 0$ como:
+\pause
+\begin{eqnarray}
+\begin{aligned}
+L \big[f(t); t \to p\big] &= \pause L \big[f(t)\big] = \pause F(p) = \pause \overline{f}(p) = \\[0.5em] \pause
+&= \scaleint{6ex}_{\bs 0}^{\infty} f(t) \, \exp(-p \, t) \dd{t}
+\end{aligned}
+\label{eq:ecuacion_03_03}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{La TL inversa}
+La transformada inversa de Laplace se define como:
+\pause
+\begin{eqnarray}
+\begin{aligned}
+f(t) &= \pause L^{-1} \big[\overline{f}(t); p \to t\big] = \pause L^{-1} \big[F(p)\big] = \\[0.5em] \pause
+&= \dfrac{1}{2 \pi \, i} \scaleint{6ex}_{\bs \gamma-i \infty}^{\gamma+\infty} \exp(p \, t) \, \overline{f} (p) \, \dd{p}
+\end{aligned}
+\label{eq:ecuacion_03_04}
+\end{eqnarray}
+donde $\gamma = \Re{p} > 0$.
+\end{frame}
+
+\section{Uso de las propiedades de la TL}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejemplo 1}
+
+\begin{frame}
+\frametitle{EValuación de la TL}
+Evalúa la TL:
+\pause
+\begin{align*}
+L \big[ \sin (t - a) \, H (t - a); t \to p  \big]
+\end{align*}
+\pause
+Y con ese resultado, evalúa:
+\pause
+\begin{align*}
+L \big[ \exp\big[ (t - a ) k \big] \sin (t - a) \, H (t - a); t \to p  \big]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución al Ejemplo 1}
+Para resolver este ejemplo, debemos de ocupar el resultado de la TL:
+\begin{eqnarray*}
+\begin{aligned}
+L \big[ \sin t ; t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} \sin t \, \exp(-p \, t) \dd{t} = \\[0.5em] \pause
+&= \dfrac{1}{p^{2} + 1}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando una propiedad de la TL}
+Por el segundo teorema de desplazamiento de la TL:
+\\
+\bigskip
+\pause
+\noindent \textbf{Teorema: } Si la transformada de Laplace de $f(t)$ es $\overline{f}(p)$, entonces la transformada de Laplace de $f(t - a) \, H(t - a)$ es $\exp(-a \, p) \, \overline{f}(p)$.
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando el segundo teorema de desplazamiento}
+Entonces se tiene que:
+\begin{align*}
+L \big[ \exp\big[ (t - a ) k \big] \sin (t - a) \, H (t - a) \big] = \dfrac{\exp (- p a)}{(1 + p^{2})}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Otra propiedad de la TL}
+Ahora ocuparemos el primer teorema de desplazamiento para la TL:
+\\
+\bigskip
+\pause
+\noindent \textbf{Teorema: } Si la transformada de Laplace de $f(t)$ es $\overline{f}(p)$, entonces la transformada de Laplace de $\exp(a \, t)$ es $\overline{f}(p - a)$.
+\end{frame}
+\begin{frame}
+\frametitle{Resultado del ejercicio}
+Al ocupar el primer teorema del desplazamiento, llegamos al resultado:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+&L \big[ \exp\big[k (t - a) \big] \, \sin (t - a) \, H (t - a); t \to p  \big] = \\[0.5em]
+&= \dfrac{\exp\big[ -(p - k) \big]}{\big[ 1 + (p - k)^{2} \big]}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Ejemplo 2}
+
+\begin{frame}
+\frametitle{Enunciado del ejemplo}
+Evalúa:
+\pause
+\begin{align*}
+L \big[ \sinh bt; t \to p \big]
+\end{align*}
+\pause
+Para luego obtener:
+\pause
+\begin{align*}
+L \big[ \exp (a t) \, \sinh bt; t \to p \big]
+\end{align*}    
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Nuevamente nos apoyamos en un resultado de la TL de la función $\sinh t$:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+L \big[ \sinh t ; t \to p \big] &= \scaleint{6ex}_{\bs 0}^{\infty} \sinh t \, \exp(-p \, t) \dd{t} = \\[0.5em] \pause
+&= \dfrac{1}{p^{2} - 1}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando otra propiedad de la TL}
+Ocuparemos la propiedad de cambio de escala de la TL:
+\\
+\bigskip
+\pause
+\noindent \textbf{Teorema: } Si:
+\begin{align*}
+L \big[f(t); t \to p\big] &= \overline{f} (p)
+\end{align*}
+Entonces
+\begin{align*}
+L \big[f(a \, t); t \to p\big] &= \dfrac{1}{a}\overline{f} \left(\dfrac{p}{a}\right)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado de la TL}
+Luego de ocupar la propiedad de cambio de escala, tenemos que la TL es:
+\pause
+\begin{align*}
+L \big[ \sinh b t ; t \to p \big] = \dfrac{b}{p^{2} - b^{2}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Respuesta al ejemplo}
+El resultado final del ejercicio es:
+\pause
+\begin{align*}
+L \big[ \exp (a t) \, \sinh bt; t \to p \big] = \dfrac{b}{(p - a)^{2} + b^{2}}
+\end{align*}
+\end{frame}
+
+\subsection{Ejercicio 3}
+
+\begin{frame}
+\frametitle{Enunciado del ejercicio}
+Evalúa la TL:
+\pause
+\begin{align*}
+L \big[ \exp (a t) \, \cos bt; t \to p \big]
+\end{align*}
+\pause
+Con ese resultado, obtén:
+\pause
+\begin{align*}
+L \big[ \exp\big[ a(t - c) \, \cos b (t - c) \, H (t - c); t \to p \big]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado de utilidad}
+Como hemos visto en los ejercicios previos, cuando se tiene una función que involucra a otras \enquote{funciones conocidas}, de las que es necesario contar con su TL, \pause es conveniente ocupar las TL de esas funciones ya sea en una lista o tabla.
+\end{frame}
+\begin{frame}
+\frametitle{Resultado de utilidad}
+En este caso, se requiere conocer el valor de la TL de:
+\pause
+\begin{align*}
+L \big[ \cos b t; t \to p \big] = \dfrac{p}{p^{2} + b^{2}}
+\end{align*}    
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando las respectivas propiedades}
+Así mismo, se procede a ocupar las propiedades de la TL que sean las pertinentes, de esta manera se simplifica el trabajo para obtener la solución.
+\end{frame}
+\begin{frame}
+\frametitle{Avanzando en la solución}
+Al ocupar el teorema de desplazamiento:
+\pause
+\begin{align*}
+L \big[ \exp(a t) \, \cos b t; t \to p \big] = \dfrac{p - a}{(p - a)^{2} + b^{2}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución al ejercicio}
+Al ocupar ahora otra de las propiedades de la TL, se llega al resultado final del ejercicio:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+&L \big[ \exp\big[ a(t - c) \, \cos b (t - c) \, H (t - c); t \to p \big] = \\[0.5em]
+&= \exp (- p c) \, \dfrac{(p - a)}{(p - a)^{2} + b^{2}}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Ejercicio 4}
+
+\begin{frame}
+\frametitle{Enunciado del ejercicio 4}
+Evalúa las siguientes TL:
+\pause
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item $L \big[ t \, H(t - 1); t \to p \big]$
+\item $L \big[ H(t - 1) \, \cos a t; t \to p \big]$
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado para ambos incisos}
+De la definición de:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+&L \big[ f(t) \, H (t - a); t \to p \big] = \scaleint{6ex}_{\bs a}^{\infty} \exp(- p t) \, f(t) \dd{t} = \\[0.5em] \pause
+&=  \scaleint{6ex}_{\bs 0}^{\infty} \exp\big[ - p (u {+} a) \big] \, f(u {+} a) \dd{u} = \\[0.5em] \pause
+&= \exp(- p a) \scaleint{6ex}_{\bs 0}^{\infty} \exp(- p u) \, f(u {+} a) \dd{u} = \\[0.5em] \pause
+&= \exp(- p a) \, L \big[ f (t {+} a); t \to p \big]
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando el resultado anterior}
+Para resolver los dos incisos del ejercicio, ocuparemos el resultado que se obtuvo:
+\pause
+\begin{align*}
+L \big[ f(t) \, H (t{-} a) \big] = \exp(- p \, a) \, L \big[ f (t {+} a); t \to p \big]    
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el inciso i)}
+Tenemos entonces que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+&L \big[ t \, H(t {-} 1); t \to p \big] = \scaleint{6ex}_{1}^{\infty} \exp(- p t) \, t \dd{t} = \hspace{1cm} a = 1 \\[0.5em]
+&= e^{-p} \scaleint{6ex}_{0}^{\infty} \exp(- p u) \, (t + 1) \dd{t} = \\[0.5em] \pause
+&= e^{-p} \bigg[ \dfrac{1}{p^{2}} + \dfrac{1}{p} \bigg] = \pause \dfrac{p + 1}{p^{2}} \, e^{-p}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el inciso ii)}
+Tenemos ahora que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+&L \big[ H(t {-} 1) \, \cos a t \big] = \exp(- p) \, L \big[ \cos a (t + 1) \big] = \\[0.5em] \pause
+&= e^{-p} \, L \big[ \cos a t \cdot \cos a - \sin a t \cdot \sin a \big] = \\[0.5em] \pause
+&= \dfrac{e^{-p}}{p^{2} + 1} \, \big[ p \cos a - a \sin a \big]
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Otra propiedad}
+
+\begin{frame}
+\frametitle{Una propiedad importante}
+Dentro de la lista de propiedades de la TL que se mencionan en las notas de trabajo, hay que agregar la siguiente:
+\\
+\bigskip
+\pause
+\noindent \textbf{Teorema: } Si la TL de una función continua en partes $f(t)$ es $\overline{f}(p)$, entonces la TL de:
+\pause
+\begin{align*}
+L \big[ t^{n} \, f(t); t \to p \big] = (-1)^{n} \, \dv[n]{\overline{f}(p)}{p}
+\end{align*}
+con $n$ un entero positivo.
+\end{frame}
+
+\end{document}
