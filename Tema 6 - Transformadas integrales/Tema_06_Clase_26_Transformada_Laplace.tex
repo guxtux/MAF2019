@@ -7,7 +7,11 @@
 \setbeamercolor{subsection in foot}{bg=OliveGreen!30}
 \makeatother
 
-\date{14 de enero de 2022}
+%\DeclareMathOperator\erf{Erf}
+\DeclareMathOperator\erfc{erfc}
+
+
+\date{18 de enero de 2022}
 
 \title{\large{Transformada de Laplace}}
 \author{M. en C. Gustavo Contreras Mayén}
@@ -24,11 +28,11 @@
 %Referencia. Debnath - Chap. 2 Laplace Transform 3.9
 \section{Definiciones}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{la TF y su inversa}
+\subsection{La TL y su inversa}
 
 \begin{frame}
 \frametitle{La Transformada de Laplace}
-Definimos la transformada de Laplace de una función continua en tramos de variable real $t$, definida en un semieje $t \geq 0$ como:
+Definimos la transformada de Laplace (TL) de una función continua en tramos de variable real $t$, definida en un semieje $t \geq 0$ como:
 \pause
 \begin{eqnarray}
 \begin{aligned}
@@ -57,7 +61,7 @@ donde $\gamma = \Re{p} > 0$.
 \subsection{Ejemplo 1}
 
 \begin{frame}
-\frametitle{EValuación de la TL}
+\frametitle{Evaluación de la TL}
 Evalúa la TL:
 \pause
 \begin{align*}
@@ -174,10 +178,10 @@ L \big[ \exp (a t) \, \sinh bt; t \to p \big] = \dfrac{b}{(p - a)^{2} + b^{2}}
 \end{align*}
 \end{frame}
 
-\subsection{Ejercicio 3}
+\subsection{Ejemplo 3}
 
 \begin{frame}
-\frametitle{Enunciado del ejercicio}
+\frametitle{Enunciado del ejemplo}
 Evalúa la TL:
 \pause
 \begin{align*}
@@ -226,10 +230,10 @@ Al ocupar ahora otra de las propiedades de la TL, se llega al resultado final de
 \end{eqnarray*}
 \end{frame}
 
-\subsection{Ejercicio 4}
+\subsection{Ejemplo 4}
 
 \begin{frame}
-\frametitle{Enunciado del ejercicio 4}
+\frametitle{Enunciado del ejemplo 4}
 Evalúa las siguientes TL:
 \pause
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
@@ -285,20 +289,329 @@ Tenemos ahora que:
 \end{eqnarray*}
 \end{frame}
 
-\subsection{Otra propiedad}
+% \subsection{Otra propiedad}
+
+% \begin{frame}
+% \frametitle{Una propiedad importante}
+% Dentro de la lista de propiedades de la TL que se mencionan en las notas de trabajo, hay que agregar la siguiente:
+% \\
+% \bigskip
+% \pause
+% \noindent \textbf{Teorema: } Si la TL de una función continua en partes $f(t)$ es $\overline{f}(p)$, entonces la TL de:
+% \pause
+% \begin{align*}
+% L \big[ t^{n} \, f(t); t \to p \big] = (-1)^{n} \, \dv[n]{\overline{f}(p)}{p}
+% \end{align*}
+% con $n$ un entero positivo.
+% \end{frame}
+
+\section{La TL de algunas funciones relevantes}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{La función de Heaviside}
 
 \begin{frame}
-\frametitle{Una propiedad importante}
-Dentro de la lista de propiedades de la TL que se mencionan en las notas de trabajo, hay que agregar la siguiente:
+\frametitle{La conocida función $H (t)$}
+Ya se presentó la función de Heaviside o de paso unitario, que está definida por:
+\pause
+\begin{align*}
+H(t) = \begin{cases}
+0, & t < 0 \\
+1, & t > 0
+\end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La función de paso unitario}
+Esto generalmente se conoce como \enquote{función unitaria de Heaviside}.
 \\
 \bigskip
 \pause
-\noindent \textbf{Teorema: } Si la TL de una función continua en partes $f(t)$ es $\overline{f}(p)$, entonces la TL de:
+Cabe señalar además que cualquier función escalonada $f(t)$ siempre se puede expresar como una combinación de diferentes funciones de Heaviside.
+\end{frame}
+\begin{frame}
+\frametitle{Combinación de funciones}
+Por ejemplo, definamos una función escalonada mediante la relación:
 \pause
 \begin{align*}
-L \big[ t^{n} \, f(t); t \to p \big] = (-1)^{n} \, \dv[n]{\overline{f}(p)}{p}
-\end{align*}
-con $n$ un entero positivo.
+f (t) = \begin{cases}
+g (t), & 0 < t < a \\
+k, & a < t < b \\
+0, & t > b
+\end{cases}
+\end{align*}    
 \end{frame}
+\begin{frame}
+\frametitle{Modificando la expresión}
+La función $f (t)$ se puede escribir como:
+\pause
+\begin{align*}
+f(t) = g(t) \, H (a - t) + k \big[ H (t - a) - H (t - b) \big]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La TL de $H (t)$}
+Calculamos la TL de la función de paso unitario de Heaviside:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+L \big[ H (t) \big] &= \scaleint{6ex}_{\bs 0}^{\infty} H (t) \, \exp(- p t) \dd{t} = \\[0.5em]
+&= \scaleint{6ex}_{\bs 0}^{\infty} 1 \cdot \exp(- p t) \dd{t} = \\[0.5em]
+&= \dfrac{1}{p}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{La TL inversa de $H (t)$}
+Entonces tenemos que la TL inversa es:
+\pause
+\begin{align*}
+L^{-1} \bigg[ \dfrac{1}{p} \bigg] = H (t)
+\end{align*}
+\end{frame}
+
+\subsection{La función delta de Dirac}
+
+\begin{frame}
+\frametitle{La delta de Dirac}
+Un problema que surge en la práctica es encontrar la transformada de Laplace inversa de la función unitaria o $H(t)$.
+\\
+\bigskip
+\pause
+Se presenta una caso similar en la función de impulso unitario $\delta (t)$.
+\end{frame}
+\begin{frame}
+\frametitle{La delta de Dirac}
+Dirac lo introdujo como $\delta (t)$ que actúa por un período de tiempo muy corto $\tau$ con un impulso finito $1$ que satisface las relaciones:
+\pause
+\begin{eqnarray}
+\delta (t) &=& 0 \hspace{1.3cm} \mbox{para  } t \neq 0 \label{eq:ecuacion_03_25} \\[0.5em] \pause
+\scaleint{6ex}_{\bs - \infty}^{\infty} \delta (t) \dd{t} &=& \scaleint{6ex}_{\bs 0}^{\tau} \delta (t) \dd{t} = 1 \label{eq:ecuacion_03_26}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Sobre la delta de Dirac}
+En el análisis matemático, dicha función es diferente a las funciones \enquote{ordinarias} y ocupar dicha función a veces conduce a inconsistencias en el análisis.
+\\
+\bigskip
+\pause
+Por ello, Dirac lo calificó como una \enquote{función impropia}.
+\end{frame}
+\begin{frame}
+\frametitle{Sobre la delta de Dirac}
+Puede usarse sólo cuando no se produzcan inconsistencias en el análisis.
+\\
+\bigskip
+\pause
+Así, formalmente tal función puede ser utilizada en el análisis clásico sin buscar rigor en el tratamiento.
+\end{frame}
+\begin{frame}
+\frametitle{Sobre la delta de Dirac}
+Las ecuaciones (\ref{eq:ecuacion_03_25}) y (\ref{eq:ecuacion_03_26}) anteriores no muestran una imagen clara de la $\delta (t)$.
+\\
+\bigskip
+\pause
+Dado que la variación precisa de $\delta (t)$ con $t$ en el intervalo no es un tema importante, pero su efecto es el punto de estudio, podemos usarlo correctamente suponiendo que no tiene oscilaciones bruscas e innecesarias en la vecindad de $t = 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Reescribiedo la $\delta (t)$}
+Si reescribimos la función de paso $\delta_{\epsilon} (t)$ por:
+\pause
+\begin{align}
+\delta_{\epsilon} (t) = \begin{cases}
+0, & t < 0 \\
+\dfrac{1}{\epsilon}, & 0 < t < \epsilon \\
+0, & t > \epsilon
+\end{cases}
+\label{eq:ecuacion_03_27}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{El comportamiento de $\delta_{\epsilon} (t)$}
+Entonces:
+\pause
+\begin{align}
+\scaleint{6ex}_{\bs - \infty}^{\infty} \delta_{\epsilon} (t) \dd{t} = \scaleint{6ex}_{\bs 0}^{\epsilon} \dfrac{1}{\epsilon} \dd{t} = 1
+\label{eq:ecuacion_03_28}
+\end{align}
+\pause
+resulta que:
+\pause
+\begin{align}
+\lim_{\epsilon \to 0} \delta_{\epsilon} (t) = \delta (t)
+\label{eq:ecuacion_03_29}
+\end{align}
+como se definió en las ecs. (\ref{eq:ecuacion_03_25}) y (\ref{eq:ecuacion_03_26}).
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando la $\delta_{\epsilon} (t)$}
+Si $f(t)$ es una función continua en la vecindad de $t = 0$, entonces:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+&\scaleint{6ex}_{\bs - \infty}^{\infty} \delta_{\epsilon} (t) \, f(t) \dd{t} = \scaleint{6ex}_{\bs 0}^{\epsilon} \delta_{\epsilon} (t) \, f(t) \dd{t} = \\[0.5em] \pause
+&=\dfrac{1}{\epsilon} \scaleint{6ex}_{\bs 0}^{\epsilon} f(t) \dd{t} = \\[0.5em] \pause
+&= \dfrac{f(\theta \epsilon)}{\epsilon} \scaleint{6ex}_{\bs 0}^{\epsilon} \dd{t} = \pause f (\theta \epsilon) \hspace{1cm} 0 < \theta < 1
+\end{aligned}
+\end{eqnarray*}
+por el teorema del valor medio.
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando la función}
+Por lo que:
+\pause
+\begin{align*}
+\scaleint{6ex}_{\bs - \infty}^{\infty} f(t) \, \delta_{\epsilon} (t) \dd{t} = f (\theta \, \epsilon) \hspace{1.3cm} 0 < \theta < 1
+\end{align*}
+\pause
+Ahora, al hacer que $\epsilon \to 0$, se obtiene:
+\begin{align}
+\scaleint{6ex}_{\bs - \infty}^{\infty} f(t) \, \delta (t) \dd{t} = f (0)
+\label{eq:ecuacion_03_30}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Expresión general}
+De manera general, hacemos que:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\scaleint{6ex}_{\bs - \infty}^{\infty} &f(\xi) \, \delta (\xi - a) \dd{\xi} = \\[0.5em] \pause
+&= \scaleint{6ex}_{\bs - \infty}^{\infty} f(t + a) \, \delta \dd{t} =  \hspace{0.6cm} \mbox{con  } \xi - a = t \\[0.5em] \pause
+&= f(0 + a) = \\[0.5em] \pause
+&= f(a)
+\end{aligned}
+\label{eq:ecuacion_03_31}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Utilidad del resultado}
+Este es un resultado importante que puede usarse formalmente en el análisis siempre que no surja confusión.
+\end{frame}
+\begin{frame}
+\frametitle{La TL de la $\delta (t)$}
+La transformada de Laplace de $\delta (t)$ se da entonces por definición:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+L \big[ \delta (t); t \to p \big] &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(- p t) \, \delta (t) \dd{t} = \\[0.5em] \pause
+&= \exp( p \cdot 0) = \\[0.5em] \pause
+&= 1 = \pause H (t) \hspace{1.3cm} t > 0
+\end{aligned}
+\label{eq:ecuacion_03_32}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+Entonces tenemos que la TL:
+\pause
+\begin{align*}
+L \big[ \delta (t); t \to p \big] = H (T)
+\end{align*}
+\pause
+mientras que la TL inversa es:
+\pause
+\begin{align}
+L^{-1} \big[ H (t) \big] = \delta (t)
+\label{eq:ecuacion_03_33}
+\end{align}
+\end{frame}
+
+\subsection{La función de error}
+
+\begin{frame}
+\frametitle{Definiendo la función de error}
+La \textcolor{blue}{función de error} $\erf \, (t)$ se define como:
+\pause
+\begin{align*}
+\erf \, (t) = \dfrac{2}{\sqrt{\pi}} \scaleint{6ex}_{0}^{t} \exp\big(-x^{2} \big) dd{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica de $\erf \, (t)$}
+\begin{figure}
+    \centering
+    \includegraphics[scale=1]{Imagenes/Plot_Funcion_Error_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Otra función de error}
+La función complementaria de error $\erfc \, (t)$ es:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+&\erfc \, (t) = \dfrac{2}{\sqrt{\pi}} \scaleint{6ex}_{t}^{\infty} \exp^{-x^{2}} \dd{x} = \\[0.5em] \pause
+&= 1 - \dfrac{2}{\sqrt{\pi}} \scaleint{6ex}_{0}^{t} \exp^{-x^{2}} \dd{x} = \pause 1 - \erf (t)
+\end{aligned}
+\label{eq:ecuacion_03_38}
+\end{eqnarray}
+ya que:
+\begin{align*}
+\dfrac{2}{\sqrt{\pi}} \scaleint{6ex}_{0}^{\infty} \exp\big(-x^{2} \big) \dd{x} = 1
+\end{align*}
+ocupando la función Gamma $\Gamma (x)$.
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica de $\erfc \, (t)$}
+\begin{figure}
+    \centering
+    \includegraphics[scale=1]{Imagenes/Plot_Funcion_Error_02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo la TL}
+Por lo tanto, al evaluar la TL de $\erf \, (t)$, de la misma manera se puede evaluar fácilmente la TL de $\erfc \, (t)$.
+\end{frame}
+\begin{frame}
+\frametitle{Procedimiento para las TL}
+Para simplificar relativamente los pasos de evaluación, evaluamos la TL de $\erf \, \big( \sqrt{t} \big)$ en lugar de $\erf \,(t)$ con los siguientes pasos.
+\end{frame}
+\begin{frame}
+\frametitle{Procedimiento para las TL}
+Sabemos que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\erf \, \big( \sqrt{t} \big) &= \dfrac{2}{\sqrt{\pi}} \scaleint{6ex}_{\bs 0}^{\sqrt{t}} e^{-x^{2}} \dd{x} = \\[0.5em] \pause
+&= \dfrac{2}{\sqrt{\pi}} \scaleint{6ex}_{\bs 0}^{\sqrt{t}} \bigg[ 1 - x^{2} + \dfrac{x^{2}}{2!} - \dfrac{x^{6}}{3!} + \cdots \bigg] = \\[0.5em] \pause
+&= \dfrac{2}{\sqrt{\pi}} \bigg[ t^{\frac{1}{2}} - \dfrac{t^{\frac{3}{2}}}{3} + \dfrac{t^{\frac{5}{2}}}{5 \cdot 2!} - \dfrac{t^{\frac{7}{2}}}{7 \cdot 3!} + \cdots \bigg]
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo la TL}
+Por lo tanto:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+&L \big[ \erf \, (\sqrt{t}) \big] = \dfrac{2}{\sqrt{\pi}} \bigg[ \dfrac{\Gamma (3/2)}{p^{\frac{3}{2}}} - \dfrac{\Gamma (5/2)}{3 \cdot p^{\frac{5}{2}}} + \dfrac{\Gamma (7/2)}{5 \cdot 2! \cdot p^{\frac{7}{2}}} + \\[0.5em]
+&- \dfrac{\Gamma (9/2)}{7 \cdot 3! \cdot p^{\frac{9}{2}}} + \cdots \bigg] = \\[0.5em] \pause
+&= \dfrac{1}{p^{\frac{3}{2}}} \bigg[ 1 - \dfrac{1}{2} \cdot \dfrac{1}{p} + \dfrac{1 \cdot 3}{2 \cdot 4} \cdot \dfrac{1}{p^{2}} - \dfrac{1 \cdot 3 \cdot 5}{2 \cdot 4 \cdot 6} \cdot \dfrac{1}{p^{3}} + \cdots \bigg]
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo la TL}
+\begin{eqnarray}
+\begin{aligned}[b]
+L \big[ \erf \, (\sqrt{t}) \big] &= \dfrac{1}{p^{\frac{3}{2}}} \, \bigg( 1 + \dfrac{1}{p} \bigg)^{-\frac{1}{2}} = \\[0.5em] \pause
+&= \dfrac{1}{p \, (p + 1)^{\frac{1}{2}}}
+\end{aligned}
+\label{eq:ecuacion_03_39}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{La Tl de $\erfc (\sqrt{t})$}
+Por lo tanto:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+L \big[ \erfc \, (\sqrt{t}) \big] &= \pause L \big[ 1 - \erf \, (\sqrt{t}) \big] = \\[0.5em] \pause
+&= \dfrac{1}{p} - \dfrac{1}{p \, (p + 1)^{\frac{1}{2}}} = \\[0.5em] \pause
+&= \dfrac{(p + 1)^{\frac{1}{2}} - 1}{p (p + 1)^{\frac{1}{2}}}
+\end{aligned}
+\label{eq:ecuacion_03_40}
+\end{eqnarray}
+\end{frame}
+
 
 \end{document}
