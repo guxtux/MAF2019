@@ -1,0 +1,202 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+
+\setbeamercolor{section in foot}{bg=alizarin, fg=white}
+\setbeamercolor{subsection in foot}{bg=brown, fg=white}
+\setbeamercolor{date in foot}{bg=goldenrod, fg=white}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+\date{22 de febrero de 2022}
+\title{El sistema coordenado cónico - 2}
+\subtitle{La física y la geometría}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
+
+\section{Operadores diferenciales}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+
+\subsection{Gradiente}
+
+\begin{frame}
+\frametitle{El operador gradiente}
+En un sistema coordenado generalizado $(q_{1}, q_{2}, q_{3})$, escribimos el gradiente de una función escalar $\psi (q_{1}, q_{2}, q_{3})$ como:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\grad{\phi} &= \dfrac{1}{h_{1}} \, \vu{q}_{1} \, \pdv{\psi}{q_{1}} + \dfrac{1}{h_{2}} \, \vu{q}_{2} \, \pdv{\psi}{q_{2}} + \dfrac{1}{h_{3}} \, \vu{q}_{3} \, \pdv{\psi}{q_{3}} = \\[0.5em] \pause
+&= \nsum_{i} \vu{q}_{i} \, \dfrac{1}{h_{i}} \, \pdv{\psi}{q_{i}}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Divergencia}
+
+\begin{frame}
+\frametitle{Expresión para simplificar la escritura}
+Definimos la cantidad:
+\pause
+\begin{align*}
+h = \dfrac{1}{h_{1} \, h_{2} \, h_{3}}
+\end{align*}
+que nos servirá para abreviar la expresión.
+\end{frame}
+\begin{frame}
+\frametitle{El operador divergencia}
+La divergencia de un vector $\vb{B}$ se expresa como:
+\pause
+\begin{align*}
+\div{\vb{B}} &= h \, \bigg[ \pdv{q_{1}} \bigg( B_{1} \, h_{2} \, h_{3} \bigg) + \\[0.5em]
+&+ \pdv{q_{2}} \bigg( B_{2} \, h_{3} \, h_{1} \bigg) + \pdv{q_{3}} \bigg( B_{3} \, h_{1} \, h_{2} \bigg) \bigg]
+\end{align*}
+\end{frame}
+
+\subsection{Rotacional}
+
+\begin{frame}
+\frametitle{El rotacional}
+El operador rotacional de un vector $\vb{B}$ es:
+\pause
+\begin{align*}
+\curl{\vb{B}} = \mqty|
+\vu{q}_{1} \, h_{1} & \vu{q}_{2} \, h_{2} & \vu{q}_{3} \, h_{3} \\[1em]
+\displaystyle \pdv{q_{1}} & \displaystyle \pdv{q_{2}} & \displaystyle \pdv{q_{3}} \\[1em]
+h_{1} \, B_{1} & h_{2} \, B_{2} & h_{3} \, B_{3}
+|
+\end{align*}
+\end{frame}
+
+\subsection{Laplaciano}
+
+\begin{frame}
+\frametitle{El Laplaciano}
+El operador Laplaciano de una función $\psi (q_{1}, q_{2}, q_{3})$ en un sistema coordenado generalizado, se define por la expresión:
+\pause
+\begin{align*}
+\laplacian{\psi} &= \dfrac{1}{h} \bigg[ \pdv{q_{1}} \bigg( \dfrac{h_{2} h_{3}}{h_{1}} \, \pdv{\psi}{q_{1}} \bigg) + \\[0.5em]
+&+ \pdv{q_{2}} \bigg( \dfrac{h_{3} h_{1}}{h_{2}} \, \pdv{\psi}{q_{2}} \bigg) + \pdv{q_{3}} \bigg( \dfrac{h_{1} h_{2}}{h_{3}} \, \pdv{\psi}{q_{3}} \bigg) \bigg]
+\end{align*}
+\end{frame}
+
+\section{Aplicación: La ecuación de Helmholtz}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Construyendo la ecuación}
+
+\begin{frame}
+\frametitle{La ecuación de Helmholtz}
+Sabemos que la ecuación de Helmholtz se expresa por:
+\pause
+\begin{align*}
+\laplacian{E} + k \, E = 0
+\end{align*}
+donde $k$ es el número de onda, $E$ es la función escalar que es solución a la ecuación.
+\\
+\bigskip
+\pause
+Expresemos esta ecuación en el sistema coordenado cónico.
+\end{frame}
+\begin{frame}
+\frametitle{El Laplaciano en coord. cónicas}
+Ya conocemos la expresión para el Laplaciano en coordenadas generalizadas:
+\pause
+\begin{align*}
+\laplacian{E} &= \dfrac{1}{h} \bigg[ \pdv{q_{1}} \bigg( \dfrac{h_{2} h_{3}}{h_{1}} \, \pdv{E}{q_{1}} \bigg) + \\[0.5em]
+&+ \pdv{q_{2}} \bigg( \dfrac{h_{3} h_{1}}{h_{2}} \, \pdv{E}{q_{2}} \bigg) + \pdv{q_{3}} \bigg( \dfrac{h_{1} h_{2}}{h_{3}} \, \pdv{E}{q_{3}} \bigg) \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El Laplaciano en coord. cónicas}
+Como ya conocemos los factores de escala:
+\pause
+\begin{align*}
+h_{r} &= 1 \\[0.5em]
+h_{\theta} &=  r \, \sqrt{\dfrac{(\theta^{2} - \lambda^{2})}{(\theta^{2} - b^{2})(c^{2} - \theta^{2})}} \\[0.5em]
+h_{\lambda} &= r \, \sqrt{\dfrac{(\theta^{2} - \lambda^{2})}{(\lambda^{2} - b^{2})(\lambda^{2} - c^{2})}}
+\end{align*}
+Nos resta más que sustituir aquéllos y hacer un pequeño manejo.
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando las operaciones}
+Con la finalidad de simplificar las operaciones, hagamos que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+f(\theta) &= \sqrt{(\theta^{2} - b^{2})(c^{2} - \theta^{2})} \\[0.5em] \pause
+f(\lambda) &= \sqrt{(\lambda^{2} - b^{2})(\lambda^{2} - c^{2})}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Valores con los factores de escala}
+Calculemos los cocientes que involucran los factores de escala:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{1}{h_{1} \, h_{2} \, h_{3}} &= \dfrac{1}{\dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)}} = \\[0.5em] \pause
+&= \dfrac{f(\theta) \, f(\lambda)}{r^{2} (\theta^{2} - \lambda^{2})}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Las otras cantidades}
+\begin{align*}
+\dfrac{h_{2} \, h_{3}}{h_{1}} = \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)}
+\end{align*}
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{h_{3} \, h_{1}}{h_{2}} = \pause \dfrac{\dfrac{r \sqrt{\theta^{2} - \lambda^{2}}}{f(\lambda)}}{\dfrac{r \sqrt{\theta^{2} - \lambda^{2}}}{f(\theta)}} = \pause \dfrac{f (\theta)}{f (\lambda)}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Las otras cantidades}
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{h_{1} \, h_{2}}{h_{3}} = \pause \dfrac{\dfrac{r \sqrt{\theta^{2} - \lambda^{2}}}{f(\theta)}}{\dfrac{r \sqrt{\theta^{2} - \lambda^{2}}}{f(\lambda)}} = \pause \dfrac{f (\lambda)}{f (\theta)}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Expresando el Laplaciano}
+El operador Laplaciano en el sistema coordenado cónico se escribe como:
+\pause
+\begin{align*}
+\laplacian{E} &= \dfrac{f(\theta) \, f(\lambda)}{r^{2} (\theta^{2} - \lambda^{2})} \bigg[ \pdv{r} \left( \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)} \, \pdv{E}{r} \right) + \\[0.5em]
+&+ \pdv{\theta} \left( \dfrac{f(\theta)}{f(\lambda)} \, \pdv{E}{\theta} \right) + \pdv{\lambda} \left( \dfrac{f(\lambda)}{f(\theta)} \, \pdv{E}{\lambda} \right) \bigg]
+\end{align*}
+\pause
+Que habrá que simplificar para entonces expresar la ecuación de Helmholtz.
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de Helmholtz}
+En el sistema coordenado cónico la ecuación de Helmholtz tiene la forma:
+\begin{align*}
+&\dfrac{1}{r^{2}} \pdv{r} \left( r^{2} \, \pdv{E}{r} \right) + \dfrac{f(\theta)}{r^{2} (\theta^{2} - \lambda^{2})} \, \pdv{\theta} \left( f(\theta) \, \pdv{E}{\theta} \right) + \\[0.5em]
+&+ \dfrac{f(\lambda)}{r^{2} (\theta^{2} - \lambda^{2})} \, \pdv{\lambda} \left( f(\lambda) \, \pdv{E}{\lambda} \right) + k^{2} \, E = 0 \qed
+\end{align*}
+\end{frame}
+\end{document}

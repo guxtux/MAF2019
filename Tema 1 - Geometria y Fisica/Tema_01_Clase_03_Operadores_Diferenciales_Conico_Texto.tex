@@ -1,0 +1,109 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Estudiando el sistema coordenado cónico - 2a. parte \\[0.3em]  \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+La construcción de cada uno de los operadores diferenciales se discute en el material de trabajo, por lo que se tomarán las expresiones a las que se llega. No está de más que repasen ese material.
+
+\section{Operadores diferenciales.}
+
+\subsection{Gradiente.}
+
+En un sistema coordenado generalizado $(q_{1}, q_{2}, q_{3})$, escribimos el gradiente de una función escalar $\psi (q_{1}, q_{2}, q_{3})$ como:
+\begin{align*}
+\grad{\phi} &= \dfrac{1}{h_{1}} \, \vu{q}_{1} \, \pdv{\psi}{q_{1}} + \dfrac{1}{h_{2}} \, \vu{q}_{2} \, \pdv{\psi}{q_{2}} + \dfrac{1}{h_{3}} \, \vu{q}_{3} \, \pdv{\psi}{q_{3}} = \\[0.5em] 
+&= \nsum_{i} \vu{q}_{i} \, \dfrac{1}{h_{i}} \, \pdv{\psi}{q_{i}}
+\end{align*}
+
+\subsection{Divergencia.}
+
+Definimos la cantidad:
+\begin{align*}
+h = \dfrac{1}{h_{1} \, h_{2} \, h_{3}}
+\end{align*}
+que nos servirá para abreviar la expresión.
+
+El operador divergencia de un vector $\vb{B}$ se expresa como:
+\begin{align*}
+\div{\vb{B}} &= h \, \bigg[ \pdv{q_{1}} \bigg( B_{1} \, h_{2} \, h_{3} \bigg) + \\[0.5em]
+&+ \pdv{q_{2}} \bigg( B_{2} \, h_{3} \, h_{1} \bigg) + \pdv{q_{3}} \bigg( B_{3} \, h_{1} \, h_{2} \bigg) \bigg]
+\end{align*}
+
+\subsection{Rotacional.}
+
+El operador rotacional de un vector $\vb{B}$ es:
+\begin{align*}
+\curl{\vb{B}} = \mqty|
+\vu{q}_{1} \, h_{1} & \vu{q}_{2} \, h_{2} & \vu{q}_{3} \, h_{3} \\[1em]
+\displaystyle \pdv{q_{1}} & \displaystyle \pdv{q_{2}} & \displaystyle \pdv{q_{3}} \\[1em]
+h_{1} \, B_{1} & h_{2} \, B_{2} & h_{3} \, B_{3}
+|
+\end{align*}
+
+\subsection{Laplaciano.}
+
+El operador Laplaciano de una función $\psi (q_{1}, q_{2}, q_{3})$ en un sistema coordenado generalizado, se define por la expresión:
+\begin{align*}
+\laplacian{\psi} &= \dfrac{1}{h} \bigg[ \pdv{q_{1}} \bigg( \dfrac{h_{2} h_{3}}{h_{1}} \, \pdv{\psi}{q_{1}} \bigg) + \\[0.5em]
+&+ \pdv{q_{2}} \bigg( \dfrac{h_{3} h_{1}}{h_{2}} \, \pdv{\psi}{q_{2}} \bigg) + \pdv{q_{3}} \bigg( \dfrac{h_{1} h_{2}}{h_{3}} \, \pdv{\psi}{q_{3}} \bigg) \bigg]
+\end{align*}
+
+\section{Aplicación: La ecuación de Helmholtz.}
+
+\subsection{Construyendo la ecuación.}
+
+Sabemos que la ecuación de Helmholtz se expresa por:
+\begin{align*}
+\laplacian{E} + k^{2} \, E = 0
+\end{align*}
+donde $k$ es el número de onda, $E$ es la función escalar que es solución a la ecuación. Expresemos esta ecuación en el sistema coordenado cónico.
+\par
+Ya conocemos la expresión para el Laplaciano en coordenadas generalizadas:
+\begin{align*}
+\laplacian{E} &= \dfrac{1}{h} \bigg[ \pdv{q_{1}} \bigg( \dfrac{h_{2} h_{3}}{h_{1}} \, \pdv{E}{q_{1}} \bigg) + \\[0.5em]
+&+ \pdv{q_{2}} \bigg( \dfrac{h_{3} h_{1}}{h_{2}} \, \pdv{E}{q_{2}} \bigg) + \pdv{q_{3}} \bigg( \dfrac{h_{1} h_{2}}{h_{3}} \, \pdv{E}{q_{3}} \bigg) \bigg]
+\end{align*}
+
+Como ya conocemos los factores de escala para este sistema coordenado cónico\footnote{Ver notas de la clase anterior.}:
+\begin{align*}
+h_{r} &= 1 \\[0.5em]
+h_{\theta} &=  r \, \sqrt{\dfrac{(\theta^{2} - \lambda^{2})}{(\theta^{2} - b^{2})(c^{2} - \theta^{2})}} \\[0.5em]
+h_{\lambda} &= r \, \sqrt{\dfrac{(\theta^{2} - \lambda^{2})}{(\lambda^{2} - b^{2})(\lambda^{2} - c^{2})}}
+\end{align*}
+Nos resta más que sustituir aquéllos y hacer un pequeño manejo.
+\par
+Con la finalidad de simplificar las operaciones, hagamos que:
+\begin{align*}
+f(\theta) &= \sqrt{(\theta^{2} - b^{2})(c^{2} - \theta^{2})} \\[0.5em] 
+f(\lambda) &= \sqrt{(\lambda^{2} - b^{2})(\lambda^{2} - c^{2})}
+\end{align*}
+
+Calculemos los cocientes que involucran los factores de escala:
+\begin{align*}
+\dfrac{1}{h_{1} \, h_{2} \, h_{3}} &= \dfrac{1}{\dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)}} = \\[0.5em] 
+&= \dfrac{f(\theta) \, f(\lambda)}{r^{2} (\theta^{2} - \lambda^{2})} \\[0.5em]
+\dfrac{h_{2} \, h_{3}}{h_{1}} &= \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)} \\[0.5em]
+\dfrac{h_{3} \, h_{1}}{h_{2}} &=  \dfrac{\dfrac{r \sqrt{\theta^{2} - \lambda^{2}}}{f(\lambda)}}{\dfrac{r \sqrt{\theta^{2} - \lambda^{2}}}{f(\theta)}} =  \dfrac{f (\theta)}{f (\lambda)}
+\dfrac{h_{1} \, h_{2}}{h_{3}} &=  \dfrac{\dfrac{r \sqrt{\theta^{2} - \lambda^{2}}}{f(\theta)}}{\dfrac{r \sqrt{\theta^{2} - \lambda^{2}}}{f(\lambda)}} =  \dfrac{f (\lambda)}{f (\theta)}
+\end{align*}
+
+El operador Laplaciano en el sistema coordenado cónico se escribe como:
+\begin{align*}
+\laplacian{E} &= \dfrac{f(\theta) \, f(\lambda)}{r^{2} (\theta^{2} - \lambda^{2})} \bigg[ \pdv{r} \left( \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)} \, \pdv{E}{r} \right) + \\[0.5em]
+&+ \pdv{\theta} \left( \dfrac{f(\theta)}{f(\lambda)} \, \pdv{E}{\theta} \right) + \pdv{\lambda} \left( \dfrac{f(\lambda)}{f(\theta)} \, \pdv{E}{\lambda} \right) \bigg]
+\end{align*}
+Que habrá que simplificar para entonces expresar la ecuación de Helmholtz.
+\par
+En el sistema coordenado cónico la ecuación de Helmholtz tiene la forma:
+\begin{align*}
+&\dfrac{1}{r^{2}} \pdv{r} \left( r^{2} \, \pdv{E}{r} \right) + \dfrac{f(\theta)}{r^{2} (\theta^{2} - \lambda^{2})} \, \pdv{\theta} \left( f(\theta) \, \pdv{E}{\theta} \right) + \\[0.5em]
+&+ \dfrac{f(\lambda)}{r^{2} (\theta^{2} - \lambda^{2})} \, \pdv{\lambda} \left( f(\lambda) \, \pdv{E}{\lambda} \right) + k^{2} \, E = 0 \qed
+\end{align*}
+\end{document}
