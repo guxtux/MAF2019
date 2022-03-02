@@ -19,7 +19,8 @@
   \vskip0pt%
 }
 \makeatother
-\date{7 de octubre de 2021}
+\usefonttheme{serif}
+\date{3 de marzo de 2022}
 
 \title{\large{Tema 2 - Primeras técnicas de solución}}
 \subtitle{Curso MAF}
@@ -56,7 +57,7 @@ Más a menudo las ecuaciones son expresiones de ecuaciones diferenciales parcial
 \begin{frame}
 \frametitle{Algunas ecuaciones de la Física Matemática}
 \begin{table}
-\renewcommand{\arraystretch}{1.5}
+\renewcommand{\arraystretch}{1.6}
 \begin{tabular}{l@{\hskip 1cm} l@{\hskip 2cm}}
 $\laplacian{u} - \dfrac{1}{c^{2}} \, \displaystyle \pdv[2]{u}{t} = 0$ &ecuación de onda \pause \\
 $\laplacian{u} - \dfrac{1}{k} \, \displaystyle \pdv{u}{t} = 0$ & ecuación de difusión \pause \\
@@ -75,7 +76,8 @@ ec. biarmónica de onda & \\
 $\nabla^{4} + \left( \dfrac{1}{p^{2}} \right) \, \displaystyle \pdv[2]{u}{t} = 0$ &  \pause \\
 $\laplacian{u} + \alpha \big[ E - V(x, y, z) \big] \, u = 0$ & ec. de Schrödinger \pause \\
 $\square \, u + \lambda^{2} \, u = 0$ & ec. de Klein-Gordon \pause \\
-$\displaystyle \pdv[2]{u}{x} = A \, \displaystyle \pdv[2]{u}{t} + B \, \displaystyle \pdv{u}{t} + C \, u$ & ecuación del telégrafo
+ecuación del telégrafo & \\
+$\displaystyle \pdv[2]{u}{x} = A \, \displaystyle \pdv[2]{u}{t} + B \, \displaystyle \pdv{u}{t} + C \, u$ & \\
 \end{tabular}
 \end{table}
 \end{frame}
@@ -140,22 +142,23 @@ En todo momento esperamos que ocupen la siguiente estrategia de trabajo:
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Tema 2}
 
+% \begin{frame}
+% \frametitle{Objetivos del Tema 2}
+% Al concluir el Tema 2, el alumno:
+% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+% \setbeamertemplate{enumerate items}[circle]
+% \begin{enumerate}
+% \item Clasificará una ecuación diferencial parcial a partir de las propiedades que presente la expresión.
+% \seti
+% \end{enumerate}
+%\end{frame}
 \begin{frame}
 \frametitle{Objetivos del Tema 2}
 Al concluir el Tema 2, el alumno:
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}
-\item Clasificará una ecuación diferencial parcial a partir de las propiedades que presente la expresión.
-\seti
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Objetivos del Tema 2}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}
-\conti
+%\conti
 \item Obtendrá las soluciones de una ecuación diferencial parcial lineal y homogénea mediante la técnica de separación de variables.
 \seti
 \end{enumerate}
@@ -187,8 +190,8 @@ Al concluir el Tema 2, el alumno:
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}
 \conti
-\item Expondrá la interpretación de (los) resultado(s) obtenido(s), para vincularlos con el fenómeno de estudio.
-\seti
+% \item Expondrá la interpretación de (los) resultado(s) obtenido(s), para vincularlos con el fenómeno de estudio.
+\item Propondrá y resolverá mediante la función de Green, problemas de ED lineales no homogéneas.
 \end{enumerate}
 \end{frame}
 \begin{frame}
@@ -201,7 +204,7 @@ Así como del manejo de series de potencias que se revisa en el curso de \emph{�
 \end{frame}
 \begin{frame}
 \frametitle{Otra nota importante}
-Se hace el comentario de que en las presentaciones y sesiones de trabajo síncrono, se presentará la solución directa de las EDO, pero tanto para los ejercicios a cuenta como del examen-tarea, tendrán que incluir todo el procedimiento de solución.
+Se hace el comentario de que en las presentaciones y sesiones de trabajo síncrono, se presentará la solución directa de las EDO, pero tanto para los ejercicios a cuenta como de los enunciado del examen-tarea, tendrán que incluir todo el procedimiento de solución.
 \end{frame}
 \begin{frame}
 \frametitle{Apoyo con software}
@@ -222,10 +225,11 @@ Los materiales de trabajo que tendrán en la plataforma son los siguientes:
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Introducción Ecs. Diferenciales Parciales.
+%\item Introducción Ecs. Diferenciales Parciales.
 \item Separación de variables.
 \item Método de Frobenius y remoción de singularidades.
 \item Segunda solución linealmente independiente.
+\item Función de Green.
 \end{enumerate}
 \end{frame}
 \begin{frame}
@@ -234,9 +238,9 @@ Se espera que revisen el material de trabajo de acuerdo al siguiente esquema:
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Semana 3 (7 y 8 Oct.): Material 1.
+\item Semana 3: Material 1.
 \item Semana 4: Material 2 y 3.
-\item Semana 5: Material 3 y 4.
+\item Semana 5: Material 4.
 \end{enumerate}
 \end{frame}
 \begin{frame}
@@ -249,67 +253,71 @@ También tendrán disponible una serie de materiales adicionales en donde se tra
 \subsection{Ejercicios a cuenta}
 
 \begin{frame}
-\frametitle{Ejercicios semanales}
-Se tendrán ejercicios a cuenta en las presentaciones semanales, por lo que se espera que los resuelvan y envíen las soluciones en Moodle al siguiente viernes, como se ha acordado previamente.
-\end{frame}
-\begin{frame}
-\frametitle{Ejercicios opcionales}
-Como se presentó en el syllabus, habrá una serie de \emph{ejercicios opcionales}, que son de carácter opcional, es decir, si se resuelven debidamente, aportarán puntaje para los ejercicios a cuenta.
+\frametitle{Ejercicios y Enunciados del Tema 2}
+El martes 8 de marzo se presentarán los ejercicios del Tema durante la sesión en Zoom.
 \\
 \bigskip
 \pause
-En caso de optar por no resolverlos, no hay penalización alguna.
+Así mismo se revisarán los enunciados que formarán parte del Examen parcial intermedio.
 \end{frame}
-\begin{frame}
-\frametitle{Puntaje adicional}
-Los ejercicios opcionales otorgarán hasta el $50\%$ de la calificación obtenida.
-\\
-\bigskip
-\pause
-Ejemplo: 5 ejercicios adicionales bien resueltos (1 punto por cada ejercicio), sumará $2.5$ puntos a los ejercicios a cuenta.
-\end{frame}
-\begin{frame}
-\frametitle{Puntaje adicional}
-Se sumarán los puntajes de los ejercicios semanales y los opcionales para luego dividir entre el total de ejercicios semanales, esto representará el 
-$50\%$ de la calificación del curso.
-\end{frame}
-\begin{frame}
-\frametitle{Ejercicios por material}
-\begin{table}
-\centering
-\begin{tabular}{l c c}
-Material & A cuenta & Opcionales \\ \hline
-1. Introd. EDP & 1 & 2 \\ \hline
-2. Separación & 3 & 2 \\ \hline
-3. Frobenius & 3 & 2 \\ \hline
-4. Segunda solución & 3 & 2 \\ \hline
-\end{tabular}
-\end{table}
-\end{frame}
-\begin{frame}
-\frametitle{Entrega ejercicios a cuenta}
-Debido a que en una misma semana van a revisar dos materiales, tienen la opción de entregar los ejercicios a cuenta:
-\pause
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item Materiales 2 y 3: el lunes 25 de octubre.
-\item Materiales 3 y 4: el viernes 29 de octubre.
-\end{enumerate}
-\pause
-En Moodle tendrán las dos opciones para el envío, tomen en cuenta que los ejercicios del Tema 2 se recibirán solo el lunes 25.
-\end{frame}
-\begin{frame}
-\frametitle{Plazo de entrega opcionales}
-Estos ejercicios opcionales se deberán de entregar en la misma fecha de entrega de los ejercicios semanales, con el mismo procedimiento de envío por Moodle, teniendo un espacio aparte del envío de ejercicios a cuenta.
-\end{frame}
+% \begin{frame}
+% \frametitle{Ejercicios opcionales}
+% Como se presentó en el syllabus, habrá una serie de \emph{ejercicios opcionales}, que son de carácter opcional, es decir, si se resuelven debidamente, aportarán puntaje para los ejercicios a cuenta.
+% \\
+% \bigskip
+% \pause
+% En caso de optar por no resolverlos, no hay penalización alguna.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Puntaje adicional}
+% Los ejercicios opcionales otorgarán hasta el $50\%$ de la calificación obtenida.
+% \\
+% \bigskip
+% \pause
+% Ejemplo: 5 ejercicios adicionales bien resueltos (1 punto por cada ejercicio), sumará $2.5$ puntos a los ejercicios a cuenta.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Puntaje adicional}
+% Se sumarán los puntajes de los ejercicios semanales y los opcionales para luego dividir entre el total de ejercicios semanales, esto representará el 
+% $50\%$ de la calificación del curso.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ejercicios por material}
+% \begin{table}
+% \centering
+% \begin{tabular}{l c c}
+% Material & A cuenta & Opcionales \\ \hline
+% 1. Introd. EDP & 1 & 2 \\ \hline
+% 2. Separación & 3 & 2 \\ \hline
+% 3. Frobenius & 3 & 2 \\ \hline
+% 4. Segunda solución & 3 & 2 \\ \hline
+% \end{tabular}
+% \end{table}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Entrega ejercicios a cuenta}
+% Debido a que en una misma semana van a revisar dos materiales, tienen la opción de entregar los ejercicios a cuenta:
+% \pause
+% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+% \setbeamertemplate{enumerate items}[circle]
+% \begin{enumerate}[<+->]
+% \item Materiales 2 y 3: el lunes 25 de octubre.
+% \item Materiales 3 y 4: el viernes 29 de octubre.
+% \end{enumerate}
+% \pause
+% En Moodle tendrán las dos opciones para el envío, tomen en cuenta que los ejercicios del Tema 2 se recibirán solo el lunes 25.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Plazo de entrega opcionales}
+% Estos ejercicios opcionales se deberán de entregar en la misma fecha de entrega de los ejercicios semanales, con el mismo procedimiento de envío por Moodle, teniendo un espacio aparte del envío de ejercicios a cuenta.
+% \end{frame}
 
-\subsection{Tarea Examen 2}
+% \subsection{Tarea Examen 2}
 
-\begin{frame}
-\frametitle{Tarea Examen 2}
-Se revisarán los ejercicios de la Tarea Examen 2 \textbf{el día 15 de octubre}, para que luego de dos semanas, se envíe por Moodle la solución, es decir, \textcolor{red}{se entrega el día 29 de octubre} a más tardar a las 6 pm.
-\end{frame}
+% \begin{frame}
+% \frametitle{Tarea Examen 2}
+% Se revisarán los ejercicios de la Tarea Examen 2 \textbf{el día 15 de octubre}, para que luego de dos semanas, se envíe por Moodle la solución, es decir, \textcolor{red}{se entrega el día 29 de octubre} a más tardar a las 6 pm.
+% \end{frame}
 % \begin{frame}
 % \frametitle{Actividades en Moodle}
 % Con el fin de estimular y motivar el trabajo, se presentarán una serie de ejercicios en la plataforma Moodle, que a diferencia de los ejercicios a cuenta, la respuesta a los ejercicios será directa.
@@ -379,17 +387,17 @@ Se revisarán los ejercicios de la Tarea Examen 2 \textbf{el día 15 de octubre}
 
 \begin{frame}
 \frametitle{Día de trabajo adicional}
-De acuerdo al calendario que se ha presentado, en octubre tendremos sesiones de trabajo en Zoom.
+De acuerdo al calendario que se ha presentado, en marzo tendremos sesiones de trabajo en Zoom, en el horario de clase, es decir, a partir de las 3:30 pm.
 \pause
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Jueves 7.
-\item Miércoles 13, viernes 15. 
-\item Miércoles 20, viernes 22.
+\item Jueves 3.
+\item Martes 8, jueves 10. 
+\item Martes 15, jueves 17.
 \end{enumerate}
-\pause
-El martes 26 se tendrá sesión para presentar el Tema 3 - Bases completas y ortogonales.
+% \pause
+% El martes 26 se tendrá sesión para presentar el Tema 3 - Bases completas y ortogonales.
 \end{frame}
 % \begin{frame}
 % \frametitle{Día de trabajo adicional}
