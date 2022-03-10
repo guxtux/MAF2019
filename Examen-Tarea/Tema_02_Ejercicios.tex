@@ -9,87 +9,92 @@
 
 \textbf{Indicaciones: } Deberás de resolver cada ejercicio de la manera más completa, ordenada y clara posible, anotando cada paso así como las operaciones involucradas. El puntaje de cada ejercicio es de \textbf{1 punto}.
 \par
-Este examen requiere que presentes todo el desarrollo de acuerdo como se trabajó con separación de variables, con el método de Frobenius: identificar puntos singulares en una EDO, se requiere que presentes la ecuación de índices, así como la relación de recurrencia y las dos soluciones linealmente independientes.
+En este conjunto de ejercicios se requiere que presentes todo el desarrollo de acuerdo como se trabajó con separación de variables, con el método de Frobenius: identificar puntos singulares en una EDO, se requiere que presentes la ecuación de índices, así como la relación de recurrencia y las dos soluciones linealmente independientes.
 
 \begin{enumerate}
-\item Demuestra que la ecuación de Poisson:
+%Ref. Riley (2006) - Mathematical methods. 21.1
+\item Un cubo hecho de material cuya conductividad es $k$, tiene como seis caras los planos $x = \pm a$, $y = \pm a$ y $z = \pm a$, y no contiene fuentes de calor internas. Verifica que la distribución de temperatura:
 \begin{align*}
-\laplacian{\varphi} (\eta, \psi, z) = 0
+u (x, y, z, t) = A \, \cos \dfrac{\pi \, x}{a} \, \sin \dfrac{\pi \, z}{a} \, \exp \left( - \dfrac{2 \, k \, \pi^{2} \, t}{a^{2}} \right)
 \end{align*}
-es separable en el sistema coordenado cilíndrico elíptico.
-%Ref. Pinchover 5.6
-\item Con el método de separación de variables (MSP): 
+\begin{enumerate}[label=\alph*)]
+\item Satisface la correspondiente ecuación de difusión.
+\item ¿A través de qué caras hay flujo de calor?
+\item ¿Cuál es la dirección y la velocidad del flujo de calor en el punto \hfill \break $\left(\dfrac{3 a}{4}, \dfrac{a}{4}, a \right)$ en el tiempo $t = \dfrac{a^{2}}{(k \, \pi^{2})}$?
+\end{enumerate}
+%Ref. 21.5
+\item Denotando los tres términos de $\laplacian$ en coordenadas esféricas por $\laplacian_{r}$, $\laplacian_{\theta}$, $\laplacian_{\phi}$, de manera obvia, evalúa $\laplacian{u}_{r}$, etc., para las dos funciones dadas a continuación y verifica que, en cada caso, aunque los términos individuales son no necesariamente cero, su suma $\laplacian{u}$ es cero. Determina los valores correspondientes de $l$ y $m$, las constantes de separación.
+\begin{enumerate}[label=\alph*)]
+\item $u(r, \theta, \phi) = \left( A \, r^{2} + \dfrac{B}{r^{3}} \right) \, \dfrac{3 \cos^{2} \theta - 1}{2}$
+\item $u(r, \theta, \phi) = \left( A \, r^{2} + \dfrac{B}{r^{2}} \right) \, \sin \theta \, \exp(i \, \phi)$
+\end{enumerate}
+\end{enumerate}
+
+\rule{15cm}{0.4pt}
+
+%Ref. Arfken (6th Ed.) 9.5.5
+Determina la naturaleza de los puntos singulares y resuelve la ecuación\footnote{Conviene que se le llame por un nombre a cada ecuación diferencial, de esa manera estaremos identificando la expresión que posteriormente abordaremos las soluciones y conoceremos que nos conducirán a lo que denominaremos como funciones especiales.} de Legendre:
+\begin{align*}
+(1 -x^{2}) \, \stilde{y} -  2 \, x \, \ptilde{y} + n(n + 1) \, y = 0
+\end{align*}
+\begin{enumerate}[resume]
+\item \label{ejercicio_03} \begin{enumerate}[label=\roman*)]
+\item Comprueba que la ecuación de índices es: $k \, (k - 1) = 0$
+\item Con $k = 0$, 
+\begin{enumerate}[label=\alph*)]
+\item Expresa la relación de recurrencia.
+\item Demuestra que la solución se expresa como una serie de potencias pares de $x$ (con $a_{1} = 0$):
+\begin{align*}
+y_{\mbox{par}} = a_{0} \bigg[ 1 - \dfrac{n (n - 1)}{2!} \, x^{2} + \dfrac{n (n - 2)(n + 1)(n + 3)}{4!} \, x^{4} + \ldots \bigg]
+\end{align*}
+\end{enumerate}
+\end{enumerate}
+\item \label{ejercicio_04} Con $k = 1$, 
+\begin{enumerate}[label=\alph*)]
+\item Expresa la relación de recurrencia.
+\item Demuestra que la solución se expresa como una serie de potencias pares de $x$ (con $a_{1} = 1$):
+\begin{align*}
+y_{\mbox{impar}} &= a_{1} \bigg[ x - \dfrac{(n - 1)(n + 2)}{3!} \, x^{3} + \\[0.5em] 
+&+ \dfrac{(n - 1)(n - 3)(n + 2)(n + 4)}{5!} \, x^{5} + \ldots \bigg]
+\end{align*}
+\end{enumerate}
+% \end{enumerate}
+\newpage
+\item Continuamos con la ecuación de Legendre y los resultados obtenidos en los ejercicios anteriores (\ref{ejercicio_03}) y (\ref{ejercicio_04}).
 \begin{enumerate}[label=\roman*)]
-\item Calcula una solución al siguiente problema periódico con la ecuación de calor:
-\begin{table}[H]
-\centering
-\large
-\begin{tabular}{l l}
-$u_{t} - k \, u_{xx} = 0$ & $0 < x < 2 \, \pi,  t > 0$, \\
-$u(0, t) = u(2 \, \pi, t) = 0, \quad u_{x} (0, t) = u_{x}(2 \, \pi, t)$ & $t \geq 0$, \\
-$u(x, 0) = f(x)$ & $0 \leq x \leq 2 \, \pi$
-\end{tabular}
-\end{table}
-donde $f$ es una función periódica \emph{suave} (bien portada, continua, derivable). Este sistema describe la evolución del calor en un alambre circular aislado de longitud $2 \, \pi$.
-\item Encuentra el $\displaystyle{\lim_{t \to \infty}} \, u(x, t)$ para todo $0 < x < 2 \, \pi$, ¿qué interpretación física se tiene de este resultado?
+\item Demuestra que ambas soluciones: $y_{\mbox{par}}$ e $y_{\mbox{impar}}$, divergen para \break \hfill $x = \pm 1$, \textbf{si la serie continua hacia el infinito}.
+\item Demuestra que mediante una elección apropiada de $n$, una serie puede convertirse en un polinomio, evitando así la catástrofe de la divergencia. En mecánica cuántica, esta restricción de $n$ a valores enteros corresponde a la \textbf{cuantización del momento angular}.
 \end{enumerate}
-%Ref. Arfken (2006) 9.3.5
-\item Una partícula atómica (mecánica cuántica) está confinada dentro de una caja rectangular de lados $a, b$ y $c$. La partícula se describe mediante una función de onda $\psi$ que satisface la ecuación de onda de Schrödinger:
-\begin{align*}
-- \dfrac{\hbar^{2}}{2 \, m} \, \laplacian{\psi} = E \, \psi
-\end{align*}
-Se requiere que la función de onda desaparezca en cada superficie de la caja (pero no que sea idénticamente cero). Esta condición impone restricciones a las constantes de separación y, por lo tanto, a la energía $E$. Demuestra que:
-\begin{align*}
-E = \dfrac{\pi^{2} \, \hbar^{2}}{2 \, m} \bigg( \dfrac{1}{a^{2}} + \dfrac{1}{b^{2}} + \dfrac{1}{c^{2}} \bigg)
-\end{align*}
-es el valor más pequeño de $E$ para el que se puede obtener esa solución.
-%Ref. Arfken 9.5.7
-\item Resuelve la ecuación diferencial de Laguerre mediante una solución en series:
-\begin{align*}
-x \, \sderivada{L}_{n} (x) + (1 - x) \, \pderivada{L}_{n} (x) + n \, L_{n} (x) = 0
-\end{align*}
-Elige el parámetro $n$ tal que se trunque la serie y la solución se exprese como un polinomio.
-\item Identifica el(los) punto(s) singular(es) y en caso de que sea conducente, con el método de Frobenius resuelve las siguientes ecuaciones diferenciales.
+
+\rule{14.6cm}{0.4pt}
+%Ref. Arfken (2006) 9.6.7
+\item Considera las siguientes dos funciones $\varphi_{1} = x$ y $\varphi_{2} = \abs{x} = x \, sgn \, x$, ver la figura (\ref{fig:figura_09_03}).
+\\[0.5em]
+\begin{minipage}[H]{\linewidth}
+\begin{wrapfigure}{R}{0.5\textwidth}
+\vspace{-25pt}
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{Imagenes/Ejercicio_Opcional_07.eps}
+\end{center}
+\caption{Gráfica de las funciones $x$ y $\abs{x}$}
+\label{fig:figura_09_03}
+\end{wrapfigure}
+
+La función $sgn x$ es el signo de $x$. Ya que $\ptilde{\varphi}_{1} = 1$ y $\ptilde{\varphi}_{2} = sng \, x$, se tiene que: $W(\varphi_{1}, \varphi_{2}) = 0$ para cualquier intervalo, incluyendo $[-1, +1]$.
+\\[0.5em]
+Que el Wronskiano en el intervalo $[-1, +1]$: ¿prueba eso que $\varphi_{1}$ y $\varphi_{2}$ sean linealmente dependientes?. 
+\\[0.5em]
+En la figura se nota claramente que no lo son. ¿Qué es lo que está mal en el argumento?
+\end{minipage}
+\item Identifica el(los) punto(s) singular(es) y en caso de que sea conducente, con el método de Frobenius resuelve las siguientes ecuaciones diferenciales, las cuales deben de contar con las correspondientes dos soluciones linealmente independientes.
 \begin{enumerate}[label=\alph*)]
-%Ref. Duffy A.2.1
-\item $(2 x^{2} + x^{3}) \stilde{y} + (x + 3 x^{2}) \ptilde{y} - (1 - 4 x) y = 0$
-%Ref. Duffy Pag. 477 8)
-%\item $2 x^{2} \stilde{y} - 3 (x + x^{2}) \ptilde{y} + (2 + 3 x) y = 0$
-%Ref. Duffy Pag. 480 4
-%\item $x^{2} \stilde{y} - x (1 + x) \ptilde{y} + y = 0$
-%REf. Duffy Pag. 480 8)
-\item $x^{2} \stilde{y} + x (2 x - 1) \ptilde{y} + x(x - 1) y = 0$
+%Ref. Duffy Pag. 480 6)
+\item $x^{2} (1 - x^{2}) \sderivada{y} - 5 \, x \, \pderivada{y} + 9 \, y = 0$
+\item $x^{2} \sderivada{y} + x (x^{2} - 1) \pderivada{y} + (1 - x^{2}) y = 0$
 \end{enumerate}
-%Ref. Arfken 9.6.3
-\item Usando el determinante Wronskiano, demuestra que el conjunto de funciones:
+\item Sea $C$ una curva cerrada y $D$ una región cerrada. Demuestra la siguiente identidad:
 \begin{align*}
-\left\{ 1, \dfrac{x^{n}}{n!} \hspace{0.2cm} (n = 1, 2, \ldots, N) \right\}
-\end{align*}
-es linealmente independiente.
-%Ref. Arfken (2006) 9.6.15
-\item Considerando que una solución de:
-\begin{align*}
-\sderivada{R} + \dfrac{1}{r} \, \pderivada{R} - \dfrac{m^{2}}{r^{2}} \, R = 0
-\end{align*}
-es $R = r^{m}$. Demuestra que la ecuación (\ref{eq:ecuacion_09_127}) predice una segunda solución: $R = r^{-m}$
-\begin{align}
-\setlength{\fboxsep}{2\fboxsep}\boxed{y_{2}(x) =  y_{1} \: (x) \int^{x} \dfrac{\exp \left[ \displaystyle - \int^{x_{2}} P(x_{1}) \: \dd{x_{1}} \right]}{[y_{1}(x_{2})]^{2}} \dd{x_{2}}}
-\label{eq:ecuacion_09_127}
-\end{align}
-%Ref. Arfken (2006) 9.6.18
-\item Una solución para la ecuación diferencial de Hermite:
-\begin{align*}
-\stilde{y} - 2 \, x \, y + 2 \, \alpha \, y = 0
-\end{align*}
-\begin{enumerate}[label=\alph*)]
-\item Para $\alpha = 0$ es $y_{1} (x) = 1$.
-\item Para $\alpha = 1$ es $y_{1} (x) = 1$.
-\end{enumerate}
-Usando la ecuación (\ref{eq:ecuacion_09_127}). Encuentra una segunda solución $y_{2}(x)$ para cada inciso.
-%Ref. Herman (2015)
-\item Sea $S$ una superficie cerrada y $V$ un volumen cerrado. Demuestra la primera identidad de Green:
-\begin{align*}
-\scaleint{6ex}_{\bs S} \phi \, \grad{\psi} \cdot \vb{n} \dd{S} = \scaleint{6ex}_{\bs V} \big( \phi \, \laplacian{\psi} + \grad{\phi} \cdot \grad{\psi} \big) \dd{V}
+\scaleint{6ex}_{\bs C} \phi \, \grad{\phi} \cdot \vb{n} \dd{s} = \scaleint{6ex}_{\bs D} \big( \phi \, \laplacian{\phi} + \grad{\phi} \cdot \grad{\phi} \big) \dd{A}
 \end{align*}
 \end{enumerate}
 

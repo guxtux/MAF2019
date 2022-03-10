@@ -1,0 +1,354 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Método de Frobenius \\[0.3em]  \large{Tema 2 - Primeras técnicas de solución} \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Curso MAF}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{16pt}%
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+\section{Puntos Ordinarios y Singulares Regulares.}
+
+Consideremos ecuaciones diferenciales lineales de la forma:
+\begin{align}
+a_{n} (x) \, \nderivada{y}{n} (x) + a_{n-1} (x) \, \nderivada{y}{n-1} (x)+ \cdots + a_{0} (x) \, y(x) = 0
+\label{eq:ecuacion_01}
+\end{align}
+la cual puede reescribirse como:
+\begin{align}
+\nderivada{y}{n} (x) + \dfrac{a_{n-1} (x)}{a_{n} (x)} \, \nderivada{y}{n-1} (x)+ \cdots + \dfrac{a_{0} (x)}{a_{n} (x)} \, y(x) = 0
+\label{eq:ecuacion_02}
+\end{align}
+Si quisiéramos buscar una solución en serie entorno a un punto $x_{0}$ será necesario que cada coeficiente de la ecuación no presente ninguna singularidad, ya que la garantía de soluciones, ya sea en un esquema del tipo Picard (método iterativo de aproximaciones sucesivas) o mediante aplicación del Teorema de Cauchy (problemas de valores iniciales que tienen solución única bajo ciertas condiciones y que los coeficientes en la EDP son funciones analíticas) requiere como mínimo continuidad de las funciones intervinientes en la ecuación diferencial.
+\par
+El caso que vamos a analizar, en virtud de que procuramos soluciones en serie será el que las funciones sean analíticas en el punto alrededor del cual exista una solución en serie. Para ello, es necesario introducir la siguiente definición.
+
+\subsection{Punto Ordinario.}
+
+Dada una ecuación diferencial de la forma:
+\begin{align*}
+\nderivada{y}{n} (x) + \dfrac{a_{n-1} (x)}{a_{n} (x)} \, \nderivada{y}{n-1} (x)+ \cdots + \dfrac{a_{0} (x)}{a_{n} (x)} \, y(x) = 0
+\end{align*}
+Diremos que $x_{0}$ es un \emph{punto ordinario} si y sólo si las funciones:
+\begin{align}
+\dfrac{a_{n-1} (x)}{a_{n} (x)}, \hspace{0.3cm} \dfrac{a_{n-2} (x)}{a_{n} (x)}, \ldots \dfrac{a_{0} (x)}{a_{n} (x)}
+\label{eq:ecuacion_03}
+\end{align}
+son analíticas en $x_{0}$.
+\par
+En torno a puntos ordinarios, tendremos soluciones analíticas, en una determinada región. Por lo cual, tendremos soluciones en serie de la forma:
+\begin{align}
+y (x) = \nsum_{0}^{\infty} c_{j} \, x^{j}
+\label{eq:ecuacion_04}
+\end{align}                                
+La convergencia de las series está garantizada por la analiticidad de los coeficientes, pero el radio de convergencia $\abs{x - x_{0}} \leq \rho$ estará determinado por el:
+\begin{align}
+\rho < \min \left\{ \rho_{0}, \rho_{1}, \rho_{2}, \ldots, \rho_{n-1} \right\}
+\label{eq:ecuacion_05}
+\end{align}
+donde $\rho$ es el radio del dominio de analiticidad de las funciones de la ec. (\ref{eq:ecuacion_03}).
+\par
+\noindent
+\textbf{Observación sobre los intervalos de convergencia.} Como ejemplo, consideremos la ecuación diferencial:
+\begin{align*}
+\tderivada{y} (x) + \dfrac{1}{1 + x^{2}} \, \sderivada{y} (x) + \dfrac{1}{x} \, y (x) = 0
+\end{align*}
+Notemos que $x_{0}$ = 1 es un punto ordinario de la ecuación diferencial. Ahora, para analizar los radios de convergencia deberíamos estudiar las regiones de analiticidad de las funciones que son coeficientes. Para ello, notemos que la función:
+\begin{align}
+\dfrac{1}{1 + x^{2}}
+\label{eq:ecuacion_06}
+\end{align}
+tiene una singularidad en $x = \pm i$ y la función $1/x$, en $x = 0$. A partir de esto, desarrollo alrededor de $x = 1/2$ tendrá un límite cuando alcance a $x = 0$ por lo que el radio de la región de analiticidad para la función $x$ es
+\begin{align*}
+\abs{x - \dfrac{1}{2}} < \dfrac{1}{2}
+\end{align*}
+Para determinar el radio de la región de analiticidad de la función -ec. (\ref{eq:ecuacion_06})- debemos de calcular la distancia entre $x = 1/2$ y $x = \pm i$ esa distancia será:
+\begin{align*}
+\sqrt{\left( \dfrac{1}{2} \right)^{2} +  1^{2}} = \dfrac{\sqrt{5}}{2}
+\end{align*}
+entonces, como $1/2$ es el menor, tendremos que la solución en serie tendrá un radio de convergencia:
+\begin{align*}
+\abs{x - \dfrac{1}{2}} < \dfrac{1}{2}
+\end{align*}
+
+\section{Sol. en serie EDO2 entorno a puntos ordinarios.}
+
+A partir de la garantía de soluciones en serie para ecuaciones diferenciales con coeficientes analíticos en un punto determinado, $x_{0}$, vamos a buscar soluciones en serie de la forma:
+\begin{align}
+y (x) = \nsum_{0}^{\infty} c_{j} \, (x - x_{0})^{j}
+\label{eq:ecuacion_07}    
+\end{align}
+y luego al imponer que se satisfaga la ecuación diferencial, se encuentran los coeficientes $c_{j}$.
+\begin{ejemplo}
+Hallar la solución general de la ecuación diferencial:
+\begin{align*}
+\sderivada{y} (x) + x \, y = 0
+\end{align*}
+Procuremos una solución en serie alrededor de $x = 0$, es decir:
+\begin{align*}
+y (x) = \nsum_{0}^{\infty} c_{j} \, x^{j}
+\end{align*}
+
+Las derivadas de $y (x)$ son:
+\begin{align*}
+\pderivada{y} (x) = \nsum_{j=0}^{\infty} j \, c_{j} \, x^{j-1} \\[0.5em]
+\sderivada{y} (x) = \nsum_{j=0}^{\infty} j \, (j - 1) \, c_{j} \, x^{j-2}
+\end{align*}
+Que al reemplazar en la ecuación diferencial, se tiene que:
+\begin{align*}
+\nsum_{j=0}^{\infty} j \, (j + 1) \, c_{j} \, x^{j-2} + \nsum_{j=0}^{\infty} c_{j} \, x^{j+1} = 0
+\end{align*}
+Separemos el término correspondiente a $x_{0}$ y reagrupando podemos escribir:
+\begin{align*}
+&2 c_{2} + \nsum_{j=0}^{\infty} (j + 3)(j + 2) \, c_{j+3} \, x^{j+1} + \nsum_{j=0}^{\infty} c_{j} \, x^{j+1} = \\[0.5em]
+&= 2 c_{2} + \nsum_{j=0}^{\infty} \big[ (j + 3)(j + 2) \, c_{j+3} + c_{j} \big] \, x^{j+1} = 0
+\end{align*}
+con lo que obtenemos:
+\begin{align*}
+c_{2} &= 0 \\[0.5em]
+c_{j+3} &= - \dfrac{c_{j}}{(j + 3)(j + 2)}
+\end{align*}
+
+Esta regla de recurrencia establece: $c_{0}$ y $c_{1}$ libres, deben ser definidos a priori: $c_{2} = 0$, lo que condiciona a $c_{5} = c_{8} =  \cdots = c_{2+3 \ell} = 0$ y los demás términos se obtienen a partir de la regla de recurrencia indicada.
+\par
+Como los coeficientes de la ecuación diferencial son analíticos en todo el plano complejo,es de esperar que la serie sea convergente en toda la recta real, pero se puede estudiar en términos del criterio del cociente:
+\begin{align*}
+\lim_{\ell \to \infty} \abs{ \dfrac{c_{\ell+3} \, x^{\ell+3+1}}{c_{\ell} \, x^{\ell+1}}} = \dfrac{1}{(\ell + 3)(\ell + 2)} \, \abs{x^{3}} = 0
+\end{align*}
+para todo $x$. Lo que indica que la serie converge para todo valor de $x$.
+\end{ejemplo}
+
+\section{Puntos singulares regulares. I: Ecuación de Euler.}
+
+Ahora estudiaremos ecuaciones diferenciales las cuales poseen coeficientes que no son analíticos en algún conjunto de puntos. No obstante, no todas las ecuaciones diferenciales con singularidades de este tipo admitirán soluciones en serie. Más aún, como buscaremos soluciones de ecuaciones entorno a puntos de singularidad, no podremos esperar series de potencias tipo Taylor, ya que esto implicaría analiticidad de la solución, la cual no está garantizada.
+\par
+Además, de las posibles singularidades existentes, sólo analizaremos un tipo particular, las que definiremos como puntos singulares regulares.
+
+\subsection{Punto singular regular.}
+
+Dada una ecuación diferencial de segundo orden de la forma:
+\begin{align}
+P (x) \, \sderivada{y} (x) + Q(x) \, \pderivada{y} (x) + R (x) y(x) = 0
+\label{eq:ecuacion_08}
+\end{align}
+Diremos que $x_{0}$ es un punto singular regular si y sólo si las funciones:
+\begin{align}
+(x - x_{0}) \, \dfrac{Q (x)}{P (x)} \hspace{0.5cm} \mbox{y} \hspace{0.5cm} (x - x_{0})^{2} \, \dfrac{R (x)}{P (x)}
+\end{align}
+son analíticas en $x_{0}$.
+\par
+Sobre lo específico de la definición volveremos más adelante y estará sustentada en la integrabilidad de la ecuación de Euler.
+
+\subsection{La ecuación de Euler.}
+
+Consideremos la ecuación diferencial:
+\begin{align}
+x^{2} \, \sderivada{y} (x) + \alpha \, x \, \pderivada{y} (x) + \beta \, y (x) = 0
+\label{eq:ecuacion_09}
+\end{align}
+donde $\alpha$ y $\beta$ son números reales.
+\par
+Esta ecuación diferencial es el paradigma de las ecuaciones con un punto singular regular, $x_{0}$. Además, la propia estructura de la ecuación diferencial sugiere a una solución de la forma $y = x^{r}$. Reemplazando en la ecuación diferencial se obtiene:
+\begin{align*}
+r \, (r - 1) \, x^{r} + \alpha \, r \, x^{r} + \beta \, x^{r} = \big[ r (r - 1) + \alpha \, r + \beta \big] \, x^{r} = 0
+\end{align*}
+Entonces, la potencia $r$ se obtiene resolviendo la ecuación:
+\begin{align*}
+r \, (r - 1) + \alpha \, r + \beta = r^{2} + (\alpha - 1) \, r + \beta = 0
+\end{align*}
+Podemos definir el polinomio $p (r)$ y lo llamaremos \emph{polinomio indicial} a:
+\begin{align}
+p (r) = r^{2} + (\alpha - 1) \, r + \beta
+\label{eq:ecuacion_10}
+\end{align}
+de tal manera que la potencia de las soluciones a la ecuación diferencial sean las raíces de este polinomio cuya ecuación se denomina \emph{ecuación indicial}
+\begin{align}
+p (r) = r^{2} + (\alpha - 1) \, r + \beta = 0
+\label{eq:ecuacion_11}
+\end{align}
+
+Analicemos las diferentes soluciones de la ecuación indicial, ya que si bien admite dos, estas pueden ser diferentes reales, diferentes complejas o iguales.
+
+\subsubsection{Raíces reales distintas.}
+
+Dada la ecuación indicial:
+\begin{align*}
+r^{2} + (\alpha - 1) \, r + \beta = 0
+\end{align*}
+para el caso:
+\begin{align*}
+(\alpha - 1)^{2} - 4 \, \beta > 0
+\end{align*}
+tendremos dos soluciones reales distintas, $r_{1}$ y $r_{2}$, con lo que la solución general será:
+\begin{align}
+y (x) = c_{1} \, x^{r_{1}} + c_{2} \, x^{r_{2}}
+\label{eq:ecuacion_12}
+\end{align}
+
+\subsubsection{Raíces complejas distintas.}
+
+Para el caso de que las raíces complejas conjugadas (ya que los coeficientes $\alpha$ y $\beta$ con reales) tenemos que
+\begin{align*}
+r_{1} = \xi + i \, \eta \hspace{0.5em} \mbox{y} \hspace{0.5cm} r_{2} = \xi - i \, \eta
+\end{align*}
+entonces:
+\begin{align}
+\begin{aligned}[b]
+y (x) &= c_{1} \, x^{\xi + i \, \eta} + c_{2} \, x^{\xi - i \, \eta} = \\[0.5em]
+&= c_{1} \, x^{\xi} \, x^{i \, \eta} + c_{2} \, x^{\xi} \, x^{- i \, \eta}
+\end{aligned}
+\label{eq:ecuacion_13}
+\end{align}
+
+Reescribiendo:
+\begin{align*}
+x^{i \eta} = e^{i \eta \ln \abs{x}}
+\end{align*}
+entonces, podemos escribir la solución general:
+\begin{align}
+y (x) = x^{\xi} \big[ (c_{1} + c_{2}) \, \cos \big( \eta \, \ln \abs{x} \big) + (c_{1} - c_{2}) \, \sin \big( \eta \, \ln \abs{x} \big) \big]
+\label{eq:ecuacion_14}
+\end{align}
+
+\subsubsection{Raíces iguales.}
+
+Para el caso en que las raíces sean iguales, sea $r_{1}$, el polinomio indicial puede escribirse:
+\begin{align*}
+p (r) = (r - r_{1})^{2}
+\end{align*}
+Si escribimos la ecuación diferencial, y al reemplazar $y = x^{r}$:
+\begin{align*}
+x^{2} \, \sderivada{y} + \alpha \, x \, \pderivada{y} + \beta \, y = (r - r_{1})^{2} \, x^{r}
+\end{align*}
+esta ecuación diferencial resulta cero en la raíz $r_{1}$. Notemos que si derivamos la ecuación diferencial con respecto a $r$, obtenemos:
+\begin{align*}
+\pdv{r} \bigg[ (r - r_{1})^{2} \, x^{r} \bigg] = 2 (r - r_{1}) \, x^{r} + (r - r_{1})^{2} \, x^{r} \, \ln \abs{x}
+\end{align*}
+Lo que significa que la derivada de la ecuación diferencial, evaluada en $r = r_{1}$ también se anula.
+\par
+Entonces, permutando la derivación con respecto a $r$ tendremos que la derivada con respecto a $r$ de la función solución también es solución, esto es $x \, r_{1} \, ln \abs{x}$ también es solución, por lo que la solución general es:
+\begin{align}
+y (x) = x^{r_{1}} , (c_{1} + c_{2} \, \ln \abs{x})
+\label{eq:ecuacion_15}
+\end{align}
+
+Ahora que tenemos caracterizadas todas las posibles soluciones para la ecuación de Euler, estamos en condiciones de estudiar una ecuación diferencial y proponer una solución en serie de potencias de $(x - x_{0})$ donde $x_{0}$ sea un punto singular regular.
+\par
+La ecuación de Euler será el sustento teórico para la búsqueda de soluciones en un entorno de puntos singulares regulares.
+
+\section{Puntos singulares regulares. II: Frobenius.}
+
+Una vez estudiada en detalle la ecuación de Euler, consideremos un caso más general de EDO2 lineal que tenga un punto singular regular.
+\par
+Sin pérdida de generalidad, podemos considerar que el punto singular regular es el $x = 0$, para simplificar la escritura.
+\par
+Consideremos la ecuación diferencial mostrada en la ec. (\ref{eq:ecuacion_08}), esta ecuación puede ser reescrita como:
+\begin{align*}
+\sderivada{y} + \dfrac{Q (x)}{P (x)} \, \pderivada{y} (x) + \dfrac{R (x)}{P (x)} \, y (x) = 0
+\end{align*}
+multiplicando a ambos miembros por $x^{2}$ obtenemos:
+\begin{align*}
+x^{2} \, \sderivada{y} + x^{2} \, \dfrac{Q (x)}{P (x)} \, \pderivada{y} (x) + x^{2}\, \dfrac{R (x)}{P (x)} \, y (x) = 0
+\end{align*}
+Podemos reescribir la ecuación en la forma:
+\begin{align*}
+x^{2} \, \sderivada{y} + x \, \bigg[ x \, \dfrac{Q (x)}{P (x)} \bigg] \, \pderivada{y} (x) + \bigg[ x^{2} \, \dfrac{R (x)}{P (x)} \bigg] \, y (x) = 0
+\end{align*}
+Las expresiones entre corchetes son funciones analíticas ya que $x = 0$ es un punto singular regular (en este punto cobra sentido la especificidad en la definición de punto singular regular).
+\par
+Por lo tanto, para las funciones entre corchetes tenemos series de Taylor convergentes alrededor de $x = 0$:
+\begin{align*}
+\bigg[ x \, \dfrac{Q (x)}{P (x)} \bigg] &= \alpha_{0} + \alpha_{1} \, x + \alpha_{2} \, x^{2} + \cdots \\[0.5em]
+\bigg[ x^{2} \, \dfrac{R (x)}{P (x)} \bigg] &= \beta_{0} + \beta_{1} \, x + \beta_{2} \, x^{2} + \cdots \\[0.5em]
+\end{align*}
+
+Si reemplazamos estas expresiones en la ecuación diferencial, tenemos que:
+\begin{align*}
+x^{2} \, \sderivada{y} + x \big[ \alpha_{0} + \alpha_{1} \, x + \alpha_{2} \, x^{2} + \cdots \big] \, \pderivada{y} (x) + \big[ \beta_{0} + \beta_{1} \, x + \beta_{2} \, x^{2} + \cdots \big] \, y (x) = 0
+\end{align*}
+distribuyendo el primer término:
+\begin{align*}
+x^{2} \, \sderivada{y} + \alpha_{0} \, x \, \pderivada{y} (x) &+ x \big[ \alpha_{1} \, x + \alpha_{2} \, x^{2} + \cdots \big] \, \pderivada{y} (x) + \beta_{0} \, y (x) + \\[0.5em]
+&+ \big[ \beta_{1} \, x + \beta_{2} \, x^{2} + \cdots \big] \, y (x) = 0
+\end{align*}
+Reagrupando términos tenemos:
+\begin{align*}
+\underbrace{x^{2} \, \sderivada{y} + \alpha_{0} \, x \, \pderivada{y} (x) + \beta_{0} \, y (x)}_{Euler} &+ x \big[ \alpha_{1} \, x + \alpha_{2} \, x^{2} + \cdots \big] \, \pderivada{y} (x) + \beta_{0} \, y (x) + \\[0.5em]
+&+ \big[ \beta_{1} \, x + \beta_{2} \, x^{2} + \cdots \big] \, y (x) = 0
+\end{align*}
+el polinomio indicial para la correspondiente ecuación de Euler, será:
+\begin{align*}
+p (r) = r^{2} + (\alpha_{0} - 1) \, r + \beta_{0}
+\end{align*}
+El hecho de que un primer término sea la ecuación de Euler, sugiere y motiva a buscar soluciones en serie para la ecuación diferencial (ahora, la completa) en la forma:
+\begin{align}
+y (x) = x^{r} \, \nsum_{l=0}^{\infty} c_{l} \, x^{l}
+\label{eq:ecuacion_16}
+\end{align}
+donde $r$ es solución de la ecuación indicial $r^{2} + (\alpha_{0} - 1) \, r + \beta_{0}$.
+\par
+Con esta propuesta de solución, tenemos que:
+\begin{align*}
+y (x) &= x^{r} \, \nsum_{l=0}^{\infty} c_{l} \, x^{l} = \nsum_{l=0}^{\infty} c_{l} \, x^{l+r} \\[0.5em]
+\pderivada{y} (x) &= \nsum_{l=0}^{\infty} (l + r) \, c_{l} \, x^{l+r-1} \\[0.5em]
+\sderivada{y} (x) &= \nsum_{l=0}^{\infty} (l + r)(l + r - 1) \, c_{l} \, x^{l+r-2}
+\end{align*}
+Reemplazando en la ecuación diferencial de Euler:
+\begin{align*}
+x^{r} \bigg[ \nsum_{l=0}^{\infty} (l {+} r)(l {+} r {-} 1) \, c_{l} \, x^{l} &+ \nsum_{l=0}^{\infty} \nsum_{j=0}^{\infty} \alpha_{j} (l {+} r) \, c_{l} \, x^{l+j} + \\[0.5em]
+&+ \nsum_{l=0}^{\infty} \nsum_{j=0}^{\infty} \beta_{j} \, c_{l} \, x^{l+j} \bigg] = 0
+\end{align*}
+entonces:
+\begin{align*}
+\nsum_{l=0}^{\infty} (l {+} r)(l {+} r {-} 1) \, c_{l} \, x^{l} &+ \nsum_{l=0}^{\infty} \nsum_{j=0}^{\infty} \alpha_{j} (l {+} r) \, c_{l} \, x^{l+j} + \\[0.5em]
+&+ \nsum_{l=0}^{\infty} \nsum_{j=0}^{\infty} \beta_{j} \, c_{l} \, x^{l+j} = 0
+\end{align*}
+
+Ordenando las sumas, de manera tal de sistematizar el cálculo. Llamemos $\ell = j + l$ luego, $l = \ell - j$ y reescribamos las sumas de la siguiente manera: $\ell = 0, 1, 2,\ldots $ y $j = 0, 1, 2, \ldots, \ell$ es decir, $\ell$ desde cero a infinito y $j$ desde cero hasta $\ell$. Entonces, podemos reescribir la ecuación:
+\begin{align*}
+\nsum_{l=0}^{\infty} (l {+} r)(l {+} r {-} 1) \, c_{l} \, x^{l} &+ \nsum_{l=0}^{\infty} \bigg[ \nsum_{j=0}^{\ell} \alpha_{j} (\ell {+} r - j) \, c_{l-j} \bigg] \, x^{l} + \\[0.5em]
+&+ \nsum_{l=0}^{\infty} \bigg[ \nsum_{j=0}^{\ell} \beta_{j} \, c_{l-j} \bigg] \, x^{l} = 0
+\end{align*}
+En la primera suma podemos cambiar la letra $l$ por $\ell$ y agrupando tenemos:
+\begin{align*}
+\nsum_{\ell=0}^{\infty} \left\{ (l + r)(l + r - 1) \, c_{l} + \nsum_{j=0}^{\ell} c_{\ell-j} \, \big[ \alpha_{j} (\ell + r - j) + \beta_{j} \big] \right\} \, x^{\ell} = 0
+\end{align*}
+lo que implica que para $\ell = 0, 1, 2, \ldots$ se debe cumplir:
+\begin{align*}
+(\ell + r)(\ell + r - 1) \, c_{l} + \nsum_{j=0}^{\ell} c_{\ell-j} \, \big[ \alpha_{j} (\ell + r - j) + \beta_{j} \big] = 0
+\end{align*}
+
+Extrayendo el primer término de la suma, correspondiente a $j = 0$, tenemos que:
+\begin{align*}
+c_{\ell} \big[ (\ell {+} r)(\ell {+} r {-} 1) + \alpha_{0} (\ell {+} r) + \beta_{0} \big] + \nsum_{j=1}^{\ell} c_{\ell-j} \, \big[ \alpha_{j} (\ell {+} r {-} j) {+} \beta_{j} \big] = 0
+\end{align*}
+que es equivalente a:
+\begin{align*}
+c_{\ell} \left\{ (\ell {+} r)^{2} + \alpha_{0} \big[ (\ell {+} r {-} 1) - 1 \big] + \beta_{0} \right\} + \nsum_{j=1}^{\ell} c_{\ell-j} \, \big[ \alpha_{j} (\ell {+} r {-} j) {+} \beta_{j} \big] = 0
+\end{align*}
+recordando la expresión del polinomio indicial, $p (r) = r^{2} + \alpha_{0} (r - 1) + \beta_{0}$ podemos escribir la última expresión como:
+\begin{align*}
+p (r + \ell) \, c_{\ell} + \nsum_{j=1}^{\ell} c_{\ell-j} \, \big[ \alpha_{j} (\ell {+} r {-} j) {+} \beta_{j} \big] = 0
+\end{align*}
+para $\ell = 0$ tenemos:
+\begin{align*}
+p (r) \, c_{0} = 0
+\end{align*}
+entonces $r$ debe ser raíz del polinomio indicial $p (r) = 0$ que es la ecuación indicial.
+\par
+Para los demás términos, se obtuvo la relación de recurrencia para los coeficientes del desarrollo:
+\begin{align*}
+c_{\ell} = - \dfrac{1}{p (\ell + r)} \, \nsum_{j=1}^{\ell} c_{\ell-j} \big[ \alpha_{j} (\ell + r - j) + \beta_{j} \big], \hspace{1cm} \ell = 1, 2, \ell
+\end{align*}
+
+\end{document}
