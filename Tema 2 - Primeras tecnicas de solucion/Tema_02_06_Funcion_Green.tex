@@ -1,0 +1,131 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Ls función de Green \\ \large {Tema 2 - Primeras técnicas de solución} \vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Curso MAF}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{16pt}%
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+
+\section{Introducción.}
+
+La ecuación de onda, la ecuación del calor y la ecuación de Laplace son ecuaciones diferenciales parciales homogéneas típicas. Se pueden escribir en la forma:
+\begin{align*}
+\mathcal{L} u (x) = 0
+\end{align*}
+donde $\mathcal{L}$ es un operador diferencial. Por ejemplo, estas ecuaciones se pueden escribir como:
+\begin{align*}
+\bigg( \pdv[2]{t} - c^{2} \, \laplacian \bigg) \, u &= 0 \\[0.25em]
+\bigg( \pdv{t} - k \, \laplacian \bigg) \, u &= 0 \\[0.25em]
+\laplacian{u} &= 0
+\end{align*}
+
+En este tema revisaremos soluciones de ecuaciones diferenciales parciales no homogéneas, del tipo:
+\begin{align*}
+\mathcal{L} u (x) = f (x)
+\end{align*}
+buscando la llamada función de Green. La historia de la función de Green se remonta a 1828, cuando George Green publicó un trabajo en el que buscaba soluciones de la ecuación de Poisson $\laplacian{u} = f$ para el potencial eléctrico $u$ definido dentro de un volumen acotado con condiciones de contorno específicas en la superficie del volumen. Introdujo una función ahora identificada como lo que Riemann más tarde acuñó como la \enquote{función de Green}. En esta parte obtendremos el valor inicial de la función de Green para ecuaciones diferenciales ordinarias. Más adelante en el capítulo volveremos a las funciones de Green de valor límite y a las funciones de Green para ecuaciones diferenciales parciales.
+\par
+Como un ejemplo simple, considere la ecuación de Poisson:
+\begin{align*}
+\laplacian{u} (\vb{r}) = f (\vb{r})
+\end{align*}
+Sea la ecuación de Poisson dentro de una región $\Omega$ limitada por la superficie $\partial \Omega$ como se muestra en la figura (\ref{fig:figura_07_01}). Esta es la forma no homogénea de la ecuación de Laplace. El término no homogéneo, $f (\vb{r})$, podría representar una fuente de calor en un problema de estado estacionario o una distribución de carga (fuente) en un problema electrostático.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Imagenes/Funcion_Green_01.eps}
+    \caption{Consideremos la ecuación de Poisson dentro de una región $\Omega$ acotada por una superficie $\partial \Omega$}
+    \label{fig:figura_07_01}
+\end{figure}
+Ahora pensemos en la fuente como una fuente puntual en la que estamos interesados en la respuesta del sistema a esta fuente puntual. Si la fuente puntual está ubicada en un punto $\vb{\pderivada{r}}$, entonces la respuesta a la fuente puntual podría sentirse en los puntos $\vb{r}$. Llamaremos a esta respuesta $G(\vb{r}, \vb{\pderivada{r}})$. La función de respuesta satisfaría una ecuación de fuente puntual de la forma:
+\begin{align*}
+\laplacian G(\vb{r}, \vb{\pderivada{r}}) = \delta (\vb{r} - \vb{\pderivada{r}})
+\end{align*}
+donde $\delta (\vb{r} - \vb{\pderivada{r}})$ es la función delta de Dirac. Una propiedad clave de esta función generalizada\footnote{Revisa el material de trabajo de la función delta de Dirac, en donde encontrarás varias propiedades, entre ellas, la propiedad de filtro.} es la propiedad de filtro:
+\begin{align*}
+\scaleint{6ex}_{\bs \Omega} \delta (\vb{r} - \vb{\pderivada{r}}) \, f (\vb{r}) \dd{V} = f (\vb{\pderivada{r}})
+\end{align*}
+La conexión entre la función de Green y la solución a la ecuación de Poisson se encuentra en la segunda identidad de Green:
+\begin{align*}
+\scaleint{6ex}_{\bs \partial \Omega} \bigg[ \phi \, \grad{\psi} - \psi \, \grad{\phi} \bigg] \cdot \vb{n} \dd{S} = \scaleint{6ex}_{\bs \Omega} \bigg[ \phi \, \laplacian{\psi} - \psi \, \laplacian{\phi} \bigg] \dd{V}
+\end{align*}
+Haciendo que $\phi = u (\vb{r})$ y $\psi = G (\vb{r}, \vb{\pderivada{r}})$, se tiene que\footnote{Considera que a continuación las integrales de volumen y de superficie, así como la diferenciación usando el operador $\grad$ se realizan usando las $\vb{r}$-coordenadas.}:
+\begin{align}
+\begin{aligned}[b]
+\scaleint{6ex}_{\bs \partial \Omega} \bigg[ u (\vb{r}) \, \grad{G (\vb{r}, \vb{\pderivada{r}})} &- G (\vb{r}, \vb{\pderivada{r}}) \, \grad{u (\vb{r})} \bigg] \cdot \vb{n} \dd{S} = \\[0.5em]
+&= \scaleint{6ex}_{\bs \Omega} \bigg[ u (\vb{r}) \, \laplacian{G (\vb{r}, \vb{\pderivada{r}})} - G (\vb{r}, \vb{\pderivada{r}}) \, \laplacian{u (\vb{r})} \bigg] \dd{V} = \\[0.5em]
+&= \scaleint{6ex}_{\bs \Omega} \bigg[ u (\vb{r}) \, \delta (\vb{r} - \vb{\pderivada{r}}) - G (\vb{r}, \vb{\pderivada{r}}) \, f (\vb{r}) \bigg] \dd{V} = \\[0.5em]
+&= u (\vb{\pderivada{r}}) - \scaleint{6ex}_{\bs \Omega} G (\vb{r}, \vb{\pderivada{r}}) \, f (\vb{r}) \dd{V}
+\end{aligned}
+\label{eq:ecuacion_07_02}
+\end{align}
+Al resolver para $u (\vb{\pderivada{r}})$, se tiene que:
+\begin{align}
+\begin{aligned}
+u (\vb{\pderivada{r}}) &= \scaleint{6ex}_{\bs \Omega} G (\vb{r}, \vb{\pderivada{r}}) \, f (\vb{r}) \dd{V} + \\[0.5em]
+&+ \scaleint{6ex}_{\bs \partial \Omega} \bigg[ u (\vb{r}) \, \grad{G (\vb{r}, \vb{\pderivada{r}})} &- G (\vb{r}, \vb{\pderivada{r}}) \, \grad{u (\vb{r})} \bigg] \cdot \vb{n} \dd{S}
+\end{aligned}
+\label{eq:ecuacion_07_03}
+\end{align}
+Si tanto $u (\vb{r})$ como $G (\vb{r}, \vb{\pderivada{r}})$ satisfacen las condiciones de Dirichlet, $u = 0$ en $\partial \Omega$, entonces la última integral se anula y nos queda\footnote{En algunas aplicaciones se presenta la simetría:
+\begin{align*}
+G (\vb{r}, \vb{\pderivada{r}}) = G (\vb{\pderivada{r}}, \vb{r})
+\end{align*}
+Por lo que el resultado se puede escribir como:
+\begin{align*}
+u (\vb{\pderivada{r}}) = \scaleint{6ex}_{\bs \Omega} G (\vb{r}, \vb{\pderivada{r}}) \, f (\vb{\pderivada{r}}) \dd{\pderivada{V}}
+\end{align*}
+}:
+\begin{align*}
+u (\vb{\pderivada{r}}) = \scaleint{6ex}_{\bs \Omega} G (\vb{r}, \vb{\pderivada{r}}) \, f (\vb{r}) \dd{V}
+\end{align*}
+Entonces, si conocemos la función de Green, podemos resolver la ecuación diferencial no homogénea. De hecho, podemos usar la función de Green para resolver problemas de valor límite y valor inicial no homogéneos.
+
+\section{Funciones de Green para valores iniciales.}
+
+En esta parte revisaremos la solución de problemas con valores iniciales que involucran ecuaciones diferenciales no homogéneas utilizando las funciones de Green.
+\par
+Nuestro objetivo es resolver la ecuación diferencial no homogénea:
+\begin{align}
+a (t) \, \sderivada{y} (t) + b (t) \, \pderivada{y} (t) + c (t) \, y (t) = f (t)
+\label{eq:ecuacion_07_04}
+\end{align}
+sujeta a las condiciones iniciales:
+\begin{align*}
+y (0) = y_{0} \hspace{1cm} \pderivada{y} (0) = v_{0}
+\end{align*}
+
+Como estamos interesados en problemas de valor inicial, denotaremos la variable independiente como una variable temporal: $t$.
+\par
+La ec. (\ref{eq:ecuacion_07_04} se puede escribir de forma compacta como:
+\begin{align*}
+L [y] = f
+\end{align*}
+donde $L$ es el operador diferencial:
+\begin{align*}
+L = a (t) \, \dv[2]{t} + b (t) \, \dv{t} + c (t) 
+\end{align*}
+Cuya solución está dada por:
+\begin{align*}
+y = L^{-1} [f]
+\end{align*}
+El inverso de un operador diferencial es un operador integral, que buscamos escribir en la forma:
+\begin{align*}
+y (t) = \scaleint{6ex} G (t, \tau) \, f(\tau) \dd{\tau}
+\end{align*}
+La función $G (t, \tau)$ se conoce como el  \emph{kernel} (núcleo) del operador integral y  se denomina función de Green.
+\newpage
+Tomando del curso de Ecuaciones Diferenciales I la parte de solución con el \emph{método de variación de parámetros\footnote{Recordemos que este método es un procedimiento útil para la obtención de una solución particular
+$y_{p} (x)$ de la EDO lineal (no homogénea) y se basa en el conocimiento de la solución general de la lineal homogénea asociada a dicha EDO lineal.}}:
+\end{document}
