@@ -2,7 +2,32 @@
 \usepackage{../Estilos/BeamerMAF}
 \input{../Preambulos/preambulo_Beamer_Dresden_seahorse}
 
-\date{26 de octubre de 2021}
+\setbeamercolor{section in foot}{bg=ginger, fg=white}
+\setbeamercolor{subsection in foot}{bg=kellygreen, fg=white}
+\setbeamercolor{date in foot}{bg=goldenrod, fg=white}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\usefonttheme{serif}
+\resetcounteronoverlays{saveenumi}
+
+\date{24 de marzo de 2022}
 
 \title{\large{Tema 3 - Bases completas y ortogonales}}
 \subtitle{Curso MAF}
@@ -48,32 +73,44 @@ Algunos de los conceptos que utilizaremos en este tema, los habrás revisado en 
 
 \begin{frame}
 \frametitle{Objetivos}
-Al concluir el Tema 3: Bases completas y ortogonales, el alumno:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+Para problemas de tipo Sturm-Liouville:
+\setbeamercolor{item projected}{bg=midnightblue,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Identificará los problemas de tipo Sturm-Liouville en una EDO2H.
-\item Llevará a cabo la correspondiente transformación para definir un problema al tipo Sturm-Liouville.
-\item Obtendrá las soluciones a un problema de tipo Sturm-Liouville en términos de valores propios y funciones propias.
-\conti
+\item Identificará los problemas de este tipo en una EDO2H.
+\item Llevará a cabo la correspondiente transformación para llevarlos a la forma.
+\item Obtendrá las soluciones en términos de valores propios y funciones propias.
+\seti
 \end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{Objetivos}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+Operadores:
+\setbeamercolor{item projected}{bg=midnightblue,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
 \conti
 \item Obtendrá el operador adjunto de un problema Sturm-Liouville.
 \item Verificará la condición de operador autoadjunto (Hermitiano).
-\item Establecerá la condición de ortogonalidad de las funciones que son solución a un problema de tipo Sturm-Liouville.
-\item Determinará la ortogonalidad de funciones que no lo son mediante el método de Gram-Schmidt.
-\conti
+\seti
 \end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{Objetivos}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+Ortogonalidad:
+\setbeamercolor{item projected}{bg=midnightblue,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item Establecerá la condición de ortogonalidad de las funciones que son solución a un problema de tipo Sturm-Liouville.
+\item Con el método de Gram-Schmidt, establecerá la ortogonalidad de funciones que no lo son.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Objetivos}
+Completitud de las funciones:
+\setbeamercolor{item projected}{bg=midnightblue,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
 \conti
@@ -103,11 +140,10 @@ Al concluir el Tema 3: Bases completas y ortogonales, el alumno:
 
 \begin{frame}
 \frametitle{Temas complementarios}
-Considerando que se va a requerir material adicional para tener una base sólida de conocimiento, se proponen dos temas complementarios:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+Considerando que se va a requerir material adicional para tener una base sólida de conocimiento, se propone el siguiente tema complementario:
+\setbeamercolor{item projected}{bg=midnightblue,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Función delta de Dirac.
 \item Espacio de Hilbert.
 \end{enumerate}
 \end{frame}
@@ -126,77 +162,68 @@ Para una revisión completa de los materiales de trabajo para el Tema 3, se pres
 \end{frame}
 \begin{frame}
 \frametitle{Distribución de tiempos}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamercolor{item projected}{bg=midnightblue,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}
-\item El tema de problemas tipo Sturm-Liouville se debe de revisar durante la semana 6: 26 al 29 de octubre.
-\item  El tema de Operadores autoadjuntos durante la semana 7 y 8.
-\item El tema de completes de una base durante la semana 8.
+\item Semanas 6 y 7: Problemas tipo Sturm-Liouville.
+\item Semanas 7 y 8: Operadores adjuntos y autoadjuntos.
+\item Semanas 8 y 9: Completes de una base.
 \end{enumerate}
 \end{frame}
 
-\subsection{Sesiones síncronas}
+% \subsection{Sesiones síncronas}
 
-\begin{frame}
-\frametitle{Sesiones síncronas de trabajo}
-Se continuará con las sesiones de trabajo los días miércoles y viernes:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item 26 y 29 de octubre.
-\item 3 y 5 de noviembre.
-\item 10 y 12 de noviembre.
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Sesiones adicionales}
-En caso de que se requieran, se continuará con sesiones adicionales de trabajo para la revisión y solución de ejercicios.
-\\
-\bigskip
-\pause
-Las reuniones se llevará a cabo bajo demanda el grupo.
-\end{frame}
+% \begin{frame}
+% \frametitle{Sesiones síncronas de trabajo}
+% Se continuará con las sesiones de trabajo los días miércoles y viernes:
+% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+% \setbeamertemplate{enumerate items}[circle]
+% \begin{enumerate}[<+->]
+% \item 26 y 29 de octubre.
+% \item 3 y 5 de noviembre.
+% \item 10 y 12 de noviembre.
+% \end{enumerate}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Sesiones adicionales}
+% En caso de que se requieran, se continuará con sesiones adicionales de trabajo para la revisión y solución de ejercicios.
+% \\
+% \bigskip
+% \pause
+% Las reuniones se llevará a cabo bajo demanda el grupo.
+% \end{frame}
 
 \section{Evaluación}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Ejercicios}
+\subsection{Ejercicios y enunciados}
 
 \begin{frame}
-\frametitle{Ejercicios a cuenta}
-La distribución de ejercicios es la siguiente:
-\pause
-\begin{table}
-\centering
-\begin{tabular}{l c c}
-Material & Semanales & Opcionales \\ \hline
-Sturm-Liouville & 3 & 2 \\ \hline
-Operadores autoadjuntos & 3 & 2 \\ \hline
-Completes de una base & 3 & 2 \\ \hline    
-\end{tabular}
-\end{table}
+\frametitle{Ejercicios a cuenta y enunciados}
+En la clase del día 29 de marzo se presentarán los ejercicios, así como los enunciados correspondientes del tema 3 del examen intermedio.
+\\
+\bigskip
+Se comentará sobre la fecha de entrega del examen intermedio.
 \end{frame}
 
-\subsection{Examen Tarea}
+% \subsection{Examen Tarea}
 
-\begin{frame}
-\frametitle{Entrega del examen tarea 3}
-En la sesión del 12 de noviembre se entregarán los enunciados del examen tarea 3, \pause para enviar la solución el día viernes 26 de noviembre.
-\end{frame}
+% \begin{frame}
+% \frametitle{Entrega del examen tarea 3}
+% En la sesión del 12 de noviembre se entregarán los enunciados del examen tarea 3, \pause para enviar la solución el día viernes 26 de noviembre.
+% \end{frame}
 \begin{frame}
 \frametitle{Días feriados}
 De acuerdo al calendario oficial, se presentas los días feriados:
 \pause
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamercolor{item projected}{bg=midnightblue,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Lunes 1 de noviembre.
-\item Martes 2 de noviembre.
-\item Lunes 15 de noviembre.
+\item Lunes 11 al viernes 15 de abril (Semana Santa)
 \end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{De los días feriados}
-En estos días no tendremos actividades, considerando que son días oficiales de asueto, por lo que la entrega de los ejercicios de la semana 7, se deberán de enviar junto con los de la semana 8 para el día 19 de noviembre.
+En estos días no tendremos actividades, considerando que son días oficiales de asueto, por lo que la entrega de los ejercicios de la semana del tema 3, se deberán de enviar en Moodle el jueves 28 de abril.
 \end{frame}
 
 

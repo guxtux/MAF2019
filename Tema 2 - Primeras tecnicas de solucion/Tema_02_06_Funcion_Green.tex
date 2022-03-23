@@ -35,7 +35,7 @@ En este tema revisaremos soluciones de ecuaciones diferenciales parciales no hom
 \begin{align*}
 \mathcal{L} u (x) = f (x)
 \end{align*}
-buscando la llamada función de Green. La historia de la función de Green se remonta a 1828, cuando George Green publicó un trabajo en el que buscaba soluciones de la ecuación de Poisson $\laplacian{u} = f$ para el potencial eléctrico $u$ definido dentro de un volumen acotado con condiciones de contorno específicas en la superficie del volumen. Introdujo una función ahora identificada como lo que Riemann más tarde acuñó como la \enquote{función de Green}. En esta parte obtendremos el valor inicial de la función de Green para ecuaciones diferenciales ordinarias. Más adelante en el capítulo volveremos a las funciones de Green de valor límite y a las funciones de Green para ecuaciones diferenciales parciales.
+buscando la llamada función de Green. La historia de la función de Green se remonta a 1828, cuando George Green publicó un trabajo en el que buscaba soluciones de la ecuación de Poisson $\laplacian{u} = f$ para el potencial eléctrico $u$ definido dentro de un volumen acotado con condiciones de contorno específicas en la superficie del volumen. Introdujo una función ahora identificada como lo que Riemann más tarde acuñó como la \enquote{función de Green}. En esta parte obtendremos el valor inicial de la función de Green para ecuaciones diferenciales ordinarias. Más adelante en el material de trabajo volveremos a las funciones de Green de condiciones en la frontera y a las funciones de Green para ecuaciones diferenciales parciales.
 \par
 Como un ejemplo simple, considere la ecuación de Poisson:
 \begin{align*}
@@ -72,9 +72,9 @@ Haciendo que $\phi = u (\vb{r})$ y $\psi = G (\vb{r}, \vb{\pderivada{r}})$, se t
 \end{align}
 Al resolver para $u (\vb{\pderivada{r}})$, se tiene que:
 \begin{align}
-\begin{aligned}
+\begin{aligned}[b]
 u (\vb{\pderivada{r}}) &= \scaleint{6ex}_{\bs \Omega} G (\vb{r}, \vb{\pderivada{r}}) \, f (\vb{r}) \dd{V} + \\[0.5em]
-&+ \scaleint{6ex}_{\bs \partial \Omega} \bigg[ u (\vb{r}) \, \grad{G (\vb{r}, \vb{\pderivada{r}})} &- G (\vb{r}, \vb{\pderivada{r}}) \, \grad{u (\vb{r})} \bigg] \cdot \vb{n} \dd{S}
+&+ \scaleint{6ex}_{\bs \partial \Omega} \bigg[ u (\vb{r}) \, \grad{G (\vb{r}, \vb{\pderivada{r}})} - G (\vb{r}, \vb{\pderivada{r}}) \, \grad{u (\vb{r})} \bigg] \cdot \vb{n} \dd{S}
 \end{aligned}
 \label{eq:ecuacion_07_03}
 \end{align}
@@ -143,8 +143,8 @@ encontramos que tenemos que resolver el sistema de ecuaciones:
 Este sistema se resuelve fácilmente, para obtener entonces:
 \begin{align}
 \begin{aligned}[b]
-\pderivada{c}_{1} &= - \dfrac{f (t) \, y_{2} (t)}{a (t) \big[ y_{1} (t) \, \pderivada{y}_{2} (t)  - \pderivada{y}_{1} \, y_{2} (t) \big]} \\[0.5em]
-\pderivada{c}_{2} &= \dfrac{f (t) \, y_{1} (t)}{a (t) \big[ y_{1} (t) \, \pderivada{y}_{2} (t)  - \pderivada{y}_{1} \, y_{2} (t) \big]}
+\pderivada{c}_{1} (t) &= - \dfrac{f (t) \, y_{2} (t)}{a (t) \big[ y_{1} (t) \, \pderivada{y}_{2} (t)  - \pderivada{y}_{1} (t) \, y_{2} (t) \big]} \\[0.5em]
+\pderivada{c}_{2} (t) &= \dfrac{f (t) \, y_{1} (t)}{a (t) \big[ y_{1} (t) \, \pderivada{y}_{2} (t)  - \pderivada{y}_{1} (t) \, y_{2} (t) \big]}
 \end{aligned}
 \label{eq:ecuacion_07_07}
 \end{align}
@@ -206,7 +206,7 @@ y (t) = y_{h} (t) + y_{p} (t)
 es una solución a la ecuación no homogénea. También, esta solución satisface las condiciones iniciales:
 \begin{align*}
 y (0) &= y_{h} (0) + y_{p} (0) = y_{0} + 0 = y_{0} \\[0.5em]
-\pderivada{y} (0) &= \pderivada{y}_{h} + \pderivada{y}_{p} (0) = v_{0} + 0 = v_{0}
+\pderivada{y} (0) &= \pderivada{y}_{h} (0) + \pderivada{y}_{p} (0) = v_{0} + 0 = v_{0}
 \end{align*}
 Por lo tanto, solo debemos centrarnos en encontrar una solución particular que satisfaga las condiciones iniciales homogéneas. Esto se hará encontrando valores para $t_{0}$ y $t_{1}$ en la ec. (\ref{eq:ecuacion_07_09}) que satisfagan las condiciones iniciales homogéneas: $y_{p} (0) = 0$ y $\pderivada{y}_{p} (0) = 0$
 \par
@@ -237,7 +237,7 @@ Suponiendo que $\pderivada{y}_{p} (0) \neq 0$, podemos hacer que $t_{0} = 0$.
 Entonces, hemos encontrado que:
 \begin{align}
 \begin{aligned}[b]
-\pderivada{y}_{p} (x) &= \pderivada{y}_{2} (t) \scaleint{6ex}_{\bs 0}^{t} \dfrac{f (\tau) \, y_{1} (\tau)}{a (\tau) \, W (\tau)} \dd{\tau} - \pderivada{y}_{1} (t) \scaleint{6ex}_{\bs t_{0}}^{t} \dfrac{f (\tau) \, y_{2} (\tau)}{a (\tau) \, W (\tau)} \dd{\tau} = \\[0.5em]
+y_{p} (x) &= y_{2} (t) \scaleint{6ex}_{\bs 0}^{t} \dfrac{f (\tau) \, y_{1} (\tau)}{a (\tau) \, W (\tau)} \dd{\tau} - y_{1} (t) \scaleint{6ex}_{\bs t_{0}}^{t} \dfrac{f (\tau) \, y_{2} (\tau)}{a (\tau) \, W (\tau)} \dd{\tau} = \\[0.5em]
 &= \scaleint{6ex}_{\bs 0}^{t} \bigg[ \dfrac{y_{1} (\tau) \, y_{2} (t) - y_{1} (t) \, y_{2} (\tau)}{a (\tau) \, W (\tau)} \bigg] \, f (\tau) \dd{\tau}
 \end{aligned}
 \label{eq:ecuacion_07_19}
@@ -394,8 +394,8 @@ y (a) &= y_{2} (a) \scaleint{6ex}_{\bs x_{1}}^{a} \dfrac{f (\xi) \, y_{1} (\xi)}
 Podemos satisfacer la condición en $x = a$ si escogemos $x_{1} = a$. De manera similar, en $x = b$, encontramos que:
 \begin{align}
 \begin{aligned}[b]
-y (b) &= y_{2} (b) \scaleint{6ex}_{\bs x_{1}}^{b} \dfrac{f (\xi) \, y_{1} (\xi)}{p (\xi) \, W (\xi)} \dd{\xi} - y_{1} (b) \scaleint{6ex}_{\bs x_{0}}^{a} \dfrac{f (\xi) \, y_{2} (\xi)}{p (\xi) \, W (\xi)} \dd{\xi} = \\[0.5em]
-&= - y_{1} (b) \scaleint{6ex}_{\bs x_{1}}^{a} \dfrac{f (\xi) \, y_{2} (\xi)}{p (\xi) \, W (\xi)} \dd{\xi}
+y (b) &= y_{2} (b) \scaleint{6ex}_{\bs x_{1}}^{b} \dfrac{f (\xi) \, y_{1} (\xi)}{p (\xi) \, W (\xi)} \dd{\xi} - y_{1} (b) \scaleint{6ex}_{\bs x_{0}}^{b} \dfrac{f (\xi) \, y_{2} (\xi)}{p (\xi) \, W (\xi)} \dd{\xi} = \\[0.5em]
+&= - y_{1} (b) \scaleint{6ex}_{\bs x_{0}}^{b} \dfrac{f (\xi) \, y_{2} (\xi)}{p (\xi) \, W (\xi)} \dd{\xi}
 \end{aligned}
 \label{eq:ecuacion_07_28}
 \end{align}
