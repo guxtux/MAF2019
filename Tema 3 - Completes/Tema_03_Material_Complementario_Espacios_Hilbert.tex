@@ -1,5 +1,5 @@
 \input{../Preambulos/preambulo_materiales}
-\title{Espacios de Hilbert y notación de Dirac \\ \large {Matemáticas Avanzadas de la Física}  \vspace{-1.5\baselineskip}}
+\title{Espacios de Hilbert y notación de Dirac \\ \large {Matemáticas Avanzadas de la Física}  \vspace{-3ex}}
 
 \author{M. en C. Gustavo Contreras Mayén}
 \date{ }
@@ -38,7 +38,7 @@ Un espacio métrico $(X , d)$ es \textbf{completo} si cada secuencia de Cauchy e
     
 Un producto interno sobre $X$ es un mapeo que asocia a cada par de vectores $x$, y un escalar, denotado $ \braket{x}{y}$ que satisface las siguientes propiedades
 \begin{enumerate}[label=\roman*.]
-\item $\braket{x}{z+y} = \braket{x}{y} + \braket{x}{y} \hspace{1cm} x, y, z \in X$
+\item $\braket{x}{z + y} = \braket{x}{y} + \braket{x}{y} \hspace{1cm} x, y, z \in X$
 \item $\braket{x}{\lambda \: y} = \lambda \: \braket{x}{y} \hspace{1cm} \lambda \in K$
 \item $\braket{x}{y} = \overline{\braket{x}{y}}$
 \item $\braket{x}{y} \geq 0$ y $\braket{x}{y} = 0 \rightarrow x = \bm{0} $ 
@@ -65,22 +65,33 @@ Un \textbf{espacio de Hilbert} es un espacio con producto interno, con una norma
 Ejemplos.
 
 \begin{enumerate}
-\item Sean $X = \mathbb{C}^{n}$ si $x = (x_{1}, x_{2}, \ldots, x_{n})$ e $y = (y_{1}, y_{2}, \ldots, y_{n})$, definamos
-\[ \braket{x}{y} = \sum_{k=1}^{n} \overline{x_{k}} \: y_{k} \]
+\item Sean $X = \mathbb{C}^{n}$ si $x = (x_{1}, x_{2}, \ldots, x_{n})$ e $y = (y_{1}, y_{2}, \ldots, y_{n})$, definamos:
+\begin{align*}
+\braket{x}{y} = \nsum_{k=1}^{n} \overline{x_{k}} \: y_{k}
+\end{align*}
 $X$ es un espacio de Hilbert.
 \item Sea $L^{2}(\mathbb{R})$ el conjunto de todas las funciones medibles de $\mathbb{R}$ en $\mathbb{C}$ tales que verifiquen la siguiente propiedad:
 
-Si $f(x) \in L2 L^{2}(\mathbb{R})$,entonces:
-\[ \int_{-\infty}^{\infty} \abs{f(x)}^{2} dx < \infty \]
-Así $L^{2}(\mathbb{R})$ es un espacio vectorial. Si lo dotamos del producto interno
-\[ \braket{f}{g} = \int_{-\infty}^{\infty} \overline{f(x)} \: g(x) |, dx \]
-y la norma asociada, entoces $L^{2}(\mathbb{R})$ es un espacio de Hilbert.
-\item Consideremos el conjunto de sucesiones de números complejos $(a_{n})_{n \in \mathbb{C}}$, tales que:
-\[ \sum_{n=1}^{\infty} \abs{a_{n}}^{2} < \infty \]
-con el producto escalar
-\[ \braket{A}{B} = \sum_{n=1}^{\infty} \overline{a_{n}} \: b_{n} \]
+Si $f(x) \in L^{2}(\mathbb{R})$, entonces:
+\begin{align*}
+\scaleint{6ex}_{\bs -\infty}^{\infty} \abs{f(x)}^{2} \dd{x} < \infty
+\end{align*}
+Así $L^{2}(\mathbb{R})$ es un espacio vectorial. Si lo dotamos del producto interno:
+\begin{align*}
+\braket{f}{g} = \scaleint{6ex}_{\bs -\infty}^{\infty} \overline{f(x)} \: g(x) \dd{x}
+\end{align*}
+y la norma asociada, entonces $L^{2}(\mathbb{R})$ es un espacio de Hilbert.
+\item Consideremos el conjunto de sucesiones de números complejos $(a_{n})_{n \in \mathbb{N}}$, tales que:
+\begin{align*}
+\nsum_{n=1}^{\infty} \abs{a_{n}}^{2} < \infty
+\end{align*}
+con el producto escalar:
+\begin{align*}
+\braket{A}{B} = \nsum_{n=1}^{\infty} \overline{a_{n}} \: b_{n}
+\end{align*}
 donde $A = (a_{n})$ y $B = (b_{n})$, este conjunto es un espacio de Hilbert llamado $\ell_{2}$.
 \end{enumerate}
+
 \begin{defi} Conjunto ortonormal.
 
 Sea $S$ un conjunto de vectores en un espacio con producto interno $X$. Entonces $S$ es un sistema o conjunto ortonormal si:
@@ -89,14 +100,16 @@ Sea $S$ un conjunto de vectores en un espacio con producto interno $X$. Entonces
 \item $\braket{x}{y} = 0 \hspace{0.5cm} \forall \, x, y \in S$ con $x \neq y$
 \end{enumerate}
 \end{defi}
+
 \begin{teo} Desigualdades de Bessel.
     
-Sea $A$ un conjunto ortonormal de vectores contenido en un espacio con producto interno $X$. Sean $x, y \in X$. Sea ${x_{1}, x_{2}, \ldots, x_{n}, \ldots}$ una sucesión de elementos de $A$ (finita o infinita). Entonces
+Sea $A$ un conjunto ortonormal de vectores contenido en un espacio con producto interno $X$. Sean $x, y \in X$. Sea ${x_{1}, x_{2}, \ldots, x_{n}, \ldots}$ una sucesión de elementos de $A$ (finita o infinita). Entonces:
 \begin{enumerate}[label=\roman*.]
-\item $\displaystyle{\sum_{n=1}^{\infty} \abs{\braket{x}{x_{n}}}^{2} \leq \norm{x}^{2}}$
-\item $\displaystyle{\sum_{n=1}^{\infty} \abs{\braket{x}{x_{n}} \, \braket{x_{n}}{y}} \leq \norm{x} \, \norm{y}}$
+\item $\displaystyle{\nsum_{n=1}^{\infty} \abs{\braket{x}{x_{n}}}^{2} \leq \norm{x}^{2}}$
+\item $\displaystyle{\nsum_{n=1}^{\infty} \abs{\braket{x}{x_{n}} \, \braket{x_{n}}{y}} \leq \norm{x} \, \norm{y}}$
 \end{enumerate}
 \end{teo}
+
 \begin{defi} Conjunto completo.
 
 Un conjunto ortonormal $A \in X$ se llama \textbf{completo} si y sólo si no existe en $X$ otro conjunto ortonormal conteniendo estrictamente en $A$.
@@ -109,19 +122,19 @@ Un espacio de Hilbert es \textbf{separable} si y sólo si el cardinal de sus con
 \end{defi}
 \begin{teo}
 Sea $X$ un espacio de Hilbert de dimensión finita o infinita. Sea ${x_{1}, x_{2}, \ldots}$ un conjunto ortonormal completo en $X$. Entonces
-\[ \norm{x}^{2} = \sum_{k=1}^{\infty} \abs{\braket{x_{k}}{x}} \]
+\begin{align*} \norm{x}^{2} = \nsum_{k=1}^{\infty} \abs{\braket{x_{k}}{x}} \end{align*}
 \end{teo}
 \begin{teo}
  Sea $A$ un conjunto ortonormal completo en un espacio de Hilbert separable y de dimensión infinita $X$. Entonces:
  \begin{enumerate}[label=\roman*.]
 \item $\overline{\bqty{A}} = X$
-\item Si $y \in X$ entonces $\displaystyle{y = \sum_{n=1}^{\infty} \, \braket{x_{n}}{y} \, x_{n}}$
+\item Si $y \in X$ entonces $\displaystyle{y = \nsum_{n=1}^{\infty} \, \braket{x_{n}}{y} \, x_{n}}$
  \end{enumerate}
 \end{teo}
 Ejemplos de conjuntos ortonormales completos:
 \begin{enumerate}
 \item Sea $X = \mathbb{C}^{n}$
-\[ (1, 0, 0, \ldots, 0), \hspace{0.5cm} (0, 1, 0, \ldots, 0), \hspace{0.5cm} \ldots, (0, 0, 0, \ldots, 1) \]
+\begin{align*} (1, 0, 0, \ldots, 0), \hspace{0.5cm} (0, 1, 0, \ldots, 0), \hspace{0.5cm} \ldots, (0, 0, 0, \ldots, 1) \end{align*}
 \item Sea $X = \ell_{2}$
 \begin{align*}
 e_{1} &=  (1, 0, 0, \ldots, 0, \ldots) \\
@@ -130,7 +143,7 @@ e_{3} &=  (0, 0, 1, \ldots, 0, \ldots) \\
 &{} \vdots
 \end{align*}
 \item En $L^{2}(0, 2 \, \pi)$, el conjunto
-\[ x_{0}(t) = \dfrac{1}{\sqrt{2 \, \pi}}, \hspace{0.5cm} x_{1}(t) = \dfrac{\cos t}{\sqrt{\pi}}, \hspace{0.5cm} x_{2}(t) = \dfrac{\sin t}{\sqrt{\pi}}, \hspace{0.5cm} x_{3}(t) = \dfrac{\cos 2 \, t}{\sqrt{\pi}}, \ldots\]
+\begin{align*} x_{0}(t) = \dfrac{1}{\sqrt{2 \, \pi}}, \hspace{0.5cm} x_{1}(t) = \dfrac{\cos t}{\sqrt{\pi}}, \hspace{0.5cm} x_{2}(t) = \dfrac{\sin t}{\sqrt{\pi}}, \hspace{0.5cm} x_{3}(t) = \dfrac{\cos 2 \, t}{\sqrt{\pi}}, \ldots\end{align*}
 \end{enumerate}
 \begin{teo}
 Sea $X$ un espacio de Hilbert de dimensión finita $n$. Entonces $X$ y $\mathbb{C}^{n}$ son isométricos.
@@ -138,7 +151,9 @@ Sea $X$ un espacio de Hilbert de dimensión finita $n$. Entonces $X$ y $\mathbb{
 \begin{teo}
 Sea $X$ un espacio de Hilbert separable y de dimensión infinita. Entonces $X$ y $\ell_{2}$ son isométricos.
 \end{teo}
+
 \subsection{Espacio dual.}
+
 \begin{defi} Funcional.
 
 Sea $f$ una aplicación lineal de un espacio normado $X$ en $\mathbb{C}$. Si $f$ es además continuo, lo llamaremos \textit{funcional lineal continuo}, o simplemente \textit{funcional}.
@@ -146,18 +161,20 @@ Sea $f$ una aplicación lineal de un espacio normado $X$ en $\mathbb{C}$. Si $f$
 \begin{defi} Espacio dual.
 
 Sea $f$ una aplicación lineal de $X \in \mathbb{C}$. Diremos que $f$ está acotada si existe una constante positiva $K$ tal que
-\[ \abs{f(x)} \leq K \, \norm{x}, \hspace{1cm} \forall \, x \in X \]
+\begin{align*} \abs{f(x)} \leq K \, \norm{x}, \hspace{1cm} \forall \, x \in X \end{align*}
 El conjunto de todas las funcionales acotadas en $X$ forman un espacio vectorial llamado \textbf{espacio dual} de $X$, denotado por $X^{*}$.
 
 Además es normado y completo con la norma
-\[ \norm{f} = \inf \{ K \vert (\forall \, x \in X) \vert f(x) \vert = K \, \norm{x} \} \]
+\begin{align*} \norm{f} = \inf \{ K \vert (\forall \, x \in X) \vert f(x) \vert = K \, \norm{x} \} \end{align*}
 \end{defi}
 \begin{teo} Teorema de representación de Riesz.
 
 Sea $f$ un funcional acotado en un espacio de Hilbert $X$. Entonces existe uno y sólo un vector $y \in X$ tal que
-\[ f(x) = \braket{y}{x}, \hspace{1cm} \forall \, x \in X \]
+\begin{align*} f(x) = \braket{y}{x}, \hspace{1cm} \forall \, x \in X \end{align*}
 \end{teo}
+
 \subsection{Operadores lineales en espacios de Hilbert.}
+
 \begin{defi} Operador lineal.
 
 Un operador lineal entre dos espacios normados $X$ e $Y$ es una aplicación lineal entre ambos.
@@ -169,13 +186,15 @@ En particular puede ser una aplicación de un espacio de Hilbert consigo mismo.
 Sea $A$ un operador lineal continuo en un espacio de Hilbert $X$.
 Fijemos $x \in X$ y consideremos el siguiente producto escalar $\braket{x}{A \, y}$ para todo $y \in X$.
 
-La aplicación $f(y) = \braket{x}{A \, y}$ es un funcional lineal y continuo en $X$, el teorema de Riez nos asegura que existe, fijado $x$, un único $z \in X$ tal que
-\[ f(y) = \braket{z}{y} = \braket{x}{A \, y} \hspace{0.5cm} \forall y \in X \]
+La aplicación $f(y) = \braket{x}{A \, y}$ es un funcional lineal y continuo en $X$, el teorema de Riesz nos asegura que existe, fijado $x$, un único $z \in X$ tal que
+\begin{align*} f(y) = \braket{z}{y} = \braket{x}{A \, y} \hspace{0.5cm} \forall y \in X \end{align*}
 
 Esto lo podemos hacer con cada uno de los $x \in X$, con lo que obtenemos una aplicación de $X$ en si mismo: $A^{\dagger}$, que llamaremos \textbf{operador adjunto} de $A$, y tal que $A^{\dagger} \, x = z$. De esta manera
-\[ \braket{x}{A \, y} = \braket{A^{\dagger} \, x}{y}, \hspace{1cm} \forall \, x, y \in X \]
+\begin{align*} \braket{x}{A \, y} = \braket{A^{\dagger} \, x}{y}, \hspace{1cm} \forall \, x, y \in X \end{align*}
 \end{defi}
+
 \subsection*{Propiedades de operadores adjuntos.}
+
 Sean $A$ y $B$ dos operadores acotados en un espacio de Hilbert $X$, y sea $\lambda$ un número complejo. Entonces
 \begin{align*}
 (A + B)^{\dagger} &= A^{\dagger} + B^{\dagger} \\
@@ -189,17 +208,17 @@ Sea $X$ un espacio de Hilbert y $T$ un operador lineal continuo, se dice que $T$
 \textbf{Ejemplo:}
 
 Sea el espacio de Hilbert $L^{2} ([0, 1])$. Sea ahora la transformación $Q : L^{2} ([0, 1]) \rightarrow L^{2}([0, 1])$ definida de la siguiente manera
-\[ (Q \: f)(x) =  x \: f(x) \hspace{1cm} \forall \, f \in L^{2}([0, 1]) \]
+\begin{align*} (Q \: f)(x) =  x \: f(x) \hspace{1cm} \forall \, f \in L^{2}([0, 1]) \end{align*}
 Esta transformación está bien definida ya que para toda $f(x) \in L^{2} ([0, 1])$ tenemos:
-\[ \int_{0}^{1} \abs{(Q \: f)(x)}^{2} \, dx = \int_{0}^{1} \abs{x \: f(x)}^{2} \leq \int_{0}^{1} \abs{f(x)}^{2} \, dx < \infty \]
+\begin{align*} \scaleint{6ex}_{\bs 0}^{1} \abs{(Q \: f)(x)}^{2} \, dx = \scaleint{6ex}_{\bs 0}^{1} \abs{x \: f(x)}^{2} \leq \scaleint{6ex}_{\bs 0}^{1} \abs{f(x)}^{2} \, dx < \infty \end{align*}
 y por tanto $(Q \: f)(x) \in L^{2}([0, 1])$. Además es lineal.
 \par
 Para demostrar que $Q$ es acotado, es decir, es continuo
-\[ \norm{Q \: f}^{2} = \int_{0}^{1} \abs{x \: f(x)}^{2} \, dx   \leq \int_{0}^{1} \abs{f(x)}^{2} \, dx = \norm{f}^{2}, \hspace{1cm} \Rightarrow \norm{Q \: f} \leq \norm{f} \]
+\begin{align*} \norm{Q \: f}^{2} = \scaleint{6ex}_{\bs 0}^{1} \abs{x \: f(x)}^{2} \, dx   \leq \scaleint{6ex}_{\bs 0}^{1} \abs{f(x)}^{2} \, dx = \norm{f}^{2}, \hspace{1cm} \Rightarrow \norm{Q \: f} \leq \norm{f} \end{align*}
 lo cual nos dice que $Q$ es un operador acotado y además su norma es menor o igual a $1$.
 
 Notemos además que para todos $f, g \in L^{2} ([0, 1])$, se tiene:
-\[ \braket{g}{Q \: f} = \int_{0}^{1} \overline{g(x)} \: x \: f(x) \, dx = \int_{0}^{1} \overline{x \: g(x)} \: f(x) \, dx = \braket{Q \: g}{f} \]
+\begin{align*} \braket{g}{Q \: f} = \scaleint{6ex}_{\bs 0}^{1} \overline{g(x)} \: x \: f(x) \, dx = \scaleint{6ex}_{\bs 0}^{1} \overline{x \: g(x)} \: f(x) \, dx = \braket{Q \: g}{f} \end{align*}
 es decir, $Q$ es autoadjunto.
 \begin{defi} Se $A$ un operador lineal continuo.
 \begin{itemize}
@@ -251,131 +270,165 @@ Si $U$ es unitario, sus eigenvalores (si existen) tienen módulo uno.
 En el caso de operadores no acotados, la definición de \textbf{operador adjunto} debe de tomar en cuenta los dominios.
 \par
 Sea $A$ un operador con dominio $\mathcal{D}$ denso en un espacio de Hilbert (de dimensión infinita y separable) $X$ Para definir el adjunto de $A$, comencemos por definir su dominio:
-\[ \mathcal{D}^{*} = \{ y \in X \vert \mbox{ existe } z \in X \mbox{ tal que } \braket{z}{x} = \braket{y}{A \, x}, \forall \, x \in \mathcal{D} \} \]
+\begin{align*} \mathcal{D}^{*} = \{ y \in X \vert \mbox{ existe } z \in X \mbox{ tal que } \braket{z}{x} = \braket{y}{A \, x}, \forall \, x \in \mathcal{D} \} \end{align*}
 De este modo, el adjunto de $A$ es
-\[ A^{\dagger} \: y = z, \hspace{1cm} \forall \: y \in \mathcal{D^{*}} \]
+\begin{align*} A^{\dagger} \: y = z, \hspace{1cm} \forall \: y \in \mathcal{D^{*}} \end{align*}
+
 \subsection*{Propiedades de los operadores adjuntos.}
+
 \begin{itemize}
 \item $A^{\dagger}$ es lineal.
 \item $A^{\dagger}$ es siempre un operador cerrado.
 \item Si $\alpha \in \mathbb{C}$ entonces $(\alpha \: A)^{\dagger} =  \overline{\alpha} \: A^{\dagger}$
 \item Sean $A$ y $B$ dos operadores en $X$ con dominios $\mathcal{D}(A)$ y $\mathcal{D}(B)$. Diremos que $B$ extiende a $A$, y escribiremos $B \succ A$, si $\mathcal{D}(A) \subset \mathcal{D}(B)$ y además para todo $z \in \mathcal{D}(A)$ se verifica que $A \: z = B \: z$. La siguiente propiedad dice que
-\[ \mbox{Si } B \succ  A \Rightarrow  A^{\dagger} \succ  B^{\dagger} \]
+\begin{align*} \mbox{Si } B \succ  A \Rightarrow  A^{\dagger} \succ  B^{\dagger} \end{align*}
 \item Si definimos 
-\[ \mathcal{D} (A + B) = \mathcal{D}(A) \cap \mathcal{D}(B)\]
+\begin{align*} \mathcal{D} (A + B) = \mathcal{D}(A) \cap \mathcal{D}(B)\end{align*}
 y
-\[ \mathcal{D} (A^{\dagger} + B^{\dagger}) = \mathcal{D}(A^{\dagger}) \cap \mathcal{D}(B^{\dagger}) \]
+\begin{align*} \mathcal{D} (A^{\dagger} + B^{\dagger}) = \mathcal{D}(A^{\dagger}) \cap \mathcal{D}(B^{\dagger}) \end{align*}
 entonces
-\[ A^{\dagger} + B^{\dagger} \prec (A + B)^{\dagger}  \]
+\begin{align*} A^{\dagger} + B^{\dagger} \prec (A + B)^{\dagger}  \end{align*}
 \item Si definimos $\mathcal{D}(A \, B)$
 \item Si definimos $\mathcal{D} (A \, B) = \{ y \in X \vert y \in \mathcal{D}(B) \mbox{ tal que } B \: y \in \mathcal{D}(A) \}$ y si $\mathcal{D}(A \: B)$ es denso en $X$,
-\[ B^{\dagger} \: A^{\dagger} \prec (A \: B)^{\dagger} \]
+\begin{align*} B^{\dagger} \: A^{\dagger} \prec (A \: B)^{\dagger} \end{align*}
 \end{itemize}
 \begin{defi}
 Un operador $A$ es llamado \textbf{simétrico (o Hermítico)} si $A \succ A^{\dagger}$, es decir
-\[ \braket{y}{A \: x} = \braket{A \: y}{x}, \hspace{1cm} \forall \, x, y \in \mathcal{D}(A) \]
+\begin{align*} \braket{y}{A \: x} = \braket{A \: y}{x}, \hspace{1cm} \forall \, x, y \in \mathcal{D}(A) \end{align*}
 Un operador simétrico es autoadjunto si $A = A^{\dagger}$
 \end{defi}
 \textbf{Ejemplo de operadores no acotados.}
 \begin{ejemplo}
 Sea $X = L^{2}(\mathbb{R})$. Consideremos
-\[ \mathcal{D} = \{ \phi (x) \in L^{2}(\mathcal{R}) \vert x \: \phi (x) \in X \} \]
+\begin{align*} \mathcal{D} = \{ \phi (x) \in L^{2}(\mathcal{R}) \vert x \: \phi (x) \in X \} \end{align*}
 $\mathcal{D}$ es un espacio vectorial, además se puede probar que es denso en $X$.
 \par
 Consideremos el operador $Q: \mathcal{D} \mapsto X$
-\[ Q \: \phi(x) =  x \: \phi (x) \]
+\begin{align*} Q \: \phi(x) =  x \: \phi (x) \end{align*}
 Se conoce a esta transformación como el \underline{operador de posición}. Este operador es autoadjunto en el dominio señalado.
 \end{ejemplo}
 \begin{ejemplo}
-Definamos ahora el espacio de Schwart, $S$ como el conjunto de funciones $f(x)$ infinitamente diferenciables en todos los puntos de $\mathbb{R}$ y tales que
-\[ \lim_{x \to \pm \infty} x^{n} \: \dv[m]{}{x} f(x) = 0, \hspace{1cm} \forall \: n, m = 0, 1, 2, \ldots \]
+Definamos ahora el espacio de Schwartz, $S$ como el conjunto de funciones $f(x)$ infinitamente diferenciables en todos los puntos de $\mathbb{R}$ y tales que
+\begin{align*} \lim_{x \to \pm \infty} x^{n} \: \dv[m]{}{x} f(x) = 0, \hspace{1cm} \forall \: n, m = 0, 1, 2, \ldots \end{align*}
 En este subespacio $Q$ y el operador
-\[ P \: \psi (x) = - i \, \hbar \: \dv{x} \psi (x) \]
+\begin{align*} P \: \psi (x) = - i \, \hbar \: \dv{x} \psi (x) \end{align*}
 son \textbf{esencialmente autoadjuntos}, es decir, son operadores simétricos y su cerradura es autoadjunta.
 \end{ejemplo}
 \textbf{Proposición}: En $S$
-\[ [Q, P] = Q \: P - P \: Q \prec i \: \hbar \: I \]
+\begin{align*} [Q, P] = Q \: P - P \: Q \prec i \: \hbar \: I \end{align*}
 \begin{defi}
 Sea $A$ un operador y sea $x \in \mathcal{D}(A) \cup \mathcal{D}(A^{2})$. Llamaremos \underline{dispersión} de $A$ en $x$ al número
-\[ \Delta_{x} (A) = \sqrt{\braket{x}{(A - \braket{x}{A \: x} \: I)^{2} \: x}} = \sqrt{\braket{x}{A^{2} \: x} - (\braket{x}{A \: x})^{2}} \]
+\begin{align*} \Delta_{x} (A) = \sqrt{\braket{x}{(A - \braket{x}{A \: x} \: I)^{2} \: x}} = \sqrt{\braket{x}{A^{2} \: x} - (\braket{x}{A \: x})^{2}} \end{align*}
 \end{defi}
 \textbf{Principio de Heinserberg:} Sea $f \in S$. Entonces:
-\[ (\Delta_{f} \: Q)(\Delta_{f} \: P) \geq \dfrac{\hbar}{2} \]
+\begin{align*} (\Delta_{f} \: Q)(\Delta_{f} \: P) \geq \dfrac{\hbar}{2} \end{align*}
+
 \section{Notación de Dirac.}
-En mecánica cuántica, la interpretación probabilística de la
-función de onda $\psi (\bm{r}, t)$ dice que $\abs{\psi (\bm{r}, t)}^{2} \dd[3]{r}$ representa la
-probabilidad de encontrar al tiempo $t$ la partícula en el volumen $\dd[3]{r}$ alrededor del punto $\bm{r}$.
+
+En mecánica cuántica, la interpretación probabilística de la función de onda $\psi (\vb{r}, t)$ dice que $\abs{\psi (\vb{r}, t)}^{2} \dd[3]{r}$ representa la probabilidad de encontrar al tiempo $t$ la partícula en el volumen $\dd[3]{r}$ alrededor del punto $\vb{r}$.
 \par
-La probabilidad de encontrar a la partícula en algún lugar del espacio es $1$, de este modo
-\[ \int \dd[3]{r} \: \abs{\psi (\bm{r}, t)}^{2} = 1 \]
+La probabilidad de encontrar a la partícula en algún lugar del espacio es $1$, de este modo:
+\begin{align*}
+\scaleint{6ex} \dd[3]{r} \: \abs{\psi (\bm{r}, t)}^{2} = 1
+\end{align*}
 Un espacio de Hilbert \enquote{natural} para trabajar es $L^{2} (\mathcal{R})$. Sin embargo es muy grande. 
 
 Llamaremos $F \subset L^{2} (\mathcal{R})$ al subespacio que es el conjunto de funciones suficientemente regulares que son cuadrado integrable.
-\subsection*{\enquote{Bases} que no pertenecen a $\mathcal{F}$.}
+
+\subsection{\enquote{Bases} que no pertenecen a \texorpdfstring{$\mathcal{F}$}{F}.}
+
+\noindent
 \textbf{Ondas Planas.}
 
-Las funciones
-\[ v_{p}(x) = \dfrac{1}{\sqrt{2 \, \pi \, \hbar}} \: e^{i \, p \, x / \hbar} \]
+Las funciones:
+\begin{align*}
+v_{p}(x) = \dfrac{1}{\sqrt{2 \, \pi \, \hbar}} \: e^{i \, p \, x / \hbar}
+\end{align*}
 no son de cuadrado integrable, por lo tanto no pertenecen a $\mathcal{F}$ y no pueden ser un conjunto ortogonal completo o base estrictamente, sin embargo cumple propiedades similares a las de las bases:
 \begin{align*}
-\psi (x) &= \int_{-\infty}^{\infty} d \: p \: \overline{\psi (p)} \: v_{p} (x) \\[1em]
+\psi (x) &= \scaleint{6ex}_{\bs -\infty}^{\infty} \dd{p} \, \overline{\psi (p)} \, v_{p} (x) \\[1em]
 \overline{\psi (p)} &= \braket{v_{p}}{\psi}
 \end{align*}
 El \enquote{producto interno} entre dos elementos de la base está dado por
-\[ \braket{v_{p}}{v_{p^{\prime}}} = \dfrac{1}{2 \, \pi} \int \dfrac{\dd x}{\hbar} \: \exp(i \, \frac{x}{\hbar}(p^{\prime} - p)) = \delta (p - p^{\prime}) \]
+\begin{align*}
+\braket{v_{p}}{v_{p^{\prime}}} = \dfrac{1}{2 \, \pi} \scaleint{6ex} \dfrac{\dd x}{\hbar} \: \exp(i \, \frac{x}{\hbar}(p^{\prime} - p)) = \delta (p - p^{\prime})
+\end{align*}
+
 \subsection*{Funciones delta.}
-De la misma manera que en el caso de ondas planas
-introducimos el conjunto $\{\xi_{x_{0}} (x) \}$ etiquetadas por el índice continuo $x_{0}$ y definidas por
-\[ \xi_{x_{0}} (x) = \delta (x - x_{0})\]
+
+De la misma manera que en el caso de ondas planas introducimos el conjunto $\{\xi_{x_{0}} (x) \}$ etiquetadas por el índice continuo $x_{0}$ y definidas por
+\begin{align*} \xi_{x_{0}} (x) = \delta (x - x_{0})\end{align*}
 Este conjunto representa una familia de funciones $\delta$ centradas en los puntos $x_{0}$. Estas funciones no son de cuadrado integrable sin embargo podemos ver que
 \begin{align*}
-\psi (x) &= \int \dd x_{0} \: \psi(x_{0}) \: \xi_{x_{0}} (x) \\[1em]
-\psi (x_{0}) &= \braket{\xi_{x_{0}}}{\psi} = \int \dd x \: \overline{\xi_{x_{0}}(x)} \: \psi(x)
+\psi (x) &= \scaleint{6ex} \dd{x_{0}} \: \psi(x_{0}) \: \xi_{x_{0}} (x) \\[1em]
+\psi (x_{0}) &= \braket{\xi_{x_{0}}}{\psi} = \scaleint{6ex} \dd{x} \: \overline{\xi_{x_{0}}(x)} \: \psi(x)
 \end{align*}
 Y la relación de ortonormalidad, es decir el producto interno entre dos elementos de la \enquote{base}:
-\[ \braket{\xi_{x_{0}}}{\xi_{x_{0}^{\prime}}(x)} = \int \dd x \: \delta (x - x_{0}) \: \delta (x - x_{0}^{\prime}) = \delta (x - x_{0}^{\prime}) \]
+\begin{align*}
+\braket{\xi_{x_{0}}}{\xi_{\pderivada{x}_{0}}(x)} = \scaleint{6ex} \dd{x} \: \delta (x - x_{0}) \: \delta (x - \pderivada{x}_{0}) = \delta (x - \pderivada{x}_{0})
+\end{align*}
 Puesto que la física no depende de la base que utilicemos, y como ya vimos que los espacios de Hilbert son isométricos entre ellos, podemos elegir trabajar en un espacio \enquote{abstracto} y cuando busquemos una propiedad en particular de nuestro sistema aterrizar al espacio de Hilbert que nos sea más cómodo. 
 \par
 Así, en correspondencia uno a uno con $\mathcal{F}$ introducimos el subespacio de \enquote{kets} $\mathcal{E}$.
-\[ \psi (x) \in \mathcal{F} \Longleftrightarrow \ket{\psi} \in \mathcal{E} \]
-El \textbf{producto interno} entre dos kets se escribe
-\[ \braket{\ket{\phi}}{\ket{\psi}} = \braket{\phi}{\psi} \]
+\begin{align*}
+\psi (x) \in \mathcal{F} \Longleftrightarrow \ket{\psi} \in \mathcal{E}
+\end{align*}
+El \textbf{producto interno} entre dos kets se escribe:
+\begin{align*}
+\braket{\ket{\phi}}{\ket{\psi}} = \braket{\phi}{\psi}
+\end{align*}
 
-El \textbf{espacio dual} de $\mathcal{E}$ es el espacio vectorial de funcionales lineales que actúan sobre los kets, a cada vector de este espacio se le conoce como \enquote{bra}, la etiqueta de los bra está dada por el
-teorema de representación de Riez
-\[ \tau (\ket{\psi}) = \braket{\tau}{\psi} \]
-La notación de Dirac ofrece una manera simple de representar los \textbf{proyectores}. Sea $\ket{\psi}$ un ket normalizado. Ahora el operador
-\[ P_{\psi} =  \ket{\psi} \bra{\psi} \]
+El \textbf{espacio dual} de $\mathcal{E}$ es el espacio vectorial de funcionales lineales que actúan sobre los kets, a cada vector de este espacio se le conoce como \enquote{bra}, la etiqueta de los bra está dada por el teorema de representación de Riesz:
+\begin{align*}
+\tau (\ket{\psi}) = \braket{\tau}{\psi}
+\end{align*}
+La notación de Dirac ofrece una manera simple de representar los \textbf{proyectores}. Sea $\ket{\psi}$ un ket normalizado. Ahora el operador:
+\begin{align*}
+P_{\psi} =  \ket{\psi} \bra{\psi}
+\end{align*}
 es un proyector. El significado geométrico es que proyecta todos los kets al subespacio generado por $\ket{\psi}$.
 \par
-El proyector para un subespacio de dimensión $n$ se construye tomando $n$ kets normalizados ortogonales entre sí $\{ \phi_{1}, \phi_{2}, \ldots, \phi_{n} \}$. De esta manera
-\[ P_{n} = \sum_{j=1}^{n} \ket{\phi_{j}} \bra{\phi_{j}}\]
+El proyector para un subespacio de dimensión $n$ se construye tomando $n$ kets normalizados ortogonales entre sí $\{ \phi_{1}, \phi_{2}, \ldots, \phi_{n} \}$. De esta manera:
+\begin{align*}
+P_{n} = \nsum_{j=1}^{n} \ket{\phi_{j}} \bra{\phi_{j}}
+\end{align*}
+
 \subsection*{Más sobre bases.}
-Un conjunto de kets, discreto $\{ \ket{u_{i}} \}$ o continuo $\{ \ket{w_{\alpha}} \}$, satisface la relación de ortonormalización
-\[ \braket{u_{i}}{u_{j}} = \delta_{ij} \hspace{1cm} \braket{w_{\alpha}}{w_{\alpha^{\prime}}} = \delta(\alpha - \alpha^{\prime}) \]
-Un vector cualquiera se escribe en la base $\{ \ket{u_{i}} \}$ como 
-\[ \ket{\psi} =  \sum_{j} c_{j} \, \ket{u_{j}} = \sum_{i} \braket{u_{j} \, \ket{\psi}}{u_{j}} = \left( \sum_{j} \ket{u_{j}} \bra{u_{j}} \right) \ket{\psi} \]
+
+Un conjunto de kets, discreto $\{ \ket{u_{i}} \}$ o continuo $\{ \ket{w_{\alpha}} \}$, satisface la relación de ortonormalización:
+\begin{align*}
+\braket{u_{i}}{u_{j}} = \delta_{ij} \hspace{1cm} \braket{w_{\alpha}}{w_{\pderivada{\alpha}}} = \delta(\alpha - \pderivada{\alpha})
+\end{align*}
+Un vector cualquiera se escribe en la base $\{ \ket{u_{i}} \}$ como:
+\begin{align*}
+\ket{\psi} =  \nsum_{j} c_{j} \, \ket{u_{j}} = \nsum_{i} \braket{u_{j} \, \ket{\psi}}{u_{j}} = \left( \nsum_{j} \ket{u_{j}} \bra{u_{j}} \right) \ket{\psi}
+\end{align*}
 El operador entre paréntesis debe ser la identidad para que se cumpla la igualdad.
 \par
 Haciendo lo mismo con la base continua $\{ \ket{w_{\alpha}} \}$:
 \begin{align*}
-\ket{\psi} &= \int \dd \alpha \: c (\alpha) \ket{w_{\alpha}} = \int \dd \alpha \: \braket{w_{\alpha}}{\psi} \ket{w_{\alpha}} \\
-&= \int \dd \alpha \: \ket{w_{\alpha}} \braket{w_{\alpha}}{\psi} = \left( \int \dd \alpha \ket{w_{\alpha}} \bra{w_{\alpha}} \right) \ket{\psi} 
+\ket{\psi} &= \scaleint{6ex} \dd{\alpha} \: c (\alpha) \ket{w_{\alpha}} = \scaleint{6ex} \dd \alpha \: \braket{w_{\alpha}}{\psi} \ket{w_{\alpha}} \\
+&= \scaleint{6ex} \dd{\alpha} \: \ket{w_{\alpha}} \braket{w_{\alpha}}{\psi} = \left( \scaleint{6ex} \dd{\alpha} \ket{w_{\alpha}} \bra{w_{\alpha}} \right) \ket{\psi} 
 \end{align*}
-Resumiendo, las bases deben cumplir la relación de cerradura que es
-\[ \sum_{j} \ket{u_{j}} \bra{u_{j}} = I, \hspace{1cm} \int \dd \alpha \ket{w_{\alpha}} \bra{w_{\alpha}} = I \]
-\subsection*{Representación en las bases $\{ \ket{x}\}$ y $\{ \ket{p}\}$}
+Resumiendo, las bases deben cumplir la relación de cerradura que es:
+\begin{align*}
+\nsum_{j} \ket{u_{j}} \bra{u_{j}} = I, \hspace{1cm} \scaleint{6ex} \dd{\alpha} \ket{w_{\alpha}} \bra{w_{\alpha}} = I \end{align*}
+
+\subsection{Representación en las bases \texorpdfstring{$\{\ket{x}\}$}{x} y \texorpdfstring{$\{ \ket{p}\}$}{p}}
+
 Tomemos los vectores delta de Dirac y de ondas planas previos.
 \begin{align*}
 \xi_{x_{0}} (x) & \Longleftrightarrow \ket{x_{0}} \\
 v_{p_{0}} (x) & \Longleftrightarrow \ket{p_{0}}
 \end{align*}
-Utilizando ahora la relación de cerradura, escribiremos
-\[ \ket{\psi} = \int \dd x \: \ket{x_{0}} \braket{x_{0}}{\psi} = \int \dd x \: \ket{p_{0}} \braket{p_{0}}{\psi} \]
+Utilizando ahora la relación de cerradura, escribiremos:
+\begin{align*} 
+\ket{\psi} = \scaleint{6ex} \dd{x} \: \ket{x_{0}} \braket{x_{0}}{\psi} = \scaleint{6ex} \dd{x} \: \ket{p_{0}} \braket{p_{0}}{\psi}
+\end{align*}
 Los coeficientes $\braket{x_0}{\psi}$ y $\braket{p_{0}}{\psi}$ son calculados directamente:
 \begin{align*}
-\braket{x_0}{\psi} &= \int \dd x \: \overline{\xi_{x_{0}}} \, \psi (x) =  \psi (x_{0}) \\
-\braket{p_0}{\psi} &= \int \dd x \: \overline{v_{p_{0}}} \, \psi (x) =  \overline{\psi} (p_{0})
+\braket{x_0}{\psi} &= \scaleint{6ex} \dd{x} \: \overline{\xi_{x_{0}}} \, \psi (x) =  \psi (x_{0}) \\
+\braket{p_0}{\psi} &= \scaleint{6ex} \dd{x} \: \overline{v_{p_{0}}} \, \psi (x) =  \overline{\psi} (p_{0})
 \end{align*}
 donde $\overline{\psi} (p)$ es la transformada de Fourier de $\psi (r)$.
 \par
