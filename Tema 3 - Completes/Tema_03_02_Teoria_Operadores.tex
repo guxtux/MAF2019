@@ -1,0 +1,441 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\input{../Preambulos/preambulo_Beamer_Dresden_seahorse}
+
+\setbeamercolor{section in foot}{bg=darkspringgreen, fg=white}
+\setbeamercolor{subsection in foot}{bg=persianblue, fg=white}
+\setbeamercolor{date in foot}{bg=goldenrod, fg=white}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\usefonttheme{serif}
+\resetcounteronoverlays{saveenumi}
+
+\date{29 de marzo de 2022}
+
+\title{\large{Teoría Operadores Sturm-Liouville}}
+\subtitle{Tema 3 - Bases completas y ortogonales}
+\author{M. en C. Gustavo Contreras Mayén}
+
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Operadores autoadjuntos}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Introducción}
+
+\begin{frame}
+\frametitle{Relevancia de los operadores}
+En el estudio de la teoría espectral de matrices, se aprende sobre el adjunto de la matriz, $A^{\dagger}$, y el papel que juegan las matrices autoadjuntas o Hermitianas en la diagonalización.
+\end{frame}
+\begin{frame}
+\frametitle{Nuevo concepto}
+Además, se necesita el concepto del \emph{adjunto} para discutir la existencia de soluciones al problema matricial:
+\begin{align*}
+\vb{y} = A \, \vb{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Operadores y ED}
+En el mismo sentido, uno está interesado en la existencia de soluciones de la ecuación del operador $L \, u = f$ y soluciones del correspondiente problema de valores propios.
+\\
+\bigskip
+\pause
+El estudio de operadores lineales en un espacio de Hilbert es una generalización de lo que estudia en un curso de álgebra lineal.
+\end{frame}
+\begin{frame}
+\frametitle{Retomando el operador Sturm-Liouville}
+Así como se puede encontrar una base de vectores propios y diagonalizar matrices Hermitianas o autoadjuntas (o simétricas reales en el caso de matrices reales), veremos que el operador de Sturm-Liouville es \emph{autoadjunto}.
+\end{frame}
+\begin{frame}
+\frametitle{Retomando el operador Sturm-Liouville}    
+En esta parte definiremos el \emph{dominio} de un operador e introduciremos la noción de \emph{operadores adjuntos}.
+\\
+\bigskip
+\pause
+Veremos el papel que juega el adjunto en la existencia de soluciones a la ecuación del operador $L \, u = f$.
+\end{frame}
+
+\subsection{El operador adjunto}
+
+\begin{frame}
+\frametitle{Definición}
+Comenzamos definiendo el adjunto de un operador: \pause el adjunto, $L^{\dagger}$, del operador $L$ satisface:
+\begin{align*}
+\langle u, L \, v \rangle = \langle L^{\dagger} \, u,  v \rangle
+\end{align*}
+para todo $v$ en el dominio de $L$ y $u$ en el dominio de $L^{\dagger}$.
+\end{frame}
+\begin{frame}
+\frametitle{El dominio del operador}
+Aquí, el dominio de un operador diferencial $L$ es el conjunto de todos $u \in L_{\sigma}^{2} (a, b)$ que satisfacen un conjunto dado de CDF homogéneas.
+\\
+\bigskip
+\pause
+Esto se comprenderá mejor con el siguiente ejemplo.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo de operador adjunto}
+Encuentra el adjunto de:
+\begin{align*}
+L = a_{2}(x) \, D^{2} + a_{1}(x) \, D + a_{0}(x)
+\end{align*}
+con $D = \dv*{x}$.
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el ejemplo de operador adjunto}    
+Para encontrar el adjunto, colocamos el operador dentro de una integral. \pause Consideremos el producto interior:
+\pause
+\begin{align*}
+\langle u , L \, v \rangle = \scaleint{5ex}_{\bs a}^{b} u (a_{2} \, \sderivada{v} + a_{1} \, \pderivada{y} + a_{0} \, v) \dd{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el ejemplo}
+Tenemos que \enquote{mover} el operador $L$ de $v$ \pause y determinar qué operador está actuando sobre $u$ para preservar formalmente el producto interno.
+\\
+\bigskip
+\pause
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el ejemplo}    
+Para un operador simple como $L = \dv*{x}$, esto se hace fácilmente mediante la integración por partes.
+\\
+\bigskip
+\pause
+Para el operador dado en el ejemplo, necesitaremos aplicar varias integraciones por partes a los términos individuales. Consideramos cada término derivado en el integrando por separado.
+\end{frame}
+\begin{frame}
+\frametitle{Integrando el término $a_{1}$}
+Para el término $a_{1} \pderivada{v}$, integramos por partes para encontrar:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\scaleint{5ex}_{\bs a}^{b} \, u(x) \, &a_{1} \, \pderivada{v}(x) \dd{x} = a_{1}(x) \, u(x) \, v(x) \eval_{a}^{b} + \\[0.5em]
+&- \scaleint{5ex}_{\bs a}^{b} \big[ u(x) \, a_{1} (x) \big]^{\prime} \, v(x) \dd{x}
+\end{aligned}
+\label{eq:ecuacion_04_17}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Integrando el término $a_{2}$}
+Ahora consideremos el caso para el término $a_{2} \, \sderivada{v}$, en donde será necesario hacer dos integraciones por partes:
+\pause
+\begin{eqnarray*}
+\begin{aligned}[b]
+&\scaleint{5ex}_{\bs a}^{b} \, u(x) \, a_{2} (x) \, \sderivada{v}(x) \dd{x} = a_{2}(x) \, u(x) \, \pderivada{v}(x) \eval_{a}^{b} + \\[0.5em]
+&- \scaleint{5ex}_{\bs a}^{b} \big[ u(x) \, a_{2} (x) \big]^{\prime} \, \pderivada{v}(x) \dd{x} = \end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Integrando el término $a_{2}$}
+\begin{eqnarray}
+\begin{aligned}[b]
+&= \bigg[ a_{2}(x) \, u(x) \, \pderivada{v}(x) - \big[ a_{2}(x) \, u(x) \big]^{\prime} \, v(x) \bigg] \eval_{a}^{b} + \\[0.5em]
+&+ \scaleint{5ex}_{\bs a}^{b} \, \big[ u(x) \, a_{2} (x) \big]^{\prime \prime} \, v(x) \dd{x}
+\end{aligned}
+\label{eq:ecuacion_04_18}
+\end{eqnarray}
+\end{frame}    
+\begin{frame}
+\frametitle{Resultado premilinar}
+Combinando estos resultados, tenemos que:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\langle u , L \, v \rangle &= \pause \scaleint{5ex}_{\bs a}^{b} u (a_{2} \, \sderivada{v} + a_{1} \, \pderivada{y} + a_{0} \, v) \dd{x} = \\[0.5em] \pause
+&= \bigg[ a_{1}(x) \, u(x) \, v(x) + a_{2}(x) \, u(x) \, \pderivada{v}(x) + \\[0.5em]
+&- \big[ a_{2}(x) \, u(x) \big]^{\prime} \, v(x) \bigg] \eval_{a}^{b} + \\[0.5em]
+&+ \scaleint{5ex}_{\bs a}^{b} \, \big[ u(x) \, a_{2} (x) \big]^{\prime \prime} \, v(x) \dd{x}
+\end{aligned}
+\label{eq:ecuacion_04_19}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Usando las CDF}
+Agregando las CDF para $v$, \pause uno tiene que determinar las CDF para $u$ tales que:
+\pause
+\begin{align*}
+&\bigg[ a_{1}(x) \, u(x) \, v(x) + a_{2}(x) \, u(x) \, \pderivada{v}(x) + \\[0.5em]
+&- \big[ a_{2}(x) \, u(x) \big]^{\prime} \, v(x) \bigg] \eval_{a}^{b} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando las CDF}
+Estos nos lleva a:
+\pause
+\begin{align*}
+\langle u , L \, v \rangle &= \scaleint{5ex}_{\bs a}^{b}  \big[ (a_{2} \, u)^{\prime \prime} - (a_{1} \, u)^{\prime} + a_{0} \, u \big] \, v \dd{x} \\[0.5em]
+&\equiv \langle L^{\dagger} \, u, v \rangle 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El operador adjunto}
+Por lo tanto:
+\pause
+\begin{align}
+L^{\dagger} = \dv[2]{x} a_{2}(x) - \dv{x} a_{1}(x) + a_{0}(x)
+\label{eq:ecuacion_04_20}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{El operador Hermitiano/Hermítico}
+Cuando $L^{\dagger} = L$, \pause el operador se llama formalmente \textbf{autoadjunto}, también es conocido como \emph{operador Hermitiano}.
+\\
+\bigskip
+\pause
+Cuando el dominio de $L$ es el mismo que el dominio de $L^{\dagger}$, se utiliza el término autoadjunto.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+Determina $L^{\dagger}$ y su dominio para el operador:
+\pause
+\begin{align*}
+L \, u = \dv{u}{x}
+\end{align*}
+donde $u$ satisface las CDF $u(0) = 2 \, u(1)$ en $[0, 1]$.
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo el ejercicio 2}
+Necesitamos encontrar el operador adjunto que satisfaga $\langle v, L \, u \rangle = \langle L^{\dagger} \, v, u \rangle$.
+\\
+\bigskip
+\pause  
+Por lo que reescribimos la integral:
+\pause
+\begin{eqnarray*}
+\langle v, L \, u \rangle = \pause \scaleint{5ex}_{\bs 0}^{1} v \, \dv{u}{x} \dd{x} = \pause u \, v \eval_{0}^{1} - \scaleint{5ex}_{\bs 0}^{1} u \, \dv{v}{x} \dd{x} = \pause \langle L^{\dagger} \, v, u \rangle
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{El problema adjunto}
+De aquí tenemos que el problema adjunto que consiste en un operador adjunto y la CDF asociada (o dominio de $L^{\dagger}$):
+\pause
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item $L^{\dagger} = - \dv{x}$
+\item $\displaystyle u \, v \eval_{0}^{1} = 0 \Rightarrow u(1) \big[ v(1) - 2 \, v(0) \big] \Rightarrow v(1) = 2 \, v(0)$
+\end{enumerate}
+\end{frame}
+
+% \vspace{0.3cm}
+% \noindent
+% %Ref. Arfken (2006) 10.2.1
+% \textbf{Ejercicio a cuenta (30).} Las funciones $\phi_{1}(x)$ y $\phi_{2}(x)$ son funciones propias del mismo operador autoadjunto (Hermitiano) pero para distintos valores propios $\lambda_{1}$ y $\lambda_{2}$. Demuestra que $\phi_{1}(x)$ y $\phi_{2}(x)$ son linealmente independientes.
+
+\section{Identidades de Lagrange y de Green.}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Identidades de apoyo}
+
+\begin{frame}
+\frametitle{Material importante}
+Antes de pasar a la demostración de que los valores propios de un problema de Sturm-Liouville son reales y las funciones propias asociadas son ortogonales, \pause necesitaremos introducir dos identidades importantes.
+\end{frame}
+\begin{frame}
+\frametitle{Con el operador Sturm-Liouville}
+Para el operador de Sturm-Liouville:
+\pause
+\begin{align*}
+\mathcal{L} = \dv{x} \left( p \, \dv{x} \right) + q
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Identidad de Lagrange}
+Se tienen dos identidades:
+\\
+\bigskip
+\pause
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item \textbf{Identidad de Lagrange:} 
+\begin{align*}
+u \, \mathcal{L} \, v - v \, \mathcal{L} \, u = \big[ p \, (u \, \pderivada{v} - v \, \pderivada{u}) \big]^{\prime}
+\end{align*}
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Identidad de Green}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]    
+\conti
+\item \textbf{Identidad de Green:} 
+\begin{align*}
+\scaleint{5ex}_{\bs a}^{b} \, \big(u \, \mathcal{L} \, v - v \, \mathcal{L} \, u \big) \dd{x} = \big[ p \, (u \, \pderivada{v} - v \, \pderivada{u}) \big]\eval_{a}^{b}
+\end{align*}
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Demostrando la identidad de Lagrange}
+La demostración de la identidad de Lagrange se sigue una sencilla manipulación del operador:
+\pause
+\begin{eqnarray*}
+\begin{aligned}[b]
+u  \mathcal{L} v {-} v \mathcal{L} u &= u \bigg[ \dv{x} \left( p \dv{v}{x} {+} q v \right) \bigg] {-} v \bigg[ \dv{x} \left( p \dv{u}{x} {+} q u \right) \bigg] = \\[0.5em] \pause
+&= u \dv{x} \left( p \dv{v}{x} \right) - v \dv{x} \left( p \dv{u}{x} \right) = \\[0.5em]
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Demostrando la identidad de Lagrange}
+\begin{eqnarray}
+\begin{aligned}[b]
+&= u \dv{x} \left( p \dv{v}{x} \right) + p \dv{u}{x} \dv{v}{x} + \\[0.5em]
+&- v \dv{x} \left( p \dv{u}{x} \right) - p \dv{u}{x} \dv{v}{x} = \\[0.5em] \pause
+&= \dv{x} \bigg[ p \, u \, \dv{v}{x} - p \, v \, \dv{u}{x}  \bigg]
+\end{aligned}
+\label{eq:ecuacion_04_21}
+\end{eqnarray}
+La identidad de Green se prueba simplemente integrando la identidad de Lagrange.
+\end{frame}    
+
+\section{Ortogonalidad y eigenvalores reales}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Eigenvalores reales}
+
+\begin{frame}
+\frametitle{Avance en el contenido}
+Ahora estamos listos para demostrar que:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item  \emph{Los eigenvalores de un problema de Sturm-Liouville son reales}.
+\item \emph{Las eigenfunciones correspondientes son ortogonales}.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Problema de eigenvalores}
+Los eigenvalores del problema de tipo Sturm-Liouville son reales:
+\pause
+\begin{align*}
+\mathcal{L} \, y = \left( x \, \pderivada{y} \right)^{\prime} + \dfrac{2}{x} \, y = - \lambda \, \sigma \, y
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Demostrando el punto}
+Sean las $\phi_{n}(x)$ una solución para el problema de eigenvalores asociados con $\lambda_{n}$:
+\pause
+\begin{align*}
+\mathcal{L} \, \phi_{n} = - \lambda_{n} \, \sigma \, \phi_{n}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando el conjugado complejo}
+Mostrando que $\overline{\lambda}_{n} = \lambda_{n}$, donde la barra significa el conjugado complejo.
+\\
+\bigskip
+\pause
+Entonces, también consideramos el conjugado complejo de esta ecuación:
+\begin{align*}
+\mathcal{L} \, \overline{\phi}_{n} = - \overline{\lambda}_{n} \, \sigma \, \overline{\phi}_{n}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Multiplicando por el conjugado}
+Multiplicando la primera ecuación por $\overline{\phi}_{n}$, la segunda ecuación por $\phi_{n}$ y luego restando los resultados, obtenemos:
+\pause
+\begin{align*}
+\overline{\phi}_{n} \, \mathcal{L} \, \phi_{n} - \phi_{n} \, \mathcal{L} \, \overline{\phi}_{n} = \big( - \overline{\lambda}_{n} - \lambda_{n} \big) \, \sigma \, \phi_{n} \, \overline{\phi}_{n}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Integrando la expresión}
+Integrando ambos lados de la expresión, se llega a:
+\pause
+\begin{align*}
+\scaleint{5ex}_{\bs a}^{b} \bigg( \overline{\phi}_{n} \, \mathcal{L} \, \phi_{n} &- \phi_{n} \mathcal{L} \overline{\phi}_{n} \bigg) \dd{x} = \\[0.5em]
+&=\big( - \overline{\lambda}_{n} {-} \lambda_{n} \big) \scaleint{5ex}_{\bs a}^{b} \sigma \phi_{n} \overline{\phi}_{n} \dd{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando la identidad de Green}
+Aplicando la identidad de Green en el lado izquierdo, se tiene que:
+\pause
+\begin{align*}
+\big[ p \, (u \, \pderivada{v} - v \, \pderivada{u}) \big]\eval_{a}^{b} = \big( - \overline{\lambda}_{n} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \overline{\phi}_{n} \dd{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando condiciones homogéneas}
+Usando las condiciones homogéneas:
+\pause
+\begin{align*}
+\alpha_{1} \, y(a) + \beta_{1} \, \ptilde{y} (a) &= 0 \\[0.5em]
+\alpha_{2} \, y(b) + \beta_{2} \, \ptilde{y} (b) &= 0
+\end{align*}
+para el operador autoadjunto, el lado izquierdo se anula.
+\end{frame}
+\begin{frame}
+\frametitle{Resultado obtenido}
+Por lo que el resultado es:
+\pause
+\begin{align*}
+\big( - \overline{\lambda}_{n} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \norm{\phi_{n}}^{2} \dd{x} = 0
+\end{align*}
+esta integral es no negativa.
+\end{frame}
+\begin{frame}
+\frametitle{Sobre los eigenvalores}
+Por lo que se tiene $\overline{\lambda}_{n} = \lambda_{n}$.
+\\
+\bigskip
+\pause
+ Entonces los eigenvalores son reales.
+\end{frame}
+
+% \noindent
+% \textbf{Ejemplo 4.} Las funciones propias correspondientes a diferentes valores propios de un problema tipo Sturm-Liouville son ortogonales.
+% \begin{align*}
+% \dv{x} \left( p(x) \, \dv{x} \right) + q(x) \, y + \lambda \, \sigma (x) \, y = 0
+% \end{align*}
+
+% La demostración es similar al ejemplo anterior. Sea $\phi_{n}(x)$ una solución al problema de valores propios con $\lambda_{n}$:
+% \begin{align*}
+% \mathcal{L} \, \phi_{n} = - \lambda_{n} \, \sigma \, \phi_{n}
+% \end{align*}
+% y sea $\phi_{m}(x)$ una solución al problema de valores propios asociado con \hfill \break $\lambda_{m} \neq \lambda_{n}$:
+% \begin{align*}
+% \mathcal{L} \, \phi_{m} = - \lambda_{m} \, \sigma \, \phi_{m}
+% \end{align*}
+% Ahora, multiplicamos la primera ecuación por $\phi_{m}$ y la segunda ecuación por $\phi_{n}$. Restando estos resultados, obtenemos:
+% \begin{align*}
+% \phi_{m}\, \mathcal{L} \, \phi_{n} - \phi_{n} \, \mathcal{L} \, \phi_{m} = \big( \lambda_{m} - \lambda_{n} \big) \, \sigma \, \phi_{n} \, \phi_{m}
+% \end{align*}
+% integrando ambos lados de la ecuación, usando la identidad de Green y usando las CDF homogéneas, se tiene:
+% \begin{align*}
+% \big( \lambda_{m} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \phi_{m} \dd{x} = 0
+% \end{align*}
+% dado que los valores propios son distintos, podemos dividir entre $\lambda_{m} - \lambda_{n}$, llegando al resultado deseado:
+% \begin{align*}
+% \scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \phi_{m} \dd{x} = 0
+% \end{align*}
+% Por lo tanto, las funciones propias son ortogonales con respecto a la función de peso $\sigma(x)$.
+% \par
+% Puede presentarse el caso en el que las funciones propias no sean ortogonales, en la siguiente sección se revisa el procedimiento que garantiza que siempre será posible contar con una ortogonalización de funciones.
+
+\end{document}
