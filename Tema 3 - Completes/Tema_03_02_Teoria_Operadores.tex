@@ -9,19 +9,19 @@
 \makeatletter
 \setbeamertemplate{footline}
 {
-  \leavevmode%
-  \hbox{%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
-    \usebeamerfont{section in foot} \insertsection
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
-    \usebeamerfont{subsection in foot}  \insertsubsection
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-    \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
-    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
-  \end{beamercolorbox}}%
-  \vskip0pt%
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+  \usebeamerfont{section in foot} \insertsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+  \usebeamerfont{subsection in foot}  \insertsubsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{1.5em}
+  \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+\end{beamercolorbox}}%
+\vskip0pt%
 }
 \makeatother
 \usefonttheme{serif}
@@ -48,13 +48,13 @@
 
 \begin{frame}
 \frametitle{Relevancia de los operadores}
-En el estudio de la teoría espectral de matrices, se aprende sobre el adjunto de la matriz, $A^{\dagger}$, y el papel que juegan las matrices autoadjuntas o Hermitianas en la diagonalización.
+En el estudio de la teoría espectral de matrices, se aprende sobre el adjunto de la matriz, $\vb{A}^{\dagger}$, y el papel que juegan las matrices autoadjuntas o Hermitianas en la diagonalización.
 \end{frame}
 \begin{frame}
 \frametitle{Nuevo concepto}
 Además, se necesita el concepto del \emph{adjunto} para discutir la existencia de soluciones al problema matricial:
 \begin{align*}
-\vb{y} = A \, \vb{x}
+\vb{y} = \vb{A} \, \vb{x}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -109,7 +109,7 @@ con $D = \dv*{x}$.
 Para encontrar el adjunto, colocamos el operador dentro de una integral. \pause Consideremos el producto interior:
 \pause
 \begin{align*}
-\langle u , L \, v \rangle = \scaleint{5ex}_{\bs a}^{b} u (a_{2} \, \sderivada{v} + a_{1} \, \pderivada{y} + a_{0} \, v) \dd{x}
+\langle u , L \, v \rangle = \scaleint{5ex}_{\bs a}^{b} u (a_{2} \, \sderivada{v} + a_{1} \, \pderivada{v} + a_{0} \, v) \dd{x}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -165,7 +165,7 @@ Combinando estos resultados, tenemos que:
 \pause
 \begin{eqnarray}
 \begin{aligned}[b]
-\langle u , L \, v \rangle &= \pause \scaleint{5ex}_{\bs a}^{b} u (a_{2} \, \sderivada{v} + a_{1} \, \pderivada{y} + a_{0} \, v) \dd{x} = \\[0.5em] \pause
+\langle u , L \, v \rangle &= \pause \scaleint{5ex}_{\bs a}^{b} u (a_{2} \, \sderivada{v} + a_{1} \, \pderivada{v} + a_{0} \, v) \dd{x} = \\[0.5em] \pause
 &= \bigg[ a_{1}(x) \, u(x) \, v(x) + a_{2}(x) \, u(x) \, \pderivada{v}(x) + \\[0.5em]
 &- \big[ a_{2}(x) \, u(x) \big]^{\prime} \, v(x) \bigg] \eval_{a}^{b} + \\[0.5em]
 &+ \scaleint{5ex}_{\bs a}^{b} \, \big[ u(x) \, a_{2} (x) \big]^{\prime \prime} \, v(x) \dd{x}
@@ -196,7 +196,7 @@ Estos nos lleva a:
 Por lo tanto:
 \pause
 \begin{align}
-L^{\dagger} = \dv[2]{x} a_{2}(x) - \dv{x} a_{1}(x) + a_{0}(x)
+L^{\dagger} = a_{2}(x) \, \dv[2]{x} - a_{1}(x) \, \dv{x} + a_{0}(x)
 \label{eq:ecuacion_04_20}
 \end{align}
 \end{frame}
@@ -246,7 +246,7 @@ De aquí tenemos que el problema adjunto que consiste en un operador adjunto y l
 % %Ref. Arfken (2006) 10.2.1
 % \textbf{Ejercicio a cuenta (30).} Las funciones $\phi_{1}(x)$ y $\phi_{2}(x)$ son funciones propias del mismo operador autoadjunto (Hermitiano) pero para distintos valores propios $\lambda_{1}$ y $\lambda_{2}$. Demuestra que $\phi_{1}(x)$ y $\phi_{2}(x)$ son linealmente independientes.
 
-\section{Identidades de Lagrange y de Green.}
+\section{Identidades de Lagrange y de Green}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Identidades de apoyo}
 
@@ -296,7 +296,7 @@ La demostración de la identidad de Lagrange se sigue una sencilla manipulación
 \pause
 \begin{eqnarray*}
 \begin{aligned}[b]
-u  \mathcal{L} v {-} v \mathcal{L} u &= u \bigg[ \dv{x} \left( p \dv{v}{x} {+} q v \right) \bigg] {-} v \bigg[ \dv{x} \left( p \dv{u}{x} {+} q u \right) \bigg] = \\[0.5em] \pause
+u  \mathcal{L} v {-} v \mathcal{L} u &= u \bigg[ \dv{x} \left( p \dv{v}{x} \right) {+} q v \bigg] {-} v \bigg[ \dv{x} \left( p \dv{u}{x} \right) {+} q u \bigg] = \\[0.5em] \pause
 &= u \dv{x} \left( p \dv{v}{x} \right) - v \dv{x} \left( p \dv{u}{x} \right) = \\[0.5em]
 \end{aligned}
 \end{eqnarray*}
@@ -360,7 +360,7 @@ Entonces, también consideramos el conjugado complejo de esta ecuación:
 Multiplicando la primera ecuación por $\overline{\phi}_{n}$, la segunda ecuación por $\phi_{n}$ y luego restando los resultados, obtenemos:
 \pause
 \begin{align*}
-\overline{\phi}_{n} \, \mathcal{L} \, \phi_{n} - \phi_{n} \, \mathcal{L} \, \overline{\phi}_{n} = \big( - \overline{\lambda}_{n} - \lambda_{n} \big) \, \sigma \, \phi_{n} \, \overline{\phi}_{n}
+\overline{\phi}_{n} \, \mathcal{L} \, \phi_{n} - \phi_{n} \, \mathcal{L} \, \overline{\phi}_{n} = \big( \overline{\lambda}_{n} - \lambda_{n} \big) \, \sigma \, \phi_{n} \, \overline{\phi}_{n}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -369,7 +369,7 @@ Integrando ambos lados de la expresión, se llega a:
 \pause
 \begin{align*}
 \scaleint{5ex}_{\bs a}^{b} \bigg( \overline{\phi}_{n} \, \mathcal{L} \, \phi_{n} &- \phi_{n} \mathcal{L} \overline{\phi}_{n} \bigg) \dd{x} = \\[0.5em]
-&=\big( - \overline{\lambda}_{n} {-} \lambda_{n} \big) \scaleint{5ex}_{\bs a}^{b} \sigma \phi_{n} \overline{\phi}_{n} \dd{x}
+&=\big( \overline{\lambda}_{n} {-} \lambda_{n} \big) \scaleint{5ex}_{\bs a}^{b} \sigma \phi_{n} \overline{\phi}_{n} \dd{x}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -377,7 +377,7 @@ Integrando ambos lados de la expresión, se llega a:
 Aplicando la identidad de Green en el lado izquierdo, se tiene que:
 \pause
 \begin{align*}
-\big[ p \, (u \, \pderivada{v} - v \, \pderivada{u}) \big]\eval_{a}^{b} = \big( - \overline{\lambda}_{n} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \overline{\phi}_{n} \dd{x}
+\big[ p \, (u \, \pderivada{v} - v \, \pderivada{u}) \big]\eval_{a}^{b} = \big( \overline{\lambda}_{n} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \overline{\phi}_{n} \dd{x}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -395,7 +395,7 @@ para el operador autoadjunto, el lado izquierdo se anula.
 Por lo que el resultado es:
 \pause
 \begin{align*}
-\big( - \overline{\lambda}_{n} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \norm{\phi_{n}}^{2} \dd{x} = 0
+\big( \overline{\lambda}_{n} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \norm{\phi_{n}}^{2} \dd{x} = 0
 \end{align*}
 esta integral es no negativa.
 \end{frame}
@@ -408,34 +408,579 @@ Por lo que se tiene $\overline{\lambda}_{n} = \lambda_{n}$.
  Entonces los eigenvalores son reales.
 \end{frame}
 
-% \noindent
-% \textbf{Ejemplo 4.} Las funciones propias correspondientes a diferentes valores propios de un problema tipo Sturm-Liouville son ortogonales.
-% \begin{align*}
-% \dv{x} \left( p(x) \, \dv{x} \right) + q(x) \, y + \lambda \, \sigma (x) \, y = 0
-% \end{align*}
+\subsection{Eigenfunciones ortogonales}
 
-% La demostración es similar al ejemplo anterior. Sea $\phi_{n}(x)$ una solución al problema de valores propios con $\lambda_{n}$:
-% \begin{align*}
-% \mathcal{L} \, \phi_{n} = - \lambda_{n} \, \sigma \, \phi_{n}
-% \end{align*}
-% y sea $\phi_{m}(x)$ una solución al problema de valores propios asociado con \hfill \break $\lambda_{m} \neq \lambda_{n}$:
-% \begin{align*}
-% \mathcal{L} \, \phi_{m} = - \lambda_{m} \, \sigma \, \phi_{m}
-% \end{align*}
-% Ahora, multiplicamos la primera ecuación por $\phi_{m}$ y la segunda ecuación por $\phi_{n}$. Restando estos resultados, obtenemos:
-% \begin{align*}
-% \phi_{m}\, \mathcal{L} \, \phi_{n} - \phi_{n} \, \mathcal{L} \, \phi_{m} = \big( \lambda_{m} - \lambda_{n} \big) \, \sigma \, \phi_{n} \, \phi_{m}
-% \end{align*}
-% integrando ambos lados de la ecuación, usando la identidad de Green y usando las CDF homogéneas, se tiene:
-% \begin{align*}
-% \big( \lambda_{m} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \phi_{m} \dd{x} = 0
-% \end{align*}
-% dado que los valores propios son distintos, podemos dividir entre $\lambda_{m} - \lambda_{n}$, llegando al resultado deseado:
-% \begin{align*}
-% \scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \phi_{m} \dd{x} = 0
-% \end{align*}
-% Por lo tanto, las funciones propias son ortogonales con respecto a la función de peso $\sigma(x)$.
-% \par
-% Puede presentarse el caso en el que las funciones propias no sean ortogonales, en la siguiente sección se revisa el procedimiento que garantiza que siempre será posible contar con una ortogonalización de funciones.
+\begin{frame}
+\frametitle{Por demostrar}
+Ahora nos interesa revisar que las funciones propias correspondientes a diferentes valores propios de un problema tipo Sturm-Liouville son ortogonales.
+\pause
+\begin{align*}
+\dv{x} \left( p(x) \, \dv{x} \right) + q(x) \, y + \lambda \, \sigma (x) \, y = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Demostración de esta propiedad}
+La demostración es similar al ejemplo anterior. Sea $\phi_{n}(x)$ una solución al problema de valores propios con $\lambda_{n}$:
+\pause
+\begin{align*}
+\mathcal{L} \, \phi_{n} = - \lambda_{n} \, \sigma \, \phi_{n}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Demostración de esta propiedad}
+Y sea $\phi_{m}(x)$ una solución al problema de valores propios asociado con $\lambda_{m} \neq \lambda_{n}$:
+\pause
+\begin{align*}
+\mathcal{L} \, \phi_{m} = - \lambda_{m} \, \sigma \, \phi_{m}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Multiplicando las expresiones}
+Ahora, multiplicamos la primera ecuación por $\phi_{m}$ y la segunda ecuación por $\phi_{n}$. \pause Restando estos resultados, obtenemos:
+\pause
+\begin{align*}
+\phi_{m}\, \mathcal{L} \, \phi_{n} - \phi_{n} \, \mathcal{L} \, \phi_{m} = \big( \lambda_{m} - \lambda_{n} \big) \, \sigma \, \phi_{n} \, \phi_{m}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Integrando los resultados}
+Integrando ambos lados de la ecuación, usando la identidad de Green y usando las CDF homogéneas, se tiene:
+\pause
+\begin{align*}
+\big( \lambda_{m} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \phi_{m} \dd{x} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Considerando los eigenvalores}
+Dado que los eigenvalores son distintos, podemos dividir entre $\lambda_{m} - \lambda_{n}$, llegando al resultado deseado:
+\pause
+\begin{align*}
+\scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \phi_{m} \dd{x} = 0
+\end{align*}
+Por lo tanto, las funciones propias son ortogonales con respecto a la función de peso $\sigma(x)$.
+\end{frame}
+\begin{frame}
+\frametitle{Degeneración}
+Si $N$ eigenfunciones linealmente independientes corresponden al mismo eigenvalor, se dice que este último es $N$-veces \emph{degenerado}.
+\end{frame}
+\begin{frame}
+\frametitle{Integral no nula}
+Si $\lambda_{m} = \lambda_{n}$, la integral:
+\pause
+\begin{align*}
+\big( \lambda_{m} - \lambda_{n} \big) \, \scaleint{5ex}_{\bs a}^{b} \sigma \, \phi_{n} \, \phi_{m} \dd{x}
+\end{align*}
+\emph{no necesariamente} se anula.
+\end{frame}
+\begin{frame}
+\frametitle{Consecuencia de la degeneración}
+Esto implica que las eigenfunciones linealmente independientes correspondientes al mismo eigenvalor \textcolor{red}{no son automáticamente} ortogonales.
+\\
+\bigskip
+\pause
+Por lo que debe de buscarse otro método para obtener un conjunto de eigenfunciones ortogonales, \pause veremos que \textcolor{blue}{siempre} se puede lograr que sean ortogonales.
+\end{frame}
 
+\section{Ortogonalización de Gram-Schmidt}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{La técnica}
+
+\begin{frame}
+\frametitle{Ortogonalizando funciones}
+Este método toma un conjunto de funciones no ortogonales linealmente dependientes y literalmente construye un conjunto ortogonal de funciones en un intervalo arbitrario con respecto a una función de peso arbitraria.
+\end{frame}
+\begin{frame}
+\frametitle{Considerando funciones reales}
+Las funciones involucradas pueden ser reales o complejas, por conveniencia, asumiremos que las funciones son reales, la generalización para funciones complejas, no ofrece mayor dificultad.
+\end{frame}
+\begin{frame}
+\frametitle{Normalización de funciones}
+Veamos el caso de la normalización de funciones, que implica lo siguiente:
+\pause
+\begin{align*}
+\scaleint{5ex}_{\bs a}^{b} \phi_{i}^{2} \, \sigma  \, \dd{x}  =  N_{i}^{2}
+\end{align*}
+\pause
+revisemos que aún no se le ha puesto atención al valor de $N_{i}$.
+\end{frame}
+\begin{frame}
+\frametitle{Problema de eigenvalores}
+Ya que la ecuación básica:
+\pause
+\begin{align}
+\mathcal{L} \, u (x) + \lambda \, \sigma (x) \, u (x) = 0
+\label{eq:ecuacion_10_08}
+\end{align}
+es \textcolor{blue}{lineal} y \textcolor{blue}{homogénea}, podemos multiplicar la solución por cualquier constante, de tal manera que sigue siendo solución.
+\end{frame}
+\begin{frame}
+\frametitle{Normalizando las funciones}
+Por lo que podemos pedir que tal solución $\phi_{i}(x)$ se multiplique por $N_{i}^{-1}$ \pause y ahora la nueva $\phi_{i}$ (normalizada) satisface:
+\pause
+\begin{align}
+\scaleint{5ex}_{\bs a}^{b} \, \phi_{i}^{2} (x) \, \sigma(x) \, \dd{x} = 1
+\label{eq:ecuacion_10_39}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando una delta}
+En términos de una delta de Kronecker:
+\pause
+\begin{align}
+\scaleint{5ex}_{\bs a}^{b} \, \phi_{i}(x) \, \phi_{j} (x) \, \sigma (x) \, \dd{x} = \delta_{ij}
+\label{eq:ecuacion_10_40}
+\end{align}
+\pause
+La ecuación (\ref{eq:ecuacion_10_39}) nos dice que se ha normalizado a la unidad.
+\end{frame}
+\begin{frame}
+\frametitle{Condición de ortonormalidad}
+Incluyendo la propiedad de ortogonalidad, tenemos la ecuación (\ref{eq:ecuacion_10_40}), a las funciones que la satisfacen, se dice que son \textbf{ortonormales} (ortogonales y normalizadas).
+\end{frame}
+\begin{frame}
+\frametitle{Condición de normalización}
+Cabe señalar que existen \emph{otras formas} de normalización, \pause cada una de las funciones especiales de la Física Matemática se puede normalizar de distintas formas.
+\end{frame}
+\begin{frame}
+\frametitle{Conjunto de funciones}
+Consideremos tres conjuntos de funciones:
+\pause
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Un conjunto original, linealmente independiente $u_{n}(x)$ con $n=0,1,2,\ldots$ \\
+Las funciones podrían ser funciones propias degeneradas, pero no es necesario que se cumpla este punto.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Conjunto de funciones}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]  
+\conti
+\item Un conjunto ortogonal $\psi_{n}(x)$ que se va a construir.
+\item Un conjunto de funciones $\phi_{n}(x)$ que serán normalizadas $\varphi_{n}(x)$
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades del conjunto de funciones}
+Tendremos las siguientes propiedades:
+\pause
+\begin{center}
+{\fontsize{12}{12}\selectfont
+\renewcommand{\arraystretch}{1.5}%
+\begin{tabular}{p{3cm} p{3cm} p{3cm}}
+\hline
+\makecell{$u_{n}(x)$} & \makecell{$\psi_{n}(x)$} & \makecell{$\varphi_{n}(x)$} \\ \hline
+\makecell{linealmente \\ independiente} &    \makecell{linealmente \\ independiente} & \makecell{linealmente \\ independiente} \\ \hline
+\makecell{no ortogonal} & \makecell{ortogonal} & \makecell{ortogonal} \\ \hline
+\makecell{no normalizada} & \makecell{no normalizada} & \makecell{normalizada \\ (ortonormal)} 
+\end{tabular}
+}
+\end{center}
+\end{frame}
+
+\subsection{Aplicando la técnica Gram-Schmidt}
+
+\begin{frame}
+\frametitle{Definiendo la técnica}
+La técnica de Gram-Schmidt consiste en tomar la n-ésima función $\psi_{n}$) para ser $u_{n}(x)$ más un combinación lineal no conocida de la función $\varphi$ previa.
+\\
+\bigskip
+\pause
+El que haya una nueva $u_{n}(x)$ nos dará la garantía de que se mantenga la independencia lineal.
+\end{frame}
+\begin{frame}
+\frametitle{Requisito necesario}
+El requisito que $\psi_{n}(x)$ sea ortogonal para cada $\varphi$ previa, proporciona los suficientes elementos para determinar cada uno de los coeficientes desconocidos.
+\\
+\bigskip
+\pause
+Así cuando ya se determinen las $\psi_{n}$, se pueden normalizar a la unidad, dejando a las  $\varphi_{n} (x)$. \pause \emph{Este procedimiento se repite} para las $\psi_{n+1}(x)$.
+\end{frame}
+\begin{frame}
+\frametitle{Comenzando con la técnica}
+Empezamos con $n = 0$, sea:
+\pause
+\begin{align}
+\psi_{0} (x) = u_{0} (x)
+\label{eq:ecuacion_10_41}
+\end{align}
+\pause
+no nos preocupemos al no tener una $\varphi$ previa.
+\end{frame}
+\begin{frame}
+\frametitle{Normalizando la función}
+Entonces normalizamos:
+\pause
+\begin{align}
+\varphi_{0}(x) = \dfrac{\psi_{0} (x)}{\left[ \displaystyle \scaleint{5ex} \psi_{0}^{2} \, \sigma \, \dd{x} \right]^{1/2}}
+\label{eq:ecuacion_10_42}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Para el siguiente valor de $n$}
+Para $n = 1$, tenemos:
+\pause
+\begin{align}
+\psi_{1} (x) = u_{1} (x) + a_{1, 0} \, \varphi_{0} (x)
+\label{eq:ecuacion_10_43}
+\end{align}
+\pause
+Que requiere que $\psi_{1} (x)$ sea ortogonal a $\varphi_{0} (x)$ (en este punto, la normalización de $\psi_{1} (x)$ es irrelevante).
+\end{frame}
+\begin{frame}
+\frametitle{Ortogonalizando la función}
+La ortogonalidad nos conduce a:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\scaleint{5ex} \psi_{1} \, \varphi_{0} \, \sigma \, \dd{x} &= \pause \scaleint{5ex} u_{1} \, \varphi_{0} \, \sigma \, \dd{x} + a_{1,0} \scaleint{5ex} \varphi_{0}^{2} \, \sigma \dd{x} = \\[0.5em] \pause
+&= 0
+\end{aligned}
+\label{eq:ecuacion_10_44}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Normalizando a la unidad}
+Ya que $\varphi_{0}$ se normaliza a la unidad (ec. \ref{eq:ecuacion_10_42}), tenemos:
+\pause
+\begin{align}
+a_{1,0} = - \scaleint{5ex} u_{1} \, \varphi_{0} \, \sigma \dd{x}
+\label{eq:ecuacion_10_45}
+\end{align}
+que deja fijo el valor de $a_{1, 0}$
+\end{frame}
+\begin{frame}
+\frametitle{Normalizando a la unidad}
+Normalizando, definimos:
+\pause
+\begin{align}
+\varphi_{1} (x) = \dfrac{\psi_{1} (x)}{ \bigg[ \displaystyle \scaleint{5ex} \psi_{1}^{2} \, \sigma \dd{x} \bigg]^{1/2}}
+\label{eq:ecuacion_10_46}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Repitiendo para otros valores de $n$}
+Generalizando, resulta:
+\pause
+\begin{align}
+\varphi_{i} (x) = \dfrac{\psi_{i} (x)}{ \bigg[ \displaystyle \scaleint{5ex} \psi_{i}^{2} (x) \, \sigma (x) \dd{x} \bigg]^{1/2}}
+\label{eq:ecuacion_10_47}
+\end{align}
+\pause
+donde:
+\pause
+\begin{align}
+\psi_{i}(x) = u_{i} + a_{1, 0} \, \phi_{0} + a_{i, 1} \, \phi_{1} + \ldots + a_{i, i-1} \, \phi_{i-1}
+\label{eq:ecuacion_10_48}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Los coeficientes $a_{i}$}
+Los coeficientes $a_{i, j}$ están dados por:
+\pause
+\begin{align}
+a_{i, j} = - \scaleint{5ex} u_{i} \, \varphi_{j} \, \sigma  \dd{x}
+\label{eq:ecuacion_10_49}
+\end{align}
+Esta ecuación es para una \textcolor{blue}{normalización unitaria}.
+\end{frame}
+\begin{frame}
+\frametitle{Normalización en general}
+Para otros tipos de normalización, se tiene que:
+\pause
+\begin{align*}
+\scaleint{5ex}_{\bs a}^{b} \left[ \varphi_{j} (x) \right]^{2} \, \sigma (x) \dd{x} =  N_{j}^{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Expresión para otras normalizaciones}
+Entonces la ecuación (\ref{eq:ecuacion_10_47}) se reemplaza por:
+\pause
+\begin{align}
+\varphi_{i} (x) =  N_{i} \: \dfrac{\psi_{i} (x)}{ \bigg[ \displaystyle \scaleint{5ex} \psi_{i}^{2} \, \sigma \dd{x} \bigg]^{1/2}}
+\label{eq:ecuacion_10_47a}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Los términos $a_{i,j}$}
+Los términos $a_{i,j}$ resultan:
+\pause
+\begin{align}
+a_{i, j} = - \dfrac{ \displaystyle \scaleint{5ex} u_{i} \, \varphi_{j} \, \sigma \dd{x}}{N_{j}^{2}}
+\label{eq:ecuacion_10_49a}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión del método de Gram-Schmidt}
+Cabe señalar que el procedimiento de Gram-Schmidt es una manera de construir un conjunto ortogonal o ortonormal, \pause pero las funciones $\varphi_{i}(x)$ no son únicas.
+\\
+\bigskip
+\pause
+Existe un infinito de posibles conjuntos ortonormales para un intervalo dado y una función de peso dada.
+\end{frame}
+
+\subsection{Ortogonalización Gram-Schmidt Polinomios de Legendre}
+
+\begin{frame}
+\frametitle{Planteamiento del problema}
+Queremos generar un conjunto ortonormal a partir de las funciones:
+\pause
+\begin{align*}
+u_{n} (x) = x^{n}, \hspace{1.5cm} n = 0, 1, 2, \ldots
+\end{align*}
+En el intervalo $-1 \leq x \leq 1$ y con la función de peso: $\sigma (x) = 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Aplicando la técnica}
+De acuerdo a la técnica descrita de ortogonalización de Gram-Schmidt:
+\pause
+\begin{align}
+u_{0} = 1 \hspace{1.5cm} \varphi_{0} =  \dfrac{1}{\sqrt{2}}
+\label{eq:ecuacion_10_50}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Función ortogonal pero no normalizada}
+Entonces:
+\pause
+\begin{align}
+\psi_{1} (x) = x + a_{1,0} \, \dfrac{1}{\sqrt{2}}
+\label{eq:ecuacion_10_51}
+\end{align}
+\pause
+donde:
+\begin{align}
+a_{1, 0} = - \scaleint{5ex}_{\bs -1}^{1} \dfrac{x}{\sqrt{2}} \, \dd{x} = 0
+\label{eq:ecuacion_10_52}
+\end{align}
+\end{frame}
+% por simetría.
+\begin{frame}
+\frametitle{Normalizando la función ortogonal}
+Normalizando $\psi_{1}$, obtenemos:
+\pause
+\begin{align}
+\varphi_{1} (x) = \sqrt{\dfrac{3}{2}} \, x
+\label{eq:ecuacion_10_53}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Repitiendo el procedimiento}
+Continuando el método de Gram-Schmidt, se define ahora:
+\pause
+\begin{align}
+\psi_{2} (x) = x^{2} +  a_{2, 0} \, \dfrac{1}{\sqrt{2}} +  a_{2, 1} \, \sqrt{\dfrac{3}{2}} \, x
+\label{eq:ecuacion_10_54}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Valores de los términos}
+Donde:
+\pause
+\begin{eqnarray}
+a_{2, 0} &=& \pause - \scaleint{5ex}_{\bs -1}^{1} \, \dfrac{x^{2}}{\sqrt{2}} \, \dd{x} = \pause - \dfrac{\sqrt{2}}{3} \label{eq:ecuacion_10_55} \\[1em] \pause
+a_{2, 1} &=& \pause - \scaleint{5ex}_{\bs -1}^{1} \, \sqrt{\dfrac{3}{2}} \, x^{3} \dd{x} = \pause 0 \label{eq:ecuacion_10_56}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Función ortogonal}
+Por tanto:
+\pause
+\begin{align}
+\psi_{2} (x) = x^{2} - \dfrac{1}{3}
+\label{eq:ecuacion_10_57}
+\end{align}
+\pause
+Normalizando a la unidad, tenemos:
+\begin{align}
+\varphi_{2} (x) = \sqrt{\dfrac{5}{2}} \, \dfrac{1}{2} \, (3 \, x^{2} - 1)
+\label{eq:ecuacion_10_58}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Otra función ortogonal}
+La siguiente función $\varphi_{3}(x)$ es:
+\pause
+\begin{align}
+\varphi_{3} (x) = \sqrt{\dfrac{7}{2}} \, \dfrac{1}{2} \, (5 \, x^{3} - 3 \, x)
+\label{eq:ecuacion_10_59}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{La $n$-ésima función}
+Se puede demostrar que:
+\pause
+\begin{align}
+\varphi_{n} (x) = \sqrt{\dfrac{2 \, n + 1}{2}} \, P_{n} (x)
+\label{eq:ecuacion_10_60}
+\end{align}
+\pause
+donde $P_{n}$ es el polinomio de orden $n$ de Legendre.
+\end{frame}
+\begin{frame}
+\frametitle{El manejo de funciones especiales}
+El uso de funciones especiales como en este caso los polinomios de Legendre $P_{n}(x)$, será algo común, ya en el Tema 5 se revisará la construcción completa de los $P_{n}(x)$, así como un conjunto de propiedades.
+\end{frame}
+
+\section{Polinomios ortogonales}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Conjunto de polinomios}
+
+\begin{frame}
+\frametitle{De la técnica Gram-Schmidt}
+El ejemplo anterior se ha elegido estrictamente para ilustrar el procedimiento de Gram-Schmidt.
+\\
+\bigskip
+\pause
+Aunque tiene la ventaja de introducir los polinomios de Legendre, las funciones iniciales $u_{n} = x^{n}$ no son funciones propias degeneradas y no son soluciones de la ecuación de Legendre.
+\end{frame}
+\begin{frame}
+\frametitle{De la técnica Gram-Schmidt}  
+Las $u_{n}$ utilizadas son simplemente un conjunto de funciones que hemos reorganizado aquí para crear un conjunto ortonormal para el intervalo dado y la función de peso dada.
+\end{frame}
+\begin{frame}
+\frametitle{De la técnica Gram-Schmidt}  
+El hecho de que hayamos obtenido los polinomios de Legendre no es \enquote{magia negra} , sino una consecuencia directa \emph{de la elección de la función de peso y del intervalo}.
+\end{frame}
+\begin{frame}
+\frametitle{Otros intervalos, otras $\sigma (x)$}  
+El uso de $u_{n} = x^{n}$ pero eligiendo otros intervalos y funciones de peso, nos conduce a otros conjuntos de polinomios ortogonales. 
+\end{frame}
+\begin{frame}
+\frametitle{Polinomios de Legendre}
+\begin{table}
+  \begin{tabular}{c c c}
+  Intervalo & $\sigma (x)$ & Normalización estándar \\ \hline
+  $-1 \leq x \leq 1$ & $1$ & $\displaystyle \scaleint{5ex}_{\bs -1}^{1} \left[ P_{n} (x) \right]^{2} \dd{x} = \dfrac{2}{2 \, n + 1} $
+  \end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Polinomios de Legendre desplazados}
+\begin{table}
+  \begin{tabular}{c c c}
+  Intervalo & $\sigma (x)$ & Normalización estándar \\ \hline
+  $0 \leq x \leq 1$ & $1$ & $\displaystyle \scaleint{5ex}_{\bs -1}^{1} \left[ P_{n}^{*}(x) \right]^{2} \dd{x} = \dfrac{2}{2 \, n + 1}$  
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Polinomios de Chebyshev tipo I}
+\begin{table}
+  \begin{tabular}{c c}
+  Intervalo & $\sigma (x)$ \\ \hline
+  $-1 \leq x \leq 1$ & $(1 - x^{2})^{-1/2}$ \\ \hline 
+\end{tabular}
+\end{table}
+Normalización estándar:
+\begin{align*}
+\scaleint{5ex}_{\bs -1}^{1} \dfrac{\left[ T_{n}(x) \right]^{2}}{(1 - x^{2})^{-1/2}} \dd{x} = \begin{cases} 
+\displaystyle \frac{\pi}{2} & n \neq 0 \\
+\pi & n = 0 \end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Polinomios de Chebyshev desplazados tipo I}
+\begin{table}
+  \begin{tabular}{c c}
+  Intervalo & $\sigma (x)$ \\ \hline
+  $0 \leq x \leq 1$ & $[x (1 - x)]^{-1/2}$ \\ \hline 
+\end{tabular}
+\end{table}
+Normalización estándar:
+\begin{align*}
+\scaleint{5ex}_{\bs 0}^{1} \dfrac{\left[ T_{n}^{*} (x) \right]^{2}}{[x (1 - x)]^{-1/2}} \dd{x} = \begin{cases} 
+\displaystyle \frac{\pi}{2} & n > 0 \\
+\pi & n = 0 \end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Polinomios de Chebyshev tipo II}
+\begin{table}
+\begin{tabular}{c c}
+Intervalo & $\sigma (x)$ \\ \hline
+$-1 \leq x \leq 1$ & $(1 - x^{2})^{1/2}$ \\ \hline
+\end{tabular}
+\end{table}
+Normalización estándar:
+\begin{align*}
+\scaleint{5ex}_{\bs -1}^{1} [U_{n} (x)]^{2} \, (1 - x^{2})^{1/2} \, \dd x = \frac{\pi}{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Polinomios de Laguerre}
+\begin{table}
+\begin{tabular}{c c c}
+Intervalo & $\sigma (x)$ & Normalización estándar \\ \hline
+$0 \leq x < \infty $ & $e^{-x}$ & $\displaystyle \scaleint{5ex}_{\bs 0}^{\infty} \left[ L_{n} (x) \right]^{2} \, e^{-x} \dd{x} =  1 $
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Polinomios Asociados de Laguerre}
+\begin{table}
+\begin{tabular}{c c}
+Intervalo & $\sigma (x)$ \\ \hline
+$0 \leq x < \infty $ & $x^{k} \, e^{-x}$ \\ \hline
+\end{tabular}
+\end{table}
+Normalización estándar:
+\begin{align*}
+\scaleint{5ex}_{\bs 0}^{\infty} \left[ L_{n}^{k} (x) \right]^{2} \, x^{k} \, e^{-x} \dd{x} = \dfrac{(n + k)!}{n!}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Polinomios de Hermite}
+\begin{table}
+\begin{tabular}{c c}
+Intervalo & $\sigma (x)$ \\ \hline
+$- \infty < x < \infty $ & $e^{-x^{2}}$ \\ \hline
+\end{tabular}
+\end{table}
+Normalización estándar:
+\begin{align*}
+\scaleint{5ex}_{\bs -\infty}^{\infty} \left[ H_{n} (x) \right]^{2} e^{-x^{2}} \dd{x} = 2^{n} \, \pi^{1/2} \, n!
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Revisando la técnica de ortogonalización}
+Una revisión de este proceso de ortogonalización revelará dos características arbitrarias:
+\pause
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Primero, como se enfatizó antes, no es necesario normalizar las funciones a la unidad. 
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Revisando la técnica de ortogonalización}
+En el ejemplo que acabamos de mostrar, podríamos haber requerido:
+\pause
+\begin{align}
+\scaleint{5ex}_{\bs -1}^{1} \varphi_{n} (x) \: \varphi_{m} (x) \, \dd{x} = \dfrac{2}{2 \, n +1} \, \delta_{nm}
+\label{eq:ecuacion_10_61}
+\end{align}
+y el conjunto resultante habrían sido el de los polinomios de Legendre.
+\end{frame}
+\begin{frame}
+\frametitle{Revisando la técnica de ortogonalización}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]  
+\conti
+\item Segundo, el signo de $\varphi_{n} (x)$ siempre es indeterminado.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Revisando la técnica de ortogonalización}
+En el ejemplo, elegimos el signo al requerir que el coeficiente de mayor potencia de $x$ en el polinomio sea positivo. 
+\\
+\bigskip
+\pause
+Para los polinomios de Laguerre, por otro lado, requeriríamos que el coeficiente de mayor potencia sea $(-1)^{n}/n!$
+\end{frame}
 \end{document}
