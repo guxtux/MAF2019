@@ -1,9 +1,34 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
+
 \input{../Preambulos/preambulo_Beamer_Dresden_seahorse}
 
-\date{5 de noviembre de 2021}
+\setbeamercolor{section in foot}{bg=darkspringgreen, fg=white}
+\setbeamercolor{subsection in foot}{bg=persianblue, fg=white}
+\setbeamercolor{date in foot}{bg=goldenrod, fg=white}
 
+\makeatletter
+\setbeamertemplate{footline}
+{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+  \usebeamerfont{section in foot} \insertsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+  \usebeamerfont{subsection in foot}  \insertsubsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{1.5em}
+  \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+\end{beamercolorbox}}%
+\vskip0pt%
+}
+\makeatother
+\usefonttheme{serif}
+\resetcounteronoverlays{saveenumi}
+
+\date{5 de abril de 2022}
 \title{\large{Ortogonalización Gram-Schmidt}}
 \subtitle{Polinomios de Chebyshev Tipo II}
 \author{M. en C. Gustavo Contreras Mayén}
@@ -27,15 +52,14 @@ Con el método de ortogonalización de Gram-Schmidt construye los primeros tres 
 \begin{frame}
 \frametitle{Elementos para el procedimiento}
 Considera lo siguiente:
-\begin{eqnarray*}
-\begin{aligned}
-u_{n}(x) &= x^{n} \\[0.5em] \pause
-n &= 0, 1, 2, \ldots \\[0.5em] \pause
--1 &\leq x \leq 1 \\[0.5em] \pause
-\omega (x) &= (1 -x^{2})^{\frac{1}{2}}
-\end{aligned}
-\label{eq:}
-\end{eqnarray*}
+\begin{table}
+\begin{tabular}{l l}
+Funciones l. i. & $u_{n}(x) = x^{n}$ \\
+ & $n = 0, 1, 2, \ldots$ \\ \pause
+Intervalo & $-1 \leq x \leq 1$ \\ \pause
+Función de peso & $\omega (x) = (1 -x^{2})^{\frac{1}{2}}$
+\end{tabular}
+\end{table}
 \end{frame}
 
 \subsection{Normalización}
