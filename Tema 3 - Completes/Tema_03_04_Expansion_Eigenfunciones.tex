@@ -1,5 +1,5 @@
 \input{../Preambulos/preambulo_materiales}
-\title{Método de expansión en eigenfunciones  \large {Bases completas}\vspace{-3ex}}
+\title{Método de expansión en eigenfunciones \\ \large {Bases completas}\vspace{-3ex}}
 
 \author{M. en C. Gustavo Contreras Mayén}
 \date{ }
@@ -10,7 +10,6 @@
 \lhead{\leftmark}
 \rfoot{\thepage}
 \setlength{\headheight}{16pt}%
-
 
 \begin{document}
 \maketitle
@@ -41,7 +40,7 @@ y sustituimos la expansión en la ecuación no homogénea. Esto nos da:
 \begin{align*}
 f (x) = \mathcal{L} \bigg( \nsum_{n=1}^{\infty} c_{n} \, \phi_{n} (x) \bigg) = - \nsum_{n=1}^{\infty} c_{n} \, \lambda_{n} \, \phi_{n} (x)
 \end{align*}
-Luego, los coeficientes de expansión $c_{n}$ se calculan haciendo uso de la ortogonalidad de las eigenfunciones. Es decir, multiplicamos la última ecuación por $\psi_{m} (x)$ y posteriormente integramos, obteniendo:
+Luego, los coeficientes de expansión $c_{n}$ se calculan haciendo uso de la ortogonalidad de las eigenfunciones. Es decir, multiplicamos la última ecuación por $\phi_{m} (x)$ y posteriormente integramos, obteniendo:
 \begin{align*}
 \scaleint{6ex}_{\bs a}^{b} f (x) \, \phi_{m} (x) \dd{x} = - \nsum_{n=1}^{\infty} c_{n} \, \lambda_{n} \, \scaleint{6ex}_{\bs a}^{b} \phi_{n} (x) \, \phi_{m} (x) \sigma (x) \dd{x}
 \end{align*}
@@ -51,7 +50,7 @@ La ortogonalidad nos lleva a:
 \end{align*}
 Resolviendo para $c_{m}$:
 \begin{align*}
-c_{m} = \dfrac{\scaleint{6ex}_{\bs a}^{b} f (x) \, \phi_{m} (x) \dd{x}}{\lambda_{m} \, \scaleint{6ex}_{\bs a}^{b} \big[ \phi_{m} (x) \big]^{2} \, \sigma (x) \dd{x}}
+c_{m} = - \dfrac{\scaleint{6ex}_{\bs a}^{b} f (x) \, \phi_{m} (x) \dd{x}}{\lambda_{m} \, \scaleint{6ex}_{\bs a}^{b} \big[ \phi_{m} (x) \big]^{2} \, \sigma (x) \dd{x}}
 \end{align*}
 
 \subsection{Ejemplo del método.}
@@ -105,7 +104,7 @@ Por lo que: $A = \sqrt{2}$. Se muestran varias de las eigenfunciones en la figur
 \end{figure}
 Ahora nos enfocamos en resolver el problema no homogéneo $\mathcal{L} \, y = 1 / x$. Primero desarrollamos la solución desconocida en términos de las eigenfunciones:
 \begin{align*}
-y (x) = \nsum_{n=1}^{\infty} c_{n} \, \sqrt{2} (n \, \pi \, \ln x)
+y (x) = \nsum_{n=1}^{\infty} c_{n} \, \sqrt{2} \sin (n \, \pi \, \ln x)
 \end{align*}
 Sustituyendo esta solución en la ecuación diferencial, se tiene lo siguiente:
 \begin{align*}
@@ -131,10 +130,98 @@ La solución se muestra en la figura (\ref{fig:figura_04_03}).
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1]{Imagenes/Expansion_Eigenfunciones_02.eps}
-    \caption{Gráfica de la solución del ejemplo, se utilizó $N = 40$.}
+    \caption{Gráfica de la solución del ejemplo, se utilizó $n = 40$.}
     \label{fig:figura_04_03}
 \end{figure}
 \end{ejemplo}
 
+% \section{Una base completa y ortogonal.}
+% \subsection{Resolviendo el ejercicio 2.}
+
+% %Ref. Zettili Problem 2.2
+
+% \begin{enumerate}[label=\alph*)]
+% \item Encuentra una base completa y ortonormal para el espacio de las funciones trigonométricas de la forma:
+% \begin{align*}
+% \psi(\theta) = \nsum_{n=0}^{N} a_{n} \, \cos (n \, \theta)
+% \end{align*}
+% \item Calcula los vectores base con $N = 5$.
+% \end{enumerate}
+
+% Para resolver el primer inciso, ocupemos una identidad conocida para expresar $\psi(\theta)$:
+% \begin{align*}
+% \psi(\theta) &= \nsum_{n=0}^{N} a_{n} \, \cos (n \, \theta) = \\[0.5em] 
+% &= \dfrac{1}{2} \nsum_{n=0}^{N} a_{n} \bigg[ e^{i n \theta} + e^{-i n \theta}\bigg] = \\[0.5em] 
+% &= \dfrac{1}{2} \bigg[ \nsum_{n=0}^{N} a_{n} \, e^{i n \theta} + \nsum_{n=-N}^{0} a_{-n} \, e^{i n \theta} \bigg] = \\[0.5em]
+% &= \nsum_{n=-N}^{N} C_{n} \, e^{i n \theta}
+% \end{align*}
+% donde:
+% \begin{align*}
+% C_{n} &= \dfrac{a_{n}}{2} \mbox{ para } n > 0 \\[0.5em]
+% C_{n} &= \dfrac{a_{-n}}{2} \mbox{ para } n < 0 \\[0.5em]
+% C_{0} &= a_{0}
+% \end{align*}
+
+% Ya que cualquier función trigonométrica de la forma:
+% \begin{align*}
+% \psi(\theta) = \nsum_{n=0}^{N} a_{n} \, \cos (n \, \theta) 
+% \end{align*}
+% Puede expresarse en términos de las funciones:
+% \begin{align*}
+% \phi_{n}(\theta) = \dfrac{e^{i n \theta}}{\sqrt{2}}
+% \end{align*}
+% intentemos usar este conjunto de funciones $\phi_{n}(\theta)$ como una base.
+% \par
+% Como el conjunto de las $\phi_{n}(\theta)$ es completo,  veamos si es ortonormal. Evaluemos el producto escalar $\ip{\phi_{m}}{\phi_{n}}$.
+% \begin{align*}
+% \ip{\phi_{m}}{\phi_{n}} &= \scaleint{6ex}_{\bs - \pi}^{\pi} \phi_{m}^{*} (\theta) \, \phi_{n} (\theta) \dd{\theta} = \\[0.5em] 
+% &= \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs - \pi}^{\pi} \exp(i (n -m )\theta) \dd{\theta} &= \\[0.5em] 
+% &= \delta_{nm}
+% \end{align*}
+
+% Llegando a este resultado, debemos de considerar dos casos:
+% \begin{enumerate}[label=\roman*)]
+% \item $n = m$
+% \item $n \neq m$
+% \end{enumerate}
+
+% \textbf{\texttt{i) }} En el primer caso: $n = m$, es obvio que:
+% \begin{align*}
+% \ip{\phi_{m}}{\phi_{n}} &= \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs - \pi}^{\pi} \dd{\theta} = \\[0.5em] 
+% &= 1
+% \end{align*}
+
+% \textbf{\texttt{ii) }} En el segundo caso: $n \neq m$, se tiene que:
+% \begin{align*}
+% \ip{\phi_{m}}{\phi_{n}} &= \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs - \pi}^{\pi} \exp(i(n - m) \theta) \dd{\theta} = \\[0.5em] 
+% &= \dfrac{1}{2 \, \pi} \, \dfrac{\exp(i(n - m) \pi) - \exp(-i(n - m) \pi)}{i (n - m)} = \\[0.5em] 
+% &= \dfrac{2 \, i \, \sin \big( \big[ n - m \big] \, \pi \big) }{2 \, i \, \pi \, (n - m)} = \\[0.5em] 
+% &= 0
+% \end{align*}
+
+% Por lo que el conjunto de funciones:
+% \begin{align*}
+% \phi_{n}(\theta) = \dfrac{e^{i n \theta}}{\sqrt{2}}
+% \end{align*}
+% forman una base completa y ortonormal.
+% \par
+% Del resultado:
+% \begin{align*}
+% \nsum_{n=-N}^{N} C_{n} \, e^{i n \theta}
+% \end{align*}
+% vemos que la base tiene $2 \, N + 1$ funciones $\phi_{n}(\theta)$, por lo que la dimensión de este espacio de funciones es igual a $2 \, N + 1$.
+% \par
+% Una vez que ya tenemos la expresión para la base ortonormal, podemos calcular los vectores base.
+% \par
+% Con $N = 5$, se tiene que la dimensión del espacio es igual a $11$,  por lo que la base tiene $11$ vectores.
+% \begin{align*}
+% \phi_{-5} (\theta) &= \exp(- 5 \, i \, \theta) / \sqrt{2 \, \pi} \\[0.5em]
+% \phi_{-4} (\theta) &= \exp(- 4 \, i \, \theta) / \sqrt{2 \, \pi} \\[0.5em]
+% \vdots \\[0.5em]
+% \phi_{0} (\theta) &= 1 / \sqrt{2 \, \pi} \\[0.5em]
+% \vdots \\[0.5em]
+% \phi_{4} (\theta) &= \exp(4 \, i \, \theta) / \sqrt{2 \, \pi} \\[0.5em]
+% \phi_{5} (\theta) &= \exp(5 \, i \, \theta) / \sqrt{2 \, \pi} \\
+% \end{align*}
 
 \end{document}
