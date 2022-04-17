@@ -1,0 +1,569 @@
+\input{../Preambulos/preambulo_materiales}
+\title{Completes de las eigenfunciones \\ \large {Bases completas}\vspace{-3ex}}
+
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Curso MAF}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{16pt}%
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Arfken (2006) 10.4
+
+\section{Tercera propiedad de operadores autoadjuntos.}
+\subsection{Completes de las eigenfunciones.}
+
+La tercera propiedad importante de un operador autoadjunto (Hermitiano) consiste en que las eigenfunciones forman un conjunto completo. Esta completes significa que cualquier función bien portada (al menos en partes pero continua) $F (x)$ se puede aproximar por una serie:
+\begin{align}
+F (x) = \nsum_{n=0}^{\infty} a_{n} \, \phi_{n} (x) 
+\label{eq:ecuacion_10_62}
+\end{align}
+con cualquier grado de precisión. Con mayor formalismo, el conjunto $\phi_{n} (x)$ se dice que es \textbf{completo}\footnote{Desde el punto de vista matemático, se ocupa el término cerrado.}, si en el límite el error medio cuadrado se anula:
+\begin{align}
+\lim_{m \to \infty} \scaleint{6ex}_{\bs a}^{b} \bigg[ F (x) - \nsum_{n=0}^{m} a_{n} \, \phi_{n} (x) \bigg]^{2} \, \sigma (x) \dd{x} = 0
+\label{eq:ecuacion_10_63}
+\end{align}
+Técnicamente, esta es una integral de Lebesgue. No necesariamente el error es nulo en $[a,b]$, pero sólo la integral del error al cuadrado debe ser cero.
+\par
+La convergencia en la media (ec. \ref{eq:ecuacion_10_63}) debe compararse con la convergencia uniforme. La convergencia uniforme implica la convergencia en la media, pero de manera inversa no se garantiza, la convergencia en la media es menos restrictiva.
+\par
+En la ecuación (\ref{eq:ecuacion_10_63}) no es válida para funciones continuas en piezas, ya que hay un número finito de discontinuidades. Un ejemplo relevante es \emph{el fenómeno de Gibbs} de las series discontinuas de Fourier, que también ocurre para otras series de funciones propias.
+\par
+En la ecuación (\ref{eq:ecuacion_10_62}) la expansión de los coeficientes $a_{m}$ se determinar mediante:
+\begin{align}
+a_{m} = \scaleint{5ex}_{\bs a}^{b} F(x) \, \phi_{m}^{*} (x) \, \sigma (x) \dd{x}
+\label{eq:ecuacion_10_64}
+\end{align}
+Que se obtiene al multiplicar la ecuación (\ref{eq:ecuacion_10_62}) por $\phi_{m}^{*} (x) \, \sigma (x)$ y luego se integra\footnote{Recordemos que se puede escribir el complejo conjugado de $\overline{\phi} = \phi^{*}$}. De la ortogonalidad de las eigenfunciones  $\phi_{n}(x)$, solo el $m$-ésimo término sobrevive, por lo que la ortogonalidad es importante. La ecuación (\ref{eq:ecuacion_10_64}) puede compararse con el producto interno de vectores. En ocasiones los coeficientes $a_{m}$ son llamados \textbf{coeficientes generalizados de Fourier}.
+\par
+Para una función conocida $F (x)$, la ecuación (\ref{eq:ecuacion_10_64}) proporciona los $a_{m}$ como una \textbf{integral definida} que siempre se puede evaluar, ya sea numéricamente si es que no es de manera analítica.
+\par
+En términos del álgebra lineal, tenemos un espacio lineal, un espacio de funciones. Las funciones linealmente independientes, ortonormales $\phi_{n} (x)$ forman una base de ese espacio (infinito-dimensional). La ecuación (\ref{eq:ecuacion_10_62}) es un punto que nos dice que las funciones $\phi_{n} (x)$ cubre ese espacio lineal. Con un producto punto definido por la ec. (\ref{eq:ecuacion_10_64}), el espacio lineal que tenemos, se convierte en un \textbf{espacio de Hilbert}.
+\par
+Por simplicidad, dejando la función de peso $\sigma (x) = 1$, la cerradura en forma de un operador para un conjunto discreto de eigenfunciones $\ket{\phi_{i}}$ es:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\nsum_{i} \ket{\varphi_{i}} \bra{\varphi_{i}} =  1}
+\end{align*}
+Multiplicando la relación de cerradura por $\ket{F}$ obtenemos la expansión de la eigenfunción:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\ket{F} = \nsum_{i} \ket{\phi_{i}} \braket{\phi_{i}}{F}}
+\end{align*}
+con el coeficiente generalizado de Fourier $a_{i} = \braket{\phi_{i}}{F}$. De manera equivalente en una representación coordenada:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\nsum_{i} \phi_{i}^{*} (y) \, \phi_{i} (x) = \delta (x - y)}
+\end{align*}
+implica que:
+\begin{align*}
+F(x) = \scaleint{5ex} \, F(y) \, \delta (x - y) \, \dd{y} = \nsum_{i} \phi_{i} (x) \, \scaleint{5ex} \, \phi_{i}^{*} (y) \, F(y) \dd{y}
+\end{align*}
+Sin pruebas, afirmamos que el espectro de un operador lineal $A$ que mapea un espacio de Hilbert\footnote{Recuerda que en la sección de material complementario, hay una revisión sobre las características y propiedades del espacio de Hilbert.} $\mathcal{H}$ en sí mismo puede dividirse en un espectro discreto (o puntual) con eigenvectores de longitud finita, un espectro continuo para que la ecuación de eigenvalores $A \, v = \lambda \, v$ con $v$ en $\mathcal{H}$ no tiene una inversa acotada única $(A - \lambda)^{-1}$ en un dominio denso de $\mathcal{H}$ y un espectro residual donde $(A - \lambda)^{-1}$ está no acotado en un dominio no denso en $\mathcal{H}$.
+
+\subsection{Desigualdad de Bessel.}
+
+Si el conjunto de funciones $\phi_{n} (x)$ no forma un conjunto completo, posiblemente sea por que no se han incluido el número infinito de elementos del conjunto completo, esto nos conduce a la \emph{desigualdad de Bessel}. Consideremos primero un caso finito. Sea $\vb{A}$ un vector de $n$ componentes:
+\begin{align}
+\vb{A} = \vu{e}_{1} \, a_{1} + \vu{e}_{2} \, a_{2} + \ldots + \vu{e}_{n} \, a_{n} 
+\label{eq:ecuacion_10_66}
+\end{align}
+en donde $\vu{e}_{i}$ es un vector unitario y $a_{i}$ es la correspondiente componente (proyección) de $\vb{A}$, esto es:
+\begin{align}
+a_{i} = \vb{A} \cdot \vu{e}_{i}
+\label{eq:ecuacion_10_67}
+\end{align}
+Entonces:
+\begin{align}
+\left( \vb{A} - \nsum_{i} \vu{e}_{i} \, a_{i} \right)^{2} \geq 0
+\label{eq:ecuacion_10_68}
+ \end{align}
+Si sumamos todos los $n$ componentes, evidentemente la suma se iguala a $\vb{A}$ por la ecuación (\ref{eq:ecuacion_10_66}) y la igualdad es consistente, pero cuando la suma no incluye a todos los $n$ componentes, resulta la desigualdad.
+\par
+Expandiendo la ecuación (\ref{eq:ecuacion_10_68}) y eligiendo los vectores unitarios para que satisfagan la relación de ortogonalidad:
+\begin{align}
+\vu{e}_{i} \cdot \vu{e}_{j} = \delta_{ij}
+\label{eq:ecuacion_10_69}
+\end{align}
+tenemos que:
+\begin{align}
+\vb{A}^{2} \geq \nsum_{i} a_{i}^{2}
+\label{eq:ecuacion_10_70}
+\end{align}
+Que es \underline{la desigualdad de Bessel}.
+\par
+Para funciones reales debemos de considerar la integral:
+\begin{align}
+\scaleint{7ex}_{\bs a}^{b} \left[ f (x) - \nsum_{i} a_{i} \, \phi_{i} (x) \right]^{2} \, \sigma (x) \dd{x} \geq 0
+\label{eq:ecuacion_10_71}
+\end{align}
+que es el análogo continuo de la ecuación (\ref{eq:ecuacion_10_68}), haciendo $n \to \infty$ y reemplazando la suma por la integración. Nuevamente, con el factor de peso $\sigma (x) > 0 $, el integrando es no negativo. La integral se anula por la ecuación (\ref{eq:ecuacion_10_62}) si tenemos un conjunto completo. De otra forma, es positiva.
+
+Desarrollando el término al cuadrado obtenemos:
+\begin{equation}
+\scaleint{5ex}_{\bs a}^{b} \big[ f (x) \big]^{2} \, \sigma (x) \dd{x} - 2 \nsum_{i} a_{i} \, \scaleint{5ex}_{\bs a}^{b} f (x) \, \phi (x) \, \sigma (x) \dd{x} + \nsum_{i} a_{i}^{2} \geq 0
+\label{eq:ecuacion_10_72}
+\end{equation}
+Usando la ecuación (\ref{eq:ecuacion_10_64}), tenemos:
+\begin{equation}
+\scaleint{5ex}_{\bs a}^{b} \big[ f (x) \big]^{2} \, \sigma (x) \dd{x} \geq \nsum_{i} a_{i}^{2}
+\label{eq:ecuacion_10_73}
+\end{equation}
+De aquí que la suma de los cuadrados de la expansión de los coeficientes $a_{i}$ es menor o igual que la integral ponderada de $[f (x)]^{2}$, la igualdad se mantiene si y sólo si, la expansión es exacta, esto ocurre si el conjunto de soluciones $\phi_{n} (x)$ es un conjunto completo. Cuando se considera que las eigenfunciones que forman conjuntos completos (como los polinomios de Legendre), la ec. (\ref{eq:ecuacion_10_73}) con el signo igual que se mantiene se llamará \textbf{relación de Parseval}.
+\par
+La desigualdad de Bessel tiene distintos usos, incluida la prueba de convergencia para las series de Fourier.
+
+\subsection{Desigualdad de Schwarz.}
+
+La desigualdad de Schwarz de uso frecuente es similar a la desigualdad de Bessel. Consideremos la ecuación cuadrática con la incógnita $x$:
+\begin{align}
+\nsum_{i=1}^{n} (a_{i} \, x + b_{i})^{2} = \nsum_{i=1}^{n} a_{i}^{2} \left( x + \dfrac{b_{i}}{a_{i}} \right)^{2} = 0
+\label{eq:ecuacion_10_74}
+\end{align}
+con $a_{i}$, $b_{i}$ reales. Si $b_{i}/a_{i}$ es la constante $c$, independiente del índice $i$, la solución es $x= - c$. 
+\par
+Si $b_{i}/a_{i}$ no es constante en $i$, todos los términos no se anulan simultáneamente para un $x$ real, por lo que la solución debe de ser compleja. Expandiendo, tenemos que:
+\begin{align}
+x^{2} \, \nsum_{i}^{n} a_{i}^{2} + 2 \, x \, \nsum_{i}^{n} a_{i} \, b_{i} + \nsum_{i}^{n} b_{i}^{2} = 0
+\label{eq:ecuacion_10_75}
+\end{align}
+como $x$ es complejo (o = $-b_{i}/a_{i}$), la fórmula cuadrática para $x$ conduce a: 
+\begin{align}
+\left( \nsum_{i=1}^{n} a_{i} \, b_{i} \right)^{2} \leq \left( \nsum_{i=1}^{n} a_{i}^{2} \right) \, \left( \nsum_{i=1}^{n} b_{i}^{2} \right)
+\label{eq:ecuacion_10_76}
+\end{align}
+la igualdad se mantiene cuando $b_{i}/a_{i}$ es una constante independiente de $i$.
+\par
+Nuevamente, en términos de vectores, tenemos:
+\begin{align}
+( \vb{a} \cdot \vb{b} )^{2} =  a^{2} \, b^{2} \, \cos^{2} \theta \leq a^{2} \, b^{2}
+\label{eq:ecuacion_10_77}
+\end{align}
+donde $\theta$ es el ángulo entre $\vb{a}$ y $\vb{b}$.
+\par
+La desigualdad de Schwarz para funciones complejas tiene la expresión:
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\abs{ \scaleint{5ex}_{\bs a}^{b} f^{*} (x) \, g (x) \dd{x} }^{2} \leq \scaleint{5ex}_{\bs a}^{b} f^{*} (x) \, f (x) \dd{x} \scaleint{5ex}_{\bs a}^{b} g^{*} (x) \, g (x) \dd{x}}
+\label{eq:ecuacion_10_78}
+\end{align}
+La desigualdad se mantiene si y sólo si $g (x) = \alpha \, f (x)$, siendo $\alpha$ una constante. Para probar esta forma de la función de la desigualdad de Schwarz, consideremos la función compleja $\psi (x) = f(x) + \lambda \, g (x)$ con $\lambda$ una constante compleja, donde las funciones $f (x)$ y $g (x)$ son cualesquiera dos funciones de cuadrado integrable (para las cuales, las integrales del lado derecho existen). Multiplicando por el conjugado complejo y luego integrando, tenemos:
+\begin{align}
+\begin{aligned}
+\scaleint{5ex}_{\bs a}^{b} \psi^{*} \, \psi \dd{x} &\equiv \scaleint{5ex}_{\bs a}^{b} f^{*} \, f \dd{x} + \lambda \, \int_{a}^{b} f^{*} \, g \dd{x} + \lambda^{*} \, \scaleint{5ex}_{\bs a}^{b} g^{*} \, f \dd{x} + \\
+&+ \lambda \, \lambda^{*} \, \scaleint{5ex}_{\bs a}^{b} g^{*} \, g \, \dd{x}  \geq 0
+\end{aligned}
+\label{eq:ecuacion_10_79}
+\end{align}
+El $\geq 0$ aparece ya que $\psi^{*} \, \psi$ es no negativo, el signo igual $(=)$ se mantiene sólo si $\psi (x)$ es idéntico a cero. Nótese que $\lambda$ y $\lambda^{*}$ son linealmente independientes, diferenciamos con respecto a uno de ellos, e igualamos la derivada a cero para minimizar $\displaystyle \int_{a}^{b} \psi^{*} \, \psi \dd{x}$:
+\begin{align*}
+\pdv{\lambda^{*}} \scaleint{5ex}_{\bs a}^{b} \psi^{*} \, \psi \dd{x} = \scaleint{5ex}_{\bs a}^{b} g^{*} \, f \dd{x}  + \lambda \scaleint{5ex}_{\bs a}^{b} g^{*} g \dd{x} = 0
+\end{align*}
+que nos lleva a:
+\begin{align}
+\lambda = - \, \dfrac{\displaystyle \scaleint{5ex}_{\bs a}^{b} g^{*} \, f \dd{x}}{\displaystyle \scaleint{5ex}_{\bs a}^{b} g^{*} \, g \dd{x}}
+\label{eq:ecuacion_10_80a}
+\end{align}
+tomando el conjugado complejo: 
+\begin{align}
+\lambda^{*} = - \dfrac{\displaystyle \scaleint{5ex}_{\bs a}^{b} f^{*} \, g \dd{x}}{\displaystyle \scaleint{5ex}_{\bs a}^{b} g^{*} \, g \dd{x}}
+\label{eq:ecuacion_80b}
+\end{align}
+sustituyendo esos valores de $\lambda$ y $\lambda^{*}$ en la ecuación (\ref{eq:ecuacion_10_79}), obtenemos la ecuación (\ref{eq:ecuacion_10_78}), \underline{la desigualdad de Schwarz}.
+\par
+En mecánica cuántica las funciones $f (x)$ y $g (x)$ podrían representar un estado o una configuración de un sistema físico, es decir, una combinación lineal de funciones de onda. Entonces la desigualdad e Schwarz garantiza que el producto punto $\displaystyle \int_{a}^{b} f^{*} (x) \, g(x) \, \dd{x}$ existe. En algunos textos, la desigualdad de Schwarz es un paso para llegar al principio de incertidumbre de Heisenberg.
+\par
+La notación de las funciones de las ecuaciones (\ref{eq:ecuacion_10_78}) y (\ref{eq:ecuacion_10_79}) es a veces incómoda; en mecánica cuántica es común utilizar la notación de Dirac. Con esta notación, se simplifica tanto el rango de integración $(a, b)$, como la función de peso $\sigma (x) \geq 0$. La desigualdad de Schwarz ahora se representa:
+\begin{align}
+\abs{\braket{f}{g}}^{2} \leq \braket{f}{f} \, \braket{g}{g}
+\label{eq:ecuacion_10_78a}
+\end{align}
+Si $g (x)$ es una eigenfunción normalizada, $\phi_{i} (x)$, la ecuación (\ref{eq:ecuacion_10_78}) nos lleva a (donde $\sigma (x) = 1$)
+\begin{align}
+a_{i}^{*} \, a_{i} \leq \scaleint{5ex}_{\bs a}^{b} f^{*} (x) \, f (x) \dd{x} 
+\label{eq:ecuacion_10_81}
+\end{align}
+Un resultado que se sigue de la ecuación (\ref{eq:ecuacion_10_73}).
+
+%Ref. Arfken (1981) pág. 514
+\section{Representación con la delta de Dirac.}
+
+ El conjunto ortonormal de eigenfunciones $\phi_{n} (x)$ proporciona otra representación interesante de la función delta de Dirac. Consideremos la suma:
+\begin{align}
+K (x, t) = K (t, x) = \nsum_{n=0}^{\infty} \phi_{n} (x) \, \phi_{n} (t)
+\label{eq:ecuacion_09_80}
+\end{align}
+Por conveniencia, se supone que $\phi_{n} (x)$ se ha definido para incluir $[\sigma (x)]^{1/2}$ si $\sigma (x) \neq 1$. Esta serie en la ec. (\ref{eq:ecuacion_09_80}) de hecho no es convergente uniformemente, pero puede utilizarse como parte de un integrando en donde la integración subsecuente la convierta en convergente.
+\par
+Supongamos ahora que se forma la integral:
+\begin{align*}
+\scaleint{6ex} F (t) \, K (x, t) \dd{t}
+\end{align*}
+en donde se considera que $F (t)$ se puede desarrollar en serie de eigenfunciones $\phi_{p} (t)$. Se tiene que:
+\begin{align}
+\begin{aligned}[b]
+\scaleint{6ex} F (t) \, K (x, t) \dd{t} &= \scaleint{6ex} \nsum_{p=0}^{\infty} a_{p} \, \phi_{p} (t) \, \nsum_{n=0}^{\infty} \phi_{n} (x) \, \phi_{n} (t) \dd{t} = \\[0.5em]
+&= \nsum_{p=0}^{\infty} a_{p} \, \phi_{p} (x) = F (x)
+\end{aligned}
+\label{eq:ecuacion_09_81}
+\end{align}
+en que los productos opuestos $\phi_{p} \, \phi_{n} \quad (n \neq p)$ desaparecen por ortogonalidad. Al tomar en cuenta la definición de la función delta de Dirac, el resultado de la ec. (\ref{eq:ecuacion_09_81}) significa que:
+\begin{align}
+K (x, t) = \delta (x - t) = \nsum_{n=0}^{\infty} \phi_{n} (x) \, \phi_{n} (t)
+\label{eq:ecuacion_09_82}
+\end{align}
+
+Es fácil demostrar\footnote{Que puedes resolver como tarea moral.} que:
+\begin{align}
+\scaleint{6ex} K (x, t) \dd{t} = 1
+\label{eq:ecuacion_09_83}
+\end{align}
+permitiendo que $F (t) = \phi_{0}$, una constante. La confirmación del comportamiento en $x = t$ se encuentra al utilizar la desigualdad de Bessel. Se tiene que:
+\begin{align}
+K (t, t) = \nsum_{n=0}^{\infty} \big[ \phi_{n} (t) \big]^{2}
+\label{eq:ecuacion_09_84}
+\end{align}
+
+Usando la ec. (\ref{eq:ecuacion_10_73}), se obtiene:
+\begin{align}
+\scaleint{6ex} \big[ K (t, t) \big]^{2} \dd{t} = \nsum_{n=0}^{\infty} a_{n}^{2} = \nsum_{n=0}^{\infty} 1 = \infty
+\label{eq:ecuacion_09_85}
+\end{align}
+En consecuencia, $K(x, t)$ diverge en $x = t$, tal como era de esperarse.
+
+%Ref. Arfken 10.5 (2006)
+\section{Función de Green.}
+
+\subsection{Expansión en eigenfunciones.}
+
+Una serie algo similar a la representada por $K (x, t)$ - que es a la vez $\delta (x - t)$ - resulta cuando se desarrolla la función de Green en eigenfunciones de la ecuación homogénea correspondiente. En la ecuación de Helmholtz no homogénea se tiene que:
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\laplacian \psi (\vb{r}) + k^{2} \, \psi (\vb{r}) = - \rho (\vb{r})
+\label{eq:ecuacion_10_82}}
+\end{align}
+La ecuación de Helmholtz homogénea se satisface con sus eigenfunciones ortonormales $\varphi_{n}$
+\begin{align}
+\laplacian \varphi_{n} (\vb{r}) + k_{n}^{2} \, \varphi_{n} (\vb{r}) = 0
+\label{eq:ecuacion_10_83}
+\end{align} 
+La función de Green $G (\vb{r}_{1}, \vb{r}_{2})$ satisface la ecuación de la fuente en el punto:
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\laplacian G (\vb{r}_{1}, \vb{r}_{2}) + k^{2} \, G (\vb{r}_{1}, \vb{r}_{2}) = - \delta (\vb{r}_{1}, \vb{r}_{2})}
+\label{eq:ecuacion_10_84}
+\end{align}
+con las condiciones de frontera impuestas en las soluciones de la ecuación homogénea. Dado que $G$ es real, se desarrolla la función de Green en la forma de serie de funciones propias de la ecuación homogénea, ec. (\ref{eq:ecuacion_10_83}), es decir:
+\begin{align}
+G (\vb{r}_{1}, \vb{r}_{2}) = \nsum_{n=0}^{\infty} a_{n} (\vb{r}_{2}) \, \varphi_{n} (\vb{r}_{1})
+\label{eq:ecuacion_10_85}
+\end{align}
+que al sustituir en la ec. (\ref{eq:ecuacion_10_84}), se obtiene:
+\begin{align}
+\begin{aligned}[b]
+- \nsum_{n=0}^{\infty} a_{n} (\vb{r}_{2}) \, k_{n}^{2} \, \varphi_{n} (\vb{r}_{1}) &+ k^{2} \, \nsum_{n=0}^{\infty} a_{n} (\vb{r}_{2}) \, \varphi_{n} (\vb{r}_{1}) = \\[0.5em]
+&- \nsum_{n=0}^{\infty} \varphi_{n} (\vb{r}_{1}) \, \varphi_{n} (\vb{r}_{2})
+\end{aligned}
+\label{eq:ecuacion_10_86}
+\end{align}
+Aquí, la $\delta (\vb{r}_{1} - \vb{r}_{2})$ se ha sustituido por su desarrollo de eigenfunción. Cuando se utiliza la ortogonalidad de $\varphi_{n} (\vb{r}_{1})$ para aislar $a_{n}$, nos lleva a:
+\begin{align*}
+\nsum_{m=0}^{\infty} a_{m} (\vb{r}_{2}) \, \big( k_{n}^{2} - k_{m}^{2} \big) \, &\scaleint{6ex} \varphi_{n} (\vb{r}_{1}) \, \varphi_{m} (\vb{r}_{1}) \dd[3]{r_{1}} = \\[0.5em]
+&- \nsum_{n=0}^{\infty} \varphi_{m} (\vb{r}_{2})  \, \scaleint{6ex} \varphi_{n} (\vb{r}_{1}) \, \varphi_{m} (\vb{r}_{1}) \dd[3]{r_{1}}    
+\end{align*} 
+o equivalentemente:
+\begin{align*}
+a_{n} (\vb{r}_{2}) \, \big( k^{2} - k_{n}^{2} \big) = - \varphi_{n} (\vb{r}_{2})
+\end{align*}
+que al sustituir en la ec. (\ref{eq:ecuacion_10_85}), la función de Green se transforma en:
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+G (\vb{r}_{1}, \vb{r}_{2}) = \nsum_{n=0}^{\infty} \dfrac{\varphi_{n} (\vb{r}_{1}) \, \varphi_{n} (\vb{r}_{2})}{k_{n}^{2} - k^{2}}}
+\label{eq:ecuacion_10_87}
+\end{align}
+que es un desarrollo bilineal, simétrico con respecto a $\vb{r}_{1}$ y $\vb{r}_{2}$ como era de esperarse. Finalmente, $\psi (\vb{r}_{1})$, la solución deseada para la ecuación no homogénea está dada por:
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\psi (\vb{r}_{1}) = \scaleint{6ex} G (\vb{r}_{1}, \vb{r}_{2}) \, \rho (\vb{r}_{2}) \dd{\tau_{2}}}
+\label{eq:ecuacion_10_88}
+\end{align}
+
+Si se generaliza la ecuación diferencial no homogénea a:
+\begin{align}
+\mathcal{L} \psi + \lambda \, \psi = - \rho
+\label{eq:ecuacion_10_89}
+\end{align}
+en donde $\mathcal{L}$ es el operador Hermitiano, se tiene que:
+\begin{align}
+G (\vb{r}_{1}, \vb{r}_{2}) = \nsum_{n=0}^{\infty} \dfrac{\varphi_{n} (\vb{r}_{1}) \, \varphi_{n} (\vb{r}_{2})}{\lambda_{n} - \lambda}
+\label{eq:ecuacion_10_90}
+\end{align}
+en donde $\lambda_{n}$ es el n-ésimo eigenvalor de $\varphi_{n}$, la eigenfunción normal correspondiente a la ED homogénea:
+\begin{align}
+\mathcal{L} \, \psi + \lambda \, \psi = 0
+\label{eq:ecuacion_10_91}
+\end{align}
+La expansión en eigenfunciones de la función de Green en la ec. (\ref{eq:ecuacion_10_90}) hace explícita la propiedad de simetría:
+\begin{align*}
+G (\vb{r}_{1}, \vb{r}_{2}) = G (\vb{r}_{2}, \vb{r}_{1})
+\end{align*}
+y es útil cuando se compara con soluciones obtenidas por otros medios.
+
+
+
+
+% \section{Teorema del desarrollo.}
+
+% En mecánica cuántica (MQ) las cantidades físicas se representan mediante operadores Hermíticos y lineales, en general, la representación de estos se realiza mediante espacios vectoriales abstractos, sin embargo, para poder realizar cálculos se requiere hacer uso de una base vectorial.
+% \par
+% El teorema del desarrollo nos permite representar a un operador en una base determinada y al mismo tiempo, podemos hacer uso de éste, para representar estados. El formalismo puede ser heredado al electromagnetismo y emplearlo para resolver ecuaciones diferenciales no homogéneas.
+
+% \subsection{Notación de Dirac.}
+
+% Se hará un breve repaso sobre una herramienta importante: la notación de Dirac, en el material complementario del Tema 3, encontrarán una lectura que les será de utilidad.
+
+% Consideraremos una contracción de vectores y matrices de la siguiente manera:
+% \begin{equation}
+% \mqty(\xmat*{a}{1}{3}) \, \mqty(\xmat*{m}{3}{3}) \, \mqty(\xmat*{b}{3}{1})
+% %\resizebox{0.65\hsize}{!}{%
+% %\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{m}{3}{3}) \, \smqty(\xmat*{b}{3}{1})%
+% %}
+% \label{eq:ecuacion_01}
+% \end{equation}
+% por otra parte, un producto interno entre vectores lo podemos escribir como:
+% \begin{equation}
+% \mqty(\xmat*{a}{1}{3}) \, \mqty(\xmat*{b}{3}{1})
+% % \resizebox{0.25\hsize}{!}{%
+% % $\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{b}{3}{1})$%
+% %}
+% \label{eq:ecuacion_02}
+% \end{equation}
+% La forma de operar las ecs. (\ref{eq:ecuacion_01}) y (\ref{eq:ecuacion_02}) es conocida, en ambos casos el resultado es un escalar, sin embargo, escribamos ambas expresiones mediante notación de índices:
+% \begin{equation}
+% \mqty(\xmat*{a}{1}{3}) \, \mqty(\xmat*{m}{3}{3}) \, \mqty(\xmat*{b}{3}{1})
+% % \resizebox{0.5\hsize}{!}{%
+% % $\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{m}{3}{3}) \, \smqty(\xmat*{b}{3}{1})$%
+% %}
+% \Rightarrow \nsum_{ij} m_{j}^{i} \, a^{j} \, b_{i} = m_{j}^{i} \, a^{j} \, b_{i} 
+% \label{eq:ecuacion_03}
+% \end{equation}
+% y para el producto interno:
+% \begin{equation}
+% \mqty(\xmat*{a}{1}{3}) \, \mqty(\xmat*{b}{3}{1})
+% %     \mqty(\xmat*{a}{1}{3}) \, \mqty(\xmat*{b}{3}{1})
+% % \resizebox{0.25\hsize}{!}{%
+% % $\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{b}{3}{1})$%
+% % }
+%  \Rightarrow \sum_{ij} a^{j} \, b_{i} = a^{j} \, b_{i}
+% \label{eq:ecuacion_04}
+% \end{equation}
+% En las Ec.(\ref{eq:ecuacion_03}) y (\ref{eq:ecuacion_04}) tenemos la suma sobre todos los índices para obtener un escalar al mismo tiempo notamos que las componentes vectoriales tienen esta representación:
+% \begin{align}
+% \begin{aligned}
+% \mqty(\xmat*{b}{3}{1})
+% % \resizebox{0.1\hsize}{!}{%
+% % $\smqty(\xmat*{b}{3}{1})$%
+% % }
+% &\Rightarrow b_{j} \hspace{0.5cm} \mbox{vector covariante}
+% \\[0.5em]
+% \mqty(\xmat*{a}{1}{3})
+% % \resizebox{0.15\hsize}{!}{%
+% % $\smqty(\xmat*{a}{1}{3})$%
+% % }
+% &\Rightarrow a^{i} \hspace{0.5cm} \mbox{vector contravariante}
+% \end{aligned}
+% \label{eq:ecuacion_05}
+% \end{align}
+% Es decir, tenemos que los vectores fila (renglón) son elementos del espacio vectorial (espacio dual) y derivado de esto, las matriz de la ecs.(\ref{eq:ecuacion_01}) y (\ref{eq:ecuacion_03}) están formadas por una combinación entre ambos: el espacio vectorial y su espacio dual.
+% \par
+% La notación de índices permite manejar en forma compacta las ecs. (\ref{eq:ecuacion_01}) y (\ref{eq:ecuacion_02}), no obstante, la información de los objetos matemáticos se da a través de sus componentes, lo que las hace dependientes de la base en la cual son escritos. El siguiente paso consiste en utilizar una notación independiente de la base en la cual estos objetos son escritos:
+% \begin{align}
+% \begin{aligned}
+% \mqty(\xmat*{b}{3}{1})
+% % \resizebox{0.1\hsize}{!}{%
+% % $\smqty(\xmat*{b}{3}{1})$%
+% % }
+% &\Rightarrow b_{j} \hspace{0.5cm} \Rightarrow \ket{b} \hspace{0.5cm} \mbox{ket}
+% \\[0.5em]
+% \mqty(\xmat*{a}{1}{3})
+% % \resizebox{0.15\hsize}{!}{%
+% % $\smqty(\xmat*{a}{1}{3})$%
+% % }
+% &\Rightarrow a^{i} \hspace{0.5cm} \Rightarrow \bra{a} \hspace{0.5cm} \mbox{bra}
+% \end{aligned}
+% \label{eq:ecuacion_06}
+% \end{align}
+% En la ec.(\ref{eq:ecuacion_06}) los \emph{vectores covariantes se representan mediante un ket}, mientras que los vectores \emph{contravariantes se representan mediante un bra} y no se hace referencia a la base en la que estos vectores son escritos.
+% \par
+% Esta asignación es la que comúnmente se hace en los textos de MQ, sin embargo, tiene su correspondiente respaldo matemático en el teorema de representación de Riesz.
+% \par
+% Usando ésta notación el producto interno de la ec.(\ref{eq:ecuacion_04}) puede escribirse como:
+% \begin{equation}
+% \mqty(\xmat*{a}{1}{3}) \, \mqty(\xmat*{b}{3}{1})
+% % \resizebox{0.25\hsize}{!}{%
+% % $\smqty(\xmat*{a}{1}{3}) \, \smqty(\xmat*{b}{3}{1})$%
+% % }
+% \Rightarrow a^{j} \, b_{i} \hspace{0.5cm} \Rightarrow \braket{a}{b}
+% \label{eq:ecuacion_07}
+% \end{equation}
+% Para escribir las matrices necesitamos hacer referencia al producto tensorial, este tipo de productos se puede aplicar entre dos tensores de distintos rangos para generar un nuevo tensor, cuyo rango es igual a la suma de los dos anteriores. Un ejemplo es el siguiente:
+% \begin{align}
+% \va{a} \otimes \va{b} = 
+% \mqty(a_{1} \\ a_{2} \\ a_{3}) \otimes \mqty(b_{1} & b_{2} & b_{3}) = \mqty(
+% a_{1} \, b_{1} & a_{1} \, b_{2} & a_{1} \, b_{3} \\
+% a_{2} \, b_{1} & a_{2} \, b_{2} & a_{2} \, b_{3} \\
+% a_{3} \, b_{1} & a_{3} \, b_{2} & a_{3} \, b_{3}
+% )
+% \label{eq:ecuacion_08}
+% \end{align}
+% En la ec.(\ref{eq:ecuacion_08}) hemos construido un tensor de rango 2 usando dos tensores de rango 1, usando la notación de Dirac reescribimos la misma ec.(\ref{eq:ecuacion_08}):
+% \begin{align}
+% \mqty(a_{1} \\ a_{2} \\ a_{3}) \otimes \mqty(b_{1} & b_{2} & b_{3}) = \mqty(
+% a_{1} \, b_{1} & a_{1} \, b_{2} & a_{1} \, b_{3} \\
+% a_{2} \, b_{1} & a_{2} \, b_{2} & a_{2} \, b_{3} \\
+% a_{3} \, b_{1} & a_{3} \, b_{2} & a_{3} \, b_{3}
+% ) = \ket{a} \bra{b}
+% \label{eq:ecuacion_09}
+% \end{align}
+% De ese modo, se puede construir una matriz usando como base el producto tensorial de dos bases vectoriales, para ello requerimos analizar un elemento extra, consideramos una base vectorial discreta $\left\{ \ket{\varphi_{n}} \right\} $ y realizamos el siguiente producto $\ket{\varphi_{n}} \bra{\varphi_{n}}$, ahora tomamos la suma sobre cada producto:
+% \begin{align}
+% \sum_{n} \ket{\varphi_{n}} \bra{\varphi_{n}}
+% \label{eq:ecuacion_10}
+% \end{align}
+% Sea $\mathbf{1}$ el operador identidad, cuando la Ec.(\ref{eq:ecuacion_10}) satisface la siguiente condición:
+% \begin{align}
+% \sum_{n} \ket{\varphi_{n}} \bra{\varphi_{n}} = \mathbf{1}
+% \label{eq:ecuacion_11}
+% \end{align}
+% diremos que la base es completa. Sin pérdida de generalidad podemos pedir la condición:
+% \begin{align*}
+% \braket{\varphi_{n}}{\varphi_{m}} = \delta_{nm}
+% \end{align*}
+% Un ejemplo de base completa, es la base canónica de $\mathbb{R}^{3}$:
+% \begin{align*}
+% \sum_{n=1}^{3} \ket{x_{n}} \bra{x_{n}} &= \ket{x} \bra{x} + \ket{y} \bra{y} + \ket{z} \bra{z} = \\[0.5em]
+% &=
+% \mqty(1 \\ 0 \\ 0) \mqty(1 & 0 & 0) + \mqty(0 \\ 1 \\ 0) \mqty(0 & 1 & 0) + \mqty(0 \\ 0 \\ 1) \mqty(0 & 0 & 1) = \\[0.5em]
+% &= 
+% \mqty(
+% 1 & 0 & 0 \\
+% 0 & 0 & 0 \\
+% 0 & 0 & 0
+% ) +
+% \mqty(
+% 0 & 0 & 0 \\
+% 0 & 1 & 0 \\
+% 0 & 0 & 0
+% ) + 
+% \mqty(
+% 0 & 0 & 0 \\
+% 0 & 0 & 0 \\
+% 0 & 0 & 1
+% ) = \\[0.5em]
+% &= \mqty(
+% 1 & 0 & 0 \\
+% 0 & 1 & 0 \\
+% 0 & 0 & 1
+% )  
+% \end{align*}
+% En este caso hemos obtenido la matriz identidad de $\mathbb{R}^{3}$, ahora usamos este resultado para representar una matriz mediante la notación de Dirac.
+
+% \section{Teorema del desarrollo.}
+
+% Sea $\mathbf{M}$ un operador, construiremos una representación de este objeto matemático en términos de una base finita, usamos el operador unidad de la siguiente manera:
+% \begin{align}
+% \begin{aligned}[b]
+% \mathbf{M} &= \underbrace{\mathbf{1 \, M \, 1} =  \left( \sum_{m=1}^{n} \ket{\varphi_{m}} \bra{\varphi_{m}} \right) \, \mathbf{M} \, \left( \sum_{l=1}^{n} \ket{\varphi_{l}} \bra{\varphi_{l}} \right)}_{\text{usando una base completa}} = \\[0.5em]
+% &= \sum_{m=1}^{n} \sum_{l=1}^{n} \ket{\varphi_{m}} \bra{\varphi_{m}} \, \mathbf{M} \, \ket{\varphi_{l}} \bra{\varphi_{l}} = \\[0.5em]
+% &= \sum_{m=1}^{n} \sum_{l=1}^{n} \underbrace{\left\{ \bra{\varphi_{m}} \, \mathbf{M} \, \ket{\varphi_{l}} \right\}}_{\text{Ver nota*}} \, \ket{\varphi_{m}} \bra{\varphi_{l}} = \\[0.5em]
+% &= \sum_{m=1}^{n} \sum_{l=1}^{n} \mathbf{M}_{ml} \ket{\varphi_{m}} \bra{\varphi_{l}} = \\[0.5em]
+% &= \mathbf{M}_{ml} \ket{\varphi_{m}} \bra{\varphi_{l}}
+% \end{aligned}
+% \label{eq:ecuacion_12}
+% \end{align}
+% \textbf{Nota*: } El término entre llaves es un número complejo correspondiente a las componentes matriciales en esta base.
+% \par
+% La ec.(\ref{eq:ecuacion_12}) es conocida como \emph{el teorema del desarrollo}. Por otro lado, podemos usar este teorema para representar un vector cualquiera en una base arbitraria:
+% \begin{align}
+% \begin{aligned}[b]
+% \ket{\alpha} = \mathbf{1} \, \ket{\alpha} &= \sum_{n} \ket{\varphi_{n}} \bra{\varphi_{n}} \ket{\alpha} = \\[0.5em]
+% &= \sum_{n} \ket{\varphi_{n}} \braket{\varphi_{n}}{\alpha} = \\[0.5em]
+% &= \sum_{n} \alpha_{n} \, \ket{\varphi_{n}}
+% \end{aligned}
+% \label{eq:ecuacion_13}
+% \end{align}
+% la relevancia del teorema radica en que los operadores de la MQ que se representan mediante operadores lineales y Hermíticos, el teorema del desarrollo nos permite asociar una base a dicho operador y de esa manera, los problemas de mecánica cuántica son llevados a problemas de álgebra de matrices.
+% \section{Límite continuo.}
+
+% En el desarrollo anterior, nos hemos referido a una base discreta, no obstante, podemos llevar los resultados obtenidos a un límite continuo:
+% \begin{align}
+% \begin{aligned}[b]
+% \braket{\varphi_{n}}{\varphi_{m}} &= \delta_{nm} \hspace{0.3cm} \Rightarrow \hspace{0.3cm} \braket{x}{\ptilde{x}} = \delta(x - \ptilde{x}) \\[0.5em]
+% &= \sum_{n} \ket{\varphi_{n}} \bra{\varphi_{n}} = \mathbf{1} \hspace{0.3cm} \Rightarrow \hspace{0.3cm} \int \ket{x} \bra{x} \dd[3]{x} = \mathbf{1}
+% \end{aligned}
+% \label{eq:ecuacion_14}
+% \end{align}
+% Análogamente el producto punto entre dos vectores puede representarse de este modo:
+% \begin{align}
+% \begin{aligned}[b]
+% \braket{\phi}{\psi} &= \bra{\phi} \, \mathbf{1} \, \ket{\psi} = \\[0.5em]
+% &= \int \braket{\phi}{x} \, \braket{x}{\psi} \dd[3]{x} = \\[0.5em]
+% &= \int \phi^{*}(x) \, \psi (x) \dd[3]{x}
+% \end{aligned}
+% \label{eq:ecuacion_15}
+% \end{align}
+% Así mismo, sin pérdida de generalidad, podemos pedir la condición
+% \begin{align*}
+% \braket{\varphi_{n}}{\varphi_{m}} &= \delta_{nm} \\[0.5em]
+% &= \int \phi^{*}(x) \, \psi (x) \dd[3]{x}
+% \end{align*}
+% usaremos esto para desarrollar una función de variable continua a la que llamaremos $f(x)$, para este fin, partimos de una base discreta de variable continua $\left\{ \varphi_{n}(x) \right\}$, asumiremos que $f(x)$ tiene la siguiente estructura:
+% \begin{align}
+% f(x) = \sum_{n} c_{n} \, \varphi_{n}(x)
+% \label{eq:ecuacion_16}
+% \end{align}
+% Para que la propuesta de la ec.(\ref{eq:ecuacion_16}) sea válida, necesitamos exhibir las condiciones suficientes y necesarias para construir los coeficientes $c_{n}$ de manera unívoca. Comenzamos por tomar el siguiente producto interior de $\varphi_{m}$, con la ec.(\ref{eq:ecuacion_16}):
+% \begin{align}
+% \begin{aligned}
+% \bigg[ \varphi_{m}^{*} \, f(x) \bigg] \dd{x} &= \int \bigg[ \varphi_{m}^{*} \bigg] \, \sum_{n} c_{n} \, \varphi_{n} (x) = \\[0.5em]
+% &= \sum_{n} c_{n} \, \bigg[ \varphi_{m}^{*} \, \varphi_{n} (x) \bigg] = \\[0.5em]
+% &= \sum_{n} c_{n} \, \delta_{nm} = \\[0.5em]
+% &= c_{n}
+% \end{aligned}
+% \label{eq:ecuacion_17}
+% \end{align}
+% De esa forma concluimos que:
+% \begin{align}
+% \int \bigg[ \varphi_{m}^{*} \, f(x) \bigg] \dd{x} = c_{m}
+% \label{eq:ecuacion_18}
+% \end{align}
+% De la ec. (\ref{eq:ecuacion_18}) notamos que $c_{m}$ existe y es unívocamente determinado (por construcción de una integral) sí y solo sí
+% \begin{align*}
+% \int \bigg[ \varphi_{m}^{*}(x) \, f(x) \bigg] \dd{x} 
+% \end{align*}
+% es convergente. Daremos un paso más analizando la estructura de $f(x)$:
+% \begin{align}
+% \begin{aligned}
+% f(x) &= \sum_{n} c_{n} \, \varphi_{n}(x) = \\[0.5em]
+% &= \int \bigg[ \varphi_{m}^{*}(\ptilde{x}) \, f(\ptilde{x}) \bigg] \dd{\ptilde{x}} \, \varphi_{n} (x) = \\[0.5em]
+% &= \int f(\ptilde{x}) \, \sum_{n} \bigg[ \varphi_{n}^{*}(\ptilde{x}) \, \varphi_{n}(x) \bigg] \dd{\ptilde{x}}
+% \end{aligned}
+% \label{eq:ecuacion_19}
+% \end{align}
+% Esta última expresión solo es posible si se satisface la condición:
+% \begin{align}
+% \sum_{n} \bigg[ \varphi_{n}^{*}(\ptilde{x}) \, \varphi_{n}(x) \bigg] = \delta(\ptilde{x} - x)
+% \label{eq:ecuacion_20}
+% \end{align}
+% En el límite continuo la ec.(\ref{eq:ecuacion_19}) es la condición de que permite afirmar que la base usada es completa, está propiedad es la que permite generar una técnica de solución para resolver ecuaciones diferenciales no homogéneas.
+
+\end{document}
