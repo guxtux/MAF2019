@@ -1,41 +1,77 @@
-\input{../Preambulos/preambulo_materiales}
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
 \usepackage{../Estilos/ColoresLatex}
-\title{El átomo de hidrógeno \\ \large {Tema 4 - Separación de variables en coord. esféricas}\vspace{-3ex}}
+\input{../Preambulos/preambulo_Beamer_Frankfurt_beaver}
 
+\setbeamercolor{section in foot}{bg=deepcarmine, fg=white}
+\setbeamercolor{subsection in foot}{bg=flame, fg=white}
+\setbeamercolor{date in foot}{bg=blue, fg=white}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+  \usebeamerfont{section in foot} \insertsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+  \usebeamerfont{subsection in foot}  \insertsubsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{1.5em}
+  \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+\end{beamercolorbox}}%
+\vskip0pt%
+}
+\makeatother
+\usefonttheme{serif}
+\setbeamercolor{frametitle}{bg=lavenderblue}
+\resetcounteronoverlays{saveenumi}
+
+\date{21 de abril de 2022}
+
+\title{\large{Tema 4 - El átomo de hidrógeno}}
+\subtitle{Funciones Especiales I}
 \author{M. en C. Gustavo Contreras Mayén}
-\date{ }
-
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{Curso MAF}
-\lhead{\leftmark}
-\rfoot{\thepage}
-\setlength{\headheight}{16pt}%
-
 
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
-\tableofcontents
-\newpage
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
 
 
-\section{Una partícula en un potencial central.}
-\subsection{Ecuación de Schrödinger.}
+\section{Partícula en un potencial central}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ecuación de Schrödinger}
 
 %Ref. Schaum's (1998) Quantum mechanics.
+
+\begin{frame}
+\frametitle{Definiendo el problema}
 El Hamiltoniano de una partícula de masa $M$ dentro de un potencial central $V (r)$ es:
+\pause
 \begin{align}
 H = \dfrac{\vb{p}^{2}}{2 M} + V (r) = - \dfrac{\hbar^{2}}{2 M} \, \laplacian + V (r)
 \label{eq:ecuacion_08_01}
 \end{align}
-donde el Laplaciano $\laplacian$ en coordenadas esféricas es:
+\end{frame}
+\begin{frame}
+\frametitle{El Laplaciano}
+Donde el Laplaciano $\laplacian$ en coordenadas esféricas es:
+\pause
 \begin{align}
 \laplacian = \dfrac{1}{r} \pdv[2]{r} + \dfrac{1}{r^{2}} \bigg[ \pdv[2]{\theta} + \dfrac{1}{\tan \theta} \, \pdv{\theta} + \dfrac{1}{\sin^{2} \theta} \, \pdv[2]{\phi} \bigg]
 \label{eq:ecuacion_08_02}
 \end{align}
-
-Considerando que el momento angular\footnote{Será conveniente que revises el material complementario sobre el momento angular} se puede expresar como:
+\end{frame}
+\begin{frame}
+\frametitle{El momento angular}
+Considerando que el momento angular se puede expresar como:
+\pause
 \begin{align}
 \begin{aligned}
 \hat{L}_{x} &=& - i \, \hbar \, \left( y \, \pdv{z} - z \, \pdv{y} \right) \\[0.5em] 
@@ -44,12 +80,16 @@ Considerando que el momento angular\footnote{Será conveniente que revises el ma
 \end{aligned}
 \label{eq:ecuacion_01_03a}
 \end{align}
-el Hamiltoniano $H$ lo escribimos:
+\end{frame}
+\begin{frame}
+\frametitle{Reescribiendo el Hamiltoniano}
+El Hamiltoniano $H$ lo escribimos como:
+\pause
 \begin{align}
 H = - \dfrac{\hbar^{2}}{2 M} \, \dfrac{1}{r} \, \pdv[2]{r} + \dfrac{1}{2 M r^{2}} \, \vb{L}^{2} + V (r)
 \label{eq:ecuacion_08_03}
 \end{align}
-
+\end{frame}
 
 %Las tres componentes del operador $\vb{L}$ conmutan con $\vb{L}^{2}$, y
 
@@ -154,32 +194,58 @@ H = - \dfrac{\hbar^{2}}{2 M} \, \dfrac{1}{r} \, \pdv[2]{r} + \dfrac{1}{2 M r^{2}
 % \hat{O} \, \psi = 0 \, \psi
 % \end{align*}
 
-Dicho de otra manera, cuando el sistema se encuentra en el estado caracterizado por $\psi$, su energía es $E$ y su propiedad $\hat{O}$ es $o$. Ambos valores $E$ y $o$ son constantes mientras el sistema permanezca en el mismo estado $\psi$.
-\par
-En los casos en los que $\psi$ sea degenerada, siempre será posible construir una combinación lineal de las funciones propias correspondientes a $E$ tal que sea también función propia de $\hat{O}$.
+% Dicho de otra manera, cuando el sistema se encuentra en el estado caracterizado por $\psi$, su energía es $E$ y su propiedad $\hat{O}$ es $o$. Ambos valores $E$ y $o$ son constantes mientras el sistema permanezca en el mismo estado $\psi$.
+% \par
+% En los casos en los que $\psi$ sea degenerada, siempre será posible construir una combinación lineal de las funciones propias correspondientes a $E$ tal que sea también función propia de $\hat{O}$.
 
-\subsection{Reglas de conmutación.}
+\subsection{Reglas de conmutación}
 
+\begin{frame}
+\frametitle{Conmutación entre operadores}
 Las reglas de conmutación entre los operadores de momento angular y sus componentes pueden ser deducidas fácilmente utilizando las expresiones en coordenadas cartesianas y algunas identidades de los conmutadores como:
-\begin{align*}
-[ \hat{A} + \hat{B}, \hat{C}] &= [\hat{A}, \hat{C}] + [\hat{B} + \hat{C}] \\[0.5em]
-[ \hat{A}^{2} , \hat{B}] &= [\hat{A}, \hat{B}] \, \hat{A} +  \hat{A} \, [\hat{A} , \hat{B}]
-\end{align*}
-
-Se cumple entonces que:
-\begin{align}
+\pause
+\begin{eqnarray*}
 \begin{aligned}
-[ \hat{L}_{x}, \hat{L}_{y} ] &= i \, \hbar \, \hat{L}_{z} \\[0.5em]
-[ \hat{L}_{y}, \hat{L}_{z} ] &= i \, \hbar \, \hat{L}_{x} \\[0.5em]
-[ \hat{L}_{z}, \hat{L}_{x} ] &= i \, \hbar \, \hat{L}_{y} \\[0.5em]
-[\hat{L}^{2}, \hat{L}_{x}] = [\hat{L}^{2}&, \hat{L}_{y}] = [\hat{L}^{2}, \hat{L}_{z}] = 0
+\comm{\hat{A}}{\hat{B} \, \hat{C}} &= \comm{\hat{A}}{\hat{B}} \, \hat{C} + \hat{B} \, \comm{\hat{A}}{\hat{C}} \\[0.5em] \pause
+\comm{\hat{A}^{2}}{\hat{B}} &= {\hat{A}}{\hat{B}} \, \hat{A} +  \hat{A} \, \comm{\hat{A}}{\hat{B}}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Conmutación entre componentes del momento}
+Se cumple entonces que:
+\pause
+\begin{eqnarray}
+\begin{aligned}
+\comm{L_{x}}{L_{y}} &= i \, \hbar \, L_{z} \\[0.5em] \pause
+\comm{L_{y}}{L_{z}} &= i \, \hbar \, L_{x} \\[0.5em] \pause
+\comm{L_{z}}{L_{x}} &= i \, \hbar \, L_{y} \\[0.5em] \pause
+\comm{\vb{L}^{2}}{L_{x}} = \comm{\vb{L}^{2}}{L_{y}} &= \comm{\vb{L}^{2}}{L_{z}} = 0
 \end{aligned}
 \label{eq:ecuacion_01_07}
-\end{align}
-
-Entonces: $\hat{L}^{2}$ conmuta con cualquiera de sus componentes, pero las componentes no conmutan entre sí. Las propiedades de conmutación entre los operadores de momento angular orbital y el Hamiltoniano dependen del sistema y deben ser determinadas para cada problema.
-\par
-% Frecuentemente $\hat{L}^{2}$ y $\hat{L}_{z}$ conmutan con $\hat{H}$ y en estos casos el módulo del momento angular y la componente sobre el eje $z$ del momento angular son constantes de movimiento.
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado de la conmutación}
+Entonces: \pause
+\setbeamercolor{item projected}{bg=lava,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item $\vb{L}^{2}$ conmuta con cualquiera de sus componentes.
+\item Pero las componentes no conmutan entre sí.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Conmutación entre momento y el Hamiltoniano}
+Las propiedades de conmutación entre los operadores de momento angular orbital y el Hamiltoniano dependen del sistema y deben ser determinadas para cada problema.
+\end{frame}
+\begin{frame}
+\frametitle{Caso particular}
+Frecuentemente $\vb{L}^{2}$ y $L_{z}$ conmutan con $H$ \pause y en estos casos el módulo del momento angular y la componente sobre el eje $z$ del momento angular son constantes de movimiento.
+\end{frame}
 % \par
 % Frecuentemente $\hat{L}^{2}$ y $\hat{L}_{z}$ conmutan con $\hat{H}$ y en estos casos el módulo del momento angular y la componente sobre el eje $z$ del momento angular son constantes de movimiento.
 % \par
@@ -232,148 +298,304 @@ Entonces: $\hat{L}^{2}$ conmuta con cualquiera de sus componentes, pero las comp
 % \hat{L}^{2} \, Y(\theta, \phi) &= c \, Y(\theta, \phi)
 % \end{align*}
 
+
+
 %Ref. Schaum's
+\begin{frame}
+\frametitle{Ecuación diferencial}
 Tendremos la siguiente ecuación de eigenvalores:
+\pause
 \begin{align}
-\bigg[ - \dfrac{\hbar^{2}}{2 \mu} \, \dfrac{1}{r} \, \pdv[2]{r} (r) + \dfrac{\vb{L}^{2}}{2 \mu r^{2}} + V (r) \bigg] \, \psi (r, \theta, \phi) = E \, \psi (r, \theta, \phi) 
+\begin{aligned}
+\bigg[ - \dfrac{\hbar^{2}}{2 \mu} \, \dfrac{1}{r} \, \pdv[2]{r} (r) &+ \dfrac{\vb{L}^{2}}{2 \mu r^{2}} + V (r) \bigg] \, \psi (r, \theta, \phi) = \\[0.5em]
+&= E \, \psi (r, \theta, \phi) 
+\end{aligned}
 \label{eq:ecuacion_08_01_02}
 \end{align}
-
+\end{frame}
+\begin{frame}
+\frametitle{Resultado de la conmutación}
 Ya se revisó que las tres componentes de $\vb{L}$ conmutan con $\vb{L}^{2}$, por lo que también conmutan con $H$:
+\pause
 \begin{align}
 \comm{H}{L_{x}} = \comm{H}{L_{y}} = \comm{H}{L_{z}} = 0
 \label{eq:ecuacion_08_04}
 \end{align}
-
+\end{frame}
+\begin{frame}
+\frametitle{Observables en el átomo de hidrógeno}
 Los tres observables $H$, $\vb{L}^{2}$ y $L_{z}$ conmutan, por lo que podemos buscar funciones $\psi (r, \theta, \phi)$, que también sean eigenfunciones de $\vb{L}^{2}$ y $L_{z}$.
-\par
+\end{frame}
+\begin{frame}
+\frametitle{Componente en la dirección $z$ de $L$}
 La componente $L_{z}$ del momento angular es:
+\pause
 \begin{align*}
 L_{z} = - i \, \hbar , \pdv{\phi}
 \end{align*}
-
+\end{frame}
+\begin{frame}
+\frametitle{Sistema de ecuaciones diferenciales de eigenvalores}
 Ahora podremos resolver el siguiente sistema de ecuaciones diferenciales de eigenvalores:
-\begin{align}
-H \, \psi (r, \theta, \phi) &= E \, \psi (r, \theta, \phi) \label{eq:ecuacion_08_05} \\[0.5em]
-\vb{L}^{2} \, \psi (r, \theta, \phi) &= \ell (\ell + 1) \, \hbar^{2} \, \psi (r, \theta, \phi) \label{eq:ecuacion_08_06} \\[0.5em]
+\begin{eqnarray}
+\begin{aligned}
+H \, \psi (r, \theta, \phi) &= E \, \psi (r, \theta, \phi) \label{eq:ecuacion_08_05} \\[0.5em] \pause
+\vb{L}^{2} \, \psi (r, \theta, \phi) &= \ell (\ell + 1) \, \hbar^{2} \, \psi (r, \theta, \phi) \label{eq:ecuacion_08_06} \\[0.5em] \pause
 L_{z} \, \psi (r, \theta, \phi) &= m \, \hbar \, \psi (r, \theta, \phi) \label{eq:ecuacion_08_07}
-\end{align}
+\end{aligned}
+\end{eqnarray}
+\pause
 y determinar aquellos estados que son eigenfunciones de $H$, $\vb{L}^{2}$ y $L_{z}$.
-\par
-Con la técnica de separación de variables, tenemos que: una solución estaría dada por el producto de:
+\end{frame}
+\begin{frame}
+\frametitle{Separación de variables}
+Con la técnica de separación de variables, tenemos que una solución estaría dada por el producto de:
+\pause
 \begin{align}
 \psi (r, \theta, \phi) = R (r) \, Y (\theta, \phi)
 \label{eq:ecuacion_08_08}
 \end{align}
-
-
+\end{frame}
 
 
 %Ref. Ghatak (2004) 9.3
-\subsection{Problema de valores propios.}
+\subsection{Problema de eigenvalores}
 
-Sin pérdida de generalidad, podemos expresar nuestro problema de valores propios para $\hat{L}^{2}$ como:
+\begin{frame}
+\frametitle{Problema de eigenvalores}
+Sin pérdida de generalidad, podemos expresar nuestro problema de valores propios para $\vb{L}^{2}$ como:
+\pause
 \begin{align}
-\hat{L}^{2} \, Y(\theta, \phi) = \lambda \, \hbar^{2} \, Y(\theta, \phi)
+\vb{L}^{2} \, Y(\theta, \phi) = \lambda \, \hbar^{2} \, Y(\theta, \phi)
 \label{eq:ecuacion_027}
 \end{align}
-donde $\lambda \, \hbar^{2}$ representan los valores propios de $\hat{L}^{2}$, y $Y(\theta, \phi)$ corresponde a las funciones propias. 
-\par
-Veremos que $\lambda$ toma valores $\ell (\ell + 1)$ con $\ell = 0, 1, 2, \ldots$ y las correspondientes funciones propias son los \emph{armónicos esféricos}.
-\par
-Para cada valor de $\ell$, habrá un orden $(2 \, \ell + 1)$ de degeneración, es decir, habrá $(2 \, \ell + 1)$ funciones propias que corresponden al mismo valor propio $\ell (\ell + 1) \, \hbar^{2}$. El operador $\hat{L}^{2}$ lo sustituimos en la ec. (\ref{eq:ecuacion_027}), así que:
+\pause
+donde $\lambda \, \hbar^{2}$ representan los eigenvalores de $\vb{L}^{2}$, \pause y $Y(\theta, \phi)$ corresponde a las eigenfunciones. 
+\end{frame}
+\begin{frame}
+\frametitle{Los eigenvalores y eigenfunciones}
+Veremos que:
+\pause
+\setbeamercolor{item projected}{bg=lava,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item $\lambda$ toma valores $\ell (\ell + 1)$ con $\ell = 0, 1, 2, \ldots$.
+\item Las correspondientes eigenfunciones son los \textbf{\textcolor{cadetblue}{armónicos esféricos}}.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{De los eigenvalores}
+Para cada eigenvalor de $\ell$, habrá un orden $(2 \, \ell + 1)$ de degeneración, \pause es decir, habrá $(2 \, \ell + 1)$ eigenfunciones que corresponden al mismo eigenvalor $\ell (\ell + 1) \, \hbar^{2}$.
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando el operador momento angular}
+El operador $\vb{L}^{2}$ lo sustituimos en la ec. (\ref{eq:ecuacion_027}), así que:
+\pause
 \begin{align}
 \dfrac{1}{\sin \theta} \pdv{\theta} \, \sin \theta \, \pdv{Y}{\theta} + \dfrac{1}{\sin^{2} \theta} \, \pdv[2]{Y}{\phi} + \lambda \, Y(\theta, \phi) = 0
 \end{align}
-Para resolver esta ecuación, usamos la técnica de separación de variables. Proponemos una solución de la forma:
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo la ecuación}
+Para resolver esta ecuación, usamos la técnica de separación de variables.
+\\
+\bigskip
+\pause
+Proponemos una solución de la forma:
+\pause
 \begin{align}
 Y(\theta, \phi) = \Theta(\theta) \, \Phi(\phi)
 \label{eq:ecuacion_029}
 \end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Avanzando en la técnica}
 Que sustituimos en la expresión anterior, para luego multiplicar por:
+\pause
 \begin{align*}
 \dfrac{\sin^{2} \theta}{Y(\theta, \phi)}
 \end{align*}
-
+\end{frame}
+\begin{frame}
+\frametitle{Resultado obtenido}
 Entonces obtendremos:
+\pause
 \begin{align}
-\dfrac{\sin^{2} \theta}{\Theta} \left[ \dfrac{1}{\sin \theta} \pdv{\theta} \, \sin \theta \, \pdv{\Theta}{\theta} + \lambda \, \Theta (\theta) \right] = -  \dfrac{1}{\Phi} \, \dv[2]{\Phi}{\phi} = m^{2}
+\begin{aligned}
+\dfrac{\sin^{2} \theta}{\Theta} &\left[ \dfrac{1}{\sin \theta} \pdv{\theta} \, \sin \theta \, \pdv{\Theta}{\theta} + \lambda \, \Theta (\theta) \right] = \\[0.5em]
+&= - \dfrac{1}{\Phi} \, \dv[2]{\Phi}{\phi} = m^{2}
+\end{aligned}
 \label{eq:ecuacion_030}
 \end{align}
-
-De hecho, las variables se han separado y hemos establecido cada lado igual a una constante positiva $m^{2}$, cuya razón quedará clara en breve. La ec. (\ref{eq:ecuacion_030}) nos da:
+\end{frame}
+\begin{frame}
+\frametitle{Las variables separadas}
+De hecho, las variables se han separado y hemos establecido cada lado igual a una constante positiva $m^{2}$, cuya razón quedará clara en breve.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación resultante}
+La ec. (\ref{eq:ecuacion_030}) nos da:
+\pause
 \begin{align*}
 \dv[2]{\Phi}{\phi} + m^{2} \Phi (\phi) = 0
 \end{align*}
-cuya solución está dada por:
+\end{frame}
+\begin{frame}
+\frametitle{Solución a la ED}
+Cuya solución está dada por:
+\pause
 \begin{align*}
 \Phi(\phi) \sim e^{i m \phi}
 \end{align*}
-
+\end{frame}
+\begin{frame}
+\frametitle{Función univaluada}
 Para que la función de onda sea univaluada, debe de ocurrir que:
+\pause
 \begin{align}
 \Phi(\phi +  2 \, \pi) = \Phi(\phi)
 \label{eq:ecuacion_031}
 \end{align}
-o equivalentemente:
+\end{frame}
+\begin{frame}
+\frametitle{De manera equivalente}
+Que es equivalente a:
+\pause
 \begin{align*}
 e^{2 \pi m i} = 1
 \end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Valor de la constante}
 Obteniendo entonces que:
+\pause
 \begin{align*}
 m = 0, \pm 1, \pm 2, \ldots
 \end{align*}
-
+\end{frame}
+\begin{frame}
+\frametitle{Elección de la constante}
 En este paso se justifica que no podríamos haber establecido una constante positiva (o compleja) porque entonces la función de onda no habría sido de un solo valor.
-\par
+\end{frame}
+\begin{frame}
+\frametitle{Las eigenfunciones}
 Al identificar las funciones con un subíndice $m$, tenemos:
+\pause
 \begin{align}
 \Phi_{m}(\phi) = \dfrac{1}{\sqrt{2 \, \pi}} \, e^{i m \phi} \hspace{1cm} m = \pm 1, \pm 2, \ldots
 \label{eq:ecuacion_032}
 \end{align}
-
+\end{frame}
+\begin{frame}
+\frametitle{Relevancia del factor}
 Donde el factor $\dfrac{1}{\sqrt{2 \, \pi}}$ asegura que:
+\pause
 \begin{align*}
-\int_{0}^{2 \pi} \abs{\Phi_{m}(\phi)}^{2} \dd{\phi} = 1
+\scaleint{6ex}_{\bs 0}^{2 \pi} \abs{\Phi_{m}(\phi)}^{2} \dd{\phi} = 1
 \end{align*}
-que es la condición de normalización. Entonces se tendrá que:
+que es la condición de normalización.
+\end{frame}
+\begin{frame}
+\frametitle{Condición de ortonormalización}
+Entonces se tendrá que:
+\pause
 \begin{align}
-\int_{0}^{2 \pi} \Phi_{\ptilde{m}}^{*}(\phi) \, \Phi_{m}(\phi) \dd{\phi} = \delta_{m \ptilde{m}}
+\scaleint{6ex}_{\bs 0}^{2 \pi} \Phi_{\ptilde{m}}^{*}(\phi) \, \Phi_{m}(\phi) \dd{\phi} = \delta_{m \ptilde{m}}
 \label{eq:ecuacion_033}
 \end{align}
 representa la condición de ortonormalización para $\Phi_{m}(\phi)$.
-\par
+\end{frame}
+\begin{frame}
+\frametitle{Segunda variable}
 Para la segunda ecuación $\Theta (\theta)$ (ec. \ref{eq:ecuacion_030}), tendremos que:
+\pause
 \begin{align}
 \dfrac{1}{\sin \theta} \dv{\theta} \left( \sin \theta \, \dv{\Theta}{\theta} \right) + \left( \lambda - \dfrac{m^{2}}{\sin^{2} \theta} \right) \, \Theta (\theta) = 0
 \label{eq:ecuacion_034}
 \end{align}
-
+\end{frame}
+\begin{frame}
+\frametitle{Cambiando la variable}
 Hacemos el siguiente cambio de variable: $\cos \theta = \mu$ y $\Theta(\theta) = F(\mu)$, para obtener:
-
+\pause
 \begin{align}
 \dv{\mu} \left[ (1 - \mu^{2}) \, \dv{F}{\mu} \right] + \left[ \lambda - \dfrac{m^{2}}{1 - \mu^{2}} \right] \, F(\mu) = 0
 \label{eq:ecuacion_035}
 \end{align}
-Hay que considerar dos casos: $m = 0$ y $m \neq 0$. 
-\par
-Con $m = 0$, la ec. (\ref{eq:ecuacion_035}) se reduce a:
+\end{frame}
+\begin{frame}
+\frametitle{Resultado que depende de $m$}
+Hay que considerar dos casos: $m = 0$ y $m \neq 0$.
+\pause
+\setbeamercolor{item projected}{bg=lava,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Con $m = 0$, la ec. (\ref{eq:ecuacion_035}) se reduce a:
+\pause
 \begin{align}
 (1 - \mu^{2}) \, \dv[2]{F}{\mu} - 2  \, \mu \, \dv{F}{\mu} + \lambda \, F(\mu) = 0
 \label{eq:ecuacion_036}
 \end{align}
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Solución a la ED}
 Las soluciones a la ec. (\ref{eq:ecuacion_036}) se conocerán como los \textbf{\textcolor{blue(munsell)}{polinomios ordinarios de Legendre}} $P_{n} (x)$.
-\par
-Con $m = 0$, el método de \enquote{fuerza bruta} para obtener $Y_{\ell m} (\theta, \phi)$es resolver directamente la ec. (\ref{eq:ecuacion_035}); esto lo veremos posteriormente. La solución corresponde a la función especial: \textbf{\textcolor{carmine}{polinomios asociados de Legendre}}: $P_{l}^{m} (x)$.
-\par
-Sin embargo, la forma más sencilla y elegante de obtener las soluciones es mediante el uso de operadores de escalera del momento angular, que también revisaremos esa solución.
-\par
-Hemos llegado a plantear una ecuación diferencial para la parte angular, nos falta considerar la parte radial, se revisará que tiene como solución:
-\begin{enumerate}[label=\alph*)]
+\\
+\bigskip
+\pause
+Las propiedades de esta función especial se revisarán en esta parte del Tema 4.
+\end{frame}
+\begin{frame}
+\frametitle{El otro caso de $m$}
+\setbeamercolor{item projected}{bg=lava,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item con $m \neq 0$: \pause El método de \enquote{fuerza bruta} para obtener $Y_{\ell m} (\theta, \phi)$ es resolver directamente la ec. (\ref{eq:ecuacion_035}).
+\\
+\bigskip
+\pause
+La solución corresponde a la función especial: \textbf{\textcolor{carmine}{polinomios asociados de Legendre}}: $P_{l}^{m} (x)$.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Método ocupando el momento angular}
+Sin embargo, \pause la forma más sencilla y elegante de obtener las soluciones es mediante el uso de los \emph{\textcolor{darkorchid}{operadores de escalera}} del momento angular, que también revisaremos esa solución.
+\end{frame}
+\begin{frame}
+\frametitle{Solución inicial}
+Hemos llegado a plantear una ecuación diferencial para la parte angular, \pause nos falta considerar la parte radial.
+\end{frame}
+\begin{frame}
+\frametitle{Otro par de funciones especiales}
+De  la ecuación radial, se tendrán como solución:
+\setbeamercolor{item projected}{bg=lava,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
 \item \textbf{\textcolor{bole}{Polinomios asociados de Laguerre $L_{n}^{k} (r)$}}.
-\item Como caso especial, los \textbf{\textcolor{darkred}{polinomios ordinarios de Laguerre $L_{n} (r)$}}.\end{enumerate}
-Para la solución completa de cualquier problema de una partícula con un potencial radial, se tiene que la función de onda es un producto de un factor radial y un armónico esférico.
+\item Como caso especial, los \textbf{\textcolor{darkred}{polinomios ordinarios de Laguerre $L_{n} (r)$}}.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Solución completa}
+Para la solución completa de cualquier problema de una partícula con un potencial radial, se tiene que la función de onda es un producto de un factor radial y un armónico esférico:
+\pause
 \begin{align*}
 \psi_{n \ell m} (r, \theta, \phi) = R_{n \ell} (r) \, Y_{\ell m} (\theta, \phi)
 \end{align*}
+\end{frame}
 \end{document}
