@@ -16,6 +16,146 @@ Una superficie esférica de radio $R$ tiene carga distribuida uniformemente sobr
 \begin{align*}
 \Phi = \dfrac{Q}{8 \pi \varepsilon_{0}} \nsum_{\ell=0}^{\infty} \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) - P_{\ell-1} (\cos \alpha) \big] \, \dfrac{r^{\ell}}{R^{\ell+1}} \, P_{\ell} (\cos \theta)
 \end{align*}
+donde, para $\ell = 0$, $P_{\ell-1} (\cos \theta) =  -1$. \textbf{¿Cuál es el potencial por fuera de la esfera?}
+\\[1em]
+\textbf{Solución: } Debido a la geometría esférica del problema y la ausencia de carga en la región donde queremos encontrar el potencial, optamos por resolver la ecuación de Laplace en coordenadas esféricas. Usando la separación de variables, la solución general para la simetría azimutal es:
+\begin{align*}
+\Phi (r, \theta, \phi) = \nsum_{\ell} \big( A_{\ell} \, r^{\ell} + \dfrac{B_{\ell}}{r^{\ell+1}} \big) \, P_\ell (\cos \theta)
+\end{align*}
+El problema no especifica una condición de frontera, solo una distribución de carga. Podemos convertir esto en una condición de frontera utilizando el método de caja de pastillas gaussiano:
+\begin{align*}
+\bigg[ \big( \vb{E}_{f} - \vb{E}_{d} \big) \cdot \vb{r} = \dfrac{1}{\varepsilon}_{0} \, \sigma \bigg]_{n=n_{0}}
+\end{align*}
+con:
+\begin{align*}
+\sigma = \varepsilon_{0} \bigg[ - \pdv{\Phi_{f}}{r} + \pdv{\Phi_{d}}{r} \bigg]_{r=R}
+\end{align*}
+donde:
+\begin{align*}
+\sigma = \begin{cases}
+\dfrac{Q}{4 \pi R^{2}} & \mbox{si } \theta > \alpha \\
+0 & \mbox{si } \theta < \alpha
+\end{cases}
+\end{align*}
+Se hace evidente que debemos resolver el potencial tanto en el interior como en el exterior al mismo tiempo y aplicar múltiples condiciones de frontera.
+\par
+Para el potencial dentro de la esfera, debe haber una solución válida en el origen. Esto obliga a que $B_{\ell} = 0$:
+\begin{align*}
+\Phi_{d} = \nsum_{\ell} A_{\ell} \, r^{\ell} \, P_{\ell} (\cos \theta)
+\end{align*}
+Para el potencial por fuera de la esfera, debe haber una solución finita en el infinito, lo que obliga a que $A_{\ell} = 0$ para $\ell > 0$:
+\begin{align*}
+\Phi_{f} = A_{0, f} + \nsum_{\ell} \dfrac{B_{\ell}}{r^{\ell+1}} \, P_{\ell} (\cos \theta)
+\end{align*}
+El término $A_{0}$ en el potencial exterior es obviamente el valor del potencial en el infinito. El potencial de una distribución de carga localizada en el infinito es el potencial de una carga puntual con una magnitud de carga, de la carga total de la distribución.
+\begin{align*}
+\Phi_{f} (r \to \infty) &= \dfrac{1}{4 \pi \varepsilon_{0}} \, \dfrac{Q_{t}}{r} \\[0.5em]
+\Rightarrow \hspace{0.2cm} \dfrac{1}{4 \pi \varepsilon_{0}} \, \dfrac{Q_{t}}{r} &= \bigg[ A_{0, f} + \nsum_{\ell} \dfrac{B_{\ell}}{r^{\ell+1}} \, P_{\ell} (\cos \theta) \bigg]_{r \to \infty} \\[0.5em]
+\Rightarrow \hspace{0.2cm} \dfrac{1}{4 \pi \varepsilon_{0}} \, \dfrac{Q_{t}}{r} &= A_{0,f} + B_{0} \, \dfrac{1}{r}
+\end{align*}
+Esto debe ser cierto para todo $r$, de modo que:
+\begin{align*}
+A_{0,f} &= 0 \\[0.5em]
+B_{0} &= \dfrac{Q_{t}}{4 \pi \varepsilon_{0}}
+\end{align*}
+Podemos calcular la carga total $Q_{t}$, integrando sobre la densidad de carga:
+\begin{align*}
+Q_{t} &= \scaleint{6ex}_{\bs 0}^{2 \pi} \, \scaleint{6ex}_{\bs 0}^{\pi} \sigma R^{2} \sin (\theta) \dd{\theta} \dd{\phi} = \\[0.5em]
+&= \dfrac{Q}{4 \pi R^{2}} \scaleint{6ex}_{\bs 0}^{2 \pi} \, \scaleint{6ex}_{\bs 0}^{\pi} R^{2} \sin (\theta) \dd{\theta} \dd{\phi} = \\[0.5em]
+&= \dfrac{Q}{2} \big[ \cos (\alpha) + 1 \big]
+\end{align*}
+Por lo que el coeficiente $B_{0}$ resulta:
+\begin{align*}
+B_{0} = \dfrac{Q}{8 \pi \varepsilon_{0}} \big[ \cos (\alpha) + 1 \big]
+\end{align*}
+Entonces el potencial por fuera de la esfera es:
+\begin{align*}
+\Phi_{f} = \big[ \cos (\alpha) + 1 \big] \, \dfrac{Q}{8 \pi \varepsilon_{0} r} + \nsum_{\ell=1}^{\infty} \dfrac{B_{\ell}}{r^{l+1}} \, P_{\ell} (\cos \theta)
+\end{align*}
+El potencial debe ser continuo tal que:
+\begin{align*}
+\Phi_{d} (r = R) = \Phi_{f} (r = R)
+\end{align*}
+Lo que nos lleva a:
+\begin{align*}
+A_{0} + \nsum_{\ell=1}^{\infty} A_{\ell} \, R^{\ell} P_{\ell} (\cos \theta) = \big[ \cos (\alpha) + 1 \big] \, \dfrac{Q}{8 \pi \varepsilon_{0} R} + \nsum_{\ell=1}^{\infty} \dfrac{B_{\ell}}{R^{l+1}} \, P_{\ell} (\cos \theta)
+\end{align*}
+Esto debe ser válido para todos los valores de $\theta$, por lo que cada coeficiente de la serie debe ser:
+igual a:
+\begin{align*}
+A_{0} &= \big[ \cos (\alpha) + 1 \big] \, \dfrac{Q}{8 \pi \varepsilon_{0} R} \\[0.5em]
+B_{\ell} &= A_{\ell}\, R^{2\ell+1}
+\end{align*}
+
+Ahora, al aplicar la condición de frontera:
+\begin{align*}
+&\sigma = \varepsilon_{0} \bigg[ - \pdv{\Phi_{f}}{r} + \pdv{\Phi_{d}}{r} \bigg]_{r=R} = \\[0.5em]
+&=  \varepsilon_{0} \bigg[ - \big[ - (\cos (\alpha) {+} 1) \dfrac{Q}{8 \pi \varepsilon_{0} r^{2}} {+} \nsum_{\ell=1}^{\infty} A_{\ell} R^{2\ell+1} (-\ell {-} 1) r^{-\ell-2} P_{\ell} (\cos \theta) \big] + \\[0.5em]
+&+ \big[ \nsum_{\ell=1}^{\infty} A_{\ell} \ell r^{\ell-1} P_{\ell} (\cos \theta) \big] \bigg]_{r=R} = \\[0.5em]
+&= (\cos (\alpha) + 1) \dfrac{Q}{8 \pi R^{2}} + \varepsilon_{0} \nsum_{\ell=1}^{\infty} A_{\ell} R^{\ell-1} (2 \ell + 1) P_{\ell} (\cos \theta)
+\end{align*}
+Multiplicando ambos lados por $P_{\pderivada{\ell}} (\cos \theta) \sin \theta$ donde $\pderivada{\ell} > 0$, para luego multiplicar:
+\begin{align*}
+\scaleint{6ex}_{\bs 0}^{\pi} \sigma &P_{\pderivada{\ell}} (\cos \theta) \sin \theta \dd{\theta} = \\[0.5em]
+&= \varepsilon_{0} A_{\ell} R^{\ell-1} (2 \ell + 1) \scaleint{6ex}_{\bs 0}^{\pi} P_{\ell} (\cos \theta) P_{\pderivada{\ell}} (\cos \theta) \sin \theta \dd{\theta} = \\[0.5em]
+&\Rightarrow \hspace{0.3cm} \scaleint{6ex}_{\bs 0}^{\pi} \sigma P_{\ell} (\cos \theta) \sin \theta \dd{\theta} = 2 \varepsilon A_{\ell} R^{\ell-1}
+\end{align*}
+de donde resolvemos para los coeficientes $A_{\ell}$:
+\begin{align*}
+A_{\ell} &= \dfrac{1}{2 \varepsilon_{0}} R^{-\ell+1} \scaleint{6ex}_{\bs 0}^{\pi} \sigma P_{\ell} (\cos \theta) \sin \theta \dd{\theta} \\[0.5em]
+&= \dfrac{1}{2 \varepsilon_{0}} R^{-\ell+1} \dfrac{Q}{4 \pi R^{2}} \scaleint{6ex}_{\bs \alpha}^{\pi} P_{\ell} (\cos \theta) \sin \theta \dd{\theta} \\[0.5em]
+&= \dfrac{Q}{8 \pi \varepsilon_{0}} R^{-\ell-1} \, \dfrac{1}{2 \ell + 1} \scaleint{6ex}_{\bs -1}^{\cos \alpha} \dv{x} \big[ P_{\ell+1} (x) - P_{\ell-1} (x) \big] \dd{x} = \\[0.5em]
+&= \dfrac{Q}{8 \pi \varepsilon_{0}} R^{-\ell-1} \, \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (x) - P_{\ell-1} (x) \big] \eval_{-1}^{\cos \alpha} = \\[0.5em]
+&= \dfrac{Q}{8 \pi \varepsilon_{0}} R^{-\ell-1} \, \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) + \\[0.5em]
+&- P_{\ell-1} (\cos \alpha) - P_{\ell+1} (-1) - P_{\ell-1} (-1) \big]
+\end{align*}
+Tenemos entonces que los coeficientes $A_{\ell}$ son:
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{
+A_{\ell} = \dfrac{Q}{8 \pi \varepsilon_{0}} R^{-\ell-1} \, \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) - P_{\ell-1} (\cos \alpha) \big] }
+\end{align*}
+
+Ya se encontraron todas las constantes y la solución final se convierte en:
+\begin{align*}
+\Phi_{d} = \big[ \cos (\alpha) {+} 1 \big] \dfrac{Q}{8 \pi \varepsilon_{0} R} {+} \nsum_{\ell=1}^{\infty} \dfrac{Q}{8 \pi \varepsilon_{0}} \, \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) {-} P_{\ell-1} (\cos \alpha) \big]
+\end{align*}
+El término $\ell =0$ puede combinarse con los otros términos, si ocupamos la definición $P_{-1} (\cos \alpha ) = -1$.
+\par
+Por lo que el potencial dentro de la esfera es:
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{
+\Phi_{d} = \dfrac{Q}{8 \pi \varepsilon_{0}} \nsum_{\ell=0}^{\infty} \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) {-} P_{\ell-1} (\cos \alpha) \big] \, \dfrac{r^{\ell}}{R^{\ell+1}} P_{\ell} (\cos \theta) } 
+\end{align*}
+Y el potencial para puntos por fuera de la esfera es:
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{
+\Phi_{f} = \dfrac{Q}{8 \pi \varepsilon_{0}} \nsum_{\ell=0}^{\infty} \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) {-} P_{\ell-1} (\cos \alpha) \big] \, \dfrac{R^{\ell}}{r^{\ell+1}} P_{\ell} (\cos \theta) } 
+\end{align*}
+\item \textbf{Calcula la magnitud y la dirección del campo eléctrico en el origen}.
+\par
+Lo que se nos pide calcular es: $\vb{E} (r = 0)$, entonces vemos que:
+\begin{align*}
+&\vb{E} (r = 0) = \bigg[ - \grad{\Phi_{d}} \bigg]_{r=0} = \\[0.5em]
+&= - \bigg[ \vu{r} \, \pdv{\Phi_{d}}{r} + \vu{\bm{\theta}} \dfrac{1}{r} \pdv{\Phi_{d}}{\theta} \bigg]_{r=0} = \\[0.5em]
+&= -\bigg[ \vu{r} \pdv{r} \bigg( \dfrac{Q}{8 \pi \varepsilon_{0}} \nsum_{\ell=0}^{\infty} \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) {-} P_{\ell-1} (\cos \alpha) \big] \, \dfrac{r^{\ell}}{R^{\ell+1}} \times \\[0.5em]
+&\times P_{\ell} (\cos \theta) \bigg) + \vu{\bm{\theta}} \dfrac{1}{r}  \pdv{\theta} \bigg( \dfrac{Q}{8 \pi \varepsilon_{0}} \nsum_{\ell=0}^{\infty} \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) {-} P_{\ell-1} (\cos \alpha) \big] \times \\[0.5em]
+&\times \dfrac{r^{\ell}}{R^{\ell+1}} \, P_{\ell} (\cos \theta) \bigg) \bigg]_{r=0}
+\end{align*}
+Hay que tener cuidado y darse cuenta de que el término $\ell = 0$ no depende de $r$ o $\theta$, por lo que su derivada con respecto a $r$ o $\theta$ es cero. Entonces:
+\begin{align*}
+&\vb{E} (r = 0) = - \bigg[  \vu{r} \nsum_{\ell=1}^{\infty} \dfrac{Q}{8 \pi \varepsilon_{0}} \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) {-} P_{\ell-1} (\cos \alpha) \big] \, \dfrac{r^{\ell-1}}{R^{\ell+1}} \times \\[0.5em]
+&\times  P_{\ell} (\cos \theta) + \vu{\bm{\theta}} \nsum_{\ell=1}^{\infty} \dfrac{Q}{8 \pi \varepsilon_{0}} \dfrac{1}{2 \ell + 1} \big[ P_{\ell+1} (\cos \alpha) {-} P_{\ell-1} (\cos \alpha) \big] \, \dfrac{r^{\ell-1}}{R^{\ell+1}} \times \\[0.5em]
+&\times P_{\ell} (\cos \theta) \, \dfrac{\big[ \ell \cos \theta P_{\ell} (\cos \theta) - \ell P_{\ell-1} (\cos \theta) \big]}{\sin \theta} \bigg]_{r=0}
+\end{align*}
+Los términos $\ell = 2$ y superiores equivalen a cero en el origen. Solo los términos $\ell = 1$ son independientes o $r$ y no se anulan.
+\begin{align*}
+\vb{E} (r = 0) = - \dfrac{Q}{24 \pi \varepsilon_{0} R^{2}} \bigg[ P_{2} (\cos \alpha) -P_{0} (\cos \alpha) \bigg] \bigg[ \vu{r} \cos \theta - \vu{\bm{\theta}} \sin \theta \bigg]
+\end{align*}
+Por lo que el campo en el origen de la esfera es:
+\begin{align*}
+\addtolength{\fboxsep}{5pt}\boxed{
+\vb{E} (r = 0) = \dfrac{Q \sin^{2}\alpha}{16 \pi \varepsilon_{0} R^{2}} \vu{z} }
+\end{align*}
 \end{enumerate}
 
 \end{document}
