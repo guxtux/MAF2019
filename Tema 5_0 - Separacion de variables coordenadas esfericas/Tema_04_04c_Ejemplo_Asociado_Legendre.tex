@@ -14,7 +14,7 @@ La principal utilidad de los polinomios asociados de Legendre es en la expansió
 \par
 Para cada frecuencia fija\footnote{Puede ser una eigenfrecuencia determinada a partir de la ecuación radial.} $\omega = k \, c$ le corresponde un modo:
 \begin{align*}
-\psi_{k} (\vb{r}, t) = \psi_{k} (\vb{r}) \, \exp(- i \omega t)
+\varphi_{k} (\vb{r}, t) = \psi_{k} (\vb{r}) \, \exp(- i \omega t)
 \end{align*}
 donde $\psi_{k} (\vb{r})$ satisface la ecuación de Helmholtz:
 \begin{align*}
@@ -33,7 +33,7 @@ El eigenvalor $\lambda$ se determinará a partir de la segunda ecuación, tomemo
 \par
 Entonces, la función completa $\phi_{k} (\vb{r})$ se puede expresar por una superposición del tipo:
 \begin{align*}
-\phi_{k} (\vb{r}) = \nsum_{\lambda} C_{\lambda} \, R_{\lambda} (r) \, Y_{\lambda} (\theta, \phi)
+\psi_{k} (\vb{r}) = \nsum_{\lambda} C_{\lambda} \, R_{\lambda} (r) \, Y_{\lambda} (\theta, \phi)
 \end{align*}
 \textbf{Nota: } La suma sobre $\lambda$ debe de considerarse como simbólica, ya que aún no hemos explorado la estructura del espectro de $\lambda$: ya sea continuo o discreto, ya sea que tenga o no degeneración.
 \par
@@ -46,12 +46,12 @@ Lo que nos lleva a las ecuaciones:
 \dv{\theta} \bigg( \sin \theta \, \dv{\Theta}{\theta} \bigg) + \bigg( - \sin \theta \lambda + \dfrac{\lambda_{1}}{\sin \theta} \bigg) \, \Theta &= 0 \\[0.5em]
 \dv[2]{\Phi}{\phi} - \lambda_{1} \, \Phi &= 0
 \end{align*}
-las cuales ya hemos resuelto anteriormente. Sabemos que el espectro de $\lambda_{1}$ es discreto, sea $\lambda_{1}  - m^{2} ~ (m = 0, 1, 2, \ldots)$ y las eigenfunciones pueden definirse de la siguiente manera.
+las cuales ya hemos resuelto anteriormente. Sabemos que el espectro de $\lambda_{1}$ es discreto, sea $\lambda_{1} = - m^{2} ~ (m = 0, 1, 2, \ldots)$ y las eigenfunciones pueden definirse de la siguiente manera.
 \par
 \noindent
 Para $m = 0$:
 \begin{align*}
-\Phi_{o} (\phi) = 1
+\Phi_{0} (\phi) = 1
 \end{align*}
 para $m \neq 0$:
 \begin{align*}
@@ -107,7 +107,7 @@ que son, sin embargo, \emph{degenerados} (excepto si $\ell = 0)$, por que para c
 \end{align*}
 y así sucesivamente, hasta llegar a:
 \begin{align*}
-\Theta_{\ell}^{\ell} (\cos \theta) \, \Phi_{2}^{(+)} (\phi) \hspace{0.5cm} \Theta_{\ell}^{\ell} (\cos \theta) \, \Phi_{2}^{(-)} (\phi)
+\Theta_{\ell}^{\ell} (\cos \theta) \, \Phi_{\ell}^{(+)} (\phi) \hspace{0.5cm} \Theta_{\ell}^{\ell} (\cos \theta) \, \Phi_{\ell}^{(-)} (\phi)
 \end{align*}
 Para cada valor de $\ell$ le corresponden $(2 \ell + 1)$ eigenfunciones, teniendo entonces un orden de degeneración de $(2 \ell + 1)$.
 \par
@@ -119,9 +119,9 @@ por medio de las expresiones:
 \begin{align*}
 &Y_{\ell 0} (\theta, \phi) = \sqrt{\dfrac{2 \ell + 1}{4 \pi}} \, P_{\ell} (\cos \theta) \hspace{0.3cm} (m = 0) \\[0.5em]
 &\left. \begin{aligned}
-Y_{\ell m}^{(+)} (\theta, \phi)  (\phi) &= \Theta_{\ell}^{m} (\cos \theta) \, \Phi_{m}^{(+)} (\phi) = \\[0.5em]
+Y_{\ell m}^{(+)} (\theta, \phi) &= \Theta_{\ell}^{m} (\cos \theta) \, \Phi_{m}^{(+)} (\phi) = \\[0.5em]
 &= \sqrt{\dfrac{2 \ell + 1}{2 \pi} \, \dfrac{(\ell - m)!}{(\ell + m)!}} \, P_{\ell}^{m} (\cos \theta) \, \cos m \phi \\[0.5em]
-Y_{\ell m}^{(-)} (\theta, \phi)  (\phi) &= \Theta_{\ell}^{m} (\cos \theta) \, \Phi_{m}^{(-)} (\phi) = \\[0.5em]
+Y_{\ell m}^{(-)} (\theta, \phi) &= \Theta_{\ell}^{m} (\cos \theta) \, \Phi_{m}^{(-)} (\phi) = \\[0.5em]
 &= \sqrt{\dfrac{2 \ell + 1}{2 \pi} \, \dfrac{(\ell - m)!}{(\ell + m)!}} \, P_{\ell}^{m} (\cos \theta) \, \sin m \phi
 \end{aligned} \right\}
 (m \neq 0)
@@ -145,8 +145,8 @@ Esta expansión en serie es válida para una función arbitraria $f (\theta, \ph
 \par
 Los coeficientes de la expansión se obtienen multiplicando $f (\theta, \phi)$ por el correspondiente armónico esférico y por el factor $\sin \theta$, para luego integrar sobre los ángulos:
 \begin{align*}
-A_{\ell 0} &= \scaleint{6ex}_{\bs 0}^{\pi} \scaleint{6ex}_{\bs 0}^{2 \pi} f (\theta, \phi) \, Y_{\ell 0} (\theta, \phi) \, \sin \theta \dd{\theta} \hspace{0.5cm} (m = 0) \\[0.5em] 
-A_{\ell m}^{(\pm)} &= \scaleint{6ex}_{\bs 0}^{\pi} \scaleint{6ex}_{\bs 0}^{2 \pi} f (\theta, \phi) \, Y_{\ell 0}^{(\pm)} (\theta, \phi) \, \sin \theta \dd{\theta} \hspace{0.5cm} (m \neq 0)
+A_{\ell 0} &= \scaleint{6ex}_{\bs 0}^{\pi} \scaleint{6ex}_{\bs 0}^{2 \pi} f (\theta, \phi) \, Y_{\ell 0} (\theta, \phi) \, \sin \theta \dd{\theta} \dd{\phi} \hspace{0.5cm} (m = 0) \\[0.5em] 
+A_{\ell m}^{(\pm)} &= \scaleint{6ex}_{\bs 0}^{\pi} \scaleint{6ex}_{\bs 0}^{2 \pi} f (\theta, \phi) \, Y_{\ell 0}^{(\pm)} (\theta, \phi) \, \sin \theta \dd{\theta} \dd{\phi} \hspace{0.5cm} (m \neq 0)
 \end{align*}
 
 \emph{Observación: } El factor $\sin \theta$ que se necesita para la ortogonalidad de las funciones $P_{\ell}^{m}$, tiene la siguiente interpretación geométrica: Un ángulo sólido se define por:
@@ -173,7 +173,7 @@ Continuemos revisando las EDP de onda y de Helmholtz en coordenadas esféricas. 
 \begin{align*}
 \dv{r} \bigg( r^{2} \, \dv{R}{r} \bigg) + \big[ k^{2} \, r^{2} - \ell (\ell + 1) \big] \, R = 0 \hspace{0.5cm} \ell = 0, 1, 2, \ldots
 \end{align*}
-Si hacemos el cambio de variable $x = k \, r$ $y (x) \equiv R (r)$, la ecuación se reduce a:
+Si hacemos el cambio de variable $x = k \, r$, $y (x) \equiv R (r)$, la ecuación se reduce a:
 \begin{align*}
 x^{2} \, \dv[2]{y}{x} + 2 \, x \, \dv{y}{x} + \big[ x^{2} - \ell (\ell + 1) \big] \, y = 0
 \end{align*}
@@ -236,7 +236,7 @@ A continuación se presenta una lista con algunas funciones $j_{\ell} (x)$:
 j_{0} (x) &= \dfrac{\sin x}{x} \\[0.5em]
 j_{1} (x) &= \dfrac{\sin x}{x^{2}} - \dfrac{\cos x}{x} \\[0.5em]
 j_{2} (x) &= \bigg( \dfrac{3}{x^{3}} - \dfrac{1}{x} \bigg) \, \sin x - \dfrac{3}{x^{2}} \, \cos x \\[0.5em]
-j_{3} (x) &= \bigg( \dfrac{15}{x^{4}} - \dfrac{6}{x^{2}} \bigg) \, \sin x - \bigg( \dfrac{15}{x^{3}} - \dfrac{1}{x} \bigg) \, \cos x 
+j_{3} (x) &= \bigg( \dfrac{15}{x^{4}} - \dfrac{6}{x^{2}} \bigg) \, \sin x - \bigg( \dfrac{15}{x^{3}} - \dfrac{1}{x} \bigg) \, \cos x \\[0.5em]
 \hspace{0.4cm} &\vdots
 \end{align*}
 \begin{figure}[H]
@@ -249,10 +249,100 @@ En la siguiente lista ahora presentamos algunas funciones $n_{\ell} (x)$:
 n_{0} (x) &= - \dfrac{\cos x}{x} \\[0.5em]
 n_{1} (x) &= - \dfrac{\cos x}{x^{2}} - \dfrac{\sin x}{x} \\[0.5em]
 n_{2} (x) &= - \bigg( \dfrac{3}{x^{2}} - \dfrac{1}{x} \bigg) \, \cos x - \dfrac{3}{x^{2}} \, \sin x \\[0.5em]
-n_{3} (x) &= - \bigg( \dfrac{15}{x^{4}} - \dfrac{6}{x^{2}} \bigg) \, \cos x - \bigg( \dfrac{15}{x^{3}} - \dfrac{1}{x} \bigg) \, \sin x
+n_{3} (x) &= - \bigg( \dfrac{15}{x^{4}} - \dfrac{6}{x^{2}} \bigg) \, \cos x - \bigg( \dfrac{15}{x^{3}} - \dfrac{1}{x} \bigg) \, \sin x \\[0.5em]
+\hspace{0.4cm} &\vdots
 \end{align*}
+
+\textbf{Observación:} Las funciones esféricas de Bessel están relacionadas con las funciones de Neumann, por la expresión\footnote{Es un buen ejercicio demostrar que $N_{\ell+1/2} (x)$ es proporcional a $J_{-\ell-1/2} (x)$, sin embargo, esto es cierto solo si l es un número entero.}:
+\begin{align*}
+n_{\ell} = \sqrt{\dfrac{\pi}{2 x}} \, N_{l+1/2} (x)
+\end{align*}
+
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1]{Imagenes/Plot_Esfericas_Neumann.eps}
 \end{figure}
+
+\section{Ejercicio.}
+
+Dentro de una cavidad esférica de radio $a$ se generan ondas sonoras. Se desea investigar los patrones de ondas estacionarias dentro de la cavidad y sus frecuencias.
+\par
+\noindent
+\textbf{Solución: } El problema se puede formular en términos del potencial de velocidad que debe satisfacer la ecuación de onda:
+\begin{align*}
+\laplacian{\varphi} - \dfrac{1}{c^{2}} \, \pdv[2]{\varphi}{t} = 0
+\end{align*}
+Se supone que la fuente del sonido se elimina en $t = 0$ y se deja que el aire en la cavidad vibre libremente. El problema está sujeto a la CDF:
+\begin{align*}
+\pdv{\varphi}{r} \eval_{r = a} = 0
+\end{align*}
+Estamos buscando soluciones de la forma:
+\begin{align*}
+\varphi_{k} (\vb{r},  t) = \psi_{k} (\vb{r}) \, \exp(-i \omega t) \hspace{0.7cm} (\omega = k \, c)
+\end{align*}
+tal que $\psi_{k} (\vb{r},  t)$ deba satisfacer:
+\begin{align*}
+\laplacian{\psi}_{k} + k^{2} \, \psi_{k} = 0 \hspace{0.4cm} \mbox{y} \hspace{0.4cm} \pdv{\psi_{k}}{r} \eval_{r = a} = 0 
+\end{align*}
+
+De los resultados obtenidos previamente en este material, se tiene que:
+\begin{align*}
+\psi_{k} (\vb{r}) = \nsum_{\ell=0}^{\infty} R_{\ell} (r) \bigg[ C_{\ell 0} \, Y_{\ell 0} (\theta, \phi) {+} \nsum_{m=0}^{\ell} \bigg( C_{\ell m}^{(+)} \, Y_{\ell m}^{(+)} (\theta, \phi) + C_{\ell m}^{(-)} \, Y_{\ell m}^{(-)} (\theta, \phi) \bigg) \bigg]
+\end{align*}    
+donde los $Y_{\ell m}$ son los armónicos esféricos y las funciones $R (r)$ deben de cumplir con la EDO:
+\begin{align*}
+\dv{r} \bigg( r^{2} \, \dv{R_{\ell}}{r} \bigg) + \big[ k^{2} \, r^{2} - \ell (\ell + 1) \big] \, R_{\ell} = 0 \hspace{0.5cm} \ell = 0, 1, 2, \ldots
+\end{align*}
+La solución general de esta ecuación es del tipo:
+\begin{align*}
+R_{\ell} (r) = A_{\ell} \, j_{\ell} (k r) + B_{\ell} \, n_{\ell} (k r) 
+\end{align*}
+Ya que la función $n_{\ell} (k r)$ no es finita en $r = 0$, debe de descartarse haciendo que $B_{\ell} = 0$. Los valores permitidos de $k$ están determinados por la CDF, lo que se reduce a:
+\begin{align*}
+\dv{r} j_{\ell} (k r) \eval_{r=a} = 0
+\end{align*}
+Las raíces de $\dv*{x} j_{\ell} (x)$ se pueden encontrar en tablas o mediante el uso de software matemático.
+\begin{table}[H]
+\centering
+\large
+\begin{tabular}{c c c}
+$\ell$ & $n$ & $\alpha_{\ell n}$ \\ \hline
+$0$ & $1$ & $0.0000$ \\ \hline
+$1$ & $1$ & $0.6626$ \\ \hline
+$2$ & $1$ & $1.0638$ \\ \hline
+$0$ & $2$ & $1.4303$ \\ \hline
+$3$ & $1$ & $1.4369$ \\ \hline
+\end{tabular}
+\end{table}
+Los correspondientes valores de $k$ para nuestro problema, son los dados por:
+\begin{align*}
+k_{\ell n} = \dfrac{\pi \alpha_{\ell n}}{a}
+\end{align*}
+y las correspondientes frecuencias están dadas de modo que:
+\begin{align*}
+\omega_{\ell n} = \dfrac{c \pi \alpha_{\ell n}}{a}
+\end{align*}
+El modo con la frecuencia más baja es para $\ell = 1$ y $n = 1$. El caso $\ell = 0$ y $n = 1$, lleva a $\varphi (\vb{r}, t) = \mbox{ constante}$ que puede mantenerse en la solución, pero no corresponde a ninguna onda de sonido congruente con la física (considera que $\vb{v} = - \grad{\varphi})$.
+\par
+Las distribuciones angulares son:
+\begin{align*}
+Y_{10} &= \sqrt{\dfrac{3}{4 \pi}} \, \cos \theta \\[0.5em]
+Y_{11}^{(+)} &= \sqrt{\dfrac{3}{8 \pi}} \, \sin \theta \cos \phi \\[0.5em]
+Y_{11}^{(-)} &= \sqrt{\dfrac{3}{8 \pi}} \, \sin \theta \sin \phi
+\end{align*}
+y la función radial es: $j_{1} (k_{11} r)$.
+\par
+El siguiente modo es para $\ell = 2, n= 1$, que tiene un orden de degeneración de $5$:
+\begin{align*}
+Y_{20}, \hspace{0.2cm} Y_{21}^{(+)}, \hspace{0.2cm} Y_{21}^{(-)}, \hspace{0.2cm} Y_{22}^{(+)}, \hspace{0.2cm} Y_{22}^{(-)}
+\end{align*}
+la función radial es: $j_{2} (k_{21} r)$.
+\par
+Se tiene un modo no degenerado con $\ell = 0, n = 2$ y con $j_{0} (k_{02} r)$ y así sucesivamente.
+\par
+La solución global del problema está dada por la expansión:
+\begin{align*}
+\varphi (\vb{r}, t) = \nsum_{n} \nsum_{\ell} \nsum_{m} j_{\ell} (k r) \, Y_{\ell m} (\theta, \phi) \bigg[ C_{n \ell m} \exp(-i \omega t) + C_{n \ell m}^{*} \exp(i \omega t) \bigg]
+\end{align*}
+Los coeficientes $C_{n \ell m}$, en realidad $C_{n \ell 0}, C_{n \ell m}^{(+)}, C_{n \ell m}^{(-)}$, pueden determinarse de las condiciones iniciales las cuales deberían de especificar la distribución inicial del potencial de velocidad $\varphi (\vb{r}, 0)$ y su derivada temporal $\pdv*{\varphi}{t} (\vb{r}, 0)$, que es proporcional a un cambio fracciona en la densidad.
 \end{document}
