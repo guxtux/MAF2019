@@ -1,0 +1,148 @@
+\input{../Preambulos/preambulo_materiales}
+
+\title{Teorema de adición de los armónicos esféricos \\ {\large Tema 4 - Separación de variables en coordenadas esféricas}\vspace{-1ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Curso MAF}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{16pt}%
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Jackson 3.6 Problem Solution
+\section{Ejercicio con la fórmula de adición.}
+\subsection{Enunciado.}
+
+Dos cargas puntuales $q$ y $-q$ se localizan sobre el eje $z$ en los puntos $z = +a$ y $z = -a$, respectivamente.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw (0, -2) -- (0, 2) node [right, pos=1] {$z$};
+        \draw [fill] (0, 1) circle (0.1);
+        \draw [fill] (0, -1) circle (0.1);
+        \draw (-0.2, 0) -- (0.2, 0);
+        \node at (0.5, 1) {$q$};
+        \node at (0.5, -1) {$-q$};
+        \node at (-0.5, 0.5) {$a$};
+        \node at (-0.5, -0.5) {$-a$};
+    \end{tikzpicture}
+\end{figure}
+Por resolver:
+\begin{enumerate}[label=\arabic*)]
+\item \label{item:inciso_1} Calcula el potencial electrostático como una expansión de los armónicos esféricos y de potencias de $r$, tanto para $r > a$ y $r < a$.
+\item \label{item:inciso_2} Manteniendo el producto $q \, a = p /2$ constante, toma el límite cuando $a \to 0$ y calcula el potencial para $r \neq 0$. Esto corresponde a la definición de un dipolo sobre el eje $z$ y su potencial.
+\item \label{item:inciso_3} Supongamos ahora que el dipolo del inciso \ref{item:inciso_2} está rodeado por una capa esférica de radio $b$ concéntrica en el origen, puesta a tierra. Por superposición lineal, encuentra el potencial en todas partes dentro del cascarón.
+\end{enumerate}
+
+\subsection{Solución.}
+
+\noindent
+\textbf{Inciso \ref{item:inciso_1}:} Usado la ley de Coulomb, podemos escribir de manera directa el potencial de dos cargas puntuales:
+\begin{align*}
+\Phi = \dfrac{q}{4 \pi \varepsilon_{0}} ~ \bigg[ \dfrac{1}{\abs{\vb{r} - a \, \vu{k}}} - \dfrac{1}{\abs{\vb{r} + a \, \vu{k}}} \bigg]
+\end{align*}
+Usando el teorema de adición, expandimos en factores de $1/R$:
+\begin{align*}
+\dfrac{1}{\abs{\vb{r} - \vb{\pderivada{r}}}} = 4 \pi \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell + 1} \, \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, Y_{\ell m}^{*} (\pderivada{\theta}, \pderivada{\phi}) \, Y_{\ell m} (\theta, \phi)
+\end{align*}
+donde:
+\begin{align*}
+r_{<} = \min \left\{ r, \pderivada{r} \right\} \hspace{1.5cm} r_{>} = \max \left\{ r, \pderivada{r} \right\}
+\end{align*}
+entonces el potencial se escribe como:
+\begin{align*}
+\Phi &= \dfrac{q}{4 \pi \varepsilon_{0}} ~ \bigg[ 4 \pi \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell + 1} \, \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, Y_{\ell m}^{*} (0, 0) \, Y_{\ell m} (\theta, \phi) + \\[0.5em]
+&- 4 \pi \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell + 1} \, \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, Y_{\ell m}^{*} (\pi, 0) \, Y_{\ell m} (\theta, \phi) \bigg]
+\end{align*}
+Ahora se tiene que:
+\begin{align*}
+r_{<} = \min \left\{ r, a \right\} \hspace{1.5cm} r_{>} = \max \left\{ r, a \right\}
+\end{align*}
+Cancelando el término $4 \pi$ y factorizando las sumas con el armónico $Y_{\ell m} (\theta, \phi)$, el potencial queda:
+\begin{align*}
+\Phi &= \dfrac{q}{\varepsilon_{0}} ~ \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell + 1} \, \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, Y_{\ell m} (\theta, \phi) \bigg[ Y_{\ell m}^{*} (0, 0) - Y_{\ell m}^{*} (\pi, 0) \bigg]    
+\end{align*} 
+Haciendo de manera explícita cada caso para $r$, se tiene que:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\Phi = \dfrac{q}{\varepsilon_{0}} \,\nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell {+} 1} \dfrac{r_{\ell}}{a^{\ell+1}} \, Y_{\ell m} (\theta, \phi) \bigg[ Y_{\ell m}^{*} (0, 0) {-} Y_{\ell m}^{*} (\pi, 0) \bigg] \hspace{0.12cm} \mbox{cuando } r < a }
+\end{align*}
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\Phi = \dfrac{q}{\varepsilon_{0}} \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell {+} 1} \dfrac{a^{\ell}}{r^{\ell+1}} Y_{\ell m} (\theta, \phi) \bigg[ Y_{\ell m}^{*} (0, 0) {-} Y_{\ell m}^{*} (\pi, 0) \bigg] \hspace{0.15cm} \mbox{cuando } r > a }
+\end{align*}
+
+La pregunta original pedía la respuesta en términos de los armónicos esféricos, así que eso es lo que hemos dado. Sin embargo, podemos simplificar la respuesta. Tengamos en cuenta que el problema presenta simetría azimutal, por lo que la solución debe ser azimutalmente simétrica. Esto significa que todos los términos de la serie excepto el término $m = 0$ deben anularse:
+\begin{align*}
+\Phi &= \dfrac{q}{\varepsilon_{0}} \nsum_{\ell=0}^{\infty}  \dfrac{1}{2 \ell {+} 1} \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} Y_{\ell 0} (\theta, \phi) \bigg[ Y_{\ell 0}^{*} (0, 0) {-} Y_{\ell 0}^{*} (\pi, 0) \bigg] = \\[0.5em]
+&= \dfrac{q}{4 \pi \varepsilon_{0}} \nsum_{\ell=0}^{\infty} \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, P_{\ell} (\cos \theta) \bigg[ P_{\ell} (1) - P_{\ell} (-1) \bigg] = \\[0.5em]
+&= \dfrac{q}{4 \pi \varepsilon_{0}} \nsum_{\ell=0}^{\infty} \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, P_{\ell} (\cos \theta) \bigg[ 1 - (-1)^{\ell} \bigg]
+\end{align*}
+Por lo que el potencial electrostático está dado por:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\Phi = \dfrac{2 q}{4 \pi \varepsilon_{0}} \nsum_{\ell=0, \text{impar}}^{\infty} \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, P_{\ell} (\cos \theta)}
+\end{align*}
+donde:
+\begin{align*}
+r_{<} = \min \left\{ r, a \right\} \hspace{1.5cm} r_{>} = \max \left\{ r, a \right\}
+\end{align*}
+\\[1em]
+\noindent
+\textbf{Inciso \ref{item:inciso_2}: } Manteniendo el producto $q \, a = p /2$ constante, toma el límite cuando $a \to 0$ y calcula el potencial para $r \neq 0$. Con esta condición, siempre estaremos en la región $r > a$. Del resultado del inciso \ref{item:inciso_1}, se tiene que:
+\begin{align*}
+\Phi = \dfrac{2 q}{4 \pi \varepsilon_{0}} \nsum_{\ell=0, \text{impar}}^{\infty} \dfrac{a^{\ell}}{r^{\ell+1}} \, P_{\ell} (\cos \theta)
+\end{align*}    
+y como $p = 2 q a$, resulta:
+\begin{align*}
+\Phi &= \dfrac{p}{4 \pi \varepsilon_{0}} \nsum_{\ell=0, \text{impar}}^{\infty} \dfrac{a^{\ell-1}}{r^{\ell+1}} \, P_{\ell} (\cos \theta) = \\[0.5em]
+&= \dfrac{p}{4 \pi \varepsilon_{0}} \bigg[ \dfrac{1}{r^{2}} \, P_{1} (\cos \theta) + \dfrac{a^{2}}{r^{4}} \, P_{3} (\cos \theta) + \dfrac{a^{4}}{r^{6}} \, P_{5} (\cos \theta) + \ldots \bigg]
+\end{align*}
+Cuando $a \to 0$, se obtiene:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\Phi = \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{r^{2}} \, \cos \theta }
+\end{align*}
+Este es el potencial de un dipolo perfecto en el origen que apunta a lo largo del eje $z$.
+\\[1em]
+\noindent
+\textbf{Inciso \ref{item:inciso_3}: } Si el dipolo del inciso \ref{item:inciso_2} está rodeado por una capa esférica conectada a tierra de radio $b$ concéntrica con el origen, habrá un potencial adicional debido a la esfera y el potencial total en la superficie debe ser cero.
+\par
+\noindent
+Del resultado del inciso \ref{item:inciso_2}:
+\begin{align*}
+\Phi = \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{r^{2}} \, \cos \theta
+\end{align*}
+Agregando el potencial adicional:
+\begin{align*}
+\Phi = \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{r^{2}} \, \cos \theta + \nsum_{\ell=0}^{\infty} A_{\ell} \, r^{\ell} \, P_{\ell} (\cos \theta)
+\end{align*}
+Aplicando la condición de frontera:
+\begin{align*}
+0 &= \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{r^{2}} \, \cos \theta + \nsum_{\ell=0}^{\infty} A_{\ell} \, b^{\ell} \, P_{\ell} (\cos \theta) \\[0.5em]
+&- \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{b^{2}} \, \cos \theta = \nsum_{\ell=0}^{\infty} A_{\ell} \, b^{\ell} \, P_{\ell} (\cos \theta)
+\end{align*}
+Debido a la condición de ortogonalidad, solo el término $\ell = 1$ es no nulo:
+\begin{align*}
+A_{1} = - \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{b^{3}}
+\end{align*}
+Entonces el potencial en puntos dentro del cascarón está dado por:
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\Phi = \dfrac{p \, \cos \theta}{4 \pi \varepsilon_{0}} ~ \bigg[ \bigg( \dfrac{b}{r} \bigg)^{2} - \dfrac{r}{b} \bigg] }
+\end{align*}
+
+\end{document}

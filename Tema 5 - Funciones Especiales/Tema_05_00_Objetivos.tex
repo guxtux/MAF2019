@@ -1,8 +1,35 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Copenhagen_wolverine}
 
-\date{diciembre de 2021}
+\setbeamercolor{section in foot}{bg=peridot, fg=black}
+\setbeamercolor{subsection in foot}{bg=powderblue(web), fg=black}
+
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+  \usebeamerfont{section in foot} \insertsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+  \usebeamerfont{subsection in foot}  \insertsubsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{1.5em}
+  \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+\end{beamercolorbox}}%
+\vskip0pt%
+}
+\makeatother
+\usefonttheme{serif}
+\setbeamercolor{frametitle}{bg=palecerulean}
+\resetcounteronoverlays{saveenumi}
+
+\date{12 de mayo de 2022}
 
 \title{\large{Tema 5 - Funciones Especiales}}
 \subtitle{Funciones Especiales Parte II}
@@ -14,77 +41,11 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideallsubsections]}
 
-\section{Funciones Especiales}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Otra vez: ¿para qué las FE?}
-
-\begin{frame}
-\frametitle{Pensamiento}
-Alberto Grünbaum del Departamento de Matemáticas de la Universidad de Berkeley, es uno de los mayores expertos mundiales en aplicaciones de funciones especiales y polinomios ortogonales.
-\end{frame}
-\begin{frame}
-\frametitle{Pensamiento}
-En particular en probabilidad, procesos estocásticos, sistemas integrables, imagenología médica (tomografía computarizada), biomatemáticas y mecánica estadística, entre otros.
-\end{frame}
-\begin{frame}
-\frametitle{Pensamiento}
-El Dr. Grünbaum expresó en una ocasión:
-\\
-\bigskip
-\pause
-\begin{quote}
-\enquote{Las funciones especiales son para las matemáticas lo que las tuberías son para una casa: nadie quiere exhibirlas abiertamente, pero nada funciona sin ellas.}
-\end{quote}
-\end{frame}
-
-\section{Objetivos}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Conocimiento y habilidades}
-
-\begin{frame}
-\frametitle{Objetivos}
-Al concluir el Tema 5, se espera que el alumno:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item Reconozca que las funciones especiales se obtienen de las soluciones de EDO2 que se recuperan luego de haber planteado un problema físico bajo ciertas condiciones en la geometría asociada, así como en las CDF y condiciones iniciales.                            
-\seti
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Objetivos}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\conti
-\item Identifique el conjunto de propiedades para las funciones especiales, en particular:
-\begin{itemize}
-\item La función generatriz.
-\item Las relaciones de recurrencia.
-\item La condición de ortogonalidad y normalización.
-\item La fórmula de Rodrigues.
-\item La condición de paridad.
-\end{itemize}
-\seti
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Objetivos}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\conti
-\item Utilice el conjunto de propiedades de las funciones especiales para resolver problemas con determinada geometría.
-\item Adquiera una metodología de trabajo para estudiar una función especial que no se haya revisado en el curso.
-\end{enumerate}
-\end{frame}
-
-\section{Contenido}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\section{Más funciones especiales}
+\frame{\frametitle{Puntos dentro del tema} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Formalismo y requisitos}
-
 
 \begin{frame}
 \frametitle{Contenido importante}
@@ -107,11 +68,65 @@ En caso de que tengan alguna complicación para el planteamiento de un ejercicio
 De esta manera tendrán completo el contexto del ejercicio, de tal manera que la solución del ejercicio y su interpretación será mucho más fácil de realizar.
 \end{frame}
 
+\section{Objetivos}
+\frame[allowframebreaks]{\frametitle{Objetivos del Tema 5} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{Conocimiento y habilidades}
+
+\begin{frame}
+\frametitle{Objetivos}
+Al concluir el Tema 5, se espera que el alumno:
+\setbeamercolor{item projected}{bg=darkcoral,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Reconozca que las funciones especiales se obtienen de las soluciones de EDO2 que se recuperan luego de haber planteado un problema físico bajo ciertas condiciones en la geometría asociada, así como en las CDF y condiciones iniciales.                            
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Objetivos}
+\setbeamercolor{item projected}{bg=darkcoral,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item Identifique el conjunto de propiedades para las funciones especiales, en particular:
+\begin{itemize}
+\item La función generatriz.
+\item Las relaciones de recurrencia.
+\item La condición de ortogonalidad y normalización.
+\item La fórmula de Rodrigues.
+\item La condición de paridad.
+\end{itemize}
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Objetivos}
+\setbeamercolor{item projected}{bg=darkcoral,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item Utilice el conjunto de propiedades de las funciones especiales para resolver problemas con determinada geometría.
+\item Adquiera una metodología de trabajo para estudiar una función especial que no se haya revisado en el curso.
+\end{enumerate}
+\end{frame}
+
+\section{Las funciones especiales}
+\frame[allowframebreaks]{\frametitle{Funciones especiales a revisar} \tableofcontents[currentsection, hideothersubsections]}
+
 \subsection{Funciones de Laguerre}
 
 \begin{frame}
 \frametitle{Laguerre - Motivación}
-Se tomará como punto de partida la ecuación radial del átomo de hidrógeno para obtener los \emph{polinomios ordinarios de Laguerre} y \emph{los polinomios asociados de Laguerre}.
+Se tomará como punto de partida la ecuación radial del átomo de hidrógeno para obtener los \emph{\textbf{\textcolor{darkslateblue}{los polinomios asociados de Laguerre}}} \pause y como un caso especial de éstos, los \emph{\textbf{\textcolor{darktan}{polinomios ordinarios de Laguerre}}}.
 \end{frame}
 \begin{frame}
 \frametitle{Laguerre - Descripción matemática}
@@ -122,7 +137,7 @@ Así mismo, se revisarán las características y propiedades de los polinomios, 
 
 \begin{frame}
 \frametitle{Hermite - Motivación}
-Continuando con ejemplos de mecánica cuántica, ahora tomaremos el estudio del oscilador armónico cuántico, lo que nos conducirá a los \emph{polinomios de Hermite}.
+Continuando con ejemplos de mecánica cuántica, ahora tomaremos el estudio del oscilador armónico cuántico, lo que nos conducirá a los \emph{\textbf{\textcolor{darkterracotta}{polinomios de Hermite}}}.
 \\
 \bigskip
 \pause
@@ -133,21 +148,14 @@ Ya hemos revisado previamente el caso del oscilador cuántico, por lo que se com
 
 \begin{frame}
 \frametitle{Bessel - Motivación y geometría}
-La consideración de la ecuación de Laplace en un sistema coordenado cilíndrico polar, nos llevará a establecer las \emph{funciones de Bessel}, conocidas como funciones de Bessel de primera clase, y las funciones de Bessel de segunda clase llamadas \emph{funciones de Neumann}.
-\end{frame}
-\begin{frame}
-\frametitle{Bessel - Geometría esférica}
-Como un caso particular del estudio con una geometría esférica, tendremos la oportunidad de revisar las \emph{funciones de Bessel esféricas}.
-\\
-\bigskip
-En el Tema 2, con la construcción de la solución con el método de Frobenius, se presentó el caso de la EDO de Bessel.
+La consideración de la ecuación de Laplace en un sistema coordenado cilíndrico polar, nos llevará a establecer las \emph{\textbf{\textcolor{debianred}{funciones de Bessel}}}, conocidas como funciones de Bessel de primera clase, \pause y las funciones de Bessel de segunda clase llamadas \emph{\textbf{\textcolor{darkslateblue}{funciones de Neumann}}}.
 \end{frame}
 
-\subsection{Funciones de Chebychev}
+\subsection{Funciones de Chebyshev}
 
 \begin{frame}
 \frametitle{Funciones de Chevychev}
-Para este par de funciones especiales: Chebychev de tipo I y Chebychev de Tipo II, tomaremos como punto de partida la ecuación diferencial correspondiente.
+Para este par de funciones especiales: Chebyshev de tipo I y Chebyshev de Tipo II, tomaremos como punto de partida la ecuación diferencial correspondiente.
 \\
 \bigskip
 \pause
@@ -161,77 +169,80 @@ Se revisarán las propiedades y características de cada una de ellas. Veremos s
 Estudiaremos la ecuación diferencial como punto de partida y encontraremos que habrá casos especiales o límite, en donde recuperamos otras funciones especiales.
 \\
 \bigskip
-Revisaremos la \emph{función hipergeométrica confluente} y la \emph{función hipergeométrica ordinaria}.
+Revisaremos la \emph{\textbf{\textcolor{darkslateblue}{función hipergeométrica confluente}}} \pause y la \emph{\textbf{\textcolor{denim}{función hipergeométrica ordinaria}}}.
 \end{frame}
 
 \subsection{Funciones de Gegenbauer}
 
 \begin{frame}
 \frametitle{Funciones de Gegenbauer}
-Este tipo de funciones que se obtienen a partir de la serie hipergeométrica para los casos en donde ésta, es finita, además, son la solución de la ecuación diferencial de Gegenbauer, una generalización de los polinomios de Legendre.
+Las \emph{\textbf{\textcolor{flame}{funciones de Gegenbauer}}} se obtienen a partir de la serie hipergeométrica para los casos en donde ésta, es finita, \pause además, son la solución de la ecuación diferencial de Gegenbauer, una generalización de los polinomios de Legendre.
 \end{frame}
 
 \section{Evaluación del Tema}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Ejercicios para resolver}
+\frame{\frametitle{Esquema de evaluación} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicios y enunciados para resolver}
 
 \begin{frame}
 \frametitle{Ejercicios a cuenta}
-La distribución de ejercicios es la siguiente:
+Los ejercicios a cuenta se presentarán en la sesión del martes 17 de mayo durante la clase.
+\\
+\bigskip
 \pause
-\renewcommand{\arraystretch}{1.15}
-\begin{table}
-\centering
-\begin{tabular}{l c c}
-Material & Semanales & Opcionales \\ \hline
-Laguerre & 2 & 1 \\ \hline
-Hermite  & 2 & 1 \\ \hline
-Bessel & 2 & 1 \\ \hline    
-Chebychev & 2 & 1 \\ \hline    
-Hipergeométrica & 2 & 1 \\ \hline
-Gegenbauer & 2 & 1
-\end{tabular}
-\end{table}
+Debiendo entregarse la solución el día \textbf{Jueves 2 de junio} a más tardar a 6 pm, por la plataforma Moodle.
 \end{frame}
-
-\subsection{Examen Tarea}
-
 \begin{frame}
-\frametitle{Entrega del examen tarea 5}
-En la sesión del 17 de diciembre se entregarán los enunciados del examen tarea 5, \pause para enviar la solución el día 16 de enero de 2022.
+\frametitle{Entrega de enunciados del Tema 5}
+En la misma sesión del martes 17 de mayo, se entregarán los enunciados del tema 5 que forman parte del segundo examen del curso.
+\end{frame}
+\begin{frame}
+\frametitle{Fechas importantes}
+Considerando que ya nos encontramos en la recta final del semestre 2022-2, el segundo examen del curso se entregará en dos partes:
+\end{frame}
+\begin{frame}
+\frametitle{Fechas importantes}    
+\setbeamercolor{item projected}{bg=darkcoral,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Los enunciados del Tema 4 y del Tema 5 se entregarán el \textbf{martes 7 de junio}, a más tardar 6 pm por la plataforma Moodle.
+\item Los enunciados del Tema 6 se entregarán en las semanas 15 y 16, \pause teniendo solo un fin de semana para resolverlos y enviarlos por Moodle.
+\end{enumerate}
 \end{frame}
 
 \section{Calendarización}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Cronograma de trabajo} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Distribución de tiempos}
 
 \begin{frame}
 \frametitle{Trabajo por semanas}
-Considerando que ya tenemos en puerta el período vacacional de fin de año, que comienza a partir del 19 de diciembre, se propone el siguiente esquema de trabajo:
+Como ya se comentó, ya estamos por completar el semestre, por lo que se presenta la siguiente distribución de tiempos para cubrir los materiales de trabajo y las sesiones presenciales.
 \end{frame}
 \begin{frame}
-\frametitle{Semanas 11 y 12}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\frametitle{Programa de trabajo}
+\setbeamercolor{item projected}{bg=darkcoral,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
-\item Semana 12: Del 6 al 10 de diciembre, funciones de Laguerre, Hermite y Bessel.
-\item Semana 13: Del 13 al 17 de diciembre, funciones de Bessel, Chebychev e hipergeométricas.
-\item Semanas 14 y 15: 6 y 7 de enero y del 10 al 12 de enero de 2022. Funciones hipergeométricas y Gegenbauer.
+\item Semanas 12 y 13: Funciones de Laguerre, Hermite y Bessel.
+\item Semanas 13 y 14: Funciones de Chebyshev, hipergeométricas y Gegenbauer.
 \end{enumerate}
 \end{frame}
 
-\subsection{Sesiones síncronas}
+\subsection{Sesiones presenciales}
 
 \begin{frame}
 \frametitle{Sesiones de trabajo}
-Se programan sesiones de trabajo síncronas para los días miércoles y viernes:
-\begin{itemize}
-\item Viernes 10 de diciembre de 2021.
-\item Miércoles 15 y viernes 17 de diciembre de 2021.
-\item Jueves 6 de enero de 2022.
-\item Lunes 10 de enero de 2022.
+Tendremos las clases presenciales los martes y jueves en el horario de 3:30 pm a 6:00 pm
+\begin{itemize}[<+->]
+\item Jueves 12 de mayo.
+\item Martes 17 y jueves 19 de mayo.
+\item Martes 24 y jueves 26 de mayo.
 \end{itemize}
-En el acostumbrado horario de las 3 pm.
 \end{frame}
 
 \end{document}

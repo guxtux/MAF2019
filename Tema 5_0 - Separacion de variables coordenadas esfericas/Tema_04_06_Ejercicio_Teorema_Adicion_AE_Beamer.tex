@@ -1,0 +1,311 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
+\input{../Preambulos/preambulo_Beamer_Frankfurt_beaver}
+
+\setbeamercolor{section in foot}{bg=almond, fg=black}
+\setbeamercolor{subsection in foot}{bg=laserlemon, fg=black}
+\setbeamercolor{date in foot}{bg=blue, fg=white}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+  \usebeamerfont{section in foot} \insertsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+  \usebeamerfont{subsection in foot}  \insertsubsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{1.5em}
+  \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+\end{beamercolorbox}}%
+\vskip0pt%
+}
+\makeatother
+\usefonttheme{serif}
+\setbeamercolor{frametitle}{bg=palecerulean}
+\resetcounteronoverlays{saveenumi}
+
+\date{12 de mayo de 2022}
+
+\title{\large{Ejercicio - El teorema de adición AE}}
+\subtitle{Funciones Especiales I}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
+%Ref. Jackson 3.6 Problem Solution
+\section{Ejercicio con la fórmula de adición}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Enunciado}
+
+\begin{frame}
+\frametitle{Enunciado para el ejercicio}
+Dos cargas puntuales $q$ y $-q$ se localizan sobre el eje $z$ en los puntos $z = +a$ y $z = -a$, respectivamente.
+\pause
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw (0, -2) -- (0, 2) node [right, pos=1] {$z$};
+        \draw [fill] (0, 1) circle (0.1);
+        \draw [fill] (0, -1) circle (0.1);
+        \draw (-0.2, 0) -- (0.2, 0);
+        \node at (0.5, 1) {$q$};
+        \node at (0.5, -1) {$-q$};
+        \node at (-0.5, 0.5) {$a$};
+        \node at (-0.5, -0.5) {$-a$};
+    \end{tikzpicture}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{A resolver}
+Por resolver:
+\pause
+\setbeamercolor{item projected}{bg=olive,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item \label{item:inciso_1} Calcula el potencial electrostático como una expansión de los armónicos esféricos y de potencias de $r$, tanto para $r > a$ y $r < a$.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{A resolver}
+\setbeamercolor{item projected}{bg=olive,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]    
+\conti
+\item \label{item:inciso_2} Manteniendo el producto $q \, a = p /2$ constante, toma el límite cuando $a \to 0$ y calcula el potencial para $r \neq 0$. \pause Esto corresponde a la definición de un dipolo sobre el eje $z$ y su potencial.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{A resolver}
+\setbeamercolor{item projected}{bg=olive,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]    
+\conti
+\item \label{item:inciso_3} Supongamos ahora que el dipolo del inciso \ref{item:inciso_2} está rodeado por una capa esférica de radio $b$ concéntrica en el origen, puesta a tierra. Por superposición lineal, encuentra el potencial en todas partes dentro del cascarón.
+\end{enumerate}
+\end{frame}
+
+\subsection{Solución Inciso 1}
+
+\begin{frame}
+\frametitle{Usando la teoría de electromagnetismo}
+\textbf{Inciso \ref{item:inciso_1}:} Usado la ley de Coulomb, podemos escribir de manera directa el potencial de dos cargas puntuales:
+\pause
+\begin{align*}
+\Phi = \dfrac{q}{4 \pi \varepsilon_{0}} ~ \bigg[ \dfrac{1}{\abs{\vb{r} - a \, \vu{k}}} - \dfrac{1}{\abs{\vb{r} + a \, \vu{k}}} \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando la teoría de MAF}
+Usando el teorema de adición, expandimos en factores de $1/R$:
+\pause
+\begin{align*}
+\dfrac{1}{\abs{\vb{r} {-} \vb{\pderivada{r}}}} = 4 \pi \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell {+} 1} \, \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, Y_{\ell m}^{*} (\pderivada{\theta}, \pderivada{\phi}) \, Y_{\ell m} (\theta, \phi)
+\end{align*}
+\pause
+donde:
+\begin{align*}
+r_{<} = \min \left\{ r, \pderivada{r} \right\} \hspace{1.5cm} r_{>} = \max \left\{ r, \pderivada{r} \right\}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Reescribiendo el potencial}
+Entonces el potencial se escribe como:
+\pause
+\begin{align*}
+&\Phi {=} \dfrac{q}{4 \pi \varepsilon_{0}} \bigg[ 4 \pi \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell {+} 1} \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} Y_{\ell m}^{*} (0, 0) Y_{\ell m} (\theta, \phi) + \\[0.5em]
+&- 4 \pi \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell {+} 1} \, \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, Y_{\ell m}^{*} (\pi, 0) \, Y_{\ell m} (\theta, \phi) \bigg]
+\end{align*}
+\pause
+Ahora se tiene que:
+\pause
+\begin{align*}
+r_{<} = \min \left\{ r, a \right\} \hspace{1.5cm} r_{>} = \max \left\{ r, a \right\}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Reorganizando la expresión}
+Cancelando el término $4 \pi$ y factorizando las sumas con el armónico $Y_{\ell m} (\theta, \phi)$, el potencial queda:
+\pause
+\begin{align*}
+\Phi &= \dfrac{q}{\varepsilon_{0}} ~ \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell + 1} \, \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, \times \\[0.5em]
+&\times Y_{\ell m} (\theta, \phi) \bigg[ Y_{\ell m}^{*} (0, 0) - Y_{\ell m}^{*} (\pi, 0) \bigg]    
+\end{align*} 
+\end{frame}
+\begin{frame}
+\frametitle{Expresión para $r < a$}
+Haciendo de manera explícita cada caso para $r$, se tiene que:
+\pause
+\begin{align*}
+\Phi &= \dfrac{q}{\varepsilon_{0}} \,\nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell {+} 1} \dfrac{r_{\ell}}{a^{\ell+1}} \, \times \\[0.5em]
+&\times Y_{\ell m} (\theta, \phi) \bigg[ Y_{\ell m}^{*} (0, 0) {-} Y_{\ell m}^{*} (\pi, 0) \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Expresión para $r > a$}
+\begin{align*}
+\Phi &= \dfrac{q}{\varepsilon_{0}} \nsum_{\ell=0}^{\infty} \nsum_{m=-\ell}^{\ell} \dfrac{1}{2 \ell {+} 1} \dfrac{a^{\ell}}{r^{\ell+1}} \, \times \\[0.5em]
+&\times Y_{\ell m} (\theta, \phi) \bigg[ Y_{\ell m}^{*} (0, 0) {-} Y_{\ell m}^{*} (\pi, 0) \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Misión cumplida}
+La pregunta original pedía la respuesta en términos de los armónicos esféricos, así que eso es lo que hemos dado.
+\\
+\bigskip
+\pause
+Sin embargo, podemos simplificar la respuesta.
+\end{frame}
+\begin{frame}
+\frametitle{Aprovechando la simetría}
+Tengamos en cuenta que el problema presenta simetría azimutal, \pause por lo que la solución debe ser azimutalmente simétrica.
+\\
+\bigskip
+\pause
+Esto significa que todos los términos de la serie excepto el término $m = 0$ deben anularse:
+\end{frame}
+\begin{frame}
+\frametitle{Consecuencia de la simetría}
+\begin{eqnarray*}
+\begin{aligned}
+\Phi &= \pause \dfrac{q}{\varepsilon_{0}} \nsum_{\ell=0}^{\infty}  \dfrac{1}{2 \ell {+} 1} \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} Y_{\ell 0} (\theta, \phi) \bigg[ Y_{\ell 0}^{*} (0, 0) {-} Y_{\ell 0}^{*} (\pi, 0) \bigg] = \\[0.5em] \pause
+&= \dfrac{q}{4 \pi \varepsilon_{0}} \nsum_{\ell=0}^{\infty} \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, P_{\ell} (\cos \theta) \bigg[ P_{\ell} (1) - P_{\ell} (-1) \bigg] = \\[0.5em] \pause
+&= \dfrac{q}{4 \pi \varepsilon_{0}} \nsum_{\ell=0}^{\infty} \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, P_{\ell} (\cos \theta) \bigg[ 1 - (-1)^{\ell} \bigg]
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Potencial electróstatico}
+Por lo que el potencial electrostático está dado por:
+\pause
+\begin{align*}
+\Phi = \dfrac{2 q}{4 \pi \varepsilon_{0}} \nsum_{\ell=0, \text{impar}}^{\infty} \dfrac{r_{<}^{\ell}}{r_{>}^{\ell+1}} \, P_{\ell} (\cos \theta)
+\end{align*}
+donde:
+\pause
+\begin{align*}
+r_{<} = \min \left\{ r, a \right\} \hspace{1.5cm} r_{>} = \max \left\{ r, a \right\}
+\end{align*}
+\end{frame}
+
+\subsection{Solución Inciso 2}
+
+\begin{frame}
+\frametitle{El inciso 2}
+Manteniendo el producto $q \, a = p /2$ constante, toma el límite cuando $a \to 0$ y calcula el potencial para $r \neq 0$.
+\pause
+Con esta condición, siempre estaremos en la región $r > a$. 
+\end{frame}
+\begin{frame}
+\frametitle{Usando el resultado del inciso 1}
+Del resultado del inciso \ref{item:inciso_1}, se tiene que:
+\pause
+\begin{align*}
+\Phi = \dfrac{2 q}{4 \pi \varepsilon_{0}} \nsum_{\ell=0, \text{impar}}^{\infty} \dfrac{a^{\ell}}{r^{\ell+1}} \, P_{\ell} (\cos \theta)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Condición del enunciado}
+Como $p = 2 q a$, resulta:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\Phi &= \dfrac{p}{4 \pi \varepsilon_{0}} \nsum_{\ell=0, \text{impar}}^{\infty} \dfrac{a^{\ell-1}}{r^{\ell+1}} \, P_{\ell} (\cos \theta) = \\[0.5em] \pause
+&= \dfrac{p}{4 \pi \varepsilon_{0}} \bigg[ \dfrac{1}{r^{2}} P_{1} (\cos \theta) {+} \dfrac{a^{2}}{r^{4}} P_{3} (\cos \theta) + \\[0.5em]
+&+ \dfrac{a^{4}}{r^{6}} P_{5} (\cos \theta) {+} \ldots \bigg]
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Caso con el límite}
+Cuando $a \to 0$, se obtiene:
+\pause
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\Phi = \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{r^{2}} \, \cos \theta }
+\end{align*}
+\pause
+Este es el potencial de un dipolo perfecto en el origen que apunta a lo largo del eje $z$.
+\end{frame}
+\subsection{Solución Inciso 3}
+
+
+\begin{frame}
+\frametitle{Enunciado del Inciso 3}
+\textbf{Inciso \ref{item:inciso_3}: } Si el dipolo del inciso \ref{item:inciso_2} está rodeado por una capa esférica conectada a tierra de radio $b$ concéntrica con el origen:
+\setbeamercolor{item projected}{bg=olive,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Habrá un potencial adicional debido a la esfera.
+\item El potencial total en la superficie debe ser cero.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ocupando el resultado del inciso 2}
+Del resultado del inciso \ref{item:inciso_2}:
+\pause
+\begin{align*}
+\Phi = \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{r^{2}} \, \cos \theta
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Sumando el otro potencial}
+Agregamos el potencial adicional:
+\pause
+\begin{align*}
+\Phi = \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{r^{2}} \, \cos \theta + \nsum_{\ell=0}^{\infty} A_{\ell} \, r^{\ell} \, P_{\ell} (\cos \theta)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando la CDF}
+Aplicando la condición de frontera:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+0 &= \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{r^{2}} \, \cos \theta + \nsum_{\ell=0}^{\infty} A_{\ell} \, b^{\ell} \, P_{\ell} (\cos \theta) \\[0.5em] \pause
+\Rightarrow \hspace{0.2cm} &- \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{b^{2}} \, \cos \theta = \nsum_{\ell=0}^{\infty} A_{\ell} \, b^{\ell} \, P_{\ell} (\cos \theta)
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando propiedades de los $P_{\ell} (\cos \theta)$}
+Debido a la condición de ortogonalidad, solo el término $\ell = 1$ es no nulo:
+\pause
+\begin{align*}
+A_{1} = - \dfrac{p}{4 \pi \varepsilon_{0}} \, \dfrac{1}{b^{3}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Potencial en puntos internos}
+Entonces el potencial en puntos dentro del cascarón está dado por:
+\pause
+\begin{align*}
+\setlength{\fboxsep}{3\fboxsep}\boxed{
+\Phi = \dfrac{p \, \cos \theta}{4 \pi \varepsilon_{0}} ~ \bigg[ \bigg( \dfrac{b}{r} \bigg)^{2} - \dfrac{r}{b} \bigg] \qed}
+\end{align*}
+\end{frame}
+\end{document}
