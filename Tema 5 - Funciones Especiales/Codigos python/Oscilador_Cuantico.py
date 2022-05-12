@@ -90,7 +90,7 @@ def find_analytic_energies(en):
     print ('Allowed energies of HO:')
     i = 0
     while((i+0.5)*h*w < E_max):
-        print '%.2f'%((i+0.5)*h*w)
+        print('.2f'.format((i+0.5)*h*w))
         i+=1
      
      
@@ -130,9 +130,9 @@ def main():
     grid()
         
     # Print energies for the found states
-    print (&quot;Energies for the bound states are: &quot;)
+    print("Energies for the bound states are: ")
     for En in E_zeroes:
-        print ("%.2f " %En)
+        print("%.2f " %En)
          
     # Print energies of each bound state from the analytical model
     find_analytic_energies(en)   
