@@ -1,8 +1,35 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Copenhagen_wolverine}
 
-\date{10 diciembre de 2021}
+\setbeamercolor{section in foot}{bg=peridot, fg=black}
+\setbeamercolor{subsection in foot}{bg=powderblue(web), fg=black}
+
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+  \usebeamerfont{section in foot} \insertsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+  \usebeamerfont{subsection in foot}  \insertsubsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{1.5em}
+  \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+\end{beamercolorbox}}%
+\vskip0pt%
+}
+\makeatother
+\usefonttheme{serif}
+\setbeamercolor{frametitle}{bg=palecerulean}
+\resetcounteronoverlays{saveenumi}
+
+\date{17 de mayo de 2022}
 
 \title{\large{Ecuación radial del átomo de hidrógeno}}
 \subtitle{Funciones de Laguerre}
@@ -14,7 +41,7 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideallsubsections]}
 
 \section{Normalización función radial}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
@@ -41,7 +68,12 @@ En particular para $R_{20}$, se tiene que:
 R_{20}(r) = \dfrac{c_{0}}{2 \, a} \left( 1 - \dfrac{r}{2 \, a} \right) \, e^{-r/2a}
 \end{align*}
 \end{frame}
-\section{Enunciado}
+
+%Ref. Griffits (2005) Problem 4.11 (a)
+\section{Ejercicio 1}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Planteamiento}
+
 \begin{frame}
 \frametitle{Enunciado del problema}
 Normaliza la función $R_{20}$ para construir la función $\psi_{200}$.
@@ -55,83 +87,96 @@ R_{20}(r) = \dfrac{c_{0}}{2 \, a} \left( 1 - \dfrac{r}{2 \, a} \right) \, e^{-r/
 \end{align*}
 Hay que determinar los coeficientes $c_{0}$.
 \end{frame}
+
 \subsection{Solución}
+
 \begin{frame}
 \frametitle{Punto de partida}
-Partimos del hecho:
+Partimos de la normalización de la función:
 \begin{align*}
-\int_{0}^{\infty} \abs{R_{20}}^{2} \, r^{2} \dd{r} = 1
+\scaleint{6ex}_{\bs 0}^{\infty} \abs{R_{20}}^{2} \, r^{2} \dd{r} = 1
 \end{align*}
 \pause
 Por lo que:
 \begin{align*}
-\int_{0}^{\infty} \abs{ \dfrac{c_{0}}{2 \, a} \left( 1 - \dfrac{r}{2 \, a} \right) \, e^{-r/2a} }^{2} r^{2} \dd{r} = 1
+\scaleint{6ex}_{\bs 0}^{\infty} \abs{ \dfrac{c_{0}}{2 \, a} \left( 1 - \dfrac{r}{2 \, a} \right) \, e^{-r/2a} }^{2} r^{2} \dd{r} = 1
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Desarrollo}
 Entonces tenemos que:
 \begin{align*}
-\int_{0}^{\infty} \left(\dfrac{c_{0}}{2 \, a}\right)^{2} \left( 1 - \dfrac{r}{2 \, a} \right)^{2} \, e^{-r/a} \, r^{2} \dd{r} = 1
+\scaleint{6ex}_{\bs 0}^{\infty} \left(\dfrac{c_{0}}{2 \, a}\right)^{2} \left( 1 - \dfrac{r}{2 \, a} \right)^{2} \, e^{-r/a} \, r^{2} \dd{r} = 1
 \end{align*}
 \\
 \bigskip
 \pause
-Proponemos el cambio de variable: $z = \dfrac{r}{a}$
+Para resolver esta integral, \pause proponemos el cambio de variable: $z = \dfrac{r}{a}$
 \end{frame}
 \begin{frame}
 \frametitle{Expresión con el cambio}
 \begin{align*}
-\int_{0}^{\infty} \left(\dfrac{c_{0}}{2 \, a}\right)^{2} \left( 1 - \dfrac{z}{2} \right)^{2} \, e^{-z} \, (a \, z)^{2} a \, \dd{z} = 1
+\scaleint{6ex}_{\bs 0}^{\infty} \bigg( \dfrac{c_{0}}{2 \, a} \bigg)^{2} \, \bigg( 1 - \dfrac{z}{2} \bigg)^{2} \, e^{-z} \, (a \, z)^{2} a \, \dd{z} = 1
 \end{align*}
 \\
 \bigskip
 \pause
 Que simplificando, obtenemos:
+\pause
 \begin{align*}
-\left(\dfrac{c_{0}}{2 \, a}\right)^{2} \, a^{3} \, \int_{0}^{\infty} \left( 1 - \dfrac{z}{2} \right)^{2} \, e^{-z} \, z^{2} \dd{z} = 1
+\bigg( \dfrac{c_{0}}{2 \, a} \bigg)^{2} \, a^{3} \, \scaleint{6ex}_{\bs 0}^{\infty} \bigg( 1 - \dfrac{z}{2} \bigg)^{2} \, e^{-z} \, z^{2} \dd{z} = 1
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Resolviendo la integral}
 Desarrollando el binomio en el integrando:
+\pause
 \begin{align*}
-\dfrac{c_{0}^{2} \, a}{4} \, \int_{0}^{\infty} \left( 1 - z + \dfrac{z^{2}}{4} \right) \, e^{-z} \, z^{2} \dd{z} = 1
+\dfrac{c_{0}^{2} \, a}{4} \, \scaleint{6ex}_{\bs 0}^{\infty} \left( 1 - z + \dfrac{z^{2}}{4} \right) \, e^{-z} \, z^{2} \dd{z} = 1
 \end{align*}
 \pause
 Entonces tendremos:
 \begin{align*}
-\dfrac{c_{0}^{2} \, a}{4} \, \int_{0}^{\infty} \left( z^{2} - z^{3} + \dfrac{z^{2}}{4} \right) \, e^{-z} \dd{z} = 1
+\dfrac{c_{0}^{2} \, a}{4} \, \scaleint{6ex}_{\bs 0}^{\infty} \left( z^{2} - z^{3} + \dfrac{z^{2}}{4} \right) \, e^{-z} \dd{z} = 1
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Ocupando un resultado conocido}
 Sabemos que una integral del tipo:
-\begin{align*}
-\int_{0}^{\infty} z^{n} \, e^{-z} \dd{z} = \Gamma(n + 1) = n!
-\end{align*}
+\begin{eqnarray*}
+\scaleint{6ex}_{\bs 0}^{\infty} z^{n} \, e^{-z} \dd{z} = \pause \Gamma(n + 1) = \pause n!
+\end{eqnarray*}
 \pause
 Por lo que la integral anterior se resuelve en términos del valor del factorial de cada término:
 \end{frame}
 \begin{frame}
 \frametitle{Solución a la integral}
-Entonces:
+Al resolver la integral de la suma de cada término, tendremos que:
+\pause
 \begin{equation*}
 \begin{aligned}
-\dfrac{c_{0}^{2} \, a}{4} \, \left[ 2 - 6 + \dfrac{24}{4} \right]  &= 1 \\[0.5em] \pause
+\dfrac{c_{0}^{2} \, a}{4} \, &\left[ 2 - 6 + \dfrac{24}{4} \right] = 1 \\[0.5em] \pause
 \dfrac{a}{2} \, c_{0}^{2} &= 1 \\[0.5em] \pause
 \Rightarrow c_{0} &= \sqrt{\dfrac{2}{a}}
 \end{aligned}
 \end{equation*}
 \end{frame}
 \begin{frame}
+\frametitle{La función radial ya es conocida}
+Una vez obtenido el valor de $c_{0}$ ya se puede ocupar para la función radial:
+\pause
+\begin{align*}
+R_{20} (r) = \sqrt{\dfrac{2}{a}} \, \dfrac{1}{2 a} \bigg( 1 - \dfrac{r}{2 a} \bigg) \, e^{-r/2a}
+\end{align*}
+\end{frame}
+\begin{frame}
 \frametitle{La solución}
 La solución general es:
 \begin{align*}
-\psi(r, \theta, \phi) = R_{n \ell} (r) \, Y_{\ell}^{m} \, (\theta, \phi)
+\psi_{n \ell m} (r, \theta, \phi) = R_{n \ell} (r) \, Y_{\ell}^{m} \, (\theta, \phi)
 \end{align*}
 \pause
-Así:
+Lo que nos pide el enunciado es:
 \begin{align*}
 \psi_{200} = R_{2 0} (r) \, Y_{0}^{0} \, (\theta, \phi)
 \end{align*}
@@ -145,14 +190,32 @@ Y_{0}^{0} \, (\theta, \phi) = \dfrac{1}{\sqrt{4 \, \pi}}
 \end{frame}
 \begin{frame}
 \frametitle{Solución al problema}
-Entonces al conjuntar los resultados, se tiene:
-\begin{equation*}
+Juntamos los resultados, para llegar a:
+\pause
+\begin{eqnarray*}
 \begin{aligned}
-\psi_{200} = \dfrac{1}{\sqrt{4 \, \pi}} \, \sqrt{\dfrac{2}{a}} \, \dfrac{1}{2 \, a} \left( 1 - \dfrac{r}{2 \, a} \right) \, e^{-r/2a} \\[1em] \pause
-\psi_{200} = \dfrac{1}{\sqrt{2 \, \pi \, a}} \, \dfrac{1}{2 \, a} \left( 1 - \dfrac{r}{2 \, a} \right) \, e^{-r/2a} \qed
+\psi_{200} &= \dfrac{1}{\sqrt{4 \, \pi}} \, \sqrt{\dfrac{2}{a}} \, \dfrac{1}{2 \, a} \bigg( 1 - \dfrac{r}{2 \, a} \bigg) \, e^{-r/2a} \\[1em] \pause
+\psi_{200} &= \dfrac{1}{\sqrt{2 \, \pi \, a}} \, \dfrac{1}{2 \, a} \bigg( 1 - \dfrac{r}{2 \, a} \bigg) \, e^{-r/2a} \qed
 \end{aligned}
-\end{equation*}
+\end{eqnarray*}
 \end{frame}
+
+%Ref. Griffits (2005) Problem 4.11 (b)
+\section{Ejercicio 2}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Enunciado}
+
+\begin{frame}
+\frametitle{Enunciado del ejercicio}
+Normaliza la función radial:
+\begin{align*}
+R_{21} (r) = \dfrac{a_{0}}{4 a^{2}} \, r \, e^{-r/2a}
+\end{align*}
+\pause
+Para construir las funciones de onda: $\psi_{211}, \psi_{210}$ y $\psi_{21-1}$
+\end{frame}
+
+
 
 \section{La función radial}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
