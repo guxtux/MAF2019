@@ -1,5 +1,6 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
+\usepackage[absolute, overlay]{textpos}
 \usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Copenhagen_wolverine}
 
@@ -235,7 +236,7 @@ Para construir las funciones de onda: $\psi_{211}, \psi_{210}$ y $\psi_{21-1}$
 Para obtener el valor del coeficiente $c_{0}$, debemos de normalizar la función $R_{21} (r)$:
 \pause
 \begin{align*}
-\scaleint{6ex}_{\bs 0}^{\infty} \abs{R_{21}}^{2} \, r \, \dd{r} = 1
+\scaleint{6ex}_{\bs 0}^{\infty} \abs{R_{21}}^{2} \, r^{2} \, \dd{r} = 1
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -296,7 +297,7 @@ Al juntar los resultados de la parte radial y el correspondiente armónico esfé
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-\psi_{210} (r, \theta, \phi) &= \dfrac{1}{\sqrt{6 \, a}} \, \dfrac{1}{2 \, a^{2}} \, r \, e^{-2/ra} \, \sqrt{\dfrac{3}{4 \, \pi}} \cos \theta = \\[0.5em] \pause
+\psi_{210} (r, \theta, \phi) &= \dfrac{1}{\sqrt{6 \, a}} \, \dfrac{1}{2 \, a^{2}} \, r \, e^{-r/2a} \, \sqrt{\dfrac{3}{4 \, \pi}} \cos \theta = \\[0.5em] \pause
 &= \dfrac{1}{2 \, \pi \, a} \, \dfrac{1}{4 \, a^{2}} \, r \, e^{-r/2a} \, \cos \theta
 \end{aligned}
 \end{eqnarray*}
@@ -307,7 +308,7 @@ Al juntar ahora los resultados de la parte radial y el correspondiente armónico
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-\psi_{21 \pm 1} (r, \theta, \phi) &= \dfrac{1}{\sqrt{6 \, a}} \, \dfrac{1}{2 \, a^{2}} \, r \, e^{-2/ra} \times \\[0.5em]
+\psi_{21 \pm 1} (r, \theta, \phi) &= \dfrac{1}{\sqrt{6 \, a}} \, \dfrac{1}{2 \, a^{2}} \, r \, e^{-r/2a} \times \\[0.5em]
 &\times \bigg[ \mp \, \sqrt{\dfrac{3}{8 \, \pi}} \, \sin \theta \, e^{\pm i \phi} \bigg]  =
 \end{aligned}
 \end{eqnarray*}
@@ -391,6 +392,7 @@ donde $L_{\ell}^{m}$ es el polinomio asociado de Laguerre de orden $\ell m$, y $
 \end{enumerate}
 \end{frame}
 
+%Ref. Perez - El  átomo de hidrógeno
 \section{Solución átomo de hidrógeno}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Expresión}
@@ -406,6 +408,24 @@ n = & 1, 2, 3 \\
 \ell = & 0, 1, 2, \ldots n-1 \\
 m &= -\ell, -\ell + 1, \ldots, \ell -1, \ell
 \end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La función radial}
+La función radial está dada por:
+\pause
+\begin{align*}
+R_{n \ell} &= - \bigg( \dfrac{2}{n a_{0}} \bigg)^{\frac{3}{2}} \, \sqrt{\dfrac{(n - \ell - 1)!}{2 n [(n + \ell)]^{3}]}} \, \bigg( \dfrac{2 r}{n a_{0}} \bigg)^{\ell} \times \\[0.5em]
+&\times \exp\bigg( - \dfrac{r}{n a_{0}} \bigg) L_{n+\ell}^{2\ell+1} \bigg( \dfrac{2 r}{n a_{0}} \bigg)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{La función angular}
+La función radial está dada por los armónicos esféricos:
+\pause
+\begin{align*}
+Y_{\ell}^{m} (\theta, \phi) &= (-1)^{m} \bigg[ \dfrac{(2 \ell + 1)(\ell - \abs{m})!}{4 \pi (\ell + \abs{m})!} \bigg]^{\frac{1}{2}} \times \\[0.5em]
+&\times P_{\ell}^{\abs{m}} (\cos \theta) \, e^{i m \phi}
 \end{align*}
 \end{frame}
 
@@ -452,112 +472,218 @@ Por ejemplo:
 \end{table}
 \end{frame}
 
-\subsection{Funciones radiales}
+\section{Orbitales hidrogenoides}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Densidad de distribución radial}
 
 \begin{frame}
-\frametitle{Las funciones radiales}
-Se presentan las siguientes gráficas:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item La probabilidad de densidad radial $r^{2} \, \abs{R_{n \ell}}^{2}$
-\item El valor esperado
+\frametitle{Densidad de distribución radial}
+Proporciona la densidad de probabilidad de encontrar al electrón a una distancia $r$.
+\\
+\bigskip
+\pause
+Se obtiene al integrar $\abs{\psi_{n \ell m} (r, \theta, \phi)}^{2}$ respecto a los ángulos $\theta$ y $\phi$.
+\end{frame}
+\begin{frame}
+\frametitle{Densidad de distribución radial}
+Viene dada por la expresión:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+D_{n \ell} (r) &= \scaleint{6ex}_{\bs 0}^{2 \pi} \scaleint{6ex}_{\bs 0}^{\pi} \psi_{n \ell m}^{*} (r, \theta, \phi) \, r^{2} \, \psi_{n \ell m} (r, \theta, \phi) \times \\[0.5em]
+&\times\sin \theta \dd{\theta} \dd{\phi} = \\[0.5em] \pause
+&= r^{2} \, R_{n \ell} (r)
+\end{aligned}
+\end{eqnarray*}
+\pause
+Considerando que los armónicos esféricos están normalizados.
+\end{frame}
+\begin{frame}
+\frametitle{Interpretando la densidad de probabilidad}
+La cantidad:
+\pause
 \begin{align*}
-\expval{r}_{n \ell} &= \expval{r}{\phi_{n \ell m}} = \\[0.5em]
-&= n^{2} \, a_{0} \, \left[ 1 + \dfrac{1}{2} \left( 1 - \dfrac{\ell (\ell + 1)}{n^{2}} \right) \right]
+D_{n \ell} (r) = r^{2} \, R_{n \ell} (r)
 \end{align*}
-\item La función radial.
+\pause
+proporciona la probabilidad de encontrar un electrón en una cáscara esférica de ancho $\dd{r}$ situada a una distancia $r$
+\end{frame}
+
+\subsection{Valores esperados}
+
+\begin{frame}
+\frametitle{El valor esperado}
+Dado que:
+\pause
+\begin{align*}
+\psi_{n \ell m} (r, \theta, \phi) = R_{n \ell} \, Y_{\ell}^{m} (\theta, \phi)
+\end{align*}
+\pause
+se comprueba que el valor esperado de $r^{k}$ es independiente del número cuántico azimutal $m$:
+\end{frame}
+\begin{frame}
+\frametitle{El valor esperado}
+Es decir:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+&\expval{r^{k}} = \pause \expval{r^{k}}{n \ell m} = \\[0.5em]
+&= \scaleint{6ex} r^{k} \, \abs{\psi_{n \ell m} (r, \theta, \phi)}^{2} \, r^{2} \, \sin \theta \dd{r} \dd{\theta} \dd{\phi} = \\[0.5em] \pause
+&= \scaleint{6ex} r^{k+2} \, \abs{R_{n \ell} (r) }^ {2} \, \scaleint{6ex}_{\bs 0}^{2 \pi} \sin \theta \dd{\theta} \times \\[0.5em] 
+&\times \scaleint{6ex}_{\bs 0}^{\pi} \psi_{n \ell m}^{*} (r, \theta, \phi) \, \psi_{n \ell m} (r, \theta, \phi) \dd{\phi}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{El valor esperado}
+Entonces se tiene que:
+\pause
+\begin{align*}
+\expval{r^{k}} = \scaleint{6ex}_{\bs 0}^{\infty} r^{k+2} \, \abs{R_{n \ell} (r)}^{2} \dd{r}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Valores esperados}
+Ocupando las propiedades de los polinomios de Laguerre, se puede demostrar que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\expval{r} &= \dfrac{1}{2} \big[ 3 n^{2} - \ell (\ell + 1) \big] \, a_{0} \\[0.5em] \pause
+\expval{r^{2}} &= \dfrac{1}{2} \, n^{2} \big[ 5 n^{2} + 1 -  3 \, \ell (\ell + 1) \big] \, a_{0}^{ {2}} \\[0.5em] \pause
+\expval{r^{-1}} &= \dfrac{1}{n^{2} \, a_{0}} \\[0.5em] \pause
+\expval{r^{-2}} &= \dfrac{2}{n^{3} \, (2 \, \ell + 1) a_{0}^{2}}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{\texorpdfstring{$D_{n \ell} (r)$}{Dnl (r)} para orbitales}
+
+\begin{frame}
+\frametitle{Graficando $R_{n \ell}$ y $D_{n \ell} (r)$}
+A continuación se presentan las gráficas tanto de la función radial, como de la densidad de probabilidad para distintos orbitales.
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{10} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_10_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{10} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_10_02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{20} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_20_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{20} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_20_02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{30} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_30_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{30} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_30_02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{31} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_31_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{30} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_31_02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{32} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_32_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{La función $R_{32} (r)$}
+\begin{figure}
+   \centering
+   \includegraphics[scale=1]{Imagenes/Plot_Funcion_Radial_Hidrogeno_32_02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Sobre la densidad de probabilidad}
+\setbeamercolor{item projected}{bg=black,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item $D_{n \ell} (0) = 0$ debido al término en $r^{2}$: \pause la densidad de probabilidad de encontrar el electrón es nula.
+\seti
 \end{enumerate}
 \end{frame}
 \begin{frame}
-\frametitle{La función $R_{10}$}
+\frametitle{Sobre la densidad de probabilidad}
+\setbeamercolor{item projected}{bg=black,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item $D_{n \ell} (r \to \infty) = 0$ \pause pues domina el término exponencial de $R_{n \ell} (r)$.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Sobre la densidad de probabilidad}
+\setbeamercolor{item projected}{bg=black,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item $D_{n \ell} (r)$ se hace máxima para ciertos valores de $r$.
+\\
+\bigskip
+\pause
+En particular, se puede demostrar que:
 \begin{align*}
-R_{10} = 2 \, a^{-3/2} \, \exp(-\dfrac{r}{a})
+r_{\max} (D_{n, \ell=n-1}) = n^{2} \, a_{0}
 \end{align*}
 \pause
-\vspace*{-0.5cm}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.65]{Imagenes/Plot_Funcion_Radial_10.eps}
-\end{figure}
+De manera que el radio de Bohr da la posición del máximo para la densidad de probabilidad radial para el orbital con $\ell = \ell_{\max} = n - 1$
+\end{enumerate}
 \end{frame}
 \begin{frame}
-\frametitle{La función $R_{20}$}
-\begin{align*}
-R_{20} = \dfrac{1}{\sqrt{2}} \, a^{-3/2} \, \left( 1 - \dfrac{1}{2} \, \dfrac{r}{a} \right)\exp(-\dfrac{r}{2a})
-\end{align*}
+\frametitle{De la normalización}
+De la condición de normalización, se cumple que:
 \pause
-\vspace*{-0.5cm}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.67]{Imagenes/Plot_Funcion_Radial_20.eps}
-\end{figure}
-\end{frame}
-\begin{frame}
-\frametitle{La función $R_{21}$}
 \begin{align*}
-R_{21} = \dfrac{1}{\sqrt{24}} \, a^{-3/2} \, \dfrac{r}{a} \, \exp(-\dfrac{r}{2a})
+\scaleint{6ex}_{\bs r=0}^{\infty} D_{n \ell} (r) \dd{r} = 1
 \end{align*}
-\pause
-\vspace*{-0.5cm}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.67]{Imagenes/Plot_Funcion_Radial_21.eps}
-\end{figure}
 \end{frame}
-\begin{frame}
-\frametitle{La función $R_{30}$}
-\begin{align*}
-R_{30} = \dfrac{2}{\sqrt{27}} \, a^{-3/2} \, \left[ 1 {-} \dfrac{2}{3} \, \dfrac{r}{a} {+} \dfrac{2}{27} \, \left( \dfrac{r}{a} \right)^{2} \right] \, \exp(-\dfrac{r}{3a})
-\end{align*}
-\pause
-\vspace*{-0.5cm}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.67]{Imagenes/Plot_Funcion_Radial_30.eps}
-\end{figure}
-\end{frame}
-\begin{frame}
-   \frametitle{La función $R_{31}$}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.67]{Imagenes/Plot_Funcion_Radial_31.eps}
-\end{figure}
-\end{frame}
-\begin{frame}
-\frametitle{La función $R_{32}$}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.67]{Imagenes/Plot_Funcion_Radial_32.eps}
-\end{figure}
-\end{frame}
-\begin{frame}
-\frametitle{La función $R_{40}$}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.67]{Imagenes/Plot_Funcion_Radial_40.eps}
-\end{figure}
-\end{frame}
-\begin{frame}
-\frametitle{La función $R_{41}$}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.67]{Imagenes/Plot_Funcion_Radial_41.eps}
-\end{figure}
-\end{frame}
-\begin{frame}
-\frametitle{La función $R_{42}$}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.67]{Imagenes/Plot_Funcion_Radial_42.eps}
-\end{figure}
-\end{frame}
-\begin{frame}
-\frametitle{La función $R_{43}$}
-\begin{figure}
-   \centering
-   \includegraphics[scale=0.67]{Imagenes/Plot_Funcion_Radial_43.eps}
-\end{figure}
-\end{frame}
-    
 \end{document}
