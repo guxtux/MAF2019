@@ -89,10 +89,10 @@ Al resolver la constante de normalización, tenemos que con el operador de ascen
 \end{frame}
 \begin{frame}
 \frametitle{El operador de ascenso}
-El operador de ascenso está dado por:
+El operador de ascenso (descenso) está dado por:
 \pause
 \begin{align*}
-a_{\pm} = \dfrac{1}{\sqrt{2 \hbar m \omega}} \, \bigg( \hbar \, \dv{x} + m \, \omega \, x \bigg)
+a_{\pm} = \dfrac{1}{\sqrt{2 \hbar m \omega}} \, \bigg( \mp \hbar \, \dv{x} + m \, \omega \, x \bigg)
 \end{align*}
 \pause
 De tal manera que contamos con los elementos para resolver el inciso que se nos pide.
@@ -131,12 +131,12 @@ a_{+} \psi_{0} = \dfrac{1}{\sqrt{2 \hbar m \omega}} \bigg( \dfrac{m \omega}{\pi 
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Elevando al cuadrado el operador de ascenso}
-Tenemos que tomar el cuadrado del operador de ascenso, así que:
+\frametitle{Diferenciado para obtener $(a_{+})^{2}$}
+Tenemos que diferenciar nuevamente, así que:
 \pause
 \begin{align*}
-&(a_{+})^{2} \psi_{0} = \dfrac{1}{2 \hbar m \omega} \bigg( \dfrac{m \omega}{\pi \hbar} \bigg)^{\frac{1}{4}} \, 2 m \omega x \bigg( \hbar \, \dv{x} + m \, \omega \, x \bigg) \times \\[0.5em]
-&\times \exp\bigg(- \dfrac{m \omega}{2 \hbar} x^{2} \bigg)
+&(a_{+})^{2} \psi_{0} = \dfrac{1}{2 \hbar m \omega} \bigg( \dfrac{m \omega}{\pi \hbar} \bigg)^{\frac{1}{4}} \, 2 m \omega \times \\[0.5em]
+&\times \bigg( \hbar \, \dv{x} + m \, \omega \, x \bigg) \bigg[ x \, \exp\bigg(- \dfrac{m \omega}{2 \hbar} x^{2} \bigg) \bigg] =
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -144,7 +144,7 @@ Tenemos que tomar el cuadrado del operador de ascenso, así que:
 Al resolver la parte de diferenciación y producto, tendremos:
 \pause
 \begin{align*}
-&(a_{+})^{2} \psi_{0} = \dfrac{1}{\hbar} \bigg( \dfrac{m \omega}{\pi \hbar} \bigg)^{\frac{1}{4}} \bigg[ - \hbar \bigg( 1 - x \dfrac{m \omega}{2 \hbar} \bigg) + m \omega x^{2} \bigg] \times \\[0.5em]
+&(a_{+})^{2} \psi_{0} = \dfrac{1}{\hbar} \bigg( \dfrac{m \omega}{\pi \hbar} \bigg)^{\frac{1}{4}} \bigg[ - \hbar \bigg( 1 {-} x \dfrac{m \omega}{2 \hbar} \, 2 x \bigg) {+} m \omega x^{2} \bigg] \times \\[0.5em]
 &\times \exp\bigg(- \dfrac{m \omega}{2 \hbar} x^{2} \bigg)
 \end{align*}
 \end{frame}
@@ -321,8 +321,8 @@ De tal manera que los estados para el oscilador armónico, que señala el enunci
 El valor esperado se encuentra al resolver:
 \begin{eqnarray*}
 \begin{aligned}
-\expval{x^{2}} &= \alpha^{2} \scaleint{6ex}_{\bs \-\infty}^{\infty} x^{2} \xi \, \exp\bigg( - \dfrac{\xi^{2}}{2} \bigg) \dd{x} \\[0.5em] \pause
-&= \alpha^{2} \bigg( \dfrac{\hbar}{m \omega} \bigg) \scaleint{6ex}_{\bs -\infty}^{\infty} \xi^{2} \, \exp\big( - \xi^{2} \big) \dd{x} \\[0.5em] \pause
+\expval{x^{2}} &= \alpha^{2} \scaleint{6ex}_{\bs -\infty}^{\infty} x^{2} \xi \, \exp\bigg( - \dfrac{\xi^{2}}{2} \bigg) \dd{x} \\[0.5em] \pause
+&= \alpha^{2} \bigg( \dfrac{\hbar}{m \omega} \bigg) \scaleint{6ex}_{\bs -\infty}^{\infty} \xi^{2} \, \exp\big( - \xi^{2} \big) \dd{\xi} \\[0.5em] \pause
 &= \dfrac{1}{\sqrt{\pi}} \bigg( \dfrac{\hbar}{m \omega} \bigg) = \pause \dfrac{\hbar}{2 m \omega}
 \end{aligned}
 \end{eqnarray*}
@@ -333,9 +333,19 @@ Ahora para el valor esperado $p^{2}$ en el estado $n = 0$:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-\expval{p^{2}} &= \pause \scaleint{6ex} \psi_{0} \bigg( \dfrac{h}{i} \dv{x} \bigg)^{2} \, \psi_{0} \dd{x} = \\[0.5em] \pause
-&= - \hbar^{2} \, \alpha^{2} \sqrt{\dfrac{m \omega}{\hbar}} \scaleint{6ex}_{\bs - \infty}^{\infty} \exp \bigg( - \dfrac{\xi^{2}}{2} \bigg) \dd{x} = \\[0.5em] \pause
-&= - \dfrac{m \hbar \omega}{\sqrt{\pi}} \bigg( \dfrac{\sqrt{\pi}}{2} - \sqrt{\pi} \bigg) = \pause \dfrac{m \hbar \omega}{2}
+&\expval{p^{2}} = \pause \scaleint{6ex} \psi_{0} \bigg( \dfrac{h}{i} \dv{x} \bigg)^{2} \, \psi_{0} \dd{x} = \\[0.5em] \pause
+&= - \hbar^{2} \, \alpha^{2} \sqrt{\dfrac{m \omega}{\hbar}} \scaleint{6ex}_{\bs - \infty}^{\infty} \exp\bigg( \!\!- \dfrac{\xi^{2}}{2} \bigg) \bigg[ \dv[2]{\xi} \exp\bigg( \!\! - \dfrac{\xi^{2}}{2} \bigg) \bigg]  \dd{\xi} =
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Con $n = 0$, el valor esperado $\expval{p^{2}}$}
+\pause
+\begin{eqnarray*}
+\begin{aligned}  
+&\expval{p^{2}} = - \dfrac{m \hbar \omega}{\sqrt{\pi}} \scaleint{6ex}_{\infty}^{\infty} (\xi^{2} - 1) \exp\bigg( \!\! - \dfrac{\xi^{2}}{2} \bigg) = \\[0.5em] \pause
+&= - \dfrac{m \hbar \omega}{\sqrt{\pi}} \bigg( \dfrac{\sqrt{\pi}}{2} - \sqrt{\pi} \bigg) = \\[0.5em] \pause
+&= \dfrac{m \hbar \omega}{2}
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
@@ -344,20 +354,20 @@ Ahora para el valor esperado $p^{2}$ en el estado $n = 0$:
 El valor esperado se encuentra al resolver:
 \begin{eqnarray*}
 \begin{aligned}
-\expval{x^{2}} &= 2 \alpha^{2} \scaleint{6ex}_{\bs \-\infty}^{\infty} x^{2} \xi^{2} \, \exp\big( - \xi \big) \dd{x} \\[0.5em] \pause
-&= 2 \alpha^{2} \bigg( \dfrac{\hbar}{m \omega} \bigg)^{\frac{3}{2}} \scaleint{6ex}_{\bs -\infty}^{\infty} \xi^{4} \, \exp\big( - \xi^{2} \big) \dd{x} \\[0.5em] \pause
+\expval{x^{2}} &= 2 \alpha^{2} \scaleint{6ex}_{\bs -\infty}^{\infty} x^{2} \xi^{2} \, \exp\big( \!\! - \xi \big) \dd{x} \\[0.5em] \pause
+&= 2 \alpha^{2} \bigg( \dfrac{\hbar}{m \omega} \bigg)^{\frac{3}{2}} \scaleint{6ex}_{\bs -\infty}^{\infty} \xi^{4} \, \exp\big( \!\! - \xi^{2} \big) \dd{\xi} \\[0.5em] \pause
 &= \dfrac{2 \hbar}{\sqrt{\pi} m \omega} \, \dfrac{3 \sqrt{\pi}}{4} = \pause \dfrac{3 \hbar}{2 m \omega}
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Con $n = 1$, el valor esperado $\expval{p^{2}}$}
-Ahora para el valor esperado $p^{2}$ en el estado $n = 1$:
+Ahora para el valor esperado $\expval{p^{2}}$ en el estado $n = 1$:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-\expval{p^{2}} &= - \hbar^{2} \, 2 \, \alpha^{2} \sqrt{\dfrac{m \omega}{\hbar}} \scaleint{6ex}_{\bs - \infty}^{\infty} \exp \bigg( - \dfrac{\xi^{2}}{2} \bigg) \times \\[0.5em]
-&\times \bigg[ \dv[2]{\xi} (\xi \exp\bigg( - \dfrac{\xi^{2}}{2} \bigg)) \bigg]  \dd{x} =
+\expval{p^{2}} &= - \hbar^{2} \, 2 \, \alpha^{2} \sqrt{\dfrac{m \omega}{\hbar}} \scaleint{6ex}_{\bs - \infty}^{\infty} \xi \, \exp \bigg(\!\! - \dfrac{\xi^{2}}{2} \bigg) \times \\[0.5em]
+&\times \bigg[ \dv[2]{\xi} (\xi \exp\bigg( \!\! - \dfrac{\xi^{2}}{2} \bigg)) \bigg] \dd{\xi} =
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
@@ -402,15 +412,16 @@ Con el caso $n = 0$, calculamos los valores de $\sigma_{x}$ y $\sigma_{p}$, que 
 \frametitle{El valor del producto}
 Con $n = 0$, se tiene entonces que:
 \pause
-\begin{align*}
+\begin{eqnarray*}
 \sigma_{x} \, \sigma_{p} = \pause \sqrt{\dfrac{\hbar}{2 m \omega}} \, \sqrt{\dfrac{m \hbar \omega}{2}} = \pause \dfrac{\hbar}{2}
-\end{align*}
+\end{eqnarray*}
 \pause
 Que es correcto en el límite del principio de incertidumbre.
 \end{frame}
 \begin{frame}
 \frametitle{Calculando las desviaciones estándar}
 Con el caso $n = 1$, calculamos los valores de $\sigma_{x}$ y $\sigma_{p}$:
+\pause
 \begin{eqnarray*}
 \begin{aligned}
 \sigma_{x} &= \pause \sqrt{\dfrac{3 \hbar}{2 m \omega}} \\[0.5em] \pause
@@ -422,10 +433,12 @@ Con el caso $n = 1$, calculamos los valores de $\sigma_{x}$ y $\sigma_{p}$:
 \frametitle{El valor del producto}
 Con $n = 1$, se tiene entonces que:
 \pause
-\begin{align*}
+\begin{eqnarray*}
+\begin{aligned}
 \sigma_{x} \, \sigma_{p} &= \pause \sqrt{\dfrac{3 \hbar}{2 m \omega}} \, \sqrt{\dfrac{3 m \hbar \omega}{2}} = \\[0.5em] \pause
 &= \dfrac{3 \hbar}{2} > \dfrac{\hbar}{2}
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \pause
 Cumpliéndose el principio de incertidumbre.
 \end{frame}
@@ -440,7 +453,7 @@ Cumpliéndose el principio de incertidumbre.
 De las propiedades para los polinomios de Hermite $H_{n} (x)$, la fórmula de Rodrigues establece que:
 \pause
 \begin{align*}
-H_{n} (x) = (-1)^{n} \exp\big( x^{2} \big) \dv[n]{x} \exp\big( x^{2} \big)
+H_{n} (x) = (-1)^{n} \exp\big( x^{2} \big) \dv[n]{x} \exp\big( - x^{2} \big)
 \end{align*}
 \pause
 Demostremos este resultado.
@@ -450,7 +463,7 @@ Demostremos este resultado.
 De manera conveniente, hagamos el siguiente cambio de variable:
 \pause
 \begin{align*}
-u =  \exp\big( x^{2} \big)
+u =  \exp\big( - x^{2} \big)
 \end{align*}
 \pause
 para diferenciar con respecto a $x$, de tal modo que:
@@ -464,8 +477,9 @@ para diferenciar con respecto a $x$, de tal modo que:
 Si diferenciamos esta ecuación $n + 1$ veces, tendremos que:
 \pause
 \begin{align*}
-u^{(n+2)} + 2 \, x \, u^{(n+1)} +  2 \, (n + 1) \, u^{n} = 0
+u^{(n+2)} + 2 \, x \, u^{(n+1)} +  2 \, (n + 1) \, u^{(n)} = 0
 \end{align*}
+el término entre los paréntesis indica el orden de la derivada de $u$.
 \end{frame}
 \begin{frame}
 \frametitle{Otro cambio de variable}
@@ -478,7 +492,7 @@ v = (-1)^{n} \, u^{(n)}
 con este cambio, la expresión es:
 \pause
 \begin{align}
-\sderivada{v} + 2 \, x \, v + 2 (n + 1) \, v = 0
+\sderivada{v} + 2 \, x \, \pderivada{v} + 2 (n + 1) \, v = 0
 \label{eq:ecuacion_18_131}
 \end{align}
 \end{frame}
@@ -530,13 +544,13 @@ Usando la fórmula de Rodrigues, calcula $H_{3} (x)$ y $H_{4} (x)$
 \end{frame}
 \begin{frame}
 \frametitle{Calculando las derivadas}
-De acuerdo a la fórmula de Rodrigues, \pause se requiere calcular hasta la derivada de orden cuarto de $\exp\big( x^{2} \big)$:
+De acuerdo a la fórmula de Rodrigues, \pause se requiere calcular hasta la derivada de orden cuarto de $\exp\big(- x^{2} \big)$:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-\dv{x} \bigg( \exp\big( - x^{2} \big) \bigg) &= - 2 \, x \, \exp\big( x^{2} \big) \\[0.5em] \pause
-\dv[2]{x} \exp\big( - x^{2} \big) &= \dv{x} \bigg[ - 2 \, x \, \exp\big( x^{2} \big) \bigg] \\[0.5em] \pause
-&= \big( -2 + 4 \, x^{2} \big) \exp\big( x^{2} \big)
+\dv{x} \bigg( \exp\big( - x^{2} \big) \bigg) &= - 2 \, x \, \exp\big( - x^{2} \big) \\[0.5em] \pause
+\dv[2]{x} \exp\big( - x^{2} \big) &= \dv{x} \bigg[ - 2 \, x \, \exp\big( - x^{2} \big) \bigg] \\[0.5em] \pause
+&= \big( -2 + 4 \, x^{2} \big) \exp\big( - x^{2} \big)
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
@@ -544,7 +558,7 @@ De acuerdo a la fórmula de Rodrigues, \pause se requiere calcular hasta la deri
 \frametitle{Calculando las derivadas}
 \begin{eqnarray*}
 \begin{aligned}
-&\dv[3]{x} \exp\big( - x^{2} \big) = \dv{x} \bigg[ \big( -2 + 4 \, x^{2} \big) \exp\big( x^{2} \big) \bigg] = \\[0.5em] \pause
+&\dv[3]{x} \exp\big( - x^{2} \big) = \dv{x} \bigg[ \big( -2 + 4 \, x^{2} \big) \exp\big( - x^{2} \big) \bigg] = \\[0.5em] \pause
 &= \bigg[ 8 \, x + (-2 + 4 \, x^{2})(- 2 \, x) \bigg] \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
 &= (12 \, x - 8 \, x^{3}) \, \exp\big( - x^{2} \big)
 \end{aligned}
@@ -556,7 +570,7 @@ De acuerdo a la fórmula de Rodrigues, \pause se requiere calcular hasta la deri
 \begin{aligned}
 &\dv[4]{x} \exp\big( - x^{2} \big) = \dv{x} \bigg[ (12 \, x - 8 \, x^{3}) \, \exp\big( - x^{2} \big) \bigg] = \\[0.5em] \pause
 &= \bigg[ 12 - 24 \, x^{2} + (12 \, x - 8 \, x^{3}) (-2 \, x) \bigg] \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
-&= (12 \, 48 \, x^{2} + 16 \, x^{4}) \, \exp\big( - x^{2} \big)
+&= (12 - 48 \, x^{2} + 16 \, x^{4}) \, \exp\big( - x^{2} \big)
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
@@ -566,7 +580,7 @@ Entonces para el polinomio de Hermite de orden 3 a partir de la fórmula de Rodr
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-H_{3} (x) &= (-1)^{3} \exp\big( x^{2} \big) \dv[3]{x} \exp\big( x^{2} \big) = \\[0.5em] \pause
+H_{3} (x) &= (-1)^{3} \exp\big( x^{2} \big) \dv[3]{x} \exp\big( - x^{2} \big) = \\[0.5em] \pause
 &= - \exp\big( x^{2} \big) \, (12 \, x - 8 \, x^{3}) \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
 &= - 12 \, x + 8 \, x^{3}
 \end{aligned}
@@ -578,8 +592,8 @@ Entonces para el polinomio de Hermite de orden 4 a partir de la fórmula de Rodr
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-H_{4} (x) &= (-1)^{4} \exp\big( x^{2} \big) \dv[4]{x} \exp\big( x^{2} \big) = \\[0.5em] \pause
-&= \exp\big( x^{2} \big) \, (12 \, 48 \, x^{2} + 16 \, x^{4}) \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
+H_{4} (x) &= (-1)^{4} \exp\big( x^{2} \big) \dv[4]{x} \exp\big( - x^{2} \big) = \\[0.5em] \pause
+&= \exp\big( x^{2} \big) \, (12 - 48 \, x^{2} + 16 \, x^{4}) \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
 &= 12 - 48 \, x^{2} + 16 \, x^{4}
 \end{aligned}
 \end{eqnarray*}

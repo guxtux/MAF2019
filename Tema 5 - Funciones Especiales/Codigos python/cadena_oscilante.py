@@ -62,6 +62,7 @@ def animate(i):
     line.set_data(x, z)
     return line,
 
+print(len(animate))
 
 # Configuracion de la animacion
 anim = animation.FuncAnimation(fig, animate, frames=10*nframes, init_func=init, interval=interval)
@@ -76,4 +77,4 @@ writer = animation.writers['ffmpeg'](fps=30)
 
 # Se guarda la animacion en un archivo mp4
 
-anim.save('cadena_m{}.mp4'.format(mode), writer=writer, dpi=100)
+#anim.save('cadena_m{}.mp4'.format(mode), writer=writer, dpi=100)

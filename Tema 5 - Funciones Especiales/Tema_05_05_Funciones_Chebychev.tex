@@ -9,19 +9,19 @@
 \fontsize{14}{14}\selectfont
 \tableofcontents
 \newpage
+
 %Referencia Riley 18.4 Chebyshev functions
 \section{Funciones de Chebyshev.}
 
-
 La ecuación diferencial de Chebyshev tiene la forma:
 \begin{align}
-(1 - x^{2}) \, \stilde{y} - x \, \ptilde{y} + \nu^{2} \, y
+(1 - x^{2}) \, \sderivada{y} - x \, \pderivada{y} + \nu^{2} \, y
  = 0
  \label{eq:ecuacion_18_054}
 \end{align}
 y tiene tres puntos singulares regulares, en $x = -1, 1, \infty$. Al comparar la ecuación con:
 \begin{align*}
-(1 - x^{2}) \, \stilde{y} - x \, \ptilde{y} + \ell (\ell + 1) \, y = 0
+(1 - x^{2}) \, \sderivada{y} - x \, \pderivada{y} + \ell (\ell + 1) \, y = 0
 \end{align*}
 vemos que la ecuación de Chebyshev es muy similar en forma a la ecuación de Legendre. A pesar de esta similitud, la ecuación (\ref{eq:ecuacion_18_054}) no se presenta con mucha frecuencia en problemas físicos, aunque \emph{sus soluciones son de considerable importancia en el análisis numérico}.
 \par
@@ -256,8 +256,8 @@ T_{n} (x) &= U_{n}(x) - x \, U_{n-1} (x) \label{eq:ecuacion_18_071} \\[0.5em]
 \end{align}
 que establecen relaciones útiles entre los dos conjuntos de polinomios $T_{n} (x)$ y $U_{n} (x)$. La relación (\ref{eq:ecuacion_18_071}) se sigue inmediatamente de (\ref{eq:ecuacion_18_068}), mientras que la ec. (\ref{eq:ecuacion_18_072}) se sigue de la ec. (\ref{eq:ecuacion_18_067}), con $n$ reemplazado por $n + 1$, al observar que $\sin \theta = 1 - x^{2}$. Pueden obtenerse resultados útiles adicionales relacionados con los derivadas de los polinomios de Chebyshev a partir de las ecs. (\ref{eq:ecuacion_18_065}) y (\ref{eq:ecuacion_18_066}):
 \begin{align*}
-\ptilde{T}_{n} (x) &= n \, U_{n-1} (x) \\[0.5em]
-(1 - x^{2}) \, \ptilde{U}_{n} (x) &= x \, U_{n} (x) - (n + 1) \, T_{n+1} (x)
+\pderivada{T}_{n} (x) &= n \, U_{n-1} (x) \\[0.5em]
+(1 - x^{2}) \, \pderivada{U}_{n} (x) &= x \, U_{n} (x) - (n + 1) \, T_{n+1} (x)
 \end{align*}
 
 \section{Minimizando el error de interpolación.}
@@ -444,7 +444,7 @@ Proyectando a lo largo del dicho segmento el punto medio de cada partición de l
 
 La razón por la cual la aproximación de una función $f(x)$ por un polinomio que interpole puntos escogidos de esta forma minimiza el efecto Runge es que la densidad de puntos resulta creciente desde el centro hasta los extremos.
 \par
-Para calcular dichas raices utiliza la identidad trigonométrica del polinomio de Chebyshev:
+Para calcular dichas raíces utiliza la identidad trigonométrica del polinomio de Chebyshev:
 
 La razón por la cual la aproximación de una función $f(x)$ por un polinomio que interpole puntos escogidos de esta forma minimiza el efecto Runge es que la densidad de puntos resulta creciente desde el centro hasta las extremidades.
 \par
@@ -665,34 +665,34 @@ Un inconveniente considerable de dicho método es que si queremos añadir más p
 \par
 Con un algoritmo en \texttt{python}, se simplifica esta tarea ya que el cálculo se realiza nuevamente al modificar el número de puntos $n$, las demás tareas ya quedan establecidas en funciones que se mandan llamar.
 
-\section{Ejercicios a cuenta.}
+% \section{Ejercicios a cuenta.}
 
-%ref. Arfken (2006) 13.3.4
-\noindent
-\textbf{Ejercicio a cuenta (51). } Demuestra que:
-\begin{align*}
-W_{n}(x) = (1 -x^{2})^{-\frac{1}{2}} \, T_{n+1}(x)
-\end{align*}
-es solución de la EDO:
-\begin{align*}
-(1 -x^{2}) \sderivada{W}_{n}(x) - 3 \, x \, \pderivada{W}_{n}(x) + n (n + 2) \, W_{n}(x) = 0
-\end{align*}
-\\[1em]
+% %ref. Arfken (2006) 13.3.4
+% \noindent
+% \textbf{Ejercicio a cuenta (51). } Demuestra que:
+% \begin{align*}
+% W_{n}(x) = (1 -x^{2})^{-\frac{1}{2}} \, T_{n+1}(x)
+% \end{align*}
+% es solución de la EDO:
+% \begin{align*}
+% (1 -x^{2}) \sderivada{W}_{n}(x) - 3 \, x \, \pderivada{W}_{n}(x) + n (n + 2) \, W_{n}(x) = 0
+% \end{align*}
+%\\[1em]
 %ref. Arfken (2006) 13.3.14
-\noindent
-\textbf{Ejercicio a cuenta (52). } Evalúa la integral:
-\begin{align*}
-I_{mn} = \scaleint{6ex}_{\bs -1}^{1} x^{m} \, T_{n}(x) \dfrac{\dd{x}}{\sqrt{1 - x^{2}}}
-\end{align*}
-para $m \geq n$ y $m + n$ par, ocupando los siguientes dos métodos:
-\begin{enumerate}[label=\alph*)]
-\item Ocupa $x$ como variable y cambia $T_{n}$ por su representación de la fórmula de Rodrigues.
-\item Utilizando $x = \cos \theta$ cambia la integral a una forma con $\theta$ como variable.
-\end{enumerate}
-Demuestra que se obtiene:
-\begin{align*}
-I_{mn} = \pi \, \dfrac{m!}{(m - n)!} \, \dfrac{(m - n - 1)!!}{(m + n)!!} \hspace{1.5cm} m \geq n, \hspace{1.5cm} m + n \mbox{ par}
-\end{align*}
-Como comentario adicional: la integral \emph{se anula} cuando $m < n$ y cuando $m + n$ es impar.
+% \noindent
+% \textbf{Ejercicio a cuenta (52). } Evalúa la integral:
+% \begin{align*}
+% I_{mn} = \scaleint{6ex}_{\bs -1}^{1} x^{m} \, T_{n}(x) \dfrac{\dd{x}}{\sqrt{1 - x^{2}}}
+% \end{align*}
+% para $m \geq n$ y $m + n$ par, ocupando los siguientes dos métodos:
+% \begin{enumerate}[label=\alph*)]
+% \item Ocupa $x$ como variable y cambia $T_{n}$ por su representación de la fórmula de Rodrigues.
+% \item Utilizando $x = \cos \theta$ cambia la integral a una forma con $\theta$ como variable.
+% \end{enumerate}
+% Demuestra que se obtiene:
+% \begin{align*}
+% I_{mn} = \pi \, \dfrac{m!}{(m - n)!} \, \dfrac{(m - n - 1)!!}{(m + n)!!} \hspace{1.5cm} m \geq n, \hspace{1.5cm} m + n \mbox{ par}
+% \end{align*}
+% Como comentario adicional: la integral \emph{se anula} cuando $m < n$ y cuando $m + n$ es impar.
 
 \end{document}
