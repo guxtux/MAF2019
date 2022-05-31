@@ -1,0 +1,115 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\usepackage[absolute, overlay]{textpos}
+\usepackage{../Estilos/ColoresLatex}
+\input{../Preambulos/preambulo_Beamer_Antibes_beaver}
+
+\setbeamercolor{section in foot}{bg=amethyst, fg=white}
+\setbeamercolor{subsection in foot}{bg=almond, fg=black}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+  \usebeamerfont{section in foot} \insertsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+  \usebeamerfont{subsection in foot}  \insertsubsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{1.5em}
+  \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+\end{beamercolorbox}}%
+\vskip0pt%
+}
+\makeatother
+\usefonttheme{serif}
+\setbeamercolor{frametitle}{bg=champagne}
+\resetcounteronoverlays{saveenumi}
+
+\date{31 de mayo de 2022}
+
+\title{\large{Transformada de Fourier - Ejercicios}}
+\subtitle{Matemáticas Avanzadas de la Física}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideallsubsections]}
+
+\section{La Transformada de Fourier}
+\frame[allowframebreaks]{\frametitle{Contenido}\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicios}
+
+%Ref. Patra (2018) . Example 1.4
+\begin{frame}
+\frametitle{Enunciado}
+Calcula la función cuya Transformada coseno de Fourier es:
+\pause
+\begin{align*}
+\sqrt{\dfrac{2}{\pi}} \, \dfrac{\sin a \, \xi}{\xi}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución}
+Sabemos que la transformada coseno de Fourier es:
+\pause
+\begin{align*}
+F_{c} \big[ f (x); x \to \xi \big] = \sqrt{\dfrac{2}{\pi}} \, \dfrac{\sin a \, \xi}{\xi}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando la TCIF}
+La Transformada Coseno Inversa de Fourier (TCIF), está dada por la expresión:
+\pause
+\begin{align*}
+f (x) = \sqrt{\dfrac{2}{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} F_{c} (\xi) \, \cos \xi \, x \dd{\xi}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando la TCIF}
+Entonces por la definición anterior:
+\pause
+\begin{align*}
+f (x) = \dfrac{2}{\pi} \scaleint{6ex}_{\bs 0}^{\infty} \dfrac{\sin a \, \xi}{\xi} \, \cos \xi \, x \dd{\xi}
+\end{align*}
+\pause
+Ahora tendremos que hacer uso extensivo de nuestras habilidades en el álgebra e integración para resolver la expresión.
+\end{frame}
+\begin{frame}
+\frametitle{Identidad trigonométrica}
+Usamos una identidad trigonométrica del producto:
+\pause
+\begin{align*}
+\sin x \, \cos y = \dfrac{\sin (x + y) + \sin (x - y)}{2}
+\end{align*}
+\pause
+Tenemos entonces que:
+\begin{eqnarray*}
+\begin{aligned}
+\sin a \, \xi \, \cos \xi \, x &= \dfrac{\sin \big[ a \xi + \xi x \big] + \sin \big[ a \xi - \xi x \big]}{2} = \\[0.5em] \pause
+&= \dfrac{\sin \big[ \xi (a + x) \big] + \sin \big[ \xi (a - x) \big]}{2}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Ajuste en la expresión}
+Ahora la TCIF es:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+f (x) &= \dfrac{1}{\pi} \scaleint{6ex}_{\bs 0}^{\infty} \dfrac{1}{\xi} \, \sin \big[ \xi (a + x) \big] + \sin \big[ \xi (a - x) \big] \dd{\xi} = \\[0.5em] \pause
+&= \dfrac{1}{\pi} \bigg[ \scaleint{6ex}_{\bs 0}^{\infty} \dfrac{\sin \big[ \xi (a + x) \big]}{\xi} \dd{x} + \\[0.5em] 
+&+ \scaleint{6ex}_{\bs 0}^{\infty} \dfrac{\sin \big[ \xi (a - x) \big]}{\xi} \dd{x} \bigg] =
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+
+\end{document}
