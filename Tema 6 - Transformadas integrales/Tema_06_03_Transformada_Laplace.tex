@@ -10,118 +10,119 @@
 \tableofcontents
 \newpage
 
+%Ref. Patra (2018) Chap. 3 The Laplace Transfom
 \section{Introducción.}
 
 En el material de trabajo sobre la transformada de Fourier, se revisó que si la integral:
 \begin{align*}
-\scaleint{6ex}_{\bs -\infty}^{\infty} \abs{f(t)} \dd{t}
+\scaleint{6ex}_{\bs -\infty}^{\infty} \abs{f (t)} \dd{t}
 \end{align*}
-no converge, la transformada de Fourier $F(\xi)$ no existe para todo valor real de $\xi$. Por ejemplo: si $f(t) = \sin \omega \, t$ que es un real, la $F(\xi)$ no existe. Pero tales situaciones surgen ocasionalmente en la práctica. Para manejar esta situación, consideramos una nueva función $f_{1} (t)$ conectada a $f (t)$ definida por:
+no converge, la transformada de Fourier $F(\xi)$ no existe para todo valor real de $\xi$. Por ejemplo: si $f (t) = \sin \omega \, t$ que es un real, la $F (\xi)$ no existe. Pero tales situaciones surgen ocasionalmente en la práctica. Para manejar esta situación, consideramos una nueva función $f_{1} (t)$ conectada a $f (t)$ definida por:
 \begin{align*}
-f_{1}(t) =  \exp(- \gamma \, t) \, f(t) \, H(t)
+f_{1} (t) =  \exp(- \gamma \, t) \, f (t) \, H (t)
 \end{align*}
-donde $\gamma$ es una constante arbitraria real positiva y $H(t)$ es la función de paso unitario de Heaviside. Claramente se tiene que $f_{1}(t) \in A_{1}(R) \, \forall \, t \in R$ y por lo tanto, la transformada de Fourier de $f_{1}(t)$ existe, ya que:
+donde $\gamma$ es una constante arbitraria real positiva y $H (t)$ es la función de paso unitario de Heaviside. Claramente se tiene que $f_{1} (t) \in A_{1} (R) \, \forall \, t \in R$ y por lo tanto, la transformada de Fourier de $f_{1} (t)$ existe, ya que:
 \begin{align*}
-\scaleint{6ex}_{\bs -\infty}^{+\infty} f_{1} \dd{t} = \scaleint{6ex}_{\bs 0}^{\infty} \exp(-\gamma \, t) \, f(t) \, \dd{t}
+\scaleint{6ex}_{\bs -\infty}^{+\infty} f_{1} \dd{t} = \scaleint{6ex}_{\bs 0}^{\infty} \exp(-\gamma \, t) \, f (t) \, \dd{t}
 \end{align*}
 es convergente. De hecho, en este caso, del teorema de la integral de Fourier:
 \begin{align*}
-f_{1} (t) = \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs -\infty}^{\infty} \exp(-i \, \xi \, t) \dd{\xi} \, \scaleint{6ex}_{\bs -\infty}^{+\infty} f_{1}(u) \, \exp(i \, \xi \, u) \dd{u}
+f_{1} (t) = \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs -\infty}^{\infty} \exp(-i \, \xi \, t) \dd{\xi} \, \scaleint{6ex}_{\bs -\infty}^{+\infty} f_{1} (u) \, \exp(i \, \xi \, u) \dd{u}
 \end{align*}
 implica que:
 \begin{align*}
-f (t) = \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs -\infty}^{\infty} \exp(-i \, \xi \, t) \dd{\xi} \cdot \exp{\gamma \, t} \scaleint{6ex}_{\bs 0}^{+\infty} f(u) \, \exp(- (\gamma - i \, \xi) \, u) \dd{u}
+f (t) = \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs -\infty}^{\infty} \exp(-i \, \xi \, t) \dd{\xi} \cdot \exp{\gamma \, t} \scaleint{6ex}_{\bs 0}^{+\infty} f (u) \, \exp(- (\gamma - i \, \xi) \, u) \dd{u}
 \end{align*}
 Si escribimos $p = - i \, \xi$, la relación anterior puede expresarse como:
 \begin{align}
 \begin{aligned}[b]
-f (t) &= \dfrac{1}{2 \, \pi \, i} \scaleint{6ex}_{\bs \gamma -i \, \infty}^{\gamma + i \, \infty} \exp(p \, t) \bigg[ \scaleint{6ex}_{\bs 0}^{+\infty} f(u) \, \exp(- p \, u) \dd{u} \bigg] \dd{p} = \\[0.5em]
+f (t) &= \dfrac{1}{2 \, \pi \, i} \scaleint{6ex}_{\bs \gamma -i \, \infty}^{\gamma + i \, \infty} \exp(p \, t) \bigg[ \scaleint{6ex}_{\bs 0}^{+\infty} f (u) \, \exp(- p \, u) \dd{u} \bigg] \dd{p} = \\[0.5em]
 &= \dfrac{1}{2 \, \pi \, i} \scaleint{6ex}_{\bs \gamma -i \, \infty}^{\gamma + i \, \infty} \exp(p \, t) \, \overline{f} (p) \dd{p} 
 \end{aligned}
 \label{eq:ecuacion_03_01}
 \end{align}
 donde:
 \begin{align}
-\overline{f} (p) = \scaleint{6ex}_{\bs 0}^{+\infty} f(u) \, \exp(- p \, u) \dd{u}, \hspace{1cm} \Re{p} = \gamma > 0
+\overline{f} (p) = \scaleint{6ex}_{\bs 0}^{+\infty} f (u) \, \exp(- p \, u) \dd{u}, \hspace{1cm} \Re{p} = \gamma > 0
 \label{eq:ecuacion_03_02}
 \end{align}
-Las ecs. (\ref{eq:ecuacion_03_01}) y (\ref{eq:ecuacion_03_02}) constituyen una transformada con $K(p, u) = \exp(- p \, u)$ como núcleo o kernel.
+Las ecs. (\ref{eq:ecuacion_03_01}) y (\ref{eq:ecuacion_03_02}) constituyen una transformada con $K (p, u) = \exp(- p \, u)$ como núcleo o kernel.
 
 \section{Definiciones.}
 
 Definimos la transformada de Laplace de una función continua en tramos de variable real $t$, definida en un semieje $t \geq 0$ como:
 \begin{align}
-L \big[f(t); t \to p\big] = L \big[f(t)\big] = F(p) = \overline{f}(p) = \scaleint{6ex}_{\bs 0}^{\infty} f(t) \, \exp(-p \, t) \dd{t}
+L \big[ f (t); t \to p \big] = L \big[ f (t) \big] = f (p) = \overline{f}(p) = \scaleint{6ex}_{\bs 0}^{\infty} f (t) \, \exp(-p \, t) \dd{t}
 \label{eq:ecuacion_03_03}
 \end{align}
 y la transformada inversa de Laplace se define como:
 \begin{align}
-f(t) = L^{-1} \big[\overline{f}(t); p \to t\big] = L^{-1} \big[F(p)\big] = \dfrac{1}{2 \pi \, i} \scaleint{6ex}_{\bs \gamma-i \infty}^{\gamma+\infty} \exp(p \, t) \, \overline{f} (p) \, \dd{p}
+f (t) = L^{-1} \big[ \overline{f}(t); p \to t \big] = L^{-1} \big[ f (p) \big] = \dfrac{1}{2 \pi \, i} \scaleint{6ex}_{\bs \gamma-i \infty}^{\gamma+\infty} \exp(p \, t) \, \overline{f} (p) \, \dd{p}
 \label{eq:ecuacion_03_04}
 \end{align}
 donde $\gamma = \Re{p} > 0$.
 \\[1em]
 \noindent \textbf{Nota 1: } Algunos autores usan la variable $s$ en lugar de $p$.
 \\
-\textbf{Nota 2: } La función $f(t)$ debe de ser de orden exponencial\footnote{Este concepto se define en el siguiente numeral.} para la existencia de la transformada de Laplace.
+\textbf{Nota 2: } La función $f (t)$ debe de ser de orden exponencial\footnote{Este concepto se define en el siguiente numeral.} para la existencia de la transformada de Laplace.
 \\
 \textbf{Nota 3: } En términos de notación de operadores, la ec. (\ref{eq:ecuacion_03_03}) se expresa como:
 \begin{align}
-L \big[ f(t); t \to p] = \overline{f} (p) \big]
+L \big[  f (t); t \to p] = \overline{f} (p)  \big]
 \label{eq:ecuacion_03_05}
 \end{align}
 y la relación en la ec. (\ref{eq:ecuacion_03_04}) se expresa como:
 \begin{align}
-L^{-1} \big[\overline{f}(p); p \to t \big] = f (t)
+L^{-1} \big[ \overline{f}(p); p \to t  \big] = f (t)
 \label{eq:ecuacion_03_06}
 \end{align}
 Por lo que:
 \begin{align*}
-L^{-1} \big[L(f(t))]\big] = f(t) &= I \big[f(t)\big] \\[0.5em]
+L^{-1} \big[ L(f (t))] \big] = f (t) &= I \big[ f (t) \big] \\[0.5em]
 \Rightarrow \hspace{0.4cm} L^{-1} \, L \equiv I
 \end{align*}
 También se tiene:
 \begin{align*}
-L \big[L^{-1} (\overline{f}(p))]\big] = \overline{f}(p) &= I \big[\overline{f}(p)\big] \\[0.5em]
+L \big[ L^{-1} (\overline{f}(p))] \big] = \overline{f}(p) &= I \big[ \overline{f}(p) \big] \\[0.5em]
 \Rightarrow \hspace{0.4cm} L \, L^{-1} \equiv I
 \end{align*}
 Esto significa que $L^{-1} \, L \equiv L \, L^{-1} \equiv I$, demostrando entonces que esos operadores $L$ y $L^{-1}$ son conmutativos.
 
 \subsection{Condiciones suficientes para la existencia de la transformada de Laplace.}
 
-\noindent \textbf{Teorema: } Si $f(t)$ es una función de algún orden exponencial para un valor de $t$ grande, y es continua en tramos sobre el intervalo $0 \leq t \leq \infty$, entonces la transformada de Laplace de $f(t)$ existe.
+\noindent \textbf{Teorema: } Si $f (t)$ es una función de algún orden exponencial para un valor de $t$ grande, y es continua en tramos sobre el intervalo $0 \leq t \leq \infty$, entonces la transformada de Laplace de $f (t)$ existe.
 \\[0.5em]
-\textbf{Definición: } Se dice que la función $f(t)$ es de \textbf{orden exponencial} conforme $t \to + \infty$ si existen constantes no negativas $M$, $\sigma$ y $t_{0}$ tales que
+\textbf{Definición: } Se dice que la función $f (t)$ es de \textbf{orden exponencial} conforme $t \to + \infty$ si existen constantes no negativas $M$, $\sigma$ y $t_{0}$ tales que
 \begin{align}
-\abs{f(t)} \leq M \; e^{\sigma \, t} \hspace{1cm} \mbox{para } t \geq t_{0}
+\abs{f (t)} \leq M \; e^{\sigma \, t} \hspace{1cm} \mbox{para } t \geq t_{0}
 \label{eq:023}
 \end{align}
 Así, una función es de orden exponencial siempre que su incremento (conforme $t \to + \infty$) no sea más rápido que un múltiplo constante de alguna función exponencial con un exponente lineal. Los valores particulares de $M$, $\sigma$ y $t_{0}$ no son tan importantes; lo importante es que algunos de esos valores existan de tal manera que la condición en (\ref{eq:023}) se satisfaga.
 \par
-La condición en (\ref{eq:023}) simplemente dice que $f(t) / e^{\sigma t}$ se encuentra entre $-M$ y $M$, y es por tanto acotada en su valor para $t$ suficientemente grande. En particular, esto se cumple (con $\sigma = 0$) si $f(t)$ en sí misma está acotada. Por tanto, toda función acotada -tal como $\cos k \, t$ o $\sin k \, t$ - es de orden exponencial.
+La condición en (\ref{eq:023}) simplemente dice que $f (t) / e^{\sigma t}$ se encuentra entre $-M$ y $M$, y es por tanto acotada en su valor para $t$ suficientemente grande. En particular, esto se cumple (con $\sigma = 0$) si $f (t)$ en sí misma está acotada. Por tanto, toda función acotada -tal como $\cos k \, t$ o $\sin k \, t$ - es de orden exponencial.
 \par
-\noindent \textbf{Demostración: } Sea $f(t)$ de orden exponencial $\sigma$ tal que:
+\noindent \textbf{Demostración: } Sea $f (t)$ de orden exponencial $\sigma$ tal que:
 \begin{align*}
-\abs{f(t)} < M \, e^{\sigma t} \hspace{1cm} \mbox{para} t \geq t_{0}
+\abs{f (t)} < M \, e^{\sigma t} \hspace{1cm} \mbox{para} t \geq t_{0}
 \end{align*}
 Entonces se tenemos:
 \begin{align*}
-L \big[f(t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(-p \, t) \, f(t) \dd{t} = \\[0.5em]
-&= \scaleint{6ex}_{\bs 0}^{t_{0}} \exp(-p \, t) \, f(t) \dd{t} + \scaleint{6ex}_{\bs t_{0}}^{\infty} \exp(-p \, t) \, f(t) \dd{t} = \\[0.5em]
+L \big[ f (t); t \to p \big] &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(-p \, t) \, f (t) \dd{t} = \\[0.5em]
+&= \scaleint{6ex}_{\bs 0}^{t_{0}} \exp(-p \, t) \, f (t) \dd{t} + \scaleint{6ex}_{\bs t_{0}}^{\infty} \exp(-p \, t) \, f (t) \dd{t} = \\[0.5em]
 &= I_{1} + I_{2}
 \end{align*}
-Ya que $f(t)$ es una función continua en tramos en cada intervalo finito $0 \leq t \leq t_{0}$, la integral $I_{1}$ existe y es convergente. También se tiene:
+Ya que $f (t)$ es una función continua en tramos en cada intervalo finito $0 \leq t \leq t_{0}$, la integral $I_{1}$ existe y es convergente. También se tiene:
 \begin{align*}
-\abs{I_{2}} &= \abs{\scaleint{6ex}_{\bs t_{0}}^{\infty} e^{- p t} \, f(t) \dd{t}} \leq \\[0.5em]
-&\leq \scaleint{6ex}_{\bs t_{0}}^{\infty} e^{- p t} \, \abs{f(t)} \dd{t} < \\[0.5em]
+\abs{I_{2}} &= \abs{\scaleint{6ex}_{\bs t_{0}}^{\infty} e^{- p t} \, f (t) \dd{t}} \leq \\[0.5em]
+&\leq \scaleint{6ex}_{\bs t_{0}}^{\infty} e^{- p t} \, \abs{f (t)} \dd{t} < \\[0.5em]
 &< M \, \scaleint{6ex}_{\bs t_{0}}^{\infty} \exp(-(p - \sigma) \, t) \dd{t} = \dfrac{M \, \exp(-(p - \sigma) \, t_{0})}{(p - \sigma)}, \hspace{1cm} \mbox{si  } p > \sigma
 \end{align*}
-Por lo que $\abs{I_{2}}$ es finito para todo $t_{0} > 0$ y $p > \sigma$, y de aquí resulta que $I_{2}$ es convergente. Por tanto $L\abs{f(t)}$ existe para toda $p > \sigma$.
+Por lo que $\abs{I_{2}}$ es finito para todo $t_{0} > 0$ y $p > \sigma$, y de aquí resulta que $I_{2}$ es convergente. Por tanto $L\abs{f (t)}$ existe para toda $p > \sigma$.
 Aunque las condiciones establecidas en el teorema anterior son suficientes para la existencia de la transformada de Laplace, no lo son. Esto significa que incluso si una función no satisface las condiciones anteriores, la transformada de Laplace de esa función puede existir o no. 
 \par
-Consideremos el siguiente ejemplo con $f(t) = 1 / \sqrt{t}$:
+Consideremos el siguiente ejemplo con $f (t) = 1 / \sqrt{t}$:
 \par
-De la función se tiene que $f(t) \to \infty$ mientras que $t \to 0$, por lo que $f(t)$ no es una función continua en tramos para cada intervalo finito para $t \geq 0$.
+De la función se tiene que $f (t) \to \infty$ mientras que $t \to 0$, por lo que $f (t)$ no es una función continua en tramos para cada intervalo finito para $t \geq 0$.
 \par
 Ahora veamos:
 \begin{align*}
@@ -129,31 +130,31 @@ L \bigg[ \dfrac{1}{\sqrt{t}} \bigg] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} 
 &= \dfrac{2}{\sqrt{p}} \scaleint{6ex}_{\bs 0}^{\infty} e^{x^{2}} \dd{x} = \\[0.5em]
 &= \sqrt{\dfrac{\pi}{p}} \hspace{1cm} p > 0
 \end{align*}
-Esto prueba la existencia de la transformada de Laplace de $f(t)$.
+Esto prueba la existencia de la transformada de Laplace de $f (t)$.
 
 \section{Propiedades.}
 
 \subsection{Propiedad de linealidad.}
 
-Si $L \big[f_{1}(t); t \to p\big]$ y $L \big[f_{2}(t); t \to p\big]$ existen ambas y con las constantes $c_{1}$ y $c_{2}$, se tiene entonces:
+Si $L \big[  f_{1} (t); t \to p  \big]$ y $L \big[  f_{2} (t); t \to p  \big]$ existen ambas y con las constantes $c_{1}$ y $c_{2}$, se tiene entonces:
 \begin{align*}
-L \big[c_{1} \, f_{1}(t) + c_{2} \, f_{2}(t) ; t \to p\big] = c_{1} \, L \big[f_{1}(t); t \to p\big] + c_{2} \, L c\big[f_{2}(t); t \to p\big]
+L \big[  c_{1} \, f_{1} (t) + c_{2} \, f_{2} (t) ; t \to p  \big] = c_{1} \, L \big[  f_{1} (t); t \to p  \big] + c_{2} \, L c \big[  f_{2} (t); t \to p  \big]
 \end{align*}
 
 \subsection{Primer teorema de desplazamiento.}
 
-\noindent \textbf{Teorema: } Si la transformada de Laplace de $f(t)$ es $\overline{f}(p)$, entonces la transformada de Laplace de $\exp(a \, t)$ es $\overline{f}(p - a)$.
+\noindent \textbf{Teorema: } Si la transformada de Laplace de $f (t)$ es $\overline{f} (p)$, entonces la transformada de Laplace de $\exp(a \, t)$ es $\overline{f} (p - a)$.
 \\[0.5em]
 \textbf{Demostración: } Como tenemos:
 \begin{align*}
-L \big[f(t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} f(t) \, \exp{-p \, t} \dd{t} = \\[0.5em]
+L \big[  f (t); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} f (t) \, \exp{-p \, t} \dd{t} = \\[0.5em]
 &= \overline{f} (p)
 \end{align*}
 Entonces:
 \begin{align}
 \begin{aligned}[b]
-L \big[\exp (a \, t) \, f(t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(a \, t) \, f(t) \, \exp(-p \, t) \dd{t} = \\[0.5em]
-&= \scaleint{6ex}_{\bs 0}^{\infty} f(t) \, \exp(-(p - a) \, t) \dd{t} = \\[0.5em]
+L \big[  \exp (a \, t) \, f (t); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(a \, t) \, f (t) \, \exp (-p \, t) \dd{t} = \\[0.5em]
+&= \scaleint{6ex}_{\bs 0}^{\infty} f (t) \, \exp(-(p - a) \, t) \dd{t} = \\[0.5em]
 &= \overline{f} (p - a)
 \end{aligned}
 \label{eq:ecuacion_03_07}
@@ -161,19 +162,19 @@ L \big[\exp (a \, t) \, f(t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} \
 
 \subsection{Segundo teorema de desplazamiento.}
 
-\noindent \textbf{Teorema: } Si la transformada de Laplace de $f(t)$ es $\overline{f}(p)$, entonces la transformada de Laplace de $f(t - a) \, H(t - a)$ es $\exp(-a \, p) \, \overline{f}(p)$.
+\noindent \textbf{Teorema: } Si la transformada de Laplace de $f (t)$ es $\overline{f} (p)$, entonces la transformada de Laplace de $f (t - a) \, H (t - a)$ es $\exp(-a \, p) \, \overline{f} (p)$.
 \\[0.5em]
 \textbf{Demostración: } 
 Como sabemos que:
 \begin{align*}
-L \big[f(t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} f(t) \, \exp(-p \, t) \dd{t} = \\[0.5em]
+L \big[  f (t); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} f (t) \, \exp(-p \, t) \dd{t} = \\[0.5em]
 &= \overline{f} (p)
 \end{align*}
 Entonces:
 \begin{align}
 \begin{aligned}
-L \big[f(t - a) \, H (t - a); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} f(t - a) \, H(t - a) \, \exp(-p \, t) \dd{t} = \\[0.5em]
-&= \scaleint{6ex}_{\bs a}^{\infty} f(t - a) \, \exp(-p \, x) \cdot \exp(-p \, a) \dd{x} = \\[0.5em]
+L \big[  f (t - a) \, H (t - a); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} f (t - a) \, H (t - a) \, \exp(-p \, t) \dd{t} = \\[0.5em]
+&= \scaleint{6ex}_{\bs a}^{\infty} f (t - a) \, \exp(-p \, x) \cdot \exp(-p \, a) \dd{x} = \\[0.5em]
 &= \exp(-p \, a) \, \overline{f} (p) 
 \end{aligned}
 \label{eq:ecuacion_03_08}
@@ -181,25 +182,25 @@ L \big[f(t - a) \, H (t - a); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} f
 
 \subsection{Propiedad de cambio de escala.}
 
-\noindent \textbf{Teorema: } Si
+\noindent \textbf{Teorema: } Si:
 \begin{align*}
-L \big[f(t); t \to p\big] &= \overline{f} (p)
+L \big[  f (t); t \to p  \big] &= \overline{f} (p)
 \end{align*}
-Entonces
+Entonces:
 \begin{align*}
-L \big[f(a \, t); t \to p\big] &= \dfrac{1}{a}\overline{f} \left(\dfrac{p}{a}\right)
+L \big[  f (a \, t); t \to p  \big] &= \dfrac{1}{a}\overline{f} \left(\dfrac{p}{a}\right)
 \end{align*}
 \\[0.5em]
-\textbf{Demostración: } La transformada de Laplace de $f(t)$ es:
+\textbf{Demostración: } La transformada de Laplace de $f (t)$ es:
 \begin{align*}
-L \big[f(t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} f(t) \, \exp(-p \, t) \dd{t} = \\[0.5em]
+L \big[  f (t); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} f (t) \, \exp(-p \, t) \dd{t} = \\[0.5em]
 &= \overline{f} (p)
 \end{align*}
 Entonces:
 \begin{align}
-\begin{aligned}
-L \big[f(a \, t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} f(a \, t) \, \exp(-p \, t) \dd{t} = \\[0.5em]
-&= \dfrac{1}{a} \scaleint{6ex}_{\bs 0}^{\infty} f(x) \, \exp(- (p/a) \, t) \dd{x} = \\[0.5em]
+\begin{aligned}[b]
+L \big[  f(a \, t); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} f (a \, t) \, \exp(-p \, t) \dd{t} = \\[0.5em]
+&= \dfrac{1}{a} \scaleint{6ex}_{\bs 0}^{\infty} f (x) \, \exp(- (p/a) \, t) \dd{x} = \\[0.5em]
 &= \dfrac{1}{a}\overline{f} \left(\dfrac{p}{a}\right)
 \end{aligned}
 \label{eq:ecuacion_03_09}
@@ -211,33 +212,33 @@ Calculemos la transformada de Laplace de algunas funciones sencillas a partir de
 
 \begin{ejemplo}
 \begin{align*}
-L \big[H(t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(- p \, t) \, H(t) \dd{t} = \\[0.5em]
+L \big [H (t); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(- p \, t) \, H (t) \dd{t} = \\[0.5em]
 &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(- p \, t) \dd{t} = \\[0.5em]
 &= \dfrac{1}{p}
 \end{align*}
 De aquí que:
 \begin{align*}
-L \big[H(t - a); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(- p \, t) \, H(t - a) \dd{t} = \\[0.5em]
+L \big[  H(t - a); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} \exp(- p \, t) \, H (t - a) \dd{t} = \\[0.5em]
 &= \scaleint{6ex}_{\bs a}^{\infty} \exp(- p \, t) \dd{t} = \\[0.5em]
 &= \dfrac{\exp(-a \, p)}{p}
 \end{align*}
 \end{ejemplo}
 \begin{ejemplo}
 \begin{align*}
-L \big[t^{\nu}; t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} t^{\nu} \, \exp(- p \, t) \dd{t} = \\[0.5em]
+L \big[  t^{\nu}; t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} t^{\nu} \, \exp(- p \, t) \dd{t} = \\[0.5em]
 &= \scaleint{6ex}_{\bs 0}^{\infty} u^{\nu} \, \exp(-u) \dd{u} \hspace{1cm} \mbox{cuando  } u = p \, t \\[0.5em]
 &= p^{-\nu - 1} \, \Gamma (\nu + 1) \hspace{1cm} \mbox{la cual existe cuando  } \Re{\nu} > - 1
 \end{align*}
 \end{ejemplo}
 \begin{ejemplo}
 \begin{align*}
-L \big[e^{a t}; t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, e^{a \, t} \dd{t} = \\[0.5em]
+L \big[  e^{a t}; t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, e^{a \, t} \dd{t} = \\[0.5em]
 &= \dfrac{1}{p - a} \hspace{1cm} p > a
 \end{align*}
 \end{ejemplo}
 \begin{ejemplo}
 \begin{align*}
-L \big[\sin (a t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, \sin (a \, t) \dd{t} = \\[0.5em]
+L \big[  \sin (a t); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, \sin (a \, t) \dd{t} = \\[0.5em]
 &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \,\left[ \dfrac{e^{a i t} - e^{- a i t}}{2 \, i} \right] \dd{t} = \\[0.5em]
 &= \left[ \scaleint{6ex}_{\bs 0}^{\infty}  \dfrac{e^{-(p - a i) t} - e^{- (p + a i) t}}{2 \, i} \right] \dd{t} = \\[0.5em]
 &= \dfrac{1}{2 \, i} \left[ \dfrac{1}{p {-} a \, i} {-} \dfrac{1}{p {+} a \, i} \right] = \hspace{0.25cm} \mbox{por la propiedad de linealidad} \\[0.5em]
@@ -246,7 +247,7 @@ L \big[\sin (a t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, 
 \end{ejemplo}
 \begin{ejemplo}
 \begin{align*}
-L \big[\cos (a t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \,\dfrac{e^{a i t} + e^{- a i t}}{2} \dd{t} = \\[0.5em]
+L \big[  \cos (a t); t \to p  \big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \,\dfrac{e^{a i t} + e^{- a i t}}{2} \dd{t} = \\[0.5em]
 &= \dfrac{1}{2} \left[ \scaleint{6ex}_{\bs 0}^{\infty} e^{-(p - a i) t} \dd{t} \right] + \dfrac{1}{2} \left[ \scaleint{6ex}_{\bs 0}^{\infty} e^{-(p + a i) t} \dd{t} \right] = \\[0.5em]
 &\mbox{por la propiedad de linealidad  } \\[0.5em]
 &= \dfrac{1}{2} \left[ \dfrac{1}{p - a \, i} + \dfrac{1}{p + a \, i}\right] = \\[0.5em]
@@ -256,7 +257,7 @@ L \big[\cos (a t); t \to p\big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \,\
 Evalúa la transformada de Laplace de la función que se indica:
 \begin{ejemplo}
 \begin{align*}
-L\big[f(t)\big] \hspace{0.5cm} \mbox{donde} \hspace{0.5em} f(t) = \begin{cases}
+L \big[  f (t)  \big] \hspace{0.5cm} \mbox{donde} \hspace{0.5em} f (t) = \begin{cases}
 t/a & 0 < t < a \\
 1 & t > a
 \end{cases}
@@ -264,7 +265,7 @@ t/a & 0 < t < a \\
 
 Solución:
 \begin{align*}
-L\big[f(t)\big] = \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, f(t) \dd{t}  &= \scaleint{6ex}_{\bs 0}^{a} e^{-p t} \cdot \dfrac{t}{a} \dd{t} + \scaleint{6ex}_{\bs 0}^{a} e^{-p t} \dd{t} = \\[0.5em]
+L \big[  f (t)  \big] = \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, f (t) \dd{t}  &= \scaleint{6ex}_{\bs 0}^{a} e^{-p t} \cdot \dfrac{t}{a} \dd{t} + \scaleint{6ex}_{\bs 0}^{a} e^{-p t} \dd{t} = \\[0.5em]
 &=\dfrac{1 - e^{- a p}}{a \, p^{2}}
 \end{align*}
 \end{ejemplo}
@@ -273,125 +274,125 @@ Evalúa $L \bigg[\dfrac{1}{\sqrt{\pi \, t}}\bigg]$
 
 Solución:
 \begin{align*}
-L \bigg[\dfrac{1}{\sqrt{\pi \, t}}\bigg] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{- p t} \, \dfrac{1}{\sqrt{\pi \, t}} \dd{t} = \\[0.5em]
+L \bigg[ \dfrac{1}{\sqrt{\pi \, t}} \bigg] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{- p t} \, \dfrac{1}{\sqrt{\pi \, t}} \dd{t} = \\[0.5em]
 &= \dfrac{\sqrt{p}}{\sqrt{\pi}} \scaleint{6ex}_{\bs 0}^{\infty} e^{-x} \, x^{1/2 - 1} \dfrac{\dd{x}}{p} = \\[0.5em]
 &= \dfrac{1}{\sqrt{\pi} \, p} \Gamma \left( \dfrac{1}{2} \right) = \\[0.5em]
 &= \dfrac{\sqrt{\pi}}{\sqrt{\pi \, p}} = \dfrac{1}{\sqrt{\pi}}
 \end{align*}
 \end{ejemplo}
 \begin{ejemplo}
-Evaluar $L \big[t^{\nu} \, e^{-a t} \big]$, si $\Re{\nu + 1} > 0$
+Evaluar $L \big[  t^{\nu} \, e^{-a t}  \big]$, si $\Re{\nu + 1} > 0$
 
 Solución: Se sabe que:
 \begin{align*}
-L \big[t^{\nu}; t \to p\big] = \dfrac{\Gamma (\nu + 1)}{p^{\nu+1}}
+L \big[  t^{\nu}; t \to p  \big] = \dfrac{\Gamma (\nu + 1)}{p^{\nu+1}}
 \end{align*}
 Entonces, ocupando el teorema del desplazamiento, obtenemos:
 \begin{align*}
-L \big[t^{\nu} \, e^{-a t}; t \to p\big] = \dfrac{\Gamma (\nu + 1)}{(p + a)^{\nu+1}}
+L \big[  t^{\nu} \, e^{-a t}; t \to p  \big] = \dfrac{\Gamma (\nu + 1)}{(p + a)^{\nu+1}}
 \end{align*}
 \end{ejemplo}
 \begin{ejemplo}
-Evalúa $L \big[\sin (t - a) \, H(t- a); t \to p\big]$. \\
-Para luego evaluar: $L \big[e^{(t-a) k} \, \sin (t - a) \, H(t- a); t \to p\big]$
+Evalúa $L \big[ \sin (t - a) \, H (t- a); t \to p  \big]$. \\
+Para luego evaluar: $L \big[  e^{(t-a) k} \, \sin (t - a) \, H(t- a); t \to p  \big]$
 
 Solución: Sabemos que:
 \begin{align*}
-L \big[\sin t; t \to p\big] = \dfrac{1}{p^{2} + 1}
+L \big[  \sin t; t \to p  \big] = \dfrac{1}{p^{2} + 1}
 \end{align*}
 Por lo que ocupando el segundo teorema del desplazamiento, se obtiene:
 \begin{align*}
-L \big[\sin (t - a) \, H(t- a)\big] = \dfrac{e^{-p a}}{(1 + p^{2})}
+L \big[  \sin (t - a) \, H (t- a)  \big] = \dfrac{e^{-p a}}{(1 + p^{2})}
 \end{align*}
 por lo que:
 \begin{align*}
-L \big[e^{(t-a) k} \, \sin (t - a) \, H(t- a); t \to p\big] &= \dfrac{e^{-(p - k)}}{\big[1 + (p - k^{2})\big]}
+L \big[  e^{(t-a) k} \, \sin (t - a) \, H(t- a); t \to p  \big] &= \dfrac{e^{-(p - k)}}{\big[  1 + (p - k^{2})  \big]}
 \end{align*}
 después de haber utilizado el primer teorema del desplazamiento.
 \end{ejemplo}
 
 \subsection{La transformada de Laplace de la derivada de una función.}
 
-\noindent \textbf{Teorema: } Sea $f(t)$ una función continua de $t \geq 0$ y es de orden exponencial para un valor de $t$ grande y si $\ptilde{f}(t)$ es una función continua a tramos para $t \geq 0$, entonces la transformada de Laplace de la derivada $\ptilde{f}(t)$ existe cuando $p > \sigma$ y está dada por:
+\noindent \textbf{Teorema: } Sea $f (t)$ una función continua de $t \geq 0$ y es de orden exponencial para un valor de $t$ grande y si $\pderivada{f}(t)$ es una función continua a tramos para $t \geq 0$, entonces la transformada de Laplace de la derivada $\pderivada{f}(t)$ existe cuando $p > \sigma$ y está dada por:
 \begin{align*}
-L \big[\ptilde{f}(t)\big] = p \, L \big[f(t)\big] - f(0)
+L \big[  \pderivada{f} (t)  \big] = p \, L \big[  f (t)  \big] - f(0)
 \end{align*}
 
 \noindent \textbf{Demostración:} Por definición de la transformada de Laplace:
 \begin{align}
 \begin{aligned}[b]
-L \big[\ptilde{f}(t)\big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, \ptilde{f} (t) \dd{t} = \\[0.5em]
-&= \big[e^{-p t} \cdot f(t)\big] \eval_{0}^{\infty} - \scaleint{6ex}_{\bs 0}^{\infty} (-p) \, e^{-p t} \, \ptilde{f} (t) \dd{t} = \\[0.5em]
-&= \lim_{t \to \infty} e^{-p t} \, f(t) - f(0) + p \, L \big[f(t)\big]
+L \big[  \pderivada{f}(t) \big] &= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, \pderivada{f} (t) \dd{t} = \\[0.5em]
+&= \big[ e^{-p t} \cdot f (t) \big] \eval_{0}^{\infty} - \scaleint{6ex}_{\bs 0}^{\infty} (-p) \, e^{-p t} \, \pderivada{f} (t) \dd{t} = \\[0.5em]
+&= \lim_{t \to \infty} e^{-p t} \, f (t) - f(0) + p \, L \big[ f (t) \big]
 \end{aligned}
 \label{eq:ecuacion_03_10}
 \end{align}
-Como $f(t)$ es de orden exponencial $\sigma$ para $t \to \infty$, se tiene
+Como $f (t)$ es de orden exponencial $\sigma$ para $t \to \infty$, se tiene
 \begin{align*}
-\abs{f(t)} \leq M \, e^{-\sigma t}, \hspace{0.5em} t \geq 0
+\abs{f (t)} \leq M \, e^{-\sigma t}, \hspace{0.5em} t \geq 0
 \end{align*}
 Por lo que
 \begin{align*}
-\abs{f(t) \, e^{-p t}} = e^{-p t} \, \abs{f(t)} \leq M \, e^{-p t} \cdot e^{\sigma t} = M \, e^{-(p - \sigma) t}
+\abs{f (t) \, e^{-p t}} = e^{-p t} \, \abs{f (t)} \leq M \, e^{-p t} \cdot e^{\sigma t} = M \, e^{-(p - \sigma) t}
 \end{align*}
 Así pues:
 \begin{align*}
-\lim_{t \to \infty} e^{-p t} \, f(t) = 0 \hspace{0.5cm} \mbox{mientras  } p - \sigma > 0
+\lim_{t \to \infty} e^{-p t} \, f (t) = 0 \hspace{0.5cm} \mbox{mientras  } p - \sigma > 0
 \end{align*}
 Entonces, de la ec. (\ref{eq:ecuacion_03_10}), llegamos a:
 \begin{align}
-L \big[\ptilde{f}(t)\big] = p \, L \big[f(t)\big] - f(0)
+L \big[  \pderivada{f} (t)  \big] = p \, L \big[  f (t)  \big] - f (0)
 \label{eq:ecuacion_03_11}
 \end{align}
 
-\noindent \textbf{Corolario 1: } Si $\stilde{f}(t)$ existe para $t \geq 0$ y es una función continua en tramos, entonces siguiendo el mismo procedimiento anterior, es posible extender el resultado del teorema como:
+\noindent \textbf{Corolario 1: } Si $\sderivada{f} (t)$ existe para $t \geq 0$ y es una función continua en tramos, entonces siguiendo el mismo procedimiento anterior, es posible extender el resultado del teorema como:
 \begin{align}
 \begin{aligned}[b]
-L \big[\stilde{f}(t)\big] &= p \, L \big[\ptilde{f}(t)\big] - \ptilde{f}(0) = \\[0.5em]
-&= p \, \big[p \left\{ L (f(t)) \right\} - f(0) \big] - \ptilde{f} (0) = \\[0.5em]
-&= p^{2} \, L \big[f(t)\big] - p \, f(0) - \ptilde{f}(0)
+L \big[  \sderivada{f} (t)  \big] &= p \, L \big[  \pderivada{f} (t)  \big] - \pderivada{f} (0) = \\[0.5em]
+&= p \, \big[  p \left\{ L (f (t)) \right\} - f (0)  \big] - \pderivada{f} (0) = \\[0.5em]
+&= p^{2} \, L \big[  f (t)  \big] - p \, f (0) - \pderivada{f} (0)
 \end{aligned}
 \label{eq:ecuacion_03_12}
 \end{align}
 
-\noindent \textbf{Corolario 2:} En general, si $\ntilde{f}{n}(t)$ existe para $t \geq 0$ y es una función continua en tramos de $t$, entonces:
+\noindent \textbf{Corolario 2:} En general, si $\nderivada{f}{n} (t)$ existe para $t \geq 0$ y es una función continua en tramos de $t$, entonces:
 \begin{align}
-L \big[\ntilde{f}{n}(t)\big] = p^{n} \, L \big[f(t)\big] - p^{n-1} \, f(0) - p^{n-2} \, \ptilde{f}(0) - \ldots - \ntilde{f}{n-1} (0)
+L \big[  \nderivada{f}{n} (t)  \big] = p^{n} \, L \big[  f (t)  \big] - p^{n-1} \, f (0) - p^{n-2} \, \pderivada{f}(0) - \ldots - \ntilde{f}{n-1} (0)
 \label{eq:ecuacion_03_13}
 \end{align}
 
 \subsection{Transformada de Laplace de la integral de una función.}
 
-Si la transformada de Laplace de una función $f(t)$ es $\overline{f}(p$). Entonces la transformada de la integral:
+Si la transformada de Laplace de una función $f (t)$ es $\overline{f} (p)$. Entonces la transformada de la integral:
 \begin{align}
-\scaleint{6ex}_{\bs 0}^{t} f(\tau) \dd{\tau} = \dfrac{\overline{f}(p)}{p}
+\scaleint{6ex}_{\bs 0}^{t} f (\tau) \dd{\tau} = \dfrac{\overline{f} (p)}{p}
 \label{eq:ecuacion_03_16}
 \end{align}
 
 \subsection{La Transformada de Laplace de una función periódica.}
 
-Sea $f(t)$ una función con período $\tau$, tal que 
+Sea $f (t)$ una función con período $\tau$, tal que 
 \begin{align*}
-f(t + n \, \tau) = f(t) \hspace{1cm} n = 1, 2, 3, \ldots
+f (t + n \, \tau) = f (t) \hspace{1cm} n = 1, 2, 3, \ldots
 \end{align*}
-Si $f(t)$ es una función continua en tramos para $t > 0$, entonces:
+Si $f (t)$ es una función continua en tramos para $t > 0$, entonces:
 \begin{align}
-L \big[f(t)\big] = \dfrac{1}{1 - e^{-p \tau}} \scaleint{6ex}_{\bs 0}^{\tau} e^{-p t} \, f(t) \dd{t}
+L \big[  f (t)  \big] = \dfrac{1}{1 - e^{-p \tau}} \scaleint{6ex}_{\bs 0}^{\tau} e^{-p t} \, f (t) \dd{t}
 \end{align}
 
 \subsection{Convolución de dos funciones.}
 
 Sean $f (t)$ y $g (t)$ dos funciones continuas por partes y son de algún orden exponencial para $t$ grande y para todo $t \geq 0$. Entonces la \emph{convolución}\footnote{Recuerda la observación sobre la traducción del término en inglés \emph{convolution} que se discutió en el material de trabajo: Transformada de Fourier.} de estas funciones se denota por $f * g (t)$ y se define por:
 \begin{align}
-f * g(t) = \scaleint{6ex}_{\bs 0}^{t} f(u) \, g(t - u) \dd{u}
+f * g (t) = \scaleint{6ex}_{\bs 0}^{t} f (u) \, g (t - u) \dd{u}
 \label{03_55}
 \end{align}
-Esta relación también se le conoce como \emph{faltung} de $f(t)$ y $g(t)$. Por definición:
+Esta relación también se le conoce como \emph{faltung} de $f (t)$ y $g (t)$. Por definición:
 \begin{align}
 \begin{aligned}
-f * g(t) &= \scaleint{6ex}_{\bs 0}^{t} f(u) \, g(t - u) \dd{u} = \\[0.5em]
-&= \scaleint{6ex}_{\bs 0}^{t} f(t - \tau) \, g(\tau) \dd{\tau} = \\[0.5em]
-&= g * f(t)
+f * g (t) &= \scaleint{6ex}_{\bs 0}^{t} f (u) \, g (t - u) \dd{u} = \\[0.5em]
+&= \scaleint{6ex}_{\bs 0}^{t} f (t - \tau) \, g (\tau) \dd{\tau} = \\[0.5em]
+&= g * f (t)
 \end{aligned}
 \label{eq:ecuacion_03_56}
 \end{align}
@@ -401,29 +402,29 @@ Satisface también:
 \begin{enumerate}
 \item La ley distributiva
 \begin{align}
-f * \big[g + h\big](t) = f * g(t) + f * h(t)
+f * \big[  g + h  \big](t) = f * g (t) + f * h (t)
 \label{eq:ecuacion_03_57}
 \end{align}
 \item La ley asociativa
 \begin{align}
-\big[f * (g * h)\big](t) = \big[(f * g) * h\big](t)
+\big[  f * (g * h)  \big](t) = \big[  (f * g) * h  \big] (t)
 \label{eq:ecuacion_03_58}
 \end{align}
 \end{enumerate}
-Ahora podemos enfocarnos a evaluar la transformada de Laplace de la convolución de dos funciones $f(t)$ y $g(t)$:
+Ahora podemos enfocarnos a evaluar la transformada de Laplace de la convolución de dos funciones $f (t)$ y $g (t)$:
 \begin{align}
 \begin{aligned}[b]
-L \big[(f * g)(t); t \to p\big] &= L \left[ \scaleint{6ex}_{\bs 0}^{t} f(\tau) \, g(t - \tau) \dd{\tau}; t \to p \right] = \\[0.5em]
-&= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, \left[ \scaleint{6ex}_{\bs 0}^{t} f(\tau) \, g(t - \tau) \dd{\tau}\right] \, \dd{t} = \\[0.5em]
-&= \scaleint{6ex}_{\bs 0}^{\infty} f(\tau) \, \left[ \scaleint{6ex}_{\bs \tau}^{\infty} e^{-p t} \, g(t - \tau) \dd{t}\right] \, \dd{\tau} = \\[0.5em]
-&= \scaleint{6ex}_{\bs 0}^{\infty} f(\tau) \, e^{- p t} \, \left[ \scaleint{6ex}_{\bs 0}^{\infty} e^{-p \eta} \, g(\eta) \dd{\eta} \right] \, \dd{\tau} = \\[0.5em]
-&= \overline{f}(p) \, \overline{g}(p)
+L \big[  (f * g) (t); t \to p  \big] &= L \left[ \scaleint{6ex}_{\bs 0}^{t} f (\tau) \, g (t - \tau) \dd{\tau}; t \to p \right] = \\[0.5em]
+&= \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, \left[ \scaleint{6ex}_{\bs 0}^{t} f (\tau) \, g (t - \tau) \dd{\tau}\right] \, \dd{t} = \\[0.5em]
+&= \scaleint{6ex}_{\bs 0}^{\infty} f (\tau) \, \left[ \scaleint{6ex}_{\bs \tau}^{\infty} e^{-p t} \, g (t - \tau) \dd{t}\right] \, \dd{\tau} = \\[0.5em]
+&= \scaleint{6ex}_{\bs 0}^{\infty} f(\tau) \, e^{- p t} \, \left[ \scaleint{6ex}_{\bs 0}^{\infty} e^{-p \eta} \, g (\eta) \dd{\eta} \right] \, \dd{\tau} = \\[0.5em]
+&= \overline{f} (p) \, \overline{g} (p)
 \end{aligned}
 \label{eq:ecuacion_03_59}
 \end{align}
 En particular se tiene:
 \begin{align*}
-L \big[f * f(t); t \to p\big] = \big[\overline{f}(p)\big]^{2}
+L \big[  f * f (t); t \to p  \big] = \big[  \overline{f} (p)  \big]^{2}
 \end{align*}
 
 \section{La transformada inversa de Laplace.}
@@ -432,47 +433,47 @@ L \big[f * f(t); t \to p\big] = \big[\overline{f}(p)\big]^{2}
 
 Si $f (t)$ pertenece a una clase $A$ (lo que significa que es una función continua por partes sobre $0 \leq t < \infty$ y es de algún orden exponencial), su transformada de Laplace $\overline{f} (p)$ existe. Esto se denota simbólicamente por:
 \begin{align}
-L \big[f(t); t \to p\big] = \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, f(t) \dd{t} \equiv \overline{f} (p)
+L \big[  f (t); t \to p  \big] = \scaleint{6ex}_{\bs 0}^{\infty} e^{-p t} \, f (t) \dd{t} \equiv \overline{f} (p)
 \label{ec:ecuacion_04_01}
 \end{align}
 Entonces, a su vez $f (t)$, la función de objeto es la transformada de Laplace inversa de la función de imagen $\overline{f} (p)$ y está dada simbólicamente por:
 \begin{align}
-L^{-1} \big[\overline{f}(t); p \to t\big] \equiv f (t)
+L^{-1} \big[  \overline{f} (t); p \to t  \big] \equiv f (t)
 \label{ec:ecuacion_04_02}
 \end{align}
 Así por la ec. (\ref{ec:ecuacion_04_01}), se puede evaluar $\overline{f} (p)$ para una $f (t)$ dada, ya que $\overline{f} (p)$ existe. Ahora consideraremos el problema inverso: derivar información de la $\overline{f} (p)$ prescrita que nos permite obtener la función original $f (t)$ a través de alguna fórmula, llamada \emph{fórmula de inversión de Laplace}.
 \par
-Antes de responder a este problema básico planteado anteriormente, en primer lugar presentaremos el enfoque heurístico para determinar la transformada inversa de Laplace de alguna $\overline{f}(p)$. También, según sea necesario, definimos una nueva función, llamada \textbf{función nula}, en esta conexión junto con un teorema vinculado, conocido como \emph{teorema de Lerch}.
+Antes de responder a este problema básico planteado anteriormente, en primer lugar presentaremos el enfoque heurístico para determinar la transformada inversa de Laplace de alguna $\overline{f} (p)$. También, según sea necesario, definimos una nueva función, llamada \textbf{función nula}, en esta conexión junto con un teorema vinculado, conocido como \emph{teorema de Lerch}.
 \par
 \noindent \textbf{Definición.} \textbf{Función nula.} Una función $N (t)$ que satisface la condición
 \begin{align*}
-\scaleint{6ex}_{\bs 0}^{\tau} N(\tau) \dd{\tau} = 0 \hspace{0.5cm} \forall \, t > 0
+\scaleint{6ex}_{\bs 0}^{\tau} N (\tau) \dd{\tau} = 0 \hspace{0.5cm} \forall \, t > 0
 \end{align*}
 se denomina función nula.
 \par
 \noindent \textbf{Teorema de Lerch.}
 
-\noindent Si $L \big[f_{1} (t); t \to p\big], \Re {p} > c_{1}$ y $L \big[f_{2} (t); t \to p\big], \Re {p} > c_{2}$ existen ambas, y si
+\noindent Si $L \big[ f_{1} (t); t \to p \big], \Re {p} > c_{1}$ y $L \big[ f_{2} (t); t \to p \big], \Re {p} > c_{2}$ existen ambas, y si
 \begin{align*}
-L \big[f_{1} (t); t \to p\big] = L \big[f_{2} (t); t \to p\big]
+L \big[ f_{1} (t); t \to p \big] = L \big[ f_{2} (t); t \to p \big]
 \end{align*}
 para $Re{p} > c = \max{c_{1},c_{2}}$, entonces:
 \begin{align*}
 f_{2} (t) - f_{1} (t) = N_{t}
 \end{align*}
-Además, si $f_{1}(t)$ y $f_{2}(t)$ son continuas en toda una línea real, entonces $f_{1}(t) = f_{2}(t), \hspace{0.3cm} t > 0$.
+Además, si $f_{1} (t)$ y $f_{2} (t)$ son continuas en toda una línea real, entonces $f_{1} (t) = f_{2} (t), \hspace{0.3cm} t > 0$.
 \section{Propiedades.}
 
 \subsection{Linealidad de la transformada inversa.}
 
 Si
 \begin{align*}
-\overline{f}_{1} (p) = L \big[f_{1} (t); t \to p\big] \hspace{0.5cm} \mbox{y} \hspace{0.5cm} \overline{f}_{2} (p) = L \big[f_{2} (t); t \to p\big]
+\overline{f}_{1} (p) = L \big[ f_{1} (t); t \to p \big] \hspace{0.5cm} \mbox{y} \hspace{0.5cm} \overline{f}_{2} (p) = L \big[ f_{2} (t); t \to p \big]
 \end{align*}
 y $c{1}$ y $c_{2}$ dos constantes arbitrarias, entonces se tiene que:
 \begin{align*}
-L^{-1} \, \big[ c_{1} \, \overline{f}_{1} + c_{2} \, \overline{f}_{2} (p); p \to t\big] &= c_{1} \, L^{-1} \, \big[ \overline{f}_{1}; p \to t\big] + c_{2} \, L^{-1} \, \big[ \overline{f}_{2}; p \to t\big] = \\[0.5em]
-&= c_{1} \, f_{1}(t) + c_{2} \, f_{2}(t)
+L^{-1} \, \big[  c_{1} \, \overline{f}_{1} + c_{2} \, \overline{f}_{2} (p); p \to t \big] &= c_{1} \, L^{-1} \, \big[  \overline{f}_{1}; p \to t \big] + c_{2} \, L^{-1} \, \big[  \overline{f}_{2}; p \to t \big] = \\[0.5em]
+&= c_{1} \, f_{1} (t) + c_{2} \, f_{2} (t)
 \end{align*}
 
 \subsection{Cálculo de la transformada inversa de Laplace de algunas funciones.}
@@ -480,11 +481,11 @@ L^{-1} \, \big[ c_{1} \, \overline{f}_{1} + c_{2} \, \overline{f}_{2} (p); p \to
 Antes de encontrar la transformada inversa de Laplace de funciones elementales que son un poco complejas por naturaleza, a continuación exponemos algunos resultados obtenidos previamente. Estos resultados pueden considerarse fórmulas para otras aplicaciones.
 
 \begin{enumerate}[label=\alph*)]
-\item $ L \big[H(t); t \to p\big] = \dfrac{1}{p} \hspace{0.5cm} \Rightarrow \hspace{0.5em} L^{-1} \bigg[ \dfrac{1}{p}; p \to t \bigg] = H(t)$
-\item $ L \big[t^{\nu}; t \to p\big] = \dfrac{\Gamma(\nu + 1)}{p^{\nu + 1}} \hspace{0.3cm} \Rightarrow \hspace{0.3cm} L^{-1} \bigg[ \dfrac{\Gamma(\nu + 1)}{p^{\nu + 1}}; p \to t \bigg] = t^{\nu}, \hspace{0.1cm} \Re{\nu} > - 1$
-\item $ L \big[e^{a t}; t \to p\big] = \dfrac{1}{p - a} \hspace{0.3cm} \Rightarrow \hspace{0.3cm} L^{-1} \bigg[ \dfrac{1}{p - a}; p \to t \bigg] = e^{a t}, \hspace{0.2cm} \Re{p} > a$
-\item $ L \big[\sin (a \, t); t \to p\big] = \dfrac{a}{p^{2} + a^{2}} \hspace{0.2cm} \Rightarrow \hspace{0.2cm} L^{-1} \bigg[ \dfrac{a}{p^{2} + a^{2}}; p \to t \bigg] {=} \sin (a \, t), \hspace{0.1cm} p > 0$
-\item $ L \big[\cos (a \, t); t \to p\big] = \dfrac{p}{p^{2} + a^{2}} \hspace{0.2cm} \Rightarrow \hspace{0.2cm} L^{-1} \bigg[ \dfrac{p}{p^{2} + a^{2}}; p \to t \bigg] {=} \cos (a \, t), \hspace{0.1cm} p > 0$
+\item $ L \big[ H (t); t \to p \big] = \dfrac{1}{p} \hspace{0.5cm} \Rightarrow \hspace{0.5em} L^{-1} \bigg[ \dfrac{1}{p}; p \to t \bigg] = H (t)$
+\item $ L \big[ t^{\nu}; t \to p \big] = \dfrac{\Gamma(\nu + 1)}{p^{\nu + 1}} \hspace{0.3cm} \Rightarrow \hspace{0.3cm} L^{-1} \bigg[ \dfrac{\Gamma(\nu + 1)}{p^{\nu + 1}}; p \to t \bigg] = t^{\nu}, \hspace{0.1cm} \Re{\nu} > - 1$
+\item $ L \big[ e^{a t}; t \to p \big] = \dfrac{1}{p - a} \hspace{0.3cm} \Rightarrow \hspace{0.3cm} L^{-1} \bigg[ \dfrac{1}{p - a}; p \to t \bigg] = e^{a t}, \hspace{0.2cm} \Re{p} > a$
+\item $ L \big[ \sin (a \, t); t \to p \big] = \dfrac{a}{p^{2} + a^{2}} \hspace{0.2cm} \Rightarrow \hspace{0.2cm} L^{-1} \bigg[ \dfrac{a}{p^{2} + a^{2}}; p \to t \bigg] {=} \sin (a \, t), \hspace{0.1cm} p > 0$
+\item $ L \big[ \cos (a \, t); t \to p \big] = \dfrac{p}{p^{2} + a^{2}} \hspace{0.2cm} \Rightarrow \hspace{0.2cm} L^{-1} \bigg[ \dfrac{p}{p^{2} + a^{2}}; p \to t \bigg] {=} \cos (a \, t), \hspace{0.1cm} p > 0$
 \end{enumerate}
 Ahora dirigiremos nuestra atención al discutir algunas reglas de manipulación de la inversión de Laplace de algunas combinaciones de funciones elementales de p a través de los siguientes ejemplos.
 \begin{ejemplo}
@@ -501,7 +502,7 @@ Resolviendo mediante fracciones parciales siguiendo el método tradicional, se t
 Por lo tanto:
 \begin{align*}
 L^{-1} \bigg[ \dfrac{1}{(p + 1)(p^2) + 1)}\bigg] &= \dfrac{1}{2} \, L^{-1} \bigg[ \dfrac{1}{p + 1}\bigg] {-} \dfrac{1}{2} \, L^{-1} \bigg[\dfrac{p}{p^{2} + 1} \bigg] {+} \dfrac{1}{2} L^{-1} \, \bigg[\dfrac{1}{p^{2} + 1} \bigg] = \\[0.5em]
-&= \dfrac{1}{2} \, \big[ e^{-t} - \cos t + \sin t \big]
+&= \dfrac{1}{2} \, \big[  e^{-t} - \cos t + \sin t  \big]
 \end{align*}
 \end{ejemplo}
 \begin{ejemplo} Evaluar
@@ -523,14 +524,14 @@ L^{-1} \left[ \dfrac{6 \, p^{2} + 22 \, p + 18}{p^{3} + 6 \, p^{2} + 11 \, p + 
 
 Sean $f (p)$ y $g (p)$ dos polinomios en $p$ tales que el grado de $f (p)$ es menor que el de $g (p)$. Entonces $f (p) / g (p)$ se puede expresar como:
 \begin{align*}
-\dfrac{f(p)}{g(p)} = \sum_{r=1}^{n} \dfrac{A_{r}}{p - a_{r}} \hspace{0.5cm} \mbox{donde } p - a{r} \mbox{ son los factores de } g(p)
+\dfrac{f (p)}{g (p)} = \sum_{r=1}^{n} \dfrac{A_{r}}{p - a_{r}} \hspace{0.5cm} \mbox{donde } p - a{r} \mbox{ son los factores de } g (p)
 \end{align*}
 con
 \begin{align*}
-A_{r} = \lim_{p \to a_{r}} \dfrac{(p - a_{r}) \, f(p)}{g(p)} = \dfrac{f(a_{r})}{\ptilde{g}(a_{r})} \hspace{0.5cm} \mbox{para  } r = 1, 2, \ldots, n
+A_{r} = \lim_{p \to a_{r}} \dfrac{(p - a_{r}) \, f (p)}{g (p)} = \dfrac{f(a_{r})}{\pderivada{g} (a_{r})} \hspace{0.5cm} \mbox{para  } r = 1, 2, \ldots, n
 \end{align*}
 
-\begin{ejemplo} Evalúa
+\begin{ejemplo} Evalúa:
 \begin{align*}
 L^{-1} \left[ \dfrac{p + 5}{(p + 1)(p^{2} + 1)} \right]
 \end{align*}
@@ -585,28 +586,28 @@ Supongamos que deseamos resolver una ecuación diferencial ordinaria (EDO) linea
 \end{align}
 donde $c_{i} = 1, 2, \ldots, n$ son constantes dadas, sujetas a las condiciones iniciales:
 \begin{align*}
-y(0) = k_{1}, \, \ptilde{y}(0) = k_{2} , \ldots, \ntilde{y}{n=1}(0)= k_{n}
+y(0) = k_{1}, \, \pderivada{y}(0) = k_{2} , \ldots, \ntilde{y}{n=1}(0)= k_{n}
 \end{align*}
 Tomando la transformada de Laplace en ambos lados de la EDO, utilizando los resultados y propiedades revisados previamente en estas notas, así como las condiciones iniciales dadas en la EDO, se tiene que:
 \begin{align*}
-\big[\overline{y}(p) \, &p^{n} - p^{n-1} \, k_{1} - \ldots - p \, k_{n-1} - k_{n} \big] + \\[0.5em] &+ \overline{f}(p) + k_{1} \, \big[\overline{y}(p) \, p^{n-1} - p^{n-2} \, k_{1} - \ldots - k_{n-1} - k_{n} \big] + \\[0.5em]
-&+ \ldots + c_{n-1} \big[p \, \overline{y}(p) - k_{1} \big] + c_{n} \, \overline{y}(p) = \overline{f}(p)
+\big[ \overline{y}(p) \, &p^{n} - p^{n-1} \, k_{1} - \ldots - p \, k_{n-1} - k_{n}  \big] + \\[0.5em] &+ \overline{f}(p) + k_{1} \, \big[ \overline{y}(p) \, p^{n-1} - p^{n-2} \, k_{1} - \ldots - k_{n-1} - k_{n}  \big] + \\[0.5em]
+&+ \ldots + c_{n-1} \big[ p \, \overline{y}(p) - k_{1}  \big] + c_{n} \, \overline{y}(p) = \overline{f}(p)
 \end{align*}
 Por lo tanto:
 \begin{align*}
-\overline{y}(p) \big[&p^{n} + c_{1} \, p^{n-1} \, + \ldots + c_{n} \big] = \overline{f}(p) + \\[0.5em]
-&+ k_{1} \, \big[p^{n-1} + c_{1} \, p^{n-2} + \ldots + c_{n-1} \, p\big] + \\[0.5em]
-&+ k_{2} \, \big[p^{n-2} + c_{1} \, p^{n-3} + \ldots \big] +  \ldots + \\[0.5em]
-&+ k_{n-1} \big[p + c_{1} \big] + k_{n}
+\overline{y}(p) \big[ &p^{n} + c_{1} \, p^{n-1} \, + \ldots + c_{n}  \big] = \overline{f}(p) + \\[0.5em]
+&+ k_{1} \, \big[ p^{n-1} + c_{1} \, p^{n-2} + \ldots + c_{n-1} \, p \big] + \\[0.5em]
+&+ k_{2} \, \big[ p^{n-2} + c_{1} \, p^{n-3} + \ldots  \big] +  \ldots + \\[0.5em]
+&+ k_{n-1} \big[ p + c_{1}  \big] + k_{n}
 \end{align*}
 Lo que implica:
 \begin{align}
 \begin{aligned}[b]
-\overline{y}(p) \big[ p^{n} + c_{1} &+ c_{1} \, p^{n-1} + \cdots + c_{n} \big] = \overline{f}(p) + \\[0.5em]
-&+ k_{1} \big[ p^{n-1} + c_{1} \, p^{n-2} + \cdots c_{n-1} \, p \big] + \\[0.5em]
-&+ k_{2} \big[ p^{n-2} + c_{1} \, p^{n-3} + \cdots \big] + \cdots + k_{n-1} \big[ p + c_{1} \big] + k_{n} \\[0.5em]
-\Rightarrow \hspace{0.2cm} \overline{y}(p) &= \dfrac{\big[\overline{f}(p) + \overline{g}(p) \big]}{\big[p^{n}+ c_{1} \, p^{n-1} + \ldots + c_{n}\big]} \\[0.5em]
-\overline{y}(p) &= \dfrac{\overline{f}(p)}{h(p)} + \dfrac{\overline{g}(p)}{h(p)} \hspace{1cm} \mbox{donde } \overline{f} (p) = L \big[ f(t) \big]
+\overline{y}(p) \big[  p^{n} + c_{1} &+ c_{1} \, p^{n-1} + \cdots + c_{n}  \big] = \overline{f}(p) + \\[0.5em]
+&+ k_{1} \big[  p^{n-1} + c_{1} \, p^{n-2} + \cdots c_{n-1} \, p  \big] + \\[0.5em]
+&+ k_{2} \big[  p^{n-2} + c_{1} \, p^{n-3} + \cdots  \big] + \cdots + k_{n-1} \big[  p + c_{1}  \big] + k_{n} \\[0.5em]
+\Rightarrow \hspace{0.2cm} \overline{y}(p) &= \dfrac{\big[ \overline{f}(p) + \overline{g}(p)  \big]}{\big[ p^{n}+ c_{1} \, p^{n-1} + \ldots + c_{n} \big]} \\[0.5em]
+\overline{y}(p) &= \dfrac{\overline{f}(p)}{h(p)} + \dfrac{\overline{g}(p)}{h(p)} \hspace{1cm} \mbox{donde } \overline{f} (p) = L \big[  f (t)  \big]
 \end{aligned}
 \label{eq:ecuacion_04_55}
 \end{align}
@@ -626,16 +627,16 @@ y(t) = L^{-1} \left[ \dfrac{\overline{g}(p)}{h(p)} \right]
 \begin{ejemplo}
 Resuelve usando la transformada de Laplace el problema de valores iniciales:
 \begin{align*}
-\ttilde{y}(t) +  2 \, \stilde{y} (t) - \ptilde{y}(t) - 2 \, y(t) = 0
+\ttilde{y}(t) +  2 \, \sderivada{y} (t) - \pderivada{y}(t) - 2 \, y(t) = 0
 \end{align*}
-con las condiciones iniciales: $y(0) = \ptilde{y}(0) = 0$ y $\stilde{y} = 6$
+con las condiciones iniciales: $y(0) = \pderivada{y}(0) = 0$ y $\sderivada{y} = 6$
 \noindent Solución:
 \\[0.5em]
 Aplicando la transformada de Laplace en ambos lados de la EDO con las condiciones iniciales dadas, se tiene que:
 \begin{align*}
-\big[p^{3} \, \overline{y}(p) &- p^{2} \, y(0) - p \, \ptilde{y}(0) - \stilde{y}(0) \big] + 2 \, \big[p^{2} \, \overline{y}(p) - p \, y(0) - \ptilde{y}(0) \big] + \\[0.5em]
-&- \big[p \, \overline{y}(p) - y(0) \big] - 2 \, \overline{y}(p) = 0 \\[1em]
-&\Rightarrow \overline{y}(p) = \dfrac{6}{\big[p^{3} - 2 \, p^{2} - p -2 \big]} \\[0.5em]
+\big[ p^{3} \, \overline{y}(p) &- p^{2} \, y(0) - p \, \pderivada{y}(0) - \sderivada{y}(0)  \big] + 2 \, \big[ p^{2} \, \overline{y}(p) - p \, y(0) - \pderivada{y}(0)  \big] + \\[0.5em]
+&- \big[ p \, \overline{y}(p) - y(0)  \big] - 2 \, \overline{y}(p) = 0 \\[1em]
+&\Rightarrow \overline{y}(p) = \dfrac{6}{\big[ p^{3} - 2 \, p^{2} - p -2  \big]} \\[0.5em]
 &\Rightarrow \overline{y}(p) = \dfrac{6}{(p - 1)(p + 1)(p +2)} \equiv \dfrac{1}{p - 1} - \dfrac{3}{p + 1} + \dfrac{2}{p + 2}  
 \end{align*}
 Entonces al aplicar la transformada inversa de Laplace en ambos lados de la expresión, se obtiene:
@@ -646,7 +647,7 @@ y(t) = e^{t} - 3 \, e^{-t} + 2 \, e^{- 2 t}
 \begin{ejemplo}
 Resuelve el siguiente problema de valores iniciales, definido por:
 \begin{align*}
-\left[ \dv[2]{t} + n^{2}\right] \, x(t) = a \, \sin (n \, t +  \alpha) \hspace{0.5cm} x(0) = \ptilde{x}(0) = 0
+\left[ \dv[2]{t} + n^{2}\right] \, x(t) = a \, \sin (n \, t +  \alpha) \hspace{0.5cm} x(0) = \pderivada{x}(0) = 0
 \end{align*}
 \noindent Solución:
 \\[0.5em]
@@ -657,27 +658,29 @@ Aplicando la transformada de Laplace en ambos lados de la EDO con las condicione
 \end{align*}
 Aplicando ahora la transformada inversa, se llega a:
 \begin{align*}
-x(t) &= a \, n \, \cos \alpha \, \dfrac{1}{2 \, n^{3}} \, \big[\sin n \, t - n \, t \, \cos n \, t \big] + a \, \sin \alpha \, \dfrac{t}{2 \, n} \, \sin n \, t = \\[0.5em]
-&= \dfrac{a \big[\sin n \, t \, \cos \alpha - n \, t \, \cos (n \, t +  \alpha)]}{2 \, n^{2}}
+x(t) &= a \, n \, \cos \alpha \, \dfrac{1}{2 \, n^{3}} \, \big[ \sin n \, t - n \, t \, \cos n \, t  \big] + a \, \sin \alpha \, \dfrac{t}{2 \, n} \, \sin n \, t = \\[0.5em]
+&= \dfrac{a \big[ \sin n \, t \, \cos \alpha - n \, t \, \cos (n \, t +  \alpha)]}{2 \, n^{2}}
 \end{align*}
 \end{ejemplo}
 \begin{ejemplo}
 Se aplica un voltaje $E \, e^{- a t}$ al tiempo $t = 0$ a un circuito de inductancia $L$ y resistencia $R$ conectadas en serie, donde $a$, $E$, $L$, y $R$ son constantes. Determina la corriente en cualquier tiempo, es decir: $i(t)$.
-\noindent Solución:
 \\[0.5em]
+\noindent
+Solución:
+\\
 En un circuito eléctrico en donde se tiene un voltaje $E(t)$, una resistencia $R$ e inductancia $L$, la corriente $i(t)$ en el circuito está dada por:
 \begin{align*}
 L \, \dv{i}{t} + R \, i(t) =  E(t)
 \end{align*}
 En este caso: $E(t) = E \, e^{-a t}$ y para el $t = 0$, $i(0) = 0$. Al aplicar la transformada de Laplace a la ecuación de la corriente, con las condiciones dadas, se tiene que:
 \begin{align*}
-&L \big[ p \, \overline{i}(p) - 0 \big] + R \, \overline{i} (p) = E \, \dfrac{1}{p + a} \\[0.5em]
+&L \big[  p \, \overline{i}(p) - 0  \big] + R \, \overline{i} (p) = E \, \dfrac{1}{p + a} \\[0.5em]
 &\Rightarrow \overline{i}(p) = \dfrac{E}{(L \, p + R)(p + a)} \equiv \dfrac{E}{L \, \left(a - \dfrac{R}{L} \right)} \, \left[ \dfrac{1}{p + \dfrac{R}{L}}  - \dfrac{1}{p + a}\right] \\[0.5em]
 &= \dfrac{E}{R - a \, L} \left[ \dfrac{1}{p + a} - \dfrac{1}{p + \dfrac{R}{L}}\right]
 \end{align*}
 Aplicando la transformada inversa de Laplace:
 \begin{align*}
-i(t) = \dfrac{E}{R - a \, L} \, \big[ e^{-a t} - e^{-R t /L}\big]
+i(t) = \dfrac{E}{R - a \, L} \, \big[  e^{-a t} - e^{-R t /L} \big]
 \end{align*}
 \end{ejemplo}
 
@@ -704,7 +707,7 @@ Resolviendo éstas dos ecuaciones para $\overline{x}(p)$ y $\overline{y}(p)$, ll
 \end{align*}
 Usando la transformada inversa de Laplace, se tiene:
 \begin{align*}
-x(t) = \dfrac{1}{2} \big[ \cos t + 2 \, \sin t +  e^{t} - t \, \cos t \big]
+x(t) = \dfrac{1}{2} \big[  \cos t + 2 \, \sin t +  e^{t} - t \, \cos t  \big]
 \end{align*}
 De la misma manera se llega a:
 \begin{align*}
@@ -712,35 +715,35 @@ De la misma manera se llega a:
 \end{align*}
 Que al aplicar la transformada inversa de Laplace y simplificando la expresión, tenemos que:
 \begin{align*}
-y(t)= \dfrac{1}{2} \big[ t \, \sin t - e^{t} + \cos t - \sin t \big]
+y(t)= \dfrac{1}{2} \big[  t \, \sin t - e^{t} + \cos t - \sin t  \big]
 \end{align*}
 \end{ejemplo}
 
-\section{Ejercicios a cuenta.}
+% \section{Ejercicios a cuenta.}
 
-\noindent
-\textbf{Ejercicio a cuenta (60). } Calcula la transformada de Laplace de la siguiente función:
-\begin{align*}
-f(t) = \begin{cases}
-0, & 0 < t < 1 \\
-(t - 1)^{2}, & t > 1
-\end{cases}
-\end{align*}
-\\[0.5em]
-\noindent
-\textbf{Ejercicio a cuenta (61). } Una función periódica $f(t)$ de período $2 \, \pi$ tiene una discontinuidad finita en $t = \pi$, la función está dada por:
-\begin{align*}
-f(t) = \begin{cases}
-\sin t, & 0 \leq t \leq \pi \\
-\cos t, & \pi < t \leq 2 \pi
-\end{cases}
-\end{align*}
-Calcula su transformada de Laplace.
-\\[0.5em]
-\noindent
-\textbf{Ejercicio a cuenta (62). } Ocupando la transformada de Laplace resuelve la siguiente ecuación diferencial:
-\begin{align*}
-\dv[2]{x}{t} + 9 \, x = \cos 2 \, t
-\end{align*}
-sujeta a las siguientes condiciones $x (0) =  1$, $x \bigg( \dfrac{\pi}{2} \bigg) = -1$
+% \noindent
+% \textbf{Ejercicio a cuenta (60). } Calcula la transformada de Laplace de la siguiente función:
+% \begin{align*}
+% f (t) = \begin{cases}
+% 0, & 0 < t < 1 \\
+% (t - 1)^{2}, & t > 1
+% \end{cases}
+% \end{align*}
+% \\[0.5em]
+% \noindent
+% \textbf{Ejercicio a cuenta (61). } Una función periódica $f (t)$ de período $2 \, \pi$ tiene una discontinuidad finita en $t = \pi$, la función está dada por:
+% \begin{align*}
+% f (t) = \begin{cases}
+% \sin t, & 0 \leq t \leq \pi \\
+% \cos t, & \pi < t \leq 2 \pi
+% \end{cases}
+% \end{align*}
+% Calcula su transformada de Laplace.
+% \\[0.5em]
+% \noindent
+% \textbf{Ejercicio a cuenta (62). } Ocupando la transformada de Laplace resuelve la siguiente ecuación diferencial:
+% \begin{align*}
+% \dv[2]{x}{t} + 9 \, x = \cos 2 \, t
+% \end{align*}
+% sujeta a las siguientes condiciones $x (0) =  1$, $x \bigg( \dfrac{\pi}{2} \bigg) = -1$
 \end{document}
