@@ -1,0 +1,692 @@
+\section{Método de Frobenius.}
+\subsection{Introducción.}
+%Ref. Bruzzone - Introducción al método de Frobenius
+
+El método propone la búsqueda de soluciones en series de potencias para ecuaciones diferenciales lineales de segundo orden.
+\par
+Este procedimiento requiere el encontrar relaciones de recurrencia entre los coeficientes de las series buscadas, asumiendo que el primer término de la serie es no nulo.
+
+\subsection{Soluciones analíticas.}
+
+Una clase muy extensa de ecuaciones diferenciales poseen soluciones que se expresan en series de potencias, las cuales son válidas en un dominio determinado. Las funciones que gozan de esta particularidad se les llama \emph{analíticas}.
+\par
+Las ecuaciones diferenciales más familiares como la ecuación de un oscilador armónico:
+\begin{align*}
+\ddot{x} + \omega^{2} \, x = 0
+ \end{align*}
+admite soluciones del tipo
+\begin{align*}
+x(s) = A_{1} \, \sin(\omega \, s) + A_{2} \, \cos (\omega \, s)
+\end{align*}
+siendo claro que $\sin(\omega \, s)$ y $\cos(\omega \, s)$ son funciones analíticas.
+\par
+De igual manera para la ecuación de un oscilador amortiguado, como en un gran número de ecuaciones de la mecánica nos encontraremos que forman parte de este tipo de ecuaciones.
+
+\subsection{Definición.}
+
+Una expresión de la forma:
+\begin{align}
+a_{0} + a_{1} \, (x - x_{0}) + \ldots + a_{n} \, x^{n} = \nsum_{n=0}^{\infty} a_{n} \, (x - x_{0})^{n}
+\label{eq:ecuacion_01}    
+\end{align}
+se llama \textit{serie de potencias}.
+\par
+La serie puede estar definida por el límite
+\begin{align*}
+\lim_{N \to \infty} \nsum_{n=0}^{N} a_{n} \, (x - x_{0})
+\end{align*}
+para aquellos valores de $x$ en que exista el límite. En ese caso, se le conoce a la serie como una serie convergente.
+\par
+Para determinar los valores de $x$ que cumplen la condición de convergencia, se utiliza el criterio del cociente:
+\begin{align*}
+\lim_{n \to \infty} \dfrac{a_{n+1}}{a_{n}} = \rho \hspace{1.5cm} \begin{cases}
+\text{Converge si } & \rho < 1 \\
+\text{Diverge si } & \rho > 1
+\end{cases}
+\end{align*}
+El criterio no clasifica si $\rho = 1$.
+\par
+Más general es considerar el valor absoluto de dicho cociente, si está acotado por cierto numero $\sigma$ cuando $n \to \infty$, la serie converge cuando $\sigma < 1$. Por lo tanto, tendríamos que
+\begin{align*}
+\rho = \lim_{n \to \infty} \abs{\dfrac{a_{n+1}}{a_{n}}} \, \abs{x - x_{0}} = L \, \abs{x - x_{0}}
+\end{align*}
+en donde
+\begin{align*}
+L = \lim_{n \to \infty} \abs{\dfrac{a_{n+1}}{a_{n}}}
+\end{align*}
+\par
+Si este límite existe, se deduce por la ec. (\ref{eq:ecuacion_01}):
+\begin{align}
+\begin{aligned}        
+\text{converge si } &\abs{x - x_{0}} < \dfrac{1}{L} \\[0.5em]
+\text{diverge si } &\abs{x - x_{0}} > \dfrac{1}{L}
+\end{aligned}
+\label{eq:ecuacion_02}    
+\end{align}
+De esta manera tendremos un intervalo de convergencia cuando $L$ existe:
+\begin{align*}
+\bigg( x_{0} - \dfrac{1}{L}, x_{0} + \dfrac{1}{L} \bigg)
+\end{align*}
+Este intervalo es simétrico respecto de $x_{0}$, de manera tal que \textbf{la serie es convergente dentro} de este intervalo y \textbf{divergente fuera} del mismo.
+
+\section{Puntos singulares.}
+\subsection{Definiciones.}
+%Ref. Arfken
+
+Se presenta el concepto de un \textbf{punto singular o singularidad} (tal como se aplica a una ecuación diferencial).
+\par
+El interés en este concepto radica en su utilidad en:
+\begin{enumerate}
+\item Clasificar las EDO.
+\item Revisar la viabilidad de una solución en series, esta viabilidad es parte del teorema de Fuchs.
+\end{enumerate}
+Usando la notación $\displaystyle \dv[2]{y}{x} = \sderivada{y}$, tenemos:
+\begin{align}
+\sderivada{y} = f (x, y, \pderivada{y})
+\label{eq:ecuacion_09_74}
+\end{align}
+Ahora bien, si en la ec. (\ref{eq:ecuacion_09_74}) $y$ e $\pderivada{y}$ pueden tener todos los valores finitos a $x = x_{0}$ e $\sderivada{y}$ permanece finita, el punto $x = x_{0}$ es un \textbf{punto ordinario}.
+\par
+Por otra parte, si $\sderivada{y}$ se vuelve infinita para cualquier selección finita de $y$ e  $\sderivada{y}$, el punto $x = x_{0}$ se denomina \textbf{punto singular}.
+\par
+Si escribimos esta EDO2H (en $y$) como
+\begin{align}
+\sderivada{y} + P (x) \, \tilde{y} + Q(x) \, y = 0
+\label{eq:ecuacion_09_75}
+\end{align}
+Ahora bien, si las funciones $P (x)$ y $Q (x)$ permanecen finitas a $x = x_{0}$, el punto $x = x_{0}$ es un \emph{punto ordinario}.
+\par
+Al contrario, si $P (x)$ y/o $Q (x)$ divergen mientras $x \to x_{0}$, el punto $x_{0}$ es un \emph{punto singular}.
+\par
+Usando la ecuación (\ref{eq:ecuacion_09_75}) podemos distinguir entre dos tipos de puntos singulares:
+\begin{enumerate}
+\item Si $P (x)$ y/o $ Q(x)$ divergen a medida que $x \to x_{0}$, pero $(x - x_{0}) \: P (x)$ y $(x - x_{0})^{2} \: Q (x)$ permanecen finitas a medida que $x \to x_{0}$, entonces el punto $x = x_{0}$ se llama \textbf{punto singular regular o punto singular no esencial}.
+\item Si $P (x)$ diverge más rápidamente que $\dfrac{1}{(x - x_{0})}$, de tal modo que $(x - x_{0}) \: P (x)$ tiene a infinito a medida que $x \to x_{0}$, o cuando $Q (x)$ diverge más rápidamente que $\dfrac{1}{(x - x_{0})^{2}}$, de modo que $(x - x_{0})^{2} \: Q (x)$ tiene a infinito, a medida que $x \to x_{0}$, entonces el punto $x = x_{0}$ se llama \textbf{singularidad esencial o singularidad irregular}.
+\end{enumerate}
+Estas definiciones son válidas para todos los valores finitos de $x_{0}$. 
+\par
+El análisis de los puntos al infinito $(x \to \infty)$ es similar al tratamiento que se hace para las funciones en variable compleja: hacemos el cambio de variable $x = 1/z$, sustituyendo en la ED y entonces hacemos que $z \to 0$. 
+\par
+Haciendo el cambio de variable en las derivadas:
+\begin{align}
+\dv{y(x)}{x} = \dv{y(z^{-1})}{z} \: \dv{z}{x} = - \dfrac{1}{x^{2}} \dv{y(z^{-1})}{z} = -z^{2} \: \dv{y(z^{-1})}{z}
+\label{eq:ecuacion_09_76}
+\end{align}
+Entonces:
+\begin{align}
+\begin{aligned}
+\dv[2]{y(x)}{x} &= \dv{z} \left[ \dv{y(x)}{x} \right] \dv{z}{x} = \\
+&= (-z^{2}) \left[ -2 \: z \dv{y(z^{-1})}{z} - z^{2} \: \dv[2]{y(z^{-1})}{z} \right] = \\
+&= 2 \: z^{3} \: \dv{y(z^{-1})}{z} + z^{4} \: \dv[2]{y(z^{-1})}{z}
+\end{aligned}
+\label{eq:ecuacion_09_77}
+\end{align}
+Usando estos resultados, podemos transformar la ecuación (\ref{eq:ecuacion_09_75}) en:
+\begin{align}
+z^{4} \: \dv[2]{y}{z} + [ 2 \: z^{3} - z^{2} \: P(z^{-1})] \: \dv{y}{z} + Q(z^{-1}) \: y = 0
+\label{eq:ecuacion_09_78}
+\end{align}
+El comportamiento en $x = \infty, (z = 0)$ entonces dependerá del comportamiento de los nuevos coeficientes
+\begin{align*}
+\dfrac{2 \: z - P(z^{-1})}{z^{2}} \hspace{1cm} \text{ y } \hspace{1cm} \dfrac{Q(z^{-1})}{z^{4}}
+\end{align*}
+a medida que $z \to 0$.
+\par
+Si estas dos expresiones se mantienen finitas, el punto $x = \infty$ es un punto ordinario.
+\par
+Si las expresiones divergen con mayor rapidez que $1/z$ y $1/z^{2}$, respectivamente, el punto $x = \infty$ es un punto regular singular, de otra manera, el punto es irregular singular (una singularidad esencial).
+
+% %Ref. Hassani 2009 Chap. 26
+\section{Método de Frobenius.}
+\subsection{El método.}
+
+El supuesto básico del método de Frobenius es que la solución de la ED se puede \textbf{representar mediante una serie de potencias}.
+\par
+Esta no es una suposición restrictiva porque todas las funciones encontradas en aplicaciones físicas pueden escribirse como series de potencias siempre que estemos interesados en sus valores que se encuentran en su intervalo de convergencia.
+\par
+Este intervalo puede ser muy pequeño o puede cubrir toda la línea real.
+\par
+Una ecuación diferencial de segundo orden homogénea y lineal, se puede escribir como
+\begin{align}
+p_{2} (x) \, \dv[2]{y}{x} + p_{1} (x) \, \dv{y}{x} + p_{0} (x) \, y = 0
+\label{eq:ecuacion_26_07}    
+\end{align}
+Para casi todas las aplicaciones que se encuentran en física, consideramos que $p_{0}, p_{1}, p_{2}$ son polinomios.
+\par
+Es posible que la ED no se presenta en la forma que se muestra a partir de, digamos, el método de separación de variables, pero se puede \enquote{llevar} a esa forma.
+\par
+La forma más complicada de los coeficientes de las derivadas en una ED son típicamente funciones racionales (razones de dos polinomios).
+\par
+Por lo tanto, multiplicar la ED por el producto de los tres denominadores nos devolverá la ED en la forma dada en la ec. (\ref{eq:ecuacion_26_07}).
+\par
+El primer paso en el método de Frobenius es \textbf{asumir una serie de potencias infinita para y}. Es común elegir que el punto de expansión sea $x = 0$.
+\par
+Si $p_{2} (0) \neq 0$, solo es necesario considerar las potencias no negativas de $x$.
+\par
+Si $p_{2} (0) = 0$, la ED pierde su carácter de \enquote{segundo orden}, y las soluciones no se revisarían en estas notas.
+\par
+Se tienen dos opciones:
+\begin{enumerate}
+\item Elegir un punto de expansión diferente a $x_{0} \neq 0$, tal que $p_{2} (x_{0}) \neq 0$.
+\item Permitir las potencias no positivas de $x$ en la expansión de $y$.
+\end{enumerate}
+Rara vez se utiliza la primera opción. Resulta que la forma más económica, pero general, de incorporar la segunda opción es escribir la solución como se muestra a continuación:
+\par
+La solución que suponemos es del tipo:
+\begin{align}
+\begin{aligned}[b]
+y &= x^{r} \, \nsum_{n=0}^{\infty} a_{n} \, x^{n} = \\[0.5em]
+&= \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} = \\[0.5em]
+&= a_{0} \, x^{r} + a_{1} \, x^{r+1} + a_{2} \, x^{r+2} + \ldots
+\end{aligned}
+\label{eq:ecuacion_26_08}    
+\end{align}
+donde $r$ es un número real (no necesariamente un entero positivo) que quedará determinado por la ED.
+\par
+Es habitual elegir $a_{0} = 1$ porque cualquier múltiplo constante de una solución también es una solución.
+\par
+Si $a_{0} \neq 1$, entonces se multiplica la serie por $1/a_{0}$ y así obtener el valor.
+\par
+Ya que una serie de potencias es uniformemente convergente (con su radio de convergencia), por lo que se puede diferenciar término a término.
+\par
+Por lo que al diferenciar la solución en una primera ocasión, tenemos:
+\begin{align}
+\begin{aligned}[b]
+\dv{y}{x} &= \nsum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} = \\[0.5em]
+&= r \, a_{0} \, x^{r-1} + (r + 1) \, a_{1} \, x^{r} + \ldots
+\end{aligned}
+\label{eq:ecuacion_26_09a}
+\end{align}
+Por lo que al diferenciar por segunda vez, tenemos:
+\begin{align}
+\begin{aligned}[b]
+\dv[2]{y}{x} &= \nsum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-1} = \\[0.5em]
+&= r \, (r - 1) \, a_{0} \, x^{r-2} + (r + 1) \, r \, a_{1} \, x^{r}-1 + \ldots
+\end{aligned}
+\label{eq:ecuacion_26_09b}
+\end{align}
+
+Ahora sustituimos las ecuaciones (\ref{eq:ecuacion_26_08}), (\ref{eq:ecuacion_26_09a}) y (\ref{eq:ecuacion_26_09b}) en la EDO2H (\ref{eq:ecuacion_26_07}).
+\par
+Multiplicamos los polinomios en la serie, agrupamos todas las potencias distintas de $x$ y establecemos el coeficiente de cada término igual a cero. Así obtenemos un conjunto de ecuaciones cuya solución determina el valor de $r$ y las $a_{n}$.
+\par
+La ecuación que surge de la \textbf{potencia más baja de x} involucra solo a $r$, se llama \textbf{ecuación de índices}\footnote{En algunos textos se le conoce como \textbf{ecuación indicial}, que sería una traducción literal del inglés; en estas notas preferimos la referencia como ecuación de índices, ya que es más directa la asociación.}.
+\par
+Esta suele ser una ecuación cuadrática en $r$ que se puede resolver para obtener el(los) posible(s) valor(es) de $r$, cada uno de los cuales conduce generalmente a una solución diferente.
+\par
+Las otras ecuaciones que provienen de potencias superiores de $x$ permiten establecer \textbf{relaciones de recurrencia}, es decir, ecuaciones que dan $a_{n}$ en términos de $a_{n-1}$ y $a_{n-2}$. Al iterar esta relación, se pueden obtener todos los $a_{n}$ en términos de solo dos coeficientes.
+
+\subsection{Ejercicio}
+% %Ref. Zill ED pág. 279
+
+Resuelve la siguiente EDO2H mediante el método de Frobenius:
+\begin{align}
+3 \, x \, \sderivada{y} + \pderivada{y} - y = 0
+\label{eq:ecuacion_04}    
+\end{align}
+Como primer paso, proponemos una solución del tipo:
+\begin{align*}
+y = \nsum_{n=0}^{\infty} a_{n} \, x^{n+r}
+\end{align*}
+Procedemos a calcular la primera y segunda derivada de la solución:
+\begin{align*}
+\pderivada{y} &= \nsum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} \\[0.5em]
+\sderivada{y} &= \nsum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-2}
+\end{align*}
+Ahora se sustituyen las expresiones en la ED inicial (\ref{eq:ecuacion_04}), de donde obtenemos\footnote{Revisa con cuidado los cambios de signo, ya que en correspondencia con el álgebra, al final del renglón se deja el signo $(+)$, y si el término está restando, en el siguiente renglón se presenta el signo $(-)$.}:
+\begin{align*}
+3 \, x \, \sderivada{y} + \pderivada{y} - y &= 3 \, x \, \left[  \nsum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-2} \right] + \\[0.5em]
+&+ \nsum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} - \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+Comenzamos a simplificar la expresión:
+\begin{align*}
+3 \, \left[ \nsum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-1} \right] &+ \nsum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} + \\[0.5em]
+&- \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}
+Factorizando las primeras sumas:
+\begin{align*}
+\nsum_{n=0}^{\infty} (n + r) \, \left[ 3 \, (n + r - 1) + 1 \right] \, a_{n} \, x^{n+r-1} - \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} &= 0 \\[0.5em] 
+\Rightarrow \hspace{0.3cm} \nsum_{n=0}^{\infty} (n + r) \, (3 \, n + 3 \, r - 2) \, a_{n} \, x^{n+r-1} - \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} &= 0
+\end{align*}
+La primera suma tiene el exponente más bajo para $x$, extraemos el primer término con $n = 0$, así llegamos a:
+\begin{align*}
+r (3 \, r - 2) \, a_{0} \, x^{r-1} + \nsum_{n=1}^{\infty} (n + r) \, (3 \, n + 3 \, r - 2) \, a_{n} \, x^{n+r-1} - \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} &= 0
+\end{align*}
+Sabemos que para factorizar nuevamente las dos sumas, los índices de las mismas deben de comenzar con el mismo valor, así como los exponentes de $x$ deben de ser iguales. Ocupamos la propiedad que tienen los índices en las sumas infinitas: pasamos el índice de $n = 1$ a $n = 0$, haciendo el correspondiente ajuste en los términos que involucran a $n$:
+\begin{align*}
+r(3 \, r - 2) \, a_{0} \, x^{r-1} &+ \nsum_{n=0}^{\infty} (n + r + 1) \, (3 \, (n + 1) + 3 \, r - 2) \, a_{n+1} \, x^{n+r} + \\[0.5em]
+&- \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} = 0
+\end{align*}    
+Al contar ya con los índices que inician en el mismo valor y los exponentes de $x$ son iguales, ya es posible factorizar:
+\begin{align*}
+r(3 \, r - 2) \, a_{0} \, x^{r-1} &+ \nsum_{n=0}^{\infty} \bigg[ (n + r + 1) \, (3 \, n + 3 \, r + 1) \, a_{n+1} - a_{n} \bigg] \, x^{n+r} = 0    
+\end{align*}
+De la teoría de series infinitas, sabemos que todos los coeficientes de la suma deben de ser nulos, y como $a_{0} \neq 0$ desde la propuesta de la solución en series: tenemos dos resultados importantes, el primero de ellos lo consideramos de la expresión con el exponente más pequeño del desarrollo:
+\begin{align*}
+r \, (3 \, r - 2) \, a_{0} = 0
+\end{align*}
+que es la \textbf{ecuación de índices}.
+\par
+El segundo resultado es la \textbf{relación de recurrencia}:
+\begin{align*}
+(n + r + 1)(3 \, n + 3 \, r + 1) \, a_{n+1} - a_{n} = 0
+\end{align*}
+Por lo que:
+\begin{align}
+a_{n+1} = \dfrac{a_{n}}{(n + r + 1)(3 \, n + 3 \, r + 1)}
+\label{eq:ecuacion_07}
+\end{align}
+De la ecuación de índices, sabemos desde el inicio que $a_{0} \neq 0$, por lo que
+\begin{align}
+r (3 \, r - 2) = 0
+\label{eq:ecuacion_06}
+\end{align}
+que tiene por raíces los valores:
+\begin{align*}
+r_{1} = \dfrac{2}{3} \hspace{1.5cm} r_{2} = 0
+\end{align*}
+Ocupamos la primera raíz $r_{1} = 2/3$ en la relación de recurrencia (\ref{eq:ecuacion_07}):
+\begin{align}
+\begin{aligned}[b]
+a_{n+1} &= \dfrac{a_{n}}{ \left( n + \dfrac{2}{3} + 1\right) \left(3 \, n + 3 \, \left( \dfrac{2}{3} \right) + 1\right)} \\[0.5em]
+&= \dfrac{a_{n}}{\left( \dfrac{3 \, n + 5}{3} \right) \bigg( 3 (n + 1) \bigg)} = \\[0.5em]
+a_{n+1} &= \dfrac{a_{n}}{(3 \, n + 5)(n + 1)} \hspace{1.5cm} n = 0, 1, 2, \ldots
+\end{aligned}
+\label{eq:ecuacion_08}    
+\end{align}
+De tal manera que ya podemos calcular los valores de los coeficientes a partir de la relación de recurrencia anterior, ocupando los valores de $n$:
+\begin{align*}
+a_{1} &= \dfrac{a_{0}}{5 \cdot 1} \\[0.5em]
+a_{2} &= \dfrac{a_{1}}{8 \cdot 2} = \dfrac{a_{0}}{2! \, 5 \cdot 8} \\[0.5em]
+a_{3} &= \dfrac{a_{2}}{11 \cdot 3} = \dfrac{a_{0}}{3! \, 5 \cdot 8 \cdot 11} \\
+\vdots \\[0.5em]
+a_{n} &= \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \hspace{1cm} n = 1, 2, 3, \ldots
+\end{align*}
+Con este desarrollo hemos obtenido la primera solución $y_{1}(x)$ de la EDO2H inicial, ocupando la raíz $r_{1}$:
+\begin{align}
+y_{1} (x)= a_{0} \, x^{2/3} \left[ 1 + \nsum_{n=1}^{\infty} \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \, x^{n} \right]
+\label{eq:ecuacion_10}    
+\end{align}
+Con la segunda raíz de la ecuación de índices: $r_{2} = 0$ se genera una regla de recurrencia distinta:
+\begin{align}
+a_{n+1} = \dfrac{a_{n}}{(n+1)(3 \, n + 1)} \hspace{1.5cm} n = 0, 1, 2, \ldots
+\label{eq:ecuacion_09}    
+\end{align}
+Por lo que los coeficientes que se obtienen son:
+\begin{align*}
+a_{1} &= \dfrac{a_{0}}{1 \cdot 1} \\[0.5em]
+a_{2} &= \dfrac{a_{1}}{2 \cdot 4} = \dfrac{a_{0}}{2! \, 1 \cdot 4}  \\[0.5em]
+a_{3} &= \dfrac{a_{2}}{3 \cdot 7} = \dfrac{a_{0}}{3! \, 4 \cdot 7}  \\[0.5em]
+\vdots \\
+a_{n} &= \dfrac{a_{0}}{n! \, 1 \cdot 4 \cdot 7 \ldots (3 \, n - 2)} \hspace{1cm} n = 1, 2, 3, \ldots
+\end{align*}
+La segunda solución $y_{2}(x)$ para la EDO2H inicial es:
+\begin{align}
+y_{2} (x)= a_{0} \, x^{0} \left[ 1 + \nsum_{n=1}^{\infty} \dfrac{1}{n! \, 1 \cdot 4 \cdot 7 \ldots (3\, n - 2)} \, x^{n} \right]
+\label{eq:ecuacion_11}
+\end{align}    
+Se puede demostrar que las soluciones (\ref{eq:ecuacion_10}) y (\ref{eq:ecuacion_11}) convergen ambas para todos los valores finitos de $x$.
+\par
+También es posible ver que las soluciones no es múltiplo de la otra, por lo que $y_{1}(x)$ y $y_{2}(x)$ son linealmente independientes con respecto a $x$.
+\par
+Por el principio de superposición, tenemos que:
+\begin{align*}
+y (x) &= C_{1} \, y_{1} (x) + C_{2} \, y_{2} (x) = \\[0.5em]
+&= C_{1} \, \left[ x^{2/3} + \nsum_{n=1}^{\infty} \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \, x^{n} \right] + \\[0.5em]
+&+ C_{2} \, \left[ 1 + \nsum_{n=1}^{\infty} \dfrac{1}{n! \, 1 \cdot 4 \cdot 7 \ldots (3\, n - 2)} \, x^{n} \right]
+\end{align*}
+
+\subsection{Casos de las raíces.}
+
+Al ocupar el método de Frobenius se pueden presentar tres casos, que corresponden a la naturaleza de las raíces de la ecuación de índices.
+\par
+Haremos la suposición de que $r_{1}$ y $r_{2}$ son las soluciones \emph{reales} de la ecuación de índices, que cuando son distintas, $r_{1}$ representa la raíz mayor.
+
+\subsection*{Caso 1. Las raíces no difieren un entero.}
+
+Si $r_{1}$ y $r_{2}$ son distintas, pero no difieren  en un entero, entonces existen dos soluciones linealmente independientes de la ED, cuya forma es:
+\begin{subequations}
+\begin{align}
+y_{1} (x) &= \nsum_{n=0}^{\infty} a_{n} \, x^{n+r_{1}} \hspace{0.5cm} a_{0} \neq 0 \label{eq:ecuacion_14a} \\[0.5em]
+y_{2} (x) &= \nsum_{n=0}^{\infty} b_{n} \, x^{n+r_{2}} \hspace{0.5cm} b_{0} \neq 0 \label{eq:ecuacion_14b}
+\end{align}
+\end{subequations}
+
+\subsection*{Caso 2. Las raíces difieren en un entero positivo.}
+
+Si $r_{1} - r_{2} = N$, donde $N$ es un entero positivo, entonces existe dos soluciones linealmente independientes de la ED, de la forma:
+\begin{subequations}
+\begin{align}
+y_{1} (x) &= \nsum_{n=0}^{\infty} a_{n} \, x^{n+r_{1}} \hspace{0.5cm} a_{0} \neq 0 \label{eq:ecuacion_20a} \\[0.5em]
+y_{2} (x) &= C \, y_{1} (x) \ln x + \nsum_{n=0}^{\infty} b_{n} \, x^{n+r_{2}} \hspace{0.5cm} b_{0} \neq 0 \label{eq:ecuacion_20b}
+\end{align}
+\end{subequations}
+
+\subsection*{Caso 3. Las raíces son iguales.}
+
+Si $r_{1} = r_{2}$, siempre existen dos soluciones linealmente independientes de la ED, de la forma:
+\begin{subequations}
+\begin{align}
+y_{1} (x) &= \nsum_{n=0}^{\infty} a_{n} \, x^{n+r_{1}} \hspace{0.5cm} a_{0} \neq 0 \label{eq:ecuacion_21a} \\[0.5em]
+y_{2} (x) &= y_{1} (x) \ln x + \nsum_{n=0}^{\infty} b_{n} \, x^{n+r_{1}} \hspace{0.5cm} b_{0} \neq 0 \label{eq:ecuacion_21b}
+\end{align}
+\end{subequations}
+
+% \noindent
+% \textbf{Ejercicio a cuenta (21).} Determina los puntos singulares de las siguientes ED, clasifica cada punto singular en regular o irregular.
+% \begin{enumerate}[label=\roman*)]
+% \item $x^{3} \, \sderivada{y} + 4 \, x^{2} \, \pderivada{y} + 3 \, y = 0$
+% \item $x \, \sderivada{y} - (x + 3)^{-2} \, y = 0$
+% \item $(x^{2} - 9)^{2} \, \sderivada{y} + (x + 3) \, \pderivada{y} + 2 \, y = 0$
+% \item $\sderivada{y} - \dfrac{1}{x} \, \pderivada{y} + \dfrac{1}{(x - 1)^{3}} \, y = 0$
+% \end{enumerate}
+
+% \noindent
+% \textbf{Ejercicio a cuenta (22). } Resuelve las siguientes ED con el método de Frobenius:
+% \begin{enumerate}[label=\roman*)]
+% \item $2 \, x \, \sderivada{y} - \pderivada{y} + 2 \, y = 0$
+% \item $2 \, x \, \sderivada{y} + 5 \, \pderivada{y} + x \, y = 0$
+% \item $x (x - 1) \, \sderivada{y} + 3 \, \pderivada{y} - 2 \, y = 0$
+% \item $\sderivada{y} - \dfrac{3}{x} \, \pderivada{y} - 2 \, y = 0$
+% \end{enumerate}
+
+% Ref Kirkwood (2012). Chap. 8
+\section{Ecuación de calor.}
+\subsection{Problema completo.}
+
+Considera la ecuación de calor:
+\begin{align*}
+u_{t} =  K \,  \laplacian{u}
+\end{align*}
+
+La razón por la que las ecuaciones que se obtienen por el método de separación de variables en coordenadas cilíndricas no es tan simple como en coordenadas cartesianas, se debe a la forma del Laplaciano. 
+
+En coordenadas cilíndricas, el Laplaciano\footnote{El uso de distintas notaciones para expresar una EDP será frecuente en el curso, es por ello que al mezclar la escritura de distinta manera, nos permitirá manejar con mayor soltura las expresiones.} está dado por
+\begin{align*}
+u_{xx} = u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta} + u_{zz}
+\end{align*}
+
+Vamos a simplifcar nuestros cálculos y nos permitirá demostrar cómo surgen las funciones de Bessel\footnote{Ya en algunos ejemplos las ecuaciones resultantes o soluciones tendrán un nombre particular, aunque en esta parte del curso solo se haga la referencia, más adelante se abordará el estudio de esas ecuaciones o soluciones.} si suponemos que $u$ es una función de $r$, $\theta$ y $t$, pero no una función de $z$.
+
+\subsection{Separación de variables.}
+
+Ocupando el método de separación de variables que se revisó previamente, suponemos que existe una solución para $u$, tal que:
+\begin{align*}
+u_{t} = K \, \laplacian{u}
+\end{align*}
+Puede expresarse como:
+\begin{align*}
+R (r) \, \Theta (\theta) \, \pderivada{T} &= K \bigg[ \sderivada{T} (r) \, \Theta (\theta) \, T (t) + \\[0.5em]
+&+ \dfrac{1}{r} \pderivada{R} (r) \, \Theta(\theta) \, T (t) + \dfrac{1}{r^{2}} \, R (r) \, \sderivada{\Theta} \, T (t) \bigg]
+\end{align*}
+Dividiendo entre $K \, R (r) \, \Theta (\theta) \, T (t)$, tenemos que:
+\begin{align}
+\dfrac{1}{K} \, \dfrac{\pderivada{T} (t)}{T (t)} = \dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)}
+\label{eq:ecuacion_K01}
+\end{align}
+El lado izquierdo de la ecuación (\ref{eq:ecuacion_K01})es función sólo de $t$. Mientras que el lado derecho de la ecuación es función de $r$ y $\theta$, por lo que deben ser iguales a una constante.
+\par
+En este caso, corresponde a la primera constante de separación: $- \lambda$. Entonces tenemos que:
+\begin{align*}
+\dfrac{1}{K} \, \dfrac{\pderivada{T} (t)}{T (t)} = - \lambda
+\end{align*}
+o de manera equivalente
+\begin{align}
+\pderivada{T} (t) + \lambda \, K \, T (t) = 0
+\label{eq:ecuacion_K02}    
+\end{align}
+También tenemos que:
+\begin{align*}
+\dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)} = - \lambda
+\end{align*}
+Separando nuevamente las funciones:
+\begin{align*}
+\dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda = - \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)}
+\end{align*}
+Así tenemos:
+\begin{align}
+r^{2} \left[ \dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda \right] = - \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)}
+\label{eq:ecuacion_K03}    
+\end{align}
+El lado izquierdo de la ecuación (\ref{eq:ecuacion_K03}) es función solo de $r$ y el lado derecho es una función de $\theta$, por lo que debe ser igual a una constante: $\mu$, la segunda constante de separación.
+\begin{align}
+\sderivada{\Theta} (\theta) + \mu \, \Theta (\theta) = 0
+\label{eq:ecuacion_K04}    
+\end{align}
+y además:
+\begin{align*}
+r^{2} \left[ \dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda \right] = \mu
+\end{align*}
+Que al acomodar los términos:
+\begin{align*}
+\dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda = \dfrac{\mu}{r^{2}}
+\end{align*}
+La ecuación a la que llegamos es:
+\begin{align}
+\sderivada{R} (r) + \dfrac{1}{r} \, \pderivada{R} (r) + \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, R (r) = 0
+\label{eq:ecuacion_K05}    
+\end{align}
+Por lo tanto, para resolver la ecuación de calor en coordenadas polares, necesitamos resolver las ecuaciones (\ref{eq:ecuacion_K02}), (\ref{eq:ecuacion_K04}) y (\ref{eq:ecuacion_K05}). De éstas, solo la ecuación (\ref{eq:ecuacion_K05}) requiere atención adicional.
+\par
+La ecuación (\ref{eq:ecuacion_K05}) es (como) una \textbf{ecuación diferencial de Bessel}, es decir, presenta la forma de la ED de Bessel, que es una ecuación que como veremos más adelante, ésta ecuación forma parte de un conjunto de ecuaciones diferenciales de la física matemática que llamaremos \textbf{funciones especiales}.
+\par
+La ecuación que obtuvimos, se presenta cuando usamos el Laplaciano en coordenadas polares o cilíndricas en la ecuación de onda o la ecuación de calor.
+\par
+Como punto importante hay que señalar que a partir de una ecuación inicial, bajo cierta geometría encontramos una ED resultante, para obtener su solución. Este modo de trabajo lo retomaremos en el Tema 4 - Funciones Especiales.
+\par
+En la ecuación de Laplace, veremos que la ecuación tiene la forma
+\begin{align*}
+\sderivada{R} (r) + \dfrac{1}{r} \, \pderivada{R} (r) + \left( m^{2} - \dfrac{n^{2}}{r^{2}} \right) \, R(r) = 0
+\end{align*}
+y tendrá que manejarse de manera diferente.
+\par
+Si hubiéramos asumido que la función $u$ también dependía de $z$ y que la solución propuesta fuese:
+\begin{align*}
+u (r, \theta, z, t) =  R (r) \, \Theta (\theta) \, Z (z) \, T (t) 
+\end{align*}
+la ec. (\ref{eq:ecuacion_K05}) todavía habría sido la única EDO complicada que habría surgido.
+
+\subsection{Solución en series.}
+
+La ecuación (\ref{eq:ecuacion_K05}) es una ecuación tipo Bessel.
+\par
+A continuación, definimos una ecuación de Bessel, demostraremos una solución a tales ecuaciones y luego haremos una transformación que nos permitirá resolver la ecuación anterior
+\par
+Dado que esta es una ED de segundo orden, hay dos soluciones pero una no está acotada en $r = 0$. Debido a consideraciones físicas, esta será una solución inadmisible para nuestros problemas.
+\par
+Una ecuación de Bessel es una ecuación de la forma
+\begin{align*}
+x^{2} \, \sderivada{y} (x) + x \,\pderivada{y} (x) + (x^{2} - \nu^{2}) \, y (x) = 0 \hspace{1cm} 0 \leq x < \infty
+\end{align*}
+El método de solución que usaremos es mediante una serie de potencias.
+\par
+Proponemos una solución de la forma:
+\begin{align*}
+y = \nsum_{n=0}^{\infty} \, a_{n} \, x^{n+r}
+\end{align*}
+Para que la solución esté acotada en $x = 0$, se necesita que $r \geq 0$.
+\par
+Procedemos a diferenciar con respecto a $x$ la solución propuesta y agrupamos los términos, así tenemos que:
+\begin{align*}
+\pderivada{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, x^{n+r-1}
+\end{align*}
+Por lo que:
+\begin{align*}
+x \, \pderivada{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, x^{n+r}
+\end{align*}
+La segunda derivada es:
+\begin{align*}
+\sderivada{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2}
+\end{align*}
+Por tanto:
+\begin{align*}
+x^{2} \, \sderivada{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r}
+\end{align*}
+Al sustituir en la ec. de tipo Bessel y simplificando el producto por $x$ y $x^{2}$, se obtiene
+\begin{align*}
+&x^{2} \, \sderivada{y} (x) + x \,\pderivada{y} (x) + (x^{2} - \nu^{2}) \, y(x) = \\[0.5em]
+&= \nsum_{n=0}^{\infty} \, \bigg[ \left[ a_{n} \, (n + r) (n + r -1) \, x^{n+r} \right] + a_{n} \, (n + r) \, x^{n+r} + \\[0.5em]
+&+ \left[ (a_{n} \, x^{n+r+2} ) - \nu \, a_{n} \, x^{n+r} \right] \bigg] = 0
+\end{align*}
+Como nos interesa identificar el coeficiente del exponente menor de $x$, arreglamos la ecuación anterior para ordenar los coeficientes de menor exponente a los de mayor exponente, como veremos a continuación:
+\begin{align*}
+&a_{0} \bigg[ r (r - 1) + r - \nu^{2} \bigg] \, x^{r} + a_{1} \bigg[ (r + 1) r + (r + 1) - \nu^{2} \bigg] \, x^{r+1} + \\[0.5em]
+&+ \nsum_{n=2}^{\infty} \left\{ a_{n} \bigg[ (n + r) \left[ (n + r) - 1 \right] + (n + r) - \nu^{2} \bigg] + a_{n-2} \right\} \, x^{r+n} =
+\end{align*}
+En donde vemos que los dos primeros términos los hemos dejado fuera de la suma. Volvemos a reducir la expresión, para obtener:
+\begin{align*}
+&= a_{0} (r^{2} - \nu^{2}) \, x^{r} + a_{1} \bigg[ (r + 1)^{2} - \nu^{2} \bigg] + \\[0.5em]
+&+ \nsum_{n=2}^{\infty} \left\{ \bigg[ (n + r)^{2} - \nu^{2} \bigg] \, a_{n} + a_{n-2} \right\} \, x^{r+n} = 0
+\end{align*}
+Recordemos que el coeficiente de cada potencia de $x$ debe de anularse.
+\par
+El coeficiente de $x^{r}$ debe ser igual a cero, lo que nos devuelve la ecuación de índices que nos determina el valor de $r$.
+\par
+Si $a_{0} \neq 0$, se tiene que:
+\begin{align*}
+r^{2} - \nu^{2} = 0
+\end{align*}
+Por lo tanto:
+\begin{align*}
+r^{2} = \nu^{2}
+\end{align*}
+Entonces ocurre que:
+\begin{align*}
+a_{1} \big[ (r + 1)^{2} - \nu^{2} \big] &= a_{1} \big[ (r + 1)^{2} - r^{2} \big] = \\[0.5em]
+&= a_{1} \, \big[ 2 \, r + 1 \big] = 0
+\end{align*}
+Si la solución está acotada, entonces $r$ debe de ser un valor no negativo, por tanto $a_{1} = 0$.
+\par
+La regla de recurrencia es:
+\begin{align*}
+a_{n} \big[ (n + r) \left[ (n + r) - 1 \right] + (n + r) - \nu^{2} \big] + a_{n-2} = 0
+\end{align*}
+que de manera equivalente, tenemos:
+\begin{align*}
+&a_{n} \big[ (n + r) \left( (n + r) - 1 \right) + (n + r) - \nu^{2} \big] = \\[0.5em]
+&= a_{n} \, \big[ (n + r)^{2} - \nu^{2} \big] + a_{n-2} = 0
+\end{align*}
+Al sustituir $\nu$ para $r$
+\begin{align*}
+a_{n} \, \big[ (n + r)^{2} - \nu^{2} \big] = a_{n} \, n \, (n + 2 \, \nu) = - a_{n-2}
+\end{align*}
+Es decir:
+\begin{align*}
+a_{n} = \dfrac{- a_{n-2}}{n (n + 2 \, \nu)}
+\end{align*}
+Como $a_{1} = 0$, entonces $a_{k} = 0$ para todo entero impar $k$.
+\par
+Los coeficientes que se mantienen son los $a_{2 k}$, entonces se tiene que:
+\begin{align*}
+a_{2} &= - \dfrac{a_{0}}{2 (2 + 2 \, \nu)} \\[0.5em]
+a_{4} &= - \dfrac{a_{2}}{4 (4 + 2 \, \nu)} = \dfrac{(-1)}{4 (4 + 2 \nu)} \, \dfrac{(-1)a_{0}}{2 (2 + 2 \nu)} \\[0.5em]
+a_{6} &= - \dfrac{a_{4}}{6 (6 + 2 \, \nu)} = - \dfrac{a_{0}}{2^{3} \, (1 \cdot 2 \cdot 3) (3 + \nu)(2 + 2 \nu)(1 + \nu)}\\
+&\ldots&
+\end{align*}
+Entonces para el $k$-ésimo coeficiente, tendremos que:
+\begin{align*}
+a_{2k} = \dfrac{(-1)^{k} \, a_{0}}{2^{2 k} \, (k!) \, (k + \nu) \, (k - 1 + \nu) \ldots (1 + \nu)}
+\end{align*}
+Entonces podemos presentar una solución a la ecuación diferencial de Bessel:
+\begin{align*}
+y_{1}(x) = a_{0} \, x^{\nu} \left[ 1 + \nsum_{k=1}^{\infty} \dfrac{(-1)^{k} \, a_{0} \, k}{2^{2 k} \, (k!) \, (k + \nu) \, (k -1 + \nu)\ldots (1 + \nu)} \right]
+\end{align*}
+Que es una solución para cualquier valor de $a_{0}$. Hagamos notar que no se han impuesto condiciones de frontera alguna.
+\par
+La solución obtenida se le conoce como \textbf{función de Bessel de primera clase de orden $\nu$}. Se le representa como $J_{\nu} (x)$.
+\par
+Si hacemos lo siguiente (que es una norma común en física matemática):
+\begin{align*}
+a_{0} = \dfrac{1}{\nu!} \, 2^{\nu}
+\end{align*}
+Se puede expresar $J_{\nu} (x)$ como:
+\begin{align*}
+J_{\nu} (x) &= \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} \, x^{2k+\nu}}{2^{2k+\nu} \, (k!) \, (k + \nu)!} = \\[1em]
+&= \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} \, \left( \dfrac{x}{2}\right)^{2k+\nu}}{(k!) \, (k + \nu)!}
+\end{align*}
+Aplicando la prueba del cociente (razón), la serie converge para todos los valores de $x$.
+\par
+En el caso de que la ecuación de estudio sea de la forma:
+\begin{align*}
+\sderivada{R} (r) + \dfrac{1}{r} \, \pderivada{R} (r) + \left( m^{2} - \dfrac{n^{2}}{r^{2}} \right) \, R (r) = 0
+\end{align*}
+que sería el caso de la ecuación de Laplace, la solución sería una \textbf{función de Bessel modificada}. A esta función de Bessel modificada, se le conoce también como función de Bessel con argumento imaginario. Se le denota como $I_{\nu} (x)$
+\par
+La función es:
+\begin{align*}
+I_{\nu}(x) = \dfrac{x^{\nu}}{2^{\nu} \, \nu!} \left[ 1 + \nsum_{n=1}^{\infty} \dfrac{x^{2n}}{2^{2n} \, n! \, (1 + \nu) \ldots (n + \nu)} \right]
+\end{align*}
+La función modificada de Bessel se obtiene al sustituir $x$ por $i \, x$ en la ecuación de Bessel.
+
+\subsection*{Conclusiones.}
+
+La ecuación de Bessel es una EDO2, por lo que debería de tener dos soluciones linealmente independientes.
+\par
+Haremos de manera conveniente una pausa con la segunda solución, ya que ésta diverge en $x = 0$.
+\par
+La ecuación mostrada en este ejercicio es de la forma:
+\begin{align*}
+\sderivada{y}(r) + \dfrac{d - 1}{r} \, \pderivada{y}(r) + \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, y(r) = 0
+\end{align*}
+En coordenadas cilíndricas $d = 2$ y $\mu$ normalmente es $m^{2}$. En coordenadas esféricas: $d = 3$ y $\mu$ es $k(k+1)$.
+
+\subsection{Singularidades regulares e irregulares.}
+
+El éxito del método de la sustitución en series depende de las raíces de la ecuación de índices y el grado de singularidad de los coeficientes en la EDO. Para comprender mejor el efecto de los coeficientes de la ecuación en este procedimiento de sustitución en series, consideremos cuatro ecuaciones diferenciales simples:
+\begin{subequations}
+\begin{align}
+\sderivada{y} - \dfrac{6}{x^{2}} \, y &= 0 \label{eq:ecuacion_09_110a} \\[0.25em]
+\sderivada{y} - \dfrac{6}{x^{3}} \, y &= 0 \label{eq:ecuacion_09_110b} \\[0.25em]
+\sderivada{y} + \dfrac{1}{x} \: y^{\prime} - \dfrac{a^{2}}{x^{2}} \, y &= 0 \label{eq:ecuacion_09_110c} \\[0.25em]
+\sderivada{y} + \dfrac{1}{x^{2}} \: y^{\prime} - \dfrac{a^{2}}{x^{2}} \, y &= 0 \label{eq:ecuacion_09_110d}
+\end{align}
+\end{subequations}
+Se puede demostrar fácilmente que para la ec. (\ref{eq:ecuacion_09_110a}), la ecuación de índices es
+\begin{align*}
+k^{2} - k - 6 = 0
+\end{align*}
+considerando que $k = 3, -2$. Ya que la ecuación es homogénea en $x$ (contando $\dv*[2]{x}$ como $x^{-2}$), no existe relación de recurrencia; $a_{i} = 0$ para $i > 0$. Sin embargo, se han logrado dos soluciones perfectamente satisfactorias: $x^{3}$ y $x^{-2}$.
+\par
+La ec. (\ref{eq:ecuacion_09_110b}) difiere de la ec. (\ref{eq:ecuacion_09_110a}) tan sólo por una potencia de $x$, pero esto transforma la ecuación de índices en
+\begin{align*}
+- 6 \, a_{0} = 0
+\end{align*}
+lo cual no tienen ninguna solución ya que se ha acordado que $a_{0} \neq 0$. El método de sustitución en series ha funcionado para la ec. (\ref{eq:ecuacion_09_110a}), que tan sólo tenía una singularidad regular, pero ha sido inadecuado para la ec. (\ref{eq:ecuacion_09_110b}), la cual tiene un punto singular irregular en el origen.
+\par
+Continuando con la ec. (\ref{eq:ecuacion_09_110c}), se ha agregado el término $y/x$. La ecuación de índices es
+\begin{align*}
+k^{2} - a^{2} = 0
+\end{align*}
+pero nuevamente no se tiene una relación de recurrencia. Las soluciones son
+\begin{align*}
+y = x^{a} \hspace{2cm} y = x^{-a}
+\end{align*}
+ambas perfectamente aceptables como series de un término.
+\par
+Cuando se cambia la potencia de $x$ en el coeficiente de $\pderivada{y}$ desde $-1$ a $-2$, en la ec. (\ref{eq:ecuacion_09_110d}) se origina un cambio drástico en la solución. La ecuación de índices (que solamente tiene la contribución del término $\pderivada{y}$), se transforma en
+\begin{align*}
+k = 0
+\end{align*}
+Se tiene una relación de recurrencia
+\begin{align*}
+a_{j+1} = - a_{j} \, \dfrac{a^{2} - j (j - 1)}{j + 1}
+\end{align*}
+A menos de que se seleccione el parámetro $a$ para lograr que termine la serie, se tendrá
+\begin{align*}
+\lim_{j \to \infty} \abs{ \dfrac{a_{j+1}}{a_{j}}} &= \lim_{j \to \infty} \dfrac{j (j - 1)}{j + 1} = \\[0.5em]
+&= \lim_{j \to \infty} \, \dfrac{j^{2}}{j} = \infty
+\end{align*}
+En consecuencia, la solución en series diverge para todas las $x \neq 0$. Nuevamente, nuestro método ha funcionado para la ec. (\ref{eq:ecuacion_09_110c}) con una singularidad regular, pero ha fallado cuando se tiene la singularidad irregular de la ec. (\ref{eq:ecuacion_09_110d}).
+
+\subsection{Teorema de Fuchs.}
+
+La respuesta a la pregunta básica de cuándo se espera que el método de sustitución en series funcione adecuadamente, está dado por el teorema de Fuchs, que afirma que siempre puede lograrse al menos una solución en serie de potencias, siempre que se esté expandiendo alrededor de un punto que sea un punto ordinario o al menos en un punto singular regular. Si se intenta el desarrollo alrededor de  una singularidad esencial o irregular, el método puede fallar como en el caso de la ec. (\ref{eq:ecuacion_09_110b}) y la ec. (\ref{eq:ecuacion_09_110d}). En la física matemática las ecuaciones más importantes no tienen singularidades irregulares en el plano infinito.
+\par
+A modo de resumen:
+\par
+Si se hace una expansión sobre un punto ordinario o al menos en una singularidad regular, la sustitución por una serie de potencias, devolverá al menos una solución (Teorema de Fuchs). Si obtenemos una o dos diferentes soluciones dependerá de las raíces de la ecuación indicial:
+\begin{enumerate}
+\item Si las dos raíces de la ecuación de índices son iguales, se obtiene una única solución con el método de sustitución con una serie de potencias.
+\item Si las dos raíces difieren por un número no entero, se pueden obtener dos soluciones independientes.
+\item Si las dos raíces difieren por un número entero, se toma la raíz de mayor valor para generar la solución. La raíz con valor menor puede o no generar una solución, ya que depende del comportamiento de los coeficientes.
+\end{enumerate}
