@@ -1,10 +1,14 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+
 \title{\large{Construcción de sistemas coordenados especiales}}
 \subtitle{Tema 1 - La física y la geometría}
+
 \author{M. en C. Gustavo Contreras Mayén}
 \makeatletter
+
 \setbeamertemplate{footline}
 {
   \leavevmode%
@@ -23,15 +27,19 @@
 }
 \makeatother
 \date{}
+
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
 \spanishdecimal{.}
+
 \section*{Contenido}
 \frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+
 \section{Construcción de sistemas coordenados}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
+
 \begin{frame}
 \frametitle{Introducción}
 Una pregunta importante que planteamos en este momento es: ¿para qué estamos revisando los sistemas coordenados curvilíneos?
@@ -56,7 +64,9 @@ Cuando se menciona que \enquote{es más fácil la solución}, significa que se t
 \pause
 La \emph{técnica de separación de variables}, se verá en el Tema 2 del curso.
 \end{frame}
+
 \subsection{Sistemas coordenados especiales}
+
 \begin{frame}
 \frametitle{Otros sistemas coordenados}
 Conocemos al menos tres sistemas coordenados con los que hemos trabajado en distintas áreas de nuestra carrera: cartesiano, cilíndrico (en 3D, polar en 2D) y esférico.
@@ -76,9 +86,12 @@ Más bien, veremos una metodología con la cual abordaremos el estudio de un sis
 \begin{frame}
 \frametitle{Otros sistemas coordenados}
 De manera conveniente se presenta una lista con catorce sistemas, clasificando los mismos de acuerdo con el hecho de que tengan o no:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}
+\setbeamercolor{item projected}{bg=aureolin,fg=auburn}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
 \item Un eje de traslación (perpendicular a la familia de superficies de plano paralelo)
 \item Un eje de simetría rotacional.
 \end{enumerate}
@@ -111,6 +124,7 @@ Bipolar & Toroidal & \\
 El espaciamiento en la tabla indica las relaciones entre los diversos sistemas coordenados.
 \\
 \bigskip
+\pause
 Si se considera el caso en dos dimensiones ($z = 0$) de un sistema con un eje de traslación (columna izquierda) y se le hace girar alrededor de un eje de simetría de reflexión, se genera el sistema coordenado correspondiente indicado en la columna central hacia la derecha.
 \end{frame}
 \begin{frame}
@@ -122,57 +136,80 @@ Por ejemplo: la rotación del plano $z = 0$ del sistema cilíndrico elíptico al
 También se consideran tres sistemas que no tienen eje de traslación o eje de rotación.
 \\
 \bigskip
+\pause
 En este grupo asimétrico, el sistema elipsoidal confocal se utiliza algunas veces como el sistema más general y del que casi todos los demás sistemas se obtienen del mismo.
 \end{frame}
-\section{Desarrollo de un sistema coordenado}
+
+\section{Desarrollo de un sistema coordenado 1/2}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Coord. cilíndricas elípticas \texorpdfstring{$(u, v, z)$}{(u, v, z)}.}
+
 \begin{frame}
 \frametitle{Desarrollo para un sistema especial}
 A continuación veremos la manera de abordar un sistema coordenado especial, para determinar los las superficies constantes, los factores de escala, los operadores diferenciales, necesarios para resolver un problema con esta geometría en particular.
 \end{frame}
+
 \subsection{Reglas de transformación}
+
 \begin{frame}
 \frametitle{Reglas de transformación}
 Para el sistema cilíndrico elíptico, se tienen las siguientes reglas de transformación:
-\begin{align}
+\pause
+\begin{eqnarray}
 \begin{aligned}
-x &= a \, \cosh u \, \cos v \\
+x &= a \, \cosh u \, \cos v \\[0.5em] \pause
 y &= a \, \sinh u \, \sin v \\
 z &= z
 \end{aligned}
 \label{eq:ecuacion_02_73_esp}
-\end{align}
+\end{eqnarray}
 \end{frame}
+
 \subsection{Superficies coordenadas}
+
 \begin{frame}
 \frametitle{Superficies coordenadas}
-Para identificar las superficies constantes, elevamos al cuadrado cada lado
-\begin{align}
-x^{2} &= a^{2} \, \cosh^{2} u \, \cos^{2} v \label{eq:ecuacion_02_74_esp} \\
+Para identificar las superficies constantes, elevamos al cuadrado cada lado:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+x^{2} &= a^{2} \, \cosh^{2} u \, \cos^{2} v \label{eq:ecuacion_02_74_esp} \\[0.5em] \pause
 y^{2} &= a^{2} \, \sinh^{2} u \, \sin^{2} v \label{eq:ecuacion_02_75_esp}
-\end{align}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Superficies coordenadas}
-Dividimos la primera expresión entre $\cos^{2} v$ y la segunda entre $\sin^{2} v$, recordando que $cos^{2} + \sin^{2} = 1$, así llegamos a
-\begin{align}
-\dfrac{x^{2}}{a^{2} \, \cosh^{2}} + \dfrac{y^{2}}{a^{2} \, \sinh{2}} &= \cos^{2} + \sin^{2} = 1 \label{eq:ecuacion_02_76_esp}\\[1em]
-\dfrac{x^{2}}{a^{2} \, \cos^{2}} - \dfrac{y^{2}}{a^{2} \, \sin^{2}} &= \cosh^{2} - \sinh^{2} = 1 \label{eq:ecuacion_02_77_esp}
-\end{align}
+Dividimos la primera expresión entre $\cos^{2} v$ \pause y la segunda entre $\sin^{2} v$, recordando que $\cos^{2} v + \sin^{2} v = 1$, así llegamos a:
+\pause
+\begin{eqnarray}
+\begin{aligned}
+\dfrac{x^{2}}{a^{2} \, \cosh^{2} u} + \dfrac{y^{2}}{a^{2} \, \sinh^{2} u} &= \cos^{2} v + \sin^{2} v = 1 \label{eq:ecuacion_02_76_esp}\\[1em] \pause
+\dfrac{x^{2}}{a^{2} \, \cos^{2} v} - \dfrac{y^{2}}{a^{2} \, \sin^{2} v } &= \cosh^{2} u - \sinh^{2} u = 1 \label{eq:ecuacion_02_77_esp}
+\end{aligned}
+\end{eqnarray}
 \end{frame}
 \begin{frame}
 \frametitle{Superficies coordenadas}
-Para $v=$ constante, la ec. (\ref{eq:ecuacion_02_76_esp}) genera una familia de elipses con el eje $x$, en el principal.
-\\
-\bigskip
-Para $u=$ constante, la ec. (\ref{eq:ecuacion_02_77_esp}) genera hipérbolas con puntos focales en el eje $x$. Como se pueden ver en la siguiente figura (\ref{fig:figura_coordenada_cilindricas_elipticas})
+Para $v = $ constante, la ec. (\ref{eq:ecuacion_02_76_esp}):
+\begin{align*}
+\dfrac{x^{2}}{a^{2} \, \cosh^{2} u} + \dfrac{y^{2}}{a^{2} \, \sinh^{2} u} &= \cos^{2} v + \sin^{2} v = 1 
+\end{align*}
+genera una familia de elipses con el eje $x$, en el principal.
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+Para $u = $ constante, la ec. (\ref{eq:ecuacion_02_77_esp})
+\begin{align*}
+\dfrac{x^{2}}{a^{2} \, \cos^{2} v} - \dfrac{y^{2}}{a^{2} \, \sin^{2} v } &= \cosh^{2} u - \sinh^{2} u = 1
+\end{align*}
+genera hipérbolas con puntos focales en el eje $x$. \pause Como se pueden ver en la siguiente figura (\ref{fig:figura_coordenada_cilindricas_elipticas})
 \end{frame}
 \begin{frame}
 \frametitle{Superficies coordenadas}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.6]{Imagenes/Sistema_Cilindrico_Eliptico.eps}
+    \includegraphics[scale=0.55]{Imagenes/Sistema_Cilindrico_Eliptico.eps}
     \caption{Sistema coordenado cilíndrico elíptico en el plano $x-y$.}
     \label{fig:figura_coordenada_cilindricas_elipticas}
 \end{figure}
@@ -180,13 +217,18 @@ Para $u=$ constante, la ec. (\ref{eq:ecuacion_02_77_esp}) genera hipérbolas con
 \begin{frame}
 \frametitle{Superficies coordenadas}
 La familia de superficies coordenadas son las siguientes:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}
+\pause
+\setbeamercolor{item projected}{bg=britishracinggreen,fg=buff}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
 \item Cilindros elípticos con $u$ constante, $0 \leq u < \infty$
 \item Cilindros hiperbólicos con $v$ constante, $0 \leq v \leq 2 \, \pi$
 \item Planos paralelos al plano $x-y$ con $z$ constante, $-\infty < z < \infty$
 \end{enumerate}
+\pause
 Como vemos en la siguiente figura (\ref{fig:figura_coordenada_cilindricas_elipticas_3D})
 \end{frame}
 \begin{frame}
@@ -198,10 +240,13 @@ Como vemos en la siguiente figura (\ref{fig:figura_coordenada_cilindricas_elipti
     \label{fig:figura_coordenada_cilindricas_elipticas_3D}
 \end{figure}
 \end{frame}
+
 \subsection{Factores de escala}
+
 \begin{frame}
 \frametitle{Factores de escala}
 Calculamos los factores de escala o coeficientes métricos a partir de la expresión:
+\pause
 \begin{eqnarray*}
 h_{i} &=& \abs{\pdv{\vb{r}}{u_{i}}} \\[0.5em]
 \pause
@@ -210,72 +255,83 @@ h_{i} &=& \sqrt{ \left( \pdv{x}{u_{i}} \right)^{2} + \left( \pdv{y}{u_{i}} \righ
 \end{frame}
 \begin{frame}
 \frametitle{Factores de escala}
-Tenemos entonces que
+Tenemos entonces que:
+\pause
 \begin{align*}
 h_{1} = h_{u} = \sqrt{ \left( \pdv{x}{u} \right)^{2} + \left( \pdv{y}{u} \right)^{2} + \left( \pdv{z}{u} \right)^{2}}
 \end{align*}
 \pause
-donde las derivadas parciales son
+donde las derivadas parciales son:
+\pause
 \fontsize{12}{12}\selectfont
-\begin{align*}
-\pdv{x}{u} &= a \, \sinh u \cos v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \left( \pdv{x}{u} \right)^{2} = a^{2} \, \sinh^{2} u \, \cos^{2} v \\[0.5em]
-\pdv{y}{u} &= a \, \cosh u \sin v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \left( \pdv{y}{u} \right)^{2} = a^{2} \, \cosh^{2} u \, \sin^{2} v \\[0.5em]
+\begin{eqnarray*}
+\begin{aligned}
+\pdv{x}{u} &= a \, \sinh u \cos v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \pause \left( \pdv{x}{u} \right)^{2} = a^{2} \, \sinh^{2} u \, \cos^{2} v \\[0.5em] \pause 
+\pdv{y}{u} &= a \, \cosh u \sin v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \pause \left( \pdv{y}{u} \right)^{2} = a^{2} \, \cosh^{2} u \, \sin^{2} v \\[0.5em] \pause 
 \pdv{z}{u} &= 0
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
-\frametitle{Factores de escala}
-Al sumar los términos del radical
+\frametitle{Factores de escala: $h_{u}$}
+Al sumar los términos del radical:
+\pause
 \begin{align*}
 h_{u} = \sqrt{a^{2} \, \sinh^{2} u \, \cos^{2} v + a^{2} \, \cosh^{2} u \, \sin^{2} v}
 \end{align*}
 Haciendo el álgebra respectiva y considerando que $\cosh^{2} u - \sinh^{2} = 1$, entonces tenemos que:
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Factores de escala}
+\frametitle{Factores de escala: $h_{u}$}
 \fontsize{12}{12}\selectfont
-\begin{align*}
-h_{u} &= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + \cosh^{2} u \, \sin^{2} v \right] } \\[0.5em]
-&= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + (1 + \sinh^{2} u) \, \sin^{2} v \right] } \\[0.5em]
-&= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + \sinh^{2} u \, \sin^{2} v + \sin^{2} v \right] } \\[0.5em]
-&= \sqrt{a^{2} \left[ \sinh^{2} u ( \cos^{2} v + \sin^{2} v ) + \sin^{2} v \right] } \\[0.5em]
+\begin{eqnarray*}
+\begin{aligned}
+h_{u} &= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + \cosh^{2} u \, \sin^{2} v \right] } = \\[0.5em] \pause
+&= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + (1 + \sinh^{2} u) \, \sin^{2} v \right] } = \\[0.5em] \pause
+&= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + \sinh^{2} u \, \sin^{2} v + \sin^{2} v \right] } = \\[0.5em] \pause
+&= \sqrt{a^{2} \left[ \sinh^{2} u ( \cos^{2} v + \sin^{2} v ) + \sin^{2} v \right] } = \\[0.5em] \pause
 &= \sqrt{a^{2} \left[ \sinh^{2} u + \sin^{2} v  \right] }
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \pause
-\vspace*{-0.6cm}
 \begin{equation*}
 \hspace{-4.5cm}
 \boxed{ h_{u} = a \, \sqrt{ \sinh^{2} u + \sin^{2} v}}
 \end{equation*}
 \end{frame}
 \begin{frame}
-\frametitle{El siguiente factor de escala}
+\frametitle{El siguiente factor de escala:: $h_{v}$}
 Para el factor $h_{v}$ se tiene que:
+\pause
 \fontsize{12}{12}\selectfont
 \begin{align*}
 h_{v} = \sqrt{ \left( \pdv{x}{v} \right)^{2} + \left( \pdv{y}{v} \right)^{2} + \left( \pdv{z}{v} \right)^{2}}
 \end{align*}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{El siguiente factor de escala}
-Entonces
+\frametitle{El siguiente factor de escala: $h_{v}$}
+Entonces:
+\pause
 \fontsize{12}{12}\selectfont
 \begin{align*}
-\pdv{x}{v} &= - a \, \cosh u \sin v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \left( \pdv{x}{v} \right)^{2} = a^{2} \, \cosh^{2} u \, \sin^{2} v \\[0.5em]
-\pdv{y}{v} &= a \, \sinh u \cos v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \left( \pdv{y}{v} \right)^{2} = a^{2} \, \sinh^{2} u \, \cos^{2} v \\[0.5em]
+\pdv{x}{v} &= - a \, \cosh u \sin v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \pause \left( \pdv{x}{v} \right)^{2} = a^{2} \, \cosh^{2} u \, \sin^{2} v \\[0.5em] \pause
+\pdv{y}{v} &= a \, \sinh u \cos v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \pause \left( \pdv{y}{v} \right)^{2} = a^{2} \, \sinh^{2} u \, \cos^{2} v \\[0.5em] \pause
 \pdv{z}{v} &= 0
 \end{align*}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{El siguiente factor de escala}
+\frametitle{El siguiente factor de escala: $h_{v}$}
 Así llegamos a:
+\pause
 \fontsize{12}{12}\selectfont
-\begin{align*}
-h_{v} &= \sqrt{a^{2} \left[ \cosh^{2} u \, \sin^{2} v + \sinh^{2} u \, \cos^{2} v \right] } \\[0.5em]
-&= \sqrt{a^{2} \left[ (1 + \sinh^{2} u) \, \sin^{2} v + \sinh^{2} u \, \cos^{2} v \right] } \\[0.5em]
-&= \sqrt{a^{2} \left[ \sinh^{2} u (\cos^{2} v +  \sin^{2} v)+ \sin^{2} v \right] } \\[0.5em]
+\begin{eqnarray*}
+\begin{aligned}
+h_{v} &= \sqrt{a^{2} \left[ \cosh^{2} u \, \sin^{2} v + \sinh^{2} u \, \cos^{2} v \right] } \\[0.5em] \pause
+&= \sqrt{a^{2} \left[ (1 + \sinh^{2} u) \, \sin^{2} v + \sinh^{2} u \, \cos^{2} v \right] } \\[0.5em] \pause
+&= \sqrt{a^{2} \left[ \sinh^{2} u (\cos^{2} v +  \sin^{2} v)+ \sin^{2} v \right] } \\[0.5em] \pause
 &= \sqrt{a^{2} \left[ \sinh^{2} u + \sin^{2} v  \right] }
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \pause
 \vspace*{-0.35cm}
 \begin{equation*}
@@ -284,8 +340,9 @@ h_{v} &= \sqrt{a^{2} \left[ \cosh^{2} u \, \sin^{2} v + \sinh^{2} u \, \cos^{2} 
 \end{equation*}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Último factor de escala}
+\frametitle{Último factor de escala: $h_{z}$}
 Para el último factor de escala $h_{z}$:
+\pause
 \fontsize{12}{12}\selectfont
 \begin{align*}
 h_{z} = \sqrt{ \cancelto{0}{\left( \pdv{x}{z} \right)^{2}} + \cancelto{0}{\left( \pdv{y}{z} \right)^{2}} + \cancelto{1}{\left( \pdv{z}{z} \right)^{2}}}
@@ -300,61 +357,58 @@ h_{z} = \sqrt{ \cancelto{0}{\left( \pdv{x}{z} \right)^{2}} + \cancelto{0}{\left(
 \begin{frame}
 \frametitle{Los tres factores de escala}
 Los tres factores de escala para este sistema coordenado cilíndrico elíptico son:
+\pause
 \begin{align*}
 h_{u} &= a \, \sqrt{ \sinh^{2} u + \sin^{2} v} \\[1em]
 h_{v} &= a \, \sqrt{ \sinh^{2} u + \sin^{2} v} \\[1em]
 h_{z} &= 1
 \end{align*}
 \end{frame}
-\begin{frame}
-\frametitle{Ejercicio a cuenta}
-\textbf{Ejercicio a cuenta: } 
-Para el sistema de coordenadas esferoidales prolatas $(\xi, \eta, \phi)$, cuyas reglas de transformación son:
-\begin{align*}
-x &= a \: \sinh \xi \: \sin \eta \: \cos \phi\\
-y &= a \: \sinh \xi \: \sin \eta \: \sin \phi\\
-z &= a \: \cosh \xi \: \cos \eta
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Ejercicio a cuenta}
-\textbf{Ejercicio a cuenta: } 
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}
-\item Describe las superficies coordenadas del sistema.
-\item Calcula de manera explícita los factores de escala $(h_{\xi}, h_{\eta}, h_{\phi})$.
-\end{enumerate}
-Nota: aunque en una diapositiva más adelante se indica cuáles son los factores de escala, deberás de realizar todo el procedimiento para el cálculo de los mismos, y podrás corroborar tus resultados con esos valores.
-\end{frame}
+
 \section{Cálculo operadores diferenciales}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Gradiente}
+
 \begin{frame}
 \frametitle{Cálculo del gradiente}
 Ya definimos una expresión que nos permitirá calcular el gradiente sobre una función de prueba $\phi$, una vez conocidos los factores de escala del sistema coordenado de interés:
+\pause
 \begin{align*}
-\nabla{\phi} = \sum_{i=1}^{3} \dfrac{\vu{e_{i}}}{h_{i}} \, \pdv{\phi}{u_{i}} = \sum_{i=1}^{3} \vu{e}_{i} \left( \nabla{\phi} \right)_{i}
+\nabla{\phi} = \nsum_{i=1}^{3} \dfrac{\vu{e_{i}}}{h_{i}} \, \pdv{\phi}{u_{i}} = \nsum_{i=1}^{3} \vu{e}_{i} \left( \nabla{\phi} \right)_{i}
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Cálculo del gradiente}
 Por lo que: 
+\pause
 \begin{align*}
-\grad{\phi} &= \sum_{i=1}^{3} \dfrac{\vu{e_{i}}}{h_{i}} \, \pdv{\phi}{u_{i}}
+\grad{\phi} &= \nsum_{i=1}^{3} \dfrac{\vu{e_{i}}}{h_{i}} \, \pdv{\phi}{u_{i}}
 \end{align*}
 \pause
 Entonces:
+\pause
+\begin{align*}
+\grad{\phi} &= \dfrac{1}{a \sqrt{\sinh^{2} u + \sin^{2} v}} \vu{e}_{u} \pdv{\phi}{u} + \\[0.5em]
+&+ \dfrac{1}{a \sqrt{\sinh^{2} u + \sin^{2} v}} \, \vu{e}_{v} \pdv{\phi}{v} + \vu{e_{z}} \pdv{\phi}{z}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo del gradiente}
+Factorizando:
+\pause
 \begin{align*}
 \grad{\phi} = \dfrac{1}{a \sqrt{\sinh^{2} u + \sin^{2} v}} \left[ \vu{e}_{u} \pdv{\phi}{u} + \vu{e}_{v} \pdv{\phi}{v} \right] + \vu{e_{z}} \pdv{\phi}{z}
 \end{align*}
 \end{frame}
+
 \subsection{Divergencia}
+
 \begin{frame}
 \frametitle{Cálculo de la divergencia}
 Para un campo vectorial $\vb{B}$, habíamos llegado al resultado:
+\pause
 \begin{align*}
-\div{\vb{B}} = \dfrac{1}{h} \, \sum_{i=1}^{3} \pdv{u_{i}} \left( \dfrac{B_{i} \, h}{h_{i}} \right)
+\div{\vb{B}} = \dfrac{1}{h} \, \nsum_{i=1}^{3} \pdv{u_{i}} \left( \dfrac{B_{i} \, h}{h_{i}} \right)
 \end{align*}
 donde $h = h_{1} h_{2} h_{3}$, así entonces:
 \end{frame}
@@ -369,16 +423,20 @@ Al realizar las respectivas operaciones y reduciendo las expresiones (tarea mora
 \end{frame}
 \begin{frame}
 \frametitle{Cálculo de la divergencia}
-Haciendo $h^{\prime} = \sqrt{\sinh^{2} u + \sin^{2} v}$, tenemos que 
+Haciendo $h^{\prime} = \sqrt{\sinh^{2} u + \sin^{2} v}$, tenemos que:
+\pause
 \begin{align*}
 \div{\vb{E}} &= \dfrac{1}{a \, h^{\prime}} \left[ \pdv{u} \left( h^{\prime} \, B_{u} \right) + \pdv{v} \left( h^{\prime} \, B_{v} \right) \right] + \\[0.5em]
 &+ \pdv{B_{z}}{z}
 \end{align*}
 \end{frame}
+
 \subsection{Cálculo del rotacional}
+
 \begin{frame}
 \frametitle{Cálculo del rotacional}
 Para calcular el rotacional de un campo vectorial, ocupamos la expresión:
+\pause
 \begin{align*}
 \curl{\vb{B}} = \dfrac{1}{h_{1} h_{2} h_{3}} \, \mdet{
 h_{1} \, \vu{e}_{1} & h_{2} \, \vu{e}_{2} & h_{3} \, \vu{e}_{3} \\
@@ -390,7 +448,8 @@ Entonces tendremos que:
 \end{frame}
 \begin{frame}
 \frametitle{Cálculo del rotacional}
-Haciendo $h = \sqrt{\sinh^{2} u + \sin^{2} v}$, llegamos a
+Haciendo $h = \sqrt{\sinh^{2} u + \sin^{2} v}$, llegamos a:
+\pause
 \begin{align*}
 \curl{\vb{B}} &= \dfrac{1}{h^{2}}  \, \mdet{
 h \, \vu{e}_{u} & h \, \vu{e}_{v} & \vu{e}_{z} / a \\
@@ -399,18 +458,22 @@ B_{u} \, h & B_{v} \, h & B_{z} / a
 }
 \end{align*}
 \end{frame}
+
 \subsection{Laplaciano}
+
 \begin{frame}
 \frametitle{Cálculo del Laplaciano}
 Para una función escalar $\phi$, definimos el Laplaciano como:
+\pause
 \begin{align*}
-\laplacian{\phi} = \dfrac{1}{h} \, \sum_{i=1}^{3} \pdv{u_{i}} \left( \dfrac{h}{h_{i}^{2}}  \pdv{\phi}{u_{i}} \right)
+\laplacian{\phi} = \dfrac{1}{h} \, \nsum_{i=1}^{3} \pdv{u_{i}} \left( \dfrac{h}{h_{i}^{2}}  \pdv{\phi}{u_{i}} \right)
 \end{align*}
 con $h = h_{1} h_{2} h_{3}$.
 \end{frame}
 \begin{frame}
 \frametitle{Cálculo del Laplaciano}
 Así pues, tenemos que:
+\pause
 \begin{align*}
 \laplacian{\phi} = \dfrac{1}{a^{2} \left( \sinh^{2} u + \sin^{2} v \right)} \left[ \pdv[2]{\phi}{u} + \pdv[2]{\phi}{v} \right] + \pdv[2]{\phi}{z}
 \end{align*}
@@ -441,6 +504,36 @@ Sería un muy buen ejercicio moral, el que obtengas esos valores y construyas un
 Es cierto que puedes consultarlos en algunos textos de física matemática, pero la práctica con el trabajo a mano, nos ayuda bastante para tener presente la secuencia de pasos, además de reforzar nuestras habilidades de razonamiento matemático.
 \end{frame}
 
+\begin{frame}
+\frametitle{Ejercicio a cuenta - 2}
+\textbf{Ejercicio a cuenta: } 
+Para el sistema de coordenadas esferoidales prolatas $(\xi, \eta, \phi)$, cuyas reglas de transformación son:
+\begin{align*}
+x &= a \: \sinh \xi \: \sin \eta \: \cos \phi\\
+y &= a \: \sinh \xi \: \sin \eta \: \sin \phi\\
+z &= a \: \cosh \xi \: \cos \eta
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+\textbf{Ejercicio a cuenta: } 
+\setbeamercolor{item projected}{bg=coral,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Describe las superficies coordenadas del sistema.
+\item Calcula de manera explícita los factores de escala $(h_{\xi}, h_{\eta}, h_{\phi})$.
+\item Describe los vectores unitarios $(\vu{e}_{\xi}, \vu{e}_{\eta}, \vu{e}_{\phi})$
+\item Recupera los operadores diferenciales: gradiente, divergencia, rotacional y Laplaciano en este sistema coordenado.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+\textocolor{blue}{Nota:} aunque en una diapositiva más adelante se indica cuáles son las superficies que se generan, así como los factores de escala, deberás de realizar todo el procedimiento para la descripción de las superficies y para el cálculo de los $h_{i}$, podrás corroborar tus resultados con esos valores.
+\end{frame}
+
 \subsection{Solución de una ecuación}
 
 \begin{frame}
@@ -450,6 +543,7 @@ En este Tema 1 que nos refiere a la física y a la geometría, es un buen punto 
 \begin{frame}
 \frametitle{La ecuación de Helmholtz}
 La ecuación de Helmholtz:
+\pause
 \begin{align*}
 \nabla^{2} \psi + k^{2} \: \psi = 0
 %\label{eq:ecuacion_02_01}
@@ -463,6 +557,7 @@ Es decir, podemos reexpresar esta ecuación en un sistema coordenado distinto.
 \begin{frame}
 \frametitle{La ecuación de Helmholtz}
 En particular ésta ecuación tiene el hecho de que si:
+\pause
 \begin{itemize}[<+->]
 \item $k^{2} = 0$, se obtiene la ecuación de Laplace.
 \item $k^{2} = (+) \mbox{ constante}$, se obtiene la ecuación de Helmholtz.
@@ -509,7 +604,8 @@ A continuación presentaremos algunos sistemas coordenados: el dominio de las co
 \frametitle{1 - Coord. cilíndricas parabólicas $(u, v, z)$}
 \fontsize{12}{12}\selectfont
 \begin{minipage}{0.45\textwidth}
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 u &\in (-\infty,\infty) \\
 v &\in [0,\infty) \\
@@ -517,8 +613,10 @@ z &\in(-\infty,\infty)
 \end{align*}
 \end{minipage}
 \hspace{1cm}
+\pause
 \begin{minipage}{0.4\textwidth}
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 x &= \dfrac{1}{2}(u^{2 } -v^{2}) \\
 y &= u \: v \\
@@ -527,7 +625,9 @@ z &=z
 \end{minipage}
 \\
 \bigskip
-Factores de escala
+\pause
+Factores de escala:
+\pause
 \begin{align*}
 h_{1 } &= h_{2} = \sqrt{u^{2 } +v^{2}} \\
 h_{3 } &= 1
@@ -545,7 +645,8 @@ h_{3 } &= 1
 \frametitle{2 - Coord. esferoidales prolatas $(\xi, \eta, \phi)$}
 \fontsize{12}{12}\selectfont
 \begin{minipage}{0.45\textwidth}
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 \xi &\in [0, \infty) \\
 \eta &\in [0, \pi] \\
@@ -553,17 +654,19 @@ Dominio de las coordenadas
 \end{align*}
 \end{minipage}
 \hspace{1cm}
+\pause
 \begin{minipage}{0.4\textwidth}
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 x &= a \: \sinh \xi \: \sin \eta \: \cos \phi\\
 y &= a \: \sinh \xi \: \sin \eta \: \sin \phi\\
 z &= a \: \cosh \xi \: \cos \eta
 \end{align*}
 \end{minipage}
-\\
-\bigskip
-Factores de escala
+
+Factores de escala:
+\pause
 \begin{align*}
 h_{1} &= h_{2} = a \: \sqrt{\sinh^{2} \xi + \sin^{2} \eta} \\
 h_{3 }&= a \: \sinh \xi \: \sin \eta
@@ -581,7 +684,8 @@ h_{3 }&= a \: \sinh \xi \: \sin \eta
 \frametitle{3 - Coord. esferoidales oblatas $(\xi, \eta, \phi)$}
 \fontsize{12}{12}\selectfont
 \begin{minipage}{0.45\textwidth}
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 \xi &\in [0, \infty) \\
 \eta &\in \left[- \dfrac{\pi}{2}, \dfrac{\pi}{2} \right] \\
@@ -589,17 +693,20 @@ Dominio de las coordenadas
 \end{align*}
 \end{minipage}
 \hspace{1cm}
+\pause
 \begin{minipage}{0.4\textwidth}
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 x &= a \: \cosh \xi \: \cos \eta \: \cos \phi \\
 y &= a \: \cosh \xi \: \cos \eta \: \sin \phi\\
 z &= a \: \sinh \xi \: \sin \eta
 \end{align*}
 \end{minipage}
-\\
-\bigskip
-Factores de escala
+
+\pause
+Factores de escala:
+\pause
 \begin{align*}
 h_{1 }&= h_{2} = a \: \sqrt{\sinh^{2} \xi + \sin^{2} \eta} \\
 h_{3 }&= a \: \cosh \xi \: \cos \eta
@@ -617,7 +724,8 @@ h_{3 }&= a \: \cosh \xi \: \cos \eta
 \frametitle{4 - Coord. parabólicas $(u, v, \phi)$}
 \fontsize{12}{12}\selectfont
 \begin{minipage}{0.45\textwidth}
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 u &\in [0, \infty) \\
 v &\in [0, \infty) \\
@@ -625,17 +733,19 @@ v &\in [0, \infty) \\
 \end{align*}
 \end{minipage}
 \hspace{1cm}
+\pause
 \begin{minipage}{0.4\textwidth}
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 x &= u \: v \: \cos \phi \\
 y &= u \: v \: \sin \phi \\
 z &= \dfrac{1}{2} (u^{2} - v^{2})
 \end{align*}
 \end{minipage}
-\\
-\bigskip
-Factores de escala
+
+Factores de escala:
+\pause
 \begin{align*}
 h_{1} &= h_{2} = \sqrt{u^{2 } +v^{2}} \\
 h_{3} &= u \: v
@@ -652,10 +762,11 @@ h_{3} &= u \: v
 \begin{frame}
 \frametitle{5 - Coord. cónicas $(r, \theta, \lambda)$}
 \fontsize{12}{12}\selectfont
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 0 &\leq r < \infty \\
-b^{2} &< \theta < c^{2} \\
+b^{2} &< \theta^{2} < c^{2} \\
 0 &< \lambda^{2} < b^{2}
 \end{align*}
 Con
@@ -666,7 +777,8 @@ c^{2} > \theta^{2} > b^{2} > \lambda^{2} > 0
 \begin{frame}
 \frametitle{5 - Coord. cónicas $(r, \theta, \lambda)$}
 \fontsize{12}{12}\selectfont
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 (x)^{2} &= \left( \dfrac{r \, \theta \, \lambda}{b \, c} \right)^{2} \\[0.5em]
 (y)^{2} &= \dfrac{r^{2} (\theta^{2} - b^{2})(b^{2} - \lambda^{2})}{b^{2}(c^{2} - b^{2})} \\[0.5em]
@@ -676,7 +788,8 @@ Reglas de transformación
 \begin{frame}
 \frametitle{5- Coord. cónicas $(r, \theta, \lambda)$}
 \fontsize{12}{12}\selectfont
-Factores de escala
+Factores de escala:
+\pause
 \begin{align*}
 h_{1} &= 1\\
 (h_{2})^{2} &= \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{(\theta^{2} - b^{2})(c^{2} - \theta^{2})} \\[0.5em]
@@ -694,7 +807,8 @@ h_{1} &= 1\\
 \begin{frame}
 \frametitle{6 - Coord. elipsoidales $(\eta, \theta, \lambda)$}
 \fontsize{12}{12}\selectfont
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 c^{2} &< \eta^{2} < \infty, \\
 b^{2} &< \theta^{2} < c^{2}, \\
@@ -708,7 +822,8 @@ Con
 \begin{frame}
 \frametitle{6 - Coord. elipsoidales $(\eta, \theta, \lambda)$}
 \fontsize{12}{12}\selectfont
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 (x)^{2} &= \left( \dfrac{\eta \, \theta \, \lambda}{b \, c} \right)^{2} \\[0.5em]
 (y)^{2} &= \dfrac{(\eta^{2} - b^{2})(\theta^{2} - b^{2})(b^{2} - \lambda^{2})}{b^{2}(c^{2} - b^{2})} \\[0.5em]
@@ -718,7 +833,8 @@ Reglas de transformación
 \begin{frame}
 \frametitle{6 - Coord. elipsoidales $(\eta, \theta, \lambda)$}
 \fontsize{12}{12}\selectfont
-Factores de escala
+Factores de escala:
+\pause
 \begin{align*}
 (h_{1})^{2} &= \dfrac{(\eta^{2} - \theta^{2})(\eta^{2} - \lambda^{2})}{(\eta^{2} - b^{2})(\eta^{2} - c^{2})} \\[0.5em]
 (h_{2})^{2} &= \dfrac{(\theta^{2} - \lambda^{2})(\eta^{2} - \theta^{2})}{(\theta^{2} - b^{2})(c^{2} - \theta^{2})} \\[0.5em]
@@ -736,7 +852,8 @@ Factores de escala
 \begin{frame}
 \frametitle{7 - Coord. paraboloides $(\mu, \nu, \lambda)$}
 \fontsize{12}{12}\selectfont
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 b &< \mu < \infty \\
 0 &< \nu < c \\
@@ -750,7 +867,8 @@ Con
 \begin{frame}
 \frametitle{7 - Coord. paraboloides $(\mu, \nu, \lambda)$}
 \fontsize{12}{12}\selectfont
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 (x)^{2} &= \dfrac{4}{(b - c)} \, (\mu - b) \\[0.5em]
 (y)^{2} &= \dfrac{4}{(b - c)} \, (\mu - c) \\[0.5em]
@@ -760,7 +878,8 @@ z &= \mu + \nu + \lambda - b - c
 \begin{frame}
 \frametitle{7 - Coord. paraboloides $(\mu, \nu, \lambda)$}
 \fontsize{12}{12}\selectfont
-Factores de escala
+Factores de escala:
+\pause
 \begin{align*}
 (h_{1})^{2} &= \dfrac{(\mu - \nu)(\mu - \lambda)}{(\mu - b)(\mu - c)} \\[0.5em]
 (h_{2})^{2} &= \dfrac{(\mu - \nu)(\lambda - \nu)}{(b - \nu)(c - \nu)} \\[0.5em]
@@ -778,7 +897,8 @@ Factores de escala
 \begin{frame}
 \frametitle{8 - Coord. cardioide $(\mu, \nu, \psi)$}
 \fontsize{12}{12}\selectfont
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 0 &\leq \mu < \infty \\
 0 &\leq \nu < \infty \\
@@ -788,7 +908,8 @@ Dominio de las coordenadas
 \begin{frame}
 \frametitle{8 - Coord. cardioide $(\mu, \nu, \psi)$}
 \fontsize{12}{12}\selectfont
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 x &= \dfrac{\mu \, \nu}{(\mu^{2} + \nu^{2})^{2}} \, \cos \psi \\[0.5em]
 y &= \dfrac{\mu \, \nu}{(\mu^{2} + \nu^{2})^{2}} \, \sin \psi \\[0.5em]
@@ -798,7 +919,8 @@ z &= \dfrac{1}{2} \, \dfrac{(\mu^{2} - \nu^{2})}{(\mu^{2} + \nu^{2})^{2}}
 \begin{frame}
 \frametitle{8 - Coord. cardioide $(\mu, \nu, \psi)$}
 \fontsize{12}{12}\selectfont
-Factores de escala
+Factores de escala:
+\pause
 \begin{align*}
 (h_{1})^{2} = (h_{2})^{2} &= \dfrac{1}{(\mu^{2} + \nu^{2})^{3}} \\[0.5em]
 (h_{3})^{2} &= \dfrac{\mu^{2} \, \nu^{2}}{(\mu^{2} + \nu^{2})^{4}}
@@ -816,7 +938,8 @@ Factores de escala
 \begin{frame}
 \frametitle{9 - Coord. biesféricas $(\eta, \theta, \psi)$}
 \fontsize{12}{12}\selectfont
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 -\infty &< \eta < \infty \\
 0 &\leq \theta < \pi \\
@@ -826,7 +949,8 @@ Dominio de las coordenadas
 \begin{frame}
 \frametitle{9 - Coord. biesféricas $(\eta, \theta, \psi)$}
 \fontsize{12}{12}\selectfont
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 x &= \dfrac{a \, \sin \theta \, \cos \psi}{\cosh \eta - \cos \theta} \\[0.5em]
 y &= \dfrac{a \, \sin \theta \, \sin \psi}{\cosh \eta - \cos \theta} \\[0.5em]
@@ -836,7 +960,8 @@ z &= \dfrac{a \, \sinh \eta}{\cosh \eta - \cos \theta}
 \begin{frame}
 \frametitle{9 - Coord. biesféricas $(\eta, \theta, \psi)$}
 \fontsize{12}{12}\selectfont
-Factores de escala
+Factores de escala:
+\pause
 \begin{align*}
 (h_{1})^{2} = (h_{2})^{2} &= \dfrac{a^{2}}{(\cosh \eta - \cos \theta)^{2}} \\[0.5em]
 (h_{3})^{2} &= \dfrac{a^{2} \, \sin^{2} \theta}{(\cosh \eta - \cos \theta)^{2}}
@@ -853,7 +978,8 @@ Factores de escala
 \begin{frame}
 \frametitle{10 - Coord. toroidales $(\eta, \theta, \psi)$}
 \fontsize{12}{12}\selectfont
-Dominio de las coordenadas
+Dominio de las coordenadas:
+\pause
 \begin{align*}
 0 &\leq \eta < +\infty \\
 -\pi &< \theta \leq +\pi \\
@@ -863,7 +989,8 @@ Dominio de las coordenadas
 \begin{frame}
 \frametitle{10 - Coord. toroidales $(\eta, \theta, \psi)$}
 \fontsize{12}{12}\selectfont
-Reglas de transformación
+Reglas de transformación:
+\pause
 \begin{align*}
 x &= \dfrac{a \, \sinh \eta \, \cos \psi}{\cosh \eta - \cos \theta} \\[0.5em]
 y &= \dfrac{a \, \sinh \eta \, \sin \psi}{\cosh \eta - \cos \theta} \\[0.5em]
@@ -873,7 +1000,8 @@ z &= \dfrac{a \, \sin \theta}{\cosh \eta - \cos \theta}
 \begin{frame}
 \frametitle{10 - Coord. toroidales $(\eta, \theta, \psi)$}
 \fontsize{12}{12}\selectfont
-Factores de escala
+Factores de escala:
+\pause
 \begin{align*}
 (h_{1})^{2} = (h_{2})^{2} &= \dfrac{a^{2}}{(\cosh \eta - \cos \theta)^{2}} \\[0.5em]
 (h_{3})^{2} &= \dfrac{a^{2} \, \sinh^{2} \eta}{(\cosh \eta - \cos \theta)^{2}}
@@ -890,6 +1018,7 @@ Factores de escala
 \section{Siguiente paso}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Construcción de otros sistemas}
+
 \begin{frame}
 \frametitle{El siguiente paso}
 Una vez que se ha revisado la metodología para construir sistemas curvilíneos, el siguiente paso sería elaborar la descripción de las superficies coordenadas, calcular los factores de escala, obtener los elementos de línea, superficie y volumen, así como los operadores diferenciales.
@@ -899,15 +1028,539 @@ Una vez que se ha revisado la metodología para construir sistemas curvilíneos,
 De esa manera ya podremos expresar la(s) ecuación(es) que definen un problema de la física bajo una geometría en particular.
 \\
 \bigskip
+\pause
 Esa tarea se desarrollará cuando se nos presente un problema específico.
 \end{frame}
+% \begin{frame}
+% \frametitle{Ejercicio a cuenta}
+% Ocupando el mismo el sistema de coordenadas esferoidales prolatas $((\xi, \eta, \phi))$ del ejercicio a cuenta anterior:
+% \pause
+% \setbeamercolor{item projected}{bg=bulgarianrose,fg=bubbles}
+% \setbeamertemplate{enumerate items}{%
+% \usebeamercolor[bg]{item projected}%
+% \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+% }
+% \begin{enumerate}[<+->]
+% \item Calcula los operadores diferenciales $\grad{\phi}$, $\div{\vb{B}}$, $\curl{\vb{B}}$ y $\laplacian{\phi}$
+% \end{enumerate}
+% \end{frame}
+
+\section{Desarrollo de un sistema coordenado 2/2}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Coordenadas cónicas \texorpdfstring{$(r, \theta, \lambda)$}{(r, t, l)}.}
+
 \begin{frame}
-\frametitle{Ejercicio a cuenta}
-Ocupando el mismo el sistema de coordenadas esferoidales prolatas $((\xi, \eta, \phi))$ del ejercicio a cuenta anterior:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}
-\item Calcula los operadores diferenciales $\grad{\phi}$, $\div{\vb{B}}$, $\curl{\vb{B}}$ y $\laplacian{\phi}$
-\end{enumerate}
+\frametitle{Desarrollo para un sistema especial}
+A continuación veremos la manera de abordar un sistema coordenado especial, para determinar las superficies constantes, los factores de escala, los operadores diferenciales, necesarios para resolver un problema con esta geometría en particular.
 \end{frame}
+
+\subsection{Reglas de transformación}
+\begin{frame}
+\frametitle{Dominio de las coordenadas}
+Para el sistema coordenado cónico, tenemos que:
+\pause
+% \begin{align*}
+% y^{1} = x, \hspace{1cm} y^{2} = y, \hspace{1cm} y^{3} = z
+% \end{align*}
+% \pause
+% junto con:
+\begin{align*}
+u_{1} &= r \hspace{1.5cm} 0 \leq r < \infty \\[0.35em]
+u_{2} &= \theta \hspace{1.5cm} b^{2} < \theta^{2} < c^{2} \\[0.35em]
+u_{3} &= \lambda \hspace{1.5cm} 0 < \lambda^{2} < b^{2}
+\end{align*}
+donde $c^{2} > \theta^{2} > b^{2} > \lambda^{2} > 0$
+\end{frame}
+\begin{frame}
+\frametitle{Reglas de transformación}
+Las reglas de transformación son:
+\pause
+\begin{align*}
+x &= \dfrac{r \, \theta \, \lambda}{b \, c} \\[0.5em]
+y &= \dfrac{r}{b} \, \sqrt{\dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{(b^{2} - c^{2})}} \\[0.5em]
+z &= \dfrac{r}{c} \, \sqrt{\dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^{2} - b^{2})}}
+\end{align*}
+\end{frame}
+
+\subsection{Superficies coordenadas}
+
+\begin{frame}
+\frametitle{Superficies coordenadas}
+Para identificar las superficies constantes, elevamos al cuadrado cada lado:
+\pause
+\begin{align*}
+x^{2} &= \dfrac{r^{2} \theta^{2} \lambda^{2}}{b^{2} c^{2}} \\[0.5em]
+y^{2} &= \dfrac{r^{2}}{b^{2}} \dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{(b^{2} - c^{2})} \\[0.5em]
+z^{2} &= \dfrac{r^{2}}{c^{2}} \dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^{2} - b^{2})}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Sumando las expresiones}
+Sumamos las expresiones al cuadrado:
+\begin{align*}
+x^{2} + y^{2} + z^{2} &= \dfrac{r^{2} \theta^{2} \lambda^{2}}{b^{2} c^{2}} + \dfrac{r^{2}}{b^{2}} \dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{(b^{2} - c^{2})} + \\[0.5em]
+&+ \dfrac{r^{2}}{c^{2}} \dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^{2} - b^{2})} =
+\end{align*}
+\pause
+Nos armamos con paciencia para resolver la suma de fracciones, el álgebra debe de llevarse con cuidado.
+\end{frame}
+\begin{frame}
+\frametitle{Reduciendo la expresión}\hypertarget{Suma1}
+Factorizamos el término $r^{2}$:
+\pause
+\begin{align*}
+&= r^{2} \bigg[ \dfrac{\theta^{2} \lambda^{2}}{b^{2} c^{2}} + \dfrac{1}{b^{2}} \dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{(b^{2} - c^{2})} + \\[0.5em]
+&+ \dfrac{1}{c^{2}} \dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^{2} - b^{2})} \bigg]
+\end{align*}
+\hyperlink{Regreso}{\beamerbutton{Regreso}}
+\end{frame}
+\begin{frame}
+\frametitle{Analizando dos sumandos}
+Nos enfocamos con los siguientes sumandos:
+\pause
+\begin{align*}
+\dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{b^{2}(b^{2} - c^{2})} + \dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{c^{2}(c^{2} - b^{2})}
+\end{align*}
+\pause
+Haciendo con cuidado el álgebra, desarrollamos cada uno de los términos:
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollando el primer término}
+Entonces para el primer término:
+\pause
+\begin{eqnarray*}
+&{}&\dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{b^{2}(b^{2} - c^{2})} = \dfrac{\theta^{2} \lambda^{2} - \theta^2 b^{2} - \lambda^{2} b^{2} + b^{4}}{b^{2}(b^{2} - c^{2})} = \\[0.5em] \pause
+&=& \dfrac{\theta^{2} \lambda^{2}}{b^{2}(b^{2} - c^{2})} - \dfrac{\theta^{2}}{(b^{2} - c^{2})} - \dfrac{\lambda^{2}}{(b^{2} - c^{2})} + \dfrac{b^{2}}{(b^{2} - c^{2})}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Desarrollando el segundo término}
+Entonces para el segundo término:
+\pause
+\begin{eqnarray*}
+&{}&\dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{c^{2}(c^{2} - b^{2})} = \dfrac{\theta^{2} \lambda^{2} - \theta^2 c^{2} - \lambda^{2} c^{2} + c^{4}}{c^{2}(c^{2} - b^{2})} = \\[0.5em] \pause
+&=& \dfrac{\theta^{2} \lambda^{2}}{c^{2}(c^{2} - b^{2})} - \dfrac{\theta^{2}}{(c^{2} - b^{2})} - \dfrac{\lambda^{2}}{(c^{2} - b^{2})} + \dfrac{c^{2}}{(c^{2} - b^{2})}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Sumando los dos términos}
+Ordenando y sumando los dos términos, tendremos:
+\pause
+\begin{align*}
+&\dfrac{\theta^{2} \lambda^{2}}{b^{2}(b^{2} - c^{2})} + \dfrac{\theta^{2} \lambda^{2}}{c^{2}(c^{2} - b^{2})} - \dfrac{\theta^{2}}{(b^{2} - c^{2})} - \dfrac{\theta^{2}}{(c^{2} - b^{2})} + \\[0.5em] 
+&- \dfrac{\lambda^{2}}{(b^{2} - c^{2})} - \dfrac{\lambda^{2}}{(c^{2} - b^{2})} + \dfrac{b^{2}}{(b^{2} - c^{2})} + \dfrac{c^{2}}{(c^{2} - b^{2})}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Reduciendo los términos}
+Del primero término encontrado, vemos que:
+\pause
+\begin{eqnarray*}
+&{}&\dfrac{\theta^{2} \lambda^{2}}{b^{2}(b^{2} - c^{2})} + \dfrac{\theta^{2} \lambda^{2}}{c^{2}(c^{2} - b^{2})} = \\[0.5em] \pause
+&=& \dfrac{\theta^{2} \lambda^{2} c^{2} (c^{2} - b^{2}) + \theta^{2} \lambda^{2} b^{2} (b^{2} - c^{2})}{b^{2} c^{2}(b^{2} - c^{2})(c^{2} - b^{2})} = \\[0.5em] \pause
+&=& \dfrac{\theta^{2} \lambda^{2} \big[ c^{2} (c^{2} - b^{2}) + b^{2} (b^{2} - c^{2}) \big]}{b^{2} c^{2}(b^{2} - c^{2})(c^{2} - b^{2})} = \\[0.5em] \pause
+&=& \dfrac{\theta^{2} \lambda^{2} (c^{4} - b^{2} c^{2} + b^{4} -b^{2} c^{2})}{-b^{2} c^{2} (b^{2} - c^{2})^{2}} = \pause - \dfrac{\theta^{2} \lambda^{2}}{b^{2} c^{2}} \Cancel[red]{\dfrac{(b^{2} - c^{2})^{2}}{(b^{2} - c^{2})^{2}}} =
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado reducido}
+Entonces el resultado:
+\pause
+\begin{align*}
+\dfrac{\theta^{2} \lambda^{2}}{b^{2}(b^{2} - c^{2})} + \dfrac{\theta^{2} \lambda^{2}}{c^{2}(c^{2} - b^{2})} = - \dfrac{\theta^{2} \lambda^{2}}{b^{2} c^{2}}
+\end{align*}
+\pause
+Quedando pendientes los otros términos de la suma.
+\end{frame}
+\begin{frame}
+\frametitle{Los otros resultados}
+Es fácil revisar que:
+\pause
+\begin{eqnarray*}
+- \dfrac{\theta^{2}}{(b^{2} {-} c^{2})} {-} \dfrac{\theta^{2}}{(c^{2} {-} b^{2})} &=& + \dfrac{\theta^{2}}{(c^{2} {-} b^{2})} {-} \dfrac{\theta^{2}}{(c^{2} {-} b^{2})} = 0 \\[0.5em] \pause
+- \dfrac{\lambda^{2}}{(b^{2} {-} c^{2})} {-} \dfrac{\lambda^{2}}{(c^{2} {-} b^{2})} &=& + \dfrac{\lambda^{2}}{(c^{2} {-} b^{2})} {-} \dfrac{\lambda^{2}}{(c^{2} {-} b^{2})} = 0
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Por último}
+El último término que queda es:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{b^{2}}{(b^{2} - c^{2})} + \dfrac{c^{2}}{(c^{2} - b^{2})} &= \pause \dfrac{b^{2}}{(b^{2} - c^{2})} - \dfrac{c^{2}}{(b^{2} - c^{2})} = \\[0.5em] \pause
+&= \Cancel[red]{\dfrac{(b^{2} - c^{2})}{(b^{2} - c^{2})}} = 1
+\end{aligned}
+\end{eqnarray*}
+\end{frame}  
+\begin{frame}
+\frametitle{La suma completa}\hypertarget{Suma2}
+Hemos llegado entonces a que la suma completa es:
+\begin{eqnarray*}
+x^{2} + y^{2} + z^{2} &=& \pause r^{2} \bigg[ \Cancel[blue]{\dfrac{\theta^{2} \lambda^{2}}{b^{2} c^{2}}} - \Cancel[blue]{\dfrac{\theta^{2} \lambda^{2}}{b^{2} c^{2}}} + 1 \bigg] = \\[0.5em] \pause
+x^{2} + y^{2} + z^{2} &=& r^{2}
+\end{eqnarray*}
+\pause
+Que nos definen una familia de esferas concéntricas de radio $r$, siendo la primera superficie coordenada en este sistema cónico.
+\hyperlink{Regreso}{\beamerbutton{Regreso}}
+\end{frame}
+\begin{frame}
+\frametitle{Superficie coordenada con $r$ constante}
+\begin{figure}
+  \centering
+  \includegraphics[scale=1]{Imagenes/Sistema_Conico_Superficie_Constante_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Superficie coordenada con $\theta$ constante}
+Al dejar que $\theta$ sea constante, y como $\theta > 0$, podemos revisar lo siguiente:
+\pause
+\begin{align*}
+\dfrac{x^{2}}{\theta^{2}} + \dfrac{y^{2}}{\theta^{2} - b^{2}} + \dfrac{z^{2}}{\theta^{2} - c^{2}} = 0
+\end{align*}
+\pause
+Nos define una familia de conos, que es la segunda superficie coordenada.
+\end{frame}
+\begin{frame}
+\frametitle{Superficie coordenada con $\lambda$ constante}
+Ahora hacemos que $\lambda$ sea constante, y como $\lambda > 0$, podemos revisar lo siguiente:
+\pause
+\begin{align*}
+\dfrac{x^{2}}{\lambda^{2}} + \dfrac{y^{2}}{\lambda^{2} - b^{2}} + \dfrac{z^{2}}{\lambda^{2} - c^{2}} = 0
+\end{align*}
+\pause
+Nos define otra familia de conos, que es la tercera superficie coordenada.
+\end{frame}
+\begin{frame}
+\frametitle{Intersección de las superficies}
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.3]{Imagenes/Sistema_Conico.eps}
+\end{figure}
+\end{frame}
+
+\subsection{Factores de escala}
+
+\begin{frame}
+\frametitle{Los factores de escala}
+Para obtener los factores de escala, ocupamos la expresión:
+\pause
+\begin{eqnarray*}
+h_{i} = \pause \abs{\dv{\vb{r}}{u_{i}}} = \pause \sqrt{\bigg( \pdv{x}{u_{i}} \bigg)^{2} + \bigg( \pdv{y}{u_{i}} \bigg)^{2} + \bigg( \pdv{z}{u_{i}} \bigg)^{2}}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo $h_{r}$}
+Para obtener el factor de escala $h_{r}$, debemos de calcular:
+\pause
+\begin{align*}
+h_{r} = \sqrt{\bigg( \pdv{x}{r} \bigg)^{2} + \bigg( \pdv{y}{r} \bigg)^{2} + \bigg( \pdv{z}{r} \bigg)^{2}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Las derivadas parciales 1}
+Desarrollamos de manera explícita las derivadas parciales:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\pdv{x}{r} &= \pause \displaystyle \pdv{r} \bigg( \dfrac{r \theta \lambda}{b c} \bigg) = \pause \dfrac{\theta \lambda}{b c} \\[0.5em] \pause
+\Rightarrow \hspace{0.3cm} \bigg( \pdv{x}{r} \bigg)^{2} &= \dfrac{\theta^{2} \lambda^{2}}{b^{2} c^{2}}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Las derivadas parciales 2}
+\begin{eqnarray*}
+\begin{aligned}
+\pdv{y}{r} &= \pause \pdv{r} \bigg( \dfrac{r}{b} \sqrt{\dfrac{ (\theta^{2} - b^{2}) (\lambda^{2} - b^{2}) }{(b^{2} - c^{2})}} \bigg) = \\[0.5em] \pause
+&= \dfrac{1}{b} \sqrt{\dfrac{ (\theta^{2} - b^{2}) (\lambda^{2} - b^{2}) }{(b^{2} - c^{2})}} \\[0.5em] \pause
+\Rightarrow \hspace{0.3cm} \bigg( \pdv{y}{r} \bigg)^{2} &= \dfrac{1}{b^{2}} \dfrac{ (\theta^{2} - b^{2}) (\lambda^{2} - b^{2})}{(b^{2} - c^{2})}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Las derivadas parciales 3}
+\begin{eqnarray*}
+\begin{aligned}
+\pdv{z}{r} &= \pause \pdv{r} \bigg( \dfrac{r}{c} \sqrt{\dfrac{ (\theta^{2} - c^{2}) (\lambda^{2} - c^{2}) }{(c^{2} - b^{2})}} \bigg) = \\[0.5em] \pause
+&= \dfrac{1}{c} \sqrt{\dfrac{ (\theta^{2} - c^{2}) (\lambda^{2} - c^{2}) }{(c^{2} - b^{2})}} \\[0.5em] \pause
+\Rightarrow \hspace{0.3cm} \bigg( \pdv{z}{r} \bigg)^{2} &= \dfrac{1}{c^{2}} \dfrac{ (\theta^{2} - c^{2}) (\lambda^{2} - c^{2}) }{(c^{2} - b^{2})}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Haciendo la suma de las derivadas parciales}
+Podemos hacer la suma:
+\pause
+\begin{align*}
+\bigg( \pdv{x}{r} \bigg)^{2} + \bigg( \pdv{y}{r} \bigg)^{2} + \bigg( \pdv{z}{r} \bigg)^{2} =
+\end{align*}
+Entonces:
+\pause
+\begin{align*}
+\dfrac{\theta^{2} \lambda^{2}}{b^{2} c^{2}} + \dfrac{1}{b^{2}} \dfrac{ (\theta^{2} - b^{2}) (\lambda^{2} - b^{2})}{(b^{2} - c^{2})} + \dfrac{1}{c^{2}} \dfrac{ (\theta^{2} - c^{2}) (\lambda^{2} - c^{2}) }{(c^{2} - b^{2})}
+\end{align*}
+\hypertarget{Regreso}
+Esta suma ya se realizó: \hyperlink{Suma1}{\beamerbutton{Suma}} \hspace{1.5cm} \hyperlink{Suma2}{\beamerbutton{Resultado}}
+\end{frame}
+\begin{frame}
+\frametitle{El factor de escala $h_{r}$}
+Entonces tenemos que:
+\pause
+\begin{align*}
+h_{r} &= \sqrt{\bigg( \pdv{x}{r} \bigg)^{2} + \bigg( \pdv{y}{r} \bigg)^{2} + \bigg( \pdv{z}{r} \bigg)^{2}} = \\[0.5em]
+&= 1
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El factor de escala $h_{\theta}$}
+Ocupamos nuevamente la expresión para obtener el factor de escala $h_{\theta}$:
+\pause
+\begin{align*}
+h_{\theta} &= \sqrt{\bigg( \pdv{x}{\theta} \bigg)^{2} + \bigg( \pdv{y}{\theta} \bigg)^{2} + \bigg( \pdv{z}{\theta} \bigg)^{2}}
+\end{align*}
+Recomendamos hacer el cálculo de las derivadas parciales de manera paulatina, para evitar errores.
+\end{frame}
+\begin{frame}
+\frametitle{La derivada parcial $\pdv*{x}{\theta}$}
+Comenzamos con:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\pdv{x}{\theta} &= \pause \displaystyle \pdv{\theta} \bigg( \dfrac{r \theta \lambda}{b c} \bigg) = \pause \dfrac{r \lambda}{b c} \\[0.5em] \pause
+\Rightarrow \hspace{0.3cm} \bigg( \pdv{x}{\theta} \bigg)^{2} &= \dfrac{r^{2} \lambda^{2}}{b^{2} c^{2}}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{La derivada parcial $\pdv*{y}{\theta}$}
+\begin{eqnarray*}
+\begin{aligned}
+\pdv{y}{\theta} &= \pause \pdv{\theta} \bigg( \dfrac{r}{b} \sqrt{\dfrac{ (\theta^{2} - b^{2}) (\lambda^{2} - b^{2}) }{(b^{2} - c^{2})}} \bigg) = \\[0.5em] \pause
+&= \dfrac{r \theta (\lambda^{2} - b^{2})}{b (b^{2} -c^{2}) \bigg[ \dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{(b^{2} - c^{2})} \bigg]^{\frac{1}{2}}}
+\end{aligned}
+\end{eqnarray*}  
+\end{frame}
+\begin{frame}
+\frametitle{La derivada parcial $\pdv*{y}{\theta}$}
+\begin{eqnarray*}
+\begin{aligned}
+\Rightarrow \hspace{0.3cm} \bigg( \pdv{y}{\theta} \bigg)^{2} &= \dfrac{r^{2} \theta^{2} (\lambda^{2} - b^{2})^{2}}{b^{2} (b^{2} -c^{2})^{2} \bigg[ \dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{(b^{2} - c^{2})} \bigg]} = \\[0.5em] \pause
+&= \dfrac{r^{2} \theta^{2} (\lambda^{2} - b^{2})}{b^{2} (b^{2} - c^{2}) (\theta^{2} - b^{2})}
+\end{aligned}
+\end{eqnarray*}  
+\end{frame}
+\begin{frame}
+\frametitle{La derivada parcial $\pdv*{z}{\theta}$}
+Para la tercera derivada parcial:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\pdv{z}{\theta} &= \pause \pdv{\theta} \bigg( \dfrac{r}{c} \sqrt{\dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^{2} - b^{2})}} \bigg) = \\[0.5em] \pause
+&= \dfrac{r \theta (\lambda^{2} - c^{2})}{c (c^{2} - b^{2}) \bigg[ \dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^{2} - b^{2})} \bigg]^{\frac{1}{2}}}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{La derivada parcial $\pdv*{z}{\theta}$}
+\begin{eqnarray*}
+\begin{aligned}
+\Rightarrow \hspace{0.3cm} \bigg( \pdv{z}{\theta} \bigg)^{2} &= \dfrac{r^{2} \theta^{2} (\lambda^{2} - c^{2})^{2}}{c^{2} (c^{2} - b^{2})^{2} \bigg[ \dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^{2} - b^{2})} \bigg]} = \\[0.5em] \pause
+&= \dfrac{r^{2} \theta^{2} (\lambda^{2} - c^{2})^{2}}{c^{2} (c^{2} - b^{2}) (\theta^{2} - c^{2})}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Sumando las derivadas parciales}
+Al sumar las tres derivadas parciales, se tiene que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+h_{\theta} &= \sqrt{\bigg( \pdv{x}{\theta} \bigg)^{2} + \bigg( \pdv{y}{\theta} \bigg)^{2} + \bigg( \pdv{z}{\theta} \bigg)^{2}} = \\[0.5em] \pause
+&= \dfrac{r^{2} \lambda^{2}}{b^{2} c^{2}} {+} \dfrac{r^{2} \theta^{2} (\lambda^{2} - b^{2})}{b^{2} (b^{2} - c^{2}) (\theta^{2} - b^{2})} {+} \dfrac{r^{2} \theta^{2} (\lambda^{2} - c^{2})^{2}}{c^{2} (c^{2} - b^{2}) (\theta^{2} - c^{2})}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{El factor de escala $h_{\theta}$}
+Luego de un cuidadoso trabajo algebraico, se llega al resultado:
+\pause
+\begin{align*}
+h_{\theta} = r \sqrt{\dfrac{(\theta^{2} - \lambda^{2})}{(\theta^{2} - b^{2})(c^{2} - \theta^{2})}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El factor de escala $h_{\lambda}$}
+Siguiendo el mismo procedimiento, el tercer factor de escala para este sistema coordenado cónico es:
+\pause
+\begin{align*}
+h_{\lambda} = r \sqrt{\dfrac{(\theta^{2} - \lambda^{2})}{(\lambda^{2} - b^{2})(\lambda^{2} - c^{2})}}
+\end{align*}
+\pause
+En las soluciones de los ejercicios a cuenta y del examen, se debe de hacer todo el procedimiento de manera explícita.
+\end{frame}
+\begin{frame}
+\frametitle{Los factores de escala}
+Hemos calculado los factores de escala:
+\pause
+\begin{align*}
+h_{r} &= 1 \\[0.5em]
+h_{\theta} &=  r \, \sqrt{\dfrac{(\theta^{2} - \lambda^{2})}{(\theta^{2} - b^{2})(c^{2} - \theta^{2})}} \\[0.5em]
+h_{\lambda} &= r \, \sqrt{\dfrac{(\theta^{2} - \lambda^{2})}{(\lambda^{2} - b^{2})(\lambda^{2} - c^{2})}}
+\end{align*}
+\end{frame}
+
+\subsection{Diferencial de desplazamiento}
+% \frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Vectores unitarios en el sistema cónico}
+
+\begin{frame}
+\frametitle{Vectores unitarios}
+De acuerdo con las notas de trabajo, los vectores unitarios se expresan como:
+\pause
+\begin{align*}
+\vu{e}_{i} = \dfrac{1}{h_{i}} \, \pdv{\vb{r}}{u_{i}}
+\end{align*}
+\end{frame}
+
+% \subsection{Diferencial de desplazamiento}
+
+\begin{frame}
+\frametitle{Obteniendo el diferencial}
+El cuadrado de la distancia entre dos puntos está dado por:
+\pause
+\begin{align*}
+\big( \dd{s} \big)^{2} = \big( h_{1} \dd{q_{1}} \big)^{2} + \big( h_{2} \dd{q_{2}} \big)^{2} + \big( h_{3} \dd{q_{3}} \big)^{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Estimado el diferencial de desplazamiento}
+Una vez que se cuenta con los factores de escala, podemos expresar el diferencial de desplazamiento en el sistema coordenado cónico:
+\pause
+\begin{align*}
+&\big( \dd{s} \big)^{2} = \big( \dd{r} \big)^{2} + \\[0.5em]
+&+ r^{2} \big( \theta^{2} {-} \lambda^{2} \big) \bigg[ \dfrac{(\dd{\theta})^{2}}{(\theta^{2} {-} b^{2})(c^{2} {-} \theta^{2})} {+} \dfrac{(\dd{\lambda})^{2}}{(b^{2} {-} \lambda^{2})(c^{2} {-} \lambda^{2})} \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo más elementos del sistema coordenado}
+Los factores de escala pueden identificarse convenientemente mediante la relación:
+\pause
+\begin{align*}
+\dd{s_{i}} = h_{i} \dd{q_{i}}
+\end{align*}
+para cualquier $\dd{q_{i}}$, conservando las otras $q$ constantes.
+\end{frame}
+\begin{frame}
+\frametitle{Elementos de área y de volumen}
+Con lo anterior, se pueden desarrollar los elementos de área y volumen:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dd{\sigma_{ij}} &= \dd{s_{i}} \dd{s_{j}} = h_{i} \, h_{j} \dd{q_{i}} \dd{q_{j}} \\[0.5em] \pause
+\dd{\tau} &= \dd{s_{1}} \dd{s_{2}} \dd{s_{3}}= h_{1} \, h_{2} \, h_{3} \dd{q_{1}} \dd{q_{2}} \dd{q_{3}}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+
+\subsection{Aplicación: La ecuación de Helmholtz}
+% \frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Construyendo la ecuación}
+
+\begin{frame}
+\frametitle{La ecuación de Helmholtz}
+Sabemos que la ecuación de Helmholtz se expresa por:
+\pause
+\begin{align*}
+\laplacian{E} + k \, E = 0
+\end{align*}
+donde $k$ es el número de onda, $E$ es la función escalar que es solución a la ecuación.
+\\
+\bigskip
+\pause
+Expresemos esta ecuación en el sistema coordenado cónico.
+\end{frame}
+\begin{frame}
+\frametitle{El Laplaciano en coord. cónicas}
+Ya conocemos la expresión para el Laplaciano en coordenadas generalizadas:
+\begin{align*}
+\laplacian{\varphi} = \dfrac{1}{h} \nsum_{i=1}^{3} \pdv{u_{i}} \bigg[ \dfrac{h}{h_{i}^{2}} \, \pdv{\varphi}{u_{i}}\bigg]
+  \end{align*}
+\pause
+Por lo que hay que calcular algunos valores de manera anticipada.  
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando las operaciones}
+Con la finalidad de simplificar las operaciones, hagamos que:
+\pause
+\begin{align*}
+f(\theta) &= \sqrt{(\theta^{2} - b^{2})(c^{2} - \theta^{2})} \\[0.5em]
+f(\lambda) &= \sqrt{(\lambda^{2} - b^{2})(c^{2} - \lambda^{2})}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Valores con los componentes métricos}
+Se tiene que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{1}{h} &= \left( \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\theta)^{2}} \cdot \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\lambda)^{2}} \right)^{\frac{1}{2}} = \\[0.5em] \pause
+&= \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Los otros valores}
+Por lo que:
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{h}{h_{r}} &= \pause \dfrac{\dfrac{r^{2}(\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)}}{1} \\[0.5em] \pause
+&= \dfrac{r^{2}(\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Los otros valores}
+Del mismo modo:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{h}{h_{\theta}} &= \pause \dfrac{\dfrac{r^{2}(\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)}}{\dfrac{r^{2}(\theta^{2} - \lambda^{2})}{f(\theta)^{2}}} \\[0.5em] \pause
+&= \dfrac{r^{2}(\theta^{2} - \lambda^{2}) f(\theta)^{2}}{r^{2}(\theta^{2} - \lambda^{2}) \, f(\theta) \, f(\lambda)} = \\[0.5em] \pause
+&= \dfrac{f(\theta)}{f(\lambda)} 
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Los otros valores}
+Para el último valor:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{h}{h_{\lambda}} &= \pause \dfrac{\dfrac{r^{2}(\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)}}{\dfrac{r^{2}(\theta^{2} - \lambda^{2})}{f(\lambda)^{2}}} \\[0.5em] \pause
+&= \dfrac{r^{2}(\theta^{2} - \lambda^{2}) f(\lambda)^{2}}{r^{2}(\theta^{2} - \lambda^{2}) \, f(\theta) \, f(\lambda)} = \\[0.5em] \pause
+&= \dfrac{f(\lambda)}{f(\theta)} 
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Expresando el Laplaciano}
+El Laplaciano en coordenadas cónicas será entonces:
+\pause
+\begin{align*}
+\laplacian{E} &= \dfrac{f(\theta) \, f(\lambda)}{r^{2} (\theta^{2} - \lambda^{2})} \bigg[ \pdv{r} \left( \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{f(\theta) \, f(\lambda)} \, \pdv{E}{r} \right) + \\[0.5em]
+&+ \pdv{\theta} \left( \dfrac{f(\theta)}{f(\lambda)} \, \pdv{E}{\theta} \right) + \pdv{\lambda} \left( \dfrac{f(\lambda)}{f(\theta)} \, \pdv{E}{\lambda} \right) \bigg]
+\end{align*}
+\pause
+Que habrá que simplificar para entonces expresar la ecuación de Helmholtz.
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de Helmholtz}
+En el sistema coordenado cónico la ecuación de Helmholtz tiene la forma:
+\pause
+\begin{align*}
+&\dfrac{1}{r^{2}} \pdv{r} \left( r^{2} \, \pdv{E}{r} \right) + \dfrac{f(\theta)}{r^{2} (\theta^{2} - \lambda^{2})} \, \pdv{\theta} \left( f(\theta) \, \pdv{E}{\theta} \right) + \\[0.5em]
+&+ \dfrac{f(\lambda)}{r^{2} (\theta^{2} - \lambda^{2})} \, \pdv{\lambda} \left( f(\lambda) \, \pdv{E}{\lambda} \right) + k \, E = 0 \qed
+\end{align*}
+\end{frame}
+
 \end{document}
