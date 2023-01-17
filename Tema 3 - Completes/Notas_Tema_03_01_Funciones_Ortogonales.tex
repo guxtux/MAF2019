@@ -1,0 +1,1253 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
+\input{../Preambulos/preambulo_Beamer_Warsaw_crane}
+
+\date{}
+
+\title{\large{Funciones ortogonales}}
+\subtitle{Tema 3 - Bases completas y ortogonales}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\resetcounteronoverlays{saveenumi}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+
+\section{Introducción}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Objetivo}
+
+\begin{frame}
+\frametitle{Introducción}
+Hasta ahora hemos discutido de manera general el tipo de ecuaciones que aparecen en la física y algunas de sus propiedades, hemos trabajado con algunas de las ecuaciones diferenciales en el que estamos interesados y hemos estudiado sus singularidades.
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+Todas estas ecuaciones son ecuaciones diferenciales lineales de segundo orden, las cuales como hemos visto, admiten sólo dos soluciones linealmente independientes.
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+En este tema, nos enfocaremos no a resolver la ED sino a \textocolor{ao}{desarrollar y comprender las propiedades generales de las soluciones}.
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+Existe una estrecha analogía entre los conceptos de este capítulo y los de álgebra lineal: \pause las funciones que aquí veremos, desempeñan el papel de vectores en el álgebra, y los operadores lineales el de las matrices.
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+La diagonalización de una matriz simétrica real corresponde en este tema, la solución de una ED definida por un \textocolor{carmine}{operador autoadjunto} $\mathcal{L}$ en términos de sus eigenfunciones, que son el análogo \enquote{continuo} de los eigenvectores.
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+Los ejemplos de la analogía correspondiente entre matrices Hermitianas y operadores Hermitianos son los Hamiltonianos en mecánica cuántica y sus eigenfunciones de energía.
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+Trabajaremos con los conceptos de:
+\setbeamercolor{item projected}{bg=cobalt,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Operador autoadjunto.
+\item Eigenfunción (Función propia).
+\item Eigenvalor (Valor propio).
+\item Operador Hermitiano.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+El concepto de operador adjunto, dado primero en términos de ED, luego se redefine de acuerdo con el uso en mecánica cuántica, donde las eigenfunciones toman valores complejos.
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+Se discutirán las propiedades relevantes de:
+\pause
+\setbeamercolor{item projected}{bg=burgundy,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Los eigenvalores (Valores propios).
+\item La ortogonalidad de las eigenfunciones (Funciones propias).
+\item Procedimiento de Gram-Schmidt para construir sistemáticamente conjuntos de funciones ortogonales.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Introducción}
+\setbeamercolor{item projected}{bg=burgundy,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item La propiedad general de la \textocolor{bistre}{completes} de un conjunto de eigenfunciones.
+\end{enumerate}
+\end{frame}
+
+\section{ED autoadjuntas}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Operador lineal}
+
+\begin{frame}
+\frametitle{El operador lineal}
+Ya hemos estudiado, clasificado y resuelto EDO2 lineales, cuya forma general en términos de un operador diferencial lineal de segundo orden ($\mathcal{L}$) es:
+\pause
+{\fontsize{12}{12}\selectfont
+\begin{align}
+\mathcal{L} \, u (x) = \left[ p_{0} (x) \, \dv[2]{x} + p_{1} (x) \, \dv{x} + p_{2} (x) \right] \, u (x)
+\label{eq:ecuacion_10_01}
+\end{align}}
+Los coeficientes $p_{0} (x)$, $p_{1} (x)$, y $p_{2} (x)$ son funciones reales de $x$ sobre la región de interés $a \leq x \leq b$.
+\end{frame}
+\begin{frame}
+\frametitle{El operador lineal}
+Donde reconocemos que:
+\pause
+\begin{align*}
+P (x) = \dfrac{p_{1} (x)}{p_{0}(x)} \hspace{1cm} Q (x) = \dfrac{p_{2} (x)}{p_{0} (x)}
+\end{align*}
+\pause
+por lo que $p_{0} (x)$ no puede anularse en $a < x < b$.
+\end{frame}
+\begin{frame}
+\frametitle{El operador lineal}
+Hay que tomar en cuentas un par de condiciones adicionales para las tres funciones:
+\pause
+\setbeamercolor{item projected}{bg=carmine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item La función $p_{0} (x)$ es diferente de cero para todo punto en el intervalo abierto $(a, b)$.
+\item Las primeras $2-i$ derivadas de la función $p_{i} (x)$ son continuas.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{El operador lineal}
+Los ceros de la función $p_{0} v (x)$ son puntos singulares de la ED (\ref{eq:ecuacion_10_01}), \pause podemos elegir el intervalo $[a, b]$ de tal manera que no hayan puntos singulares al interior del intervalo, \pause sucede a menudo que los únicos puntos donde pueden existir puntos singulares son los puntos extremos del intervalo: $x = a$ y $x = b$.
+\end{frame}
+\begin{frame}
+\frametitle{El operador lineal}
+Para un operador lineal $\mathcal{L}$, el análogo de una forma cuadrática para una matriz, es la integral:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\matrixel{u}{\mathcal{L}}{u} &\equiv \pause \ip{u}{\mathcal{L} \, u} = \pause \scaleint{6ex}_{\bs a}^{b} u (x) \, \mathcal{L} \, u (x) \, \dd{u} \\[0.5em] \pause
+&= \scaleint{6ex}_{\bs a}^{b} u \, [ p_{0} \, \sderivada{u} + p_{1} \, \pderivada{u} + p_{2} \, u ] \, \dd{x}
+\end{aligned}
+\label{eq:ecuacion_10_02}
+\end{eqnarray}
+donde las primadas de la función real $ u (x)$ indican las derivadas.
+\end{frame}
+\begin{frame}
+\frametitle{El operador lineal}
+Si cambiamos las derivadas al primer factor, $u$, en la ec. (\ref{eq:ecuacion_10_02}) integrando por partes una o dos veces, nos dirige a la expresión equivalente:
+\pause
+\begin{align}
+\begin{aligned}
+\matrixel{u}{\mathcal{L}}{u} &= [ u(x) \, ( p_{1} - \pderivada{p}_{0} ) \, u(x)] \eval_{x=a}^{b} + \\
+&+ \scaleint{6ex}_{\bs a}^{b} \left\{ \dv[2]{x} [p_{0} \, u] - \dv{x} [p_{1} \, u] + p_{2} \, u \right\} \, u \, \dd{x}
+\end{aligned}
+\label{eq:ecuacion_10_03}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{El operador lineal}
+Se requiere que las integrales en las ecs. (\ref{eq:ecuacion_10_02}) y (\ref{eq:ecuacion_10_03}) sean idénticas \textocolor{darkblue}{para todas las funciones $\bm{u}$ (diferenciables dos veces)}, por lo que los integrandos deben de ser iguales.
+\end{frame}
+\begin{frame}
+\frametitle{El operador lineal}
+La comparación nos deja que:
+\pause
+\begin{align*}
+u \, (\sderivada{p}_{0} - p_{1}) \, u + 2 \, u (\pderivada{p}_{0} - p_{1}) \, \pderivada{u} = 0
+\end{align*}
+\pause
+o
+\begin{align}
+\pderivada{p}_{0} (x) = p_{1} (x)
+\label{eq:ecuacion_10_04}
+\end{align}
+como ganancia, los valores en los extremos $x = a$ y $x = b$ en la ec. (\ref{eq:ecuacion_10_03}) se anulan.
+\end{frame}
+
+\subsection{Operador autoadjunto}
+
+\begin{frame}
+\frametitle{El operador autoadjunto}
+Por la analogía a la matriz transpuesta, es conveniente definir el operador lineal en la ec. (\ref{eq:ecuacion_10_03}):
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\overline{\mathcal{L}} \, u &= \dv[2]{x} [ p_{0} \, u (x)] - \dv{x} [p_{1} \, u (x)] + p_{2} \, u (x) = \\[0.5em] \pause
+&= p_{0} \dv[2]{u}{x} + \left[ 2 \; \pderivada{p}_{0} - p_{1} \right] \; \dv{u}{x} + \left( \sderivada{p}_{0} - \pderivada{p}_{1} + p_{2} \right) \, u
+\label{eq:ecuacion_10_05}
+\end{aligned}
+\end{eqnarray}
+Este es el \textocolor{darkmagenta}{operador autoadjunto $\overline{\mathcal{L}}$}.
+\end{frame}
+\begin{frame}
+\frametitle{El operador autoadjunto}
+Se ha definido el operador autoadjunto $\overline{\mathcal{L}}$ y se ha demostrado que si la ec. (\ref{eq:ecuacion_10_04}) se cumple, entonces $\ip{\overline{\mathcal{L}} \, u}{u} = \ip{u}{\mathcal{L} \, u}$.
+\end{frame}
+\begin{frame}
+\frametitle{El operador autoadjunto}
+Siguiendo el mismo procedimiento, podemos mostrar de manera más general que:
+\pause
+\begin{align*}
+\ip{v}{\mathcal{L} \, u} = \ip{\mathcal{L} \, v}{u}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{El operador autoadjunto}
+Cuando esta condición se satisface:
+\pause
+\begin{equation}
+\setlength{\fboxsep}{3\fboxsep}\boxed{\overline{
+\mathcal{L}} \, u = \mathcal{L} \, u = \dv{x} \left[ p (x) \dv{u (x)}{x} \right] + q (x) \, u (x)}
+\label{eq:ecuacion_10_06}
+\end{equation}
+\pause
+se dice que $\mathcal{L}$ es un \textocolor{darkscarlet}{operador autoadjunto}. 
+\\
+\bigskip
+\pause
+Aquí, para el caso autoadjunto, $p_{0} (x)$ se reemplaza por $p (x)$ y $p_{2} (x)$ por $q (x)$ para evitar subíndices innecesarios.
+\end{frame}
+\begin{frame}
+\frametitle{El operador autoadjunto}
+La forma de la ec. (\ref{eq:ecuacion_10_06}) permite llevar a cabo dos integraciones por partes en la ec. (\ref{eq:ecuacion_10_03}) sin integrados.
+\\
+\bigskip
+\pause
+Toma en cuenta que un operador dado no es inherentemente autoadjunto; su propiedad de autoadjunto depende de las propiedades del espacio en el que actúa la función y en las condiciones de frontera.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos de ecuaciones autoadjuntas}
+Como ejemplos tenemos que la ecuación de Legendre:
+\pause
+\begin{align*}
+(1 - x^{2}) \sderivada{u} - 2 x \pderivada{u} + n (n + 1) u = 0 \hspace{1.3cm} -1 \leq x \leq 1  
+\end{align*}
+\pause
+y la ecuación del oscilador lineal:
+\begin{align*}
+\sderivada{y} (x) + \lambda y \, (x) = 0
+\end{align*}
+son autoadjuntas.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos de ecuaciones no autoadjuntas}
+Pero otras, como la ecuación de Laguerre:
+\begin{align*}
+x \, \sderivada{y} (x) + (1 - x) \, \pderivada{y} (x) + n \, y (x) = 0
+\end{align*}
+\pause
+y la ecuación de Hermite:
+\begin{align*}
+\sderivada{H}_{n} (x) - 2 \, x \, \pderivada{H}_{n} (x) + 2 \, n \, H_{n} (x) = 0
+\end{align*}
+no son autoadjuntas.
+\end{frame}
+\begin{frame}
+\frametitle{Modificación a ecuaciones autoadjuntas}
+Sin embargo, la teoría de las ED autoadjuntas lineales de segundo orden es perfectamente general porque \textocolor{deepcarmine}{siempre podemos transformar} el operador no autoadjunto en la forma autoadjunta requerida.
+\end{frame}
+\begin{frame}
+\frametitle{Veamos como hacerlo}
+Considera la ec. (\ref{eq:ecuacion_10_01}) con $\pderivada{p}_{0} \neq p_{1}$. \pause Si multiplicamos $\mathcal{L}$ por:
+\pause
+\begin{align*}
+\dfrac{1}{p_{0} (x)} \exp \left[ \scaleint{6ex}^{x} \dfrac{p_{1} (t)}{p_{0} (t)} \, \dd{t} \right]
+\end{align*}
+se obtiene:
+\end{frame}
+\begin{frame}
+\frametitle{Veamos como hacerlo}
+\begin{eqnarray}
+\begin{aligned}
+&\dfrac{1}{p_{0} (x)} \exp \left[ \scaleint{6ex}^{x} \dfrac{p_{1} (t)}{p_{0} (t)} \dd{t} \right] \, \mathcal{L} \, u (x) = \\[1em] \pause
+&= \dv{x} \left[ \exp \left( \scaleint{6ex}^{x} \dfrac{p_{1} (t)}{p_{0} (t)} \, \dd{t} \right) \, \dv{u (x)}{x} \right] + \\[1em] 
+&+ \dfrac{p_{2} (x)}{p_{0} (x)} \, \exp \left[ \scaleint{6ex}^{x} \dfrac{p_{1} (t)}{p_{0} (t)} \, \dd{t} \right] \, u
+\end{aligned}
+\label{eq:ecuacion_10_07}
+\end{eqnarray}
+que es un operador claramente autoadjunto.
+\end{frame}
+\begin{frame}
+\frametitle{Resultado}
+Nótese que $p_{0}$ está en el denominador, esto se debe a que necesariamente $p_{0} \neq 0$, en el intervalo $a < x < b$.
+\\
+\bigskip
+\pause
+En el siguiente desarrollo, supondremos que $\mathcal{L}$ ha sido puesto en una forma autoadjunta.
+\end{frame}
+
+\section{Problemas de tipo Sturm-Liouville}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Funciones y eigenvalores}
+
+\begin{frame}
+\frametitle{Ejemplo de ec. de eigenvalores}
+La ecuación de onda de Schrödinger:
+\pause
+\begin{align*}
+H \, \psi (x) = E \, \psi (x)
+\end{align*}
+\fontsize{12}{12}\selectfont
+Es el ejemplo más importante de una ecuación de eigenvalores en física; aquí el operador diferencial $\mathcal{L}$ está definido por el Hamiltoniano $H$ y puede que no sea real, y el eigenvalor se convierte en la energía total $E$ del sistema.
+\\
+\bigskip
+\pause
+La eigenfunción $\psi (x)$ puede ser compleja y generalmente se denomina \textocolor{ao}{función de onda}.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de eigenvalores}
+Sobre la base de propiedades de simetría esféricas, cilíndricas o de otro sistema coordenado, una EDP o de eigenvalores de tres o cuatro dimensiones, como la ecuación de Schrödinger, puede separarse en ecuaciones de eigenvalores de una sola variable cada una.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de eigenvalores}
+Sin embargo, a veces una ecuación de eigenvalores toma la forma autoadjunta más general:
+\pause
+\begin{align}
+\mathcal{L} \, u (x) + \lambda \, w (x) \, u (x) = 0
+\label{eq:ecuacion_10_08}
+\end{align}
+donde la constante $\lambda$ es el eigenvalor y $w (x)$ es una función conocida de peso o densidad; $w (x) > 0$, excepto posiblemente en puntos aislados en los que $w (x) = 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Función y eigenvalores}
+Para una elección dada del parámetro $\lambda$, una función $u_{\lambda}(x)$, que satisface la ec. (\ref{eq:ecuacion_10_08}) \textocolor{blue}{y las CDF impuestas}, se llama una \textocolor{red}{eigenfunción} (función propia) correspondiente a $\lambda$.
+\\
+\bigskip
+\pause
+La constante $\lambda$ es llamada \textbf{eigenvalor}\footnote{La palabra alemana \emph{eigen} que se traduce en español como \emph{propio}, se utilizó por primera vez en este contexto por David Hilbert en 1904.} por los matemáticos.
+\end{frame}
+\begin{frame}
+\frametitle{Función y eigenvalores}
+No hay garantía de que exista una eigenfunción $u_{\lambda} (x)$ para una elección arbitraria del parámetro $\lambda$.
+\\
+\bigskip
+\pause
+De hecho, el requisito de que haya una eigenfunción a menudo restringe los valores aceptables de $\lambda$ en un conjunto discreto. 
+\end{frame}
+\begin{frame}
+\frametitle{Función de peso}
+El producto interno de dos funciones:
+\pause
+\begin{align*}
+\ip{v}{u} = \scaleint{6ex}_{\bs a}^{b} v^{*} (x) \, w (x) \, u (x) \, \dd{x}
+\end{align*}
+depende de la función de peso y generaliza nuestra definición previa, donde $w (x) = 1$.
+\\
+\bigskip
+\pause
+La función de peso también modifica la definición de \textocolor{lava}{ortogonalidad} de dos funciones propias: \pause son ortogonales si su producto interno $\ip{u_{\pderivada{\lambda}}}{u_{\lambda}} = 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Función de peso - Ejemplo de cuántica}
+La función de peso adicional $w(x)$ aparece a veces como una función de onda asintótica $\psi_{\infty}$ que es un factor común en todas las soluciones de una EDP como la ecuación de Schrödinger, \pause por ejemplo, cuando el potencial $V (x) \to 0$ cuando $x \to \infty$ en $H = T + V$. 
+\\
+\bigskip
+\pause
+Podemos encontrar $\psi_{\infty}$ cuando establecemos $V = 0$ en la ecuación de Schrödinger.
+\end{frame}
+\begin{frame}
+\frametitle{Función de peso - Otro caso}
+Otra fuente para $w (x)$ puede ser una barrera de momento angular no nulo $\ell (\ell +1)/x^{2}$ en una EDP o una EDO separada que tiene una singularidad regular y domina en $x \to 0$. 
+\\
+\bigskip
+\pause
+En tal caso, la ecuación de índices, muestra que la función de onda tiene a $x^{\ell}$ como factor general.
+\end{frame}
+\begin{frame}
+\frametitle{Función de peso - Otro caso}
+Dado que la función de onda entra dos veces en los elementos de la matriz y las relaciones de ortogonalidad, las funciones de peso en la Tabla (\ref{tabla:tabla_01}) provienen de estos factores comunes en ambas funciones de onda radial.
+\\
+\bigskip
+\pause
+Así es como surge el $\exp(-x)$ para los polinomios de Laguerre y $x^{k} \, \exp(-x)$ para los polinomios asociados de Laguerre.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuaciones Diferenciales de la FM}
+A continuación enlistaremos una serie de ED con nombre, \pause en los Temas 4 y 5 estudiaremos las soluciones y propiedades de las mismas.
+\end{frame}
+\begin{frame}
+\frametitle{ED de la FM}
+\setbeamercolor{item projected}{bg=carmine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Bessel: $x^{2} \sderivada{y} + x \pderivada{y} + (x^{2} - \nu^{2}) y = 0$
+\item Legendre: $(1 - x^{2}) \sderivada{y} - 2 x \pderivada{y} + n (n + 1) y = 0$
+\item Asociados de Legendre:
+\begin{align*}
+(1 - x^{2}) \sderivada{y} - 2 x \pderivada{y} + \left[ n (n + 1) - \dfrac{m^{2}}{1- x^{2}} \right] y = 0
+\end{align*}
+\item Laguerre: $x \, \sderivada{y} + (1 - x) \, \pderivada{y} + n \, y = 0$
+\item Asociada de Laguerre:
+\begin{align*}
+x \, \sderivada{y} + (m + 1 - x) \, \pderivada{y} + n \, y = 0
+\end{align*}
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{ED de la FM}
+\setbeamercolor{item projected}{bg=carmine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item Hermite: $\sderivada{y} - 2 \, x \, \pderivada{y} + 2 \, n \, y = 0$
+\item Chebyshev I: $(1 -x^{2}) \sderivada{y} - x \pderivada{y} + \nu^{2} y = 0$
+\item Chebyshev II: $(1 -x^{2}) \sderivada{y} - 3 x \pderivada{y} + \nu (\nu + 2) y = 0$
+\item Hipergeométrica:
+\begin{align*}
+x (1 - x) \sderivada{y} + [c - (a + b + 1) x] \pderivada{y} - a b y = 0
+\end{align*}
+\item Confluente: $x \sderivada{y} + (c - x) \pderivada{y} - a y = 0$
+\item Ultraesférica:
+\begin{align*}
+(1 {-} x^{2}) \dv[2]{x} C_{n}^{(\alpha)} {-} (2 \alpha {+} 1) \dv{x} C_{n}^{(\alpha)} {+} n (n {+} 2 \alpha) C_{n}^{(\alpha)} = 0
+\end{align*}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Funciones de peso (1/2)}
+\begin{table}[!ht]
+\caption{Tabla con parámetros y coeficientes de ED con eigenvalores.\label{tabla:tabla_01}}
+\centering
+\scriptsize
+\begin{threeparttable}
+\begin{tabular}{p{3cm} c c c c }
+\hline
+\makecell{Ecuación} & $p(x)$ & $q(x)$ & $\lambda$ & $w(x)$ \\ \hline
+Legendre & $1 - x^{2}$ & 0 & $\ell (\ell + 1)$ & 1  \\
+Asociada de Legendre & $1 - x^{2}$ & 0 & $\ell (\ell + 1)$ & 1  \\
+Chebychev I & $(1 - x^{2})^{1/2}$ & $0$ & $n^{2}$ & $(1 - x^{2})^{-1/2}$ \\
+Chebychev II & $(1 - x^{2})^{3/2}$ & $0$ & $n^{2}$ & $(1 - x^{2})^{-1/2}$ \\
+Ultraesféricos & $(1-x^{2})^{\alpha + 1/2}$ & 0 & $n(n + 2 \alpha)$ & $(1-x^{2})^{\alpha -1/2}$ 
+\end{tabular}
+\end{threeparttable}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Funciones de peso (2/2)}
+\begin{table}[!ht]
+%\caption{Tabla con parámetros y coeficientes de ED con eigenvalores.}
+\centering
+\scriptsize
+\begin{threeparttable}
+\begin{tabular}{p{3.5cm} c c c c }
+\hline
+\makecell{Ecuación} & $p(x)$ & $q(x)$ & $\lambda$ & $w(x)$ \\ \hline
+Bessel$^{b}$, en $0 \leq x \leq a$ & $x$ & $- \dfrac{n^{2}}{x}$ & $a^{2}$ & $x$ \\
+Laguerre, en $0 \leq x < \infty$ & $x \; e^{-x}$ & $0$ & $\alpha$ & $e^{-x}$ \\
+Asociados de Laguerre & $x^{k+1} \; e^{-x}$ & $0$  & $\alpha - k$ & $x^{k} \; e^{-x}$ \\
+Hermite, en $0 \leq x < \infty$ & $e^{-x^{2}}$ & $0$ & $2 \alpha$ & $e^{-x^{2}}$ \\
+Oscilador armónico simple & $1$ & $0$ & $n^{2}$ & $1$
+\end{tabular}
+\begin{tablenotes}
+\scriptsize
+\item $^{a} \: \ell = 0, 1, 2, \ldots, -\ell \leq m < \ell$ son enteros.
+\item $^{b} \:$  La ortogonalidad de las funciones de Bessel es bastante especial, como se verá en el desarrollo del Tema 3.
+\item $^{c} \: k$ es un entero no negativo.  
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo: Ecuación de Legendre}
+La ecuación de Legendre está dada por:
+\pause
+\begin{align}
+(1 - x^{2}) \, \sderivada{y} - 2 \, x \, \pderivada{y} +  n(n -1) \, y = 0
+\label{eq:ecuacion_10_09}
+\end{align}
+De acuerdo con las ecs. (\ref{eq:ecuacion_10_01}), (\ref{eq:ecuacion_10_08}) y (\ref{eq:ecuacion_10_09}):
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo: Ecuación de Legendre}
+Se tiene que:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+p_{0} (x) &= 1 - x^{2} = p \\ \pause
+p_{1} (x) &= -2 \, x = \pderivada{p} \\ \pause
+p_{2} (x) &= 0 = q
+\end{aligned}
+\end{eqnarray*}
+y además:
+\pause
+\begin{eqnarray*}
+\omega (x) = 1 \hspace{1.5cm} \pause \lambda = n (n + 1)
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo: Ecuación de Legendre}
+Como recordamos, las soluciones a la ecuación de Legendre divergen a menos de que $n$ se restrinja a uno de los números enteros.
+\\
+\bigskip
+\pause
+Esto representa una cuantificación del parámetro $\lambda$ $\qed$.
+\end{frame}
+\begin{frame}
+\frametitle{Ecs. de la física matemática}
+Cuando las ecuaciones de la física matemática se transforman al modelo autoadjunto, se encuentran los siguientes valores de los coeficientes y parámetros, como se ve en la Tabla (\ref{tabla:tabla_01}).
+\end{frame}
+\begin{frame}
+\frametitle{Ecs. de la física matemática}
+\setbeamercolor{item projected}{bg=bananayellow,fg=ao}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item El coeficiente $p (x)$ es el coeficiente de la segunda derivada de la función del eigenvalor.
+\item El eigenvalor $\lambda$ es el parámetro que se encuentra disponible en un término de la forma $\lambda \, \omega (x) \, y (x)$.
+\item Cualquier dependencia de $x$ aparte de la eigenfunción se transforma en la función de peso $\omega (x)$.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ecs. de la física matemática}
+Si se tiene otro término que contiene la eigenfunción (no las derivadas), el coeficiente de la eigenfunción en el término adicional se identifica como $q (x)$.
+\\
+\bigskip
+\pause
+En caso de que tal término no esté presente, $q (x)$ es simplemente cero.
+\end{frame}
+
+\subsection{Condiciones de frontera}
+
+\begin{frame}
+\frametitle{Las condiciones de frontera}
+En la definición anterior de eigenfunción, se observó que la eigenfunción $u_{\lambda} (x)$ era necesaria para satisfacer ciertas CDF impuestas. 
+\end{frame}
+\begin{frame}
+\frametitle{Las condiciones de frontera}
+El término CDF incluye como un caso especial el concepto de condiciones iniciales.
+\\
+\bigskip
+\pause
+Por ejemplo, especificar la posición inicial $x_{0}$ y la velocidad inicial $v_{0}$ en algún problema dinámico, correspondería a las condiciones de frontera de Cauchy.
+\end{frame}
+\begin{frame}
+\frametitle{Las condiciones de frontera}
+La única diferencia en el uso actual de las CDF en estos problemas unidimensionales es que vamos a aplicar las condiciones en ambos extremos del rango permitido de la variable.
+\end{frame}
+\begin{frame}
+\frametitle{Las condiciones de frontera}
+Generalmente, la forma de la ecuación diferencial o las CDF en las soluciones garantizarán que al final de nuestro intervalo (es decir, en el límite, como lo sugiere la ecuación \ref{eq:ecuacion_10_03}):
+\end{frame}
+\begin{frame}
+\frametitle{Las condiciones de frontera}
+Los siguientes productos se anulen:
+\pause
+\begin{align}
+\begin{aligned}
+p(x) \, v^{*}(x) \dv{u(x)}{x} \eval_{x = a} = 0 \\[1em]
+p(x) \, v^{*}(x) \dv{u(x)}{x} \eval_{x = b} = 0
+\label{eq:ecuacion_10_19}
+\end{aligned}
+\end{align}
+Donde $u(x)$ y $v(x)$ son soluciones de la ecuación diferencial (\ref{eq:ecuacion_10_08}).
+\end{frame}
+\begin{frame}
+\frametitle{Las condiciones de frontera}
+Podemos de cualquier forma, trabajar con un conjunto de CDF menos restrictivas:
+\pause
+\begin{equation}
+v^{*} \, p \, \pderivada{u} \eval_{x = a} = v^{*} \, p \, \pderivada{u} \eval_{x = b} = 0
+\label{eq:ecuacion_10_20}
+\end{equation}
+en la que $u(x)$ y $v(x)$ son soluciones de la ecuación diferencial correspondiente a eigenvalores iguales o diferentes.
+\end{frame}
+\begin{frame}
+\frametitle{Uso del conjugado complejo}
+La ecuación (\ref{eq:ecuacion_10_20}) podría satisfacerse si tratáramos con un sistema físico periódico, como el de una red cristalina.
+\\
+\bigskip
+\pause
+Nótese que se han escrito las ecuaciones anteriores  (\ref{eq:ecuacion_10_19}) y (\ref{eq:ecuacion_10_20}) en términos de $v^{*} (x)$ como conjugado complejo.
+\end{frame}
+\begin{frame}
+\frametitle{Uso del conjugado complejo}
+Cuando las soluciones son reales $v(x) = v^{*} (x)$, podemos omitir el asterisco.
+\\
+\bigskip
+\pause
+En las expansiones exponenciales de Fourier y en ejercicios de mecánica cuántica, las funciones serán complejas y se requiere el conjugado complejo.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo: Elección del intervalo de integración}
+Para $\displaystyle \mathcal{L} = \dv[2]{x}$ una posible ecuación de eigenvalores es:
+\pause
+\begin{align}
+\dv[2]{x} u(x) + n^{2} \, u(x) = 0
+\label{eq:ecuacion_10_21}
+\end{align}
+\pause
+con funciones propias:
+\begin{align*}
+u_{n} &= \cos n \, x \hspace{1.5cm} v_{m} &= \sin m \, x
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo: Elección del intervalo de integración}
+La ecuación (\ref{eq:ecuacion_10_20}) es en este caso:
+\pause
+\begin{align*}
+- n \, \sin m \, x \sin n \, x \eval^{b}_{a} &= 0 \\[1em]
+m \, \cos m \, x \, \cos n \, x \eval^{b}_{a} &= 0 
+\end{align*}
+intercambiando $u_{n}$ y $v_{m}$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo: Elección del intervalo de integración}
+Ya que $\sin m \, x$ y $\cos n \, x$ son funciones periódicas, con período $2 \, \pi$ (para $n$ y $m$ $\in \mathbb{N}$), la ecuación (\ref{eq:ecuacion_10_20}) se satisface si $a = x_{0}$ y $b = x_{0} + 2 \, \pi$.
+\end{frame}
+\begin{frame}
+\frametitle{Elección del intervalo de integración}
+Si un problema prescribe un intervalo diferente, las funciones propias y los eigenvalores cambiarán junto con las CDF.
+\\
+\bigskip
+\pause
+Las funciones deben elegirse siempre para que se cumplan las CDF (ec. \ref{eq:ecuacion_10_20}).
+\end{frame}
+\begin{frame}
+\frametitle{Elección del intervalo de integración}
+Para este caso (series de Fourier) las opciones habituales son $x_{0} = 0$ que conducen al intervalo $(0, 2 \, \pi)$ y $x_{0} = - \pi$, con lo que el intervalo es $(-\pi, \pi)$.
+\\
+\bigskip
+\pause
+De aquí y en adelante, el intervalo de ortogonalidad será aquel en donde se cumplan las CDF (ecuación \ref{eq:ecuacion_10_20}).
+\end{frame}
+\begin{frame}
+\frametitle{Intervalo de ortogonalidad}
+En la Tabla (\ref{tabla:tabla_02}), se enlista el intervalo de ortogonalidad $[a, b]$ y el factor de peso $w (x)$ para las ecuaciones diferenciales de segundo orden más comunes de la Física Matemática.
+\end{frame}
+\begin{frame}
+\frametitle{Tabla 2 (1/2)}
+\begin{table}[!ht]
+\caption{Elección del intervalo de ortogonalidad $[a,b]$ y del factor de peso $\omega(x)$.\label{tabla:tabla_02}}
+\centering
+\scriptsize
+\begin{threeparttable}
+\begin{tabular}{p{5cm} c c c}
+\hline
+\makecell{Ecuación} & $a$ & $b$ & $\omega(x)$ \\ \hline
+Legendre & $-1$ & $1$ & $1$ \\
+Asociados de  Legendre & $-1$ & $1$ & $1$ \\
+Chebychev I & $-1$ & $1$ & $(1-x^{2})^{-1/2}$ \\
+Chebychev II & $-1$ & $1$ & $(1-x^{2})^{1/2}$ \\
+Laguerre & $0$ & $\infty$ & $e^{-x}$ \\
+\end{tabular}
+\end{threeparttable}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Tabla 2 (2/2)}
+\begin{table}[!ht]
+\centering
+\scriptsize
+\begin{threeparttable}
+\scriptsize
+\begin{tabular}{p{5cm} c c c}
+\hline
+\makecell{Ecuación} & $a$ & $b$ & $\omega(x)$ \\ \hline
+Asociados de Laguerre & $0$ & $\infty$ & $x^{k} e^{-x}$ \\
+Hermite & $-\infty$ & $\infty$ & $e^{-x^{2}}$ \\
+Oscilador armónico & $0$ & $2 \pi$ & $1$ \\
+    & $-\pi$ & $\pi$ & $1$ 
+\end{tabular}
+\begin{tablenotes}
+\small
+\item $1.$ El intervalo de ortogonalidad $[a, b]$ está determinado por las CDF.
+\item $2.$ La función de peso se presenta a modo de que la EDO queda en una forma autoadjunta.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\end{frame}
+% \subsection{Ejercicios a cuenta}
+% \begin{frame}
+% \frametitle{Ejercicios a cuenta}
+% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+% \setbeamertemplate{enumerate items}[circle]
+% \begin{enumerate}
+% \item Demuestra que la ecuación de Laguerre
+% \begin{align*}
+% x \, \sderivada{y} + (1 - x) \, \pderivada{y} + n \, y = 0
+% \end{align*}
+% se puede escribir de una manera autoadjunta multiplicándola por la función $\exp(-x)$ y que la función de peso es $\omega(x) = \exp(-x)$.
+% \seti
+% \end{enumerate}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ejercicios a cuenta}
+% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+% \setbeamertemplate{enumerate items}[circle]
+% \begin{enumerate}
+% \conti    
+% \item Demuestra que la ecuación de Chebychev de tipo I
+% \begin{align*}
+% (1 -x^{2}) \, \sderivada{y} - x \, \pderivada{y} + n^{2} \, y = 0
+% \end{align*}
+% se puede escribir en la forma autoadjunta. Determina la función de peso.
+% \end{enumerate}
+% \end{frame}
+% \section{Operadores Hermitianos}
+% \frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+
+\subsection{Propiedades importantes}
+
+\begin{frame}
+\frametitle{Propiedades importantes}
+Veamos una propiedad importante que se obtiene al combinar un operador diferencial de segundo orden autoadjunto (ecuación \ref{eq:ecuacion_10_08}) y las soluciones $u(x)$ y $v(x)$, que satisfacen las CDF dadas por la ecuación (\ref{eq:ecuacion_10_20}).
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades importantes}
+Integramos el producto de $v^{*}$ (conjugado complejo) con el operador diferencial autoadjunto de segundo orden $\mathcal{L}$ (operando sobre $u$) en el intervalo $a \leq x \leq b$, usando la ecuación, obteniendo:
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades importantes}
+\begin{align}
+\scaleint{6ex}_{\bs a}^{b} v^{*} \, \mathcal{L} \, u \, \dd{x} = \scaleint{6ex}_{\bs a}^{b} v^{*} (p \, \pderivada{u})^{\prime} \dd{x} + \scaleint{6ex}_{\bs a}^{b} v^{*} \, q \, u \, \dd{x}
+\label{eq:ecuacion_10_22}
+\end{align}
+usando la ecuación (\ref{eq:ecuacion_10_06}).
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades importantes}
+Integrando por partes, obtenemos:
+\pause
+\begin{align}
+\scaleint{6ex}_{\bs a}^{b} v^{*}(p \, \pderivada{u})^{\prime} \dd{x} = v^{*} \, p \, \pderivada{u} \eval_{a}^{b} - \scaleint{6ex}_{\bs a}^{b} v^{* \, \prime} \, p \, \pderivada{u} \dd{x}
+\label{eq:ecuacion_10_23}
+\end{align}
+con las CDF, el término integrado se anula cuando se usa la ecuación (\ref{eq:ecuacion_10_20})
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades importantes}
+Al integrar el término que queda, ahora por partes nuevamente, tenemos que:
+\pause
+\begin{align}
+- \scaleint{6ex}_{\bs a}^{b} v^{* \prime} \, p \, \pderivada{u} \dd{x} = - v^{* \, \prime} \, p \, u \eval_{a}^{b} + \scaleint{6ex}_{\bs a}^{b} u(p \, v^{* \, \prime})^{\prime} \dd{x}
+\label{eq:ecuacion_10_24}
+\end{align}
+El término integrado se anula nuevamente al considerar la ecuación (\ref{eq:ecuacion_10_20}).
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades importantes}
+Una combinación de las ecuaciones (\ref{eq:ecuacion_10_22}) a la (\ref{eq:ecuacion_10_24}), nos resulta en:
+\pause
+\begin{align}
+\scaleint{6ex}_{\bs a}^{b} v^{*} \, \mathcal{L} \, u \, \dd{x} = \scaleint{6ex}_{\bs a}^{b} u (\mathcal{L}  \, v)^{*} \dd{x}
+\label{eq:ecuacion_10_25}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades importantes}
+Esta propiedad nos dice que el operador $\mathcal{L}$ es Hermitiano respecto a las funciones $u(x)$ y $v(x)$, las cuales satisfacen las CDF que se especifican por la ecuación (\ref{eq:ecuacion_10_20}).
+\end{frame}
+
+\subsection{Operadores en mecánica cuántica}
+
+\begin{frame}
+\frametitle{Operadores en mecánica cuántica}
+Generalizando la teoría de operadores Hermitianos en mecánica cuántica, podemos agregar que: los operadores no necesitan ser operadores de segundo orden y ni ser reales. 
+\pause
+\begin{align*}
+p_{x} = - i \, \hbar \left(\pdv{x}\right)
+\end{align*}
+sería un operador Hermitiano.
+\end{frame}
+\begin{frame}
+\frametitle{Operadores en mecánica cuántica}
+Simplemente asumimos (como es habitual en la mecánica cuántica) que las funciones de onda satisfacen las CDF apropiadas: se anulan con la fuerza suficiente en el infinito o tienen un comportamiento periódico (como en una red cristalina, o la intensidad de la unidad para problemas de dispersión). 
+\end{frame}
+\begin{frame}
+\frametitle{Operador Hermitiano}
+El operador $\mathcal{L}$ se llama \textocolor{cobalt}{Hermitiano} si:
+\pause
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{\scaleint{6ex} \psi_{1}^{*} \, \mathcal{L} \, \psi_{2} \dd{\tau} =  \scaleint{6ex} (\mathcal{L} \, \psi_{1})^{*} \, \psi_{2} \dd{\tau}}
+\label{eq:ecuacion_10_26}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Operador Hermitiano}
+El adjunto $A^{\dagger}$ (se acostumbra leerlo como $A$ daga) de un operador $A$.
+\pause
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{\scaleint{6ex} \psi_{1}^{*} \, A^{\dagger} \, \psi_{2} \dd{\tau} \equiv \scaleint{6ex} (A \, \psi_{1})^{*} \, \psi_{2} \dd{\tau}}
+\label{eq:ecuacion_10_27}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Operador Hermitiano}
+Esto generaliza nuestra definición clásica del operador diferencial de segundo orden, ec. (\ref{eq:ecuacion_10_05}). 
+\\
+\bigskip
+\pause
+El operador adjunto está definido en términos del resultado de la integral, con $A^{\dagger}$ como parte del integrando. 
+\end{frame}
+\begin{frame}
+\frametitle{Operador Hermitiano}
+Si $A = A^{\dagger}$ (\textbf{autoadjunto}), entonces $A$ es Hermitiano.
+\\
+\bigskip
+\pause
+Al revés no es tan sencillo (y no siempre cierto), pero en mecánica cuántica los términos \emph{autoadjunto} y \emph{Hermitiano}, se usan como sinónimos.
+\end{frame}
+\begin{frame}
+\frametitle{Valor esperado}
+El \textocolor{red}{valor esperado} de un operador $\mathcal{L}$ se define como:
+\pause
+\begin{align}
+\setlength{\fboxsep}{3\fboxsep}\boxed{\expval{\mathcal{L}} = \scaleint{6ex} \psi^{*} \, \mathcal{L} \, \psi \dd{\tau}}
+\label{eq:ecuacion_10_28a}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Valor esperado}
+En el ámbito de mecánica cuántica $\expval{\mathcal{L}}$ corresponde al resultado de una medición de una cantidad física representada por $\mathcal{L}$ donde el sistema físico es un estado descrito por la función de onda $\psi$. 
+\end{frame}
+\begin{frame}
+\frametitle{Valor esperado}
+Si queremos que $\mathcal{L}$ sea Hermitiano, debemos de mostrar que $\expval{\mathcal{L}}$ es real (en correspondencia de una medición en física).
+\end{frame}
+\begin{frame}
+\frametitle{Valor esperado}
+Tomando el conjugado complejo de la ecuación (\ref{eq:ecuacion_10_28a}), tenemos:
+\pause
+\begin{align*}
+\expval{\mathcal{L}}^{*} &= \left[ \scaleint{6ex} \psi^{*} \, \mathcal{L} \, \psi \dd{\tau} \right] = \scaleint{6ex} \psi \, \mathcal{L}^{*} \, \psi^{*} \dd{\tau}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Valor esperado}
+Ordenando los factores en el integrando, resulta:
+\pause
+\begin{align*}
+\expval{\mathcal{L}}^{*} = \scaleint{6ex} (\mathcal{L} \, \psi)^{*} \, \psi \dd{\tau}
+\end{align*}
+\pause
+De la definición de operador Hermitiano (ecuación \ref{eq:ecuacion_10_26}):
+\pause
+\begin{equation}
+\expval{\mathcal{L}}^{*} = \scaleint{6ex} \psi^{*} \, \mathcal{L} \, \psi \dd{\tau} = \expval{\mathcal{L}} 
+\label{eq:ecuacion_10_28b}
+\end{equation}
+o $\expval{\mathcal{L}}$ es real.
+\end{frame}
+\begin{frame}
+\frametitle{Valor esperado}
+Vale la pena señalar que $\psi$ no es necesariamente una eigenfunción de $\mathcal{L}$.
+\end{frame}
+
+\subsection{Operadores Hermitianos o Autoadjuntos.}
+
+\begin{frame}
+\frametitle{Operadores Autoadjuntos}
+Los operadores Hermitianos o autoadjuntos tienen tres propiedades de gran importancia en la física tanto clásica como cuántica:
+\end{frame}
+\begin{frame}
+\frametitle{Operadores Autoadjuntos}
+\setbeamercolor{item projected}{bg=byzantine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Los eigenvalores son reales.
+\item Cuenta con un conjunto de funciones propias ortogonales.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Operadores Autoadjuntos}
+\setbeamercolor{item projected}{bg=byzantine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item Las funciones propias forman un conjunto completo.
+\par
+Esta tercera propiedad no es universal. Se mantiene para los operadores diferenciales lineales de segundo orden en forma de Sturm-Liouville (autoadjunto).
+\end{enumerate}
+\end{frame}
+
+% \subsection{eigenvalores reales}
+% \begin{frame}
+% \frametitle{Primera propiedad}
+% Sea
+% \begin{equation}
+% \mathcal{L} \, u_{i} + \lambda_{i} \, w \, u_{i} = 0
+% \label{eq:ecuacion_10_29}
+% \end{equation}
+% Suponemos la existencia de un segundo eigenvalor y eigenfunción
+% \begin{equation}
+% \mathcal{L} \, u_{j} + \lambda_{j} \, w \, u_{j} = 0
+% \label{eq:ecuacion_10_30}
+% \end{equation}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera propiedad}
+% Entonces, al tomar el conjugado completo, resulta
+% \begin{equation}
+% \mathcal{L}^{*} \, u_{j}^{*} + \lambda_{j}^{*} \, w \, u_{j}^{*} = 0
+% \label{eq:ecuacion_10_31}
+% \end{equation}
+% donde $w(x) \geq 0$ es una función real.
+% \\
+% \bigskip
+% \pause
+% Permitimos que tanto $\lambda_{k}$ que son los eigenvalores, así como $u_{k}$ las funciones propias, sean complejos.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera propiedad}
+% Multiplicando la ecuación (\ref{eq:ecuacion_10_29}) y (\ref{eq:ecuacion_10_31}) por $u_{i}$, y luego las restamos, se obtiene:
+% \begin{equation}
+% u_{j}^{*} \, \mathcal{L} \, u_{i} - u_{i} \mathcal{L}^{*} \, u_{j}^{*} =  (\lambda_{j}^{*} - \lambda_{i}) \, w \, u_{i} \, u_{j}^{*}
+% \label{eq:ecuacion_10_32}
+% \end{equation}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera propiedad}
+% Integramos en el intervalo $a \leq x \leq b$,
+% \begin{align}
+% \begin{aligned}[b]
+% \scaleint{6ex}_{\bs a}^{b} u_{j}^{*} \, \mathcal{L} \, u_{i} \dd{x} &- \scaleint{6ex}_{\bs a}^{b} u_{i} \, \mathcal{L}^{*} \, u_{j}^{*} \dd{x} = \\[1em]
+% &= (\lambda_{j}^{*} - \lambda_{i}) \, \scaleint{6ex}_{\bs a}^{b}  u_{i} \, u_{j}^{*} \, w \dd{x}
+% \end{aligned}
+% \label{eq:ecuacion_10_33}
+% \end{align}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera propiedad}
+% Como $\mathcal{L}$ es Hermitiano, el lado izquierdo de la igualdad se anula, considerando la ecuación (\ref{eq:ecuacion_10_26}) y tenemos
+% \begin{equation}
+% (\lambda_{j}^{*} - \lambda_{i}) \, \scaleint{6ex}_{\bs a}^{b}  u_{i} \, u_{j}^{*} \, w \dd{x} = 0
+% \label{eq:ecuacion_10_34}
+% \end{equation}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera propiedad}
+% Si $i=j$ la integral no se puede anular ($w(x) > 0$ para puntos aislados), a menos que tengamos el caso trivial $u_{i} = 0$. Por tanto el coeficiente $(\lambda_{i}^{*} - \lambda_{j})$ debe de ser cero:
+% \begin{equation}
+% \lambda_{i}^{*} = \lambda_{i}
+% \label{eq:ecuacion_10_35}
+% \end{equation}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera propiedad}
+% Lo que es una prueba matemática de que el eigenvalor es real, ya que $\lambda_{i}$ representa a cualquiera de los eigenvalores, se cumple esta propiedad.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Cantidades medibles}
+% En mecánica cuántica los eigenvalores corresponden a cantidades medibles, tales como la energía o el momento angular
+% \\
+% \bigskip
+% Con la teoría revisada en términos de operadores Hermitianos, esta prueba de que los eigenvalores nos garantiza que la teoría predice valores reales para esas cantidades físicas medibles.
+% \end{frame}
+
+\subsection{Funciones propias ortogonales}
+
+\begin{frame}
+\frametitle{Funciones propias}
+Si tomamos $i \neq	j$ y si $\lambda_{i} \neq \lambda_{j}$ la integral del producto de dos funciones propias diferentes debe de anularse:
+\pause
+\begin{align}
+\scaleint{6ex}_{\bs a}^{b} u_{i} \, u_{j}^{*} \, w \dd{x} = 0
+\label{eq:ecuacion_10_36}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Condición de ortogonalidad}
+Esta condición es llamada \textocolor{byzantium}{ortogonalidad}, es el análogo continuo del producto escalar de dos vectores y éste se anula.
+\\
+\bigskip
+\pause
+Se dice que las funciones propias $u_{i}(x)$ y $u_{j}(x)$ son ortogonales con respecto a una función de peso $w(x)$ en el intervalo $[a,b]$.
+\end{frame}
+\begin{frame}
+\frametitle{Analogía entre ED y matrices}
+La ec. (\ref{eq:ecuacion_10_36}) es una demostración parcial de la segunda propiedad de los operadores Hermitianos. 
+\\
+\bigskip
+\pause
+Podemos marcar la analogía con el análisis de matrices. De hecho, se puede establecer una correspondencia uno a uno entre esta teoría de Sturm-Liouville de las ecuaciones diferenciales y el tratamiento de matrices hermitianas.
+\end{frame}
+\begin{frame}
+\frametitle{Referencia histórica}
+Como referencia histórica, esta correspondencia ha sido significativa en el establecimiento de la equivalencia matemática de las matrices desarrollada por Heinseberg y la mecánica de ondas desarrollada por Schrödinger.
+\end{frame}
+\begin{frame}
+\frametitle{Referencia histórica}
+Hoy en día, los dos procedimientos distintos entre sí, han emergido en la teoría de la mecánica cuántica y la formulación matemática que es más conveniente para un problema particular se utiliza para dicho problema.
+\end{frame}
+\begin{frame}
+\frametitle{Caso degenerado}
+Esta demostración de la ortogonalidad no es lo suficientemente completa, veamos el camino a seguir: \pause si tenemos el caso $i \neq j$ pero se mantiene que $\lambda_{i} = \lambda_{j}$, se tiene el llamado caso \textocolor{candyapplered}{degenerado}. 
+\end{frame}
+\begin{frame}
+\frametitle{Excepción de ortogonalidad}
+Esto significa que la independencia lineal de las funciones propias que corresponden al mismo eigenvalor, no son automáticamente ortogonales, por lo que deberíamos usar un método que nos permita recuperar el conjunto ortogonal.  
+\end{frame}
+\begin{frame}
+\frametitle{Excepción de ortogonalidad}
+Aunque tengamos funciones propias en el caso degenerado y sean no ortogonales, siempre se pueden ortogonalizar.
+\\
+\bigskip
+\pause
+Revisaremos más adelante la propiedad de completes de los operadores Hermitianos.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo: Series de Fourier}
+Ocupamos nuevamente el ejemplo anterior, es decir, considerando la ecuación:
+\pause
+\begin{align*}
+\dv[2]{x} y(x) + n^{2} \, y(x) = 0
+\end{align*}
+Que en mecánica cuántica puede describir una partícula en una caja, o puede representar la cuerda de un violín con funciones propias (degeneradas) $\cos n \, x, \sin n \, x$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo}
+Con $n$ real (que consideraremos integral), las integrales ortogonales son:
+\pause
+\setbeamercolor{item projected}{bg=burntumber,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item $\begin{aligned}[t] \scaleint{6ex}_{\bs x_{0}}^{x_{0} + 2 \pi} \sin m \, x \sin n \, x \dd{x} = C_{n} \, \delta_{nm} \end{aligned} $ 
+\item $\begin{aligned}[t] \scaleint{6ex}_{\bs x_{0}}^{x_{0} + 2 \pi} \cos m \, x \cos n \, x \dd{x} = D_{n} \, \delta_{nm} \end{aligned} $ 
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo}
+\setbeamercolor{item projected}{bg=burntumber,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item $\begin{aligned}[t] \scaleint{6ex}_{\bs x_{0}}^{x_{0} + 2 \pi} \sin m \, x \cos n \, x \dd{x} = 0 \end{aligned} $
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo}
+Para un intervalo de $2 \, \pi$ el análisis previo garantiza la delta de Kronecker en los incisos $1)$ y $2)$, pero no para el inciso $3)$, ya que $3)$ involucra funciones propias degeneradas.
+\\
+\bigskip
+\pause
+Pero vemos que en $3)$ siempre se anula para todas las integrales $m$ y $n$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo}
+La teoría de Sturm-Liouville no nos dice nada sobre los valores de $C_{n}$ y $D_{n}$. Al calcularlos:
+\pause
+\begin{align*}
+C_{n} = \begin{cases}
+\pi  & n \neq 0 \\
+0  & n = 0 \end{cases}
+\hspace{1cm}
+D_{n} = \begin{cases}
+\pi & n \neq 0 \\
+2 \, \pi & n = 0 \end{cases}
+\end{align*}
+La ortogonalidad de los integrandos forma la base para las series de Fourier.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+\textbf{Ejemplo: Expansión de funciones propias ortogonales: una onda cuadrada.}
+\\
+\bigskip
+\pause
+La propiedad de \textocolor{cardinal}{completes} significa que cierta clase de funciones (funciones continuas por secciones o pedazos), puede representarse por una serie de funciones propias ortogonales, con cualquier grado de precisión.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+Consideremos la onda cuadrada:
+\pause
+\begin{equation}
+f(x) = \begin{cases}
+\dfrac{h}{2} & 0 < x < \pi \\[0.5em]
+- \dfrac{h}{2} & -\pi < x < o
+\end{cases}
+\label{eq_ecuacion_10_37}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+Esta función puede desarrollarse en funciones propias de varios tipos: Legendre, Hermite, Chebyshev, etc.
+\\
+\bigskip
+\pause
+La elección de la eigenfunción se hace en base a la conveniencia del problema. Si elegimos para el desarrollo de la solución, las funciones propias $\cos n \, x$ y $\sin n \, x$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+La serie de funciones propias se escribe conveniente (y convencionalmente) como:
+\pause
+\begin{align*}
+f(x) = \dfrac{a_{0}}{2} + \nsum_{m=1}^{\infty} (a_{m} \, \cos m \, x +  b_{m} \, \sin m \, x)
+\end{align*}
+\pause
+Al multiplicar $f(t)$ por $\cos n \, t$ o $\sin n \, t$ para luego integrar, sólo los n-ésimos términos sobreviven, de la ortogonalidad de los integrales.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+Los coeficientes están dados por:
+\pause
+\begin{align*}
+a_{n} &= \dfrac{1}{\pi} \scaleint{6ex}_{\bs -\pi}^{\pi} f(t) \cos n \, t \dd{t} \\[1em]
+b_{n} &= \dfrac{1}{\pi} \scaleint{6ex}_{\bs -\pi}^{\pi} f(t) \sin n \, t \dd{t}, \hspace{1cm} n = 0,1,2,\ldots
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+La sustitución directa de $\pm h/2$ para $f(t)$, devuelve que:
+\pause
+\begin{align*}
+ a_{n} = 0
+\end{align*}
+lo que ya se esperaba dada la antisimetría $f(-x) = - f(x)$
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+Además:
+\pause
+\begin{align*}
+b_{n} = \dfrac{h}{n \, \pi} (1 - \cos n \, \pi) = \begin{cases}
+0 & n \mbox{ par} \\
+\dfrac{2 \, h}{n \, \pi} & n \mbox{ impar} \end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo 2}
+Por lo que la expansión de las funciones propias (de Fourier) de una onda cuadrada es:
+\pause
+\begin{equation}
+f(x) = \dfrac{2 \, h}{\pi} \nsum_{n=0}^{\infty} \dfrac{\sin(2 \, n + 1) \, x}{(2 \, n + 1)}
+\label{eq:ecuacion_10_38}
+\end{equation}
+\end{frame}
+
+\subsection{Degeneración}
+
+\begin{frame}
+\frametitle{Degeneración}
+Si $N$ funciones propias linealmente independientes corresponden al mismo eigenvalor, se dice que el eigenvalor es $N$-veces degenerado.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo de degeneración}
+Un ejemplo directo lo tomamos de las funciones propias y eigenvalores en la ecuación del oscilador armónico: para cada eigenvalor $n^{2}$, hay dos posibles soluciones: $\sin n \, x$ y $\cos n \, x$ (y cualquier posibles combinación lineal). 
+\\
+\bigskip
+\pause
+En este caso, las funciones son degeneradas o el eigenvalor es degenerado.
+\end{frame}
+\begin{frame}
+\frametitle{Otro ejemplo de degeneración}
+Otro ejemplo es el sistema de un electrón en un átomo (no relativista y omitiendo el spin).
+\\
+\bigskip
+\pause
+De la ecuación de Schrödinger para el hidrógeno:
+\pause
+\begin{align*}
+- \dfrac{\hbar^{2}}{2 \, m} \laplacian{\psi} - \dfrac{Z \, e^{2}}{r} \psi =  E \, \psi
+\end{align*}
+la energía total del electrón es el eigenvalor.
+\end{frame}
+\begin{frame}
+\frametitle{Otro ejemplo de degeneración}
+Si nombramos $E_{nLM}$ usando los números cuánticos $n$, $L$ y $M$ como subíndices.
+\\
+\bigskip
+\pause
+Para cada diferente conjunto de números cuánticos $(n, L, M)$ existe una eigenfunción linealmente independiente $\psi_{nLM}(r,\theta, \varphi)$.
+\end{frame}
+\begin{frame}
+\frametitle{Otro ejemplo de degeneración}
+Para el hidrógeno, la energía $E_{nLM}$ es independiente de $L$ y $M$, reflejando la simetría esférica del potencial de Coulomb.
+\\
+\bigskip
+\pause
+Con $0 \leq L \leq n-1$ y $-L \leq M \leq L$, el eigenvalor es $n^{2}$-veces degenerado (que al incluir el espín del electrón, lo elevaría a $2 \, n^{2}$)
+\end{frame}
+\begin{frame}
+\frametitle{Otro ejemplo de degeneración}
+En átomos con más de un electrón, el campo electrostático no es mayor a un potencial de tipo $r^{-1}$. 
+\\
+\bigskip
+\pause
+La energía depende de $L$ como de $n$, pero no de $M$. En este caso, la energía $E_{nLM}$ es aún $(2 \, L + 1)$-veces degenerada.
+\end{frame}
+\begin{frame}
+\frametitle{Otro ejemplo de degeneración}
+Esta particularidad (debida a la invariancia rotacional del potencial) se puede remover aplicando un campo magnético externo, rompiendo la simetría esférica, dando origen al efecto Zeeman.
+\end{frame}
+\begin{frame}
+\frametitle{Funciones propias y el Espacio de Hilbert}
+Como regla, las funciones propias forman un \textocolor{red}{Espacio de Hilbert}, que es un espacio vectorial completo de funciones con una métrica definida por el producto punto.
+\end{frame}
+\begin{frame}
+\frametitle{Simetrías}
+A menudo, una simetría subyacente, como la invariancia rotacional, está causando las degeneraciones.
+\\
+\bigskip
+\pause
+Los estados que pertenecen al mismo eigenvalor de energía formarán entonces un multiplete o una representación del grupo de simetría.
+\end{frame}
+% \subsection{Ejercicios a cuenta}
+% \begin{frame}
+% \frametitle{Ejercicios a cuenta}
+% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+% \setbeamertemplate{enumerate items}[circle]
+% \begin{enumerate}[<+->]
+% \item Demuestra que la suma de dos operadores Hermitianos es Hermitano.
+% \item Supongamos que el operador $\hat{Q}$ es Hermitiano y $\alpha$ es un número complejo. ¿Bajo qué condición (sobre $\alpha$) es $\alpha \, \hat{Q}$ Hermitiano?
+% \seti
+% \end{enumerate}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ejercicios a cuenta}
+% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+% \setbeamertemplate{enumerate items}[circle]
+% \begin{enumerate}[<+->]
+% \conti    
+% \item ¿Cuándo el producto de dos operadores Hermitianos es Hermitiano?
+% \item Demuestra que el operador de posición $(\hat{x} = x)$ y el operador Hamiltoniano
+% \begin{align*}
+% \hat{H} = - \left( \dfrac{\hbar^{2}}{2 \, m} \right) \, \dv[2]{x} + V(x)
+% \end{align*}
+% es Hermitiano.
+% \end{enumerate}
+% \end{frame}
+
+\end{document}
