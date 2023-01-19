@@ -30,7 +30,7 @@
 \setbeamercolor{frametitle}{bg=palecerulean}
 \resetcounteronoverlays{saveenumi}
 
-\date{19 de mayo de 2022}
+\date{}
 
 \title{\large{El oscilador armónico cuántico}}
 \subtitle{Funciones de Hermite}
@@ -75,7 +75,7 @@ En el material de revisión, se plantea el problema del oscilador armónico cuá
 Para obtener un estado de orden mayor, ocupamos el operador de ascenso:
 \pause
 \begin{align*}
-\psi_{n} (x) = A_{n} \, (a_{+})^{n} \, \phi_{0} (x)
+\psi_{n} (x) = A_{n} \, (a_{+})^{n} \, \psi_{0} (x)
 \end{align*}
 donde $A_{n}$ es una constante de normalización.
 \end{frame}
@@ -92,7 +92,7 @@ Al resolver la constante de normalización, tenemos que con el operador de ascen
 El operador de ascenso (descenso) está dado por:
 \pause
 \begin{align*}
-a_{\pm} = \dfrac{1}{\sqrt{2 \hbar m \omega}} \, \bigg( \mp \hbar \, \dv{x} + m \, \omega \, x \bigg)
+a_{\pm} = \dfrac{1}{\sqrt{2 \hbar m \omega}} \, \bigg( \mp \dfrac{\hbar}{i} \, \dv{x} + m \, \omega \, x \bigg)
 \end{align*}
 \pause
 De tal manera que contamos con los elementos para resolver el inciso que se nos pide.
@@ -292,7 +292,7 @@ Se tiene entonces que:
 \expval{p} = \pause m \, \dv{\expval{x}}{t} = \pause 0
 \end{eqnarray*}
 \pause
-\textbf{Nota: } \textcolor{cadetblue}{Estos resultados se mantienen para cualquier estado estacionario del oscilador armónico cuántico.}
+\textbf{Nota: } \textocolor{cadetblue}{Estos resultados se mantienen para cualquier estado estacionario del oscilador armónico cuántico.}
 \end{frame}
 \begin{frame}
 \frametitle{Simplificando las operaciones}
@@ -366,7 +366,7 @@ Ahora para el valor esperado $\expval{p^{2}}$ en el estado $n = 1$:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-\expval{p^{2}} &= - \hbar^{2} \, 2 \, \alpha^{2} \sqrt{\dfrac{m \omega}{\hbar}} \scaleint{6ex}_{\bs - \infty}^{\infty} \xi \, \exp \bigg(\!\! - \dfrac{\xi^{2}}{2} \bigg) \times \\[0.5em]
+\expval{p^{2}} &= - \hbar^{2} \, 2 \, \alpha^{2} \sqrt{\dfrac{m \omega}{\hbar}} \scaleint{6ex}_{\bs - \infty}^{\infty} \xi \, \exp \bigg(\!\! - \dfrac{\xi^{2}}{2} \bigg) \dd{\xi} \times \\[0.5em]
 &\times \bigg[ \dv[2]{\xi} (\xi \exp\bigg( \!\! - \dfrac{\xi^{2}}{2} \bigg)) \bigg] \dd{\xi} =
 \end{aligned}
 \end{eqnarray*}
@@ -536,117 +536,143 @@ es solución a la ecuación diferencial.
 Además, dado que esta solución es claramente un polinomio de orden $n$, debe ser algún múltiplo de $H_{n} (x)$.
 \end{frame}
 
-\subsection{Ejercicio 4}
+\subsection{Ejercicio a cuenta}
 
 \begin{frame}
-\frametitle{Enunciado del ejercicio 4}
-Usando la fórmula de Rodrigues, calcula $H_{3} (x)$ y $H_{4} (x)$
+\frametitle{Ejercicio a cuenta - 9}
+\setbeamercolor{item projected}{bg=red,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
+\item Usando la fórmula de Rodrigues, calcula $H_{3} (x)$ y $H_{4} (x)$
+\seti
+\end{enumerate}
 \end{frame}
 \begin{frame}
-\frametitle{Calculando las derivadas}
-De acuerdo a la fórmula de Rodrigues, \pause se requiere calcular hasta la derivada de orden cuarto de $\exp\big(- x^{2} \big)$:
-\pause
-\begin{eqnarray*}
-\begin{aligned}
-\dv{x} \bigg( \exp\big( - x^{2} \big) \bigg) &= - 2 \, x \, \exp\big( - x^{2} \big) \\[0.5em] \pause
-\dv[2]{x} \exp\big( - x^{2} \big) &= \dv{x} \bigg[ - 2 \, x \, \exp\big( - x^{2} \big) \bigg] \\[0.5em] \pause
-&= \big( -2 + 4 \, x^{2} \big) \exp\big( - x^{2} \big)
-\end{aligned}
-\end{eqnarray*}
-\end{frame}
-\begin{frame}
-\frametitle{Calculando las derivadas}
-\begin{eqnarray*}
-\begin{aligned}
-&\dv[3]{x} \exp\big( - x^{2} \big) = \dv{x} \bigg[ \big( -2 + 4 \, x^{2} \big) \exp\big( - x^{2} \big) \bigg] = \\[0.5em] \pause
-&= \bigg[ 8 \, x + (-2 + 4 \, x^{2})(- 2 \, x) \bigg] \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
-&= (12 \, x - 8 \, x^{3}) \, \exp\big( - x^{2} \big)
-\end{aligned}
-\end{eqnarray*}
-\end{frame}
-\begin{frame}
-\frametitle{Calculando las derivadas}
-\begin{eqnarray*}
-\begin{aligned}
-&\dv[4]{x} \exp\big( - x^{2} \big) = \dv{x} \bigg[ (12 \, x - 8 \, x^{3}) \, \exp\big( - x^{2} \big) \bigg] = \\[0.5em] \pause
-&= \bigg[ 12 - 24 \, x^{2} + (12 \, x - 8 \, x^{3}) (-2 \, x) \bigg] \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
-&= (12 - 48 \, x^{2} + 16 \, x^{4}) \, \exp\big( - x^{2} \big)
-\end{aligned}
-\end{eqnarray*}
-\end{frame}
-\begin{frame}
-\frametitle{Calculando $H_{3} (x)$}
-Entonces para el polinomio de Hermite de orden 3 a partir de la fórmula de Rodrigues:
-\pause
-\begin{eqnarray*}
-\begin{aligned}
-H_{3} (x) &= (-1)^{3} \exp\big( x^{2} \big) \dv[3]{x} \exp\big( - x^{2} \big) = \\[0.5em] \pause
-&= - \exp\big( x^{2} \big) \, (12 \, x - 8 \, x^{3}) \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
-&= - 12 \, x + 8 \, x^{3}
-\end{aligned}
-\end{eqnarray*}
-\end{frame}
-\begin{frame}
-\frametitle{Calculando $H_{4} (x)$}
-Entonces para el polinomio de Hermite de orden 4 a partir de la fórmula de Rodrigues:
-\pause
-\begin{eqnarray*}
-\begin{aligned}
-H_{4} (x) &= (-1)^{4} \exp\big( x^{2} \big) \dv[4]{x} \exp\big( - x^{2} \big) = \\[0.5em] \pause
-&= \exp\big( x^{2} \big) \, (12 - 48 \, x^{2} + 16 \, x^{4}) \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
-&= 12 - 48 \, x^{2} + 16 \, x^{4}
-\end{aligned}
-\end{eqnarray*}
-\end{frame}
-\begin{frame}
-\frametitle{Gráfica de $H_{3} (x)$ y $H_{4} (x)$}
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.95]{Imagenes/Plot_Hermite_H3_H4.eps}
-\end{figure}
-\end{frame}
-
-\subsection{Ejercicio 5}
-
-\begin{frame}
-\frametitle{Regla de recurrencia}
-A partir de la siguiente regla de recurrencia que nos proporciona el polinomio de Hermite de orden $n + 1$, en términos de los dos polinomios precedentes:
+\frametitle{Ejercicio a cuenta - 9}
+\setbeamercolor{item projected}{bg=red,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
+\conti
+\item A partir de la siguiente regla de recurrencia que nos proporciona el polinomio de Hermite de orden $n + 1$, en términos de los dos polinomios precedentes:
 \pause
 \begin{align*}
 H_{n+1} (x) = 2 \, x \, H_{n} (x) - 2 \, n \, H_{n - 1} (x)
 \end{align*}
 Con los resultados del ejercicio anterior, calcula los $H_{5} (x)$ y $H_{6} (x)$.
+\end{enumerate}
 \end{frame}
-\begin{frame}
-\frametitle{Calculando $H_{5} (x)$}
-Usando los resultados de $H_{3} (x)$ y $H_{4} (x)$ en conjunto con la regla de recurrencia:
-\pause
-\begin{eqnarray*}
-\begin{aligned}
-H_{5} &= 2 \, x \, H_{4} - 8 \, H_{3} = \\[0.5em] \pause
-&= 2 \, x (12 - 48 \, x^{2} + 16 \, x^{4}) - 8 (- 12 \, x + 8 \, x^{3}) = \\[0.5em] \pause
-&= 120 \, x - 160 \, x^{3} + 32 \, x^{5}
-\end{aligned}
-\end{eqnarray*}
-\end{frame}
-\begin{frame}
-\frametitle{Calculando $H_{6} (x)$}
-Usando los resultados de $H_{5} (x)$ y $H_{4} (x)$ en conjunto con la regla de recurrencia:
-\pause
-\begin{eqnarray*}
-\begin{aligned}
-H_{6} &= 2 \, x \, H_{5} - 10 \, H_{4} = \\[0.5em] \pause
-&= 2 \, x (120 \, x - 160 \, x^{3} + 32 \, x^{5}) + \\[0.5em] 
-&- 10 (12 - 48 \, x^{2} + 16 \, x^{4}) = \\[0.5em] \pause
-&= - 120 + 720 \, x - 480 \, x^{4} + 64 \, x^{6}
-\end{aligned}
-\end{eqnarray*}
-\end{frame}
-\begin{frame}
-\frametitle{Gráfica de $H_{5} (x)$ y $H_{6} (x)$}
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.95]{Imagenes/Plot_Hermite_H5_H6.eps}
-\end{figure}
-\end{frame}
+
+% \begin{frame}
+% \frametitle{Calculando las derivadas}
+% De acuerdo a la fórmula de Rodrigues, \pause se requiere calcular hasta la derivada de orden cuarto de $\exp\big(- x^{2} \big)$:
+% \pause
+% \begin{eqnarray*}
+% \begin{aligned}
+% \dv{x} \bigg( \exp\big( - x^{2} \big) \bigg) &= - 2 \, x \, \exp\big( - x^{2} \big) \\[0.5em] \pause
+% \dv[2]{x} \exp\big( - x^{2} \big) &= \dv{x} \bigg[ - 2 \, x \, \exp\big( - x^{2} \big) \bigg] \\[0.5em] \pause
+% &= \big( -2 + 4 \, x^{2} \big) \exp\big( - x^{2} \big)
+% \end{aligned}
+% \end{eqnarray*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Calculando las derivadas}
+% \begin{eqnarray*}
+% \begin{aligned}
+% &\dv[3]{x} \exp\big( - x^{2} \big) = \dv{x} \bigg[ \big( -2 + 4 \, x^{2} \big) \exp\big( - x^{2} \big) \bigg] = \\[0.5em] \pause
+% &= \bigg[ 8 \, x + (-2 + 4 \, x^{2})(- 2 \, x) \bigg] \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
+% &= (12 \, x - 8 \, x^{3}) \, \exp\big( - x^{2} \big)
+% \end{aligned}
+% \end{eqnarray*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Calculando las derivadas}
+% \begin{eqnarray*}
+% \begin{aligned}
+% &\dv[4]{x} \exp\big( - x^{2} \big) = \dv{x} \bigg[ (12 \, x - 8 \, x^{3}) \, \exp\big( - x^{2} \big) \bigg] = \\[0.5em] \pause
+% &= \bigg[ 12 - 24 \, x^{2} + (12 \, x - 8 \, x^{3}) (-2 \, x) \bigg] \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
+% &= (12 - 48 \, x^{2} + 16 \, x^{4}) \, \exp\big( - x^{2} \big)
+% \end{aligned}
+% \end{eqnarray*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Calculando $H_{3} (x)$}
+% Entonces para el polinomio de Hermite de orden 3 a partir de la fórmula de Rodrigues:
+% \pause
+% \begin{eqnarray*}
+% \begin{aligned}
+% H_{3} (x) &= (-1)^{3} \exp\big( x^{2} \big) \dv[3]{x} \exp\big( - x^{2} \big) = \\[0.5em] \pause
+% &= - \exp\big( x^{2} \big) \, (12 \, x - 8 \, x^{3}) \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
+% &= - 12 \, x + 8 \, x^{3}
+% \end{aligned}
+% \end{eqnarray*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Calculando $H_{4} (x)$}
+% Entonces para el polinomio de Hermite de orden 4 a partir de la fórmula de Rodrigues:
+% \pause
+% \begin{eqnarray*}
+% \begin{aligned}
+% H_{4} (x) &= (-1)^{4} \exp\big( x^{2} \big) \dv[4]{x} \exp\big( - x^{2} \big) = \\[0.5em] \pause
+% &= \exp\big( x^{2} \big) \, (12 - 48 \, x^{2} + 16 \, x^{4}) \, \exp\big( - x^{2} \big) = \\[0.5em] \pause
+% &= 12 - 48 \, x^{2} + 16 \, x^{4}
+% \end{aligned}
+% \end{eqnarray*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Gráfica de $H_{3} (x)$ y $H_{4} (x)$}
+% \begin{figure}
+%   \centering
+%   \includegraphics[scale=0.95]{Imagenes/Plot_Hermite_H3_H4.eps}
+% \end{figure}
+% \end{frame}
+
+% \subsection{Ejercicio 5}
+
+% \begin{frame}
+% \frametitle{Regla de recurrencia}
+% A partir de la siguiente regla de recurrencia que nos proporciona el polinomio de Hermite de orden $n + 1$, en términos de los dos polinomios precedentes:
+% \pause
+% \begin{align*}
+% H_{n+1} (x) = 2 \, x \, H_{n} (x) - 2 \, n \, H_{n - 1} (x)
+% \end{align*}
+% Con los resultados del ejercicio anterior, calcula los $H_{5} (x)$ y $H_{6} (x)$.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Calculando $H_{5} (x)$}
+% Usando los resultados de $H_{3} (x)$ y $H_{4} (x)$ en conjunto con la regla de recurrencia:
+% \pause
+% \begin{eqnarray*}
+% \begin{aligned}
+% H_{5} &= 2 \, x \, H_{4} - 8 \, H_{3} = \\[0.5em] \pause
+% &= 2 \, x (12 - 48 \, x^{2} + 16 \, x^{4}) - 8 (- 12 \, x + 8 \, x^{3}) = \\[0.5em] \pause
+% &= 120 \, x - 160 \, x^{3} + 32 \, x^{5}
+% \end{aligned}
+% \end{eqnarray*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Calculando $H_{6} (x)$}
+% Usando los resultados de $H_{5} (x)$ y $H_{4} (x)$ en conjunto con la regla de recurrencia:
+% \pause
+% \begin{eqnarray*}
+% \begin{aligned}
+% H_{6} &= 2 \, x \, H_{5} - 10 \, H_{4} = \\[0.5em] \pause
+% &= 2 \, x (120 \, x - 160 \, x^{3} + 32 \, x^{5}) + \\[0.5em] 
+% &- 10 (12 - 48 \, x^{2} + 16 \, x^{4}) = \\[0.5em] \pause
+% &= - 120 + 720 \, x - 480 \, x^{4} + 64 \, x^{6}
+% \end{aligned}
+% \end{eqnarray*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Gráfica de $H_{5} (x)$ y $H_{6} (x)$}
+% \begin{figure}
+%   \centering
+%   \includegraphics[scale=0.95]{Imagenes/Plot_Hermite_H5_H6.eps}
+% \end{figure}
+% \end{frame}
 \end{document}

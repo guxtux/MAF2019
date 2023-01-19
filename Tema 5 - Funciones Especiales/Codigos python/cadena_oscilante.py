@@ -2,14 +2,13 @@
 """
 Editor de Spyder
 
-Este es un archivo temporal.
 """
 
 import numpy as np
 from scipy.special import j0, jn_zeros
 import matplotlib.pyplot as plt
 from matplotlib import animation
-plt.rcParams['animation.ffmpeg_path'] = '/usr/local/bin/ffmpeg'
+# plt.rcParams['animation.ffmpeg_path'] = '/usr/local/bin/ffmpeg'
 
 # Aceleracion debida a la gravedad s^-2
 g = 9.81
@@ -26,7 +25,7 @@ z = np.linspace(0, L, 201)
 # Eje vertical escalado
 u = 2 * np.sqrt(z/g)
 
-mode = 1
+mode = 4
 
 # jn_zeros calcula los primeros n ceros de Jo(x)
 w = jn_zeros(0, mode)[mode-1] * np.sqrt(g/L) / 2
@@ -47,6 +46,7 @@ def init():
     line.set_data([], [])
     return line,
 
+line, = ax.plot([], [], 'k', dashes=[5,2], lw=3)
 
 # Retraso entre los frames (ms)
 interval = 10
@@ -62,12 +62,13 @@ def animate(i):
     line.set_data(x, z)
     return line,
 
-print(len(animate))
 
 # Configuracion de la animacion
-anim = animation.FuncAnimation(fig, animate, frames=10*nframes, init_func=init, interval=interval)
+# anim = animation.FuncAnimation(fig, animate, frames=10*nframes, init_func=init, interval=interval)
+anim = animation.FuncAnimation(fig, animate, init_func=init,
+                               frames=nframes, interval=interval, blit=True)
 
-writer = animation.writers['ffmpeg'](fps=30)
+# writer = animation.writers['ffmpeg'](fps=30)
 
 
 
