@@ -203,7 +203,7 @@ Entonces el coeficiente $a_{2k+1}$ se escribe como:
 \begin{eqnarray*}
 \begin{aligned}
 &a_{2k+1} = 2 \, \dfrac{2 \, (2 k + 1) + 1}{2} \, V_{0} \, \scaleint{6ex}_{0}^{1} P_{2k+1} (x) \dd{x} = \\[0.5em] \pause
-&= \dfrac{(-1)^{k} \, (4 k + 3) \, (2 k!)}{2^{2 k + 1} \, k! \, (k + 1)!} \, V_{0}
+&= \dfrac{(-1)^{k} \, (4 k + 3) \, (2 k)!}{2^{2 k + 1} \, k! \, (k + 1)!} \, V_{0}
 \end{aligned}
 \end{eqnarray*}
 con $a_{\ell} = 0$ para $\ell$ par. 
@@ -218,7 +218,7 @@ La expansión final en series se escribe como:
 V_{0} & \text{ si } 0 < x \leq 1 \\
 -V_{0} & \text{ si } -1 \leq x < 0
 \end{cases} = \\[0.5em] \pause
-&= V_{0} \, \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} \,(4 k + 3) \, (2 k!)}{2^{2 k + 1} \, k! \, (k + 1)!} \, P_{2k+1} (x)
+&= V_{0} \, \nsum_{k=0}^{\infty} \dfrac{(-1)^{k} \,(4 k + 3) \, (2 k)!}{2^{2 k + 1} \, k! \, (k + 1)!} \, P_{2k+1} (x)
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
@@ -230,29 +230,58 @@ Expresando los primeros términos:
 f (x) = V_{0} \, \left[ \dfrac{3}{2} P_{1}(x) - \dfrac{7}{4} P_{3}(x) + \dfrac{21}{16} P_{5}(x) - \cdots \right]
 \end{align*}
 \end{frame}
+\begin{frame}
+\frametitle{Ejemplo con valor de $V_{0}$}
+Consideremos el potencial $V_{0}$:
+\begin{align*}
+f (x) = \begin{cases}
+\SI{10}{\volt} & \text{ si } 0 < x \leq 1 \\
+- \SI{10}{\volt} & \text{ si } -1 \leq x < 0
+\end{cases}
+\end{align*}
+\end{frame}
 \begin{frame}[plain]
 \begin{figure}
     \centering
-    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_01.pdf}
+    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_V_01.pdf}
 \end{figure}
 \end{frame}
 \begin{frame}[plain]
 \begin{figure}
     \centering
-    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_02.pdf}
+    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_V_02.pdf}
 \end{figure}
 \end{frame}
 \begin{frame}[plain]
 \begin{figure}
     \centering
-    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_03.pdf}
+    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_V_03.pdf}
 \end{figure}
 \end{frame}
 \begin{frame}[plain]
 \begin{figure}
     \centering
-    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_04.pdf}
+    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_V_04.pdf}
 \end{figure}
+\end{frame}
+\begin{frame}[plain]
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_V_05.pdf}
+\end{figure}
+\end{frame}
+\begin{frame}[plain]
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{Imagenes/Legendre_Expansion_V_06.pdf}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio de evaluación}
+\textbf{Ejercicio: } Demuestra que la expansión mediante los polinomios de Legendre de la delta de Dirac es:
+\begin{align*}
+\delta (x) = \nsum_{k=0}^{\infty} (-1)^{k} \, \dfrac{(4 \, k + 1) \, (2 \, k)!}{2^{2 k + 1} \, (k!)^{2}} \, P_{2 \, k} (x)
+\end{align*}
 \end{frame}
 
 \section{Cálculo de potenciales eléctricos}
@@ -278,7 +307,7 @@ Haciendo un esquema del problema tenemos que:
     \includestandalone[scale=0.9]{Figuras/cuadrupolo_01}
 \end{figure}
 \pause
-Calcula el potencial electrostático de este arreglo, conocido como el \textocolor{cobalt}{cuadruplo lineal eléctrico}.
+Calcula el potencial electrostático de este arreglo, conocido como el \textocolor{cobalt}{cuadrupolo lineal eléctrico}.
 \end{frame}
 
 \subsection{Solución}
@@ -366,8 +395,9 @@ Observemos el término $(-1)^{\ell}$ en la segunda suma: esto surge de la expres
 Si revisamos la ec. (\ref{eq:ecuacion_03}), nos damos cuenta de que las sumas se anula si $n$ es impar, dejándonos solo los términos pares:
 %\fontsize{12}{12}\selectfont
 \begin{align}
-\begin{aligned}
-V_{\pm a} &= \dfrac{2 \, k \, q}{r} \bigg[ P_{0} \left( \dfrac{a}{r} \right)^{0} + P_{2} \left( \dfrac{a}{r} \right)^{2} \, P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg]
+\begin{aligned}[b]
+V_{\pm a} &= \dfrac{2 \, k \, q}{r} \bigg[ P_{0} (\cos \theta)  \left( \dfrac{a}{r} \right)^{0} + P_{2} (\cos \theta) \left( \dfrac{a}{r} \right)^{2} + \\[0.5em]
+&+ P_{4} (\cos \theta) \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg]
 \end{aligned}
 \label{eq:ecuacion_04}
 \end{align}
@@ -395,9 +425,9 @@ Por lo que el potencial completo del cuadrupolo es:
 El potencial completo es:
 \pause
 \begin{align}
-\begin{aligned}
-V_{T} &= \dfrac{2 \, k \, q}{r} \bigg[ P_{0} \left( \dfrac{a}{r} \right)^{0} + \\[0.5em]
-&+ P_{2} \left( \dfrac{a}{r} \right)^{2} \, P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg] - \dfrac{2 \, k \, q}{r}
+\begin{aligned}[b]
+V_{T} &= \dfrac{2 \, k \, q}{r} \bigg[ P_{0} (\cos \theta) \left( \dfrac{a}{r} \right)^{0} + P_{2} (\cos \theta) \left( \dfrac{a}{r} \right)^{2} + \\[0.5em]
+&+ P_{4} (\cos \theta) \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg] - \dfrac{2 \, k \, q}{r}
 \end{aligned}
 \label{eq:ecuacion_05}
 \end{align}
@@ -408,26 +438,29 @@ Del primero término en los corchetes de la ec. (\ref{eq:ecuacion_05}), $P_{0}(x
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-V_{T} &= \dfrac{2 \, k \, q}{r} + \dfrac{k \, q}{r} \bigg[ P_{2} \left( \dfrac{a}{r} \right)^{2} + P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg] - \dfrac{2 \, k \, q}{r} = \\[0.5em] \pause
-&= \dfrac{2 \, k \, q}{r} \bigg[ P_{2} \left( \dfrac{a}{r} \right)^{2} + P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg]
+V_{T} &= \dfrac{2 \, k \, q}{r} + \dfrac{k \, q}{r} \bigg[ P_{2} (\cos \theta) \left( \dfrac{a}{r} \right)^{2} + \\[0.5em]
+&+ P_{4} (\cos \theta) \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg] - \dfrac{2 \, k \, q}{r} =
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Usando resultados previos}
+\begin{eqnarray*}
+\begin{aligned}
+V_{T} = \dfrac{2 \, k \, q}{r} \bigg[ P_{2} (\cos \theta) \left( \dfrac{a}{r} \right)^{2} + P_{4} (\cos \theta) \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg]
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Solución}
-Vemos que la expansión del cuadrupolo eléctrico comienza con el término $P_{2}(x)$:
+Vemos que la expansión del cuadrupolo eléctrico comienza con el término $P_{2} (\cos \theta)$:
 \pause
 \begin{align*}
-V_{T} = \dfrac{2 \, k \, q}{r} \bigg[ P_{2} \left( \dfrac{a}{r} \right)^{2} + P_{4} \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg]
+V_{T} = \dfrac{2 \, k \, q}{r} \bigg[ P_{2} (\cos \theta) \left( \dfrac{a}{r} \right)^{2} + P_{4} (\cos \theta) \left( \dfrac{a}{r} \right)^{4} + \ldots \bigg]
 \end{align*}
 \end{frame}
 
-% \textbf{Ejercicio a cuenta: } Calcula la expansión mediante los polinomios de Legendre de la delta de Dirac.
-% \par
-% Solución:
-% \begin{align*}
-% \delta(x) = \nsum_{k=0}^{\infty} (-1)^{k} \, \dfrac{(4k + 1) \, (2k!)}{2^{2k+1} \, (k!)^{2}} \, P_{2k} (x)
-% \end{align*}
+%
 % \textbf{Ejemplo 2.}
 
 % Para encontrar la solución más general con simetría azimutal de la ecuación de Laplace en coordenadas esféricas, multiplicamos la solución radial y la solución angular (polinomios de Legendre) para cada $k$ y sumamos sobre todos los valores posibles de $k$:
