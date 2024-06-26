@@ -1,0 +1,94 @@
+\input{../Preambulos/preambulo_materiales}
+% \usepackage{apacite}
+\title{Análisis tensorial \\ \large{Material de consulta previo}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Arfken - Tensor Analysis. Cap. 4 (2013)
+\section{Introducción.}
+
+Los tensores son de gran importancia en muchas áreas de la física, incluyendo la relatividad general y la teoría electromagnética. Una de las fuentes más prolíficas de cantidades tensoriales es el sólido anisotrópico. Aquí, las propiedades elásticas, ópticas, eléctricas y magnéticas pueden implicar a los tensores. Como ilustración introductoria, consideremos el flujo de una corriente eléctrica. Podemos establecer la ley de Ohm en la forma usual:
+\begin{align}
+\vb{J} = \sigma \ \vb{E}
+\label{eq:ecuacion_03_01}
+\end{align}
+con la densidad de corriente $\vb{J}$ y el campo eléctrico $\vb{E}$, ambas cantidades vectoriales. Si se tiene un medio isotrópico, $\sigma$, la conductividad, es un escalar, y para el componente $x$, por ejemplo:
+\begin{align}
+J_{1} = \sigma \, E_{1}
+\label{eq:ecuacion_03_02}
+\end{align}
+Sin embargo, si nuestro medio es anisotrópico, igual que en muchos cristales, o un plasma en presencia de un campo magnético, la densidad de corriente en la dirección $x$ puede depender de los campos eléctricos en las direcciones $y$ y $z$ así como del campo en la dirección $x$. Suponiendo una relación lineal, debemos sustituir la ec. (\ref{eq:ecuacion_03_02}) con
+\begin{align}
+J_{1} = \sigma_{11} \, E_{1} + \sigma_{12} \, E_{2} + \sigma_{13} \, E_{3}
+\label{eq:ecuacion_03_03}
+\end{align}
+y en general:
+\begin{align}
+J_{i} = \nsum_{k} \sigma_{ik} \, E_{k}
+\label{eq:ecuacion_03_04}
+\end{align}
+Para el espacio ordinario tridimensional, la conductividad escalar $\sigma$ ha dado lugar a un conjunto de nueve elementos:
+\begin{align}
+\sigma \rightarrow \begin{pmatrix}
+\sigma_{11} & \sigma_{12} & \sigma_{13} \\
+\sigma_{21} & \sigma_{22} & \sigma_{23} \\
+\sigma_{31} & \sigma_{32} & \sigma_{33}
+\end{pmatrix}
+\label{eq:ecuacion_03_05}
+\end{align}
+Este arreglo de nueve elementos forma de hecho un tensor.
+\par
+Una cantidad que permanece sin cambiar bajo las rotaciones de un sistema coordenado, es decir una cantidad invariante, se denomina \textbf{escalar}. Una cantidad cuyos componentes transformados como son aquellos de la distancia de un punto desde un origen seleccionado se denomina \textbf{vector}. 
+\par
+Si llamamos a los escalares como \textbf{tensores de rango 0} y a los vectores como \textbf{tensores de rango 1}, identificamos un tensor de rango $n$ en un espacio de dimensión $d$ como un objeto con las siguientes propiedades:
+\begin{itemize}
+\item Tiene componentes etiquetados por $n$ índices, a cada índice se le asignan valores de 1 a $d$, y por lo tanto tiene un total de $d^{n}$ componentes.
+\item Los componentes se transforman de una manera específica bajo transformaciones de coordenadas.
+\end{itemize}
+El comportamiento bajo la transformación de coordenadas es de importancia central para el análisis de tensores y se ajusta tanto a la forma en que los matemáticos definen los espacios lineales como a la noción de los físicos de que los observables físicos no deben depender de la elección de los marcos de coordenadas.
+
+\section{Tensores covariantes y contravariantes.}
+
+Consideremos una trasformación rotacional de un vector:
+\begin{align*}
+\vb{A} = A_{1} \, \vu{e}_{1} + A_{2} \, \vu{e}_{2} + A_{3} \, \vu{e}_{3}
+\end{align*}
+de un sistema cartesiano definido por $\vu{e}_{i} \, (i = 1, 2, 3)$ a un sistema coordenado rotado definido por $\vu{e}_{i}^{\prime}$; el mismo vector $\vb{A}$ se representa entonces como:
+\begin{align*}
+\vb{A}^{\prime} = A_{1}^{\prime} \, \vu{e}_{1}^{\prime} + A_{2}^{\prime} \, \vu{e}_{2}^{\prime} + A_{3}^{\prime} \, \vu{e}_{3}^{\prime}
+\end{align*}
+Las componentes de $\vb{A}$ y $\vb{A}^{\prime}$ se relacionan por:
+\begin{align}
+A_{i}^{\prime} = \nsum_{j} \left( \vu{e}_{i}^{\prime} \cdot \vu{e}_{j} \right) \, A_{j}
+\label{eq:ecuacion_04_01}
+\end{align}
+donde los coeficientes $\left( \vu{e}_{i}^{\prime} \cdot \vu{e}_{j} \right)$ son las proyecciones de $\vu{e}_{i}^{\prime}$ en las direcciones $\vu{e}_{j}$. Dado que $\vu{e}_{i}$ y $\vu{e}_{j}$ están linealmente relacionados, podemos escribir:
+\begin{align}
+A_{i}^{\prime} = \nsum \pdv{x_{i}^{\prime}}{x_{j}} \, A_{j}
+\label{eq:ecuacion_04_02}
+\end{align}
+La fórmula de la ecuación (\ref{eq:ecuacion_04_02}) corresponde a la aplicación de la regla de la cadena para convertir el conjunto $A_{j}$ en el conjunto $A_{i}^{\prime}$, y es válida para $A_{j}$ y $A_{i}^{\prime}$ de magnitud arbitraria porque ambos vectores dependen linealmente de sus componentes.
+\par
+También hemos observado anteriormente que el gradiente de un escalar $\phi$ tiene en las coordenadas cartesianas no rotadas las componentes:
+\begin{align*}
+\left( \nabla \phi \right)_{j} = \left( \pdv{\phi}{x_{j}} \right) \, \vu{e}_{j}
+\end{align*}
+lo que significa que en un sistema rotado tendríamos:
+\begin{align}
+\left( \nabla \phi \right)_{i}^{\prime} \equiv \pdv{\phi}{x_{i}^{\prime}} = \nsum_{j} \pdv{x_{j}}{x_{i}^{\prime}} \pdv{\phi}{x_{j}}
+\label{eq:ecuacion_04_03}
+\end{align}
+mostrando que el gradiente tiene una ley de transformación que difiere de la de la ecuación (\ref{eq:ecuacion_04_02}) en que $\pdv*{x_{i}^{\prime}}{x_{j}}$ ha sido reemplazado por $\pdv*{x_{j}}{x_{i}^{\prime}}$.
+\par
+Recordando que estas dos expresiones, si se escriben en detalle, corresponden, respectivamente, a $\left( \pdv*{x_{i}^{\prime}}{x_{j}} \right)_{x_{k}}$ y $\left( \pdv*{x_{j}}{x_{i}^{\prime}} \right)_{x_{k}^{\prime}}$, donde $k$ se extiende sobre los valores de índice distintos del que ya está en el denominador, y notando también que (en coordenadas cartesianas) son dos formas diferentes de calcular la misma cantidad (la magnitud y el signo de la proyección de uno de estos vectores unitarios sobre el otro), vemos que era legítimo identificar tanto a $\vb{A}$ como a $grad{\phi}$ como vectores.
+\end{document}
