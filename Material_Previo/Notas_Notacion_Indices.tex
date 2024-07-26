@@ -1,0 +1,307 @@
+\documentclass[14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{calc}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{textcomp, gensymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, 
+     bottom=2.00cm]{geometry}
+% \usepackage{Estilos/ColoresLatex}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage[skip=10pt, indent=30pt]{parskip}
+% \usepackage{scalerel}
+\usepackage{scalerel}[2016-12-29]
+
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iiint}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\textocolor}[2]{\textbf{\textcolor{#1}{#2}}}
+\sisetup{per-mode=symbol}
+\decimalpoint
+\sisetup{bracket-numbers = false}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+% \input{../Preambulos/preambulo_material_completo}
+% \usepackage{apacite}
+
+\title{Notación de índices \\ \large{Material de consulta previo}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\numberwithin{equation}{section}
+
+\linespread{1.25}
+
+\begin{document}
+
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+
+\section{El símbolo de Levi-Civita}
+
+Para manejar el producto cruz o la combinación de producto punto y cruz de vectores, es conveniente usar el símbolo de Levi-Civita.
+\par
+Consideramos el producto cruz de dos vectores $\vb{a}$ con $\vb{b}$:
+\begin{align}
+\vb{c} = \vb{a} \cross \vb{b}
+\label{eq:ecuacion_01}
+\end{align}
+Las componentes cartesianas del vector $\vb{c}$ se pueden escribir como:
+\begin{align}
+c_{i} = \nsum_{jk} \epsilon_{ijk} \, a_{j} \, b_{k}
+\label{eq:ecuacion_02}
+\end{align}
+o de la forma:
+\begin{align}
+c_{k} = \nsum_{ij} a_{i} \, b_{j} \, \epsilon_{ijk}
+\label{eq:ecuacion_03}
+\end{align}
+donde el \textbf{símbolo de Levi-Civita} está definido como:
+\begin{align}
+\epsilon_{xyz} &= \epsilon_{yzx} = \epsilon_{zxy} = 1 \label{eq:ecuacion_04} \\[0.5em]
+\epsilon_{xzy} &= \epsilon_{yxz} = \epsilon_{zyx} = - 1 \label{eq:ecuacion_05}
+\end{align}
+y todos los demás componentes son cero. Por lo tanto, todos los índices deben ser diferentes para que $\epsilon_{ijk}$ sea distinto de cero. Como puede verse en la definición, el intercambio de dos índices cualesquiera cambia el signo de $\epsilon$.
+\par
+Un rotacional $\curl{a}$ también se puede escribir usando el símbolo de Levi-Civita de la siguiente manera:
+\begin{align*}
+\left( \curl{a} \right)_{i} = \nsum_{jk} \, \epsilon_{ijk} \, \partial_{j} b_{k}
+\end{align*}
+donde:
+\begin{align*}
+\partial_{x} = \pdv{x}, \hspace{0.5cm} \partial_{y} = \pdv{y}, \hspace{0.5cm} \partial_{z} = \pdv{z}
+\end{align*}
+
+Verifiquemos que el símbolo de Levi-Civita reproduce la definición de producto cruz:
+\begin{align}
+c_{x} = \epsilon_{xyz} \, a_{y} b_{z} + \epsilon_{xzy} \, a_{z} b_{y}
+\label{eq:ecuacion_06}
+\end{align}
+Estos son los únicos términos distintos de cero en la suma de los índices $j$ y $k$ en la ec. (\ref{eq:ecuacion_02}). Como $\epsilon_{xyz} = 1$ y $\epsilon_{xzy} = - 1$ encontramos que:
+\begin{align}
+c_{x} = a_{y} b_{z} - a_{z} b_{y}
+\label{eq:ecuacion_07}
+\end{align}
+De manera similar:
+\begin{align}
+c_{y} &= \epsilon_{yzx} \, a_{z} b_{x} + \epsilon_{yxz} \, a_{x} b_{z} = a_{z} b_{x} - a_{x} b_{z} \label{eq:ecuacion_08} \\[0.5em]
+c_{z} &= \epsilon_{zxy} \, a_{x} b_{y} + \epsilon_{zxy} \, a_{y} b_{x} = a_{x} b_{y} - a_{y} b_{x} \label{eq:ecuacion_09}
+\end{align}
+
+Para manejar el álgebra vectorial usando el símbolo de Levi-Civita, la siguiente fórmula es bastante útil:
+\begin{align}
+\nsum_{k} \epsilon_{ijk} \, \epsilon_{klm} = \nsum_{k} \epsilon_{ijk} \, \epsilon_{lmk} = \delta_{il} \delta_{jm} - \delta_{im} \delta_{jl}
+\label{eq:ecuacion_10}
+\end{align}
+Esta fórmula puede entenderse al darse cuenta de que $\epsilon_{ijk}$ es cero a menos que todos los índices sean diferentes. Por ejemplo, si $i = x$ y $j = y$ sólo las dos posibilidades siguientes dan un resultado distinto de cero:
+\begin{align}
+\epsilon_{xyz} \, \epsilon_{zxy} = \epsilon_{xyz} \, \epsilon_{xyz} = 1 \hspace{1.5cm} \text{cuando } l = i = x \hspace{0.3cm} \text{y} \hspace{0.3cm} m = j = y
+\label{eq:ecuacion_11}
+\end{align}
+o cuando:
+\begin{align}
+\epsilon_{xyz} \, \epsilon_{zyx} = \epsilon_{xyz} \, \epsilon_{yxz} = - 1 \hspace{1.5cm} \text{cuando } l = j = y \hspace{0.3cm} \text{y} \hspace{0.3cm} m = i = x
+\label{eq:ecuacion_12}
+\end{align}
+
+Se obtienen resultados similares para otras elecciones de $i$ y $j$ y por lo tanto obtenemos el resultado general en la ec. (\ref{eq:ecuacion_10}). En algunos libros, el símbolo de suma a veces se omite con la convención de que los índices repetidos se suman:
+\begin{align}
+c_{i} = \epsilon_{ijk} \, a_{j} b_{k}
+\label{eq:ecuacion_13}
+\end{align}
+entonces:
+\begin{align}
+\epsilon_{ijk} \, \epsilon_{klm} = \epsilon_{ijk} \, \epsilon_{lmk} = \delta_{il} \delta_{jm} - \delta_{im} \delta_{jl}
+\label{eq:ecuacion_14}
+\end{align}
+
+\section{Ejemplos.}
+
+\subsection{Ejemplo 1. Triple producto vectorial.}
+
+Resuelve el siguiente triple producto vectorial:
+\begin{align}
+\vb{r} = \vb{a} \cross \left( \vb{b} \cross \vb{c} \right)
+\label{eq:ecuacion_15}
+\end{align}
+Con la notación de índices se tiene que:
+\begin{align}
+\begin{aligned}[b]
+r_{i} &= \nsum_{jk} \epsilon_{ijk} \, a_{j} \left( \vb{b} \cross \vb{c} \right)_{k} = \\[0.5em]
+&= \nsum_{jk} \epsilon_{ijk} \, a_{j} \, \nsum_{lm} \epsilon_{klm} \, b_{l} c_{m} = \\[0.5em]
+&= \nsum_{jlm} \left( \nsum_{k} \epsilon_{ijk} \, \epsilon_{lmn} \right) a_{j} b_{l} c_{m}
+\end{aligned}
+\label{eq:ecuacion_16}
+\end{align}
+Ahora usamos la ec. (\ref{eq:ecuacion_10}) para obtener:
+\begin{align}
+\begin{aligned}
+r_{i} &= \nsum_{jlm} \left( \delta_{il} \delta_{jm} - \delta_{im} \delta_{jl} \right) a_{j} b_{l} c_{m} = \\[0.5em]
+&= \nsum_{j} \left( a_{j} b_{i} c_{j} - a_{j} b_{j} c_{i} \right)
+\end{aligned}
+\label{eq:ecuacion_17}
+\end{align}
+Como:
+\begin{align*}
+\nsum_{j} a_{j} c_{j} = \vb{a} \vdot \vb{c} \hspace{2cm} \nsum_{j} a_{j} b_{j} = \vb{a} \vdot \vb{b}
+\end{align*}
+encontramos el resultado en términos de otra identidad vectorial:
+\begin{align*}
+\vb{r} = \vb{b} \left( \vb{a} \vdot \vb{c} \right) - \left( \vb{a} \vdot \vb{b} \right) \vb{c}
+\end{align*}
+
+\subsection{Ejemplo 2. Producto punto y producto cruz.}
+
+Resuelve:
+\begin{align*}
+V = \vb{a} \vdot \left( \vb{b} \cross \vb{c} \right)
+\end{align*}
+Nuevamente ocupamos la notación de índices:
+\begin{align*}
+V &= \nsum_{i} a_{i} \left( \vb{b} \times \vb{c} \right)_{i} = \\[0.5em]
+&= \nsum_{i} a_{i} \, \nsum_{jk} \epsilon_{ijk} \, b_{j} c_{k} = \\[0.5em]
+&= \nsum_{k} \left( \nsum_{ij} \epsilon_{ijk} \, a_{i} b_{j} \right) c_{k} = \\[0.5em]
+&= \nsum_{k} \left( \vb{a} \cross \vb{b} \right)_{k} \, c_{k} = \\[0.5em]
+&= \left( \vb{a} \cross \vb{b} \right) \vdot \vb{c}
+\end{align*}
+Vemos que en la tercera línea del desarrollo anterior, podemos escribir:
+\begin{align*}
+V &= \nsum_{j} \left( \nsum_{ik} \epsilon_{ijk} \, a_{i} c_{k} \right) b_{j} = \\[0.5em]
+&= \nsum_{j} \left( - \nsum_{ik} \epsilon_{jik} \, a_{i} c_{k} \right) b_{j} = \\[0.5em]
+&= - \nsum_{j} \left( \vb{a} \cross \vb{c} \right)_{j} \, b_{j} = \\[0.5em]
+&= - \left( \vb{a} \cross \vb{c} \right) \vdot \vb{b}
+\end{align*}
+Por lo que se tiene:
+\begin{align*}
+\vb{a} \vdot \left( \vb{b} \cross \vb{c} \right) = \left( \vb{a} \cross \vb{c}  \right) \vdot \vb{c} = - \left( \vb{a} \cross \vb{c} \right) \vdot \vb{b}
+\end{align*}
+
+\subsection{Ejemplo 3. Rotacional de un producto cruz.}
+
+Resuelve con notación de índices:
+\begin{align*}
+\vb{r} = \curl{\left( \vb{a} \cross \vb{b} \right)}
+\end{align*}
+Ocupando la expresión para el rotacional con notación de índices:
+\begin{align*}
+r_{i} &= \nsum_{jk} \epsilon_{ijk} \, \partial_{j} \left( \vb{a} \cross \vb{b} \right)_{k} = \\[0.5em]
+&= \nsum_{jk} \epsilon_{ijk} \, \partial_{j} \left( \nsum_{lm} \epsilon_{klm} \, a_{l} b_{m} \right) = \\[0.5em]
+&= \nsum_{jlm} \left( \nsum_{k} \epsilon_{ijk} \epsilon_{klm} \right) \, \partial_{j} \left( a_{l} b_{m} \right)
+\end{align*}
+Usando la ec. (\ref{eq:ecuacion_10}), se tiene que:
+\begin{align*}
+r_{i} &= \nsum_{jlm} \left( \delta_{ik} \delta_{jm} - \delta_{im} \delta_jl \right) \left( b_{m} \, \partial_{j} a_{l} + a_{l} \, \partial_{j} b_{m} \right) = \\[0.5em]
+&= \nsum_{j} \left( b_{j} \, \partial_{j} a_{i} + a_{i} \, \partial_{j} b_{j} - b_{i} \partial_{j} a_{j} - a_{j} \, \partial_{j} b_{i} \right)
+\end{align*}
+Dado que:
+\begin{align*}
+\nsum_{j} b_{j} \, \partial_{j} a_{i} &= \left( \vb{b} \vdot \nabla \right) \, a_{i} \hspace{1.5cm} \nsum_{j} a_{i} \, \partial_{j} b_{j} =  a_{i} \, \left( \nabla \vdot \vb{b}\right) \\[0.5em]
+\nsum_{j} b_{i} \, \partial_{j} a_{j} &=  b_{i} \, \left( \nabla \vdot \vb{a}\right) \hspace{1.5cm} \nsum_{j} a_{j} \, \partial_{j} b_{i} = \left( \vb{a} \vdot \nabla \right) \, b_{i}
+\end{align*}
+se obtiene:
+\begin{align*}
+\curl{\left( \vb{a} \cross \vb{b} \right)} = \left( \vb{b} \vdot \nabla \right) \, \vb{a} + \vb{a} \left( \div{\vb{b}} \right) - \vb{b} \left( \div{\vb{a}} \right) - \left( \vb{a} \vdot \nabla \right) \, \vb{b}
+\end{align*}
+
+\subsection{Ejemplo 4. Divergencia de un rotacional.}
+
+Resuelve con notación de índices:
+\begin{align*}
+V = \divergence{\vb{a} \cross \vb{b}}
+\end{align*}
+
+Usando las definiciones presentadas anteriormente:
+\begin{eqnarray*}
+\begin{aligned}
+V &= \nsum_{i} \partial_{i} \left( \vb{a} \cross \vb{b} \right)_{i} = \\[0.5em]
+&= \nsum_{i} \partial_{i} \, \nsum_{jk} \epsilon_{ijk} a_{j} b_{k} = \\[0.5em]
+&= \nsum_{ijk} \partial_{i} \left( a_{j} b_{k} \right) = \\[0.5em]
+&= \nsum_{ijk} \epsilon_{ijk} \left( b_{k} \, \partial_{i} \, a_{j} + a_{j} \, \partial_{i} \, b_{k} \right)
+\end{aligned}
+\end{eqnarray*}
+El primer término es:
+\begin{align*}
+\nsum_{ijk} \epsilon_{ijk} \, b_{k} \, \partial_{i} \, a_{j} &= \nsum_{k} b_{k} \left( \nsum_{ij} \epsilon_{kij} \, \partial_{i} \, a_{j} \right) = \\[0.5em]
+&= \nsum_{k} b_{k} \left( \curl{\vb{a}} \right)_{k} = \\[0.5em]
+&= \vb{b} \vdot \left( \curl{\vb{a}} \right)
+\end{align*}
+el segundo término es:
+\begin{align*}
+\nsum_{ijk} \epsilon_{ijk} \, a_{j} \, \partial_{i} \, b_{k} &= \nsum_{j} a_{j} \left( - \nsum_{ik} \epsilon_{jik} \, \partial_{i} \, b_{k} \right) = \\[0.5em]
+&= \nsum_{j} a_{j} \left( \curl{\vb{b}} \right)_{j} = \\[0.5em]
+&= - \vb{a} \vdot \left( \curl{\vb{b}} \right)
+\end{align*}
+Por lo tanto:
+\begin{align*}
+V = \divergence{\vb{a} \cross \vb{b}} = \vb{b} \vdot \left( \curl{\vb{a}} \right) - \vb{a} \vdot \left( \curl{\vb{b}} \right)
+\end{align*}
+
+\subsection{Identidades.}
+
+Demuestra las siguientes identidades:
+\begin{align*}
+\vb{r} = \nabla \cross \left( \grad{\phi} \right) = 0 \hspace{1.2cm} \text{y} \hspace{1.2cm}
+\div{\curl{\vb{a}}} = 0
+\end{align*}
+La primera identidad se demuestra de la siguiente manera:
+\begin{align*}
+r_{i} &= \nsum_{jk} \epsilon_{ijk} \, \partial_{j} \left( \grad{\phi} \right)_{k} = \\[0.5em]
+&= \nsum_{jk} \epsilon_{ijk} \, \partial_{j} \, \partial_{k} \, \phi
+\end{align*}
+Ya que:
+\begin{align*}
+\partial_{j} \, \partial_{k} \, \phi = \partial_{k} \, \partial_{j} \, \phi
+\end{align*}
+tenemos para la componente $x$:
+\begin{align*}
+r_{x} = \left( \epsilon_{xyz}  + \epsilon_{xzy} \right) \partial_{y} \, \partial_{z} \, \phi = 0
+\end{align*}
+ya que $\epsilon_{xzy} = - \epsilon_{xyz}$. De manera similar para las otras componentes de $\vb{r}$.
+\par
+Para la segunda identidad:
+\begin{align*}
+\div{\curl{\vb{a}}} &= \nsum_{i} \partial_{i} \left( \curl{\vb{a}} \right)_{i} = \\[0.5em]
+&= \nsum_{i} \partial_{i} \nsum_{jk} \epsilon_{ijk} \, \partial_{j} \, a_{k} = \\[0.5em]
+&= \nsum_{ijk} \epsilon_{ijk} \, \partial_{i} \, \partial_{j} \, a_{k}
+\end{align*}
+Para $k = x$ y usando $\partial_{i} \, \partial_{j} \, a_{k} = \partial_{j} \, \partial_{i} a_{k} $, se tiene en el lado derecho:
+\begin{align*}
+\left( \epsilon_{yzx} + \epsilon_{zyx} \right) \, \partial_{y} \, \partial_{z} \, a_{x} = 0
+\end{align*}
+Por lo tanto:
+\begin{align*}
+\div{\curl{\vb{a}}} = 0
+\end{align*}
+\end{document}

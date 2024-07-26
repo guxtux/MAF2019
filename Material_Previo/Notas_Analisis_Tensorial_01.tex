@@ -1,10 +1,66 @@
-\input{../Preambulos/preambulo_materiales}
+\documentclass[14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{calc}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{textcomp, gensymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, 
+     bottom=2.00cm]{geometry}
+% \usepackage{Estilos/ColoresLatex}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage[skip=10pt, indent=30pt]{parskip}
+% \usepackage{scalerel}
+\usepackage{scalerel}[2016-12-29]
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iiint}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\textocolor}[2]{\textbf{\textcolor{#1}{#2}}}
+\sisetup{per-mode=symbol}
+\decimalpoint
+\sisetup{bracket-numbers = false}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+% \input{../Preambulos/preambulo_material_completo}
 % \usepackage{apacite}
+
 \title{Análisis tensorial \\ \large{Material de consulta previo}\vspace{-3ex}}
 \author{M. en C. Gustavo Contreras Mayén}
 \date{ }
 
 \numberwithin{equation}{section}
+
+\linespread{1.25}
 
 \begin{document}
 
@@ -90,5 +146,121 @@ lo que significa que en un sistema rotado tendríamos:
 \end{align}
 mostrando que el gradiente tiene una ley de transformación que difiere de la de la ecuación (\ref{eq:ecuacion_04_02}) en que $\pdv*{x_{i}^{\prime}}{x_{j}}$ ha sido reemplazado por $\pdv*{x_{j}}{x_{i}^{\prime}}$.
 \par
-Recordando que estas dos expresiones, si se escriben en detalle, corresponden, respectivamente, a $\left( \pdv*{x_{i}^{\prime}}{x_{j}} \right)_{x_{k}}$ y $\left( \pdv*{x_{j}}{x_{i}^{\prime}} \right)_{x_{k}^{\prime}}$, donde $k$ se extiende sobre los valores de índice distintos del que ya está en el denominador, y notando también que (en coordenadas cartesianas) son dos formas diferentes de calcular la misma cantidad (la magnitud y el signo de la proyección de uno de estos vectores unitarios sobre el otro), vemos que era legítimo identificar tanto a $\vb{A}$ como a $grad{\phi}$ como vectores.
+Recordando que estas dos expresiones, si se escriben en detalle, corresponden, respectivamente, a $\left( \pdv*{x_{i}^{\prime}}{x_{j}} \right)_{x_{k}}$ y $\left( \pdv*{x_{j}}{x_{i}^{\prime}} \right)_{x_{k}^{\prime}}$, donde $k$ se extiende sobre los valores de índice distintos del que ya está en el denominador, y notando también que (en coordenadas cartesianas) son dos formas diferentes de calcular la misma cantidad (la magnitud y el signo de la proyección de uno de estos vectores unitarios sobre el otro), vemos que es legítimo identificar tanto a $\vb{A}$ como a $\grad{\phi}$ como vectores.
+\par
+Sin embargo, como un lector atento se puede notar por la inserción repetida de la palabra \enquote{cartesiano}, las derivadas parciales en las ecuaciones (\ref{eq:ecuacion_04_02}) y (\ref{eq:ecuacion_04_03}) solo están garantizadas como iguales en sistemas de coordenadas cartesianos, y dado que a veces es necesario usar sistemas no cartesianos, se hace necesario distinguir estas dos reglas de transformación diferentes. Las cantidades que se transforman de acuerdo con la ecuación (\ref{eq:ecuacion_04_02}) se denominan \textbf{vectores contravariantes}, mientras que las que se transforman de acuerdo con la ecuación (\ref{eq:ecuacion_04_03}) se denominan \textbf{covariantes}. Cuando pueden estar en juego sistemas no cartesianos, es habitual distinguir estas propiedades de transformación escribiendo el índice de un vector contravariante como un superíndice y el de un vector covariante como un subíndice. Esto significa, entre otras cosas, que los componentes del vector de posición $\vb{r}$, que sea contravariante, deberá de escribirse $\left( x^{1}, x^{2}, x^{3} \right)$. Resumiendo:
+\begin{align}
+\left( A^{\prime} \right)^{i} &= \nsum_{j} \pdv{(x^{\prime})^{i}}{x^{j}} \, A^{j} \hspace{1cm} \vb{A}, \text{vector contravariante}
+\label{eq:ecuacion_04_04} \\
+A_{i}^{\prime} &= \nsum_{j} \pdv{x^{j}}{(x^{\prime})^{i}} \, A_{j} \hspace{1cm} \vb{A}, \text{vector covariante}
+\label{eq:ecuacion_04_05}
+\end{align}
+
+Es útil observar que la aparición de subíndices y superíndices es sistemática; el índice libre (es decir, no sumado) $i$ aparece como superíndice en ambos lados de la ec. (\ref{eq:ecuacion_04_04}), mientras que aparece como subíndice en ambos lados de la ec. (\ref{eq:ecuacion_04_05}), si interpretamos un índice superior en el denominador como equivalente a un índice inferior. El índice sumado aparece una vez como superior y una vez como inferior (tratando nuevamente un índice superior en el denominador como un índice inferior). Una abreviatura que se usa con frecuencia (la \textbf{convención de Einstein}) es omitir el signo de suma en fórmulas como las ecs. (\ref{eq:ecuacion_04_04}) y (\ref{eq:ecuacion_04_05}) y entender que cuando el mismo símbolo aparece como índice superior e inferior en la misma expresión, debe sumarse.
+
+\section{Tensores de rango 2.}
+
+Ahora definamos los tensores contravariantes, mixtos y covariantes de rango 2 mediante las siguientes ecuaciones para sus componentes bajo transformaciones de coordenadas:
+\begin{align}
+\begin{aligned}
+\left( A^{\prime} \right)^{ij} &= \nsum_{kl} \pdv{\left( x^{\prime} \right)^{i}}{x^{k}} \pdv{\left( x^{\prime} \right)^{j}}{x^{l}} \, A^{kl} \\[0.5em]
+\left( B^{\prime} \right)_{j}^{i} &= \nsum_{kl} \pdv{\left( x^{\prime} \right)^{i}}{x^{k}} \pdv{x^{l}}{\left( x^{\prime} \right)^{j}} \, B_{l}^{k} \\[0.5em]
+\left( C^{\prime} \right)_{ij} &= \nsum_{kl} \pdv{x^{k}}{\left( x^{\prime} \right)^{i}} \pdv{x^{l}}{\left( x^{\prime} \right)^{j}} \, C_{kl}
+\end{aligned}
+\label{eq:ecuacion_04_06}
+\end{align}
+
+Claramente, el rango va como el número de derivadas parciales (o cosenos directores) en la definición: $0$ para un escalar, $1$ para un vector, $2$ para un tensor de segundo rango, y así sucesivamente. Cada índice (subíndice o superíndice) varía sobre el número de dimensiones del espacio. El número de índices (igual al rango del tensor) no está limitado por la dimensionalidad del espacio. Vemos que $A^{kl}$ es contravariante con respecto a ambos índices, $C_{kl}$ es covariante con respecto a ambos índices y $B_{l}^{k}$ se transforma contravariantemente con respecto al índice $k$ pero covariantemente con respecto al índice $l$. Una vez más, si estamos usando coordenadas cartesianas, las tres formas de los tensores de segundo rango, contravariante, mixta y covariante son las mismas.
+\par
+Al igual que con los componentes de un vector, las leyes de transformación para los componentes de un tensor, ec. (\ref{eq:ecuacion_04_06}), hacen que sus propiedades físicamente relevantes sean independientes de la elección del marco de referencia. Esto es lo que hace que el análisis tensorial sea importante en física. La independencia relativa al marco de referencia (invariancia) es ideal para expresar e investigar leyes físicas universales.
+\par
+El tensor de segundo rango $A$ (con componentes $A^{kl}$) se puede representar convenientemente escribiendo sus componentes en una matriz cuadrada ($3 \times 3$ si estamos en el espacio tridimensional (3D)):
+\begin{align}
+A = \begin{pmatrix}
+A^{11} & A^{12} & A^{13} \\
+A^{21} & A^{22} & A^{23} \\
+A^{31} & A^{32} & A^{33}
+\end{pmatrix}
+\label{eq:ecuacion_04_07}
+\end{align}
+Esto no significa que cualquier matriz cuadrada de números o funciones forme un tensor. La condición esencial es que los componentes se transformen de acuerdo con la ec. (\ref{eq:ecuacion_04_06}).
+\par
+Podemos considerar cada una de las ecs. (\ref{eq:ecuacion_04_06}) como una ecuación matricial. Para $A$, toma la forma:
+\begin{align}
+\left( A^{\prime} \right)^{ij} = \nsum_{kl} S_{ik} \, A^{kl} \, \left( S^{T} \right)_{lj} \hspace{1cm} \text{o} \hspace{1cm} A^{\prime} = S A S^{T}
+\label{eq:ecuacion_04_08}
+\end{align}
+una construcción que se conoce como \textbf{transformación de similitud}.
+
+
+\section{Suma y resta de tensores.}
+
+La suma y resta de tensores se define en términos de los elementos individuales, al igual que para los vectores. Si:
+\begin{align}
+A + B = C
+\label{eq:ecuacion_04_09}
+\end{align}
+entonces, tomando como ejemplo $A$, $B$ y $C$ como tensores contravariantes de rango $2$:
+\begin{align}
+A^{ij} + B^{ij} = C^{ij}
+\label{eq:ecuacion_04_10}
+\end{align}
+En general, por supuesto, $A$ y $B$ deben ser tensores del mismo rango (tanto de contravarianza como de covarianza) y en el mismo espacio.
+
+\section{Simetría.}
+
+El orden en que aparecen los índices en nuestra descripción de un tensor es importante. En general, $A^{mn}$ es independiente de $A^{nm}$, pero hay algunos casos de especial interés. Si, para todos los $m$ y $n$:
+\begin{align}
+A^{mn} = A^{nm} \hspace{1cm} A \text{ es simétrico}
+\label{eq:ecuacion_04_11}
+\end{align}
+Si, por otro lado:
+\begin{align}
+A^{mn} = -A^{nm} \hspace{1cm} A \text{ es antisimétrico}
+\label{eq:ecuacion_04_12}
+\end{align}
+Claramente, cada tensor (de segundo rango) se puede resolver en partes simétricas y antisimétricas mediante la identidad:
+\begin{align}
+A^{mn} = \dfrac{1}{2} \, \left( A^{mn} + A^{nm} \right) + \dfrac{1}{2} \, \left( A^{mn} - A^{nm} \right)
+\label{eq:ecuacion_04_13}
+\end{align}
+El primer término a la derecha es un tensor simétrico, el segundo, un tensor antisimétrico.
+
+\section{Tensores isotrópicos.}
+
+Para ilustrar algunas de las técnicas de análisis tensorial, demostremos que el ahora conocido delta de Kronecker, $\delta_{kl}$, es en realidad un tensor mixto de rango $2$, $\delta_{l}^{k}$. La pregunta es: ¿la $\delta_{l}^{k}$ se transforma según la ec. (\ref{eq:ecuacion_04_06})?, que es nuestro criterio para llamarlo tensor. Si $\delta_{l}^{k}$ es el tensor mixto correspondiente a esta notación, debe satisfacer (usando la convención de suma, lo que significa que los índices $k$ y $l$ deben sumarse):
+\begin{align*}
+\left( \delta^{\prime} \right)_{j}^{i} = \pdv{\left( x^{\prime} \right)^{i}}{x^{k}} \pdv{x^{l}}{\left( x^{\prime} \right)^{j}} \, \delta_{l}^{k} = \pdv{\left( x^{\prime} \right)^{i}}{x^{k}} \pdv{x^{k}}{\left( x^{\prime} \right)^{j}}
+\end{align*}
+donde hemos realizado la suma sobre $l$ y hemos utilizado la definición del delta de Kronecker. A continuación:
+\begin{align*}
+\pdv{\left( x^{\prime} \right)^{i}}{x^{k}} \pdv{x^{k}}{\left( x^{\prime} \right)^{j}} = \pdv{\left( x^{\prime} \right)^{i}}{\left( x^{\prime} \right)^{j}}
+\end{align*}
+donde hemos identificado la suma sobre $k$ del lado izquierdo como una instancia de la regla de la cadena para la diferenciación. Sin embargo, $\left( x^{\prime} \right)^{i}$ y $\left( x^{\prime} \right)^{j}$ son coordenadas independientes y, por lo tanto, la variación de una con respecto a la otra debe ser cero si son diferentes, y será la unidad si coinciden; es decir:
+\begin{align}
+\pdv{\left( x^{\prime} \right)^{i}}{\left( x^{\prime} \right)^{j}} = \left( \delta^{\prime} \right)_{j}^{i}
+\label{eq:ecuacion_04_14}
+\end{align}
+demostrando que la $\delta_{l}^{k}$ son de hecho los componentes de un tensor mixto de segundo rango. Nótese que este resultado es independiente del número de dimensiones de nuestro espacio.
+\par
+El delta de Kronecker tiene otra propiedad interesante. Tiene los mismos componentes en todos nuestros sistemas de coordenadas rotados y por lo tanto se llama \textbf{isotrópico}. No existe ningún tensor (vector) isotrópico de primer rango.
+
+\section{Contracción.}
+
+Al trabajar con vectores, formamos un producto escalar sumando los productos de los componentes correspondientes:
+\begin{align*}
+\vb{A} \vdot \vb{B} = \nsum_{i} A_{i} \, B_{i}
+\end{align*}
+La generalización de esta expresión en el análisis tensorial es un proceso conocido como \textbf{contracción}.
+\par
+Se establecen dos índices, uno covariante y el otro contravariante, iguales entre sí y luego (como lo implica la convención de suma) sumamos sobre este índice repetido. Por ejemplo, contraigamos el tensor mixto de segundo rango $B_{j}^{i}$ estableciendo $j$ en $i$ y luego sumando sobre $i$. Para ver qué sucede, observemos la fórmula de transformación que convierte $B$ en $B^{\prime}$. Usando la convención de suma:
+\begin{align*}
+\left( B^{\prime} \right)_{i}^{i} = \pdv{\left( x^{\prime} \right)^{i}}{x^{k}} \pdv{x^{l}}{\left( x^{\prime} \right)^{i}} \, B_{l}^{k} = \pdv{x^{l}}{x^{k}} \, B_{l}^{k}
+\end{align*}
+donde reconocimos la suma sobre $i$ como una instancia de la regla de la cadena para la diferenciación. Entonces, como las $x^{i}$ son independientes, podemos usar la ec. (\ref{eq:ecuacion_04_14}) para llegar a:
+\begin{align}
+\left( B^{\prime} \right)_{i}^{i} = \delta_{k}^{l} \, B_{l}^{k} = B_{k}^{k}
+\label{eq:ecuacion_04_16}
+\end{align}
+Recordando que el índice repetido ($i$ o $k$) se suma, vemos que el $B$ contraído es invariante bajo transformación y por lo tanto es un escalar. En general, la operación de contracción reduce el rango de un tensor en $2$.
 \end{document}

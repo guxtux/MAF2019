@@ -1,0 +1,233 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{calc}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{textcomp, gensymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, 
+     bottom=2.00cm]{geometry}
+% \usepackage{Estilos/ColoresLatex}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage[skip=10pt, indent=30pt]{parskip}
+% \usepackage{scalerel}
+\usepackage{scalerel}[2016-12-29]
+\usepackage{biblatex}
+
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ao,
+    filecolor=magenta,      
+    urlcolor=ao,
+}
+
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iiint}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\textocolor}[2]{\textbf{\textcolor{#1}{#2}}}
+\sisetup{per-mode=symbol}
+\decimalpoint
+\sisetup{bracket-numbers = false}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\numberwithin{equation}{section}
+
+\linespread{1.15}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\emergencystretch=1em
+
+
+\title{Syllabus del curso. Semestre 2025-1 \\ \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{}
+\date{ }
+
+\addbibresource{Referencias_MAF.bib}
+
+\begin{document}
+
+\vspace{-4cm}
+\maketitle
+
+\section{Equipo académico.}
+
+M. en C. Gustavo Contreras Mayén. \hspace{0.3cm} \href{mailto:gux7avo@ciencias.unam.mx}{gux7avo@ciencias.unam.mx}
+
+M. en C. Abraham Lima Buendía. \hspace{0.3cm} \href{mailto:abraham3081@ciencias.unam.mx}{abraham3081@ciencias.unam.mx}
+
+\section{Horario.}
+
+La clase se impartirá los días martes y jueves de 16:00 a 18:30 pm. El salón está pendiente de definir.
+
+\section{Objetivos del curso.}
+
+En la página de la Facultad, el programa de la asignatura: Matemáticas Avanzadas de la Física se puede consultar 
+\href{https://www.fciencias.unam.mx/sites/default/files/temario/610.pdf}{aquí}, y contiene los siguientes objetivos:
+\begin{enumerate}
+\item Reconocerá las ideas básicas del análisis de ecuaciones que involucran a funciones de varias variables.
+\item Formulará aproximaciones consistentes a soluciones, con el fin de cuantificar los distintos mecanismos de la física que se involucran.
+\item Consultará la literatura matemática que sea relevante para los problemas de física.
+\item Identificará el papel moderno que juegan las funciones especiales, como auxiliares poderosos en el análisis cualitativo de problemas en varias variables.
+\end{enumerate}
+
+También es nuestro objetivo demostrar al alumno que \textbf{las funciones especiales y las transformadas integrales} no son solamente un tema matemático que involucra las ramas de la geometría diferencial, las ecuaciones diferenciales y el análisis matemático.
+\par
+Veremos que \textbf{son las técnicas de estudio fundamentales} en la electrostática, la electrodinámica, la mecánica cuántica, la dinámica de medios deformables, la hidrodinámica clásica entre otras ramas de la física.
+\par
+El curso de MAF les brindará un manejo más fluido y consistente para lo que van a cursar en el sexto semestre y los tres semestres que les restan para concluir la carrera.
+\par
+Al ser MAF una asignatura de sexto semestre, se considerará que el alumno ha cubierto el correspondiente avance de la carrera; se requiere de la formación y conocimiento del quinto semestre tanto de la física como de la matemática.
+
+\section{Evaluación.}
+
+El esquema de evaluación para el curso se conforma de dos elementos:
+\begin{enumerate}[label=\alph*)]
+\item \textbf{Tareas.}
+
+Le corresponderán el \num{40} \% de la calificación. Por cada tema del curso se dejará una tarea para entregar.
+\item \textbf{Exámenes.}
+
+Tendrán un peso del \num{60} \% de la calificación. Se aplicarán tres exámenes parciales durante el curso.
+\end{enumerate}
+
+\subsection{Tareas.}
+
+Se entregarán los enunciados de cada tema de manera oportuna, de esta manera tendrán el suficiente tiempo para la solución, tendrán la oportunidad de realizar consultas tanto en clase, enviar un correo electrónico para aclarar dudas, esperando que resuelvan todos los ejercicios; se notificará la fecha de entrega al momento de entregar los enunciados, para que contemplen el tiempo y solución.
+\par
+Se recomienda entregar la totalidad de ejercicios de cada tarea, ya que será una buena medida para resolver los problemas en los exámenes. En caso de que entreguen una parte de cada tarea, se tomará en cuenta esa parcialidad.
+
+\subsection{Exámenes.}
+
+Habrá resolverán tres exámenes parciales durante el curso.
+\begin{enumerate}[label=\alph*), leftmargin=1.5\parindent]
+\item Primer parcial: con los Temas 1 y 2.
+\item Segundo parcial: con los Temas 3 y 4.
+\item Tercer parcial: con los Temas 5 y 6.
+\end{enumerate}
+
+El examen deberá de entregarse con la solución completa, en caso de que no suceda así, se tomará la respectiva parte proporcional de la calificación obtenida.
+
+\subsection{De las soluciones.}
+
+Durante la evaluación de las soluciones de los ejercicios de cada tarea y de cada examen, \emph{se revisa y se evalúa el proceso de resolución de un problema, es decir, será necesario detallar cada paso en la solución}.
+
+Los soluciones deberán \enquote{resolverse a mano}, en la solución se deberá de entregar de manera detallada y ordenada cada paso que se realice. No se recibirán soluciones que indiquen comprobaciones hechas en \emph{Mathematica, MatLab, Maple, etc.} o con alguna herramienta de inteligencia artificial. Cabe señalar que podrán ser utilizadas éstas a modo de corroborar los resultados, pero no serán sustitutos de la solución.
+
+\section{Temario.}
+
+El temario que se trabajará en el curso es el siguiente:
+\begin{enumerate}
+\item La física y la geometría.
+\begin{enumerate}
+\item Sistemas de coordenadas curvilíneas ortogonales.
+\item Operadores diferenciales en coordenadas curvilíneas.
+\item Funciones Gamma y Beta.
+\end{enumerate}
+\item Primeras técnicas de solución.
+\begin{enumerate}
+\item Técnica de separación de variables.
+\item Método de Frobenius y remoción de singularidades.
+\item Segunda solución linealmente independiente.
+\item Función de Green.
+\end{enumerate}
+\item Bases completas y ortogonales.
+\begin{enumerate}
+\item La delta de Dirac. 
+\item Ecuaciones de tipo Sturm-Liouville.
+\item Ortogonalización de Gram-Schimdt.
+\item Completes de las funciones propias.
+\end{enumerate}
+\item Funciones especiales.
+\begin{enumerate}
+\item Funciones de Bessel. (Propagación de ondas cilíndricas)
+\item Funciones de Hermite. (Oscilador armónico cuántico)
+\item Funciones de Chebyshev (Interpolación numérica)
+\item Funciones hipergeométricas: ordinaria y confluente.
+\item Funciones de Gegenbauer.
+\end{enumerate}
+\item El átomo de hidrógeno.
+\begin{enumerate}
+\item Parte radial: Ec. asociada de Laguerre. y la Ec. ordinaria de Laguerre.
+\item Parte angular: Armónicos esféricos
+\item Teorema de adición de los armónicos esféricos.
+\item Ecuación asociada de Legendre y la Ecuación ordinaria de Legendre.
+\end{enumerate}
+\item Transformadas integrales.
+\begin{enumerate}
+\item Transformada de Fourier.
+\item Transformada de Laplace.
+\item Transformada discreta de Fourier.
+\item Transformada rápida de Fourier.
+\end{enumerate}
+\end{enumerate}
+
+\section{Consideraciones importantes.}
+
+\begin{itemize}
+\setlength{\itemsep}{0mm}
+\item No se recibirán tareas de manera extemporánea, ya que la entrega de enunciados y la fecha de entrega se notificarán oportunamente
+\item No habrá reposición de exámenes parciales.
+\item En caso de que la calificación de un examen (o los tres) sea menor a $6$ (seis), el alumno presentará el Examen Final de todo el curso.
+\item Para presentar Examen Final de todo el curso se requiere que el alumno haya entregado los tres exámenes parciales.
+\item En caso de no haber entregado ninguna tarea y no haber entregado los tres exámenes parciales del curso, el alumno no tendrá derecho a presentar el Examen Final, por lo que la calificación final que se asentará en el acta del curso, será \textbf{NP (No presentó)}.
+\item En caso de haber presentado al menos un examen parcial y/o haber entregado una tarea, y posteriormente no se tenga registro de otra entrega, se entenderá que el alumno abandonó el curso, por lo que no tendrá derecho para presentar el Examen Final, y la calificación que se asentará en el acta del curso, será $\mathbf{5}$ \textbf{(cinco)}.
+\item En conformidad con el Reglamento de Estudios Superiores, el alumno que cumpla los requisitos mencionados presentará el Examen Final hasta en dos rondas de aplicación.
+\item Si en la primera aplicación del Examen Final, el alumno obtiene una calificación aprobatoria ($>=6.0$), será la calificación que se asiente en el acta del curso. En caso contrario podrá presentar el Examen Final en una segunda ronda. Cabe señalar que para tener derecho a presentar el Examen Final en la segunda ronda, el alumno deberá de haber presentado el Examen Final en la primera ronda.
+\item Si el alumno en la segunda ronda del Examen Final obtiene una  una calificación aprobatoria ($>=6.0$), será la calificación que se asiente en el acta del curso. En caso contrario, se asentará la calificación de $\mathbf{5}$ \textbf{(cinco)}, en el acta del curso.
+\item No se \enquote{renuncian} a calificaciones.
+\end{itemize}
+
+\section{Calendario oficial.}
+
+\begin{itemize}
+\item Lunes 5 de agosto de 2024. Inicio del semestre 2025-1.
+\item Viernes 22 de noviembre de 2024. Termina el semestre 2025-1.
+\item Del lunes 25 al viernes 29 de noviembre de 2024. \underline{Primera semana de exámenes}.
+\item Del lunes 2 al viernes 6 de diciembre de 2024. \underline{Segunda semana de exámenes}.
+\end{itemize}
+
+\section{Bibliografía.}
+
+Se ocuparán las referencias bibliográficas básicas y complementarias que se indican en el programa del curso, más otros materiales específicos que se darán a conocer en la revisión de los temas.
+
+\nocite{*}
+\printbibliography[title=Referencias para el curso.]
+
+
+\end{document}

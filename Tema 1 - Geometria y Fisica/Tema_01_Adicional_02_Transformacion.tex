@@ -1,0 +1,457 @@
+\documentclass[hidelinks,12pt]{article}
+\usepackage[left=0.25cm,top=1cm,right=0.25cm,bottom=1cm]{geometry}
+%\usepackage[landscape]{geometry}
+\textwidth = 20cm
+\hoffset = -1cm
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla, es-lcroman]{babel}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[tbtags]{amsmath}
+\usepackage{nccmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{standalone}
+\graphicspath{{Imagenes/}{../Imagenes/}}
+\usepackage[outdir=./Imagenes/]{epstopdf}
+\usepackage{siunitx}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+\usepackage{color}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{multirow}
+%\usepackage{milista}
+\usepackage{anyfontsize}
+\usepackage{anysize}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{mdframed}
+\usepackage{relsize}
+\usepackage{placeins}
+\usepackage{empheq}
+\usepackage{cancel}
+\usepackage{pdfpages}
+\usepackage{wrapfig}
+\usepackage[flushleft]{threeparttable}
+\usepackage{makecell}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{bigints}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{scalerel}
+\usepackage{pgfplots}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.16}
+\spanishdecimal{.}
+\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+
+\newcommand{\ptilde}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\stilde}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\ttilde}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\ntilde}[2]{\ensuremath{{#1}^{(#2)}}}
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+
+\newtheorem{defi}{{\it Definición}}[section]
+\newtheorem{teo}{{\it Teorema}}[section]
+\newtheorem{ejemplo}{{\it Ejemplo}}[section]
+\newtheorem{propiedad}{{\it Propiedad}}[section]
+\newtheorem{lema}{{\it Lema}}[section]
+\newtheorem{cor}{Corolario}
+\newtheorem{ejer}{Ejercicio}[section]
+
+\newlist{milista}{enumerate}{2}
+\setlist[milista,1]{label=\arabic*)}
+\setlist[milista,2]{label=\arabic{milistai}.\arabic*)}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iiint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+
+\usetikzlibrary{babel}
+\usepackage{tikz-3dplot}
+\setlength{\tabcolsep}{12pt}
+\usepackage[outline]{contour} % glow around text
+\colorlet{veccol}{green!50!black}
+\colorlet{myred}{red!90!black}
+\colorlet{myblue}{blue!80!black}
+\colorlet{mydarkblue}{blue!50!black}
+\tikzset{>=latex} % for LaTeX arrow head
+\tikzstyle{proj}=[projcol!80,line width=0.08] %very thin
+\tikzstyle{area}=[draw=veccol,fill=veccol!80,fill opacity=0.6]
+\tikzstyle{vector}=[-stealth,myblue,thick,line cap=round]
+\tikzstyle{unit vector}=[->,veccol,thick,line cap=round]
+\tikzstyle{dark unit vector}=[unit vector,veccol!70!black]
+\usetikzlibrary{angles,quotes} % for pic (angle labels)
+\contourlength{1.3pt}
+
+\title{Transformación de ecuaciones \\ \large{Material de consulta previo}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\begin{document}
+
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Heinbockel (1996) Introduction to tensor calculus and continuum mechanics.
+
+\section{Ecuaciones de transformación.}
+
+Considera dos conjuntos de $N$ variables independientes que se denotan mediante los símbolos con barra $\overline{x}^{i}$ y sin barra $x^{i}$ con $i = 1, \ldots, N$. Las variables independientes $x^{i}, i = 1, \ldots, N$ puede considerarse como la definición de las coordenadas de un punto en un espacio $N$-dimensional. De manera similar, las variables independientes con barra definen un punto en algún otro espacio $N$-dimensional. Se supone que estas coordenadas son cantidades reales y no cantidades complejas. Además, suponemos que estas variables están relacionadas mediante un conjunto de ecuaciones de transformación.
+\begin{align}
+x^{i} = x^{i} \, \left( \overline{x}^{1}, \overline{x}^{2}, \ldots, \overline{x}^{N} \right)
+\label{eq:ecuacion_01_01_07}
+\end{align}
+Suponemos que estas ecuaciones de transformación son independientes. Una condición necesaria y suficiente para que estas ecuaciones de transformación sean independientes es que el determinante Jacobiano sea distinto de cero, es decir:
+\begin{align*}
+J \left( \dfrac{x}{\overline{x}} \right) = \abs{\pdv{x^{i}}{\overline{x}^{j}}} = 
+\mqty| \displaystyle \pdv{x^{1}}{\overline{x}^{1}} & \displaystyle \pdv{x^{1}}{\overline{x}^{2}} & \ldots & \displaystyle \pdv{x^{1}}{\overline{x}^{N}} \\[0.75em]
+\displaystyle \pdv{x^{2}}{\overline{x}^{1}} & \displaystyle \pdv{x^{2}}{\overline{x}^{2}} & \ldots & \displaystyle \pdv{x^{2}}{\overline{x}^{N}} \\[0.75em]
+\vdots & \vdots & \hdots & \vdots \\[0.75em]
+\displaystyle \pdv{x^{N}}{\overline{x}^{1}} & \displaystyle \pdv{x^{N}}{\overline{x}^{2}} & \ldots & \displaystyle \pdv{x^{N}}{\overline{x}^{N}} | \neq 0
+\end{align*}
+Este supuesto nos permite obtener un conjunto de relaciones inversas.
+\begin{align}
+\overline{x}^{i} = \overline{x}^{i} \,  \left( x^{1}, x^{1}, \ldots, x^{N} \right) \hspace{1.5cm} i = 1, \ldots, N
+\label{eq:ecuacion_01_01_08}
+\end{align}
+donde las $\overline{x}$ se determinan en términos de las $x$. Debemos entender que las ecuaciones de transformación dadas son reales y continuas. Además, se supone que todas las derivadas que aparecen en nuestras discusiones existen y son continuas en el dominio de las variables consideradas.
+\par
+\noindent
+\textbf{Ejemplo. } El siguiente es un ejemplo de un conjunto de ecuaciones de transformación de la forma definida por las ecuaciones (\ref{eq:ecuacion_01_01_07}) y (\ref{eq:ecuacion_01_01_08}) en el caso $N = 3$. Considera la transformación de coordenadas cilíndricas $(r, \alpha, z)$ a coordenadas esféricas $(\rho, \beta, \alpha)$. 
+\begin{figure}[H]
+    \centering
+% 3D AXIS with cylindrical coordinates
+\tdplotsetmaincoords{60}{110}
+\begin{tikzpicture}[scale=3,tdplot_main_coords]
+  
+  % VARIABLES
+  \def\rtheta{0.25} % length theta arc
+  \def\rvec{1.2}
+  \def\phivec{46}
+  \def\thetavec{48}
+  
+  % AXES
+  \coordinate (O) at (0,0,0);
+  \draw[thick,->] (0,0,0) -- (1,0,0) node[below left=-3]{$x$};
+  \draw[thick,->] (0,0,0) -- (0,1,0) node[right=-1]{$y$};
+  \draw[thick,->] (0,0,0) -- (0,0,1) node[above=-1]{$z$};
+  
+  % POINT P
+  \tdplotsetcoord{P}{\rvec}{\phivec}{\thetavec}
+  \draw (Pxy)++(0,0,0.12) --++ (\thetavec+180:0.12) --++ (0,0,-0.12);
+  \node[circle,inner sep=0.9,fill=myblue]
+    (P') at ({\rvec*sin(\phivec)*cos(\thetavec)},{\rvec*sin(\phivec)*sin(\thetavec)},{\rvec*cos(\phivec)}) {};
+  
+  % VECTORS & DASHED
+  \draw[dashed,mydarkblue] (P)  -- (Pz)
+    node[pos=0.55,above right=-6] {\contour{white}{$r$}};
+  \draw[dashed,mydarkblue] (Py) -- (Pxy) -- (Px);
+  
+  % MEASURES
+  \draw[<->,veccol] (0,0,0) -- (\thetavec:{\rvec*sin(\phivec)})
+    node[pos=0.5,scale=0.9]{\contour{white}{$r$}};
+  \draw[<->,veccol] (\thetavec:{\rvec*sin(\phivec)}) -- (P')
+    node[pos=0.55,scale=0.9]{\contour{white}{$z$}};
+  \draw[->] (\rtheta,0,0) arc(0:\thetavec:\rtheta)
+    node[pos=0.35,below=-2,scale=0.9] {$\alpha$};
+  
+  % VECTORS
+  \draw[vector] (O)  -- (P')
+    node[pos=0.5,above left=-4] {$r$}
+    node[right=1,above right=-3] {$\mathrm{P} = (r, \alpha, z)$};   
+\end{tikzpicture}
+\tdplotsetmaincoords{60}{110}
+\begin{tikzpicture}[scale=3,tdplot_main_coords]
+  
+  % VARIABLES
+  \def\rvec{.8}
+  \def\thetavec{30}
+  \def\phivec{60}
+  
+  % AXES
+  \coordinate (O) at (0,0,0);
+  \draw[thick,->] (0,0,0) -- (1,0,0) node[below left=-3]{$x$};
+  \draw[thick,->] (0,0,0) -- (0,1,0) node[right=-1]{$y$};
+  \draw[thick,->] (0,0,0) -- (0,0,1) node[above=-1]{$z$};
+  
+  % VECTORS
+  \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+  \draw[vector,red] (O)  -- (P) node[above right=-2] {$\mathrm{P} = (\rho, \alpha, \beta)$};
+  \draw[dashed,myred]   (O)  -- (Pxy);
+  \draw[dashed,myred]   (P)  -- (Pxy);
+  \draw[dashed,myred]   (Py) -- (Pxy);
+  
+  % ARCS
+  \tdplotdrawarc[->]{(O)}{0.2}{0}{\phivec}
+    {anchor=north}{$\alpha$}
+  \tdplotsetthetaplanecoords{\phivec}
+  \tdplotdrawarc[->,tdplot_rotated_coords]{(0,0,0)}{0.4}{0}{\thetavec}
+    {anchor=south west}{\hspace{-1mm}$\beta$}
+
+\end{tikzpicture}
+\caption{Coordenadas cilíndricas y esféricas}
+\label{fig:figura_01_01_05}
+\end{figure}
+De la geometría de la figura (\ref{fig:figura_01_01_05}) podemos encontrar las ecuaciones de transformación:
+\begin{align*}
+r &= \rho \, \sin \beta \\[0.5em]
+\alpha &= \alpha \hspace{1.5cm} 0 < \alpha < 2 \pi \\[0.5em]
+z &= \rho \, \cos \beta \hspace{1.5cm} 0 < \beta < \pi
+\end{align*}
+con la transformación inversa:
+\begin{align*}
+\rho &= \sqrt{r^{2} + z^{2}} \\[0.5em]
+\alpha &= \alpha \\[0.5em]
+\beta &= \arctan \left( \dfrac{r}{z} \right)
+\end{align*}
+Haciendo ahora las sustituciones:
+\begin{align*}
+\left( x^{1}, x^{2}, x^{3} \right) = \left( r, \alpha, z \right) \hspace{1.5cm} \left( \overline{x}^{1}, \overline{x}^{2}, \overline{x}^{3} \right) = \left( \rho, \beta, \alpha \right)
+\end{align*}
+Las transformaciones resultantes tienen entonces la forma de las ecuaciones (\ref{eq:ecuacion_01_01_07}) y (\ref{eq:ecuacion_01_01_08}).
+
+\section{Cálculo de derivadas.}
+
+Consideremos ahora la regla de la cadena aplicada a la diferenciación de una función de las variables con barra. Representamos esta diferenciación con notación de índices. Sea $\Phi = \left( \overline{x}^{1},  \overline{x}^{2}, \ldots, \overline{x}^{N}, \right)$ una función escalar de las variables $\overline{x}^{i}, \, i = 1, \ldots, N$ y dejemos que estas variables estén relacionadas con el conjunto de variables $x^{i}$  con $i = 1, \ldots, N$ mediante las ecuaciones de transformación (\ref{eq:ecuacion_01_01_07}) y (\ref{eq:ecuacion_01_01_08}). Las derivadas parciales de $\Phi$ con respecto a las variables $x^{i}$ se pueden expresar con notación de índices como:
+\begin{align}
+\pdv{\Phi}{x^{i}} = \pdv{\Phi}{\overline{x}^{j}} \, \pdv{\overline{x}^{j}}{x^i} = \pdv{\Phi}{\overline{x}^{1}} \, \pdv{\overline{x}^{1}}{x^{i}} + \pdv{\Phi}{\overline{x}^{2}} \, \pdv{\overline{x}^{2}}{x^{i}} + \ldots + \pdv{\Phi}{\overline{x}^{N}} \, \pdv{\overline{x}^{N}}{x^{i}}
+\label{eq:ecuacion_01_01_09}
+\end{align}
+para cualquier valor fijo de $i$ que satisface $1 \leq i \leq N$.
+\par
+La segunda derivada parcial de $\Phi$ también se puede expresar con notación de índices, derivando parcialmente la ecuación (\ref{eq:ecuacion_01_01_09}) con respecto a $x^{m}$, se obtiene:
+\begin{align}
+\pdv[2]{\Phi}{x^{i}}{x^{m}} = \pdv{\Phi}{\overline{x}^{j}} \, \pdv[2]{\overline{x}^{j}}{x^{i}}{x^{m}} + \pdv{x^{m}} \left[ \pdv{\Phi}{\overline{x}^{j}} \right] \pdv{\overline{x}^{j}}{x^{i}}
+\label{eq:ecuacion_01_01_10}
+\end{align}
+Este resultado no es más que una aplicación de la regla general para diferenciar un producto de dos cantidades. Para evaluar la derivada del término entre paréntesis en la ecuación (\ref{eq:ecuacion_01_01_10}) debemos recordar que la cantidad dentro de los paréntesis es función de las variables con barra. Hagamos:
+\begin{align*}
+G = \pdv{\Phi}{\overline{x}^{j}} = G \left( \overline{x}^{1}, \overline{x}^{2}, \ldots, \overline{x}^{N} \right)
+\end{align*}
+Para enfatizar esta dependencia de las variables de barra, entonces la derivada de $G$ es:
+\begin{align}
+\pdv{G}{x^{m}} = \pdv{G}{\overline{x}^{k}} \, \pdv{\overline{x}^{k}}{x^{m}} = \pdv[2]{\Phi}{\overline{x}^{j}}{\overline{x}^{k}} \, \pdv{\overline{x}^{k}}{x^{m}}
+\label{eq:ecuacion_01_01_11}
+\end{align}
+Esta es solo una aplicación de la regla básica de la ecuación (\ref{eq:ecuacion_01_01_09}) con $\Phi$ reemplazada por $G$. Por lo tanto, la derivada de la ecuación (\ref{eq:ecuacion_01_01_10}) se puede expresar como:
+\begin{align}
+\pdv[2]{\Phi}{x^{i}}{x^{m}} = \pdv{\Phi}{\overline{j}^{j}} \, \pdv[2]{\overline{x}^{j}}{x^{i}}{x^{m}} + \pdv[2]{\Phi}{\overline{x}^{j}}{\overline{x}^{k}} \, \pdv{\overline{x}^{j}}{x^{i}} \, \pdv{\overline{x}^{k}}{x^{m}}
+\label{eq:ecuacion_01_01_12}
+\end{align}
+donde $i, m$ son índices libres y $j, k$ son índices de suma mudos.
+\par
+\noindent
+\textbf{Ejemplo. } Sea $\Phi = \Phi (r, \theta)$, donde $r, \theta$ son las coordenadas polares, relacionadas con las coordenadas cartesianas $(x, y)$ con las ecuaciones de transformación:
+\begin{align*}
+x =  r \, \cos \theta \hspace{2cm} y = r \, \sin \theta
+\end{align*}
+Calcula las derivadas parciales de primer y segundo orden.
+\par
+\noindent
+\textbf{Solución:} La derivada parcial de primer orden de $\Phi$ con respecto a $x$ se obtiene de la ec. (\ref{eq:ecuacion_01_01_09}), así:
+\begin{align}
+\pdv{\Phi}{x} = \pdv{\Phi}{r} \, \pdv{r}{x} + \pdv{\Phi}{\theta} \, \pdv{\theta}{x}
+\label{eq:ecuacion_01_01_13}
+\end{align}
+La segunda derivada parcial se obtiene al diferencia la primera derivada parcial. De la regla del producto para derivadas, podemos escribir:
+\begin{align}
+\pdv[2]{\Phi}{x} = \pdv{\Phi}{r} \, \pdv[2]{r}{x} + \pdv{r}{x} \, \pdv{x} \left[ \pdv{\Phi}{r} \right] + \pdv{\Phi}{\theta} \, \pdv[2]{\theta}{x} + \pdv{\theta}{x} \, \pdv{x} \left[ \pdv{\Phi}{\theta} \right]
+\label{eq:ecuacion_01_01_14}
+\end{align}
+Para simplificar aún más la ec. (\ref{eq:ecuacion_01_01_14}), debemos recordar que los términos dentro de los corchetes deben tratarse como funciones de las variables $r$ y $\theta$, y que la derivada de estos términos puede evaluarse aplicando nuevamente la regla básica de la ec. (\ref{eq:ecuacion_01_01_13}) con $\Phi$ reemplazado por $\pdv*{\Phi}{r}$ y entonces $\Phi$ reemplazado con $\pdv*{\Phi}{\theta}$. Lo que nos devuelve:
+\begin{align}
+\begin{aligned}[b]
+\pdv[2]{\Phi}{x} &= \pdv{\Phi}{r} \, \pdv[2]{r}{x} + \pdv{r}{x} \left[ \pdv[2]{\Phi}{r} \, \pdv{r}{x} + \pdv[2]{\Phi}{r}{\theta} \, \pdv{\theta}{x} \right] + \\[0.5em]
+&+ \pdv{\Phi}{\theta} \, \pdv[2]{\theta}{x} + \pdv{\theta}{x} \left[ \pdv[2]{\Phi}{\theta}{r} \, \pdv{r}{x} + \pdv[2]{\Phi}{\theta} \, \pdv{\theta}{x} \right]
+\end{aligned}
+\label{eq:ecuacion_01_01_15}
+\end{align}
+De las ecuaciones de transformación se obtienen las relaciones:
+\begin{align*}
+r^{2} = x^{2} + y^{2} \hspace{2cm} \tan \theta = \dfrac{y}{x}
+\end{align*}
+de esas relaciones podemos calcular todas las derivadas necesarias para simplificar las ecs. (\ref{eq:ecuacion_01_01_13}) y (\ref{eq:ecuacion_01_01_15}). Esas derivadas son:
+\begin{align*}
+2 r \, \pdv{r}{x} = 2 \, x \hspace{1cm} &\text{o} \hspace{1cm} \pdv{r}{x} = \dfrac{x}{r} = \cos \theta \\[0.5em]
+\sec^{2} \theta \, \pdv{\theta}{x} = - \dfrac{y}{x^{2}} \hspace{1cm} &\text{o} \hspace{1cm} \pdv{\theta}{x} = - \dfrac{y}{r^{2}} = - \dfrac{\sin \theta}{r} \\[0.5em]
+\pdv[2]{r}{x} = - \sin \theta \, \pdv{\theta}{x} = \dfrac{\sin^{2} \theta}{r} \hspace{0.7cm} &{} \hspace{0.7cm} \pdv[2]{\theta}{x} = \dfrac{\displaystyle - r \cos \theta \, \pdv{\theta}{x} + \sin \theta \, \pdv{r}{x}}{r^{2}} = \dfrac{2 \sin \theta \cos \theta}{r^{2}}
+\end{align*}
+Por tanto, las derivadas de las ecs. (\ref{eq:ecuacion_01_01_13}) y (\ref{eq:ecuacion_01_01_15}) se pueden expresar en la forma:
+\begin{align*}
+\pdv{\Phi}{x} &= \pdv{\Phi}{r} \cos \theta - \pdv{\Phi}{\theta} \dfrac{\sin \theta}{r} \\[0.5em]
+\pdv[2]{\Phi}{x} &= \pdv{\Phi}{r} \, \dfrac{\sin^{2} \theta}{r} + 2 \pdv{\Phi}{\theta} \dfrac{\sin \theta \, \cos \theta}{r^{2}} + \pdv[2]{\Phi}{r} \, \cos^{2} \theta + \\[0.5em]
+&- 2 \pdv[2]{\Phi}{r}{\theta} \, \dfrac{\cos \theta \, \sin \theta}{r} + \pdv[2]{\Phi}{\theta} \, \dfrac{\sin^{2} \theta}{r^{2}}
+\end{align*}
+Dejando que $\overline{x}^{1} = r$, $\overline{x}^{2} = \theta$, así como $x^{1} = x$, $x^{2} = y$ y realizando las sumas indicadas en las ecs. (\ref{eq:ecuacion_01_01_09}) y (\ref{eq:ecuacion_01_01_12}) se obtienen los mismos resultados que antes.
+
+\section{Identidades vectoriales en coordenadas cartesianas.}
+
+Empleando las sustituciones $x^{1} = x, \, x^{2} = y, \, x^{3} = z$, donde se emplean variables en superíndice y denotan los vectores unitarios en coordenadas cartesianas por $\vb{e}_{1}, \vb{e}_{2}, \vb{e}_{3}$, ilustramos cómo se escriben varias operaciones vectoriales utilizando la notación de índices.
+
+\subsection{Gradiente.}
+
+
+En coordenadas cartesianas el gradiente de un campo escalar es:
+\begin{align*}
+\grad{\phi} = \pdv{\phi}{x} \, \vu{e}_{1} + \pdv{\phi}{y} \, \vu{e}_{2} + \pdv{\phi}{z} \, \vu{e}_{3}
+\end{align*}
+La notación de índices centra la atención sólo en los componentes del gradiente. En coordenadas cartesianas, estos componentes se representan mediante un subíndice de coma para indicar la derivada:
+\begin{align*}
+\vu{e}_{j} \vdot \grad{\phi} = \phi_{,j} = \pdv{\phi}{x^{j}}, \hspace{1.5cm} j = 1, 2, 3
+\end{align*}
+El uso de la coma se usa para denotar las derivadas, por ejemplo:
+\begin{align*}
+\phi_{,j} = \pdv{\phi}{x^{j}}, \hspace{2cm} \phi_{,jk} = \pdv[2]{\phi}{x^{j}}{x^{k}}, \hspace{1cm} \text{etc.}
+\end{align*}
+
+\subsection{Divergencia.}
+
+En coordenadas cartesianas la divergencia de un campo vectorial $\va{A}$, es un campo escalar que se representa como:
+\begin{align*}
+\div{\va{A}} = \pdv{A_{1}}{x} + \pdv{A_{2}}{y} + \pdv{A_{3}}{z}
+\end{align*}
+Usando la convención de suma y la notación de índices, la divergencia en coordenadas cartesianas se escribe:
+\begin{align*}
+\div{\va{A}} = A_{i i} = \pdv{A_{i}}{x^{i}}
+\end{align*}
+donde $i$ es el índice mudo en la suma.
+
+\subsection{Rotacional.}
+
+Para representar el vector $\va{B} = \curl{\va{A}}$ en coordenadas cartesianas, notemos que la notación de índice se enfoca solo en los componentes de este vector. Las componentes $B_{i}$, con $i =1, 2, 3$ del vector $\va{B}$ se representa por:
+\begin{align*}
+B_{i} = e_{ijk} \, A_{k, j} \hspace{1.5cm} \text{para } i, j, k = 1, 2, 3
+\end{align*}
+donde $e_{ijk}$ es el símbolo de permutación que se mencionó anteriormente, y las $A_{k,j} = \pdv*{A_{k}}{x^{j}}$.
+\par
+Para verificar esta representación de $\curl{\va{A}}$ solo necesitamos realizar las sumas indicadas por los índices repetidos. Tenemos la suma en $j$:
+\begin{align*}
+B_{i} = e_{i1k} \, A_{k,1} + e_{i2k} \, A_{k,2} + e_{i3k} \, A_{k,3}
+\end{align*}
+Ahora sumando cada término en el índice repetido $k$, tenemos:
+\begin{align*}
+B_{i} = e_{i12} \, A_{2,1} + e_{i13} \, A_{3,1} + e_{i21} \, A_{1,2} + e_{i23} \, A_{3,2} + e_{i31} \, A_{1,3} + e_{i32} \, A_{2,3}
+\end{align*}
+Aquí $i$ es un índice libre el cual puede tomar cualquiera de los valores $1, 2$ o $3$. Por lo que tenemos:
+\begin{align*}
+&\text{Para } i = 1, \hspace{0.5cm} B_{1} = A_{3, 2} - A_{2, 3} = \pdv{A_{3}}{x^{2}} - \pdv{A_{2}}{x^{3}} \\[0.5em]
+&\text{Para } i = 2, \hspace{0.5cm} B_{2} = A_{1, 3} - A_{3, 1} = \pdv{A_{1}}{x^{3}} - \pdv{A_{3}}{x^{1}} \\[0.5em]
+&\text{Para } i = 3, \hspace{0.5cm} B_{3} = A_{2, 1} - A_{1, 2} = \pdv{A_{2}}{x^{1}} - \pdv{A_{1}}{x^{2}}
+\end{align*}
+lo que verifica la representación del rotacional de $\va{A}$ con notación de índices en coordenadas cartesianas.
+
+\subsection{Otras operaciones.}
+
+Los siguientes ejemplos ilustran cómo se puede utilizar la notación de índices para representar operadores vectoriales adicionales en coordenadas cartesianas.
+
+\begin{enumerate}
+\item En la notación de índice, los componentes del vector $\left( \va{B} \vdot \nabla \right) \, \va{A}$ es:
+\begin{align*}
+\left\{ \left( \va{B} \vdot \nabla \right) \, \va{A} \right\} \vdot \vu{e}_{p} = A_{p,q} \, B_{q} \hspace{1.5cm} p, q = 1, 2, 3
+\end{align*}
+Que se puede verificar realizando las sumas indicadas. Tenemos que sumar en el índice repetido $q$:
+\begin{align*}
+A_{p,q} B_{q} = A_{p,1} B_{1} + A_{p,2} B_{2} + A_{p,3} B_{3}
+\end{align*}
+El índice $p$ es ahora un índice libre, el cual puede tener los valores $1, 2$ o $3$, así:
+\begin{align*}
+\text{Para: } p = 1, \hspace{0.5cm} A_{1, q} B_{q} &= A_{1,1} B_{1} + A_{1,2} B_{2} + A_{1,3} B_{3} \\[0.5em]
+&=\pdv{A_{1}}{x^{1}} B_{1} + \pdv{A_{1}}{x^{2}} B_{2} + \pdv{A_{1}}{x^{3}} B_{3} \\[0.5em]
+\text{Para: } p = 2, \hspace{0.5cm} A_{2, q} B_{q} &= A_{2,1} B_{1} + A_{2,2} B_{2} + A_{2,3} B_{3} \\[0.5em]
+&=\pdv{A_{2}}{x^{1}} B_{1} + \pdv{A_{2}}{x^{2}} B_{2} + \pdv{A_{2}}{x^{3}} B_{3} \\[0.5em]
+\text{Para: } p = 3, \hspace{0.5cm} A_{3, q} B_{q} &= A_{3,1} B_{1} + A_{3,2} B_{2} + A_{3,3} B_{3} \\[0.5em]
+&=\pdv{A_{3}}{x^{1}} B_{1} + \pdv{A_{3}}{x^{2}} B_{2} + \pdv{A_{3}}{x^{3}} B_{3}
+\end{align*}
+\item El escalar $\left( \va{B} \vdot \nabla \right) \, \phi$ tiene la siguiente forma cuando se expresa con notación de índices:
+\begin{align*}
+\left( \va{B} \vdot \nabla \right) \, \phi = B_{i} \phi_{,1} &= B_{1} \phi_{,1} + B_{2} \phi_{,2} + B_{3} \phi_{,3} \\[0.5em]
+&= B_{1} \pdv{\phi}{x^{1}} + B_{2} \pdv{\phi}{x^{2}} + B_{3} \pdv{\phi}{x^{3}}
+\end{align*}
+\item Las componentes del vector $\left( \va{B} \cross \nabla \right) \, \phi$ se expresa en notación de índices como:
+\begin{align*}
+\vu{e}_{i} \vdot \left[ \left( \va{B} \cross \nabla \right) \phi \right] = \epsilon_{ijk} \, B_{j} \, \phi_{,k}
+\end{align*}
+Esto se puede comprobar realizando las sumas indicadas y se deja como ejercicio.
+\item El escalar $\left( \va{B} \cross \nabla \right) \vdot \va{A}$ se puede expresar en notación de índices de la forma:
+\begin{align*}
+\left( \va{B} \cross \nabla \right) \vdot \va{A} = \epsilon_{ijk} \, B_{j} A_{i,k}
+\end{align*}
+La comprobación se deja como ejercicio.
+\item Las componentes del vector $\laplacian{\va{A}}$ en la notación de índices se representa como:
+\begin{align*}
+\vu{e}_{p} \cdot \laplacian{\va{A}} = A_{p, qq}
+\end{align*}
+La comprobación se deja también como ejercicio.
+\end{enumerate}
+
+\subsection{Ejercicios.}
+
+Usando la notación de índices demuestra las siguientes identidades vectoriales en coordenadas cartesianas.
+
+\begin{enumerate}[label=\roman*)]
+\item $\curl{f \, \va{A}} = \left( \grad{f} \right) \cross \va{A} + f \left( \curl{\va{A}} \right)$
+\item $\divergence{\left( \va{A} + \va{B} \right)} = \divergence{\va{A}} + \divergence{\va{B}}$
+\item $\left( \va{A} \vdot \nabla \right) \, f = \va{A} \vdot \grad{f}$
+\item $\curl{\left( \va{A} \cross \va{B} \right)} = \va{A} \left( \divergence{\va{B}} \right) - \va{B} \left( \divergence{\va{A}} \right) + \left( \va{B} \vdot \nabla \right) \, \va{A} - \left( \va{A} \vdot \nabla \right) \, \va{B}$
+\item $\curl{\left( \curl{\va{A}} \right)} = \grad{\left( \divergence{\va{A}} \right)} - \laplacian{\va{A}}$
+\end{enumerate}
+
+\section{Forma con índices de teoremas integrales.}
+
+El \textbf{teorema de la divergencia}, tanto en notación vectorial como de índices, se puede escribir:
+\begin{align}
+\begin{aligned}
+\scaleiiint{6ex}_{V} \text{div} \vdot \va{F} \dd{\tau} &= \scaleiint{6ex}_{S} \va{F} \vdot \vu{n} \dd{\sigma} \\[0.5em]
+\scaleint{6ex}_{\bs V} F_{i, i} \dd{\tau} &= \scaleint{6ex}_{\bs S} F_{i} n_{i} \dd{\sigma} \hspace{1cm} i = 1, 2, 3
+\end{aligned}
+\label{eq:ecuacion_01_01_16}
+\end{align}
+donde $n_{i}$ son los cosenos directores de la normal exterior unitaria a la superficie, $\dd{\tau}$ es un elemento de volumen y $\dd{\sigma}$ es un elemento de área de superficie. Nótese que al utilizar la notación de índices, las integrales de volumen y superficie deben extenderse sobre el rango especificado por los índices. Esto sugiere que el teorema de divergencia puede aplicarse a vectores en espacios n-dimensionales.
+\par
+La forma vectorial y en notación de índices para \textbf{el teorema de Stokes} son:
+\begin{align}
+\begin{aligned}
+\scaleiint{6ex}_{\bs S} \left( \curl{\va{F}} \right) \vdot \vu{n} \dd{\sigma} &= \scaleint{6ex}_{\bs C} \va{F} \vdot \dd{\va{r}} \\[0.5em]
+\scaleint{6ex}_{\bs S} e_{ijk} F_{k,j} n_{i} \dd{\sigma} &= \scaleint{6ex}_{\bs C} F_{i} \dd{x^{i}} \hspace{1cm} i, j, k = 1, 2, 3
+\end{aligned}
+\label{eq:ecuacion_01_01_17}
+\end{align}
+\end{document}
