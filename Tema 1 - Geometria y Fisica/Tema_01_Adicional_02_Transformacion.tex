@@ -101,6 +101,10 @@
 
 \newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
 
+% \newcommand{\qed}{\tag*{$\blacksquare$}}
+\renewcommand{\qed}{\hfill\blacksquare}
+
+
 \usetikzlibrary{babel}
 \usepackage{tikz-3dplot}
 \setlength{\tabcolsep}{12pt}
@@ -434,7 +438,7 @@ Usando la notación de índices demuestra las siguientes identidades vectoriales
 \item $\curl{\left( \curl{\va{A}} \right)} = \grad{\left( \divergence{\va{A}} \right)} - \laplacian{\va{A}}$
 \end{enumerate}
 
-\section{Forma con índices de teoremas integrales.}
+\section{Teoremas integrales en notación de índices.}
 
 El \textbf{teorema de la divergencia}, tanto en notación vectorial como de índices, se puede escribir:
 \begin{align}
@@ -454,4 +458,176 @@ La forma vectorial y en notación de índices para \textbf{el teorema de Stokes}
 \end{aligned}
 \label{eq:ecuacion_01_01_17}
 \end{align}
+y el \textbf{teorema de Green} en el plano, el cual es un caso especial del teorema de Stokes, se expresa como:
+\begin{align}
+\begin{aligned}
+\scaleiint{6ex} \left( \pdv{F_{2}}{x} - \pdv{F_{1}}{y} \right) \dd{x} \dd{y} &= \scaleint{6ex}_{\bs C} F_{1} \dd{x} + F_{2} \dd{y} \\[0.5em]
+\scaleint{6ex}_{\bs S} \epsilon_{3jk} F_{k,j} \dd{S} &= \scaleint{6ex}_{\bs C} F_{i} \dd{x^{i}} \hspace{1cm} i, j, k = 1, 2
+\end{aligned}
+\label{eq:ecuacion_01_01_18}
+\end{align}
+
+Otras formas de los teoremas integrales son:
+\begin{align*}
+\scaleiiint{6ex}_{V} \gradient{\phi} \dd{\tau} = \scaleiint{6ex}_{\bs S} \phi \, \vu{n} \dd{\sigma}
+\end{align*}
+que se obtiene a partir del teorema de divergencia haciendo que $\va{F} = \phi \, \va{C}$ donde $\va{C}$ es un vector constante. Al reemplazar $\va{F}$ por $\va{F} \cross \va{C}$ en el teorema de divergencia, se consigue:
+\begin{align*}
+\scaleiiint{6ex}_{V} \left( \curl{\va{F}} \right) \dd{\tau} = - \scaleiint{6ex}_{S} \va{F} \cross \va{n} \dd{\sigma}
+\end{align*}
+
+En el teorema de la divergencia, haciendo la sustitución $\va{F} = \phi \grad{\psi}$, se recupera:
+\begin{align*}
+\scaleiiint{6ex}_{V} \left[ \phi \laplacian{\psi} + \left( \gradient{\phi} \right) \vdot \left( \gradient{\psi} \right) \right] \dd{\tau} = \scaleiint{6ex}_{S} \left( \phi \gradient{\psi} \right) \vdot \vu{n} \dd{\sigma}
+\end{align*}
+La \textbf{identidad de Green}:
+\begin{align*}
+\scaleiiint{6ex}_{V} \left( \phi \laplacian{\psi} - \psi \laplacian{\phi} \right) \dd{\tau} = \scaleiint{6ex}_{\bs S} \left( \phi \gradient{\psi} - \psi \gradient{\phi} \right) \vdot \vu{n} \dd{\sigma}
+\end{align*}
+se obtiene dejando primero $\va{F} = \phi \gradient{\psi}$ en el teorema de divergencia y luego dejando que $\va{F} = \psi \gradient{\phi}$ en el teorema de divergencia y luego restando los resultados.
+
+\section{Determinantes y cofactores.}
+
+Para $A = (a_{ij}), i, j = 1, \ldots, n$ una matriz de $n \times n$, el determinante de $A$ se puede escribir como:
+\begin{align*}
+\text{det} A = \abs{A} = \epsilon_{i_{1} i_{2} i_{3} \ldots i_{n}} \, a_{1 i_{1}} a_{2 i_{2}} a_{3 i_{3}} \ldots a_{n i_{n}}
+\end{align*}
+Esto da una suma de las $n!$ permutaciones de productos formados a partir de los elementos de la matriz $A$. El resultado es un único número llamado \textbf{determinante de A}.
+\\[0.5em]
+\noindent
+\textbf{Ejemplo:} En el caso cuando $n = 2$, se tiene:
+\begin{align*}
+\abs{A} = \mdet{
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+} &= \epsilon_{nm} a_{1n} a_{2m} = \\[0.25em]
+&= \epsilon_{1m} a_{11} a_{2m} + \epsilon_{2m} a_{12} a_{2m} \\[0.25em]
+&= \epsilon_{12} a_{11} a_{22} + \epsilon_{21} a_{12} a_{21} \\[0.25em]
+&= a_{11} a_{22} - a_{12} a_{21} \hspace{2cm} \qed
+\end{align*}
+\\[0.5em]
+\noindent
+\textbf{Ejemplo:} En el caso cuando $n = 3$, podemos usar cualquiera de las notaciones:
+\begin{align*}
+A = \mqty(
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33})
+\hspace{1.5cm} \text{o} \hspace{1.5cm}
+A = \mqty(
+a_{1}^{1} & a_{2}^{1} & a_{3}^{1} \\
+a_{1}^{2} & a_{2}^{2} & a_{3}^{2} \\
+a_{1}^{3} & a_{2}^{3} & a_{3}^{3})
+\end{align*}
+el determinante de $A$ se puede representar de cualquiera de las siguientes maneras:
+\begin{align*}
+\text{det } \abs{A} &= \epsilon_{ijk} a_{1i} a_{2j} a_{3k} \\
+\text{det } \abs{A} &= \epsilon_{ijk} a_{i1} a_{j2} a_{k3} \\
+\text{det } \abs{A} &= \epsilon_{ijk} a_{1}^{i} a_{2}^{j} a_{3}^{k} \\
+\text{det } \abs{A} &= \epsilon_{ijk} a_{i}^{1} a_{j}^{2} a_{k}^{3}
+\end{align*}
+Estos representan expansiones por filas y columnas del determinante.
+\par
+Una importante identidad se recupera si examinamos la cantidad 
+\begin{align*}
+B_{rst} = \epsilon_{ijk} a_{r}^{i} a_{s}^{j} a_{t}^{k}
+\end{align*}
+Es un ejercicio fácil cambiar los índices de suma ficticios y reorganizar los términos en esta expresión. Por ejemplo:
+\begin{align*}
+B_{rst} = \epsilon_{ijk} a_{r}^{i} a_{s}^{j} a_{t}^{k} = \epsilon_{kij} a_{r}^{k} a_{s}^{j} a_{t}^{i} = \epsilon_{kji} a_{t}^{i} a_{s}^{j} a_{r}^{k} = - \epsilon_{ijk} a_{t}^{i} a_{s}^{j} a_{r}^{k} = - B_{tsr}
+\end{align*}
+y considerando otras permutaciones de los índices, se puede establecer que $B_{rst}$ es completamente antisimétrico. En los ejercicios se muestra que cualquier sistema antisimétrico de tercer orden satisface
+$B_{rst} = B_{123} \epsilon_{rst}$. Pero $B_{123} = \text{det } A$ y así llegamos a la identidad:
+\begin{align*}
+B_{rst} = \epsilon_{ijk} a_{r}^{i} a_{s}^{j} a_{t}^{k} = \abs{A} \, \epsilon_{rst}
+\end{align*}
+otras formas de esta identidad son:
+\begin{align}
+\begin{aligned}
+\epsilon^{ijk} a_{i}^{r} a_{j}^{s} a_{k}^{t} &= \abs{A} \, \epsilon^{rst} \\[0.5em]
+\epsilon_{ijk} a_{ir} a_{js} a_{kt} &= \abs{A} \, \epsilon_{rst} \hspace{3cm} \qed
+\end{aligned}
+\label{eq:ecuacion_01_01_19} 
+\end{align}
+
+Consideremos la representación del determinante usando la notación de índices:
+\begin{align*}
+\det{A} = \mdet{
+a_{1}^{1} & a_{2}^{1} & a_{3}^{1} \\
+a_{1}^{2} & a_{2}^{2} & a_{3}^{2} \\
+a_{1}^{3} & a_{2}^{3} & a_{3}^{3}}
+\end{align*}
+Expandiendo por columnas, este determinante puede expresarse:
+\begin{align}
+\abs{A} = \epsilon_{rst} \, a_{1}^{r} a_{2}^{s} a_{3}^{t}
+\label{eq:ecuacion_01_01_20}
+\end{align}
+y si usamos la expansión por renglones, el determinante queda expresado como:
+\begin{align}
+\abs{A} = \epsilon^{ijk} \, a_{i}^{1} a_{j}^{2} a_{k}^{3}
+\label{eq:ecuacion_01_01_21}
+\end{align}
+Definimos $A_{m}^{i}$ como el \textbf{cofactor} del elemento $a_{i}^{m}$ en el determinante de $\abs{A}$. De la ec. (\ref{eq:ecuacion_01_01_20}), el cofactor de $a_{1}^{r}$ se obtienen removiendo este elemento y encontramos que:
+\begin{align}
+A_{r}^{1} = \epsilon_{rst} \, a_{2}^{s} a_{3}^{t}
+\label{eq:ecuacion_01_01_22}
+\end{align}
+El resultado de la ec. (\ref{eq:ecuacion_01_01_20}) se puede expresar en la forma:
+\begin{align}
+\abs{A} = a_{1}^{r} \, A_{r}^{1} = a_{1}^{1} A_{1}^{1} + a_{1}^{2} A-{2}^{1} + a_{1}^{3} A_{3}^{1}
+\label{eq:ecuacion_01_01_23}
+\end{align}
+Es decir, el determinante $\abs{A}$ se obtiene multiplicando cada elemento de la primera columna por su cofactor correspondiente y sumando el resultado. Obsérvese también que a partir de la ec. (\ref{eq:ecuacion_01_01_20}) encontramos los cofactores adicionales:
+\begin{align}
+A_{s}^{2} = \epsilon_{rst} \, a_{1}^{r} a_{3}^{t} \hspace{1.5cm} \text{y} \hspace{1.5cm} A_{t}^{3} = \epsilon_{rst} \, a_{1}^{r} a_{2}^{2}
+\label{eq:ecuacion_01_01_24}
+\end{align}
+Por lo tanto, la ec. (\ref{eq:ecuacion_01_01_20}) se puede también expresar en una de las formas:
+\begin{align*}
+\abs{A} &= a_{2}^{2} A_{s}^{2} = a_{2}^{1} A_{1}^{2} + a_{2}^{2} A_{2}^{2} + a_{2}^{3} A_{3}^{2} \\[0.5em]
+\abs{A} &= a_{3}^{t} A_{t}^{3} = a_{3}^{1} A_{1}^{3} + a3{2}^{2} A_{2}^{3} + a_{3}^{3} A_{3}^{3}
+\end{align*}
+Los resultados de las ecs. (\ref{eq:ecuacion_01_01_22}) y (\ref{eq:ecuacion_01_01_24}) se pueden escribir de una forma ligeramente diferente con la notación indicial. A partir de la notación paraa un delta de Kronecker generalizada definida por:
+\begin{align*}
+\epsilon^{ijk} \, \epsilon_{lmn} = \delta_{lmn}^{ijk}
+\end{align*}
+los cofactores escritos más arriba, se escriben de la forma:
+\begin{align*}
+A_{r}^{1} &= \epsilon^{123} \, \epsilon_{rst} \, a_{2}^{s} a_{3}^{t} = \dfrac{1}{2!} \, \epsilon^{1jk} \, \epsilon_{rst} \, a_{j}^{s} a_{k}^{t} = \dfrac{1}{2!} \, \delta_{rst}^{1jk} \, a_{j}^{s} a_{k}^{t} \\[0.5em]
+A_{r}^{2} &= \epsilon^{123} \, \epsilon_{str} \, a_{1}^{s} a_{3}^{t} = \dfrac{1}{2!} \, \epsilon^{2jk} \, \epsilon_{rst} \, a_{j}^{s} a_{k}^{t} = \dfrac{1}{2!} \, \delta_{rst}^{2jk} \, a_{j}^{s} a_{k}^{t} \\[0.5em]
+A_{r}^{3} &= \epsilon^{123} \, \epsilon_{tsr} \, a_{1}^{t} a_{2}^{s} = \dfrac{1}{2!} \, \epsilon^{3jk} \, \epsilon_{rst} \, a_{j}^{s} a_{k}^{t} = \dfrac{1}{2!} \, \delta_{rst}^{3jk} \, a_{j}^{s} a_{k}^{t}
+\end{align*}
+Estos cofactores se combinan luego en la ecuación única:
+\begin{align}
+A_{r}^{i} = \dfrac{1}{2!} \, \delta_{rst}^{ijk} \, a_{j}^{s} a_{k}^{t}
+\label{eq:ecuacion_01_01_25}
+\end{align}
+que representa el cofactor de $a_{i}^{r}$. Cuando los elementos de cualquier fila (o columna) se multiplican por sus cofactores correspondientes y se suman los resultados, obtenemos el valor del determinante. Siempre que los elementos de cualquier fila (o columna) se multiplican por los elementos cofactores de una fila (o columna) diferente y se suman los resultados, obtenemos cero. Esto se puede ilustrar considerando la suma:
+\begin{align*}
+a_{r}^{m} \, A_{m}^{i} &= \dfrac{1}{2!} \, \delta_{mst}^{ijk} \, a_{j}^{s} a_{k}^{t} a_{r}^{m} = \dfrac{1}{2!} \, \epsilon^{ijk} \, \epsilon_{mst} \, a_{r}^{m} a_{j}^{s} a_{k}^{t} \\[0.5em]
+&= \dfrac{1}{2!} \epsilon^{ijk} \, \epsilon_{rjk} \, \abs{A} = \dfrac{1}{2!} \delta_{rjk}^{ijk} \, \abs{A} = \delta_{r}^{i} \, \abs{A}
+\end{align*}
+Aquí hemos utilizado la identidad $\epsilon - \delta$ para obtener:
+\begin{align*}
+\delta_{rjk}^{ijk} = \epsilon^{ijk} \, \epsilon_{rjk} = \epsilon^{jik} \, \epsilon_{jrk} = \delta_{r}^{i} \, \delta_{k}^{k} - \delta_{k}^{i} \, \delta_{r}^{k} = 3 \, \delta_{r}^{i} - \delta_{r}^{i} = 2 \, \delta_{r}^{i}
+\end{align*}
+que se utilizó para simplificar el resultado anterior.
+\par
+Como ejercicio, se puede demostrar que una forma alternativa de la suma anterior de elementos por sus cofactores es:
+\begin{align*}
+a_{m}^{r} = \abs{A} \, \delta_{i}^{r}
+\end{align*}
+\\[0.5em]
+\noindent
+\textbf{Ejemplo: } En $N$ dimensiones, la cantidad $\displaystyle \delta_{k_{1} k_{2} \ldots k_{N}}^{j_{1} j_{2} \ldots j_{N}}$ se llama la delta generalizada de Kronecker. Se puede definir en términos de símbolos de permituación como:
+\begin{align}
+\epsilon^{j_{1} j_{2} \ldots j_{N}} \, e_{k_{1} k_{2} \ldots k_{N}} = \delta_{k_{1} k_{2} \ldots k_{N}}^{j_{1} j_{2} \ldots j_{N}}
+\label{eq:ecuacion_01_01_26}
+\end{align}
+Observa que:
+\begin{align*}
+\delta_{k_{1} k_{2} \ldots k_{N}}^{j_{1} j_{2} \ldots j_{N}} \, \epsilon^{k_{1} k_{2} \ldots k_{N}} = \left( N! \right) \epsilon^{j_{1} j_{2} \ldots j_{N}}
+\end{align*}
+Esto se deduce porque $e^{k_{1} k_{2} \ldots k_{N}}$ es antisimétrico en todos los pares de sus superíndices. El lado izquierdo denota una suma de $N!$ términos. El primer término en la suma tiene superíndices $j_{1} j_{2} \ldots j_{N}$ y todos los demás términos tienen superíndices que son alguna permutación de este orden con signos menos asociados con aquellos términos que tienen una permutación impar. Debido a que $e^{j_{1} j_{2} \ldots j_{N}}$ es completamente antisimétrico, encontramos que todos los términos en la suma tienen el valor $+e^{j_{1} j_{2} \ldots j_{N}}$. Por lo tanto, obtenemos $N!$ de estos términos. \hspace{5cm} $\qed$
+
 \end{document}

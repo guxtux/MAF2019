@@ -1,6 +1,13 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \makeatletter
 % \setbeamercolor{section in foot}{bg=gray!30, fg=black!90!orange}
 % \setbeamercolor{subsection in foot}{bg=blue!30!yellow, fg=red}
@@ -22,18 +29,20 @@
   \vskip0pt%
 }
 \makeatother
-\date{15 de febrero de 2022}
+
+\date{6 de agosto de 2024}
+
 \title{La física y la geometría}
 \subtitle{Objetivos del Tema 1}
 
 \begin{document}
+
 \maketitle
 \fontsize{14}{14}\selectfont
 \spanishdecimal{.}
 
 \section*{Contenido}
 \frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
-
 
 \section{Introducción}
 \frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
@@ -77,12 +86,24 @@ En coordenadas esféricas $(r, \theta, \phi)$, en donde se aprovecha completamen
 \end{frame}
 \begin{frame}
 \frametitle{¿Cómo cambiamos de un sistema a otro?}
-Será necesario utilizar conceptos como reglas de transformación, factores de escala, vectores unitarios, así como representar en el nuevo sistema coordenado, el conjunto de operadores diferenciales que ya conocemos: gradiente, divergencia y rotacional.
+Será necesario utilizar conceptos como:
+\pause
+\begin{enumerate}[<+->]
+\item Reglas de transformación.
+\item Factores de escala.
+\item Vectores unitarios.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Operadores diferenciales necesarios}
+Posteriormente tendremos que representar en el nuevo sistema coordenado, al conjunto de operadores diferenciales que ya conocemos: gradiente, divergencia y rotacional.
 \end{frame}
 \begin{frame}
 \frametitle{Segundo ejemplo}
 Ahora consideramos un problema con ondas estacionarias en un sistema bidimensional con simetría circular: una membrana circular delgada y perfectamente flexible, por ejemplo: una membrana de tambor circular idealizada de radio $r$.
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Segundo ejemplo}
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.75]{Imagenes/Tambor.png}
@@ -125,11 +146,11 @@ Una vez que se realiza la reexpresión de la ED, el siguiente paso es resolverla
 \\
 \bigskip
 \pause
-Para ello, ocuparemos lo que se revisará en el \emph{\textcolor{blue}{Tema 2 - Primeras técnicas de solución}}.
+Para ello, ocuparemos lo que se revisará en el \emph{\textocolor{blue}{Tema 2 - Primeras técnicas de solución}}.
 \end{frame}
 \begin{frame}
 \frametitle{Solución al problema}
-Cuando veamos el tema de \emph{función de Bessel}, tomaremos de nuevo este ejercicio.
+Cuando veamos el tema de \textocolor{darkgreen}{función de Bessel}, tomaremos de nuevo este ejercicio.
 \\
 \bigskip
 \pause
@@ -155,9 +176,24 @@ La solución obtenida la podemos ocupar con otras herramientas computacionales p
 \subsection{Sistemas comunes}
 
 \begin{frame}
+\frametitle{Sistemas coordenados más comunes}
+A continuación se enlistarán una serie de sistemas coordenados que serán muy comunes de encontrar en la física, siendo muy específicos para un problema determinado.
+\end{frame}
+\begin{frame}
+\frametitle{Aviso importante}
+Se menciona oportunamente que \textocolor{red}{no se revisarán todos} en este primer tema.
+\\
+\bigskip
+\pause
+Aprenderemos la base de trabajo para analizar otro sistema que se nos presente en un futuro.
+\end{frame}
+\begin{frame}
 \frametitle{Sistemas coordenados}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=darkorange,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item Cartesiano.
 \item Esféricas polares.
@@ -172,9 +208,11 @@ La solución obtenida la podemos ocupar con otras herramientas computacionales p
 \end{frame}
 \begin{frame}
 \frametitle{Sistemas coordenados}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
+\setbeamercolor{item projected}{bg=darkorange,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}\begin{enumerate}[<+->]
 \conti
 \item Parabólicas.
 \item Elipsoidal.
@@ -191,8 +229,11 @@ Cuando se realizan ciertas traslaciones en alguna dirección perpendicular en pa
 \end{frame}
 \begin{frame}
 \frametitle{Sistemas coordenados especiales}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=debianred,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item Cilíndrico tangente.
 \item Cilíndrico cardioide.
@@ -211,13 +252,17 @@ La ecuación de Helmholtz se encuentra muy a menudo en la física:
 \begin{align*}
 \laplacian{\psi} + k \, \psi = 0
 \end{align*}
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de Helmholtz}
 Un buen ejercicio que nos brindará el desarrollo de habilidades trabajando con distintos sistemas coordenados, es expresar esta ecuación diferencial en cada uno de los sistemas coordenados que hemos mencionado.
 \end{frame}
 \begin{frame}
 \frametitle{La ecuación de Helmholtz}
-Con lo que veremos en el Tema 1 y al inicio del Tema 2, encontramos que la ecuación es \emph{separable} en 11 de los sistemas coordenados mencionados previamente.
-\pause
+Con lo que veremos en el Tema 1 y al inicio del Tema 2, encontramos que la ecuación es \textocolor{carmine}{separable} en 11 de los sistemas coordenados mencionados previamente.
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de Helmholtz}
 Se obtendrá un sistema de ecuaciones diferenciales las cuales se podrán resolver \emph{más fácilmente} que en el sistema inicial.
 \end{frame}
 
@@ -226,82 +271,94 @@ Se obtendrá un sistema de ecuaciones diferenciales las cuales se podrán resolv
 \begin{frame}
 \frametitle{Otras ecuaciones relevantes en la física}
 Enumeremos algunas EDP conocidas:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\pause
+\setbeamercolor{item projected}{bg=indigo(web),fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item La ecuación de calor:
-\begin{align}
+\begin{align*}
 \text{\Large{$u_{t} - u_{xx} = 0$}}
-\label{eq:ecuacion_S11}
-\end{align}
+\end{align*}
 \item La ecuación de onda:
-\begin{align}
+\begin{align*}
 \text{\Large{$u_{tt} - u_{xx} = 0$}}
-\label{eq:ecuacion_S12}
-\end{align}
+\end{align*}
 \item Ecuación de Laplace:
-\begin{align}
+\begin{align*}
 \text{\Large{$u_{xx} + u_{yy} = 0$}}
-\label{eq:ecuacion_S14}
-\end{align}
+\end{align*}
 \seti
 \end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{Otras ecuaciones relevantes en la física}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=indigo(web),fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Ecuación no lineal de calor:
-\begin{align}
+\begin{align*}
 \pdv{u}{t} = \pdv{x} \left[ f(u) \, \pdv{u}{x} \right]
-\label{eq:ecuacion_S27}  
-\end{align}
+\end{align*}
 \seti
 \end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{Otras ecuaciones relevantes en la física}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=indigo(web),fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Ecuación Kolmogorov-Petrovskii-Piskunov:
-\begin{align}
+\begin{align*}
 \pdv{u}{t} = a \, \pdv[2]{w}{x} + f(u), \hspace{1cm} a > 0
-\label{eq:ecuacion_S28}
-\end{align}
-Las ecuaciones de esta forma se encuentran a menudo en varios problemas de transferencia de masa y calor (siendo $f$ la reacción de cambio del volumen en una reacción química), teoría de la combustión, biología y ecología.
+\end{align*}
 \seti
 \end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{Otras ecuaciones relevantes en la física}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+Las ecuaciones de este tipo se encuentran a menudo en varios problemas de transferencia de masa y calor (siendo $f$ la reacción de cambio del volumen en una reacción química), teoría de la combustión, biología y ecología.
+\end{frame}
+\begin{frame}
+\frametitle{Otras ecuaciones relevantes en la física}
+\setbeamercolor{item projected}{bg=indigo(web),fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Ecuación de Burgers:
-\begin{align}
+\begin{align*}
 \pdv{w}{t} + u \, \pdv{u}{x} = \pdv[2]{u}{x}
-\label{eq:ecuacion_S29}
-\end{align}
+\end{align*}
 Se ocupa para describir procesos ondulatorios en la dinámica de gases, hidrodinámica, en acústica y para el flujo del tráfico.
 \seti
 \end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{Otras ecuaciones relevantes en la física}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=indigo(web),fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Ecuación de onda no lineal:
-\begin{align}
+\begin{align*}
 \pdv[2]{u}{t} = \pdv{x} \left[ f(u) \, \pdv{u}{x} \right]
-\label{eq:ecuacion_S30}
-\end{align}
+\end{align*}
 Esta ecuación se encuentra en dinámica de ondas y gases, con $f(u) > 0$.
 \end{enumerate}
 \end{frame}
@@ -313,75 +370,42 @@ Esta ecuación se encuentra en dinámica de ondas y gases, con $f(u) > 0$.
 \begin{frame}
 \frametitle{Objetivos}
 Al concluir el Tema 1, el alumno:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\pause
+\setbeamercolor{item projected}{bg=onyx,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item Describirá las superficies coordenadas a partir de las reglas de transformación entre el sistema cartesiano y otro sistema de estudio.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Objetivos}
+\setbeamercolor{item projected}{bg=onyx,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
 \item Determinará los factores de escala del nuevo sistema de estudio, así como los vectores base y la interpretación con los vectores cartesianos.
 \seti
 \end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{Objetivos}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=onyx,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Calculará los operadores diferenciales en el nuevo sistema de estudio.
-\item Resolverá mediante las funciones Gamma y Beta ejercicios de la física.
+\item Ocupará las funciones Gamma y Beta para resolver ejercicios de la física.
 \end{enumerate}
-\end{frame}
-
-\section{Trabajo asíncrono}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Materiales de trabajo}
-
-\begin{frame}
-\frametitle{Trabajo a realizar}
-Como se revisó en la presentación del curso de MAF, el trabajo asíncrono por parte del alumno, consistirá en leer los materiales del curso en la plataforma Moodle, siendo los siguientes:
-\end{frame}
-\begin{frame}
-\frametitle{Materiales de trabajo}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item 1 - Sistema de coordenadas curvilíneas ortogonales.
-\item 2 - Diferenciales y operadores diferenciales.
-\item 3 - Funciones Gamma y Beta.
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Trabajo por semana}
-Recomendación para la revisión de materiales de trabajo por semana:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item Semana 1: Material de trabajo 1.
-\item Semana 2: Material de trabajo 2.
-\item Semana 3: Material de trabajo 3.
-\end{enumerate}
-\end{frame}
-
-\subsection{Ejercicios}
-
-\begin{frame}
-\frametitle{Listado de ejercicios}
-La lista de $10$ ejercicios del Tema 1, se publicarán en la plataforma Moodle el jueves 9 de febrero.
-\\
-\bigskip
-\pause
-De esta manera, tendrán el tiempo necesario para resolverlos. \pause Considerando además de que podrán hacer consultas, aclaraciones, atención de dudas.
-\end{frame}
-\begin{frame}
-\frametitle{Entrega de los ejercicios}
-La entrega de los ejercicios resueltos será por Moodle, teniendo como fecha límite \textcolor{blue}{el $8$ de marzo a las 6 pm.}
-\end{frame}
-
-\subsection{Ejercicios para el Examen 1}
-
-\begin{frame}
-\frametitle{Enunciados del Examen Tema 1}
-Con la finalidad de contar con el suficiente tiempo para resolver los ejercicios del Tema 1 para el examen intermedio, el día martes 22 de febrero se revisará en clase el listado de ejercicios a resolver.
 \end{frame}
 
 \subsection{Materiales complementarios}
@@ -403,31 +427,4 @@ Siendo también un atractivo para que extiendan la consulta en las referencias b
 \end{figure}
 \end{frame}
 
-\section{Sesiones síncronas}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-
-\subsection{Programa de videoconferencias}
-
-\begin{frame}
-\frametitle{Sesiones síncronas}
-Hemos programado sesiones los días martes y jueves en un horario de 3:30 a 4:30 pm.
-\\
-\bigskip
-\pause
-En estas sesiones se trabajarán algunos ejercicios para complementar los materiales de trabajo, y se dará espacio para dudas, comentarios, etc. tanto de las presentaciones como de los ejercicios.
-\end{frame}
-\begin{frame}
-\frametitle{Calendario de reuniones}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item Martes 15 de febrero.
-\item Jueves 17 de febrero.
-\item Martes 22 de febrero.
-\item Jueves 24 de febrero.
-\item Martes 1 de marzo.
-\end{enumerate}
-\pause
-Se les enviará por correo el enlace y la contraseña oportunamente.
-\end{frame}
 \end{document}
