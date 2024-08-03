@@ -1,13 +1,116 @@
-\input{../preambulo_doc}
-\marginsize{1.5cm}{1.5cm}{2cm}{2cm} 
+\documentclass[hidelinks,12pt]{article}
+\usepackage[left=0.25cm,top=1cm,right=0.25cm,bottom=1cm]{geometry}
+%\usepackage[landscape]{geometry}
+\textwidth = 20cm
+\hoffset = -1cm
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla, es-lcroman]{babel}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[tbtags]{amsmath}
+\usepackage{nccmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{standalone}
+\graphicspath{{Imagenes/}{../Imagenes/}}
+\usepackage[outdir=./Imagenes/]{epstopdf}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{color}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{multirow}
+%\usepackage{milista}
+\usepackage{anyfontsize}
+\usepackage{anysize}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{mdframed}
+\usepackage{relsize}
+\usepackage{placeins}
+\usepackage{empheq}
+\usepackage{cancel}
+\usepackage{pdfpages}
+\usepackage{wrapfig}
+\usepackage[flushleft]{threeparttable}
+\usepackage{makecell}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{bigints}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{scalerel}
+\usepackage{pgfplots}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.16}
+\spanishdecimal{.}
+\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+
+\newcommand{\ptilde}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\stilde}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\ttilde}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\ntilde}[2]{\ensuremath{{#1}^{(#2)}}}
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+
+\newtheorem{defi}{{\it Definición}}[section]
+\newtheorem{teo}{{\it Teorema}}[section]
+\newtheorem{ejemplo}{{\it Ejemplo}}[section]
+\newtheorem{propiedad}{{\it Propiedad}}[section]
+\newtheorem{lema}{{\it Lema}}[section]
+\newtheorem{cor}{Corolario}
+\newtheorem{ejer}{Ejercicio}[section]
+
+\newlist{milista}{enumerate}{2}
+\setlist[milista,1]{label=\arabic*)}
+\setlist[milista,2]{label=\arabic{milistai}.\arabic*)}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iiint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+% \marginsize{1.5cm}{1.5cm}{2cm}{2cm}
+
 \title{Teoremas integrales del cálculo vectorial \\ {\large Matemáticas Avanzadas de la Física}}
+
 \date{ }
 \author{}
+
 \begin{document}
 \renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
 \maketitle
 \fontsize{14}{14}\selectfont
 \vspace{-2cm}
+
 \section{Introducción.}
 Nos ocupamos ahora de dos generalizaciones del segundo teorema fundamental del cálculo a integrales de superficie: el \emph{teorema de Stokes} y el \emph{teorema de Gauss}. Éstos, junto con el teorema de Green, constituyen los tres teoremas fundamentales del cálculo integral vectorial.
 \par
@@ -81,56 +184,56 @@ entonces
 El teorema de Stokes es una extensión directa del \emph{teorema de Green}, en tanto que relaciona la integral de línea de un campo vectorial alrededor de una curva cerrada simple $C$ en $\mathbb{R}^{3}$ con la integral sobre una superficie $S$ de la cual $C$ es frontera.
 \par
 Más precisamente, el teorema de Stokes establece que la integral de la componente normal del rotacional de un campo vectorial $\overline{F}$ sobre una superficie $S$ es igual a la integral de la componente tangencial de $\overline{F}$ alrededor de la frontera $C$ de $S$ (ver la figura \ref{fig:figura_01}).
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Imagenes/Teoremas_Integrales_01.png}
-    \caption{Aplicación del teorema de Stokes.}
-    \label{fig:figura_01}
-\end{figure}
-\subsection{Teorema de Stokes.}
-\begin{teo}Teorema de Stokes.
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[scale=0.7]{Imagenes/Teoremas_Integrales_01.png}
+%     \caption{Aplicación del teorema de Stokes.}
+%     \label{fig:figura_01}
+% \end{figure}
+% \subsection{Teorema de Stokes.}
+% \begin{teo}Teorema de Stokes.
 
-Sea $S = \overline{r}(T)$ una superficie paramétrica regular simple, donde $T$ es una región del plano $OUV$ limitada por una curva de Jordan $\Gamma$  descrita por un camino regular a trozos $\overline{\gamma}$. Supongamos
-también que $\overline{r}$ es una aplicación inyectiva de clase $C^{2}$ en un entorno abierto de $T \cup \Gamma$ . Sea $C$ la imagen de $\Gamma$ por $\overline{r}$, y sea $\overline{F} = (P, Q, R)$ un campo vectorial de clase $C^{1} (S)$. Entonces:
-\begin{align*}
-\iint_{S} (\curl{\overline{F}}) \cdot \dd{S} = \int_{C} \overline{F} \cdot \dd{\overline{\alpha}}
-\end{align*}
-donde $\overline{\alpha} = \overline{r} \circ \overline{\gamma}$ es una parametrización de $C$ y $\Gamma$ se recorre en sentido positivo.
-\end{teo}
-\begin{proof}
+% Sea $S = \overline{r}(T)$ una superficie paramétrica regular simple, donde $T$ es una región del plano $OUV$ limitada por una curva de Jordan $\Gamma$  descrita por un camino regular a trozos $\overline{\gamma}$. Supongamos
+% también que $\overline{r}$ es una aplicación inyectiva de clase $C^{2}$ en un entorno abierto de $T \cup \Gamma$ . Sea $C$ la imagen de $\Gamma$ por $\overline{r}$, y sea $\overline{F} = (P, Q, R)$ un campo vectorial de clase $C^{1} (S)$. Entonces:
+% \begin{align*}
+% \iint_{S} (\curl{\overline{F}}) \cdot \dd{S} = \int_{C} \overline{F} \cdot \dd{\overline{\alpha}}
+% \end{align*}
+% donde $\overline{\alpha} = \overline{r} \circ \overline{\gamma}$ es una parametrización de $C$ y $\Gamma$ se recorre en sentido positivo.
+% \end{teo}
+% \begin{proof}
 
-Sea $\overline{\gamma}$ la parametrización de $\Gamma$ dada por
-\begin{align*}
-\overline{\gamma}(t) = (U(t), V(t)) , \hspace{0.5cm} t \in [a, b]
-\end{align*}
-Si $\overline{F} = (P, Q, R)$, entonces
-\begin{align*}
-\text{rot} \, \overline{F} = \curl{F} = \left( \pdv{R}{y} - \pdv{Q}{z}, \pdv{P}{z} - \pdv{R}{x}, \pdv{Q}{x} - \pdv{P}{y} \right)
-\end{align*}
-Por otra parte, si
-\begin{align*}
-\overline{r} (u, v) = (X (u, v), Y(u, v), Z(u, v)) \hspace{1cm} (u, v) \in T
-\end{align*}
-entonces
-\begin{align*}
-\pdv{\overline{r}}{u} \cp \pdv{\overline{r}}{v} = \left( \pdv{(Y, Z)}{(u, v)}, \pdv{(Z, X)}{(u, v)}, \pdv{(X, Y)}{(u, v)} \right)
-\end{align*}
-Necesitamos demostrar que:
-\begin{align*}
-\iint_{S} (\curl{\overline{F}}) \cdot dd{S} &= \iint_{T} \left( \pdv{R}{y} - \pdv{Q}{z}, \pdv{P}{z} - \pdv{R}{x}, \pdv{Q}{x} - \pdv{P}{y} \right) \cdot \\[0.5em]
-&\cdot \left( \pdv{(Y, Z)}{(u, v)}, \pdv{(Z, X)}{(u, v)}, \pdv{(X, Y)}{(u, v)} \right) \dd{u} \dd{v} \\
-&= \int_{C} P \dd{x} + Q \dd{y} + R \dd{z}
-\end{align*}
-para esto, basta con demostras las siguientes tres igualdades:
-\begin{align}
-\begin{aligned}
-\iint_{T} \left[ \pdv{P}{z} \, \pdv{(Z, X)}{(u, v)} - \pdv{P}{y} \, \pdv{(X, Y)}{(u, v)} \right] \dd{u} \dd{v} &= \int_{C} P \dd{x} \\[0.5em]
-\iint_{T} \left[ \pdv{Q}{x} \, \pdv{(X, Y)}{(u, v)} - \pdv{Q}{z} \, \pdv{(Y, Z)}{(u, v)} \right] \dd{u} \dd{v} &= \int_{C} Q \dd{y} \\[0.5em]
-\iint_{T} \left[ \pdv{R}{y} \, \pdv{(Y, Z)}{(u, v)} - \pdv{R}{x} \, \pdv{(Z, X)}{(u, v)} \right] \dd{u} \dd{v} &= \int_{C} R \dd{z}
-\end{aligned}
-\label{eq:ecuacion_01}
-\end{align}
-Nos ocuparemos solamente de establecer la primera de ellas, ya que las dos restantes admiten un tratamiento análogo.
+% Sea $\overline{\gamma}$ la parametrización de $\Gamma$ dada por
+% \begin{align*}
+% \overline{\gamma}(t) = (U(t), V(t)) , \hspace{0.5cm} t \in [a, b]
+% \end{align*}
+% Si $\overline{F} = (P, Q, R)$, entonces
+% \begin{align*}
+% \text{rot} \, \overline{F} = \curl{F} = \left( \pdv{R}{y} - \pdv{Q}{z}, \pdv{P}{z} - \pdv{R}{x}, \pdv{Q}{x} - \pdv{P}{y} \right)
+% \end{align*}
+% Por otra parte, si
+% \begin{align*}
+% \overline{r} (u, v) = (X (u, v), Y(u, v), Z(u, v)) \hspace{1cm} (u, v) \in T
+% \end{align*}
+% entonces
+% \begin{align*}
+% \pdv{\overline{r}}{u} \cp \pdv{\overline{r}}{v} = \left( \pdv{(Y, Z)}{(u, v)}, \pdv{(Z, X)}{(u, v)}, \pdv{(X, Y)}{(u, v)} \right)
+% \end{align*}
+% Necesitamos demostrar que:
+% \begin{align*}
+% \iint_{S} (\curl{\overline{F}}) \cdot dd{S} &= \iint_{T} \left( \pdv{R}{y} - \pdv{Q}{z}, \pdv{P}{z} - \pdv{R}{x}, \pdv{Q}{x} - \pdv{P}{y} \right) \cdot \\[0.5em]
+% &\cdot \left( \pdv{(Y, Z)}{(u, v)}, \pdv{(Z, X)}{(u, v)}, \pdv{(X, Y)}{(u, v)} \right) \dd{u} \dd{v} \\
+% &= \int_{C} P \dd{x} + Q \dd{y} + R \dd{z}
+% \end{align*}
+% para esto, basta con demostras las siguientes tres igualdades:
+% \begin{align}
+% \begin{aligned}
+% \iint_{T} \left[ \pdv{P}{z} \, \pdv{(Z, X)}{(u, v)} - \pdv{P}{y} \, \pdv{(X, Y)}{(u, v)} \right] \dd{u} \dd{v} &= \int_{C} P \dd{x} \\[0.5em]
+% \iint_{T} \left[ \pdv{Q}{x} \, \pdv{(X, Y)}{(u, v)} - \pdv{Q}{z} \, \pdv{(Y, Z)}{(u, v)} \right] \dd{u} \dd{v} &= \int_{C} Q \dd{y} \\[0.5em]
+% \iint_{T} \left[ \pdv{R}{y} \, \pdv{(Y, Z)}{(u, v)} - \pdv{R}{x} \, \pdv{(Z, X)}{(u, v)} \right] \dd{u} \dd{v} &= \int_{C} R \dd{z}
+% \end{aligned}
+% \label{eq:ecuacion_01}
+% \end{align}
+% Nos ocuparemos solamente de establecer la primera de ellas, ya que las dos restantes admiten un tratamiento análogo.
 
-\end{proof}
+% \end{proof}
 \end{document}
