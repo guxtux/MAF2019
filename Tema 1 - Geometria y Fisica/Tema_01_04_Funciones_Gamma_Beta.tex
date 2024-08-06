@@ -3,6 +3,11 @@
 \usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \title{\large{Funciones Gamma y Beta}}
 \subtitle{Tema 1 - La física y la geometría}
 
@@ -37,7 +42,7 @@
 \frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
 
 \section{Integrales como funciones.}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Funciones de apoyo}
 
 \begin{frame}
@@ -74,7 +79,7 @@ La función Gamma $\Gamma (x)$ aparece ocasionalmente en problemas de física ta
 En realidad la función $\Gamma (x)$ tiene pocas aplicaciones directas en física, \pause sin embargo es importante porque nos permite desarrollar otras funciones que si tienen una aplicación directa en la física, como por ejemplo: las funciones de Bessel.
 \end{frame}
 \begin{frame}
-\frametitle{Relación entre las funciones de apoyp}
+\frametitle{Relación entre las funciones de apoyo}
 La relación entre las funciones $\Gamma (x)$ y $B (x, y)$ también nos permitirán expresar de manera más compacta los resultados que se obtendrán al resolver ciertas ecuaciones diferenciales que veremos a lo largo del curso.
 \end{frame}
 \begin{frame}
@@ -186,7 +191,7 @@ También se define $(-1)!! = 1$, un caso especial que no se obtiene de la ec. (\
 \end{frame}
 
 \section{Función Gamma}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Definición}
 
 \begin{frame}
@@ -207,7 +212,7 @@ También es una práctica bastante común reemplazar $n$ por la letra $p$ cuando
 \end{frame}
 \begin{frame}
 \frametitle{Definición}
-Siguiendo estas convenciones, se define la función Gamma para cualquier $p > 0$:
+Siguiendo estas convenciones, se define la \textocolor{awesome}{función Gamma} para cualquier $p > 0$:
 \pause
 \begin{align}\addtolength{\fboxsep}{5pt}\boxed{
 \Gamma (p) = \scaleint{6ex}_{\bs 0}^{\infty} x^{p-1} \, e^{-x} \dd{x}, \hspace{1cm} p > 0}
@@ -740,10 +745,11 @@ Al diferenciar con respecto a $z$, se obtiene:
 \end{aligned}
 \label{eq:ecuacion_10_38}
 \end{align}
+La cual define a la \textocolor{cadmiumgreen}{función digamma}. 
 \end{frame}
 \begin{frame}
 \frametitle{La función digamma}
-La cual define a la \emph{función digamma}. De la expresión para la constante de Euler-Mascheroni, la ec. (\ref{eq:ecuacion_10_38}) se puede reescribir como:
+De la expresión para la constante de Euler-Mascheroni, la ec. (\ref{eq:ecuacion_10_38}) se puede reescribir como:
 \pause
 \begin{align}
 \begin{aligned}[b]
@@ -758,7 +764,7 @@ La cual define a la \emph{función digamma}. De la expresión para la constante 
 
 \begin{frame}
 \frametitle{Diferenciando nuevamente}
-La función Digamma se puede diferenciar de manera iterativa, dando origen a la función Poligamma:
+La función digamma se puede diferenciar de manera iterativa, dando origen a la \textocolor{chestnut}{función poligamma}:
 \pause
 \begin{align}
 \begin{aligned}
@@ -846,7 +852,9 @@ B (x, y) &= B (y, x) \\[1em]
 B (x, 2-x) &= \dfrac{\pi}{\sin x \, \pi}, \hspace{1.5cm} 0 < x < 1   
 \end{align*}
 \end{frame}
+
 \subsection{La función Beta en términos de Gamma}
+
 \begin{frame}
 \frametitle{La función $B(p, q)$ en términos de $\Gamma (p)$}
 La función Beta se expresa en términos de la función Gamma de la siguiente manera:
@@ -854,12 +862,18 @@ La función Beta se expresa en términos de la función Gamma de la siguiente ma
 \addtolength{\fboxsep}{5pt}\boxed{B(p, q) = \dfrac{\Gamma(p) \, \Gamma(q)}{\Gamma (p + q)}}
 \label{eq:ecuacion_07_01}
 \end{align}
-Esta fórmula nos ayuda a evaluar una función $B (p, q)$ en términos de funciones $\Gamma$. \textbf{Nota: } también es fácil demostrar la expresión, para que en el caso de que la utilices, realices el ejercicio.
+Esta fórmula nos ayuda a evaluar una función $B (p, q)$ en términos de funciones $\Gamma$. 
 \end{frame}
+\begin{frame}
+\frametitle{La función $B(p, q)$ en términos de $\Gamma (p)$}
+\textbf{Nota: } también es fácil demostrar la expresión anterior, para que en el caso de que la utilices, deberás de presentar el desarrollo.
+\end{frame}
+
 \section{Ejemplos}
 \frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
 %Referencia: Farrell - Solved Problems in Analysis as Applied to Gamma Function II-39
 \subsection{Longitud de una lemniscata}
+
 \begin{frame}
 \frametitle{Longitud de una leminiscata}
 Usando la función Gamma, calcula la longitud de la lemniscata
@@ -903,24 +917,29 @@ Como $\rho^{2} = a^{2} \, \cos 2 \theta$, tenemos que:
 \begin{frame}
 \frametitle{Resolviendo el problema}
 Entonces:
-\begin{align*}
-\dfrac{1}{4} \, s &= \scaleint{6ex}_{\bs {0}}^{\pi/4} \left( a^{2} \, \cos 2 \theta + \dfrac{a^{4} \, \sin^{2} 2 \theta}{\cos 2 \theta} \right)^{1/2} \dd{\theta} = \\[1em]
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{1}{4} \, s &= \scaleint{6ex}_{\bs {0}}^{\pi/4} \left( a^{2} \, \cos 2 \theta + \dfrac{a^{4} \, \sin^{2} 2 \theta}{\cos 2 \theta} \right)^{1/2} \dd{\theta} = \\[1em] \pause
 &= \scaleint{6ex}_{\bs {0}}^{\pi/4} a \, \cos^{-1/2} 2 \theta \dd{\theta}
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Resolviendo al integral}
 Haciendo un cambio de variable, es posible llevar esta integral a uno forma de la función Beta con integral.
 \\
 \bigskip
+\pause
 Sea $2 \theta = t$. Por lo que el intervalo de integración ahora va de $0$ a $\pi/2$.
 \end{frame}
 \begin{frame}
 \frametitle{Resolviendo la integral}
 Por tanto:
-\begin{align*}
-\scaleint{6ex}_{\bs 0}^{\pi/4} a \, \cos^{-1/2} \, 2 \, \theta \dd{\theta} = \dfrac{a}{2} \scaleint{6ex}_{\bs {0}}^{\pi/2} \cos^{-1/2} \, t \, \sin^{0} t \dd{t}
-\end{align*}
+\begin{eqnarray*}
+\begin{aligned}
+\scaleint{6ex}_{\bs 0}^{\pi/4} a \, \cos^{-1/2} \, 2 \, \theta \dd{\theta} = \pause \dfrac{a}{2} \scaleint{6ex}_{\bs {0}}^{\pi/2} \cos^{-1/2} \, t \, \sin^{0} t \dd{t}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Resolviendo la integral}
@@ -930,18 +949,22 @@ B(x, y) = \scaleint{6ex}_{\bs {0}}^{\pi/2} 2 \, \sin^{2x-1} \theta \, \cos^{2y-1
 \end{align*}
 \pause
 por tanto
-\begin{align*}
-\dfrac{1}{4} \, s &= \scaleint{6ex}_{\bs {0}}^{\pi/4} a \, \cos^{-1/2} 2 \theta \dd{\theta} =  \\[0.5em]
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{1}{4} \, s &= \scaleint{6ex}_{\bs {0}}^{\pi/4} a \, \cos^{-1/2} 2 \theta \dd{\theta} =  \\[0.5em] \pause
 &= \dfrac{a}{2} \scaleint{6ex}_{\bs {0}}^{\pi/2} \cos^{-1/2} t \, \sin^{0} t \dd{t}
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Resolviendo la integral}
-Encontramos entonces que
-\begin{align*}
-\dfrac{1}{4} \, s &= \dfrac{a}{2} \, \dfrac{1}{2} \, B \, \left(\dfrac{1}{4}, \dfrac{1}{2} \right) = \\[1em]
+Encontramos entonces que;
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{1}{4} \, s &= \dfrac{a}{2} \, \dfrac{1}{2} \, B \, \left(\dfrac{1}{4}, \dfrac{1}{2} \right) = \\[1em] \pause
 &= \dfrac{a}{4} B\left(\dfrac{1}{4}, \dfrac{1}{2} \right)
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \pause
 \fontsize{12}{12}\selectfont
 La longitud completa de la lemniscata se obtiene al multiplicar el resultado anterior por cuatro, además ocupamos la fórmula que relaciona la función Beta con la función Gamma.
@@ -950,8 +973,10 @@ La longitud completa de la lemniscata se obtiene al multiplicar el resultado ant
 \frametitle{Solución al problema}
 Así tenemos el resultado:
 \begin{eqnarray*}
-s &=& a \, B\left(\dfrac{1}{4}, \dfrac{1}{2} \right) = \dfrac{a \, \Gamma \left( \dfrac{1}{4} \right) \, \Gamma \left( \dfrac{1}{2} \right) }{\Gamma \left( \dfrac{3}{4} \right)} = \\ \pause
-&=& \dfrac{4 \, a \, \Gamma \left( \dfrac{5}{4} \right) \sqrt{\pi}}{\dfrac{4}{3} \, \Gamma \left( \dfrac{7}{4} \right)} \pause \cong 5.2 \, a
+\begin{aligned}
+s &= a \, B\left(\dfrac{1}{4}, \dfrac{1}{2} \right) = \pause \dfrac{a \, \Gamma \left( \dfrac{1}{4} \right) \, \Gamma \left( \dfrac{1}{2} \right) }{\Gamma \left( \dfrac{3}{4} \right)} = \\ \pause
+&= \dfrac{4 \, a \, \Gamma \left( \dfrac{5}{4} \right) \sqrt{\pi}}{\dfrac{4}{3} \, \Gamma \left( \dfrac{7}{4} \right)} \pause \cong 5.2 \, a
+\end{aligned}
 \end{eqnarray*}
 \end{frame}
 
@@ -1338,14 +1363,14 @@ Por lo que veremos un desarrollo para el producto de los números pares:
 \frametitle{Solución Identidad 2}
 Entonces tenemos que:
 \pause
-\begin{eqnarray}
+\begin{eqnarray*}
 \begin{aligned}
-2 \cdot 4 \cdot 6 \ldots \cdot 2 \, n  &=& (2 \cdot 1) (2 \cdot 2) (2 \cdot 3) \ldots (2 \cdot n) = \nonumber \\[0.5em] \pause
+2 \cdot 4 \cdot 6 \ldots \cdot 2 \, n  &= (2 \cdot 1) (2 \cdot 2) (2 \cdot 3) \ldots (2 \cdot n) = \\[0.5em] \pause
 &= 2^{n} \, n! \nonumber \\[0.5em] \pause
 &= 2^{n} \, \Gamma (n + 1) \qed 
 \end{aligned}
-\label{eq:ecuacion_01_16}
-\end{eqnarray}
+% \label{eq:ecuacion_01_16}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Un ajuste para $n$}

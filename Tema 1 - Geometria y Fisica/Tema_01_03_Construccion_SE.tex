@@ -3,6 +3,11 @@
 \usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \title{\large{Construcción de sistemas coordenados especiales}}
 \subtitle{Tema 1 - La física y la geometría}
 
@@ -50,7 +55,7 @@ Como respuesta presentamos la siguiente:
 \end{frame}
 \begin{frame}
 \frametitle{Introducción}
-Ante un problema de la física, debemos de seleccionar el sistema coordenado de modo que se adapte al problema, \emph{para aprovechar cualquier oportunidad o simetría presente en el mismo}.
+Ante un problema de la física, debemos de seleccionar el sistema coordenado de modo que se adapte al problema, \textocolor{ao(english)}{para aprovechar cualquier oportunidad o simetría presente en el mismo}.
 \\
 \bigskip
 \pause
@@ -78,9 +83,9 @@ De manera conveniente enlistamos catorce sistemas coordenados, que en algún mom
 \begin{frame}
 \frametitle{Aviso importante}
 Como punto importante debemos de señalar que no es intención de curso que se haga una revisión completa, detallada para cada uno de los sistemas.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Aviso importante}
 Más bien, veremos una metodología con la cual abordaremos el estudio de un sistema coordenado, y entonces tendremos la manera de estudiar otros de acuerdo a las necesidades que se nos presenten.
 \end{frame}
 \begin{frame}
@@ -141,7 +146,7 @@ En este grupo asimétrico, el sistema elipsoidal confocal se utiliza algunas vec
 \end{frame}
 
 \section{Desarrollo de un sistema coordenado 1/2}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Coord. cilíndricas elípticas \texorpdfstring{$(u, v, z)$}{(u, v, z)}.}
 
 \begin{frame}
@@ -180,7 +185,7 @@ y^{2} &= a^{2} \, \sinh^{2} u \, \sin^{2} v \label{eq:ecuacion_02_75_esp}
 \end{frame}
 \begin{frame}
 \frametitle{Superficies coordenadas}
-Dividimos la primera expresión entre $\cos^{2} v$ \pause y la segunda entre $\sin^{2} v$, recordando que $\cos^{2} v + \sin^{2} v = 1$, así llegamos a:
+Dividimos la primera expresión entre $\cos^{2} v$ \pause y la segunda entre $\sin^{2} v$, \pause recordando que $\cos^{2} v + \sin^{2} v = 1$, así llegamos a:
 \pause
 \begin{eqnarray}
 \begin{aligned}
@@ -279,11 +284,13 @@ Al sumar los términos del radical:
 \begin{align*}
 h_{u} = \sqrt{a^{2} \, \sinh^{2} u \, \cos^{2} v + a^{2} \, \cosh^{2} u \, \sin^{2} v}
 \end{align*}
+\pause
 Haciendo el álgebra respectiva y considerando que $\cosh^{2} u - \sinh^{2} = 1$, entonces tenemos que:
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Factores de escala: $h_{u}$}
 \fontsize{12}{12}\selectfont
+\vspace{-1cm}
 \begin{eqnarray*}
 \begin{aligned}
 h_{u} &= \sqrt{a^{2} \left[ \sinh^{2} u \, \cos^{2} v + \cosh^{2} u \, \sin^{2} v \right] } = \\[0.5em] \pause
@@ -313,11 +320,13 @@ h_{v} = \sqrt{ \left( \pdv{x}{v} \right)^{2} + \left( \pdv{y}{v} \right)^{2} + \
 Entonces:
 \pause
 \fontsize{12}{12}\selectfont
-\begin{align*}
+\begin{eqnarray*}
+\begin{aligned}
 \pdv{x}{v} &= - a \, \cosh u \sin v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \pause \left( \pdv{x}{v} \right)^{2} = a^{2} \, \cosh^{2} u \, \sin^{2} v \\[0.5em] \pause
 \pdv{y}{v} &= a \, \sinh u \cos v \hspace{0.5cm} \Rightarrow \hspace{0.5cm} \pause \left( \pdv{y}{v} \right)^{2} = a^{2} \, \sinh^{2} u \, \cos^{2} v \\[0.5em] \pause
 \pdv{z}{v} &= 0
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{El siguiente factor de escala: $h_{v}$}
@@ -366,7 +375,7 @@ h_{z} &= 1
 \end{frame}
 
 \section{Cálculo operadores diferenciales}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Gradiente}
 
 \begin{frame}
@@ -480,7 +489,7 @@ Así pues, tenemos que:
 \end{frame}
 
 \section{Más sistemas coordenados}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Algunos sistemas}
 
 \begin{frame}
@@ -559,10 +568,10 @@ Es decir, podemos reexpresar esta ecuación en un sistema coordenado distinto.
 En particular ésta ecuación tiene el hecho de que si:
 \pause
 \begin{itemize}[<+->]
-\item $k^{2} = 0$, se obtiene la ecuación de Laplace.
-\item $k^{2} = (+) \mbox{ constante}$, se obtiene la ecuación de Helmholtz.
-\item $k^{2} = (-) \mbox{ constante}$, se obtiene la ecuación de difusión (en su parte espacial).
-\item $k^{2} = \mbox{ constante } \times \mbox{ energía cinética}$, se obtiene la ecuación de onda de Schrödinger.
+\item[\ding{212}] $k^{2} = 0$, se obtiene la ecuación de Laplace.
+\item[\ding{212}] $k^{2} = (+) \mbox{ constante}$, se obtiene la ecuación de Helmholtz.
+\item[\ding{212}] $k^{2} = (-) \mbox{ constante}$, se obtiene la ecuación de difusión (en su parte espacial).
+\item[\ding{212}] $k^{2} = \mbox{ constante } \times \mbox{ energía cinética}$, se obtiene la ecuación de onda de Schrödinger.
 \end{itemize}
 \end{frame}
 \begin{frame}
@@ -595,41 +604,54 @@ Lo importante es trabajar con las reglas de transformación.
 \end{frame}
 \begin{frame}
 \frametitle{Información de otros sistemas}
-A continuación presentaremos algunos sistemas coordenados: el dominio de las coordenadas, las reglas de transformación, los factores de escala y un representación visual de las superficies.
+A continuación presentaremos las características y propiedades importantes de algunos sistemas coordenados:
+\pause
+\setbeamercolor{item projected}{bg=aquamarine,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item El dominio de las coordenadas.
+\item Las reglas de transformación. 
+\item Los factores de escala.
+\item Una representación visual de las superficies.
+\end{enumerate}
 \end{frame}
 
 \subsection{Otros \texorpdfstring{$11$}{11} sistemas coordenados}
 
+% \setlength{\belowdisplayskip}{0pt}
+% \setlength{\abovedisplayshortskip}{0pt}
+% \setlength{\belowdisplayshortskip}{0pt}
+
 \begin{frame}
 \frametitle{1 - Coord. cilíndricas parabólicas $(u, v, z)$}
+\setlength{\abovedisplayskip}{-1pt}
 \fontsize{12}{12}\selectfont
-\begin{minipage}{0.45\textwidth}
-Dominio de las coordenadas:
-\pause
+\begin{minipage}[t]{0.45\textwidth}
+Dominio:
 \begin{align*}
-u &\in (-\infty,\infty) \\
-v &\in [0,\infty) \\
-z &\in(-\infty,\infty)
+u &\in (-\infty, \infty) \\
+v &\in [0, \infty) \\
+z &\in (-\infty, \infty)
 \end{align*}
 \end{minipage}
 \hspace{1cm}
 \pause
-\begin{minipage}{0.4\textwidth}
-Reglas de transformación:
-\pause
+\begin{minipage}[t]{0.4\textwidth}
+Reglas:
 \begin{align*}
 x &= \dfrac{1}{2}(u^{2 } -v^{2}) \\
 y &= u \: v \\
-z &=z
+z &= z
 \end{align*}
-\end{minipage}
-\\
-\bigskip
+\end{minipage}%
+\\[0.75em]
 \pause
 Factores de escala:
-\pause
 \begin{align*}
-h_{1 } &= h_{2} = \sqrt{u^{2 } +v^{2}} \\
+h_{1 } &= h_{2} = \sqrt{u^{2} +v^{2}} \\
 h_{3 } &= 1
 \end{align*}
 \end{frame}
@@ -640,13 +662,12 @@ h_{3 } &= 1
   \includegraphics[scale=0.3]{Imagenes/Sistema_Cilindrico_Parabolico.eps}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{2 - Coord. esferoidales prolatas $(\xi, \eta, \phi)$}
+\setlength{\abovedisplayskip}{-1pt}
 \fontsize{12}{12}\selectfont
-\begin{minipage}{0.45\textwidth}
-Dominio de las coordenadas:
-\pause
+\begin{minipage}[t]{0.45\textwidth}
+Dominio:
 \begin{align*}
 \xi &\in [0, \infty) \\
 \eta &\in [0, \pi] \\
@@ -655,18 +676,17 @@ Dominio de las coordenadas:
 \end{minipage}
 \hspace{1cm}
 \pause
-\begin{minipage}{0.4\textwidth}
-Reglas de transformación:
-\pause
+\begin{minipage}[t]{0.4\textwidth}
+Reglas:
 \begin{align*}
 x &= a \: \sinh \xi \: \sin \eta \: \cos \phi\\
 y &= a \: \sinh \xi \: \sin \eta \: \sin \phi\\
 z &= a \: \cosh \xi \: \cos \eta
 \end{align*}
-\end{minipage}
-
-Factores de escala:
+\end{minipage}%
+\\[1em]
 \pause
+Factores de escala:
 \begin{align*}
 h_{1} &= h_{2} = a \: \sqrt{\sinh^{2} \xi + \sin^{2} \eta} \\
 h_{3 }&= a \: \sinh \xi \: \sin \eta
@@ -679,13 +699,12 @@ h_{3 }&= a \: \sinh \xi \: \sin \eta
   \includegraphics[scale=0.3]{Imagenes/Sistema_Esfeoridal_Prolato.eps}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{3 - Coord. esferoidales oblatas $(\xi, \eta, \phi)$}
 \fontsize{12}{12}\selectfont
+\setlength{\abovedisplayskip}{-1pt}
 \begin{minipage}{0.45\textwidth}
-Dominio de las coordenadas:
-\pause
+Dominio:
 \begin{align*}
 \xi &\in [0, \infty) \\
 \eta &\in \left[- \dfrac{\pi}{2}, \dfrac{\pi}{2} \right] \\
@@ -695,18 +714,16 @@ Dominio de las coordenadas:
 \hspace{1cm}
 \pause
 \begin{minipage}{0.4\textwidth}
-Reglas de transformación:
-\pause
+Reglas:
 \begin{align*}
 x &= a \: \cosh \xi \: \cos \eta \: \cos \phi \\
 y &= a \: \cosh \xi \: \cos \eta \: \sin \phi\\
 z &= a \: \sinh \xi \: \sin \eta
 \end{align*}
-\end{minipage}
-
+\end{minipage}%
+\\[1em]
 \pause
 Factores de escala:
-\pause
 \begin{align*}
 h_{1 }&= h_{2} = a \: \sqrt{\sinh^{2} \xi + \sin^{2} \eta} \\
 h_{3 }&= a \: \cosh \xi \: \cos \eta
@@ -719,13 +736,12 @@ h_{3 }&= a \: \cosh \xi \: \cos \eta
   \includegraphics[scale=0.3]{Imagenes/Sistema_Esfeoridal_Oblato.eps}
 \end{figure}
 \end{frame}  
-
 \begin{frame}
 \frametitle{4 - Coord. parabólicas $(u, v, \phi)$}
+\setlength{\abovedisplayskip}{-1pt}
 \fontsize{12}{12}\selectfont
-\begin{minipage}{0.45\textwidth}
-Dominio de las coordenadas:
-\pause
+\begin{minipage}[t]{0.45\textwidth}
+Dominio:
 \begin{align*}
 u &\in [0, \infty) \\
 v &\in [0, \infty) \\
@@ -734,18 +750,16 @@ v &\in [0, \infty) \\
 \end{minipage}
 \hspace{1cm}
 \pause
-\begin{minipage}{0.4\textwidth}
-Reglas de transformación:
-\pause
+\begin{minipage}[t]{0.4\textwidth}
+Reglas:
 \begin{align*}
 x &= u \: v \: \cos \phi \\
 y &= u \: v \: \sin \phi \\
 z &= \dfrac{1}{2} (u^{2} - v^{2})
 \end{align*}
-\end{minipage}
-
+\end{minipage}%
+\\[1em]
 Factores de escala:
-\pause
 \begin{align*}
 h_{1} &= h_{2} = \sqrt{u^{2 } +v^{2}} \\
 h_{3} &= u \: v
@@ -758,27 +772,26 @@ h_{3} &= u \: v
 \includegraphics[scale=0.3]{Imagenes/Sistema_Parabolico.eps}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{5 - Coord. cónicas $(r, \theta, \lambda)$}
+\setlength{\abovedisplayskip}{-1pt}
 \fontsize{12}{12}\selectfont
-Dominio de las coordenadas:
-\pause
+Dominio:
 \begin{align*}
 0 &\leq r < \infty \\
 b^{2} &< \theta^{2} < c^{2} \\
 0 &< \lambda^{2} < b^{2}
 \end{align*}
-Con
+Con:
 \begin{align*}
 c^{2} > \theta^{2} > b^{2} > \lambda^{2} > 0
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{5 - Coord. cónicas $(r, \theta, \lambda)$}
+\setlength{\abovedisplayskip}{-1pt}
 \fontsize{12}{12}\selectfont
-Reglas de transformación:
-\pause
+Reglas:
 \begin{align*}
 (x)^{2} &= \left( \dfrac{r \, \theta \, \lambda}{b \, c} \right)^{2} \\[0.5em]
 (y)^{2} &= \dfrac{r^{2} (\theta^{2} - b^{2})(b^{2} - \lambda^{2})}{b^{2}(c^{2} - b^{2})} \\[0.5em]
@@ -787,9 +800,9 @@ Reglas de transformación:
 \end{frame}
 \begin{frame}
 \frametitle{5- Coord. cónicas $(r, \theta, \lambda)$}
+\setlength{\abovedisplayskip}{-1pt}
 \fontsize{12}{12}\selectfont
 Factores de escala:
-\pause
 \begin{align*}
 h_{1} &= 1\\
 (h_{2})^{2} &= \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{(\theta^{2} - b^{2})(c^{2} - \theta^{2})} \\[0.5em]
@@ -1088,11 +1101,13 @@ z &= \dfrac{r}{c} \, \sqrt{\dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^
 \frametitle{Superficies coordenadas}
 Para identificar las superficies constantes, elevamos al cuadrado cada lado:
 \pause
-\begin{align*}
-x^{2} &= \dfrac{r^{2} \theta^{2} \lambda^{2}}{b^{2} c^{2}} \\[0.5em]
-y^{2} &= \dfrac{r^{2}}{b^{2}} \dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{(b^{2} - c^{2})} \\[0.5em]
+\begin{eqnarray*}
+\begin{aligned}
+x^{2} &= \dfrac{r^{2} \theta^{2} \lambda^{2}}{b^{2} c^{2}} \\[0.5em] \pause
+y^{2} &= \dfrac{r^{2}}{b^{2}} \dfrac{(\theta^{2} - b^{2})(\lambda^{2} - b^{2})}{(b^{2} - c^{2})} \\[0.5em] \pause
 z^{2} &= \dfrac{r^{2}}{c^{2}} \dfrac{(\theta^{2} - c^{2})(\lambda^{2} - c^{2})}{(c^{2} - b^{2})}
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Sumando las expresiones}
