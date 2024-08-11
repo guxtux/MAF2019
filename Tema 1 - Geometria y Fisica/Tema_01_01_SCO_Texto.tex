@@ -1,12 +1,100 @@
-\input{../Preambulos/preambulo_materiales}
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{calc}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{textcomp, gensymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, 
+     bottom=2.00cm]{geometry}
+% \usepackage{Estilos/ColoresLatex}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage[skip=10pt, indent=30pt]{parskip}
+% \usepackage{scalerel}
+\usepackage{scalerel}[2016-12-29]
+\usepackage{biblatex}
+
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ao,
+    filecolor=magenta,      
+    urlcolor=ao,
+}
+
+\newcommand{\ptilde}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\stilde}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\ttilde}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\ntilde}[2]{\ensuremath{{#1}^{(#2)}}}
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iiint}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\textocolor}[2]{\textbf{\textcolor{#1}{#2}}}
+\sisetup{per-mode=symbol}
+\decimalpoint
+\sisetup{bracket-numbers = false}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\numberwithin{equation}{section}
+
+\linespread{1.15}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\emergencystretch=1em
+
+% \input{../Preambulos/preambulo_materiales}
 \title{1 - Coordenadas curvilíneas ortogonales \\[0.3em]  \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
 \author{M. en C. Gustavo Contreras Mayén}
 \date{ }
+
 \begin{document}
 \vspace{-4cm}
 \maketitle
 \fontsize{14}{14}\selectfont
 \tableofcontents
+
 \newpage
 
 \section{Coordenadas curvilíneas ortogonales.}
@@ -31,7 +119,13 @@ La intersección de los tres planos $x = x_{0}, y = y_{0}, z = z_{0}$ genera un 
 \subsubsection*{Coordenadas esféricas.}
 
 Las coordenadas esféricas se definen en términos de tres superficies: esferas concéntricas, conos con el mismo vértice y planos meridianos.
-\par
+La conexión entre coordenadas cartesianas y esféricas (regla de transformación) tiene la forma:
+\begin{align*}
+x &= r \, \sin \theta \cos \varphi \\
+y &= r \sin \theta \sin \varphi \\
+z &= r \cos \theta
+\end{align*}
+
 Un punto tiene coordenadas $(r, \theta, \phi)$ y las tres superficies son perpendiculares en cada punto.
 \begin{figure}[H]
    \centering
@@ -39,16 +133,11 @@ Un punto tiene coordenadas $(r, \theta, \phi)$ y las tres superficies son perpen
    \caption{Coordenadas esféricas $(r, \theta, \phi)$. Las superficies coordenadas son \emph{esferas} ($r = \mbox{cte.}$), \emph{conos circulares} $(\theta = \mbox{const})$, \emph{planos meridianos} $(\phi = \mbox{cte.})$}
    \label{fig:figura_planos_esfericos}
 \end{figure}
+Para obtener las superficies coordenadas, hay que apoyarnos con lo que ya sabemos sobre geometría del espacio, por lo que deberemos de recordar las expresiones generales que nos definen planos, esferas, conos, cilindros, etc.; el ejercicio para el sistema esférico se desarrolló en clase y lo puedes nuevamente trabajar en tu cuaderno.
+\par
 La intersección del cono y la esfera genera una circunferencia a lo largo de la cual varía sólo la coordenada $\phi$.
 \par
 La intersección de la esfera y el plano meridiano genera un arco de meridiano a lo largo del cual sólo $\theta$ varía, y la intersección del cono y el plano genera una recta radial a lo largo de la cual sólo $r$ varía.
-\par
-La conexión entre coordenadas cartesianas y esféricas (regla de transformación) tiene la forma:
-\begin{align*}
-x &= r \, \sin \theta \cos \varphi \\
-y &= r \sin \theta \sin \varphi \\
-z &= r \cos \theta
-\end{align*}
 
 \subsubsection*{Coordenadas cilíndricas.}
 
@@ -140,6 +229,8 @@ Por ejemplo, la ecuación de onda:
 es válida en todos los sistemas coordenados, es decir, es invariante bajo transformación de coordenadas.
 
 \section{Teoría de transformación.}
+
+\subsection{Construcción.}
 
 En el espacio euclidiano es siempre posible construir un sistema coordenado cartesiano que se extienda indefinidamente.
 \par
