@@ -422,15 +422,20 @@ De la figura (\ref{fig:figura_planos_esfericos}) la \enquote{conexión} (regla d
 \end{frame}
 \begin{frame}
 \frametitle{Reglas de transformación}
+De $(x, y, z) \rightarrow (r, \theta, \varphi)$:
 \begin{align*}
 x &= r \, \sin \theta \, \cos \varphi \\
 y &= r \, \sin \theta \, \sin \varphi \\
 z &= r \, \cos \theta
 \end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Reglas de transformación}
+De $(r, \theta, \varphi) \rightarrow (x, y, z)$:
 \begin{align*}
-r &= \sqrt{x^{2} + y^{2} + z^{2}} \\
-\theta &= \cos^{-1} \left( z / \sqrt{x^{2} + y^{2} + z^{2}} \right) \\
-\varphi &= \tan^{-1} (y/x)
+r &= \sqrt{x^{2} + y^{2} + z^{2}} \\[0.75em]
+\theta &= \cos^{-1} \left( \dfrac{z}{\sqrt{x^{2} + y^{2} + z^{2}}} \right) \\[0.75em]
+\varphi &= \tan^{-1} \left( \dfrac{y}{x} \right)
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -457,10 +462,12 @@ Entonces tenemos que:
 Así al calcular la norma:
 \pause
 \begin{eqnarray*}
-\abs{\pdv{\vb{u}}{r}} &=& \sqrt{\sin^{2} \theta \, \cos^{2} \varphi + \sin^{2} \theta \, \sin^{2} \varphi + \cos^{2} \theta} = \\[0.5em] \pause
-&=& \sqrt{\sin^{2} \theta \left( \cos^{2} \varphi + \sin^{2} \varphi \right) + \cos^{2} \theta} = \\[0.5em] \pause
-&=& \sqrt{\sin^{2} \theta + \cos^{2} \theta} = \\[0.5em] \pause
-&=& 1
+\begin{aligned}
+\abs{\pdv{\vb{r}}{r}} &= \sqrt{\sin^{2} \theta \, \cos^{2} \varphi + \sin^{2} \theta \, \sin^{2} \varphi + \cos^{2} \theta} = \\[0.5em] \pause
+&= \sqrt{\sin^{2} \theta \left( \cos^{2} \varphi + \sin^{2} \varphi \right) + \cos^{2} \theta} = \\[0.5em] \pause
+&= \sqrt{\sin^{2} \theta + \cos^{2} \theta} = \\[0.5em] \pause
+&= 1
+\end{aligned}
 \end{eqnarray*}
 \end{frame}
 \begin{frame}
@@ -481,12 +488,18 @@ h_{1} = h_{r} = 1
 \begin{align*}
 \pdv{\vb{r}}{\theta} = \vu{i} \, r \, \cos \theta \, \cos \varphi + \vu{j} \, r \, \cos \theta \, \sin \varphi - \vu{k} \, r \, \sin \theta
 \end{align*}
-\pause
-Entonces:
-\begin{align*}
-\abs{\pdv{\vb{u}}{\theta}} &= \sqrt{r^{2} (\cos^{2} \theta \, \cos^{2} \varphi + \cos^{2} \theta \, \sin^{2} \varphi + \sin^{2} \theta)} \\[0.5em]
+Procedemos a calcular el factor de escala:
+\end{frame}
+\begin{frame}
+\frametitle{Siguiente factor $\pdv*{\vb{r}}{\theta}$}
+\begin{eqnarray*}
+\begin{aligned}
+\abs{\pdv{\vb{u}}{\theta}} &= \sqrt{r^{2} (\cos^{2} \theta \, \cos^{2} \varphi + \cos^{2} \theta \, \sin^{2} \varphi + \sin^{2} \theta)} \\[0.5em] \pause
+&= \sqrt{r^{2} (\cos^{2} \theta \left(\cos^{2} \varphi + \sin^{2} \varphi \right) + \sin^{2} \theta)} \\[0.5em] \pause
+&= \sqrt{r^{2} (\cos^{2} \theta + \sin^{2} \theta)} \\[0.5em] \pause
 &= r
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \pause
 Así: $h_{2} = h_{\theta} = r$
 \end{frame}
@@ -495,18 +508,24 @@ Así: $h_{2} = h_{\theta} = r$
 \begin{align*}
 \pdv{\vb{r}}{\varphi} = - \vu{i} \, r \, \sin \theta \, \sin \varphi + \vu{j} \, r \, \sin \theta \, \cos \varphi
 \end{align*}
-\pause
-Entonces:
-\begin{align*}
-\abs{\pdv{\vb{u}}{\varphi}} &= \sqrt{r^{2} (\sin^{2} \theta \, \sin^{2} \varphi + \sin^{2} \theta \, \cos^{2} \varphi)} \\[0.5em]
+Nuevamente se calcula el factor de escala:
+\end{frame}
+\begin{frame}
+\frametitle{Siguiente factor $\pdv*{\vb{r}}{\varphi}$}
+\begin{eqnarray*}
+\begin{aligned}
+\abs{\pdv{\vb{u}}{\varphi}} &= \sqrt{r^{2} \left( \sin^{2} \theta \, \sin^{2} \varphi + \sin^{2} \theta \, \cos^{2} \varphi \right)} \\[0.5em] \pause
+&= \sqrt{r^{2} \left[ \sin^{2} \theta \left( \sin^{2} \varphi + \cos^{2} \varphi \right) \right]} \\[0.5em] \pause
+&= \sqrt{r^{2} \, \sin^{2} \theta} \\[0.5em] \pause
 &= r \, \sin \theta
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \pause
 Así: $h_{3} = h_{\varphi} = r \, \sin \theta$
 \end{frame}
 \begin{frame}
 \frametitle{Factores de escala}
-Entonces los factores de escala para el sistema coordenado esférico son:
+Entonces los factores de escala $h_{i}$ para el sistema coordenado esférico son:
 \pause
 \begin{align}
 \begin{aligned}
@@ -719,7 +738,7 @@ x &= 2 \, u \, v \\[0.5em]
 y &= u^{2} + v^{2} \\[0.5em]
 z &= w
 \end{align*}
-Demuestra que el nuevo sistema de coordenadas \textocolor{red}{no es ortogonal}.
+Demuestra que el nuevo sistema de coordenadas \textocolor{red}{es no ortogonal}.
 \end{frame}
 \begin{frame}
 \frametitle{Ejercicio a cuenta 2}
@@ -893,7 +912,7 @@ h_{1} & 0 & 0 \\
 
 \begin{frame}
 \frametitle{Invarianza bajo transformaciones}
-Un postulado básico de la teoría de transformación asegura que la invarianza bajo transformación de coordenadas del elemento de línea $\dd\vb{r}$, y en general de cualquier vector.
+Un postulado básico de la teoría de transformación asegura la invarianza bajo transformación de coordenadas del elemento de línea $\dd\vb{r}$, y en general de cualquier vector, bajo transformación de coordenadas.
 \\
 \bigskip
 \pause
