@@ -39,10 +39,10 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 \section{Construcción de sistemas coordenados}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
 
 \begin{frame}
@@ -63,11 +63,11 @@ De tal manera que resultará más fácil la solución que cuando se obliga a ada
 \end{frame}
 \begin{frame}
 \frametitle{Introducción}
-Cuando se menciona que \enquote{es más fácil la solución}, significa que se tendrá una ecuación diferencial parcial (EDP) que puede separarse en ecuaciones diferenciales ordinarias (EDO), frecuentemente en la \enquote{forma estándar} en el nuevo sistema coordenado.
+Cuando se menciona que \enquote{es más fácil la solución}, significa que se tendrá una ecuación diferencial parcial (EDP) que pueda separarse en ecuaciones diferenciales ordinarias (EDO), frecuentemente en la \enquote{forma estándar} en el nuevo sistema coordenado.
 \\
 \bigskip
 \pause
-La \emph{técnica de separación de variables}, se verá en el Tema 2 del curso.
+La \textocolor{amethyst}{técnica de separación de variables}, se verá en el Tema 2 del curso.
 \end{frame}
 
 \subsection{Sistemas coordenados especiales}
@@ -146,24 +146,37 @@ En este grupo asimétrico, el sistema elipsoidal confocal se utiliza algunas vec
 \end{frame}
 
 \section{Desarrollo de un sistema coordenado 1/2}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Coord. cilíndricas elípticas \texorpdfstring{$(u, v, z)$}{(u, v, z)}.}
 
 \begin{frame}
 \frametitle{Desarrollo para un sistema especial}
-A continuación veremos la manera de abordar un sistema coordenado especial, para determinar los las superficies constantes, los factores de escala, los operadores diferenciales, necesarios para resolver un problema con esta geometría en particular.
+A continuación veremos la manera de abordar un sistema coordenado especial, para determinar:
+\pause
+\setbeamercolor{item projected}{bg=cadetblue,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Las superficies constantes.
+\item Los factores de escala.
+\item Los operadores diferenciales.
+\end{enumerate}
+\pause
+que serán necesarios para resolver un problema con esta geometría en particular.
 \end{frame}
 
 \subsection{Reglas de transformación}
 
 \begin{frame}
-\frametitle{Reglas de transformación}
-Para el sistema cilíndrico elíptico, se tienen las siguientes reglas de transformación:
+\frametitle{Reglas de transformación - S. Cilíndrico elíptico}
+Para el \textocolor{carnelian}{sistema cilíndrico elíptico}, se tienen las siguientes reglas de transformación:
 \pause
 \begin{eqnarray}
 \begin{aligned}
 x &= a \, \cosh u \, \cos v \\[0.5em] \pause
-y &= a \, \sinh u \, \sin v \\
+y &= a \, \sinh u \, \sin v \\[0.5em] \pause
 z &= z
 \end{aligned}
 \label{eq:ecuacion_02_73_esp}
@@ -174,7 +187,7 @@ z &= z
 
 \begin{frame}
 \frametitle{Superficies coordenadas}
-Para identificar las superficies constantes, elevamos al cuadrado cada lado:
+Para identificar las superficies constantes, elevamos al cuadrado cada lado de $x$ e $y$:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
@@ -185,20 +198,53 @@ y^{2} &= a^{2} \, \sinh^{2} u \, \sin^{2} v \label{eq:ecuacion_02_75_esp}
 \end{frame}
 \begin{frame}
 \frametitle{Superficies coordenadas}
-Dividimos la primera expresión entre $\cos^{2} v$ \pause y la segunda entre $\sin^{2} v$, \pause recordando que $\cos^{2} v + \sin^{2} v = 1$, así llegamos a:
-\pause
-\begin{eqnarray}
+Dividimos $x^{2}$ entre $\cos^{2} v$ \pause
+\begin{eqnarray*}
 \begin{aligned}
-\dfrac{x^{2}}{a^{2} \, \cosh^{2} u} + \dfrac{y^{2}}{a^{2} \, \sinh^{2} u} &= \cos^{2} v + \sin^{2} v = 1 \label{eq:ecuacion_02_76_esp}\\[1em] \pause
-\dfrac{x^{2}}{a^{2} \, \cos^{2} v} - \dfrac{y^{2}}{a^{2} \, \sin^{2} v } &= \cosh^{2} u - \sinh^{2} u = 1 \label{eq:ecuacion_02_77_esp}
+\dfrac{x^{2}}{\cos^{2} v} &= \dfrac{a^{2} \, \cosh^{2} u \, \cos^{2} v}{\cos^{2} v} \\[0.5em] \pause
+\dfrac{x^{2}}{\cos^{2} v} &= a^{2} \, \cosh^{2} u \\[0.5em] \pause
+\Rightarrow \hspace{0.3cm} \dfrac{x^{2}}{a^{2} \, \cosh^{2} u} &= \cos^{2} v 
 \end{aligned}
-\end{eqnarray}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+Luego dividimos $y^{2}$ entre $\sin^{2} v$:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+\dfrac{y^{2}}{\sin^{2} v} &= \dfrac{a^{2} \, \sinh^{2} u \, \sin^{2} v}{\sin^{2} v} = a^{2} \, \sinh^{2} u  \\[0.5em]
+\Rightarrow \hspace{0.3cm} \dfrac{y^{2}}{a^{2} \, \sinh^{2} u} &= \sin^{2} v
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+Recordamos que:
+\pause
+\begin{align*}
+\cos^{2} v + \sin^{2} v = 1 \\
+\cosh^{2} u - \sinh^{2} u = 1
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Superficies coordenadas}
+Así llegamos a:
+\pause
+\begin{subequations}
+\begin{equation}
+\dfrac{x^{2}}{a^{2} \, \cosh^{2} u} + \dfrac{y^{2}}{a^{2} \, \sinh^{2} u} = \cos^{2} v + \sin^{2} v = 1 \label{eq:ecuacion_02_76_esp}
+\end{equation}
+\begin{equation}
+\dfrac{x^{2}}{a^{2} \, \cos^{2} v} - \dfrac{y^{2}}{a^{2} \, \sin^{2} v } = \cosh^{2} u - \sinh^{2} u = 1 \label{eq:ecuacion_02_77_esp}
+\end{equation}
+\end{subequations}
 \end{frame}
 \begin{frame}
 \frametitle{Superficies coordenadas}
 Para $v = $ constante, la ec. (\ref{eq:ecuacion_02_76_esp}):
 \begin{align*}
-\dfrac{x^{2}}{a^{2} \, \cosh^{2} u} + \dfrac{y^{2}}{a^{2} \, \sinh^{2} u} &= \cos^{2} v + \sin^{2} v = 1 
+\dfrac{x^{2}}{a^{2} \, \cosh^{2} u} + \dfrac{y^{2}}{a^{2} \, \sinh^{2} u} = \cos^{2} v + \sin^{2} v = 1 
 \end{align*}
 genera una familia de elipses con el eje $x$, en el principal.
 \end{frame}
@@ -208,13 +254,17 @@ Para $u = $ constante, la ec. (\ref{eq:ecuacion_02_77_esp})
 \begin{align*}
 \dfrac{x^{2}}{a^{2} \, \cos^{2} v} - \dfrac{y^{2}}{a^{2} \, \sin^{2} v } &= \cosh^{2} u - \sinh^{2} u = 1
 \end{align*}
-genera hipérbolas con puntos focales en el eje $x$. \pause Como se pueden ver en la siguiente figura (\ref{fig:figura_coordenada_cilindricas_elipticas})
+genera hipérbolas con puntos focales en el eje $x$.
+\\
+\bigskip
+\pause
+Como se pueden ver en la siguiente figura (\ref{fig:figura_coordenada_cilindricas_elipticas})
 \end{frame}
 \begin{frame}
 \frametitle{Superficies coordenadas}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.55]{Imagenes/Sistema_Cilindrico_Eliptico.eps}
+    \includegraphics[scale=0.55]{Imagenes/EllipticCylindricalCoord_1000.png}
     \caption{Sistema coordenado cilíndrico elíptico en el plano $x-y$.}
     \label{fig:figura_coordenada_cilindricas_elipticas}
 \end{figure}
@@ -375,7 +425,7 @@ h_{z} &= 1
 \end{frame}
 
 \section{Cálculo operadores diferenciales}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Gradiente}
 
 \begin{frame}
@@ -489,7 +539,7 @@ Así pues, tenemos que:
 \end{frame}
 
 \section{Más sistemas coordenados}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Algunos sistemas}
 
 \begin{frame}
@@ -1029,7 +1079,7 @@ Factores de escala:
 \end{frame}
 
 \section{Siguiente paso}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Construcción de otros sistemas}
 
 \begin{frame}
@@ -1059,7 +1109,7 @@ Esa tarea se desarrollará cuando se nos presente un problema específico.
 % \end{frame}
 
 \section{Desarrollo de un sistema coordenado 2/2}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Coordenadas cónicas \texorpdfstring{$(r, \theta, \lambda)$}{(r, t, l)}.}
 
 \begin{frame}
