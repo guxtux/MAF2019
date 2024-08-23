@@ -217,7 +217,7 @@ El elemento diferencial de volumen se define como:
 En coordenadas esféricas tenemos:
 \begin{align*}
 \dd{S_{1}} &= \dd{S_{r}} = h_{\theta} \, h_{\varphi} \dd{\theta} \dd{\varphi} = r^{2} \sin \theta \dd{\theta} \dd{\varphi} \\[0.5em]
-\dd{S_{2}} &= \dd{S_{\theta}} = h_{\varphi} \, h_{r} \dd{\varphi} \dd{r} = r \sin \theta \dd{\theta} \dd{\varphi} \\[0.5em]
+\dd{S_{2}} &= \dd{S_{\theta}} = h_{\varphi} \, h_{r} \dd{\varphi} \dd{r} = r \sin \theta \dd{r} \dd{\varphi} \\[0.5em]
 \dd{S_{3}} &= \dd{S_{\varphi}} = h_{r} \, h_{\theta} \dd{r} \dd{\theta} = r \dd{r} \dd{\theta}
 \end{align*}
 
@@ -281,7 +281,7 @@ Teniendo en cuenta la ec. (\ref{eq:ecuacion_01_21}) se sigue que:
 Multiplicando escalarmente por $\vu{e}_{i}$ tenemos que:
 \begin{align*}
 \dd{\vb{r}} \vdot \vu{e}_{i} &= \left( \nsum_{j=1}^{3} h_{j} \, \vu{e}_{j} \dd{u_{j}} \right) \vdot \vu{e}_{i} = \\[0.5em]
-&= \nsum_{j=1}^{3} \left( \vu{e}_{j} \cdot \vu{e}_{j} \right) \, h_{j} \, \dd{u_{j}} = \nsum_{j=1}^{3} \delta_{ij} \, h_{j} \, \dd{u_{j}} = h_{i} \dd{u_{i}} \\[1em]
+&= \nsum_{j=1}^{3} \left( \vu{e}_{j} \cdot \vu{e}_{i} \right) \, h_{j} \, \dd{u_{j}} = \nsum_{j=1}^{3} \delta_{ij} \, h_{j} \, \dd{u_{j}} = h_{i} \dd{u_{i}} \\[1em]
 &\Longrightarrow \dd{u_{i}} = \dfrac{1}{h_{i}} \dd{\vb{r}} \cdot \vu{e}_{i}
 \end{align*}
 Al sustituir en la ec. (\ref{eq:ecuacion_01_26}), llegamos a:
@@ -324,7 +324,7 @@ Para estudiar las propiedades del gradiente tomemos un par de superficies infini
 
 De la ec. (\ref{eq:ecuacion_01_29}) se tiene que:
 \begin{align*}
-\dd{\phi} = \dd{\vb{u}} \cdot \grad{\phi} = \abs{\dd{\vb{r}}} \, \abs{\grad{\phi}} \, \cos \theta
+\dd{\phi} = \dd{\vb{r}} \cdot \grad{\phi} = \abs{\dd{\vb{r}}} \, \abs{\grad{\phi}} \, \cos \theta
 \end{align*}
 donde $\theta$ es el ángulo entre $\dd{\vb{r}}$ y $\grad{\phi}$.
 
@@ -339,7 +339,7 @@ En consecuencia: $\grad{\phi}$ es \emph{perpendicular} a la superficie $\phi = \
 \par
 El valor máximo de $\dd{\phi}$ se presenta cuando $\theta = 0$, es decir:
 \begin{align*}
-\dd{\theta}_{\max} &= \abs{\grad{\phi}} \, \abs{\dd{\vb{r}}} \dd{l} \\[1em]
+\dd{\phi}_{\max} &= \abs{\grad{\phi}} \, \abs{\dd{\vb{r}}} \dd{l} \\[1em]
 \mbox{o cuando } \hspace{0.5cm} \left( \dv{\phi}{l} \right)_{\max} &= \abs{\grad{\phi}}
 \end{align*}
 
@@ -572,16 +572,16 @@ B_{1} \, h_{1} & B_{2} \, h_{2} & B_{3} \, h_{3}
 \end{align*}
 El operador $\pdv*{u_{i}}$ opera solo sobre la tercera fila. Es posible demostrar que:
 \begin{align*}
-{\rm Rot} \, \vb{B} = \curl{B}
+{\rm Rot} \, \vb{B} = \curl{\vb{B}}
 \end{align*}
 
 De la expresión:
 \begin{align*}
-\oint_{c} \vb{B} \cdot \dd{\vb{l}} = (\curl{B}) \cdot \dd{\vb{S}}
+\oint_{c} \vb{B} \cdot \dd{\vb{l}} = (\curl{\vb{B}}) \cdot \dd{\vb{S}}
 \end{align*}
 se sigue que:
 \begin{align*}
-\oint \vb{B} \cdot \dd{\vb{l}} = \abs{\curl{B}} \dd{S \, \cos \theta}
+\oint \vb{B} \cdot \dd{\vb{l}} = \abs{\curl{\vb{B}}} \dd{S \, \cos \theta}
 \end{align*}
 
 La máxima circulación se obtiene con $\theta = 0$,
@@ -658,10 +658,10 @@ El Laplaciano en coordenadas cartesianas, donde $h_{x} = h_{y} = h_{z} = 1$:
 \begin{align*}
 \laplacian{f} &= \pdv[2]{f}{x} + \pdv[2]{f}{y} + \pdv[2]{f}{z}
 \end{align*}
-El Laplaciano en coordenadas cilíndricas, donde $h_{\rho} = h_{z} = 1$ y $h_{\phi} = r$:
+El Laplaciano en coordenadas cilíndricas, donde $h_{\rho} = h_{z} = 1$ y $h_{\phi} = \rho$:
 \begin{eqnarray*}
 \begin{aligned}
-\laplacian{f} &= \dfrac{1}{\rho} \pdv{\rho} \left( \dfrac{\rho}{1} \pdv{f}{\rho} \right) + \dfrac{1}{\rho} \pdv{\phi} \left( \dfrac{\rho}{\rho^{2}} \pdv{f}{\rho} \right) + \dfrac{1}{\rho} \pdv{z} \left( \dfrac{\rho}{1} \pdv{f}{z} \right) = \\[0.5em]
+\laplacian{f} &= \dfrac{1}{\rho} \pdv{\rho} \left( \dfrac{\rho}{1} \pdv{f}{\rho} \right) {+} \dfrac{1}{\rho} \pdv{\phi} \left( \dfrac{\rho}{\rho^{2}} \pdv{f}{\phi} \right) {+} \dfrac{1}{\rho} \pdv{z} \left( \dfrac{\rho}{1} \pdv{f}{z} \right) = \\[0.5em]
 &= \dfrac{1}{\rho} \, \pdv{\rho} \left( \rho \, \pdv{f}{\rho} \right) + \dfrac{1}{\rho^{2}} \, \pdv[2]{f}{\varphi} + \pdv[2]{f}{z} 
 \end{aligned}
 \end{eqnarray*}
@@ -709,63 +709,63 @@ Con la construcción que hemos revisado, ahora tenemos la oportunidad de expresa
 
 Una vez que hayamos expresado la ecuación diferencial, el siguiente paso será resolverla. Para ello, revisaremos algunas técnicas de solución que se trabajarán en el \emph{\textcolor{blue}{Tema 2 - Primeras técnicas de solución}}.
 
-\subsection{La ecuación de Helmholtz.}
+% \subsection{La ecuación de Helmholtz.}
 
-La ecuación de Helmholtz:
-\begin{align}
-\nabla^{2} \psi + k^{2} \: \psi = 0
-\label{eq:ecuacion_02_01}
-\end{align}
-es una ecuación separable. Diremos que una ecuación es separable cuando la solución de la misma $\psi(x, y, z)$, se expresa como el producto de funciones que dependen solo de una variable: $\psi(x, y, z) = X (x) \, Y (y),\, Z(z)$, logrando con ello un paso importante en el cambio de tipo de ecuación diferencial parcial a un sistema de ecuaciones diferenciales ordinarias, que ya podremos resolver de manera más sencilla y directa. 
-\par
-Como primer paso para \emph{separar} una ecuación, se debe de reescribir la misma en el sistema coordenado de interés, ocupando los correspondientes operadores diferenciales que intervengan.
-\par
-En particular, la ecuación de Helmholtz tiene el hecho de que si:
-\begin{itemize}
-\item $k^{2} = 0$, se obtiene la ecuación de Laplace.
-\item $k^{2} = (+) \mbox{ constante}$, se obtiene la ecuación de Helmholtz.
-\item $k^{2} = (-) \mbox{ constante}$, se obtiene la ecuación de difusión (en su parte espacial).
-\item $k^{2} = \mbox{ constante } \times \mbox{ energía cinética}$, se obtiene la ecuación de onda de Schrödinger.
-\end{itemize}
+% La ecuación de Helmholtz:
+% \begin{align}
+% \nabla^{2} \psi + k^{2} \: \psi = 0
+% \label{eq:ecuacion_02_01}
+% \end{align}
+% es una ecuación separable. Diremos que una ecuación es separable cuando la solución de la misma $\psi(x, y, z)$, se expresa como el producto de funciones que dependen solo de una variable: $\psi(x, y, z) = X (x) \, Y (y),\, Z(z)$, logrando con ello un paso importante en el cambio de tipo de ecuación diferencial parcial a un sistema de ecuaciones diferenciales ordinarias, que ya podremos resolver de manera más sencilla y directa. 
+% \par
+% Como primer paso para \emph{separar} una ecuación, se debe de reescribir la misma en el sistema coordenado de interés, ocupando los correspondientes operadores diferenciales que intervengan.
+% \par
+% En particular, la ecuación de Helmholtz tiene el hecho de que si:
+% \begin{itemize}
+% \item $k^{2} = 0$, se obtiene la ecuación de Laplace.
+% \item $k^{2} = (+) \mbox{ constante}$, se obtiene la ecuación de Helmholtz.
+% \item $k^{2} = (-) \mbox{ constante}$, se obtiene la ecuación de difusión (en su parte espacial).
+% \item $k^{2} = \mbox{ constante } \times \mbox{ energía cinética}$, se obtiene la ecuación de onda de Schrödinger.
+% \end{itemize}
 
-Se ha demostrado que existen once sistemas coordenados en donde la ecuación de Helmholtz  (ec. \ref{eq:ecuacion_02_01}) puede separarse. 
-\par
-\textbf{Importante: } Cabe señalar que en algunos textos se ocupa una notación para las nuevas coordenadas con letras del alfabeto castellano: $(u, v, w)$.
-\par
-Otros textos ocupan letras griegas: $(\xi, \eta, \mu, \nu, \theta, \psi, \phi, \lambda, \varphi)$.
-\par
-Sin pérdida de generalidad, ocupar cualquiera de las notaciones indicadas representa lo mismo. Lo importante es trabajar con las reglas de transformación. A continuación se presenta la ecuación de Helmholtz en algunos sistemas coordenados\footnote{Si en algún ejercicio se pide la expresión de esta ecuación, pero que no se haya desarrollado de manera explícita, deberán de hacer el trabajo de obtener los respectivos factores de escala, obtener el operador diferencial laplaciano y escribir la ecuación, ya sea la de Helmholtz o cualquier otra de la Física Matemática. Las expresiones que se muestran en la lista se entiende que \emph{no están desarrolladas de manera explícita.}}, convendría que realices las operaciones necesarias para lograr la expresión que se indica.
-\par
-\begin{enumerate}
-\item Coordenadas cilíndricas circulares $(\rho, \phi, z)$.
-\begin{align*}
-\dfrac{1}{\rho} \pdv{\rho} \bigg( \rho \pdv{\psi}{\rho} \bigg) + \dfrac{1}{\rho^{2}} \pdv[2]{\phi}{\varphi} + \pdv[2]{\psi}{z} + k^{2} \, \psi = 0
-\end{align*}
-\item Coordenadas cilíndricas elípticas $(u, v, z)$.
-\begin{align*}
-\dfrac{1}{a \big( \sinh^{2} u + \sin^{2} v \big)} \bigg( \pdv[2]{\psi}{u} + \pdv[2]{\psi}{v} \bigg) + \pdv[2]{\psi}{z} + k^{2} \, \psi = 0
-\end{align*}
-\item Coordenadas cilíndricas elípticas $(u, v, z)$.
-\begin{align*}
-\dfrac{1}{u^{2} + v^{2}} \bigg( \pdv[2]{\psi}{u} + \pdv[2]{\psi}{v} \bigg) + \pdv[2]{\psi}{z} + k^{2} \, \psi = 0
-\end{align*}
-\item Coordenadas esféricas polares $(\rho, \theta, \phi)$.
-\begin{align*}
-\dfrac{1}{r^{2}} \pdv{r} \bigg( r^{2} \pdv{\psi}{r} \bigg) + \dfrac{1}{r^{2} \sin \theta} \pdv{\theta} \bigg( \sin \pdv{\psi}{\theta} \bigg) + \dfrac{1}{r^{2} \sin^{2} \theta} \pdv[2]{\psi}{\varphi} + k^{2} \, E = 0
-\end{align*}
-\item Coordenadas esferoidales prolatas $(\xi, \eta, \phi)$.
-\begin{align*}
-&\dfrac{1}{\sinh \xi} \pdv{\xi} \bigg( \sinh \xi \pdv{\psi}{\xi} \bigg) + \dfrac{1}{\sin \eta} \pdv{\eta} \bigg( \sin \eta \pdv{\psi}{\eta} \bigg) + \\[0.5em]
-&+ \bigg( \dfrac{\sinh^{2} \xi + \sin^{2} \eta}{\sinh^{2} \xi \, \sin^{2} \eta} \bigg) \pdv[2]{\psi}{\phi} + k^{2} a^{2} (\sinh^{2} \xi + \sin^{2} \eta) = 0
-\end{align*}
-\item Coordenadas esferoidales oblatas $(\xi, \eta, \phi)$.
-\begin{align*}
-&\dfrac{1}{\cosh \xi} \pdv{\xi} \bigg( \cosh \xi \pdv{\psi}{\xi} \bigg) + \dfrac{1}{\sin \eta} \pdv{\eta} \bigg( \sin \eta \pdv{\psi}{\eta} \bigg) + \\[0.5em]
-&+ \bigg( \dfrac{\cosh^{2} \xi - \sin^{2} \eta}{\cosh^{2} \xi \, \sin^{2} \eta} \bigg) \pdv[2]{\psi}{\phi} + k^{2} a^{2} (\cosh^{2} \xi - \sin^{2} \eta) = 0
-\end{align*}
-\item Coordenadas parabólicas $(u, v, \phi)$.
-\begin{align*}
-\dfrac{1}{u (u^{2} + v^{2})} \pdv{u} \bigg( u \pdv{\psi}{u} \bigg) + \dfrac{1}{v (u^{2} + v^{2})} \pdv{v} \bigg( v  \pdv{\psi}{v} \bigg) + \dfrac{1}{u^{2} v^{2}} \pdv[2]{\psi}{\phi} +k^{2} \, E = 0
-\end{align*}
-\end{enumerate}
+% Se ha demostrado que existen once sistemas coordenados en donde la ecuación de Helmholtz  (ec. \ref{eq:ecuacion_02_01}) puede separarse. 
+% \par
+% \textbf{Importante: } Cabe señalar que en algunos textos se ocupa una notación para las nuevas coordenadas con letras del alfabeto castellano: $(u, v, w)$.
+% \par
+% Otros textos ocupan letras griegas: $(\xi, \eta, \mu, \nu, \theta, \psi, \phi, \lambda, \varphi)$.
+% \par
+% Sin pérdida de generalidad, ocupar cualquiera de las notaciones indicadas representa lo mismo. Lo importante es trabajar con las reglas de transformación. A continuación se presenta la ecuación de Helmholtz en algunos sistemas coordenados\footnote{Si en algún ejercicio se pide la expresión de esta ecuación, pero que no se haya desarrollado de manera explícita, deberán de hacer el trabajo de obtener los respectivos factores de escala, obtener el operador diferencial laplaciano y escribir la ecuación, ya sea la de Helmholtz o cualquier otra de la Física Matemática. Las expresiones que se muestran en la lista se entiende que \emph{no están desarrolladas de manera explícita.}}, convendría que realices las operaciones necesarias para lograr la expresión que se indica.
+% \par
+% \begin{enumerate}
+% \item Coordenadas cilíndricas circulares $(\rho, \phi, z)$.
+% \begin{align*}
+% \dfrac{1}{\rho} \pdv{\rho} \bigg( \rho \pdv{\psi}{\rho} \bigg) + \dfrac{1}{\rho^{2}} \pdv[2]{\phi}{\varphi} + \pdv[2]{\psi}{z} + k^{2} \, \psi = 0
+% \end{align*}
+% \item Coordenadas cilíndricas elípticas $(u, v, z)$.
+% \begin{align*}
+% \dfrac{1}{a \big( \sinh^{2} u + \sin^{2} v \big)} \bigg( \pdv[2]{\psi}{u} + \pdv[2]{\psi}{v} \bigg) + \pdv[2]{\psi}{z} + k^{2} \, \psi = 0
+% \end{align*}
+% \item Coordenadas cilíndricas elípticas $(u, v, z)$.
+% \begin{align*}
+% \dfrac{1}{u^{2} + v^{2}} \bigg( \pdv[2]{\psi}{u} + \pdv[2]{\psi}{v} \bigg) + \pdv[2]{\psi}{z} + k^{2} \, \psi = 0
+% \end{align*}
+% \item Coordenadas esféricas polares $(\rho, \theta, \phi)$.
+% \begin{align*}
+% \dfrac{1}{r^{2}} \pdv{r} \bigg( r^{2} \pdv{\psi}{r} \bigg) + \dfrac{1}{r^{2} \sin \theta} \pdv{\theta} \bigg( \sin \pdv{\psi}{\theta} \bigg) + \dfrac{1}{r^{2} \sin^{2} \theta} \pdv[2]{\psi}{\varphi} + k^{2} \, E = 0
+% \end{align*}
+% \item Coordenadas esferoidales prolatas $(\xi, \eta, \phi)$.
+% \begin{align*}
+% &\dfrac{1}{\sinh \xi} \pdv{\xi} \bigg( \sinh \xi \pdv{\psi}{\xi} \bigg) + \dfrac{1}{\sin \eta} \pdv{\eta} \bigg( \sin \eta \pdv{\psi}{\eta} \bigg) + \\[0.5em]
+% &+ \bigg( \dfrac{\sinh^{2} \xi + \sin^{2} \eta}{\sinh^{2} \xi \, \sin^{2} \eta} \bigg) \pdv[2]{\psi}{\phi} + k^{2} a^{2} (\sinh^{2} \xi + \sin^{2} \eta) = 0
+% \end{align*}
+% \item Coordenadas esferoidales oblatas $(\xi, \eta, \phi)$.
+% \begin{align*}
+% &\dfrac{1}{\cosh \xi} \pdv{\xi} \bigg( \cosh \xi \pdv{\psi}{\xi} \bigg) + \dfrac{1}{\sin \eta} \pdv{\eta} \bigg( \sin \eta \pdv{\psi}{\eta} \bigg) + \\[0.5em]
+% &+ \bigg( \dfrac{\cosh^{2} \xi - \sin^{2} \eta}{\cosh^{2} \xi \, \sin^{2} \eta} \bigg) \pdv[2]{\psi}{\phi} + k^{2} a^{2} (\cosh^{2} \xi - \sin^{2} \eta) = 0
+% \end{align*}
+% \item Coordenadas parabólicas $(u, v, \phi)$.
+% \begin{align*}
+% \dfrac{1}{u (u^{2} + v^{2})} \pdv{u} \bigg( u \pdv{\psi}{u} \bigg) + \dfrac{1}{v (u^{2} + v^{2})} \pdv{v} \bigg( v  \pdv{\psi}{v} \bigg) + \dfrac{1}{u^{2} v^{2}} \pdv[2]{\psi}{\phi} +k^{2} \, E = 0
+% \end{align*}
+% \end{enumerate}
 \end{document}

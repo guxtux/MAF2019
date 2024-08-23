@@ -38,22 +38,29 @@
 \usepackage{relsize}
 \usepackage{siunitx}
 \usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
 %\usepackage[backend=biber]{biblatex}
 \usepackage{standalone}
 \usepackage{mathrsfs}
 \usepackage{bigints}
 \usepackage{bookmark}
 \spanishdecimal{.}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+
 \title{Tabla de Sistemas Coordenados Ortogonales \\ {\large Matemáticas Avanzadas de la Física}}
 \date{ }
 \author{}
 \pgfplotsset{compat=1.12}
-\begin{document}
+% \linespread{1.15}
 
-\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+\begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
 \vspace{-2cm}
+
 {\renewcommand{\arraystretch}{4}%
 \begin{longtable}{| l | p{5cm} | l | p{7.3cm} |}
 \hline
@@ -243,6 +250,7 @@ h_{3}^{2} &= \dfrac{r^{2} (\theta^{2} - \lambda^{2})}{(\lambda^{2} - b^{2})(\lam
 \end{aligned}$ \\ \hline
 \end{longtable}}
 
+\linespread{1.5}\selectfont
 Tomen en cuenta que tanto la referencia de las variables $q_{i}$ como en algunos sistemas coordenados, las reglas de transformación pueden tener variantes, esto dependerá del texto de física matemática que se consulte.
 \par
 Es un buen ejercicio obtener los factores de escala de los sistemas mencionados, ya que les brindará la oportunidad de hacer un repaso para la diferenciación parcial y del álgebra necesaria para llegar a la expresión que se señala en la columna de factores de escala.
