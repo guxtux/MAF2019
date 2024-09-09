@@ -1,26 +1,59 @@
-\input{../Preambulos/preambulo_presentacion_CambridgeUS_beaver}
+% \input{../Preambulos/preambulo_presentacion_CambridgeUS_beaver}
+
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
+
+\input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \title{\large{Objetivos del Tema 2 - Primeras técnicas de solución}}
-\subtitle{Curso MAF}
+% \subtitle{Curso MAF}
 \author{M. en C. Gustavo Contreras Mayén}
-\date{\today}
-\institute{Facultad de Ciencias - UNAM}
-\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
-   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
-}
+
 \setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}  \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\date{}
+
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
 \spanishdecimal{.}
+
 \section*{Contenido}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
+
 \section{Introducción}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Las EDP}
+
 \begin{frame}
 \frametitle{Las Ecs. Diferenciales Parciales}
 De la ecuación de movimiento de una partícula para conocer la fuerza por ejemplo, en general nos conduce a una ecuación diferencial.
 \\
 \bigskip
+\pause
 Por lo tanto, en casi toda la física  básica y en una mayor parte de la física teórica avanzada se expresa en términos de ecuaciones diferenciales.
 \end{frame}
 \begin{frame}
@@ -28,6 +61,7 @@ Por lo tanto, en casi toda la física  básica y en una mayor parte de la físic
 A veces, esas son ecuaciones diferenciales ordinarias en una variable (EDO).
 \\
 \bigskip
+\pause
 Más a menudo las ecuaciones son expresiones de ecuaciones diferenciales parciales (EDP) en dos o más variables.
 \end{frame}
 \begin{frame}
@@ -36,7 +70,7 @@ Al haber revisado la construcción de sistemas curvilíneos ortogonales en el Te
 \end{frame}
 \begin{frame}
 \frametitle{Apoyo con el Tema 1}
-El modelar un fenómeno en una geometría particular mediante una EDP, nos devolverá un EDP y como primera técnica de solución, ocuparemos \emph{la técnica de separación de variables}.
+El modelar un fenómeno en una geometría particular mediante una EDP, nos devolverá un EDP y como primera técnica de solución, ocuparemos \textocolor{coquelicot}{la técnica de separación de variables}.
 \end{frame}
 \begin{frame}
 \frametitle{Punto importante}
@@ -60,22 +94,31 @@ El sistema de EDO obtenido se resuelve de una manera mucho más sencilla, tal y 
 \begin{frame}
 \frametitle{Etapas de trabajo}
 En todo momento esperamos que ocupen la siguiente estrategia de trabajo:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\pause
+\setbeamercolor{item projected}{bg=bananayellow,fg=blue}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item Formulación.
 \item Solución.
 \item Intepretación.
 \end{enumerate}
 \end{frame}
+
 \section{Objetivos}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Tema 2}
+
 \begin{frame}
 \frametitle{Objetivos del Tema 2}
 Al concluir el Tema 2, el alumno:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=corn,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \item Clasificará una ecuación diferencial parcial a partir de las propiedades que presente la expresión.
 \seti
@@ -83,8 +126,11 @@ Al concluir el Tema 2, el alumno:
 \end{frame}
 \begin{frame}
 \frametitle{Objetivos del Tema 2}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=corn,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \conti
 \item Obtendrá las soluciones de una ecuación diferencial parcial lineal y homogénea mediante la técnica de separación de variables.
@@ -93,8 +139,11 @@ Al concluir el Tema 2, el alumno:
 \end{frame}
 \begin{frame}
 \frametitle{Objetivos del Tema 2}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=corn,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Obtendrá las soluciones en series de potencias de una ecuación diferencial parcial a partir del método de Frobenius.
@@ -104,8 +153,11 @@ Al concluir el Tema 2, el alumno:
 \end{frame}
 \begin{frame}
 \frametitle{Objetivos del Tema 2}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=corn,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \conti
 \item Identificará el caso en donde sea posible y resolverá para obtener una segunda solución linealmente independiente de una EDP de segundo orden.
@@ -114,8 +166,11 @@ Al concluir el Tema 2, el alumno:
 \end{frame}
 \begin{frame}
 \frametitle{Objetivos del Tema 2}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=corn,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \conti
 \item Expondrá la interpretación de (los) resultado(s) obtenido(s), para vincularlos con el fenómeno de estudio.
@@ -131,25 +186,17 @@ En este tema como se habrán dado cuenta, será necesario apoyarse \enquote{fuer
 Así como del manejo de series de potencias que se revisa en el curso de \emph{Álgebra lineal.}
 \end{frame}
 \begin{frame}
-\frametitle{Otra nota importante}
-Se hace el comentario de que en las presentaciones y sesiones de trabajo síncrono, se presentará la solución directa de las EDO, pero tanto para los ejercicios a cuenta como del examen-tarea, tendrán que incluir todo el procedimiento de solución.
-\end{frame}
-\begin{frame}
 \frametitle{Apoyo con software}
 También podrán apoyarse con software para corroborar sus resultados y en su caso, para explorar algunas características de las soluciones de las EDO, para la interpretación de lo que obtienen.
-\end{frame}
-\section{Cronograma de trabajo}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Trabajo semanal}
-\begin{frame}
-\frametitle{Distribución de actividades}
-Para alcanzar los objetivos del Tema 2, se han preparado una serie de materiales de lectura y otros adicionales, que deberán de leer, revisar y apoyarse para resolver los ejercicios a cuenta.
 \end{frame}
 \begin{frame}
 \frametitle{Materiales de revisión}
 Los materiales de trabajo que tendrán en la plataforma son los siguientes:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=red,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item Introducción Ecs. Diferenciales Parciales.
 \item Separación de variables.
@@ -157,102 +204,5 @@ Los materiales de trabajo que tendrán en la plataforma son los siguientes:
 \item Segunda solución linealmente independiente.
 \end{enumerate}
 \end{frame}
-\begin{frame}
-\frametitle{Trabajo por semana}
-Se espera que revisen el material de trabajo de acuerdo al siguiente esquema:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item Semana 3 y 4 (8 y 9 Oct.) Presentaciones 1 y 2.
-\item Semana 5 - Presentación 3.
-\item Semana 6 - Presentación 4.
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Material adicional}
-También tendrán disponible una serie de materiales adicionales en donde se trabajarán EDP que nos encontraremos más adelante en el curso, pero serán de utilidad para el Tema 2.
-\end{frame}
-\section{Evaluación}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Ejercicios a cuenta}
-\begin{frame}
-\frametitle{Ejercicios semanales}
-Se tendrán ejercicios a cuenta en las presentaciones semanales, por lo que se espera que los resuelvan y envíen como se ha acordado previamente.
-\end{frame}
-\begin{frame}
-\frametitle{Actividades en Moodle}
-Con el fin de estimular y motivar el trabajo, se presentarán una serie de ejercicios en la plataforma Moodle, que a diferencia de los ejercicios a cuenta, la respuesta a los ejercicios será directa.
-\\
-\bigskip
-Es decir, al leer el enunciado deberán de realizar la solución por su cuenta, y anotar la respuesta en el espacio correspondiente.
-\end{frame}
-\begin{frame}
-\frametitle{Actividades en Moodle}
-Por ejemplo, se presentará una lista de EDP y se les pide identificar algunas propiedades de ellas: si son lineales o no, su clasificación a partir del discriminante, etc.
-\\
-\bigskip
-Por lo que su respuesta se deberá de anotar en el espacio de Moodle.
-\end{frame}
-\begin{frame}
-\frametitle{Puntuación de los ejercicios}
-La solución a los ejercicios es \textbf{opcional}, no penaliza la calificación en caso de que no se resuelvan, pero \textbf{SI} aportará puntaje para los ejercicios de la semana.
-\end{frame}
-\begin{frame}
-\frametitle{Puntaje de los ejercicios}
-Se le dará un puntaje de los ejercicios opcionales en Moodle, siendo el máximo puntaje de $0.5$ que se aplicará a los ejercicios de la semana.
-\\
-\bigskip
-\pause
-Se agregará la parte propocional de los ejercicios con respuesta correcta.
-\end{frame}
-\begin{frame}
-\frametitle{Puntaje de los ejercicios}
-Es decir, si en la semana $4$ hay $10$ ejercicios a cuenta, y se resuelven los ejercicios opcionales, y todos tienen la respuesta correcta se sumará $0.5$ al puntaje obtenido luego de la evaluación de los $10$ ejercicios semanales.
-\end{frame}
-\begin{frame}
-\frametitle{Puntaje de los ejercicios}
-Si tuve 6 ejercicios opcionales correctos, entonces el puntaje que se sumará a la semana, es decir: 
-\begin{align*}
-\dfrac{6}{10} \times 0.5 = 0.3 \mbox{ puntos}
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Puntaje de los ejercicios}
-Como ejemplo: si en la semana $4$, obtuve un puntaje de $8.5$ luego de la revisión de los $10$ ejercicios, entonces:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item Si tengo correctos todas las respuestas de los ejercicios adicionales, mi puntaje de ejercicios  será de $9.0$
-\item Si tengo una parte de los ejercicios con respuesta correcta $(6/10)$, mi puntaje de ejercicios será de $8.8$
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Plazo para resolver}
-Los ejercicios opcionales tendrán un plazo y vencimiento: se deberán de responder durante la semana de trabajo, es decir, para la semana $4$, se podrán resolver y responder en la plataforma.
-\end{frame}
-\begin{frame}
-\frametitle{Plazo para resolver}
-Quedará programada la apertura para el día lunes y el cierre para el día viernes a las 6 pm.
-\\
-\bigskip
-Un vez alcanzado el horario, la plataforma ya no permitirá enviar respuestas.
-\end{frame}
-\begin{frame}
-\frametitle{Puntaje de los Ejercicios}
-Recuerden que al final del semestre, se sumará el total de puntos obtenidos en los ejercicios a cuenta, por lo que es atractivo resolver algunos ejercicios más para obtener puntos adicionales.
-\end{frame}
-\section{Sesiones síncronas}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Día de trabajo en línea}
-\begin{frame}
-\frametitle{Día de trabajo adicional}
-De acuerdo al calendario que se ha presentado, se considera oportuno que los días miércoles de las semanas 4, 5 y 6, es decir, los días 14, 21 y 28 de octubre, se realice una sesión de trabajo en Zoom.
-\end{frame}
-\begin{frame}
-\frametitle{Día de trabajo adicional}
-De tal manera que se revisen otros ejercicios con ciertas características, que buscarían complementar el trabajo que están realizando.
-\\
-\bigskip
-Se espera también que revisen los materiales de trabajo de manera previa.
-\end{frame}
+
 \end{document}

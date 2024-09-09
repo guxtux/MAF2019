@@ -1,22 +1,61 @@
-\input{../Preambulos/preambulo_presentacion_CambridgeUS_beaver}
-\title{\large{Introducción}}
-\subtitle{Tema 2 - Método de separación de variables}
+% \input{../Preambulos/preambulo_presentacion_CambridgeUS_beaver}
+
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
+\usepackage{empheq}
+
+\input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+
+%\newtcbox{\mybox}{on line,
+%  colframe=mycolor,colback=mycolor!10!white,
+%  boxrule=0.5pt,arc=4pt,boxsep=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt}
+
+
+\title{Tema 2 - Método de separación de variables}
 \author{M. en C. Gustavo Contreras Mayén}
-\date{}
-\institute{Facultad de Ciencias - UNAM}
-\titlegraphic{\includegraphics[width=1.75cm]{../Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
-   \includegraphics[width=1.75cm]{../Imagenes/escudo-unam}
-}
+
 \setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+    \usebeamerfont{section in foot} \insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+    \usebeamerfont{subsection in foot}  \insertsubsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot} {T2 - Segunda presentación} \hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+\date{}
+
 \begin{document}
 \maketitle
 \fontsize{14}{14}\selectfont
 \spanishdecimal{.}
+
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
+
 \section{Ecuaciones Diferenciales Parciales}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
+
 \begin{frame}
 \frametitle{Solución de las EDP}
 Una vez que se ha realizado la formulación de una EDP el siguiente paso es resolver la ecuación, en un primer momento podemos considerar la solución general de la EDP, entonces en vez de constantes arbitrarias aparecen funciones arbitrarias.
@@ -27,18 +66,20 @@ Por ejemplo, la solución general de $u_{xy} = 0$ es $u(x, y) = G(x) + F (y)$ do
 \end{frame}
 \begin{frame}
 \frametitle{Solución de las EDP}
-Dado que se quieren resolver problemas específicos, hay que estudiar el tipo de condiciones que hay que imponer para garantizar \emph{la unicidad} de la solución.
+Dado que se quieren resolver problemas específicos, hay que estudiar el tipo de condiciones que hay que imponer para garantizar \textocolor{red}{la unicidad} de la solución.
 \end{frame}
 \begin{frame}
 \frametitle{Solución de las EDP}
 Como se revisó en la presentación anterior, tenemos una clasificación con tres tipos de ecuaciones (parabólica, hiperbólica y elíptica) a continuación presentamos un posible tipo de condiciones de frontera (CDF) que se pueden presentar.
 \end{frame}
+
 \section{Condiciones de frontera}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{EDP Parabólica}
+
 \begin{frame}
 \frametitle{Ecuación de calor}
-Consideremos la ecuación del calor
+Consideremos la ecuación del calor:
 \begin{align*}
 u_{t} =  \alpha^{2} \,  u_{xx}
 \end{align*}
@@ -56,13 +97,18 @@ que en analogía con las ODE, tiene sentido llamar tal condición una \emph{cond
 \begin{frame}
 \frametitle{Condiciones de frontera}
 A su vez, como la barra tiene una longitud finita, hay que especificar la interacción de los extremos de la barra con el medio ambiente. Tales condiciones se conocen como \emph{condiciones de frontera}.
-\par
+\\
+\bigskip
+\pause
 Para los problemas de una dimensión hay tres tipos de condiciones de frontera usuales, aunque solo se estudiarán las primeras dos en esta revisión:
 \end{frame}
 \begin{frame}
 \frametitle{Condiciones de frontera}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=blue,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \item \textbf{Condición de Dirichlet}: Consiste en especificar la temperatura en los extremos de la barra en todo instante, es decir, dar dos funciones $f(t)$ y $g(t)$ de modo que:
 \begin{align}
@@ -75,8 +121,11 @@ Estas son las condiciones de tipo Dirichlet.
 \end{frame}
 \begin{frame}
 \frametitle{Condiciones de frontera}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=blue,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \conti
 \item \textbf{Condición de Neumann}: Consiste en especificar la derivada de la temperatura en los extremos de la barra, es decir, especificar el flujo de calor en los extremos de la barra:
@@ -89,15 +138,19 @@ Estas son las condiciones de tipo Neumann.
 \end{enumerate}
 \end{frame}
 \begin{frame}
-\frametitle{Condiciones de frontera}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\frametitle{Condiciones de frontera}\setbeamercolor{item projected}{bg=blue,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \conti
 \item \textbf{Condiciones mixtas (de Robin)}: Consiste en especificar una combinación de $u$ y de $u_{x}$ en los extremos de la barra.
 \end{enumerate}
 \end{frame}
+
 \subsection{EDP Elíptica}
+
 \begin{frame}
 \frametitle{La ecuación de trabajo}
 Sea la ecuación de Laplace:
@@ -112,8 +165,11 @@ En este caso no hay que especificar condiciones iniciales pues la función no de
 \end{frame}
 \begin{frame}
 \frametitle{Condiciones de la EDP}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=crimson,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \item \textbf{Condición de Dirichlet}: Si se trabaja sobre una lámina rectangular $0 < x < a$ y $0 < y < b$ las condiciones de Dirichlet consisten en especificar los valores de la temperatura (o el potencial) sobre todos los lados, es decir:
 \seti
@@ -130,9 +186,11 @@ u(x, 0) &= g_{1}(x) \hspace{1cm} u(x, b) = g_{2}(x)
 \end{align}
 \end{frame}
 \begin{frame}
-\frametitle{Condiciones de la EDP}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=crimson,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \conti    
 \item \textbf{Condiciones Mixtas}: Para los lados de la placa se toman dos de las condiciones de Dirichlet y las otras dos de Neumann, por ejemplo:
@@ -145,7 +203,9 @@ u(x, 0) &= g_{1}(x) \hspace{1cm} u(x, b) = g_{2}(x)
 \end{align}
 \end{enumerate}
 \end{frame}
+
 \subsection{EDP Hiperbólica}
+
 \begin{frame}
 \frametitle{La ecuación de trabajo}
 Consideremos ahora la ecuación de onda
@@ -168,8 +228,11 @@ A su vez, hay que especificar como se relaciona la cuerda con su frontera y nuev
 \end{frame}
 \begin{frame}
 \frametitle{Condiciones de frontera}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=cyan,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \item \textbf{Condición de Dirichlet}: Se especifica la posición de los extremos de la cuerda, es decir:
 \begin{align}
@@ -181,8 +244,11 @@ u(0, t) = f (t) \hspace{1cm} u(L, t) = g(t)
 \end{frame}
 \begin{frame}
 \frametitle{Condiciones de frontera}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=cyan,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \conti
 \item \textbf{Condición de Neumann}: Se especifica la forma en que se están \enquote{jalando} los extremos de la cuerda, es decir:
@@ -204,14 +270,20 @@ Para que tenga éxito el método, se ocupará que varias de las condiciones de f
 \frametitle{Consideraciones}
 Luego, dado que las ecuaciones son lineales se propone por el principio de superposición una combinación lineal (de hecho una serie en la mayoría de los casos) de tales soluciones y las constantes que aparecen se hallan tomando el desarrollo de Fourier de las otras condiciones iniciales o de frontera que todavía no se han utilizado.
 \end{frame}
+
 \section{Método de separación de variables}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Descripción}
+
 \begin{frame}
 \frametitle{El método}
 El método de separación de variables es una de las técnicas más antiguas para resolver problemas de valores con condiciones iniciales y se aplica en problemas donde:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\pause
+\setbeamercolor{item projected}{bg=darkmagenta,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \item La EDP es lineal y homogénea (no necesariamente con coeficientes constantes).
 \seti
@@ -219,8 +291,11 @@ El método de separación de variables es una de las técnicas más antiguas par
 \end{frame}
 \begin{frame}
 \frametitle{El método}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=darkmagenta,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}
 \item Las condiciones de frontera tienen la forma:
 \begin{align*}
@@ -238,12 +313,15 @@ Como referencia histórica, este método se remonta a la época de Joseph Fourie
 \pause
 En lugar de mostrar cómo funciona el método en general, apliquémoslo a un problema específico.
 \end{frame}
+
 \subsection{Planteamiento del problema}
+
 \begin{frame}
 \frametitle{La ecuación de calor}
 Considera el siguiente problema de valores iniciales con la ecuación de calor:
 \\
 \bigskip
+\pause
 Ecuación diferencial:
 \begin{align*}
 \addtolength{\fboxsep}{5pt}\boxed{ u_{t} = \alpha^{2} \, u_{xx}, \hspace{1cm} 0 < x < L,\hspace{0.5cm} 0 < t < \infty}
@@ -283,7 +361,9 @@ También se nos dan datos sobre el problema en forma de condición inicial; nues
 \pause
 Ahora veamos una descripción general.
 \end{frame}
+
 \subsection{La técnica}
+
 \begin{frame}
 \frametitle{Suposición de una solución}
 El método de separación de variables supone la existencia de soluciones sencillas de una EDP de la forma
@@ -312,7 +392,7 @@ Estas funciones simples
 \begin{align*}
 u_{n} (t) = X_{n} (x) \, T_{n}(t)
 \end{align*}
-se les denomina \textbf{soluciones fundamentales}, son las componentes básicas de nuestro problema, y de la solución $u (x, t)$ que estamos buscando.
+se les denomina \textocolor{red}{soluciones fundamentales}, son las componentes básicas de nuestro problema, y de la solución $u (x, t)$ que estamos buscando.
 \end{frame}
 \begin{frame}
 \frametitle{Soluciones al problema}
@@ -330,7 +410,9 @@ Dado que esta suma aún satisface la EDP y las CDF, ahora tenemos la solución a
 \pause
 Veamos a detalle el método de separación de variables.
 \end{frame}
+
 \subsection{Paso 1}
+
 \begin{frame}
 \frametitle{Encontrar las soluciones elementales de la EDP}
 Nos interesa encontrar la función $u(x, t)$ que satisfaga las siguientes condiciones:
@@ -407,7 +489,7 @@ X(x) = A \cos (a x ) + B \, \sin (a x) & \hspace{0.2cm} \lambda = a^{2}
 \end{align}
 \end{frame}
 \begin{frame}
-\frametitle{Resolviendo las escudo}
+\frametitle{Resolviendo las EDO}
 Mientras que para $T^{\prime} + \lambda \, \alpha^{2} \, T = 0$ se tiene:
 \begin{align}
 T(t) = A \, e^{- \lambda \, \alpha^{2} \, t} \hspace{1cm} \mbox{A arbitraria}
@@ -477,11 +559,12 @@ u_{n} (x, t) = A_{n} \, \exp \left( - \dfrac{n^{2} \, \alpha^{2} \, \pi^{2}}{L^{
 \frametitle{Principio de superposición}
 Por el principio de superposición, la solución que se propone es:
 \begin{align}
-u (x, t) = \sum_{n=1}^{\infty} A_{n} \, \exp \left( - \dfrac{n^{2} \, \alpha^{2} \, \pi^{2}}{L^{2}} \, t \right) \, \sin \left( \dfrac{n \, \pi}{L} \, x \right)
+u (x, t) = \nsum_{n=1}^{\infty} A_{n} \, \exp \left( - \dfrac{n^{2} \, \alpha^{2} \, \pi^{2}}{L^{2}} \, t \right) \, \sin \left( \dfrac{n \, \pi}{L} \, x \right)
 \label{eq:ecuacion_06_02_38}
 \end{align}
 Nos queda por considerar las condiciones iniciales del problema para obtener entonces la solución a la EDP.
 \end{frame}
+
 \subsection{Paso 3}
 \begin{frame}
 \frametitle{La solución de la EDP con las CDF y la CI}
@@ -533,176 +616,178 @@ Este seguimiento de pasos es el que se debe de utilizar cuando aplicamos el mét
 \frametitle{Consideración}
 Con el ejercicio del caso unidimensional, encontramos una solución a las EDO resultantes, en el siguiente ejercicio veremos un caso con una complejidad mayor, y que nos va a devolver una ecuación diferencial con ciertas características que revisaremos más adelante en el curso.
 \end{frame}
-\section{Coordenadas cilíndricas}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Ecuación de Helmholtz}
-\begin{frame}
-\frametitle{Tipo de problema}
-En el siguiente ejercicio ocuparemos nuevamente el método de separación de variables, en donde no se han especificado las condiciones de frontera ni las condiciones iniciales.
-\end{frame}
-\begin{frame}
-\frametitle{Tipo de problema}
-La geometría en donde se plantea el problema es con el sistema coordenado cilíndrico, y como partimos de una ecuación que involucra al operador diferencial Laplaciano, se debe de representar en la respectiva geometría, el correspondiente Laplaciano.
-\\
-\bigskip
-Este ejercicio sirve de base para demostrar que una ecuación diferencial es separable en otra simetría.
-\end{frame}
-\begin{frame}
-\frametitle{La EDP}
-Consideremos una función desconocida $\psi$ que depende de $\rho, \varphi$ y $z$, la ecuación de Helmholtz se expresa como:
-\begin{align}
-\laplacian{\psi (\rho, \varphi, z)} + k^{2} \, \psi (\rho, \varphi, z) = 0
-\label{eq:ecuacion_09_45}    
-\end{align}
-\end{frame}
-\subsection{Ecuación en coordenadas cilíndricas}
-\begin{frame}
-\frametitle{EDP en geometría cilíndrica}
-Aquí recuperamos lo que vimos en el Tema 1 - La física y la geometría, ya que para expresar el operador laplaciano, debemos de ocupar los factores de escala para este sistema coordenado.
-\end{frame}
-\begin{frame}
-\frametitle{Cambio de coordenadas}
-En coordenadas cilíndricas la ecuación de Helmholtz tiene la forma:
-\begin{align}
-\dfrac{1}{\rho} \, \pdv{\rho} \left( \rho \, \pdv{\psi}{\rho} \right) + \dfrac{1}{\rho^{2}} \, \pdv[2]{\psi}{\varphi} + \pdv{\psi}{z} + k^{2} \, \psi = 0
-\label{eq:ecuacion_09_46}
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Separando variables}
-Ocuparemos la primera suposición que vimos en el ejemplo anterior para la ecuación de calor, es decir, suponemos que existe una solución del tipo
-\begin{align}
-\psi (\rho, \varphi, z) = P(\rho) \, \Phi (\varphi) \, Z(z)
-\label{eq:ecuacion_09_47}
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Separando variables}
-Sustituyendo en la ecuación (\ref{eq:ecuacion_09_46}), tendremos que:
-\begin{align}
-\dfrac{\Phi \, Z}{\rho} \, \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + \dfrac{\Phi \, Z}{\rho^{2}} \, \dv[2]{\Phi}{\varphi} + P \, \Phi \, \dv[2]{Z}{z} + k^{2} \, P \, \Phi \, Z = 0 
-\label{eq:ecuacion_09_48}    
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Separando variables}
-Todas las derivadas parciales quedan como derivadas ordinarias, ya que las funciones dependen sólo de una variable. Dividiendo entre $P \, \Phi \, Z$, dejando el término de la derivada de $z$ a la derecha de la igualdad, resulta en:
-\begin{align}
-\dfrac{1}{\rho \, P} \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + \dfrac{1}{\rho^{2} \, \Phi} \, \dv[2]{\Phi}{\varphi} + k^{2} =  - \dfrac{1}{Z} \, \dv[2]{Z}{z}
-\label{eq:eq:ecuacion_09_49}
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Separando variables}
-Encontramos que una función de $z$ a la derecha parece depender de una función de $\rho$ y $\varphi$ a la izquierda.
-\\
-\bigskip
-Resolvemos esto haciendo que cada lado de la ec. (\ref{eq:eq:ecuacion_09_49}) sea igual a la misma constante. 
-\end{frame}
-\subsection{Primera constante de separación}
-\begin{frame}
-\frametitle{Primera constante}
-La elección del signo de la constante de separación es arbitraria.
-\\
-\bigskip
-Sin embargo, se elige un signo menos para la coordenada axial $z$ con la expectativa de una posible dependencia exponencial de $z$ (de la ec. (\ref{eq:ecuacion_09_50})).
-\end{frame}
-\begin{frame}
-\frametitle{Primera constante}
-Se elige un signo positivo para la coordenada azimutal $\varphi$ con la expectativa de una dependencia periódica de $\varphi$ (de la ec. (\ref{eq:ecuacion_09_53})).
-\end{frame}
-\begin{frame}
-\frametitle{Primera constante}
-Escogemos la constante de separación $- l^{2}$. Por tanto, tenemos el sistema:
-\begin{align}
-\dv[2]{Z}{z} &= l^{2} \, Z \label{eq:ecuacion_09_50} \\[0.5em]
-\dfrac{1}{\rho \, P} \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + \dfrac{1}{\rho^{2} \, \Phi} \dv[2]{\Phi}{\varphi} + k^{2} &= - l^{2} \label{eq:ecuacion_09_51}
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Ecuación resultante}
-Haciendo $k^{2} + l^{2} = n^{2}$, multiplicando por $\rho^{2}$, y reordenando los términos tenemos:
-\begin{align}
-\dfrac{\rho}{P} \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + n^{2} \, \rho^{2} = - \dfrac{1}{\Phi} \, \dv[2]{\Phi}{\varphi}
-\label{eq:ecuacion_09_52}
-\end{align}
-\end{frame}
-\subsection{Segunda constante de separación}
-\begin{frame}
-\frametitle{Segunda constante}
-Si definimos que la expresión del lado derecho sea igual a $m^{2}$, que en este caso representa la segunda constante de separación, entonces:
-\begin{align}
-\dv[2]{\Phi}{\varphi} = - m^{2} \, \Phi
-\label{eq:ecuacion_09_53}
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Separando variables}
-Para el término con dependencia en $\rho$, se tiene
-\begin{align}
-\rho \, \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + (n^{2} \, \rho^{2} - m^{2}) \, P = 0
-\label{eq:ecuacion_09_54}
-\end{align}
-\pause
-Esta última ecuación se le conoce como la \emph{ecuación diferencial de Bessel}, cuya solución y sus propiedades se presentarán en el Tema 5 - Funciones Especiales. 
-\end{frame}
-\begin{frame}
-\frametitle{De la ec. de Bessel}
-Como dato adicional: la separación de variables de la ecuación de Laplace en coordenadas parabólicas también devuelve la ecuación de Bessel.
-\end{frame}
-\begin{frame}
-\frametitle{Las constantes de separación}
-La ecuación de Helmholtz inicial (ec. \ref{eq:ecuacion_09_45}), que es una EDP en tres dimensiones y ocupando dos constantes de separación\footnote{Como vemos, si $n$ es el orden de la EDP, entonces tendremos $n-1$ constantes de separación.}, ha sido reemplazada por tres EDO (\ref{eq:ecuacion_09_50}), (\ref{eq:ecuacion_09_53}) y (\ref{eq:ecuacion_09_54}).
-\end{frame}
-\begin{frame}
-\frametitle{Solución a la EDP inicial}
-Una solución de la ecuación de Helmholtz es:
-\begin{align}
-\psi (\rho, \varphi, z) = P(\rho) \, \Phi (\varphi) \, Z(z)
-\label{eq:ecuacion_09_55}    
-\end{align}
-\end{frame}
-\subsection{Solución general}
-\begin{frame}
-\frametitle{Solución obtenida}
-Identificando las soluciones específicas para $P, \Phi, Z$ por los subíndices, la solución más general de la ecuación de Helmholtz, es una combinación lineal del producto de las soluciones:
-\begin{align}
-\Psi (\rho, \varphi, z) =  \sum_{m,n} a_{mn} \, P_{mn}(\rho) \, \Phi_{m}(\varphi) \, Z_{n}(z)
-\label{eq:ecuacion_09_56}
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Solución específica}
-Para resolver un caso particular, se deberán de tener en cuenta las condiciones de frontera, así como las condiciones iniciales, que nos devolvería una solución particular a un problema.
-\end{frame}
-\section{Ejercicios a cuenta.}
-\begin{frame}
-\frametitle{Para practicar}
-Del ejercicio (\ref{item2}) al (\ref{item7}) clasifica la EDP que se muestra (orden, linealidad, tipo de EDP), tendrás que mostrar tu argumento para la respuesta, es decir, justificar por qué clasificaste de esa forma.
-\begin{enumerate}
-\item $2 \, u_{xx} + 6 , u_{xy} + 5 \, u_{yy} + u_{x} = 0$ \label{item2}
-\item $u_{xx} - 2 \, u_{xy} + u_{yy} + 3 \, u_{x} - u_{y} = 0$ \label{item3}
-\item $u_{xx} + 6 \, u_{xy} + 9 \, u_{yy} + 3 \, y \, u_{y} = 0$ \label{item5}
-\item $u_{xx} - 2 \, \cos x \, u_{xy} +  (2 - \sin^{2} x) \, u_{yy} + u = 0$ \label{item7}
-\seti
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Para practicar}
-\begin{enumerate}
-\conti
-\item Demuestra que la ecuación de Helmholtz
-\begin{align*}
-\laplacian \psi + k^{2} \: \psi = 0
-\end{align*}
-es separable en coordenadas cilíndricas circulares si $k^{2}$ se generaliza como
-\begin{align*}
-k^{2} + f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \: g(\varphi) + h(z)
-\end{align*}
-es decir, la ecuación de Helmholtz es:
-\begin{align*}
-\laplacian \psi + \left( k^{2} + f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \: g(\varphi) + h(z) \right) \, \psi = 0
-\end{align*}
-\end{enumerate}
-\end{frame}
+
+% \section{Coordenadas cilíndricas}
+% \frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Ecuación de Helmholtz}
+
+% \begin{frame}
+% \frametitle{Tipo de problema}
+% En el siguiente ejercicio ocuparemos nuevamente el método de separación de variables, en donde no se han especificado las condiciones de frontera ni las condiciones iniciales.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Tipo de problema}
+% La geometría en donde se plantea el problema es con el sistema coordenado cilíndrico, y como partimos de una ecuación que involucra al operador diferencial Laplaciano, se debe de representar en la respectiva geometría, el correspondiente Laplaciano.
+% \\
+% \bigskip
+% Este ejercicio sirve de base para demostrar que una ecuación diferencial es separable en otra simetría.
+% \end{frame}
+% \begin{frame}
+% \frametitle{La EDP}
+% Consideremos una función desconocida $\psi$ que depende de $\rho, \varphi$ y $z$, la ecuación de Helmholtz se expresa como:
+% \begin{align}
+% \laplacian{\psi (\rho, \varphi, z)} + k^{2} \, \psi (\rho, \varphi, z) = 0
+% \label{eq:ecuacion_09_45}    
+% \end{align}
+% \end{frame}
+% \subsection{Ecuación en coordenadas cilíndricas}
+% \begin{frame}
+% \frametitle{EDP en geometría cilíndrica}
+% Aquí recuperamos lo que vimos en el Tema 1 - La física y la geometría, ya que para expresar el operador laplaciano, debemos de ocupar los factores de escala para este sistema coordenado.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Cambio de coordenadas}
+% En coordenadas cilíndricas la ecuación de Helmholtz tiene la forma:
+% \begin{align}
+% \dfrac{1}{\rho} \, \pdv{\rho} \left( \rho \, \pdv{\psi}{\rho} \right) + \dfrac{1}{\rho^{2}} \, \pdv[2]{\psi}{\varphi} + \pdv{\psi}{z} + k^{2} \, \psi = 0
+% \label{eq:ecuacion_09_46}
+% \end{align}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Separando variables}
+% Ocuparemos la primera suposición que vimos en el ejemplo anterior para la ecuación de calor, es decir, suponemos que existe una solución del tipo
+% \begin{align}
+% \psi (\rho, \varphi, z) = P(\rho) \, \Phi (\varphi) \, Z(z)
+% \label{eq:ecuacion_09_47}
+% \end{align}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Separando variables}
+% Sustituyendo en la ecuación (\ref{eq:ecuacion_09_46}), tendremos que:
+% \begin{align}
+% \dfrac{\Phi \, Z}{\rho} \, \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + \dfrac{\Phi \, Z}{\rho^{2}} \, \dv[2]{\Phi}{\varphi} + P \, \Phi \, \dv[2]{Z}{z} + k^{2} \, P \, \Phi \, Z = 0 
+% \label{eq:ecuacion_09_48}    
+% \end{align}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Separando variables}
+% Todas las derivadas parciales quedan como derivadas ordinarias, ya que las funciones dependen sólo de una variable. Dividiendo entre $P \, \Phi \, Z$, dejando el término de la derivada de $z$ a la derecha de la igualdad, resulta en:
+% \begin{align}
+% \dfrac{1}{\rho \, P} \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + \dfrac{1}{\rho^{2} \, \Phi} \, \dv[2]{\Phi}{\varphi} + k^{2} =  - \dfrac{1}{Z} \, \dv[2]{Z}{z}
+% \label{eq:eq:ecuacion_09_49}
+% \end{align}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Separando variables}
+% Encontramos que una función de $z$ a la derecha parece depender de una función de $\rho$ y $\varphi$ a la izquierda.
+% \\
+% \bigskip
+% Resolvemos esto haciendo que cada lado de la ec. (\ref{eq:eq:ecuacion_09_49}) sea igual a la misma constante. 
+% \end{frame}
+% \subsection{Primera constante de separación}
+% \begin{frame}
+% \frametitle{Primera constante}
+% La elección del signo de la constante de separación es arbitraria.
+% \\
+% \bigskip
+% Sin embargo, se elige un signo menos para la coordenada axial $z$ con la expectativa de una posible dependencia exponencial de $z$ (de la ec. (\ref{eq:ecuacion_09_50})).
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera constante}
+% Se elige un signo positivo para la coordenada azimutal $\varphi$ con la expectativa de una dependencia periódica de $\varphi$ (de la ec. (\ref{eq:ecuacion_09_53})).
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera constante}
+% Escogemos la constante de separación $- l^{2}$. Por tanto, tenemos el sistema:
+% \begin{align}
+% \dv[2]{Z}{z} &= l^{2} \, Z \label{eq:ecuacion_09_50} \\[0.5em]
+% \dfrac{1}{\rho \, P} \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + \dfrac{1}{\rho^{2} \, \Phi} \dv[2]{\Phi}{\varphi} + k^{2} &= - l^{2} \label{eq:ecuacion_09_51}
+% \end{align}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ecuación resultante}
+% Haciendo $k^{2} + l^{2} = n^{2}$, multiplicando por $\rho^{2}$, y reordenando los términos tenemos:
+% \begin{align}
+% \dfrac{\rho}{P} \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + n^{2} \, \rho^{2} = - \dfrac{1}{\Phi} \, \dv[2]{\Phi}{\varphi}
+% \label{eq:ecuacion_09_52}
+% \end{align}
+% \end{frame}
+% \subsection{Segunda constante de separación}
+% \begin{frame}
+% \frametitle{Segunda constante}
+% Si definimos que la expresión del lado derecho sea igual a $m^{2}$, que en este caso representa la segunda constante de separación, entonces:
+% \begin{align}
+% \dv[2]{\Phi}{\varphi} = - m^{2} \, \Phi
+% \label{eq:ecuacion_09_53}
+% \end{align}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Separando variables}
+% Para el término con dependencia en $\rho$, se tiene
+% \begin{align}
+% \rho \, \dv{\rho} \left( \rho \, \dv{P}{\rho} \right) + (n^{2} \, \rho^{2} - m^{2}) \, P = 0
+% \label{eq:ecuacion_09_54}
+% \end{align}
+% \pause
+% Esta última ecuación se le conoce como la \emph{ecuación diferencial de Bessel}, cuya solución y sus propiedades se presentarán en el Tema 5 - Funciones Especiales. 
+% \end{frame}
+% \begin{frame}
+% \frametitle{De la ec. de Bessel}
+% Como dato adicional: la separación de variables de la ecuación de Laplace en coordenadas parabólicas también devuelve la ecuación de Bessel.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Las constantes de separación}
+% La ecuación de Helmholtz inicial (ec. \ref{eq:ecuacion_09_45}), que es una EDP en tres dimensiones y ocupando dos constantes de separación\footnote{Como vemos, si $n$ es el orden de la EDP, entonces tendremos $n-1$ constantes de separación.}, ha sido reemplazada por tres EDO (\ref{eq:ecuacion_09_50}), (\ref{eq:ecuacion_09_53}) y (\ref{eq:ecuacion_09_54}).
+% \end{frame}
+% \begin{frame}
+% \frametitle{Solución a la EDP inicial}
+% Una solución de la ecuación de Helmholtz es:
+% \begin{align}
+% \psi (\rho, \varphi, z) = P(\rho) \, \Phi (\varphi) \, Z(z)
+% \label{eq:ecuacion_09_55}    
+% \end{align}
+% \end{frame}
+% \subsection{Solución general}
+% \begin{frame}
+% \frametitle{Solución obtenida}
+% Identificando las soluciones específicas para $P, \Phi, Z$ por los subíndices, la solución más general de la ecuación de Helmholtz, es una combinación lineal del producto de las soluciones:
+% \begin{align}
+% \Psi (\rho, \varphi, z) =  \sum_{m,n} a_{mn} \, P_{mn}(\rho) \, \Phi_{m}(\varphi) \, Z_{n}(z)
+% \label{eq:ecuacion_09_56}
+% \end{align}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Solución específica}
+% Para resolver un caso particular, se deberán de tener en cuenta las condiciones de frontera, así como las condiciones iniciales, que nos devolvería una solución particular a un problema.
+% \end{frame}
+% \section{Ejercicios a cuenta.}
+% \begin{frame}
+% \frametitle{Para practicar}
+% Del ejercicio (\ref{item2}) al (\ref{item7}) clasifica la EDP que se muestra (orden, linealidad, tipo de EDP), tendrás que mostrar tu argumento para la respuesta, es decir, justificar por qué clasificaste de esa forma.
+% \begin{enumerate}
+% \item $2 \, u_{xx} + 6 , u_{xy} + 5 \, u_{yy} + u_{x} = 0$ \label{item2}
+% \item $u_{xx} - 2 \, u_{xy} + u_{yy} + 3 \, u_{x} - u_{y} = 0$ \label{item3}
+% \item $u_{xx} + 6 \, u_{xy} + 9 \, u_{yy} + 3 \, y \, u_{y} = 0$ \label{item5}
+% \item $u_{xx} - 2 \, \cos x \, u_{xy} +  (2 - \sin^{2} x) \, u_{yy} + u = 0$ \label{item7}
+% \seti
+% \end{enumerate}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Para practicar}
+% \begin{enumerate}
+% \conti
+% \item Demuestra que la ecuación de Helmholtz
+% \begin{align*}
+% \laplacian \psi + k^{2} \: \psi = 0
+% \end{align*}
+% es separable en coordenadas cilíndricas circulares si $k^{2}$ se generaliza como
+% \begin{align*}
+% k^{2} + f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \: g(\varphi) + h(z)
+% \end{align*}
+% es decir, la ecuación de Helmholtz es:
+% \begin{align*}
+% \laplacian \psi + \left( k^{2} + f(\rho) + \left( \dfrac{1}{\rho^{2}} \right) \: g(\varphi) + h(z) \right) \, \psi = 0
+% \end{align*}
+% \end{enumerate}
+% \end{frame}
 \end{document}
