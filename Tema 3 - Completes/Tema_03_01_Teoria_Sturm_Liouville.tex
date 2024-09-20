@@ -25,10 +25,17 @@
   \vskip0pt%
 }
 \makeatother
-\usefonttheme{serif}
+% \usefonttheme{serif}
 \resetcounteronoverlays{saveenumi}
 
-\date{24 de marzo de 2022}
+\date{\today}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+% \numberwithin{equation}{section}
 
 \title{\large{Teoría Sturm-Liouville}}
 \subtitle{Tema 3 - Bases completas y ortogonales}
@@ -41,28 +48,28 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 
 %Ref. Herman (2015)  - Sturm-Liouville
 \section{Problemas de tipo Sturm-Liouville.}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
 
 \begin{frame}
 \frametitle{Soluciones a las EDO}
 Hemos visto que las funciones trigonométricas y que algunas las funciones especiales son las soluciones de ecuaciones diferenciales.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Soluciones a las EDO}
 Estas soluciones dan conjuntos ortogonales de funciones que se pueden utilizar para representar funciones en expansiones de series de Fourier generalizadas.
 \end{frame}
 \begin{frame}
 \frametitle{Procedimientos más generales}
 Al mismo tiempo, sería interesante generalizar las técnicas que usamos por primera vez para resolver la ecuación de calor con el fin de resolver problemas más generales de valores iniciales (VI) o con condiciones de frontera (CDF).
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Procedimientos más generales}
  Es decir, usamos la separación de variables para separar la ecuación diferencial parcial dada en un conjunto de ecuaciones diferenciales ordinarias.
 \end{frame}
 \begin{frame}
@@ -75,21 +82,24 @@ Con suerte, esas soluciones constituirán una base útil en algún espacio funci
 \end{frame}
 
 \section{Teoría Sturm-Liouville}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Definición}
 
 \begin{frame}
 \frametitle{Definición}
-Una clase de problemas a la que pertenecen estos ejemplos anteriores, son \emph{los problemas de valores propios de Sturm-Liouville}.
+Una clase de problemas a la que pertenecen estos ejemplos anteriores, son \textocolor{red}{los problemas de valores propios de Sturm-Liouville}.
 \end{frame}
 \begin{frame}
 \frametitle{Uso de operadores}
 Estos problemas involucran:
-\setbeamercolor{item projected}{bg=cadet,fg=white}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=byzantine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
-\item \emph{Operadores autoadjuntos} (diferenciales) que juegan un papel importante en la teoría espectral de operadores lineales.
-\item La existencia de las eigenfunciones necesarias para resolver problemas de física descritos por los problemas de VI o CDF anteriores.
+\item \textocolor{lava}{Operadores autoadjuntos} (diferenciales) que juegan un papel importante en la teoría espectral de operadores lineales.
+\item La \textocolor{coquelicot}{existencia de las eigenfunciones} necesarias para resolver problemas de física descritos por los problemas de VI o CDF anteriores.
 \end{enumerate}
 \end{frame}
 
@@ -119,11 +129,11 @@ En general, podríamos obtener ecuaciones de la forma:
 a_{2} (x) \, \sderivada{y} + a_{1} (x) \, \pderivada{y} + a_{0} (x) \, y = f(x)
 \label{eq:ecuacion_04_01}
 \end{align}
-sujeta a CDF.
+sujeta a las CDF.
 \end{frame}
 \begin{frame}
 \frametitle{Expresión con el operador}
-Podemos escribir una ecuación de este tipo en forma de un operador definiendo el \emph{operador diferencial}:
+Podemos escribir una ecuación de este tipo en forma de un operador definiendo el \textocolor{coolblack}{operador diferencial}:
 \pause
 \begin{align*}
 L = a_{2} (x) \, D^{2} + a_{1} (x) \, D + a_{0} (x)
@@ -135,7 +145,7 @@ L \, y = f
 \end{frame}
 \begin{frame}
 \frametitle{Solución con eigenfunciones}
-Veremos que estas ecuaciones se pueden resolver usando \emph{expansiones de eigenfunciones}.
+Veremos que estas ecuaciones se pueden resolver usando \textocolor{byzantium}{expansiones de eigenfunciones}.
 \\
 \bigskip
 \pause
@@ -176,7 +186,7 @@ Resulta que cualquier operador diferencial lineal de segundo orden puede convert
 \end{frame}
 \begin{frame}
 \frametitle{Propiedad del operador diferencial}
-El operador resultante se denomina \emph{operador Sturm-Liouville}.
+El operador resultante se denomina \textocolor{ao(english)}{operador Sturm-Liouville}.
 \\
 \bigskip
 \pause
@@ -218,11 +228,11 @@ Se supone que las funciones $p (x)$, $\pderivada{p} (x)$, $q (x)$ y $\sigma (x)$
 \end{frame}
 \begin{frame}
 \frametitle{El problema de S-L}    
-Si el intervalo es finito y estas suposiciones sobre los coeficientes son verdaderas en $[a, b]$, entonces se dice que el problema es un \emph{problema regular de Sturm-Liouville}.
+Si el intervalo es finito y estas suposiciones sobre los coeficientes son verdaderas en $[a, b]$, entonces se dice que el problema es un \textocolor{carmine}{problema regular de Sturm-Liouville}.
 \\
 \bigskip
 \pause
-De lo contrario, se denomina \emph{problema singular de Sturm-Liouville}.
+De lo contrario, se denomina \textocolor{cerise}{problema singular de Sturm-Liouville}.
 \end{frame}
 \begin{frame}
 \frametitle{Condiciones de frontera}
@@ -457,7 +467,7 @@ x \, \sderivada{y} + \pderivada{y} + \dfrac{2}{x} \, y &= 0 \\[0.5em] \pause
 
 
 \section{Propiedades VP de S-L}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Cinco propiedades}
 
 \begin{frame}
@@ -470,8 +480,11 @@ Vamos a enumerar algunos de los hechos importantes y nos centraremos en algunas 
 \end{frame}
 \begin{frame}
 \frametitle{Los valores propios}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=black,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item Los eigenvalores son reales, contables, ordenados y hay un eigenvalor más pequeño.
 \\\
@@ -495,8 +508,11 @@ En español se utiliza el prefijo auto- o propio, siendo característico tambié
 \end{frame}
 \begin{frame}
 \frametitle{Los eigenvalores}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=black,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Para cada eigenvalor $\lambda_{n}$ existe una eigenfunción $\phi_{n}$ con $n - 1$ ceros en $(a, b)$.
@@ -505,8 +521,11 @@ En español se utiliza el prefijo auto- o propio, siendo característico tambié
 \end{frame}
 \begin{frame}
 \frametitle{Las eigenfunciones}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=black,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Las eigenfunciones que corresponden a diferentes valores de las mismas son ortogonales con respecto a la función de peso, $\sigma (x)$.
@@ -524,7 +543,7 @@ Al definir el producto interno de $f (x)$ y $g (x)$ como:
 \end{frame}
 \begin{frame}
 \frametitle{La ortogonalidad de las eigenfunciones}
-Entonces la \emph{ortogonalidad} de las eigenfunciones se puede escribir de la forma:
+Entonces la \textocolor{ao}{ortogonalidad} de las eigenfunciones se puede escribir de la forma:
 \pause
 \begin{align}
 \langle \phi_{n}, \phi_{m} \rangle = \langle \phi_{n}, \phi_{n} \rangle \, \delta_{nm} \hspace{1.5cm} n, m = 1, 2, \ldots
@@ -533,14 +552,17 @@ Entonces la \emph{ortogonalidad} de las eigenfunciones se puede escribir de la f
 \end{frame}
 \begin{frame}
 \frametitle{El conjunto de las eigenfunciones}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=black,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
-\item El conjunto de eigenfunciones es \emph{completo}, \pause es decir, cualquier función suave se puede representar mediante una expansión generalizada de las eigenfunciones de la serie de Fourier:
+\item El conjunto de eigenfunciones es \textocolor{carnelian}{completo}, \pause es decir, cualquier función suave se puede representar mediante una expansión generalizada de las eigenfunciones de la serie de Fourier:
 \pause
 \begin{align*}
-f(x) \sim \nsum_{n=1}^{\infty} c_{n} \, \phi_{n} (x)
+f (x) \sim \nsum_{n=1}^{\infty} c_{n} \, \phi_{n} (x)
 \end{align*}
 \seti
 \end{enumerate}
@@ -563,7 +585,7 @@ Por cuadrado integrable, queremos decir que $\langle f,  f \rangle < \infty$.
 \end{frame}
 \begin{frame}
 \frametitle{El espacio de Hilbert}
-Se puede demostrar que tal espacio es isomorfo en un \emph{espacio de Hilbert}, un espacio de producto interno completo.
+Se puede demostrar que tal espacio es isomorfo en un \textocolor{magenta}{espacio de Hilbert}, un espacio de producto interno completo.
 \\
 \bigskip
 \pause
@@ -571,8 +593,11 @@ Los espacios de Hilbert juegan un papel especial en la mecánica cuántica.
 \end{frame}
 \begin{frame}
 \frametitle{El cociente de Rayleigh}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=black,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Los valores propios satisfacen el cociente de Rayleigh:
@@ -618,8 +643,11 @@ Este es un problema que ya se ha visto muchas veces.
 \bigskip
 \pause
 Para este ejercicio:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=cobalt,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item Las eigenfunciones son $\phi_{n} (x) = \sin n\, x$.
 \item Con eigenvalores $\lambda_{n} = n^{2}$ para $n = 1, 2, \ldots$.
@@ -745,7 +773,7 @@ Por lo tanto, la solución general es:
 \pause
 \begin{align}
 \begin{aligned}
-y(x) &= c_{1} \, \cos \left( \sqrt{\lambda + 2} \, \ln \abs{x} \right) + \\[0.5em]
+y (x) &= c_{1} \, \cos \left( \sqrt{\lambda + 2} \, \ln \abs{x} \right) + \\[0.5em]
 &+ c_{2} \, \sin \left( \sqrt{\lambda + 2} \, \ln \abs{x} \right)
 \end{aligned}
 \label{eq:ecuacion_04_15}
@@ -815,8 +843,11 @@ Por lo que $\pderivada{y} (2)$ se anula automáticamente, dejando la solución e
 \frametitle{Se cumplen las propiedades}
 Observamos que algunas de las propiedades enumeradas al principio de la sección son válidas para este ejemplo.
 \pause
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=debianred,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item Los eigenvalores se consideran reales, contables y ordenados.
 \item Hay al menos uno, $\lambda_{0} = -2$.
@@ -825,8 +856,11 @@ Observamos que algunas de las propiedades enumeradas al principio de la sección
 \end{frame}
 \begin{frame}
 \frametitle{Se cumplen las propiedades}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=debianred,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item Se pueden encontrar los ceros de cada eigenfunción en el intervalo $[1, 2]$. \pause Entonces, el argumento del coseno, $\bigg( \dfrac{n \, \pi}{\ln 2} \, \ln x \bigg)$, toma valores de $0$ a $n \pi$ para $x \in [1, 2]$. 
@@ -850,8 +884,11 @@ La función coseno tiene $n - 1$ raíces en este intervalo. Como se aprecia en l
 \frametitle{Se cumplen las propiedades}
 Observamos que algunas de las propiedades enumeradas al principio de la sección son válidas para este ejemplo.
 \pause
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=debianred,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \conti
 \item La ortogonalidad se revisa como sigue: En la integral usamos el cambio de variable $y = \dfrac{\pi \, \ln x}{\ln 2}$.
@@ -870,4 +907,5 @@ Esto nos devuelve:
 \label{eq:ecuacion_04_16}
 \end{eqnarray}
 \end{frame}                
+
 \end{document}

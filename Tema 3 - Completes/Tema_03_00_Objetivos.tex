@@ -1,9 +1,10 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Dresden_seahorse}
 
-\setbeamercolor{section in foot}{bg=ginger, fg=white}
-\setbeamercolor{subsection in foot}{bg=kellygreen, fg=white}
+\setbeamercolor{section in foot}{bg=ginger, fg=black}
+\setbeamercolor{subsection in foot}{bg=kellygreen, fg=black}
 \setbeamercolor{date in foot}{bg=goldenrod, fg=white}
 
 \makeatletter
@@ -24,10 +25,17 @@
   \vskip0pt%
 }
 \makeatother
-\usefonttheme{serif}
+% \usefonttheme{serif}
 \resetcounteronoverlays{saveenumi}
 
-\date{24 de marzo de 2022}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\numberwithin{equation}{section}
+
+\date{\today}
 
 \title{\large{Tema 3 - Bases completas y ortogonales}}
 \subtitle{Curso MAF}
@@ -40,10 +48,10 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 \section{Introducción}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Avances en el curso}
 
 \begin{frame}
@@ -68,7 +76,7 @@ Algunos de los conceptos que utilizaremos en este tema, los habrás revisado en 
 \end{frame}
 
 \section{Objetivo}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Objetivos del Tema 3}
 
 \begin{frame}
@@ -119,57 +127,60 @@ Completitud de las funciones:
 \end{enumerate}
 \end{frame}
 
-% \section{Temas a revisar}
-% \frame{\tableofcontents[currentsection, hideothersubsections]}
-% \subsection{Contenido}
-
-
-% \begin{frame}
-% \frametitle{Temas}
-% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-% \setbeamertemplate{enumerate items}[circle]
-% \begin{enumerate}[<+->]
-% \item Problemas de tipo Sturm-Liouville.
-% \item Operadores adjuntos y autoadjuntos (Hermitianos).
-% \item Funciones propias ortogonales.
-% \item Completes de una base.
-% \end{enumerate}
-% \end{frame}
-
-\subsection{Temas complementarios}
+\section{Temas a revisar}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{Contenido}
 
 \begin{frame}
-\frametitle{Temas complementarios}
-Considerando que se va a requerir material adicional para tener una base sólida de conocimiento, se propone el siguiente tema complementario:
-\setbeamercolor{item projected}{bg=babyblue,fg=black}
-\setbeamertemplate{enumerate items}[square]
+\frametitle{Temas}
+
+\setbeamercolor{item projected}{bg=bananayellow,fg=ao}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
-\item Espacio de Hilbert.
+\item Problemas de tipo Sturm-Liouville.
+\item Operadores adjuntos y autoadjuntos (Hermitianos).
+\item Funciones propias ortogonales.
+\item Completes de una base.
 \end{enumerate}
 \end{frame}
+
+% \subsection{Temas complementarios}
+
+% \begin{frame}
+% \frametitle{Temas complementarios}
+% Considerando que se va a requerir material adicional para tener una base sólida de conocimiento, se propone el siguiente tema complementario:
+% \setbeamercolor{item projected}{bg=babyblue,fg=black}
+% \setbeamertemplate{enumerate items}[square]
+% \begin{enumerate}[<+->]
+% \item Espacio de Hilbert.
+% \end{enumerate}
+% \end{frame}
 % \begin{frame}
 % \frametitle{Sobre los temas complementarios}
 % El tema de la \emph{función delta de Dirac} es importante ya que vamos a apoyarnos bastante en lo que sigue del curso, por lo que recomendamos ampliamente que lo revisen y trabajen los ejercicios opcionales para repasar.
 % \end{frame}
 
-\section{Cronograma de trabajo}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Trabajo por semana}
+% \section{Cronograma de trabajo}
+% \frame{\tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Trabajo por semana}
 
-\begin{frame}
-\frametitle{Distribución de tiempos}
-Para una revisión completa de los materiales de trabajo para el Tema 3, se presenta la siguiente distribución de tiempos:
-\end{frame}
-\begin{frame}
-\frametitle{Distribución de tiempos}
-\setbeamercolor{item projected}{bg=babyblue,fg=black}
-\setbeamertemplate{enumerate items}[square]
-\begin{enumerate}
-\item Semanas 6 y 7: Problemas tipo Sturm-Liouville.
-\item Semanas 7 y 8: Operadores adjuntos y autoadjuntos.
-\item Semanas 8 y 9: Completes de una base.
-\end{enumerate}
-\end{frame}
+% \begin{frame}
+% \frametitle{Distribución de tiempos}
+% Para una revisión completa de los materiales de trabajo para el Tema 3, se presenta la siguiente distribución de tiempos:
+% \end{frame}
+% \begin{frame}
+% \frametitle{Distribución de tiempos}
+% \setbeamercolor{item projected}{bg=babyblue,fg=black}
+% \setbeamertemplate{enumerate items}[square]
+% \begin{enumerate}
+% \item Semanas 6 y 7: Problemas tipo Sturm-Liouville.
+% \item Semanas 7 y 8: Operadores adjuntos y autoadjuntos.
+% \item Semanas 8 y 9: Completes de una base.
+% \end{enumerate}
+% \end{frame}
 
 % \subsection{Sesiones síncronas}
 
@@ -193,45 +204,45 @@ Para una revisión completa de los materiales de trabajo para el Tema 3, se pres
 % Las reuniones se llevará a cabo bajo demanda el grupo.
 % \end{frame}
 
-\section{Evaluación}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Ejercicios y enunciados}
+% \section{Evaluación}
+% \frame{\tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Ejercicios y enunciados}
 
-\begin{frame}
-\frametitle{Ejercicios a cuenta y enunciados}
-En la clase del día 29 de marzo se presentarán los ejercicios, así como los enunciados correspondientes del tema 3 del examen intermedio.
-\\
-\bigskip
-A continuación se detallan las fechas de entrega.
-\end{frame}
-\begin{frame}
-\frametitle{Ajuste en la fecha de entrega}
-Debido al recorrido en las actividades del curso, se modificará en esta ocasión la manera de entregar los ejercicios y el examen intermedio.
-\\
-\bigskip
-\pause
-Habrá  una primera entrega de ejercicios del Tema 3 y el Examen intermedio con enunciados que cubren hasta el contenido de ortogonalización de funciones (Gram-Schmidt)
-\end{frame}
-\begin{frame}
-\frametitle{Entrega de ejercicios}
-Los primeros ocho ejercicios para el Tema 3, se entregarán el: \pause \textbf{Martes 19 de abril a las 6 pm en Moodle}.
-\\
-\bigskip
-\pause
-Los dos ejercicios restantes, se entregarán el \pause \textbf{Martes 26 de abril a las 6 pm en Moodle}.
-\end{frame}
-\begin{frame}
-\frametitle{Examen intermedio}
-Los enunciados del  examen intermedio se indicarán en la semana 8. \pause Del Tema 3 se incluirá hasta el contenido de ortogonalización de Gram-Schmidt.
-\\
-\bigskip
-\pause
-El examen intermedio se entregará el \textbf{Martes 19 de abril a las 6 pm en Moodle}.
-\end{frame}
-\begin{frame}
-\frametitle{Ejercicio(s) pendientes} 
-El o los enunciados pendientes del tema de completes de una base (Tema 3), se entregarán el \pause \textbf{Martes 26 de abril a las 6 pm en Moodle}.
-\end{frame}
+% \begin{frame}
+% \frametitle{Ejercicios a cuenta y enunciados}
+% En la clase del día 29 de marzo se presentarán los ejercicios, así como los enunciados correspondientes del tema 3 del examen intermedio.
+% \\
+% \bigskip
+% A continuación se detallan las fechas de entrega.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ajuste en la fecha de entrega}
+% Debido al recorrido en las actividades del curso, se modificará en esta ocasión la manera de entregar los ejercicios y el examen intermedio.
+% \\
+% \bigskip
+% \pause
+% Habrá  una primera entrega de ejercicios del Tema 3 y el Examen intermedio con enunciados que cubren hasta el contenido de ortogonalización de funciones (Gram-Schmidt)
+% \end{frame}
+% \begin{frame}
+% \frametitle{Entrega de ejercicios}
+% Los primeros ocho ejercicios para el Tema 3, se entregarán el: \pause \textbf{Martes 19 de abril a las 6 pm en Moodle}.
+% \\
+% \bigskip
+% \pause
+% Los dos ejercicios restantes, se entregarán el \pause \textbf{Martes 26 de abril a las 6 pm en Moodle}.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Examen intermedio}
+% Los enunciados del  examen intermedio se indicarán en la semana 8. \pause Del Tema 3 se incluirá hasta el contenido de ortogonalización de Gram-Schmidt.
+% \\
+% \bigskip
+% \pause
+% El examen intermedio se entregará el \textbf{Martes 19 de abril a las 6 pm en Moodle}.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ejercicio(s) pendientes} 
+% El o los enunciados pendientes del tema de completes de una base (Tema 3), se entregarán el \pause \textbf{Martes 26 de abril a las 6 pm en Moodle}.
+% \end{frame}
 
 % \subsection{Examen Tarea}
 
@@ -239,24 +250,24 @@ El o los enunciados pendientes del tema de completes de una base (Tema 3), se en
 % \frametitle{Entrega del examen tarea 3}
 % En la sesión del 12 de noviembre se entregarán los enunciados del examen tarea 3, \pause para enviar la solución el día viernes 26 de noviembre.
 % \end{frame}
-\begin{frame}
-\frametitle{Días feriados}
-De acuerdo al calendario oficial, se presentas los días feriados:
-\pause
-\setbeamercolor{item projected}{bg=babyblue,fg=black}
-\setbeamertemplate{enumerate items}[square]
-\begin{enumerate}[<+->]
-\item Lunes 11 al viernes 15 de abril (Semana Santa)
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{De los días feriados}
-En estos días no tendremos actividades, considerando que son días oficiales de asueto.
-\\
-\bigskip
-\pause
-Regresando a las actividades el martes 19 de abril a las 3:30 pm.
-\end{frame}
+% \begin{frame}
+% \frametitle{Días feriados}
+% De acuerdo al calendario oficial, se presentas los días feriados:
+% \pause
+% \setbeamercolor{item projected}{bg=babyblue,fg=black}
+% \setbeamertemplate{enumerate items}[square]
+% \begin{enumerate}[<+->]
+% \item Lunes 11 al viernes 15 de abril (Semana Santa)
+% \end{enumerate}
+% \end{frame}
+% \begin{frame}
+% \frametitle{De los días feriados}
+% En estos días no tendremos actividades, considerando que son días oficiales de asueto.
+% \\
+% \bigskip
+% \pause
+% Regresando a las actividades el martes 19 de abril a las 3:30 pm.
+% \end{frame}
 
 
 % \section{Punto importante}
