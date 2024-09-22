@@ -1,14 +1,101 @@
-\input{../Preambulos/preambulo_materiales}
-\usepackage{apacite}
+% \input{../Preambulos/preambulo_materiales}
+% \usepackage{apacite}
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{calc}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{textcomp, gensymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, 
+     bottom=2.00cm]{geometry}
+% \usepackage{Estilos/ColoresLatex}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage[skip=10pt, indent=30pt]{parskip}
+% \usepackage{scalerel}
+\usepackage{scalerel}[2016-12-29]
+\usepackage{biblatex}
+\usepackage{cancel}
+
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ao,
+    filecolor=magenta,      
+    urlcolor=ao,
+}
+
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iiint}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+% \newcommand{\textbf}[2]{\textbf{\textcolor{#1}{#2}}}
+\sisetup{per-mode=symbol}
+\decimalpoint
+\sisetup{bracket-numbers = false}
+
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\numberwithin{equation}{section}
+
+\linespread{1.25}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\emergencystretch=1em
+
 \title{Segunda solución linealmente independiente \\[0.3em]  \large{Tema 2 - Primeras técnicas de solución}\vspace{-3ex}}
 \author{M. en C. Gustavo Contreras Mayén}
 \date{ }
+
 \begin{document}
 \vspace{-4cm}
 \maketitle
 \fontsize{14}{14}\selectfont
 \tableofcontents
 \newpage
+
 %Referencia Arfken - 9.6 A Second Solution
 \section{Una segunda solución.}
 Con el método de Frobenius se obtuvo una solución de una EDO2H a partir de la sustitución en una serie de potencias. Esto es posible por el teorema de Fuchs, siempre que la serie de potencias se haga alrededor de un punto ordinario o un punto singular no esencial.
@@ -21,13 +108,14 @@ Presentaremos dos métodos para obtener una segunda solución independiente:
 \item Una serie de potencias que contiene un término logarítmico.
 \end{enumerate}
 En primer lugar, sin embargo, consideramos la independencia de un conjunto de funciones.
+
 \section{Independencia lineal de las soluciones.}
-Dado un conjunto de funciones $\varphi_{\lambda}$, el criterio de dependencia lineal es la existencia de una relación de la forma
+Dado un conjunto de funciones $\varphi_{\lambda}$, el criterio de dependencia lineal es la existencia de una relación de la forma:
 \begin{align}
-\sum_{\lambda} k_{\lambda} \: \varphi_{\lambda} = 0 
+\nsum_{\lambda} k_{\lambda} \: \varphi_{\lambda} = 0 
 \label{eq:ecuacion_09_111}
 \end{align}
-en la cual, no necesariamente todos los coeficientes de $k_{\lambda}$ son cero. Dicho de otra forma, si la única solución de la ecuación (\ref{eq:ecuacion_09_111}) es $k_{\lambda} = 0$, para toda $\lambda$, el conjunto de funciones $\varphi_{\lambda}$ se dice que es \emph{linealmente independiente}.
+en la cual, no necesariamente todos los coeficientes de $k_{\lambda}$ son cero. Dicho de otra forma, si la única solución de la ecuación (\ref{eq:ecuacion_09_111}) es $k_{\lambda} = 0$, para toda $\lambda$, el conjunto de funciones $\varphi_{\lambda}$ se dice que es \textbf{linealmente independiente}.
 % \par
 % Pensemos en la dependencia lineal entre vectores. Consideremos $\vb{A}$, $\vb{B}$, y $\vb{C}$, en el espacio 3D, con $\vb{A} \cdot \vb{B} \cp \vb{C} \neq 0$. Entonces la relación no trivial de la forma
 % \begin{align}
@@ -43,10 +131,10 @@ en la cual, no necesariamente todos los coeficientes de $k_{\lambda}$ son cero. 
 % \end{align}
 % y los cuatro vectores no son linealmente independientes. Si un conjunto de vectores o funciones son mutuamente ortogonales, entonces sabemos que son linealmente independientes. La ortogonalidad implica independencia lineal.
 \par
-Supongamos que las funciones $\varphi_{\lambda}$ son diferenciables según se requiera, por tanto, podemos diferenciar la expresión (\ref{eq:ecuacion_09_111}) repetidamente, donde obtenemos el conjunto de ecuaciones
+Supongamos que las funciones $\varphi_{\lambda}$ son diferenciables según se requiera, por tanto, podemos diferenciar la expresión (\ref{eq:ecuacion_09_111}) repetidamente, donde obtenemos el conjunto de ecuaciones:
 \begin{align}
-\sum_{\lambda} k_{\lambda} \: \varphi^{\prime}_{\lambda} &= 0 \label{eq:ecuacion_09_114} \\[0.5em]
-\sum_{\lambda} k_{\lambda} \: \varphi^{\prime \prime}_{\lambda} &= 0 \label{eq:ecuacion_09_115} \\[0.5em]
+\nsum_{\lambda} k_{\lambda} \: \pderivada{\varphi}_{\lambda} &= 0 \label{eq:ecuacion_09_114} \\[0.5em]
+\nsum_{\lambda} k_{\lambda} \: \sderivada{\varphi}_{\lambda} &= 0 \label{eq:ecuacion_09_115} \\[0.5em]
 &\vdots \nonumber
 \end{align}
 y así, sucesivamente. Lo que nos proporciona un conjunto de ecuaciones lineales homogéneas, en donde los coeficientes $k_{\lambda}$ con cantidades desconocidas. 
@@ -55,21 +143,21 @@ Sabemos que existe una solución $k_{\lambda} \neq 0$, sólo si el determinante 
 \begin{align}
 \mdet{
 \varphi_{1} & \varphi_{2} & \ldots & \varphi_{n} \\[0.5em]
-\varphi^{\prime}_{1} & \varphi^{\prime}_{2} & \ldots & \varphi^{\prime}_{n} \\[0.5em]
+\pderivada{\varphi}_{1} & \pderivada{\varphi}_{2} & \ldots & \pderivada{\varphi}_{n} \\[0.5em]
 \ldots & \ldots & \ldots & \ldots \\[0.5em]
 \varphi^{(n-1)}_{1} & \varphi^{(n-1)}_{2} & \ldots & \varphi^{(n-1)}_{n} \\
 } = 0
 \label{eq:ecuacion_09_116}
 \end{align}
-A este determinante se le llama \emph{Wronskiano}:
-\begin{enumerate}
-\item Si el Wronkiano no es cero, entonces la ecuación (\ref{eq:ecuacion_09_111}) no tiene solución más que $k_{\lambda}=0$. El conjunto de funciones es por tanto, independiente.
+A este determinante se le llama \textbf{Wronskiano}:
+\begin{enumerate}[label=\alph*)]
+\item Si el Wronkiano no es cero, entonces la ecuación (\ref{eq:ecuacion_09_111}) no tiene solución más que $k_{\lambda} = 0$. El conjunto de funciones es por tanto, independiente.
 \item Si el Wronskiano se anula en ciertos valores aislados del argumento, esto no prueba necesariamente la dependencia lineal (a menos que el conjunto de funciones sea de dos funciones). De cualquier manera, si el Wronskiano es cero en un rango amplio de la variable, las funciones $\varphi_{\lambda}$ son linealmente dependientes dentro de ese rango.
 \end{enumerate}
 \par
 \subsection{Independencia lineal.}
 
-Las soluciones de la ecuación del oscilador lineal que conocemos de la mecánica, son $\varphi_{1} = \sin \: \omega x$ y $\varphi_{2} = \cos \: \omega x$. Por lo que el Wronskiano resulta ser
+Las soluciones de la ecuación del oscilador lineal que conocemos de la mecánica, son $\varphi_{1} = \sin \: \omega x$ y $\varphi_{2} = \cos \: \omega x$. Por lo que el Wronskiano resulta ser:
 \begin{align*}
 \mdet{
 \sin \omega x & \cos \omega x \\
@@ -78,7 +166,7 @@ Las soluciones de la ecuación del oscilador lineal que conocemos de la mecánic
 \end{align*}
 Estas dos soluciones $\varphi_{1}$ y $\varphi_{2}$ son por tanto linealmente independientes. Para estas dos funciones, esto significa que una no es múltiplo de la otra, lo cual es cierto.
 \par
-Sabemos que
+Sabemos que de la trigonometría:
 \begin{align*}
 \sin \omega x = \pm (1 - \cos^{2} \: \omega x)^{1/2}
 \end{align*}
@@ -103,35 +191,39 @@ e^{x} + e^{-x} - 2 \: \cosh x = 0 \hspace{2cm} \text{con } k_{\lambda} \neq 0
 
 \section{Segunda solución.}
 
-Regresando a la ecuación diferencial lineal de segundo orden y homogénea de la forma
+Regresando a la ecuación diferencial lineal de segundo orden y homogénea de la forma:
 \begin{align}
-\stilde{y} + P(x) \, \ptilde{y} + Q(x) \: y = 0
+\sderivada{y} + P (x) \, \pderivada{y} + Q (x) \: y = 0
 \label{eq:ecuacion_09_118}
 \end{align}
-sean $y_{1}$ y $y_{2}$ dos soluciones independientes. El Wronskiano por definición es:
+sean $y_{1}$ y $y_{2}$ dos soluciones independientes.
+
+\subsection{El Wronskiano.}
+
+El Wronskiano por definición es:
 \begin{align}
-W = y_{1} \: \ptilde{y}_{2} - \ptilde{y}_{1} \: y_{2}
+W = y_{1} \: \pderivada{y}_{2} - \pderivada{y}_{1} \: y_{2}
 \label{eq:ecuacion_09_119}
 \end{align}
-diferenciando el Wronksiano, obtenemos
+diferenciando el Wronksiano, obtenemos:
 \begin{align*}
-\ptilde{W} &= \ptilde{y}_{1} \: \ptilde{y}_{2} + y_{1} \: \stilde{y}_{2} - \stilde{y}_{1} \: y_{2} - \ptilde{y}_{1} \: \ptilde{y}_{2} \\
-&= y_{1} \bigg[ - P(x) \: \ptilde{y}_{2} - Q(x) \: y_{2} \bigg] - y_{2} \bigg[ - P(x) \: \ptilde{y}_{1} - Q(x)  \: y_{1} \bigg] \\
-&= - P(x) \: \bigg[ y_{1} \: \ptilde{y}_{2} - \ptilde{y}_{1} \: y_{2} \bigg]
+\pderivada{W} &= \pderivada{y}_{1} \: \pderivada{y}_{2} + y_{1} \: \sderivada{y}_{2} - \sderivada{y}_{1} \: y_{2} - \pderivada{y}_{1} \: \pderivada{y}_{2} = \\
+&= y_{1} \bigg[ - P(x) \: \pderivada{y}_{2} - Q(x) \: y_{2} \bigg] - y_{2} \bigg[ - P(x) \: \pderivada{y}_{1} - Q(x)  \: y_{1} \bigg] \\
+&= - P(x) \: \bigg[ y_{1} \: \pderivada{y}_{2} - \pderivada{y}_{1} \: y_{2} \bigg]
 \end{align*}
 Donde la expresión entre corchetes es el Wronskiano mismo, por tanto
 \begin{align}
-\ptilde{W} = - P(x) \: W
+\pderivada{W} = - P(x) \: W
 \label{eq:ecuacion_09_120}
 \end{align}
 En el caso especial con $P(x) = 0$, entonces
 \begin{align}
-\stilde{y} + Q(x) \: y = 0
+\sderivada{y} + Q(x) \: y = 0
 \label{eq:ecuacion_09_121}
 \end{align}
 el Wronskiano
 \begin{align}
-W = y_{1} \: \ptilde{y}_{2} - \ptilde{y}_{1} \: y_{2} = \mbox{ constante}
+W = y_{1} \: \pderivada{y}_{2} - \pderivada{y}_{1} \: y_{2} = \mbox{ constante}
 \label{eq:ecuacion_09_1202}
 \end{align}
 Ya que nuestra ecuación diferencial es homogénea, podemos multiplicar las soluciones $y_{1}$ e $y_{2}$ por cualesquiera constantes, para ajustar que el valor del Wronskiano sea uno (ó $-1$).
@@ -151,44 +243,48 @@ Desarrollamos una segunda solución independiente para la cual $W \neq 0$, reesc
 \end{align*}
 integramos con respecto a $x$, desde $a$ hasta $x$ de donde obtenemos
 \begin{align*}
-\ln \dfrac{W(x)}{W(a)} = - \int_{a}^{x} P(x_{1}) \: \dd{x_{1}}
+\ln \dfrac{W(x)}{W(a)} = - \scaleint{6ex}_{a}^{x} P(x_{1}) \: \dd{x_{1}}
 \end{align*}
 que es lo mismo
 \begin{align}
-\setlength{\fboxsep}{2\fboxsep}\boxed{W(x) = W(a) \: \exp \left[ - \int_{a}^{x} P(x_{1}) \: \dd{x_{1}} \right]}
+\setlength{\fboxsep}{2\fboxsep}\boxed{W(x) = W(a) \: \exp \left[ - \scaleint{6ex}_{a}^{x} P(x_{1}) \: \dd{x_{1}} \right]}
 \label{eq:ecuacion_09_123}
 \end{align}
 Pero
 \begin{align}
-W(x) = y_{1} \: \ptilde{y}_{2} - \ptilde{y}_{1} \: y_{2} = y_{1}^{2} \: \dv{x} \left( \dfrac{y_{2}}{y_{1}} \right)
+W (x) = y_{1} \: \pderivada{y}_{2} - \pderivada{y}_{1} \: y_{2} = y_{1}^{2} \: \dv{x} \left( \dfrac{y_{2}}{y_{1}} \right)
 \label{eq:ecuacion_09_124}
 \end{align}
-Combinando las ecuaciones (\ref{eq:ecuacion_09_123}) y (\ref{eq:ecuacion_09_124}), tenemos que
+Combinando las ecuaciones (\ref{eq:ecuacion_09_123}) y (\ref{eq:ecuacion_09_124}), tenemos que:
 \begin{align}
-\dv{x} \left( \dfrac{y_{2}}{y_{1}} \right) =  W(a) \: \dfrac{\exp \left[\displaystyle - \int_{a}^{x} \: P(x_{1}) \: \dd{x_{1}} \right]}{y^{2}_{1}}
+\dv{x} \left( \dfrac{y_{2}}{y_{1}} \right) =  W(a) \: \dfrac{\exp \left[\displaystyle - \scaleint{6ex}_{a}^{x} \: P(x_{1}) \: \dd{x_{1}} \right]}{y^{2}_{1}}
 \label{eq:ecuacion_09_125}
 \end{align}
-Finalmente integramos la ecuación (\ref{eq:ecuacion_09_125}) de $x_{2} = b$ a $x_{2} = x$, para obtener
+
+\subsection{Segunda solución con el Wronskiano.}
+
+Finalmente integramos la ecuación (\ref{eq:ecuacion_09_125}) de $x_{2} = b$ a $x_{2} = x$, para obtener:
 \begin{align}
-y_{2} = y_{1} \: W(a) \: \int_{b}^{x} \dfrac{\exp \left[ \displaystyle - \int_{a}^{x_{2}} P(x_{1}) \dd{x_{1}} \right]}{[y_{1}(x_{2})]^{2}} \dd{x_{2}}
+y_{2} = y_{1} \: W(a) \: \scaleint{6ex}_{b}^{x} \dfrac{\exp \left[ \displaystyle - \scaleint{6ex}_{a}^{x_{2}} P(x_{1}) \dd{x_{1}} \right]}{[y_{1}(x_{2})]^{2}} \dd{x_{2}}
 \label{eq:ecuacion_09_126}
 \end{align}
 Donde $a$ y $b$ son constantes arbitrarias, los términos $y_{1}(x)y_{2}(b)/y_{1}(b)$ se han omitido, ya que no conducen a algo.
 \par
-Para $W(a)$, el Wronskiano evaluado en $x=a$, es una constante y las soluciones de la ecuación diferencial homogénea siempre contienen un factor de normalización desconocido, hacemos $W(a)=1$ y escribimos
+Para $W (a)$, el Wronskiano evaluado en $x=a$, es una constante y las soluciones de la ecuación diferencial homogénea siempre contienen un factor de normalización desconocido, hacemos $W(a)=1$ y escribimos
 \begin{align}
-\setlength{\fboxsep}{2\fboxsep}\boxed{y_{2}(x) =  y_{1} \: (x) \int^{x} \dfrac{\exp \left[ \displaystyle - \int^{x_{2}} P(x_{1}) \: \dd{x_{1}} \right]}{[y_{1}(x_{2})]^{2}} \dd{x_{2}}}
+\setlength{\fboxsep}{2\fboxsep}\boxed{y_{2}(x) =  y_{1} \: (x) \scaleint{6ex}^{x} \dfrac{\exp \left[ \displaystyle - \scaleint{6ex}^{x_{2}} P(x_{1}) \: \dd{x_{1}} \right]}{[y_{1}(x_{2})]^{2}} \dd{x_{2}}}
 \label{eq:ecuacion_09_127}
 \end{align}
 en donde se han omitido los límites inferiores de integración $x_{1} = a$ y $x_{2}=b$. En caso contrario, simplemente originan una contribución igual a una constante multiplicada por al primera solución conocida $y_{1}(x)$ lo cual consecuentemente no agrega nada nuevo.
 % \par
 Si tenemos el caso especial e importante, cuando $P(x) = 0$, la ecuación (\ref{eq:ecuacion_09_127}), toma la forma:
 \begin{align}
-y_{2}(x) =  y_{1}(x) \: \int^{x} \dfrac{\dd{x_{2}}}{[y_{1}(x_{2})]^{2}}
+y_{2}(x) =  y_{1}(x) \: \scaleint{6ex}^{x} \dfrac{\dd{x_{2}}}{[y_{1}(x_{2})]^{2}}
 \label{eq:ecuacion_09_128}
 \end{align}
 Lo que significa que usando ya sea (\ref{eq:ecuacion_09_127}) o (\ref{eq:ecuacion_09_128}), podemos tomar una solución conocida y luego integrando, podemos generar una segunda solución independiente.
 \par
+\noindent
 \textbf{Ejemplo: } \\
 De la ecuación
 \begin{align*}
@@ -196,101 +292,102 @@ De la ecuación
 \end{align*}
 hacemos una solución tipo $y_{1} = \sin x$, aplicando la solución (\ref{eq:ecuacion_09_128}), resulta
 \begin{align*}
-y_{2}(x) &= \sin x \int^{x} \dfrac{\dd{x_{2}}}{\sin^{2} x_{2}} \\
+y_{2}(x) &= \sin x \scaleint{6ex}^{x} \dfrac{\dd{x_{2}}}{\sin^{2} x_{2}} \\
 &= \sin x (-\cot x) = - \cos x
 \end{align*}
 La cual es obviamente independiente (y no un múltiplo lineal) de $\sin x$.
 
 \section{Desarrollo en series de una segunda solución.}
+
 Un análisis más profundo de la naturaleza de la segunda solución de la ecuación diferencial se puede lograr mediante la siguiente secuencia de pasos:
 \begin{enumerate}
-\item Expresamos $P(x)$ y $Q(x)$ en la ecuación (\ref{eq:ecuacion_09_118}) como
+\item Expresamos $P (x)$ y $Q (x)$ en la ecuación (\ref{eq:ecuacion_09_118}) como:
 \begin{align}
-P(x) = \sum_{i=-1}^{\infty} p_{i} \: x^{i} \hspace{2cm} Q(x) = \sum_{j=-2}^{\infty} q_{j} \: x^{j}
+P (x) = \nsum_{i=-1}^{\infty} p_{i} \: x^{i} \hspace{2cm} Q(x) = \nsum_{j=-2}^{\infty} q_{j} \: x^{j}
 \label{eq:ecuacion_09_129}
 \end{align}
 Los límites inferiores de las sumas se eligen justamente para satisface el teorema de Fuchs ( para crear una potencial singularidad regular en el origen).
 \item Desarrollamos los primeros términos de la solución en series de potencias.
 \item Usamos la solución obtenida como $y_{1}$, obtenemos una segunda solución en tipo de series $y_{2}$, con la ecuación (\ref{eq:ecuacion_09_127}) integramos término a término.
 \end{enumerate}
-Siguiendo el paso 1, tenemos
+Siguiendo el paso 1, tenemos que:
 \begin{align}
-\stilde{y} + (p_{-1} \, x^{-1} + p_{0} + p_{1} \, x + \ldots) \, \ptilde{y} + (q_{-2} \, x^{-2} + q_{-1} \, x^{-1} + \ldots) \, y = 0
+\sderivada{y} + (p_{-1} \, x^{-1} + p_{0} + p_{1} \, x + \ldots) \, \pderivada{y} + (q_{-2} \, x^{-2} + q_{-1} \, x^{-1} + \ldots) \, y = 0
 \label{eq:ecuacion_09_130}
 \end{align}
-en donde el punto $x = 0$ es en el peor de los casos un punto singular regular. Si $p_{-1} = q_{-1} = q_{-2} = 0$, se reduce a un punto ordinario. Sustituimos
+en donde el punto $x = 0$ es en el peor de los casos un punto singular regular. Si $p_{-1} = q_{-1} = q_{-2} = 0$, se reduce a un punto ordinario. Sustituimos:
 \begin{align*}
-y = \sum_{\lambda = 0}^{\infty} a_{\lambda} \: x^{k + \lambda}
+y = \nsum_{\lambda = 0}^{\infty} a_{\lambda} \: x^{k + \lambda}
 \end{align*}
-Obtenemos (paso 2)
+Obtenemos (paso 2):
 \begin{align}
 \begin{aligned}[b]
-\sum_{\lambda=0}^{\infty} (k &+ \lambda)(k + \lambda - 1) \: a_{\lambda} \, x^{k + \lambda - 2} + \sum_{i=-1}^{\infty} p_{i} \, x^{i} \sum_{\lambda=0}^{\infty} (k + \lambda) \,  a_{\lambda} x^{k + \lambda - 1} + \\
-&+ \sum_{j=-2}^{\infty} q_{j} \, x^{j} \: \sum_{\lambda=0}^{\infty} a_{\lambda} \, x^{k + \lambda} = 0
+\nsum_{\lambda=0}^{\infty} (k &+ \lambda)(k + \lambda - 1) \: a_{\lambda} \, x^{k + \lambda - 2} + \nsum_{i=-1}^{\infty} p_{i} \, x^{i} \nsum_{\lambda=0}^{\infty} (k + \lambda) \,  a_{\lambda} x^{k + \lambda - 1} + \\
+&+ \nsum_{j=-2}^{\infty} q_{j} \, x^{j} \: \nsum_{\lambda=0}^{\infty} a_{\lambda} \, x^{k + \lambda} = 0
 \end{aligned}
 \label{eq:ecuacion_09_131}
 \end{align}
-suponiendo que $p_{-1} \neq 0, q_{-2} \neq 0$, la ecuación de índices es
+suponiendo que $p_{-1} \neq 0, q_{-2} \neq 0$, la ecuación de índices es:
 \begin{align*}
 k \, (k - 1) + p_{-1} \, k + q_{-2} = 0
 \end{align*}
-lo que hace que el coeficiente neto de $x^{k-2}$ sea igual a cero, por lo que se reduce a
+lo que hace que el coeficiente neto de $x^{k-2}$ sea igual a cero, por lo que se reduce a:
 \begin{align}
 k^{2} + (p_{-1} - 1) \, k + q_{-2} = 0
 \label{eq:ecuacion_09_132}
 \end{align}
-Escribimos las raíces de la ecuación indicial como $k = \alpha$ y $k= \alpha - n$ donde $n$ es cero o un entero positivo (si $n$ es no entero, esperamos dos soluciones independientes en series). Por lo que
+Escribimos las raíces de la ecuación indicial como $k = \alpha$ y $k= \alpha - n$ donde $n$ es cero o un entero positivo (si $n$ es no entero, esperamos dos soluciones independientes en series). Por lo que:
 \begin{align}
 (k - \alpha)(k - \alpha + n) = 0
 \label{eq:ecuacion_09_133}
 \end{align}
-que es lo mismo
+que es lo mismo:
 \begin{align*}
 k^{2} + (n - 2 \, \alpha) \, k + \alpha \, (\alpha - n) = 0
 \end{align*}
-Igualando los coeficientes de $k$ en las ecuaciones (\ref{eq:ecuacion_09_132}) y (\ref{eq:ecuacion_09_133}), tenemos
+Igualando los coeficientes de $k$ en las ecuaciones (\ref{eq:ecuacion_09_132}) y (\ref{eq:ecuacion_09_133}), tenemos:
 \begin{align}
 p_{-1} -1 = n - 2 \: \alpha
 \label{eq:ecuacion_09_134}
 \end{align}
-La solución en series conocida corresponde al valor más grande de la raíz $k = \alpha$, que se escribe como
+La solución en series conocida corresponde al valor más grande de la raíz $k = \alpha$, que se escribe como:
 \begin{align*}
-y_{1} =  x^{\alpha} \, \sum_{\lambda=0}^{\infty} a_{\lambda} \: x^{\lambda}
+y_{1} =  x^{\alpha} \, \nsum_{\lambda=0}^{\infty} a_{\lambda} \: x^{\lambda}
 \end{align*}
-Sustituimos la solución en series en la ecuación (\ref{eq:ecuacion_09_127}) - Paso 3- y vemos que
+Sustituimos la solución en series en la ecuación (\ref{eq:ecuacion_09_127}) - Paso 3- y vemos que:
 \begin{align}
-y_{2}(x) = y_{1} (x) \: \int^{x} \dfrac{\exp \left[ \displaystyle - \int_{a}^{x_{2}} \sum_{i=-1}^{\infty} p_{i} \: x^{i}_{1} \: \dd{x_{1}} \right] }{x_{2}^{2 \, \alpha} \left( \displaystyle \sum_{\lambda=0}^\infty a_{\lambda} \: x_{2}^{\lambda} \right)^{2} } \dd{x_{2}}
+y_{2}(x) = y_{1} (x) \: \scaleint{6ex}^{x} \dfrac{\exp \left[ \displaystyle - \scaleint{6ex}_{a}^{x_{2}} \nsum_{i=-1}^{\infty} p_{i} \: x^{i}_{1} \: \dd{x_{1}} \right] }{x_{2}^{2 \, \alpha} \left( \displaystyle \nsum_{\lambda=0}^\infty a_{\lambda} \: x_{2}^{\lambda} \right)^{2} } \dd{x_{2}}
 \label{eq:ecuacion_09_135}
 \end{align}
-donde las soluciones $y_{1}$ y $y_{2}$ se han normalizado de modo que el Wronskiano $W(a) = 1$. 
+donde las soluciones $y_{1}$ y $y_{2}$ se han normalizado de modo que el Wronskiano sea tal que $W (a) = 1$. 
 \par
-Mirando primero el argumento del factor exponencial
+Mirando primero el argumento del factor exponencial:
 \begin{align}
-\int_{a}^{x_{2}} \sum_{i=-1}^{\infty} p_{i} \: x_{1}^{i} \: \dd{x_{1}} = p_{-1} \: \ln x_{2} + \sum_{k=0}^{\infty} \dfrac{p_{k}}{k + 1} \: x_{2}^{k + 1} + f(a)
+\scaleint{6ex}_{a}^{x_{2}} \nsum_{i=-1}^{\infty} p_{i} \: x_{1}^{i} \: \dd{x_{1}} = p_{-1} \: \ln x_{2} + \nsum_{k=0}^{\infty} \dfrac{p_{k}}{k + 1} \: x_{2}^{k + 1} + f(a)
 \label{eq:ecuacion_09_136}
 \end{align}
-donde $f(a)$ es una constante de integración que depende de $a$. De aquí resulta:
+donde $f (a)$ es una constante de integración que depende de $a$. De aquí resulta:
 \begin{align}
 \begin{aligned}[b]
-&{}\exp \left( - \int_{a}^{x_{2}} \sum_{i} p_{i} \: x_{1}^{i} \dd{x_{1}} \right) =  \\
-&= \exp [ - f(a) ] \: x_{2}^{-p_{-1}} \exp \left( - \sum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} \: x_{2}^{k+1} \right)  \\
-&= \exp [ - f(a) ] \: x_{2}^{-p_{-1}} \left[ 1 - \sum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} \: x_{2}^{k+1} + \dfrac{1}{2!} \left( \sum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} \: x_{2}^{k+1} \right)^{2} + \ldots \right]
+&{}\exp \left( - \scaleint{6ex}_{a}^{x_{2}} \nsum_{i} p_{i} \: x_{1}^{i} \dd{x_{1}} \right) =  \\
+&= \exp [ - f(a) ] \: x_{2}^{-p_{-1}} \exp \left( - \nsum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} \: x_{2}^{k+1} \right)  \\
+&= \exp [ - f(a) ] \: x_{2}^{-p_{-1}} \left[ 1 - \nsum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} \: x_{2}^{k+1} + \dfrac{1}{2!} \left( \nsum_{k=0}^{\infty} \dfrac{p_{k}}{k+1} \: x_{2}^{k+1} \right)^{2} + \ldots \right]
 \end{aligned}
 \label{eq:ecuacion_09_137}
 \end{align}
 Esta expansión en serie de la exponencial ciertamente converge, si la expansión original del coeficiente $P(x)$ converge uniformemente.
 \par
-El denominador en la ecuación (\ref{eq:ecuacion_09_135}) puede manejarse como
+El denominador en la ecuación (\ref{eq:ecuacion_09_135}) puede manejarse como:
 \begin{align}
 \begin{aligned}[b]
-\left[ x_{2}^{2 \, \alpha} \left( \sum_{\lambda=0}^{\infty} a_{\lambda} \: x_{2}^{\lambda} \right)^{2} \right]^{-1} &= x_{2}^{-2 \, \alpha} \left( \sum_{\lambda=0}^{\infty} a_{\lambda} \: x_{2}^{\lambda} \right)^{2}  \\
-&= x_{2}^{-2 \, \alpha} \sum_{\lambda=0}^{\infty} b_{\lambda} \: x_{2}^{\lambda}
+\left[ x_{2}^{2 \, \alpha} \left( \nsum_{\lambda=0}^{\infty} a_{\lambda} \: x_{2}^{\lambda} \right)^{2} \right]^{-1} &= x_{2}^{-2 \, \alpha} \left( \nsum_{\lambda=0}^{\infty} a_{\lambda} \: x_{2}^{\lambda} \right)^{2}  \\
+&= x_{2}^{-2 \, \alpha} \nsum_{\lambda=0}^{\infty} b_{\lambda} \: x_{2}^{\lambda}
 \end{aligned}
 \label{eq:ecuacion_09_138}
 \end{align}
-Haciendo a un lado los factores constantes considerando que podemos tener $W(a) = 1$, para obtener
+Haciendo a un lado los factores constantes considerando que podemos tener $W(a) = 1$, para obtener:
 \begin{align}
-y_{2}(x) =  y_{1}(x) = \int^{x} x_{2}^{-p_{-1}-2 \alpha} \left( \sum_{\lambda=0}^{\infty} c_{\lambda} \: x_{2}^{\lambda} \right) \dd{x_{2}} 
+y_{2}(x) =  y_{1}(x) = \scaleint{6ex}^{x} x_{2}^{-p_{-1}-2 \alpha} \left( \nsum_{\lambda=0}^{\infty} c_{\lambda} \: x_{2}^{\lambda} \right) \dd{x_{2}} 
 \label{eq:ecuacion_09_139}
 \end{align}
 de las raíces de la ecuación de índices (ec. \ref{eq:ecuacion_09_134})
@@ -299,26 +396,27 @@ x_{2}^{-p_{-1} - 2 \, \alpha} = x_{2}^{-n-1}
 \end{align}
 si suponemos que $n$ es entero, al sustituir el resultado en ec. (\ref{eq:ecuacion_09_139}) obtenemos 
 \begin{align}
-y_{2}(x) = y_{1}(x) \int^{x} (c_{0} \, x_{2}^{-n-1} + c_{1} \, x_{2}^{-n} + c_{2} \, x_{2}^{-n+1} + \ldots + c_{n} \, x^{-1} + \ldots ) \dd{x_{2}}
+y_{2}(x) = y_{1}(x) \scaleint{6ex}^{x} (c_{0} \, x_{2}^{-n-1} + c_{1} \, x_{2}^{-n} + c_{2} \, x_{2}^{-n+1} + \ldots + c_{n} \, x^{-1} + \ldots ) \dd{x_{2}}
 \label{eq:ecuacion_09_141}
 \end{align}
 La integración anterior nos devuelve un coeficiente de $y_{1}(x)$ formado de dos partes:
-\begin{enumerate}
+\begin{enumerate}[label=\roman*)]
 \item Una serie de potencias que inicia en $x^{-n}$
-\item Un término logarítmico de la integración de $x^{-1}$ (cuando $\lambda=n$). Este término siempre aparecerá cuando $n$ sea un entero, a menos de que $c_{n}$ fortuitamente se anule.
+\item Un término logarítmico de la integración de $x^{-1}$ (cuando $\lambda = n$). Este término siempre aparecerá cuando $n$ sea un entero, a menos de que $c_{n}$ fortuitamente se anule.
 \end{enumerate}
+
 \section{Segunda solución para la ecuación de Bessel.}
 
-De acuerdo con la ecuación de Bessel 
+De acuerdo con la ecuación diferencial de Bessel:
 \begin{align}
-x^{2} \: y^{\prime \prime} + x \: y^{\prime} + (x^{2} - n^{2}) \: y = 0
+x^{2} \: \sderivada{y} + x \: \pderivada{y} + (x^{2} - n^{2}) \: y = 0
 \label{eq:ecuacion_09_100}
 \end{align}
 (dividida entre $x^{2}$ para concondar con la ec. (\ref{eq:ecuacion_09_118})), se tiene que:
 \begin{align*}
-P(x) = x^{-1} \hspace{1.5cm} Q(x) = 1 \hspace{1.5cm} \text{con } n = 0
+P (x) = x^{-1} \hspace{1.5cm} Q(x) = 1 \hspace{1.5cm} \text{con } n = 0
 \end{align*}
-En consecuencia $p_{-1} = 1, q_{0} = 1$, todas las otras $p_{i}$ y $q_{j}$ se anulan- La ecuación de índices de Bessel es
+En consecuencia $p_{-1} = 1, q_{0} = 1$, todas las otras $p_{i}$ y $q_{j}$ se anulan- La ecuación de índices de Bessel\footnote{Como tareal moral hay que hacer todo el desarrollo de las sumas, sus derivadas, obtener los términos de las sumas con el menor exponente, para llegar a este resultado.} es:
 \begin{align*}
 k^{2} = 0
 \end{align*}
@@ -326,7 +424,7 @@ que es la ecuación $k^{2} - n^{2} = 0$ con $n = 0$. En consecuencia, se verific
 \par
 Nuestra primera solución queda disponible de la ecuación
 \begin{align}
-y(x) = a_{0} \, 2^{n} \, n! \, \sum_{j=0}^{\infty} (-1)^{j} \, \dfrac{1}{j! \, (n + j)!} \left( \dfrac{x}{2} \right)^{n +2j}
+y(x) = a_{0} \, 2^{n} \, n! \, \nsum_{j=0}^{\infty} (-1)^{j} \, \dfrac{1}{j! \, (n + j)!} \left( \dfrac{x}{2} \right)^{n +2j}
 \label{eq:ecuacion_09_108}
 \end{align}
 Hacemos un etiquetado para concordar con la función de Besser de orden $0$ (y haciendo $a_{0} = 1)$, obtenemos
@@ -337,12 +435,12 @@ y_{1} (x) = J_{0} (x) =  1 - \dfrac{x^{2}}{4} + \dfrac{x^{4}}{64} - \order{x^{6}
 \end{align}
 Ahora, sustituyendo todo esto en la ec. (\ref{eq:ecuacion_09_127}), se tiene el caso específico a la ec. (\ref{eq:ecuacion_09_135}):
 \begin{align}
-y_{2} (x) = J_{0} (x) \; \int^{x} \dfrac{\exp(\displaystyle - \int^{x^{2}} x_{1}^{-1} \dd{x_{1}})}{\left[ 1 - \dfrac{x^{2}}{4} + \dfrac{x^{4}}{64} - \ldots\right]^{2}} \dd{x_{2}}
+y_{2} (x) = J_{0} (x) \; \scaleint{6ex}^{x} \dfrac{\exp(\displaystyle - \scaleint{6ex}^{x^{2}} x_{1}^{-1} \dd{x_{1}})}{\left[ 1 - \dfrac{x^{2}}{4} + \dfrac{x^{4}}{64} - \ldots\right]^{2}} \dd{x_{2}}
 \label{eq:ecuacion_09_142b}
 \end{align}
 Del numerador del integrando
 \begin{align*}
-\exp \left[ - \int^{x^{2}} \dfrac{\dd{x_{1}}}{x_{1}} \right]= \exp (\ln x_{2}) = \dfrac{1}{x_{2}} 
+\exp \left[ - \scaleint{6ex}^{x^{2}} \dfrac{\dd{x_{1}}}{x_{1}} \right]= \exp (\ln x_{2}) = \dfrac{1}{x_{2}} 
 \end{align*}
 Esto corresponde a $x_{2}^{p-1}$ en la ec. (\ref{eq:ecuacion_09_137}). Del denominador del integrando, usando la expansión binomial, obtenemos
 \begin{align*}
@@ -350,7 +448,7 @@ Esto corresponde a $x_{2}^{p-1}$ en la ec. (\ref{eq:ecuacion_09_137}). Del denom
 \end{align*}
 Correspondiente a la ec. (\ref{eq:ecuacion_09_139}), se tiene
 \begin{align}
-y_{2} (x) &= J_{0} (x) \, \int^{x} \dfrac{1}{x_{2}} \, \left[ 1 + \dfrac{x_{2}^{2}}{2} + \dfrac{5 \, x_{2}^{4}}{32} + \ldots \right] \dd{x_{2}} \nonumber \\[0.5em]
+y_{2} (x) &= J_{0} (x) \, \scaleint{6ex}^{x} \dfrac{1}{x_{2}} \, \left[ 1 + \dfrac{x_{2}^{2}}{2} + \dfrac{5 \, x_{2}^{4}}{32} + \ldots \right] \dd{x_{2}} \nonumber \\[0.5em]
 &= J_{0} (x) \, \left\{ \ln x + \dfrac{x^{2}}{4} + \dfrac{5 \, x^{4}}{128} + \ldots  \right\}
 \label{eq:ecuacion_09_142c}
 \end{align}
@@ -379,7 +477,7 @@ Ahora, la comparación con $N_{0}(x)$ se transforma en una multiplicación de $J
 \par
 De acuerdo con el análisis predecente, la segunda solución de la ec. (\ref{eq:ecuacion_09_118}), $y_{2}(x)$, se puede escribir de la forma
 \begin{align}
-y_{2}(x) = y_{1} (x) \, \ln x + \sum_{j=-n}^{\infty} d_{j} \, x^{j+\alpha}
+y_{2}(x) = y_{1} (x) \, \ln x + \nsum_{j=-n}^{\infty} d_{j} \, x^{j+\alpha}
 \label{eq:ecuacion_09_142f}
 \end{align}
 es decir, la primera solución multiplicada por $\ln x$ y otra serie de potencias, ésta última comenzando con $x^{\alpha - n}$, lo cual significa que podemos buscar un término logarítmico cuando la ecuación de índices proporciona tan sólo una solución en serie.
@@ -389,40 +487,40 @@ Con la forma de la segunda solución dada por la ec. (\ref{eq:ecuacion_09_142f})
 \par
 La segunda solución normalmente será divergente en el origen debido al factor logarítmico y las potencias negativas de la serie. Debido a esto, es que $y_{2}(x)$ se denomina frecuentemente \textbf{solución irregular}. La primera solución en serie $y_{1}(x)$, que normalmente converge en el origen, se denomina \textbf{solución regular}.
 \par
-\textbf{Resumen: } Las dos soluciones vistas en este apartado, proporciona una solución completa de la EDO2H lineal, suponiendo que el punto de desarrollo no es peor que una singularidad regular. Al menos se puede obtener una solución mediante la sustitución en series de potencias. Una segunda solución linealmente independiente se puede construir por medio de la doble integral Wronskiana. Esto es todo lo posible: \emph{no hay una tercera solución linealmente independiente}.
+\textbf{Resumen: } Las dos soluciones vistas en este apartado, proporciona una solución completa de la EDO2H lineal, suponiendo que el punto de desarrollo no es peor que una singularidad regular. Al menos se puede obtener una solución mediante la sustitución en series de potencias. Una segunda solución linealmente independiente se puede construir por medio de la doble integral Wronskiana. Esto es todo lo posible: \textbf{no hay una tercera solución linealmente independiente}.
 \par
 La ED2 lineal y \textit{no homogénea} tendrá una solución adicional: la \emph{solución particular}. Esta solución particular se puede obtener por el método de variación de parámetros, o por medio de técnicas tales como las funciones de Green.
-\section{Ejercicios a cuenta.}
-Resuelve los siguientes ejercicios:
-\begin{enumerate}
-\item Si el Wronskiano de dos funciones $y_{1}$ e $y_{2}$ es igual a cero, demuestra mediante integración directa que:
-\begin{align*}
-y_{1} = c \, y_{2}
-\end{align*}
-Considera la suposición de que las funciones tienen derivadas continuas y que al menos una de las funciones no desaparece en e intervalo bajo consideración.
-\item Considera las siguientes funciones:
-\begin{align*}
-\varphi_{1} =  x \hspace{2cm} \varphi_{2} = \abs{x} = x \, \, \mbox{sgn} \, x
-\end{align*}
-Donde la función \textit{sgn} es precisamente el signo de $x$. Como 
-\begin{align*}
-\ptilde{\varphi}_{1} &=  1 \hspace{2cm} \ptilde{\varphi}_{2} = \mbox{sgn} \, x \\
-&\Rightarrow W(\varphi_{1}, \varphi_{2}) = 0
-\end{align*}
-para cualquier intervalo, incluyendo $[-1, +1]$.
-\par
-Comprueba si la cancelación del Wronskiano en $[-1, +1]$ demustra que $\varphi_{1}$ y $\varphi_{2}$ son linealmente independientes. Evidentemente que no lo son. ¿En dónde está el error? (Tip: gráfica las dos funciones en el intervalo para visualizar las funciones)
-\item Considerando que una solución de
-\begin{align*}
-\stilde{R} + \dfrac{1}{r} \, \ptilde{R} - \dfrac{m^{2}}{r^{2}} \, R = 0
-\end{align*}
-es $R = r^{m}$. Demuestra que la ecuación (\ref{eq:ecuacion_09_127}) predice una segunda solución: $R = r^{-m}$
-\item Una solución para la ecuación diferencial de Hermite
-\begin{align*}
-\stilde{y} - 2 \, x \, y + 2 \, \alpha \, y = 0
-\end{align*}
-para $\alpha = 0$ es $y_{1} = 1$. Encuentra una segunda solución $y_{2}(x)$, usando la ecuación (\ref{eq:ecuacion_09_127})
-\end{enumerate}
+% \section{Ejercicios a cuenta.}
+% Resuelve los siguientes ejercicios:
+% \begin{enumerate}
+% \item Si el Wronskiano de dos funciones $y_{1}$ e $y_{2}$ es igual a cero, demuestra mediante integración directa que:
+% \begin{align*}
+% y_{1} = c \, y_{2}
+% \end{align*}
+% Considera la suposición de que las funciones tienen derivadas continuas y que al menos una de las funciones no desaparece en e intervalo bajo consideración.
+% \item Considera las siguientes funciones:
+% \begin{align*}
+% \varphi_{1} =  x \hspace{2cm} \varphi_{2} = \abs{x} = x \, \, \mbox{sgn} \, x
+% \end{align*}
+% Donde la función \textit{sgn} es precisamente el signo de $x$. Como 
+% \begin{align*}
+% \pderivada{\varphi}_{1} &=  1 \hspace{2cm} \pderivada{\varphi}_{2} = \mbox{sgn} \, x \\
+% &\Rightarrow W(\varphi_{1}, \varphi_{2}) = 0
+% \end{align*}
+% para cualquier intervalo, incluyendo $[-1, +1]$.
+% \par
+% Comprueba si la cancelación del Wronskiano en $[-1, +1]$ demustra que $\varphi_{1}$ y $\varphi_{2}$ son linealmente independientes. Evidentemente que no lo son. ¿En dónde está el error? (Tip: gráfica las dos funciones en el intervalo para visualizar las funciones)
+% \item Considerando que una solución de
+% \begin{align*}
+% \sderivada{R} + \dfrac{1}{r} \, \pderivada{R} - \dfrac{m^{2}}{r^{2}} \, R = 0
+% \end{align*}
+% es $R = r^{m}$. Demuestra que la ecuación (\ref{eq:ecuacion_09_127}) predice una segunda solución: $R = r^{-m}$
+% \item Una solución para la ecuación diferencial de Hermite
+% \begin{align*}
+% \sderivada{y} - 2 \, x \, y + 2 \, \alpha \, y = 0
+% \end{align*}
+% para $\alpha = 0$ es $y_{1} = 1$. Encuentra una segunda solución $y_{2}(x)$, usando la ecuación (\ref{eq:ecuacion_09_127})
+% \end{enumerate}
 %referencia 8.7 Obtención de una segunda solución linealmente independiente. Fundamentos de
 %Ecuaciones Diferenciales. Nagle y Saff. Addison-Wesley.
 % Encuentra los primeros términos del desarrollo en series de potencias en torno al punto regular singular $x = 0$ de la solución general de
