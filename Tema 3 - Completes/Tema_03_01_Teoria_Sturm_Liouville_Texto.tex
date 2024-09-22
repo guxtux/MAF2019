@@ -1,0 +1,335 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{calc}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{textcomp, gensymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, 
+     bottom=2.00cm]{geometry}
+% \usepackage{Estilos/ColoresLatex}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage[skip=10pt, indent=30pt]{parskip}
+% \usepackage{scalerel}
+\usepackage{scalerel}[2016-12-29]
+\usepackage{biblatex}
+\usepackage{cancel}
+
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ao,
+    filecolor=magenta,      
+    urlcolor=ao,
+}
+
+\newcommand{\ptilde}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\stilde}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\ttilde}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\ntilde}[2]{\ensuremath{{#1}^{(#2)}}}
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iiint}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+% \newcommand{\textbf}[2]{\textbf{\textcolor{#1}{#2}}}
+\sisetup{per-mode=symbol}
+\decimalpoint
+\sisetup{bracket-numbers = false}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\numberwithin{equation}{section}
+
+\linespread{1.25}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\emergencystretch=1em
+
+\title{\large{Teoría Sturm-Liouville}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+\tableofcontents
+\newpage
+
+%Ref. Herman (2015)  - Sturm-Liouville
+\section{Problemas de tipo Sturm-Liouville.}
+\subsection{Introducción.}
+
+Hemos visto que las funciones trigonométricas y que algunas las funciones especiales son las soluciones de ecuaciones diferenciales.
+\par
+Estas soluciones dan conjuntos ortogonales de funciones que se pueden utilizar para representar funciones en expansiones de series de Fourier generalizadas.
+\par
+Al mismo tiempo, sería interesante generalizar las técnicas que usamos por primera vez para resolver la ecuación de calor con el fin de resolver problemas más generales de condiciones iniciales (CI) o con condiciones de frontera (CDF). Es decir, usamos la separación de variables para separar la ecuación diferencial parcial dada en un conjunto de ecuaciones diferenciales ordinarias.
+\par
+Un subconjunto de esas ecuaciones nos proporciona un conjunto de problemas de valores en la frontera cuyas eigenfunciones son útiles para representar soluciones de la EDP. Con suerte, esas soluciones constituirán una base útil en algún espacio funcional.
+
+\section{Teoría Sturm-Liouville}
+\subsection{¿En qué consiste?}
+
+Una clase de problemas a la que pertenecen estos ejemplos anteriores, son \textbf{los problemas de valores propios de Sturm-Liouville}. Estos problemas involucran:
+\begin{enumerate}
+\item \textbf{Operadores autoadjuntos} (diferenciales) que juegan un papel importante en la teoría espectral de operadores lineales.
+\item La \textbf{existencia de las eigenfunciones} necesarias para resolver problemas de física descritos por los problemas de CI o CDF anteriores.
+\end{enumerate}
+
+\subsection{Operadores diferenciales.}
+
+En física, muchos problemas surgen en forma de problemas de CDF que involucran ecuaciones diferenciales ordinarias de segundo orden. Por ejemplo: la ecuación de onda y la ecuación de calor en tres dimensiones. Separar la dependencia del tiempo conduce a un problema de valor límite tridimensional en ambos casos. Una mayor separación de variables conduce a un conjunto de problemas de valores de frontera que involucran ecuaciones diferenciales ordinarias de segundo orden.
+\par
+En general, podríamos obtener ecuaciones de la forma:
+\begin{align}
+a_{2} (x) \, \sderivada{y} + a_{1} (x) \, \pderivada{y} + a_{0} (x) \, y = f (x)
+\label{eq:ecuacion_04_01}
+\end{align}
+sujeta a las CDF.
+
+Podemos escribir una ecuación de este tipo en forma de un operador definiendo el \textbf{operador diferencial}:
+\begin{align*}
+L = a_{2} (x) \, D^{2} + a_{1} (x) \, D + a_{0} (x)
+\end{align*}
+donde $D = \dv*{x}$.  Entonces, la ecuación (\ref{eq:ecuacion_04_01}) toma la forma:
+\begin{align*}
+L \, y = f
+\end{align*}
+
+Veremos que estas ecuaciones se pueden resolver usando \textbf{expansiones de eigenfunciones}. Es decir, buscamos soluciones al problema de los valores propios:
+\begin{align*}
+L \, \phi = \lambda \, \phi
+\end{align*}
+con CDF homogéneas en $\phi$ y luego buscar una solución del problema no homogéneo: $L \, y = f$, como una expansión sobre estas eigenfunciones.
+\par
+Formalmente, hacemos que:
+\begin{align*}
+y (x) = \nsum_{n=1}^{\infty} c_{n} \, \phi_{n} (x)
+\end{align*}
+Sin embargo, no siempre se garantiza un buen conjunto de eigenfunciones. Necesitamos un conjunto apropiado para formar una base en el espacio funcional. 
+\par
+Además, sería bueno tener ortogonalidad para que podamos resolver fácilmente los coeficientes de expansión.
+\par
+Resulta que cualquier operador diferencial lineal de segundo orden puede convertirse en un operador que posea las propiedades adecuadas (autoadjuntas) para llevar a cabo este procedimiento.
+\par
+El operador resultante se denomina \textbf{operador Sturm-Liouville}. Revisaremos algunas de las propiedades de estos operadores y ver cómo se aplican.
+
+\subsection{El operador Sturm-Liouville.}
+
+Se define el operador Sturm-Liouville como:
+\begin{align}
+\mathcal{L} = \dv{x} \, p(x) \, \dv{x} + q(x)
+\label{eq:ecuacion_04_02}
+\end{align}
+
+El problema de valores propios de tipo Sturm-Liouville está dado por la siguiente ecuación diferencial:
+\begin{align*}
+\mathcal{L} \, y = - \lambda \, \sigma(x) \, y
+\end{align*}
+De manera equivalente:
+\begin{align}
+\dv{x} \left( p (x) \, \dv{x} \right) \, y + q (x) \, y + \lambda \, \sigma (x) \, y = 0
+\label{eq:ecuacion_04_03}
+\end{align}
+para $x \, \in \, (a, b)$, $y = y (x)$, más las CDF.
+\par
+Se supone que las funciones $p (x)$, $\pderivada{p} (x)$, $q (x)$ y $\sigma (x)$ son continuas en $(a, b)$ y $p (x) > 0$, $\sigma (x) > 0$ en $[a , b]$.
+\par
+Si el intervalo es finito y estas suposiciones sobre los coeficientes son verdaderas en $[a, b]$, entonces se dice que el problema es un \textbf{carmine}{problema regular de Sturm-Liouville}. De lo contrario, se denomina \textbf{cerise}{problema singular de Sturm-Liouville}.
+\par
+También necesitamos imponer un conjunto de CDF homogéneas:
+\begin{align}
+\begin{aligned}
+\alpha_{1} \, y(a) + \beta_{1} \, \pderivada{y} (a) &= 0 \\[0.5em]
+\alpha_{2} \, y(b) + \beta_{2} \, \pderivada{y} (b) &= 0
+\end{aligned}
+\label{eq:ecuacion_04_04}
+\end{align}
+Las $\alpha$ y $\beta$ son constantes. Para diferentes valores, se tienen tipos especiales de condiciones de contorno.
+\par
+Para $\beta_{i} = 0$, tenemos las llamadas condiciones de frontera de Dirichlet, es decir, $y (a) = 0$ y $y (b) = 0$. Para $\alpha_{i} = 0$, se tienen las condiciones de frontera de Neumann. En este caso, $\pderivada{y} (a) = 0$ y $\pderivada{y} (b) = 0$.
+\par
+En términos del ejemplo de la ecuación de calor, las condiciones de Dirichlet corresponden a mantener una temperatura fija en los extremos de la varilla.
+\par
+Las condiciones de frontera de Neumann corresponderían a ningún flujo de calor a través de los extremos, o condiciones de aislamiento, ya que no habría gradiente de temperatura en esos puntos.  Las condiciones de contorno más generales permiten límites parcialmente aislados.
+\par
+Otro tipo de CDF que se encuentra a menudo es la \emph{condición de frontera periódica}. Considera una varilla calentada que se ha doblado para formar un círculo. Entonces, los dos puntos finales son físicamente iguales. Entonces, esperaríamos que la temperatura y el gradiente de temperatura coincidieran en esos puntos. Para este caso escribimos $y (a) = y (b)$ y $\pderivada{y} (a) = \pderivada{y} (b)$.
+\par
+Los problemas con CDF que utilizan estas condiciones deben manejarse de manera diferente a las condiciones homogéneas anteriores. Estas condiciones conducen a diferentes tipos de eigenfunciones y valores propios.
+
+\subsection{Transformación al operador Sturm-Liouville.}
+
+Como se mencionó anteriormente, las ecuaciones de la forma (\ref{eq:ecuacion_04_01}) se presentan con frecuencia. Ahora mostraremos que cualquier operador lineal de segundo orden se puede poner en la forma del operador de Sturm-Liouville.
+\par
+En particular, la ecuación (\ref{eq:ecuacion_04_01}) se puede escribir de la forma:
+\begin{align}
+\dv{x} \left( p(x) \, \dv{x} \right) \, y + q(x) \, y =  F(x)
+\label{eq:ecuacion_04_05}
+\end{align}
+Otra forma de expresar esto se proporciona en el teorema:  Consideremos primero la ecuación (\ref{eq:ecuacion_04_01}) para el caso de que $a_{1} (x) = \pderivada{a}_{2} (x)$. Entonces, podemos escribir la ecuación en una forma en la que los dos primeros términos se combinen:
+\begin{align}
+\begin{aligned}
+f (x) &= a_{2} (x) \, \sderivada{y} + a_{1} (x) \, \pderivada{y} + a_{0} (x) \, y = \\[0.5em]
+&= \big[ a_{2} (x) \, \pderivada{y} \, \big]^{\prime} + a_{0} (x) \, y
+\end{aligned}
+\label{eq:ecuacion_04_06}
+\end{align}
+La ecuación resultante está ahora en la forma de Sturm-Liouville. Simplemente identificamos $p(x) = a_{2} (x)$ y $q (x) = a_{0} (x)$.
+\par
+No todas las ecuaciones diferenciales de segundo orden son tan sencillas de convertir. Considera la ecuación diferencial:
+\begin{align*}
+x^{2} \, \sderivada{y} + x \, \pderivada{y} + 2 \, y = 0
+\end{align*}
+En este caso $a_{2} (x) = x^{2}$ y $\pderivada{a}_{2} (x) = 2 \, x \neq a_{1} (x)$.  Entonces, esto no viene al caso.
+\par
+Sin embargo, podemos cambiar el operador en esta ecuación, $x^{2} \, D + x \, D$, a un operador de Sturm-Liouville, $D \, p (x) \, D$ para un $p (x)$ que depende de los coeficientes $x^{2}$ y $x$. En el operador de Sturm Liouville, los términos de la derivada se agrupan en una derivada \enquote{perfecta}, $D \, p (x) \, D$. Esto es similar cuando se resuelven ecuaciones lineales de primer orden, se busca un factor integrador.
+\par
+Es posible hacer lo mismo aquí: buscamos una función $\mu (x)$ que podamos multiplicar con la ec. (\ref{eq:ecuacion_04_01}) para que pueda escribirse en la forma de Sturm-Liouville.
+
+Primero dividimos entre $a_{2} (x)$, obteniendo:
+\begin{align*}
+\sderivada{y} + \dfrac{a_{1} (x)}{a_{2} (x)} \, \pderivada{y} + \dfrac{a_{0} (x)}{a_{2} (x)} \, y = \dfrac{f(x)}{a_{2} (x)}
+\end{align*} 
+El siguiente paso es multiplicar la ecuación diferencial por $\mu$:
+\begin{align*}
+\mu (x) \, \sderivada{y} + \mu (x) \, \dfrac{a_{1} (x)}{a_{2} (x)} \, \pderivada{y} + \mu (x) \, \dfrac{a_{0} (x)}{a_{2} (x)} \, y = \mu (x) \, \dfrac{f (x)}{a_{2} (x)}
+\end{align*}
+Los dos primeros términos ahora se pueden combinar en una derivada exacta $( \mu \, \pderivada{y})^{\prime}$  si el segundo coeficiente es $\pderivada{\mu} (x)$. Por lo tanto, $\mu (x)$ satisface una ecuación diferencial separable de primer orden:
+\begin{align*}
+\dv{\mu}{x} = \mu (x) \, \dfrac{a_{1} (x)}{a_{2} (x)}
+\end{align*}
+Esto se resuelve formalmente para dar el factor de integración buscado:
+\begin{align*}
+\mu (x) = \exp \left( \scaleint{6ex} \, \dfrac{a_{1}(x)}{a_{2}(x)} \dd{x} \right)
+\end{align*}
+Por tanto, la ecuación original se puede multiplicar por factor:
+\begin{align*}
+\dfrac{\mu (x)}{a_{2} (x)} = \dfrac{1}{a_{2} (x)} \, \exp \left( \scaleint{6ex} \, \dfrac{a_{1} (x)}{a_{2} (x)} \dd{x} \right)
+\end{align*}
+para obtener una expresión en forma de Sturm-Liouville.
+\par
+La ec. (\ref{eq:ecuacion_04_01}):
+\begin{align*}
+a_{2} (x) \, \sderivada{y} + a_{1} (x) \, \pderivada{y} + a_{0} \, y = f(x)
+%\label{eq:ecuacion_04_07}
+\end{align*}
+se puede escribir de la forma Sturm-Liouville:
+\begin{align}
+\dv{x} \left( p(x) \, \dv{x} \right) \, y + q(x) \, y =  F(x)
+\label{eq:ecuacion_04_08}
+\end{align}
+donde:
+\begin{align}
+\begin{aligned}
+p (x) &= \exp \left( \scaleint{6ex} \, \dfrac{a_{1}(x)}{a_{2}(x)} \dd{x} \right) \\[0.5em]
+q (x) &= p(x) \, \dfrac{a_{0}(x)}{a_{2}(x)} \\[0.5em]
+F (x) &= p(x) \, \dfrac{f(x)}{a_{2}(x)}
+\end{aligned}
+\label{eq:ecuacion_04_09}
+\end{align}
+
+\noindent
+\textbf{Ejemplo 1}: Escribe la siguiente EDO2H en la forma de Sturm-Liouville:
+\begin{align*}
+x^{2} \, \sderivada{y} + x \, \pderivada{y} + 2 \, y = 0
+\end{align*}
+Podemos multiplicar esta ecuación por:
+\begin{align*}
+\dfrac{\mu (x)}{a_{2} (x)} = \dfrac{1}{x^{2}} \, \exp \left( \scaleint{6ex} \, \dfrac{\dd{x}}{x} \right) = \dfrac{1}{\pderivada{x}}
+\end{align*}
+para escribirla en la forma de Sturm-Liouville:
+\begin{align*}
+x \, \sderivada{y} + \pderivada{y} + \dfrac{2}{x} \, y &= 0 \\[0.5em] 
+\big( x \, \pderivada{y} \big)^{\prime} +  \dfrac{2}{x} \, y &= 0    
+\end{align*}
+
+\section{Propiedades de valores propios de Sturm-Liouville.}
+\subsection{Cinco propiedades.}
+
+Hay varias propiedades que se pueden probar para el problema de valores propios de Sturm-Liouville (regular) dado por la ec. (\ref{eq:ecuacion_04_03}). Sin embargo, no se probarán todas. Vamos a enumerar algunos de los hechos importantes y nos centraremos en algunas de las propiedades.
+\begin{enumerate}
+\item Los eigenvalores son reales, contables, ordenados y hay un eigenvalor más pequeño.
+
+Por tanto, podemos escribirlos como $\lambda_{1} < \lambda_{2} < \ldots $ Sin embargo, no hay un eigenvalor más grande: si $n \to \infty$, $\lambda_{n} \to \infty$.
+
+La palabra alemana \emph{eigen}, se traduce en español como propio, se uso por primera vez en este contexto por David Hilbert en 1904. \emph{Eigen} también se ha traducido como inherente, característico o por el prefijo auto-. En español se utiliza el prefijo auto- o propio, siendo característico también en portugués e italiano, pero en otros idiomas en matemática se utiliza la palabra alemana \emph{eigen} sin conflictos a la referencia.
+\item Para cada eigenvalor $\lambda_{n}$ existe una eigenfunción $\phi_{n}$ con $n - 1$ ceros en $(a, b)$.
+\item Las eigenfunciones que corresponden a diferentes valores de las mismas son ortogonales con respecto a la función de peso, $\sigma (x)$.
+
+Al definir el producto interno de $f (x)$ y $g (x)$ como:
+\begin{align}
+\langle f , g \rangle = \scaleint{6ex}_{\bs a}^{b} f(x) \, g(x) \, \sigma(x) \dd{x}
+\label{eq:ecuacion_04_11}
+\end{align}
+Entonces la \textbf{ortogonalidad} de las eigenfunciones se puede escribir de la forma:
+\begin{align}
+\langle \phi_{n}, \phi_{m} \rangle = \langle \phi_{n}, \phi_{n} \rangle \, \delta_{nm} \hspace{1.5cm} n, m = 1, 2, \ldots
+\label{eq:ecuacion_04_12}
+\end{align}
+\item El conjunto de eigenfunciones es \textbf{completo},  es decir, cualquier función suave se puede representar mediante una expansión generalizada de las eigenfunciones de la serie de Fourier:
+\begin{align*}
+f (x) \sim \nsum_{n=1}^{\infty} c_{n} \, \phi_{n} (x)
+\end{align*}
+Donde los coeficientes están dados por:
+\begin{align*}
+c_{n} = \dfrac{\langle f, \phi_{n} \rangle}{\langle \phi_{n}, \phi_{n} \rangle}
+\end{align*}
+En realidad, se necesita que $f (x) \in \, L_{\sigma}^{2} (a, b$), el conjunto de funciones de cuadrado integrables sobre $[a, b]$ con la función de peso $\sigma (x)$. Por cuadrado integrable, queremos decir que $\langle f,  f \rangle < \infty$.
+
+Se puede demostrar que tal espacio es isomorfo en un \textbf{espacio de Hilbert}, un espacio de producto interno completo. Los espacios de Hilbert juegan un papel especial en la mecánica cuántica.
+\item Los valores propios satisfacen el cociente de Rayleigh:
+\begin{align*}
+\lambda_{n} = \dfrac{- p \, \phi_{n} \, \displaystyle \dv{\phi_{n}}{x} \eval_{b}^{a} + \scaleint{6ex}_{\bs a}^{b} \bigg[ p \left( \dv{\phi_{n}}{x} \right)^{2} - q \, \phi_{n}^{2} \bigg] \dd{x}}{\langle  \phi_{n}, \phi_{n} \rangle} 
+\end{align*}
+\end{enumerate}
+Esto se puede verificar al multiplicar el problema de valores propios:
+\begin{align*}
+\mathcal{L} \, \phi_{n} = - \lambda_{n} \, \sigma(x) \, \phi_{n}
+\end{align*}
+por $\phi_{n}$ y luego integrar.
+
+Al resolver este resultado para $\lambda_{n}$, se obtiene el cociente de Rayleigh. El cociente de Rayleigh es útil para obtener estimaciones de valores propios y probar algunas de las otras propiedades.
+
+\end{document}
