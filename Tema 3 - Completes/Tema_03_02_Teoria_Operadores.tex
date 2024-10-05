@@ -1,5 +1,6 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Dresden_seahorse}
 
 \setbeamercolor{section in foot}{bg=darkspringgreen, fg=white}
@@ -24,10 +25,15 @@
 \vskip0pt%
 }
 \makeatother
-\usefonttheme{serif}
+% \usefonttheme{serif}
 \resetcounteronoverlays{saveenumi}
 
-\date{29 de marzo de 2022}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\date{}
 
 \title{\large{Teoría Operadores Sturm-Liouville}}
 \subtitle{Tema 3 - Bases completas y ortogonales}
@@ -40,10 +46,10 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 \section{Operadores autoadjuntos}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
 
 \begin{frame}
@@ -52,7 +58,7 @@ En el estudio de la teoría espectral de matrices, se aprende sobre el adjunto d
 \end{frame}
 \begin{frame}
 \frametitle{Nuevo concepto}
-Además, se necesita el concepto del \emph{adjunto} para discutir la existencia de soluciones al problema matricial:
+Además, se necesita el concepto del \textocolor{red}{adjunto} para discutir la existencia de soluciones al problema matricial:
 \begin{align*}
 \vb{y} = \vb{A} \, \vb{x}
 \end{align*}
@@ -60,18 +66,18 @@ Además, se necesita el concepto del \emph{adjunto} para discutir la existencia 
 \begin{frame}
 \frametitle{Operadores y ED}
 En el mismo sentido, uno está interesado en la existencia de soluciones de la ecuación del operador $L \, u = f$ y soluciones del correspondiente problema de valores propios.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Operadores y ED}
 El estudio de operadores lineales en un espacio de Hilbert es una generalización de lo que estudia en un curso de álgebra lineal.
 \end{frame}
 \begin{frame}
 \frametitle{Retomando el operador Sturm-Liouville}
-Así como se puede encontrar una base de vectores propios y diagonalizar matrices Hermitianas o autoadjuntas (o simétricas reales en el caso de matrices reales), veremos que el operador de Sturm-Liouville es \emph{autoadjunto}.
+Así como se puede encontrar una base de vectores propios y diagonalizar matrices Hermitianas o autoadjuntas (o simétricas reales en el caso de matrices reales), veremos que el operador de Sturm-Liouville es \textocolor{blue}{autoadjunto}.
 \end{frame}
 \begin{frame}
 \frametitle{Retomando el operador Sturm-Liouville}    
-En esta parte definiremos el \emph{dominio} de un operador e introduciremos la noción de \emph{operadores adjuntos}.
+En esta parte definiremos el \textocolor{bole}{dominio} de un operador e introduciremos la noción de \textocolor{debianred}{operadores adjuntos}.
 \\
 \bigskip
 \pause
@@ -106,8 +112,11 @@ con $D = \dv*{x}$.
 \end{frame}
 \begin{frame}
 \frametitle{Resolviendo el ejemplo de operador adjunto}    
-Para encontrar el adjunto, colocamos el operador dentro de una integral. \pause Consideremos el producto interior:
+Para encontrar el adjunto, colocamos el operador dentro de una integral. 
+\\
+\bigskip
 \pause
+Consideremos el producto interior:
 \begin{align*}
 \langle u , L \, v \rangle = \scaleint{5ex}_{\bs a}^{b} u (a_{2} \, \sderivada{v} + a_{1} \, \pderivada{v} + a_{0} \, v) \dd{x}
 \end{align*}
@@ -202,7 +211,7 @@ L^{\dagger} = a_{2}(x) \, \dv[2]{x} - a_{1}(x) \, \dv{x} + a_{0}(x)
 \end{frame}
 \begin{frame}
 \frametitle{El operador Hermitiano/Hermítico}
-Cuando $L^{\dagger} = L$, \pause el operador se llama formalmente \textbf{autoadjunto}, también es conocido como \emph{operador Hermitiano}.
+Cuando $L^{\dagger} = L$, \pause el operador se llama formalmente \textocolor{darkorchid}{autoadjunto}, también es conocido como \textocolor{darkred}{operador Hermitiano}.
 \\
 \bigskip
 \pause
@@ -233,11 +242,14 @@ Por lo que reescribimos la integral:
 \frametitle{El problema adjunto}
 De aquí tenemos que el problema adjunto que consiste en un operador adjunto y la CDF asociada (o dominio de $L^{\dagger}$):
 \pause
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=darkscarlet,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
-\item $L^{\dagger} = - \dv{x}$
-\item $\displaystyle u \, v \eval_{0}^{1} = 0 \Rightarrow u(1) \big[ v(1) - 2 \, v(0) \big] \Rightarrow v(1) = 2 \, v(0)$
+\item $L^{\dagger} = - \displaystyle \dv{x}$
+\item $\displaystyle u \, v \eval_{0}^{1} = 0 \Rightarrow u (1) \big[ v(1) - 2 \, v(0) \big] \Rightarrow v (1) = 2 \, v(0)$
 \end{enumerate}
 \end{frame}
 
@@ -247,7 +259,7 @@ De aquí tenemos que el problema adjunto que consiste en un operador adjunto y l
 % \textbf{Ejercicio a cuenta (30).} Las funciones $\phi_{1}(x)$ y $\phi_{2}(x)$ son funciones propias del mismo operador autoadjunto (Hermitiano) pero para distintos valores propios $\lambda_{1}$ y $\lambda_{2}$. Demuestra que $\phi_{1}(x)$ y $\phi_{2}(x)$ son linealmente independientes.
 
 \section{Identidades de Lagrange y de Green}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Identidades de apoyo}
 
 \begin{frame}
@@ -268,10 +280,13 @@ Se tienen dos identidades:
 \\
 \bigskip
 \pause
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item \textbf{Identidad de Lagrange:} 
+\setbeamercolor{item projected}{bg=deepcarmine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
+\item \textocolor{denim}{Identidad de Lagrange:} 
 \begin{align*}
 u \, \mathcal{L} \, v - v \, \mathcal{L} \, u = \big[ p \, (u \, \pderivada{v} - v \, \pderivada{u}) \big]^{\prime}
 \end{align*}
@@ -280,11 +295,14 @@ u \, \mathcal{L} \, v - v \, \mathcal{L} \, u = \big[ p \, (u \, \pderivada{v} -
 \end{frame}
 \begin{frame}
 \frametitle{Identidad de Green}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]    
+\setbeamercolor{item projected}{bg=deepcarmine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
 \conti
-\item \textbf{Identidad de Green:} 
+\item \textocolor{goldenbrown}{Identidad de Green:} 
 \begin{align*}
 \scaleint{5ex}_{\bs a}^{b} \, \big(u \, \mathcal{L} \, v - v \, \mathcal{L} \, u \big) \dd{x} = \big[ p \, (u \, \pderivada{v} - v \, \pderivada{u}) \big]\eval_{a}^{b}
 \end{align*}
@@ -315,17 +333,20 @@ La identidad de Green se prueba simplemente integrando la identidad de Lagrange.
 \end{frame}    
 
 \section{Ortogonalidad y eigenvalores reales}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Eigenvalores reales}
 
 \begin{frame}
 \frametitle{Avance en el contenido}
 Ahora estamos listos para demostrar que:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=halayaube,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
-\item  \emph{Los eigenvalores de un problema de Sturm-Liouville son reales}.
-\item \emph{Las eigenfunciones correspondientes son ortogonales}.
+\item \textocolor{hanblue}{Los eigenvalores de un problema de Sturm-Liouville son reales}.
+\item \textocolor{indiagreen}{Las eigenfunciones correspondientes son ortogonales}.
 \end{enumerate}
 \end{frame}
 \begin{frame}
@@ -420,7 +441,11 @@ Ahora nos interesa revisar que las funciones propias correspondientes a diferent
 \end{frame}
 \begin{frame}
 \frametitle{Demostración de esta propiedad}
-La demostración es similar al ejemplo anterior. Sea $\phi_{n}(x)$ una solución al problema de valores propios con $\lambda_{n}$:
+La demostración es similar al ejemplo anterior.
+\\
+\bigskip
+\pause
+Sea $\phi_{n}(x)$ una solución al problema de valores propios con $\lambda_{n}$:
 \pause
 \begin{align*}
 \mathcal{L} \, \phi_{n} = - \lambda_{n} \, \sigma \, \phi_{n}
@@ -461,7 +486,7 @@ Por lo tanto, las funciones propias son ortogonales con respecto a la función d
 \end{frame}
 \begin{frame}
 \frametitle{Degeneración}
-Si $N$ eigenfunciones linealmente independientes corresponden al mismo eigenvalor, se dice que este último es $N$-veces \emph{degenerado}.
+Si $N$ eigenfunciones linealmente independientes corresponden al mismo eigenvalor, se dice que este último es $N$-veces \textocolor{red}{degenerado}.
 \end{frame}
 \begin{frame}
 \frametitle{Integral no nula}
@@ -474,15 +499,15 @@ Si $\lambda_{m} = \lambda_{n}$, la integral:
 \end{frame}
 \begin{frame}
 \frametitle{Consecuencia de la degeneración}
-Esto implica que las eigenfunciones linealmente independientes correspondientes al mismo eigenvalor \textcolor{red}{no son automáticamente} ortogonales.
+Esto implica que las eigenfunciones linealmente independientes correspondientes al mismo eigenvalor \textocolor{indigo(web)}{no son automáticamente} ortogonales.
 \\
 \bigskip
 \pause
-Por lo que debe de buscarse otro método para obtener un conjunto de eigenfunciones ortogonales, \pause veremos que \textcolor{blue}{siempre} se puede lograr que sean ortogonales.
+Por lo que debe de buscarse otro método para obtener un conjunto de eigenfunciones ortogonales, \pause veremos que \textocolor{ao}{siempre} se puede lograr que sean ortogonales.
 \end{frame}
 
 \section{Ortogonalización de Gram-Schmidt}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{La técnica}
 
 \begin{frame}
@@ -511,7 +536,7 @@ Ya que la ecuación básica:
 \mathcal{L} \, u (x) + \lambda \, \sigma (x) \, u (x) = 0
 \label{eq:ecuacion_10_08}
 \end{align}
-es \textcolor{blue}{lineal} y \textcolor{blue}{homogénea}, podemos multiplicar la solución por cualquier constante, de tal manera que sigue siendo solución.
+es \textocolor{blue}{lineal} y \textocolor{byzantine}{homogénea}, podemos multiplicar la solución por cualquier constante, de tal manera que sigue siendo solución.
 \end{frame}
 \begin{frame}
 \frametitle{Normalizando las funciones}
@@ -535,19 +560,22 @@ La ecuación (\ref{eq:ecuacion_10_39}) nos dice que se ha normalizado a la unida
 \end{frame}
 \begin{frame}
 \frametitle{Condición de ortonormalidad}
-Incluyendo la propiedad de ortogonalidad, tenemos la ecuación (\ref{eq:ecuacion_10_40}), a las funciones que la satisfacen, se dice que son \textbf{ortonormales} (ortogonales y normalizadas).
+Incluyendo la propiedad de ortogonalidad, tenemos la ecuación (\ref{eq:ecuacion_10_40}), a las funciones que la satisfacen, se dice que son \textocolor{lava}{ortonormales} (ortogonales y normalizadas).
 \end{frame}
 \begin{frame}
 \frametitle{Condición de normalización}
-Cabe señalar que existen \emph{otras formas} de normalización, \pause cada una de las funciones especiales de la Física Matemática se puede normalizar de distintas formas.
+Cabe señalar que existen \textocolor{lincolngreen}{otras formas} de normalización, \pause cada una de las funciones especiales de la Física Matemática se puede normalizar de distintas formas.
 \end{frame}
 \begin{frame}
 \frametitle{Conjunto de funciones}
 Consideremos tres conjuntos de funciones:
 \pause
-\setbeamercolor{item projected}{bg=kellygreen,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
+\setbeamercolor{item projected}{bg=kellygreen,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
 \item Un conjunto original, linealmente independiente $u_{n}(x)$ con $n=0,1,2,\ldots$ \\
 Las funciones podrían ser funciones propias degeneradas, pero no es necesario que se cumpla este punto.
 \seti
@@ -555,8 +583,11 @@ Las funciones podrían ser funciones propias degeneradas, pero no es necesario q
 \end{frame}
 \begin{frame}
 \frametitle{Conjunto de funciones}
-\setbeamercolor{item projected}{bg=kellygreen,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=kellygreen,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]  
 \conti
 \item Un conjunto ortogonal $\psi_{n}(x)$ que se va a construir.
@@ -685,7 +716,7 @@ Los coeficientes $a_{i, j}$ están dados por:
 a_{i, j} = - \scaleint{5ex} u_{i} \, \varphi_{j} \, \sigma  \dd{x}
 \label{eq:ecuacion_10_49}
 \end{align}
-Esta ecuación es para una \textcolor{blue}{normalización unitaria}.
+Esta ecuación es para una \textocolor{carmine}{normalización unitaria}.
 \end{frame}
 \begin{frame}
 \frametitle{Normalización en general}
@@ -826,7 +857,7 @@ El uso de funciones especiales como en este caso los polinomios de Legendre $P_{
 \end{frame}
 
 \section{Polinomios ortogonales}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Conjunto de polinomios}
 
 \begin{frame}
@@ -1004,7 +1035,7 @@ y(1) = y(e) = 0 \hspace{1.5cm} 1 \leq x \leq e
 \begin{frame}
 \frametitle{Qué es lo que se pide}
 Resolver el ejercicio implica obtener:
-\setbeamercolor{item projected}{bg=OliveGreen,fg=white}
+\setbeamercolor{item projected}{bg=darkolivegreen,fg=white}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
 \item Los correspondientes eigenvalores.
@@ -1117,7 +1148,7 @@ y (x) = \dfrac{a}{x^{2}} \, \left( x^{\sqrt{4 - \lambda}} + x^{- \sqrt{4 - \lamb
 \frametitle{La segunda CDF}
 Con la condición $y(e) = 0$, se tienen dos casos:
 \pause
-\setbeamercolor{item projected}{bg=OliveGreen,fg=white}
+\setbeamercolor{item projected}{bg=darkolivegreen,fg=white}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
 \item Si $4 - \lambda > 0$
@@ -1135,7 +1166,7 @@ Por tanto $y (x) = 0$
 \end{frame}
 \begin{frame}
 \frametitle{La segunda CDF}
-\setbeamercolor{item projected}{bg=OliveGreen,fg=white}
+\setbeamercolor{item projected}{bg=darkolivegreen,fg=white}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
 \conti

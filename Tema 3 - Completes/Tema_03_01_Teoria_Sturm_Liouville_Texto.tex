@@ -332,4 +332,113 @@ por $\phi_{n}$ y luego integrar.
 
 Al resolver este resultado para $\lambda_{n}$, se obtiene el cociente de Rayleigh. El cociente de Rayleigh es útil para obtener estimaciones de valores propios y probar algunas de las otras propiedades.
 
+\subsection{Ejemplos.}
+
+\textbf{Ejemplo 1: } Verifica algunas de las propiedades para el siguiente problema de eigenvalores:
+\begin{align*}
+\sderivada{y} = - \lambda \, y \hspace{1cm} y(0) = y(\pi) = 0
+\end{align*}
+Este es un problema que ya se ha visto muchas veces. Las eigenfunciones para este problema de eigenvalores son $\phi_{n} (x) = \sin n\, x$, con eigenvalores $\lambda_{n} = n^{2}$ para $n = 1, 2, \ldots$. Éstas satisfacen las propiedades enumeradas anteriormente.
+\par
+En primer lugar, los eigenvalores son reales, contables y ordenados, $1 < 4 < 9 < \ldots$. No hay un eigenvalor más grande pero hay un primer valor.
+\par
+Las eigenfunciones correspondientes a cada eigenvalor tienen $n -1$ ceros en el intervalo $(0, \pi)$. Esto se comprueba para varias eigenfunciones en la figura (\ref{fig:figura_04_01}).
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1.3]{Imagenes/Eigenfunciones_Sin_nx.eps}
+    \caption{Gráfica de las eigenfunciones $\phi_{n} (x) = \sin n \,x$ para $n = 1, 2, 3, 4$.}
+    \label{fig:figura_04_01}
+\end{figure}
+También sabemos que el conjunto $\left\{ \sin n \, x \right\}$ con $n = 1, \ldots, \infty$ es un conjunto ortogonal de funciones básicas de longitud:
+\begin{align*}
+\norm{\phi_{n}} = \sqrt{\dfrac{\pi}{2}}
+\end{align*}
+Por lo tanto, el cociente de Rayleigh se puede calcular usando $p (x) = 1$, $q (x) = 0$ y las eigenfunciones. Está dado entonces por:
+\begin{align}
+\begin{aligned}[b]
+R &= \dfrac{- \phi_{n} \, \pderivada{\phi}_{n} \eval_{0}^{\pi} + \scaleint{6ex}_{\bs 0}^{\pi} \, (\pderivada{\phi}_{n})^{2} \dd{x}}{\dfrac{\pi}{2}} = \\[0.5em]
+&= \dfrac{2}{\pi} \scaleint{6ex}_{\bs 0}^{\pi} \left( - n^{2} \, \cos n \, x \right)^{2} \dd{x} = \\[0.5em]
+&= n^{2}
+\end{aligned}
+\label{eq:ecuacion_04_13}
+\end{align}
+Por lo tanto, conociendo la eigenfunción, el cociente de Rayleigh devuelve los eigenvalores como se esperaba.
+\\[1em]
+\noindent
+\textbf{Ejemplo 2: } Buscamos las eigenfunciones del operador que se encuentran en el \textbf{Ejemplo 1}. Es decir, queremos resolver el problema de los eigenvalores:
+\begin{align}
+\mathcal{L} \, y = \left( x \, \pderivada{y} \right)^{\prime} + \dfrac{2}{x} \, y = - \lambda \, \sigma \, y
+\label{eq:ecuacion_04_14}
+\end{align}
+sujeta a las CDF:
+\begin{align*}
+\pderivada{y} (1) = 0, \hspace{1cm} \pderivada{y}(2) = 0
+\end{align*}
+Tomemos en cuenta que todavía no conocemos quién es la función $\sigma (x)$, pero elegiremos una función adecuada para obtener las soluciones.
+\par
+\noindent
+Expandiendo la derivada, tendremos que:
+\begin{align*}
+x \, \sderivada{y} + \pderivada{y} + \dfrac{2}{x} \, y = - \lambda \, \sigma \, y
+\end{align*}
+multiplicamos por $x$ para obtener:
+\begin{align*}
+x^{2} \, \sderivada{y} + x \, \pderivada{y} + (2 + \lambda \, x \,  \sigma) \, y = 0
+\end{align*}
+Veamos que si elegimos $\sigma(x) = x^{-1}$, entonces la ecuación se puede expresar como una ecuación de tipo Cauchy-Euler. Entonces tendremos:
+\begin{align*}
+x^{2} \, \sderivada{y} + x \, \pderivada{y} + (\lambda + 2) \, y = 0
+\end{align*}
+La ecuación característica es:
+\begin{align*}
+r^{2} + \lambda + 2 = 0
+\end{align*}
+Para tener soluciones oscilatorias, se necesita que $\lambda + 2 > 0$. Por lo tanto, la solución general es:
+\begin{align}
+y (x) = c_{1} \, \cos \left( \sqrt{\lambda + 2} \, \ln \abs{x} \right) + c_{2} \, \sin \left( \sqrt{\lambda + 2} \, \ln \abs{x} \right)
+\label{eq:ecuacion_04_15}
+\end{align}
+Aplicamos las CDF $\pderivada{y}(1) = 0$, obliga que $c_{2} = 0$, esto nos deja:
+\begin{align*}
+y (x) = c_{1} \, \cos \left( \sqrt{\lambda + 2} \, \ln \abs{x} \right)
+\end{align*}
+La segunda condición $\pderivada{y}(2) = 0$, nos lleva a:
+\begin{align*}
+\sin \left( \sqrt{\lambda + 2} \, \ln 2 \right) = 0
+\end{align*}
+las soluciones no triviales se presentan cuando:
+\begin{align*}
+\sqrt{\lambda + 2} \, \ln 2 = n \, \pi \hspace{1.5cm} n = 0, 1, 2, \ldots
+\end{align*}
+Entonces se tiene que las eigenfunciones para este problema de eigenvalores son:
+\begin{align*}
+y_{n} (x) = \cos \left( \dfrac{n \, \pi}{\ln 2} \, \ln x \right), \hspace{1.5cm} 1 \leq x \leq 2
+\end{align*}
+y los eigenvalores son:
+\begin{align*}
+\lambda_{n} = \left( \dfrac{n \, \pi}{\ln 2} \right)^{2} - 2, \hspace{1.5cm} n = 0, 1, 2, \ldots
+\end{align*}
+\emph{Nota:} Incluimos el caso $n = 0$ porque $y (x) =$ constante, es una solución del caso $\lambda = - 2$. Más específicamente, en este caso la ecuación característica se reduce a $r^{2} = 0$. Por lo tanto, la solución general de esta ecuación de Cauchy-Euler es:
+\begin{align*}
+y (x) = c_{1} + c_{2} \, \ln \abs{x}
+\end{align*}
+Haciendo que $\pderivada{y} (1) = 0$, obliga que $c_{2} = 0$. Por lo que $\pderivada{y} (2)$ se anula automáticamente, dejando la solución en este caso como $y(x) = c_{1}$.
+\par
+Observamos que algunas de las propiedades enumeradas al principio de la sección son válidas para este ejemplo. Los eigenvalores se consideran reales, contables y ordenados. Hay al menos uno, $\lambda_{0} = -2$. A continuación, se pueden encontrar los ceros de cada eigenfunción en el intervalo $[1, 2]$. Entonces, el argumento del coseno, $\left( \dfrac{n \, \pi}{\ln 2} \, \ln x \right)$, toma valores de $0$ a $n \pi$ para $x \in [1, 2]$. La función coseno tiene $n - 1$ raíces en este intervalo, en la fig. (\ref{fig:figura_04_02}) se muestra la gráfica de las primeras eigenfunciones.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1.3]{Imagenes/Plot_Ejercicio_SL_03.eps}
+    \caption{Gráfica de las primeras eigenfunciones solución con sus correspondientes eigenvalores del Ejemplo 3.}
+    \label{fig:figura_04_02}
+\end{figure}
+La ortogonalidad se revisa como sigue: En la integral usamos el cambio de variable $y = \dfrac{\pi \, \ln x}{\ln 2}$. Esto nos devuelve:
+\begin{align}
+\begin{aligned}[b]
+\langle y_{n}, y_{n} \rangle &= \scaleint{6ex}_{\bs 1}^{2} \, \cos \left( \dfrac{n \, \pi}{\ln 2} \, \ln x \right) \, \cos \left( \dfrac{m \, \pi}{\ln 2} \, \ln x \right) \dfrac{\dd{x}}{x} = \\[0.5em]
+&= \dfrac{\ln 2}{\pi} \scaleint{6ex}_{\bs 0}^{\pi} \cos (n \, y) \, \cos (m \, y) \dd{y} = \\[0.5em]
+&= \dfrac{\ln 2}{2} \, \delta_{nm}
+\end{aligned}
+\label{eq:ecuacion_04_16}
+\end{align}
+
 \end{document}
