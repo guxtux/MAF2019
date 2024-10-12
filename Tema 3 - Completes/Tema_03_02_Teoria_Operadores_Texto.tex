@@ -7,7 +7,6 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{physics}
-\AtBeginDocument{\RenewCommandCopy\qty\SI}
 \usepackage{tikz}
 \usepackage{float}
 \usepackage{calc}
@@ -28,9 +27,6 @@
 \usepackage{scalerel}[2016-12-29]
 \usepackage{biblatex}
 \usepackage{cancel}
-
-\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
-\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
 
 \hypersetup{
     colorlinks=true,
@@ -486,5 +482,83 @@ Se puede demostrar que:
 donde $P_{n}$ es el polinomio de orden $n$ de Legendre.
 \par
 El uso de funciones especiales como en este caso los polinomios de Legendre $P_{n}(x)$, será algo común, ya en el Tema 5 se revisará la construcción completa de los $P_{n}(x)$, así como un conjunto de propiedades.
+
+\section{Polinomios ortogonales.}
+\subsection{Conjunto de polinomios.}
+
+El ejemplo anterior se ha elegido estrictamente para ilustrar el procedimiento de Gram-Schmidt. Aunque tiene la ventaja de introducir los polinomios de Legendre, las funciones iniciales $u_{n} = x^{n}$ no son funciones propias degeneradas y no son soluciones de la ecuación de Legendre.
+\par
+Las $u_{n}$ utilizadas son simplemente un conjunto de funciones que hemos reorganizado aquí para crear un conjunto ortonormal para el intervalo dado y la función de peso dada. El hecho de que hayamos obtenido los polinomios de Legendre no es \enquote{magia negra} , sino una consecuencia directa \textbf{de la elección de la función de peso y del intervalo}.
+\par
+El uso de $u_{n} = x^{n}$ pero eligiendo otros intervalos y funciones de peso, nos conduce a otros conjuntos de polinomios ortogonales, a continuación se presentan los intervalos de definición, la función de peso y las condiciones de ortogonalización de varias funciones especiales, consideremos que éstas se son soluciones de una ecuación diferencial correspondiente. 
+\begin{enumerate}
+\item Polinomios de Legendre.
+
+\begin{center}
+Intervalo: $-1 \leq x \leq 1$ \hspace{1.5cm} $\sigma (x) = 1$ \\[1em]
+Normalización estándar: $\displaystyle \scaleint{6ex}_{\bs -1}^{1} \left[ P_{n} (x) \right]^{2} \dd{x} = \dfrac{2}{2 \, n + 1}$
+\end{center}
+\item Polinomios de Legendre desplazados.
+
+\begin{center}
+Intervalo: $0 \leq x \leq 1$ \hspace{1.5cm}  $\sigma (x) =  1$ \\[1em]
+Normalización estándar: $\displaystyle \scaleint{6ex}_{\bs 0}^{1} \left[ P_{n}^{*}(x) \right]^{2} \dd{x} = \dfrac{2}{2 \, n + 1}$  
+\end{center}
+\item Polinomios de Chebyshev tipo I.
+
+\begin{center}
+Intervalo: $-1 \leq x \leq 1$ \hspace{1.5cm} $\sigma (x) = (1 - x^{2})^{-1/2}$ \\[1em]
+Normalización estándar: $\scaleint{6ex}_{\bs -1}^{1} \dfrac{\left[ T_{n}(x) \right]^{2}}{(1 - x^{2})^{-1/2}} \dd{x} = \begin{cases} 
+\displaystyle \frac{\pi}{2} & n \neq 0 \\
+\pi & n = 0 \end{cases}$
+\end{center}
+
+\item Polinomios de Chebyshev desplazados tipo I.
+
+\begin{center}
+Intervalo: $0 \leq x \leq 1$ \hspace{1.5cm} $\sigma (x) = [x (1 - x)]^{-1/2}$ \\[1em]
+Normalización estándar: $\scaleint{6ex}_{\bs 0}^{1} \dfrac{\left[ T_{n}^{*} (x) \right]^{2}}{[x (1 - x)]^{-1/2}} \dd{x} = \begin{cases} 
+\displaystyle \frac{\pi}{2} & n > 0 \\
+\pi & n = 0 \end{cases}$
+\end{center}
+\item Polinomios de Chebyshev tipo II.
+
+\begin{center}
+Intervalo: $-1 \leq x \leq 1$ \hspace{1.5cm} $\sigma (x) = (1 - x^{2})^{1/2}$ \\[1em]
+Normalización estándar: $\scaleint{6ex}_{\bs -1}^{1} [U_{n} (x)]^{2} \, (1 - x^{2})^{1/2} \, \dd x = \dfrac{\pi}{2}$
+\end{center}
+\item Polinomios de Laguerre.
+
+\begin{center}
+Intervalo: $0 \leq x < \infty $ \hspace{1.5cm} $\sigma (x) = e^{-x}$ \\[1em]
+Normalización estándar: $ \scaleint{6ex}_{\bs 0}^{\infty} \left[ L_{n} (x) \right]^{2} \, e^{-x} \dd{x} =  1 $
+\end{center}
+\item Polinomios Asociados de Laguerre.
+
+\begin{center}
+Intervalo: $0 \leq x < \infty $ \hspace{1.5cm} $\sigma (x) = x^{k} \, e^{-x}$ \\[1em]
+Normalización estándar: $\scaleint{6ex}_{\bs 0}^{\infty} \left[ L_{n}^{k} (x) \right]^{2} \, x^{k} \, e^{-x} \dd{x} = \dfrac{(n + k)!}{n!}$
+\end{center}
+\item Polinomios de Hermite.
+
+\begin{center}
+Intervalo: $- \infty < x < \infty$ \hspace{1.5cm} $\sigma (x) =  e^{-x^{2}}$ \\[1em]
+Normalización estándar: $\scaleint{6ex}_{\bs -\infty}^{\infty} \left[ H_{n} (x) \right]^{2} e^{-x^{2}} \dd{x} = 2^{n} \, \pi^{1/2} \, n!$
+\end{center}
+\end{enumerate}
+
+Una revisión de este proceso de ortogonalización revelará dos características arbitrarias:
+\begin{enumerate}
+\item Primero, como se enfatizó antes, no es necesario normalizar las funciones a la unidad. 
+
+En el ejemplo que acabamos de mostrar, podríamos haber requerido:
+\begin{align}
+\scaleint{6ex}_{\bs -1}^{1} \varphi_{n} (x) \: \varphi_{m} (x) \, \dd{x} = \dfrac{2}{2 \, n + 1} \, \delta_{nm}
+\label{eq:ecuacion_10_61}
+\end{align}
+y el conjunto resultante habrían sido el de los polinomios de Legendre.
+\item Segundo, el signo de $\varphi_{n} (x)$ siempre es indeterminado.
+\end{enumerate}
+En el ejemplo, elegimos el signo al requerir que el coeficiente de mayor potencia de $x$ en el polinomio sea positivo.  Para los polinomios de Laguerre, por otro lado, requeriríamos que el coeficiente de mayor potencia sea $(-1)^{n}/n!$
 
 \end{document}
