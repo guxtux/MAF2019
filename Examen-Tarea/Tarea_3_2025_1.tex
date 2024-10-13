@@ -1,0 +1,160 @@
+\documentclass[hidelinks,12pt]{article}
+\usepackage[left=0.25cm,top=1cm,right=0.25cm,bottom=1cm]{geometry}
+%\usepackage[landscape]{geometry}
+\textwidth = 20cm
+\hoffset = -1cm
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla, es-lcroman]{babel}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[tbtags]{amsmath}
+\usepackage{nccmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{standalone}
+\graphicspath{{Imagenes/}{../Imagenes/}}
+\usepackage[outdir=./Imagenes/]{epstopdf}
+\usepackage{siunitx}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+\usepackage{color}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{multirow}
+%\usepackage{milista}
+\usepackage{anyfontsize}
+\usepackage{anysize}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{mdframed}
+\usepackage{relsize}
+\usepackage{placeins}
+\usepackage{empheq}
+\usepackage{cancel}
+\usepackage{pdfpages}
+\usepackage{wrapfig}
+\usepackage[flushleft]{threeparttable}
+\usepackage{makecell}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{bigints}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{scalerel}
+\usepackage{pgfplots}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+
+\pgfplotsset{compat=1.16}
+\spanishdecimal{.}
+\renewcommand{\baselinestretch}{1.5}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iiint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+
+% \newcommand{\qed}{\tag*{$\blacksquare$}}
+\renewcommand{\qed}{\hfill\blacksquare}
+
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\newlist{milista}{enumerate}{2}
+\setlist[milista,1]{label=\roman*)}
+\setlist[milista,2]{label=\roman{milista}.\roman*)}
+
+\title{Tarea Tema 3 \\[0.3em] \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+
+\fontsize{14}{14}\selectfont
+
+\textbf{Indicaciones: } Se te pide gentilmente que resuelvas de manera detallada, clara y ordenada los siguientes ejercicios, el puntaje que otorga cada enunciado es de \textbf{1 punto}. En caso de que requieras apoyarte en alguna propiedad, si fue vista en clase, solo indícalo, pero si esa propiedad aunque esté relacionada al ejercicio y no se haya mencionado en clase, habrá que demostrarla debidamente.
+
+\begin{enumerate}
+\item Demuestra que la ecuación diferencial de Hermite:
+\begin{align*}
+\sderivada{y} - 2 \, x \, \pderivada{y} + 2 \, \alpha \, y = 0
+\end{align*}
+se puede escribir de forma autoadjunta multiplicando por $\exp (-x^{2})$, usando la función de peso $\sigma (x) = \exp (-x^{2})$.
+\item Cuentas con los siguientes elementos:
+\begin{milista}
+\item Un conjunto de funciones $\left\{ u_{n} (x) \right\} = \left\{ x^{n} \right\}, \mbox{ con } n = 1, 2, \ldots$
+\item El intervalo $(0, \infty)$
+\item Una función de peso $w(x) = x \, e^{-x}$
+\end{milista}
+Con el método de Gram-Schmidt construye las primeras \textbf{tres funciones ortonormales} del conjunto $u_{n}(x)$, con ese intervalo dado y con la función de peso dada.
+% Ref. Ghatak (2004) - Quantum mechanics. 1.8. Problema 1.1
+\item Para $f (x) = \abs{x}$, demuestra que:
+\begin{align*}
+\sderivada{f} (x) = 2 \, \delta (x)
+\end{align*}
+%Ref. Arfken 10.4.4
+\item En lugar de la expansión de una función $F(x)$ dada por:
+\begin{align*}
+F (x) = \nsum_{n=0}^{\infty} a_{n} \, \varphi_{n} (x)
+\end{align*}
+con los coeficientes:
+\begin{align*}
+a_{n} = \scaleint{6ex}_{\bs a}^{b} F(x) \, \varphi_{n} (x) \, \omega (x) \dd{x}
+\end{align*}
+Considera la aproximación por una serie \textbf{finita}:
+\begin{align*}
+F (x) \approx \nsum_{n=0}^{m} c_{n} \, \varphi_{n} (x)
+\end{align*}
+Demuestra que el cuadrado del error medio:
+\begin{align*}
+\scaleint{6ex}_{\bs a}^{b} \bigg[ F(x) - \nsum_{n=0}^{m} c_{n} \, \varphi_{n} (x) \bigg]^{2} \, \omega (x) \dd{x}
+\end{align*}
+se minimiza cuando $c_{n} = a_{n}$.
+\par
+\noindent
+\textbf{Nota: } Los valores de los coeficientes son independientes del número de términos en la serie finita. Esta independencia es una consecuencia de la ortogonalidad y no sería válida para un ajuste por mínimos cuadrados utilizando potencias de $x$.
+%Ref. Arfken 10.4.7
+% \item Recupera la desigualdad de Schwarz de la siguiente identidad:
+% \begin{align*}
+% &\bigg[ \scaleint{6ex}_{\bs a}^{b} f(x) \, g(x) \dd{x} \bigg
+% ]^{2} {=} \scaleint{6ex}_{\bs a}^{b} \big[ f(x) \big
+% ]^{2} \dd{x} \, \scaleint{6ex}_{\bs a}^{b} \big[ g(x) \big
+% ]^{2} \dd{x} + \\[0.5em]
+% &- \dfrac{1}{2} \, \scaleint{6ex}_{\bs a}^{b} \, \scaleint{6ex}_{\bs a}^{b} \bigg[ f(x) \, g(y) - f(y) \, g(x) \bigg
+% ]^{2} \dd{x} \dd{y}
+% \end{align*}
+% \textbf{Nota:} Cuida el signo de la expresión, recuerda que al cortar el renglón, se deja el signo $+$, en el siguiente renglón se tiene el signo $-$, por lo que el segundo término está restando el producto del primer término.
+\item De la lectura del artículo de V. Balakrishnan \enquote{\emph{All about the Dirac delta function}}, responde por qué el autor considera que la forma de $\delta (x - x_{0})$ se asemeja más al kernel de un operador integral.
+\end{enumerate}
+
+
+\end{document}

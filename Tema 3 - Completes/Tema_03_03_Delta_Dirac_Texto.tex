@@ -16,18 +16,28 @@
 \usepackage{textcomp, gensymb}
 \usepackage{multicol}
 \usepackage{enumitem}
+\usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{bookmark}
 \usepackage{setspace}
 \usepackage[left=2.00cm, right=2.00cm, top=2.00cm, 
      bottom=2.00cm]{geometry}
 % \usepackage{Estilos/ColoresLatex}
 \usepackage{makecell}
-\usepackage{subcaption}
+% \usepackage{subcaption}
 \usepackage[skip=10pt, indent=30pt]{parskip}
 % \usepackage{scalerel}
 \usepackage{scalerel}[2016-12-29]
 % \usepackage{biblatex}
 \usepackage{cancel}
+\usepackage{caption}
+\usepackage{capt-of}
+\usepackage[outdir=./Imagenes/]{epstopdf}
+
+\graphicspath{{Imagenes/}}
+\DeclareGraphicsExtensions{.png,.jpg,.eps}
+
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
 
 \hypersetup{
     colorlinks=true,
@@ -97,7 +107,7 @@
 \section{La delta de Dirac.}
 \subsection{Impulsos en la física.}
 
-En física a menudo nos encontramos con fenómenos donde se involucra el concepto de un pulso de duración \textbf{infinitamente corto}. Por ejemplo, en el curso de Mecánica Clásica se revisa el concepto de una magnitud física llamada \textbf{impulso},  la cual se introduce cuando se cambia el estado de movimiento de un cuerpo al aplicarle un \textbf{golpe repentino}. El impulso se denota comúnmente con la letra $I$.
+En física a menudo nos encontramos con fenómenos donde se involucra el concepto de un pulso de duración \textbf{infinitamente corto}. Por ejemplo, en el curso de Mecánica Clásica se revisa el concepto de una magnitud física llamada \textbf{impulso}, la cual se introduce cuando se cambia el estado de movimiento de un cuerpo al aplicarle un \textbf{golpe repentino}. El impulso se denota comúnmente con la letra $I$.
 \par
 Tomemos como ejemplo del fútbol, con un penalty,  en este caso tenemos inicialmente al balón en reposo, la intención es meter la pelota en la portería contraria. Después de patear el balón, éste adquiere un momento que es igual al impulso asociado a la patada misma.
 \par
@@ -105,18 +115,18 @@ Analíticamente esta afirmación se escribe como:
 \begin{align*}
 m \: v = I = \scaleint{6ex}_{t_{0}}^{t_{0} + \tau} F (t) \dd{t}
 \end{align*}
-donde $F(t)$ es la fuerza y $\tau$ la duración del impacto sobre la pelota (técnicamente de la acción de la fuerza sobre el balón). El término \textbf{repentino} implica que $\tau$ se considera infinitamente pequeño y por tanto, que el cambio en el momento ocurre instantáneamente.
+donde $F (t)$ es la fuerza y $\tau$ la duración del impacto sobre la pelota (técnicamente de la acción de la fuerza sobre el balón). El término \textbf{repentino} implica que $\tau$ se considera infinitamente pequeño y por tanto, que el cambio en el momento ocurre instantáneamente.
 \par
-Sin embargo, dado que el cambio en el momento es un número finito,  se sigue que la magnitud de la fuerza $F (t)$ debió haber sido infinita durante el golpe al balón y cero en cualquier otro momento. Este tipo de descripciones no se puede formular apropiadamente con los conceptos matemáticos que conocemos, más aún, la descripción tampoco es rigurosa desde un punto de vista físico.
+Sin embargo, dado que el cambio en el momento es un número finito, se sigue que la magnitud de la fuerza $F (t)$ debió haber sido infinita durante el golpe al balón y cero en cualquier otro momento. Este tipo de descripciones no se puede formular apropiadamente con los conceptos matemáticos que conocemos, más aún, la descripción tampoco es rigurosa desde un punto de vista físico.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.8]{Imagenes/delta_Dirac_01.eps}
+    \includegraphics[scale=1]{Imagenes/delta_Dirac_01.eps}
     \caption{Representación del pico para la función.}
-    \label{fig:figura_delta_Dirac_01}
+    \label{fig:delta_Dirac_01}
 \end{figure}
 En realidad, la gráfica de la fuerza es una curva muy \textbf{picuda}:
 \begin{enumerate}
-\item Es muy estrecha y muy alta, como se aprecia en la figura (\ref{fig:figura_delta_Dirac_01})
+\item Es muy estrecha y muy alta, como se aprecia en la figura (\ref{fig:delta_Dirac_01})
 \item Satisface la propiedad que el área bajo la curva es igual a $I$.
 \end{enumerate}
 En la gran mayoría de los problemas físicos, la forma exacta de la gráfica no se conoce,  sin embargo, en lo correspondiente a los efectos físicos observables asociados con tal función, usualmente esta falta de información no importa. Lo que tiene significado es la integral de la fuerza, esto es, el valor del impulso:
@@ -127,11 +137,14 @@ Las funciones puntiagudas son comunes en cualquier área de la física,  por eje
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1.3]{Imagenes/delta_Dirac_02a.eps}
+    \caption{Distribución de carga ideal.}
     \label{fig:figura_delta_Dirac_02}
 \end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.85]{Imagenes/delta_Dirac_02b.eps}
+    \caption{Distribución de carga real.}
+    \label{fig:figura_delta_Dirac_05}
 \end{figure}
 
 En los circuitos eléctricos, las corrientes \textbf{puntiaguadas} de una duración extremadamente corta, se presentan cuando se conecta el interruptor. Como en el caso de la redistribución de carga entre dos condensadores, como se ve en la figura (\ref{fig:figura_delta_Dirac_03}).
@@ -194,7 +207,7 @@ Hay otras tres secuencias de funciones comunes que se acercan a la función $\de
 Secuencia de resonancia.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=1]{Imagenes/secuencia_Delta_05.eps}
+    \includegraphics[scale=1]{Imagenes/secuencia_Delta_05.png}
     \caption{Gráfica de la secuencia delta para la función resonancia.}
     \label{fig:figura_05_07}
 \end{figure}
@@ -203,7 +216,7 @@ Cada una de esas funciones tiene un área unitaria para cualquier valor de $n$, 
 Secuencia Gaussiana.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=1]{Imagenes/secuencia_Delta_06.eps}
+    \includegraphics[scale=1]{Imagenes/secuencia_Delta_06.png}
     \caption{Gráfica de la secuencia delta para la función Gaussiana.}
     \label{fig:figura_05_08}
 \end{figure}
@@ -211,7 +224,7 @@ Secuencia Gaussiana.
 Secuencia sinc al cuadrado.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=1]{Imagenes/secuencia_Delta_07.eps}
+    \includegraphics[scale=1]{Imagenes/secuencia_Delta_07.png}
     \caption{Gráfica de la secuencia delta para la función sinc al cuadrado.}
     \label{fig:figura_05_09}
 \end{figure}
