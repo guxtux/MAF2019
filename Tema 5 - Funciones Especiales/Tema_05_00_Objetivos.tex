@@ -6,7 +6,6 @@
 \setbeamercolor{section in foot}{bg=peridot, fg=black}
 \setbeamercolor{subsection in foot}{bg=powderblue(web), fg=black}
 
-
 \makeatletter
 \setbeamertemplate{footline}
 {
@@ -25,14 +24,19 @@
 \vskip0pt%
 }
 \makeatother
-\usefonttheme{serif}
+% \usefonttheme{serif}
 \setbeamercolor{frametitle}{bg=palecerulean}
 \resetcounteronoverlays{saveenumi}
 
-\date{12 de mayo de 2022}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
 
-\title{\large{Tema 5 - Funciones Especiales}}
-\subtitle{Funciones Especiales Parte II}
+\date{17 de octubre de 2024}
+
+\title{\large{Tema 4 - Funciones Especiales}}
+\subtitle{Funciones Especiales Parte I}
 \author{M. en C. Gustavo Contreras Mayén}
 
 \begin{document}
@@ -41,10 +45,10 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideallsubsections]}
+\frame{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
-\section{Más funciones especiales}
-\frame{\frametitle{Puntos dentro del tema} \tableofcontents[currentsection, hideothersubsections]}
+\section{Las funciones especiales}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Formalismo y requisitos}
 
 \begin{frame}
@@ -62,25 +66,25 @@ La construcción completa del ejercicio, es decir, la base teórica en cada tema
 \begin{frame}
 \frametitle{Sobre los temas en los ejemplos}
 En caso de que tengan alguna complicación para el planteamiento de un ejercicio en un tema particular, deberán de apoyarse con las referencias en cada tema.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Sobre los temas en los ejemplos}
 De esta manera tendrán completo el contexto del ejercicio, de tal manera que la solución del ejercicio y su interpretación será mucho más fácil de realizar.
 \end{frame}
 
 \section{Objetivos}
-\frame[allowframebreaks]{\frametitle{Objetivos del Tema 5} \tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Objetivos del Tema 4} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Conocimiento y habilidades}
 
 \begin{frame}
 \frametitle{Objetivos}
-Al concluir el Tema 5, se espera que el alumno:
+Al concluir el Tema 4, se espera que el alumno:
 \setbeamercolor{item projected}{bg=darkcoral,fg=white}
 \setbeamertemplate{enumerate items}{%
 \usebeamercolor[bg]{item projected}%
 \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
 }
-\begin{enumerate}[<+->]
+\begin{enumerate}
 \item Reconozca que las funciones especiales se obtienen de las soluciones de EDO2 que se recuperan luego de haber planteado un problema físico bajo ciertas condiciones en la geometría asociada, así como en las CDF y condiciones iniciales.                            
 \seti
 \end{enumerate}
@@ -122,15 +126,22 @@ Al concluir el Tema 5, se espera que el alumno:
 \section{Las funciones especiales}
 \frame[allowframebreaks]{\frametitle{Funciones especiales a revisar} \tableofcontents[currentsection, hideothersubsections]}
 
-\subsection{Funciones de Laguerre}
+% \subsection{Funciones de Laguerre}
+
+% \begin{frame}
+% \frametitle{Laguerre - Motivación}
+% Se tomará como punto de partida la ecuación radial del átomo de hidrógeno para obtener los \emph{\textbf{\textcolor{darkslateblue}{los polinomios asociados de Laguerre}}} \pause y como un caso especial de éstos, los \emph{\textbf{\textcolor{darktan}{polinomios ordinarios de Laguerre}}}.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Laguerre - Descripción matemática}
+% Así mismo, se revisarán las características y propiedades de los polinomios, buscando conectar su uso con las aplicaciones en problemas de la física matemática.
+% \end{frame}
+
+\subsection{Funciones de Bessel}
 
 \begin{frame}
-\frametitle{Laguerre - Motivación}
-Se tomará como punto de partida la ecuación radial del átomo de hidrógeno para obtener los \emph{\textbf{\textcolor{darkslateblue}{los polinomios asociados de Laguerre}}} \pause y como un caso especial de éstos, los \emph{\textbf{\textcolor{darktan}{polinomios ordinarios de Laguerre}}}.
-\end{frame}
-\begin{frame}
-\frametitle{Laguerre - Descripción matemática}
-Así mismo, se revisarán las características y propiedades de los polinomios, buscando conectar su uso con las aplicaciones en problemas de la física matemática.
+\frametitle{Bessel - Motivación y geometría}
+La consideración de la ecuación de Laplace en un sistema coordenado cilíndrico polar, nos llevará a establecer las \emph{\textbf{\textcolor{debianred}{funciones de Bessel}}}, conocidas como funciones de Bessel de primera clase, \pause y las funciones de Bessel de segunda clase llamadas \emph{\textbf{\textcolor{darkslateblue}{funciones de Neumann}}}.
 \end{frame}
 
 \subsection{Funciones de Hermite}
@@ -138,17 +149,10 @@ Así mismo, se revisarán las características y propiedades de los polinomios, 
 \begin{frame}
 \frametitle{Hermite - Motivación}
 Continuando con ejemplos de mecánica cuántica, ahora tomaremos el estudio del oscilador armónico cuántico, lo que nos conducirá a los \emph{\textbf{\textcolor{darkterracotta}{polinomios de Hermite}}}.
-\\
-\bigskip
-\pause
-Ya hemos revisado previamente el caso del oscilador cuántico, por lo que se completará el tema con el estudio de las propiedades de los polinomios de Hermite.
-\end{frame}
-
-\subsection{Funciones de Bessel}
-
-\begin{frame}
-\frametitle{Bessel - Motivación y geometría}
-La consideración de la ecuación de Laplace en un sistema coordenado cilíndrico polar, nos llevará a establecer las \emph{\textbf{\textcolor{debianred}{funciones de Bessel}}}, conocidas como funciones de Bessel de primera clase, \pause y las funciones de Bessel de segunda clase llamadas \emph{\textbf{\textcolor{darkslateblue}{funciones de Neumann}}}.
+% \\
+% \bigskip
+% \pause
+% Ya hemos revisado previamente el caso del oscilador cuántico, por lo que se completará el tema con el estudio de las propiedades de los polinomios de Hermite.
 \end{frame}
 
 \subsection{Funciones de Chebyshev}
@@ -179,70 +183,102 @@ Revisaremos la \emph{\textbf{\textcolor{darkslateblue}{función hipergeométrica
 Las \emph{\textbf{\textcolor{flame}{funciones de Gegenbauer}}} se obtienen a partir de la serie hipergeométrica para los casos en donde ésta, es finita, \pause además, son la solución de la ecuación diferencial de Gegenbauer, una generalización de los polinomios de Legendre.
 \end{frame}
 
-\section{Evaluación del Tema}
-\frame{\frametitle{Esquema de evaluación} \tableofcontents[currentsection, hideothersubsections]}
-\subsection{Ejercicios y enunciados para resolver}
+\subsection{El átomo de hidrógeno}
 
 \begin{frame}
-\frametitle{Ejercicios a cuenta}
-Los ejercicios a cuenta se presentarán en la sesión del martes 17 de mayo durante la clase.
-\\
-\bigskip
-\pause
-Debiendo entregarse la solución el día \textbf{Jueves 2 de junio} a más tardar a 6 pm, por la plataforma Moodle.
+\frametitle{El tema del átomo de hidrogéno}
+Para tener un estudio más formal del átomo de hidrógeno, se deja en una unidad completa.
 \end{frame}
 \begin{frame}
-\frametitle{Entrega de enunciados del Tema 5}
-En la misma sesión del martes 17 de mayo, se entregarán los enunciados del tema 5 que forman parte del segundo examen del curso.
+\frametitle{El tema del átomo de hidrogéno}
+En donde se revisarán la parte angular y la radial.
 \end{frame}
 \begin{frame}
-\frametitle{Fechas importantes}
-Considerando que ya nos encontramos en la recta final del semestre 2022-2, el segundo examen del curso se entregará en dos partes:
+\frametitle{Legendre - Motivación}
+Se tomará como punto de partida la ecuación angular del átomo de hidrógeno para obtener los \emph{\textbf{\textcolor{darkgreen}{polinomios Legendre}}}.
 \end{frame}
 \begin{frame}
-\frametitle{Fechas importantes}    
-\setbeamercolor{item projected}{bg=darkcoral,fg=white}
-\setbeamertemplate{enumerate items}{%
-\usebeamercolor[bg]{item projected}%
-\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
-}
-\begin{enumerate}[<+->]
-\item Los enunciados del Tema 4 y del Tema 5 se entregarán el \textbf{martes 7 de junio}, a más tardar 6 pm por la plataforma Moodle.
-\item Los enunciados del Tema 6 se entregarán en las semanas 15 y 16, \pause teniendo solo un fin de semana para resolverlos y enviarlos por Moodle.
-\end{enumerate}
+\frametitle{Laguerre - Motivación}
+Se tomará como punto de partida la ecuación radial del átomo de hidrógeno para obtener los \emph{\textbf{\textcolor{darkslateblue}{polinomios asociados de Laguerre}}} \pause y como un caso especial de éstos, los \emph{\textbf{\textcolor{darktan}{polinomios ordinarios de Laguerre}}}.
 \end{frame}
 
-\section{Calendarización}
-\frame{\frametitle{Cronograma de trabajo} \tableofcontents[currentsection, hideothersubsections]}
-\subsection{Distribución de tiempos}
+\section{Importante}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{Funciones a revisar}
 
 \begin{frame}
-\frametitle{Trabajo por semanas}
-Como ya se comentó, ya estamos por completar el semestre, por lo que se presenta la siguiente distribución de tiempos para cubrir los materiales de trabajo y las sesiones presenciales.
+\frametitle{¿Hay más funciones especiales?}
+Cabe señalar que la revisión que estaremos haciendo, nos proporcionará una metodología de estudio para las funciones especiales.
 \end{frame}
 \begin{frame}
-\frametitle{Programa de trabajo}
-\setbeamercolor{item projected}{bg=darkcoral,fg=white}
-\setbeamertemplate{enumerate items}{%
-\usebeamercolor[bg]{item projected}%
-\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
-}
-\begin{enumerate}[<+->]
-\item Semanas 12 y 13: Funciones de Laguerre, Hermite y Bessel.
-\item Semanas 13 y 14: Funciones de Chebyshev, hipergeométricas y Gegenbauer.
-\end{enumerate}
+\frametitle{Metodología para abordar}
+Esa metodología se podrá replicar y con ello, recuperar las características y propiedades de otras funciones.
 \end{frame}
 
-\subsection{Sesiones presenciales}
+% \section{Evaluación del Tema}
+% \frame{\frametitle{Esquema de evaluación} \tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Ejercicios y enunciados para resolver}
 
-\begin{frame}
-\frametitle{Sesiones de trabajo}
-Tendremos las clases presenciales los martes y jueves en el horario de 3:30 pm a 6:00 pm
-\begin{itemize}[<+->]
-\item Jueves 12 de mayo.
-\item Martes 17 y jueves 19 de mayo.
-\item Martes 24 y jueves 26 de mayo.
-\end{itemize}
-\end{frame}
+% \begin{frame}
+% \frametitle{Ejercicios a cuenta}
+% Los ejercicios a cuenta se presentarán en la sesión del martes 17 de mayo durante la clase.
+% \\
+% \bigskip
+% \pause
+% Debiendo entregarse la solución el día \textbf{Jueves 2 de junio} a más tardar a 6 pm, por la plataforma Moodle.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Entrega de enunciados del Tema 5}
+% En la misma sesión del martes 17 de mayo, se entregarán los enunciados del tema 5 que forman parte del segundo examen del curso.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Fechas importantes}
+% Considerando que ya nos encontramos en la recta final del semestre 2022-2, el segundo examen del curso se entregará en dos partes:
+% \end{frame}
+% \begin{frame}
+% \frametitle{Fechas importantes}    
+% \setbeamercolor{item projected}{bg=darkcoral,fg=white}
+% \setbeamertemplate{enumerate items}{%
+% \usebeamercolor[bg]{item projected}%
+% \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+% }
+% \begin{enumerate}[<+->]
+% \item Los enunciados del Tema 4 y del Tema 5 se entregarán el \textbf{martes 7 de junio}, a más tardar 6 pm por la plataforma Moodle.
+% \item Los enunciados del Tema 6 se entregarán en las semanas 15 y 16, \pause teniendo solo un fin de semana para resolverlos y enviarlos por Moodle.
+% \end{enumerate}
+% \end{frame}
+
+% \section{Calendarización}
+% \frame{\frametitle{Cronograma de trabajo} \tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Distribución de tiempos}
+
+% \begin{frame}
+% \frametitle{Trabajo por semanas}
+% Como ya se comentó, ya estamos por completar el semestre, por lo que se presenta la siguiente distribución de tiempos para cubrir los materiales de trabajo y las sesiones presenciales.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Programa de trabajo}
+% \setbeamercolor{item projected}{bg=darkcoral,fg=white}
+% \setbeamertemplate{enumerate items}{%
+% \usebeamercolor[bg]{item projected}%
+% \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+% }
+% \begin{enumerate}[<+->]
+% \item Semanas 12 y 13: Funciones de Laguerre, Hermite y Bessel.
+% \item Semanas 13 y 14: Funciones de Chebyshev, hipergeométricas y Gegenbauer.
+% \end{enumerate}
+% \end{frame}
+
+% \subsection{Sesiones presenciales}
+
+% \begin{frame}
+% \frametitle{Sesiones de trabajo}
+% Tendremos las clases presenciales los martes y jueves en el horario de 3:30 pm a 6:00 pm
+% \begin{itemize}[<+->]
+% \item Jueves 12 de mayo.
+% \item Martes 17 y jueves 19 de mayo.
+% \item Martes 24 y jueves 26 de mayo.
+% \end{itemize}
+% \end{frame}
 
 \end{document}

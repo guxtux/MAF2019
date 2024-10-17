@@ -5,6 +5,33 @@
 
 \input{../Preambulos/preambulo_Beamer_Copenhagen_wolverine}
 
+\makeatletter
+\setbeamertemplate{footline}
+{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+  \usebeamerfont{section in foot} \insertsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+  \usebeamerfont{subsection in foot}  \insertsubsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{1.5em}
+  \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+\end{beamercolorbox}}%
+\vskip0pt%
+}
+\makeatother
+% \usefonttheme{serif}
+\setbeamercolor{frametitle}{bg=palecerulean}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \date{}
 
 \title{\large{Funciones de Bessel}}
@@ -19,10 +46,10 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
-\section{Inciando el estudio}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\section{Iniciando el estudio}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
 
 %Sadri Hassani - Mathematical methods for students of physics. Chap. 27 Laplace equation: cylindrical coordinates
@@ -57,6 +84,7 @@ Sin embargo, \textocolor{cobalt}{una vez que se imponen las CDF}, las soluciones
 El siguiente argumento ilustra este punto en la ED angular resultante de la separación de variables para la ecuación de Laplace en coordenadas cilíndricas.
 \end{frame}
 
+
 \section{Funciones de Bessel}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{El problema de estudio}
@@ -72,7 +100,6 @@ La separación de variables en coordenadas cilíndricas para la ecuación de Lap
 \begin{frame}
 \frametitle{Ecuación de Laplace}    
 Mediante la solución propuesta:
-\pause
 \begin{align*}
 \Phi (\rho, \varphi, z) = R (\rho) \, S (\varphi) \, Z (z)
 \end{align*}
@@ -90,7 +117,7 @@ nos lleva a un sistema de tres EDO:
 \end{frame}
 \begin{frame}
 \frametitle{Ecuación en particular}
-Si nos fijamos en la segunda ecuación (\ref{eq:ecuacion_27_01b})cuya solución más general podemos escribir como:
+Si nos fijamos en la segunda ecuación (\ref{eq:ecuacion_27_01b}) cuya solución más general podemos escribir como:
 \pause
 \begin{align}
 S (\varphi) = \begin{cases}
@@ -253,9 +280,9 @@ Tanto la ec. (\ref{eq:ecuacion_27_05}) o (\ref{eq:ecuacion_27_06}), es una de la
 \begin{frame}
 \frametitle{Usando el método de Frobenius}
 El método de Frobenius es una manera efectiva para encontrar las soluciones de las EDO.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Usando el método de Frobenius}
 Al reescribir la ec. (\ref{eq:ecuacion_27_06}) multiplicando por $v^{2}$ para convertir todos sus coeficientes en polinomios como lo sugiere la ecuación (\ref{eq:ecuacion_26_07}):
 \pause
 \begin{equation}
@@ -312,7 +339,7 @@ en la ED inicial, nos conduce a:
 \end{frame}
 \begin{frame}
 \frametitle{Relación de recurrencia}
-Para encontrar la relación de recurrencia, necesitamos que el valor de la potencia de $v$ sea el mismo en las sumas, por lo que re-escribimos la primera suma como:
+Para encontrar la relación de recurrencia, necesitamos que el valor de la potencia de $v$ sea el mismo en las sumas, por lo que reescribimos la primera suma como:
 \end{frame}
 \begin{frame}
 \frametitle{Relación de recurrencia}
@@ -328,11 +355,15 @@ donde en la segunda línea, usamos $n = k -2$.
 \end{frame}
 \begin{frame}
 \frametitle{Relación de recurrencia}    
-Como el índice $n$ es mudo, lo podemos regresar de nuevo al índice $k$. \pause Entonces, seguimos con que:
+Como el índice $n$ es mudo, lo podemos regresar de nuevo al índice $k$.
+\\
+\bigskip
+\pause
+Entonces, seguimos con que:
 \pause
 \begin{align*}
-c_{0}(s^{2} &- m^{2}) v^{s} + c_{1} [(s + 1)^{2}- m^{2}] v^{s+1} + \\
-&+ \nsum_{k=0}^{\infty} \left\{ c_{k+2} [(k + 2 + s)^{2} - m^{2}] + c_{k} \right\} \, v^{k+2+s} = 0
+c_{0}(s^{2} &{-} m^{2}) v^{s} {+} c_{1} [(s {+} 1)^{2} {-} m^{2}] v^{s+1} + \\
+&+ \nsum_{k=0}^{\infty} \left\{ c_{k+2} [(k {+} 2 {+} s)^{2} {-} m^{2}] {+} c_{k} \right\} \, v^{k+2+s} = 0
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -349,13 +380,23 @@ c_{k+2} [(k + 2 + s)^{2} - m^{2}] + c_{k} &= 0
 \end{frame}
 \begin{frame}
 \frametitle{Relación de recurrencia}
-La primera ecuación nos dice que $m = \pm s$. \pause Por lo que al usarlo en la segunda ecuación, resulta en:
+La primera ecuación nos dice que $m = \pm s$.
+\\
+\bigskip
+\pause
+Por lo que al usarlo en la segunda ecuación, resulta en:
 \pause
 \begin{align*}
 c_{1} (2 \, s + 1) = 0 \hspace{0.5cm} \Rightarrow \hspace{0.5cm} c_{1} = 0 \hspace{0.5cm} \mbox{ o } \hspace{0.5cm} s = - \dfrac{1}{2}
 \end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Relación de recurrencia}
+La elección $s = -1/2$ nos devuelve que $m = \mp 1/2$ la cual no es aceptable, por lo que decidimos que $m$ sea un entero positivo.
+\\
+\bigskip
 \pause
-La elección $s = -1/2$ nos devuelve que $m = \mp 1/2$ la cual no es aceptable, por lo que decidimos que $m$ sea un entero positivo. Por lo tanto concluimos que $s = \pm m$ y $c_{1} = 0$.
+Por lo tanto concluimos que $s = \pm m$ y $c_{1} = 0$.
 \end{frame}
 \begin{frame}
 \frametitle{Sobre los valores no enteros}
@@ -375,7 +416,7 @@ La serie de Frobenius entonces será:
 \pause
 \begin{equation}
 \begin{aligned}
-R(v) &= v^{\pm m} \nsum_{k=0}^{\infty} c_{2k} \, v^{2k}, \\[0.5cm]
+R (v) &= v^{\pm m} \nsum_{k=0}^{\infty} c_{2k} \, v^{2k}, \\[0.5cm]
 \dfrac{c_{2k+2}}{c_{2k}} &= - \dfrac{1}{(2k + 2 + s)^{2} - m^{2}}
 \end{aligned}
 \label{eq:ecuacion_27_08}
@@ -394,9 +435,9 @@ Lo que nos indica que la serie de la ec. (\ref{eq:ecuacion_27_08}) es convergent
 \begin{frame}
 \frametitle{Uso de la relación de recurrencia}
 Ahora usaremos la relación de recurrencia para obtener los coeficientes de la expansión.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Uso de la relación de recurrencia}
 Reescribimos la relación de recurrencia como:
 \pause
 \begin{eqnarray*}
@@ -413,9 +454,9 @@ Lo que nos devuelve:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-c_{2} &= - \dfrac{1}{2 (2 s {+} 2)} c_{0} \\ \pause
-c_{4} &= - \dfrac{1}{4 (2 s {+} 4)} c_{2} = (-1)^{2} \dfrac{1}{4 (2 s {+} 4)} \, \dfrac{1}{2 (2 s {+} 2)} \, c_{0} \\ \pause
-c_{6} &= - \dfrac{1}{6 (2 s + 6)} c_{4} = (-1)^{3} \dfrac{1}{6 (2 s {+} 6)} \, \dfrac{1}{4 (2 s {+} 4)} \, \dfrac{1}{2 (2 s {+} 2)} \, c_{0} 
+c_{2} &{=} - \dfrac{1}{2 (2 s {+} 2)} c_{0} \\ \pause
+c_{4} &{=} - \dfrac{1}{4 (2 s {+} 4)} c_{2} = (-1)^{2} \dfrac{1}{4 (2 s {+} 4)} \, \dfrac{1}{2 (2 s {+} 2)} \, c_{0} \\ \pause
+c_{6} &{=} - \dfrac{1}{6 (2 s + 6)} c_{4} = (-1)^{3} \dfrac{1}{6 (2 s {+} 6)} \, \dfrac{1}{4 (2 s {+} 4)} \, \dfrac{1}{2 (2 s {+} 2)} \, c_{0} 
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
@@ -425,7 +466,7 @@ De manera general:
 \pause
 \begin{align*}
 &c_{2k} = (-1)^{k} \times \\
-&\times \dfrac{c_{0}}{\underbrace{2 k \cdot (2 k - 2) \ldots 2}_{=2^{k} \, k!} \underbrace{(2 s + 2 k)[2 s + (2 k - 2)] \ldots (2 s + 2)}_{=2^{k} (s + k)(s + k + 1) \ldots (s + 1)}}
+&\times \dfrac{c_{0}}{\underbrace{2 k \cdot (2 k {-} 2) \ldots 2}_{=2^{k} \, k!} \underbrace{(2 s {+} 2 k)[2 s {+} (2 k {-} 2)] \ldots (2 s {+} 2)}_{=2^{k} (s {+} k)(s {+} k {+} 1) \ldots (s {+} 1)}}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -483,7 +524,7 @@ Pero esto es precisamente para lo que se inventó la función Gamma $\Gamma (x)$
 \end{frame}
 
 \section{Segunda solución a la ED de Bessel}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Obteniendo la 2a. solución}
 
 \begin{frame}
@@ -579,18 +620,25 @@ donde:
 De manera similar:
 \pause
 \begin{align*}
-\pdv{J_{-s}}{s} = -J_{-s} (x) \, \ln \left( \dfrac{x}{2} \right) + \left( \dfrac{x}{2} \right)^{-s} \nsum_{k=0}^{\infty} (-1)^{k} \, \dfrac{\Psi(-s + k + 1)}{k! \, \Gamma(-s + k + 1)} \, \left( \dfrac{x}{2} \right)^{2k}
+&\pdv{J_{-s}}{s} = -J_{-s} (x) \, \ln \left( \dfrac{x}{2} \right) + \\[0.5em]
+&+ \left( \dfrac{x}{2} \right)^{-s} \nsum_{k=0}^{\infty} (-1)^{k} \, \dfrac{\Psi(-s + k + 1)}{k! \, \Gamma(-s + k + 1)} \, \left( \dfrac{x}{2} \right)^{2k}
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Expresando el resultado}    
 Al sustituir estas expresiones en la definición de $Y_{n}(x)$ y usando la identidad $J_{-n} = (-1)^{n} J_{n}(x)$, se obtiene:
 \pause
-\begin{eqnarray}
-\begin{aligned}[b]
+\begin{align*}
 &Y_{n} (x) = \dfrac{2}{\pi} \, J_{n} (x) \, \ln \left(\dfrac{x}{2} \right) - \dfrac{1}{\pi} \left( \dfrac{x}{2} \right)^{n} \times \\
-&\times \nsum_{k=0}^{\infty} (-1)^{k} \dfrac{\Psi (n {+} k {+} 1)}{k! \, \Gamma (n + k + 1)} \left(\dfrac{x}{2} \right)^{2k} =  \\ \pause
-&= - \dfrac{1}{\pi} (-1)^{n} \left( \dfrac{x}{2} \right)^{-n} \nsum_{k=0}^{\infty} (-1)^{k} \dfrac{\Psi (k {-} n {+} 1)}{k! \, \Gamma (k {-} n {+} 1)} \left(\dfrac{x}{2} \right)^{2k}
+&\times \nsum_{k=0}^{\infty} (-1)^{k} \dfrac{\Psi (n {+} k {+} 1)}{k! \, \Gamma (n + k + 1)} \left(\dfrac{x}{2} \right)^{2k} =  \\ 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Expresando el resultado}    
+\begin{eqnarray}
+\begin{aligned}
+Y_{n} (x) &= - \dfrac{1}{\pi} (-1)^{n} \left( \dfrac{x}{2} \right)^{-n} \times \\[0.5em]
+&\times \nsum_{k=0}^{\infty} (-1)^{k} \dfrac{\Psi (k {-} n {+} 1)}{k! \, \Gamma (k {-} n {+} 1)} \left(\dfrac{x}{2} \right)^{2k}
 \end{aligned}
 \label{eq:ecuacion_27_12}
 \end{eqnarray}
@@ -609,7 +657,7 @@ En particular, la solución de la ecuación radial en coordenadas cilíndricas, 
 \pause
 \begin{eqnarray}
 \begin{aligned}
-R(\rho) &= A \, J_{m}(v) + B \, Y_{m}(v) = \\[0.5em] \pause 
+R (\rho) &= A \, J_{m} (v) + B \, Y_{m} (v) = \\[0.5em] \pause 
 &= A \, J_{m} (l \, \rho) + B \, Y_{m} (l \, \rho)
 \end{aligned}
 \label{eq:ecuacion_27_13}
@@ -617,7 +665,7 @@ R(\rho) &= A \, J_{m}(v) + B \, Y_{m}(v) = \\[0.5em] \pause
 \end{frame}
 
 \section{Propiedades de las funciones de Bessel}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Funciones de Bessel de orden entero negativo}
 
 \begin{frame}
@@ -665,9 +713,9 @@ J_{m+1}(x) &= \dfrac{m}{x} \, J_{m} (x) - J_{m}^{\prime} (x)
 \begin{frame}
 \frametitle{Más relaciones importantes}    
 Podemos utilizar estas ecuaciones para obtener nuevas y útiles relaciones de recurrencia.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Más relaciones importantes}
 Por ejemplo, al diferenciar $x^{m} \, J_{m} (x)$, se obtiene:
 \pause
 \begin{eqnarray*}
@@ -761,11 +809,21 @@ Se sigue que si $k \neq l$, entonces la integral se anula, es decir:
 \label{eq:ecuacion_27_20}
 \end{equation}
 \pause
-Esta es la relación de ortogonalidad para las funciones de Bessel. \pause Para completar la relación de ortogonalidad, también debemos abordar el caso cuando $k = l$.
+Esta es la relación de ortogonalidad para las funciones de Bessel.
 \end{frame}
 \begin{frame}
 \frametitle{Relación de ortogonalidad}
-Esto implica la evaluación de la integral $\displaystyle \scaleint{6ex} \rho J_{m}^{2} ( k \, \rho) \dd{\rho}$, la cual con el cambio de variable $x \equiv k \, \rho$ se reduce a:
+Para completar la relación de ortogonalidad, también debemos abordar el caso cuando $k = l$.
+\end{frame}
+\begin{frame}
+\frametitle{Relación de ortogonalidad}
+Esto implica la evaluación de la integral:
+\pause
+\begin{align*}
+\displaystyle \scaleint{6ex} \rho J_{m}^{2} ( k \, \rho) \dd{\rho}
+\end{align*}
+\pause
+la cual con el cambio de variable $x \equiv k \, \rho$ se reduce a:
 \pause
 \begin{align*}
 \dfrac{\displaystyle \scaleint{6ex} x \, J_{m}^{2} (x) \dd{x}}{k^{2}}
@@ -776,8 +834,11 @@ Esto implica la evaluación de la integral $\displaystyle \scaleint{6ex} \rho J_
 Integrando por partes, se tiene:
 \pause
 \begin{eqnarray*}
-I \equiv \scaleint{6ex}  \underbrace{J_{m}^{2} (x)}_{u} \, \underbrace{x \dd{x}}_{\dd{v}} = \pause \dfrac{1}{2} x^{2} \, J_{m}^{2} (x)
+\begin{aligned}
+&I \equiv \scaleint{6ex}  \underbrace{J_{m}^{2} (x)}_{u} \, \underbrace{x \dd{x}}_{\dd{v}} = \\[0.5em] \pause
+&= \dfrac{1}{2} x^{2} \, J_{m}^{2} (x)
  - \scaleint{6ex} J_{m}(x) \, J_{m}^{\prime} (x) \, x^{2} \dd{x}
+\end{aligned}
 \end{eqnarray*}
 \end{frame}
 \begin{frame}
@@ -853,12 +914,18 @@ para todo $m \geq 0$ y, por la ec. (\ref{eq:ecuacion_27_14}), también para todo
 \begin{frame}
 \frametitle{Relación de ortogonalidad}
 Como se mencionó anteriormente, limitaremos nuestra discusión a las funciones de Bessel de orden entero.
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Relación de ortogonalidad}
 Es costumbre simplificar el lado derecho de la igualdad de la ec. (\ref{eq:ecuacion_27_22}) al elegir $k$ de tal manera que $J_{m} (k \, a) = 0$, es decir, que $k \, a$ sea una raíz de la función de Bessel de orden $m$. \pause En general, hay infinitas raíces.
 \end{frame}
 \begin{frame}
 \frametitle{Relación de ortogonalidad}
-Entonces, digamos que $x_{mn}$ corresponde a la $n$-ésima raíz de $J_m (x)$. \pause Entonces:
+Entonces, digamos que $x_{mn}$ corresponde a la $n$-ésima raíz de $J_m (x)$.
+\\
+\bigskip
+\pause
+Entonces:
 \pause
 \begin{align*}
 k \, a = x_{mn} \hspace{1cm} \Longrightarrow \hspace{1cm} k = \dfrac{x_{mn}}{a}, \hspace{1cm} n = 1, 2, 3, \ldots
