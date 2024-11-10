@@ -1,0 +1,660 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
+\usepackage[absolute, overlay]{textpos}
+
+\input{../Preambulos/preambulo_Beamer_Copenhagen_wolverine}
+
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+% \documentclass[12pt]{beamer}
+% \usepackage{../Estilos/BeamerMAF}
+% \input{../Preambulos/preambulo_Beamer_Copenhagen_wolverine}
+
+\date{7 de noviembre de 2024}
+
+\title{\large{Funciones hipergeométricas generalizadas}}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
+
+%Ref. Slater (1996) - Generalized hypergeometric functions
+\section{La función de Gauss.}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definiciones}
+
+\begin{frame}
+\frametitle{Definición}
+La serie:
+\pause
+\begin{align}
+\begin{aligned}[b]
+1 &+ \dfrac{a b}{c} \dfrac{z}{1!} + \dfrac{a (a {+} 1) b (b {+} 1)}{c( c {+} 1)} \dfrac{z^{2}}{2!} + \\[0.5em]
+&+ \dfrac{a (a {+} 1)(a {+} 2) b (b {+} 1)(b {+} 2)}{c (c {+} 1)(c {+} 2)} \dfrac{z^{3}}{3!} + \ldots
+\end{aligned}
+\label{eq:ecuacion_01_01_01}
+\end{align}
+es llamada \textocolor{red}{serie de Gauss} o \textocolor{ao}{serie hipergeométrica ordinaria}.
+\end{frame}
+\begin{frame}
+\frametitle{Notación utilizada}
+Normalmente se representa con la notación:
+\pause
+\begin{align*}
+{}_{2} F_{1} \big[ a, b; c; z \big]
+\end{align*}
+La variable es $z$, y $a$, $b$ y $c$ son los parámetros  de la función.
+\end{frame}
+\begin{frame}
+\frametitle{De serie a polinomio}
+Si alguna de las cantidades $a$ o $b$ es un entero negativo $-n$, la serie tiene solo un número finito de términos y se convierte de hecho en un polinomio:
+\begin{align*}
+{}_{2} F_{1} \big[ -n, b; c; z \big]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{De serie a polinomio}
+Por ejemplo, si $a = -2$, entonces la serie es:
+\pause
+\begin{align*}
+{}_{2} F_{1} \big[ -2, b: c; z \big] &= 1 + \dfrac{(-2) b}{c} \dfrac{z}{1!} + \\[0.5em]
+&+ \dfrac{(-2) (-1) b (b + 1)}{c( c + 1)} \dfrac{z^{2}}{2!} + 0 
+\end{align*}    
+esto es:
+\pause
+\begin{align}
+{}_{2} F_{1} \big[ -2, b; c; z \big] = 1 - \dfrac{2 b z}{c} + \dfrac{b( b + 1) z^{2}}{c (c + 1)}
+\label{eq:ecuacion_01_01_02}
+\end{align}
+ya que los restantes términos se anulan.
+\end{frame}
+
+\subsection{Desarrollo histórico}
+
+\begin{frame}
+\frametitle{Uso del término \emph{hiper}}
+En su trabajo \textocolor{carmine}{Arithmetica Infinitorum} (1655), el profesor de Oxford John Wallis (1616 - 1703) fue el primero en utilizar el término \enquote{hipergeométrica} (del griego $\acute{\nu} \pi \epsilon \rho$, por arriba o más allá de...)
+\end{frame}
+\begin{frame}
+\frametitle{Series de trabajo de Wallis}
+Para denotar cualquier serie que estuviera más allá de las serie geométrica ordinaria:
+\pause
+\begin{align*}
+1 + x + x^{2} + x^{3} + \ldots
+\end{align*}
+\pause
+En particular, estudió las series:
+\begin{align*}
+1 + a + a( a + 1) + a (a + 1)(a + 2) + \ldots
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Siguientes estudios}
+Durante los siguientes ciento cincuenta años, muchos otros matemáticos estudiaron series similares, notablemente Leonard Euler (1783) dio, entre muchos otros resultados, la famosa relación:
+\pause
+\begin{align}
+\begin{aligned}[b]
+{}_{2} &F_{1} \big[ -n, b; c; z \big] = \\[0.5em]
+&= (1 - z)^{c+n-b} \, {}_{2} F_{1} \big[ c + n, c - b; c; z \big]
+\end{aligned}
+\label{eq:ecuacion_01_01_03} 
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Extensión del teorema del binomio}
+En 1770, el francés A. T. Vandermonde (1735-1796) estableció su teorema, una extensión del teorema del binomio, en la forma:
+\pause
+\begin{align}
+\begin{aligned}[b]
+{}_{2} &F_{1} \big[ -n, b; c; 1 \big] = \\[0.5em]
+&= \dfrac{(c {-} b)(c {-} b {+} 1)(c {-} b {+} 2) \cdots (c {-} b {+} n {-} 1)}{c (c {+} 1)(c {+} 2)(c {+} 3) \cdots (c {+} n {-} 1)}
+\end{aligned}
+\label{eq:ecuacion_01_01_04}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Avances infructuosos}
+Pero durante los siguientes cuarenta años, la escuela de Göttingen bajo C. F. Hindenberg (1741-1808) desperdició mucho esfuerzo en varias extensiones complicadas de los teoremas binomial y multinomial.
+\end{frame}
+\begin{frame}
+\frametitle{Avances infructuosos}
+Todo esto cambió drásticamente cuando el 20 de enero de 1812 C. F. Gauss (1777-1855) pronunció su famosa tesis \enquote{Disquisitiones generales circa seriem infinitam} ante la Real Sociedad de Göttingen.
+\end{frame}
+\begin{frame}
+\frametitle{El avance de Gauss}
+En el, Gauss definió la serie infinita moderna de la ec. (\ref{eq:ecuacion_01_01_01}) e introdujo la notación $F \big[a, b; c; z \big]$ para ello.
+\end{frame}
+\begin{frame}
+\frametitle{El avance de Gauss}
+También demostró su famoso teorema de suma:
+\pause
+\begin{align}
+{}_{2} F_{1} \big[ a, b; c; 1 \big] = \dfrac{\Gamma (c) \Gamma (c - a - b)}{\Gamma(c - a) \Gamma (c - b)}
+\label{eq:ecuacion_01_01_05}
+\end{align}
+y dio muchas relaciones entre dos o más de estas series.
+\end{frame}
+\begin{frame}
+\frametitle{Más aportaciones de Gauss}
+Gauss mostró claramente que ya estaba considerando ${}_{2} F_{1} \big[ a, b; c; z \big]$ como \textocolor{byzantium}{una función de cuatro variables}, en lugar de una serie en $z$.
+\\
+\bigskip
+\pause
+En una nota agregada el 10 de febrero de 1812, dio una discusión notablemente completa de la convergencia de tales series.
+\end{frame}
+\begin{frame}
+\frametitle{Los trabajos de Kummer}
+El siguiente gran avance fue realizado en 1836 por E. E. Kummer (1810 - 1893), quien utilizó por primera vez el término \enquote{hipergeométrico} únicamente para series del tipo (\ref{eq:ecuacion_01_01_01}).
+\end{frame}
+\begin{frame}
+\frametitle{Los trabajos de Kummer}
+Mostró que la ecuación diferencial:
+\pause
+\begin{align}
+z (1 - z) \dv[2]{y}{z} + \big[ c - \big( 1 + a + b \big) z \big] \dv{y}{z} - a b y = 0
+\label{eq:ecuacion_01_01_06}
+\end{align}
+se satisface por la función:
+\pause
+\begin{align*}
+{}_{2} F_{1} \big[ a, b; c; z \big]
+\end{align*}
+y tiene en total veinticuatro soluciones en términos de funciones de Gauss similares.
+\end{frame}
+\begin{frame}
+\frametitle{La aportación de Riemann}
+En 1857, G. F. B. Riemann (1826 - 1866) amplió esta teoría mediante la introducción de sus funciones $P$, que en cierto modo, son generalizaciones de la Gaussiana:
+\pause
+\begin{align*}
+{}_{2} F_{1} \big[ a, b; c; z \big]
+\end{align*}    
+\end{frame}
+\begin{frame}
+\frametitle{La aportación de Riemann}
+Riemann también discutió la teoría general de la transformación de la variable en una ecuación diferencial y esta teoría fue aplicada al trabajo de Kummer por J. Thomae quien, en 1879, elaboró en detalle las relaciones entre las veinticuatro soluciones de Kummer.
+\end{frame}
+\begin{frame}
+\frametitle{Representación integral}
+La primera representación integral de la función de Gauss se remonta a Euler, quien demostró que:
+\pause
+\begin{align}
+\begin{aligned}[b]
+{}_{2} &F_{1} \big[ -n, b; c; z \big] = \dfrac{n!}{c (c {+} 1)(c {+} 2) \cdots (c {+} {-} 1)} \times \\[0.5em]
+&\times \scaleint{6ex}_{\bs 0}^{1} t^{-n-1} \, (1 {-} t)^{c+n-1} \, (1 - t z)^{-b} \dd{t}
+\end{aligned}
+\label{eq:ecuacion_01_01_07}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Funciones como integrales}
+La idea básica de representar una función mediante una integral de contorno con funciones Gamma en el integrando parece deberse a S. Pincherle (1853 - 1936), quien utilizó contornos de un tipo que proviene del trabajo de Riemann. 
+\end{frame}
+\begin{frame}
+\frametitle{Funciones como integrales}
+Este lado del tema fue desarrollado extensamente por R. Mellin y E. W. Barnes.
+\\
+\bigskip
+\pause
+En 1907, Barnes publicó sus representaciones integrales de contorno de las veinticuatro funciones de Kummer.
+\end{frame}
+\begin{frame}
+\frametitle{La demostración de Barnes}
+Más tarde, en 1910, demostró el análogo integral del teorema de Gauss.
+\begin{align}
+\begin{aligned}[b]
+\dfrac{1}{2 \pi i} \scaleint{6ex}_{\bs -\infty}^{\infty} \, &\Gamma (a {+} s) \, \Gamma (b {+} s) \, \Gamma(c {-} s) \, \Gamma (d {-} s) \dd{s} = \\[0.5em]
+&= \dfrac{\Gamma (a {+} c) \, \Gamma (a {+} d) \, \Gamma(b {+} c) \, \Gamma (b {+} d)}{\Gamma (a {+} b {+} c) {+ d}}
+\end{aligned}
+\label{eq:ecuacion_01_01_08}
+\end{align}
+\end{frame}
+
+
+\section{Las series de Gauss y su convergencia.}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{Función de apoyo}
+
+\begin{frame}
+\frametitle{Símbolos de Pochhamer}
+Escribamos lo siguiente:
+\pause
+\begin{align}
+\big( a \big)_{n} = a ( a + 1)(a + 2)(a + 3) \cdots (a + n - 1)
+\label{eq:ecuacion_01_01_01_01}
+\end{align}
+y en particular $\big( a \big)_{0} \equiv 1$
+\end{frame}
+\begin{frame}
+\frametitle{Símbolos de Pochhamer}
+Por ejemplo:
+\pause
+\begin{align*}
+\big( 3 \big)_{5} = 3 \cdot 4 \cdot 5 \cdot 6 \cdot 7 = 2520
+\end{align*}
+\pause
+y también se tiene que $\big( 1 \big) = n!$.
+\end{frame}
+\begin{frame}
+\frametitle{Representación con la función Gamma}
+Entonces:
+\pause
+\begin{align}
+\big( a \big)_{n} = \dfrac{\Gamma (a + n)}{\Gamma (a)}
+\label{eq:ecuacion_01_01_01_02}
+\end{align}
+y: 
+\pause
+\begin{align}
+\lim_{n \to \infty} \big( a \big)_{n} = \dfrac{1}{\Gamma (a)}
+\label{eq:ecuacion_01_01_01_03}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Caso especial}
+Si $a$ es un entero negativo $-m$, entonces:
+\pause
+\begin{align*}
+\big( a \big)_{n} = \begin{cases}
+\big( -m \big)_{n} & \mbox{si } m \geq n \\
+0 & \mbox{si } m < n
+\end{cases}
+\end{align*}
+por lo que: \pause
+\begin{align*}
+\big( -3 \big)_{3} = (-3)(-2)(-1) = -6 \hspace{0.5cm} \mbox{pero} \hspace{0.5cm} \big( -3 \big)_{4} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Función de Gauss con notación Pochhamer}
+En esta notación, la función de Gauss es:
+\pause
+\begin{align}
+{}_{2} &F_{1} \big[ a, b; c; z \big] = \nsum_{n=1}^{\infty} \dfrac{\big( a \big)_{n} \big( b \big)_{n} \, z^{n}}{\big( c \big)_{n} \, n!}
+\label{eq:ecuacion_01_01_01_04}
+\end{align}
+donde $a$, $b$, $c$ y $z$ pueden ser reales o complejos.
+\end{frame}
+\begin{frame}
+\frametitle{De serie a polinomio}
+A partir de esto, vemos que si cualquiera de los números $a$ o $b$ es cero o un número entero negativo, \pause la función se reduce a un polinomio.
+\end{frame}
+\begin{frame}
+\frametitle{De serie a polinomio}
+Pero si $c$ es cero o un número entero negativo, \pause la función no está definida, ya que todos menos un número finito de los términos de la serie se vuelven infinitos.
+\end{frame}
+\begin{frame}
+\frametitle{Un resultado importante}
+También tenemos inmediatamente que:
+\pause
+\begin{align}
+\begin{aligned}[b]
+\dv{z} \bigg( {}_{2} &F_{1} \big[ a, b; c; z \big] \bigg) = \\[0.5em]
+&= \dfrac{a b}{c} \, {}_{2} F_{1} \big[ a + 1, b + 1; c + 1; z \big]
+\end{aligned}
+\label{eq:ecuacion_01_01_01_05}
+\end{align}
+\end{frame}
+
+\subsection{Notación para la función de Gauss}
+
+\begin{frame}
+\frametitle{Diferentes notaciones}
+La función de Gauss se puede encontrar en distintas notaciones, por ejemplo:
+\pause
+\setbeamercolor{item projected}{bg=bananayellow,fg=ao}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Appell (1926):
+\pause
+\begin{align}
+{}_{2} F_{1} \bigg[
+\begin{tabular}{c c}
+a, b; & \multirow{2}{*}{z} \\
+c; &
+\end{tabular} \bigg] = {}_{2} F_{1} \big[ a, b; c; z \big]
+\label{eq:ecuacion_01_01_01_06}
+\end{align}
+\seti 
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Diferentes notaciones}
+\setbeamercolor{item projected}{bg=bananayellow,fg=ao}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]    
+\conti
+\item Bailey (1935):
+\begin{align}
+F \big( a, b; c; z \big) = {}_{2} F_{1} \big[ a, b; c; z \big]
+\label{eq:ecuacion_01_01_01_07}
+\end{align}
+\seti 
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Diferentes notaciones}
+\setbeamercolor{item projected}{bg=bananayellow,fg=ao}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]    
+\conti
+\item Meijer (1953):
+\begin{align}
+\Phi \big( a, b; c; z \big) = \dfrac{{}_{2} F_{1} \big[ a, b; c; z \big]}{\Gamma (c)}
+\label{eq:ecuacion_01_01_01_08}
+\end{align}
+\seti 
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Diferentes notaciones}
+\setbeamercolor{item projected}{bg=bananayellow,fg=ao}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]    
+\conti
+\item MacRobert (1947):
+\begin{align}
+\begin{aligned}[b]
+E \big( 2; a, &b; 1; c; -\dfrac{1}{z} \big) = \\[0.5em]
+&= \dfrac{\Gamma (a) \Gamma (b)}{\Gamma (c)} \, {}_{2} F_{1} \big[ a, b; c; z \big]
+\label{eq:ecuacion_01_01_01_09}
+\end{aligned}
+\end{align}
+\end{enumerate}
+\end{frame}
+
+\subsection{Pruebas de convergencia}
+
+\begin{frame}
+\frametitle{Estableciendo pruebas de convergencia}
+Hagamos que:
+\pause
+\begin{align*}
+u_{n} = \dfrac{\big( a \big)_{n} \big( b \big)_{n}}{\big( c \big)_{n} \big( 1 \big)_{n}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Pruebas de convergencia}
+Entonces se tiene que:
+\pause
+\begin{align}
+(1 + n)(c + n) \, u_{n+1} = (a + n)(b +  n) \, u_{n}
+\label{eq:ecuacion_01_01_01_12}
+\end{align}
+\pause
+la razón de dos términos sucesivos $u_{n}$ y $u_{n+1}$ de la serie Gaussiana es:
+\pause
+\begin{align}
+\dfrac{(a + n)(b +  n)}{(c + n)(1 +  n)} \, z = \dfrac{(1 + a/n)(1 + b/n)}{(1 + c/n)(1 + 1/n)} \, z
+\label{eq:ecuacion_01_01_01_13}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Tomando un límite}
+Tal que, cuando $n \to \infty$, la razón:
+\pause
+\begin{align*}
+\abs{\dfrac{u_{n+1}}{u_{n}}} \to \abs{z}
+\end{align*}
+\pause
+Por tanto, según la prueba de D'Alembert, la serie es convergente para todos los valores de $z$, reales o complejos tales que $\abs{z} < 1$, y divergente para todos los valores de $z$ reales o complejos, tales que $\abs{z} > 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Caso especial}
+Cuando $\abs{z} = 1$:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+\abs{\dfrac{u_{n+1}}{u_{n}}} &= \abs{\left\{ 1 {+} \dfrac{a {+} b}{n} {+} \order{\dfrac{1}{n^{2}}} \right\} \left\{ 1 {-} \dfrac{1 {+} c}{n} {+} \order{\dfrac{1}{n^{2}}} \right\}} = \\[0.5em] \pause
+&= \abs{1 + \dfrac{a + b - c - 1}{n} + \order{\dfrac{1}{n^{2}}}} \\[0.5em] \pause
+&\leq 1 {+} \left\{ \dfrac{\Re (a {+} b {-} c {-} 1)}{n} \right\} {+} \order{\dfrac{1}{n^{2}}}
+\end{aligned}
+\label{eq:eq:ecuacion_01_01_01_14}
+\end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Convergencia de la serie}
+Entonces, cuando $z = 1$, por la prueba de Raabe, la serie es convergente si $\Re (c - a - b) > 0$, y divergente si $\Re (c - a - b) < 0$.
+\end{frame}
+\begin{frame}
+\frametitle{Divergencia de la serie}
+También es divergente cuando $\Re (c - a - b) = 0$, en este caso:
+\pause
+\begin{align*}
+\abs{\dfrac{u_{n+1}}{u_{n}}} > 1 - \dfrac{1}{n} - \dfrac{C}{n^{2}}
+\end{align*}
+donde $C$ es una constante.
+\end{frame}
+\begin{frame}
+\frametitle{Convergencia absoluta}
+Cuando $\abs{z} = 1$, pero $z \neq 1$, la serie es absolutamente convergente cuando $\Re (c - a - b) > 0$, convergente pero no de manera absoluta solo cuando:
+\pause
+\begin{align*}
+- 1 < \Re (c - a - b) \leq 0
+\end{align*}
+\pause
+y divergente cuando $\Re (c - a - b) < -1$.
+\end{frame}
+\begin{frame}
+\frametitle{Convergencia absoluta}
+Si $\Re (c - a - b) = -1$, se requieren pruebas de convergencia más delicadas.
+\end{frame}
+\begin{frame}
+\frametitle{Caso especial}
+En este caso, se tiene que:
+\pause
+\begin{align}
+\abs{\dfrac{u_{n+1}}{u_{n}}} = 1 - \dfrac{\Re (a + b - a b + 1)}{n^{2}} + \order{\dfrac{1}{n^{3}}}
+\label{eq:ecuacion_01_01_01_15}
+\end{align}
+\pause
+De aquí la serie es convergente si $\Re (a + b) > \Re \, a \, b$, y divergente si $\Re (a + b) \leq \Re \, a \, b$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo de serie divergente}
+Por ejemplo, la serie:
+\pause
+\begin{align}
+\begin{aligned}
+1 - \dfrac{2}{3} &+ \dfrac{3}{4} - \dfrac{4}{5} + \dfrac{5}{6} - \dfrac{6}{7} + \cdots = \\[0.5em]
+&= \dfrac{1}{2} \left\{ 1 + \, {}_{2} F_{1} \big[ 2, 2; 3; -1 \big] \right\}
+\end{aligned}
+\label{eq:ecuacion_01_01_01_16}
+\end{align}
+es divergente.
+\end{frame}
+\begin{frame}
+\frametitle{Cociente divergente}
+Notemos que:
+\pause
+\begin{align}
+\begin{aligned}
+\dfrac{\big( a \big)_{n} \big( b \big)_{n}}{\big( c \big)_{n}} &\to 0 \hspace{1cm} \mbox{cuando} \hspace{0.2cm} n \to \infty, \hspace{0.2cm} \\[0.5em]
+&\mbox{si } 0 < \Re (1 + c - a - b) < 1
+\end{aligned}
+\label{eq:ecuacion_01_01_01_17}
+\end{align}
+\end{frame}
+
+\section{Función hipergeométrica}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición}
+
+\begin{frame}
+\frametitle{Ecuación diferencial de partida}
+La ecuación diferencial hipergeométrica tiene la forma:
+\pause
+\begin{align}
+x (1 - x) \, \sderivada{y} + \big[ c - (a + b - 1) \, x \big] \, \pderivada{y} -  a \, b \, y = 0
+\label{eq:ecuacion_18_136}
+\end{align}
+tiene tres puntos singulares regulares, en $x = 0, 1, \infty$, pero sin singularidades esenciales. Los parámetros $a$, $b$ y $c$ son números reales.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación diferencial de partida}
+%En la revisión previa sobre las funciones de Legendre, las funciones de Legendre asociadas y las funciones de Chebyshev, se observó que en cada caso la ecuación diferencial de segundo orden correspondiente tenía tres puntos singulares regulares, en $x = -1, 1 , \infty$, y sin singularidades esenciales.
+La ecuación hipergeométrica puede considerarse como la \textocolor{red}{forma canónica} de las ecuaciones diferenciales de segundo orden con este número de singularidades.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación diferencial de partida}
+Se puede demostrar que, al hacer los cambios apropiados de las variables independientes y dependientes, cualquier ecuación diferencial de segundo orden con tres singularidades regulares y un punto ordinario en el infinito se puede transformar en la ecuación hipergeométrica (\ref{eq:ecuacion_18_136}) con las singularidades en $x= -1 , 1, \infty$.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación diferencial de partida}
+Esto permite que las funciones de Legendre, las funciones de Legendre asociadas y las funciones de Chebyshev, por ejemplo, se escriban como \textocolor{cobalt}{casos particulares de funciones hipergeométricas}, que son las soluciones a la ec. (\ref{eq:ecuacion_18_136}).
+\end{frame}
+\begin{frame}
+\frametitle{Singularidades en la ED}
+Ya que el punto $x = 0$ es una singularidad regular de la ec. (\ref{eq:ecuacion_18_136}), podemos encontrar al menos una solución en una forma de serie de Frobenius:
+\pause
+\begin{align}
+y (x) = \nsum_{0}^{\infty} a_{n} \, x^{n+\sigma}
+\label{eq:ecuacion_18_137}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Solución en serie de potencias}
+Sustituyendo esta serie en la ec. (\ref{eq:ecuacion_18_136}) para luego dividir entre $x^{\sigma-1}$, se obtiene:
+\pause
+\begin{align}
+\begin{aligned}[b]
+\nsum_{n=0}^{\infty} &\big[ (1 - x)(n + \sigma)(n + \sigma - 1) + \\[0.5em]
+&+ [c - (a + b + 1) \, x] \, (n + \sigma) - a \, b \, x \big] a_{n} \, x^{n} = 0
+\end{aligned}
+\label{eq:ecuacion_18_138}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Solución en serie de potencias}
+Estableciendo $x = 0$, de modo que solo quede el término $n = 0$, obtenemos la ecuación de índices:
+\begin{align*}
+\sigma (\sigma - 1) + c \, \sigma = 0
+\end{align*}
+que tiene las raíces $\sigma = 0$ y $\sigma = 1 - c$.
+\end{frame}
+\begin{frame}
+\frametitle{Soluciones a la ED}
+Por tanto, siempre que $c$ no sea un número entero, se pueden obtener dos soluciones linealmente independientes de la ecuación hipergeométrica en la forma (\ref{eq:ecuacion_18_137}).
+\\
+\bigskip
+\pause
+Para $\sigma = 0$, la solución correspondiente es una serie de potencias simple.
+\end{frame}
+\begin{frame}
+\frametitle{Relación de recurrencia}
+Sustituyendo $\sigma = 0$ en la ec. (\ref{eq:ecuacion_18_138}) y exigiendo que el coeficiente de $x^{n}$ se anule, encontramos la relación de recurrencia:
+\pause
+\begin{align}
+\begin{aligned}
+&n \big[ (n - 1) + c \big] \, a_{n} - \big[ (n - 1)(a + b + n - 1) + \\[0.5em]
+&+ a \, b \big] \, a_{n-1} = 0
+\end{aligned}
+\label{eq:ecuacion_18_139}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Relación de recurrencia}
+Que al simplificar y reemplazar $n$ por $n + 1$, nos lleva a la relación de recurrencia:
+\pause
+\begin{align}
+a_{n+1} = \dfrac{(a + n)(b + n)}{(n + 1)(c + n)} \, a_{n}
+\label{eq:ecuacion_18_140}
+\end{align}
+Es convencional hacer la elección simple de $a_{0} = 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Presentando la solución}
+Por lo tanto, siempre que $c$ no sea un número entero negativo o cero, podemos escribir la solución de la siguiente manera:
+\pause
+\begin{align}
+\begin{aligned}
+&F(a, b, c; x) {=} 1 {+} \dfrac{a \, b}{c} \, \dfrac{x}{1!} + \\[1em]
+&+ \dfrac{a (a {+} 1)\, b (b {+} 1)}{c (c {+} 1)} \, \dfrac{x^{2}}{2!} + \ldots \label{eq:ecuacion_18_141}
+\end{aligned}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Presentando la solución}
+\begin{align}
+F(a, b, c; x) {=} \dfrac{\Gamma (c)}{\Gamma (a) \, \Gamma (b)} \nsum_{n=0}^{\infty} \dfrac{\Gamma (a {+} n) \, \Gamma (b {+} n)}{\Gamma (c {+} n)} \, \dfrac{x^{n}}{n!} \label{eq:ecuacion_18_142}
+\end{align}
+donde $F(a, b, x; x)$ se le conoce como la \textocolor{burgundy}{función hipergeométrica} o \textocolor{bole}{serie hipergeométrica}.
+\end{frame}
+\begin{frame}
+\frametitle{Convergencia de la solución}
+Es sencillo demostrar que la serie hipergeométrica converge en el rango $\abs{x} < 1$.
+\\
+\bigskip
+\pause
+También converge en $x = 1$ si $ c > a + b$ y en $x = -1$ si $c > a + b - 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Simetría en la solución}
+También observamos que $F (a, b, c; x)$ es simétrico en los parámetros $a$ y $b$, es decir, $F (a, b, c; x) = F (b, a, c; x)$.
+\end{frame}
+\begin{frame}
+\frametitle{Solución parcial}
+La función hipergeométrica $y (x) = F (a, b, c; x)$ claramente no es la solución general de la ecuación hipergeométrica (\ref{eq:ecuacion_18_136}), \pause ya que también debemos considerar la segunda raíz de la ecuación de índices.
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución}
+Sustituyendo la raíz $\sigma = 1 - c$ en la ec.  (\ref{eq:ecuacion_18_138}) y exigiendo que el coeficiente de $x^{n}$ se anule, encontramos que debemos tener:
+\pause 
+\begin{align*}
+n (n + 1 - &c) \, a_{n} - \big[ (n - c)(a + b + n - c) + \\[1em]
+&+ a \, b \big] \, a_{n-1} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución}
+Que al comparar con la ec. (\ref{eq:ecuacion_18_139}) y al reemplazar $n$ por $n + 1$, se obtiene la relación de recurrencia:
+\pause
+\begin{align*}
+a_{n+1} = \dfrac{(a - c + 1 + n)(b -c + 1 + n)}{(n + 1)(2 - c + n)} \, a_{n}
+\end{align*}
+Vemos que esta relación de recurrencia tiene la misma forma que la ec. (\ref{eq:ecuacion_18_140}) si se hacen los reemplazos $a \to a - c + 1$, $b \to b - c + 1$ y $c \to 2 - c$.
+\end{frame}
+\begin{frame}
+\frametitle{Solución general a la ED}
+Por lo tanto, siempre que $c$, $a - b$ y $c - a - b$ sean no enteros, la solución general de la ecuación hipergeométrica, válida para el intervalo $\abs{x} < 1$, puede escribirse como:
+\pause
+\begin{align}
+\begin{aligned}
+y (x) &= A \, F (a, b, c; x) + \\[1em]
+&+ B \, x^{1-c} \, F (a-c+1, b - c + 1, 2 - c; x)
+\end{aligned}
+\label{eq:ecuacion_18_143}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Solución general a la ED}
+Donde $A$ y $B$ son constantes arbitrarias que quedarán determinadas por las CDF en la solución.
+\\
+\bigskip
+\pause
+Para que sea solución en $x = 0$, se requiere que $B = 0$.
+\end{frame}
+
+\end{document}

@@ -1,0 +1,145 @@
+\documentclass[hidelinks,12pt]{article}
+\usepackage[left=0.25cm,top=1cm,right=0.25cm,bottom=1cm]{geometry}
+%\usepackage[landscape]{geometry}
+\textwidth = 20cm
+\hoffset = -1cm
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla, es-lcroman]{babel}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[tbtags]{amsmath}
+\usepackage{nccmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{standalone}
+\graphicspath{{Imagenes/}{../Imagenes/}}
+\usepackage[outdir=./Imagenes/]{epstopdf}
+\usepackage{siunitx}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+\usepackage{color}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{multirow}
+%\usepackage{milista}
+\usepackage{anyfontsize}
+\usepackage{anysize}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{mdframed}
+\usepackage{relsize}
+\usepackage{placeins}
+\usepackage{empheq}
+\usepackage{cancel}
+\usepackage{pdfpages}
+\usepackage{wrapfig}
+\usepackage[flushleft]{threeparttable}
+\usepackage{makecell}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{bigints}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{scalerel}
+\usepackage{pgfplots}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+
+\pgfplotsset{compat=1.16}
+\spanishdecimal{.}
+\renewcommand{\baselinestretch}{1.5}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iiint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+
+% \newcommand{\qed}{\tag*{$\blacksquare$}}
+\renewcommand{\qed}{\hfill\blacksquare}
+
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\newlist{milista}{enumerate}{2}
+\setlist[milista,1]{label=\roman*)}
+\setlist[milista,2]{label=\roman{milista}.\roman*)}
+
+\title{Tarea Tema 4 \\[0.3em] \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+
+\fontsize{14}{14}\selectfont
+
+\textbf{Indicaciones: } Se te pide gentilmente que resuelvas de manera detallada, clara y ordenada los siguientes ejercicios, el puntaje que otorga cada enunciado es de \textbf{1 punto}. En caso de que requieras apoyarte en alguna propiedad, si fue vista en clase, solo indícalo, pero si esa propiedad aunque esté relacionada al ejercicio y no se haya mencionado en clase, habrá que demostrarla debidamente.
+
+\begin{enumerate}
+%Referencia Hassani - Chapter 12
+\item \textbf{Bessel. }Un cilindro largo conductor de calor de radio $a$ se compone de dos mitades (con secciones transversales semicirculares) con un espacio infinitesimal entre ellas. Las mitades superior e inferior del cilindro están en contacto con baños térmicos $+T_{0}$ y $-T_{0}$, respectivamente. Encuentra la temperatura tanto dentro como fuera del cilindro.
+%Referencia Hassani - Chapter 12
+\item Un cilindro largo conductor de calor de radio $a$ se compone de dos mitades (con secciones transversales semicirculares) con un espacio infinitesimal entre ellas. Las mitades superior e inferior del cilindro están en contacto con baños térmicos $+T_{1}$ y $-T_{1}$, respectivamente.
+\par 
+El cilindro está dentro de otro cilindro de radio $b$ más grande ( $a < b$ y coaxial con él) que se mantiene a la temperatura $T_{2}$. Encuentra la temperatura dentro del cilindro interno, entre los dos cilindros y fuera del cilindro externo.
+
+\newpage
+
+% %Ref. Arfken(2006) 13.1.6 (b)
+\item \textbf{Hermite. } Demuestra que la expansión de la función:
+\begin{align*}
+f (x) =x^{2 r + 1}
+\end{align*}
+en una serie de polinomios de Hermite de orden impar es:
+\begin{align*}
+x^{2 r +1} &= \dfrac{(2 r + 1)!}{2^{2 r +1}} \nsum_{n=0}^{r} \dfrac{H_{2n+1}(x)}{(2 \, n + 1)! \, (r - n)!} \\[1em]
+&{} \hspace{2cm} r = 0, 1, 2, \ldots
+\end{align*}
+Nota: Considera usar la fórmula de Rodrigues para luego integrar por partes.
+%Ref. Arfken(2006) 13.1.10
+\item Demuestra que:
+\begin{align*}
+\scaleint{6ex}_{\bs - \infty}^{\infty} x^{2} \, e^{-x^{2}} \, H_{n}(x) \, H_{n}(x) \dd{x} = \pi^{\frac{1}{2}} \, 2^{n} \, n! \, \bigg( n + \dfrac{1}{2} \bigg)
+\end{align*}
+Esta integral se presenta en el cálculo del desplazamiento medio cuadrado del oscilador armónico cuántico.
+%Ref. Arfken (2013) 18.4.1
+\item \textbf{Chebyshev. } Evaluando la función generatriz para valores especiales de $x$, verifica las siguientes expresiones:
+\begin{align*}
+T_{n} (1) = 1, \hspace{0.75cm} T_{n} (-1) = (-1)^{n}, \hspace{0.75cm} T_{2n} (0) = (-1)^{n}, \hspace{0.75cm} T_{2n+1} (0) = 0
+\end{align*} 
+\item Existen varias ecuaciones que relacionan los dos tipos de polinomios de Chebyshev. Demuestra que:
+\begin{enumerate}[label=\alph*)]
+\item $T_{n}(x) = U_{n}(x) - x \, U_{n-1}(x)$
+\item $(1 - x^{2}) \, U_{n}(x) = x \, T_{n+1}(x) - T_{n+2}(x)$
+\end{enumerate}
+\end{enumerate}
+
+\end{document}
