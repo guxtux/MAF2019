@@ -1,0 +1,58 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
+\begin{document}
+
+\begin{tikzpicture}[tdplot_main_coords]
+
+    % Define the spherical coordinates of the vector
+    % r = radial distance, theta = polar angle, phi = azimuthal angle
+    \def\rvec{3}
+    \def\thetavec{60} % Polar angle (from z-axis)
+    \def\phivec{45}  % Azimuthal angle (from x-axis in xy-plane)
+
+    % Set the origin
+    \coordinate (O) at (0,0,0);
+
+    % Draw the main coordinate axes
+    \draw[thick, ->] (0,0,0) -- (1.5*\rvec,0,0) node[anchor=north east]{$x$};
+    \draw[thick, ->] (0,0,0) -- (0,1.3*\rvec,0) node[anchor=north west]{$y$};
+    \draw[thick, ->] (0,0,0) -- (0,0,1.2*\rvec) node[anchor=south]{$z$};
+
+    % Define the point P using spherical coordinates
+    \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+
+    % Draw the main vector from origin to P
+    \draw[-stealth, very thick, blue] (O) -- (P) node[midway, sloped, above] {$\vec{A}$};
+    \node[right=2pt] at (P) {$P(r, \theta, \phi)$};
+    
+    % Draw the projection of the vector onto the xy-plane
+    \draw[dashed, gray] (O) -- (Pxy);
+    \draw[dashed, gray] (P) -- (Pxy);
+
+    % Draw the radial distance label
+    % We do this separately to place it nicely
+    \draw (O) -- node[midway, sloped, below] {$r$} (P);
+
+    % Draw and label the azimuthal angle (phi) in the xy-plane
+    \tdplotdrawarc[thick, ->, green!60!black]{(O)}{0.5}{0}{\phivec}{anchor=north}{$\phi$}
+
+    % Draw and label the polar angle (theta) from the z-axis
+    % For this, we need to rotate the drawing plane to the plane of the vector
+    \tdplotsetthetaplanecoords{\phivec}
+    \tdplotdrawarc[tdplot_rotated_coords, thick, ->, orange]{(O)}{0.8}{0}{\thetavec}{anchor=south west, text=black}{$\theta$}
+
+    % --- Unit Vectors at point P ---
+    % Set up a new coordinate system at point P, aligned with spherical unit vectors
+    \tdplotsetrotatedcoords{\phivec}{\thetavec}{0}
+    
+    % Draw the unit vectors in this new rotated coordinate system
+    % The new x' is r_hat, y' is theta_hat, and z' is phi_hat
+    \draw[tdplot_rotated_coords, -stealth, thick, red] (P) --++ (0.8,0,0) node[anchor=west]{$\hat{r}$};
+    \draw[tdplot_rotated_coords, -stealth, thick, red] (P) --++ (0,0.8,0) node[anchor=west]{$\hat{\theta}$};
+    \draw[tdplot_rotated_coords, -stealth, thick, red] (P) --++ (0,0,0.8) node[anchor=south]{$\hat{\phi}$};
+
+\end{tikzpicture}
+
+\end{document}
