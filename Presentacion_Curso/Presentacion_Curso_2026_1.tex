@@ -1,0 +1,154 @@
+\documentclass[14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{calc}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{textcomp, gensymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, 
+     bottom=2.00cm]{geometry}
+% \usepackage{Estilos/ColoresLatex}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage[skip=10pt, indent=30pt]{parskip}
+% \usepackage{scalerel}
+\usepackage{scalerel}[2016-12-29]
+
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ao,
+    filecolor=magenta,      
+    urlcolor=ao,
+}
+
+
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iiint}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\textocolor}[2]{\textbf{\textcolor{#1}{#2}}}
+\sisetup{per-mode=symbol}
+\decimalpoint
+\sisetup{bracket-numbers = false}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\numberwithin{equation}{section}
+
+\linespread{1.15}
+
+% \input{../Preambulos/preambulo_material_completo}
+% \usepackage{apacite}
+
+\title{Presentación Curso MAF \\ \large{Semestre 2026-1 \vspace{2cm} Grupo 8215}\vspace{-3ex}}
+\author{}
+\date{ }
+
+\begin{document}
+
+\vspace{-4cm}
+\maketitle
+
+\section{Equipo académico.}
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l}
+M. en C. Gustavo Contreras Mayén. & \href{mailto:gux7avo@ciencias.unam.mx}{gux7avo@ciencias.unam.mx} \\
+Alfredo Rodríguez González. & \href{mailto:alfredojo1997@ciencias.unam.mx}{alfredojo1997@ciencias.unam.mx}
+\end{tabular}
+\end{table}
+
+\section{Modalidad y Horarios.}
+
+La modalidad del curso será presencial, con un horario de \textbf{martes y jueves de 16:00 a 18:30 horas}, está pendiente por asignar el aula en la que se impartirá el curso.
+
+\section{Objetivos del curso.}
+
+En la página de la Facultad, el programa de la asignatura: Matemáticas Avanzadas de la Física se puede consultar 
+\href{https://www.fciencias.unam.mx/sites/default/files/temario/610.pdf}{aquí}, y contiene los siguientes objetivos:
+\begin{enumerate}
+\item Reconocerá las ideas básicas del análisis de ecuaciones que involucran a funciones de varias variables.
+\item Formulará aproximaciones consistentes a soluciones, con el fin de cuantificar los distintos mecanismos de la física que se involucran.
+\item Consultará la literatura matemática que sea relevante para los problemas de física.
+\item Identificará el papel moderno que juegan las funciones especiales, como auxiliares poderosos en el análisis cualitativo de problemas en varias variables.
+\end{enumerate}
+
+También es nuestro objetivo demostrar al alumno que \textbf{las funciones especiales y las transformadas integrales} no son solamente un tema matemático que involucra las ramas de la geometría diferencial, las ecuaciones diferenciales y el análisis matemático.
+
+Veremos que \textbf{son las técnicas de estudio fundamentales} en la electrostática, la electrodinámica, la mecánica cuántica, la dinámica de medios deformables, la hidrodinámica clásica entre otras ramas de la física.
+
+El curso de MAF les brindará un manejo más fluido y consistente para lo que van a cursar en el sexto semestre y los tres semestres que les restan para concluir la carrera.
+
+\section{Evaluación.}
+
+El esquema de evaluación para el curso se conforma de dos elementos:
+\begin{enumerate}[label=\alph*)]
+\item \textbf{Exámenes.}
+
+Tendrán un peso del \num{60} \% de la calificación. Se aplicarán tres exámenes parciales durante el curso.
+\item \textbf{Tareas.}
+
+Le corresponderán el \num{40} \% de la calificación. Por cada tema del curso (seis en total) se dejará una tarea para entregar.
+\end{enumerate}
+En la primera sesión del curso se extenderá cada elemento de evaluación, precisando las características de los mismos.
+
+\newpage
+
+\section{Temario.}
+
+El temario que se trabajará en el curso es el siguiente:
+
+\begin{enumerate}[label=Tema \arabic*., leftmargin=3\parindent]
+\item La física y la geometría.
+\item Primeras técnicas de solución.
+\item Bases completas y ortogonales.
+\item Funciones especiales.
+\item El átomo de hidrógeno.
+\item Transformadas integrales.
+\end{enumerate}
+Tmabién en la primera sesión del curso presentaremos de manera detallada el contenido de cada tema.
+
+\section{De la asignatura.}
+
+Al ser MAF una asignatura de sexto semestre, se considerará que el alumno ha cubierto el correspondiente avance de la carrera; se requiere de la formación y conocimiento del quinto semestre tanto de la física como de la matemática.
+ 
+\section{Bibliografía.}
+
+Se ocuparán las referencias bibliográficas básicas y complementarias que se indican en el programa del curso, más otros materiales específicos que se darán a conocer en la revisión de los temas.
+
+\section{Primera sesión.}
+
+Se les extiende la más cordial invitación para asistir el día martes 12 de agosto a las 16 horas en el salón (pendiente de asignar), en donde se extenderá este syllabus del curso. En caso de algún comentario, te pedimos que nos envíes un correo y con mucho gusto te daremos respuesta lo más pronto posible.
+\end{document}
