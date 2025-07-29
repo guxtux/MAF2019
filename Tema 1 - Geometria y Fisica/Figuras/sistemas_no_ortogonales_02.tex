@@ -1,0 +1,44 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath}
+\usepackage{physics}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\begin{document}
+
+% Ángulos de vista
+\tdplotsetmaincoords{70}{110}
+
+\begin{tikzpicture}[tdplot_main_coords, scale=2]
+
+  % Vectores base directos
+  \draw[->, thick] (0, 0, 0) -- (1.5, 1.8, 0) node[anchor=north] {$\vb{b}_1$};
+  \draw[->, thick] (0, 0, 0) -- (-1.5, 1, 0) node[anchor=north west] {$\vb{b}_2$};
+  \draw[->, thick] (0, 0, 0) -- (-0.5, -0.8, 0.5) node[anchor=south] {$\vb{b}_3$};
+
+  % Vectores recíprocos (opuestos, en línea de trazos)
+  \draw[->, thick] (0, 0, 0) -- (2.5, 1.5, 0) node[left, pos=0.8] {$b_{1}$};
+  \draw[->, thick] (0, 0, 0) -- (0.5, 1, 1) node[anchor=south east] {$b_{2}$};
+  \draw[->, thick] (0, 0, 0) -- (0, 0, 1.5) node[left, pos=0.8] {$b_{3}$};
+
+  % Líneas de conexión para visualización
+  % Para b3
+  \draw[dashed] (0, 0, 0) -- (1, -0.5, 0);
+  \draw[dashed] (1, -0.5, 0) -- (-0.5, -0.8, -0.75);
+  \draw[dashed] (-0.5, -0.8, 0.5) -- (-0.5, -0.8, -0.75);
+
+  % Para b2
+  \draw[dashed] (0.5, 1, 1) -- (0.5, 1, 0.65);
+  \draw[dashed] (0.5, 1, 0.65) -- (0, 0, 0);
+
+  % Para b1
+  \draw[dashed] (2.5, 1.5, 0) -- (2.5, 1.5, 0.35);
+  \draw[dashed] (2.5, 1.5, 0.35) -- (0, 0, 0);
+
+\end{tikzpicture}
+
+\end{document}

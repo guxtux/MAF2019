@@ -1,0 +1,53 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{arrows.meta,3d}
+\usetikzlibrary{positioning}
+\usepackage{amsmath}
+\usepackage{physics}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\begin{document}
+
+\tdplotsetmaincoords{60}{60} 
+
+\begin{tikzpicture}[scale=1,tdplot_main_coords]
+
+\coordinate (P1) at (2, 0, 0);
+\coordinate (P2) at (0, 2.5, 0);
+\coordinate (P3) at (0, 1.4, 2.75);
+\coordinate (P4) at (5, 0, 0);
+\coordinate (P5) at (0, 5, 0);
+\coordinate (P6) at (0, 3, 5.5);
+
+
+\draw (0, 0, 0) -- (6, 0, 0);
+\draw (0, 0, 0) -- (0, 5.5, 0);
+\draw (0, 0, 0) -- (0, 3.5, 6.5);
+
+% Triángulo sombreado
+\fill[black!30, opacity=0.5] (P1) -- (P2) -- (P3) -- cycle;
+\fill[black!30, opacity=0.5] (P4) -- (P5) -- (P6) -- cycle;
+
+\draw [fill] (P1) circle (0.08);
+\node at (P1) [anchor=east] {\large{$\rho_{1} \, \vb{b}_{1}$}};
+% \draw [fill] (P2) circle (0.08);
+% \node at (P2) [anchor=north] {\large{$P_{2}$}};
+\draw [fill] (P3) circle (0.08);
+\node at (P3) [anchor=east] {\large{$\rho_{3} \, \vb{b}_{3}$}};
+
+\draw [fill] (P4) circle (0.08);
+\node at (P4) [anchor=east] {\large{$ 2 \, \rho_{1} \, \vb{b}_{1}$}};
+\draw [fill] (P5) circle (0.08);
+\node at (P5) [anchor=north west, outer ysep=-20pt] {\large{$ 2 \, \rho_{2} \, \vb{b}_{2}$}};
+\draw [fill] (P6) circle (0.08);
+\node at (P6) [anchor=west] {\large{$ 2 \, \rho_{3} \, \vb{b}_{3}$}};
+
+\draw[-{Stealth[length=3mm, width=2mm]}, thick]  (0, 0, 0) -- (0, 2.8, 0.5) node [above, pos=0.9] {\large{$\vb{n}$}};
+
+\draw (0, 1.7, 0.3) -- (P1);
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,888 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{multicol,multienum}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{anysize}
+\usepackage{anyfontsize}
+\usepackage{geometry}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[shortlabels]{enumitem}
+\usepackage[os=win]{menukeys}
+\usepackage{bm}
+\usepackage{calc}
+%Este paquete permite manejar los encabezados del documento
+\usepackage{fancyhdr}
+%hay que definir el ambiente de la página
+\pagestyle{fancy}
+%aqui va el texto para todas las paginas l--> izquierda, r--> derecha, hay un C--> para centrar el texto deseado
+%\lhead{Curso de Física Computacional}
+\setlength{\headheight}{15pt}
+\fancyhead[R]{\nouppercase{\leftmark}}
+%define el ancho de la linea que separa el encabezado del cuerpo del texto
+\renewcommand{\headrulewidth}{0.5pt}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.5}
+\interfootnotelinepenalty=8000
+\usepackage{hyperref}
+%esta parte define el color del marco que aparece en las hiperreferencias.
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+\spanishdecimal{.}
+\marginsize{1.5cm}{1.5cm}{1.5cm}{1.5cm}
+
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\title{Cinemática de una partícula \\ \begin{Large} Curso de Mecánica Analítica \end{Large}}
+\author{M. en C. Gustavo Contreras Mayén.}
+\date{ }
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+
+\tableofcontents
+
+\newpage
+
+\section{Cinemática de una partícula.}
+
+Se entiende por partícula un cuerpo puntiforme; tal tipo de cuerpo, por supuesto, no existe en realidad. La idea de cuerpo puntiforme es una idealización matemática de un objeto cuyas dimensiones y orientación en el espacio son despreciables para la descripción particular de su movimiento que interesa. Por ejemplo, en el movimiento de los planetas alrededor del Sol, éstos se pueden considerar, en una primera aproximación, como cuerpos sin dimensiones, o sea, como cuerpos puntiformes. Por el contrario, un electrón que se mueva muy cerca de otro cuerpo cargado eléctricamente no puede ser tratado como partícula.
+\par
+Las cantidades físicas necesarias para describir el movimiento de una partícula son: su posición, su velocidad y su aceleración. La forma que toman estas cantidades vectoriales depende de las coordenadas en función de las cuales, y del sistema de coordenadas con respecto al cual, medimos el movimiento de la partícula.
+\par
+La selección de un sistema de coordenadas es completamente arbitrario, teniendo como única condición el que los tres vectores base no sean coplanares. La selección más sencilla será la de tres vectores unidad mutuamente ortogonales, y aun con estos vectores hay una gran flexibilidad. Por ejemplo, en las coordenadas cilindricas y esféricas, usamos tres vectores base unidad mutuamente ortogonales cuya orientación en el espacio depende de la posición de la partícula (fig. 2-1). Estos vectores base girarán a medida que la partícula cambie de posición. Los vectores base de coordenadas que se empleen en un problema particular se determinarán, como veremos más adelante, por las coordenadas en función de las cuales decidamos describir 
+el movimiento.
+\par
+A continuación se definirán la velocidad y la aceleración de una partícula y se hará una descripción en coordenadas cartesianas, cilíndricas y esféricas, para concluir con un estudio de ellas en coordenadas generalizadas.
+
+\subsection{Velocidad y aceleración.} 
+
+El vector de posición de una partícula queda determinado por el radio vector $\vb{r}$ que va desde el origen de un sistema de coordenadas cartesianas al punto en que está situada la partícula. Si la partícula se mueve, su vector de posición será función del tiempo $t$, y se designará por:
+\begin{align}
+\vb{r} = \vb{r} (t)
+\label{eq:ecuacion_02_01} 
+\end{align}
+La sucesión de puntos ocupados por la partícula trazará una curva en el espacio, que se puede representar en forma paramétrica por las ecuaciones que indiquen la dependencia, con respecto al tiempo, de los valores de las tres coordenadas x, y y z del vector de posición: 
+\begin{align}
+x = x (t), \hspace{1cm} y = y (t), \hspace{1cm} z = z (t)
+\label{eq:ecuacion_02_02} 
+\end{align}
+La velocidad instantánea de una partícula en el instante $t$, se define por la derivada respecto al tiempo de su vector de posición:
+\begin{align}
+\vb{v} (t) = \dv{\vb{r}}{t} = \lim_{\Delta t \to 0} \left[ \dfrac{\vb{r} (t + \Delta t) - \vb{r} (t)}{\Delta t} \right]
+\label{eq:ecuacion_02_03} 
+\end{align}
+O sea, que la velocidad instantánea, es el límite de la velocidad media $\expval{\vb{v}}$ en el intervalo de tiempo $(t_{2} - t_{1})$:
+\begin{align}
+\expval{\vb{v}} = \dfrac{\vb{r} (t_{2}) - \vb{r} (t_{1})}{t_{2} - t_{1}}
+\label{eq:ecuacion_02_04} 
+\end{align}
+cuando este tiende a cero.
+\par
+Expresando la velocidad en función de las componentes cartesianas del vector de posición, tendremos:
+\begin{align}
+\vb{v} = \dot{x} \, \vb{i} + \dot{y} \, \vb{j} + \dot{z} \, \vb{k}
+\label{eq:ecuacion_02_05}
+\end{align}
+donde el punto sobre las componentes $x$, $y$ y $z$, del vector de posición, representa sus respectivas derivadas con respecto al tiempo. Por ejemplo:
+\begin{align*}
+\dot{x} = \dv{x}{t}
+\end{align*}
+
+La aceleración de una partícula se define por la derivada, con respecto al tiempo, de su velocidad:
+\begin{align}
+\vb{a} = \dv{\vb{v}}{t} = \ddot{r}
+\label{eq:ecuacion_02_06}
+\end{align}
+Los dos puntos sobre el vector de posición $\vb{r}$, indican su segunda derivada con respecto al tiempo:
+\begin{align*}
+\ddot{r} = \dv[2]{\vb{r}}{t}
+\end{align*}
+Derivando la ecuación (\ref{eq:ecuacion_02_05}) encontramos la expresión de la aceleración en coordenadas cartesianas:
+\begin{align}
+\vb{a} = \ddot{x} \, \vb{i} + \ddot{y} \, \vb{j} + \ddot{z} \, \vb{k} 
+\label{eq:ecuacion_02_07}
+\end{align}
+
+\textbf{Ejercicio: } Hallar la velocidad y la aceleración de una partícula cuyo vector de posición es:
+\begin{align}
+\vb{r} (t) = A \, \cos \omega t + A \, \sin \omega t
+\label{eq:ecuacion_02_08}
+\end{align}
+o sea, 
+\begin{align}
+x = A \, \cos \omega t, \hspace{1.5cm} y = A \, \sin \omega t
+\label{eq:ecuacion_02_09}
+\end{align}
+Las ecuaciones (\ref{eq:ecuacion_02_09}) son las paramétricas de una circunferencia de radio $A$. Para una partícula que se mueve en dicha circunferencia, la velocidad estará dada por: 
+\begin{align*}
+\vb{v} = \dot{\vb{r}} = - A \, \omega \, \sin \omega t \, \vb{i} + A \, \omega \, \cos \omega t \, \vb{j} 
+\end{align*}
+La distancia al origen es fija, ya que la partícula se está moviendo en una circunferencia, o sea $r^{2} = A^{2}$, por lo tanto, $\vb{v} = \dot{\vb{r}}$ será perpendicular a $\vb{r}$. Se verifica que $\vb{v} \cdot \vb{r} = 0$. 
+\par
+En el caso especial que estamos considerando, la magnitud del vector de velocidad, $v^{2} = \omega^{2} A^{2}$, es constante. Luego, también deberemos encontrar que $\vb{v} \cdot \vb{a} = 0$. Derivando la velocidad obtenemos:
+\begin{align*}
+\vb{a} = - A \omega^{2} \, \cos \omega t \, \vb{i} - A \omega^{2} \, \sin \omega t \, \vb{j} = - \omega \, \vb{r}
+\end{align*} 
+por lo que se ve que $\vb{a}$ es perpendicular a $\vb{v}$.
+
+\subsection{Velocidad y aceleración en coordenadas cilíndricas.}
+
+Las coordenadas cilindricas $\phi, \theta, z$ se definen por sus relaciones con las coordenadas cartesianas $x, y, z$, que son:
+
+\vspace*{-1cm}
+\begin{center}
+\begin{minipage}[t]{0.3\linewidth}
+\begin{align*}
+x &= \rho \, \cos \phi \\
+y &= \rho \, \sin \phi \\
+z &= z
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{0.3\linewidth}
+\begin{align}
+\begin{aligned}
+x^{2} + y^{2} &= \rho^{2} \\
+\arctan \left( \dfrac{y}{x} \right) &= \phi
+\end{aligned}
+\label{eq:ecuacion_02_10}
+\end{align}
+\end{minipage}
+\end{center}
+Se ve que $\rho$ es la proyección del radio vector $\vb{r}$ en el plano $x y$ (fig. ), y que $\phi$ es el ángulo que forma $\rho$ con el eje $x$. Estas coordenadas reciben el nombre de cilindricas porque las superficies en las que $\rho$ es constante son cilindros circulares paralelos al eje $z$.
+
+Como conocemos la relación entre las coordenadas cartesianas y las cilindricas, el vector de posición se puede expresar en función de las últimas, lo que da:
+\begin{align}
+r = \rho \, \cos \phi \, \vb{i} + \rho \, \sin \phi \, \vb{j} + z \, \vb{k}
+\label{eq:ecuacion_02_11} 
+\end{align}
+Y derivando sucesivamente esta expresión del vector de posición, obtenemos los vectores de velocidad y aceleración:
+\begin{align}
+\vb{v} = \left( \dot{\rho} \, \cos \theta - \rho \, \dot{\phi} \, \sin \phi \right) \vb{i} + \left( \dot{\rho} \, \sin \theta + \rho \, \dot{\phi} \, \cos \phi \right) \vb{j} + \dot{z} \, \vb{k}
+\label{eq:ecuacion_02_12}
+\end{align}
+y para el vector aceleración:
+\begin{align}
+\begin{aligned}
+\vb{a} &= \left( \ddot{\rho} \, \cos \phi - 2 \dot{\rho} \dot{\phi} \sin \phi - \rho \dot{\phi}^{2} \, \cos \phi - \rho \ddot{\phi} \, \sin \phi \right) \vb{i} + \\
+&+ \left( \ddot{\rho} \, \sin \phi - 2 \dot{\rho} \dot{\phi} \cos \phi - \rho \dot{\phi}^{2} \, \sin \phi - \rho \ddot{\phi} \, \cos \phi \right) \vb{j} + \ddot{z} \, \vb{k}
+\end{aligned}
+\label{eq:ecuacion_02_13}
+\end{align}
+Estas expresiones son bastante complicadas. Se simplificarán algo si las expresamos en función de un nuevo conjunto de vectores base que sean más naturales para las coordenadas cilindricas. 
+\par
+Los vectores unidad que tomaremos como base siempre que empleemos coordenadas cilindricas para el estudio cinemático del movimiento de una partícula son $\vb{e}_{\rho}, \vb{e}_{\phi}$, y $\vb{k}$, que, para un punto dado, estarán dirigidos respectivamente en el sentido en que el vector de posición $\vb{r}$ cambia, cuando $\rho, \phi, z$ sufren un incremento infinitesimal. Estos vectores unidad se definen por:
+\begin{align}
+\vb{e}_{\rho} &= \dfrac{\Delta \vb{r}_{\rho}}{\abs{\Delta \vb{r}_{\rho}}} = \dfrac{\pdv*{\vb{r}}{\rho}}{\abs{\pdv*{\vb{r}}{\rho}}} = \cos \phi \, \vb{i} + \sin \phi \, \vb{j} \label{eq:ecuacion_02_14} \\
+\vb{e}_{\phi} &= \dfrac{\Delta \vb{r}_{\phi}}{\abs{\Delta \vb{r}_{\phi}}} = \dfrac{\pdv*{\vb{r}}{\phi}}{\abs{\pdv*{\vb{r}}{\phi}}} = - \sin \phi \, \vb{i} + \cos \phi \, \vb{j} \label{eq:ecuacion_02_15}
+\end{align}
+siendo $\vb{k}$ el vector unidad en el sentido positivo del eje $z$. En las ecuaciones (\ref{eq:ecuacion_02_14}) y (\ref{eq:ecuacion_02_15}), $\Delta \vb{r}_{\rho}$ y $\Delta \vb{r}_{\phi}$ representan los cambios en el vector de posición producidos al variar $\rho$ y $\phi$, respectivamente (fig. ):
+\begin{align*}
+\Delta \vb{r}_{\rho} = \pdv{\vb{r}}{\rho} \, \Delta \rho, \hspace{1.5cm} \Delta \vb{r}_{\phi} = \pdv{\vb{r}}{\phi} \, \Delta \phi
+\end{align*} 
+Se verifica fácilmente que en un punto, los tres vectores unidad $\vb{e}_{\rho}, \vb{e}_{\phi}, \vb{k}$, son mutuamente ortogonales, formando en dicho punto un sistema de coordenadas a la derecha, o sea dextrógiro. Se deja como demostración:
+\begin{align}
+\vb{e}_{\rho} \cp \vb{e}_{\phi} = \vb{k}, \hspace{1cm} \vb{e}_{\phi} \cp \vb{k} = \vb{e}_{\rho}, \hspace{1cm} \vb{k} \cp \vb{e}_{\rho} = \vb{e}_{\phi}
+\label{eq:ecuacion_02_16}
+\end{align}
+La figura () muestra los sentidos y direcciones de los vectores unidad tomados como base $\vb{e}_{\rho}, \vb{e}_{\phi}, \vb{k}$. El vector unidad $\vb{e}_{\rho}$ está en el plano $x y$ formando un ángulo $\phi$ con el eje $x$, y situado a lo largo de la proyección del vector de posición sobre el plano $x y$. El vector también está en el plano $x y$, es perpendicular a $\vb{e}_{\rho}$ y forma un ángulo $\phi$ con el sentido positivo del eje $y$. 
+\par
+De todo lo anterior se desprende que el vector de posición queda determinado, en función del conjunto ortogonal de vectores unidad base $\vb{e}_{\rho}, \vb{e}_{\phi}, \vb{k}$, por la relación:
+\begin{align*}
+\vb{r} = \left( \vb{r} \cdot \vb{e}_{\rho} \right) \vb{e}_{\rho} + \left( \vb{r} \cdot \vb{e}_{\phi} \right) \vb{e}_{\phi} + \left( \vb{r} \cdot \vb{k} \right) \vb{k}
+\end{align*}
+y, por lo tanto, de la ecuación (\ref{eq:ecuacion_02_11}), obtenemos:
+\begin{align}
+\vb{r} = \rho \, \vb{e}_{\rho} +  z \, \vb{k}
+\label{eq:ecuacion_02_17}
+\end{align}
+Similarmente, utilizando las ecuaciones (\ref{eq:ecuacion_02_12}) y (\ref{eq:ecuacion_02_13}), se obtiene:
+\begin{align}
+\begin{aligned}
+\vb{v} &= \left( \vb{v} \cdot \vb{e}_{\rho} \right) \vb{e}_{\rho} + \left( \vb{v} \cdot \vb{e}_{\phi} \right) \vb{e}_{\phi} + \left( \vb{v} \cdot \vb{k} \right) \vb{k} = \\
+&= \dot{\rho} \, \vb{e}_{\rho} + \rho \, \dot{\phi} \, \vb{e}_{\phi} + \dot{z} \vb{k}
+\end{aligned}
+\label{eq:ecuacion_02_18}
+\end{align}
+y para la aceleración:
+\begin{align}
+\begin{aligned}
+\vb{a} &= \left( \vb{a} \cdot \vb{e}_{\rho} \right) \vb{e}_{\rho} + \left( \vb{a} \cdot \vb{e}_{\phi} \right) \vb{e}_{\phi} + \left( \vb{a} \cdot \vb{k} \right) \vb{k} = \\
+&= \left( \ddot{\rho} - \rho \, \dot{\phi}^{2} \right) \vb{e}_{\rho} + \left( \rho \, \ddot{\phi} + 2 \dot{\rho} \dot{\phi} \right) \vb{e}_{\phi} + \ddot{z} \vb{k}
+\end{aligned}
+\label{eq:ecuacion_02_19}
+\end{align}
+Las ecuaciones (\ref{eq:ecuacion_02_18}) y (\ref{eq:ecuacion_02_19}) se pudieran obtener algo más fácilmente 
+por derivaciones sucesivas de la ecuación (\ref{eq:ecuacion_02_17}). La primera derivada nos dará la expresión de la velocidad:
+\begin{align*}
+\vb{v} = \dot{\vb{r}} = \dot{\rho} \, \vb{e}_{\rho} + \rho \, \dot{\vb{e}}_{\rho} + \dot{z} \, \vb{k}
+\end{align*}
+Derivando la ecuación (\ref{eq:ecuacion_02_14}) se encuentra que:
+\begin{align}
+\dot{\vb{e}}_{\rho} = \dot{\phi} \left( - \sin \phi \, \vb{i} + \cos \phi \, \vb{j} \right) = \dot{\phi} \, \vb{e}_{\phi}
+\label{eq:ecuacion_02_20}
+\end{align}
+Cuando este resultado se sustituye en las ecuaciones anteriores, resulta la ecuación (\ref{eq:ecuacion_02_18}) para el vector velocidad. 
+\par
+Similarmente, de la ecuación (\ref{eq:ecuacion_02_15}), hallamos:
+\begin{align}
+\dot{\vb{e}}_{\phi} = \left( - \cos \phi \, \vb{i} - \sin \phi \, \vb{j} \right) \dot{\phi} = - \dot{\phi} \, \vb{e}_{\rho}
+\label{eq:ecuacion_02_21}
+\end{align}
+relación que necesitaremos para obtener la expresión de la aceleración.
+\par 
+Notemos que, como era de esperar:
+\begin{align*}
+\vb{e}_{\rho} \cdot \vb{e}_{\rho} = \vb{e}_{\phi} \cdot \vb{e}_{\phi} = 0 
+\end{align*}
+podemos ahora definir un vector de velocidad angular:
+\begin{align}
+\bm{\omega} =  \dot{\phi} \, \vb{k}
+\label{eq:ecuacion_02_22}
+\end{align}
+en función del cual podemos expresar la razón de variación con respecto al tiempo de los vectores $\vb{e}_{\rho}$ y $\vb{e}_{\phi}$ en forma de productos vectoriales:
+\begin{align}
+\dot{\vb{e}}_{\rho} &= \bm{\omega} \cp \vb{e}_{\rho} \label{eq:ecuacion_02_23} \\
+\dot{\vb{e}}_{\phi} &= \bm{\omega} \cp \vb{e}_{\phi} \label{eq:ecuacion_02_24}
+\end{align}
+La velocidad, en función del vector de velocidad angular $\omega$, queda expresada por:
+\begin{align}
+\begin{aligned}
+\vb{v} &= \dot{\rho} \vb{e}_{\rho} + \rho \, \bm{\omega} \cp \vb{e}_{\rho} + \dot{z} \vb{k} = \\
+&= \dot{\rho} \vb{e}_{\rho} + \rho \, \dot{\phi} \vb{e}_{\rho} + \dot{z} \vb{k}
+\end{aligned}
+\label{eq:ecuacion_02_25}
+\end{align}
+De una forma semejante obtendremos para el vector aceleración:
+\begin{align}
+\begin{aligned}
+\vb{a} &= \dv{\vb{v}}{t} = \ddot{r} \vb{e}_{\rho} + 2 \dot{\rho} \dot{\vb{e}}_{\rho} + \rho \, \ddot{\phi} \, \vb{e}_{\phi} + \rho \, \dot{\phi} \dot{\vb{e}}_{\phi} + \ddot{z} \, \vb{k} = \\
+&= \left( \ddot{\rho} - \rho \dot{\phi}^{2} \right) \vb{e}_{\rho} + \left( \rho \, \ddot{\phi} + 2 \dot{\rho} \dot{\phi} \right) \vb{e}_{\phi} + \ddot{z} \vb{k}
+\end{aligned}
+\label{eq:ecuacion_02_26}
+\end{align}
+expresión que coincide con la ecuación (\ref{eq:ecuacion_02_19}).
+\par
+\noindent
+\textbf{Ejercicio: } Como ejemplo ilustrativo, repetiremos el problema de la sección anterior, pero ahora determinaremos en coordenadas cilindricas la velocidad y la aceleración de una partícula que se mueve con velocidad constante en una trayectoria circular. En este sistema, el vector de posición de la partícula, 
+$\vb{r} = A \cos \omega t \, \vb{i} +  A \sin \omega t \, \vb{j}$, estará dado por:
+\begin{align}
+\vb{r} = \rho \, \vb{e}_{\rho}
+\label{eq:ecuacion_02_27}
+\end{align}
+donde $\phi$, es el ángulo que forma $\vb{e}_{\rho}$ con el eje $x$, varía linealmente con el tiempo, 
+\begin{align*}
+\phi = \omega \, t
+\end{align*}
+y $\rho = A$ permanece constante en magnitud. 
+\par
+Entonces, tenemos que:
+\begin{align}
+\vb{v} &= A \dot{\vb{e}}_{\rho} = A \, \dot{\phi} \, \vb{e}_{\rho} \label{eq:ecuacion_02_28} \\
+\vb{a} &= A \omega \, \dot{\vb{e}}_{\phi} = - A \omega^{2} \, \vb{e}_{\rho} = - \omega^{2} \, \vb{r} \label{eq:ecuacion_02_29}
+\end{align}
+Recordemos del curso de mecánica vectorial que en una partícula que se mueve sobre una circunferencia:
+\begin{enumerate}[label=\alph*)]
+\item $\rho \dot{\phi}$, es la magnitud de su velocidad tangencial.
+\item $\rho \dot{\phi}^{2}$ es su aceleración centrípeta.
+\item $\rho \ddot{\phi}$ es la magnitud de su aceleración tangencial.
+\end{enumerate}
+Cuando el movimiento de la partícula no es circular, aparecen además otros términos en las expresiones de la velocidad y la aceleración, como se ve en las ecuaciones (\ref{eq:ecuacion_02_25}) y (\ref{eq:ecuacion_02_26}). Estos nuevos términos son:
+\begin{enumerate}[label=\roman*)]
+\item La componente radial de la velocidad $\dot{\rho}$.
+\item La aceleración radial $\ddot{\rho}$.
+\item Un término $2 \rho \dot{\phi}$, que aparece en la componente tangencial de la aceleración y se debe a la rotación del sistema coordenado de vectores base cuando cambia el vector de posición. Se denomina este último término \emph{aceleración de Coriolis}.
+\end{enumerate}
+
+\subsection{Velocidad y aceleración en coordenadas esféricas.}
+
+Velocidad y aceleración en coordenadas esféricas 
+
+Para obtener las expresiones de la velocidad y la aceleración en coordenadas esféricas, seguiremos un camino semejante al empleado para las coordenadas cilindricas. 
+\par
+Las coordenadas esféricas $\rho, \theta, \phi$, quedan definidas por las ecuaciones:
+\begin{align}
+r &= \sqrt{x^{2} + y^{2} + z^{2}} \label{eq:ecuacion_02_30} \\
+\theta &= \arctan \left( \dfrac{\sqrt{x^{2} + y^{2}}}{z} \right) \label{eq:ecuacion_02_31} \\
+\phi &= \arctan \left( \dfrac{y}{x} \right) \label{eq:ecuacion_02_32}
+\end{align}
+o de manera equivalente:
+\begin{align}
+    x &= r \, \sin \theta \, \cos \phi \label{eq:ecuacion_02_33} \\
+    y &= r \, \sin \theta \, \sin \phi \label{eq:ecuacion_02_34} \\
+    z &= r \, \cos \theta \label{eq:ecuacion_02_35}
+\end{align}
+Se ve claramente que $r$ es la magnitud del vector de posición, $\theta$ el ángulo formado por el vector de posición con el eje $z$, y $\phi$ el ángulo formado por el eje $x$ y la proyección del vector de posición en el plano $x y$ (fig. ). 
+\par
+Los vectores unidad que tomaremos como base de las coordenadas esféricas se definen por las ecuaciones:
+\begin{align}
+\vb{e}_{r} &= \dfrac{\pdv*{\vb{r}}{r}}{\abs{\pdv*{\vb{r}}{r}}} \label{eq:ecuacion_02_36} \\[0.5em]
+\vb{e}_{\theta} &= \dfrac{\pdv*{\vb{r}}{\theta}}{\abs{\pdv*{\vb{r}}{\theta}}} \label{eq:ecuacion_02_37} \\[0.5em]
+\vb{e}_{\phi} &= \dfrac{\pdv*{\vb{r}}{\phi}}{\abs{\pdv*{\vb{r}}{\phi}}} \label{eq:ecuacion_02_38}
+\end{align}
+y son, respectivamente, los vectores unidad que apuntan en los sentidos en que cambia el vector de posición cuando las coordenadas $R, \theta, \phi$ sufren un cambio infinitesimal (fig. ). Partiendo de :
+\begin{align}
+\begin{aligned}
+\vb{r} &= x \, \vb{i} + y \, \vb{j} + z \, \vb{k} = \\[0.5em]
+&= r \, \sin \theta \, \cos \phi \, \vb{i} + r \, \sin \theta \, \sin \phi \, \vb{j} + r \, \cos \theta \, \vb{k}
+\end{aligned}
+\label{eq:ecuacion_02_39}
+\end{align}
+y utilizando las ecuaciones que definen los vectores unidad base del sistema, encontramos las expresiones:
+\begin{align}
+    \vb{e}_{r} &= \sin \theta \, \cos \phi \, \vb{i} + \sin \theta \, \sin \phi \, \vb{j} + \cos \theta \, \vb{k} \label{eq:ecuacion_02_40} \\[0.5em]
+    \vb{e}_{\theta} &= \cos \theta \, \cos \phi \, \vb{i} + \cos \theta \, \sin \phi \, \vb{j} - \sin \theta \, \vb{k} \label{eq:ecuacion_02_41} \\[0.5em]
+    \vb{e}_{\phi} &= - \sin \phi \, \vb{i} + \cos \phi \, \vb{j} \label{eq:ecuacion_02_42}
+\end{align}
+que determinan los vectores base unidad en un punto específico por medio de un conjunto dado de $r, \theta, \phi$. Se verifica fácilmente que estos tres vectores son mutuamente ortogonales y definen un sistema de coordenadas a la derecha, o sea de sentido dextrógiro, y que satisfacen las relaciones:
+\begin{align}
+    \vb{e}_{r} \cp \vb{e}_{\theta} = \vb{e}_{\phi}, \hspace{1.5cm} \vb{e}_{\theta} \cp \vb{e}_{\phi} = \vb{e}_{r}, \hspace{1.5cm} \vb{e}_{\phi} \cp \vb{e}_{r} = \vb{e}_{\theta} \label{eq:ecuacion_02_43}
+\end{align}
+Observaremos, por las ecuaciones (\ref{eq:ecuacion_02_40}), (\ref{eq:ecuacion_02_41}) y (\ref{eq:ecuacion_02_42}), que, como en el caso de las coordenadas cilindricas, los vectores unidad base del sistema de coordenadas esféricas son igualmente funciones de posición que cambian su orientación al variar $\theta$ y $\phi$. Por lo tanto, necesitaremos utilizar también sus derivadas con respecto al tiempo, que son: 
+\begin{align}
+    \vb{\dot{e}}_{r} &= \left( - \sin \theta \, \sin \theta \, \dot{\theta} + \cos \theta \, \cos \phi \, \dot{\theta} \right) \vb{i} + \nonumber \\[0.5em] 
+    &+ \left( \sin \theta \, \cos \phi \, \dot{\theta} + \cos \theta \, \sin \phi \, \dot{\theta} \right) \vb{j} - \sin \theta \, \dot{\theta} \, \vb{k} \label{eq:ecuacion_02_44} \\[0.5em]
+    \vb{e}_{\dot{\theta}} &= \left( - \cos \theta \, \sin \phi \, \dot{\theta} - \sin \theta \, \cos \phi \, \dot{\theta} \right) \vb{i} + \nonumber \\[0.5em]
+    &+ \left( \cos \theta \, \cos \phi \, \dot{\phi} + \sin \theta \, \sin \phi \, \dot{\theta} \right) \vb{j} - \cos \theta \, \dot{\theta} \, \vb{k} \label{eq:ecuacion_02_45} \\[0.5em]
+    \vb{e}_{\dot{\phi}} &= - \cos \phi \, \dot{\phi} \, \vb{i} - \sin \phi \, \dot{\phi} \, \vb{j} = \nonumber \\[0.5em]
+    &= - \sin \theta \, \phi \, \vb{e}_{r} - \cos \theta \, \phi \, \vb{e}_{\theta} \label{eq:ecuacion_02_46}
+\end{align}
+El hecho de que los tres vectores unidad base mantengan su ortogonalidad, hace sospechar la existencia de un único vector de velocidad angular $\bm{\omega}$, en función del cual se exprese la derivada o razón de variación con respecto al tiempo de los vectores unidad $\vb{e}_{r}, \vb{e}_{\theta}, \vb{e}_{\phi}$. Los vectores base cambian su orientación al variar los ángulos $\theta$ y $\phi$. Un cambio en $\phi$ implica una rotación del vector de posición alrededor del eje $z$, mientras que un cambio en $\theta$ implica la rotación del vector de posición alrededor de la dirección $\vb{e}_{\phi}$. Con base en esto, podemos definir el vector de veloci- 
+dad angular por:
+\begin{align}
+\begin{aligned}
+\bm{\omega} &= \dot{\phi} \, \vb{k} + \dot{\theta} \, \vb{e}_{\phi} = \\[0.5em]
+&= \dot{\phi} \, \cos \theta \, \vb{e}_{r} - \dot{\phi} \, \sin \theta \, \vb{e}_{\theta} + \dot{\theta} \, \vb{e}_{\phi} = \\[0.5em]
+&= \dot{\phi} \, \vb{k} - \sin \phi \, \dot{\theta} \, \vb{i} + \cos \phi \, \dot{\theta} \, \vb{j}
+\end{aligned}
+\label{eq:ecuacion_02_47}
+\end{align}
+para obtener las dos últimas igualdades, se ha utilizado la relación:
+\begin{align*}
+    \vb{k} &= \left( \vb{k} \cdot \vb{e}_{r} \right) \vb{e}_{r} + \left( \vb{k} \cdot \vb{e}_{\theta} \right) \vb{e}_{\theta} + \left( \vb{k} \cdot \vb{e}_{\phi} \right) \vb{e}_{\phi} = \\[0.5em]
+    &= \cos \theta \, \vb{e}_{r} - \sin \theta \, \vb{e}_{\theta}
+\end{align*}
+y la relación:
+\begin{align*}
+    \vb{e}_{\phi} = - \sin \phi \, \vb{i} + \cos \phi \, \vb{j}
+\end{align*}
+Ahora podemos indicar las derivadas con respecto al tiempo de los vectores base en función del vector de velocidad angular $\bm{\omega}$:
+\begin{align}
+    \dot{\vb{e}}_{r} &= \bm{\omega} \cp \vb{e}_{r} \label{eq:ecuacion_02_48} \\[0.5em]
+    \dot{\vb{e}}_{\theta} &= \bm{\omega} \cp \vb{e}_{\theta} \label{eq:ecuacion_02_49} \\[0.5em]
+    \dot{\vb{e}}_{\phi} &= \bm{\omega} \cp \vb{e}_{\phi} \label{eq:ecuacion_02_50}
+\end{align}
+Con lo anterior, estamos en condiciones de encontrar la velocidad y la aceleración en coordenadas esféricas. Puesto que $\vb{r} = r \, \vb{e}_{r}$, obtendremos la siguiente expresión para la velocidad:
+\begin{align}
+\begin{aligned}
+\vb{v} &= \dot{r} \, \vb{e}_{r} + r \, \dot{\vb{e}}_{r} = \\[0.5em]
+&= \dot{r} \, \vb{e}_{r} + r \, \dot{\theta} \, \vb{e}_{\theta} + r \, \sin \theta \, \dot{\phi} \, \vb{e}_{\phi}
+\end{aligned}
+\label{eq:ecuacion_02_51}
+\end{align}
+y para la aceleración:
+\begin{align}
+\begin{aligned}[b]
+\vb{a} &= \left( \dot{r} \, \vb{e}_{r} + \dot{r} \, \vb{e}_{r} \right) + \left( \dot{r} \, \dot{\theta} \, \vb{e}_{\theta} + r \, \ddot{\theta} \, \vb{e}_{\theta} + r \, \theta \, \dot{\vb{e}}_{\theta} \right) + \\[0.5em]
+&+ \left( r \, \sin \theta \, \phi \, \dot{\vb{e}}_{\phi} + \dot{r} \, \sin \theta \, \dot{\phi} \, \vb{e}_{\phi} + r \, \cos \theta \, \dot{\theta} \, \dot{\phi} \, \vb{e}_{\phi} + r \, \sin \theta \, \ddot{\phi} \, \vb{e}_{\phi} \right) = \\[0.5em]
+&= \left( \ddot{r} - r \, \dot{\theta}^{2} - r \, \sin^{2} \theta \, \dot{\phi}^{2} \right) \vb{e}_{r} + \left( r \, \ddot{\theta} + 2 \, \dot{r} \, \theta - r \, \sin \theta \, \cos \theta \, \dot{\phi}^{2} \right) \vb{e}_{\theta} + \\[0.5em]
+&+ \left( r \, \sin \theta \, \ddot{\phi} + 2 \, \dot{r} \, \dot{\phi} \, \sin \theta + 2 \, r \, \cos \theta \, \dot{\theta} \, \dot{\phi} \right) \vb{e}_{\phi}
+\end{aligned}
+\label{eq:ecuacion_02_52}
+\end{align}
+
+\subsection{Vectores base para coordenadas generalizadas.}
+
+Las coordenadas cilindricas y esféricas no son sino casos particulares de las coordenadas generalizadas, $q_{1}, q_{2}, q_{3}$, en función de las cuales se puede analizar el movimiento de una partícula. Por ejemplo, en el sistema de coordenadas esféricas tenemos:
+\begin{align*}
+q_{1} &= r, \hspace{1cm} q_{2} = \theta, \hspace{1cm} q_{3} = \phi
+\end{align*}
+Los pasos seguidos para obtener las expresiones de la velocidad y la aceleración en coordenadas cilindricas o esféricas son, en general, aplicables a cualquier conjunto de coordenadas. Así, si:
+\begin{align}
+    x = x \left( q_{1}, q_{2}, q_{3} \right), \hspace{1cm} y = y \left( q_{1}, q_{2}, q_{3} \right) \hspace{1cm} z = z \left( q_{1}, q_{2}, q_{3} \right)  \label{eq:ecuacion_02_53}
+\end{align}
+son las ecuaciones que relacionan las coordenadas cartesianas con las generalizadas, $q_{1}, q_{2}, q_{3}$, el radio vector podrá expresarse por:
+\begin{align}
+    \vb{r} = x \left( q_{1}, q_{2}, q_{3} \right) \vb{i} + y \left( q_{1}, q_{2}, q_{3} \right) \vb{j} +  z \left( q_{1}, q_{2}, q_{3} \right) \vb{k}
+    \label{eq:ecuacion_02_54}
+\end{align}
+Definiremos los vectores base de las coordenadas generalizadas en una forma semejante a la de las ecuaciones (\ref{eq:ecuacion_02_14}) y (\ref{eq:ecuacion_02_15}) para las coordenadas cilindricas y de las ecuaciones correspondientes para las coordenadas esféricas. Sin embargo, estos vectores base no serán normalizados para que sean vectores unidad. 
+\par
+Los vectores base de las coordenadas generalizadas, $q_{1}, q_{2}, q_{3}$ y se definen por:
+\begin{align}
+    \vb{b}_{1} &= \pdv{\vb{r}}{q_{1}} = h_{1} \, \vb{e}_{1}, \hspace{1.5cm} h_{1} = \abs{\pdv{\vb{r}}{q_{1}}} \label{eq:ecuacion_02_55} \\[0.5em]
+    \vb{b}_{2} &= \pdv{\vb{r}}{q_{2}} = h_{2} \, \vb{e}_{2}, \hspace{1.5cm} h_{2} = \abs{\pdv{\vb{r}}{q_{2}}} \label{eq:ecuacion_02_56} \\[0.5em]
+    \vb{b}_{3} &= \pdv{\vb{r}}{q_{3}} = h_{3} \, \vb{e}_{3}, \hspace{1.5cm} h_{3} = \abs{\pdv{\vb{r}}{q_{3}}} \label{eq:ecuacion_02_57}
+\end{align}
+Notemos que estos vectores base, $b_{1}, b_{2}, b_{3}$, no son vectores unidad. La razón para escogerlos en lugar de los vectores unidad definidos por:
+\begin{align}
+\vb{e}_{i} = \dfrac{\pdv*{\vb{r}}{q_{i}}}{\abs{\pdv*{\vb{r}}{q_{i}}}}, \hspace{1.5cm} i = 1, 2, 3
+\label{eq:ecuacion_02_58}
+\end{align}
+se hará evidente más adelante. En general, obtendremos resultados más concisamente expresables usando los vectores base $b_{i}$. Cuando 
+esto no suceda, preferiremos usar los vectores unidad $\vb{e}_{i}$, que tienen otras ventajas. 
+\par
+Los vectores base que acabamos de definir se especifican, en función de sus componentes cartesianas, por:
+\begin{align}
+    \vb{b}_{i} = \pdv{x}{q_{i}} \, \vb{i} + \pdv{y}{q_{i}} \, \vb{j} + \pdv{z}{q_{i}} \, \vb{k}
+    \label{eq:ecuacion_02_59}  
+\end{align} 
+y sus magnitudes son:
+\begin{align}
+    h_{i} = \sqrt{\left( \pdv{x}{q_{i}} \right)^{2} + \left( \pdv{y}{q_{i}} \right)^{2} + \left( \pdv{z}{q_{i}} \right)^{2}}
+    \label{eq:ecuacion_02_60}
+\end{align}
+Por ejemplo, en el sistema de coordenads esféricas, tenemos que:
+\begin{align*}
+    \vb{b}_{1} = \vb{e}_{r}, \hspace{1cm} \vb{b}_{2} = r \, \vb{e}_{\theta}, \hspace{1cm} \vb{b}_{3} = r \, \sin \theta \, \vb{e}_{\phi}
+\end{align*}
+Es decir, los vectores base tienen las magnitudes:
+\begin{align*}
+    h_{1} = 1, \hspace{1cm} h_{2} = r, \hspace{1cm} h_{3} = r \, \sin \theta
+\end{align*}
+El vector $\vb{b}_{i}$ tiene el mismo sentido que el cambio en el vector de posición producido por un incremento infinitesimal de la coordenada generalizada $q_{i}$, como se deduce de la ecuación:
+\begin{align*}
+    \Delta \vb{r} = \pdv{\vb{r}}{q_{i}} \, \Delta q_{i}
+\end{align*}
+Generalmente, los vectores $\vb{b}_{i}$ definidos por la ecuación (\ref{eq:ecuacion_02_59}) no son perpendiculares entre sí. Por nuestro estudio de los vectores base no ortogonales nos damos cuenta de que esto es absolutamente correcto siempre que los vectores base no sean coplanares. La condición para que no sean coplanares es que su triple producto escalar no se anule. O sea:
+\bgroup
+\everymath{\displaystyle}
+\begin{align}
+    \vb{b}_{1} \cdot \vb{b}_{2} \cp \vb{b}_{3} = \mdet{
+        \pdv{x}{q_{1}} & \pdv{y}{q_{1}} & \pdv{z}{q_{1}} \\[1em]
+        \pdv{x}{q_{2}} & \pdv{y}{q_{2}} & \pdv{z}{q_{2}} \\[1em]
+        \pdv{x}{q_{3}} & \pdv{y}{q_{3}} & \pdv{z}{q_{3}}
+    } \neq 0
+    \label{eq:ecuacion_02_61}
+\end{align}
+\egroup
+El determinante anterior es el \emph{Jacobiano} de las coordenadas cartesianas $x, y, z$ con respecto a las coordenadas generalizadas $q_{1}, q_{2}, q_{3}$. El determinante Jacobiano se suele indicar por:
+\bgroup
+\everymath{\displaystyle}
+\begin{align}
+    \pdv{(x, y, z)}{(q_{1}, q_{2}, q_{3})} = \mdet{
+        \pdv{x}{q_{1}} & \pdv{y}{q_{1}} & \pdv{z}{q_{1}} \\[1em]
+        \pdv{x}{q_{2}} & \pdv{y}{q_{2}} & \pdv{z}{q_{2}} \\[1em]
+        \pdv{x}{q_{3}} & \pdv{y}{q_{3}} & \pdv{z}{q_{3}}
+    }
+    \label{eq:ecuacion_02_62}
+\end{align}
+\egroup
+Por lo tanto, la ecuación (\ref{eq:ecuacion_02_61}) queda expresada como:
+\begin{align*}
+    \pdv{(x, y, z)}{(q_{1}, q_{2}, q_{3})} \neq 0
+\end{align*}
+Esta es, también, la condición necesaria y suficiente para que de las ecuaciones (\ref{eq:ecuacion_02_53}) se puedan hallar las coordenadas generalizadas, $q_{i}$, expresadas como funciones de las coordenadas cartesianas $x, y, z$; en otras palabras, habrá una correspondencia biunívoca entre los valores de $x, y, z$ y los de $q_{1}, q_{2}, q_{3}$.
+\par
+Siempre que se trate con un conjunto de vectores base no ortogonales o no normalizados, habrá también un conjunto de vectores base recíprocos que será necesario tomar en cuenta. Cuando los vectores base $b_{i}$ sean ortogonales, es decir, cuando empleamos un sistema de coordenadas generalizadas curvilíneas ortogonales, la obtención del sistema recíproco es inmediata. Por la ecuación (), que define 
+los vectores base recíprocos, sabemos que éstos, en un sistema ortogonal, son paralelos a los vectores base, y, en consecuencia, de la ecuación () deducimos que, si para un conjunto ortogonal de vectores base se tiene:
+\begin{align}
+    \vb{b}_{i} = h_{i} \, \vb{e}_{i}
+    \label{eq:ecuacion_02_63} 
+\end{align}
+donde los $\vb{e}_{i}$ son vectores unidad, los vectores recíprocos serán:
+\begin{align}
+    b_{i} = \dfrac{1}{h_{i}} \, \vb{e}_{i} = \dfrac{1}{h_{i}^{2}} \, \vb{b}_{i}
+    \label{eq:ecuacion_02_64}
+\end{align}
+Cuando los vectores base no son ortogonales, la situación es algo más compleja. Sin embargo, veremos que nunca podremos evitar el empleo de las ecuaciones () que definen los vectores base recíprocos. Las ecuaciones () son las soluciones de las (). Es evidente que éstas soluciones son únicas y que, por lo tanto, cualquier conjunto de vectores cuyos productos escalares por b¡ satisfagan las ecuaciones () serán, necesariamente, los vectores recíprocos. 
+\par
+Ahora bien, las coordenadas generalizadas $q_{1}, q_{2}, q_{3}$ son coordenadas independientes, de donde:
+\begin{align*}
+    \pdv{q_{1}}{q_{1}} = \pdv{q_{2}}{q_{2}} = \pdv{q_{3}}{q_{3}} = 1
+\end{align*} 
+y
+\begin{align*}
+    \pdv{q_{1}}{q_{2}} = \pdv{q_{1}}{q_{3}} = \pdv{q_{2}}{q_{1}} = \pdv{q_{2}}{q_{3}} = \pdv{q_{3}}{q_{1}} = \pdv{q_{3}}{q_{2}} = 0
+\end{align*}
+o sea,
+\begin{align}
+    \pdv{q_{i}}{q_{j}} = \begin{cases}
+        0 & i \neq j \\
+        1 & i = j
+    \end{cases}
+    \label{eq:ecuacion_02_65}
+\end{align}
+Pero considerando que las $q_{i}$ son funciones de $x, y, z$, y que, a su vez, éstas son funciones de las $q_{j}$, resulta que:
+\begin{align}
+    \pdv{q_{i}}{q_{j}} = \pdv{q_{i}}{x} \, \pdv{x}{q_{j}} + \pdv{q_{i}}{y} \, \pdv{y}{q_{j}} + \pdv{q_{i}}{z} \, \pdv{z}{q_{j}} = \delta_{ij}
+    \label{eq:ecuacion_02_66} 
+\end{align}
+Comparando las ecuaciones (\ref{eq:ecuacion_02_66}) con las (), encontramos que los vectores recíprocos vendrán dados por:
+\begin{align}
+    \vb{b}_{i} = \pdv{q_{i}}{x} \, \vb{i} + \pdv{q_{i}}{y} \, \vb{j} + \pdv{q_{i}}{z} \, \vb{k}
+    \label{eq:ecuacion_02_67}
+\end{align}
+El segundo miembro de esta ecuación se denomina \emph{gradiente} de $q_{i}$, y se escribe como $\grad{q_{i}}$.
+\par
+Más adelante llegaremos al mismo resultado:
+\begin{align}
+    b_{i} = \grad{q_{i}}
+    \label{eq:ecuacion_02_68}
+\end{align}
+\par
+\noindent
+\textbf{Ejercicio: } Considera las coordenadas parabólicas definidas por las ecuaciones:
+\begin{align*}
+    x = \eta \, \xi \, \cos \phi, \hspace{1cm} y = \eta \, \xi \, \sin \phi, \hspace{1cm} z = \dfrac{1}{2} \, \left( \xi^{2} - \eta^{2} \right)
+\end{align*}
+o con las relaciones inversas:
+\begin{align*}
+    \xi^{2} = \sqrt{x^{2} + y^{2} + z^{2}} + z, \hspace{1cm} \eta^{2} = \sqrt{x^{2} + y^{2} + z^{2}} - z, \hspace{1cm} \phi = \arctan \left( \dfrac{y}{x} \right) 
+\end{align*}
+Usando la ecuación (\ref{eq:ecuacion_02_59}) se obtienen los vectores base:
+\begin{align*}
+    \vb{b}_{1} &= \pdv{\vb{r}}{\xi} = \eta \, \cos \phi \, \vb{i} + \eta \, \sin \phi \, \vb{j} + \xi \, \vb{k} \\[1em]
+    \vb{b}_{2} &= \pdv{\vb{r}}{\eta} = \xi \, \cos \phi \, \vb{i} + \xi \, \sin \phi \, \vb{j} - \eta \, \vb{k} \\[1em]
+    \vb{b}_{3} &= \pdv{\vb{r}}{\phi} = - \eta \, \xi \, \sin \phi \, \vb{i} + \eta \, \xi \, \cos \phi \, \vb{j}
+\end{align*}
+Estos vectores son mutuamente ortogonales y tienen las magnitudes:
+\begin{align*}
+    h_{1} &= h_{2} = \sqrt{\eta^{2} + \xi^{2}} \\[0.5em]
+    h_{3} &= \eta \, \xi
+\end{align*} 
+La ecuación (\ref{eq:ecuacion_02_64}) nos da los vectores base recíprocos:
+\begin{align*}
+    \vb{b}_{1} &= \dfrac{ \eta \, \cos \phi}{\eta^{2} + \xi^{2}} \, \vb{i} + \dfrac{\eta \, \sin \phi}{\eta^{2} + \xi^{2}} \, \vb{j} + \dfrac{\xi}{\eta^{2} + \xi^{2}} \, \vb{k} \\[1em]
+    \vb{b}_{2} &= \dfrac{ \xi \, \cos \phi}{\eta^{2} + \xi^{2}} \, \vb{i} + \dfrac{\xi \, \sin \phi}{\eta^{2} + \xi^{2}} \, \vb{j} + \dfrac{\eta}{\eta^{2} + \xi^{2}} \, \vb{k} \\[1em]
+    \vb{b}_{3} &= - \dfrac{\sin \phi}{\eta \, \xi} \, \xi + \dfrac{\cos \phi}{\eta \, \xi} \, \vb{j}
+\end{align*}
+Estos mismos resultados se pueden obtener con la ecuación (\ref{eq:ecuacion_02_67}). Por ejemplo, para:
+\begin{align*}
+    \vb{b}_{1} = \pdv{\xi}{x} \, \vb{i} + \pdv{\xi}{y} \, \vb{j} + \pdv{\xi}{z} \, \vb{k}
+\end{align*} 
+llegamos a la misma solución, ya que:
+\begin{align*}
+    \pdv{\xi}{x} &= \dfrac{1}{2 \, \xi} \, \pdv{\xi^{2}}{x} = \dfrac{x}{2 \, \xi \, \sqrt{x^{2} + y^{2} + z^{2}}} = \dfrac{\eta \, \cos \phi}{\eta^{2} + \xi^{2}} \\[1em]
+    \pdv{\xi}{y} &= \dfrac{1}{2 \, \xi} \, \pdv{\xi^{2}}{y} = \dfrac{y}{2 \, \xi \, \sqrt{x^{2} + y^{2} + z^{2}}} = \dfrac{\eta \, \sin \phi}{\eta^{2} + \xi^{2}} \\[1em]
+    \pdv{\xi}{z} &= \dfrac{1}{2 \, \xi} \, \pdv{\xi^{2}}{z} = \dfrac{z}{2 \, \xi \, \sqrt{x^{2} + y^{2} + z^{2}}} = \dfrac{\xi}{\eta^{2} + \xi^{2}}
+\end{align*}
+
+\subsection{Velocidad y aceleración en coordenadas generalizadas.}
+
+La velocidad de una partícula se puede expresar en función de sus vectores base, $\vb{b}_{i}$, y de sus recíprocos $b_{i}$, bien por:
+\begin{align}
+    \vb{v} = \nsum_{i=1}^{3} \left( \vb{v} \cdot b_{i} \right) \vb{b}_{i} = \nsum_{i=1}^{3} v_{i}^{*} \, \vb{b}_{i}
+    \label{eq:ecuacion_02_69}
+\end{align}
+o bien por:
+\begin{align}
+    \vb{v} = \nsum_{i=1}^{3} \left( \vb{v} \cdot \vb{b}_{i} \right) \, b_{i} = \nsum_{i=1}^{3} v_{i} \, b_{i}
+    \label{eq:ecuacion_02_70}
+\end{align}
+donde:
+\begin{align*}
+    v_{i} = \vb{v} \cdot \vb{b}_{i}, \hspace{1cm} v_{i}^{*} = \vb{v} \cdot b_{i}
+\end{align*}
+En función de las expresiones de los vectores $\vb{b}_{i}$, obtenemos las de $v_{i}$, llamadas \emph{componentes covariantes} de la velocidad, por la fórmula:
+\begin{align}
+    v_{i} = \dot{x} \, \pdv{x}{q_{i}} + \dot{y} \, \pdv{y}{q_{i}} + \dot{z} \, \pdv{z}{q_{i}}
+    \label{eq:ecuacion_02_71}
+\end{align} 
+Conociendo la dependencia funcional de las coordenadas cartesianas con respecto a las generalizadas, podemos expresar fácilmente las componentes cartesianas de la velocidad (que aparecen en esta última ecuación) en función de las coordenadas generalizadas y sus derivadas con respecto al tiempo. Tendremos:
+\begin{align}
+    \dot{x} = \nsum_{i=1}^{3} \pdv{x}{q_{i}} \, \dot{q}_{i}, \hspace{1cm} \dot{y} = \nsum_{i=1}^{3} \pdv{y}{q_{i}} \, \dot{q}_{i}, \hspace{1cm} \dot{z} = \nsum_{i=1}^{3} \pdv{z}{q_{i}} \, \dot{q}_{i}
+    \label{eq:ecuacion_02_72}
+\end{align}
+Obsérvese que en estas ecuaciones $\dot{x}, \dot{y}$ y $\dot{z}$ son funciones explícitas de las coordenadas generalizadas y sus derivadas con respecto al tiempo. Luego, de ellas, obtenemos los resultados:
+\begin{align}
+    \pdv{\dot{x}}{\dot{q}_{i}} = \pdv{x}{q_{i}}, \hspace{1cm} \pdv{\dot{y}}{\dot{q}_{i}} = \pdv{y}{q_{i}}, \hspace{1cm} \pdv{\dot{z}}{\dot{q}_{i}} = \pdv{z}{q_{i}}
+    \label{eq:ecuacion_02_73}
+\end{align}
+Y, sustituyendo las derivadas parciales de la ecuación (\ref{eq:ecuacion_02_71}) por sus equivalentes dadas por la ecuación (\ref{eq:ecuacion_02_73}), hallaremos que (\ref{eq:ecuacion_02_71}) queda expresado muy concisamente por:
+\begin{align}
+    v_{i} = \dot{x} \, \pdv{\dot{x}}{\dot{q}_{i}} + \dot{y} \, \pdv{\dot{y}}{\dot{q}_{i}} + \dot{z} \, \pdv{\dot{z}}{\dot{q}_{i}} = \pdv{\dot{q}_{i}} \, \left( \dfrac{1}{2} v^{2} \right)
+    \label{eq:ecuacion_02_74}
+\end{align}
+donde $v^{2} = \dot{x}^{2} + \dot{y}^{2} + \dot{z}^{2}$. La ecuación (\ref{eq:ecuacion_02_74}) nos indica que las componentes covariantes de la velocidad son iguales a las derivadas parciales, con respecto a las $\dot{q}_{i}$, de la mitad del cuadrado de la velocidad. Antes de derivar, tendremos que expresar $1/2 \, v^{2}$ en función de las coordenadas generalizadas, $q_{i}$, y de sus derivadas respecto al tiempo $\dot{q}_{i}$. 
+\par
+\noindent
+\textbf{Ejemplo: } Consideremos las coordenadas esféricas con las que:
+\begin{align*}
+    \dfrac{1}{2} \, v^{2} = \dfrac{1}{2} \, \left( \dot{r}^{2} + r^{2} \, \dot{\theta}^{2} + r^{2} \, \sin^{2} \theta \, \dot{\phi}^{2} \right)
+\end{align*}
+y para las que, con la ecuación (\ref{eq:ecuacion_02_74}), obtendremos las siguientes componentes covariantes de la velocidad:
+\begin{align*}
+    v_{1} &= \pdv{\dot{r}} \left( \dfrac{1}{2} \, v^{2} \right) = \dot{r} \\[1em]
+    v_{2} &= \pdv{\dot{\theta}} \left( \dfrac{1}{2} \, v^{2} \right) = r^{2} \, \dot{\theta} \\[1em]
+    v_{3} &= \pdv{\dot{\phi}} \left( \dfrac{1}{2} \, v^{2} \right) = r^{2} \, \sin^{2} \theta \, \dot{\phi}
+\end{align*}
+A la $v_{i}^{*}$ se llaman \emph{componentes contravariantes} de la velocidad. Empleando la ecuación (\ref{eq:ecuacion_02_67}) se llega al resultado:
+\begin{align}
+    v_{i}^{*} = \vb{v} \cdot b_{i} = \pdv{q_{i}}{x} \, \dot{x} + \pdv{q_{i}}{y} \, \dot{y} + \pdv{q_{i}}{z} \, \dot{z}
+    \label{eq:ecuacion_02_75}
+\end{align} 
+Las componentes contravariantes de la velocidad se llaman también \emph{velocidades generalizadas}. Por otra parte, en contraposición a lo anterior, llamaremos cantidades de movimiento generalizadas de la partícula a los productos de las componentes covariantes de la velocidad multiplicadas por la masa de la partícula:
+\begin{align*}
+    p_{i} = m \, v_{i}
+\end{align*} 
+Análogamente, hallaremos la aceleración, la cual, sin embargo, sólo requerirá su expresión por:
+\begin{align}
+    \vb{a} = \nsum_{i=1}^{3} \left( \vb{a} \cdot b_{i} \right) b_{i} = \nsum_{i=1}^{3} a_{i} \, b_{i}
+    \label{eq:ecuacion_02_76}
+\end{align}
+donde las \emph{componentes covariantes de la aceleración} quedan expresadas por:
+\begin{align*}
+    a_{i} = \vb{a} \cdot \vb{b}_{i} = \ddot{x} \, \pdv{x}{q_{i}} + \ddot{y} \, \pdv{y}{q_{i}} + \ddot{z} \, \pdv{z}{q_{i}}
+\end{align*}
+El producto escalar de $\vb{a}$ por el vector base $\vb{b}_{i}$, indicado en la última ecuación, se puede poner en una forma mucho más útil con ayuda de la ecuación (\ref{eq:ecuacion_02_73}). 
+\par
+Por ejemplo, poniendo:
+\begin{align*}
+    \ddot{x} = \, \pdv{x}{q_{i}} = \dv{t} \left( \dot{x} \, \pdv{x}{q_{i}} \right) \left( - \dot{x} \, \dv{t} \, \pdv{x}{q_{i}} \right) = \dv{t} \left( \dot{x} \, \pdv{\dot{x}}{\dot{q}_{i}} \right) - \dot{x} \, \pdv{\dot{x}}{q_{i}}
+\end{align*}
+y sabiendo que:
+\begin{align*}
+    \pdv{x}{q_{i}} = \pdv{\dot{x}}{\dot{q}_{i}}
+\end{align*}
+obtenemos:
+\begin{align}
+    \ddot{x} \, \pdv{x}{q_{i}} = \dv{t} \left( \dot{x} \, \pdv{\dot{x}}{\dot{q}_{i}} \right) - \dot{x} \, \pdv{\dot{x}}{q_{i}} = \dv{t} \, \pdv{\dot{q}_{i}} \left( \dfrac{1}{2} \, \dot{x}^{2} \right) - \pdv{q_{i}} \left( \dfrac{1}{2} \dot{x}^{2} \right)
+    \label{eq:ecuacion_02_77}
+\end{align}
+Con expresiones semejantes de $\ddot{y} (\pdv*{y}{q_{i}})$ y $\ddot{z} (\pdv*{z}{q_{i}})$, se puede establecer:
+\begin{align}
+\begin{aligned}[b]
+a_{i} &= \dv{t} \, \pdv{\dot{q}_{i}} \left( \dfrac{\dot{x}^{2} + \dot{y}^{2} + \dot{z}^{2}}{2} \right) - \pdv{q_{i}} \left( \dfrac{\dot{x}^{2} + \dot{y}^{2} + \dot{z}^{2}}{2} \right) = \\[1em]
+&= \dv{t} \, \pdv{\dot{q}_{i}} \left( \dfrac{v^{2}}{2} \right) - \pdv{q_{i}} \left( \dfrac{v^{2}}{2} \right)
+\end{aligned}
+\label{eq:ecuacion_02_78}
+\end{align}
+
+\noindent
+\textbf{Ejercicio: } Obtendremos, una vez más, las componentes de la aceleración en coordenadas cilindricas. De la ecuación (\ref{eq:ecuacion_02_12}) o (\ref{eq:ecuacion_02_18}) se tiene:
+\begin{align*}
+    v^{2} = \dot{\rho}^{2} + \rho^{2} \, \dot{\theta}^{2} + \dot{z}^{2}
+\end{align*}
+y en consecuencia:
+\begin{align*}
+    a_{1} &= \vb{a} \cdot \vb{e}_{\rho} = \dv{t} \, \pdv{\dot{\rho}} \left( \dfrac{\dot{\rho}^{2} + \rho^{2} \dot{\theta}^{2} + \dot{z}^{2}}{2} \right) - \pdv{\rho} \left( \dfrac{\dot{\rho}^{2} + \rho^{2} \dot{\theta}^{2} + \dot{z}^{2}}{2} \right) = \\[1em]
+    &= \ddot{\rho} - \rho \, \dot{\phi}^{2} \\[1em]
+    a_{2} &= \vb{a} \cdot \left( \rho \, \vb{e}_{\rho} \right) = \dv{t} \left( \rho^{2} \, \phi \right) = \rho^{2} \, \ddot{\phi} + 2 \, \rho \, \dot{\rho} \, \dot{\phi} \\[1em]
+    a_{3} &= \vb{a} \cdot \vb{k} = \dv{t} \dot{z} = \ddot{z}
+\end{align*}
+que concuerda con los resultados hallados antes para:
+\begin{align*}
+    \vb{a} \cdot \vb{e}_{\rho} = \vb{a} \cdot \vb{b}_{1}, \hspace{1.5cm} \vb{a} \cdot \vb{e}_{\phi} =\dfrac{1}{\rho} \, \vb{a} \cdot \vb{b}_{2}, \hspace{1.5cm} \vb{a} \cdot \vb{k} = \vb{a} \cdot \vb{b}_{3}
+\end{align*}
+
+El contenido de las dos últimas secciones es de tal importancia que haremos un resumen de los pasos seguidos para hallar los vectores base, la velocidad y la aceleración de una partícula en coordenadas generalizadas. 
+\par
+Dadas las relaciones entre las coordenadas cartesianas y las generalizadas, los vectores base se obtienen empleando las ecuaciones (\ref{eq:ecuacion_02_59}):
+\begin{align*}
+    \vb{b}_{i} = \pdv{x}{q_{i}} \, \vb{i} + \pdv{y}{q_{i}} \, \vb{j} + \pdv{z}{q_{i}} \, \vb{k}
+\end{align*}
+y, para transformaciones independientes del tiempo, los vectores base recíprocos se hallan, con la ecuación (\ref{eq:ecuacion_02_67}), que son:
+\begin{align*}
+    b_{i} = \pdv{q_{i}}{x} \, \vb{i} + \pdv{q_{i}}{y} \, \vb{j} + \pdv{q_{i}}{z} \, \vb{k}
+\end{align*}
+Las velocidades contravariantes, que emplearemos en transformaciones independientes del tiempo, serán, simplemente las $\dot{q}_{i}$, es decir:
+\begin{align*}
+    v_{i}^{*} = \dot{q}_{i}
+\end{align*}
+y las componentes covariantes de la velocidad serán:
+\begin{align*}
+    v_{i} = \pdv{\dot{q}_{i}} \left( \dfrac{1}{2} \, v^{2} \right)
+\end{align*}
+donde $v^{2}$ deberá expresarse en función de las coordenadas generalizadas, $q_{i}$, y las velocidades generalizadas $\dot{q}_{i}$. Esta relación de dependencia se halla con:
+\begin{align*}
+    v^{2} = \dot{x}^{2} + \dot{y}^{2} + \dot{z}^{2}
+\end{align*}
+Cuando se trata con coordenadas curvilíneas ortogonales, $v^{2}$ se halla también de una manera sencilla partiendo del hecho de que:
+\begin{align}
+    \vb{v} = \dv{\vb{r}}{t} = \nsum_{i=1}^{3} \pdv{\vb{r}}{q_{i}} \, \dot{q}_{i} = \nsum_{i=1}^{3} \dot{q}_{i} \, \vb{b}_{i} = \nsum_{i=1}^{3} \dot{q}_{i} \, h_{i} \, \vb{e}_{i}
+    \label{eq:ecuacion_02_79} 
+\end{align} 
+Esto es:
+\begin{align}
+    v^{2} = \nsum_{i=1}^{3} h_{i}^{2} \left( \dot{q}_{i}^{2} \right)
+    \label{eq:ecuacion_02_80}
+\end{align}
+Las componentes covariantes de la aceleración se obtienen por la relación:
+\begin{align*}
+    a_{i} = \dv{t} \, \pdv{\dot{q}_{i}} \left( \dfrac{v^{2}}{2} \right) - \pdv{q_{i}} \left( \dfrac{v^{2}}{2} \right)
+\end{align*}
+
+\subsection{Geometría diferencial de las coordenadas curvilíneas.}
+
+Sea $\phi (x, y, z)$ una función continua con valores únicos (univalente), que tiene derivadas parciales continuas. Entonces, la ecuación:
+\begin{align}
+    \phi (x, y, z) = \text{constante}
+    \label{eq:ecuacion_02_81}
+\end{align} 
+nos define una superficie en el espacio tridimensional. Similarmente, las tres ecuaciones 
+\begin{align}
+    q_{1} (x, y, z) = c_{1} \hspace{1.5cm} q_{2} (x, y, z) = c_{2}, \hspace{1.5cm} q_{3} (x, y, z) = c_{3}
+    \label{eq:ecuacion_02_82}
+\end{align}
+en las que $q_{i}$, son las coordenadas generalizadas, definen tres superficies que pasan por el punto cuyas coordenadas cartesianas son:
+\begin{align}
+\begin{aligned}
+x_{0} &= x \left( q_{1} = c_{1}, q_{2} = c_{2}, q_{3} = c_{3} \right) \\[0.5em]
+y_{0} &= y \left( c_{1}, c_{2}, c_{3} \right) \\[0.5em]
+z_{0} &= z \left( c_{1}, c_{2}, c_{3} \right)
+\end{aligned}
+\label{eq:ecuacion_02_83}
+\end{align}
+La intersección de las superficies $q_{1}$ y $q_{2}$, 
+\begin{align*}
+    q_{1} (x, y, z) = c_{1}, \hspace{1.5cm} q_{2} (x, y, z) = c_{2}
+\end{align*}
+nos define una curva a lo largo de la cual varía $q_{3}$. Llamaremos a ésta, \emph{curva} $q_{3}$. Igualmente, existirán otras dos curvas, la $q_{1}$ que es intersección de las superficies $q_{2}$ y $q_{3}$, y la $q_{2}$, intersección de las superficies $q_{1}$ y $q_{3}$, ver la fig. ().
+\par
+Se puede demostrar que los vectores $b_{i}$ recíprocos de los vectores base $\vb{b}_{i}$, son normales a las superficies $q_{i}$ (fig. ). Por ejemplo, sabemos que el vector:
+\begin{align}
+    b_{1} = \dfrac{\vb{b}_{2} \cp \vb{b}_{3}}{\vb{b}_{1} \cdot \vb{b}_{2} \cp \vb{b}_{3}}
+    \label{eq:ecuacion_02_84}
+\end{align}
+es perpendicular a los vectores $\vb{b}_{2}$ y $\vb{b}_{3}$. Pero estos últimos son tangentes a la superficie $q_{1}$ puesto que, siendo $\vb{b}_{2}$ tangente a la curva $q_{2}$, que es la intersección de las superficies $q_{1}$ y $q_{3}$, será tangente a estas dos superficies; y, similarmente, el vector $\vb{b}_{3}$ será tangente a las superficies $q_{1}$ y $q_{2}$. Ahora bien, $b_{1}$ es un vector perpendicular al plano de los vectores $\vb{b}_{2}$ y $\vb{b}_{3}$ en el punto $( x_{0}, y_{0}, z_{0})$. Pero este plano, al igual que los vectores que lo determinan, es tangente a la superficie $q_{1}$ en el punto $(x_{0}, y_{0}, z_{0})$. Entonces, el vector $\vb{b}_{1}$ será normal a la superficie $q_{1}$.
+\par
+Ahora podemos relacionar directamente con la normal a la superficie $q_{1}$ al vector $\vb{b}_{1}$ definido por la ecuación (\ref{eq:ecuacion_02_84}). Para hallar esta normal, consideraremos el cambio de $q_{1}$, cuando $x, y, z$ varían en las cantidades infinitesimales $\Delta x, \Delta y, \Delta z$. El incremento infinitesimal que resulta entonces para $q_{1}$ es:
+\begin{align}
+    \Delta q_{1} = \pdv{q_{1}}{x} \, \Delta x + \pdv{q_{1}}{y} \, \Delta y + \pdv{q_{1}}{z} \, \Delta z
+    \label{eq:ecuacion_02_85}
+\end{align} 
+que se puede considerar como el producto escalar del vector
+\begin{align}
+    \Delta \vb{r} = \Delta x \, \vb{i} + \Delta y \, \vb{j} + \Delta z \, \vb{k}
+    \label{eq:ecuacion_02_86}
+\end{align}
+y el vector
+\begin{align}
+    \grad{q_{1}} = \pdv{q_{1}}{x} \, \vb{i} + \pdv{q_{1}}{y} \, \vb{j} + \pdv{q_{1}}{z} \, \vb{k}
+    \label{eq:ecuacion_02_87}
+\end{align}
+Estos es:
+\begin{align}
+    \Delta q_{1} = \Delta \vb{r} \cdot \grad{q_{1}}
+    \label{eq:ecuacion_02_88}
+\end{align}
+El gradiente $\grad{q_{1}}$ se definió ya anteriormente. El operador \enquote{del}, en coordenadas cartesianas se define por:
+\begin{align}
+    \grad = \vb{i} \, \pdv{x} + \vb{j} \, \pdv{j} + \vb{k} \, \pdv{z}
+    \label{ec:ecuacion_02_89}
+\end{align}
+Si escogemos el nuevo punto $(x + \Delta x, y + \Delta y, z + \Delta z)$ de tal forma que esté en la superficie $q_{1} (x, y, z) = c_{1}$, esto es, si:
+\begin{align*}
+    q_{1} \left( x + \Delta x, y + \Delta y, z + \Delta z \right) = c_{1}
+\end{align*}
+entonces, obviamente:
+\begin{align*}
+    \Delta q_{1} = 0
+\end{align*}
+De donde deducimos que, en el límite cuando $\abs{\Delta r} \to 0$ a lo largo de alguna curva de la superficie $q_{1}$, o cuando $\Delta \vb{r} / \abs{\Delta \vb{r}}$ se aproxima al vector tangente unidad a una curva de la superficie $q_{1}$: 
+\begin{align*}
+    \dfrac{\Delta q_{1}}{\abs{\Delta \vb{r}}} \to \vb{e}_{t} \cdot \grad{q_{1}}
+\end{align*}
+donde $\vb{e}_{t}$ es dicho vector unidad. Luego, para todos los puntos de la superficie:
+\begin{align*}
+    \dfrac{\Delta q_{1}}{\abs{\Delta \vb{r}}} = 0
+\end{align*}
+encontramos:
+\begin{align*}
+    \vb{e}_{t} \cdot \grad{q_{1}} = 0
+\end{align*}
+En consecuencia, $\grad{q_{1}}$ es normal a la superficie $q_{1}$.
+\par
+Tambièn se ha demostrado que los vectores recíprocos se pueden expresar por:
+\begin{align*}
+    b_{i} = \grad{q_{i}}
+\end{align*}
+cuando se trate de transformaciones de coordenadas independientes del tiempo.
+\par
+Concluiremos esta exposición de las coordenadas curvilíneas determinando algunas expresiones de uso corriente en sistemas de coordenadas curvilíneas ortogonales. 
+\begin{enumerate}[label=\alph*)]
+    \item \emph{Longitud de arco.} La longitud del arco $\Delta s$, está definida por:
+    \begin{align*}
+        \Delta s = \abs{\Delta \vb{r}} = \abs{\Delta x \, \vb{i} + \Delta y \, \vb{j} + \Delta z \, \vb{k}}
+    \end{align*}
+    En un sistema de coordenadas curvilíneas ortogonales tenemos,
+    \begin{align}
+    \begin{aligned}[b]
+        \Delta \vb{r} &= \Delta q_{1} \vb{b}_{1} + \Delta q_{2} \vb{b}_{2} + \Delta q_{3} \vb{b}_{3} =\\[0.5em]
+        &= h_{1} \, \Delta q_{1} \vb{e}_{1} + h_{2} \, \Delta q_{2} \vb{e}_{2} + h_{3} \, \Delta q_{3} \vb{e}_{3} 
+    \end{aligned}
+    \label{eq:ecuacion_02_90}
+    \end{align}
+    en donde:
+    \begin{align*}
+        \left( \Delta \vb{r} \right)^{2} = \left( h_{1} \Delta q_{1} \right)^{2} + \left( h_{2} \Delta q_{2} \right)^{2} + \left( h_{3} \Delta q_{3} \right)^{2}
+    \end{align*}
+    o sea:
+    \begin{align}
+        \left( \Delta s \right) = \nsum_{i=1}^{3} h_{i}^{2} \left( \Delta q_{i} \right)^{2}
+        \label{eq:ecuacion_02_91}
+    \end{align}
+    donde $h_{1}, h_{2}, h_{3}$ son los \emph{factores de escala}.
+    \item \emph{Área infinitesimal de una superficie.} En general, el área de un parelelgramo definido por dos vectores $\dd{\vb{s}_{1}}$ y $\dd{\vb{s}_{2}}$, está dada por:
+    \begin{align*}
+        \text{Área } = \abs{\dd{\vb{s}_{1} \cp \dd{\vb{s}_{2}}}}    
+    \end{align*}
+    En muchas aplicaciones nos interesa, particularmente, un área infinitesimal de una de las superficies coordenadas, por ejemplo, la superficie $q_{k}$, definida por las longitudes de arco $\Delta s_{i}$, $\Delta s_{j}$, tomadas a lo largo de las tangentes a las curvas $q_{i}$ y $q_{j}$, donde $i \neq j \neq k$ (fig. ). Los vectores $\Delta \vb{s}_{i}$ y $\Delta \vb{s}_{j}$ son, respectivamente, los cambios $\Delta q_{i} \vb{b}_{i}$ y $\Delta q_{j} \vb{b}_{j}$, del vector de posición. El área del paralelogramo formado por estos vectores será:
+    \begin{align}
+        \abs{\Delta \vb{s}_{k}} = \abs{\Delta q_{i} \vb{b}_{i} \cp \Delta q_{i} \vb{b}_{j}} = h_{i} h_{j} \Delta q_{i} \Delta q_{j} \hspace{1cm} i, j, k =1, 2, 3 \hspace{1cm} i \neq j \neq k
+        \label{eq:ecuacion_02_92}
+    \end{align}
+    \item \emph{Volumen infinitesimal. } En muchas ocasiones se puede simplificar la  integración de un volumen escogiendo un sistema de coordenadas apropiado. En un sistema de coordenadas curvilíneas, el elemento infinitesimal de volumen está dado por el triple producto escalar de los vectores $\Delta \vb{s}_{i}$. Es decir:
+    \begin{align}
+    \begin{aligned}[b]
+        \Delta V &= \Delta q_{1} \vb{b}_{1} \cdot \Delta q_{2} \vb{b}_{2} \cp \Delta q_{3} \vb{b}_{3} \\[1em]
+        &= \Delta q_{1} \Delta q_{2} \Delta q_{3} \, \pdv{(x, y, z)}{q_{1}, q_{2}, q_{3}}
+    \end{aligned}
+    \label{eq:ecuacion_02_93}
+    \end{align}
+    Que en un sistema de coordenadas curvilíneas ortogonales, se reduce a:
+    \begin{align}
+        \Delta V = h_{1} h_{2} h_{3} \Delta q_{1} \Delta q_{2} \Delta q_{3}
+        \label{eq:ecuacion_02_94}
+    \end{align}
+    Por ejemplo, el elemento infinitesimal de volumen en coordenadas esféricas es:
+    \begin{align*}
+        \dd{V} = r^{2} \sin \theta \dd{r} \dd{\theta} \dd{\phi}
+    \end{align*}
+    \item \emph{Gradiente en coordenads curvilíneas ortogonales. } El gradiente de una función escalar en coordenadas cartesianas se definió por la ecuación (\ref{eq:ecuacion_02_87}). Si usamos coordenadas curvilíneas ortogonales, se deberá expresar en función de los vectores unidad base $\vb{e}_{i}$. Esto es:
+    \begin{align*}
+        \grad{\phi} = \left( \vb{e}_{1} \cdot \grad{\phi} \right) \vb{e}_{1} + \left( \vb{e}_{2} \cdot \grad{\phi} \right) \vb{e}_{2} + \left( \vb{e}_{3} \cdot \grad{\phi} \right) \vb{e}_{3}
+    \end{align*}
+    Puesto que:
+    \begin{align*}
+        \vb{e}_{i} \cdot \grad{\phi} &= \dfrac{1}{h_{i}} \, \vb{b}_{i} \cdot \grad{\phi} = \\[1em]
+        &= \dfrac{1}{h_{i}} \left( \pdv{\phi}{x} \pdv{x}{q_{i}} + \pdv{\phi}{y} \pdv{y}{q_{i}} + \pdv{\phi}{z} \pdv{z}{q_{i}} \right) = \dfrac{1}{h_{i}} \, \pdv{\phi}{q_{i}}
+    \end{align*}
+    tendremos, en coordenadas curvilíneas ortogonales:
+    \begin{align}
+        \grad{\phi} = \nsum_{i=1}^{3} \dfrac{1}{h_{i}} \pdv{\phi}{q_{i}} \vb{e}_{i}
+        \label{eq:ecuacion_02_95}
+    \end{align}
+    Por ejemplo, en coordenadas esféricas, el gradiente de una función escalar $\Psi$ está dado por:
+    \begin{align*}
+        \grad{\Psi} = \pdv{\Psi}{r} \vb{e}_{r} + \dfrac{1}{r} \pdv{\Psi}{\theta} \vb{e}_{\theta} + \dfrac{1}{\sin \theta} \pdv{\Psi}{\phi} \vb{e}_{\phi}
+    \end{align*}
+\end{enumerate}
+
+\subsection{Movimiento sobre una curva determinada.}
+
+El movimiento de una partícula sobre una curva determinada es un caso especial de lo que llamaremos movimiento restringido, del cual hablaremos más adelante. Por el momento, nos limitaremos a analizar el movimiento sobre una curva en función del parámetro $s$, que definiremos por la distancia tomada a lo largo de la curva, desde un punto de la misma escogido como origen, hasta el punto en que se encuentra la partícula en un momento dado. En forma paramétrica, una curva queda determinada por las tres ecuaciones:
+\begin{align*}
+    x = x (s), \hspace{1cm} y = y (s), \hspace{1cm} z = z (s)
+\end{align*} 
+
+\end{document}

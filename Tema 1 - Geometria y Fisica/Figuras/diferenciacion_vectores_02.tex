@@ -1,0 +1,27 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{amsmath}
+\usepackage{physics}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\begin{document}
+
+\begin{tikzpicture}[scale=2]
+    \coordinate (A) at (0, 0);
+    \coordinate (B) at (2, 0);
+    \coordinate (C) at (1.2, 1.6);
+    
+    \draw (A) circle (2cm);
+    \draw[-{Latex}, thick] (A) -- (B) node [midway, below] {$\vb{A} (t)$};
+    \draw[-{Latex}, thick] (1.2, 0) -- (C);
+    \draw[-{Latex}, thick] (A) -- (C) node [midway, above, rotate=55] {$\vb{A} (t + \Delta t)$};
+    \draw (0.5, 0) arc (0:55:0.5cm);
+    \node at (0.7, 0.2) () {$\Delta \theta$};
+    \draw [stealth-] (1.2, 0.8) -- (2.3, 1) node [above, pos=1.7] {$\Delta \vb{A}_{\perp} =  \vb{A} (t + \Delta t) \, \sin (\Delta \phi) \, \vb{e}_{\perp}$};
+    
+\end{tikzpicture}
+\end{document}

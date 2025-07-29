@@ -1,0 +1,47 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{tikz-3dplot}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\begin{document}
+
+\tdplotsetmaincoords{60}{45}
+\begin{tikzpicture}[tdplot_main_coords, scale=3]
+
+  % Ejes coordenados
+  \draw[->, thick] (0, 0, 0) -- (1.2, 0, 0) node[anchor=north east] {$\vb{A}$};
+  \draw[->, thick] (0, 0, 0) -- (0, 1.2, 0) node[anchor=north west] {$\vb{B}$};
+  \draw[->, thick] (0, 0, 0) -- (0, 0, 1.2) node[anchor=south] {$\vb{A} \cp \vb{B} =  A B \sin \theta \, \vb{n}$};
+
+  % Vectores unitarios con color
+%   \draw[->, thick, red] (0,0,0) -- (1,0,0);
+%   \draw[->, thick, blue] (0,0,0) -- (0,1,0);
+  \draw[->, thick, blue] (0, 0, 0) -- (0, 0, 0.5) node [anchor
+  =west] {$\vb{n}$};
+
+  % Arco que representa el producto vectorial (giro de i hacia j)
+  \draw[->, thick, gray] (0.6,0,0) arc (0:90:0.6);
+  \node at (0.3,0.3,0.05) {$\theta$};
+
+  % Tornillo helicoidal con flecha (representa sentido de rotación derecho)
+%   \foreach \z in {0,0.05,...,0.8} {
+%     \pgfmathsetmacro\radius{0.1}
+%     \pgfmathsetmacro\angle{720*\z}
+%     \draw[gray!70] 
+%       ({\radius*cos(\angle)}, {\radius*sin(\angle)}, \z) -- 
+%       ({\radius*cos(\angle+10)}, {\radius*sin(\angle+10)}, \z+0.05);
+%   }
+  % Flecha del tornillo
+%   \draw[->, very thick, gray!80!black] (0,0,0.8) -- (0,0,1.1) node[anchor=south west] {Sentido de rotación (mano derecha)};
+
+  % Nodo extra
+%   \node[align=center] at (0.3,0.3,1.1) {\small Regla del \\ \small tornillo derecho};
+
+\end{tikzpicture}
+
+\end{document}

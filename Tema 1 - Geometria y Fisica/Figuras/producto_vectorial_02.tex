@@ -1,0 +1,57 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{tikz-3dplot}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\begin{document}
+
+\tdplotsetmaincoords{70}{45}
+\begin{tikzpicture}[tdplot_main_coords, scale=3]
+
+  % Coordenadas base
+  \coordinate (O) at (0, 0, 0);
+  \coordinate (B) at (1.5, 0, 0);
+  \coordinate (C) at (0.5, 1.5, 0);
+  \coordinate (A) at (0.25, 0.25, 1);
+
+  % Vectores de referencia
+  \draw[->, thick] (O) -- (B) node[anchor=north] {$\vb{B}$};
+  \draw[->, thick] (O) -- (C) node[anchor=north] {$\vb{C}$};
+  \draw[->, thick] (O) -- (A) node[anchor=south east] {$\vb{A}$};
+
+  % Vector normal (n)
+  \draw[->, thick] (O) -- (0, 0, 1.5) node[anchor=south] {$\vec{n}$};
+
+  % Líneas del paralelepípedo
+  \draw[dashed] (B) -- ++(0.5, 1.5, 0) coordinate (BC);
+  \draw[dashed] (B) -- ++(0.25, 0.25, 1) coordinate (BA);
+  \draw[dashed] (C) -- ++(1.5, 0, 0) coordinate (CB);
+  \draw[dashed] (C) -- ++(0.25, 0.25, 1) coordinate (CA);
+  \draw[dashed] (A) -- ++(1.5, 0, 0) coordinate (AB);
+  \draw[dashed] (A) -- ++(0.5, 1.5, 0) coordinate (AC);
+  \draw[dashed] (CB) -- ++(0, 0.5, 1) coordinate (BC2);
+
+%   \draw[dashed] (BC) -- (BC2);
+%   \draw[dashed] (BA) -- (AB);
+  \draw[dashed] (CA) -- (BC2);
+  \draw[dashed] (AB) -- (BC2);
+
+  % Altura (h = A cosθ)
+  \draw[dashed] (A) -- (0, 0, 1) node[left] {$h = A \cos \theta$};
+
+  % Ángulos
+  \tdplotdrawarc[->]{(0, -0.38, 0.5)}{0.4}{30}{90}{anchor=north east}{$\theta$}
+  \tdplotdrawarc[->]{(O)}{0.5}{0}{67}{anchor=east}{$\phi$}
+
+  % Etiquetas puntos
+%   \fill (O) circle (0.5pt) node[below left] {O};
+%   \fill (C) circle (0.5pt) node[below right] {C};
+
+\end{tikzpicture}
+
+\end{document}
