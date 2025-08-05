@@ -1,0 +1,59 @@
+\documentclass[tikz,border=3.14pt]{standalone}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{arrows.meta}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{calc}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\begin{document}
+\tdplotsetmaincoords{60}{120}
+\begin{tikzpicture}[scale=3,
+        tdplot_main_coords,
+        axis/.style={->, thick},
+        vector/.style={-stealth, thick}]
+
+    %standard tikz coordinate definition using x, y, z coords
+    \coordinate (O) at (0, 0, 0);
+    
+    %tikz-3dplot coordinate definition using r, theta, phi coords
+    \tdplotsetcoord{P}{2.5}{50}{40}
+    
+    %draw axes
+    \draw [axis] (0, 0, 0) -- (1.5, 0, 0) node[anchor=north east]{$x$};
+    \draw [axis] (0, 0, 0) -- (0, 1.5, 0) node[anchor=north west]{$y$};
+    \draw [axis] (0, 0, 0) -- (0, 0, 1) node[anchor=south]{$z$};
+    
+    %draw a vector from O to P
+    \draw (O) -- (P);
+    \draw [vector] (P) -- ++(-0.2, 0.2, 0) node [left, pos=1.6] {\small{$\vb{e}_{\phi}$}};
+    \draw (O) -- (P);
+    \draw [dashed] (P) -- ++(0, 0.5, 0) node [above, pos=1.2] {\small{$y$}};
+    % \draw[->] (1.3, 1, 1.2) arc [start angle=0,end angle=60,x radius=0.5,y radius=0.5];
+    \node at (1.2, 1.3, 1.47) {\small{$\phi$}};
+    
+    \draw [vector] (O) -- (P);
+    \draw [vector] (P) -- ++(0.3, 0.25, 0);
+    \node at (1, 1.12, 1.1) {\small{$\vb{e}_{\theta}$}};
+
+    \draw (O) -- (P);
+    \draw [dashed] (P) -- ++(0, 0, 0.5);
+    
+    \draw [dashed] (P) -- (Pxy);
+    \draw [vector] (P) -- ++(0, 0.2, 0.25);
+    \node at (0.9, 1.2, 1.5) {\small{$\vb{e}_{r}$}};
+    \draw [dashed] (O) -- (Pxy);
+    \draw [dashed] (P) -- (0, 0, 1);
+
+
+
+    %define the rotated coordinate frame to lie in the "theta plane"
+    \tdplotsetthetaplanecoords{50}
+
+    \tdplotdrawarc[tdplot_rotated_coords]{(P)}{.35}{0}{48}{anchor=south}{\small{$\theta$}};
+
+\end{tikzpicture}
+\end{document}

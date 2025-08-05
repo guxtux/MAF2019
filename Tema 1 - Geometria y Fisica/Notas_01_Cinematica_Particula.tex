@@ -17,6 +17,7 @@
 \usepackage[os=win]{menukeys}
 \usepackage{bm}
 \usepackage{calc}
+\usepackage{xr}
 %Este paquete permite manejar los encabezados del documento
 \usepackage{fancyhdr}
 %hay que definir el ambiente de la página
@@ -49,6 +50,8 @@
             }
     }
 }
+
+\externaldocument[00_Vectores-]{Notas_00_Vectores}
 
 \title{Cinemática de una partícula \\ \begin{Large} Curso de Mecánica Analítica \end{Large}}
 \author{M. en C. Gustavo Contreras Mayén.}
@@ -111,7 +114,6 @@ donde el punto sobre las componentes $x$, $y$ y $z$, del vector de posición, re
 \begin{align*}
 \dot{x} = \dv{x}{t}
 \end{align*}
-
 La aceleración de una partícula se define por la derivada, con respecto al tiempo, de su velocidad:
 \begin{align}
 \vb{a} = \dv{\vb{v}}{t} = \ddot{r}
@@ -127,6 +129,7 @@ Derivando la ecuación (\ref{eq:ecuacion_02_05}) encontramos la expresión de la
 \label{eq:ecuacion_02_07}
 \end{align}
 
+\noindent
 \textbf{Ejercicio: } Hallar la velocidad y la aceleración de una partícula cuyo vector de posición es:
 \begin{align}
 \vb{r} (t) = A \, \cos \omega t + A \, \sin \omega t
@@ -172,8 +175,13 @@ x^{2} + y^{2} &= \rho^{2} \\
 \end{align}
 \end{minipage}
 \end{center}
-Se ve que $\rho$ es la proyección del radio vector $\vb{r}$ en el plano $x y$ (fig. ), y que $\phi$ es el ángulo que forma $\rho$ con el eje $x$. Estas coordenadas reciben el nombre de cilindricas porque las superficies en las que $\rho$ es constante son cilindros circulares paralelos al eje $z$.
-
+Se ve que $\rho$ es la proyección del radio vector $\vb{r}$ en el plano $x y$ (fig. \ref{fig:figura_02_02}), y que $\phi$ es el ángulo que forma $\rho$ con el eje $x$. Estas coordenadas reciben el nombre de cilindricas porque las superficies en las que $\rho$ es constante son cilindros circulares paralelos al eje $z$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Imagenes/cinematica_02.pdf}
+    \caption{Coordenadas polares cilíndricas.}
+    \label{fig:figura_02_02}    
+\end{figure}
 Como conocemos la relación entre las coordenadas cartesianas y las cilindricas, el vector de posición se puede expresar en función de las últimas, lo que da:
 \begin{align}
 r = \rho \, \cos \phi \, \vb{i} + \rho \, \sin \phi \, \vb{j} + z \, \vb{k}
@@ -199,16 +207,28 @@ Los vectores unidad que tomaremos como base siempre que empleemos coordenadas ci
 \vb{e}_{\rho} &= \dfrac{\Delta \vb{r}_{\rho}}{\abs{\Delta \vb{r}_{\rho}}} = \dfrac{\pdv*{\vb{r}}{\rho}}{\abs{\pdv*{\vb{r}}{\rho}}} = \cos \phi \, \vb{i} + \sin \phi \, \vb{j} \label{eq:ecuacion_02_14} \\
 \vb{e}_{\phi} &= \dfrac{\Delta \vb{r}_{\phi}}{\abs{\Delta \vb{r}_{\phi}}} = \dfrac{\pdv*{\vb{r}}{\phi}}{\abs{\pdv*{\vb{r}}{\phi}}} = - \sin \phi \, \vb{i} + \cos \phi \, \vb{j} \label{eq:ecuacion_02_15}
 \end{align}
-siendo $\vb{k}$ el vector unidad en el sentido positivo del eje $z$. En las ecuaciones (\ref{eq:ecuacion_02_14}) y (\ref{eq:ecuacion_02_15}), $\Delta \vb{r}_{\rho}$ y $\Delta \vb{r}_{\phi}$ representan los cambios en el vector de posición producidos al variar $\rho$ y $\phi$, respectivamente (fig. ):
+siendo $\vb{k}$ el vector unidad en el sentido positivo del eje $z$. En las ecuaciones (\ref{eq:ecuacion_02_14}) y (\ref{eq:ecuacion_02_15}), $\Delta \vb{r}_{\rho}$ y $\Delta \vb{r}_{\phi}$ representan los cambios en el vector de posición producidos al variar $\rho$ y $\phi$, respectivamente (fig. \ref{fig:figura_02_03}):
 \begin{align*}
 \Delta \vb{r}_{\rho} = \pdv{\vb{r}}{\rho} \, \Delta \rho, \hspace{1.5cm} \Delta \vb{r}_{\phi} = \pdv{\vb{r}}{\phi} \, \Delta \phi
-\end{align*} 
+\end{align*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Imagenes/cinematica_03.pdf}
+    \caption{Cambios infinitesimales del vector de posición producidos por cambios infinitesimales en las coordenadas cilíndricas $\rho$ y $\phi$ y $z$.}
+    \label{fig:figura_02_03}
+\end{figure}
 Se verifica fácilmente que en un punto, los tres vectores unidad $\vb{e}_{\rho}, \vb{e}_{\phi}, \vb{k}$, son mutuamente ortogonales, formando en dicho punto un sistema de coordenadas a la derecha, o sea dextrógiro. Se deja como demostración:
 \begin{align}
 \vb{e}_{\rho} \cp \vb{e}_{\phi} = \vb{k}, \hspace{1cm} \vb{e}_{\phi} \cp \vb{k} = \vb{e}_{\rho}, \hspace{1cm} \vb{k} \cp \vb{e}_{\rho} = \vb{e}_{\phi}
 \label{eq:ecuacion_02_16}
 \end{align}
-La figura () muestra los sentidos y direcciones de los vectores unidad tomados como base $\vb{e}_{\rho}, \vb{e}_{\phi}, \vb{k}$. El vector unidad $\vb{e}_{\rho}$ está en el plano $x y$ formando un ángulo $\phi$ con el eje $x$, y situado a lo largo de la proyección del vector de posición sobre el plano $x y$. El vector también está en el plano $x y$, es perpendicular a $\vb{e}_{\rho}$ y forma un ángulo $\phi$ con el sentido positivo del eje $y$. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Imagenes/cinematica_04.pdf}
+    \caption{Vectores base unidad ortogonales $\vb{e}_{\rho}, \vb{e}_{\phi}, \vb{k}$, en un punto en coordenadas $\rho, \phi, z$.}
+    \label{fig:figura_02_04}    
+\end{figure}
+La figura (\ref{fig:figura_02_04}) muestra los sentidos y direcciones de los vectores unidad tomados como base $\vb{e}_{\rho}, \vb{e}_{\phi}, \vb{k}$. El vector unidad $\vb{e}_{\rho}$ está en el plano $x y$ formando un ángulo $\phi$ con el eje $x$, y situado a lo largo de la proyección del vector de posición sobre el plano $x y$. El vector también está en el plano $x y$, es perpendicular a $\vb{e}_{\rho}$ y forma un ángulo $\phi$ con el sentido positivo del eje $y$. 
 \par
 De todo lo anterior se desprende que el vector de posición queda determinado, en función del conjunto ortogonal de vectores unidad base $\vb{e}_{\rho}, \vb{e}_{\phi}, \vb{k}$, por la relación:
 \begin{align*}
@@ -235,8 +255,7 @@ y para la aceleración:
 \end{aligned}
 \label{eq:ecuacion_02_19}
 \end{align}
-Las ecuaciones (\ref{eq:ecuacion_02_18}) y (\ref{eq:ecuacion_02_19}) se pudieran obtener algo más fácilmente 
-por derivaciones sucesivas de la ecuación (\ref{eq:ecuacion_02_17}). La primera derivada nos dará la expresión de la velocidad:
+Las ecuaciones (\ref{eq:ecuacion_02_18}) y (\ref{eq:ecuacion_02_19}) se pudieran obtener algo más fácilmente por derivaciones sucesivas de la ecuación (\ref{eq:ecuacion_02_17}). La primera derivada nos dará la expresión de la velocidad:
 \begin{align*}
 \vb{v} = \dot{\vb{r}} = \dot{\rho} \, \vb{e}_{\rho} + \rho \, \dot{\vb{e}}_{\rho} + \dot{z} \, \vb{k}
 \end{align*}
@@ -319,8 +338,6 @@ Cuando el movimiento de la partícula no es circular, aparecen además otros té
 
 \subsection{Velocidad y aceleración en coordenadas esféricas.}
 
-Velocidad y aceleración en coordenadas esféricas 
-
 Para obtener las expresiones de la velocidad y la aceleración en coordenadas esféricas, seguiremos un camino semejante al empleado para las coordenadas cilindricas. 
 \par
 Las coordenadas esféricas $\rho, \theta, \phi$, quedan definidas por las ecuaciones:
@@ -335,15 +352,20 @@ o de manera equivalente:
     y &= r \, \sin \theta \, \sin \phi \label{eq:ecuacion_02_34} \\
     z &= r \, \cos \theta \label{eq:ecuacion_02_35}
 \end{align}
-Se ve claramente que $r$ es la magnitud del vector de posición, $\theta$ el ángulo formado por el vector de posición con el eje $z$, y $\phi$ el ángulo formado por el eje $x$ y la proyección del vector de posición en el plano $x y$ (fig. ). 
-\par
+Se ve claramente que $r$ es la magnitud del vector de posición, $\theta$ el ángulo formado por el vector de posición con el eje $z$, y $\phi$ el ángulo formado por el eje $x$ y la proyección del vector de posición en el plano $x y$ (fig. \ref{fig:figura_02_05}). 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Imagenes/cinematica_05.pdf}
+    \caption{Coordenadas esféricas $r, \theta, \phi$.}
+    \label{fig:figura_02_05}
+\end{figure}
 Los vectores unidad que tomaremos como base de las coordenadas esféricas se definen por las ecuaciones:
 \begin{align}
 \vb{e}_{r} &= \dfrac{\pdv*{\vb{r}}{r}}{\abs{\pdv*{\vb{r}}{r}}} \label{eq:ecuacion_02_36} \\[0.5em]
 \vb{e}_{\theta} &= \dfrac{\pdv*{\vb{r}}{\theta}}{\abs{\pdv*{\vb{r}}{\theta}}} \label{eq:ecuacion_02_37} \\[0.5em]
 \vb{e}_{\phi} &= \dfrac{\pdv*{\vb{r}}{\phi}}{\abs{\pdv*{\vb{r}}{\phi}}} \label{eq:ecuacion_02_38}
 \end{align}
-y son, respectivamente, los vectores unidad que apuntan en los sentidos en que cambia el vector de posición cuando las coordenadas $R, \theta, \phi$ sufren un cambio infinitesimal (fig. ). Partiendo de :
+y son, respectivamente, los vectores unidad que apuntan en los sentidos en que cambia el vector de posición cuando las coordenadas $R, \theta, \phi$ sufren un cambio infinitesimal (fig. \ref{fig:figura_02_06}). Partiendo de :
 \begin{align}
 \begin{aligned}
 \vb{r} &= x \, \vb{i} + y \, \vb{j} + z \, \vb{k} = \\[0.5em]
@@ -351,6 +373,12 @@ y son, respectivamente, los vectores unidad que apuntan en los sentidos en que c
 \end{aligned}
 \label{eq:ecuacion_02_39}
 \end{align}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Imagenes/cinematica_06.pdf}
+    \caption{Vectores base unidad en coordenadas esféricas.}
+    \label{fig:figura_02_06}
+\end{figure}
 y utilizando las ecuaciones que definen los vectores unidad base del sistema, encontramos las expresiones:
 \begin{align}
     \vb{e}_{r} &= \sin \theta \, \cos \phi \, \vb{i} + \sin \theta \, \sin \phi \, \vb{j} + \cos \theta \, \vb{k} \label{eq:ecuacion_02_40} \\[0.5em]
@@ -497,8 +525,7 @@ Por lo tanto, la ecuación (\ref{eq:ecuacion_02_61}) queda expresada como:
 \end{align*}
 Esta es, también, la condición necesaria y suficiente para que de las ecuaciones (\ref{eq:ecuacion_02_53}) se puedan hallar las coordenadas generalizadas, $q_{i}$, expresadas como funciones de las coordenadas cartesianas $x, y, z$; en otras palabras, habrá una correspondencia biunívoca entre los valores de $x, y, z$ y los de $q_{1}, q_{2}, q_{3}$.
 \par
-Siempre que se trate con un conjunto de vectores base no ortogonales o no normalizados, habrá también un conjunto de vectores base recíprocos que será necesario tomar en cuenta. Cuando los vectores base $b_{i}$ sean ortogonales, es decir, cuando empleamos un sistema de coordenadas generalizadas curvilíneas ortogonales, la obtención del sistema recíproco es inmediata. Por la ecuación (), que define 
-los vectores base recíprocos, sabemos que éstos, en un sistema ortogonal, son paralelos a los vectores base, y, en consecuencia, de la ecuación () deducimos que, si para un conjunto ortogonal de vectores base se tiene:
+Siempre que se trate con un conjunto de vectores base no ortogonales o no normalizados, habrá también un conjunto de vectores base recíprocos que será necesario tomar en cuenta. Cuando los vectores base $b_{i}$ sean ortogonales, es decir, cuando empleamos un sistema de coordenadas generalizadas curvilíneas ortogonales, la obtención del sistema recíproco es inmediata. Por la ec. (\ref{00_Vectores-eq:ecuacion_01_36}) del tema de Vectores, que define los vectores base recíprocos, sabemos que éstos, en un sistema ortogonal, son paralelos a los vectores base, y, en consecuencia, de la ec. (\ref{00_Vectores-eq:ecuacion_01_37}) del tema de Vectores, deducimos que, si para un conjunto ortogonal de vectores base se tiene:
 \begin{align}
     \vb{b}_{i} = h_{i} \, \vb{e}_{i}
     \label{eq:ecuacion_02_63} 
@@ -508,7 +535,7 @@ donde los $\vb{e}_{i}$ son vectores unidad, los vectores recíprocos serán:
     b_{i} = \dfrac{1}{h_{i}} \, \vb{e}_{i} = \dfrac{1}{h_{i}^{2}} \, \vb{b}_{i}
     \label{eq:ecuacion_02_64}
 \end{align}
-Cuando los vectores base no son ortogonales, la situación es algo más compleja. Sin embargo, veremos que nunca podremos evitar el empleo de las ecuaciones () que definen los vectores base recíprocos. Las ecuaciones () son las soluciones de las (). Es evidente que éstas soluciones son únicas y que, por lo tanto, cualquier conjunto de vectores cuyos productos escalares por b¡ satisfagan las ecuaciones () serán, necesariamente, los vectores recíprocos. 
+Cuando los vectores base no son ortogonales, la situación es algo más compleja. Sin embargo, veremos que nunca podremos evitar el empleo de las ecs. (\ref{00_Vectores-eq:ecuacion_01_36}) del tema de Vectores, que definen los vectores base recíprocos. Las ecs. (\ref{00_Vectores-eq:ecuacion_01_36}) del tema de Vectores, son las soluciones de las ecs. (\ref{00_Vectores-eq:ecuacion_01_37}) del tema de Vectores. Es evidente que éstas soluciones son únicas y que, por lo tanto, cualquier conjunto de vectores cuyos productos escalares por $\vb{b}_{i}$ satisfagan las ecs. (\ref{00_Vectores-eq:ecuacion_01_37}) del tema de Vectores serán, necesariamente, los vectores recíprocos. 
 \par
 Ahora bien, las coordenadas generalizadas $q_{1}, q_{2}, q_{3}$ son coordenadas independientes, de donde:
 \begin{align*}
@@ -531,7 +558,7 @@ Pero considerando que las $q_{i}$ son funciones de $x, y, z$, y que, a su vez, �
     \pdv{q_{i}}{q_{j}} = \pdv{q_{i}}{x} \, \pdv{x}{q_{j}} + \pdv{q_{i}}{y} \, \pdv{y}{q_{j}} + \pdv{q_{i}}{z} \, \pdv{z}{q_{j}} = \delta_{ij}
     \label{eq:ecuacion_02_66} 
 \end{align}
-Comparando las ecuaciones (\ref{eq:ecuacion_02_66}) con las (), encontramos que los vectores recíprocos vendrán dados por:
+Comparando las ecuaciones (\ref{eq:ecuacion_02_66}) con las ecs. (\ref{00_Vectores-eq:ecuacion_01_38}) del tema de Vectores, encontramos que los vectores recíprocos vendrán dados por:
 \begin{align}
     \vb{b}_{i} = \pdv{q_{i}}{x} \, \vb{i} + \pdv{q_{i}}{y} \, \vb{j} + \pdv{q_{i}}{z} \, \vb{k}
     \label{eq:ecuacion_02_67}
