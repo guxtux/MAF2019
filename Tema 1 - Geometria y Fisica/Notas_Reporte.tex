@@ -1,0 +1,97 @@
+\documentclass[letterpaper, 12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{multicol,multienum}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{tikz-3dplot}
+\usepackage{color}
+\usepackage{anysize}
+\usepackage{anyfontsize}
+\usepackage{geometry}
+\usepackage{siunitx}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[shortlabels]{enumitem}
+\usepackage[os=win]{menukeys}
+\usepackage{bm}
+\usepackage{calc}
+\usepackage{xr}
+\usepackage[fit, breakall]{truncate}
+
+%Este paquete permite manejar los encabezados del documento
+\usepackage{fancyhdr}
+%hay que definir el ambiente de la página
+\pagestyle{fancy}
+
+\fancyhf{} % Clears all headers and footers
+
+%aqui va el texto para todas las paginas l--> izquierda, r--> derecha, hay un C--> para centrar el texto deseado
+%\lhead{Curso de Física Computacional}
+\setlength{\headheight}{30.22pt}
+\fancyhead[R]{\nouppercase{\truncate{0.5 \textwidth} \rightmark}}
+\fancyhead[L]{\nouppercase{\truncate{0.45 \textwidth} \leftmark}}
+%define el ancho de la linea que separa el encabezado del cuerpo del texto
+\renewcommand{\headrulewidth}{0.5pt}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.5}
+\interfootnotelinepenalty=8000
+\usepackage{hyperref}
+%esta parte define el color del marco que aparece en las hiperreferencias.
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+\spanishdecimal{.}
+
+% \marginsize{1.5cm}{1.5cm}{1.5cm}{1.5cm}
+
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\tikzset{>=latex}
+
+\tikzset{
+    ejesxy/.pic={
+        \draw (0, 0) -- (5, 0);
+        \draw (0, 0) -- (0, 4);
+    }
+}
+
+
+\setcounter{tocdepth}{2}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\externaldocument[00_Vectores-]{Notas_00_Vectores}
+
+\title{Notas de Vectores y Cinemática \\ \begin{Large} Curso de Matemáticas Avanzadas de la Física \end{Large}}
+\author{M. en C. Gustavo Contreras Mayén.}
+\date{ }
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+
+\tableofcontents
+
+\include{Notas_Reporte_00}
+
+\include{Notas_Reporte_01}
+
+\end{document}
