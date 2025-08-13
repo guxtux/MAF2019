@@ -25,9 +25,14 @@
 \vskip0pt%
 }
 \makeatother
-\usefonttheme{serif}
+% \usefonttheme{serif}
 \setbeamercolor{frametitle}{bg=champagne}
 \resetcounteronoverlays{saveenumi}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
 
 % \date{31 de mayo de 2022}
 
@@ -45,106 +50,106 @@
 
 %Referencia. Debnath - Integral transforms and their applications. Sec. 1.1
 
-\section{Las Transformadas Integrales}
-\frame[allowframebreaks]{\frametitle{Contenido}\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Introducción}
+% \section{Las Transformadas Integrales}
+% \frame[allowframebreaks]{\frametitle{Contenido}\tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Introducción}
 
-\begin{frame}
-\frametitle{Marco histórico}
-Las transformadas integrales se han utilizado con éxito durante casi dos siglos para resolver muchos problemas en matemática aplicada, física matemática y ciencias de la ingeniería.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-Históricamente, el origen de las transformaciones integrales, incluidas las transformadas de Laplace y de Fourier, \pause se remonta a la célebre obra de Laplace (1749-1827) sobre la teoría de la probabilidad en la década de 1780 \pause y al tratado monumental de Joseph Fourier (1768-1830) en \emph{La Théorie Analytique de la Chaleur} publicada en 1822.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-De hecho, el libro clásico de Laplace \emph{La Théorie Analytique des Probabilities} incluye algunos resultados básicos de la transformada de Laplace, \pause que es una de las transformadas integrales más antiguas y más utilizadas en la literatura matemática. 
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-Esto se ha utilizado efectivamente para encontrar la solución de ecuaciones diferenciales lineales y ecuaciones integrales.
-\\
-\bigskip
-\pause
-Por otro lado, el tratado de Fourier proporcionó la teoría matemática moderna de la conducción de calor, las series de Fourier y las integrales de Fourier con aplicaciones.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-En su tratado, Fourier declaró un resultado notable que se conoce universalmente como el \textocolor{blue}{Teorema Integral de Fourier}.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-Proporcionó una serie de ejemplos antes de afirmar que una función arbitraria definida en un intervalo finito puede expandirse en términos de series trigonométricas que ahora se conocen universalmente como la \textocolor{lava}{serie de Fourier}.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-En un intento por extender sus nuevas ideas a funciones definidas en un intervalo infinito, \pause Fourier descubrió una transformada integral y su fórmula de inversión que ahora se conocen como la \textocolor{ao}{transformada de Fourier} y la \textocolor{armygreen}{transformada de Fourier inversa}.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-Sin embargo, esta célebre idea de Fourier era conocida por Laplace y Cauchy (1789–1857), ya que algunos de sus trabajos anteriores implicaban esta transformada.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-Por otro lado, Poisson (1781–1840) también utilizó de manera independiente el método de transformada en su investigación sobre la propagación de ondas de agua.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-Sin embargo, fue Leibniz (1646–1716) quien introdujo por primera vez la idea de un método simbólico en el cálculo.
-\\
-\bigskip
-\pause
-Posteriormente, tanto Lagrange (1736–1813) como Laplace hicieron contribuciones considerables a los métodos simbólicos que se conocieron como cálculo operacional.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-Aunque tanto la transformada de Laplace como la de Fourier se descubrieron en el siglo XIX, \pause fue el ingeniero eléctrico británico Oliver Heaviside (1850–1925) quien hizo la transformada de Laplace muy popular al usarla para resolver ecuaciones diferenciales ordinarias de circuitos y sistemas eléctricos, y luego desarrollar el cálculo operacional moderno.
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-Puede ser relevante señalar que la transformada de Laplace es esencialmente un caso especial de la transformada de Fourier para una clase de funciones definidas en el eje real positivo, pero es más simple que la transformada de Fourier por las siguientes razones:
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-\setbeamercolor{item projected}{bg=asparagus,fg=white}
-\setbeamertemplate{enumerate items}{%
-\usebeamercolor[bg]{item projected}%
-\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
-}
-\begin{enumerate}[<+->]
-\item La cuestión de la convergencia de la transformada de Laplace es mucho menos delicada debido al kernel de la exponencial decreciente $\exp (-s \, t)$, donde $\Re{s} > 0$ y $t > 0$.
-\seti
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-\setbeamercolor{item projected}{bg=asparagus,fg=white}
-\setbeamertemplate{enumerate items}{%
-\usebeamercolor[bg]{item projected}%
-\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
-}
-\begin{enumerate}[<+->]
-\conti
-\item La transformada de Laplace es una función analítica de variable compleja y sus propiedades pueden ser fácilmente estudiadas con el conocimiento de la teoría de la variable compleja.
-\seti
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Marco histórico}
-\setbeamercolor{item projected}{bg=asparagus,fg=white}
-\setbeamertemplate{enumerate items}{%
-\usebeamercolor[bg]{item projected}%
-\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
-}
-\begin{enumerate}[<+->]
-\conti
-\item La fórmula integral de Fourier proporcionó las definiciones de la transformada de Laplace y la transformada inversa de Laplace en términos de una integral de contorno complejo que se puede evaluar con la ayuda de la teoría del residuo de Cauchy y la deformación del contorno en el plano complejo.
-\end{enumerate}
-\end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% Las transformadas integrales se han utilizado con éxito durante casi dos siglos para resolver muchos problemas en matemática aplicada, física matemática y ciencias de la ingeniería.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% Históricamente, el origen de las transformaciones integrales, incluidas las transformadas de Laplace y de Fourier, \pause se remonta a la célebre obra de Laplace (1749-1827) sobre la teoría de la probabilidad en la década de 1780 \pause y al tratado monumental de Joseph Fourier (1768-1830) en \emph{La Théorie Analytique de la Chaleur} publicada en 1822.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% De hecho, el libro clásico de Laplace \emph{La Théorie Analytique des Probabilities} incluye algunos resultados básicos de la transformada de Laplace, \pause que es una de las transformadas integrales más antiguas y más utilizadas en la literatura matemática. 
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% Esto se ha utilizado efectivamente para encontrar la solución de ecuaciones diferenciales lineales y ecuaciones integrales.
+% \\
+% \bigskip
+% \pause
+% Por otro lado, el tratado de Fourier proporcionó la teoría matemática moderna de la conducción de calor, las series de Fourier y las integrales de Fourier con aplicaciones.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% En su tratado, Fourier declaró un resultado notable que se conoce universalmente como el \textocolor{blue}{Teorema Integral de Fourier}.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% Proporcionó una serie de ejemplos antes de afirmar que una función arbitraria definida en un intervalo finito puede expandirse en términos de series trigonométricas que ahora se conocen universalmente como la \textocolor{lava}{serie de Fourier}.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% En un intento por extender sus nuevas ideas a funciones definidas en un intervalo infinito, \pause Fourier descubrió una transformada integral y su fórmula de inversión que ahora se conocen como la \textocolor{ao}{transformada de Fourier} y la \textocolor{armygreen}{transformada de Fourier inversa}.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% Sin embargo, esta célebre idea de Fourier era conocida por Laplace y Cauchy (1789–1857), ya que algunos de sus trabajos anteriores implicaban esta transformada.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% Por otro lado, Poisson (1781–1840) también utilizó de manera independiente el método de transformada en su investigación sobre la propagación de ondas de agua.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% Sin embargo, fue Leibniz (1646–1716) quien introdujo por primera vez la idea de un método simbólico en el cálculo.
+% \\
+% \bigskip
+% \pause
+% Posteriormente, tanto Lagrange (1736–1813) como Laplace hicieron contribuciones considerables a los métodos simbólicos que se conocieron como cálculo operacional.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% Aunque tanto la transformada de Laplace como la de Fourier se descubrieron en el siglo XIX, \pause fue el ingeniero eléctrico británico Oliver Heaviside (1850–1925) quien hizo la transformada de Laplace muy popular al usarla para resolver ecuaciones diferenciales ordinarias de circuitos y sistemas eléctricos, y luego desarrollar el cálculo operacional moderno.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% Puede ser relevante señalar que la transformada de Laplace es esencialmente un caso especial de la transformada de Fourier para una clase de funciones definidas en el eje real positivo, pero es más simple que la transformada de Fourier por las siguientes razones:
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% \setbeamercolor{item projected}{bg=asparagus,fg=white}
+% \setbeamertemplate{enumerate items}{%
+% \usebeamercolor[bg]{item projected}%
+% \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+% }
+% \begin{enumerate}[<+->]
+% \item La cuestión de la convergencia de la transformada de Laplace es mucho menos delicada debido al kernel de la exponencial decreciente $\exp (-s \, t)$, donde $\Re{s} > 0$ y $t > 0$.
+% \seti
+% \end{enumerate}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% \setbeamercolor{item projected}{bg=asparagus,fg=white}
+% \setbeamertemplate{enumerate items}{%
+% \usebeamercolor[bg]{item projected}%
+% \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+% }
+% \begin{enumerate}[<+->]
+% \conti
+% \item La transformada de Laplace es una función analítica de variable compleja y sus propiedades pueden ser fácilmente estudiadas con el conocimiento de la teoría de la variable compleja.
+% \seti
+% \end{enumerate}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Marco histórico}
+% \setbeamercolor{item projected}{bg=asparagus,fg=white}
+% \setbeamertemplate{enumerate items}{%
+% \usebeamercolor[bg]{item projected}%
+% \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+% }
+% \begin{enumerate}[<+->]
+% \conti
+% \item La fórmula integral de Fourier proporcionó las definiciones de la transformada de Laplace y la transformada inversa de Laplace en términos de una integral de contorno complejo que se puede evaluar con la ayuda de la teoría del residuo de Cauchy y la deformación del contorno en el plano complejo.
+% \end{enumerate}
+% \end{frame}
 
 \section{Conceptos básicos}
-\frame[allowframebreaks]{\frametitle{Contenido}\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Definición}
 
 \begin{frame}
@@ -520,7 +525,6 @@ Es conveniente definir $\psi_{a, b}$ como sigue:
 \pause
 \begin{align*}
 \psi_{a, b} (x) = \abs{a}^{1/2} \, \psi \left( \dfrac{x - b}{a} \right)
-\pause
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -569,7 +573,11 @@ La solución de esta ecuación será una función de $\alpha$ y las variables re
 \end{frame}
 \begin{frame}
 \frametitle{Cambio de estado y regreso}
-Cuando se ha obtenido esta solución, tiene que ser \enquote{invertida} para recuperar la variable \enquote{perdida}: \pause Así, si $t$ es la variable eliminada y $g (\alpha)$ es una de las transformaciones dadas anteriormente, \pause obtenemos primero las ecuaciones auxiliares que dan $g$ en términos de $\alpha$ y las variables independientes restantes, resolvemos para $g$ y luego invertimos para obtener $g (\alpha)$.
+Cuando se ha obtenido esta solución, tiene que ser \enquote{invertida} para recuperar la variable \enquote{perdida}.
+\end{frame}
+\begin{frame}
+\frametitle{Cambio de estado y regreso}
+Así, si $t$ es la variable eliminada y $g (\alpha)$ es una de las transformaciones dadas anteriormente, \pause obtenemos primero las ecuaciones auxiliares que dan $g$ en términos de $\alpha$ y las variables independientes restantes, resolvemos para $g$ y luego invertimos para obtener $g (\alpha)$.
 \end{frame}
 \begin{frame}
 \frametitle{La transformada inversa}
@@ -652,7 +660,7 @@ En general, el mayor problema con el uso de las transformadas integrales, es det
 \\
 \bigskip
 \pause
-Sin embargo, para los dos tipos de transformaciones: de Fourier y de Laplace, obtener el inverso es relativamente sencillo.
+Sin embargo, para los dos tipos de transformaciones: de Fourier y de Laplace, obtener la transformada inversa es relativamente sencillo.
 \end{frame}
 
 % %Ref. Patra (2018) 1.2 Classes of functions.
@@ -666,7 +674,15 @@ Una función de valor único $f (x)$ de la variable independiente $x$ que es con
 \end{frame}
 \begin{frame}
 \frametitle{Función continua}
-Se dice que una función $f (x)$ es continua por partes en un intervalo $(a, b)$, \pause si el intervalo se puede dividir en un número finito de subintervalos que no se intersectan $(a, a_{1}), (a_{1}, a_{2}), \ldots, (a_{n -1}, b)$, \pause en cada uno de los cuales la función es continua y tiene límites finitos cuando $x$ se acerca a los puntos extremos de cada uno de los subintervalos.
+Se dice que una función $f (x)$ es continua por partes en un intervalo $(a, b)$, \pause si el intervalo se puede dividir en un número finito de subintervalos que no se intersectan $(a, a_{1}), (a_{1}, a_{2}), \ldots, (a_{n -1}, b)$.
+\end{frame}
+\begin{frame}
+\frametitle{Función continua}
+En cada uno de los subintervalos
+\begin{align*}
+(a, a_{1}), (a_{1}, a_{2}), \ldots, (a_{n -1}, b)
+\end{align*}
+la función es continua y tiene límites finitos cuando $x$ se acerca a los puntos extremos de cada uno de los subintervalos.
 \end{frame}
 \begin{frame}
 \frametitle{Función continua de clase $P$}
@@ -709,6 +725,18 @@ Finalmente, presentamos una clase de funciones $f (x)$, que satisface las siguie
 \begin{enumerate}[<+->]
 \item $f (x)$ se define en $c < x < c + 2 \, l$.
 \item $f (x)$ es una función periódica del período $2 \, l$.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Funciones particulares}
+\setbeamercolor{item projected}{bg=ceil,fg=black}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
 \item $f (x)$ y $\pderivada{f} (x)$ son continuas por partes en $c  < x <c + 2 \, l$ expresado por $f (x) \in P^{1} (c, c + 2 \, l)$.
 \end{enumerate}
 \pause
@@ -739,7 +767,11 @@ Consideremos una función $f (x)$ que satisface las condiciones de Dirichlet en 
 \end{frame}
 \begin{frame}
 \frametitle{Función y series de Fourier}
-Sea el período principal de $f (x)$ igual a $2 \, l$. \pause Entonces $f (x)$ admite una representación en una serie de Fourier:
+Sea el período principal de $f (x)$ igual a $2 \, l$. 
+\\
+\bigskip
+\pause
+Entonces $f (x)$ admite una representación en una serie de Fourier:
 \pause
 \begin{align*}
 f (x) = a_{0} + \nsum_{n=1}^{\infty} \left[ a_{n} \, \cos \left( \dfrac{n \pi x}{l}  \right) + b_{n} \, \sin \left( \dfrac{n \pi x}{l}  \right) \right]

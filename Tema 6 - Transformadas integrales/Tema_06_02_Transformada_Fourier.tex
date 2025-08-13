@@ -37,11 +37,16 @@
 \vskip0pt%
 }
 \makeatother
-\usefonttheme{serif}
+% \usefonttheme{serif}
 \setbeamercolor{frametitle}{bg=champagne}
 \resetcounteronoverlays{saveenumi}
 
-\date{}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+% \date{}
 
 \title{\large{Tema 6 - Transformada de Fourier}}
 \subtitle{Matemáticas Avanzadas de la Física}
@@ -53,7 +58,7 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 
 %Ref. Patra (2018) 1.2 Classes of functions.
@@ -154,7 +159,7 @@
 
 %Referencia. Patra (2018) - An introduction to integral transforms. Sec. 1.4
 \section{Las transformadas de Fourier}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Definición}
 
 \begin{frame}
@@ -163,11 +168,11 @@ Una vez revisado el material introductorio, \pause podemos definir la \textocolo
 \end{frame}
 \begin{frame}
 \frametitle{Definiendo la transformada}
-La transformada se define por:
+La Transformada de Fourier (TF) se define por:
 \pause
 \begin{eqnarray}
 \begin{aligned}[b]
-F \big[ f (x); x \to \xi \big] &= \pause F \big[ f (x) \big] = \pause F (\xi) = \pause \overline{f} (\xi) = \\[0.5em] \pause
+&F \big[ f (x); x \to \xi \big] = \pause F \big[ f (x) \big] = \pause F (\xi) = \pause \overline{f} (\xi) = \\[0.5em] \pause
 &= \dfrac{1}{\sqrt{2 \, \pi}} \scaleint{6ex}_{\bs -\infty}^{+\infty} f (x) \, \exp(i \, \xi \, x) \dd{x}
 \end{aligned}
 \label{eq:ecuacion_01_12}
@@ -175,7 +180,7 @@ F \big[ f (x); x \to \xi \big] &= \pause F \big[ f (x) \big] = \pause F (\xi) = 
 \end{frame}
 \begin{frame}
 \frametitle{Definiendo la transformada}
-Y también:
+Y también, la Transformada Inversa de Fourier (TIF):
 \pause
 \begin{eqnarray}
 \begin{aligned}[b]
@@ -200,7 +205,7 @@ en un punto continuo de $f (x)$.
 \end{frame}
 \begin{frame}
 \frametitle{Sobre la definición}
-Algunos autores definen la transformada de Fourier  (ec. \ref{eq:ecuacion_01_12}) y la transformada inversa (ec. \ref{eq:ecuacion_01_13}) respectivamente como:
+Algunos autores definen la transformada de Fourier  (ec. \ref{eq:ecuacion_01_12}) como:
 \pause
 \begin{eqnarray}
 \begin{aligned}[b]
@@ -209,6 +214,11 @@ Algunos autores definen la transformada de Fourier  (ec. \ref{eq:ecuacion_01_12}
 \label{eq:ecuacion_01_14}
 \end{aligned}
 \end{eqnarray}
+\end{frame}
+\begin{frame}
+\frametitle{Sobre la definición}
+Y la transformada inversa de Fourier (ec. \ref{eq:ecuacion_01_13}) como:
+\pause
 \begin{eqnarray}
 f (x) = \dfrac{1}{2 \, \pi} \scaleint{6ex}_{\bs -\infty}^{+\infty} F (\xi) \, \exp(-i \, \xi \, x) \dd{\xi}
 \label{eq:ecuacion_01_15}
@@ -533,10 +543,10 @@ Otras tres partes del teorema son:
 \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
 }
 \begin{enumerate}[<+->]
-\item Si $F_{s} \big[ f (x); x \to \xi \big] = F_{s} (\xi)$, entonces:
+\item Si $F_{s} \big[ f (x); x \to \xi \big] = F_{s} (\xi)$, entonces:
 \pause
 \begin{align*}
-F_{s} \big[ f (x) \, \cos a \, x; x \to \xi \big] = \dfrac{1}{2} \big[ F_{s} (\xi +  a) + F_{s} (\xi - a) \big]
+F_{s} \big[ f (x) \cos a x; x \to \xi \big] = \dfrac{1}{2} \big[ F_{s} (\xi {+}  a) {+} F_{s} (\xi {-} a) \big]
 \end{align*}
 \seti
 \end{enumerate}
@@ -554,9 +564,9 @@ F_{s} \big[ f (x) \, \cos a \, x; x \to \xi \big] = \dfrac{1}{2} \big[ F_{s} (\
 \begin{align*}
 F_{c} \big[ f (x) \, \sin a \, x; x \to \xi \big] = \dfrac{1}{2} \big[ F_{s} (\xi {+}  a) {-} F_{s} (\xi {-} a) \big]
 \end{align*}
-\item Si $F_{c} \big[f (x); x \to \xi \big] = F_{c} (\xi)$, entonces:
+\item Si $F_{c} \big[f (x); x \to \xi \big] = F_{c} (\xi)$, entonces:
 \begin{align*}
-F_{s} \big[f (x) \, \sin a \, x; x \to \xi \big] = \dfrac{1}{2} \big[ F_{c} (\xi -  a) - F_{c} (\xi + a) \big]
+F_{s} \big[f (x) \sin a x; x \to \xi \big] {=} \dfrac{1}{2} \big[ F_{c} (\xi {-}  a) {-} F_{c} (\xi {+} a) \big]
 \end{align*}
 \end{enumerate}
 \end{frame}
@@ -744,7 +754,7 @@ Por definición:
 \end{frame}
 \begin{frame}
 \frametitle{La TF de $H (x)$}
-Por lo que, usando la TFI, se obtiene:
+Por lo que, usando la TIF, se obtiene:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
@@ -830,9 +840,9 @@ Por definición:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-&F \big[ f (x); x \to \xi \big] = \dfrac{1}{\sqrt{2 \pi}} \scaleint{6ex}_{\bs -a}^{a} x \exp(i \xi x) \dd{x} = \\[0.5em] \pause
-&= \dfrac{1}{\sqrt{2 \pi}} \left\{ \bigg[ x \, \dfrac{\exp(i \xi x)}{i \xi} \bigg] \eval_{-a}^{a} - \dfrac{1}{i \xi} \scaleint{6ex}_{\bs -a}^{a} \exp(i \xi x) \dd{x} \right\} = \\[0.5em] \pause
-&= \dfrac{1}{\sqrt{2 \pi}} \bigg[ \dfrac{a \exp(i \xi a) + a \exp(-i \xi a)}{i \xi} {+} \\[0.5em] 
+&F \big[ f (x); x \to \xi \big] {=} \dfrac{1}{\sqrt{2 \pi}} \scaleint{6ex}_{\bs -a}^{a} x \exp(i \xi x) \dd{x} = \\[0.5em] \pause
+&= \dfrac{1}{\sqrt{2 \pi}} \left\{ \bigg[ x \dfrac{\exp(i \xi x)}{i \xi} \bigg] \eval_{-a}^{a} {-} \dfrac{1}{i \xi} \scaleint{6ex}_{\bs -a}^{a} \exp(i \xi x) \dd{x} \right\} = \\[0.5em] \pause
+&= \dfrac{1}{\sqrt{2 \pi}} \bigg[ \dfrac{a \exp(i \xi a) {+} a \exp(-i \xi a)}{i \xi} {+} \\[0.5em] 
 &+ \dfrac{1}{\xi^{2}} \left\{ \exp(i a \xi) {-} \exp(-i a \xi) \right\} \bigg] =
 \end{aligned}
 \end{eqnarray*}
@@ -1173,7 +1183,7 @@ donde el signo de barra sobre la función significa el conjugado complejo de las
 \end{frame}
 \begin{frame}
 \frametitle{Demostración}
-Por la fórmula de la TFI, se tiene que:
+Por la fórmula de la TIF, se tiene que:
 \pause
 \begin{align*}
 g (x) = \dfrac{1}{\sqrt{2 \pi}} \scaleint{6ex}_{\bs -\infty}^{\infty} G (\xi) \, \exp(-i \xi x) \dd{\xi}
@@ -1376,7 +1386,11 @@ Lo que implica que la énesima derivada de la TF de una función $f (x)$ es $(- 
 \end{frame}
 \begin{frame}
 \frametitle{La derivada TF seno y coseno}
-Los correspondientes resultados para las derivadas TF seno y coseno de una función no son tan sencillos. \pause Vemos lo siguiente, definimos $F_{s}^{(n)}$ y $F_{c}^{(n)}$ por las expresiones:
+Los correspondientes resultados para las derivadas TF seno y coseno de una función no son tan sencillos. 
+\end{frame}
+\begin{frame}
+\frametitle{La derivada TF seno y coseno}
+Vemos lo siguiente, definimos $F_{s}^{(n)}$ y $F_{c}^{(n)}$ por las expresiones:
 \pause
 \begin{eqnarray}
 \begin{aligned}
@@ -1713,7 +1727,7 @@ Que es la función de temperatur
 \end{frame}
 \begin{frame}
 \frametitle{Solución gráfica}
-Que se muestra en la figura (\r
+Que se muestra en la figura 
 \end{frame}
 \begin{frame}[plain]
 \begin{figure}[H]
