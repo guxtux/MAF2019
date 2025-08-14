@@ -1,6 +1,7 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
 \usepackage{../Estilos/ColoresLatex}
+\usepackage{media9}
 \input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
 
 \AtBeginDocument{\RenewCommandCopy\qty\SI}
@@ -26,9 +27,22 @@
     \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
     \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
   \end{beamercolorbox}}%
-  \vskip0pt%
+  \vskip0pt%.0
 }
 \makeatother
+
+\newcommand{\includemovie}[3]{%
+\includemedia[
+  width=0.8\linewidth, % ancho del video
+  height=0.6\linewidth, % alto del video
+  activate=onclick,     % se reproduce al hacer clic
+  addresource=membrana_03.mp4,% archivo de video
+  flashvars={
+     source=membrana_03.mp4   % ruta del video
+    &autoPlay=true      % reproducción automática (opcional)
+  }%
+]{}{StrobeMediaPlayback.swf}%
+}% end of the new command
 
 \date{14 de agosto de 2025}
 
@@ -203,18 +217,26 @@ La solución obtenida la podemos ocupar con otras herramientas computacionales p
 \end{frame}
 \begin{frame}
 \frametitle{Simulación computacional - Video}
-\movie[
-  width=0.8\linewidth,
-  height=0.6\linewidth,
-  poster,   % muestra la primera imagen (poster frame)
-  autostart % opcional, depende del visor
-]{\fbox{Reproducir video}}{membrana_03.mp4}
+% \movie[
+%   width=0.8\linewidth,
+%   height=0.6\linewidth,
+%   poster,   % muestra la primera imagen (poster frame)
+%   autostart % opcional, depende del visor
+% ]{\fbox{Reproducir video}}{membrana_03.mp4}
+% \begin{center}%
+%     \includemovie{.85\textheight}{.85\textheight}{membrana_03.mp4}%
+% \end{center}
+ \centering
+    \movie[externalviewer]{\includegraphics[width=0.5\textheight, keepaspectratio]{Imagenes/Tambor.png}}{membrana_03.mp4}
 \end{frame}
 \begin{frame}
 \frametitle{¿Y si tenemos un toroide?}
 \begin{figure}
-    \centering
-    \includegraphics[scale=0.4]{Imagenes/Geometria_Toro.png}
+   \centering
+    \movie[externalviewer]{\includegraphics[width=\textheight, keepaspectratio]{Imagenes/Geometria_Toro.png}}{Toroide.mp4}  
+  
+  % \centering
+  %   \includegraphics[scale=0.4]{Imagenes/Geometria_Toro.png}
 \end{figure}
 \end{frame}
 
@@ -303,38 +325,69 @@ La ecuación de Helmholtz se encuentra muy a menudo en la física:
 \end{align*}
 \end{frame}
 \begin{frame}
+\frametitle{¿De dónde surge la ecuación de Helmholtz?}
+La ecuación de Helmholtz la podemos interpretar \enquote{como un puente} entre la ecuación de onda y los problemas estacionarios que aparecen en muchas ramas de la física.
+\end{frame}
+\begin{frame}
 \frametitle{La ecuación de Helmholtz}
-Esta ecuación surge en diferentes contextos, \pause por ejemplo: \pause la ecuación de Schrödinger libre (independiente del tiempo) es:
+Ejemplos en donde encontraremos esta ecuación:
+\pause
+\setbeamercolor{item projected}{bg=bubbles,fg=burgundy}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Acústica: presión sonora en una cavidad (modos propios).
+\item Electromagnetismo: modos de una guía de ondas o cavidad resonante.
+\item Óptica: propagación de luz en medios homogéneos.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de Helmholtz}
+\setbeamercolor{item projected}{bg=bubbles,fg=burgundy}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\conti
+\item Mecánica cuántica: partícula libre o en pozo de potencial con energía fija (la ecuación de Schrödinger estacionaria es una de Helmholtz con $k^{2} \propto E$)
+\item Vibraciones mecánicas: modos propios de una membrana, cuerda o placa.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{La ecuación de Helmholtz}
+En la ecuación de Schrödinger dependiente del tiempo es:
 \pause
 \begin{align*}
-- \dfrac{\hbar^{2}}{2 \, m} \, \laplacian{\phi} (x, y, z) = E \, \phi (x, y, z)
+i \, \hbar \, \pdv{\Psi}{t} = \left[ - \dfrac{\hbar^{2}}{2 \, m} \, \laplacian{\phi} + V (\vb{r}) \right] \, \Psi
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{La ecuación de Helmholtz}
-Que se puede escribir como:
+Si consideramos una solución de la forma:
 \begin{align*}
-\left( \laplacian + k^{2} \right) \, \phi (x, y, z) = 0 \hspace{1.5cm} k^{2} = \dfrac{2 m E}{\hbar^{2}}
+\Psi (\vb{r}, t) = \psi (\vb{r}) \, e^{- i \, E \, t / \hbar} 
+\end{align*}
+\pause
+La ecuación inicial es:
+\begin{align*}
+E \, \psi = \left( - \dfrac{\hbar^{2}}{2 m} \, \laplacian + V \right) \, \psi
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{La ecuación de Helmholtz}
-La ecuación de onda es:
-\begin{align*}
-\left( \laplacian - \dfrac{1}{c^{2}} \, \pdv[2]{t} \right) \, \Psi (x, y, z, t) = 0
-\end{align*}
-\pause
-Si proponemos soluciones de la forma:
-\begin{align*}
-\Psi (x, y, t) = e^{i \omega t} \, \phi (x, y)
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{La ecuación de Helmholtz}
-Se obtiene:
+Entonces:
 \pause
 \begin{align*}
-\left( \laplacian + k^{2} \right) \, \phi (x, y, z) = 0 \hspace{1.5cm} k^{2} = \dfrac{\omega^{2}}{c^{2}}
+\laplacian \psi + \dfrac{2 m}{\hbar^{2}} \, (E - V) \, \psi = 0
+\end{align*}
+\pause
+Esto es la ec. de Helmholtz con índice espacial:
+\begin{align*}
+  \left[ \laplacian + k^{2} (\vb{r}) \right] \, \psi = 0, \hspace{1cm} k^{2} (\vb{r}) = \dfrac{2 m}{\hbar^{2}} \, (E - V (\vb{r}))
 \end{align*}
 \end{frame}
 \begin{frame}
