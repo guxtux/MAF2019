@@ -1,0 +1,46 @@
+\documentclass[tikz,border=3.14pt]{standalone}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{arrows.meta}
+\usepackage{amsmath}
+\usepackage{physics}
+
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\begin{document}
+\tdplotsetmaincoords{60}{120}
+\begin{tikzpicture}[scale=3,
+        tdplot_main_coords,
+        axis/.style={->, thick},
+        vector/.style={-{Latex}, very thick}]
+
+    %standard tikz coordinate definition using x, y, z coords
+    \coordinate (O) at (0, 0, 0);
+    
+    %tikz-3dplot coordinate definition using r, theta, phi coords
+    \tdplotsetcoord{P}{2.5}{50}{45}
+    
+    %draw axes
+    \draw[axis] (0, 0, 0) -- (1.5, 0, 0) node[anchor=north east]{$x$};
+    \draw[axis] (0, 0, 0) -- (0, 1.5, 0) node[anchor=north west]{$y$};
+    \draw[axis] (0, 0, 0) -- (0, 0, 1) node[anchor=south]{$z$};
+
+    \draw [fill] (O) circle (0.75pt);
+    \node at (0.25, 0.25, 0) {$q$};
+
+    \draw [fill] (P) circle (0.75pt) node [anchor=west] {$P$};
+    
+    %draw a vector from O to P
+    \draw[vector] (O) -- (P) node [midway, above] {$\vb{r}$};
+
+    \node at (-1, 1, 1) {$x = r \, \sin \varphi \, \cos \theta$};
+    \node at (-1, 1, 0.75) {$y = r \, \sin \varphi \, \sin \theta$};
+    \node at (-0.75, 1, 0.6) {$z = r \, \cos \varphi$};
+
+    % \draw (P) -- (Pxy) node [right, midway] {$z$};
+    % \draw (O) -- (Pxy) node [left, midway] {$\rho$};
+    % \tdplotdrawarc{(O)}{.35}{0}{45}{anchor=north}{$\phi$}
+
+\end{tikzpicture}
+\end{document}
