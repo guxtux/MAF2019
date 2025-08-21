@@ -1,0 +1,129 @@
+\documentclass[12pt]{article}
+%\usepackage[left=0.25cm,top=1cm,right=0.25cm,bottom=1cm]{geometry}
+\usepackage{geometry}
+\textwidth = 20cm
+\hoffset = -1cm
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath}
+\usepackage{nccmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{enumerate}
+\usepackage{anyfontsize}
+\usepackage{anysize}
+\usepackage{enumitem}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{relsize}
+\usepackage{physics}
+\usepackage{empheq}
+\usepackage{mathtools}
+\spanishdecimal{.}
+\setlist[enumerate]{itemsep=0mm}
+\renewcommand{\baselinestretch}{1.2}
+\let\oldbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{\oldbibliography{#1}
+\setlength{\itemsep}{0pt}}
+%\marginsize{1.5cm}{1.5cm}{0cm}{2cm}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+
+\title{Ejercicios para el Tema 1 \\ \large{Matemáticas Avanzadas de la Física}}
+%\subtitle{Fecha de entrega: 8 de marzo de 2016.}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\begin{document}
+\vspace{-4cm}
+
+\maketitle
+\fontsize{14}{14}\selectfont
+
+\section*{Coordenadas cilíndricas elípticas}
+
+El sistema de coordenadas cilíndricas elípticas $(\sigma, \tau, z)$ se define mediante las relaciones:
+\begin{align*}
+    x = 2 \, A \, \cosh \sigma \, \cos \tau \hspace{1cm} y = 2 \, A \, \senh \sigma \, \sen \tau \hspace{1cm} z = z
+\end{align*}
+Demuestra que:
+\begin{enumerate}
+\item Este sistema de coordenadas es ortogonal.
+\item Los factores de escala son:
+\begin{align*}
+    h^{2}_{\sigma} = h^{2}_{\tau} = 4 \, A^{2} \left( \sinh 2 \sigma + \sin 2 \tau \right) \hspace{0.5cm} \text{y} \hspace{0.5cm} h_{z} = 1
+\end{align*}
+\end{enumerate}
+
+\vspace{1cm}
+\noindent
+\textbf{Solución: } Consideremos las reglas de transformación:
+\begin{align*}
+x = 2\, A \, \cosh \sigma \, \cos \tau, \hspace{1cm}  y = 2 \, A \, \sinh \sigma \, \sin \tau \hspace{1cm} z = z
+\end{align*}
+con los dominios $\sigma \in \mathbb{R}, \, \tau \in [0, 2 \, \pi)$ y constante $(A > 0)$. Denotamos el vector posición:
+\begin{align*}
+\vb{r} (\sigma, \tau, z) = \left( 2 \,A \, \cosh \sigma \, \cos \tau, 2 \, A \, \sinh \sigma \, \sin \tau, z \right)
+\end{align*}
+
+\subsection*{Vectores base covariantes}
+Calculamos las derivadas parciales:
+\begin{align*}
+\vb{e}_{\sigma} &= \pdv{\vb{r}}{\sigma} = \left( 2 \, A \, \sinh \sigma \, \cos \tau, 2 \, A \, \cosh \sigma \, \sin \tau, 0 \right) \\[1em]
+\vb{e}_{\tau} &= \pdv{\vb{r}}{\tau} = \left( - 2 \, A \, \cosh \sigma \, \sin \tau, 2 \, A \, \sinh \sigma \, \cos \tau,  0 \right) \\[1em]
+\vb{e}_{z} &= \pdv{\vb{r}}{z} = (0, 0, 1)
+\end{align*}
+
+\subsection*{Ortogonalidad}
+Para que el sistema sea ortogonal necesitamos que los productos escalares cruzados se anulen:
+\begin{align*}
+&\vb{e}_{\sigma} \cdot \vb{e}_{\tau} = \\[1em]
+&= \left( 2 A \sinh \sigma \, \cos \tau, 2 A \cosh \sigma \, \sin \tau, 0 \right) \cdot \left( - 2 A \cosh \sigma \, \sin \tau, 2 A \sinh \sigma \, \cos \tau, 0 \right) \\[1em]
+&= \left( 2 A \sinh \sigma \, \cos \tau \right) \left( - 2 A \cosh \sigma \, \sin \tau \right) {+} \left( 2 A \cosh \sigma \, \sin \tau \right) \left( 2 A \sinh \sigma \, \cos \tau \right) + \\[1em]
+&+ \left( 0 \cdot 0 \right) = \\[1em]
+&= - (2 A)^{2} \sinh \sigma \, \cosh \sigma \, \cos \tau \, \sin \tau + (2 A)^{2} \sinh \sigma \, \cosh \sigma \, \cos \tau \, \sin \tau = \\[1em]
+&= (2 \, A)^{2} \left( \sinh \sigma \, \cos \tau (- \cosh \sigma \, \sin \tau + \cosh \sigma \, \sin \tau \cdot \sinh \sigma \, \cos \tau \right) = \\[1em]
+&\vb{e}_{\sigma} \cdot \vb{e}_{\tau} = 0
+\end{align*}
+Efectivamente los dos términos se cancelan entre sí, por lo que $( \vb{e}_{\sigma} \perp \vb{e}_{\tau} )$. Además:
+\begin{align*}
+\vb{e}_{\sigma} \cdot \vb{e}_{z} =\vb{e}_{\tau} \cdot \vb{e}_{z} = 0
+\end{align*}
+porque $\vb{e}_{z}$ sólo tiene componente en $z$.
+\par
+Por tanto $(\vb{e}_{\sigma}, \vb{e}_{\tau}, \vb{e}_{z})$ son mutuamente ortogonales y el sistema es ortogonal.
+
+\subsection*{Factores de escala}
+Los factores de escala $(h_{\sigma}, h_{\tau}, h_{z})$ se obtienen como las normas de los vectores base:
+\begin{align*}
+h_{\sigma}^{2} &= \vb{e}_{\sigma} \cdot \vb{e}_{\sigma}, \hspace{1cm} h_{\tau}^{2} = \vb{e}_{\tau} \cdot \vb{e}_{\tau}, \hspace{1cm} 
+h_{z}^{2} = \vb{e}_{z} \cdot \vb{e}_{z}
+\end{align*}
+Calculemos $(h_{\sigma}^{2})$:
+\begin{align*}
+h_{\sigma}^{2} &= (2\, A)^{2} \left( \sinh^{2} \sigma \, \cos^{2} \tau + \cosh^{2} \sigma \, \sin^{2} \tau \right) = \\[4pt]
+&= (2 \, A)^{2} \left( \sinh^{2} \sigma (\cos^{2} \tau + \sin^{2} \tau) + \sin^{2} \tau (\cosh^{2} \sigma - \sinh^{2} \sigma) \right) =\\[4pt]
+&= (2 \, A)^{2} \left( \sinh^{2} \sigma + \sin^{2} \tau \right) = \\[4pt]
+&= 4\, A^{2} \left( \sinh^{2} \sigma + \sin^{2} \tau \right)
+\end{align*}
+De forma análoga para $(h_{\tau}^{2})$:
+\begin{align*}
+h_{\tau}^{2} &=(2 \, A)^{ } \left( \cosh^{2} \sigma \, \sin^{2} \tau + \sinh^{2} \sigma \, \cos^{2} \tau \right) \\[1em]
+&= (2\, A)^{2} \left( \sinh^{2} \sigma + \sin^{2} \tau \right) = 4\, A^{2} \left( \sinh^{2} \sigma + \sin^{2} \tau \right)
+\end{align*}
+Finalmente,
+\begin{align*}
+h_{z}^{2} = \vb{e}_{z} \cdot \vb{e}_{z} = 1 \quad \Longrightarrow \quad h_{z} = 1
+\end{align*}
+\bigskip
+\noindent Por tanto:
+\begin{align*}
+\boxed{h_{\sigma} = h_{\tau} = 2\, A\ \, \sqrt{\sinh^{2} \sigma + \sin^{2} \tau}, \hspace{1cm} h_{z} = 1}
+\end{align*}
+y el sistema $(\sigma, \tau, z)$ es ortogonal.
+
+\end{document}
