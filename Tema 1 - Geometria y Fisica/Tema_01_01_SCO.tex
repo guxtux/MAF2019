@@ -3,6 +3,7 @@
 \usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Warsaw_seahorse}
 \usepackage{pifont}
+\captionsetup{labelformat=empty,labelsep=none}
 
 \AtBeginDocument{\RenewCommandCopy\qty\SI}
 \ExplSyntaxOn
@@ -445,6 +446,7 @@ Al intersectar las tres superficies coordenadas, se define un punto de coordenad
 \begin{figure}
    \centering
    \includegraphics[width=0.95\linewidth]{Imagenes/superficies_esfericas_04.png}
+   \caption{}
    \label{fig:superficies_esfericas_04}
 \end{figure}
 \end{frame}
@@ -628,13 +630,13 @@ Entonces podemos escribir:
 \frametitle{Ecuación vectorial}
 Estas tres ecuaciones son las componentes de la ecuación vectorial:
 \pause
-\begin{align}
+\begin{eqnarray}
 \begin{aligned}
-\dd{\vb{r}} &= \pdv{\vb{r}}{u_{1}} \dd{u_{1}} + \pdv{\vb{r}}{u_{2}} \dd{u_{2}} + \pdv{\vb{r}}{u_{3}} \dd{u_{3}} = \\[0.5em]
+\dd{\vb{r}} &= \pdv{\vb{r}}{u_{1}} \dd{u_{1}} + \pdv{\vb{r}}{u_{2}} \dd{u_{2}} + \pdv{\vb{r}}{u_{3}} \dd{u_{3}} = \\[0.5em] \pause
 &= \nsum_{i=1}^{3} \pdv{\vb{r}}{u_{i}} \dd{u_{i}}
 \end{aligned}
 \label{eq:ecuacion_01_01}
-\end{align}
+\end{eqnarray}
 \end{frame}
 \begin{frame}
 \frametitle{Vector no unitario}
@@ -716,12 +718,12 @@ En consecuencia los vectores unitarios en coordenadas curvilíneas (ec. \ref{eq:
 \frametitle{Cambio a coordenadas esféricas}
 Como ejemplo haremos el cambio de coordenadas cartesianas a coordenadas esféricas.
 \begin{align*}
-(x, y, z) \longrightarrow (r, \theta, \varphi)
+(x, y, z) \longrightarrow (\rho, \theta, \varphi)
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Cambio a coordenadas esféricas}
-Un punto $P$ puede localizarse mediante las coordenadas cartesianas $(x, y, z)$ y también mediante coordenadas esféricas $(r, \theta, \varphi)$, donde:
+Un punto $P$ puede localizarse mediante las coordenadas cartesianas $(x, y, z)$ y también mediante coordenadas esféricas $(\rho, \theta, \varphi)$, donde:
 \pause
 \begin{minipage}{0.4\linewidth}
 \begin{align*}
@@ -733,7 +735,7 @@ Un punto $P$ puede localizarse mediante las coordenadas cartesianas $(x, y, z)$ 
 \hspace{0.3cm}
 \begin{minipage}{0.4\linewidth}
 \begin{align*}
-r \geq 0 \\
+\rho \geq 0 \\
 0 \le \theta \le \pi \\
 0 \le \varphi \le 2 \, \pi
 \end{align*}
@@ -744,29 +746,27 @@ r \geq 0 \\
 Donde:
 \pause
 \begin{itemize}
-\item[\ding{212}] $r = \abs{\vb{r}}$ es la coordenada radial.
+\item[\ding{212}] $\rho = \abs{\vb{r}}$ es la coordenada radial.
 \item[\ding{212}] $\theta$ es la coordenada polar.
 \item[\ding{212}] $\varphi$ es la coordenada azimutal.
 \end{itemize}
 \end{frame}
 \begin{frame}
 \frametitle{Reglas de transformación}
-De la figura (\ref{fig:figura_planos_esfericos}) la \enquote{conexión} (regla de transformación)  entre las coordenadas cartesianas y esféricas es:
-\end{frame}
-\begin{frame}
-\frametitle{Reglas de transformación}
-De $(x, y, z) \rightarrow (r, \theta, \varphi)$:
+Las reglas de transformación entre las coordenadas cartesianas y esféricas son:
+\pause
+De $(x, y, z) \rightarrow (\rho, \theta, \varphi)$:
 \begin{align*}
-x &= r \, \sin \theta \, \cos \varphi \\
-y &= r \, \sin \theta \, \sin \varphi \\
-z &= r \, \cos \theta
+x &= \rho \, \sin \theta \, \cos \varphi \\
+y &= \rho \, \sin \theta \, \sin \varphi \\
+z &= \rho \, \cos \theta
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Reglas de transformación}
-De $(r, \theta, \varphi) \rightarrow (x, y, z)$:
+De $(\rho, \theta, \varphi) \rightarrow (x, y, z)$:
 \begin{align*}
-r &= \sqrt{x^{2} + y^{2} + z^{2}} \\[0.75em]
+\rho &= \sqrt{x^{2} + y^{2} + z^{2}} \\[0.75em]
 \theta &= \cos^{-1} \left( \dfrac{z}{\sqrt{x^{2} + y^{2} + z^{2}}} \right) \\[0.75em]
 \varphi &= \tan^{-1} \left( \dfrac{y}{x} \right)
 \end{align*}
@@ -778,27 +778,34 @@ Entonces el vector de posición es:
 \begin{align}
 \begin{aligned}
 \vb{r} &= \vu{i} \, x + \vu{j} \, y + \vu{k} \, z \\
-&= \vu{i} \, r \, \sin \theta \, \cos \varphi + \vu{j} \, r \, \sin \theta \, \sin \varphi + \vu{k} \, r \cos \theta 
+&= \vu{i} \, \rho \, \sin \theta \, \cos \varphi + \vu{j} \, \rho \, \sin \theta \, \sin \varphi + \vu{k} \, \rho \cos \theta 
 \end{aligned}
 \label{eq:ecuacion_01_06}
 \end{align}
 \pause
-Por lo que podemos calcular los $\pdv*{\vb{r}}{u_{i}}$.
+Por lo que podemos calcular las derivadas $\pdv*{\vb{r}}{u_{i}}$.
 \end{frame}
 \begin{frame}
 \frametitle{Calculando el factor $\pdv*{\vb{r}}{r}$}
 Entonces tenemos que:
 \pause
-\begin{align*}
-\pdv{\vb{r}}{r} = \vu{i} \, \sin \theta \, \cos \varphi + \vu{j} \, \sin \theta \, \sin \varphi + \vu{k} \, \cos \theta
-\end{align*}
-Así al calcular la norma:
-\pause
 \begin{eqnarray*}
 \begin{aligned}
-\abs{\pdv{\vb{r}}{r}} &= \sqrt{\sin^{2} \theta \, \cos^{2} \varphi + \sin^{2} \theta \, \sin^{2} \varphi + \cos^{2} \theta} = \\[0.5em] \pause
-&= \sqrt{\sin^{2} \theta \left( \cos^{2} \varphi + \sin^{2} \varphi \right) + \cos^{2} \theta} = \\[0.5em] \pause
-&= \sqrt{\sin^{2} \theta + \cos^{2} \theta} = \\[0.5em] \pause
+\pdv{\vb{r}}{\rho} &= \pdv{\rho} \left[ \vu{i} \, \rho \, \sin \theta \, \cos \varphi \right] + \pdv{\rho} \left[ \vu{j} \, \rho \, \sin \theta \, \sin \varphi \right] + \\
+&+ \pdv{\rho} \left[ \vu{k} \, \rho \, \cos \theta \right] = \\[0.5em] \pause
+&= \vu{i} \sin \theta \, \cos \varphi + \vu{j} \, \sin \theta \, \sin \varphi + \vu{k} \, \cos \theta
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando la norma}
+\begin{eqnarray*}
+\begin{aligned}
+\abs{\pdv{\vb{r}}{\rho}} &= \left[ \left( \vu{i} \sin \theta \, \cos \varphi \right)^{2} + \left( \vu{j} \, \sin \theta \, \sin \varphi \right)^{2} + \right. \\[0.35em]
+&+ \left. \left( \vu{k} \, \cos \theta \right)^{2} \right]^{1/2} = \\[0.35em] \pause
+&= \sqrt{\sin^{2} \theta \, \cos^{2} \varphi + \sin^{2} \theta \, \sin^{2} \varphi + \cos^{2} \theta} = \\[0.35em] \pause
+&= \sqrt{\sin^{2} \theta \left( \cos^{2} \varphi + \sin^{2} \varphi \right) + \cos^{2} \theta} = \\[0.35em] \pause
+&= \sqrt{\sin^{2} \theta + \cos^{2} \theta} = \\[0.35em] \pause
 &= 1
 \end{aligned}
 \end{eqnarray*}
@@ -813,48 +820,58 @@ Entonces por la ec. (\ref{eq:ecuacion_01_04}):
 Tendremos el primer factor de escala:
 \pause
 \begin{align*}
-h_{1} = h_{r} = 1
+h_{1} = h_{\rho} = 1
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Siguiente factor $\pdv*{\vb{r}}{\theta}$}
-\begin{align*}
-\pdv{\vb{r}}{\theta} = \vu{i} \, r \, \cos \theta \, \cos \varphi + \vu{j} \, r \, \cos \theta \, \sin \varphi - \vu{k} \, r \, \sin \theta
-\end{align*}
-Procedemos a calcular el factor de escala:
-\end{frame}
-\begin{frame}
-\frametitle{Siguiente factor $\pdv*{\vb{r}}{\theta}$}
+Para calcular el siguiente factor de escala, ahora consideramos la derivada parcial:
+\pause
 \begin{eqnarray*}
 \begin{aligned}
-\abs{\pdv{\vb{u}}{\theta}} &= \sqrt{r^{2} (\cos^{2} \theta \, \cos^{2} \varphi + \cos^{2} \theta \, \sin^{2} \varphi + \sin^{2} \theta)} \\[0.5em] \pause
-&= \sqrt{r^{2} (\cos^{2} \theta \left(\cos^{2} \varphi + \sin^{2} \varphi \right) + \sin^{2} \theta)} \\[0.5em] \pause
-&= \sqrt{r^{2} (\cos^{2} \theta + \sin^{2} \theta)} \\[0.5em] \pause
-&= r
+\pdv{\vb{r}}{\theta} &=\pdv{\theta} \left[ \vu{i} \, \rho \, \sin \theta \, \cos \varphi \right] + \pdv{\theta} \left[ \vu{j} \, \rho \, \sin \theta \, \sin \varphi \right] + \\
+&+ \pdv{\theta} \left[ \vu{k} \, \rho \, \cos \theta \right] = \\[0.5em] \pause
+&= \vu{i} \, \rho \, \cos \theta \, \cos \varphi + \vu{j} \, \rho \, \cos \theta \, \sin \varphi - \vu{k} \, \rho \, \sin \theta
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando la norma}
+\begin{eqnarray*}
+\begin{aligned}
+\abs{\pdv{\vb{r}}{\theta}} &= \sqrt{\rho^{2} \left[ \cos^{2} \theta \, \cos^{2} \varphi + \cos^{2} \theta \, \sin^{2} \varphi + \sin^{2} \theta \right]} \\[0.5em] \pause
+&= \sqrt{\rho^{2} \left[ \cos^{2} \theta \left(\cos^{2} \varphi + \sin^{2} \varphi \right) + \sin^{2} \theta \right]} \\[0.5em] \pause
+&= \sqrt{\rho^{2} (\cos^{2} \theta + \sin^{2} \theta)} \\[0.5em] \pause
+&= \rho
 \end{aligned}
 \end{eqnarray*}
 \pause
-Así: $h_{2} = h_{\theta} = r$
+Así: $h_{2} = h_{\theta} = \rho$
 \end{frame}
 \begin{frame}
 \frametitle{Siguiente factor $\pdv*{\vb{r}}{\varphi}$}
-\begin{align*}
-\pdv{\vb{r}}{\varphi} = - \vu{i} \, r \, \sin \theta \, \sin \varphi + \vu{j} \, r \, \sin \theta \, \cos \varphi
-\end{align*}
-Nuevamente se calcula el factor de escala:
-\end{frame}
-\begin{frame}
-\frametitle{Siguiente factor $\pdv*{\vb{r}}{\varphi}$}
+Nos faltaría calcular el último factor de escala, que corresponde a la derivada parcial:
+\pause
 \begin{eqnarray*}
 \begin{aligned}
-\abs{\pdv{\vb{u}}{\varphi}} &= \sqrt{r^{2} \left( \sin^{2} \theta \, \sin^{2} \varphi + \sin^{2} \theta \, \cos^{2} \varphi \right)} \\[0.5em] \pause
-&= \sqrt{r^{2} \left[ \sin^{2} \theta \left( \sin^{2} \varphi + \cos^{2} \varphi \right) \right]} \\[0.5em] \pause
-&= \sqrt{r^{2} \, \sin^{2} \theta} \\[0.5em] \pause
-&= r \, \sin \theta
+\pdv{\vb{r}}{\varphi} &= \pdv{\varphi} \left[ \vu{i} \, \rho \, \sin \theta \, \cos \varphi \right] + \pdv{\varphi} \left[ \vu{j} \, \rho \, \sin \theta \, \sin \varphi \right] + \\
+&+ \pdv{\varphi} \left[ \vu{k} \, \rho \, \cos \theta \right] = \\[0.5em] \pause
+&= - \vu{i} \, \rho \, \sin \theta \, \sin \varphi + \vu{j} \, \rho \, \sin \theta \, \cos \varphi
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo la norma}
+\begin{eqnarray*}
+\begin{aligned}
+\abs{\pdv{\vb{r}}{\varphi}} &= \sqrt{\rho^{2} \left( \sin^{2} \theta \, \sin^{2} \varphi + \sin^{2} \theta \, \cos^{2} \varphi \right)} \\[0.5em] \pause
+&= \sqrt{\rho^{2} \left[ \sin^{2} \theta \left( \sin^{2} \varphi + \cos^{2} \varphi \right) \right]} \\[0.5em] \pause
+&= \sqrt{\rho^{2} \, \sin^{2} \theta} \\[0.5em] \pause
+&= \rho \, \sin \theta
 \end{aligned}
 \end{eqnarray*}
 \pause
-Así: $h_{3} = h_{\varphi} = r \, \sin \theta$
+Así: $h_{3} = h_{\varphi} = \rho \, \sin \theta$
 \end{frame}
 \begin{frame}
 \frametitle{Factores de escala}
@@ -862,9 +879,9 @@ Entonces los factores de escala $h_{i}$ para el sistema coordenado esférico son
 \pause
 \begin{align}
 \begin{aligned}
-h_{r} &= 1 \\[0.5em]
-h_{\theta} &= r \\[0.5em]
-h_{\varphi} &= r \, \sin \theta
+h_{\rho} &= 1 \\[0.5em]
+h_{\theta} &= \rho \\[0.5em]
+h_{\varphi} &= \rho \, \sin \theta
 \end{aligned}
 \label{eq:ecuacion_01_07}
 \end{align}
@@ -875,26 +892,26 @@ Al reemplazar los factores de escala en la ec. (\ref{eq:ecuacion_01_05}), los ve
 \pause
 \begin{align}
 \begin{aligned}
-\vu{e}_{r} &= \vu{i} \, \sin \theta \, \cos \varphi + \vu{j} \, \sin \theta \, \sin \varphi + \vu{k} \, \cos \theta \\[0.25em]
+\vu{e}_{\rho} &= \vu{i} \, \sin \theta \, \cos \varphi + \vu{j} \, \sin \theta \, \sin \varphi + \vu{k} \, \cos \theta \\[0.25em]
 \vu{e}_{\theta} &= \vu{i} \, \cos \theta \, \cos \varphi + \vu{j} \, \cos \theta \, \sin \varphi - \vu{k} \, \sin \theta \\[0.25em]
 \vu{e}_{\varphi} &= - \vu{i} \, \sin \varphi + \vu{j} \, \cos \varphi
 \end{aligned}
 \label{eq:ecuacion_01_08}
 \end{align}
-Donde $(\vu{e}_{1}, \vu{e}_{2}, \vu{e}_{3}) = (\vu{e}_{r}, \vu{e}_{\theta}, \vu{e}_{\varphi})$
+Donde $(\vu{e}_{1}, \vu{e}_{2}, \vu{e}_{3}) = (\vu{e}_{\rho}, \vu{e}_{\theta}, \vu{e}_{\varphi})$
 \end{frame}
 \begin{frame}
 \frametitle{Ecuaciones inversas}
-Las ecs. (\ref{eq:ecuacion_01_08}) pueden invertirse algebraicamente para expresar los vectores unitarios $\vu{i}, \vu{j}, \vu{k}$ en términos de $\vu{e}_{r}, \vu{e}_{\theta}, \vu{e}_{\varphi}$, tal que:
+Las ecs. (\ref{eq:ecuacion_01_08}) pueden invertirse algebraicamente para expresar los vectores unitarios $\vu{i}, \vu{j}, \vu{k}$ en términos de $\vu{e}_{\rho}, \vu{e}_{\theta}, \vu{e}_{\varphi}$, tal que:
 \end{frame}
 \begin{frame}
 \frametitle{Ecuaciones inversas}
 Las ecuaciones son:
 \pause
 \begin{align*}
-\vu{i} &= \vu{e}_{r} \, \sin \theta \, \cos \varphi + \vu{e}_{\theta} \, \cos \theta \, \cos \varphi - \vu{e}_{\varphi} \, \sin \varphi \\[0.5em]
-\vu{j} &= \vu{e}_{r} \, \sin \theta \, \sin \varphi + \vu{e}_{\theta} \, \cos \theta \, \sin \varphi + \vu{e}_{\varphi} \, \cos \varphi \\[0.5em]
-\vu{k} &= \vu{e}_{r} \, \cos \theta - \vu{e}_{\theta} \, \sin \theta
+\vu{i} &= \vu{e}_{\rho} \, \sin \theta \, \cos \varphi + \vu{e}_{\theta} \, \cos \theta \, \cos \varphi - \vu{e}_{\varphi} \, \sin \varphi \\[0.5em]
+\vu{j} &= \vu{e}_{\rho} \, \sin \theta \, \sin \varphi + \vu{e}_{\theta} \, \cos \theta \, \sin \varphi + \vu{e}_{\varphi} \, \cos \varphi \\[0.5em]
+\vu{k} &= \vu{e}_{\rho} \, \cos \theta - \vu{e}_{\theta} \, \sin \theta
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -914,7 +931,7 @@ donde:
 \vu{e}_{2} \\
 \vu{e}_{3})
 = \mqty(
-\vu{e}_{r} \\
+\vu{e}_{\rho} \\
 \vu{e}_{\theta} \\
 \vu{e}_{\phi}), \hspace{1.5cm}
 \vu{\epsilon} = \mqty(
@@ -1089,9 +1106,34 @@ Escribe en coordenadas esféricas el siguiente vector:
 \begin{align*}
 \vb{A} = x \, y \, \vu{i} - x \, \vu{j} + 3 \, x \, \vu{k}
 \end{align*}
-adicionalmente expresa $A_{r}, A_{\theta}, A_{\phi}$ en términos de $r, \theta, \phi$.
+adicionalmente expresa $A_{\rho}, A_{\theta}, A_{\phi}$ en términos de $\rho, \theta, \phi$.
 \end{frame}
-
+\begin{frame}
+\frametitle{Ejercicio a cuenta 4}
+Calcula las componentes rectangulares de la velocidad y aceleración de la partícula cuyo vector de posición está dado por:
+\setbeamercolor{item projected}{bg=auburn,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item $\vb{r} = A \, \cos n \, \omega \,  t \, \vu{i} + B \, \sin m \, \omega \, t \, \vu{j}$, con $n, m$ enteros.
+\item $\vb{r} = 3 \, t \, \vu{i} - 4 \, t \, \vu{j} + \left( t^{2} + 3 \right) \, \vu{k}$
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta 5}
+Calcula las expresiones de las componentes polares de la velocidad y aceleración de las partículas cuyo vector bidimensional de posición está dado por:
+\setbeamercolor{item projected}{bg=bulgarianrose,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item $r = \dfrac{5}{2 - \cos \phi}, \hspace{0.5cm} \phi = \omega \, t$
+\item $r = \dfrac{a}{t}, \hspace{0.5cm} \phi = b \, t$
+\end{enumerate}
+\end{frame}
 \section{Jacobianos y transformaciones}
 \frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 
