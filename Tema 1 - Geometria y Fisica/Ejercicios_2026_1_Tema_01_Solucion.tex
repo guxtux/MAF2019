@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+%\usepackage[left=0.25cm,top=1cm,right=0.25cm,bottom=1cm]{geometry}
+\usepackage{geometry}
+\textwidth = 20cm
+\hoffset = -1cm
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath}
+\usepackage{nccmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{enumerate}
+\usepackage{anyfontsize}
+\usepackage{anysize}
+\usepackage{enumitem}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{relsize}
+\usepackage{physics}
+\usepackage{empheq}
+\usepackage{mathtools}
+\spanishdecimal{.}
+\setlist[enumerate]{itemsep=0mm}
+\renewcommand{\baselinestretch}{1.2}
+\let\oldbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{\oldbibliography{#1}
+\setlength{\itemsep}{0pt}}
+%\marginsize{1.5cm}{1.5cm}{0cm}{2cm}
+%\renewcommand\theenumii{\arabic{theenumii.enumii}}
+\renewcommand\labelenumii{\theenumi.{\arabic{enumii}}}
+
+\title{Ejercicios para el Tema 1 \\ \large{Matemáticas Avanzadas de la Física}}
+%\subtitle{Fecha de entrega: 8 de marzo de 2016.}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\begin{document}
+\vspace{-4cm}
+
+\maketitle
+\fontsize{14}{14}\selectfont
+
+\begin{enumerate}
+\item Considera la transformación de coordenadas:
+\begin{align*}
+x &= 2 \, u \, v \\[0.5em]
+y &= u^{2} + v^{2} \\[0.5em]
+z &= w
+\end{align*}
+Demuestra que el nuevo sistema de coordenadas \emph{es no ortogonal}.
+
+\vspace{1cm}
+\noindent
+\textbf{Solución: } Para verificar si un sistema $(u, v, w)$ es ortogonal basta revisar si las derivadas parciales de la posición $\vb{r}_{u}$, $\vb{r}_{v}$, $\vb{r}_{w}$ (vectores base covariantes) son mutuamente perpendiculares, es decir, si $\vb{r}_i \cdot \vb{r}_j = 0$ para $i \neq j$.
+\par
+Partimos de:
+\begin{align*}
+x = 2 \, u \, v \hspace{1cm} y = u^{2} + v^{2} \hspace{1cm} z = w
+\end{align*}
+y definimos:
+\begin{align*}
+\vb{r}(u, v, w) = (x, y, z) = (2 \, u \, v, u^{2} + v^{2}, w)
+\end{align*}
+Entonces los vectores base son:
+\begin{align*}
+\vb{r}_{u} = \pdv{\vb{r}}{u} = \left( 2 \, v, 2 \, u, 0 \right) \hspace{0.75cm} \vb{r}_{v} = \pdv{\vb{r}}{v} = \left( 2 \, u, 2 \, v, 0 \right) \hspace{0.75cm} \vb{r}_{w} = \pdv{\vb{r}}{w} = \left( 0, 0, 1 \right)
+\end{align*}
+Calculamos los productos punto:
+\begin{align*}
+\vb{r}_{u} \cdot \vb{r}_{u} &= (2 \, v)^2 + (2 \, u)^2 = 4(u^2 + v^2) \\[0.5em]
+\vb{r}_{v} \cdot \vb{r}_{v} &= (2 \, u)^2 + (2 \, v)^2 = 4(u^2 + v^2) \\[0.5em]
+\vb{r}_{w} \cdot \vb{r}_{w} &= 1 \\[0.5em]
+\vb{r}_{u} \cdot \vb{r}_{v} &= (2 \, v)(2 \, u) + (2 \, u)(2 \, v) = 8 \, u \, v \quad \vb{r}_{u} \cdot \vb{r}_{w} = 0, \quad \vb{r}_{v} \cdot \vb{r}_{w} = 0
+\end{align*}
+La condición de ortogonalidad exige $\vb{r}_{i} \cdot \vb{r}_{j} = 0$ para $i \neq j$. Aquí tenemos:
+\begin{align*}
+\vb{r}_{u} \cdot \vb{r}_{v} = 8 \, v \neq 0
+\end{align*}
+Por tanto, el sistema de coordenadas $(u, v, w)$ es \emph{\textbf{no ortogonal}}. Las direcciones $u$ y $v$ no son ortogonales, pero ambas sí son ortogonales a $w$.
+\item Considera la transformación de coordenadas:
+\begin{align*}
+x &= 2 \, u \, v \\[0.5em]
+y &= u^{2} - v^{2} \\[0.5em]
+z &= w
+\end{align*}
+Demuestra que el nuevo sistema de coordenadas \emph{es ortogonal}.
+
+\vspace{1cm}
+\noindent
+\textbf{Solución: } Nuevamente revisamos si $\vb{r}_{i} \cdot \vb{r}_{j} = 0$ para $i \neq j$. Definimos entonces:
+\begin{align*}
+u (u, v, w) = (x, y, z) = (2 \, u \, v, u^{2} - v^{2}, w)
+\end{align*}
+Calculamos las derivadas parciales:
+\begin{align*}
+\vb{r}_{u} &= \pdv{\vb{r}}{u} = \left( 2 \, v, 2 \, u, 0 \right) \hspace{0.5cm} \vb{r}_{v} = \pdv{\vb{r}}{v} = \left( 2 \, u, -2 \, v, 0 \right) \hspace{0.5cm} \vb{r}_{w} = \pdv{\vb{r}}{w} = \left( 0, 0, 1 \right)
+\end{align*}
+Calculamos los productos punto:
+\begin{align*}
+\vb{r}_{u} \cdot \vb{r}_{u} &= (2 \, v)^2 + (2 \, u)^2 = 4(u^2 + v^2) \\[0.5em]
+\vb{r}_{v} \cdot \vb{r}_{v} &= (2 \, u)^2 + (-2 \, v)^2 = 4(u^2 + v^2) \\[0.5em]
+\vb{r}_{w} \cdot \vb{r}_{w} &= 1 \\[0.5em]
+\vb{r}_{u} \cdot \vb{r}_{v} &= (2 \, v)(2 \, u) + (2 \, u)(-2 \, v) = 8 \, u \, v - 8 \, u \, v = 0 \\[0.5em]
+\vb{r}_{u} \cdot \vb{r}_{w} &= 0, \quad \vb{r}_{v} \cdot \vb{r}_{w} = 0
+\end{align*}
+Aquí tenemos que $\vb{r}_{u} \cdot \vb{r}_{v} = 0$, lo que implica que las direcciones $u$ y $v$ son ortogonales. Además, ambas son ortogonales a $w$. Por tanto, el sistema de coordenadas $(u, v, w)$ es \emph{\textbf{ortogonal}}.
+\item Escribe en coordenadas esféricas el siguiente vector:
+\begin{align*}
+\vb{A} = x \, y \, \vu{i} - x \, \vu{j} + 3 \, x \, \vu{k}
+\end{align*}
+adicionalmente expresa $A_{r}, A_{\theta}, A_{\phi}$ en términos de $r, \theta, \phi$.
+
+\vspace{1cm}
+\noindent
+\textbf{Solución: } Recordemos que las coordenadas esféricas están definidas por:
+\begin{align*}
+x &= r \, \sin \theta \, \cos \phi \\[0.5em]
+y &= r \, \sin \theta \, \sin \phi \\[0.5em]
+z &= r \, \cos \theta
+\end{align*}
+Sea el vector $A$ dado por:
+\begin{align*}
+\vb{A} = x \, y \,\vu{i} - x \,\vu{j} + 3 \, x \vu{k}
+\end{align*}
+Los vectores base esféricos en términos de $\left( \vu{i}, \vu{j}, \vu{k} \right)$ son:
+\begin{align*}
+\vb{e}_{r} &= \sin \theta \, \cos \phi \,\vu{i} + \sin \theta \, \sin \phi \, \vu{j} + \cos \theta \, \vu{k} \\[0.5em]
+\vb{e}_{\theta} &= \cos \theta \, \cos \phi \,\vu{i} + \cos \theta \, \sin \phi \, \vu{j} - \sin \theta \, \vu{k} \\[0.5em]
+\vb{e}_{\phi} &= - \sin \phi \, \vu{i} + \cos \phi \, \vu{j}
+\end{align*}
+De manera inversa, los vectores base cartesianos en términos de los vectores base esféricos:
+\begin{align*}
+\vu{i} &= \sin \theta \, \cos \phi \, \vb{e}_{r} + \cos \theta \, \cos \phi \, \vb{e}_{\theta} - \sin \phi \, \vb{e}_{\phi} \\[0.5em]
+\vu{j} &= \sin \theta \, \sin \phi \,\vb{e}_{r} + \cos \theta \, \sin \phi \, \vb{e}_{\theta} + \cos \phi \, \vb{e}_{\phi} \\[0.5em]
+\vu{k} &= \cos \theta \, \vb{e}_{r} - \sin \theta \, \vb{e}_{\theta}
+\end{align*}
+%--- Componentes cartesianas de A en función de (r,theta,phi)
+Primero sustituimos $(x, y, z)$ en términos de $(r, \theta, \phi)$:
+\begin{align*}
+A_{x} &= x \, y = \left( r \, \sin \theta \, \cos \phi \right) \left( r \, \sin \theta \, \sin \phi \right) = r^{2} \, \sin^2 \theta \, \cos \phi \, \sin \phi \\[0.5em]
+A_{y} &= - x = - r \sin \theta \, \cos \phi \\[0.5em]
+A_{z} &= 3 \, x = 3 \, r \, \sin \theta \, \cos\phi
+\end{align*}
+
+%--- Componentes esféricas por producto punto
+Las componentes esféricas del vector $\vb{A}$ se obtienen a partir de:
+\begin{align*}
+A_{r} = \vb{A} \cdot \vb{e}_{r} \hspace{1cm} A_{\theta} = \vb{A} \cdot \vb{e}_{\theta} \hspace{1cm} A_{\phi} = \vb{A} \cdot \vb{e}_{\phi}
+\end{align*}
+Entonces:
+\begin{align*}
+A_{r} &= \left( A_{x} + A_{y} + A_{z} \right) \cdot \vb{e}_{r} = \\[0.5em]
+&= \left( A_{x} + A_{y} + A_{z} \right) \cdot \left( \sin \theta \, \cos \phi \,\vu{i} + \sin \theta \, \sin \phi \, \vu{j} + \cos \theta \, \vu{k} \right) = \\[0.5em]
+&= A_{x} \, \sin \theta \cos \phi + A_{y} \, \sin \theta \, \sin \phi + A_{z} \, \cos\theta \\[0.5em]
+A_{\theta} &= A_{x} \, \cos \theta \, \cos \phi + A_{y} \, \cos \theta \, \sin \phi - A_{z} \, \sin \theta \\[0.5em]
+A_{\phi} &= - A_{x} \, \sin \phi + A_{y} \, \cos \phi
+\end{align*}
+y sustituyendo $\left( A_{x}, A_{y}, A_{z} \right)$ en función de $(r, \theta, \phi)$, que luego de factorizar resulta:
+\begin{align*}
+A_{r} &= \left( r^{2} \, \sin^2 \theta \, \cos \phi \, \sin \phi \right) \left( \cos \theta \, \cos \phi \right) + \left( - r \sin \theta \, \cos \phi \right) \left( \sin \theta \, \sin \phi \right) + \\[0.5em]
+&+ \left( 3 \, r \, \sin \theta \, \cos\phi \right) \left( \cos\theta \right) \\[0.5em]
+\Aboxed{A_{r} &= r \, \sin \theta \, \cos \phi \, \left[ r \, \sin \theta \, \sin \phi \, \cos \phi - \sin \theta \, \sin \phi + 3 \, \cos \theta \right]} \\[0.5em]
+A_{\theta} &= \left( r^{2} \, \sin^2 \theta \, \cos \phi \, \sin \phi \right) \left( \cos \theta \, \cos \phi \right) + \left( - r \sin \theta \, \cos \phi  \right) \left( \cos \theta \, \sin \phi \right) + \\[0.5em]
+&+ \left( 3 \, r \, \sin \theta \, \cos\phi \right) \left( - \sin \theta \right) \\[0.5em]
+\Aboxed{A_{\theta} &= r \, \sin \theta \, \cos \phi \, \left[ r \, \sin \theta \, \cos \theta \, \sin \phi \, \cos \phi \, - \cos \theta \, \sin \phi - 3 \, \sin \theta \right]} \\[0.5em]
+A_{\phi }&= \left( r^{2} \, \sin^2 \theta \, \cos \phi \, \sin \phi \right) \left( - \sin \phi \right) + \left( - r \sin \theta \, \cos \phi  \right) \left( \cos \phi \right) \\[0.5em]
+\Aboxed{A_{\phi}&= - r^{2} \, \sin^{2} \theta \, \cos \phi \, \sin^{2} \phi - r \, \sin \theta \, \cos^{2} \phi}
+\end{align*}
+%--- Vector A en base esférica
+Por lo tanto:
+\begin{align*}
+\boxed{
+\vb{A} = A_{r} \,\vb{e}_{r} + A_{\theta} \, \vb{e}_{\theta} + A_{\phi} \, \vb{e}{\phi} }
+\end{align*}
+con $ (A_{r}, A_{\theta}, A_{\phi} )$ dados arriba.
+
+\end{enumerate}
+\end{document}
