@@ -5,6 +5,13 @@
 
 \date{}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\resetcounteronoverlays{saveenumi}
+
 \title{\large{Introducción EDP }}
 \subtitle{Tema 2 - Primeras técnicas de solución}
 \author{M. en C. Gustavo Contreras Mayén}
@@ -15,10 +22,10 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 \section{Ecuaciones Diferenciales Parciales}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
 
 \begin{frame}
@@ -27,7 +34,11 @@ La mayoría de los fenómenos físicos, ya sea en el dominio de la dinámica de 
 \end{frame}
 \begin{frame}
 \frametitle{Uso de las EDP}
-Encontraremos que la mayoría de la física matemática son EDP. Es cierto que se pueden hacer simplificaciones que reduzcan las ecuaciones en cuestión a ecuaciones diferenciales ordinarias, sin embargo, la descripción completa de estos sistemas reside en el área general de la matemática para las EDP.
+Encontraremos que la mayoría de la física matemática son EDP. 
+\end{frame}
+\begin{frame}
+\frametitle{Uso de las EDP}
+Es cierto que se pueden hacer simplificaciones que reduzcan las ecuaciones en cuestión a ecuaciones diferenciales ordinarias, sin embargo, la descripción completa de estos sistemas reside en el área general de la matemática para las EDP.
 \end{frame}
 
 \subsection{Definición}
@@ -35,10 +46,10 @@ Encontraremos que la mayoría de la física matemática son EDP. Es cierto que s
 \begin{frame}
 \frametitle{Definición EDP}
 Una ecuación diferencial parcial (EDP) es una ecuación que contiene derivadas parciales. 
-\\
-\bigskip
-\pause
-En contraste con las ecuaciones diferenciales ordinarias (EDO), donde la función desconocida depende solo de una variable, en las EDP, la función desconocida depende de varias variables (como la temperatura $u (x, t)$ depende tanto de la posición $x$ como del tiempo $t$).
+\end{frame}
+\begin{frame}
+\frametitle{Definición EDP}
+En contraste con las ecuaciones diferenciales ordinarias (EDO), donde la función desconocida depende solo de una variable, \pause en las EDP, la función desconocida depende de varias variables (como la temperatura $u (x, t)$ depende tanto de la posición $x$ como del tiempo $t$).
 \end{frame}
 \begin{frame}
 \frametitle{Notación EDP}
@@ -69,13 +80,10 @@ u_{tt} &= u_{xx} + u_{yy} + u_{zz} \hspace{1cm} \mbox{Ec. de onda en 3D} \\[0.5e
 u_{tt} &= u_{xx} + \alpha \, u_{t} + \beta \, u \hspace{0.9cm} \mbox{Ec. del telégrafo}
 \end{aligned}
 \end{eqnarray*}
+Veamos que la función desconocida $u$ siempre depende de más de una variable.
 \end{frame}
 \begin{frame}
 \frametitle{Variables en las EDP}
-Veamos de los ejemplos anteriores que la función desconocida $u$ siempre depende de más de una variable.
-\\
-\bigskip
-\pause
 La variable $u$ (que diferenciamos) se llama \textocolor{burgundy}{variable dependiente}, \pause mientras que aquellas con respecto a las que diferenciamos se llaman \textocolor{ao}{variables independientes}.
 \end{frame}
 \begin{frame}
@@ -92,7 +100,7 @@ la variable dependiente $u (x, t)$ es una función de dos variables independient
 Mientras que para la ecuación:
 \pause
 \begin{align*}
-u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta}
+u_{t} = u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta}
 \end{align*}
 se tiene que $u (r, \theta, t)$ depende de las variables $r$, $\theta$ y $t$.
 \end{frame}
@@ -101,7 +109,7 @@ se tiene que $u (r, \theta, t)$ depende de las variables $r$, $\theta$ y $t$.
 
 \begin{frame}
 \frametitle{¿Por qué son importantes las EDP?}
-La mayoría de las leyes naturales de la física, como las ecuaciones de Maxwell, \pause la ley de enfriamiento de Newton, \pause las ecuaciones de Navier-Stokes, \pause las ecuaciones de movimiento de Newton \pause y la ecuación de Schrödinger de la mecánica cuántica, \pause se expresan (o pueden ser expresadas) en términos de EDP, es decir, estas leyes describen los fenómenos físicos relacionando las derivadas espaciales y temporales.
+La mayoría de las leyes naturales de la física, se expresan (o pueden ser expresadas) en términos de EDP, es decir, estas leyes describen los fenómenos físicos relacionando las derivadas espaciales y temporales.
 \end{frame}
 \begin{frame}
 \frametitle{¿Por qué son importantes las EDP?}
@@ -113,7 +121,7 @@ Por tanto, tenemos ecuaciones que relacionan derivadas parciales de alguna canti
 \end{frame}
 
 \section{Métodos de solución para las EDP}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Lista de métodos}
 
 \begin{frame}
@@ -122,7 +130,11 @@ Por tanto, tenemos ecuaciones que relacionan derivadas parciales de alguna canti
 \\
 \bigskip
 \pause
-Esta es una buena pregunta que debemos de plantearnos. Resulta que hay conjunto amplio de métodos disponibles para resolver las EDP; los métodos \textocolor{cornellred}{más importantes son los que convierten las EDP en EDO}, ya que simplifican el manejo y su solución.
+Esta es una buena pregunta que debemos de plantearnos.
+\end{frame}
+\begin{frame}
+\frametitle{Técnicas de solución}
+Resulta que hay conjunto amplio de métodos disponibles para resolver las EDP; los métodos \textocolor{cornellred}{más importantes son los que convierten las EDP en EDO}, ya que simplifican el manejo y su solución.
 \end{frame}
 \begin{frame}
 \frametitle{Lista de 10 técnicas de solución}
@@ -140,7 +152,7 @@ No es una lista definitiva, pero nos servirá de referencia para contemplar otra
 \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
 }
 \begin{enumerate}
-\item \emph{Separación de variables}.
+\item \textocolor{burntorange}{Separación de variables}.
 \\
 \bigskip
 Esta técnica reduce una EDP de $n$ variables, a un sistema de $n$ EDO.
@@ -155,7 +167,7 @@ Esta técnica reduce una EDP de $n$ variables, a un sistema de $n$ EDO.
 \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
 }\begin{enumerate}
 \conti
-\item \emph{Transformadas integrales}. 
+\item \textocolor{burntumber}{Transformadas integrales}. 
 \\
 \bigskip
 Este procedimiento reduce una EDP de $n$ variables independientes a una de $n - 1$ variables; por lo tanto, una EDP en dos variables podría cambiarse a una EDO.
@@ -171,7 +183,7 @@ Este procedimiento reduce una EDP de $n$ variables independientes a una de $n - 
 }
 \begin{enumerate}
 \conti
-\item \emph{Cambio de coordenadas}.
+\item \textocolor{byzantine}{Cambio de coordenadas}.
 \\
 \bigskip
 Este método cambia la EDP original a una EDO o bien a otra EDP (una más fácil) cambiando las coordenadas del problema (rotando el eje o transformaciones similares).
@@ -187,7 +199,7 @@ Este método cambia la EDP original a una EDO o bien a otra EDP (una más fácil
 }
 \begin{enumerate}
 \conti
-\item \emph{Transformación de la variable dependiente}.
+\item \textocolor{byzantium}{Transformación de la variable dependiente}.
 \\
 \bigskip
 Este método transforma la variable incógnita de una EDP en una nueva incógnita que es más fácil de encontrar.
@@ -203,7 +215,7 @@ Este método transforma la variable incógnita de una EDP en una nueva incógnit
 }
 \begin{enumerate}
 \conti
-\item \emph{Métodos numéricos}. 
+\item \textocolor{cadet}{Métodos numéricos}. 
 \\
 \bigskip
 Estos métodos cambian una EDP a un sistema de ecuaciones en diferencias que puede resolverse mediante un algoritmo con técnicas iterativas en una computadora; en muchos casos, esta es la única técnica que funcionará. 
@@ -223,7 +235,7 @@ Además de los métodos que reemplazan las EDP por ecuaciones en diferencias, ex
 }
 \begin{enumerate}
 \conti
-\item \emph{Métodos de perturbación}.
+\item \textocolor{cadmiumgreen}{Métodos de perturbación}.
 \\
 \bigskip
 Este método convierte un problema no lineal en una secuencia de problemas lineales que se aproxima al no lineal.
@@ -239,7 +251,7 @@ Este método convierte un problema no lineal en una secuencia de problemas linea
 }
 \begin{enumerate}
 \conti
-\item \emph{Técnica impulso-respuesta}.
+\item \textocolor{cardinal}{Técnica impulso-respuesta}.
 \\
 \bigskip
 Este procedimiento descompone las condiciones iniciales y de frontera del problema en impulsos simples y encuentra la respuesta a cada impulso. La respuesta general se encuentra luego agregando estas respuestas simples.
@@ -255,7 +267,7 @@ Este procedimiento descompone las condiciones iniciales y de frontera del proble
 }
 \begin{enumerate}
 \conti
-\item \emph{Ecuaciones integrales}. Esta técnica cambia una EDP a una ecuación integral (una ecuación donde la incógnita está dentro de la integral). Luego, la ecuación integral se resuelve mediante varias técnicas.
+\item \textocolor{ceruleanblue}{Ecuaciones integrales}. Esta técnica cambia una EDP a una ecuación integral (una ecuación donde la incógnita está dentro de la integral). Luego, la ecuación integral se resuelve mediante varias técnicas.
 \seti
 \end{enumerate}
 \end{frame}
@@ -268,7 +280,7 @@ Este procedimiento descompone las condiciones iniciales y de frontera del proble
 }
 \begin{enumerate}
 \conti
-\item \emph{Métodos de cálculo de variaciones}.
+\item \textocolor{cordovan}{Métodos de cálculo de variaciones}.
 \\
 \bigskip
 Estos métodos encuentran la solución a las EDP reformulando la ecuación como un problema de minimización. Resulta que el mínimo de cierta expresión (muy probablemente la expresión representará la energía total) también es la solución a la EDP.
@@ -284,7 +296,7 @@ Estos métodos encuentran la solución a las EDP reformulando la ecuación como 
 }
 \begin{enumerate}
 \conti
-\item \emph{Expansión de funciones propias (eigenfunciones)}.
+\item \textocolor{darkcoral}{Expansión de funciones propias (eigenfunciones)}.
 \\
 \bigskip
 Este método intenta encontrar la solución de una EDP como una suma infinita de funciones propias. Estas funciones propias se encuentran resolviendo lo que se conoce como un problema de valores propios correspondiente al problema original.
@@ -304,7 +316,7 @@ En el caso que nos encontremos una EDP muy específica en donde no sea posible r
 \end{frame}
 
 \section{Tipos de EDP}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar}\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Clasificación}
 
 \begin{frame}
@@ -313,10 +325,10 @@ Las ecuaciones diferenciales parciales se clasifican de acuerdo a ciertas caract
 \\
 \bigskip
 \pause
-La clasificación es un concepto importante porque la teoría general y \emph{los métodos de solución generalmente se aplican solo a una clase determinada} de ecuaciones.
+La clasificación es un concepto importante porque la teoría general y \textocolor{darkmagenta}{los métodos de solución generalmente se aplican solo a una clase determinada} de ecuaciones.
 \end{frame}
 
-\subsection*{Orden de la EDP}
+\subsection{Orden de la EDP}
 
 \begin{frame}
 \frametitle{Definición}
@@ -349,7 +361,11 @@ u_{t} &= u_{rr} + \dfrac{1}{r} \, u_{r} + \dfrac{1}{r^{2}} \, u_{\theta \theta} 
 
 \begin{frame}
 \frametitle{Linealidad}
-Las EDP son lineales o no lineales. \pause En las lineales, la variable dependiente $u$ y todas sus derivadas aparecen de forma lineal (no se multiplican juntas ni al cuadrado, por ejemplo).
+Las EDP son lineales o no lineales. 
+\\
+\bigskip
+\pause
+En las lineales, la variable dependiente $u$ y todas sus derivadas aparecen de forma lineal (no se multiplican juntas ni al cuadrado, por ejemplo).
 \end{frame}
 \begin{frame}
 \frametitle{Linealidad}
@@ -397,7 +413,7 @@ Si los coeficientes $A, B, C, D, E, F$ en la ec. (\ref{eq:ecuacion_01_01}) son c
 \begin{frame}
 \frametitle{Tres tipos de EDP}
 Toda EDP lineal como la ec. (\ref{eq:ecuacion_01_01}) puede clasificarse como de tipo:
-\setbeamercolor{item projected}{bg=green(pigment),fg=lava}
+\setbeamercolor{item projected}{bg=green(pigment),fg=white}
 \setbeamertemplate{enumerate items}{%
 \usebeamercolor[bg]{item projected}%
 \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
