@@ -3,6 +3,11 @@
 \usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \date{}
 
 \title{\large{Método de Frobenius}}
@@ -17,20 +22,20 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 
 \section{Series de potencias}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
 
 %Ref. Bruzzone - Introducción al método de Frobenius
 \begin{frame}
 \frametitle{El método de Frobenius}
 El método propone la búsqueda de soluciones en series de potencias para ecuaciones diferenciales lineales de segundo orden.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{El método de Frobenius}
 Este procedimiento requiere el encontrar relaciones de recurrencia entre los coeficientes de las series buscadas, asumiendo un primer término no nulo.
 \end{frame}
 
@@ -42,7 +47,7 @@ Una clase muy extensa de ecuaciones diferenciales poseen soluciones que se expre
 \\
 \bigskip
 \pause
-Las funciones que gozan de esta particularidad se les llama \emph{analíticas}.
+Las funciones que gozan de esta particularidad se les llama \textocolor{brown(web)}{analíticas}.
 \end{frame}
 \begin{frame}
 \frametitle{Soluciones analíticas}
@@ -55,9 +60,9 @@ Las ecuaciones diferenciales más familiares como la ecuación de un oscilador a
  admite soluciones del tipo:
 \pause
 \begin{align*}
-x(s) = A_{1} \, \sin( \omega \, s) + A_{2} \, \cos (\omega \, s)
+x (s) = A_{1} \, \sin(\omega \, s) + A_{2} \, \cos (\omega \, s)
 \end{align*}
-siendo claro que $\sin( \omega \, s)$ y $\cos( \omega \, s)$ son funciones analíticas.
+siendo claro que $\sin (\omega \, s)$ y $\cos(\omega \, s)$ son funciones analíticas.
 \end{frame}
 \begin{frame}
 \frametitle{Soluciones analíticas}
@@ -138,17 +143,17 @@ De esta manera tendremos un intervalo de convergencia cuando $L$ existe:
 \left( x_{0} - \dfrac{1}{L}, x_{0} + \dfrac{1}{L} \right)
 \end{align*}
 \pause
-Este intervalo es simétrico respecto de $x_{0}$, de manera tal que \emph{la serie es convergente dentro} de este intervalo y \emph{divergente fuera} del mismo.
+Este intervalo es simétrico respecto de $x_{0}$, de manera tal que \textocolor{ao}{la serie es convergente dentro} de este intervalo y \textocolor{red}{divergente fuera} del mismo.
 \end{frame}
 
 \section{Puntos singulares}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Definiciones}
 
 %Ref. Arfken
 \begin{frame}
 \frametitle{Definiendo puntos}
-Se presenta el concepto de un \emph{punto singular o singularidad} (tal como se aplica a una ecuación diferencial).
+Se presenta el concepto de un \textocolor{ao(english)}{punto singular o singularidad} (tal como se aplica a una ecuación diferencial).
 \\
 \bigskip
 \pause
@@ -160,8 +165,8 @@ El interés en este concepto radica en su utilidad en:
 \raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
 }
 \begin{enumerate}[<+->]
-\item Clasificar las ODE.
-\item Revisar la viabilidad de una solución en series, esta viabilidad es parte del teorema de Fuchs.
+\item Clasificar las EDO.
+\item Revisar la viabilidad de una solución en series, esta viabilidad es parte del \textocolor{blue-violet}{teorema de Fuchs}.
 \end{enumerate}
 \end{frame}
 \begin{frame}
@@ -169,7 +174,7 @@ El interés en este concepto radica en su utilidad en:
 Usando la notación $\displaystyle \dv[2]{y}{x} = \sderivada{y}$, tenemos:
 \pause
 \begin{align}
-\sderivada{y} = f(x, y, \pderivada{y})
+\sderivada{y} = f (x, y, \pderivada{y})
 \label{eq:ecuacion_09_74}
 \end{align}
 \pause
@@ -194,7 +199,7 @@ Ahora bien, si las funciones $P (x)$ y $Q (x)$ permanecen finitas a $x = x_{0}$,
 \\
 \bigskip
 \pause
-Al contrario, si $P (x)$ y/o $Q (x)$ divergen mientras $x \to x_{0}$, el punto $x_{0}$ es un \emph{punto singular}.
+Al contrario, si $P (x)$ y/o $Q (x)$ divergen mientras $x \to x_{0}$, el punto $x_{0}$ es un \textocolor{darkcyan}{punto singular}.
 \end{frame}
 \begin{frame}
 \frametitle{Tipos de puntos singulares}
@@ -230,61 +235,61 @@ Estas definiciones son válidas para todos los valores finitos de $x_{0}$.
 \pause
 El análisis de los puntos al infinito $(x \to \infty)$ es similar al tratamiento que se hace para las funciones en variable compleja.
 \end{frame}
-\begin{frame}
-\frametitle{Análisis puntos al infinito}
-Hacemos el cambio de variable $x = 1/z$, sustituyendo en la ED y entonces hacemos que $z \to 0$. 
-\\
-\bigskip
-\pause
-Haciendo el cambio de variable en las derivadas:
-\begin{align}
-\dv{y(x)}{x} = \dv{y(z^{-1})}{z} \: \dv{z}{x} = - \dfrac{1}{x^{2}} \dv{y(z^{-1})}{z} = -z^{2} \: \dv{y(z^{-1})}{z}
-\label{eq:ecuacion_09_76}
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Análisis puntos al infinito}
-Entonces:
-\pause
-\begin{align}
-\begin{aligned}
-\dv[2]{y(x)}{x} &= \dv{z} \left[ \dv{y(x)}{x} \right] \dv{z}{x} = \\
-&= (-z^{2}) \left[ -2 \: z \dv{y(z^{-1})}{z} - z^{2} \: \dv[2]{y(z^{-1})}{z} \right] = \\
-&= 2 \: z^{3} \: \dv{y(z^{-1})}{z} + z^{4} \: \dv[2]{y(z^{-1})}{z}
-\end{aligned}
-\label{eq:ecuacion_09_77}
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Análisis puntos al infinito}
-Usando estos resultados, podemos transformar la ecuación (\ref{eq:ecuacion_09_75}) en:
-\pause
-\begin{align}
-z^{4} \: \dv[2]{y}{z} + [ 2 \: z^{3} - z^{2} \: P (z^{-1})] \: \dv{y}{z} + Q (z^{-1}) \: y = 0
-\label{eq:ecuacion_09_78}
-\end{align}
-\end{frame}
-\begin{frame}
-\frametitle{Análisis puntos al infinito}
-El comportamiento en $x = \infty, (z = 0)$ entonces dependerá del comportamiento de los nuevos coeficientes:
-\pause
-\begin{align*}
-\dfrac{2 \: z - P(z^{-1})}{z^{2}} \hspace{1cm} \text{ y } \hspace{1cm} \dfrac{Q(z^{-1})}{z^{4}}
-\end{align*}
-a medida que $z \to 0$.
-\end{frame}
-\begin{frame}
-\frametitle{Análisis puntos al infinito}
-Si estas dos expresiones se mantienen finitas, el punto $x = \infty$ es un punto ordinario.
-\\
-\bigskip
-\pause
-Si las expresiones divergen con mayor rapidez que $1/z$ y $1/z^{2}$, respectivamente, el punto $x = \infty$ es un punto regular singular, de otra manera, el punto es irregular singular (una singularidad esencial).
-\end{frame}
+% \begin{frame}
+% \frametitle{Análisis puntos al infinito}
+% Hacemos el cambio de variable $x = 1/z$, sustituyendo en la ED y entonces hacemos que $z \to 0$. 
+% \\
+% \bigskip
+% \pause
+% Haciendo el cambio de variable en las derivadas:
+% \begin{eqnarray}
+% \dv{y(x)}{x} = \dv{y(z^{-1})}{z} \: \dv{z}{x} = \pause - \dfrac{1}{x^{2}} \dv{y(z^{-1})}{z} = \pause -z^{2} \: \dv{y(z^{-1})}{z}
+% \label{eq:ecuacion_09_76}
+% \end{eqnarray}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Análisis puntos al infinito}
+% Entonces:
+% \pause
+% \begin{eqnarray}
+% \begin{aligned}
+% \dv[2]{y(x)}{x} &= \dv{z} \left[ \dv{y(x)}{x} \right] \dv{z}{x} = \\ \pause
+% &= (-z^{2}) \left[ -2 \: z \dv{y(z^{-1})}{z} - z^{2} \: \dv[2]{y(z^{-1})}{z} \right] = \\ \pause
+% &= 2 \: z^{3} \: \dv{y(z^{-1})}{z} + z^{4} \: \dv[2]{y(z^{-1})}{z}
+% \end{aligned}
+% \label{eq:ecuacion_09_77}
+% \end{eqnarray}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Análisis puntos al infinito}
+% Usando estos resultados, podemos transformar la ecuación (\ref{eq:ecuacion_09_75}) en:
+% \pause
+% \begin{align}
+% z^{4} \: \dv[2]{y}{z} + [ 2 \: z^{3} - z^{2} \: P (z^{-1})] \: \dv{y}{z} + Q (z^{-1}) \: y = 0
+% \label{eq:ecuacion_09_78}
+% \end{align}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Análisis puntos al infinito}
+% El comportamiento en $x = \infty, (z = 0)$ entonces dependerá del comportamiento de los nuevos coeficientes:
+% \pause
+% \begin{align*}
+% \dfrac{2 \: z - P(z^{-1})}{z^{2}} \hspace{1cm} \text{ y } \hspace{1cm} \dfrac{Q(z^{-1})}{z^{4}}
+% \end{align*}
+% a medida que $z \to 0$.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Análisis puntos al infinito}
+% Si estas dos expresiones se mantienen finitas, el punto $x = \infty$ es un punto ordinario.
+% \\
+% \bigskip
+% \pause
+% Si las expresiones divergen con mayor rapidez que $1/z$ y $1/z^{2}$, respectivamente, el punto $x = \infty$ es un punto regular singular, de otra manera, el punto es irregular singular (una singularidad esencial).
+% \end{frame}
 
 %Ref. Hassani 2009 Chap. 26
 \section{Método de Frobenius}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{El método}
 
 \begin{frame}
@@ -304,7 +309,7 @@ Este intervalo puede ser muy pequeño o puede cubrir toda la línea real.
 Una ecuación diferencial de segundo orden homogénea y lineal, se puede escribir como:
 \pause
 \begin{align}
-p_{2} (x) \, \dv[2]{y}{x} + p_{1} (x) \, \dv{y}{x} + p_{0}(x) \, y = 0
+p_{2} (x) \, \dv[2]{y}{x} + p_{1} (x) \, \dv{y}{x} + p_{0} (x) \, y = 0
 \label{eq:ecuacion_26_07}    
 \end{align}
 \end{frame}
@@ -338,7 +343,7 @@ Si $p_{2} (0) \neq 0$, solo es necesario considerar las potencias no negativas d
 \\
 \bigskip
 \pause
-Si $p_{2} (0) = 0$, la ED pierde su carácter de \enquote{segundo orden}, y las soluciones no se revisarían en estas notas.
+Si $p_{2} (0) = 0$, la ED pierde su carácter de \enquote{segundo orden}, y las soluciones no se revisarían en el curso.
 \end{frame}
 \begin{frame}
 \frametitle{Dos opciones}
@@ -362,14 +367,14 @@ Rara vez se utiliza la primera opción. Resulta que la forma más económica, pe
 \frametitle{Solución supuesta}
 La solución que suponemos es del tipo:
 \pause
-\begin{align}
+\begin{eqnarray}
 \begin{aligned}
-y &= x^{r} \, \nsum_{n=0}^{\infty} a_{n} \, x^{n} = \\[0.5em]
-&= \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} = \\[0.5em]
+y &= x^{r} \, \nsum_{n=0}^{\infty} a_{n} \, x^{n} = \\[0.5em] \pause
+&= \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} = \\[0.5em] \pause
 &= a_{0} \, x^{r} + a_{1} \, x^{r+1} + a_{2} \, x^{r+2} + \ldots
 \end{aligned}
 \label{eq:ecuacion_26_08}    
-\end{align}
+\end{eqnarray}
 donde $r$ es un número real (no necesariamente un entero positivo) que quedará determinado por la ED.
 \end{frame}
 \begin{frame}
@@ -388,25 +393,25 @@ Ya que una serie de potencias es uniformemente convergente (con su radio de conv
 \frametitle{Diferenciando la solución}
 Por lo que al diferenciar la solución en una primera ocasión, tenemos:
 \pause
-\begin{align}
+\begin{eqnarray}
 \begin{aligned}
-\dv{y}{x} &= \nsum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} = \\[0.5em]
+\dv{y}{x} &= \nsum_{n=0}^{\infty} a_{n} \, (n + r) \, x^{n+r-1} = \\[0.5em] \pause
 &= r \, a_{0} \, x^{r-1} + (r + 1) \, a_{1} \, x^{r} + \ldots
 \end{aligned}
 \label{eq:ecuacion_26_09a}
-\end{align}
+\end{eqnarray}
 \end{frame}
 \begin{frame}
 \frametitle{Diferenciando nuevamente la solución}
 Por lo que al diferenciar por segunda vez, tenemos:
 \pause
-\begin{align}
+\begin{eqnarray}
 \begin{aligned}
-\dv[2]{y}{x} &= \nsum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-1} = \\[0.5em]
+\dv[2]{y}{x} &= \nsum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-1} = \\[0.5em] \pause
 &= r \, (r - 1) \, a_{0} \, x^{r-2} + (r + 1) \, r \, a_{1} \, x^{r}-1 + \ldots
 \end{aligned}
 \label{eq:ecuacion_26_09b}
-\end{align}
+\end{eqnarray}
 \end{frame}
 \begin{frame}
 \frametitle{Siguiente paso}
@@ -445,7 +450,7 @@ Al iterar esta relación, se pueden obtener todos los $a_{n}$ en términos de so
 Resuelve la siguiente EDO2H mediante el método de Frobenius:
 \pause
 \begin{align}
-3 \, x \, y^{\prime \prime} + y^{\prime} - y = 0
+3 \, x \, \sderivada{y} + \pderivada{y} - y = 0
 \label{eq:ecuacion_04}    
 \end{align}
 \end{frame}
@@ -459,17 +464,19 @@ y = \nsum_{n=0}^{\infty} a_{n} \, x^{n+r}
 \pause
 Así se tiene que:
 \pause
-\begin{align*}
-y^{\prime} &= \nsum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} \\[0.5em]
-y^{\prime \prime} &= \nsum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-2}
-\end{align*}
+\begin{eqnarray*}
+\begin{aligned}
+\pderivada{y} &= \nsum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} \\[0.5em] \pause
+\sderivada{y} &= \nsum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-2}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Solución}
 De modo que:
 \pause
 \begin{align*}
-3 \, x \, y^{\prime \prime} + y^{\prime} - y &= 3 \, \nsum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-1} + \\[0.5em]
+3 \, x \, \sderivada{y} + \pderivada{y} - y &= 3 \, \nsum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-1} + \\[0.5em]
 &+ \nsum_{n=0}^{\infty} (n + r) \, a_{n} \, x^{n+r-1} + \\[0.5em]
 &- \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} =
 \end{align*}
@@ -501,11 +508,11 @@ Tenemos dos resultados importantes, el primero de ellos lo consideramos de la ex
 \begin{align*}
 r \, (3 \, r - 2) \, a_{0} = 0
 \end{align*}
-que se le conoce como \textbf{ecuación de índices}.
+que se le conoce como \textocolor{darkred}{ecuación de índices} (en algunos textos se traduce como \textocolor{deeplilac}{ecuación indicial}).
 \end{frame}
 \begin{frame}
 \frametitle{Resultados importantes}
-El segundo resultado es la \textbf{relación de recurrencia}:
+El segundo resultado es la \textocolor{indiagreen}{relación de recurrencia}:
 \pause
 \begin{align*}
 (k + r + 1)(3 \, k + 3 \, r + 1) \, a_{k+1} - a_{k} = 0
@@ -599,17 +606,19 @@ Se puede demostrar que las soluciones (\ref{eq:ecuacion_10}) y (\ref{eq:ecuacion
 \end{frame}
 \begin{frame}
 \frametitle{Independencia de las series}
-También es posible ver que las soluciones no es múltiplo de la otra, por lo que $y_{1}(x)$ y $y_{2}(x)$ son linealmente independientes con respecto a $x$.
+También es posible ver que las soluciones no es múltiplo de la otra, por lo que $y_{1} (x)$ y $y_{2} (x)$ son linealmente independientes con respecto a $x$.
 \end{frame}
 \begin{frame}
 \frametitle{Principio de superposición}
 Por el principio de superposición, tenemos que:
 \pause
-\begin{align*}
-y &= C_{1} \, y_{1} (x) + C_{2} \, y_{2} = \\[0.5em]
+\begin{eqnarray*}
+\begin{aligned}
+y &= C_{1} \, y_{1} (x) + C_{2} \, y_{2} = \\[0.5em] \pause
 &= C_{1} \, \left[ x^{2/3} + \nsum_{n=1}^{\infty} \dfrac{a_{0}}{n! \, 5 \cdot 8 \cdot 11 \ldots (3\, n + 2)} \, x^{n} \right] + \\[0.5em]
 &+ C_{2} \, \left[ 1 + \nsum_{n=1}^{\infty} \dfrac{1}{n! \, 1 \cdot 4 \cdot 7 \ldots (3\, n - 2)} \, x^{n} \right]
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 
 \subsection{Casos de las raíces}
@@ -620,14 +629,14 @@ Al ocupar el método de Frobenius se pueden presentar tres casos, que correspond
 \end{frame}
 \begin{frame}
 \frametitle{La ecuación de índices}
-Haremos la suposición ie $r_{1}$ y $r_{2}$ son las soluciones \emph{reales} de la ecuación de índices, que cuando son distintas, $r_{1}$ representa la raíz mayor.
+Haremos la suposición ie $r_{1}$ y $r_{2}$ son las soluciones \textocolor{indigo(web)}{reales} de la ecuación de índices, que cuando son distintas, $r_{1}$ representa la raíz mayor.
 \end{frame}
 
 \subsection*{Caso 1}
 
 \begin{frame}
 \frametitle{Caso 1}
-\textbf{Las raíces no difieren un entero}. Si $r_{1}$ y $r_{2}$ son distintas, pero no difieren  en un entero, entonces existen dos soluciones linealmente independientes de la ED, cuya forma es:
+\textocolor{lasallegreen}{Las raíces no difieren un entero}. \pause Si $r_{1}$ y $r_{2}$ son distintas, pero no difieren  en un entero, entonces existen dos soluciones linealmente independientes de la ED, cuya forma es:
 \pause
 \begin{subequations}
 \begin{align}
@@ -641,7 +650,7 @@ y_{2} &= \nsum_{n=0}^{\infty} b_{n} \, x^{n+r_{2}} \hspace{0.5cm} b_{0} \neq 0 \
 
 \begin{frame}
 \frametitle{Caso 2}
-\textbf{Las raíces difieren en un entero positivo.} Si $r_{1} - r_{2} = N$, donde $N$ es un entero positivo, entonces existe dos soluciones linealmente independientes de la ED, de la forma:
+\textocolor{lust}{Las raíces difieren en un entero positivo.} \pause Si $r_{1} - r_{2} = N$, donde $N$ es un entero positivo, entonces existe dos soluciones linealmente independientes de la ED, de la forma:
 \pause
 \begin{subequations}
 \begin{align}
@@ -655,7 +664,7 @@ y_{2} &= C \, y_{1} (x) \ln x + \nsum_{n=0}^{\infty} b_{n} \, x^{n+r_{2}} \hspac
 
 \begin{frame}
 \frametitle{Caso 3}
-\textbf{Las raíces son iguales.} Si $r_{1} = r_{2}$, siempre existen dos soluciones linealmente independientes de la ED, de la forma:
+\textocolor{oldmauve}{Las raíces son iguales.} \pause Si $r_{1} = r_{2}$, siempre existen dos soluciones linealmente independientes de la ED, de la forma:
 \pause
 \begin{subequations}
 \begin{align}
@@ -664,30 +673,45 @@ y_{2} &= y_{1} (x) \ln x + \nsum_{n=0}^{\infty} b_{n} \, x^{n+r_{1}} \hspace{0.5
 \end{align}
 \end{subequations}
 \end{frame}
-% \begin{frame}
-% \frametitle{Ejercicios a cuenta}
-% Determina los puntos singulares de las siguientes ED, clasifica cada punto singular en regular o irregular.
-% \begin{enumerate}
-% \item $x^{3} \, y^{\prime \prime} + 4 \, x^{2} \, y^{\prime} + 3 \, y = 0$
-% \item $x \, y^{\prime \prime} - (x + 3)^{-2} \, y = 0$
-% \item $(x^{2} - 9)^{2} \, y^{\prime \prime} + (x + 3) \, y^{\prime} + 2 \, y = 0$
-% \item $y^{\prime \prime} - \dfrac{1}{x} \, y^{\prime} + \dfrac{1}{(x - 1)^{3}} \, y = 0$
-% \end{enumerate}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Ejercicios a cuenta}
-% Resuelve las siguientes ED con el método de Frobenius:
-% \begin{enumerate}
-% \item $2 \, x \, y^{\prime \prime} - y^{\prime} + 2 \, y = 0$
-% \item $2 \, x \, y^{\prime \prime} + 5 \, y^{\prime} + x \, y = 0$
-% \item $x (x - 1) \, y^{\prime \prime} + 3 \, y^{\prime} - 2 \, y = 0$
-% \item $y^{\prime \prime} - \dfrac{3}{x} \, y^{\prime} - 2 \, y = 0$
-% \end{enumerate}
-% \end{frame}
+
+\section{Ejercicios a cuenta}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{Para la Tarea 2}
+
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+Determina los puntos singulares de las siguientes ED, clasifica cada punto singular en regular o irregular.
+\setbeamercolor{item projected}{bg=bananayellow,fg=ao}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
+\item $x^{3} \, \sderivada{y} + 4 \, x^{2} \, \pderivada{y} + 3 \, y = 0$
+\item $x \, \sderivada{y} - (x + 3)^{-2} \, y = 0$
+\item $(x^{2} - 9)^{2} \, \sderivada{y} + (x + 3) \, \pderivada{y} + 2 \, y = 0$
+\item $\sderivada{y} - \dfrac{1}{x} \, \pderivada{y} + \dfrac{1}{(x - 1)^{3}} \, y = 0$
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+Resuelve las siguientes ED con el método de Frobenius:
+\setbeamercolor{item projected}{bg=lava,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate} 
+\item $2 \, x \, \sderivada{y} - \pderivada{y} + 2 \, y = 0$
+\item $2 \, x \, \sderivada{y} + 5 \, \pderivada{y} + x \, y = 0$
+\item $x (x - 1) \, \sderivada{y} + 3 \, \pderivada{y} - 2 \, y = 0$
+\item $\sderivada{y} - \dfrac{3}{x} \, \pderivada{y} - 2 \, y = 0$
+\end{enumerate}
+\end{frame}
 
 %Ref Kirkwood
 \section{Ecuación de calor}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Problema completo}
 
 \begin{frame}
@@ -727,16 +751,16 @@ u_{t} = \alpha^{2} \, \laplacian{u}
 Puede expresarse como:
 \pause
 \begin{align*}
-R(r) \, \Theta (\theta) \, T^{\prime} &= \alpha^{2} \bigg[ \stilde{T} (r) \, \Theta (\theta) \, T(t) + \\[0.5em]
-&+ \dfrac{1}{r} \ptilde{R} (r) \, \Theta(\theta) \, T(t) + \dfrac{1}{r^{2}} \, R(r) \, \stilde{\Theta} \, T(t) \bigg]
+R (r) \, \Theta (\theta) \, \pderivada{T} &= \alpha^{2} \bigg[ \sderivada{T} (r) \, \Theta (\theta) \, T (t) + \\[0.5em]
+&+ \dfrac{1}{r} \pderivada{R} (r) \, \Theta(\theta) \, T (t) + \dfrac{1}{r^{2}} \, R (r) \, \sderivada{\Theta} \, T (t) \bigg]
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Acomodando los términos}
-Dividiendo entre $\alpha^{2} R(r) \, \Theta (\theta) \, T(t)$, tenemos que:
+Dividiendo entre $\alpha^{2} R (r) \, \Theta (\theta) \, T (t)$, tenemos que:
 \pause
 \begin{align}
-\dfrac{1}{K} \, \dfrac{\ptilde{T} (t)}{T (t)} = \dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (t)}{R (t)} + \dfrac{1}{r^{2}} \, \dfrac{\stilde{\Theta} (\theta)}{\Theta (\theta)}
+\dfrac{1}{K} \, \dfrac{\pderivada{T} (t)}{T (t)} = \dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (t)}{R (t)} + \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)}
 \label{eq:ecuacion_K01}
 \end{align}
 \pause
@@ -755,12 +779,12 @@ En este caso, corresponde a la primera constante de separación: $- \lambda$.
 Entonces tenemos que:
 \pause
 \begin{align*}
-\dfrac{1}{\alpha^{2}} \, \dfrac{\ptilde{T} (t)}{T (t)} = - \lambda
+\dfrac{1}{\alpha^{2}} \, \dfrac{\pderivada{T} (t)}{T (t)} = - \lambda
 \end{align*}
 o de manera equivalente:
 \pause
 \begin{align}
-\ptilde{T}(t) + \lambda \, \alpha^{2} \, T(t) = 0
+\pderivada{T}(t) + \lambda \, \alpha^{2} \, T(t) = 0
 \label{eq:ecuacion_K02}    
 \end{align}
 \end{frame}
@@ -769,13 +793,13 @@ o de manera equivalente:
 También tenemos que:
 \pause
 \begin{align*}
-\dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \dfrac{1}{r^{2}} \, \dfrac{\stilde{\Theta} (\theta)}{\Theta (\theta)} = - \lambda
+\dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)} = - \lambda
 \end{align*}
 \pause
 Separando nuevamente las funciones:
 \pause
 \begin{align*}
-\dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \lambda = - \dfrac{1}{r^{2}} \, \dfrac{\stilde{\Theta} (\theta)}{\Theta (\theta)}
+\dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda = - \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -783,7 +807,7 @@ Separando nuevamente las funciones:
 Así tenemos:
 \pause
 \begin{align}
-r^{2} \left[ \dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \lambda \right] = - \dfrac{\stilde{\Theta} (\theta)}{\Theta (\theta)}
+r^{2} \left[ \dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda \right] = - \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)}
 \label{eq:ecuacion_K03}    
 \end{align}
 El lado izquierdo de esta ecuación es función solo de $r$ y el lado derecho es una función de $\theta$, por lo que debe ser igual a una constante: $\mu$, la segunda constante de separación.
@@ -791,7 +815,7 @@ El lado izquierdo de esta ecuación es función solo de $r$ y el lado derecho es
 \begin{frame}
 \frametitle{Ecuación con respecto a $\theta$}
 \begin{align}
-\stilde{\Theta} (\theta) + \mu \, \Theta (\theta) = 0
+\sderivada{\Theta} (\theta) + \mu \, \Theta (\theta) = 0
 \label{eq:ecuacion_K04}    
 \end{align}
 \end{frame}
@@ -800,13 +824,13 @@ El lado izquierdo de esta ecuación es función solo de $r$ y el lado derecho es
 Entonces hacemos:
 \pause
 \begin{align*}
-r^{2} \left[ \dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \lambda \right] = \mu
+r^{2} \left[ \dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda \right] = \mu
 \end{align*}
 \pause
 Que al acomodar los términos:
 \pause
 \begin{align*}
-\dfrac{\stilde{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\ptilde{R} (r)}{R (r)} + \lambda = \dfrac{\mu}{r^{2}}
+\dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda = \dfrac{\mu}{r^{2}}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -814,7 +838,7 @@ Que al acomodar los términos:
 La ecuación a la que llegamos es:
 \pause
 \begin{align}
-\stilde{R} (r) + \dfrac{1}{r} \, \ptilde{R} (r) + \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, R(r) = 0
+\sderivada{R} (r) + \dfrac{1}{r} \, \pderivada{R} (r) + \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, R (r) = 0
 \label{eq:ecuacion_K05}    
 \end{align}
 \end{frame}
@@ -828,7 +852,7 @@ De éstas, solo la ecuación (\ref{eq:ecuacion_K05}) requiere atención adiciona
 \end{frame}
 \begin{frame}
 \frametitle{Ecuación especial}
-La ecuación (\ref{eq:ecuacion_K05}) es (como) una \emph{ecuación de Bessel}, es decir, presenta la forma de la ED de Bessel, que es una ecuación que como veremos más adelante, va a definir un conjunto de ecuaciones diferenciales de la física matemática que nos llevan a un conjunto de \emph{funciones especiales}.
+La ecuación (\ref{eq:ecuacion_K05}) es (como) una \textocolor{palecarmine}{ecuación de Bessel}, es decir, presenta la forma de la ED de Bessel, que es una ecuación que como veremos más adelante, \pause va a definir un conjunto de ecuaciones diferenciales de la física matemática que nos llevan a un conjunto de \textocolor{prune}{funciones especiales}.
 \end{frame}
 \begin{frame}
 \frametitle{Ecuación especial}
@@ -843,7 +867,7 @@ Como punto importante hay que señalar que a partir de una ecuación inicial, ba
 En la ecuación de Laplace, veremos que la ecuación tiene la forma:
 \pause
 \begin{align*}
-\stilde{R} (r) + \dfrac{1}{r} \, \ptilde{R} (r) + \left( m^{2} - \dfrac{n^{2}}{r^{2}} \right) \, R(r) = 0
+\sderivada{R} (r) + \dfrac{1}{r} \, \pderivada{R} (r) + \left( m^{2} - \dfrac{n^{2}}{r^{2}} \right) \, R (r) = 0
 \end{align*}
 y tendrá que manejarse de manera diferente.
 \end{frame}
@@ -852,7 +876,7 @@ y tendrá que manejarse de manera diferente.
 Si hubiéramos asumido que la función $u$ también dependía de $z$ y que la solución propuesta fuese:
 \pause
 \begin{align*}
-u(r, \theta, z, t) =  R(r) \, \Theta (\theta) \, T(t) \, Z(z)
+u (r, \theta, z, t) =  R (r) \, \Theta (\theta) \, T (t) \, Z (z)
 \end{align*}
 la ec. (\ref{eq:ecuacion_K05}) todavía habría sido la única EDO complicada que habría surgido.
 \end{frame}
@@ -880,7 +904,7 @@ Debido a consideraciones físicas, esta será una solución inadmisible para nue
 Una ecuación de Bessel es una ecuación de la forma:
 \pause
 \begin{align*}
-x^{2} \, \stilde{y} (x) + x \,\ptilde{y} (x) + (x^{2} - \nu^{2}) \, y(x) = 0 \hspace{1cm} 0 \leq x < \infty
+x^{2} \, \sderivada{y} (x) + x \,\pderivada{y} (x) + (x^{2} - \nu^{2}) \, y (x) = 0 \hspace{1cm} 0 \leq x < \infty
 \end{align*}
 \pause
 El método de solución que usaremos es mediante una serie de potencias.
@@ -899,13 +923,13 @@ Para que la solución esté acotada en $x = 0$, se necesita que $r \geq 0$.
 Procedemos a diferenciar y agrupamos los términos, así tenemos que:
 \pause
 \begin{align*}
-\ptilde{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, x^{n+r-1}
+\pderivada{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, x^{n+r-1}
 \end{align*}
 \pause
 Por lo que:
 \pause
 \begin{align*}
-x \, \ptilde{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, x^{n+r}
+x \, \pderivada{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, x^{n+r}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -913,23 +937,25 @@ x \, \ptilde{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, x^{n+r}
 La segunda derivada es:
 \pause
 \begin{align*}
-\stilde{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2}
+\sderivada{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2}
 \end{align*}
 Por tanto:
 \pause
 \begin{align*}
-x^{2} \, \stilde{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r}
+x^{2} \, \sderivada{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r}
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Sustitución en la EDO2}
 Al sustituir en la ec. de tipo Bessel, se obtiene:
 \pause
-\begin{align*}
-&x^{2} \, \stilde{y} (x) + x \,\ptilde{y} (x) + (x^{2} - \nu^{2}) \, y(x) = \\[0.5em]
+\begin{eqnarray*}
+\begin{aligned}
+&x^{2} \, \sderivada{y} (x) + x \,\pderivada{y} (x) + (x^{2} - \nu^{2}) \, y(x) = \\[0.5em] \pause
 &= \nsum_{n=0}^{\infty} \, \bigg[ \left[ a_{n} \, (n + r) (n + r -1) \, x^{n+r} \right] + a_{n} \, (n + r) \, x^{n+r} + \\[0.5em]
 &+ \left[ (a_{n} \, x^{n+r+2} ) - \nu \, a_{n} \, x^{n+r} \right] \bigg] = 0
-\end{align*}
+\end{aligned}
+\end{eqnarray*}
 \end{frame}
 \begin{frame}
 \frametitle{Manejo algebraico}
@@ -1082,9 +1108,9 @@ Aplicando la prueba del cociente (razón), la serie converge para todos los valo
 En el caso de que la ecuación de estudio sea de la forma:
 \pause
 \begin{align*}
-\stilde{R} (r) + \dfrac{1}{r} \, \ptilde{R} (r) + \left( m^{2} - \dfrac{n^{2}}{r^{2}} \right) \, R(r) = 0
+\sderivada{R} (r) + \dfrac{1}{r} \, \pderivada{R} (r) + \left( m^{2} - \dfrac{n^{2}}{r^{2}} \right) \, R(r) = 0
 \end{align*}
-que sería el caso de la ecuación de Laplace, la solución sería una \emph{función de Bessel modificada}.
+que sería el caso de la ecuación de Laplace, la solución sería una \textocolor{regalia}{función de Bessel modificada}.
 \end{frame}
 \begin{frame}
 \frametitle{Función de Bessel modificada}
@@ -1116,9 +1142,9 @@ Haremos de manera conveniente una pausa con la segunda solución, ya que ésta d
 La ecuación mostrada en este ejercicio es de la forma:
 \pause
 \begin{align*}
-\stilde{y}(r) + \dfrac{d - 1}{r} \, \ptilde{y}(r) + \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, y(r) = 0
+\sderivada{y} (r) + \dfrac{d - 1}{r} \, \pderivada{y}(r) + \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, y(r) = 0
 \end{align*}
-En coord. cilíndricas $d = 2$ y $\mu$ normalmente es $m^{2}$. En coord. esféricas: $d = 3$ y $\mu$ es $k(k+1)$.
+En coord. cilíndricas $d = 2$ y $\mu$ normalmente es $m^{2}$. \pause En coord. esféricas: $d = 3$ y $\mu$ es $k (k + 1)$.
 \end{frame}
 
 \subsection{El teorema de Fuchs}
@@ -1127,21 +1153,21 @@ En coord. cilíndricas $d = 2$ y $\mu$ normalmente es $m^{2}$. En coord. esféri
 \frametitle{El teorema de Fuchs}
 El teorema nos dice que se obtendrá al menos una solución en serie de potencias al aplicar el método de Frobenius si el punto de expansión es un punto singular ordinario o regular.
 \end{frame}
-% \begin{frame}
-% \frametitle{Ejercicio a cuenta}
-% Para repasar lo que hemos desarrollado hasta el momento, con la siguiente ecuación:
-% \pause
-% \begin{align*}
-% x^{2} \, \stilde{y}(x) + x \, \ptilde{y}(x) + (x^{2} - 4) \, y(x) = 0
-% \end{align*}
-% Determina:
-% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-% \setbeamertemplate{enumerate items}[circle]
-% \begin{enumerate}[<+->]
-% \item La ecuación de índices.
-% \item La regla de recurrencia.
-% \item La(s) solución(es) en series de potencias.
-% \end{enumerate}
-% \end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+Para repasar lo que hemos desarrollado hasta el momento, con la siguiente ecuación:
+\pause
+\begin{align*}
+x^{2} \, \sderivada{y} (x) + x \, \pderivada{y} (x) + (x^{2} - 4) \, y (x) = 0
+\end{align*}
+Determina:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item La ecuación de índices.
+\item La regla de recurrencia.
+\item La(s) solución(es) en series de potencias.
+\end{enumerate}
+\end{frame}
 
 \end{document}
