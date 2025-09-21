@@ -183,7 +183,7 @@ Ahora bien, si en la ec. (\ref{eq:ecuacion_09_74}) $y$ e $\pderivada{y}$ pueden 
 \end{frame}
 \begin{frame}
 \frametitle{Punto singular}
-Por otra parte, si $\sderivada{y}$ se vuelve infinita para cualquier selección finita de $y$ e $\sderivada{y}$, \pause el punto $x = x_{0}$ se denomina \textocolor{cardinal}{punto singular}.
+Por otra parte, si $\sderivada{y}$ se vuelve infinita para cualquier selección finita de $y$ e $\pderivada{y}$, \pause el punto $x = x_{0}$ se denomina \textocolor{cardinal}{punto singular}.
 \end{frame}
 \begin{frame}
 \frametitle{Reescribiendo la EDO2}
@@ -416,7 +416,7 @@ Por lo que al diferenciar por segunda vez, tenemos:
 \pause
 \begin{eqnarray}
 \begin{aligned}
-\dv[2]{y}{x} &= \nsum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-1} = \\[0.5em] \pause
+\dv[2]{y}{x} &= \nsum_{n=0}^{\infty} a_{n} \, (n + r) \, (n + r - 1) \, x^{n+r-2} = \\[0.5em] \pause
 &= r \, (r - 1) \, a_{0} \, x^{r-2} + (r + 1) \, r \, a_{1} \, x^{r}-1 + \ldots
 \end{aligned}
 \label{eq:ecuacion_26_09b}
@@ -493,7 +493,7 @@ Entonces $x = x_{0}$ es un punto singular regular.
 \end{frame}
 \begin{frame}
 \frametitle{Solución}
-Una vez que encontramos que Se propone una solución del tipo:
+Una vez que encontramos que la EDO tiene solo un punto singular en $x = 0$, se propone una solución del tipo:
 \pause
 \begin{align*}
 y = \nsum_{n=0}^{\infty} a_{n} \, x^{n+r}
@@ -510,7 +510,7 @@ Así se tiene que:
 \end{frame}
 \begin{frame}
 \frametitle{Solución}
-De modo que:
+De modo que al sustituir en la EDO::
 \pause
 \begin{align*}
 &3 \, x \, \sderivada{y} + \pderivada{y} - y = 3 \, \nsum_{n=0}^{\infty} (n + r) \, (n + r - 1) \, a_{n} \, x^{n+r-1} + \\[0.5em]
@@ -518,44 +518,159 @@ De modo que:
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Factorizando términos}
-Haciendo álgebra:
+\frametitle{Comenzando con el álgebra}
+Factorizamos con respecto a $x^{n+r-1}$:
 \pause
+\begin{align*}
+&= \nsum_{n=0}^{\infty} \left[ 3 \, (n + r) \, (n + r - 1) \, a_{n} + (n + r) \, a_{n} \right] x^{n+r-1} + \\[0.5em]
+&- \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Seguimos con el álgebra}
+En la primera suma factorizamos con respecto a $a_{n}$:
+\pause
+\begin{align*}
+&= \nsum_{n=0}^{\infty} (n + r) \, a_{n} \left[ 3 (n + r - 1) + 1 \right] x^{n+r-1} + \\[0.5em]
+&- \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Más álgebra}
+Desarrollamos el producto en la primera suma:
+\pause
+\begin{align*}
+&= \nsum_{n=0}^{\infty} (n + r) \, a_{n} \left[ 3 n + 3 r - 3 + 1 \right] x^{n+r-1} + \\[0.5em]
+&- \nsum_{n=0}^{\infty} a_{n} \, x^{n+r} =
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Simplificando y más álgebra}
+Simplificamos el coeficiente de la primera suma:
+\pause
+\begin{align*}
+&= \nsum_{n=0}^{\infty} (n + r) \left[ 3 n + 3 r - 2 \right] \, a_{n} x^{n+r-1} + \\[0.5em]
+&- \nsum_{n=0}^{\infty} a_{n} \, x^{n+r}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Tomando un término de la primera suma}
+Como las sumas no tienen el mismo exponente en $x$, tomamos el primer término de la primera suma, es decir, cuando $n = 0$:
+\end{frame}
+\begin{frame}
+\frametitle{Tomando un término de la primera suma}
+\begin{align*}
+&= r (3 r - 2) \, a_{0} \, x^{-1} + \\[0.5em] 
+&+ \nsum_{n=1}^{\infty} (n + r) \left[ 3 n + 3 r - 2 \right] \, a_{n} x^{n+r-1} + \\[0.5em]
+&- \nsum_{n=0}^{\infty} a_{n} \, x^{n+r}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorizando términos}
+Factorizamos con respecto a $x^{r}$:
+\pause
+\begin{align*}
+&= x^{r} \, \bigg[ r (3 \, r - 2) \, a_{0} \, x^{-1} +  \\[0.5em]
+&+ \nsum_{n=1} (n + r)\,(3 \, n + 3 \, r - 2) \, a_{n} \, x^{n-1} - \nsum_{n=0} a_{n} \, x^{n} \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando el índice en las sumas}
+Al haber retirado un término en la primera suma, para poder combinar las sumas, ajustamos el índice en la primera suma, es decir, hacemos $\mathcolor{ao}{k} = n - 1$, por lo que $n = \mathcolor{ao}{k + 1}$, y en la segunda suma hacemos $\mathcolor{ao}{k} = n$:
+\end{frame}
+\begin{frame}
+\frametitle{Recorriendo el índice en una suma}
 \begin{align*}
 &= x^{r} \, \bigg[ r (3 \, r - 2) \, a_{0} \, x^{-1} +  \\[0.5em]
 &+ \underbrace{\nsum_{n=1} (n + r)\,(3 \, n + 3 \, r - 2) \, a_{n} \, x^{n-1}}_{k=n-1} - \underbrace{\nsum_{n=0} a_{n} \, x^{n}}_{k=n} \bigg] =
 \end{align*}
 \end{frame}
 \begin{frame}
+\frametitle{Simplificando el valor de $k$}
+\begin{align*}
+&= x^{r} \, \bigg[ r (3 \, r {-} 2) \, a_{0} \, x^{-1} +  \\[0.5em]
+&+ \nsum_{\mathcolor{ao}{k}=0} (\mathcolor{ao}{k {+} 1} {+} r)\,(3 \, \mathcolor{ao}{(k {+} 1)} {+} 3 \, r {-} 2) \, a_{\mathcolor{ao}{k+1}} \, x^{\mathcolor{ao}{k}} + \\[0.5em]
+&- \nsum_{\mathcolor{ao}{k}=0} a_{\mathcolor{ao}{k}} \, x^{\mathcolor{ao}{k}} \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo los coeficientes}
+\begin{align*}
+&= x^{r} \, \bigg[ r (3 \, r {-} 2) \, a_{0} \, x^{-1} +  \\[0.5em]
+&+ \nsum_{k=0} (k {+} 1 {+} r)\,(3 k \, + 3 {+} 3 \, r {-} 2) \, a_{k+1} \, x^{k} + \\[0.5em]
+&- \nsum_{k=0} a_{k} \, x^{k} \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo los coeficientes}
+\begin{align*}
+&= x^{r} \, \bigg[ r (3 \, r {-} 2) \, a_{0} \, x^{-1} +  \\[0.5em]
+&+ \nsum_{k=0} (k {+} 1 {+} r)\,(3 k {+} 3 \, r {+} 1) \, a_{k+1} \, x^{k} + \\[0.5em]
+&- \nsum_{k=0} a_{k} \, x^{k} \bigg]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Sumas con el mismo índice}
+Hemos logrado que ambas sumas tengan el mismo índice, y en ambas, tenemos un factor común: $x^{k}$, por lo que podemos nuevamente factorizar con respecto a éste término:
+\end{frame}
+\begin{frame}
 \frametitle{Expresión resultante}
 Llegamos entonces a:
 \pause
 \begin{align*}
-&= x^{r} \, \bigg[ r \, (3 \, r - 2) \, a_{0} \, x^{-1} + \\[0.5em]
-&+ \nsum_{k=0}^{\infty} \left[ (k + r + 1)(3 \, k + 3 \, r + 1) \, a_{k+1} - a_{k} \right] \, x^{k} \bigg] = 0
+&= x^{r} \bigg[ r \, (3 \, r - 2) \, a_{0} \, x^{-1} +  \\[0.5em]
+&+ \nsum_{k=0}^{\infty} \bigg\{ (k + r + 1)(3 \, k + 3 \, r + 1) \, a_{k+1} - a_{k} \bigg\} \bigg] \, x^{k} = 0
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Resultados importantes}
-Tenemos dos resultados importantes, el primero de ellos lo consideramos de la expresión con la potencia más pequeña del desarrollo:
+\frametitle{Los coeficientes de la suma}
+Para que esta expresión sea cero para todo $x$, cada uno de los coeficientes en los corchetes debe ser cero.
+\\
+\bigskip
 \pause
+Lo que nos devuelve dos resultados importantes.
+\end{frame}
+\begin{frame}
+\frametitle{Resultados importantes}
+Esos resultados son:
+\setbeamercolor{item projected}{bg=carmine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
+\item Lo consideramos de la expresión con la potencia más pequeña del desarrollo:
 \begin{align*}
 r \, (3 \, r - 2) \, a_{0} = 0
 \end{align*}
 que se le conoce como \textocolor{darkred}{ecuación de índices} (en algunos textos se traduce como \textocolor{deeplilac}{ecuación indicial}).
+\seti
+\end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{Resultados importantes}
-El segundo resultado es la \textocolor{indiagreen}{relación de recurrencia}:
-\pause
+\setbeamercolor{item projected}{bg=carmine,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
+\conti
+\item El siguente resultado es la \textocolor{indiagreen}{relación de recurrencia}:
 \begin{align*}
 (k + r + 1)(3 \, k + 3 \, r + 1) \, a_{k+1} - a_{k} = 0
 \end{align*}
-\pause
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Relación de recurrencia}
 Entonces:
 \pause
 \begin{align}
-a_{k+1} = \dfrac{a_{k}}{(k + r + 1)(3 \, k + 3 \, r + 1)}
+\begin{aligned}
+a_{k+1} &= \dfrac{a_{k}}{(k + r + 1)(3 \, k + 3 \, r + 1)} \\[0.5em]
+\text{con } k &= 0, 1, 2, \ldots
+\end{aligned}
 \label{eq:ecuacion_07}
 \end{align}
 \end{frame}
@@ -743,7 +858,7 @@ Resuelve las siguientes ED con el método de Frobenius:
 \end{enumerate}
 \end{frame}
 
-%Ref Kirkwood
+%Ref Kirkwood Chap. 8
 \section{Ecuación de calor}
 \frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Problema completo}
@@ -777,7 +892,7 @@ Vamos a simplifcar nuestros cálculos y nos permitirá demostrar cómo surgen la
 Ocupando el método de separación de variables, suponemos que existe una solución para $u$, tal que:
 \pause
 \begin{align*}
-u_{t} = \alpha^{2} \, \laplacian{u}
+u_{t} = K \, \laplacian{u}
 \end{align*}
 \end{frame}
 \begin{frame}[fragile]
@@ -785,16 +900,15 @@ u_{t} = \alpha^{2} \, \laplacian{u}
 Puede expresarse como:
 \pause
 \begin{align*}
-R (r) \, \Theta (\theta) \, \pderivada{T} &= \alpha^{2} \bigg[ \sderivada{T} (r) \, \Theta (\theta) \, T (t) + \\[0.5em]
-&+ \dfrac{1}{r} \pderivada{R} (r) \, \Theta(\theta) \, T (t) + \dfrac{1}{r^{2}} \, R (r) \, \sderivada{\Theta} \, T (t) \bigg]
+R \, \Theta \, \pderivada{T} = K \, \bigg[ \sderivada{R} \, \Theta \, T + \dfrac{1}{r} \pderivada{R} \, \Theta \, T + \dfrac{1}{r^{2}} \, R \, \sderivada{\Theta} \, T \bigg]
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Acomodando los términos}
-Dividiendo entre $\alpha^{2} R (r) \, \Theta (\theta) \, T (t)$, tenemos que:
+Dividiendo entre $K \, R \, \Theta \, T $, tenemos que:
 \pause
 \begin{align}
-\dfrac{1}{K} \, \dfrac{\pderivada{T} (t)}{T (t)} = \dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (t)}{R (t)} + \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)}
+\dfrac{1}{K} \, \dfrac{\pderivada{T}}{T} = \dfrac{\sderivada{R}}{R} + \dfrac{1}{r} \, \dfrac{\pderivada{R}}{R} + \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta}}{\Theta}
 \label{eq:ecuacion_K01}
 \end{align}
 \pause
@@ -813,12 +927,12 @@ En este caso, corresponde a la primera constante de separación: $- \lambda$.
 Entonces tenemos que:
 \pause
 \begin{align*}
-\dfrac{1}{\alpha^{2}} \, \dfrac{\pderivada{T} (t)}{T (t)} = - \lambda
+\dfrac{1}{\alpha^{2}} \, \dfrac{\pderivada{T}}{T} = - \lambda
 \end{align*}
 o de manera equivalente:
 \pause
 \begin{align}
-\pderivada{T}(t) + \lambda \, \alpha^{2} \, T(t) = 0
+\pderivada{T} + \lambda \, K \, T = 0
 \label{eq:ecuacion_K02}    
 \end{align}
 \end{frame}
@@ -827,13 +941,13 @@ o de manera equivalente:
 También tenemos que:
 \pause
 \begin{align*}
-\dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)} = - \lambda
+\dfrac{\sderivada{R}}{R} + \dfrac{1}{r} \, \dfrac{\pderivada{R}}{R} + \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta}}{\Theta} = - \lambda
 \end{align*}
 \pause
 Separando nuevamente las funciones:
 \pause
 \begin{align*}
-\dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda = - \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)}
+\dfrac{\sderivada{R}}{R} + \dfrac{1}{r} \, \dfrac{\pderivada{R}}{R} + \lambda = - \dfrac{1}{r^{2}} \, \dfrac{\sderivada{\Theta}}{\Theta}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -841,7 +955,7 @@ Separando nuevamente las funciones:
 Así tenemos:
 \pause
 \begin{align}
-r^{2} \left[ \dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda \right] = - \dfrac{\sderivada{\Theta} (\theta)}{\Theta (\theta)}
+r^{2} \left[ \dfrac{\sderivada{R}}{R} + \dfrac{1}{r} \, \dfrac{\pderivada{R}}{R} + \lambda \right] = - \dfrac{\sderivada{\Theta}}{\Theta}
 \label{eq:ecuacion_K03}    
 \end{align}
 El lado izquierdo de esta ecuación es función solo de $r$ y el lado derecho es una función de $\theta$, por lo que debe ser igual a una constante: $\mu$, la segunda constante de separación.
@@ -849,7 +963,7 @@ El lado izquierdo de esta ecuación es función solo de $r$ y el lado derecho es
 \begin{frame}
 \frametitle{Ecuación con respecto a $\theta$}
 \begin{align}
-\sderivada{\Theta} (\theta) + \mu \, \Theta (\theta) = 0
+\sderivada{\Theta} + \mu \, \Theta = 0
 \label{eq:ecuacion_K04}    
 \end{align}
 \end{frame}
@@ -858,13 +972,13 @@ El lado izquierdo de esta ecuación es función solo de $r$ y el lado derecho es
 Entonces hacemos:
 \pause
 \begin{align*}
-r^{2} \left[ \dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda \right] = \mu
+r^{2} \left[ \dfrac{\sderivada{R}}{R} + \dfrac{1}{r} \, \dfrac{\pderivada{R}}{R} + \lambda \right] = \mu
 \end{align*}
 \pause
 Que al acomodar los términos:
 \pause
 \begin{align*}
-\dfrac{\sderivada{R} (r)}{R (r)} + \dfrac{1}{r} \, \dfrac{\pderivada{R} (r)}{R (r)} + \lambda = \dfrac{\mu}{r^{2}}
+\dfrac{\sderivada{R}}{R} + \dfrac{1}{r} \, \dfrac{\pderivada{R}}{R} + \lambda = \dfrac{\mu}{r^{2}}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -872,7 +986,7 @@ Que al acomodar los términos:
 La ecuación a la que llegamos es:
 \pause
 \begin{align}
-\sderivada{R} (r) + \dfrac{1}{r} \, \pderivada{R} (r) + \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, R (r) = 0
+\sderivada{R} + \dfrac{1}{r} \, \pderivada{R} + \left( \lambda - \dfrac{\mu}{r^{2}} \right) \, R = 0
 \label{eq:ecuacion_K05}    
 \end{align}
 \end{frame}
@@ -886,7 +1000,7 @@ De éstas, solo la ecuación (\ref{eq:ecuacion_K05}) requiere atención adiciona
 \end{frame}
 \begin{frame}
 \frametitle{Ecuación especial}
-La ecuación (\ref{eq:ecuacion_K05}) es (como) una \textocolor{palecarmine}{ecuación de Bessel}, es decir, presenta la forma de la ED de Bessel, que es una ecuación que como veremos más adelante, \pause va a definir un conjunto de ecuaciones diferenciales de la física matemática que nos llevan a un conjunto de \textocolor{prune}{funciones especiales}.
+La ecuación (\ref{eq:ecuacion_K05}) es (como) una \textocolor{palecarmine}{ecuación diferencial de Bessel}, es decir, presenta la forma de la ED de Bessel, que es una ecuación que como veremos más adelante, \pause va a definir un conjunto de ecuaciones diferenciales de la física matemática que nos llevan a un conjunto de \textocolor{prune}{funciones especiales}.
 \end{frame}
 \begin{frame}
 \frametitle{Ecuación especial}
@@ -901,7 +1015,7 @@ Como punto importante hay que señalar que a partir de una ecuación inicial, ba
 En la ecuación de Laplace, veremos que la ecuación tiene la forma:
 \pause
 \begin{align*}
-\sderivada{R} (r) + \dfrac{1}{r} \, \pderivada{R} (r) + \left( m^{2} - \dfrac{n^{2}}{r^{2}} \right) \, R (r) = 0
+\sderivada{R} + \dfrac{1}{r} \, \pderivada{R} + \left( m^{2} - \dfrac{n^{2}}{r^{2}} \right) \, R = 0
 \end{align*}
 y tendrá que manejarse de manera diferente.
 \end{frame}
@@ -910,7 +1024,7 @@ y tendrá que manejarse de manera diferente.
 Si hubiéramos asumido que la función $u$ también dependía de $z$ y que la solución propuesta fuese:
 \pause
 \begin{align*}
-u (r, \theta, z, t) =  R (r) \, \Theta (\theta) \, T (t) \, Z (z)
+u (r, \theta, z, t) =  R \, \Theta \, T \, Z
 \end{align*}
 la ec. (\ref{eq:ecuacion_K05}) todavía habría sido la única EDO complicada que habría surgido.
 \end{frame}
@@ -919,11 +1033,11 @@ la ec. (\ref{eq:ecuacion_K05}) todavía habría sido la única EDO complicada qu
 
 \begin{frame}
 \frametitle{Resolviendo la ecuación}
-La ecuación (\ref{eq:ecuacion_K05}) es una ecuación tipo Bessel.
+La ecuación (\ref{eq:ecuacion_K05}) es una ecuación diferencial tipo Bessel.
 \\
 \bigskip
 \pause
-A continuación, definimos una ecuación de Bessel, demostraremos una solución a tales ecuaciones y luego haremos una transformación que nos permitirá resolver la ecuación anterior
+A continuación, definimos una ED de Bessel, demostraremos una solución a tales ecuaciones y luego haremos una transformación que nos permitirá resolver la ecuación anterior
 \end{frame}
 \begin{frame}
 \frametitle{Resolviendo la ecuación}
@@ -935,13 +1049,36 @@ Debido a consideraciones físicas, esta será una solución inadmisible para nue
 \end{frame}
 \begin{frame}
 \frametitle{Ecuación tipo Bessel}
-Una ecuación de Bessel es una ecuación de la forma:
+Una ecuación diferencial de Bessel es una ecuación de la forma:
 \pause
 \begin{align*}
 x^{2} \, \sderivada{y} (x) + x \,\pderivada{y} (x) + (x^{2} - \nu^{2}) \, y (x) = 0 \hspace{1cm} 0 \leq x < \infty
 \end{align*}
 \pause
 El método de solución que usaremos es mediante una serie de potencias.
+\end{frame}
+\begin{frame}
+\frametitle{Revisión de puntos singulares}
+Llevamos la ecuación a la forma estándar:
+\pause
+\begin{align*}
+    \sderivada{y} + \dfrac{1}{x} \, \pderivada{y} + \left( 1 - \dfrac{\nu^{2}}{x^{2}} \right) \, y = 0
+\end{align*}
+con
+\begin{align*}
+    P (x) = \dfrac{1}{x} \hspace{1.5cm} Q(x) = 1 - \dfrac{\nu^{2}}{x^{2}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Revisión de puntos singulares}
+Ahora veamos lo qué sucede cuando $x \to x_{0} = 0$:
+\pause
+\begin{align*}
+\lim_{x \to x_{0}} (x - x_{0}) \, P(x) &= \lim_{x \to 0} \left( x \, \dfrac{1}{x} \right) = 1 \\[1em]
+\lim_{x \to x_{0}} (x - x_{0})^{2} \, Q(x) &= \lim_{x \to 0} \left[ x^{2} \, \left( 1 - \dfrac{\nu^{2}}{x^{2}} \right) \right] = - \nu^{2}
+\end{align*}
+\pause
+Entonces $x_{0} = 0$ es un punto singular regular.
 \end{frame}
 \begin{frame}
 \frametitle{Solución a la ecuación}
@@ -981,13 +1118,13 @@ x^{2} \, \sderivada{y} = \nsum_{n=0}^{\infty} \, a_{n} \, (n + r) \, (n + r - 1)
 \end{frame}
 \begin{frame}
 \frametitle{Sustitución en la EDO2}
-Al sustituir en la ec. de tipo Bessel, se obtiene:
+Al sustituir en la ED tipo Bessel, se obtiene:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
 &x^{2} \, \sderivada{y} (x) + x \,\pderivada{y} (x) + (x^{2} - \nu^{2}) \, y(x) = \\[0.5em] \pause
 &= \nsum_{n=0}^{\infty} \, \bigg[ \left[ a_{n} \, (n + r) (n + r -1) \, x^{n+r} \right] + a_{n} \, (n + r) \, x^{n+r} + \\[0.5em]
-&+ \left[ (a_{n} \, x^{n+r+2} ) - \nu \, a_{n} \, x^{n+r} \right] \bigg] = 0
+&+ \left[ (a_{n} \, x^{n+r+2} ) - \nu^{2} \, a_{n} \, x^{n+r} \right] \bigg] = 0
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
