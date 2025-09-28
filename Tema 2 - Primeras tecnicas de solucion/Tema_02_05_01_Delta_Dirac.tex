@@ -3,6 +3,11 @@
 \usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \date{}
 
 \title{\large{La delta de Dirac}}
@@ -17,17 +22,16 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 \section{Concepto inicial}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
 
 \begin{frame}
 \frametitle{Referencia inicial}
-En física a menudo nos encontramos con fenómenos donde se involucra el concepto de un pulso de duración \enquote{infinitamente corto}.
+En física a menudo nos encontramos con fenómenos donde se involucra el concepto de un pulso de duración \enquote{\textocolor{lava}{infinitamente corto}}.
 \end{frame}
-
 \begin{frame}
 \frametitle{Ejemplo de pulso corto}
 Por ejemplo, en su curso de Mecánica Clásica se revisó el concepto de una magnitud física llamada \textocolor{red}{impulso}, \pause la cual se introduce cuando se cambia el estado de movimiento de un cuerpo al aplicarle un \enquote{golpe repentino}.
@@ -36,12 +40,10 @@ Por ejemplo, en su curso de Mecánica Clásica se revisó el concepto de una mag
 \pause
 El impulso se denota comúnmente con la letra $I$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Ejemplo de pulso corto}
 Tomemos como ejemplo del fútbol, con un penalty, \pause en este caso tenemos inicialmente al balón en reposo, \pause la intención es meter la pelota en la portería contraria.
 \end{frame}
-
 \begin{frame}
 \frametitle{Ejemplo de pulso corto}
 Después de patear el balón, éste adquiere un momento que es igual al impulso asociado a la patada misma.
@@ -55,22 +57,18 @@ m \, v = I = \scaleint{6ex}_{\bs t_{0}}^{t_{0} + \tau} F (t) \dd{t}
 \end{align*}
 donde $F (t)$ es la fuerza y $\tau$ la duración del impacto sobre la pelota (técnicamente de la acción de la fuerza sobre el balón).
 \end{frame}
-
 \begin{frame}
 \frametitle{Analizando el ejemplo}
 El término \textocolor{cadmiumgreen}{repentino} implica que $\tau$ se considera infinitamente pequeño \pause y por tanto, que el cambio en el momento ocurre instantáneamente.
 \end{frame}
-
 \begin{frame}
 \frametitle{Ejemplo de pulso corto}
 Sin embargo, dado que el cambio en el momento es un número finito, \pause se sigue que la magnitud de la fuerza $F (t)$ debió haber sido infinita durante el golpe al balón y cero en cualquier otro momento.
 \end{frame}
-
 \begin{frame}
 \frametitle{Representación matemática}
 Este tipo de descripciones no se puede formular apropiadamente con los conceptos matemáticos que conocemos, más aún, la descripción tampoco es rigurosa desde un punto de vista físico.
 \end{frame}
-
 \begin{frame}
 \frametitle{Gráfica de pulso corto}
 \begin{figure}[H]
@@ -80,17 +78,14 @@ Este tipo de descripciones no se puede formular apropiadamente con los conceptos
     \label{fig:figura_delta_Dirac_01}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Revisando la gráfica}
 En realidad, la gráfica de la fuerza es una curva muy \enquote{\textocolor{ao}{picuda}}: muy estrecha y muy alta, como se aprecia en la figura (\ref{fig:figura_delta_Dirac_01}) \pause y satisface la propiedad que el área bajo la curva es igual a $I$.
 \end{frame}
-
 \begin{frame}
 \frametitle{El caso en la física}
 En la gran mayoría de los problemas físicos, la forma exacta de la gráfica no se conoce, \pause sin embargo, en lo correspondiente a los efectos físicos observables asociados con tal función, usualmente esta falta de información no importa.
 \end{frame}
-
 \begin{frame}
 \frametitle{Valor del impulso}
 Lo que tiene significado es la integral de la fuerza, esto es, el valor del impulso:
@@ -99,12 +94,10 @@ Lo que tiene significado es la integral de la fuerza, esto es, el valor del impu
 I = \scaleint{6ex}_{\bs t_{0}}^{t_{0} + \tau } F (t) \dd{t}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{De las funciones puntiagudas}
 Las funciones puntiagudas son comunes en cualquier área de la física, \pause por ejemplo: una fuerza concentrada sobre una barra, es una distribución puntiaguda de la carga, \pause veamos las figuras (\ref{fig:figura_delta_Dirac_02}) y (\ref{fig:figura_delta_Dirac_03}). 
 \end{frame}
-
 \begin{frame}
 \frametitle{Función puntiaguda ideal}
 \begin{figure}[H]
@@ -114,7 +107,6 @@ Las funciones puntiagudas son comunes en cualquier área de la física, \pause p
     \label{fig:figura_delta_Dirac_02}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Función puntiaguada real}
 \begin{figure}[H]
@@ -124,12 +116,10 @@ Las funciones puntiagudas son comunes en cualquier área de la física, \pause p
     \label{fig:figura_delta_Dirac_03}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Otras funciones puntiagudas}
 En los circuitos eléctricos, las corrientes \textocolor{cadetblue}{puntiagudas} de una duración extremadamente corta, \pause se presentan cuando se conecta el interruptor, como en el caso de la redistribución de carga entre dos condensadores, como se ve en la figura (\ref{fig_figura_delta_Dirac_04}).
 \end{frame}
-
 \begin{frame}
 \frametitle{Función puntiaguda en un circuito eléctrico}
 \begin{figure}[H]
@@ -293,7 +283,7 @@ En los circuitos eléctricos, las corrientes \textocolor{cadetblue}{puntiagudas}
 % \end{frame}
 
 \section{La delta de Dirac}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Definición}
 
 \begin{frame}
@@ -308,7 +298,6 @@ Informalmente la delta de Dirac es una \enquote{\textocolor{blue-violet}{funció
 \label{eq:ecuacion_delta_01}
 \end{equation}
 \end{frame}
-
 \begin{frame}
 \frametitle{Integral normalizada}
 Pero tal que la integral de $\delta (x)$ está normalizada a la unidad:
@@ -331,7 +320,6 @@ La delta de Dirac satisface la siguiente propiedad:
 \end{equation}
 donde $f (x)$ es una función continua.
 \end{frame}
-
 \begin{frame}
 \frametitle{Resolviendo la integral}
 Esta integral puede ser \enquote{\textocolor{red}{evaluada}} utilizando siguiente argumento: \pause
@@ -346,7 +334,6 @@ Esta integral puede ser \enquote{\textocolor{red}{evaluada}} utilizando siguient
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Resolviendo la integral}
 \setbeamercolor{item projected}{bg=bole,fg=white}
@@ -366,7 +353,6 @@ Esta integral puede ser \enquote{\textocolor{red}{evaluada}} utilizando siguient
 Esta aproximación mejora cuando $\epsilon \to 0$.
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Consideración importante}
 Pero:
@@ -376,7 +362,6 @@ Pero:
 \end{align*}
 para todos los valores de $\epsilon$, por que $\delta (x) = 0$ para $x \neq 0$ y $\delta (x)$ está normalizada.
 \end{frame}
-
 \begin{frame}
 \frametitle{Tomando el límite}
 Así en el límite $\epsilon \to 0$, se tiene:
@@ -386,7 +371,6 @@ Así en el límite $\epsilon \to 0$, se tiene:
 \end{align*}
 \textbf{Nota: } Los límites $-\infty$ y $+\infty$ se pueden reemplazar por cualesquiera números $a$ y $b$, tales que $a < 0 < b$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Propiedad de filtro}
 Esta integral se le conoce también como \textocolor{bostonuniversityred}{propiedad de filtro} de la función delta, \pause ya que $\delta (x)$ actúa como un filtro, seleccionando de todos los posibles valores de $f (x)$ su valor en el punto $x = 0$.
@@ -398,7 +382,6 @@ Esta integral se le conoce también como \textocolor{bostonuniversityred}{propie
 \frametitle{Haciendo la referencia correcta}
 La afirmación de que la función $\delta (x)$ está dada por la expresión (\ref{eq:ecuacion_delta_01}) \textit{\textocolor{brown(web)}{o es una afirmación apropiada y no se puede utilizar para definir una función}}, mucho menos para una función integrable.
 \end{frame}
-
 \begin{frame}
 \frametitle{Referencia alterna}
 Una posible definición alterna, podría ser el definir la función $\delta (x)$ como la función que satisface la propiedad de filtro (\ref{eq:ecuacion_delta_03}):
@@ -408,7 +391,6 @@ Una posible definición alterna, podría ser el definir la función $\delta (x)$
 \end{align*}
 para toda función continua $f (x)$. 
 \end{frame}
-
 \begin{frame}
 \frametitle{Complicación matemática}
 Sin embargo es posible demostrar que no existe ninguna función con esa propiedad.
@@ -421,7 +403,6 @@ Por lo que:
 \textit{¡¡la función delta no es una función en el sentido matemático usual!!}
 \end{center}
 \end{frame}
-
 \begin{frame}
 \frametitle{Respondiendo al problema}
 ¿Qué se hace entonces? \pause ¿Dirac nos engañó con su propuesta?
@@ -430,7 +411,6 @@ Por lo que:
 \pause
 Lo que sucede es que existen secuencias de funciones de pico pronunciado, las cuales en el límite en que el pico es infinitamente delgado e infinitamente alto, satisfacen la propiedad de filtro.
 \end{frame}
-
 \begin{frame}
 \frametitle{Proponiendo una secuencia}
 La siguiente puede ser una secuencia $\phi_{n} (x)$ con $n = 1, 2, 3, \ldots$, tal que:
@@ -439,7 +419,6 @@ La siguiente puede ser una secuencia $\phi_{n} (x)$ con $n = 1, 2, 3, \ldots$, t
 \lim_{n \to \infty} \scaleint{6ex}_{\bs -\infty}^{+ \infty} \phi_{n} (x) \: f (x) \dd{x} =  f (0)
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Definiendo la secuencia delta}
 Llamamos secuencias delta $\delta_{n} (x)$ a una secuencia de funciones de pico pronunciado, que satisfacen:
@@ -448,7 +427,6 @@ Llamamos secuencias delta $\delta_{n} (x)$ a una secuencia de funciones de pico 
 \lim_{n \to \infty} \scaleint{6ex}_{\bs -\infty}^{+ \infty} \phi_{n} (x) \: f (x) \: \dd{x} =  f (0)
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Ejemplo de una secuencia}
 La secuencia de funciones:
@@ -464,7 +442,6 @@ n & - \dfrac{1}{2 \, n} < x < \dfrac{1}{2 \, n} \\
 \end{equation}
 es una secuencia delta.
 \end{frame}
-
 \begin{frame}[plain]
 %\frametitle{Graficando la secuencia}
 \begin{figure}[H]
@@ -474,7 +451,6 @@ es una secuencia delta.
     \label{fig:secuncia_delta_01}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Demostración}
 Para verificar esta afirmación consideremos la integral:
@@ -485,7 +461,6 @@ Para verificar esta afirmación consideremos la integral:
 \end{align*}
 para cualquier función continua arbitraria $f (x)$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Demostración}
 De la expresión (\ref{eq:ecuacion_delta_04}) para la secuencia delta se tiene:
@@ -495,7 +470,6 @@ De la expresión (\ref{eq:ecuacion_delta_04}) para la secuencia delta se tiene:
 &= n \scaleint{6ex}_{\bs -\frac{1}{2 \, n}}^{\frac{1}{2 \, n}} f (x) \:  \dd{x}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Apoyo del cálculo}
 Utilizando el teorema del valor medio para integrales, podemos deducir que:
@@ -508,7 +482,6 @@ n \, \scaleint{6ex}_{\bs -\frac{1}{2 \, n}}^{\frac{1}{2 \, n}} f (x) \dd{x} \pau
 \end{eqnarray*}
 En el límite cuando $n \to \infty$, $\xi \to 0$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando la continuidad de la función}
 De la continuidad de la función $f (x)$ se sigue que $f (\xi) \to f (0)$, obteniendo así el resultado:
@@ -518,7 +491,6 @@ De la continuidad de la función $f (x)$ se sigue que $f (\xi) \to f (0)$, obten
 \end{align*}
 lo que nos dice que la secuencia (\ref{eq:ecuacion_delta_04}), es una secuencia delta. \pause  Nótese que la secuencia delta (\ref{eq:ecuacion_delta_04}) no es derivable en el punto $x = 0$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Secuencias atractivas y de utilidad}
 Para muchos propósitos es deseable construir secuencias delta de funciones que sean continuas y diferenciables.
@@ -527,7 +499,6 @@ Para muchos propósitos es deseable construir secuencias delta de funciones que 
 \pause 
 Por ejemplo, en las figuras (\ref{fig:plot_secuencia_01}), (\ref{fig:plot_secuencia_02}) y (\ref{fig:plot_secuencia_03}) podemos apreciar algunas secuencias delta con estas características:
 \end{frame}
-
 \begin{frame}[plain]
 \frametitle{Una secuencia delta}
 \begin{figure}[H]
@@ -537,7 +508,6 @@ Por ejemplo, en las figuras (\ref{fig:plot_secuencia_01}), (\ref{fig:plot_secuen
     \label{fig:plot_secuencia_01}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Otra secuencia delta}
 \begin{figure}[H]
@@ -547,7 +517,6 @@ Por ejemplo, en las figuras (\ref{fig:plot_secuencia_01}), (\ref{fig:plot_secuen
     \label{fig:plot_secuencia_02}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Una secuencia delta más}
 \begin{figure}[H]
@@ -557,12 +526,10 @@ Por ejemplo, en las figuras (\ref{fig:plot_secuencia_01}), (\ref{fig:plot_secuen
     \label{fig:plot_secuencia_03}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Consideración relevante}
 Tomemos en cuenta que no es correcto expresar que éstas secuencias convergen a la función delta: \pause los límites de esas secuencias \textocolor{burgundy}{no existen}, de acuerdo a las definiciones conocidas de convergencia.
 \end{frame}
-
 \begin{frame}
 \frametitle{Secuencias normalizadas}
 Todas estas funciones están normalizadas a la unidad:
@@ -583,7 +550,6 @@ Una vez que hemos definido la delta de Dirac, nos gustaría saber ahora como ope
 \pause
 ¿Es posible decir algo sobre su derivada? \pause La respuesta a esta pregunta es afirmativa y las secuencias delta hechas de funciones diferenciables nos permiten responder a la pregunta de manera precisa.
 \end{frame}
-
 \begin{frame}
 \frametitle{Diferenciando la secuencia delta}
 Por ejemplo, sea la secuencia delta:
@@ -598,7 +564,6 @@ entonces, al diferenciar la secuencia:
 \dv{\phi_{n}(x)}{x} = - \dfrac{2 \: n^{3}}{\sqrt{\pi}} \: x \: \exp(-n^{2} \: x^{2})
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Gráfica de la derivada de la secuencia}
 \begin{figure}[H]
@@ -608,7 +573,6 @@ entonces, al diferenciar la secuencia:
     \label{fig:fig_figura_delta_04}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando una integral}
 Consideremos ahora la integral:
@@ -625,7 +589,6 @@ Integrando por partes, se obtiene:
 \scaleint{6ex}_{\bs -\infty}^{+\infty} \dv{\phi_{n}(x)}{x} \: f (x) \dd{x} = \phi_{n} \: f (x) \eval_{-\infty}^{+\infty} - \scaleint{6ex}_{\bs -\infty}^{+\infty} \phi_{n} \: \dv{f (x)}{x} \dd{x}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Resolviendo la integral}
 Suponemos que:
@@ -641,7 +604,6 @@ Esto normalmente es cierto, ya que estamos considerando funciones para las cuale
 \end{align*}
 converge.
 \end{frame}
-
 \begin{frame}
 \frametitle{Resolviendo la integral}
 Entonces, haciendo que $n \to \infty$, tenemos:
@@ -655,7 +617,6 @@ Entonces, haciendo que $n \to \infty$, tenemos:
 \pause
 Vemos entonces que la secuencia $\pderivada{\phi} (x)$ está relacionada con la propiedad de filtro.
 \end{frame}
-
 \begin{frame}
 \frametitle{Propiedad de filtro para las derivadas}
 La delta de Dirac satisface la siguiente propiedad:
@@ -665,7 +626,6 @@ La delta de Dirac satisface la siguiente propiedad:
 \end{align*}
 con $f (x)$ una función diferenciable.
 \end{frame}
-
 \begin{frame}
 \frametitle{Propiedad para las derivadas de orden superior}
 Con la idea anterior, se presenta la propiedad para las derivadas de orden superior de $\delta (x)$:
@@ -674,7 +634,6 @@ Con la idea anterior, se presenta la propiedad para las derivadas de orden super
 \scaleint{6ex}_{\bs -\infty}^{+\infty} \dv[m]{\delta (x)}{x} \: f (x) \dd{x} =  (-1)^{m} \: \dv[m]{f (0)}{x}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Casos en los que se cumple}
 Es necesario enfatizar que la expresión anterior tiene significado sólo cuando asumimos directamente que las funciones involucradas son $m$ veces diferenciables y que las integrales:
@@ -684,14 +643,13 @@ Es necesario enfatizar que la expresión anterior tiene significado sólo cuando
 \end{align*}
 convergen para todo valor de $n$ y para todo valor de $k$ de $0$ a $m$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Propiedades de la delta de Dirac}
 La delta de Dirac satisface varias propiedades y conocerlas es de mucha utilidad cuando resolvemos problemas específicos en física. 
 \end{frame}
 
 \section{Propiedades de \texorpdfstring{$\delta (x)$}{d (x)}}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Lista de propiedades}
 
 \begin{frame}
@@ -712,7 +670,6 @@ La siguiente lista contiene propiedades que se pueden demostrar directamente de 
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Revisando las propiedades}
 \setbeamercolor{item projected}{bg=cadet,fg=white}
@@ -729,7 +686,6 @@ La siguiente lista contiene propiedades que se pueden demostrar directamente de 
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Revisando las propiedades}
 \setbeamercolor{item projected}{bg=cadet,fg=white}
@@ -746,7 +702,6 @@ La siguiente lista contiene propiedades que se pueden demostrar directamente de 
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Revisando las propiedades}
 \setbeamercolor{item projected}{bg=cadet,fg=white}
@@ -762,7 +717,6 @@ La siguiente lista contiene propiedades que se pueden demostrar directamente de 
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Revisando las propiedades}
 \setbeamercolor{item projected}{bg=cadet,fg=white}
@@ -781,7 +735,7 @@ donde los $x_{i}$ son los ceros simples de $f (x)$.
 \end{frame}
 
 \section{Introduciendo más variables}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Expandiendo la delta de Dirac}
 
 \begin{frame}
@@ -799,7 +753,6 @@ de manera que al integrar sobre todo el espacio tenemos:
 \scaleint{6ex} \delta (\va{\bm{r}} - \va{\bm{r_{0}}}) \: \dd{x} \dd{y}  \dd{z} = 1
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando la $\delta (x)$}
 La función delta permite especificar la densidad de carga debida a un conjunto de $N$ cargas puntuales de valores $q_{i}$ situadas en posiciones $\va{r_{i}}$ como:
@@ -809,7 +762,6 @@ La función delta permite especificar la densidad de carga debida a un conjunto 
 \label{eq:ecuacion_A_04}
 \end{equation}
 \end{frame}
-
 \begin{frame}
 \frametitle{Recuperando el potencial}
 Las propiedades de la función delta permiten obtener el potencial $\varphi(\va{r})$ evaluando la función dentro de la integral en los puntos $\va{r_{i}}$, es decir:
@@ -824,7 +776,6 @@ Las propiedades de la función delta permiten obtener el potencial $\varphi(\va{
 \pause
 Nótese que $\delta (x)$ tiene unidades de inverso de $x$ y $\delta (\va{r})$ tiene unidades de densidad numérica.
 \end{frame}
-
 \begin{frame}
 \frametitle{Cambiando las coordenadas}
 La función $\delta (x)$ toma una forma particular en coordenadas cilíndricas y esféricas, dadas por la condición de normalización:
@@ -845,7 +796,6 @@ La función $\delta (x)$ toma una forma particular en coordenadas cilíndricas y
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Cambiando las coordenadas}
 \setbeamercolor{item projected}{bg=byzantium,fg=white}
@@ -864,7 +814,6 @@ La función $\delta (x)$ toma una forma particular en coordenadas cilíndricas y
 \end{eqnarray*}
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Algunas funciones al límite}
 Algunas funciones que en el límite generan la función delta:
@@ -884,7 +833,7 @@ Algunas funciones que en el límite generan la función delta:
 \end{frame}
 
 \section{Ejercicios}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Calculando integrales}
 
 \begin{frame}
@@ -897,7 +846,6 @@ Evalúa las siguientes integrales:
 \pause
 Nos apoyaremos con las propiedades que hemos enlistado.
 \end{frame}
-
 \begin{frame}
 \frametitle{Resolviendo la integral}
 Usando la propiedad de distribución de la integral, se tiene que:
@@ -909,7 +857,6 @@ Usando la propiedad de distribución de la integral, se tiene que:
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando una propiedad}
 Ahora ocupamos la siguiente propiedad:
@@ -926,7 +873,6 @@ Por lo que:
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando otra propiedad}
 Entonces para la última integral, ocupamos la propiedad:
@@ -943,7 +889,6 @@ Llegando entonces al resultado:
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Enunciado del Ejercicio 2}
 Evalúa la siguiente integral:
@@ -952,7 +897,6 @@ Evalúa la siguiente integral:
 \scaleint{6ex}_{\bs -\infty}^{+\infty} \dfrac{\cos (x) \, \delta (x)}{2 \exp(x) + 1}  \dd{x}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Resolviendo la integral}
 Expresamos la integral como:
@@ -969,7 +913,6 @@ Usamos la propiedad anterior:
 \scaleint{6ex}_{\bs -\infty}^{\infty} \delta (x) \, f (x) \dd{x} = f (0)
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Resultado}
 Llegando entonces a lo siguiente:
@@ -981,7 +924,6 @@ Llegando entonces a lo siguiente:
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Ejercicio 3}
 Evalúa la siguiente integral:
@@ -996,7 +938,6 @@ La propiedad a utilizar es:
 \scaleint{6ex}_{\bs -\infty}^{\infty} \delta (x - \pderivada{x}) \, f (\pderivada{x}) \dd{\pderivada{x}} = f (x)
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Evaluando la integral}
 Al hacer uso de la propiedad:
@@ -1007,7 +948,6 @@ Al hacer uso de la propiedad:
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Ejercicio 4}
 Evalúa la siguiente integral:
@@ -1018,7 +958,6 @@ Evalúa la siguiente integral:
 \pause
 Tendremos que utilizar las propiedades que hemos mencionado de la $\delta (x)$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Propiedad de utilidad}
 Ya mencionamos que:
@@ -1036,7 +975,6 @@ Por lo tanto:
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Ejercicio 5}
 Calcula la integral:
@@ -1047,7 +985,6 @@ Calcula la integral:
 \pause
 Nuevamente debemos de utilizar una de las propiedades revisadas.
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución al Ejercicio 5}
 Ocupamos la propiedad:
@@ -1063,22 +1000,31 @@ Sabemos que los ceros de la función:
 \sin x = 0 \hspace{0.5cm} \Rightarrow \hspace{0.5cm} x = n \, \pi
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución del Ejercicio 5}
 Por lo tanto:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-&\scaleint{6ex}_{\bs -\infty}^{\infty} \exp\big(-x^{2}\big) \, \delta (\sin x) \dd{x} = \pause \scaleint{6ex}_{\bs -\infty}^{\infty} e^{-x^{2}} \, \bigg( \nsum_{n=-\infty}^{\infty} \dfrac{\delta (x {-} n \pi)}{\abs{\cos n \pi}} \bigg) \dd{x} = \\[0.5em] \pause
+&\scaleint{6ex}_{\bs -\infty}^{\infty} \exp\big(-x^{2}\big) \, \delta (\sin x) \dd{x} = \\[0.5em] \pause
+&\scaleint{6ex}_{\bs -\infty}^{\infty} e^{-x^{2}} \, \bigg( \nsum_{n=-\infty}^{\infty} \dfrac{\delta (x {-} n \pi)}{\abs{\cos n \pi}} \bigg) \dd{x} =
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución del Ejercicio 5}
+\begin{eqnarray*}
+\begin{aligned}
 &= \nsum_{n=-\infty}^{\infty} \scaleint{6ex}_{\bs -\infty}^{\infty} \exp\big( -x^{2} \big) \delta (x - n \pi) \dd{x} = \\[0.5em] \pause
 &= \nsum_{n=-\infty}^{\infty} \exp(-n \pi)^{2} \qed
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
 
+\subsection{Ejercicios a cuenta}
+
 \begin{frame}
-\frametitle{Ejercicio a cuenta - 6}
+\frametitle{Ejercicio a cuenta}
 Evalúa las siguientes integrales:
 \begin{align*}
 \scaleint{6ex}_{\bs -1}^{0} \sinh (2 t \, \delta (5 t + 2)) \dd{t} \\

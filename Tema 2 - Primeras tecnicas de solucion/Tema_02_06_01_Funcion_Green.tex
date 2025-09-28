@@ -3,6 +3,11 @@
 \usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \date{}
 
 \title{\large{La Función de Green}}
@@ -17,11 +22,11 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 %Ref. Herman (2015) - Green's functions and inhomogueneous equations
 \section{Función de Green}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
 
 \begin{frame}
@@ -59,21 +64,22 @@ En esta parte del Tema  2, revisaremos soluciones de ecuaciones diferenciales pa
 \end{align*}
 buscando la llamada función de Green. 
 \end{frame}
-
 \begin{frame}
 \frametitle{Referencia histórica}
 La historia de la función de Green se remonta a 1828, cuando George Green publicó un trabajo en el que buscaba soluciones de la ecuación de Poisson $\laplacian{u} = f$ para el potencial eléctrico $u$ definido dentro de un volumen acotado con condiciones de contorno específicas en la superficie del volumen.
 \end{frame}
-
 \begin{frame}
 \frametitle{Referencia histórica}
 Introdujo una función ahora identificada como lo que Riemann más tarde acuñó como la \textocolor{ao}{función de Green}.
 \\
 \bigskip
 \pause
-En esta parte obtendremos el valor inicial de la función de Green para ecuaciones diferenciales ordinarias.  \pause Más adelante en el material de trabajo volveremos a las funciones de Green con CDF y las funciones de Green para EDP.
+En esta parte obtendremos el valor inicial de la función de Green para ecuaciones diferenciales ordinarias.
 \end{frame}
-
+\begin{frame}
+\frametitle{Referencia histórica}
+Más adelante en el material de trabajo volveremos a las funciones de Green con CDF y las funciones de Green para EDP.
+\end{frame}
 \begin{frame}
 \frametitle{Ejemplo inicial}
 Como un ejemplo simple, consideremos la ecuación de Poisson:
@@ -83,7 +89,6 @@ Como un ejemplo simple, consideremos la ecuación de Poisson:
 \end{align*}
 Sea la ecuación de Poisson dentro de una región $\Omega$ limitada por la superficie $\partial \Omega$ como se muestra en la figura (\ref{fig:figura_07_01}).
 \end{frame}
-
 \begin{frame}
 \frametitle{Región para el problema}
 \begin{figure}[H]
@@ -93,7 +98,6 @@ Sea la ecuación de Poisson dentro de una región $\Omega$ limitada por la super
 \label{fig:figura_07_01}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Ecuación no homogénea}
 Esta es la forma no homogénea de la ecuación de Laplace.
@@ -102,7 +106,6 @@ Esta es la forma no homogénea de la ecuación de Laplace.
 \pause
 El término no homogéneo, $f (\vb{r})$, podría representar una fuente de calor en un problema de estado estacionario o una distribución de carga (fuente) en un problema electrostático.
 \end{frame}
-
 \begin{frame}
 \frametitle{Considerando la fuente}
 Ahora pensemos en la fuente como una fuente puntual en la que estamos interesados en la respuesta del sistema a esta fuente puntual.
@@ -111,7 +114,6 @@ Ahora pensemos en la fuente como una fuente puntual en la que estamos interesado
 \pause
 Si la fuente puntual está ubicada en un punto $\vb{\pderivada{r}}$, entonces la respuesta a la fuente puntual podría sentirse en los puntos $\vb{r}$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Estableciendo un nombre}
 Llamaremos a esta respuesta $G(\vb{r}, \vb{\pderivada{r}})$. \pause La función de respuesta satisfaceria una ecuación de fuente puntual de la forma:
@@ -121,7 +123,6 @@ Llamaremos a esta respuesta $G(\vb{r}, \vb{\pderivada{r}})$. \pause La función 
 \end{align*}
 donde $\delta (\vb{r} - \vb{\pderivada{r}})$ es la función delta de Dirac.
 \end{frame}
-
 \begin{frame}
 \frametitle{Propiedad de filtro de $\delta (r)$}
 Una propiedad clave de esta función generalizada es la propiedad de filtro:
@@ -130,7 +131,6 @@ Una propiedad clave de esta función generalizada es la propiedad de filtro:
 \scaleint{6ex}_{\bs \Omega} \delta (\vb{r} - \vb{\pderivada{r}}) \, f (\vb{r}) \dd{V} = f (\vb{\pderivada{r}})
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Relación entre la función de Green y la solución}
 La conexión entre la función de Green y la solución a la ecuación de Poisson se encuentra en la segunda identidad de Green:
@@ -139,12 +139,10 @@ La conexión entre la función de Green y la solución a la ecuación de Poisson
 \scaleint{6ex}_{\bs \partial \Omega} \bigg[ \phi \, \grad{\psi} - \psi \, \grad{\phi} \bigg] \cdot \vb{n} \dd{S} = \scaleint{6ex}_{\bs \Omega} \bigg[ \phi \, \laplacian{\psi} - \psi \, \laplacian{\phi} \bigg] \dd{V}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando la identidad}
 Haciendo que $\phi = u (\vb{r})$ y $\psi = G (\vb{r}, \vb{\pderivada{r}})$, \pause considera que a continuación las integrales de volumen y de superficie, así como la diferenciación usando el operador $\grad$ se realizan usando las $\vb{r}$-coordenadas.
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando la identidad}
 Se tiene que:
@@ -159,7 +157,6 @@ Se tiene que:
 \label{eq:ecuacion_07_02}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Resolviendo la expresión}
 Al resolver para $u (\vb{\pderivada{r}})$, se tiene que:
@@ -172,7 +169,6 @@ Al resolver para $u (\vb{\pderivada{r}})$, se tiene que:
 \label{eq:ecuacion_07_03}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Ocupando las condiciones del problema}
 Si tanto $u (\vb{r})$ como $G (\vb{r}, \vb{\pderivada{r}})$ satisfacen las condiciones de Dirichlet, $u = 0$ en $\partial \Omega$, \pause entonces la última integral se anula y nos queda:
@@ -180,7 +176,6 @@ Si tanto $u (\vb{r})$ como $G (\vb{r}, \vb{\pderivada{r}})$ satisfacen las condi
 u (\vb{\pderivada{r}}) = \scaleint{6ex}_{\bs \Omega} G (\vb{r}, \vb{\pderivada{r}}) \, f (\vb{r}) \dd{V}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Casos con simetría}
 En algunas aplicaciones se presenta la simetría:
@@ -195,7 +190,6 @@ Por lo que el resultado se puede escribir como:
 u (\vb{\pderivada{r}}) = \scaleint{6ex}_{\bs \Omega} G (\vb{r}, \vb{\pderivada{r}}) \, f (\vb{\pderivada{r}}) \dd{\pderivada{V}}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Resultado importante}
 Entonces, si conocemos la función de Green, \pause \textocolor{red}{podemos resolver la ED no homogénea}.
@@ -206,14 +200,13 @@ De hecho, podemos usar la función de Green para resolver problemas de valor lí
 \end{frame}
 
 \section{Funciones de Green para valores iniciales}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Planteamiento}
 
 \begin{frame}
 \frametitle{Tipo de problemas a resolver}
 En esta parte revisaremos la solución de problemas con valores iniciales que involucran ED no homogéneas utilizando las funciones de Green.
 \end{frame}
-
 \begin{frame}
 \frametitle{Tipo de ED}
 Nuestro objetivo es resolver la ED no homogénea:
@@ -229,13 +222,12 @@ sujeta a las condiciones iniciales (CI):
 y (0) = y_{0} \hspace{1cm} \pderivada{y} (0) = v_{0}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Reasignado la variable independiente}
 Como estamos interesados en problemas de valor inicial, denotaremos la variable independiente como una variable temporal: $t$.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Reasignado la variable independiente}
 La ec. (\ref{eq:ecuacion_07_04}) se puede escribir de forma compacta como:
 \pause
 \begin{align*}
@@ -247,7 +239,6 @@ donde $L$ es el operador diferencial:
 L = a (t) \, \dv[2]{t} + b (t) \, \dv{t} + c (t) 
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución al problema}
 Cuya solución está dada por:
@@ -256,7 +247,6 @@ Cuya solución está dada por:
 y = L^{-1} [f]
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{El inverso del operador}
 El inverso de un operador diferencial es un operador integral, que buscamos escribir en la forma:
@@ -267,12 +257,10 @@ y (t) = \scaleint{6ex} G (t, \tau) \, f(\tau) \dd{\tau}
 \pause
 La función $G (t, \tau)$ se conoce como el  \textocolor{ao}{kernel} (núcleo) del operador integral y  se denomina \textocolor{carmine}{función de Green}.
 \end{frame}
-
 \begin{frame}
 \frametitle{Apoyo del curso de EDO1}
-Tomando del curso de Ecuaciones Diferenciales I la parte de solución con el \textocolor{armygreen}{método de variación de parámetros}, \pause recordemos que este método es un procedimiento útil para la obtención de una solución particular $y_{p} (x)$ de la EDO lineal (no homogénea) y se basa en el conocimiento de la solución general de la lineal homogénea asociada a dicha EDO lineal.
+Tomando del curso de Ecuaciones Diferenciales I la parte de solución con el \textocolor{armygreen}{método de variación de parámetros}, \pause recordemos que este método es un procedimiento útil para la obtención de una solución particular $y_{p} (x)$ de la EDO lineal (no homogénea) \pause y se basa en el conocimiento de la solución general de la lineal homogénea asociada a dicha EDO lineal.
 \end{frame}
-
 \begin{frame}
 \frametitle{Seguimos entonces}
 Hacemos que:
@@ -282,7 +270,6 @@ y_{p} (t) = c_{1} (t) \, y_{1} (t) + c_{2} (t) \, y_{2} (t)
 \label{eq:ecuacion_07_05}
 \end{align}
 \end{frame}
-
 \begin{frame}
 \frametitle{Sistema por resolver}
 Encontramos que tenemos que resolver el sistema de ecuaciones:
@@ -295,7 +282,6 @@ Encontramos que tenemos que resolver el sistema de ecuaciones:
 \label{eq:ecuacion_07_06}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Resolviendo el sistema}
 Este sistema se resuelve fácilmente, para obtener entonces:
@@ -308,7 +294,6 @@ Este sistema se resuelve fácilmente, para obtener entonces:
 \label{eq:ecuacion_07_07}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando el Wronskiano}
 Notemos que el denominador en estas expresiones involucra el Wronskiano de las soluciones al problema homogéneo, el cual viene dado por el determinante:
@@ -319,12 +304,10 @@ y_{1} (t) & y_{2} (t) \\
 \pderivada{y}_{1} (t) & \pderivada{y}_{2} (t) |
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Soluciones linealmente independientes}
 Cuando $y_{1} (t)$ y $y_{2} (t)$ son linealmente independientes, \pause entonces el Wronskiano no es cero y tenemos garantizada una solución para el sistema anterior.
 \end{frame}
-
 \begin{frame}
 \frametitle{Integrando el sistema}
 Entonces, después de una integración, encontramos los parámetros como:
@@ -338,7 +321,6 @@ c_{2} (t) &= \scaleint{6ex}_{\bs t_{1}}^{t} \dfrac{f (\tau) \, y_{1} (\tau)}{a (
 \end{eqnarray}
 donde $t_{0}$ y $t_{1}$ son constantes arbitrarias que se determinarán a partir de las condiciones iniciales.
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución particular}
 Por lo tanto, la solución particular de la ec. (\ref{eq:ecuacion_07_04}) se puede escribir como:
@@ -351,12 +333,10 @@ y_{p} (t) &= y_{2} (t) \scaleint{6ex}_{\bs t_{1}}^{t} \dfrac{f (\tau) \, y_{1} (
 \label{eq:ecuacion_07_09}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Obteniendo las soluciones}
 Comenzamos con la solución particular de la ec. (\ref{eq:ecuacion_07_09}) de la ED no homogénea (\ref{eq:ecuacion_07_04}).
 \end{frame}
-
 \begin{frame}
 \frametitle{Obteniendo las soluciones}Esta se puede combinar con la solución general del problema homogéneo para dar la solución general de la ED no homogénea:
 \begin{eqnarray}
@@ -367,7 +347,6 @@ y_{p} (t) &= c_{1} y_{1} (t) + c_{2} y_{2} (t) +  y_{2} (t) \scaleint{6ex}_{\bs 
 \end{aligned}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Elección oportuna}
 Sin embargo, se puede encontrar una elección adecuada de $t_{0}$ y $t_{1}$ para que no necesitemos escribir explícitamente la solución al problema homogéneo, $c_{1} y_{1} (t) + c_{2} y_{2} (t)$. 
@@ -376,7 +355,6 @@ Sin embargo, se puede encontrar una elección adecuada de $t_{0}$ y $t_{1}$ para
 \pause
 No obstante, configurar la solución de esta forma nos permitirá usar $t_{0}$ y $t_{1}$ para determinar soluciones particulares que satisfagan ciertas condiciones homogéneas.
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando la función de Green}
 En particular, mostraremos que la ec. (\ref{eq:ecuacion_07_10}) se puede escribir en la forma:
@@ -387,7 +365,6 @@ y_{p} (t) = c_{1} y_{1} (t) + c_{2} y_{2} (t) +  y_{2} (t) \scaleint{6ex}_{\bs 0
 \end{align}
 donde la función $G (t, \tau)$ será identificada como la función de Green.
 \end{frame}
-
 \begin{frame}
 \frametitle{Tipos de problemas}
 El objetivo es entonces desarrollar la técnica de la función de Green para resolver el problema de valor inicial:
@@ -400,13 +377,12 @@ y (0) = y_{0}, \hspace{0.7cm} &\pderivada{y} (0) = v_{0}
 \label{eq:ecuacion_07_12}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Revisando el tipo de problemas}
 Primero observamos que podemos resolver este problema de valores iniciales resolviendo dos problemas de valores iniciales separados.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Revisando el tipo de problemas}
 Suponemos que la solución del problema homogéneo satisface las condiciones iniciales originales:
 \pause
 \begin{eqnarray}
@@ -417,7 +393,6 @@ y_{h} (0) = y_{0}, \hspace{0.7cm} &\pderivada{y}_{h} (0) = v_{0}
 \label{eq:ecuacion_07_13}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución particular}
 Entonces asumimos que la solución particular satisface el problema:
@@ -430,7 +405,6 @@ y_{p} (0) = y_{0}, \hspace{0.2cm} &\pderivada{y}_{p} (0) = v_{0}
 \label{eq:ecuacion_07_14}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Aprovechando la linealidad}
 Dado que la ED es lineal, se sabe que:
@@ -440,7 +414,6 @@ y (t) = y_{h} (t) + y_{p} (t)
 \end{align*}
 es una solución a la ecuación no homogénea.
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución que satisface las CI}
 También, esta solución satisface las condiciones iniciales:
@@ -450,7 +423,6 @@ y (0) &= y_{h} (0) + y_{p} (0) = y_{0} + 0 = y_{0} \\[0.5em]
 \pderivada{y} (0) &= \pderivada{y}_{h} (0) + \pderivada{y}_{p} (0) = v_{0} + 0 = v_{0}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución que cumpla las CI}
 Por lo tanto, solo debemos centrarnos en encontrar una solución particular que satisfaga las condiciones iniciales homogéneas.
@@ -459,7 +431,6 @@ Por lo tanto, solo debemos centrarnos en encontrar una solución particular que 
 \pause
 Esto se hará encontrando valores para $t_{0}$ y $t_{1}$ en la ec. (\ref{eq:ecuacion_07_09}) que satisfagan las condiciones iniciales homogéneas: $y_{p} (0) = 0$ y $\pderivada{y}_{p} (0) = 0$
 \end{frame}
-
 \begin{frame}
 \frametitle{Considerando un valor}
 Primero, consideramos $y_{p} (0) = 0$. \pause Tenemos que:
@@ -507,7 +478,6 @@ Evaluando este resultado en $t = 0$, tenemos:
 \end{align}
 Suponiendo que $\pderivada{y}_{p} (0) \neq 0$, podemos hacer que $t_{0} = 0$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Resultado obtenido}
 Entonces, hemos encontrado que:
@@ -521,10 +491,13 @@ y_{p} (x) &= y_{2} (t) \scaleint{6ex}_{\bs 0}^{t} \dfrac{f (\tau) \, y_{1} (\tau
 \label{eq:ecuacion_07_19}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Expresión conocida}
-Este resultado está en la forma correcta y podemos identificar el valor temporal o inicial: \textocolor{ao}{la función de Green}. \pause Entonces, la solución particular se da como:
+Este resultado está en la forma correcta y podemos identificar el valor temporal o inicial: \textocolor{ao}{la función de Green}. 
+\end{frame}
+\begin{frame}
+\frametitle{Expresión conocida}
+Entonces, la solución particular se da como:
 \pause
 \begin{align}
 y_{p} (t) = \scaleint{6ex}_{\bs 0}^{t} G (t, \tau) \, f (\tau) \dd{\tau}
@@ -536,7 +509,6 @@ donde la condición inicial de la función de Green está definida como:
 G (t, \tau) = \dfrac{y_{1} (\tau) \, y_{2} (t) - y_{1} (t) \, y_{2} (\tau)}{a (\tau) \, W (\tau)}
 \end{align*}
 \end{frame}
-
 \begin{frame}[plain]
 \begin{tcolorbox}[title={\centering Solución para problema de valores iniciales con la función de Green}]
 La solución al problema de valores iniciales:
@@ -552,7 +524,6 @@ y (t) = y_{h} (t) + \scaleint{6ex}_{\bs 0}^{t} G (t, \tau) \, f (t) \dd{\tau}
 \end{align}
 \end{tcolorbox}
 \end{frame}
-
 \begin{frame}[plain]
 \begin{tcolorbox}[title={\centering Solución para problema de valores iniciales con la función de Green}]
 Donde:
@@ -578,7 +549,6 @@ Resolvamos el problema del oscilador forzado:
 \sderivada{x} + x = 2 \, \cos t, \hspace{0.5cm} x (0) = 4, \hspace{0.2cm} \pderivada{x} (0) = 0
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Primera solución}
 Primero resolvemos el problema homogéneo con las condiciones iniciales no homogéneas:
@@ -589,7 +559,6 @@ Primero resolvemos el problema homogéneo con las condiciones iniciales no homog
 \pause
 Cuya solución se obtiene fácilmente: $x_{h} (t) = 4 \, \cos t$, que se presenta en la figura (\ref{fig:figura_01}).
 \end{frame}
-
 \begin{frame}
 \frametitle{Gráfica de la solución}
 \begin{figure}[H]
@@ -607,7 +576,6 @@ A continuación, construimos la función de Green.
 \pause
 Necesitamos dos soluciones linealmente independientes, $y_{1} (x)$, $y_{2} (x)$, para la ED homogénea que satisfaga diferentes condiciones homogéneas, $y_{1} (0) = 0$ y $\pderivada{y}_{2} (0) = 0$. \pause Las soluciones más simples son $y_{1} (t) = \sen t$ y $y_{2} (t) = \cos t$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Recuperando el Wronskiano}
 El Wronskiano para este ejemplo es:
@@ -620,7 +588,6 @@ W (t) &= y_{1} (t) \, \pderivada{y}_{2} (t) - \pderivada{y}_{1} (t) \, y_{2} (t)
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{La función de Green}
 Dado que en este ejercicio $a (t) = 1$, es posible calcular la función de Green:
@@ -643,7 +610,6 @@ Tomemos en cuenta que la función de Green depende de $t - \tau$.
 \pause
 Si bien esto es útil en algunos contextos, usaremos la forma expandida al realizar la integración.
 \end{frame}
-
 \begin{frame}
 \frametitle{La solución particular}
 Ahora podemos determinar la solución particular de la ED no homogénea. \pause Tenemos que:
@@ -656,7 +622,6 @@ x_{p} (t) &= \scaleint{6ex}_{\bs 0}^{t} G (t, \tau) \, f (\tau) \dd{\tau} = \\[0
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{La solución particular}
 \begin{eqnarray}
@@ -678,7 +643,6 @@ En la figura (\ref{fig:figura_02}) se muestra la solución al caso no homogéneo
     \label{fig:figura_02}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Soluciones a la ED}
 \begin{figure}[H]
@@ -688,7 +652,6 @@ En la figura (\ref{fig:figura_02}) se muestra la solución al caso no homogéneo
     \label{fig:figura_03}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución completa}
 Por lo tanto, la solución al problema no homogéneo, es la suma es la solución del problema homogéneo y esta solución particular:
@@ -698,7 +661,6 @@ x (t) = 4 \, \cos t + t \, \sin t
 \end{align*}
 La gráfica de la solución se muestra en la figura (\ref{fig:figura_04}):
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución completa a la ED inhomogénea}
 \begin{figure}[H]
@@ -709,16 +671,14 @@ La gráfica de la solución se muestra en la figura (\ref{fig:figura_04}):
 \end{figure}
 \end{frame}
 
-
-\section{Valores de frontera y funciones de Green.}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\section{Valores de frontera y funciones de Green}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{El problema de estudio}
 
 \begin{frame}
 \frametitle{Lo que trabajaremos}
 En esta parte extenderemos este método a la solución de problemas con condiciones de frontera no homogéneos usando una función de Green.
 \end{frame}
-
 \begin{frame}
 \frametitle{Lo que trabajaremos}
 Recordemos que el objetivo es resolver la ED no homogénea:
@@ -728,7 +688,6 @@ L [y] = f, \hspace{0.6cm} a \leq x \leq b
 \end{align*}
 donde $L$ es un operador diferencial y $y (x)$ satisface las condiciones de frontera en $x = a$ y $x = b$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución al problema}
 La solución viene dada formalmente por:
@@ -738,13 +697,14 @@ y = L^{-1} [y]
 \end{align*}
 \pause
 El \textocolor{carmine}{inverso de un operador diferencial es un operador integral}, que buscamos escribir de la forma:
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Solución al problema}
 \begin{align*}
 y (x) = \scaleint{6ex}_{a}^{b} G (x, \xi) \, f (\xi) \dd{\xi} 
 \end{align*}
 La función $G (x, \xi)$ se conoce como el \textocolor{armygreen}{kernel} (núcleo) del operador integral y se le llama \textocolor{cobalt}{función de Green}.
 \end{frame}
-
 \begin{frame}
 \frametitle{Tipo particular de ED}
 Consideraremos problemas CDF de la forma de \textocolor{darkviolet}{Sturm-Liouville}:
@@ -753,15 +713,14 @@ Consideraremos problemas CDF de la forma de \textocolor{darkviolet}{Sturm-Liouvi
 \dv{x} \bigg[ p (x) \, \dv{y (x)}{x} \bigg] + q (x) \, y (x) = f (x), \hspace{0.6cm} a < x < b
 \label{eq:ecuacion_07_25}
 \end{align}
-con valores fijos de $y (x)$ en la frontera, $y (a) = 0$ y $y (b) = 0$. \pause Sin embargo, la teoría general funciona para otras formas de condiciones de frontera homogéneas.
+con valores fijos de $y (x)$ en la frontera, $y (a) = 0$ y $y (b) = 0$. \pause Sin embargo, la teoría general funciona para otras formas de CDF homogéneas.
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución a la ED}
 Buscamos la función de Green resolviendo primero la ED no homogénea usando el \textocolor{byzantine}{método de variación de parámetros}.
-\\
-\bigskip
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Solución a la ED}
 Suponemos una solución particular de la forma:
 \pause
 \begin{align*}
@@ -769,7 +728,6 @@ y_{p} (x) = c_{1} (x) \, y_{1} (x) + c_{2} (x) \, y_{2} (x)
 \end{align*}
 que se forma a partir de dos soluciones linealmente independientes del problema homogéneo, $y_{i} (x), i = 1, 2$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Coeficientes que satisfacen el sistema}
 Habíamos encontrado que las funciones de los coeficientes satisfacen las ecuaciones:
@@ -782,7 +740,6 @@ Habíamos encontrado que las funciones de los coeficientes satisfacen las ecuaci
 \label{eq:ecuacion_07_26}
 \end{align}
 \end{frame}
-
 \begin{frame}
 \frametitle{Resolviendo el sistema}
 Resolviendo este sistema, se obtiene:
@@ -793,7 +750,6 @@ Resolviendo este sistema, se obtiene:
 \end{align*}
 donde $W (y_{1}, y_{2}) = y_{1} \, \pderivada{y}_{2} - \pderivada{y}_{1} \, y_{2}$ es el Wronskiano.
 \end{frame}
-
 \begin{frame}
 \frametitle{Integrando el resultado}
 Integrando las expresiones para sustituirlas de regreso en la solución particular, se encuentra que:
@@ -803,12 +759,10 @@ y (x) = y_{2} (x) \scaleint{6ex}_{\bs x_{1}}^{x} \dfrac{f (\xi) \, y_{1} (\xi)}{
 \end{align*}
 donde $x_{0}$ y $x_{1}$ se determinarán utilizando las condiciones de frontera.
 \end{frame}
-
 \begin{frame}
 \frametitle{Valores en particular}
 En particular, buscaremos $x_{0}$ y $x_{1}$ para que la solución al problema de valores en la frontera pueda escribirse como una integral simple que involucre una función de Green.
 \end{frame}
-
 \begin{frame}
 \frametitle{Recuperando la solución}
 Notemos que podemos absorber la solución del problema homogéneo, $y_{h} (x)$, en las integrales con una elección apropiada de límites en las integrales.
@@ -817,12 +771,10 @@ Notemos que podemos absorber la solución del problema homogéneo, $y_{h} (x)$, 
 \pause
 Ahora buscamos satisfacer las condiciones $y (a) = 0$ y $y (b) = 0$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando las soluciones}
 Primero usamos soluciones de la ED homogénea que satisfacen $y_{1} (a) = 0$, $y_{2} (b) = 0$ y $y_{1} (b) \neq 0$, $y_{2} (a) \neq 0$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando las soluciones}
 Evaluando $y (x)$ en $x = 0$, tenemos que:
@@ -836,7 +788,6 @@ y (a) &= y_{2} (a) \scaleint{6ex}_{\bs x_{1}}^{a} \dfrac{f (\xi) \, y_{1} (\xi)}
 \label{eq:ecuacion_07_27}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Eligiendo las condiciones}
 Podemos satisfacer la condición en $x = a$ si escogemos $x_{1} = a$. \pause De manera similar, en $x = b$, encontramos que:
@@ -850,7 +801,6 @@ y (b) &= y_{2} (b) \scaleint{6ex}_{\bs x_{1}}^{b} \dfrac{f (\xi) \, y_{1} (\xi)}
 \label{eq:ecuacion_07_28}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Valor de la condición}
 Esta expresión se anula para $x_{0} = b$.
@@ -867,7 +817,6 @@ y (x) &= y_{2} (x) \scaleint{6ex}_{\bs a}^{x} \dfrac{f (\xi) \, y_{1} (\xi)}{p (
 \label{eq:ecuacion_07_29}
 \end{align}
 \end{frame}
-
 \begin{frame}
 \frametitle{Reescribiendo la expresión}
 Esta solución se puede escribir en forma compacta tal como lo hicimos para el problema de valores iniciales del numeral anterior.
@@ -876,7 +825,6 @@ Esta solución se puede escribir en forma compacta tal como lo hicimos para el p
 \pause
 Buscamos una función de Green para que la solución se pueda escribir como una sola integral.
 \end{frame}
-
 \begin{frame}
 \frametitle{Ajustando los términos}
 Podemos mover las funciones de $x$ debajo de la integral.
@@ -885,7 +833,6 @@ Podemos mover las funciones de $x$ debajo de la integral.
 \pause
 Además, dado que $a < x < b$, podemos invertir los límites en la segunda integral.
 \end{frame}
-
 \begin{frame}
 \frametitle{Resultado obtenido}
 Esto nos da:
@@ -898,12 +845,10 @@ y (x) &= \scaleint{6ex}_{\bs x}^{a} \dfrac{f (\xi) \, y_{1} (\xi) \, y_{2} (x)}{
 \label{eq:ecuacion_07_30}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Reescribiendo nuevamente}
 Este resultado se puede ahora escribir de una manera compacta:
 \end{frame}
-
 \begin{frame}[plain]
 \begin{tcolorbox}[title={\centering Solución para problema de CDF con la función de Green}]
 \begin{align}
@@ -915,7 +860,6 @@ Este resultado se puede ahora escribir de una manera compacta:
 \end{align}
 \end{tcolorbox}
 \end{frame}
-
 \begin{frame}[plain]
 \begin{tcolorbox}[title={\centering Solución para problema de CDF con la función de Green}]
 Toma la forma:
@@ -923,10 +867,8 @@ Toma la forma:
 y (x) = \scaleint{6ex}_{\bs a}^{b} G (x, \xi) \, f (\xi) \dd{\xi}
 \label{eq:ecuacion_07_32}
 \end{align}
-
 \end{tcolorbox}
 \end{frame}
-
 \begin{frame}[plain]
 \begin{tcolorbox}[title={\centering Solución para problema de CDF con la función de Green}]
 Donde la función de Green es una función en partes definida como:
@@ -956,7 +898,6 @@ G (a, \xi) &= \dfrac{y_{1} (a) \, y_{2} (x)}{p \, W} = 0 \\[0.5em] \pause
 G (b, \xi) &= \dfrac{y_{1} (\xi) \, y_{2} (b)}{p \, W} = 0
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Simetría con respecto a los argumentos}
 Además, la función de Green es simétrica en sus argumentos.
@@ -973,7 +914,6 @@ G (\xi, x) = \begin{cases}
 \label{eq:ecuacion_07_34}
 \end{align}
 \end{frame}
-
 \begin{frame}
 \frametitle{Revisando la simetría}
 Pero revisando de manera cuidadosa a la forma original, tenemos que:
@@ -982,7 +922,6 @@ Pero revisando de manera cuidadosa a la forma original, tenemos que:
 G (x, \xi) = G (\xi, x)
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Uso de las propiedades}
 Haremos uso de estas propiedades más adelante para determinar rápidamente las funciones de Green para otros problemas de valores en la frontera.
@@ -998,7 +937,6 @@ Usando la función de Green para CDF, resuelve el problema:
 \sderivada{y} = x^{2}, \hspace{0.6cm} y (0) = 0 = y (1)
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución homogénea}
 Primero resolvemos la ecuación homogénea, $\sderivada{y} = 0$.
@@ -1012,7 +950,6 @@ y (x) = A \, x + B
 \end{align*}
 donde falta determinar las constantes $A$ y $B$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución necesaria}
 Necesitamos una solución que satisfaga $y_{1} (0) = 0$.
@@ -1027,7 +964,6 @@ Por lo tanto:
 \pause
 Entonces, podemos elegir $y_{1} (x) = x$, ya que $A$ es arbitrario.
 \end{frame}
-
 \begin{frame}
 \frametitle{Eligiendo la otra solución}
 La otra solución tiene que satisfacer $y_{2} (1) = 0$. 
@@ -1042,7 +978,6 @@ Entonces:
 \pause
 Esto se puede resolver para $B = - A$. \pause Nuevamente, $A$ es arbitraria y elegimos $A = - 1$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Segunda solución}
 Por tanto:
@@ -1051,7 +986,6 @@ Por tanto:
 y_{2} (x) = 1 - x
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Gráfica de las soluciones}
 \begin{figure}[H]
@@ -1061,7 +995,6 @@ y_{2} (x) = 1 - x
     \label{fig:figura_05}
 \end{figure}
 \end{frame}
-
 \begin{frame}
 \frametitle{Usando las soluciones}
 Para este problema $p (x) = 1$. \pause Así, para $y_{1} (x) = x$ y $y_{2} (x) = 1 - x$, el producto:
@@ -1075,7 +1008,6 @@ p (x) \, W (x) &=  y_{1} (x) \, \pderivada{y}_{2} (x) - \pderivada{y}_{1} (x) \,
 \end{eqnarray*}
 Tomemos en cuenta que $p (x) \, W (x)$ es una constante, como debería ser.
 \end{frame}
-
 \begin{frame}
 \frametitle{Obteniendo la función de Green}
 Ahora construimos la función de Green.
@@ -1092,7 +1024,6 @@ G (x, \xi) = \begin{cases}
 \label{eq:ecuacion_07_35}
 \end{align}
 \end{frame}
-
 \begin{frame}
 \frametitle{Simetría en la solución}
 Observemos la simetría entre las dos partes de la función de Green. 
@@ -1106,7 +1037,6 @@ G (0, \xi) &= 0, \mbox{ de la parte inferior}, \\[0.5em]
 G (1, \xi) &= 0, \mbox{ de la parte superior}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Forma integral}
 Finalmente, sustituimos la función de Green en la forma integral de la solución y evaluamos la integral:
@@ -1119,7 +1049,6 @@ y (x) &= \scaleint{6ex}_{0}^{1} G (x, \xi) \, f (\xi) \dd{\xi} = \\[0.5em] \paus
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Forma integral}
 \begin{eqnarray}
@@ -1132,7 +1061,6 @@ y (x) &= \scaleint{6ex}_{0}^{1} G (x, \xi) \, f (\xi) \dd{\xi} = \\[0.5em] \paus
 \label{eq:ecuacion_07_36}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Solución a la ED}
 Revisando la solución, se verifica fácilmente que la ED:
@@ -1142,7 +1070,6 @@ Revisando la solución, se verifica fácilmente que la ED:
 \end{align*}
 se satisface para las CDF $y (0) = 0$ y $y (1) = 0$. \pause La solución completa al caso no homogéneo se presenta en la figura (\ref{fig:figura_05}).
 \end{frame}
-
 \begin{frame}
 \frametitle{Gráfica de la solución}
 \begin{figure}[H]
@@ -1154,7 +1081,7 @@ se satisface para las CDF $y (0) = 0$ y $y (1) = 0$. \pause La solución complet
 \end{frame}
 
 \section{Propiedades de la función de Green}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Propiedades básicas}
 
 \begin{frame}
@@ -1165,7 +1092,6 @@ Hemos mencionado algunas propiedades de las funciones de Green en el último num
 \pause
 En esta parte revisaremos algunas de estas propiedades como una herramienta para construir rápidamente funciones de Green para problemas de valores en la frontera.
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 \setbeamercolor{item projected}{bg=dartmouthgreen,fg=bisque}
@@ -1183,7 +1109,6 @@ Esto se establece fácilmente. \pause Para $x < \xi$ estamos en el  segundo caso
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 Así, dado que $y_{1} (x)$ es una solución de la ecuación homogénea, también lo es $G (x, \xi)$. Para $x > \xi$ estamos en el primer caso y $G (x, \xi)$ es proporcional a $y_{2} (x)$.
@@ -1192,7 +1117,6 @@ Así, dado que $y_{1} (x)$ es una solución de la ecuación homogénea, también
 \pause
 Entonces, una vez más $G (x, \xi)$ es una solución del problema homogéneo.
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 \setbeamercolor{item projected}{bg=dartmouthgreen,fg=bisque}
@@ -1210,12 +1134,10 @@ Por ejemplo, para $x = a$ estamos en el segundo caso y $G (x, \xi)$ es proporcio
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 Por lo tanto, cualquier condición que satisfaga $y_{1} (x)$, $G (x, \xi)$ la satisfará. Se puede hacer una afirmación similar para $x = b$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 \setbeamercolor{item projected}{bg=dartmouthgreen,fg=bisque}
@@ -1233,7 +1155,6 @@ Se demostró esta propiedad en el numeral anterior.
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 \setbeamercolor{item projected}{bg=dartmouthgreen,fg=bisque}
@@ -1251,7 +1172,6 @@ Aquí definimos $\xi^{\pm}$ a través de los límites de una función cuando $x$
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 En particular:
@@ -1267,12 +1187,10 @@ Haciendo $x = \xi$ en ambos casos, tenemos que:
 \dfrac{y_{1} (\xi) \, y_{2} (\xi)}{p \, W} = \dfrac{y_{1} (\xi) \, y_{2} (\xi)}{p \, W}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 Por tanto, hemos establecido la continuidad de $G (x, \xi)$ entre los dos casos en $x = \xi$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 \setbeamercolor{item projected}{bg=dartmouthgreen,fg=bisque}
@@ -1291,7 +1209,6 @@ Esta propiedad no es tan obvia.
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 Primero calculamos las derivadas observando qué caso está involucrado y luego evaluamos las derivadas y las restamos.
@@ -1302,11 +1219,11 @@ Así, tenemos lo siguiente:
 \pause
 \begin{eqnarray*}
 \begin{aligned}[b]
-&\pdv{G (\xi^{+}, \xi)}{x} - \pdv{G (\xi^{-}, \xi)}{x} = - \dfrac{1}{p \, W} \, y_{1} (\xi) \, \pderivada{y}_{2} (\xi) + \dfrac{1}{p \, W} \, \pderivada{y}_{1} (\xi) \, y_{2} (\xi) = \\[0.5em]
+\pdv{G (\xi^{+}, \xi)}{x} - \pdv{G (\xi^{-}, \xi)}{x} &= - \dfrac{1}{p \, W} \, y_{1} (\xi) \, \pderivada{y}_{2} (\xi) + \\[0.5em]
+&+ \dfrac{1}{p \, W} \, \pderivada{y}_{1} (\xi) \, y_{2} (\xi) = 
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Cinco propiedades}
 \begin{eqnarray}
@@ -1317,7 +1234,6 @@ Así, tenemos lo siguiente:
 \label{eq:ecuacion_07_37}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}[plain]
 \begin{tcolorbox}[title={\centering Propiedades de la función de Green}]
 \setbeamercolor{item projected}{bg=denim,fg=white}
@@ -1337,7 +1253,6 @@ Así, tenemos lo siguiente:
 \end{enumerate}
 \end{tcolorbox}
 \end{frame}
-
 \begin{frame}[plain]
 \begin{tcolorbox}[title={\centering Propiedades de la función de Green}]
 \setbeamercolor{item projected}{bg=denim,fg=white}
@@ -1366,7 +1281,6 @@ Construye la función de Green para el siguiente problema:
 &=y (0) = 0 = y (1) \hspace{0.6cm} \omega \neq 0
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento}
 \setbeamercolor{item projected}{bg=eggplant,fg=white}
@@ -1385,7 +1299,6 @@ y_{h} (x) = c_{1} \, \sin \omega x + c_{2} \, \cos \omega x
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 1}
 Por lo que, para $x \neq \xi$:
@@ -1420,7 +1333,6 @@ G (x, \xi) = c_{1} (\xi) \, \sin \omega x = 0, \hspace{0.5cm} 0 \leq x \leq \xi
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 2}
 Segundo, tenemos que $G (1, \xi) = 0$, para $\xi \leq x \leq 1$. Por lo tanto:
@@ -1435,7 +1347,6 @@ Se puede elegir una solución haciendo que:
 c_{2} (\xi) = - c_{1} (\xi) \, \tan \omega
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 2}
 Esto nos proporciona:
@@ -1446,7 +1357,6 @@ G (x, \xi) = c_{1} (\xi) \, \sin \omega x - c_{1} (\xi) \, \tan \omega \, \cos \
 \pause
 Esto se puede simplificar factorizando el $c_{1} (\xi)$ y colocando los términos restantes sobre un denominador común.
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 2}
 El resultado es:
@@ -1459,7 +1369,6 @@ G (x, \xi) &= \dfrac{c_{1} (\xi)}{\cos \omega} \big[ \sin \omega x \, \cos \omeg
 \label{eq:ecuaction_07_38}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 2}
 Dado que el coeficiente es arbitrario en este punto, podemos escribir el resultado como:
@@ -1470,7 +1379,6 @@ G (x, \xi) = d_{1} (\xi) \, \sin \omega (1 - x), \hspace{0.5cm} \xi \leq x \leq 
 \pause
 Observamos que podríamos haber comenzado con $y_{2} (x) = \sin \omega (1 - x)$ como una de las soluciones linealmente independientes del problema homogéneo, anticipando que $y_{2} (x)$ satisface la segunda condición de frontera.
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 3}
 \setbeamercolor{item projected}{bg=eggplant,fg=white}
@@ -1493,7 +1401,6 @@ d_{1} (\xi) \, \sin \omega (1 - x) & \xi \leq x \leq 1
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 3}
 Podemos hacer que los casos sean simétricos eligiendo las formas correctas para $c_{1} (\xi)$ y $d_{1} (\xi)$. Elegimos :
@@ -1502,7 +1409,9 @@ Podemos hacer que los casos sean simétricos eligiendo las formas correctas para
 c_{1} (\xi) &= C \, \sin \omega (1 - \xi) \\[0.5em]
 d_{1} (\xi) &= C \, \sin \omega \xi
 \end{align*}
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Procedimiento Paso 3}
 Luego entonces:
 \pause
 \begin{align*}
@@ -1512,7 +1421,6 @@ d_{1} (\xi) \, \sin \omega (1 - x) & \xi \leq x \leq 1
 \end{cases}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 3}
 Ahora la función de Green es simétrica y todavía tenemos que determinar la constante $C$.
@@ -1521,7 +1429,6 @@ Ahora la función de Green es simétrica y todavía tenemos que determinar la co
 \pause
 Notemos que podríamos haber llegado a este punto usando el resultado del método de variación de parámetros donde $C = \dfrac{1}{p \, W}$.
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 4}
 \setbeamercolor{item projected}{bg=eggplant,fg=white}
@@ -1537,7 +1444,6 @@ Ya tenemos continuidad en virtud de la simetría impuesta en el último paso.
 \seti
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 5}
 \setbeamercolor{item projected}{bg=eggplant,fg=white}
@@ -1556,7 +1462,6 @@ Todavía necesitamos determinar $C$. Podemos hacer esto usando salto de disconti
 \end{align*}
 \end{enumerate}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 5}
 En este problema $p (x) = 1$. Sustituyendo la función de Green, se tiene que:
@@ -1569,7 +1474,6 @@ En este problema $p (x) = 1$. Sustituyendo la función de Green, se tiene que:
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 5}
 \begin{eqnarray}
@@ -1581,7 +1485,6 @@ En este problema $p (x) = 1$. Sustituyendo la función de Green, se tiene que:
 \label{eq:ecuacion_07_39}
 \end{eqnarray}
 \end{frame}
-
 \begin{frame}
 \frametitle{Procedimiento Paso 5}
 Por lo tanto:
@@ -1590,7 +1493,6 @@ Por lo tanto:
 C = - \dfrac{1}{\omega \, \sin \omega}
 \end{align*}
 \end{frame}
-
 \begin{frame}
 \frametitle{Resultado esperado}
 Finalmente, hemos obtenido la función de Green:
@@ -1603,5 +1505,63 @@ G (x, \xi) = \begin{cases}
 \label{eq:ecuacion_07_40}
 \end{align}
 \end{frame}
+
+\section{Ejercicios a cuenta}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicios}
+
+\begin{frame}
+\frametitle{Ejercicio 1}
+Para el problema:
+\begin{align*}
+    \sderivada{y} - k^{2} \, y = f (x), \hspace{1cm} y (0) = 0, \hspace{0.5cm} \pderivada{y} (0) = 1
+\end{align*}
+\setbeamercolor{item projected}{bg=cobalt,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
+\item Encuentra la función de Green.
+\item Usa la función de Green para resolver:
+\begin{align*}
+    \sderivada{y} - y = e^{-x}
+\end{align*}
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 1}
+\setbeamercolor{item projected}{bg=cobalt,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}
+\conti
+\item Usa la función de Green para resolver:
+\begin{align*}
+    \sderivada{y} - 4 \, y = e^{2x}
+\end{align*}
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 2}
+Considera el problema:
+\begin{align*}
+    \sderivada{y} = \sin x, \hspace{1cm} \pderivada{y} (0) = 0, \hspace{0.5cm} y (\pi) = 0
+\end{align*}
+\setbeamercolor{item projected}{bg=ao(english),fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
+\begin{enumerate}[<+->]
+\item Resuelve por integración directa.
+\item Determina la función de Green.
+\item Resuelve el problema con las CDF usando la función de Green.
+\end{enumerate}
+\end{frame}
+
 
 \end{document}

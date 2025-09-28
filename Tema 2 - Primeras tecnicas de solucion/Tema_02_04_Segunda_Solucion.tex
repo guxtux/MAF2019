@@ -3,6 +3,11 @@
 \usepackage{../Estilos/ColoresLatex}
 \input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \date{}
 
 \title{\large{Segunda solución linealmente independiente}}
@@ -17,11 +22,11 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 %Referencia Arfken - 9.6 A Second Solution
 \section{Una segunda solución}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Introducción}
 
 \begin{frame}
@@ -41,7 +46,7 @@ No hay garantía de que este enfoque devuelva dos soluciones independientes que 
 Vamos a demostrar que una EDO de este tipo tiene como máximo dos soluciones linealmente independientes. 
 \end{frame}
 \begin{frame}
-\frametitle{Dos métodos }
+\frametitle{Dos métodos}
 Presentaremos dos métodos para obtener una segunda solución independiente:
 \pause
 \setbeamercolor{item projected}{bg=blue-violet,fg=white}
@@ -56,7 +61,7 @@ Presentaremos dos métodos para obtener una segunda solución independiente:
 \end{frame}
 
 \section{Independencia lineal}
-\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Independencia lineal de las soluciones}
 
 \begin{frame}
@@ -113,7 +118,7 @@ Sabemos que existe una solución $k_{\lambda} \neq 0$, sólo si el determinante 
 % \end{aligned}
 % \label{eq:ecuacion_09_116}
 \end{align*}
-A este determinante se le llama \emph{Wronskiano}:
+A este determinante se le llama \textocolor{byzantine}{Wronskiano}:
 \end{frame}
 \begin{frame}
 \frametitle{Propiedades del Wronskiano}
@@ -138,7 +143,7 @@ A este determinante se le llama \emph{Wronskiano}:
 \fontsize{12}{12}\selectfont
 \begin{enumerate}[<+->]
 \conti
-\item Si el Wronskiano se anula en ciertos valores aislados del argumento, esto no prueba necesariamente la dependencia lineal (a menos que el conjunto de funciones sea de dos funciones). De cualquier manera, si el Wronskiano es cero en un rango amplio de la variable, las funciones $\varphi_{\lambda}$ son linealmente dependientes dentro de ese rango.
+\item Si el Wronskiano se anula en ciertos valores aislados del argumento, esto no prueba necesariamente la dependencia lineal (a menos que el conjunto de funciones sea de dos funciones). De cualquier manera, si el Wronskiano es cero en un rango amplio de la variable, las funciones $\varphi_{\lambda}$ son \textocolor{ao(english)}{linealmente dependientes} dentro de ese rango.
 \end{enumerate}
 \end{frame}
 
@@ -209,7 +214,7 @@ e^{x} + e^{-x} - 2 \: \cosh x = 0 \hspace{1.5cm} \text{con } k_{\lambda} \neq 0
 \end{frame}
 
 \section{Solución integral}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Construcción}
 
 \begin{frame}
@@ -217,7 +222,7 @@ e^{x} + e^{-x} - 2 \: \cosh x = 0 \hspace{1.5cm} \text{con } k_{\lambda} \neq 0
 Regresando a la ecuación diferencial lineal de segundo orden y homogénea de la forma:
 \pause
 \begin{equation}
-\stilde{y} + P (x) \, \ptilde{y} + Q (x) \: y = 0
+\sderivada{y} + P (x) \, \pderivada{y} + Q (x) \: y = 0
 \label{eq:ecuacion_09_118}
 \end{equation}
 sean $y_{1}$ y $y_{2}$ dos soluciones independientes.
@@ -227,7 +232,7 @@ sean $y_{1}$ y $y_{2}$ dos soluciones independientes.
 El Wronskiano por definición es:
 \pause
 \begin{align}
-W = y_{1} \: \ptilde{y}_{2} - \ptilde{y}_{1} \: y_{2}
+W = y_{1} \: \pderivada{y}_{2} - \pderivada{y}_{1} \: y_{2}
 \label{eq:ecuacion_09_119}
 \end{align}
 \end{frame}
@@ -237,10 +242,10 @@ Diferenciando el Wronskiano, obtenemos:
 \pause
 \begin{eqnarray*}
 \begin{aligned}
-\ptilde{W} &= \ptilde{y}_{1} \: \ptilde{y}_{2} + y_{1} \: \stilde{y}_{2} - \stilde{y}_{1} \: y_{2} - \ptilde{y}_{1} \: \ptilde{y}_{2} = \\ \pause
-&= y_{1} \bigg[ - P(x) \: \ptilde{y}_{2} - Q(x) \: y_{2} \bigg] + \\ \pause
-&- y_{2} \bigg[ - P(x) \: \ptilde{y}_{1} - Q(x)  \: y_{1} \bigg] = \\ \pause
-&= - P(x) \: \bigg[ y_{1} \: \ptilde{y}_{2} - \ptilde{y}_{1} \: y_{2} \bigg]
+\pderivada{W} &= \pderivada{y}_{1} \: \pderivada{y}_{2} + y_{1} \: \sderivada{y}_{2} - \sderivada{y}_{1} \: y_{2} - \pderivada{y}_{1} \: \pderivada{y}_{2} = \\ \pause
+&= y_{1} \bigg[ - P(x) \: \pderivada{y}_{2} - Q(x) \: y_{2} \bigg] + \\ \pause
+&- y_{2} \bigg[ - P(x) \: \pderivada{y}_{1} - Q(x)  \: y_{1} \bigg] = \\ \pause
+&= - P(x) \: \bigg[ y_{1} \: \pderivada{y}_{2} - \pderivada{y}_{1} \: y_{2} \bigg]
 \end{aligned}
 \end{eqnarray*}
 \end{frame}
@@ -249,7 +254,7 @@ Diferenciando el Wronskiano, obtenemos:
 Donde la expresión entre corchetes es el Wronskiano mismo, por tanto:
 \pause
 \begin{align}
-\ptilde{W} = - P(x) \: W
+\pderivada{W} = - P(x) \: W
 \label{eq:ecuacion_09_120}
 \end{align}
 \end{frame}
@@ -258,13 +263,13 @@ Donde la expresión entre corchetes es el Wronskiano mismo, por tanto:
 En el caso especial con $P(x) = 0$, entonces:
 \pause
 \begin{align}
-\stilde{y} + Q(x) \: y = 0
+\sderivada{y} + Q(x) \: y = 0
 \label{eq:ecuacion_09_121}
 \end{align}
 el Wronskiano:
 \pause
 \begin{align}
-W = y_{1} \: \ptilde{y}_{2} - \ptilde{y}_{1} \: y_{2} = \mbox{ constante}
+W = y_{1} \: \pderivada{y}_{2} - \pderivada{y}_{1} \: y_{2} = \mbox{ constante}
 \label{eq:ecuacion_09_1202}
 \end{align}
 \end{frame}
@@ -276,8 +281,8 @@ Ya que nuestra ecuación diferencial es homogénea, podemos multiplicar las solu
 \frametitle{Caso especial}
 El caso $P(x) = 0$ aparece más frecuentemente de lo esperado:
 \begin{itemize}
-\item El laplaciano $\laplacian$ en coordenadas cartesianas no contiene la primera derivada.
-\item La dependencia radial de $\laplacian (\dfrac{\psi}{r})$ en coordenadas esféricas polares carece de la primera derivada radial.
+\item[\ding{212}] El laplaciano $\laplacian$ en coordenadas cartesianas no contiene la primera derivada.
+\item[\ding{212}] La dependencia radial de $\laplacian (\dfrac{\psi}{r})$ en coordenadas esféricas polares carece de la primera derivada radial.
 \end{itemize}
 \end{frame}
 \begin{frame}
@@ -316,7 +321,7 @@ que es lo mismo:
 Pero:
 \pause
 \begin{align}
-W(x) = y_{1} \: \ptilde{y}_{2} - \ptilde{y}_{1} \: y_{2} = y_{1}^{2} \: \dv{x} \left( \dfrac{y_{2}}{y_{1}} \right)
+W(x) = y_{1} \: \pderivada{y}_{2} - \pderivada{y}_{1} \: y_{2} = y_{1}^{2} \: \dv{x} \left( \dfrac{y_{2}}{y_{1}} \right)
 \label{eq:ecuacion_09_124}
 \end{align}
 Combinando las ecuaciones (\ref{eq:ecuacion_09_123}) y (\ref{eq:ecuacion_09_124}), tenemos que:
@@ -391,13 +396,15 @@ La cual es obviamente independiente (y no un múltiplo lineal) de $\sin x$.
 \end{frame}
 
 \section{Segunda solución en series}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Construcción}
 
 \begin{frame}
 \frametitle{Secuencia de pasos}
 Un análisis más profundo de la naturaleza de la segunda solución de la ecuación diferencial se puede lograr mediante la siguiente secuencia de pasos:
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Secuencia de pasos}
 \setbeamercolor{item projected}{bg=lava,fg=white}
 \setbeamertemplate{enumerate items}{%
 \usebeamercolor[bg]{item projected}%
@@ -433,7 +440,7 @@ Siguiendo el paso 1, tenemos:
 \pause
 \begin{align}
 \begin{aligned}[b]
-\stilde{y} &+ (p_{-1} \, x^{-1} + p_{0} + p_{1} \, x + \ldots) \, \ptilde{y} + \\[0.5em]
+\sderivada{y} &+ (p_{-1} \, x^{-1} + p_{0} + p_{1} \, x + \ldots) \, \pderivada{y} + \\[0.5em]
 &+(q_{-2} \, x^{-2} + q_{-1} \, x^{-1} + \ldots) \, y = 0
 \end{aligned}
 \label{eq:ecuacion_09_130}
@@ -445,6 +452,7 @@ Si $p_{-1} = q_{-1} = q_{-2} = 0$, se reduce a un punto ordinario.
 \end{frame}
 \begin{frame}
 \frametitle{Desarrollo}
+\vspace*{-0.5cm}
 Sustituimos:
 \pause
 {\fontsize{12}{12}\selectfont
@@ -812,11 +820,15 @@ La ED2 lineal y \textit{no homogénea} tendrá una solución adicional: la \emph
 Esta solución particular se puede obtener por el método de variación de parámetros, o por medio de técnicas tales como las funciones de Green.
 \end{frame}
 
+\section{Ejercicio a cuenta}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{Enunciado}
+
 \begin{frame}
-\frametitle{Ejercicio a cuenta - 5}
+\frametitle{Ejercicio a cuenta}
 Considerando que una solución de:
 \begin{align*}
-\stilde{R} + \dfrac{1}{r} \, \ptilde{R} - \dfrac{m^{2}}{r^{2}} \, R = 0
+\sderivada{R} + \dfrac{1}{r} \, \pderivada{R} - \dfrac{m^{2}}{r^{2}} \, R = 0
 \end{align*}
 es $R = r^{m}$. Demuestra que la ecuación (\ref{eq:ecuacion_09_127}) predice una segunda solución: $R = r^{-m}$
 \end{frame}
