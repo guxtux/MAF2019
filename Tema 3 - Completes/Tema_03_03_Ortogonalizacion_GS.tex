@@ -1,10 +1,11 @@
 \documentclass[12pt]{beamer}
 \usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
 
 \input{../Preambulos/preambulo_Beamer_Dresden_seahorse}
 
-\setbeamercolor{section in foot}{bg=darkspringgreen, fg=white}
-\setbeamercolor{subsection in foot}{bg=persianblue, fg=white}
+\setbeamercolor{section in foot}{bg=ao(english), fg=white}
+\setbeamercolor{subsection in foot}{bg=ao, fg=white}
 \setbeamercolor{date in foot}{bg=goldenrod, fg=white}
 
 \makeatletter
@@ -25,10 +26,16 @@
 \vskip0pt%
 }
 \makeatother
-\usefonttheme{serif}
+% \usefonttheme{serif}
 \resetcounteronoverlays{saveenumi}
 
-\date{5 de abril de 2022}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+
+\date{16 de octubre de 2025}
 \title{\large{Ortogonalización Gram-Schmidt}}
 \subtitle{Polinomios de Chebyshev Tipo II}
 \author{M. en C. Gustavo Contreras Mayén}
@@ -39,10 +46,10 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 \section{Ejercicio}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Enunciado}
 
 \begin{frame}
@@ -117,7 +124,7 @@ Para reducir el tiempo en el cálculo de algunas integrales, nos apoyaremos con 
 \end{frame}
 
 \section{Cambiando el valor de \texorpdfstring{$n$}{n}}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Caso \texorpdfstring{$n=0$}{n=0}}
 
 \begin{frame}
@@ -145,7 +152,7 @@ N_{0}^{2} &= \dfrac{\pi}{2}
 \end{frame}
 \begin{frame}
 \frametitle{Resolviendo las operaciones}
-La integral del denominador resulta:
+La integral del denominador resulta (usamos a integral de apoyo):
 \pause
 \begin{eqnarray*}
 \begin{aligned}
@@ -176,7 +183,7 @@ Continuamos la técnica ahora con el valor de $n = 1$
 \Rightarrow \psi_{1} (x) &=  u_{1} + a_{1,0} \, \varphi_{0} \\[0.5em] \pause
 a_{1,0} &= - \dfrac{\scaleint{5ex} u_{1} \, \varphi_{0} \, \omega \dd{x}}{(N_{0})^{2}} = \pause
 - \dfrac{\scaleint{5ex}_{\bs -1}^{1} x \, (1 - x^{2})^{\frac{1}{2}} \dd{x}}{\dfrac{\pi}{2}} = \\[0.5em] \pause
-&= 0
+&= 0 \hspace{1.5cm} \text{¿por qué la integral se anula?}
 \end{aligned}
 \end{eqnarray*}    
 \end{frame}
@@ -192,7 +199,7 @@ a_{1,0} &= - \dfrac{\scaleint{5ex} u_{1} \, \varphi_{0} \, \omega \dd{x}}{(N_{0}
 \end{frame}
 \begin{frame}
 \frametitle{Siguiente valor de $n$}
-Calculamos el valor de la integral en el denominador:
+Calculamos el valor de la integral en el denominador (usamos nuevamente la integral de apoyo):
 \pause
 \begin{eqnarray*}
 \begin{aligned}
@@ -234,7 +241,8 @@ a_{2,0} &= \pause - \dfrac{\scaleint{5ex} u_{2} \, \varphi_{0} \, \omega \dd{x}}
 a_{2,1} &= \pause - \dfrac{\scaleint{5ex} u_{2} \, \varphi_{1} \, \omega \dd{x}}{\big( N_{1} \big)^{2}} = \pause
 - \dfrac{2 \scaleint{5ex} x^{3} (1 - x^{2})^{\frac{1}{2}} \dd{x}}{\dfrac{\pi}{2}} = \pause 0
 \end{aligned}
-\end{eqnarray*}    
+\end{eqnarray*}
+Revisa que usamos la integral de apoyo.
 \end{frame}
 \begin{frame}
 \frametitle{Avanzando con la técnica}
@@ -276,6 +284,7 @@ También habrá que simplificar el denominador.
 \end{frame}
 \begin{frame}
 \frametitle{Simplificando el denominador}
+Aplicamos la propiedad distributiva y usamos la integral de apoyo:
 \begin{eqnarray*}
 \begin{aligned}
 \bigg[ \scaleint{5ex}_{\bs -1}^{1} \bigg( &x^{2} - \dfrac{1}{4} \bigg)^{2} (1 -x^{2})^{\frac{1}{2}} \dd{x} \bigg]^{\frac{1}{2}} = \\[0.5em] \pause
@@ -296,7 +305,7 @@ Entonces la tercera función ortogonal que corresponde al polinomio de Chebyshev
 \end{frame}
 
 \section{Resultados}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Funciones y gráfica}
 
 \begin{frame}
@@ -305,7 +314,7 @@ Se han construido las $\varphi_{i}(x), i = 1, 2, 3$, que renombramos como $U_{i}
 \\
 \bigskip
 \pause
-A estas funciones $U_{n}(x)$ les llamaremos \emph{polinomios de Chebyshev de orden $n$ de tipo II}.
+A estas funciones $U_{n}(x)$ les llamaremos \textocolor{ao(english)}{polinomios de Chebyshev de orden $n$ de tipo II}.
 \end{frame}
 \begin{frame}
 \frametitle{Los primeros polinomios $U_{n}(x)$}
@@ -328,12 +337,12 @@ podemos recuperar más funciones ortogonales.
 \end{frame}
 
 \section{Problemas Sturm-Liouville}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Interpretación física}
 
 \begin{frame}
 \frametitle{¿De dónde surgen estos problemas?}
-Los sistemas Sturm-Liouville surgen típicamente de problemas de \textcolor{blue}{vibración} en la mecánica continua.
+Los sistemas Sturm-Liouville surgen típicamente de problemas de \textocolor{cobalt}{vibración} en la mecánica continua.
 \\
 \bigskip
 \pause
@@ -363,8 +372,11 @@ La EDP de una cuerda que vibra es:
 \end{align*}
 \pause
 Donde:
-\setbeamercolor{item projected}{bg=blue!70!black,fg=white}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=carnelian,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item $y$ es el desplazamiento lateral desde el punto de equilibrio.
 \item $T$ es la tensión (constante)
@@ -380,7 +392,7 @@ y (x, t) = u (x) \, \cos k(t - t_{0})
 \end{frame}
 \begin{frame}
 \frametitle{Solución a la ecuación de onda}
-Para que la solución $y (x, t)$ satisfaga la ecuación de onda $y_{tt} = c^{2} \, y_{xx}$, \pause \emph{es necesario y suficiente} que:
+Para que la solución $y (x, t)$ satisfaga la ecuación de onda $y_{tt} = c^{2} \, y_{xx}$, \pause \textocolor{bole}{es necesario y suficiente} que:
 \begin{align*}
 \sderivada{u} + \lambda \, u = 0, \hspace{1.3cm} \lambda = \dfrac{k^{2}}{c^{2}}
 \end{align*}
@@ -388,7 +400,7 @@ donde $k$ depende de la condición del extremo final.
 \end{frame}
 \begin{frame}
 \frametitle{Condición natural en la cuerda}
-Para la cuerda que vibra, \pause \emph{es natural físicamente tener extremos fijos}, de modo que:
+Para la cuerda que vibra, \pause \textocolor{byzantine}{es natural físicamente tener extremos fijos}, de modo que:
 \pause
 \begin{align*}
 y (a, t) = y (b, t) = 0
@@ -401,7 +413,7 @@ u (a) = u (b) = 0
 \end{frame}
 \begin{frame}
 \frametitle{Los eigenvalores}
-El eigenvalor perteneciente a cada eigenfunción \emph{es proporcional} a la frecuencia al cuadrado $k^{2}/4 \pi^{2}$.
+El eigenvalor perteneciente a cada eigenfunción \textocolor{cerise}{es proporcional} a la frecuencia al cuadrado $k^{2}/4 \pi^{2}$.
 \\
 \bigskip
 \pause
@@ -412,7 +424,7 @@ Esta relación, combinada con la analogía entre ondas mecánicas y electromagn�
 
 \begin{frame}
 \frametitle{El caso de una barra elástica}
-Otra \emph{interpretación física} de los sistemas S-L la proporcionan \textcolor{OliveGreen}{las vibraciones longitudinales de una barra elástica} de rigidez local $p (x)$ y densidad $p (x)$.
+Otra \textocolor{burgundy}{interpretación física} de los sistemas S-L la proporcionan \textcolor{ao(english)}{las vibraciones longitudinales de una barra elástica} de rigidez local $p (x)$ y densidad $p (x)$.
 \end{frame}
 \begin{frame}
 \frametitle{La ecuación de onda para la barra}
@@ -424,7 +436,7 @@ El desplazamiento longitudinal medio $v (x, t)$ de la sección de dicha barra de
 \end{frame}
 \begin{frame}
 \frametitle{Oscilaciones armónicas}
-Las oscilaciones armónicas simples (los \emph{modos normales} de oscilación) están dados por la separación de variables:
+Las oscilaciones armónicas simples (los \textocolor{carmine}{modos normales} de oscilación) están dados por la separación de variables:
 \pause
 \begin{align*}
 v (x, t) = u (x) \, \cos k(t - t_{0})
@@ -443,8 +455,11 @@ En este caso especial, $q = 0$ y $\lambda = k^{2}$.
 \frametitle{CDF para una barra finita}
 Para una barra finita, que se extiende en el intervalo $a \leq x \leq b$, se presentan naturalmente varias condiciones físicas de frontera:
 \pause
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=darkblue,fg=white}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item $u (a) = u (b) = 0$ extremos rígidamente fijos
 \item $\pderivada{u} (a) = \pderivada{u} (b) = 0$ extremos libres
@@ -454,7 +469,7 @@ Para una barra finita, que se extiende en el intervalo $a \leq x \leq b$, se pre
 \end{frame}
 \begin{frame}
 \frametitle{Las condiciones en la solución}
-Cada una de estas condiciones de punto final en $u$ \emph{implica una condición correspondiente} en $v (x, t)$, con $\dv*{x}$ reemplazada por $\pdv*{x}$.
+Cada una de estas condiciones de punto final en $u$ \textocolor{darkmagenta}{implica una condición correspondiente} en $v (x, t)$, con $\dv*{x}$ reemplazada por $\pdv*{x}$.
 \end{frame}
 \begin{frame}
 \frametitle{Frecuencias naturales}
