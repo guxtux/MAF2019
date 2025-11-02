@@ -1,0 +1,249 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{calc}
+\usepackage{scalerel}
+\usepackage{geometry}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{graphicx}
+\geometry{margin=1in}
+
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iiint}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\linespread{1.25}
+
+\title{Ejercicios con funciones de Bessel}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+
+\section*{Ejercicio 1.}
+
+Un cilindro macizo está limitado por las superficies r = 1, z = 0 y z = b. La primera superficie está aislada, la segunda se conserva a la temperatura cero, y la última a la temperatura f(r).
+
+\section*{1. Ecuación y condiciones de contorno.}
+Se busca la distribución de temperaturas estacionaria $u (r, z)$, asumiendo simetría axial (independencia de $\theta$) y regularidad en el eje $r = 0$.
+\par
+La ecuación de Laplace en coordenadas cilíndricas, para soluciones independientes de $\theta$, es:
+\begin{equation}\label{laplace}
+u_{rr} + \dfrac{1}{r} \, u_{r} + u_{zz} = 0, \qquad 0 \le r \le 1, \quad 0 \le z\le b.
+\end{equation}
+Donde las CDF son:
+\begin{align}
+u_{r} (1, z) &= 0, &0 \le z \le b \qquad &\text{(pared lateral aislada)},\label{bc_r} \\[1em]
+u (r, 0) &= 0, &0 \le r \le 1 \qquad &\text{(base a temperatura cero)}, \label{bc_z0} \\[1em]
+u (r, b) &= f (r), &0 \le r\le 1 \qquad &\text{(tapa con temperatura prescrita)}\label{bc_zb}
+\end{align}
+Además pedimos que $u$ sea finita en $r = 0$.
+
+\section*{2. Separación de variables.}
+
+Proponemos una solución de la forma:
+\begin{align*}
+    u (r, z) = R (r) \, Z (z)
+\end{align*}
+Donde $R (r)$ y $Z (z)$ dependen solo de su correspondiente variable. Sustituyendo en (\ref{laplace}) y dividiendo por $R \, Z$ obtenemos:
+\begin{align*}
+    \dfrac{\sderivada{R} (r) + \dfrac{1}{r} \, \pderivada{R} (r)}{R (r)} + \dfrac{\sderivada{Z} (z)}{Z (z)} = 0
+\end{align*}
+Dado que $r$ y $z$ son independientes entre sí, y para que esta igualdad tenga sentido, entonces cada término debe ser una constante; tomamos la constante de separación:
+\begin{align*}
+\dfrac{\sderivada{R}+ \dfrac{1}{r} \pderivada{R}}{R} = -\lambda^{2}, \qquad \dfrac{\sderivada{Z}}{Z} = \lambda^{2}
+\end{align*}
+Con esto queda un sistema de dos EDO:
+\begin{align}
+&\sderivada{R} + \dfrac{1}{r} \, \pderivada{R} + \lambda^{2} \, R = 0, \label{bessel} \\[1em]
+&\sderivada{Z} - \lambda^{2} \, Z = 0 \label{zode}
+\end{align}
+Reconocemos que la ecuación radial (\ref{bessel}) es la ecuación de Bessel de orden cero.
+
+\section*{3. Soluciones radiales y condiciones en $r = 0$ y $r = 1$.}
+
+La solución general de (\ref{bessel}) es:
+\begin{align*}
+    R (r) = A \, J_{0} (\lambda \, r) + B \, Y_{0} (\lambda \, r)
+\end{align*}
+donde $J_{\nu}$ y $Y_{\nu}$ son las funciones de Bessel de primer y segundo tipo. La regularidad en el eje $r = 0$ exige que $B = 0$, ya que $Y_{0}$ diverge en $r = 0$. Entonces:
+\begin{align*}\label{R}
+R (r) = A \, J_{0} (\lambda \, r)
+\end{align*}
+La CDF en la pared aislada (Neumann) (\ref{bc_r}) implica que:
+\begin{align*}
+    u_{r} (1, z) = \pderivada{R} (1) \, Z (z) = 0 \quad \text{para todo } z
+\end{align*}
+Para las soluciones no triviales $Z \not \neq 0$ y $A \neq 0$, se requiere que:
+\begin{align*}
+    \pderivada{R} (1) = 0
+\end{align*}
+Cálculando $\pderivada{R} (r) = A \, \lambda (-J_{1} (\lambda \, r))$ (identidad de la derivada de Bessel), en $r = 1$ se obtiene:
+\begin{align*}
+    -A \, \lambda \, J_{1} (\lambda) = 0
+\end{align*}
+Para soluciones no triviales con $A \neq 0$ y $\lambda \neq 0$ se necesita que:
+\begin{equation}\label{alpha}
+J_{1} (\lambda) = 0.
+\end{equation}
+Denotamos por $\alpha_{n}$ las raíces positivas de $J_{1}$, es decir:
+\begin{align*}
+    J_{1} (\alpha_{n}) = 0, \qquad 0 < \alpha_{1} < \alpha_{2} < \ldots
+\end{align*}
+Adicionalmente existe el caso especial $\lambda = 0$ que requiere tratamiento aparte (modo constante en $r$).
+
+\section*{4. Soluciones en $z$.}
+
+Para cada $\lambda = \alpha_{n} > 0$, la ecuación en $z$ (\ref{zode}) tiene por solución:
+\begin{align*}
+    Z (z) = C \, e^{\lambda z} + D \, e^{-\lambda z} = C \, \sinh(\lambda z) + D \, \cosh(\lambda z)
+\end{align*}
+La condición (\ref{bc_z0}) en $z = 0$ exige que $Z (0) = 0$, por tanto $D = 0$ y
+\begin{align*}
+    Z_{n} (z) = C_{n} \, \sinh(\alpha_{n} z)
+\end{align*}
+Para el modo $\lambda = 0$ la ecuación en $z$ es $\sderivada{Z} = 0$, cuyas soluciones son afines: $Z (z) = a + b \, z$. Imponiendo la condición $Z (0) = 0$ resulta $a = 0$ y entonces queda $Z_{0} (z) = b \, z$. Por tanto el modo de orden cero es proporcional a $z$ (constante en $r$).
+
+\section*{5. Serie generalizada (superposición)}
+
+Combinando todos los modos obtenemos la expansón general que satisface la ecuación y las condiciones en $r = 0$ y $z = 0$:
+\begin{equation}\label{u_series}
+u (r, z) = A_{0} \, z + \nsum_{n=1}^{\infty} A_{n} \, J_{0} (\alpha_{n} r) \, \dfrac{\sinh (\alpha_n z)}{\sinh (\alpha_n b)}.
+\end{equation}
+Hemos elegido escribir la dependencia en $z$ normalizada por $\sinh(\alpha_n b)$ para facilitar la aplicación de la condición en $z = b$.
+
+\section*{6. Uso de la condición en $z = b$ y cálculo de los coeficientes.}
+
+Imponiendo (\ref{bc_zb}) en (\ref{u_series}) se tiene que:
+\begin{equation}\label{expansion_fb}
+f (r) = u (r, b) = A_{0} \, b + \nsum_{n=1}^{\infty} A_{n} \, J_{0} (\alpha_n r) \qquad 0 \le r \le 1
+\end{equation}
+Es decir, debemos expandir $f (r)$ en la base ortogonal formada por la constante y las funciones $J_{0} (\alpha_n r)$ en el intervalo $[0, 1]$ con peso $r$.
+
+\subsection*{Ortogonalidad y normas.}
+
+Para las raíces $\alpha_{n}$ de (\ref{alpha}) se cumple la ortogonalidad (peso $r$):
+\begin{equation}\label{ortho}
+\scaleint{6ex}_{\bs 0}^{1} r \, J_{0} (\alpha_n r) \, J_{0} (\alpha_m r) \dd{r} = 0 \quad n\neq m
+\end{equation}
+La norma de cada modo es (fórmula estandar):
+\begin{equation}\label{norma}
+\scaleint{6ex}_{\bs 0}^{1} r \, [J_{0}(\alpha_n r)]^{2} \dd{r} = \dfrac{1}{2} \, [J_{0} (\alpha_n)]^{2}
+\end{equation}
+Además la función constante es ortogonal a todos los $J_{0} (\alpha_n r)$ con el peso $r$, ya que:
+\begin{align*}
+    \scaleint{6ex}_{\bs 0}^{1} r \, J_{0} (\alpha_n r) \dd{r} = \dfrac{J_{1}(\alpha_{n})}{\alpha_{n}} = 0
+\end{align*}
+
+\subsection*{Coeficientes.}
+
+Definimos la proyección con peso $r$:
+\begin{align}
+C_{0} &= \dfrac{\scaleint{6ex}_{\bs 0}^{1} r \, f (r) \dd{r}}{\scaleint{6ex}_{\bs 0}^{1} r \dd{r}} = 2 \, \scaleint{6ex}_{\bs 0}^{1} r \, f (r) \dd{r}, \label{C0} \\[1em]
+C_{n} &= \dfrac{\displaystyle \scaleint{6ex}_{\bs 0}^{1} r \, f (r) \, J_{0} (\alpha_n r) \dd{r}}{\displaystyle \scaleint{6ex}_{\bs 0}^{1} r \, [J_{0} (\alpha_n r)]^{2} \dd{r}} = \dfrac{2}{[J_{0} (\alpha_n)]^{2}} \, \scaleint{6ex}_{\bs 0}^{1} r \, f (r) \, J_{0} (\alpha_n r) \dd{r} \quad n \ge 1 \label{Cn}
+\end{align}
+Comparando con (\ref{expansion_fb}) vemos que:
+\begin{align}
+&A_{0} \, b = C_{0} \quad \Rightarrow \quad A_{0} = \dfrac{C_{0}}{b} = \dfrac{2}{b} \scaleint{6ex}_{\bs 0}^{1} r \, f (r) \dd{r} \label{A0} \\[1em]
+&A_{n} = C_{n} = \dfrac{2}{[J_{0} (\alpha_n)]^{2}} \, \scaleint{6ex}_{\bs 0}^{1} r \, f (r) \, J_{0} (\alpha_{n} r) \dd{r} \qquad n \ge 1 \label{An}
+\end{align}
+
+\section*{7. Solución final.}
+
+Sustituyendo (\ref{A0}) y (\ref{An}) en (\ref{u_series}) obtenemos la solución en series:
+\begin{align}
+\begin{aligned}
+u (r, z) &= \dfrac{2 \, z}{b} \, \scaleint{6ex}_{\bs 0}^{1} \rho \, f (\rho) \dd{\rho} + \nsum_{n=1}^{\infty} \left( \dfrac{2}{[J_{0}(\alpha_{n})]^{2}} \, \scaleint{6ex}_{\bs 0}^{1} \rho \, f (\rho) \, J_{0}(\alpha_{n} \rho) \dd{\rho} \right) \times \\[1em]
+&\times J_{0} (\alpha_{n} r) \, \dfrac{\sinh (\alpha_{n} z)}{\sinh (\alpha_{n} b)},
+\end{aligned}
+\label{sol_final}
+\end{align}
+
+donde $\alpha_{n}$ es la $n$-ésima raíz positiva de $J_{1} (\alpha) = 0$.
+
+% \section*{8. Comentarios}
+% \begin{itemize}
+% \item El primer término corresponde al modo $\lambda=0$ (dependencia lineal en $z$ y constante en $r$).
+% \item Los restantes términos son modos radiales proporcionales a $J_0(\alpha_n r)$ que satisfacen la condición Neumann en $r=1$.
+% \item Las integrales para $A_n$ se calculan seg'un la función $f(r)$. Para funciones simples pueden obtenerse expresiones analíticas; en general se eval'uan numéricamente y se truncará la serie para aproximaciones.
+% \item Si se desea, se puede reescribir la serie usando funciones hiperbólicas alternas (por ejemplo, combinando exponenciales) o usando la forma sin normalizar en $z$ y resolviendo para las constantes $C_n$ directamente.
+% \end{itemize}
+
+% \bigskip
+% \noindent{\small Nota: para evaluar numéricamente los coeficientes se requieren los valores numéricos de las raíces $\alpha_n$ de $J_1$ (las primeras raíces son aproximadamente $\alpha_1\approx3.8317$, $\alpha_2\approx7.0156$, ...).}
+
+% \section*{Enunciado}
+% Partiendo del problema anterior (cilindro macizo con $0\le r\le1$, $0\le z\le b$, pared lateral aislada $u_r(1,z)=0$, base $u(r,0)=0$ y tapa $u(r,b)=f(r)$), demuestre que si
+% [ f(r)=A,\qquad 0<r<1,]
+% la solución estacionaria es
+% [ u(r,z)=\frac{A z}{b}.]
+
+% \section*{Demostración paso a paso}
+% Usamos la forma general de la solución obtenida por separación de variables (ver derivación general):
+% \begin{equation}\label{u_general}
+% u(r,z)=A_0, z + \sum_{n=1}^{\infty} A_n J_0(\alpha_n r),\frac{\sinh(\alpha_n z)}{\sinh(\alpha_n b)},
+% \end{equation}
+% donde ${\alpha_n}$ son las raíces positivas de $J_1(\alpha)=0$ y los coeficientes vienen dados por
+% \begin{align}
+% A_0 &= \frac{2}{b}\int_0^1 \rho, f(\rho),d\rho, \label{A0_def}\
+% A_n &= \frac{2}{[J_0(\alpha_n)]^2}\int_0^1 \rho, f(\rho), J_0(\alpha_n \rho),d\rho. \label{An_def}
+% \end{align}
+
+% Sustituimos $f(\rho)=A$ (constante) en las fórmulas de los coeficientes.
+
+% \subsection*{Cálculo de $A_0$}
+% \begin{align*}
+% A_0 &= \frac{2}{b}\int_0^1 \rho, A, d\rho = \frac{2A}{b} \left[ \frac{\rho^2}{2} \right]_0^1 = \frac{2A}{b}\cdot \frac{1}{2} = \frac{A}{b}.
+% \end{align*}
+% Por tanto el término del modo $\lambda=0$ es
+% [ A_0 z = \frac{A}{b} z = \frac{A z}{b}.]
+
+% \subsection*{Cálculo de $A_n$ para $n\ge1$}
+% Para $n\ge1$:
+% \begin{align*}
+% A_n &= \frac{2}{[J_0(\alpha_n)]^2} \int_0^1 \rho, A, J_0(\alpha_n \rho),d\rho = \frac{2A}{[J_0(\alpha_n)]^2} \int_0^1 \rho J_0(\alpha_n \rho),d\rho.
+% \end{align*}
+% Usamos la identidad conocida (integral de Bessel):
+% [ \int_0^1 \rho J_0(\alpha_n \rho),d\rho = \frac{J_1(\alpha_n)}{\alpha_n}.]
+% Como $\alpha_n$ son ceros de $J_1$, tenemos $J_1(\alpha_n)=0$; por tanto la integral vale cero y entonces
+% [ A_n = 0, \qquad n\ge1.]
+
+% \subsection*{Conclusión}
+% Sustituyendo en (\ref{u_general}) se anulan todos los términos de la suma y queda solo el modo constante en $r$:
+% [ u(r,z)=\frac{A z}{b}. ]
+% Observamos que esta solución es independiente de $r$, satisface la ecuación de Laplace (ya que $u_{rr}+\tfrac{1}{r}u_r=0$ y $u_{zz}=0$), la condición en $z=0$ (da cero) y en $z=b$ da $u(r,b)=A$; además satisface $u_r(1,z)=0$ (claro, porque no depende de $r$).
+
+% \section*{Comentario final}
+% El resultado intuitivo es que si la tapa superior tiene temperatura constante y la pared lateral es aislada, la distribución estacionaria en el cilindro es una función lineal de $z$ que va de $0$ en la base a $A$ en la tapa; la independencia respecto a $r$ proviene de la simetría y de que la condición Neumann en la pared lateral no introduce variación radial cuando la frontera superior es constante.
+
+
+
+
+\end{document}
