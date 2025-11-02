@@ -1,0 +1,117 @@
+\section*{Ejercicio 2.}
+
+Cuando $f (r) = A, \quad (0 < r < 1)$ en el problema anterior, demuestra que:
+
+\begin{align*}
+    u (r, z) = \dfrac{A \, z}{b}
+\end{align*}
+% Partiendo del problema anterior (cilindro macizo con $0 \le r \le 1$, $0 \le z \le b$, con la pared lateral aislada $u_{r} (1, z) = 0$, y con la base $u (r, 0) = 0$ y la tapa $u (r, b) = f (r)$), demuestre que si
+% [ f(r)=A,\qquad 0<r<1,]
+% la solución estacionaria es
+% [ u(r,z)=\frac{A z}{b}.]
+
+\section*{Solución.}
+
+Usamos la forma general de la solución obtenida por separación de variables:
+\begin{equation}\label{u_general}
+u (r, z) = A_{0} \, z + \nsum_{n=1}^{\infty} A_{n} \, J_{0} (\alpha_{n} r) \, \dfrac{\sinh(\alpha_{n} z)}{\sinh(\alpha_{n} b)},
+\end{equation}
+donde ${\alpha_{n}}$ son las raíces positivas de $J_{1}(\alpha) = 0$ y los coeficientes vienen dados por:
+\begin{align}
+A_{0} &= \dfrac{2}{b} \, \scaleint{6ex}_{\bs 0}^{1} r \, f (r) \dd{r}, \label{A0_def} \\[1em]
+A_{n} &= \dfrac{2}{[J_{0}(\alpha_{n})]^{2}} \scaleint{6ex}_{\bs 0}^{1} r \, f (r) \, J_{0}(\alpha_{n} r) \dd{r} \label{An_def}
+\end{align}
+Sustituimos $f (r) = A$ (constante) en las fórmulas de los coeficientes.
+
+\subsection*{Cálculo de $A_0$.}
+
+\begin{align*}
+A_{0} &= \dfrac{2}{b} \, \scaleint{6ex}_{0}^{1} r \, A \, \dd{r} = \dfrac{2 \, A}{b} \left[ \dfrac{r^{2}}{2} \right]_{0}^{1} = \dfrac{2 \, A}{b} \cdot \dfrac{1}{2} = \dfrac{A}{b}
+\end{align*}
+Por tanto el término del modo $\lambda = 0$ es:
+\begin{align*}
+    A_{0} \, z = \dfrac{A}{b} \, z = \dfrac{A \, z}{b}
+\end{align*}
+
+\subsection*{Cálculo de $A_{n}$ para $n \ge 1$.}
+
+Para $n \ge 1$:
+\begin{align*}
+A_{n} &= \dfrac{2}{[J_{0} (\alpha_{n})]^{2}} \scaleint{6ex}_{\bs 0}^{1} r \, A \, J_{0} (\alpha_{n} r) \dd{r} = \dfrac{2 \, A}{[J_{0}(\alpha_{n})]^{2}} \scaleint{6ex}_{\bs 0}^{1} r \, J_{0} (\alpha_{n} r) \dd{r}
+\end{align*}
+Usamos la identidad integral conocida (ver el Anexo):
+\begin{align*}
+    \scaleint{6ex}_{\bs 0}^{1} r \, J_{0} (\alpha_{n} r) \dd{r} = \dfrac{J_{1} (\alpha_{n})}{\alpha_{n}}
+\end{align*}
+Como $\alpha_{n}$ son ceros de $J_{1}$, tenemos que $J_{1} (\alpha_{n}) = 0$; por tanto la integral vale cero y entonces:
+\begin{align*}
+    A_{n} = 0 \qquad n \ge 1
+\end{align*}
+
+% \subsection*{Conclusión}
+Sustituyendo en (\ref{u_general}) se anulan todos los términos de la suma y queda solo el modo constante en $r$:
+\begin{align*}
+    u (r, z) = \dfrac{A \, z}{b}
+\end{align*}
+Observamos que esta solución es independiente de $r$, satisface la ecuación de Laplace, ya que:
+\begin{align*}
+    u_{rr} + \dfrac{1}{r} \, u_{r} = 0 \hspace{1cm} \text{y} \hspace{1cm} u_{zz} = 0
+\end{align*}
+la condición en $z = 0$ (da cero) y en $z = b$ da $u (r, b) = A$; además satisface $u_{r} (1, z) = 0$, porque no depende de $r$.
+
+% \section*{Comentario final}
+El resultado intuitivo es que si la tapa superior tiene temperatura constante y la pared lateral es aislada, la distribución estacionaria en el cilindro es una función lineal de $z$ que va de $0$ en la base a $A$ en la tapa; la independencia respecto a $r$ proviene de la simetría y de que la condición Neumann en la pared lateral no introduce variación radial cuando la frontera superior es constante.
+
+\section*{Anexo.}
+
+Consideremos la siguiente integral: %que aparece frecuentemente en problemas de conducción de calor o vibraciones con simetría cilíndrica:
+\begin{align*}
+    I = \scaleint{6ex}_{\bs 0}^{1} r \, J_{0} (\alpha_{n} r) \dd{r}
+\end{align*}
+donde $J_{0}$ es la función de Bessel de primer tipo y de orden cero, y $\alpha_{n}$ es una constante positiva (por lo general, una raíz de alguna CDF).
+
+Hacemos el cambio de variable $x = \alpha_{n} \, r$, de modo que:
+\begin{align*}
+     r = \dfrac{x}{\alpha_{n}}, \hspace{1.5cm} \dd{r} = \dfrac{\dd{x}}{\alpha_{n}}
+\end{align*}
+Entonces se tiene que:
+\begin{align*}
+I = \scaleint{6ex}_{\bs 0}^{\alpha_{n}} \dfrac{x}{\alpha_{n}} \, J_{0} (x) \dfrac{\dd{x}}{\alpha_{n}} = \dfrac{1}{\alpha_{n}^{2}} \scaleint{6ex}_{0}^{\alpha_{n}} x \, J_{0} (x) \dd{x}
+\end{align*}
+Por lo tanto:
+\begin{align*}
+I = \dfrac{1}{\alpha_{n}^{2}} \scaleint{6ex}_{0}^{\alpha_{n}} x \, J_{0} (x) \dd{x}
+\end{align*}
+
+Recordemos la relación de recurrencia entre $J_{0}$ y $J_{1}$:
+\begin{align*}
+    \dv{x} \bigl[ x \, J_{1} (x) \bigr] = x \, J_{0} (x)
+\end{align*}
+% \textit{Demostración rápida:}
+% \begin{align*}
+% \frac{d}{dx}\bigl[x J_1(x)\bigr] &= J_1(x) + x J_1'(x) \
+% &= J_1(x) + x\left(J_0(x) - \frac{J_1(x)}{x}\right) = x J_0(x).
+% \end{align*}
+Usando esta relación, podemos escribir la integral como:
+\begin{align*}
+\scaleint{6ex}_{0}^{\alpha_{n}} x \, J_{0} (x) \dd{x} = \scaleint{6ex}_{\bs 0}^{\alpha_{n}} \dv{x} \bigl[ x \, J_{1} (x) \bigr] \dd{x}
+\end{align*}
+Por el teorema fundamental del cálculo:
+\begin{align*}
+\scaleint{6ex}_{\bs 0}^{\alpha_{n}} x \, J_{0} (x) \dd{x} = \left[ x \, J_{1} (x) \right]_{0}^{\alpha_{n}} = \alpha_{n} \, J_{1}(\alpha_{n}) - 0
+\end{align*}
+Sustituyendo este resultado en la integral original:
+\begin{align*}
+I = \dfrac{1}{\alpha_{n}^{2}} (\alpha_{n} \, J_{1}(\alpha_{n})) = \dfrac{J_{1} (\alpha_{n})}{\alpha_{n}}
+\end{align*}
+Se obtiene la identidad integral:
+\begin{align*}
+\boxed{\displaystyle \scaleint{6ex}_{0}^{1} r \, J_{0} (\alpha_{n} r) \dd{r} = \dfrac{J_{1} (\alpha_{n})}{\alpha_{n}}}
+\end{align*}
+
+% \section*{6. Comentarios}
+% \begin{itemize}
+% \item Esta relación se utiliza para proyectar condiciones de frontera radiales $f(r)$ sobre las funciones base $J_0(\alpha_n r)$.
+% \item Si $\alpha_n$ es una raíz de $J_0$, es decir, $J_0(\alpha_n) = 0$, esta identidad es particularmente útil para calcular coeficientes de expansión en series de Bessel.
+% \item La deducción sólo usa la identidad de derivada de Bessel y un cambio de variable sencillo.
+% \end{itemize}

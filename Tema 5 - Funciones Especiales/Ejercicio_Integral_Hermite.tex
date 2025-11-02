@@ -1,0 +1,146 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{calc}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{textcomp, gensymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, 
+     bottom=2.00cm]{geometry}
+% \usepackage{Estilos/ColoresLatex}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage[skip=10pt, indent=30pt]{parskip}
+% \usepackage{scalerel}
+\usepackage{scalerel}[2016-12-29]
+\usepackage{biblatex}
+\usepackage{cancel}
+\usepackage{tcolorbox}
+
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ao,
+    filecolor=magenta,      
+    urlcolor=ao,
+}
+
+\newcommand{\ptilde}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\stilde}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\ttilde}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\ntilde}[2]{\ensuremath{{#1}^{(#2)}}}
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[6ex]{\displaystyle\iiint}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+% \newcommand{\textbf}[2]{\textbf{\textcolor{#1}{#2}}}
+\sisetup{per-mode=symbol}
+\decimalpoint
+\sisetup{bracket-numbers = false}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\numberwithin{equation}{section}
+
+\linespread{1.25}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\emergencystretch=1em
+
+
+\title{\large{Ejercicio con los polinomios de Hermite}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+
+\spanishdecimal{.}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+
+Demuestra que:
+\begin{align*}
+\scaleint{6ex}_{\bs - \infty}^{\infty} x^{2} \, e^{-x^{2}} \, H_{n}(x) \, H_{n}(x) \dd{x} = \pi^{\frac{1}{2}} \, 2^{n} \, n! \, \bigg( n + \dfrac{1}{2} \bigg)
+\end{align*}
+Esta integral se presenta en el cálculo del desplazamiento medio cuadrado del oscilador armónico cuántico.
+
+\vspace{1cm}
+\noindent
+\textbf{Solución:} Reescribimos la integral de la siguiente forma:
+\begin{align*}
+\scaleint{6ex}_{\bs - \infty}^{\infty} x^{2} \, e^{-x^{2}} \, H_{n}(x) \, H_{n}(x) \dd{x} = \scaleint{6ex}_{\bs - \infty}^{\infty} e^{-x^{2}} \, \left[ x \, H_{n} (x) \right]^{2} \dd{x}
+\end{align*}
+tenemos una relación de recurrencia tal que:
+\begin{align*}
+    H_{n+1} (x) &= 2 \, x \, H_{n} (x) - 2 \, n \, H_{n-1} (x) \\[0.5em]
+    \Rightarrow \quad x \, H_{n} (x) &= n \, H_{n-1} (x) + \dfrac{1}{2} \, H_{n+1} (x)
+\end{align*}
+entonces la integral inicial la escribimos como:
+\begin{align*}
+\scaleint{6ex}_{\bs - \infty}^{\infty} e^{-x^{2}} \, \left[ x \, H_{n} (x) \right]^{2} \dd{x} = \scaleint{6ex}_{\bs - \infty}^{\infty} e^{-x^{2}} \, \left[ n \, H_{n-1} (x) + \dfrac{1}{2} \, H_{n+1} (x) \right]^{2} \dd{x}
+\end{align*}
+procedemos ahora a desarrollar el binomio al cuadrado que está a la derecha de la igualdad:
+\begin{align*}
+&\scaleint{6ex}_{\bs - \infty}^{\infty} e^{-x^{2}} \, \left[ n \, H_{n-1} (x) + \dfrac{1}{2} \, H_{n+1} (x) \right]^{2} \dd{x} = \\[1em]
+&= \scaleint{6ex}_{\bs - \infty}^{\infty} e^{-x^{2}} \, \left[ n^{2} \, H_{n-1} (x) \, H_{n-1} (x) + n \, H_{n-1} (x) \, H_{n+1} (x) + \dfrac{1}{2^{2}} \, H_{n+1} (x) \, H_{n+1} (x) \right] \dd{x}
+\end{align*}
+separamos en una suma de integrales:
+\begin{align*}
+&n^{2} \, \scaleint{6ex}_{\bs - \infty}^{\infty} e^{-x^{2}} \, H_{n-1} (x) \, H_{n-1} (x) \dd{x} + n \, \scaleint{6ex}_{\bs - \infty}^{\infty} e^{-x^{2}} \, H_{n-1} (x) \, H_{n+1} (x) \dd{x} + \\[1em]
+&+ \dfrac{1}{2^{2}} \, \scaleint{6ex}_{\bs - \infty}^{\infty} e^{-x^{2}} \, H_{n+1} (x) \, H_{n+1} (x) \dd{x} \\
+\end{align*}
+que al usar la propiedad de ortogonalidad de los polinomios de Hermite:
+\begin{align*}
+    \scaleint{6ex}_{-\infty}^{\infty} e^{-x^{2}} \, &H_{n} (x) \, H_{m} (x) \dd{x} = 2^{n} \, \sqrt{\pi} \, n! \, \delta_{m n} \\
+    n &= 0, 1, 2, \ldots
+\end{align*}
+la segunda integral se anula, dejando entonces el resultado para la primera y tercera integral:
+\begin{align*}
+    n^{2} \left[ 2^{n-1} \, \sqrt{\pi} \, \left( n - 1 \right)! \right] + \dfrac{1}{2^{2}} \left[ 2^{n+1} \, \sqrt{\pi} \, \left( n + 1 \right)! \right] =
+\end{align*}
+simplificamos cada uno de los términos:
+\begin{align*}
+    &= 2^{n-1} \, \sqrt{\pi} \, \left( n \cdot n \right) \, \left( n - 1 \right)! + 2^{n-1} \, \sqrt{\pi} \, \left( n + 1 \right) \, n! = \\[1em]
+    &= 2^{n-1} \, \sqrt{\pi} \, n! \, \left( n + n + 1 \right) = \\[1em]
+    &= 2^{n-1} \, \sqrt{\pi} \, n! \, \left( 2 \, n + 1 \right) = \\[1em]
+    &= 2^{n} \, \sqrt{\pi} \, n! \, \left( n + \dfrac{1}{2} \right) \quad \qed
+\end{align*}
+\end{document}
