@@ -1,0 +1,550 @@
+\documentclass[12pt]{beamer}
+\usepackage{../Estilos/BeamerMAF}
+\usepackage{../Estilos/ColoresLatex}
+\input{../Preambulos/preambulo_Beamer_Frankfurt_beaver}
+
+\setbeamercolor{section in foot}{bg=deepcarmine, fg=white}
+\setbeamercolor{subsection in foot}{bg=flame, fg=white}
+\setbeamercolor{date in foot}{bg=blue, fg=white}
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+  \usebeamerfont{section in foot} \insertsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+  \usebeamerfont{subsection in foot}  \insertsubsection
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{1.5em}
+  \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+\end{beamercolorbox}}%
+\vskip0pt%
+}
+\makeatother
+% \usefonttheme{serif}
+\setbeamercolor{frametitle}{bg=lavenderblue}
+\resetcounteronoverlays{saveenumi}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\title{\large{Tema 4 - El átomo de hidrógeno}}
+\subtitle{Funciones Especiales II}
+\author{M. en C. Gustavo Contreras Mayén}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+
+\section*{Contenido}
+\frame[allowframebreaks]{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
+
+%Ref. Riley (2009) 18.1 Legendre functions.
+\section{Funciones ordinarias de Legendre}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
+\subsection{La ecuación diferencial}
+
+\begin{frame}
+\frametitle{La ED de inicio}
+La ecuación diferencial ordinaria de Legendre tiene la forma:
+\pause
+\begin{align}
+(1 - x^{2}) \sderivada{y} - 2 \, x \, \pderivada{y} + \ell (\ell + 1) \, y = 0
+\label{eq:ecuacion_18_01}
+\end{align}
+y tiene tres puntos regulares singulares en $x = -1, 1, \infty$.
+\end{frame}
+\begin{frame}
+\frametitle{Naturaleza de la ED}
+Esta ecuación se presenta en diversos problemas de la física, en particular en problemas con simetría axial que involucra el operador $\nabla^{2}$, expresado en coordenadas esféricas.
+\end{frame}
+\begin{frame}
+\frametitle{Argumento en la ED}
+Normalmente la variable $x$ en la ecuación de Legendre es el coseno del ángulo en coordenadas polares, por lo que $-1 \leq x \leq 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Parámetro en la ED}
+El parámetro $\ell$ es un número real, y la solución a la ecuación (\ref{eq:ecuacion_18_01}) se le denomina \textocolor{byzantium}{función ordinaria de Legendre}.
+\end{frame}
+\begin{frame}
+\frametitle{Puntos ordinarios en la ED}
+Es posible demostrar que $x = 0$ es un punto ordinario, por lo que podemos esperar dos soluciones linealmente independientes de la forma:
+\pause
+\begin{align*}
+y = \nsum_{n=0}^{\infty} a_{n} \, x^{n}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Procedimiento en la solución}
+Sustituimos entonces para encontrar:
+\pause
+\begin{align*}
+&\nsum_{n=0}^{\infty} \bigg[ n \, (n - 1) a_{n} \, x^{n-2} - n \, (n - 1) \, a_{n} \, x^{n} + \\[0.5em]
+&- 2 \, n \, a_{n} \, x^{n} + \ell (\ell + 1) \, a_{n} \, x^{n} \bigg] = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Procedimiento en la solución}
+Donde agrupamos los términos:
+%\footnote{Recuerda que en los materiales de trabajo, se abrevian las operaciones, como verás, se tuvo que haber dejado las sumas con el mismo índice de tal manera que se pueden agrupar para la variable $x^{n}$.}
+\pause
+\begin{align*}
+&\nsum_{n=0}^{\infty} \bigg[ (n + 2)(n + 1) \, a_{n+2} - [ n \, (n+1) + \\[0.5em]
+&- \ell (\ell + 1) ] \, a_{n} \bigg] \, x^{n} = 0
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Relación de recurrencia}
+La relación de recurrencia es por tanto:
+\pause
+\begin{align}
+a_{n+2} = \dfrac{[n \, (n + 1)- \ell (\ell + 1)]}{(n + 1)(n + 2)} \, a_{n}
+\label{eq:ecuacion_18_02}
+\end{align}
+para $n = 0, 1, 2, \ldots$
+\end{frame}
+\begin{frame}
+\frametitle{Una solución a la ED}
+Si elegimos $a_{0} = 1$ y $a_{1} = 0$ entonces obtenemos la solución:
+\pause
+\begin{align}
+\begin{aligned}
+y_{1} (x) &= 1 - \ell (\ell + 1) \dfrac{x^{2}}{2!} + \\
+&+ (\ell - 2)\; \ell \; (\ell + 1)\;(\ell + 3) \dfrac{x^{4}}{4!} - \ldots
+\end{aligned}
+\label{eq:ecuacion_18_03}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda solución a la ED}
+Mientras que si escogemos $a_{0} = $ y $ a_{1} = 1 $, encontramos la segunda solución:
+\pause
+\begin{align}
+\begin{aligned}
+y_{2} (x) &= x - (\ell - 1)(\ell + 2) \dfrac{x^{3}}{3!} + \\[0.5em]
+&+ (\ell - 3) (\ell - 1)(\ell + 2)(\ell + 4) \dfrac{x^{5}}{5!} - \ldots
+\label{eq:ecuacion_18_04}
+\end{aligned}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Convergencia de la serie}
+Aplicando la prueba de convergencia de la razón, se encuentra que ambas series convergen para $\abs{x} < 1$, y su radio de convergencia es unitario, que representa la distancia al punto singular más cercano de la ecuación.
+\end{frame}
+\begin{frame}
+\frametitle{Soluciones independienes}
+Dado que la ecuación (\ref{eq:ecuacion_18_03}) contiene sólo potencias pares de $x$ y la ecuación (\ref{eq:ecuacion_18_04}) contiene sólo potencias impares, \pause esas dos soluciones no pueden ser proporcionales una de la otra, por lo tanto, son linealmente independientes.
+\end{frame}
+\begin{frame}
+\frametitle{Solución general a la ED}
+De aquí, la solución general para la ecuación (\ref{eq:ecuacion_18_01}) y con $\abs{x} < 1$ es:
+\pause
+\begin{align*}
+y(x) = c_{1} \, y_{1} (x) + c_{2} \, y_{2} (x)
+\end{align*}
+\end{frame}
+
+\subsection{Legendre para enteros \texorpdfstring{$\ell$}{l}}
+
+\begin{frame}
+\frametitle{Parámetro en la ED}
+En varios problemas de la física, el parámetro $\ell$ en la ecuación de Legendre - ec. (\ref{eq:ecuacion_18_01})- es un entero, es decir $\ell = 0,1,2,\ldots$.
+\end{frame}
+\begin{frame}
+\frametitle{Parámetro en la ED}
+En ese caso, la relación de recurrencia - ec. (\ref{eq:ecuacion_18_02})- queda como:
+\pause
+\begin{align*}
+a_{\ell + 2} = \dfrac{[ \ell (\ell + 1) - \ell (\ell + 1) ]}{(\ell + 1)(\ell + 2)} \, a_{\ell} = 0
+\end{align*}
+Esto es, la serie termina y obtenemos una solución con un polinomio de orden $\ell$.
+\end{frame}
+\begin{frame}
+\frametitle{Truncamiento de la serie}
+En particular, si $\ell$ es par, entonces $y_{1} (x)$ en la ecuación (\ref{eq:ecuacion_18_03}) se reduce a un polinomio, \pause mientras que si $\ell$ es impar, lo mismo le ocurre a $y_{2} (x)$ en la ecuación (\ref{eq:ecuacion_18_04}).
+\end{frame}
+\begin{frame}
+\frametitle{Soluciones normalizadas}
+Esas soluciones (adecuadamente normalizadas) son llamadas \textocolor{denim}{Polinomios ordinarios de Legendre de orden $\ell$}, se escriben $P_{\ell} (x)$ y son válidas para todo valor $x$ finito.
+\end{frame}
+\begin{frame}
+\frametitle{Soluciones normalizadas}
+De manera convencional, se normaliza $P_{\ell} (x)$ de tal manera que $P_{\ell}(1) =  1$, y como consecuencia $P_{\ell} (-1) = (-1)^{\ell}$.
+\end{frame}
+\begin{frame}
+\frametitle{Primeros polinomios}
+Los primeros polinomios se construyen fácilmente y están dados por:
+\pause
+\vspace*{-1cm}
+\begin{center}
+\begin{tabular}{l l}
+$P_{0} (x) {=} 1 $ & $P_{1}(x) {=} 1 $ \\[0.5em]
+$P_{2} (x) {=} \dfrac{1}{2} (3 x^{2} {-} 1)$ & $P_{3} (x) {=} \dfrac{1}{2} (5 x^{2} {-} 3 x)$ \\[0.5em] 
+$P_{4} (x) {=} \dfrac{1}{8} (35 x^{4} {-} 30 x^{2} {+} 3)$ & $P_{5} (x) {=} \dfrac{1}{8} (63 x^{5} {-} 70 x^{3} + 15 x)$
+\end{tabular}
+\end{center}
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica de los polinomios}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.9]{Imagenes/Plot_Lagrange_0-6.eps}
+    % \caption{Gráfica de los primeros seis polinomios de Legendre.}
+    % \label{fig:polinomios_Lagrange_01}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Valor del parámetro}
+A pesar de que si $\ell$ es un entero par o impar, respectivamente para $y_{1}(x)$ - ec. (\ref{eq:ecuacion_18_03}) - o $y_{2}(x)$ - ec. (\ref{eq:ecuacion_18_04}), \pause se termina dando un múltiplo del correspondiente polinomio ordinario de Legendre $P_{\ell}(x)$, \pause la otra serie en cada caso no termina y por tanto converge sólo para $\abs{x} < 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Valor del parámetro}
+Dependiendo de si $\ell$ es par o impar, se definen las \textocolor{amethyst}{funciones ordinarias de Legendre de segunda clase} como:
+\pause
+\begin{align*}
+Q_{\ell} (x) &=  \alpha_{\ell} \, y_{2} (x) \\
+Q_{\ell} (x) &=  \beta_{\ell} \, y_{1} (x)
+\end{align*}
+respectivamente.
+\end{frame}
+\begin{frame}
+\frametitle{Valores de las constantes}
+Donde las constantes $\alpha_{\ell}$ y $\beta_{\ell}$ toman los valores:
+\pause
+\begin{align}
+&\mbox{ para $\ell$ par} \nonumber \\
+&\alpha_{\ell} = \dfrac{(-1)^{\ell/2} \; 2^{\ell} \; [(\ell / 2)!]^{2}}{\ell!} \label{eq:ecuacion_18_05} \\[1em]
+&\mbox{ para $\ell$ impar} \nonumber \\
+&\beta_{\ell} = \dfrac{(-1)^{(\ell + 1)/2} \; 2^{\ell - 1} \; \lbrace \left[ (\ell - 1) /2 \right] ! \rbrace^{2}}{\ell!} \label{eq:ecuacion_18_06}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Normalización de los factores}
+La normalización de los factores se elige de tal manera que $Q_{\ell} (x)$ obedece la misma relación de recurrencia de $P_{\ell} (x)$.
+\end{frame}
+\begin{frame}
+\frametitle{Solución general a la ED}
+La solución general para la EDO de Legendre para enteros $\ell$ es por tanto:
+\pause
+\begin{align}
+y(x) = c_{1} \, P_{\ell} (x) + c_{2} \, Q_{\ell} (x) 
+\label{eq:ecuacion_18_07}
+\end{align}
+Donde $P_{\ell} (x)$ es un polinomio de orden $\ell$, que converge para cualquier $x$, y $Q_{\ell} (x)$ es una serie infinita que converge sólo si $\abs{x} < 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando la segunda solución}
+Usando el método del Wronkisano, podemos obtener una forma cerrada para $Q_{\ell} (x)$.
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando la segunda solución}
+Una segunda solución para la ecuación de Legendre (ec. \ref{eq:ecuacion_18_01}), con $\ell = 0$ es:
+\pause
+\begin{eqnarray}
+\begin{aligned}[b]
+y_{2} (x) &= P_{0} (x) \scaleint{6ex}^{x} \dfrac{1}{[P_{0} (u)]^{2}} \, \exp \left( \scaleint{6ex}^{u} \dfrac{2 \, v}{1 - v^{2}} \dd{v} \right) \dd{u} \\[0.5em] \pause
+&= \scaleint{6ex}^{x} \exp [ - \ln (1 - u^{2}) ] \dd{u} \\[0.5em] \pause
+&= \scaleint{6ex}^{x} \dfrac{\dd{u}}{(1 - u^{2})} = \dfrac{1}{2} \, \ln \left( \dfrac{1 + x}{1 - x} \right)
+\end{aligned}
+\label{eq:ecuacion_18_08}
+\end{eqnarray}
+% En la segunda línea hemos utilizado el hecho de que $P_{0} (x) = 1$.
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando la segunda solución}
+Lo que queda es ajustar la normalización de esta solución para que se corresponda con la ecuación (\ref{eq:ecuacion_18_05}).
+\end{frame}
+\begin{frame}
+\frametitle{Ajustando la segunda solución}
+Expandiendo el logaritmo en la ec. (\ref{eq:ecuacion_18_08}) como una serie de Maclaurin, obtenemos:
+\pause
+\begin{align*}
+y_{2}(x) = x + \dfrac{x^{3}}{3} + \dfrac{x^{5}}{5} + \cdots
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica de la segunda solución}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.9]{Imagenes/Plot_LagrangeSC_0-4.eps}
+    % \caption{Gráfica de los cuatro polinomios de Legendre de segunda clase.}
+    % \label{fig:polinomios_Lagrange_02}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Solución normalizada}
+Comparando esto con la expresión para $Q_{0} (x)$, usando la ec. (\ref{eq:ecuacion_18_04}) con $\ell = 0$ y normalizando -ec. (\ref{eq:ecuacion_18_05})-, encontramos que $y_{2} (x)$ está correctamente normalizada, así:
+\pause
+\begin{align*}
+Q_{0} (x) = \dfrac{1}{2} \, \ln \left( \dfrac{1 + x}{1 - x} \right)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución normalizada}
+Usando el mismo método para $\ell = 1$, tenemos que:
+\pause
+\begin{align*}
+Q_{1} (x) =  \frac{1}{2} \, x \,  \ln \left( \dfrac{1 + x}{1 - x} \right) - 1
+\end{align*}
+Se pueden encontrar formas cerradas para $Q_{\ell} (x)$ de mayor orden, usando la relación de recurrencia.
+\end{frame}
+
+\section{Propiedades de Polinomios de Legendre}
+\frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Nombre Subseccion}
+% \subsection{Propiedades de los Polinomios de Legendre}
+
+% % \begin{frame}
+% % \frametitle{Valor entero en el parámetro}
+% % Como se mencionó anteriormente, cuando encontramos problemas físicos en donde la variable $x$ en la ecuación de Legendre es el coseno del ángulo polar $\theta$ en coordenadas esféricas, y entonces requiere la solución $y (x)$ que sea regular en $x = \pm 1$, que corresponde a $\theta = 0$ o $\theta = \pi$.
+% % \end{frame}
+% % \begin{frame}
+% % \frametitle{Valor entero en el parámetro}
+% % Para que esto ocurra, requerimos que la ecuación tenga una solución polinomial, así el valor de $\ell$ debe ser un entero.
+% % \begin{frame}
+% % \frametitle{Solución como múltiplo}
+% % Por otra parte, también requerimos que el coeficiente $c_{2}$ de la función $Q_{\ell}(x)$ en la ecuación (\ref{eq:ecuacion_18_07}) sea nulo, ya que $Q_{\ell} (x)$ es singular en $x = \pm 1$, como resultado de que la solución general es un múltiplo del polinomio de Legendre $P_{\ell} (x)$.
+
+\subsection{Fórmula de Rodrigues}
+
+\begin{frame}
+\frametitle{Fórmula de Rodrigues}
+Como una ayuda para definir nuevas propiedades de los polinomios de Legendre, presentamos la \textocolor{brown(web)}{fórmula de Rodrigues} para el $P_{\ell} (x)$:
+\pause
+\begin{align}
+P_{\ell} (x) = \dfrac{1}{2^{\ell} \; \ell !} \dv[\ell]{x} \, (x^{2} - 1)^{\ell}
+\label{eq:ecuacion_18_09}
+\end{align}
+\end{frame}
+
+\subsection{Ortogonalidad}
+
+\begin{frame}
+\frametitle{ED de tipo Sturm-Liouville}
+Del Tema 3, reconocemos que la ecuación de Legendre es de la forma Sturm-Liouville con $p = 1 - x^{2}$, $q = 0$, $\lambda = \ell (\ell + 1)$ y $\omega = 1$, y que su intervalo natural es $[-1, 1]$.
+\end{frame}
+\begin{frame}
+\frametitle{ED de tipo Sturm-Liouville}
+Ya que los polinomios ordinarios de Legendre $P_{\ell} (x)$ son regulares en los puntos extremos $x = \pm 1$, deben ser mutuamente ortogonales en este intervalo, es decir:
+\pause
+\begin{align}
+\scaleint{6ex}_{\bs -1}^{1} P_{\ell}(x) \, P_{k}(x) \dd{x} = 0 \hspace{1cm} \mbox{ si $\ell \neq k$}
+\label{eq:ecuacion_18_12}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Expansión de una función}
+Como ya se comentó previamente, la ortogonalidad mutua (y completitud) de $P_{\ell} (x)$ significa que cualquier función razonable $f (x)$ (es decir, una que satisfaga las condiciones de Dirichlet) puede expresarse en el intervalo de $\abs{x} < 1$ como una suma infinita de polinomios ordinarios de Legendre:
+\pause
+\begin{align}
+f (x) = \nsum_{\ell = 0}^{\infty} a_{\ell} \, P_{\ell} (x)
+\label{eq:ecuacion_013}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Expansión de una función}
+Donde los coeficientes $a_{\ell}$ están dados por:
+\pause
+\begin{align}
+a_{\ell} = \dfrac{2 \ell + 1}{2} \scaleint{6ex}_{\bs -1}^{1} f(x) \, P_{\ell} (x) \dd{x}
+\label{eq:ecuacion_18_14}
+\end{align}
+\end{frame}
+
+\subsection{Función generatriz}
+
+% % Una manera útil para manipular y estudiar secuencias de funciones o cantidades etiquetadas por una variable entera (en el caso de los polinomios de Legendre $P_{\ell} (x)$ están etiquetados por $\ell$), es mediante una función generatriz. 
+% % \par
+% % La función generatriz tiene quizás su mayor utilidad en el ámbito de la teoría de la probabilidad, sin embargo, también es de gran conveniencia en nuestro estudio.
+% % \par
+% % La función generatriz para decirlo, es una serie de funciones $f_{n} (x)$ para $n = 0, 1, 2,\ldots$ es una función $G (x, h)$ que contiene tanto a $x$, como una variable ficticia $h$, de tal manera que:
+% % \begin{align*}
+% % G (x,h) = \nsum_{n=0}^{\infty} f_{n} (x) \, h^{n}
+% % \end{align*}
+% % es decir, $f_{n} (x)$ es el coeficiente de $h^{n}$ en la expansión de $G$ en potencias de $h$. La utilidad de esta manera de trabajar la función, está en el hecho de que a veces es posible encontrar una forma cerrada para $G (x, h)$.
+% % \par
+\begin{frame}
+\frametitle{Función generatriz}
+En el caso de los polinomios ordinarios de Legendre, usemos las funciones $P_{n} (x)$ definidas por:
+\pause
+\begin{align}
+G (x ,h) = (1 - 2 \, x \, h + h^{2})^{-1/2} =  \nsum_{n=0}^{\infty} P_{n} (x) \, h^{n}
+\label{eq:ecuacion_18_15}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Función generatriz}
+Como veremos las funciones así definidas son idénticas a los polinomios ordinarios de Legendre y la función $(1 - 2 \, x \, h + h^{2})^{-1/2}$ es de hecho la función generatriz para ellos.
+\end{frame}
+\begin{frame}
+\frametitle{Función generatriz}
+En el proceso también vamos a deducir varias relaciones útiles entre los diferentes polinomios y sus derivadas.
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+Hacemos la anotación de que $\dv*{P_{n}(x)}{x}$ es $\pderivada{P}_{n}$, \pause derivamos la ecuación (\ref{eq:ecuacion_18_15}) con respecto a $x$ y obtenemos:
+\pause
+\begin{align}
+h (1 - 2 \, x \, h + h^{2})^{-3/2} = \nsum \pderivada{P}_{n} \; h^{n}
+\label{eq:ecuacion_18_16}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+También derivamos la ecuación (\ref{eq:ecuacion_18_15}) con respecto a $h$ por lo que:
+\pause
+\begin{align}
+(x - h) (1 - 2 \, x \, h + h^{2})^{-3/2} = \nsum n \; P_{n} \; h^{n-1}
+\label{eq:ecuacion_18_17}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+La ecuación (\ref{eq:ecuacion_18_16}) puede reescribirse usando la ecuación (\ref{eq:ecuacion_18_15}) como:
+\pause
+\begin{align*}
+h \, \nsum P_{n} \; h^{n} =  (1 - 2 \, x \, h + h^{2}) \nsum \pderivada{P}_{n} \, h^{n}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+Igualando los coeficientes de $h^{n+1}$, obtenemos la relación de recurrencia:
+\pause
+\begin{align}
+P_{n} = \pderivada{P}_{n+1} - 2 \, x \; \pderivada{P}_{n} + \pderivada{P}_{n-1}
+\label{eq:ecuacion_18_18}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+Las ecuaciones (\ref{eq:ecuacion_18_16}) y (\ref{eq:ecuacion_18_17}) pueden combinarse como:
+\pause
+\begin{align*}
+(x - h) \nsum \pderivada{P}_{n} \; h^{n} = h \, \nsum n \; P_{n} \; h^{n-1}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+Donde el coeficiente de $h^{n}$ nos proporciona otra relación de recurrencia:
+\pause
+\begin{align}
+x \, \pderivada{P}_{n} - \pderivada{P}_{n-1} =  n \; P_{n}
+\label{eq:ecuacion_18_19}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+Eliminando $\pderivada{P}_{n-1}$ entre las ecuaciones (\ref{eq:ecuacion_18_18}) y (\ref{eq:ecuacion_18_19}), el resultado que se obtiene es:
+\pause
+\begin{align}
+(n + 1) \, P_{n} = \pderivada{P}_{n+1} - x \; \pderivada{P}_{n}
+\label{eq:ecuacion_18_20}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+Si tomamos el resultado de la ecuación (\ref{eq:ecuacion_18_20}) reemplazando $n$ por $n-1$ y sumamos $x$ veces, obtenemos:
+\pause
+\begin{equation}
+(1 - x^{2}) \, \pderivada{P}_{n} = n \; (P_{n-1} - x \, P_{n})
+\label{eq:ecuacion_18_21}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+Finalmente, derivamos ambos lados con respecto a $x$ y usamos el resultado de la ecuación (\ref{eq:ecuacion_18_19}) para tener:
+\pause
+\begin{eqnarray*}
+\begin{aligned}
+(1 - x^{2}) \sderivada{P}_{n} - 2 \, x \, \pderivada{P}_{n} &= n \, \bigg[ (\pderivada{P}_{n-1} - x \, \pderivada{P}_{n}) - P_{n} \bigg] = \\[0.5em] \pause
+&= n \, (-n \, P_{n} - P_{n}) = \\[0.5em] \pause
+&= -n \, (n + 1) \, P_{n}
+\end{aligned}
+\end{eqnarray*}
+\end{frame}
+\begin{frame}
+\frametitle{Construyendo relaciones}
+Por lo que los $P_{n}$ definidos en la ecuación (\ref{eq:ecuacion_18_15}), satisfacen la ecuación ordinaria de Legendre.
+\end{frame}
+
+% % \par
+% % El ejemplo anterior muestra que las funciones $P_{n} (x)$ definida por la ecuación (\ref{eq:ecuacion_18_15}) satisfacen la ecuación ordinaria de Legendre con $\ell = n$ (un entero) y también de (\ref{eq:ecuacion_18_15}), estas funciones son regulares en $x = \pm 1$. Por lo tanto $P_{n}$ debe ser un múltiplo del n-ésimo polinomio ordinario de Legendre. Por lo tanto, sólo queda verificar la normalización. Esto se hace fácilmente en $x = 1$, cuando $G$ se convierte en:
+% % \begin{align*}
+% % G (1, h) = [(1 - h)^{2}]^{-1/2} =  1 + h + h^{2} + \cdots
+% % \end{align*}
+% % y podemos ver que todo $P_{n}$ así definido, se tiene $P_{n} (1) = 1$ como se requiere, por tanto son idénticos a los polinomios ordinarios de Legendre.
+% % \par
+\begin{frame}
+\frametitle{Uso de la función generatriz}
+Un uso particular de la función generatriz (\ref{eq:ecuacion_18_15}) es la representación del inverso de la distancia entre dos puntos en el espacio tridimensional en términos de polinomios ordinarios de Legendre.
+\end{frame}
+\begin{frame}
+\frametitle{Uso de la función generatriz}
+Si dos puntos $\vb{r}$ y $\pderivada{\vb{r}}$ se encuentran a distancias $r$ y $\pderivada{r}$, respectivamente, desde el origen, con $\pderivada{r} < r$, se tiene:
+\end{frame}
+\begin{frame}
+\frametitle{Uso de la función generatriz}
+\begin{eqnarray}
+\begin{aligned}[b]
+\dfrac{1}{\abs{\vb{r} - \pderivada{\vb{r}}}} &= \dfrac{1}{(r^{2} + r^{\prime \: 2} - 2 \, r \, \pderivada{r} \, \cos \theta)^{1/2}} \\[0.5em] \pause
+&= \dfrac{1}{r \, [ 1 -2 (\pderivada{r}/r) \, \cos \theta + (\pderivada{r}/r)^{2}]^{1/2}} \\[0.5em] \pause
+&= \dfrac{1}{r} \nsum_{\ell = 0}^{\infty} \left( \dfrac{\pderivada{r}}{r} \right)^{\ell} \, P_{\ell} (\cos \theta)
+\end{aligned}
+\label{eq:ecuacion_18_22}
+\end{eqnarray}
+donde $\theta$ es el ángulo entre los dos vectores de posición $\vb{r}$ y $\pderivada{\vb{r}}$.
+\end{frame}
+\begin{frame}
+\frametitle{Uso de la función generatriz}
+Si $\pderivada{r} > r$, entonces $r$ y $\pderivada{r}$ deben de intercambiarse en la ecuación (\ref{eq:ecuacion_18_22}) o de lo contrario, la serie no converge.
+\end{frame}
+\begin{frame}
+\frametitle{Uso de la función generatriz}
+Este resultado puede ser utilizado por ejemplo, para escribir el potencial electrostático en un punto $\vb{r}$ debido a una carga $q$ en el punto $\pderivada{\vb{r}}$. Entonces, en el caso $\pderivada{r} < r$, se tiene que:
+\pause
+\begin{align*}
+V (\vb{r}) = \dfrac{q}{4 \, \pi \, \varepsilon_{0} \, r} \nsum_{\ell=0}^{\infty} \left( \dfrac{\pderivada{r}}{r} \right)^{\ell} \, P_{\ell} (\cos \theta)
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Uso de la función generatriz}
+Vemos el caso especial cuando la carga está en el origen, y $\pderivada{r} = 0$, entonces el término $\ell = 0$ en la serie es no nulo, y la expresión se reduce a la forma ya conocida:
+\pause
+\begin{align*}
+V(\vb{r}) = \dfrac{q}{4 \, \pi \, \varepsilon_{0} \, r}
+\end{align*}
+\end{frame}
+
+\subsection{Relaciones de recurrencia}
+
+\begin{frame}
+\frametitle{Más relaciones de recurrencia}
+% En nuestro análisis previo de la función generatriz, derivamos varias relaciones de recurrencia útiles que satisfacen los polinomios ordinarios de Legendre $P_{n} (x)$. En particular,
+A partir de la ecuación (\ref{eq:ecuacion_18_18}), tenemos la cuarta relación de recurrencia:
+\pause
+\begin{align*}
+\pderivada{P}_{n+1} + \pderivada{P}_{n-1} =  P_{n} + 2 \; x \; \pderivada{P}_{n}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Más relaciones de recurrencia}
+De las ecuaciones (\ref{eq:ecuacion_18_19}) a (\ref{eq:ecuacion_18_21}) tenemos las siguientes relaciones de recurrencia con tres términos:
+\pause
+\begin{align*}
+\pderivada{P}_{n+1} &= (n+1) \; P_{n} + x \; \pderivada{P}_{n} \\[0.5em]
+\pderivada{P}_{n-1} &= -n \; P_{n} + x \; \pderivada{P}_{n} \\[0.5em]
+(1 - x^{2}) \, \pderivada{P}_{n+1} &= n \; (P_{n-1} - x \; P_{n}) \\[0.5em]
+(2 \, n + 1) \, P_{n} &= \pderivada{P}_{n+1} - \pderivada{P}_{n-1}
+\end{align*}
+\end{frame}
+
+\end{document}
