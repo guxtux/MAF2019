@@ -8,7 +8,7 @@
 \usepackage[autostyle,spanish=mexican]{csquotes}
 \usepackage[tbtags]{amsmath}
 \usepackage{nccmath}
-\usepackage{amsthm}
+\usepackage{amsthm, bm}
 \usepackage{amssymb}
 \usepackage{mathrsfs}
 \usepackage{graphicx}
@@ -20,10 +20,6 @@
 \usepackage[outdir=./Imagenes/]{epstopdf}
 \usepackage{siunitx}
 \usepackage{physics}
-\AtBeginDocument{\RenewCommandCopy\qty\SI}
-\ExplSyntaxOn
-\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
-\ExplSyntaxOff
 \usepackage{color}
 \usepackage{float}
 \usepackage{hyperref}
@@ -47,6 +43,7 @@
 \usepackage{makecell}
 \usepackage{fancyhdr}
 \usepackage{tikz}
+\usetikzlibrary{calc, positioning}
 \usepackage{bigints}
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable}
@@ -54,7 +51,7 @@
 \usepackage{pgfplots}
 \usepackage{pdflscape}
 \usepackage{enumitem}
-\pgfplotsset{compat=1.16}
+\pgfplotsset{compat=1.18}
 \spanishdecimal{.}
 \renewcommand{\baselinestretch}{1.5}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
@@ -104,11 +101,19 @@
 % \newcommand{\qed}{\tag*{$\blacksquare$}}
 \renewcommand{\qed}{\hfill\blacksquare}
 
-
 \usetikzlibrary{babel}
 \usepackage{tikz-3dplot}
 \setlength{\tabcolsep}{12pt}
 \usepackage[outline]{contour} % glow around text
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\newcounter{miencabezaejemplo}[section]% el argumento [section] hace que se reinicie en cada sección
+\newcommand{\encabezaejemplo}{\refstepcounter{miencabezaejemplo}\textbf{Ejemplo \thesection.\arabic{miencabezaejemplo} \,}}
+
 \colorlet{veccol}{green!50!black}
 \colorlet{myred}{red!90!black}
 \colorlet{myblue}{blue!80!black}
@@ -137,7 +142,7 @@
 
 
 %Ref. Heinbockel (1996) Introduction to tensor calculus and continuum mechanics.
-\section{Concepto de tensores y transformaciones.}
+\section{Representación de un vector.}
 
 Para los vectores unitarios ortogonales independientes $\vu{e}_{1}, \vu{e}_2, \vu{e}_{3}$ (vectores base), podemos escribir cualquier vector $\va{A}$ como:
 \begin{align*}
@@ -206,7 +211,7 @@ entonces los componentes $\left( A_{1}, A_{2}, A_{3} \right)$ del vector $\va{A}
 \end{align*}    
 Las componentes contravariante y covariante son formas diferentes de representar el mismo vector con respecto a un conjunto de vectores de base recíproca. Existe una relación simple entre estos componentes que ahora desarrollamos. Introducimos la notación:
 \begin{align}
-\va{E}_{i} \vdot \va{E}_{j} = g_{ij} = g{ji}  \hspace{1cm} \text{y} \hspace{1cm} \va{E}^{i} \vdot \va{E}^{j} = g^{ij} = g^{ji}
+\va{E}_{i} \vdot \va{E}_{j} = g_{ij} = g_{ji}  \hspace{1cm} \text{y} \hspace{1cm} \va{E}^{i} \vdot \va{E}^{j} = g^{ij} = g^{ji}
 \label{eq:ecuacion_01_02_03}
 \end{align}
 donde $g_{ij}$ se denominan \textbf{componentes métricos del espacio} y $g^{ij}$ se denominan \textbf{componentes métricos conjugados del espacio}. Entonces podemos escribir:
@@ -214,7 +219,7 @@ donde $g_{ij}$ se denominan \textbf{componentes métricos del espacio} y $g^{ij}
 \begin{aligned}[b]
 \va{A} \vdot \va{E}^{1} &= A_{1} \, \left( \va{E}^{1} \vdot \va{E}_{1} \right) + A_{2} \, \left( \va{E}^{2} \vdot \va{E}_{1} \right) + A{3} \, \left( \va{E}^{3} \vdot\va{E}_{1} \right) = A_{1} \\[0.5em]
 \va{A} \vdot \va{E}_{1} &= A^{1} \, \left( \va{E}_{1} \vdot \va{E}_{1} \right) + A^{2} \, \left( \va{E}_{2} \vdot \va{E}_{1} \right) + A^{3} \, \left( \va{E}_{3} \vdot \va{E}_{1} \right) = A_{1} \\[0.5em]
-\mbox{0} &{} \\[0.5em]
+\mbox{o de la forma} \hspace{0.5cm} &{} \\[0.5em]
 A_{1} &= A^{1} \, g_{11} + A^{2} \, g_{12} + A^{3} \, g_{13}
 \end{aligned}
 \label{eq:ecuacion_01_02_04}
@@ -463,7 +468,7 @@ Un grupo $G$ es un conjunto de elementos no vacíos junto con una ley, para comb
 \item La ley asociativa se cumple bajo la ley de combinación, así que: $a \, (b \, c) = (a \, b) \,  c$ para todo $a, b, c \in G$.
 \end{enumerate}
 
-Por ejemplo, el conjunto de elementos $G = {1, -1, i, -i}$, donde $i^{2} = -1$ junto con la ley de combinación de la multiplicación ordinaria, forma un grupo. Esto se puede ver en la siguiente tabla de multiplicación:
+Por ejemplo, el conjunto de elementos $G = \left\{ 1, -1, i, -i \right\}$, donde $i^{2} = -1$ junto con la ley de combinación de la multiplicación ordinaria, forma un grupo. Esto se puede ver en la siguiente tabla de multiplicación:
 \begin{table}[H]
 \centering
 \begin{tabular}{| c | c | c | c | c |} \hline
@@ -534,7 +539,7 @@ de coordenadas cartesianas $(x, y, z)$ a coordenadas esféricas $(\rho, \theta, 
 \begin{align*}
 y^{1} = x, \hspace{0.2cm} y^{2} = y, \hspace{0.2cm} y^{3} = z \hspace{0.7cm} x^{1} = \rho, \hspace{0.2cm} x^{2} = \theta, \hspace{0.2cm} x^{3} = \phi
 \end{align*}    
-el conjunto de ecuaciones anterior tiene la forma que se encuentra en la ecuación (\ref{eq:ecuacion_01_02_08}) con $u = \rho, v = \theta, w = \phi$ las coordenadas generalizadas. Se podrían colocar barras sobre las $x$ en este ejemplo para distinguir estas coordenadas de las x del ejemplo anterior. Las coordenadas esféricas $(\rho, \theta, \phi)$ muestran en la figura (\ref{fig:figura_01_02_03}).
+el conjunto de ecuaciones anterior tiene la forma que se encuentra en la ecuación (\ref{eq:ecuacion_01_02_08}) con $u = \rho, v = \theta, w = \phi$ las coordenadas generalizadas. Se podrían colocar barras sobre las $x$ en este ejemplo para distinguir estas coordenadas de las $x$ del ejemplo anterior. Las coordenadas esféricas $(\rho, \theta, \phi)$ muestran en la figura (\ref{fig:figura_01_02_03}).
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1]{Imagenes/Sistema_Esferico.eps}
@@ -569,7 +574,9 @@ f = f (x^{1}, \ldots, x^{N}) = f (x^{1} (\overline{x}), \ldots, x^{N} (\overline
 \label{eq:ecuacion_01_02_38}
 \end{align}
 
-\section{Transformación vectorial, componentes contravariantes.}
+\section{Transformación vectorial.}
+
+\subsection{Componentes contravariantes.}
 
 En $V_{N}$ considera una curva $C$ definida por el conjunto de ecuaciones paramétricas:
 \begin{align*}
@@ -630,8 +637,50 @@ se satisface, estas cantidades se denominan \textbf{componentes de un tensor rel
 \end{center}
 \par
 Vemos que la ley de transformación anterior satisface las propiedades del grupo que mencionamos anteriormente.
+\\
+\noindent
+\encabezaejemplo Propiedad transitiva de la transformación contravariante.
 
-\section{Transformación vectorial, componentes covariantes.}
+Demuestra que una sucesión de transformaciones contraviariantes es también una transformación contravariante.
+
+\noindent
+\textbf{Solución: } Considera la tranformación de un vector de un sistema sin barra a un sistema coordenado con barras. Un vector o tensor de rango uno \break \hfill $A^{i} = A^{i} (x) = 1, \ldots, N$ será una transformación como en la ecuación (\ref{eq:ecuacion_01_02_40}) y
+\begin{align}
+    \bar{A}^{i} (\bar{x}) = \pdv{\bar{x}^{i}}{x^{j}} \, A^{j} (x)
+    \label{eq:ecuacion_01_02_42}
+\end{align}
+Otra transformación de coordenadas de $\bar{x} \to \bar{\bar{x}}$, genera los componentes
+\begin{align}
+    \bar{\bar{A}}^{i} (\bar{\bar{x}}) = \pdv{\bar{\bar{x}}^{i}}{\bar{x}^{j}} \, \bar{A}^{j} (x)
+    \label{eq:ecuacion_01_02_43}
+\end{align}
+Aquí se ha usado la notación $A^{j} (x)$ para enfatizar la dependencia de los componentes $A^{j}$ sobre las coordenadas $x$. Cambiando los índices y sustituyendo la ecuación (\ref{eq:ecuacion_01_02_42}) en la (\ref{eq:ecuacion_01_02_43}), se encuentra que
+\begin{align}
+    \bar{\bar{A}}^{i} (\bar{\bar{x}}) = \pdv{\bar{\bar{x}}^{i}}{\bar{x}^{j}} \, \pdv{\bar{x}^{j}}{x^{m}} \, A^{m} (x)
+    \label{eq:ecuacion_01_02_44}
+\end{align}
+Del hecho que
+\begin{align*}
+    \pdv{\bar{\bar{x}}^{i}}{\bar{x}^{j}} \, \pdv{\bar{x}^{j}}{x^{m}} = \pdv{\bar{\bar{x}}^{i}}{x^{m}}
+\end{align*}
+la ecuación (\ref{eq:ecuacion_01_02_44}) se simplifica como
+\begin{align}
+    \bar{\bar{A}}^{i} (x) = \pdv{\bar{\bar{x}}^{i}}{x^{m}} \, A^{m} (x)
+    \label{eq:ecuacion_01_02_45}
+\end{align}
+y de aquí que la transformación sea también contravariante. Esto debido a que la expresión es transitiva respecto al grupo de transformación de coordenadas.
+\par
+Notemos que de la regla de la cadena, podemos escribir
+\begin{align*}
+    \pdv{x^{m}}{\bar{x}^{j}} \, \pdv{\bar{x}^{j}}{x^{n}} = \pdv{x^{m}}{\bar{x}^{1}} \, \pdv{\bar{x}^{1}}{x^{n}} +  \pdv{x^{m}}{\bar{x}^{2}} \, \pdv{\bar{x}^{2}}{x^{n}} + \pdv{x^{m}}{\bar{x}^{3}} \, \pdv{\bar{x}^{3}}{x^{n}} = \pdv{x^{m}}{x^{n}} = \delta_{n}^{m}
+\end{align*}
+No debemos de equivocarnos escribiendo
+\begin{align*}
+    \pdv{x^{m}}{\bar{x}^{2}} \, \pdv{\bar{x}^{2}}{x^{n}} = \pdv{x^{m}}{x^{n}} \hspace{0.75cm} \text{o} \hspace{0.75cm} \pdv{x^{m}}{\bar{x}^{3}} \, \pdv{\bar{x}^{3}}{x^{n}} = \pdv{x^{m}}{x^{n}}
+\end{align*}
+ya que las expresiones son incorrectas. Revisemos que no hay sumas en esas expresiones, mientras que hay un índice de suma en la representación de la regla de la cadena.
+
+\subsection{Componentes covariantes.}
 
 Considere un invariante escalar $A (x) = \overline{A} (\overline{x})$ la cual en notación abreviada de la ecuación:
 \begin{align*}
@@ -667,6 +716,20 @@ se satisface, entonces estas cantidades se denominan \emph{componentes de un ten
 \end{center}
 \par
 Nuevamente notamos que la transformación anterior satisface las propiedades del grupo. Los \emph{tensores absolutos de rango u orden uno se denominan vectores}, mientras que los \emph{tensores absolutos de rango u orden cero se denominan escalares}.
+\\
+\noindent
+\encabezaejemplo Propiedad transitiva de la transformación covariante.
+
+Considera una secuencia de transformaciones definidas por la ecuación (\ref{eq:ecuacion_01_02_47})
+\begin{align*}
+    x &\to \bar{x} \hspace{1cm} \bar{A}_{i} (\bar{x}) = A_{j} (x) \, \pdv{x^{j}}{\bar{x}^{i}} \\[1em]
+    x &\to \bar{\bar{x}} \hspace{1cm} \bar{\bar{A}}_{i} (\bar{x}) = \bar{A}_{m} (x) \, \pdv{\bar{x}^{m}}{\bar{\bar{x}}^{k}}
+\end{align*}
+Por lo tanto, podemos expresar la transformación de los componentes asociados con la transformación de coordenadas $x \to \bar{\bar{x}}$ y
+\begin{align*}
+    \bar{\bar{A}}_{k} (\bar{\bar{x}}) = \left( A_{j} (x) \, \pdv{x^{j}}{\bar{x}^{m}} \right) \pdv{\bar{x}^{m}}{\bar{\bar{x}}^{m}} = A_{j} (x) \, \pdv{x^{j}}{\bar{\bar{x}}^{k}}
+\end{align*}
+lo cual demuestra la propiedad transitiva de una transformación covariante.
 
 \section{Tensores de orden superior.}
 
@@ -789,7 +852,7 @@ donde los términos $\vu{e}_{i} \, \vu{e}_{j}$ se denominan díadas unitarias. T
 &{\quad} A_{21} \, \vu{e}_{1} \, \vu{e}_{2} + A_{22} \, \vu{e}_{2} \, \vu{e}_{2} + A_{23} \, \vu{e}_{3} \, \vu{e}_{2} \\[0.5em]
 &{\quad} A_{31} \, \vu{e}_{1} \, \vu{e}_{3} + A_{32} \, \vu{e}_{2} \, \vu{e}_{3} + A_{33} \, \vu{e}_{3} \, \vu{e}_{3}    
 \end{align*}
-Si una diádica es igual a su conjugada $\vb{A} = \vb{A}_{c}$, entonces $A_{ij} = A_{ji}$ y la diádica se llama \textbf{simétrica}. Si una diádica es igual al negativo de su conjugada $\vb{A} = - \vb{A}_{c}$, entonces $A_{ij} = - A_{ji}$ y la diádica se llama \textbf{simétrica sesgada}. Una diádica especial llamada \textbf{diádica idéntica o factor idéntico} que está definida por:
+Si una diádica es igual a su conjugada $\vb{A} = \vb{A}_{c}$, entonces $A_{ij} = A_{ji}$ y la diádica se llama \textbf{simétrica}. Si una diádica es igual al negativo de su conjugada $\vb{A} = - \vb{A}_{c}$, entonces $A_{ij} = - A_{ji}$ y la diádica se llama \textbf{antisimétrica}. Una diádica especial llamada \textbf{diádica idéntica o factor idéntico} que está definida por:
 \begin{align*}
 J = \vu{e}_{1} \, \vu{e}_{1} + \vu{e}_{2} \, \vu{e}_{2} + \vu{e}_{3} \, \vu{e}_{3}
 \end{align*}
@@ -807,7 +870,7 @@ J \cdot \va{V} &= J \cdot (V_{1} \, \vu{e}_{1} + V_{2} \, \vu{e}_{2} + V_{3} \, 
 &= \va{V}
 \end{align*}
 
-Una operación diádica que se usa a menudo en física y química es el producto de doble punto $\va{A} : \va{B}$, donde $\va{A}$ y $\va{B}$ son ambos diádicas. Aquí ambas diádicas se expanden usando la ley distributiva de la multiplicación, y luego cada par de díadas unitarias $\vu{e}_{i} \, \vu{e}_{j} : \vu{e}_{m} \, \vu{e}_{n}$ se combinan de acuerdo con la regla:
+Una operación diádica que se usa a menudo en física y química es el producto de doble punto $\va{A} : \va{B}$, donde $\va{A}$ y $\va{B}$ son ambas diádicas. Aquí ambas diádicas se expanden usando la ley distributiva de la multiplicación, y luego cada par de díadas unitarias $\vu{e}_{i} \, \vu{e}_{j} : \vu{e}_{m} \, \vu{e}_{n}$ se combinan de acuerdo con la regla:
 \begin{align*}
 \vu{e}_{i} \, \vu{e}_{j} : \vu{e}_{m} \, \vu{e}_{n} = (\vu{e}_{i} \cdot \vu{e}_{m}) (\vu{e}_{j} \cdot \vu{e}_{n})
 \end{align*}
@@ -927,7 +990,7 @@ El producto interno de dos tensores se obtiene:
 \end{enumerate}
 
 \noindent
-\textbf{Ejemplo: (Producto interno)}. Sean $A^{i}$ y $B_{j}$ los componentes de dos tensores (vectores) de primer orden. El producto externo de estos tensores es:
+\encabezaejemplo \textbf{Producto interno}. Sean $A^{i}$ y $B_{j}$ los componentes de dos tensores (vectores) de primer orden. El producto externo de estos tensores es:
 \begin{align*}
 C_{j}^{i} = A^{i} \, B_{j} \hspace{1.5cm} i, j = 1, 2, \ldots, N
 \end{align*}

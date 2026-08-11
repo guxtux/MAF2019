@@ -8,7 +8,7 @@
 \usepackage[autostyle,spanish=mexican]{csquotes}
 \usepackage[tbtags]{amsmath}
 \usepackage{nccmath}
-\usepackage{amsthm}
+\usepackage{amsthm, bm}
 \usepackage{amssymb}
 \usepackage{mathrsfs}
 \usepackage{graphicx}
@@ -20,10 +20,6 @@
 \usepackage[outdir=./Imagenes/]{epstopdf}
 \usepackage{siunitx}
 \usepackage{physics}
-\AtBeginDocument{\RenewCommandCopy\qty\SI}
-\ExplSyntaxOn
-\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
-\ExplSyntaxOff
 \usepackage{color}
 \usepackage{float}
 \usepackage{hyperref}
@@ -47,6 +43,7 @@
 \usepackage{makecell}
 \usepackage{fancyhdr}
 \usepackage{tikz}
+\usetikzlibrary{calc, positioning}
 \usepackage{bigints}
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable}
@@ -54,7 +51,8 @@
 \usepackage{pgfplots}
 \usepackage{pdflscape}
 \usepackage{enumitem}
-\pgfplotsset{compat=1.16}
+\pgfplotsset{compat=1.18}
+
 \spanishdecimal{.}
 \renewcommand{\baselinestretch}{1.5}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
@@ -104,6 +102,13 @@
 % \newcommand{\qed}{\tag*{$\blacksquare$}}
 \renewcommand{\qed}{\hfill\blacksquare}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\newcounter{miencabezaejemplo}[section]% el argumento [section] hace que se reinicie en cada sección
+\newcommand{\encabezaejemplo}{\refstepcounter{miencabezaejemplo}\textbf{Ejemplo \thesection.\arabic{miencabezaejemplo} \,}}
 
 \usetikzlibrary{babel}
 \usepackage{tikz-3dplot}
@@ -159,7 +164,7 @@ Este supuesto nos permite obtener un conjunto de relaciones inversas.
 donde las $\overline{x}$ se determinan en términos de las $x$. Debemos entender que las ecuaciones de transformación dadas son reales y continuas. Además, se supone que todas las derivadas que aparecen en nuestras discusiones existen y son continuas en el dominio de las variables consideradas.
 \par
 \noindent
-\textbf{Ejemplo. } El siguiente es un ejemplo de un conjunto de ecuaciones de transformación de la forma definida por las ecuaciones (\ref{eq:ecuacion_01_01_07}) y (\ref{eq:ecuacion_01_01_08}) en el caso $N = 3$. Considera la transformación de coordenadas cilíndricas $(r, \alpha, z)$ a coordenadas esféricas $(\rho, \beta, \alpha)$. 
+\encabezaejemplo El siguiente es un ejemplo de un conjunto de ecuaciones de transformación de la forma definida por las ecuaciones (\ref{eq:ecuacion_01_01_07}) y (\ref{eq:ecuacion_01_01_08}) en el caso $N = 3$. Considera la transformación de coordenadas cilíndricas $(r, \alpha, z)$ a coordenadas esféricas $(\rho, \beta, \alpha)$. 
 \begin{figure}[H]
     \centering
 % 3D AXIS with cylindrical coordinates
@@ -173,62 +178,139 @@ donde las $\overline{x}$ se determinan en términos de las $x$. Debemos entender
   \def\thetavec{48}
   
   % AXES
-  \coordinate (O) at (0,0,0);
-  \draw[thick,->] (0,0,0) -- (1,0,0) node[below left=-3]{$x$};
-  \draw[thick,->] (0,0,0) -- (0,1,0) node[right=-1]{$y$};
-  \draw[thick,->] (0,0,0) -- (0,0,1) node[above=-1]{$z$};
+  \coordinate (O) at (0, 0, 0);
+  \draw[thick,->] (0, 0, 0) -- (1, 0, 0) node[below left=-0.3]{$x$};
+  \draw[thick,->] (0, 0, 0) -- (0, 1, 0) node[right]{$y$};
+  \draw[thick,->] (0, 0, 0) -- (0, 0, 1) node[left]{$z$};
   
   % POINT P
   \tdplotsetcoord{P}{\rvec}{\phivec}{\thetavec}
-  \draw (Pxy)++(0,0,0.12) --++ (\thetavec+180:0.12) --++ (0,0,-0.12);
-  \node[circle,inner sep=0.9,fill=myblue]
-    (P') at ({\rvec*sin(\phivec)*cos(\thetavec)},{\rvec*sin(\phivec)*sin(\thetavec)},{\rvec*cos(\phivec)}) {};
+  \draw (Pxy)++(0, 0, 0.12) --++ (\thetavec+180:0.12) --++ (0, 0, -0.12);
+  \node[circle,inner sep=0.9,fill=myblue] (P') at ({\rvec*sin(\phivec)*cos(\thetavec)},{\rvec*sin(\phivec)*sin(\thetavec)},{\rvec*cos(\phivec)}) {};
   
   % VECTORS & DASHED
-  \draw[dashed,mydarkblue] (P)  -- (Pz)
-    node[pos=0.55,above right=-6] {\contour{white}{$r$}};
-  \draw[dashed,mydarkblue] (Py) -- (Pxy) -- (Px);
+  % \draw[dashed,mydarkblue] (P)  -- (Pz) node[pos=0.55, above] {\contour{white}{$r$}};
+  \draw[dashed, mydarkblue] (Py) -- (Pxy) -- (Px);
   
   % MEASURES
-  \draw[<->,veccol] (0,0,0) -- (\thetavec:{\rvec*sin(\phivec)})
-    node[pos=0.5,scale=0.9]{\contour{white}{$r$}};
-  \draw[<->,veccol] (\thetavec:{\rvec*sin(\phivec)}) -- (P')
-    node[pos=0.55,scale=0.9]{\contour{white}{$z$}};
-  \draw[->] (\rtheta,0,0) arc(0:\thetavec:\rtheta)
-    node[pos=0.35,below=-2,scale=0.9] {$\alpha$};
+  \draw[->, veccol] (0, 0, 0) -- (\thetavec:{\rvec*sin(\phivec)}) node[pos=0.5, scale=0.9]{\contour{white}{$r$}};
+  \draw[->, veccol] (\thetavec:{\rvec*sin(\phivec)}) -- (P')  node[pos=0.55, scale=0.9]{\contour{white}{$z$}};
+  \draw[->] (\rtheta, 0, 0) arc(0:\thetavec:\rtheta) node[pos=0.35, below, scale=0.9] {$\alpha$};
   
+  \node at (0.5, 1, 1) {$\mathrm{P} = (r, \alpha, z)$};
   % VECTORS
-  \draw[vector] (O)  -- (P')
-    node[pos=0.5,above left=-4] {$r$}
-    node[right=1,above right=-3] {$\mathrm{P} = (r, \alpha, z)$};   
+  % \draw[vector] (O) -- (P') node[pos=0.5,above left=-4] {$r$} node[right=1,above right=-3] {$\mathrm{P} = (r, \alpha, z)$};   
 \end{tikzpicture}
 \tdplotsetmaincoords{60}{110}
-\begin{tikzpicture}[scale=3,tdplot_main_coords]
+% \begin{tikzpicture}[scale=3,tdplot_main_coords]
   
-  % VARIABLES
-  \def\rvec{.8}
-  \def\thetavec{30}
-  \def\phivec{60}
+%   % VARIABLES
+%   \def\rvec{.8}
+%   \def\thetavec{30}
+%   \def\phivec{60}
   
-  % AXES
-  \coordinate (O) at (0,0,0);
-  \draw[thick,->] (0,0,0) -- (1,0,0) node[below left=-3]{$x$};
-  \draw[thick,->] (0,0,0) -- (0,1,0) node[right=-1]{$y$};
-  \draw[thick,->] (0,0,0) -- (0,0,1) node[above=-1]{$z$};
+%   % AXES
+%   \coordinate (O) at (0, 0, 0);
+%   \draw[thick,->] (0, 0, 0) -- (1, 0, 0) node[below left=-0.3]{$x$};
+%   \draw[thick,->] (0, 0, 0) -- (0, 1, 0) node[right]{$y$};
+%   \draw[thick,->] (0, 0, 0) -- (0, 0, 1) node[above]{$z$};
   
-  % VECTORS
-  \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
-  \draw[vector,red] (O)  -- (P) node[above right=-2] {$\mathrm{P} = (\rho, \alpha, \beta)$};
-  \draw[dashed,myred]   (O)  -- (Pxy);
-  \draw[dashed,myred]   (P)  -- (Pxy);
-  \draw[dashed,myred]   (Py) -- (Pxy);
+%   % VECTORS
+%   \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+%   \draw[vector, red] (O)  -- (P) node[above right=-0.5] {$\mathrm{P} = (\rho, \alpha, \beta)$};
+%   \draw[dashed, myred]   (O)  -- (Pxy);
+%   \draw[dashed, myred]   (P)  -- (Pxy);
+%   \draw[dashed, myred]   (Py) -- (Pxy);
   
-  % ARCS
-  \tdplotdrawarc[->]{(O)}{0.2}{0}{\phivec}
-    {anchor=north}{$\alpha$}
-  \tdplotsetthetaplanecoords{\phivec}
-  \tdplotdrawarc[->,tdplot_rotated_coords]{(0,0,0)}{0.4}{0}{\thetavec}
-    {anchor=south west}{\hspace{-1mm}$\beta$}
+%   % ARCS
+%   \tdplotdrawarc[->]{(O)}{0.2}{0}{\phivec}
+%     {anchor=north}{$\alpha$}
+%   \tdplotsetthetaplanecoords{\phivec}
+%   \tdplotdrawarc[->,tdplot_rotated_coords]{(0,0,0)}{0.4}{0}{\thetavec}
+%     {anchor=south west}{\hspace{-1mm}$\beta$}
+
+% \end{tikzpicture}
+
+%----------------------------------------
+% Ángulo de observación
+%----------------------------------------
+\tdplotsetmaincoords{68}{120}
+\begin{tikzpicture}[tdplot_main_coords, scale=2, line cap=round, line join=round, >=stealth]
+
+%----------------------------------------------------
+% Parámetros
+%----------------------------------------------------
+\def\R{1.6}
+\def\az{45}      % alpha
+\def\pol{35}     % beta (desde z)
+
+%----------------------------------------------------
+% Ejes
+%----------------------------------------------------
+\draw[->,thick] (0, 0, 0) -- (2, 0, 0) node[below left]{$x$};
+\draw[->,thick] (0, 0, 0) -- (0, 2, 0) node[right]{$y$};
+\draw[->,thick] (0, 0, 0) -- (0, 0, 2) node[above]{$z$};
+
+%----------------------------------------------------
+% Circunferencia ecuatorial
+%----------------------------------------------------
+\tdplotdrawarc {(0, 0, 0)}{\R}{0}{90}{}{}
+\draw (0, 0, 0) -- (1.13, 1.13, 0);
+
+%----------------------------------------------------
+% Semimeridiano yz
+%----------------------------------------------------
+\tdplotsetthetaplanecoords{90}
+
+\tdplotdrawarc[tdplot_rotated_coords]{(0, 0, 0)}{\R}{0}{90}{}{}
+
+%----------------------------------------------------
+% Semimeridiano xz
+%----------------------------------------------------
+\tdplotsetthetaplanecoords{0}
+
+\tdplotdrawarc[tdplot_rotated_coords]{(0, 0, 0)}{\R}{0}{90}{}{}
+
+%----------------------------------------------------
+% Segundo meridiano (plano que contiene al vector)
+%----------------------------------------------------
+\tdplotsetthetaplanecoords{\az}
+
+\tdplotdrawarc[tdplot_rotated_coords]{(0, 0, 0)}{\R}{0}{90}{}{}
+
+%----------------------------------------------------
+% Punto P en coordenadas esféricas
+% (r, theta, phi)
+% theta = 90-beta
+%----------------------------------------------------
+\tdplotsetcoord{P}{\R}{90-\pol}{\az}
+
+% Vector posición
+\draw[->, thick] (O) -- (P);
+
+\node [circle, inner sep=0.9, fill=myblue] (Q') at (P) {};
+
+\node at ($(O)!0.55!(P) + (0.15, 0.15, 0)$) {$\rho$};
+\node at ($(O)!0.55!(P) + (0.15, 1, 0.75)$) {$\mathrm{P}=(\rho, \beta, \alpha)$};
+
+%----------------------------------------------------
+% Proyección al plano xy
+%----------------------------------------------------
+% \tdplotsetcoord{Q}{\R*sin(\pol)}{90}{\az}
+
+% \draw (Q) -- (P);
+
+%----------------------------------------------------
+% Ángulo alpha
+%----------------------------------------------------
+\tdplotdrawarc {(0, 0, 0)}{0.42}{0}{\az}{anchor=north}{$\alpha$}
+
+%----------------------------------------------------
+% Ángulo beta
+%----------------------------------------------------
+\tdplotsetthetaplanecoords{\az}
+
+\tdplotdrawarc[tdplot_rotated_coords] {(0, 0, 0)}{0.42}{0}{55}{anchor=south east}{$\beta$}
 
 \end{tikzpicture}
 \caption{Coordenadas cilíndricas y esféricas}
@@ -261,7 +343,7 @@ Consideremos ahora la regla de la cadena aplicada a la diferenciación de una fu
 \end{align}
 para cualquier valor fijo de $i$ que satisface $1 \leq i \leq N$.
 \par
-La segunda derivada parcial de $\Phi$ también se puede expresar con notación de índices, derivando parcialmente la ecuación (\ref{eq:ecuacion_01_01_09}) con respecto a $x^{m}$, se obtiene:
+La segunda derivada parcial de $\Phi$ también se puede expresar con notación de índices; derivando parcialmente la ecuación (\ref{eq:ecuacion_01_01_09}) con respecto a $x^{m}$, se obtiene:
 \begin{align}
 \pdv[2]{\Phi}{x^{i}}{x^{m}} = \pdv{\Phi}{\overline{x}^{j}} \, \pdv[2]{\overline{x}^{j}}{x^{i}}{x^{m}} + \pdv{x^{m}} \left[ \pdv{\Phi}{\overline{x}^{j}} \right] \pdv{\overline{x}^{j}}{x^{i}}
 \label{eq:ecuacion_01_01_10}
@@ -283,11 +365,11 @@ Esta es solo una aplicación de la regla básica de la ecuación (\ref{eq:ecuaci
 donde $i, m$ son índices libres y $j, k$ son índices de suma mudos.
 \par
 \noindent
-\textbf{Ejemplo. } Sea $\Phi = \Phi (r, \theta)$, donde $r, \theta$ son las coordenadas polares, relacionadas con las coordenadas cartesianas $(x, y)$ con las ecuaciones de transformación:
+\encabezaejemplo Sea $\Phi = \Phi (r, \theta)$, donde $r, \theta$ son las coordenadas polares, relacionadas con las coordenadas cartesianas $(x, y)$ con las ecuaciones de transformación:
 \begin{align*}
 x =  r \, \cos \theta \hspace{2cm} y = r \, \sin \theta
 \end{align*}
-Calcula las derivadas parciales de primer y segundo orden.
+Calcula las derivadas parciales de primer y segundo orden, es decir: $\pdv*{\Phi}{x}$ y $\pdv*[2]{\Phi}{x}$.
 \par
 \noindent
 \textbf{Solución:} La derivada parcial de primer orden de $\Phi$ con respecto a $x$ se obtiene de la ec. (\ref{eq:ecuacion_01_01_09}), así:
@@ -328,10 +410,9 @@ Dejando que $\overline{x}^{1} = r$, $\overline{x}^{2} = \theta$, así como $x^{1
 
 \section{Identidades vectoriales en coordenadas cartesianas.}
 
-Empleando las sustituciones $x^{1} = x, \, x^{2} = y, \, x^{3} = z$, donde se emplean variables en superíndice y denotan los vectores unitarios en coordenadas cartesianas por $\vb{e}_{1}, \vb{e}_{2}, \vb{e}_{3}$, ilustramos cómo se escriben varias operaciones vectoriales utilizando la notación de índices.
+Empleando las sustituciones $x^{1} = x, \, x^{2} = y, \, x^{3} = z$, donde se emplean en superíndice las variables y denotan los vectores unitarios en coordenadas cartesianas por $\vu{e}_{1}, \vu{e}_{2}, \vu{e}_{3}$, ya hemos revisado cómo se escriben varias operaciones vectoriales utilizando la notación de índices.
 
 \subsection{Gradiente.}
-
 
 En coordenadas cartesianas el gradiente de un campo escalar es:
 \begin{align*}
@@ -354,15 +435,15 @@ En coordenadas cartesianas la divergencia de un campo vectorial $\va{A}$, es un 
 \end{align*}
 Usando la convención de suma y la notación de índices, la divergencia en coordenadas cartesianas se escribe:
 \begin{align*}
-\div{\va{A}} = A_{i i} = \pdv{A_{i}}{x^{i}}
+\div{\va{A}} = A_{i,i} = \pdv{A_{i}}{x^{i}} = \pdv{A_{1}}{x^{1}} + \pdv{A_{2}}{x^{2}} + \pdv{A_{3}}{x^{3}}
 \end{align*}
 donde $i$ es el índice mudo en la suma.
 
 \subsection{Rotacional.}
 
-Para representar el vector $\va{B} = \curl{\va{A}}$ en coordenadas cartesianas, notemos que la notación de índice se enfoca solo en los componentes de este vector. Las componentes $B_{i}$, con $i =1, 2, 3$ del vector $\va{B}$ se representa por:
+Para representar el vector $\va{B} = \curl{\va{A}}$ en coordenadas cartesianas, revisemos que la notación de índice se enfoca solo en los componentes de este vector. Las componentes $B_{i}$, con $i =1, 2, 3$ del vector $\va{B}$ se representa por:
 \begin{align*}
-B_{i} = e_{ijk} \, A_{k, j} \hspace{1.5cm} \text{para } i, j, k = 1, 2, 3
+B_{i} = \vu{e}_{i} \cdot \curl{\va{A}} = e_{ijk} \, A_{k,j} \hspace{1.5cm} \text{para } i, j, k = 1, 2, 3
 \end{align*}
 donde $e_{ijk}$ es el símbolo de permutación que se mencionó anteriormente, y las $A_{k,j} = \pdv*{A_{k}}{x^{j}}$.
 \par
@@ -440,7 +521,9 @@ Usando la notación de índices demuestra las siguientes identidades vectoriales
 
 \section{Teoremas integrales en notación de índices.}
 
-El \textbf{teorema de la divergencia}, tanto en notación vectorial como de índices, se puede escribir:
+\subsection{Teorema de Gauss.}
+
+El teorema de Gauss (divergencia), tanto en notación vectorial como de índices, se puede escribir:
 \begin{align}
 \begin{aligned}
 \scaleiiint{6ex}_{V} \text{div} \vdot \va{F} \dd{\tau} &= \scaleiint{6ex}_{S} \va{F} \vdot \vu{n} \dd{\sigma} \\[0.5em]
@@ -449,8 +532,10 @@ El \textbf{teorema de la divergencia}, tanto en notación vectorial como de índ
 \label{eq:ecuacion_01_01_16}
 \end{align}
 donde $n_{i}$ son los cosenos directores de la normal exterior unitaria a la superficie, $\dd{\tau}$ es un elemento de volumen y $\dd{\sigma}$ es un elemento de área de superficie. Nótese que al utilizar la notación de índices, las integrales de volumen y superficie deben extenderse sobre el rango especificado por los índices. Esto sugiere que el teorema de divergencia puede aplicarse a vectores en espacios n-dimensionales.
-\par
-La forma vectorial y en notación de índices para \textbf{el teorema de Stokes} son:
+
+\subsection{Teorema de Stolkes.}
+
+La forma vectorial y en notación de índices para el teorema de Stokes son:
 \begin{align}
 \begin{aligned}
 \scaleiint{6ex}_{\bs S} \left( \curl{\va{F}} \right) \vdot \vu{n} \dd{\sigma} &= \scaleint{6ex}_{\bs C} \va{F} \vdot \dd{\va{r}} \\[0.5em]
@@ -458,7 +543,10 @@ La forma vectorial y en notación de índices para \textbf{el teorema de Stokes}
 \end{aligned}
 \label{eq:ecuacion_01_01_17}
 \end{align}
-y el \textbf{teorema de Green} en el plano, el cual es un caso especial del teorema de Stokes, se expresa como:
+
+\subsection{Teorema de Green.}
+
+El teorema de Green en el plano, el cual es un caso especial del teorema de Stokes, se expresa como:
 \begin{align}
 \begin{aligned}
 \scaleiint{6ex} \left( \pdv{F_{2}}{x} - \pdv{F_{1}}{y} \right) \dd{x} \dd{y} &= \scaleint{6ex}_{\bs C} F_{1} \dd{x} + F_{2} \dd{y} \\[0.5em]
@@ -466,6 +554,8 @@ y el \textbf{teorema de Green} en el plano, el cual es un caso especial del teor
 \end{aligned}
 \label{eq:ecuacion_01_01_18}
 \end{align}
+
+\subsection{Otras representaciones integrales.}
 
 Otras formas de los teoremas integrales son:
 \begin{align*}
@@ -480,7 +570,10 @@ En el teorema de la divergencia, haciendo la sustitución $\va{F} = \phi \grad{\
 \begin{align*}
 \scaleiiint{6ex}_{V} \left[ \phi \laplacian{\psi} + \left( \gradient{\phi} \right) \vdot \left( \gradient{\psi} \right) \right] \dd{\tau} = \scaleiint{6ex}_{S} \left( \phi \gradient{\psi} \right) \vdot \vu{n} \dd{\sigma}
 \end{align*}
-La \textbf{identidad de Green}:
+
+\subsection{Identidad de Green.}
+
+La identidad de Green es:
 \begin{align*}
 \scaleiiint{6ex}_{V} \left( \phi \laplacian{\psi} - \psi \laplacian{\phi} \right) \dd{\tau} = \scaleiint{6ex}_{\bs S} \left( \phi \gradient{\psi} - \psi \gradient{\phi} \right) \vdot \vu{n} \dd{\sigma}
 \end{align*}
@@ -488,14 +581,14 @@ se obtiene dejando primero $\va{F} = \phi \gradient{\psi}$ en el teorema de dive
 
 \section{Determinantes y cofactores.}
 
-Para $A = (a_{ij}), i, j = 1, \ldots, n$ una matriz de $n \times n$, el determinante de $A$ se puede escribir como:
+Para $A = (a_{ij})$ con $i, j = 1, \ldots, n$ una matriz de $n \times n$, el determinante de $A$ se puede escribir como:
 \begin{align*}
 \text{det} A = \abs{A} = \epsilon_{i_{1} i_{2} i_{3} \ldots i_{n}} \, a_{1 i_{1}} a_{2 i_{2}} a_{3 i_{3}} \ldots a_{n i_{n}}
 \end{align*}
 Esto da una suma de las $n!$ permutaciones de productos formados a partir de los elementos de la matriz $A$. El resultado es un único número llamado \textbf{determinante de A}.
 \\[0.5em]
 \noindent
-\textbf{Ejemplo:} En el caso cuando $n = 2$, se tiene:
+\encabezaejemplo En el caso cuando $n = 2$, se tiene:
 \begin{align*}
 \abs{A} = \mdet{
 a_{11} & a_{12} \\
@@ -507,7 +600,7 @@ a_{21} & a_{22}
 \end{align*}
 \\[0.5em]
 \noindent
-\textbf{Ejemplo:} En el caso cuando $n = 3$, podemos usar cualquiera de las notaciones:
+\encabezaejemplo En el caso cuando $n = 3$, podemos usar cualquiera de las notaciones:
 \begin{align*}
 A = \mqty(
 a_{11} & a_{12} & a_{13} \\
@@ -552,7 +645,7 @@ otras formas de esta identidad son:
 
 Consideremos la representación del determinante usando la notación de índices:
 \begin{align*}
-\det{A} = \mdet{
+\abs{A} = \mdet{
 a_{1}^{1} & a_{2}^{1} & a_{3}^{1} \\
 a_{1}^{2} & a_{2}^{2} & a_{3}^{2} \\
 a_{1}^{3} & a_{2}^{3} & a_{3}^{3}}
@@ -619,7 +712,7 @@ a_{m}^{r} = \abs{A} \, \delta_{i}^{r}
 \end{align*}
 \\[0.5em]
 \noindent
-\textbf{Ejemplo: } En $N$ dimensiones, la cantidad $\displaystyle \delta_{k_{1} k_{2} \ldots k_{N}}^{j_{1} j_{2} \ldots j_{N}}$ se llama la delta generalizada de Kronecker. Se puede definir en términos de símbolos de permituación como:
+\encabezaejemplo En $N$ dimensiones, la cantidad $\displaystyle \delta_{k_{1} k_{2} \ldots k_{N}}^{j_{1} j_{2} \ldots j_{N}}$ se llama la delta generalizada de Kronecker. Se puede definir en términos de símbolos de permituación como:
 \begin{align}
 \epsilon^{j_{1} j_{2} \ldots j_{N}} \, e_{k_{1} k_{2} \ldots k_{N}} = \delta_{k_{1} k_{2} \ldots k_{N}}^{j_{1} j_{2} \ldots j_{N}}
 \label{eq:ecuacion_01_01_26}

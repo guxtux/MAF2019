@@ -8,7 +8,7 @@
 \usepackage[autostyle,spanish=mexican]{csquotes}
 \usepackage[tbtags]{amsmath}
 \usepackage{nccmath}
-\usepackage{amsthm}
+\usepackage{amsthm, bm}
 \usepackage{amssymb}
 \usepackage{mathrsfs}
 \usepackage{graphicx}
@@ -20,10 +20,6 @@
 \usepackage[outdir=./Imagenes/]{epstopdf}
 \usepackage{siunitx}
 \usepackage{physics}
-\AtBeginDocument{\RenewCommandCopy\qty\SI}
-\ExplSyntaxOn
-\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
-\ExplSyntaxOff
 \usepackage{color}
 \usepackage{float}
 \usepackage{hyperref}
@@ -47,6 +43,7 @@
 \usepackage{makecell}
 \usepackage{fancyhdr}
 \usepackage{tikz}
+\usetikzlibrary{calc, positioning}
 \usepackage{bigints}
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable}
@@ -54,7 +51,7 @@
 \usepackage{pgfplots}
 \usepackage{pdflscape}
 \usepackage{enumitem}
-\pgfplotsset{compat=1.16}
+\pgfplotsset{compat=1.18}
 \spanishdecimal{.}
 \renewcommand{\baselinestretch}{1.5}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
@@ -101,14 +98,22 @@
 
 \newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 % \newcommand{\qed}{\tag*{$\blacksquare$}}
 \renewcommand{\qed}{\hfill\blacksquare}
 
+\newcounter{miencabezaejemplo}[section]% el argumento [section] hace que se reinicie en cada sección
+\newcommand{\encabezaejemplo}{\refstepcounter{miencabezaejemplo}\textbf{Ejemplo \thesection.\arabic{miencabezaejemplo} \,}}
 
 \usetikzlibrary{babel}
 \usepackage{tikz-3dplot}
 \setlength{\tabcolsep}{12pt}
 \usepackage[outline]{contour} % glow around text
+
 \colorlet{veccol}{green!50!black}
 \colorlet{myred}{red!90!black}
 \colorlet{myblue}{blue!80!black}
@@ -176,6 +181,48 @@ Si transformamos a otro sistema de coordenadas, digamos $\overline{x}^{i}, i = 1
 \dd{s}^{2} = \overline{g}_{ij} \dd{\overline{x}}^{i} \dd{\overline{x}}^{j}
 \end{align*}
 donde $\overline{g}_{ij} = \overline{g}_{ij} (\overline{x})$ es una función de las coordenadas barradas.
+\\
+\noindent
+\encabezaejemplo Demuestra que los componentes métricos $g_{ij}$ son tensores covariantes de segundo orden.
+\\[1em]
+\noindent
+\textbf{Solución: } En un sistema coordenado $x^{i}, \, i = 1, \ldots, N$, el cuadrado del elemento de longitud de arco es
+\begin{align}
+    \dd{s^{2}} = g_{ij} \, \dd{x^{i}} \dd{x^{j}}
+    \label{eq:ecuacion_01_03_06}
+\end{align}
+mientras que en un sistema coordenado $\bar{x}^{i}, \, i = 1, \ldots, N$, el cuadrado del elemento de longitud de arco es de la forma
+\begin{align}
+    \dd{s^{2}} = \bar{g}_{mn} \, \dd{\bar{x}^{m}} \dd{\bar{x}^{n}}
+    \label{eq:ecuacion_01_03_07}
+\end{align}
+El cuadrado del elemento de longitud de arco debe ser invariante, por lo que
+\begin{align}
+     \bar{g}_{mn} \, \dd{\bar{x}^{m}} \dd{\bar{x}^{n}} = g_{ij} \, \dd{x^{i}} \dd{x^{j}}
+     \label{eq:ecuacion_01_03_08}
+\end{align}
+Aquí se supone que existe una transformación de coordenadas de la forma definida por la ecuación
+\begin{align*}
+    x^{i} = x^{i} (\bar{x}^{1}, \bar{x}^{2}, \ldots, \bar{x}^{N}), \hspace{0.5cm} i = 1, 2, \ldots, N
+\end{align*}
+junto con una transformación inversa, como en la ecuación
+\begin{align*}
+    \bar{x}^{i} = \bar{x}^{i} (x^{1}, x^{2}, \ldots, x^{N}), \hspace{0.5cm} i = 1, 2, \ldots, N
+\end{align*}
+que relaciona las $x$ con y sin barra. En general, si $x^{i} = x^{i} (\bar{x})$, entonces para $i = 1, \ldots, N$ tenemos
+\begin{align}
+    \dd{x^{i}} = \pdv{x^{i}}{\bar{x}^{m}} \dd{\bar{x}}^{m} \hspace{0.75cm} \text{y} \hspace{0.75cm} \dd{x^{j}} = \pdv{x^{j}}{\bar{x}^{n}} \dd{\bar{x}}^{n}
+    \label{eq:ecuacion_01_03_09}
+\end{align}
+Sustituyendo esos diferenciales en la ecuación (\ref{eq:ecuacion_01_03_08}) obtenemos el resultado
+\begin{align*}
+    \bar{g}_{mn} \dd{\bar{x}^{m}} \dd{\bar{x}^{n}} = g_{ij} \pdv{x^{i}}{\bar{x}^{m}} \pdv{x^{j}}{\bar{x}^{n}} \dd{\bar{x}^{m}} \dd{\bar{x}^{n}} \hspace{0.5cm} \text{o} \hspace{0.5cm} \left( \bar{g}_{mn} - g_{ij} \pdv{x^{i}}{\bar{x}^{m}} \pdv{x^{j}}{\bar{x}^{n}} \right) \dd{\bar{x}^{m}} \dd{\bar{x}^{n}} = 0
+\end{align*}
+Para cambios arbitrarios en $\dd{\bar{x}^{m}}$ esta ecuación implica que
+\begin{align*}
+    \bar{g}_{mn} = g_{ij} \pdv{x^{i}}{\bar{x}^{m}} \pdv{x^{j}}{\bar{x}^{n}}
+\end{align*}
+y en consecuencia $g_{ij}$ transforma como un tensor absoluto covariante de segundo orden.
 
 \section{Coordenadas curvilíneas.}
 
@@ -239,10 +286,10 @@ y haciendo que: $x^{1} = u$, $x^{2} = v$, $x^{3} = w$. Entonces el elemento de l
 \end{align*}
 donde:
 \begin{align}
-g_{ij} = \va{E}_{i} \cdot \va{E}_{j} = \pdv{\va{r}}{x^{i}} \cdot \pdv{\va{r}}{x^{j}} = \pdv{y^{m}}{x^{i}} \, \pdv{y^{m}}{x^{j}} \hspace{1cm} i, j \quad \mbox{ índices libres}
+g_{ij} = \va{E}_{i} \cdot \va{E}_{j} = \pdv{\va{r}}{x^{i}} \cdot \pdv{\va{r}}{x^{j}} = \pdv{y^{m}}{x^{i}} \, \pdv{y^{m}}{x^{j}} \hspace{0.75cm} i, j \quad \mbox{ índices libres}
 \label{eq:ecuacion_01_03_13}
 \end{align}
-son llamados \textbf{componentes métricos del sistema coordenado curvilíneo}. Los componentes métricos pueden considerarse como los elementos de una matriz simétrica, ya que $g_{ij} = g_{ji}$.
+son los llamados \textbf{componentes métricos del sistema coordenado curvilíneo}. Los componentes métricos pueden considerarse como los elementos de una matriz simétrica, ya que $g_{ij} = g_{ji}$.
 \par
 En el sistema de coordenadas rectangular $x, y, z$, el elemento de la longitud del arco al cuadrado es $\dd{s}^{2} = \dd{x}^{2} + \dd{y}^{2} + \dd{z}^{2}$. En este espacio los componentes métricos son:
 \begin{align*}
@@ -312,7 +359,8 @@ así llegamos a:
 
 Notemos que mientras $g_{ij} = 0$ cuando $i \neq j$, el sistema coordenado es ortogonal.
 
-\par
+\subsection{Factor de escala.}
+
 Dado un conjunto de transformaciones de la forma encontrada en la ec. (\ref{eq:ecuacion_01_03_10}), se pueden calcular fácilmente los componentes métricos asociados con las coordenadas generalizadas. Los componentes métricos de un sistema ortogonal tienen la forma:
 \begin{align*}
 g_{ij} = \mqty(
@@ -320,9 +368,157 @@ h_{1}^{2} & 0 & 0 \\
 0 & h_{2}^{2} & 0 \\
 0 & 0 & h_{3}^{2})
 \end{align*}
-donde los $h_{i}$ es el llamado \textbf{factor de escala}. Entonces el elemento de longitud de arco al cuadrado es:
+donde los $h_{i}$ es el llamado \textbf{factor de escala}. Entonces el cuadrado del elemento de longitud de arco es:
 \begin{align*}
 \dd{s}^{2} = h_{1}^{2} \, (\dd{x}^{1})^{2} + h_{2}^{2} \, (\dd{x}^{2})^{2} + h_{3}^{2} \, (\dd{x}^{3})^{2}
 \end{align*}
+
+\section{Sistemas de coordenadas curvilíneos.}
+
+\subsection{Coordenadas cartesianas \texorpdfstring{$(x, y, z)$}{(x, y, z)}.}
+
+Reglas de transformación
+\begin{align*}
+    x = x, \hspace{1cm} y = y, \hspace{1cm} z = z
+\end{align*}
+Factores de escala
+\begin{align*}
+    h_{1} = 1, \hspace{1cm} h_{2} = 1, \hspace{1cm} h_{3} =  1
+\end{align*}
+Las curvas coordenadas se forman por la intersección de las superficies coordenadas
+\begin{align*}
+    x = \text{constante}, \quad y =\text{constante}, \quad z = \text{constante}
+\end{align*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{../Imagenes/sistema_01_cartesiano.png}
+    \caption{Superficies del sistema cartesiano.}
+    \label{fig:sistema_01_cartesiano}
+\end{figure}
+
+\subsection{Coordenadas cilíndricas \texorpdfstring{$(r, \theta, z)$}{(r, t, z)}.}
+
+Reglas de transformación
+\begin{align*}
+    x &= r \, \cos \theta, \hspace{0.75cm} r \geq 0 \\
+    y &= r \, \sin \theta, \hspace{0.75cm} 0 \leq \theta \leq 2 \pi \\
+    z &= z , \hspace{0.75cm} -\infty < z < \infty
+\end{align*}
+Factores de escala
+\begin{align*}
+    h_{1} = 1, \hspace{1cm} h_{2} = r, \hspace{1cm} h_{3} =  1
+\end{align*}
+Las curvas coordenadas se muestran en la siguiente figura, se forman por la intersección de las superficies
+\begin{align*}
+    x^{2} + y^{2} &= r^{2}, \hspace{0.5cm} \text{cilindros} \\
+    \dfrac{y}{x} &= \tan \theta, \hspace{0.5cm} \text{planos} \\
+    z &= \text{constante}, \hspace{0.5cm} \text{planos}
+\end{align*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{../Imagenes/sistema_02_cilindrico.png}
+    \caption{Superficies del sistema cilíndrico.}
+    \label{fig:sistema_02_cilindrico}
+\end{figure}
+
+\subsection{Coordenadas esféricas \texorpdfstring{$(\rho, \theta, \phi)$}{(r, t, f)}.}
+
+Reglas de transformación
+\begin{align*}
+    x &= \rho \, \sin \theta \cos \phi, \hspace{0.75cm} r \geq 0 \\
+    y &= r \, \sin \theta \, \sin \phi \hspace{0.75cm} 0 \leq \theta \leq 2 \pi \\
+    z &= \rho \, \cos \theta, \hspace{0.75cm} 0 \leq \phi \leq 2 \pi
+\end{align*}
+Factores de escala
+\begin{align*}
+    h_{1} = 1, \hspace{1cm} h_{2} = \rho, \hspace{1cm} h_{3} = \rho \, \sin \phi
+\end{align*}
+Las curvas coordenadas se muestran en la siguiente figura, se forman por la intersección de las superficies
+\begin{align*}
+    x^{2} + y^{2} + z^{2}&= \rho^{2}, \hspace{0.5cm} \text{esferas} \\
+    x^{2} + y^{2} &= \tan^{2} \theta \, z^{2}, \hspace{0.5cm} \text{conos} \\
+    y &= x \, \tan \phi, \hspace{0.5cm} \text{planos}
+\end{align*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{../Imagenes/sistema_03_esferico.png}
+    \caption{Superficies del sistema esférico.}
+    \label{fig:sistema_03_esferico}
+\end{figure}
+
+\subsection{Coordenadas cilíndricas parabólicas \texorpdfstring{$(u, v, z)$}{(u, v, z)}.}
+
+Reglas de transformación
+\begin{align*}
+    x &= \dfrac{1}{2} \left( u^{2} - v^{2} \right), \hspace{0.75cm} -\infty < u < \infty \\
+    y &= u \, v \hspace{1.5cm} 0 \leq v < \infty \\
+    z &= z, \hspace{1.5cm} -\infty < z < \infty
+\end{align*}
+Factores de escala
+\begin{align*}
+    h_{1} = h_{2} = \sqrt{u^{2} + v^{2}}, \hspace{1cm} h_{3} = 1
+\end{align*}
+Las curvas coordenadas se muestran en la siguiente figura, se forman por la intersección de las superficies
+\begin{align*}
+    x^{2} &= - 2 u^{2} \left( y - \dfrac{u^{2}}{2}  \right), \hspace{0.5cm} \text{cilindros parabólicos} \\
+    x^{2} &= - 2 v^{2} \left( y - \dfrac{v^{2}}{2}  \right), \hspace{0.5cm} \text{cilindros parabólicos} \\
+    z &= \text{constante}, \hspace{0.5cm} \text{planos}
+\end{align*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{../Imagenes/sistema_04_CilindricoParabolico.png}
+    \caption{Superficies del sistema cilìndrico parabólico.}
+    \label{fig:sistema_04_cilindrico_parabolico}
+\end{figure}
+
+\subsection{Coordenadas parabólicas \texorpdfstring{$(u, v, z)$}{(u, v, z)}.}
+
+Reglas de transformación
+\begin{align*}
+    x &= u \, v \, \cos \phi, \hspace{0.75cm} 0 \leq u < \infty \\
+    y &= u \, v \, \sin \phi, \hspace{0.75cm} 0 \leq u < \infty \\
+    z &= \dfrac{1}{2} \left( u^{2} - v^{2} \right), \hspace{0.75cm} 0 < \phi < 2 \pi
+\end{align*}
+Factores de escala
+\begin{align*}
+    h_{1} = h_{2} = \sqrt{u^{2} + v^{2}}, \hspace{1cm} h_{3} = u \, v
+\end{align*}
+Las curvas coordenadas se muestran en la siguiente figura, se forman por la intersección de las superficies
+\begin{align*}
+    x^{2} + y^{2} &= - 2 u^{2} \left( z - \dfrac{u^{2}}{2} \right), \hspace{0.5cm} \text{paraboloide} \\
+    x^{2} + y^{2} &= - 2 v^{2} \left( z - \dfrac{v^{2}}{2}  \right), \hspace{0.5cm} \text{paraboloide} \\
+    z &= x \, \tan \phi, \hspace{0.5cm} \text{planos}
+\end{align*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{../Imagenes/sistema_05_Parabolico.png}
+    \caption{Superficies del sistema parabólico.}
+    \label{fig:sistema_05_parabolico}
+\end{figure}
+
+\subsection{Coordenadas cilíndricas elípticas \texorpdfstring{$(u, v, z)$}{(u, v, z)}.}
+
+Reglas de transformación
+\begin{align*}
+    x &= a \, \cosh u \cos v, \hspace{0.75cm} 0 \leq u < \infty \\
+    y &= a \, \sinh u \sin v, \hspace{0.75cm} 0 \leq u < 2 \pi \\
+    z &= z, \hspace{0.75cm} -\infty < z < \infty
+\end{align*}
+Factores de escala
+\begin{align*}
+    h_{1} = h_{2} = a \sqrt{\sinh^{2} u + \sin{2} v}, \hspace{1cm} h_{3} = a \, \sinh u \, \sin v
+\end{align*}
+Las curvas coordenadas se muestran en la siguiente figura, se forman por la intersección de las superficies
+\begin{align*}
+    \dfrac{x^{2}}{\cosh^{2} u} + \dfrac{y^{2}}{\sinh^{2} v} &= 1, \hspace{0.5cm} \text{cilindros elípticos} \\
+    \dfrac{x^{2}}{\cos^{2} v} + \dfrac{y^{2}}{\sin^{2} v} &= 1, \hspace{0.5cm} \text{cilindros hiperbólicos} \\
+    z &= \text{constante}, \hspace{0.5cm} \text{planos}
+\end{align*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{../Imagenes/sistema_06_Cilindricas_Elipticas.png}
+    \caption{Superficies del sistema cilíndrico elíptico.}
+    \label{fig:sistema_04_cilindrico_elíptico}
+\end{figure}
 
 \end{document}
