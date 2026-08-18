@@ -1,0 +1,420 @@
+\documentclass[hidelinks,12pt]{article}
+\usepackage[left=0.25cm,top=1cm,right=0.25cm,bottom=1cm]{geometry}
+%\usepackage[landscape]{geometry}
+\textwidth = 20cm
+\hoffset = -1cm
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla, es-lcroman]{babel}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[tbtags]{amsmath}
+\usepackage{nccmath}
+\usepackage{amsthm, bm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{standalone}
+\graphicspath{{Imagenes/}{../Imagenes/}}
+\usepackage[outdir=./Imagenes/]{epstopdf}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{color}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{multirow}
+%\usepackage{milista}
+\usepackage{anyfontsize}
+\usepackage{anysize}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{mdframed}
+\usepackage{relsize}
+\usepackage{placeins}
+\usepackage{empheq}
+\usepackage{cancel}
+\usepackage{pdfpages}
+\usepackage{wrapfig}
+\usepackage[flushleft]{threeparttable}
+\usepackage{makecell}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{bigints}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{scalerel}
+\usepackage{pgfplots}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.16}
+\spanishdecimal{.}
+\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+
+\newcommand{\ptilde}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\stilde}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\ttilde}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\ntilde}[2]{\ensuremath{{#1}^{(#2)}}}
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+
+\newtheorem{defi}{{\it Definición}}[section]
+\newtheorem{teo}{{\it Teorema}}[section]
+\newtheorem{ejemplo}{{\it Ejemplo}}[section]
+\newtheorem{propiedad}{{\it Propiedad}}[section]
+\newtheorem{lema}{{\it Lema}}[section]
+\newtheorem{cor}{Corolario}
+\newtheorem{ejer}{Ejercicio}[section]
+
+\newlist{milista}{enumerate}{2}
+\setlist[milista,1]{label=\arabic*)}
+\setlist[milista,2]{label=\arabic{milistai}.\arabic*)}
+\newlength{\depthofsumsign}
+\setlength{\depthofsumsign}{\depthof{$\sum$}}
+\newcommand{\nsum}[1][1.4]{% only for \displaystyle
+    \mathop{%
+        \raisebox
+            {-#1\depthofsumsign+1\depthofsumsign}
+            {\scalebox
+                {#1}
+                {$\displaystyle\sum$}%
+            }
+    }
+}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iiint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\title{Examen Final 2026-1 \\[0.3em]  \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+\fontsize{14}{14}\selectfont
+
+\textbf{Indicaciones: } Deberás de resolver cada ejercicio de la manera más completa, ordenada y clara posible, anotando cada paso así como las operaciones involucradas. El puntaje de cada ejercicio es de \textbf{1 punto}.
+
+\begin{enumerate}
+%Ref. Arfken 2.4.15
+% \item El cálculo del efecto de retracción magnetohidrodinámica (efecto \emph{pinch}) implica la evaluación de $(\vb{B \cdot \nabla}) \, \vb{B}$. Si la inducción magnética $\vb{B}$ se considera que es: $\vb{B} = \vu{\varphi} \, B_{\varphi}(\rho)$, demuestra que:
+% \begin{align*}
+% \vb{(B \cdot \nabla}) \, \vb{B} = - \vu{\rho} \, \dfrac{B_{\varphi}^{2}}{\rho}
+% \end{align*}
+\item Utilizando las coordenadas esferoidales prolatas, calcula el volumen de una elipsoide prolata, es decir, expresa la integral que representa el volumen.
+
+\noindent
+\textbf{Solución:} Las coordenadas esferoidales prolatas $(\xi, \eta, \varphi)$ se definen en función de un parámetro focal $a > 0$ mediante:
+\begin{align}
+x &= a \, \sqrt{(\xi^{2} - 1)(1 - \eta^{2})} \, \cos \varphi \\[0.5em]
+y &= a \, \sqrt{(\xi^{2} - 1)(1 - \eta^{2})} \, \sin \varphi \\[0.5em]
+z &= a \, \xi \, \eta
+\end{align}
+Los rangos de las coordenadas son:
+\begin{align*}
+    1 \le \xi < \infty, \qquad -1 \le \eta \le 1, \qquad 0 \le \varphi < 2 \pi
+\end{align*}
+Las superficies $\xi = \text{cte.}$ describen elipsoides prolatas confocales.
+
+Una elipsoide prolata queda determinada fijando:
+\begin{align*}
+    \xi = \xi_{0}, \qquad \xi_{0} > 1.
+\end{align*}
+En coordenadas cartesianas, esta superficie satisface la ecuación:
+\begin{align*}
+    \dfrac{x^{2} + y^{2}}{a^{2} (\xi_{0}^{2} - 1)} + \dfrac{z^{2}}{a^{2} \, \xi_{0}^{2}} = 1
+\end{align*}
+Los semiejes de la elipsoide son:
+\begin{align*}
+    b = a \, \sqrt{\xi_{0}^{2} - 1}, \qquad c = a \, \xi_{0}
+\end{align*}
+siendo $c > b$, lo cual confirma su carácter prolato.
+
+El jacobiano de la transformación a coordenadas esferoidales prolatas está dado por:
+
+\begin{align*}
+    J = a^{3} (\xi^{2} - \eta^{2})
+\end{align*}
+Por tanto, el elemento diferencial de volumen es:
+\begin{align*}
+    \dd{V} = a^{3} \, (\xi^{2} - \eta^{2}) \dd{\xi} \dd{\eta} \dd{\varphi}
+\end{align*}
+El volumen de la elipsoide prolata se obtiene integrando sobre la región:
+\begin{align*}
+    1 \le \xi \le \xi_{0}, \qquad -1 \le \eta \le 1, \qquad 0 \le \varphi < 2 \, \pi
+\end{align*}
+Así, el volumen está dado por la integral triple:
+\begin{align*}
+V = \scaleint{6ex}_{\bs 0}^{2 \pi} \scaleint{6ex}_{\bs -1}^{1} \scaleint{6ex}_{\bs 1}^{\xi_{0}} a^{3} \, (\xi^{2} - \eta^{2}) \dd{\xi} \dd{\eta} \dd{\varphi}
+\end{align*}
+Que al evaluar la integral, primero integrando con respecto a $\xi$:
+\begin{align*}
+    \scaleint{6ex}_{\bs 1}^{\xi_{0}} (\xi^{2} - \eta^{2}) \dd{\xi} = \left[ \dfrac{\xi^{3}}{3} - \eta^{2} \, \xi \right] \eval_{1}^{\xi_{0}} = \dfrac{\xi_{0}^{3} - 1}{3} - \eta^{2}(\xi_{0} - 1)
+\end{align*}
+Ahora se integra respecto a $\eta$:
+\begin{align*}
+&\scaleint{6ex}_{-1}^{1} \left( \dfrac{\xi_{0}^{3} - 1}{3} - \eta^{2}(\xi_{0} - {1}) \right) \dd{\eta} = \\[0.5em]
+&= \dfrac{\xi_{0}^{3} - 1}{3} \scaleint{6ex}_{\bs -1}^{1} \dd{\eta} - (\xi_{0} - 1) \scaleint{6ex}_{\bs -1}^{1} \eta^{2} \dd{\eta} \\[0.5em]
+&= \dfrac{\xi_{0}^{3} - 1}{3}(2) - (\xi_{0} - 1) \left( \dfrac{2}{3} \right)
+\end{align*}
+Factorizando:
+\begin{align*}
+    \dfrac{2}{3} \, \left[(\xi_{0}^{3} - 1) - (\xi_{0} - 1) \right] = \dfrac{2}{3} \, \left( \xi_{0}^{3} - \xi_{0} \right)
+\end{align*}
+Finalmente, se integra con respecto a $\varphi$:
+\begin{align*}
+    \scaleint{6ex}_{\bs 0}^{2 \pi} \dd{\varphi} = 2 \, \pi
+\end{align*}
+Sustituyendo todos los factores, el volumen resulta:
+\begin{align*}
+    V = a^{3} \cdot 2 \, \pi \cdot \dfrac{2}{3} \, (\xi_{0}^{3} - \xi_{0})
+\end{align*}
+Simplificando:
+\begin{align*}
+    \boxed{V = \dfrac{4}{3} \, \pi \, a^{3} \xi_{0} \, \left( \xi_{0}^{2} - 1 \right)}
+\end{align*}
+Este resultado coincide con la fórmula geométrica del volumen de una elipsoide:
+\begin{align*}
+    V = \dfrac{4}{3} \, \pi \, b^{2} \, {c}
+\end{align*}
+con $b = a \, \sqrt{\xi_{0}^{2} - 1}$ y $c = a \, \xi_{0}$.
+
+%Ref. II-19
+\item \label{ejercicio_09} Con el uso de las funciones Gamma y Beta, evalúa la integral:
+\begin{align*}
+\scaleint{6ex}_{\bs 0}^{1} \dfrac{x^{5}}{\sqrt[3]{1 - x^{4}}} \dd{x}
+\end{align*}
+
+\noindent
+\textbf{Solución: }Escribimos el integrando en forma de potencia:
+\begin{align*}
+    I = \scaleint{6ex}_{\bs 0}^{1} x^{5}(1 - x^{4})^{-1/3} \dd{x}
+\end{align*}
+Hacemos el siguiente cambio de variable:
+\begin{align*}
+    u = x^{4} \qquad \Rightarrow \qquad \dd{u} = 4 \, x^{3} \dd{x}
+\end{align*}
+Descomponemos el factor diferencial:
+\begin{align*}
+    x^{5} \dd{x} = x^{2} \,  \left(x^{3} \dd{x} \right)
+\end{align*}
+Usando $x = u^{1/4}$, se obtiene:
+\begin{align*}
+    x^{2} = u^{1/2}, \qquad x^{3} \dd{x} = \dfrac{1}{4} \dd{u}
+\end{align*}
+Por lo tanto:
+\begin{align*}
+    x^{5} \dd{x} = \dfrac{1}{4} \, u^{1/2} \dd{u}
+\end{align*}
+Cuando $x = 0$, se tiene $u = 0$, y cuando $x = 1$, se tiene $u = 1$. Los límites de integración no cambian.
+
+Sustituyendo en la integral original:
+\begin{align*}
+    I = \dfrac{1}{4} \, \scaleint{6ex}_{\bs 0}^{1} u^{1/2}(1 - u)^{-1/3} \dd{u}
+\end{align*}
+
+Recordemos la definición de la función Beta:
+\begin{align*}
+    B (p, q) = \scaleint{6ex}_{\bs 0}^{1} t^{p-1} \, (1 - t)^{q-1} \dd{t}
+\end{align*}
+Comparando con la integral obtenida, se identifican los parámetros:
+\begin{align*}
+    p - 1 &= \dfrac{1}{2} \quad \Rightarrow \quad p = \dfrac{3}{2} \\[0.5em]
+    q - 1 &= -\dfrac{1}{3} \quad \Rightarrow \quad q = \dfrac{2}{3}
+\end{align*}
+Por tanto:
+\begin{align*}
+    I = \dfrac{1}{4} \, B \left(\dfrac{3}{2}, \dfrac{2}{3} \right)
+\end{align*}
+La función Beta se expresa en términos de la función Gamma mediante:
+\begin{align*}
+    B (p, q) = \dfrac{\Gamma (p) \, \Gamma (q)}{\Gamma(p + q)}
+\end{align*}
+Aplicando esta relación:
+\begin{align*}
+    I = \dfrac{1}{4} \, \dfrac{\Gamma \left( \dfrac{3}{2} \right) \, \Gamma \left( \dfrac{2}{3} \right)}{\Gamma \left(\dfrac{13}{6}\right)}
+\end{align*}
+Se utiliza el valor conocido de la función Gamma:
+\begin{align*}
+    \Gamma \left( \dfrac{3}{2} \right) = \dfrac{\sqrt{\pi}}{2}
+\end{align*}
+Sustituyendo:
+\begin{align*}
+    I &= \dfrac{1}{4} \cdot \dfrac{\dfrac{\sqrt{\pi}}{2} \, \Gamma \left( \dfrac{2}{3} \right)}{\Gamma \left( \dfrac{13}{6} \right)} \\[0.5em]
+    &= \dfrac{\sqrt{\pi}}{8} \, \dfrac{\Gamma \left( \dfrac{2}{3} \right)}{\Gamma \left( \dfrac{13}{6} \right)}
+\end{align*}
+Se concluye que:
+\begin{align*}
+    \boxed{\scaleint{6ex}_{\bs 0}^{1} \dfrac{x^{5}}{\sqrt[3]{1 - x^{4}}} \dd{x} = \dfrac{\sqrt{\pi}}{8} \, \dfrac{\Gamma \left( \dfrac{2}{3} \right)}{\Gamma \left(\dfrac{13}{6} \right)}}
+\end{align*}
+
+%Ref. Pinchover 5.5b
+\item Resuelve con el método de separación de variables, la ecuación de calor $u_{t} = 12 \, u_{xx}$ en $0 < x < \pi, t > 0$ sujeta a las siguientes condiciones de frontera e iniciales:
+\begin{table}[H]
+\centering
+\begin{tabular}{l l}
+$u_{x} (0, t) = u_{x} (\pi, t) = 0$ & $t \geq 0$, \\
+$u(x, 0) = 1 + \sin^{3} x$ & $0 \leq x \leq \pi$
+\end{tabular}
+\end{table}
+\end{enumerate}
+Identifica el(los) punto(s) singular(es) y en caso de que sea conducente, con el método de Frobenius resuelve las siguientes ecuaciones diferenciales.
+\begin{enumerate}[resume]
+%Ref. Duffy A.2.1
+\item $(2 x^{2} + x^{3}) \stilde{y} + (x + 3 x^{2}) \ptilde{y} - (1 - 4 x) y = 0$
+%Ref. Duffy Pag. 477 8)
+%\item $2 x^{2} \stilde{y} - 3 (x + x^{2}) \ptilde{y} + (2 + 3 x) y = 0$
+%Ref. Duffy Pag. 480 4
+\item $x^{2} \stilde{y} - x (1 + x) \ptilde{y} + y = 0$
+%Ref. Datos Arfken Tabla 10.3
+\item Con el método de ortogonalización de Gram-Schmidt construye los primeros tres polinomios asociados de Legendre, ocupando para ello la siguiente información:
+\begin{enumerate}[label=\alph*)]
+\item $u_{n}(x) = x^{n}$
+\item $n = 0, 1, 2, \ldots$
+\item $0 \leq x \leq 1$
+\item $\omega (x) = 1$
+\item Normalización:
+\begin{align*}
+\scaleint{6ex}_{\bs 0}^{1} \big[ P_{n}^{*} (x) \big]^{2} \dd{x} = \dfrac{1}{2 \, n + 1}
+\end{align*}
+\end{enumerate}
+\item Halla en términos de las funciones de Bessel $J_{0}$ y $J_{1}$:
+\begin{align*}
+    \dv{x} \left[ x^{3} \, J_{4} (x^{2}) \right]
+\end{align*}
+
+\noindent
+\textbf{Solución: } Aplicamos la regla del producto de la derivación:
+\begin{align*}
+\dv{x} \left[ x^{3} J_{4}(x^{2}) \right] = 3 \, x^{2} \, J_{4}(x^{2}) + x^{3} \dv{x} J_{4}(x^{2})
+\end{align*}
+Para la derivada de la función de Bessel usamos la regla de la cadena:
+\begin{align*}
+\dv{x} J_{4}(x^{2}) = \left[ J_{4} \left( x^{2} \right) \right]^{\prime} \cdot 2 \, x
+\end{align*}
+Sustituyendo en la expresión anterior:
+\begin{align*}
+\left[ x^{3} \, J_{4} \left( x^{2} \right) \right]^{\prime} = 3 \, x^{2} \, J_{4} \left( x^{2} \right) + 2 \, x^{4} \,  \left[J_{4}\left( x^{2} \right) \right]^{\prime}
+\end{align*}
+Usamos la identidad conocida que involucra la derivada de la función de Bessel con las funciones de Bessel de órdenes $\nu - 1$ y de orden $\nu + 1$:
+\begin{align*}
+\left[ J_{\nu} (z) \right]^{\prime} = \dfrac{1}{2} \bigg[ J_{\nu-1} (z) - J_{\nu+1} (z) \bigg]
+\end{align*}
+Para $\nu = 4$ se tiene:
+\begin{align*}
+\left[ J_{4}(z) \right]^{\prime} = \dfrac{1}{2} \, \bigg[ J_{3} (z) - J_{5} (z) \bigg]
+\end{align*}
+Por tanto:
+\begin{align*}
+2 \, x^{4} \, \left[ J_{4} \left( x^{2} \right) \right]= x^{4} \, \bigg[ J_{3} \left( x^{2} \right) - J_{5} \left( x^{2} \right) \bigg]
+\end{align*}
+Usamos las relaciones de recurrencia para reducir el orden de las funciones de Bessel:
+\begin{align*}
+J_{\nu+1} (z) = \dfrac{2 \, \nu}{z} \, J_{\nu} (z) - J_{\nu-1} (z)
+\end{align*}
+Para $z = x^{2}$:
+\begin{align*}
+J_{3} \left( x^{2} \right) &= \dfrac{4}{x^{2}} \, J_{2} \left( x^{2} \right) - J_{1} \left( x^{2}\right) \\[0.5em]
+J_{5} \left( x^{2} \right) &= \dfrac{8}{x^{2}} \, J_{4}\left( x^{2} \right) - J_{3} \left( x^{2} \right)
+\end{align*}
+Sustituyendo y simplificando sucesivamente mediante las relaciones:
+\begin{align*}
+J_{2}(z) &= \dfrac{2}{z} \, J_{1} (z) - J_{0} (z) \\[0.5em]
+J_{4}(z) &= \dfrac{6}{z} \, J_{3} (z) - J_{2} (z)
+\end{align*}
+se obtiene finalmente una expresión únicamente en términos de $J_{0}$ y $J_{1}$. El resultado de la derivada es:
+\begin{align*}
+\boxed{
+\dv{x} \left[ x^{3} J_{4} \left( x^{2} \right) \right] = x^{2} \, \Big[ \big( 3 \, x^{2} - 48 \, \big) J_{0} \left( x^{2} \right) + \big( 24 - 6 \, x^{2} \big) \, J_{1} \left( x^{2} \right) \Big]
+}
+\end{align*}
+%Ref. Arfken 12.5.10
+\item Evalúa la siguiente integral:
+\begin{align*}
+\scaleint{5ex}_{\bs 0}^{2 \pi} \sin^{2} \theta \, P_{n}^{1} (\cos \theta) \dd{\theta}
+\end{align*}
+
+\noindent
+\textbf{Solución: } Recordemos que los polinomios asociados de Legendre satisfacen la propiedad de paridad:
+\begin{align*}
+P_{n}^{m} (-x) = (-1)^{n+m} \, P_{n}^{m} (x)
+\end{align*}
+Para $m = 1$ se tiene que:
+\begin{align*}
+P_{n}^{1} (-x) = (-1)^{n+1} \, P_{n}^{1} (x)
+\end{align*}
+Además, la función $\sin^{2} \theta$ es par respecto a $\theta = \pi$, mientras que:
+\begin{align*}
+\cos (2 \pi - \theta) = \cos \theta
+\end{align*}
+Por tanto, el comportamiento de la integral estará determinado por la paridad del factor $P_n^1 (\cos \theta)$.
+
+Hacemos el cambio de variable:
+\begin{align*}
+x = \cos \, \theta, \qquad \dd{x} = - \sin \theta \dd{\theta}
+\end{align*}
+Observamos que:
+\begin{align*}
+\sin^{2} \theta \dd{\theta} = - \sin \theta \dd{x}
+\end{align*}
+En el intervalo $\theta \in [0, 2 \pi]$, el valor de $x = \cos \theta$ recorre dos veces el intervalo $[-1, 1]$, una vez en cada sentido.
+
+Los polinomios asociados de Legendre pueden expresarse como:
+\begin{align*}
+P_{n}^{1} (x) = - \sqrt{1 - x^{2}} \, \dv{x} P_{n} (x)
+\end{align*}
+Sustituyendo $x = \cos \theta$, se obtiene:
+\begin{align*}
+P_{n}^{1} (\cos \theta) = - \sin \theta \, \dv{\cos \theta} P_{n} (\cos \theta)
+\end{align*}
+Por tanto, el integrando se escribe como:
+\begin{align*}
+\sin^{2} \theta \, P_{n}^{1} (\cos \theta) = - \sin^{3} \theta \, \dv{\cos \theta} P_{n} (\cos\theta)
+\end{align*}
+
+La función $\sin^{3} \theta$ es impar respecto a $\theta = \pi$, mientras que $P_n (\cos\theta)$ es par o impar dependiendo de $n$. El integrando completo resulta ser una función impar sobre el intervalo $[0, 2 \pi]$, por lo tanto, la contribución total de la integral se anula.
+
+Se concluye entonces que:
+\begin{align*}
+\boxed{
+\scaleint{6ex}_{\bs 0}^{2 \pi} \sin^{2} \theta \, P_{n}^{1} (\cos\theta) \dd{\theta} = 0 \qquad \text{para todo } n \geq 1.
+}
+\end{align*}
+
+%Ref. Arfken (2006) 13.3.20
+% \item Existen varias ecuaciones que relacionan los dos tipos de polinomios de Chebyshev. Demuestra que:
+% \begin{align*}
+%     T_{n} (x) = U_{n} (x) - x \, U_{n-1} (x)
+% \end{align*}
+%Patra Pag 76. Ejercicio 29 b)
+\item Usando la transformada de Fourier resuelve la siguiente EDO:
+\begin{align*}
+    2 \, \sderivada{y} (x) +  x \, \pderivada{y} (x) + y (x) = 0
+\end{align*}
+%Ref. Spiegel - Schaum's Chap. 2 22 Pag. 57
+\item Evalúa la siguiente expresión utilizando el teorema de convolución para la transformada inversa de Laplace:
+\begin{align*}
+    \mathcal{L}^{-1} \left\{ \dfrac{p}{(p^{2} + a^{2})^{2}} \right\}
+\end{align*}
+\end{enumerate}
+
+\end{document}

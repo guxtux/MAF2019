@@ -2,6 +2,7 @@ from manim import *
 
 class SistemaEsferico(ThreeDScene):
     def construct(self):
+        config.frame_width =13
         # Ejes 3D
         axes = ThreeDAxes(
             x_range=[-3,3,1],
@@ -73,6 +74,6 @@ class SistemaEsferico(ThreeDScene):
         self.wait(2)
 
         # Rotación final para visualizar todo el sistema
-        self.begin_3dillusion_camera_rotation(rate=0.5)
-        self.wait(12)
+        self.begin_3dillusion_camera_rotation(rate=0.2)
+        self.wait(10)
         self.stop_3dillusion_camera_rotation()
