@@ -1,0 +1,915 @@
+\documentclass[12pt]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{physics}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{bm}
+
+\geometry{margin=2.5cm}
+
+\title{Sistemas Coordenados Ortogonales y su Relación con la Formulación Tensorial}
+\author{Matemáticas Avanzadas de la Física}
+\date{}
+
+\begin{document}
+\fontsize{14}{14}\selectfont
+\maketitle
+
+\section{Introducción.}
+
+En coordenadas cartesianas, las expresiones para gradiente, divergencia y rotacional poseen una forma particularmente simple debido a que:
+\begin{itemize}
+    \item la métrica es constante,
+    \item los vectores base no dependen de la posición,
+    \item los factores de escala son unitarios.
+\end{itemize}
+Al cambiar a coordenadas cilíndricas, esféricas u otros sistemas curvilíneos, estas propiedades dejan de cumplirse y la geometría del espacio aparece explícitamente en las ecuaciones.
+\par<
+El objetivo de este documento es mostrar cómo los conceptos de:
+\begin{itemize}
+    \item reglas de transformación,
+    \item factores de escala,
+    \item operadores diferenciales,
+\end{itemize}
+pueden entenderse naturalmente mediante:
+\begin{itemize}
+    \item notación de índices,
+    \item tensores,
+    \item símbolo de Levi-Civita,
+    \item símbolos de Christoffel.
+\end{itemize}
+
+\section{Transformaciones de coordenadas.}
+
+Consideremos una transformación entre coordenadas cartesianas y un sistema general:
+\begin{align*}
+    x^{i} = x^{i} \left( q^{1}, q^{2}, q^{3} \right)
+\end{align*}
+Por ejemplo, para coordenadas esféricas:
+\begin{align*}
+x &= r \sin \theta \cos \phi \\
+y &= r \sin \theta \sin \phi \\
+z &= r \cos \theta
+\end{align*}
+El Jacobiano de la transformación es:
+\begin{align*}
+    J^{i}_{j} = \pdv{x^{i}}{q^{j}}
+\end{align*}
+La transformación de un vector contravariante está dada por:
+\begin{align*}
+    V^{\prime \, {i}} = \pdv{q^{\prime \, i}}{q^{j}} \, V^{j}
+\end{align*}
+mientras que un covector transforma según:
+
+\[
+V'_i=
+\frac{\partial q^j}{\partial q'^i}V_j
+\]
+
+Estas leyes motivan la definición de tensor.
+
+\section{Notación de índices y convención de Einstein.}
+
+Se adopta la convención de suma de Einstein:
+
+\[
+A_iB^i=
+\sum_{i=1}^{3}A_iB^i
+\]
+
+Por ejemplo, el producto punto se escribe simplemente como:
+
+\[
+\mathbf{A}\cdot\mathbf{B}=A_iB^i
+\]
+
+Un tensor de segundo orden transforma como:
+
+\[
+T'^i_{\ j}
+=
+\frac{\partial q'^i}{\partial q^k}
+\frac{\partial q^l}{\partial q'^j}
+T^k_{\ l}
+\]
+
+\section{Factores de escala y tensor métrico}
+
+En coordenadas ortogonales el elemento diferencial de longitud puede escribirse como:
+
+\[
+d\mathbf{r}
+=
+h_1dq^1\hat{e}_1+
+h_2dq^2\hat{e}_2+
+h_3dq^3\hat{e}_3
+\]
+
+donde
+
+\[
+h_i=
+\left|
+\frac{\partial \mathbf{r}}
+{\partial q^i}
+\right|
+\]
+
+son los factores de escala.
+
+El elemento de línea resulta:
+
+\[
+ds^2=
+h_1^2(dq^1)^2+
+h_2^2(dq^2)^2+
+h_3^2(dq^3)^2
+\]
+
+que puede escribirse en forma tensorial como:
+
+\[
+ds^2=
+g_{ij}dq^idq^j
+\]
+
+En coordenadas ortogonales:
+
+\[
+g_{ij}=0
+\qquad
+(i\neq j)
+\]
+
+y
+
+\[
+g_{ii}=h_i^2
+\]
+
+por lo que:
+
+\[
+h_i=\sqrt{g_{ii}}
+\]
+
+Por tanto, los factores de escala corresponden a las raíces cuadradas de las componentes diagonales del tensor métrico.
+
+\section{Operadores diferenciales mediante índices}
+
+\subsection{Gradiente}
+
+El gradiente de un escalar puede escribirse como:
+
+\[
+(\nabla \phi)_i=
+\partial_i\phi
+\]
+
+\subsection{Divergencia}
+
+La divergencia de un vector es:
+
+\[
+\nabla\cdot\mathbf{A}
+=
+\partial_iA^i
+\]
+
+\subsection{Rotacional}
+
+El rotacional se expresa utilizando el símbolo de Levi-Civita:
+
+\[
+(\nabla\times\mathbf{A})^i
+=
+\varepsilon^{ijk}
+\partial_jA_k
+\]
+
+\section{Símbolo de Levi-Civita}
+
+El símbolo de Levi-Civita se define mediante:
+
+\[
+\varepsilon_{123}=1
+\]
+
+y cambia de signo bajo permutaciones impares:
+
+\[
+\varepsilon_{213}=-1
+\]
+
+mientras que vale cero si existen índices repetidos.
+
+El producto cruz puede escribirse como:
+
+\[
+(\mathbf{A}\times\mathbf{B})^i
+=
+\varepsilon^{ijk}
+A_jB_k
+\]
+
+lo que permite unificar el tratamiento del producto vectorial y del rotacional.
+
+\section{Determinante métrico}
+
+En sistemas curvilíneos aparece el determinante de la métrica:
+
+\[
+g=\det(g_{ij})
+\]
+
+y el tensor completamente antisimétrico se define como:
+
+\[
+E^{ijk}
+=
+\frac{1}{\sqrt{g}}
+\varepsilon^{ijk}
+\]
+
+En coordenadas esféricas:
+
+\[
+g=r^4\sin^2\theta
+\]
+
+por lo tanto:
+
+\[
+\sqrt{g}=r^2\sin\theta
+\]
+
+Esto explica la aparición de factores geométricos en los operadores diferenciales expresados en coordenadas esféricas.
+
+\section{Dependencia espacial de las bases}
+
+En coordenadas cartesianas:
+
+\[
+\frac{\partial \hat{e}_i}{\partial x^j}=0
+\]
+
+Sin embargo, en coordenadas esféricas:
+
+\[
+\frac{\partial \hat{r}}{\partial\theta}
+=
+\hat{\theta}
+\]
+
+y
+
+\[
+\frac{\partial \hat{r}}{\partial\phi}
+=
+\sin\theta\hat{\phi}
+\]
+
+Los vectores base dependen de la posición y sus derivadas ya no son nulas.
+
+\section{Símbolos de Christoffel}
+
+Debido a la variación espacial de las bases, la derivada parcial de un vector no transforma tensorialmente.
+
+Para corregir esto se introduce la derivada covariante:
+
+\[
+\nabla_jV^i
+=
+\partial_jV^i
++
+\Gamma^i_{\ jk}V^k
+\]
+
+donde:
+
+\[
+\Gamma^i_{\ jk}
+=
+\frac{1}{2}
+g^{im}
+\left(
+\partial_jg_{mk}
++
+\partial_kg_{mj}
+-
+\partial_mg_{jk}
+\right)
+\]
+
+Los símbolos de Christoffel representan el cambio geométrico de la base local.
+
+\section{Divergencia mediante derivada covariante}
+
+La divergencia puede escribirse como:
+
+\[
+\nabla_iV^i
+=
+\partial_iV^i
++
+\Gamma^i_{\ ik}V^k
+\]
+
+o equivalentemente:
+
+\[
+\nabla_iV^i
+=
+\frac{1}{\sqrt{g}}
+\partial_i
+\left(
+\sqrt{g}V^i
+\right)
+\]
+
+En coordenadas ortogonales:
+
+\[
+\sqrt{g}=h_1h_2h_3
+\]
+
+\section{Ejemplo: coordenadas cilíndricas}
+
+Los factores de escala son:
+
+\[
+h_r=1,
+\qquad
+h_{\phi}=r,
+\qquad
+h_z=1
+\]
+
+Por tanto:
+
+\[
+\sqrt{g}=r
+\]
+
+La divergencia toma la forma:
+
+\[
+\nabla\cdot\mathbf{A}
+=
+\frac{1}{r}
+\frac{\partial}{\partial r}
+(rA_r)
++
+\frac{1}{r}
+\frac{\partial A_{\phi}}{\partial \phi}
++
+\frac{\partial A_z}{\partial z}
+\]
+
+sin necesidad de memorizar la expresión particular.
+
+\section{Secuencia didáctica sugerida}
+
+\begin{enumerate}
+    \item Transformaciones de coordenadas.
+    \item Jacobiano y regla de la cadena.
+    \item Convención de Einstein.
+    \item Vectores covariantes y contravariantes.
+    \item Factores de escala.
+    \item Tensor métrico.
+    \item Gradiente, divergencia y rotacional.
+    \item Símbolo de Levi-Civita.
+    \item Dependencia espacial de las bases.
+    \item Derivada covariante.
+    \item Símbolos de Christoffel.
+    \item Operadores diferenciales en forma tensorial.
+\end{enumerate}
+
+\section{Conclusión}
+
+La formulación tensorial permite unificar el tratamiento de todos los sistemas coordenados.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Concepto clásico & Interpretación geométrica \\
+\midrule
+Factores de escala & Componentes de la métrica \\
+Jacobiano & Transformación tensorial \\
+Producto cruz & Levi-Civita \\
+Cambio de versores & Christoffel \\
+Gradiente, divergencia y rotacional & Derivadas covariantes \\
+Sistemas ortogonales & Caso particular de geometría riemanniana \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+De esta forma, las expresiones particulares de los operadores diferenciales dejan de ser fórmulas aisladas para memorizar y pasan a entenderse como manifestaciones de una estructura geométrica única.
+
+
+\section{Velocidad y Aceleración mediante Símbolos de Christoffel.}
+
+Sea una trayectoria parametrizada mediante coordenadas generalizadas
+\begin{align*}
+    q^{i} = q^{i} (t)
+\end{align*}
+La velocidad contravariante se define como
+\begin{align*}
+    v^{i} = \dot{q}^{i}
+\end{align*}
+mientras que la aceleración geométrica se obtiene mediante la derivada covariante de la velocidad:
+\begin{align*}
+    a^{i} = \pdv{v^{i}}{t}
+\end{align*}
+es decir,
+\begin{align*}
+    \boxed{
+        a^{i} = \ddot{q}^{i} + \Gamma_{jk}^{i} \, \dot{q}^{j} \, \dot{q}^{k}
+    }
+\end{align*}
+Los términos que contienen símbolos de Christoffel representan la contribución asociada a la variación espacial de la base local.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Coordenadas esféricas.}
+
+Las coordenadas son
+
+\[
+q^1=r,
+\qquad
+q^2=\theta,
+\qquad
+q^3=\phi
+\]
+
+con transformación
+
+\begin{align}
+x&=r\sin\theta\cos\phi\\
+y&=r\sin\theta\sin\phi\\
+z&=r\cos\theta
+\end{align}
+
+\subsection{Tensor métrico}
+
+El elemento diferencial de longitud es
+
+\[
+ds^2=
+dr^2+
+r^2d\theta^2+
+r^2\sin^2\theta\,d\phi^2
+\]
+
+por lo tanto,
+
+\[
+g_{ij}
+=
+\begin{pmatrix}
+1&0&0\\
+0&r^2&0\\
+0&0&r^2\sin^2\theta
+\end{pmatrix}
+\]
+
+y
+
+\[
+g^{ij}
+=
+\begin{pmatrix}
+1&0&0\\
+0&\frac1{r^2}&0\\
+0&0&
+\frac1{r^2\sin^2\theta}
+\end{pmatrix}
+\]
+
+\subsection{Símbolos de Christoffel no nulos}
+
+Utilizando
+
+\[
+\Gamma^i_{jk}
+=
+\frac12
+g^{im}
+\left(
+\partial_jg_{mk}
++
+\partial_kg_{mj}
+-
+\partial_mg_{jk}
+\right)
+\]
+
+se obtiene:
+
+\begin{align}
+\Gamma^r_{\theta\theta}
+&=-r
+\\
+\Gamma^r_{\phi\phi}
+&=
+-r\sin^2\theta
+\\
+\Gamma^\theta_{r\theta}
+=
+\Gamma^\theta_{\theta r}
+&=
+\frac1r
+\\
+\Gamma^\theta_{\phi\phi}
+&=
+-\sin\theta\cos\theta
+\\
+\Gamma^\phi_{r\phi}
+=
+\Gamma^\phi_{\phi r}
+&=
+\frac1r
+\\
+\Gamma^\phi_{\theta\phi}
+=
+\Gamma^\phi_{\phi\theta}
+&=
+\cot\theta
+\end{align}
+
+\subsection{Velocidad}
+
+Las componentes contravariantes de la velocidad son
+
+\[
+v^r=\dot r
+\]
+
+\[
+v^\theta=\dot\theta
+\]
+
+\[
+v^\phi=\dot\phi
+\]
+
+Las componentes físicas se obtienen multiplicando por los factores de escala:
+
+\[
+h_r=1,
+\qquad
+h_\theta=r,
+\qquad
+h_\phi=r\sin\theta
+\]
+
+Por tanto,
+
+\[
+\boxed{
+\mathbf v
+=
+\dot r\,\hat r
++
+r\dot\theta\,\hat\theta
++
+r\sin\theta\,\dot\phi\,\hat\phi
+}
+\]
+
+\subsection{Aceleración}
+
+\subsubsection*{Componente radial}
+
+\[
+a^r
+=
+\ddot r
++
+\Gamma^r_{\theta\theta}\dot\theta^2
++
+\Gamma^r_{\phi\phi}\dot\phi^2
+\]
+
+\[
+a^r
+=
+\boxed{
+\ddot r
+-r\dot\theta^2
+-r\sin^2\theta\dot\phi^2
+}
+\]
+
+\subsubsection*{Componente polar}
+
+\[
+a^\theta
+=
+\ddot\theta
++
+2\Gamma^\theta_{r\theta}
+\dot r\dot\theta
++
+\Gamma^\theta_{\phi\phi}\dot\phi^2
+\]
+
+\[
+a^\theta
+=
+\boxed{
+\ddot\theta
++
+\frac{2}{r}\dot r\dot\theta
+-
+\sin\theta\cos\theta\dot\phi^2
+}
+\]
+
+\subsubsection*{Componente azimutal}
+
+\[
+a^\phi
+=
+\ddot\phi
++
+2\Gamma^\phi_{r\phi}\dot r\dot\phi
++
+2\Gamma^\phi_{\theta\phi}
+\dot\theta\dot\phi
+\]
+
+\[
+a^\phi
+=
+\boxed{
+\ddot\phi
++
+\frac{2}{r}\dot r\dot\phi
++
+2\cot\theta\dot\theta\dot\phi
+}
+\]
+
+Las componentes físicas son
+
+\[
+\boxed{
+\mathbf a=
+a_r\hat r
++
+a_\theta\hat\theta
++
+a_\phi\hat\phi
+}
+\]
+
+con
+
+\begin{align}
+a_r&=
+\ddot r
+-r\dot\theta^2
+-r\sin^2\theta\dot\phi^2
+\\
+a_\theta&=
+r\ddot\theta
++2\dot r\dot\theta
+-r\sin\theta\cos\theta\dot\phi^2
+\\
+a_\phi&=
+r\sin\theta\ddot\phi
++2\sin\theta\dot r\dot\phi
++2r\cos\theta\dot\theta\dot\phi
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Coordenadas cilíndricas parabólicas}
+
+Las coordenadas son
+
+\[
+q^1=u,
+\qquad
+q^2=v,
+\qquad
+q^3=z
+\]
+
+definidas mediante
+
+\begin{align}
+x&=
+\frac12(u^2-v^2)
+\\
+y&=
+uv
+\\
+z&=z
+\end{align}
+
+\subsection{Factores de escala}
+
+Los vectores tangentes son
+
+\[
+\frac{\partial\mathbf r}{\partial u}
+=
+(u,v,0)
+\]
+
+\[
+\frac{\partial\mathbf r}{\partial v}
+=
+(-v,u,0)
+\]
+
+por lo que
+
+\[
+h_u=h_v=
+\sqrt{u^2+v^2}
+\]
+
+y
+
+\[
+h_z=1
+\]
+
+El elemento diferencial de longitud es
+
+\[
+ds^2=
+(u^2+v^2)
+(du^2+dv^2)
++dz^2
+\]
+
+Por tanto,
+
+\[
+g_{ij}
+=
+\begin{pmatrix}
+u^2+v^2&0&0\\
+0&u^2+v^2&0\\
+0&0&1
+\end{pmatrix}
+\]
+
+\subsection{Métrica inversa}
+
+\[
+g^{ij}
+=
+\begin{pmatrix}
+\dfrac1{u^2+v^2}&0&0\\
+0&
+\dfrac1{u^2+v^2}&0\\
+0&0&1
+\end{pmatrix}
+\]
+
+\subsection{Símbolos de Christoffel no nulos}
+
+Los símbolos distintos de cero son
+
+\begin{align}
+\Gamma^u_{uu}
+&=
+\frac{u}{u^2+v^2}
+\\
+\Gamma^u_{uv}
+=
+\Gamma^u_{vu}
+&=
+\frac{v}{u^2+v^2}
+\\
+\Gamma^u_{vv}
+&=
+-\frac{u}{u^2+v^2}
+\\
+\Gamma^v_{uu}
+&=
+-\frac{v}{u^2+v^2}
+\\
+\Gamma^v_{uv}
+=
+\Gamma^v_{vu}
+&=
+\frac{u}{u^2+v^2}
+\\
+\Gamma^v_{vv}
+&=
+\frac{v}{u^2+v^2}
+\end{align}
+
+\subsection{Velocidad}
+
+Las componentes físicas de la velocidad son
+
+\[
+\boxed{
+\mathbf v
+=
+\sqrt{u^2+v^2}\,
+\dot u\,\hat e_u
++
+\sqrt{u^2+v^2}\,
+\dot v\,\hat e_v
++
+\dot z\,\hat z
+}
+\]
+
+\subsection{Aceleración}
+
+\subsubsection*{Componente \(u\)}
+
+\[
+a^u=
+\ddot u
++
+\Gamma^u_{uu}\dot u^2
++
+2\Gamma^u_{uv}\dot u\dot v
++
+\Gamma^u_{vv}\dot v^2
+\]
+
+\[
+\boxed{
+a^u=
+\ddot u
++
+\frac{
+u(\dot u^2-\dot v^2)
++
+2v\dot u\dot v
+}
+{u^2+v^2}
+}
+\]
+
+\subsubsection*{Componente \(v\)}
+
+\[
+a^v=
+\ddot v
++
+\Gamma^v_{uu}\dot u^2
++
+2\Gamma^v_{uv}\dot u\dot v
++
+\Gamma^v_{vv}\dot v^2
+\]
+
+\[
+\boxed{
+a^v=
+\ddot v
++
+\frac{
+-v\dot u^2
++
+2u\dot u\dot v
++
+v\dot v^2
+}
+{u^2+v^2}
+}
+\]
+
+\subsubsection*{Componente \(z\)}
+
+\[
+a^z=\ddot z
+\]
+
+Las componentes físicas se obtienen multiplicando por los factores de escala correspondientes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusiones}
+
+La expresión
+
+\[
+a^i=
+\ddot q^i+
+\Gamma^i_{jk}
+\dot q^j
+\dot q^k
+\]
+
+permite obtener de manera sistemática las aceleraciones en cualquier sistema coordenado sin necesidad de derivar explícitamente los versores unitarios.
+
+Los símbolos de Christoffel representan la contribución asociada al cambio espacial de la base local y constituyen la generalización geométrica de las derivadas de los vectores unitarios utilizadas tradicionalmente en mecánica clásica.
+
+
+\end{document}
