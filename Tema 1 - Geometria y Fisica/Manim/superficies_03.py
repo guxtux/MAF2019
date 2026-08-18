@@ -61,13 +61,13 @@ class Cilindricas(ThreeDScene):
             fill_opacity=0.5
         )
 
-        encabezado_01=Tex(r'Con $(r_{0}=\text{cte}, \phi, z)$', font_size=20).scale(2)
+        encabezado_01 = Tex(r'Con $(r_{0}=\text{cte}, \phi, z)$', font_size=20).scale(2)
         encabezado_02 = Tex(r'Con $(r, \phi_{0}=\text{cte}, z)$', font_size=20).scale(2)
         encabezado_03 = Tex(r'Con $(r, \phi, z_{0}=\text{cte})$', font_size=20).scale(2)
         encabezado_04 = Tex(r'Las tres superficies constantes', font_size=20).scale(2)
 
-        self.add_fixed_in_frame_mobjects(encabezado_04) #<----- Add this
-        encabezado_04.to_corner(UL)
+        #self.add_fixed_in_frame_mobjects(encabezado_04) #<----- Add this
+        #encabezado_04.to_corner(UL)
 
         self.play(Create(axes), Write(labels))
         self.wait()
@@ -80,3 +80,9 @@ class Cilindricas(ThreeDScene):
         self.wait(2)
         self.play(FadeIn(z_plane))
         self.wait(2)
+
+        # Rotación final para visualizar todo el sistema
+        self.begin_3dillusion_camera_rotation(rate=0.5)
+        self.wait(12)
+        self.stop_3dillusion_camera_rotation()
+
