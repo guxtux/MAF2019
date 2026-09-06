@@ -49,7 +49,8 @@ class CilindricasElipticas(ThreeDScene):
         # (Cilindros elípticos)
         ############################################################
 
-        u_values = [0.35, 1.25]
+        u_values = [0.35, 1.35]
+        # 1.35
 
         cilindros_elipticos = VGroup()
 
@@ -82,12 +83,7 @@ class CilindricasElipticas(ThreeDScene):
         # (Cilindros hiperbólicos)
         ############################################################
 
-        v_values = [
-            25*DEGREES,
-            55*DEGREES,
-            125*DEGREES,
-            155*DEGREES
-        ]
+        v_values = [25*DEGREES, 55*DEGREES, 125*DEGREES, 155*DEGREES]
 
         umax = 1.45
 
