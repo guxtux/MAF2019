@@ -286,6 +286,9 @@ Para que tenga éxito el método, se ocupará que varias de las condiciones de f
 Luego, dado que las ecuaciones son lineales se propone por el principio de superposición una combinación lineal (de hecho una serie en la mayoría de los casos) de tales soluciones \pause y las constantes que aparecen se hallan tomando el desarrollo de Fourier de las otras condiciones iniciales o de frontera que todavía no se han utilizado.
 \end{frame}
 
+%Ref. Farlow (1993) - Partial Differential Equations for Scientists and Engineers
+%Ref. Cap. 5
+
 \section{Método de separación de variables}
 \frame[allowframebreaks]{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{La técnica}
@@ -568,12 +571,24 @@ Mientras que para $\pderivada{T} + \lambda \, \alpha^{2} \, T = 0$ se tiene:
 T (t) = A \, e^{- \lambda \, \alpha^{2} \, t} \hspace{1.5cm} \mbox{con A arbitraria}
 \label{eq:ecuacion_06_02_36a}    
 \end{align}
-y de aquí
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo las EDO}
+Por lo que la solución es:
 \begin{align*}
-u (x, t) = X (x) \, T (t) 
+u (x, t) &= X (x) \, T (t) \\[0.5em]
+T (t) &= A \, \exp\left( -\lambda^{2} \alpha^{2} t \right)  \hspace{0.5cm} \text{A constante arbitraria} \\[0.5em]
+X (x) &= A \sin (\lambda x ) + B \, \cos (\lambda x) \hspace{0.5cm} \text{(A, B arbitrarias)}
 \end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resolviendo las EDO}
+Así llegamos a:
 \pause
-En este punto, tenemos un número infinito de funciones que satisfacen la EDP.
+\begin{align*}
+u (x, t) &= \exp\left( -\lambda^{2} \alpha^{2} t \right)  \bigg[  A \sin (\lambda x ) + B \, \cos (\lambda x) \bigg]
+\end{align*}
+Con $A, B, \lambda$ arbitrarias. \pause En este punto, tenemos un número infinito de funciones que satisfacen la EDP.
 \end{frame}
 
 \subsection{Paso 2}
@@ -594,7 +609,7 @@ u (L, t) &= 0
 Por las CDF, únicamente en las posibles soluciones para $X(x)$ (ec. \ref{eq:ecuacion_06_02_31}), la tercera posibilidad produce una solución no trivial:
 \pause
 \begin{align*}
-X (x) = A \cos (a x ) + B \, \sin (a x), & \hspace{0.2cm} \lambda = a^{2}
+X (x) = A \, \sin (a x) + B \, \cos (a x ), & \hspace{0.2cm} \lambda = a^{2}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -602,13 +617,13 @@ X (x) = A \cos (a x ) + B \, \sin (a x), & \hspace{0.2cm} \lambda = a^{2}
 De hecho, trabajando con:
 \pause
 \begin{align*}
-X (x) = A \cos (a x) + B \, \sin (a x) \hspace{2cm}
+X (x) = A \, \sin (a x) + B \, \cos (a x) \hspace{2cm}
 \end{align*}
 \pause
 que al sustituir en la solución, multiplicando la solución de $X (t)$ y de $T (t)$:
 \begin{eqnarray*}
-u (0, t) &=& A \, e^{-\lambda \alpha^{2} \, t} = 0 \pause \hspace{0.3cm} \Longrightarrow \hspace{0.3cm} A = 0 \\[0.5em] \pause
-u (L, t) &=& B \, e^{-\lambda \alpha^{2} \, t} \, \sin (\lambda \, L) = 0 \pause \hspace{0.3cm} \Longrightarrow \hspace{0.3cm} \sin (\lambda \, L) = 0
+u (0, t) &=& B \, e^{-\lambda \alpha^{2} \, t} = 0 \pause \hspace{0.3cm} \Longrightarrow \hspace{0.3cm} B = 0 \\[0.5em] \pause
+u (L, t) &=& A \, e^{-\lambda \alpha^{2} \, t} \, \sin (\lambda \, L) = 0 \pause \hspace{0.3cm} \Longrightarrow \hspace{0.3cm} \sin (\lambda \, L) = 0
 \end{eqnarray*}
 \end{frame}
 \begin{frame}

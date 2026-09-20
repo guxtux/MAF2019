@@ -2,6 +2,11 @@
 \usepackage{../Estilos/BeamerMAF}
 \input{../Preambulos/preambulo_Beamer_Cambridge_beaver}
 
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
 \makeatletter
 \setbeamertemplate{footline}
 {
@@ -20,7 +25,7 @@
   \vskip0pt%
 }
 \makeatother
-\date{13 de octubre de 2021}
+\date{\today}
 
 \title{\large{Ec. Helmholtz en coordenadas parabólicas}}
 \subtitle{Tema 2 - Primeras técnicas de solución}
@@ -32,10 +37,10 @@
 \spanishdecimal{.}
 
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame{\frametitle{Contenido} \tableofcontents[currentsection, hideallsubsections]}
 
 \section{La ecuación de Helmholtz}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Enunciado del ejercicio}
 
 \begin{frame}
@@ -73,8 +78,11 @@ El Laplaciano en coordenadas parabólicas $(\varepsilon, \eta, \varphi)$ es:
 \frametitle{El método de separación de variables}
 El método de separación de variables funciona cuando:
 \pause
-\setbeamercolor{item projected}{bg=red!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{item projected}{bg=red!70!black, fg=yellow}
+\setbeamertemplate{enumerate items}{%
+\usebeamercolor[bg]{item projected}%
+\raisebox{1.5pt}{\colorbox{bg}{\color{fg}\footnotesize\insertenumlabel}}%
+}
 \begin{enumerate}[<+->]
 \item En la expresión no hay términos con derivadas parciales mixtas.
 \item La función solución que propongamos es un producto de funciones de una sola variable:
@@ -249,7 +257,7 @@ Las EDO2H (\ref{eq:ecuacion_E}), (\ref{eq:ecuacion_H}) y (\ref{Eq:ecuacion_F}) q
 \end{frame}
 
 \section{La matriz de Stäckel}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
+\frame{\frametitle{Temas a revisar} \tableofcontents[currentsection, hideothersubsections]}
 \subsection{Método para la separación}
 
 \begin{frame}
@@ -261,14 +269,14 @@ El método de separación de variables es difícil de aplicar a las coordenadas 
 Permite de una manera sistematizada separar la ecuación tridimensional de Helmholtz, para once de los sistemas de coordenadas.
 \end{frame}
 \begin{frame}
-\frametitle{}
+\frametitle{Condiciones de separabilidad}
 Las condiciones de separabilidad de la ecuación de Helmholtz, se basan en el trabajo de separabilidad de la ecuación de Hamilton-Jacobi desarrollada por Stäckel y basada en la condición de separabilidad de Robertson: ésta limita el tipo de sistema coordenado en el cual se permite la separación.
 \end{frame}
 \begin{frame}
 \frametitle{Referencias de consulta}
 \begin{figure}
   \centering
-  \includegraphics[scale=0.4]{Imagenes/Referencia_Eisenhart.png}
+  \includegraphics[width=0.7\linewidth]{Imagenes/Referencia_Eisenhart.png}
 \end{figure}
 \end{frame}
 \begin{frame}
