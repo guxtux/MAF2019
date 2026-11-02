@@ -1,0 +1,179 @@
+\documentclass[hidelinks,12pt]{article}
+\usepackage[left=0.25cm,top=1cm,right=0.25cm,bottom=1cm]{geometry}
+%\usepackage[landscape]{geometry}
+\textwidth = 20cm
+\hoffset = -1cm
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla, es-lcroman]{babel}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[tbtags]{amsmath}
+\usepackage{nccmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{standalone}
+\graphicspath{{Imagenes/}{../Imagenes/}}
+\usepackage[outdir=./Imagenes/]{epstopdf}
+\usepackage{siunitx}
+\usepackage{physics}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\ExplSyntaxOn
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+\usepackage{color}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{multirow}
+%\usepackage{milista}
+\usepackage{anyfontsize}
+\usepackage{anysize}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{mdframed}
+\usepackage{relsize}
+\usepackage{placeins}
+\usepackage{empheq}
+\usepackage{cancel}
+\usepackage{pdfpages}
+\usepackage{wrapfig}
+\usepackage[flushleft]{threeparttable}
+\usepackage{makecell}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{bigints}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{scalerel}
+\usepackage{pgfplots}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.16}
+\spanishdecimal{.}
+\renewcommand{\baselinestretch}{1.5}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\scaleoint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\oint}{#1}}}}
+\def\scaleiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iint}{#1}}}}
+\def\scaleiiint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\iiint}{#1}}}}
+\def\bs{\mkern-12mu}
+
+\newcommand{\Cancel}[2][black]{{\color{#1}\cancel{\color{black}#2}}}
+
+% \newcommand{\qed}{\tag*{$\blacksquare$}}
+\renewcommand{\qed}{\hfill\blacksquare}
+
+\newcommand{\pderivada}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\sderivada}[1]{\ensuremath{{#1}^{\prime \prime}}}
+\newcommand{\tderivada}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
+\newcommand{\nderivada}[2]{\ensuremath{{#1}^{(#2)}}}
+
+\title{Lista de ejercicios del Tema 2 \\[0.3em]  \large{Matemáticas Avanzadas de la Física}\vspace{-3ex}}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{ }
+
+\begin{document}
+\vspace{-4cm}
+\maketitle
+
+\fontsize{14}{14}\selectfont
+
+\textbf{Indicaciones: } Se te pide gentilmente que resuelvas de manera detallada, clara y ordenada los siguientes ejercicios, el puntaje que otorga cada enunciado es de \textbf{1 punto}. En caso de que requieras apoyarte en alguna propiedad, si fue vista en clase, solo indícalo, pero si esa propiedad aunque esté relacionada al ejercicio y no se haya mencionado en clase, habrá que demostrarla debidamente.
+
+\subsection*{Separación de variables.}
+
+\begin{enumerate}
+    \item Encuentra la solución a la ecuación de onda:
+        \begin{align*}
+            u_{tt} = 2 \, u_{xx} 
+        \end{align*}
+    en $[0, 2 \, \pi]$ que satisface las CDF: $u (0, t) = 0$ y $u_{x} (2 \, \pi, t) = 0$
+    \item Encuentra la solución a la ecuación de Laplace:
+        \begin{align*}
+            u_{xx} + u_{yy} = 0
+        \end{align*}
+    en un cuadrado unitario que satisface las CDF:
+        \begin{align*}
+            u (0, y) &= 0 \hspace{1cm} u (1, y) = g (y) \\[0.5em]
+            u (x, 0) &= 0  \hspace{1cm} u (x, 1) = 0
+        \end{align*}
+        \item Clasifica las siguientes ecuaciones ya sea como hiperbólicas, parabólicas o elípticas:
+            \begin{enumerate}
+            \item $u_{yy} + u_{xy} + u_{xx} = 0$
+            \item $3 \, u_{xx} + 2 \, u_{xy} + 5 \, u_{yy} = 0$
+            \item $x^{2} \, u_{xx} + 2 \, x \, y \, u_{xy} + y^{2} \, u_{yy} = 0$
+            \item $y^{2} \, u_{xx} + 2 \, x \, y \, u_{xy} + \left( x^{2} + 4 \, x^{4} \right) \, u_{yy} = 0$
+        \end{enumerate}
+        \item Considera la ecuación de calor:
+            \begin{align*}
+                u_{t} = \kappa \, u_{xx}
+            \end{align*}
+        sujeta a las CDF:
+            \begin{align*}
+            u(0, t) = 0 \hspace{1cm} u_{x} (L, t) = 0
+            \end{align*}
+        Resuelve el problema para las siguientes CI:
+            \begin{enumerate}
+                \item $u (x, 0) = 2 \, \cos \left( \dfrac{3 \pi x}{L} \right)$
+                \item $u (x, 0) = 6 \sin \left( \dfrac{9 \pi x}{L} \right)$
+                \item $u (x, 0) = 3 \sin \left( \dfrac{\pi x}{L} \right) - \sin \left( \dfrac{3 \pi x}{L} \right)$
+                \item $u (x, 0) = \begin{cases}
+                1, & \text{para } 0 < x < \dfrac{L}{2} \\[1em]
+                2, & \text{para } \dfrac{L}{2} < x < L
+                \end{cases}$
+            \end{enumerate}
+    \end{enumerate}
+
+\subsection*{Método de Frobenius.}
+
+\begin{enumerate}
+    \item Determina los puntos singulares de las siguientes ED, clasifica cada punto singular en regular o irregular.
+        \begin{enumerate}
+            \item $x^{3} \, \sderivada{y} + 4 \, x^{2} \, \pderivada{y} + 3 \, y = 0$
+            \item $x \, \sderivada{y} - (x + 3)^{-2} \, y = 0$
+            \item $(x^{2} - 9)^{2} \, \sderivada{y} + (x + 3) \, \pderivada{y} + 2 \, y = 0$
+            \item $\sderivada{y} - \dfrac{1}{x} \, \pderivada{y} + \dfrac{1}{(x - 1)^{3}} \, y = 0$
+        \end{enumerate}
+    \item Resuelve las siguientes ED con el método de Frobenius:
+        \begin{enumerate} 
+            \item $2 \, x \, \sderivada{y} - \pderivada{y} + 2 \, y = 0$
+            \item $2 \, x \, \sderivada{y} + 5 \, \pderivada{y} + x \, y = 0$
+            \item $x (x - 1) \, \sderivada{y} + 3 \, \pderivada{y} - 2 \, y = 0$
+            \item $\sderivada{y} - \dfrac{3}{x} \, \pderivada{y} - 2 \, y = 0$
+        \end{enumerate}
+    \item Con la siguiente ecuación:
+        \begin{align*}
+            x^{2} \, \sderivada{y} (x) + x \, \pderivada{y} (x) + (x^{2} - 4) \, y (x) = 0
+        \end{align*}
+        Determina:
+        \begin{enumerate}
+            \item La naturaleza de los puntos singulares.
+            \item La ecuación de índices.
+            \item La regla de recurrencia.
+            \item La(s) solución(es) en series de potencias.
+        \end{enumerate}
+\end{enumerate}
+
+\subsection*{Segunda solución linealmente independiente.}
+
+\begin{enumerate}
+    \item Considerando que una solución de:
+    \begin{align*}
+        \sderivada{R} + \dfrac{1}{r} \, \pderivada{R} - \dfrac{m^{2}}{r^{2}} \, R = 0
+    \end{align*}
+    es $R = r^{m}$.
+    
+    Demuestra que la ecuación:
+    \begin{align*}
+        y_{2} (x) =  y_{1} \: (x) \scaleint{6ex}^{x} \dfrac{\exp \left[ \displaystyle - \scaleint{6ex}^{x_{2}} P (x_{1}) \: \dd{x_{1}} \right]}{[y_{1} (x_{2})]^{2}} \dd{x_{2}}
+    % \label{eq:ecuacion_09_127}
+    \end{align*}
+    predice una segunda solución: $R = r^{-m}$
+\end{enumerate}
+
+\end{document}
